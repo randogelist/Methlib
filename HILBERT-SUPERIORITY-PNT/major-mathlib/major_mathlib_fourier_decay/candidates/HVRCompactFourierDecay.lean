@@ -23,13 +23,15 @@ namespace HVRCompactFourierDecay
 theorem halfPeriod_tendsto_atTop : Tendsto halfPeriod atTop (𝓝 0) := by
   have hmul : Tendsto (fun ξ : ℝ => 2 * ξ) atTop atTop :=
     (Filter.tendsto_const_mul_atTop_of_pos (show (0 : ℝ) < 2 by norm_num)).2 tendsto_id
-  simpa only [halfPeriod] using hmul.inv_tendsto_atTop
+  change Tendsto (fun ξ : ℝ => (2 * ξ)⁻¹) atTop (𝓝 0)
+  simpa only [Pi.inv_apply] using hmul.inv_tendsto_atTop
 
 /-- The half-period approaches zero also along negative frequencies. -/
 theorem halfPeriod_tendsto_atBot : Tendsto halfPeriod atBot (𝓝 0) := by
   have hmul : Tendsto (fun ξ : ℝ => 2 * ξ) atBot atBot :=
     (Filter.tendsto_const_mul_atBot_of_pos (show (0 : ℝ) < 2 by norm_num)).2 tendsto_id
-  simpa only [halfPeriod] using hmul.inv_tendsto_atBot
+  change Tendsto (fun ξ : ℝ => (2 * ξ)⁻¹) atBot (𝓝 0)
+  simpa only [Pi.inv_apply] using hmul.inv_tendsto_atBot
 
 /-- Positive-frequency decay for a continuous compactly supported function. -/
 theorem fourier_tendsto_atTop (g : ℝ → ℂ) (hg : Continuous g)
@@ -41,7 +43,8 @@ theorem fourier_tendsto_atTop (g : ℝ → ℂ) (hg : Continuous g)
       (hg.integrable_of_hasCompactSupport hcompact) (ne_of_gt hξ)
   · have ht := (HVRCompactTranslation.translation_integral_tendsto g hg hcompact).comp
       halfPeriod_tendsto_atTop
-    simpa only [translationDifference, Function.comp_def] using ht
+    change Tendsto (fun ξ : ℝ => ∫ t : ℝ, ‖g (t + halfPeriod ξ) - g t‖) atTop (𝓝 0)
+    simpa only [Function.comp_def] using ht
 
 /-- Negative-frequency decay for a continuous compactly supported function. -/
 theorem fourier_tendsto_atBot (g : ℝ → ℂ) (hg : Continuous g)
@@ -53,7 +56,8 @@ theorem fourier_tendsto_atBot (g : ℝ → ℂ) (hg : Continuous g)
       (hg.integrable_of_hasCompactSupport hcompact) (ne_of_lt hξ)
   · have ht := (HVRCompactTranslation.translation_integral_tendsto g hg hcompact).comp
       halfPeriod_tendsto_atBot
-    simpa only [translationDifference, Function.comp_def] using ht
+    change Tendsto (fun ξ : ℝ => ∫ t : ℝ, ‖g (t + halfPeriod ξ) - g t‖) atBot (𝓝 0)
+    simpa only [Function.comp_def] using ht
 
 /-- The ordinary convention requires negative-frequency decay in the 2π convention. -/
 theorem ordinary_tendsto_atTop (g : ℝ → ℂ) (hg : Continuous g)
