@@ -253,5 +253,25 @@
     "banned": [
       "Real.tendsto_integral_exp_smul_cocompact"
     ]
+  },
+  {
+    "module": "HVRFourierTraceControlLeaf",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRFourierTraceControlBridge",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRFourierDependencyDiagnostic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRFourierDependencyDiagnosticIndependent",
+    "names": [],
+    "banned": []
   }
 ]

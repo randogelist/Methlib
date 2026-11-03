@@ -15,7 +15,7 @@ import Mathlib.Tactic
 noncomputable section
 
 open MeasureTheory Filter Set
-open scoped Topology ENNReal
+open scoped Topology ENNReal NNReal
 
 namespace HVRCompactTranslation
 
