@@ -24,8 +24,9 @@ try {
   $checksumFile = Join-Path $pkg 'sources.sha256'
   if (-not (Test-Path -LiteralPath $planFile -PathType Leaf)) { Fail 'Missing_audit_plan' }
   if (-not (Test-Path -LiteralPath $checksumFile -PathType Leaf)) { Fail 'Missing_source_hash_manifest' }
-  $plan = @(Get-Content -LiteralPath $planFile -Raw -Encoding UTF8 | ConvertFrom-Json)
-  if ($plan.Count -eq 0) { Fail 'Empty_audit_plan' }
+  $plan = Get-Content -LiteralPath $planFile -Raw -Encoding UTF8 | ConvertFrom-Json
+  if ($null -eq $plan -or $plan -isnot [System.Array] -or $plan.Count -eq 0) { Fail 'Invalid_or_empty_audit_plan' }
+  Write-Host "PLAN_ENTRY_COUNT=$($plan.Count) FIRST_ENTRY_TYPE=$($plan[0].GetType().FullName) FIRST_MODULE=$($plan[0].module)"
   $checks = @{}
   foreach ($line in @(Get-Content -LiteralPath $checksumFile -Encoding UTF8)) {
     if ([string]::IsNullOrWhiteSpace($line)) { continue }
