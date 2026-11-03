@@ -170,3 +170,5 @@ and native-chain package are retained in
 their own proof scopes and audits; inclusion here does not merge their
 theorems into the original PNT root.
 
+
+The original downloadable derivation packages and their historical evidence are also retained under [`archives/`](archives/).
