@@ -1,0 +1,7 @@
+SCOPED TARGET: Fourier decay of the actual patched PNT zeta boundary weighted by a continuous compactly supported test, in both the 2π positive-frequency and ordinary positive-frequency conventions.
+
+STATUS=A_TIER_CANDIDATE until matching external cached Lean 4.34.0-rc1 compiler and theorem-level axiom audit evidence exists. Paper derivation: half-period phase, compact-support uniform translation estimate, HVR norm squeeze, negative-frequency convention conversion. See HVRCompactFourierDecay and HVRActualBoundaryFourier. The prior audited conditional squeeze remains separately preserved.
+
+The actual boundary adapter imports 31 project modules to obtain patchedShift continuity, including zeta nonvanishing and analytic results and other Mathlib endpoints. It does not call the selected Fourier theorem by name in its own source; no recursive independence is claimed. It does not prove the prime-density convolution identity, nor change or integrate into the existing PNT root. The complete Fourier theorem for arbitrary L1 functions is outside this candidate.
+
+The alternative HVRFallbackFourier and some helper proofs are adapted from Mathlib.Analysis.Fourier.RiemannLebesgueLemma, Copyright 2022 David Loeffler, Apache 2.0; they are not independently discovered results. The Mathlib license is retained in the repository.

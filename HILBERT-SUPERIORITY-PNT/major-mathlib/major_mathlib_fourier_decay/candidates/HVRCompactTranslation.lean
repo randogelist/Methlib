@@ -1,4 +1,4 @@
-/-!
+/-
 Compact-support L1 translation continuity for the HVR Fourier route.
 Adapted from the compact-support estimate in Mathlib's
 Mathlib/Analysis/Fourier/RiemannLebesgueLemma.lean, Copyright 2022 David
@@ -85,7 +85,6 @@ theorem translation_integral_tendsto (g : ℝ → ℂ) (hg : Continuous g)
     _ ≤ (ε / (2 * (B : ℝ))) * (B : ℝ) := by
       exact mul_le_mul_of_nonneg_left hA (by positivity)
     _ < ε := by
-      field_simp [ne_of_gt hB]
-      linarith
+      field_simp [ne_of_gt hB] <;> nlinarith
 
 end HVRCompactTranslation
