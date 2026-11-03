@@ -1,6 +1,6 @@
 # Hilbert–Superiority PNT
 
-[![HVR theta PNT — main-branch CI](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml/badge.svg?branch=main)](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
+[![HVR theta PNT Linux — main-branch CI](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml/badge.svg?branch=main)](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
 
 ## Unconditional theta theorem
 
@@ -20,7 +20,7 @@ per-theorem badge. The workflow builds the 85 staged modules and audits their
 named declarations, including the root theorem and its two named supporting
 declarations. The runner rejects missing audit reports and axioms outside
 `propext`, `Classical.choice`, and `Quot.sound`. Open a run above and download
-its `hvr-theta-evidence` artifact for its logs and recorded hashes.
+its `hvr-theta-linux-evidence` artifact for its logs and recorded hashes.
 
 An earlier external Windows run was reported to have passed the root build and
 named standard-axiom audit. Its full Mathlib cache provenance was not recorded.
@@ -61,11 +61,14 @@ print("Nonblank lines:", sum(bool(line.strip()) for line in lines))
 
 ## Reproduction
 
-GitHub Actions uses native Windows Lean `4.34.0-rc1` and Mathlib commit
-`de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11` (the `v4.34.0-rc1` release),
-downloads Mathlib's cache, executes the original runner, and uploads its
-evidence. This Mathlib revision was selected for CI; it is not an identified
-match for the earlier external cache.
+GitHub Actions uses Linux Lean `4.34.0-rc1` and Mathlib commit
+`de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11` (the `v4.34.0-rc1` release).
+It downloads Mathlib's cache, verifies all 174 original Lean source hashes and
+the original build-plan script, and uses the Linux runner to build and audit
+the same 85-stage plan. It rebuilds the package's own objects on Linux.
+This Mathlib revision was selected for CI; it is not an identified match for
+the earlier external cache. A separate [manual Windows workflow](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt-windows.yml)
+and the original Windows runner remain available.
 
 The workflow checks these original source hashes before building:
 
