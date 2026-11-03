@@ -1,0 +1,3 @@
+import HVR_PrimeBoundary_EventualDomination
+#print axioms HVRPrimeBoundaryEventualDomination.laplace_eventually_bounded_on_compact
+#print axioms HVRPrimeBoundaryEventualDomination.frequency_eventually_dominated_on_compact

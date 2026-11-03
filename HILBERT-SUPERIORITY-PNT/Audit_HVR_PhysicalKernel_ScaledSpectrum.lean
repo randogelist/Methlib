@@ -1,0 +1,5 @@
+import HVR_PhysicalKernel_ScaledSpectrum
+#print axioms HVRPhysicalKernelScaledSpectrum.scaledSpectrum_continuous
+#print axioms HVRPhysicalKernelScaledSpectrum.scaledSpectrum_zero_of_band
+#print axioms HVRPhysicalKernelScaledSpectrum.scaledSpectrum_compact
+#print axioms HVRPhysicalKernelScaledSpectrum.scaledSpectrum_integrable

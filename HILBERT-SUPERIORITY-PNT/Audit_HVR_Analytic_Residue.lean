@@ -1,0 +1,6 @@
+import HVR_Analytic_Residue
+
+#check HVRAnalyticResidue.logDeriv_continuousAt_of_analytic
+#print axioms HVRAnalyticResidue.logDeriv_continuousAt_of_analytic
+#check HVRAnalyticResidue.normalized_neg_logDeriv_tendsto
+#print axioms HVRAnalyticResidue.normalized_neg_logDeriv_tendsto

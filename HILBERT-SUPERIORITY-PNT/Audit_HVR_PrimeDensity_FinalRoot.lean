@@ -1,0 +1,7 @@
+import HVR_PrimeDensity_FinalRoot
+#print HVRPrimeDensityFinalRoot.backwardDecomposition
+#check HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing
+#check HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one
+#print axioms HVRPrimeDensityFinalRoot.backwardDecomposition
+#print axioms HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing
+#print axioms HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one

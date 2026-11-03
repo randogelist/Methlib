@@ -1,0 +1,15 @@
+import HVR_Prime_ZetaSplit
+#check HVRPrimeZetaSplit.higherCoefficientC_eq_sub
+#print axioms HVRPrimeZetaSplit.higherCoefficientC_eq_sub
+#check HVRPrimeZetaSplit.primeCoefficientC_zero
+#print axioms HVRPrimeZetaSplit.primeCoefficientC_zero
+#check HVRPrimeZetaSplit.prime_lseries_term_eq
+#print axioms HVRPrimeZetaSplit.prime_lseries_term_eq
+#check HVRPrimeZetaSplit.prime_lseries_eq_primeSeries
+#print axioms HVRPrimeZetaSplit.prime_lseries_eq_primeSeries
+#check HVRPrimeZetaSplit.prime_lseries_summable
+#print axioms HVRPrimeZetaSplit.prime_lseries_summable
+#check HVRPrimeZetaSplit.higher_lseries_summable
+#print axioms HVRPrimeZetaSplit.higher_lseries_summable
+#check HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher
+#print axioms HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher

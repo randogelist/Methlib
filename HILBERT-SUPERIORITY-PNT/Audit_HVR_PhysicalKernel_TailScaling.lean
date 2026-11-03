@@ -1,0 +1,4 @@
+import HVR_PhysicalKernel_TailScaling
+#print axioms HVRPhysicalKernelTailScaling.scaled_window_tail_le
+#print axioms HVRPhysicalKernelTailScaling.exists_scaled_window_small_tail
+#print axioms HVRPhysicalKernelTailScaling.exists_concentrated_scaled_kernel

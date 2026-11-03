@@ -1,0 +1,12 @@
+import HVR_Prime_PoleMass
+
+#check HVRPrimePoleMass.boundaryApproach_zero_ne_one
+#print axioms HVRPrimePoleMass.boundaryApproach_zero_ne_one
+#check HVRPrimePoleMass.boundaryApproach_zero_sub_one
+#print axioms HVRPrimePoleMass.boundaryApproach_zero_sub_one
+#check HVRPrimePoleMass.boundaryApproach_zero_punctured
+#print axioms HVRPrimePoleMass.boundaryApproach_zero_punctured
+#check HVRPrimePoleMass.normalized_zeta_pole_along_boundary
+#print axioms HVRPrimePoleMass.normalized_zeta_pole_along_boundary
+#check HVRPrimePoleMass.normalized_primeMass_pole_limit
+#print axioms HVRPrimePoleMass.normalized_primeMass_pole_limit

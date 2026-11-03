@@ -1,0 +1,4 @@
+import HVR_HalfLine_IndicatorConvolution
+#print axioms HVRHalfLineIndicatorConvolution.halfLineConvolution_eq_integral_Iic
+#print axioms HVRHalfLineIndicatorConvolution.integral_Iic_tendsto_integral
+#print axioms HVRHalfLineIndicatorConvolution.halfLineConvolution_tendsto_one

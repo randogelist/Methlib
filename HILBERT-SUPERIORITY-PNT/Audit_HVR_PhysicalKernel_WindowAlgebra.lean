@@ -1,0 +1,3 @@
+import HVR_PhysicalKernel_WindowAlgebra
+#print axioms HVRPhysicalKernelWindowAlgebra.normalizedKernel_integrable
+#print axioms HVRPhysicalKernelWindowAlgebra.window_bounds_of_unit_mass_tail

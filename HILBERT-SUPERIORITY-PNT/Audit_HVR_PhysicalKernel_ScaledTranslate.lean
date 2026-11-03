@@ -1,0 +1,4 @@
+import HVR_PhysicalKernel_ScaledTranslate
+#print axioms HVRPhysicalKernelScaledTranslate.scaledTranslate_nonneg
+#print axioms HVRPhysicalKernelScaledTranslate.scaledTranslate_integrable
+#print axioms HVRPhysicalKernelScaledTranslate.scaledTranslate_integral

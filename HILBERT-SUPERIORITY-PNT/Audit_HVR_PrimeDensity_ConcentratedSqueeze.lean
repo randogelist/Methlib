@@ -1,0 +1,4 @@
+import HVR_PrimeDensity_ConcentratedSqueeze
+#print axioms HVRPrimeDensityConcentratedSqueeze.integral_split_window
+#print axioms HVRPrimeDensityConcentratedSqueeze.two_bounds_of_concentrated_kernel
+#print axioms HVRPrimeDensityConcentratedSqueeze.primeDensity_tendsto_of_concentrated_smoothing

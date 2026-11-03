@@ -1,0 +1,2 @@
+import HVR_PhysicalKernel_ScaledRepresentation
+#print axioms HVRPhysicalKernelScaledRepresentation.kernel_scaledSpectrum_eq_scaledTranslate

@@ -1,0 +1,15 @@
+import HVR_Prime_Complex
+#check HVRPrimeComplex.primeTerm_summable
+#print axioms HVRPrimeComplex.primeTerm_summable
+#check HVRPrimeComplex.primeTerm_re
+#print axioms HVRPrimeComplex.primeTerm_re
+#check HVRPrimeComplex.primeSeries_re
+#print axioms HVRPrimeComplex.primeSeries_re
+#check HVRPrimeComplex.primeTerm_eq_dirichlet
+#print axioms HVRPrimeComplex.primeTerm_eq_dirichlet
+#check HVRPrimeComplex.primeTerm_eq_dirichlet_indicator
+#print axioms HVRPrimeComplex.primeTerm_eq_dirichlet_indicator
+#check HVRPrimeComplex.primeSeries_eq_dirichlet
+#print axioms HVRPrimeComplex.primeSeries_eq_dirichlet
+#check HVRPrimeComplex.infinite_complex_gram_nonnegative
+#print axioms HVRPrimeComplex.infinite_complex_gram_nonnegative

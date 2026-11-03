@@ -1,0 +1,4 @@
+import HVR_PrimeDensity_BoundaryLimit
+#print axioms HVRPrimeDensityBoundaryLimit.primeDensityLaplace_tendsto_right_boundary
+#print axioms HVRPrimeDensityBoundaryLimit.primeDensityLaplace_boundaryEps_tendsto
+#print axioms HVRPrimeDensityBoundaryLimit.primeDensityLaplace_uniform_on_compact

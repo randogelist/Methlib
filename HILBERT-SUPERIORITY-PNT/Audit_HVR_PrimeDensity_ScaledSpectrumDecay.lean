@@ -1,0 +1,2 @@
+import HVR_PrimeDensity_ScaledSpectrumDecay
+#print axioms HVRPrimeDensityScaledSpectrumDecay.scaledSpectrum_undamped_tendsto_zero

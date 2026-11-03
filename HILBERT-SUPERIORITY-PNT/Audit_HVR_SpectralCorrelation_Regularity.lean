@@ -1,0 +1,4 @@
+import HVR_SpectralCorrelation_Regularity
+#print axioms HVRSpectralCorrelationRegularity.correlation_eq_convolution
+#print axioms HVRSpectralCorrelationRegularity.correlation_continuous
+#print axioms HVRSpectralCorrelationRegularity.correlation_integrable

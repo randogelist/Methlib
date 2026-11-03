@@ -1,0 +1,6 @@
+import HVR_Zeta_CorrectionIdentity
+
+#check HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection
+#print axioms HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection
+#check HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection
+#print axioms HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection

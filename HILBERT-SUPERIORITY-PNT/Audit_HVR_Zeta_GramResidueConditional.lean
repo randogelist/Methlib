@@ -1,0 +1,8 @@
+import HVR_Zeta_GramResidueConditional
+
+#check HVRZetaGramResidueConditional.boundaryPoint_ne_one
+#print axioms HVRZetaGramResidueConditional.boundaryPoint_ne_one
+#check HVRZetaGramResidueConditional.nonvanishing_of_two_zeta_residues
+#print axioms HVRZetaGramResidueConditional.nonvanishing_of_two_zeta_residues
+#check HVRZetaGramResidueConditional.nonvanishing_of_all_zeta_residues
+#print axioms HVRZetaGramResidueConditional.nonvanishing_of_all_zeta_residues

@@ -1,0 +1,7 @@
+import HVR_Prime_InfiniteGram
+#check HVRPrimeInfinite.cosMoment_summable
+#print axioms HVRPrimeInfinite.cosMoment_summable
+#check HVRPrimeInfinite.gramTerm_nonneg
+#print axioms HVRPrimeInfinite.gramTerm_nonneg
+#check HVRPrimeInfinite.infinite_prime_gram_nonnegative
+#print axioms HVRPrimeInfinite.infinite_prime_gram_nonnegative

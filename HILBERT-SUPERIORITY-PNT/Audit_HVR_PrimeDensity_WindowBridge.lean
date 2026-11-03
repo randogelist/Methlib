@@ -1,0 +1,4 @@
+import HVR_PrimeDensity_WindowBridge
+#print axioms HVRPrimeDensityWindowBridge.future_window_lower_of_integrable
+#print axioms HVRPrimeDensityWindowBridge.past_window_upper_of_integrable
+#print axioms HVRPrimeDensityWindowBridge.weighted_density_upper_of_integrable

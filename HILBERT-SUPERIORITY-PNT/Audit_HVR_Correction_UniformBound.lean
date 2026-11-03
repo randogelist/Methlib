@@ -1,0 +1,12 @@
+import HVR_Correction_UniformBound
+
+#check HVRCorrectionUniformBound.ratio_antitone_re
+#print axioms HVRCorrectionUniformBound.ratio_antitone_re
+#check HVRCorrectionUniformBound.ratio_sq_eq_weight_exp
+#print axioms HVRCorrectionUniformBound.ratio_sq_eq_weight_exp
+#check HVRCorrectionUniformBound.complexCorrectionTerm_uniform_bound
+#print axioms HVRCorrectionUniformBound.complexCorrectionTerm_uniform_bound
+#check HVRCorrectionUniformBound.complexCorrection_differentiableOn
+#print axioms HVRCorrectionUniformBound.complexCorrection_differentiableOn
+#check HVRCorrectionUniformBound.complexCorrection_summable
+#print axioms HVRCorrectionUniformBound.complexCorrection_summable

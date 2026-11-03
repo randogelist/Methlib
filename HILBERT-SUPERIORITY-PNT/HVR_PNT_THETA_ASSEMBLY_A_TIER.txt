@@ -1,0 +1,37 @@
+HVR PNT THETA-RATIO ASSEMBLY -- A-TIER CANDIDATE
+
+REPORTED BASE: FINAL_BRIDGES_FIX1 passed the external build and named
+standard-axiom audits. The audited base includes numerical kernel
+concentration, scaled physical-kernel Fourier representation, and decay of
+the actual prime-error convolution. The theta endpoint is conditional.
+
+LATEST EXTERNAL EXCERPT: IndicatorIntegral failed to synthesize a real-volume
+negation-invariance instance; the excerpt did not include later build or audit
+results. FIX1 adds an explicit import of the audited SpatialAbel module and
+records that direct runner dependency. The fix has not been compiled locally.
+
+FIX1 EXCERPT: The indicator-integral build passed (its dependent stage ran)
+and reflected physical decay built. Their audits and the later stages are not
+shown. BackwardDecomposition failed on function subtraction; FIX2 unfolds
+pointwise subtraction before ring. No local Lean was run.
+
+NEW CANDIDATES: NOT COMPILED OR AUDITED, NO LOCAL LEAN
+IndicatorIntegral targets the half-line integral identity, accounting for
+the zero endpoint. BackwardDecomposition targets the exact smoothing
+identities for every integrable real kernel. ReflectedPhysicalDecay targets
+the reflected kernel's error decay. DecompositionEndpoint reduces theta to
+an explicit named backward-decomposition premise. FinalRoot attempts to
+prove that premise, the complete concentrated smoothing premise, and then
+  HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one :
+    Tendsto (fun x : ℝ => Chebyshev.theta x / x) atTop (𝓝 1).
+This root has no explicit analytic premise in its stated signature. It is a
+candidate only until the user's external build and named axiom audit pass.
+The root is the theta form; no separate prime-counting-form theorem is claimed.
+
+The runner requires all plan builds and named audits to pass before reporting
+THETA_ROOT_BUILD_AND_NAMED_AXIOM_AUDIT=PASS. Its output still declares route
+independence and full cache provenance unverified. -TraceDependencies adds an
+optional final-root declaration traversal and diagnostic control; neither a
+passed trace nor absent named sentinels proves independence. The trace itself
+is uncompiled. Full dependency bodies, PNT-equivalent dependencies, first path
+resolution, and pinned Mathlib/core source-object provenance require review.

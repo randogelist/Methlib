@@ -1,0 +1,8 @@
+import HVR_HigherCoefficient_Reindex
+
+#check HVRHigherCoefficientReindex.higher_lseries_support_prime_powers
+#print axioms HVRHigherCoefficientReindex.higher_lseries_support_prime_powers
+#check HVRHigherCoefficientReindex.higher_lseries_term_at_prime
+#print axioms HVRHigherCoefficientReindex.higher_lseries_term_at_prime
+#check HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum
+#print axioms HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum

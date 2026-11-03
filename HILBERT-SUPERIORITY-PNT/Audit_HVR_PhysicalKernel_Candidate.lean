@@ -1,0 +1,11 @@
+import HVR_PhysicalKernel_Candidate
+
+#print axioms HVRPhysicalKernelCandidate.complexSeed_compact
+#print axioms HVRPhysicalKernelCandidate.complexSeed_smooth
+#print axioms HVRPhysicalKernelCandidate.seedSchwartz_apply
+#print axioms HVRPhysicalKernelCandidate.seedSchwartz_zero_of_band
+#print axioms HVRPhysicalKernelCandidate.rawKernel_nonneg
+#print axioms HVRPhysicalKernelCandidate.rawKernel_continuous
+#print axioms HVRPhysicalKernelCandidate.rawKernel_integrable
+#print axioms HVRPhysicalKernelCandidate.normalizedKernel_nonneg
+#print axioms HVRPhysicalKernelCandidate.normalizedKernel_integral

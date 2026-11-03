@@ -1,0 +1,4 @@
+import HVR_PrimeBoundary_OrdinaryFrequencyDecay
+
+#print axioms HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_eq_scaled_fourier
+#print axioms HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_tendsto_zero

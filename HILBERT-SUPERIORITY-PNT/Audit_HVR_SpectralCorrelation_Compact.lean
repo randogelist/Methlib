@@ -1,0 +1,3 @@
+import HVR_SpectralCorrelation_Compact
+#print axioms HVRSpectralCorrelationCompact.correlation_hasCompactSupport
+#print axioms HVRSpectralCorrelationCompact.complexCorrelation_hasCompactSupport

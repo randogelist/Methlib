@@ -1,0 +1,3 @@
+import HVR_PrimeBoundary_EventualAbelGlue
+#print axioms HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support
+#print axioms HVRPrimeBoundaryEventualAbelGlue.undamped_eq_ordinaryBoundary_of_compact_support

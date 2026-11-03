@@ -1,0 +1,2 @@
+import HVR_PhysicalKernel_SpectralIdentity
+#print axioms HVRPhysicalKernelSpectralIdentity.fourierInv_correlation_eq_rawKernel

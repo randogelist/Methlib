@@ -1,0 +1,5 @@
+import HVR_PrimeCount_LogSubstitution
+#print axioms HVRPrimeCountLogSubstitution.exp_image_pos_halfline
+#print axioms HVRPrimeCountLogSubstitution.exp_mul_mellin_power
+#print axioms HVRPrimeCountLogSubstitution.primeThetaMellin_eq_exp_integral
+#print axioms HVRPrimeCountLogSubstitution.exp_integral_sub_pole_eq_regularPartAt

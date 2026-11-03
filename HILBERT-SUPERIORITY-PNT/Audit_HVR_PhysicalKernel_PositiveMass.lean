@@ -1,0 +1,7 @@
+import HVR_PhysicalKernel_PositiveMass
+
+#print axioms HVRPhysicalKernelCandidate.wave_at_zero
+#print axioms HVRPhysicalKernelCandidate.rawKernel_at_zero
+#print axioms HVRPhysicalKernelCandidate.mass_pos
+#print axioms HVRPhysicalKernelCandidate.normalizedKernel_nonneg_unconditional
+#print axioms HVRPhysicalKernelCandidate.normalizedKernel_integral_unconditional

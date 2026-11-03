@@ -1,0 +1,5 @@
+import HVR_Smoothing_MonotoneNormalization
+#print axioms HVRMonotoneNormalization.cutoffMass_monotone
+#print axioms HVRMonotoneNormalization.normalizedMass_le
+#print axioms HVRMonotoneNormalization.normalized_cutoffMass_le
+#print axioms HVRMonotoneNormalization.weighted_normalized_cutoffMass_le

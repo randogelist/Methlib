@@ -1,0 +1,6 @@
+import HVR_Zeta_PoleResidue
+
+#check HVRZetaPoleResidue.logDerivative_regular_part_tendsto
+#print axioms HVRZetaPoleResidue.logDerivative_regular_part_tendsto
+#check HVRZetaPoleResidue.normalized_zeta_logDerivative_tendsto_one
+#print axioms HVRZetaPoleResidue.normalized_zeta_logDerivative_tendsto_one
