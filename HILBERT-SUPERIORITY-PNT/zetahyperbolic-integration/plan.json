@@ -1,35 +1,43 @@
 [
   {
-    "module": "HVR_Smoothing_FrequencySeed",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_Candidate",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralSeedCorrelation",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralCorrelation_Compact",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralCorrelation_Regularity",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_PositiveMass",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledSpectrum",
-    "theorems": []
-  },
-  {
     "module": "HVR_Prime_Gram",
     "theorems": []
+  },
+  {
+    "module": "HVR_ZetaHyperAffineJacobi",
+    "theorems": []
+  },
+  {
+    "module": "HVR_ZetaHyperMatrixJacobi",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeMomentJacobi",
+    "theorems": [
+      "HVRPrimeMomentJacobi.moment_zero_eq_primeMass",
+      "HVRPrimeMomentJacobi.moment_hasDerivAt",
+      "HVRPrimeMomentJacobi.gram_entry_hasDerivAt",
+      "HVRPrimeMomentJacobi.finite_prime_gram_logDet_hasDerivAt",
+      "HVRPrimeMomentJacobi.primeMass_pos",
+      "HVRPrimeMomentJacobi.log_primeMass_hasDerivAt"
+    ]
+  },
+  {
+    "module": "HVRPrimeAtomicGram",
+    "theorems": [
+      "HVRPrimeAtomicGram.quadratic_eq_prime_sum",
+      "HVRPrimeAtomicGram.quadratic_nonnegative",
+      "HVRPrimeAtomicGram.quadratic_pos_of_prime_witness",
+      "HVRPrimeAtomicGram.gramEntry_zero_zero"
+    ]
+  },
+  {
+    "module": "HVRPrimeGramJacobiBridge",
+    "theorems": [
+      "HVRPrimeGramJacobiBridge.gramEntry_eq_primeMomentGram",
+      "HVRPrimeGramJacobiBridge.primeMomentGram_quadratic_nonnegative",
+      "HVRPrimeGramJacobiBridge.primeMomentGram_quadratic_pos_of_prime_witness"
+    ]
   },
   {
     "module": "HVR_Prime_Summability",
@@ -173,6 +181,64 @@
     "theorems": []
   },
   {
+    "module": "HVR_PrimeDensity_FubiniBridge",
+    "theorems": []
+  },
+  {
+    "module": "NativeFubini",
+    "theorems": []
+  },
+  {
+    "module": "HVRZetaHyperbolicFiniteFrequency",
+    "theorems": [
+      "HVRZetaHyperbolicFiniteFrequency.actual_fixed_frequency",
+      "HVRZetaHyperbolicFiniteFrequency.actual_fixed_frequency_integrable",
+      "HVRZetaHyperbolicFiniteFrequency.actual_finite_frequency_identity",
+      "HVRZetaHyperbolicFiniteFrequency.actual_continuous_identity_of_frequency_approximation"
+    ]
+  },
+  {
+    "module": "HVR_PrimeMellin_Modes",
+    "theorems": [
+      "HVRPrimeMellinModes.weighted_exponential_mode",
+      "HVRPrimeMellinModes.primeMode_integral",
+      "HVRPrimeMellinModes.primeMode_integrable",
+      "HVRPrimeMellinModes.primeMode_integral_norm",
+      "HVRPrimeMellinModes.primeMode_integral_norm_summable",
+      "HVRPrimeMellinModes.primeMode_integral_eq_primeTerm",
+      "HVRPrimeMellinModes.theta_exp_laplace_of_modes",
+      "HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion"
+    ]
+  },
+  {
+    "module": "HVR_Smoothing_FrequencySeed",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_Candidate",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralSeedCorrelation",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralCorrelation_Compact",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralCorrelation_Regularity",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_PositiveMass",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledSpectrum",
+    "theorems": []
+  },
+  {
     "module": "HVR_Smoothing_PoleGlue",
     "theorems": []
   },
@@ -202,10 +268,6 @@
   },
   {
     "module": "HVR_PrimeBoundary_EventualDomination",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_FubiniBridge",
     "theorems": []
   },
   {
@@ -342,68 +404,6 @@
       "HVRPrimeDensityFinalRoot.backwardDecomposition",
       "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
       "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
-    ]
-  },
-  {
-    "module": "HVR_ZetaHyperAffineJacobi",
-    "theorems": []
-  },
-  {
-    "module": "HVR_ZetaHyperMatrixJacobi",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeMomentJacobi",
-    "theorems": [
-      "HVRPrimeMomentJacobi.moment_zero_eq_primeMass",
-      "HVRPrimeMomentJacobi.moment_hasDerivAt",
-      "HVRPrimeMomentJacobi.gram_entry_hasDerivAt",
-      "HVRPrimeMomentJacobi.finite_prime_gram_logDet_hasDerivAt",
-      "HVRPrimeMomentJacobi.primeMass_pos",
-      "HVRPrimeMomentJacobi.log_primeMass_hasDerivAt"
-    ]
-  },
-  {
-    "module": "HVRPrimeAtomicGram",
-    "theorems": [
-      "HVRPrimeAtomicGram.quadratic_eq_prime_sum",
-      "HVRPrimeAtomicGram.quadratic_nonnegative",
-      "HVRPrimeAtomicGram.quadratic_pos_of_prime_witness",
-      "HVRPrimeAtomicGram.gramEntry_zero_zero"
-    ]
-  },
-  {
-    "module": "NativeFubini",
-    "theorems": []
-  },
-  {
-    "module": "HVRZetaHyperbolicFiniteFrequency",
-    "theorems": [
-      "HVRZetaHyperbolicFiniteFrequency.actual_fixed_frequency",
-      "HVRZetaHyperbolicFiniteFrequency.actual_fixed_frequency_integrable",
-      "HVRZetaHyperbolicFiniteFrequency.actual_finite_frequency_identity",
-      "HVRZetaHyperbolicFiniteFrequency.actual_continuous_identity_of_frequency_approximation"
-    ]
-  },
-  {
-    "module": "HVR_PrimeMellin_Modes",
-    "theorems": [
-      "HVRPrimeMellinModes.weighted_exponential_mode",
-      "HVRPrimeMellinModes.primeMode_integral",
-      "HVRPrimeMellinModes.primeMode_integrable",
-      "HVRPrimeMellinModes.primeMode_integral_norm",
-      "HVRPrimeMellinModes.primeMode_integral_norm_summable",
-      "HVRPrimeMellinModes.primeMode_integral_eq_primeTerm",
-      "HVRPrimeMellinModes.theta_exp_laplace_of_modes",
-      "HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion"
-    ]
-  },
-  {
-    "module": "HVRPrimeGramJacobiBridge",
-    "theorems": [
-      "HVRPrimeGramJacobiBridge.gramEntry_eq_primeMomentGram",
-      "HVRPrimeGramJacobiBridge.primeMomentGram_quadratic_nonnegative",
-      "HVRPrimeGramJacobiBridge.primeMomentGram_quadratic_pos_of_prime_witness"
     ]
   }
 ]

@@ -1,4 +1,7 @@
-import Mathlib
+import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
+import Mathlib.Analysis.Calculus.Deriv.Polynomial
+import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+import Mathlib.Tactic
 
 /-!
 Generic finite real affine Jacobi material extracted from the audited

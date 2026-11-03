@@ -26,6 +26,7 @@ run_cmd do
     `HVRMellinTraceControlLeaf.direct_target,
     `HVRMellinTraceControlBridge.indirect_target]
   let roots : Array Name := #[
+    `HVRPrimeMellinAbel.lseries_eq_mellin_of_zero,
     `HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin,
     `HVRPrimeCountMellin.zeta_log_deriv_eq_primeThetaMellin_add_correction,
     `HVRPrimeCountGrowth.primeSeries_eq_mul_primeThetaMellin_unconditional,
