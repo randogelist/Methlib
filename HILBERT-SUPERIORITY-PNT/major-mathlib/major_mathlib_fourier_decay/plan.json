@@ -7,5 +7,52 @@
     "banned": [
       "Real.tendsto_integral_exp_smul_cocompact"
     ]
+  },
+  {
+    "module": "HVRFourierPhase",
+    "names": [
+      "HVRFourierPhase.half_period_shift",
+      "HVRFourierPhase.half_period_cancellation"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRCompactTranslation",
+    "names": [
+      "HVRCompactTranslation.translation_integral_tendsto"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFourierLimit",
+    "names": [
+      "HVRFourierLimit.decay_of_half_period_obligations"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVROrdinaryFourier",
+    "names": [
+      "HVROrdinaryFourier.ordinaryIntegral_eq_scaled",
+      "HVROrdinaryFourier.ordinaryIntegral_tendsto_zero_of_atBot"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFallbackFourier",
+    "names": [
+      "HVRFallbackFourier.real_fourier_compact_decay"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
   }
 ]
