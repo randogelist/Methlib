@@ -1,0 +1,16 @@
+[
+  {
+    "module": "NativeMellinAbel",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRPrimeMellinLimit",
+    "names": [
+      "HVRPrimeMellinLimit.prime_mellin_of_finite_abel_limits"
+    ],
+    "banned": [
+      "LSeries_eq_mul_integral"
+    ]
+  }
+]

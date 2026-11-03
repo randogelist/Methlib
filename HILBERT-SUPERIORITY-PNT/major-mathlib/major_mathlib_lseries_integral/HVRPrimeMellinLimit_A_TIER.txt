@@ -1,0 +1,22 @@
+TARGET: LSeries_eq_mul_integral
+NEW DECLARATION: HVRPrimeMellinLimit.prime_mellin_of_finite_abel_limits
+STATUS: A_TIER_CANDIDATE. The new conditional limit-transfer source has
+not yet been compiled or theorem-level audited. No local Lean was run.
+
+SCOPED STATEMENT: If the finite prime-weight partial sums converge to L,
+the boundary term converges to zero, the truncated derivative integrals
+converge to I, and the required finite-interval differentiability and
+integrability conditions hold, then L = -I.
+
+This follows from the finite prime-weight Abel identity by uniqueness of
+limits. It does not establish the general LSeries_eq_mul_integral theorem:
+the hypotheses, identification of L with the actual L-series, identification
+of I with the Mellin integral, and the convergence estimates remain open.
+The finite bridge explicitly invokes Mathlib's general finite Abel summation
+theorem sum_mul_eq_sub_integral_mul₀'. No target-independence claim is made.
+
+The copied NativeMellinAbel.lean source SHA-256 is
+985ab3d490113ab68802ed98b7c9b66135247844d7f2bce5f8620561afd5debf;
+its finite named theorems were built and audited by cached Linux CI at
+https://github.com/randogelist/Methlib/actions/runs/41697649026.
+That evidence does not cover the new limit-transfer theorem.
