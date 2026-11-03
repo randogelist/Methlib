@@ -47,7 +47,9 @@ jobs:
         shell: pwsh
         run: |
           if ((Get-Content lean-toolchain -Raw).Trim() -ne 'leanprover/lean4:v4.34.0-rc1') { throw 'Unexpected Mathlib toolchain' }
-          lake exe cache get
+          $lake = Join-Path $env:USERPROFILE '.elan\bin\lake.exe'
+          if (-not (Test-Path -LiteralPath $lake -PathType Leaf)) { throw "Elan Lake executable not found: $lake" }
+          & $lake exe cache get
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Verify original root and audit source hashes
