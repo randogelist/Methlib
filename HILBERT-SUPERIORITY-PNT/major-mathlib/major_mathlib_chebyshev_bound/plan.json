@@ -1,0 +1,11 @@
+[
+  {
+    "module": "NativeChebyshevBound",
+    "names": [
+      "HVRNativeChebyshevBound.theta_le_log4_mul_x_native"
+    ],
+    "banned": [
+      "Chebyshev.theta_le_log4_mul_x"
+    ]
+  }
+]

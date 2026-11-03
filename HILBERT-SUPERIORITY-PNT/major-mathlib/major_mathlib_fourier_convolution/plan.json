@@ -1,0 +1,11 @@
+[
+  {
+    "module": "NativeFourierConvolution",
+    "names": [
+      "NativeFourierConvolution.real_complex_convolution_product"
+    ],
+    "banned": [
+      "Real.fourier_mul_convolution_eq"
+    ]
+  }
+]

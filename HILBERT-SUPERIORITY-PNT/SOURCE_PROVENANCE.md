@@ -1,6 +1,6 @@
 # Source provenance and scope
 
-These additions consolidate the HVR source packages developed alongside the original `HILBERT-SUPERIORITY-PNT` project. The original theta/PNT files and their own source-hash manifest remain the authoritative inputs for the existing PNT job.
+These additions consolidate the HVR source packages developed alongside the original `HILBERT-SUPERIORITY-PNT` project. The original half-line source is replaced as described in HALFLINE_REPLACEMENT.md. `original_sources.sha256` is retained as historical provenance; `branch_sources.sha256` is the input lock used for the PNT job.
 
 - `native-lean-chain/` is the extracted source of `archives/HVR_NATIVE_LEAN_CHAIN.zip`, exactly the original archive tracked on the development branch. It includes the six prime-spectral modules and its own source manifest, build plan and Linux/Windows runners. Its named-theorem Linux build and axiom audit passed in [run 41688856236](https://github.com/randogelist/Methlib/actions/runs/41688856236). Consult the individual theorem signatures: an audit of a conditional implication does not discharge its hypotheses.
 - `prime-spectral-amendment/` preserves the six branch source files, their exact audit plan, source hashes and native Windows runner. They are built also in the combined chain above. Their zeta-linked statements still use Mathlib infrastructure, including an existing von Mangoldt/zeta endpoint in the audited source.

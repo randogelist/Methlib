@@ -1,0 +1,27 @@
+Target: MeasureTheory.integral_integral_swap
+
+Candidate module: NativeFubini.lean
+Candidate declarations:
+  HVRNativeFubini.separable_integral_swap
+  HVRNativeFubini.fixed_frequency_factorization
+  HVRNativeFubini.fixed_frequency_laplace
+
+The first declaration proves exchange only for a separable scalar integrand
+f(u) g(t). The other two declarations establish fixed-frequency algebra and
+the corresponding one-variable Laplace integration identity. No declaration
+here proves the general Fubini theorem or swaps the two integrals of the
+coupled phase appearing in the PNT chain. Product integrability and an
+appropriate finite-rank approximation/interchange remain to be established.
+
+The candidate makes no explicit direct call to the target declaration. It
+uses Mathlib's integral identities, and their transitive dependencies have
+not been certified free of the target. This is not a dependency-independence
+claim. It has not been substituted into the PNT chain.
+
+The source is byte-for-byte the previously reported NativeFubini source,
+SHA-256 b23fa080375e011c5523f901f42a5168979262a6692dafe19c3b3328905e8b1c.
+The earlier supplied external runner output reported build and standard-only
+axiom audits for all three named declarations. The compiler and audit of the
+present branch must be checked separately; the source comments that say no
+Lean build was run refer to its original preparation state. A passing audit
+only covers the exact statements and their visible premises above.

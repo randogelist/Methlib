@@ -1,0 +1,101 @@
+[
+  {
+    "module": "HVRNativePrimePowerDivisorSum",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRNativeCoprimePrimePowerDivisors",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRNativeArithmeticZeta",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRSimpleMangoldtOne",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRSimplePrimePowDisjoint",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeMangoldtPrime",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeMangoldtPow",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NextMangoldtDivisorSum",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRNativeLogRpow",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRNativeLSeriesNorm",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeMangoldtNonneg",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeMangoldtBound",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeSeriesInfrastructure",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NextSummability",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRSimpleMoebiusBound",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeOneZetaSummability",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "IntegratedZetaNonzero",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRMajorZetaLogDerivative",
+    "names": [
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  }
+]

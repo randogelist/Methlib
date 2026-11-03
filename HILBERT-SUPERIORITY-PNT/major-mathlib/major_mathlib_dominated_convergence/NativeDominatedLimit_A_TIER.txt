@@ -1,0 +1,25 @@
+Target: MeasureTheory.tendsto_integral_of_dominated_convergence
+
+Candidate module: NativeDominatedLimit.lean
+Candidate declarations:
+  HVRNativeDominatedLimit.integral_error_le_weighted
+  HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error
+
+The second declaration proves integral convergence under the stronger
+weighted-uniform error condition ||f_n - g|| <= e_n weight almost everywhere,
+where e_n tends to zero, the weight is integrable, and each f_n and g is
+integrable. It does not prove general dominated convergence. Whether the
+actual Abel boundary integrands satisfy the stronger condition is open.
+
+The source makes no explicit direct call to the target declaration. It uses
+Mathlib Bochner integration estimates and limit infrastructure, whose
+transitive dependencies have not been certified free of the target. This is
+not a dependency-independence claim. It has not been substituted into PNT.
+
+The source is byte-for-byte the previously reported NativeDominatedLimit
+source, SHA-256 0ff0f73cd59ae032be27507eebb92be7fc439e60199099be0e5b8237e75431e8.
+The earlier supplied external runner output reported build and standard-only
+axiom audits for both named declarations. The compiler and audit of this
+branch must be checked separately; the source comments that say uncompiled
+and unaudited refer to its original preparation state. A passing audit only
+covers the exact statements and their visible premises above.

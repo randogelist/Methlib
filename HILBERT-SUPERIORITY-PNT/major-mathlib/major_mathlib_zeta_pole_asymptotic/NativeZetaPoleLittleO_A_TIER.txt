@@ -1,0 +1,12 @@
+HVR CANDIDATE: zeta logarithmic-derivative pole little-o
+
+Exact endpoint:
+HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO :
+  (fun s : ℂ => deriv riemannZeta s / riemannZeta s + (s - 1)⁻¹ -
+      (Real.eulerMascheroniConstant : ℂ)) =o[nhdsWithin 1 {1}ᶜ] (fun _ : ℂ => (1 : ℂ))
+
+Premises: none in the stated theorem. Mathlib regularized-zeta differentiability, factorization, local nonvanishing, and values at 1 are used. The auxiliary HVRNativeZetaPoleEquality candidate builds the eventual log-derivative factorization from Mathlib's pointwise derivative/factorization and nonvanishing results. The little-o candidate composes that auxiliary rather than directly calling Mathlib's eventual factorization. No full transitive independence from the selected old endpoint is claimed.
+
+Proof outline: regularized logarithmic derivative tends to its value at 1; use the HVR factorization near 1, subtract the Euler-Mascheroni constant, and convert convergence to zero to little-o of 1.
+
+Status: A_TIER_CANDIDATE for this composition: previous individual source files were historically audited, but the changed import and composition require a new matching cached external build and theorem-level axiom audit. Root PNT integration has not been attempted.

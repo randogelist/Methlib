@@ -1,0 +1,9 @@
+TARGET: Real.tendsto_integral_exp_smul_cocompact
+SCOPE: Conditional HVR Fourier-decay candidate for complex functions on R, with convergence along atTop.
+
+THEOREM: NativeFourierDecay.decay_from_half_period_obligations.
+It assumes (1) the eventual half-period Fourier cancellation identity hphase and (2) the L1 translation-difference limit htranslation. It concludes that the defined Fourier integral tends to zero at +infinity. These are genuine analytic premises, not proofs of the Riemann-Lebesgue lemma for every integrable function. The Mathlib target also has cocompact scope, so closing both directions or the exact target application requires additional work.
+
+SOURCE PROVENANCE: The file is byte-identical to the NativeFourierDecay.lean in main/native22-rebuild/candidates, SHA256 219249b0cdae696a5ba5f4ccb49ba2bb01f946404c5ccd59d5fd73a1c641f099. An earlier supplied native Windows run reported build and standard-only axiom audit for this named declaration. Re-run the branch's audit for matching compiler and source evidence. No transitive dependency absence is asserted; trace coverage must be verified separately.
+
+OPEN: derive hphase and htranslation for the required integrable boundary functions, reconcile the Fourier convention and cocompact endpoint, connect to the PNT, and verify transitive target absence.

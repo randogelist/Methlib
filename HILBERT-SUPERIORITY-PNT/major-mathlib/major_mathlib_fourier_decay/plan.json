@@ -1,0 +1,277 @@
+[
+  {
+    "module": "NativeFourierDecay",
+    "names": [
+      "NativeFourierDecay.decay_from_half_period_obligations"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFourierPhase",
+    "names": [
+      "HVRFourierPhase.half_period_shift",
+      "HVRFourierPhase.half_period_cancellation"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRCompactTranslation",
+    "names": [
+      "HVRCompactTranslation.translation_integral_tendsto"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFourierLimit",
+    "names": [
+      "HVRFourierLimit.decay_of_half_period_obligations"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVROrdinaryFourier",
+    "names": [
+      "HVROrdinaryFourier.ordinaryIntegral_eq_scaled",
+      "HVROrdinaryFourier.ordinaryIntegral_tendsto_zero_of_atBot"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFallbackFourier",
+    "names": [
+      "HVRFallbackFourier.real_fourier_compact_decay"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRCompactFourierDecay",
+    "names": [
+      "HVRCompactFourierDecay.fourier_tendsto_atTop",
+      "HVRCompactFourierDecay.fourier_tendsto_atBot",
+      "HVRCompactFourierDecay.ordinary_tendsto_atTop",
+      "HVRCompactFourierDecay.weighted_boundary_tendsto_atTop"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVR_Prime_Gram",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_Summability",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_InfiniteGram",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_Complex",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_LogDerivative",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_ZetaSplit",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_HigherCoefficient_Reindex",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_PowerCorrection",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PowerCorrection_Holomorphic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_TermHolomorphic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_UniformBound",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_HigherCoefficient_Geometric",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_PrimeSubtype",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_CorrectionIdentity",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_PoleResidue",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_BoundaryLimit",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_BoundaryBridge",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_ResidueTransfer",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_PoleMass",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_BoundaryFactor",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_GramResidueConditional",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Analytic_Residue",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_BoundarySequence",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_ZeroFreeBoundary",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_AnalyticGerms",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_PoleGlue",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_MellinCandidate",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_GrowthCandidate",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_MellinGerm",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_LogSubstitution",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_BoundaryExtension",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRActualBoundaryFourier",
+    "names": [
+      "HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero",
+      "HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFallbackApplications",
+    "names": [
+      "HVRFallbackApplications.fourier_tendsto_atTop",
+      "HVRFallbackApplications.fourier_tendsto_atBot",
+      "HVRFallbackApplications.ordinary_tendsto_atTop",
+      "HVRFallbackApplications.weighted_boundary_tendsto_atTop"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFallbackActualBoundary",
+    "names": [
+      "HVRFallbackActualBoundary.weightedBoundary_fourier_tendsto_zero",
+      "HVRFallbackActualBoundary.ordinaryBoundary_tendsto_zero"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "HVRFourierTraceControlLeaf",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRFourierTraceControlBridge",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRFourierDependencyDiagnostic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRFourierDependencyDiagnosticIndependent",
+    "names": [],
+    "banned": []
+  }
+]

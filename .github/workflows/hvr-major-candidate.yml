@@ -1,0 +1,93 @@
+name: HVR major Mathlib candidates (Linux)
+
+on:
+  push:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/major-mathlib/**'
+      - '.github/workflows/hvr-major-candidate.yml'
+  pull_request:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/major-mathlib/**'
+      - '.github/workflows/hvr-major-candidate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: Candidate / ${{ matrix.package }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - major_mathlib_von_mangoldt_log_derivative
+          - major_mathlib_zeta_nonzero
+          - major_mathlib_zeta_analytic
+          - major_mathlib_zeta_pole_asymptotic
+          - major_mathlib_chebyshev_bound
+          - major_mathlib_lseries_integral
+          - major_mathlib_fourier_decay
+          - major_mathlib_fourier_convolution
+          - major_mathlib_fubini_swap
+          - major_mathlib_dominated_convergence
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Install Lean 4.34.0-rc1
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned Mathlib cache
+        working-directory: .ci-mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Build and audit candidate
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+          HVR_PACKAGE: ${{ matrix.package }}
+        run: |
+          set -euo pipefail
+          export HVR_REBUILD_ROOT="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/major-mathlib/$HVR_PACKAGE"
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$HVR_REBUILD_ROOT/runner/native_audit.py" --check-plan
+          python3 "$HVR_REBUILD_ROOT/runner/native_audit.py"
+      - name: Summarize audit scope
+        if: always()
+        shell: bash
+        env:
+          HVR_PACKAGE: ${{ matrix.package }}
+        run: |
+          echo "## $HVR_PACKAGE" >> "$GITHUB_STEP_SUMMARY"
+          echo 'This job builds the package plan and audits its named declarations with standard axioms only.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'A passing job does not remove conditional premises or establish independence from Mathlib.' >> "$GITHUB_STEP_SUMMARY"
+          find "$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/major-mathlib/$HVR_PACKAGE/evidence-linux" -name result.txt -type f -exec cat {} \; >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+      - name: Upload candidate audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: hvr-major-candidate-${{ matrix.package }}-evidence
+          path: HILBERT-SUPERIORITY-PNT/major-mathlib/${{ matrix.package }}/evidence-linux/
+          if-no-files-found: warn

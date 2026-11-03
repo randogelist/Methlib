@@ -1,0 +1,16 @@
+[
+  {
+    "module": "NativeZetaPoleEquality",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeZetaPoleLittleO",
+    "names": [
+      "HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO"
+    ],
+    "banned": [
+      "log_deriv_riemannZeta_add_inv_sub_sub_isLittleO"
+    ]
+  }
+]

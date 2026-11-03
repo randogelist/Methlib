@@ -1,0 +1,11 @@
+HVR CANDIDATE: analyticity of actual riemannZeta away from 1
+
+Exact endpoint:
+HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized :
+  AnalyticOnNhd ℂ riemannZeta ({(1 : ℂ)}ᶜ)
+
+Proof outline: differentiate the inverse pole factor multiplied by riemannZeta₁ away from 1; transfer by eventual equality to riemannZeta; use analyticity of complex differentiable functions on an open set.
+
+Premises: none in the stated theorem. The proof explicitly uses Mathlib differentiable_riemannZeta₁ and riemannZeta_eq_inv_sub_mul. In the pinned Mathlib revision, differentiability of the regularized function is itself built using zeta differentiability away from 1; this is a direct-call replacement, not an independent construction of analytic continuation. Imports and transitive dependencies are not removed by merely changing the direct call.
+
+Status: candidate for this branch until matching cached external build and theorem-level standard-only axiom audit are verified. The identical prior source had a historical audit in the native22 package, but no dependency-trace absence certification. Root PNT integration has not been attempted.

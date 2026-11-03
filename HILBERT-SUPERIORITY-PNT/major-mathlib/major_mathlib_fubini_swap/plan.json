@@ -1,0 +1,11 @@
+[
+  {
+    "module": "NativeFubini",
+    "names": [
+      "HVRNativeFubini.separable_integral_swap"
+    ],
+    "banned": [
+      "MeasureTheory.integral_integral_swap"
+    ]
+  }
+]

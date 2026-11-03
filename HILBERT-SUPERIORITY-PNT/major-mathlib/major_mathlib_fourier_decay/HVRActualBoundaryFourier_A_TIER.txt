@@ -1,0 +1,18 @@
+HVR ACTUAL PNT BOUNDARY FOURIER DECAY
+STATUS=A_TIER FOR THE NAMED STATEMENTS AND THEIR EXPLICIT PREMISES
+
+Audited declarations:
+  HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero
+  HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero
+Both assume psi : R -> C is continuous and compactly supported. The first proves integrability and positive 2pi-frequency decay of psi(t)*patchedShift(it); the second proves ordinary positive-frequency decay of the actual boundary expression.
+
+Cached external Linux Lean 4.34.0-rc1 CI built the 45-module plan and passed the named standard-only axiom audits at proof-source commit 8c1d6ad9ee8580e56e1aaffb6d1a6e4394d55351:
+https://github.com/randogelist/Methlib/actions/runs/41726247514
+HVRActualBoundaryFourier.lean SHA256 b7d21967cdc7c6240bc01bc66f72525841031c6e8dcda090f2b9bc556e8efe03.
+HVRCompactFourierDecay.lean SHA256 b6c8a6b278d1ca6828db35b58e7e50ed0dcb9f5caff34f7583104e5f29c33b0e.
+
+Controlled source-dependency diagnostics detected direct and two-hop positive controls for Real.tendsto_integral_exp_smul_cocompact. In the four HVR compact/actual roots, this target and declarations from its Mathlib RiemannLebesgueLemma module were not seen; reached theorem bodies unavailable = 0. Negative trace coverage remains UNVERIFIED. This is not a proof of semantic independence or independence from Mathlib generally. Control files intentionally import the old theorem only after candidate modules are built and are not candidate proof dependencies.
+
+Proof spine: half-period phase, compact-support uniform L1 translation estimate, filter-generic HVR squeeze, negative-frequency convention conversion, actual boundary adapter. The phase and translation proofs are adapted from Mathlib.Analysis.Fourier.RiemannLebesgueLemma, Copyright 2022 David Loeffler, Apache-2.0, not an independently discovered result. Mathlib infrastructure remains. The adapter depends on the project patchedShift continuity and 31 project modules containing other Mathlib analytic endpoints.
+
+Not established by these theorems: the general L1 Riemann-Lebesgue theorem, identification of the boundary Fourier integral with the PNT convolution, replacing the original PNT-root call, or a formal BKQR/GP identification. Original PNT integration has not been attempted.

@@ -1,0 +1,10 @@
+import NativeZetaPoleLittleO
+
+#check HVRNativeZetaPoleEquality.log_derivative_eq
+#print axioms HVRNativeZetaPoleEquality.log_derivative_eq
+#check HVRNativeZetaPoleEquality.log_derivative_eventually_eq
+#print axioms HVRNativeZetaPoleEquality.log_derivative_eventually_eq
+#check HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto
+#print axioms HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto
+#check HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO
+#print axioms HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO

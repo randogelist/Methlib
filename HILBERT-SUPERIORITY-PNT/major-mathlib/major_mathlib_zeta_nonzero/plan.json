@@ -1,0 +1,26 @@
+[
+  {
+    "module": "HVRSimpleMoebiusBound",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "NativeOneZetaSummability",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRMajorZetaNonzero",
+    "names": [
+      "HVRMajorZetaNonzero.zeta_ne_zero_of_one_lt_re"
+    ],
+    "banned": [
+      "riemannZeta_ne_zero_of_one_lt_re"
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+HVR HALF-LINE KERNEL TAIL AND INDICATOR CONVOLUTION
+STATUS=A_TIER for the two named exact statements and their explicit premises.
+
+HVRNativeHalfLineTail.integral_Iic_tendsto_integral: for any real integrable kernel k, the integral over Iic x tends to its total integral at x -> +infinity.
+HVRNativeHalfLineApplication.halfLineConvolution_tendsto_one: if in addition the total integral equals 1, the convolution with the positive-halfline indicator tends to 1. This definition has the same body and theorem scope as the original PNT half-line module.
+
+Both build and named standard-only axiom audits passed in cached Linux Lean 4.34.0-rc1 CI https://github.com/randogelist/Methlib/actions/runs/41730665577. The complete job failed because an optional separate HVRSpatialTail helper did not compile. Source hashes: HVRNativeHalfLineTail.lean 2b33d781b835cdef6883a047531ed74b763c4d703d3aa5c38b9e3fab315d2245; HVRNativeHalfLineApplication.lean 9e51276dee87787ed31cf5c80a56560b609c611555ae9d41b7f4959007ba3336.
+
+Controlled dependency diagnostic found neither sequential nor filter DCT target, four direct/two-hop controls detected, 0 missing reached declarations, 0 unavailable reached theorem bodies, and 0 reached declarations from Mathlib.MeasureTheory.Integral.DominatedConvergence. Negative dependency coverage remains UNVERIFIED; equivalent measure results may remain. The same proof has now been integrated into the original PNT half-line module on this branch. Full theta-root build, named axiom audit, and controlled trace passed in https://github.com/randogelist/Methlib/actions/runs/41732097102. The two selected DCT targets were not seen in the patched half-line theorems but both were FOUND in the PNT root. Negative dependency coverage remains unverified.

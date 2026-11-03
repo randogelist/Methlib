@@ -1,0 +1,4 @@
+import NativeFourierConvolution
+
+#check NativeFourierConvolution.real_complex_convolution_product
+#print axioms NativeFourierConvolution.real_complex_convolution_product

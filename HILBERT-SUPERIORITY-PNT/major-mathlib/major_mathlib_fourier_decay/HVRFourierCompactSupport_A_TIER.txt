@@ -1,0 +1,10 @@
+HVR FOURIER COMPACT-SUPPORT DERIVATION
+STATUS=A_TIER FOR THE NAMED THEOREMS AND THEIR EXPLICIT PREMISES
+
+Cached Lean 4.34.0-rc1 Linux CI passed all 45 planned modules and their named standard-only axiom audits: https://github.com/randogelist/Methlib/actions/runs/41726247514
+
+The audited declarations include HVRFourierPhase.half_period_cancellation; HVRCompactTranslation.translation_integral_tendsto; HVRCompactFourierDecay.fourier_tendsto_atTop and fourier_tendsto_atBot; and the ordinary and weighted-boundary forms. The translation proof assumes g is continuous and compactly supported. It gives actual two-sided Fourier decay, not the general L1 theorem.
+
+Phase and translation proofs adapt the pinned Mathlib.Analysis.Fourier.RiemannLebesgueLemma source, Copyright 2022 David Loeffler, Apache-2.0. The target is not called in these proof sources. Controlled trace positive tests passed and the selected declaration was not seen in audited roots; negative trace coverage remains UNVERIFIED.
+
+The BKQR-style Gram interpretation has not been formalized and no existing GP object was identified. The original PNT chain has not been modified.

@@ -1,0 +1,272 @@
+[
+  {
+    "module": "NativeDominatedLimit",
+    "names": [
+      "HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence"
+    ]
+  },
+  {
+    "module": "HVR_Prime_Gram",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_Summability",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_InfiniteGram",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_Complex",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_LogDerivative",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_ZetaSplit",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_HigherCoefficient_Reindex",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_PowerCorrection",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PowerCorrection_Holomorphic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_TermHolomorphic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_UniformBound",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_HigherCoefficient_Geometric",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_PrimeSubtype",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_CorrectionIdentity",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_MellinCandidate",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_GrowthCandidate",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_PoleResidue",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Correction_BoundaryLimit",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_BoundaryBridge",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_ResidueTransfer",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Prime_PoleMass",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_BoundaryFactor",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_GramResidueConditional",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Analytic_Residue",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_BoundarySequence",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Zeta_ZeroFreeBoundary",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_AnalyticGerms",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_MellinGerm",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_LogSubstitution",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_MonotoneNormalization",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeLogDensity",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeCount_ExpGrowth",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Complex_PoleLaplace",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeDensity_Laplace",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_PoleGlue",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_Smoothing_BoundaryExtension",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeDensity_BoundaryLink",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVR_PrimeDensity_BoundaryLimit",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRCompactBoundaryLimit",
+    "names": [
+      "HVRCompactBoundaryLimit.norm_frequency_phase",
+      "HVRCompactBoundaryLimit.frequency_integral_tendsto_boundary"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence",
+      "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
+    ]
+  },
+  {
+    "module": "HVRDCTTraceControlLeaf",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRDCTTraceControlBridge",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRDCTDependencyDiagnostic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRNativeHalfLineTail",
+    "names": [
+      "HVRNativeHalfLineTail.integral_Iic_tendsto_integral"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence",
+      "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
+    ]
+  },
+  {
+    "module": "HVRNativeHalfLineApplication",
+    "names": [
+      "HVRNativeHalfLineApplication.halfLineConvolution_tendsto_one"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence",
+      "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
+    ]
+  },
+  {
+    "module": "HVRAbstractCompactBoundary",
+    "names": [
+      "HVRAbstractCompactBoundary.frequency_integral_tendsto_boundary"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence",
+      "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
+    ]
+  },
+  {
+    "module": "HVRDCTIntermediaryDiagnostic",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRDCTShortestPaths",
+    "names": [],
+    "banned": []
+  },
+  {
+    "module": "HVRDCTHalfLineDiagnostic",
+    "names": [],
+    "banned": []
+  }
+]
