@@ -1,0 +1,14 @@
+HVR MAJOR MATHLIB: VON MANGOLDT LOGARITHMIC DERIVATIVE
+STATUS=A_TIER_CANDIDATE
+
+Exact theorem:
+HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta :
+  forall {s : Complex}, 1 < s.re ->
+    LSeries (fun n : Nat => (ArithmeticFunction.vonMangoldt n : Complex)) s =
+      - deriv riemannZeta s / riemannZeta s.
+
+Method: reproduce the integrated HVR divisor-sum route: establish convolution with the constant-one sequence, combine absolute convergence with generic L-series convolution, obtain nonvanishing through the Mobius-inverse bridge, differentiate the constant-one L-series, and identify it locally with the actual Riemann zeta function. The theorem has no additional mathematical hypothesis beyond 1 < s.re. This source is a namespace-renamed copy of NextZetaLogDerivative.lean and retains its attribution. Imports use the existing native-rebuild candidate sources.
+
+Prior related evidence: source NextZetaLogDerivative.lean, theorem HVRNextZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta passed named axiom audit in Linux cached CI https://github.com/randogelist/Methlib/actions/runs/41716200774. The newly named theorem and source in this candidate have not yet been audited; prior evidence cannot promote them. They remain A_TIER_CANDIDATE until matching external Lean 4.34.0-rc1 compiler and theorem-level axiom audit evidence exists.
+
+Dependency scope: generic Mathlib definitions, convolution, L-series differentiation, series convergence, complex analysis and zeta identification remain. The existing target dependency trace has known findings and incomplete negative coverage; do not claim the major Mathlib target or every selected endpoint absent without a validated transitive trace of this exact theorem. The candidate is not substituted into the PNT chain.
