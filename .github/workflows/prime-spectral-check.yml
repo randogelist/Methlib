@@ -1,0 +1,56 @@
+name: Prime spectral amendment (Windows RC1)
+on:
+  push:
+    branches: [prime-spectral-amendment-check]
+    paths:
+      - 'PRIME-SPECTRAL-AMENDMENT/**'
+      - '.github/workflows/prime-spectral-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: windows-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch Mathlib cache
+        shell: pwsh
+        working-directory: .ci-mathlib
+        run: |
+          if ((Get-Content lean-toolchain -Raw).Trim() -ne 'leanprover/lean4:v4.34.0-rc1') { throw 'Unexpected Lean version' }
+          $lake = Join-Path $env:USERPROFILE '.elan\bin\lake.exe'
+          & $lake exe cache get
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build and audit
+        shell: pwsh
+        run: |
+          $env:MATHLIB_CACHE_ROOT = Join-Path $env:GITHUB_WORKSPACE '.ci-mathlib'
+          $nativeModules = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\Modules'
+          $sharedModules = Join-Path $env:ProgramFiles 'WindowsPowerShell\Modules'
+          $env:PSModulePath = "$nativeModules;$sharedModules;$env:PSModulePath"
+          & (Join-Path $env:GITHUB_WORKSPACE 'PRIME-SPECTRAL-AMENDMENT/run.cmd')
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: prime-spectral-amendment-evidence
+          path: PRIME-SPECTRAL-AMENDMENT/evidence/
+          if-no-files-found: warn

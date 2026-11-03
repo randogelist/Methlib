@@ -1,0 +1,62 @@
+[
+  {
+    "module": "PrimeSpectralTheta",
+    "deps": [],
+    "names": [
+      "PrimeSpectralTheta.prime_coordinate_cancellation",
+      "PrimeSpectralTheta.cutoffPairing_eq_chebyshev_theta"
+    ]
+  },
+  {
+    "module": "PrimeSpectralSeries",
+    "deps": ["PrimeSpectralTheta"],
+    "names": [
+      "PrimeSpectralSeries.weight_nonneg",
+      "PrimeSpectralSeries.vector_sq",
+      "PrimeSpectralSeries.vector_eq_amplitude",
+      "PrimeSpectralSeries.heatTerm_eq_dirichlet",
+      "PrimeSpectralSeries.heatTerm_eq_LSeries_term",
+      "PrimeSpectralSeries.heat_summable",
+      "PrimeSpectralSeries.vector_sq_summable",
+      "PrimeSpectralSeries.heat_hasSum_actual_zeta"
+    ]
+  },
+  {
+    "module": "PrimeSpectralResolvent",
+    "deps": [],
+    "names": [
+      "PrimeSpectralResolvent.mode_integrable",
+      "PrimeSpectralResolvent.mode_integral",
+      "PrimeSpectralResolvent.spectral_resolvent_laplace",
+      "PrimeSpectralResolvent.heat_series_resolvent_laplace",
+      "PrimeSpectralResolvent.summable_mode_integral_norm",
+      "PrimeSpectralResolvent.heat_series_resolvent_of_summable_mass"
+    ]
+  },
+  {
+    "module": "PrimeSpectralHilbert",
+    "deps": ["PrimeSpectralSeries"],
+    "names": [
+      "PrimeSpectralHilbert.primeAmplitude_memlp",
+      "PrimeSpectralHilbert.actualPrimeVector_apply",
+      "PrimeSpectralHilbert.coordinate_apply",
+      "PrimeSpectralHilbert.finiteDiagonal_matrix_element",
+      "PrimeSpectralHilbert.theta_matrix_element_of_coordinates",
+      "PrimeSpectralHilbert.primeVector_apply",
+      "PrimeSpectralHilbert.theta_matrix_element_of_square_summability",
+      "PrimeSpectralHilbert.theta_matrix_element",
+      "PrimeSpectralHilbert.finite_heat_matrix_element",
+      "PrimeSpectralHilbert.finite_heat_matrix_elements_tendsto_zeta"
+    ]
+  },
+  {
+    "module": "PrimeSpectralBridge",
+    "deps": ["PrimeSpectralSeries", "PrimeSpectralResolvent"],
+    "names": [
+      "PrimeSpectralBridge.weight_summable",
+      "PrimeSpectralBridge.prime_heat_resolvent_laplace",
+      "PrimeSpectralBridge.heat_series_eq_zeta_realpart",
+      "PrimeSpectralBridge.zeta_realpart_resolvent_laplace"
+    ]
+  }
+]
