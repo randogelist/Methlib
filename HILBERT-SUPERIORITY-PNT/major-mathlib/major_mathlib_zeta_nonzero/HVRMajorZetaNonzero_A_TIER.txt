@@ -1,0 +1,12 @@
+HVR MAJOR MATHLIB: RIEMANN ZETA NONVANISHING IN Re(s)>1
+STATUS=A_TIER_CANDIDATE
+
+Exact theorem:
+HVRMajorZetaNonzero.zeta_ne_zero_of_one_lt_re :
+  forall {s : Complex}, 1 < s.re -> riemannZeta s != 0.
+
+Method: establish summability of the Mobius L-series using bounded coefficients, identify the product of the zeta and Mobius L-series via generic arithmetic convolution and the Mobius inverse identity, identify the first L-series with the actual Riemann zeta, and conclude nonvanishing from their product being one. The theorem has no additional mathematical hypothesis beyond 1 < s.re. This source is a namespace-renamed copy of IntegratedZetaNonzero.lean and retains its attribution. Imports use existing native-rebuild candidate sources.
+
+Prior related evidence: source IntegratedZetaNonzero.lean, theorem HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re passed named axiom audit in Linux cached CI https://github.com/randogelist/Methlib/actions/runs/41716200774. The newly named theorem and source in this candidate have not yet been audited; prior evidence cannot promote them. They remain A_TIER_CANDIDATE until matching external Lean 4.34.0-rc1 compiler and theorem-level axiom audit evidence exists.
+
+Dependency scope: the proof retains generic Mathlib arithmetic-function convolution, Mobius and zeta definitions, bounded-coefficient L-series summability, zeta L-series identification, and complex analysis. Negative dependency trace coverage is unverified; a complete target-freedom claim requires further validation. The candidate is not substituted into the PNT chain.
