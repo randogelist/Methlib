@@ -1,0 +1,15 @@
+{
+  "module": "NativeFourierDecay",
+  "source": "NativeFourierDecay.lean",
+  "audit": "Audit_NativeFourierDecay.lean",
+  "theorems": [
+    "NativeFourierDecay.decay_from_half_period_obligations"
+  ],
+  "target": "Real.tendsto_integral_exp_smul_cocompact",
+  "source_sha256": "219249b0cdae696a5ba5f4ccb49ba2bb01f946404c5ccd59d5fd73a1c641f099",
+  "proof_scope": "conditional atTop; two analytic premises",
+  "source_imports": [
+    "Mathlib.Analysis.Fourier.FourierTransform",
+    "Mathlib.Tactic"
+  ]
+}

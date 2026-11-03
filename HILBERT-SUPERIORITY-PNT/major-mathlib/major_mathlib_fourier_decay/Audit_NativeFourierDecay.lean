@@ -1,0 +1,4 @@
+import NativeFourierDecay
+
+#check NativeFourierDecay.decay_from_half_period_obligations
+#print axioms NativeFourierDecay.decay_from_half_period_obligations
