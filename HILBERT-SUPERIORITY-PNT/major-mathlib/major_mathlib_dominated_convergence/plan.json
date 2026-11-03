@@ -225,29 +225,6 @@
     "banned": []
   },
   {
-    "module": "HVRSpatialTail",
-    "names": [
-      "HVRSpatialTail.tail_integral_tendsto_zero",
-      "HVRSpatialTail.shifted_kernel_tail_small",
-      "HVRSpatialTail.cumulative_integral_tendsto_total"
-    ],
-    "banned": [
-      "MeasureTheory.tendsto_integral_of_dominated_convergence",
-      "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
-    ]
-  },
-  {
-    "module": "HVRNativeHalfLineIndicatorConvolution",
-    "names": [
-      "HVRNativeHalfLineIndicatorConvolution.integral_Iic_tendsto_integral",
-      "HVRNativeHalfLineIndicatorConvolution.halfLineConvolution_tendsto_one"
-    ],
-    "banned": [
-      "MeasureTheory.tendsto_integral_of_dominated_convergence",
-      "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
-    ]
-  },
-  {
     "module": "HVRNativeHalfLineTail",
     "names": [
       "HVRNativeHalfLineTail.integral_Iic_tendsto_integral"
@@ -279,11 +256,6 @@
   },
   {
     "module": "HVRDCTIntermediaryDiagnostic",
-    "names": [],
-    "banned": []
-  },
-  {
-    "module": "HVRDCTTailDiagnostic",
     "names": [],
     "banned": []
   },
