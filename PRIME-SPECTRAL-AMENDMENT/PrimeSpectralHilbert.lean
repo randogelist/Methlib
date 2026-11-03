@@ -18,7 +18,7 @@ namespace PrimeSpectralHilbert
 
 abbrev PrimeHilbert := lp (fun _ : ℕ => ℝ) 2
 
-local instance : Fact ((1 : ℝ≥0∞) ≤ 2) := ⟨by norm_num⟩
+local instance : Fact ((1 : ENNReal) ≤ 2) := ⟨by norm_num⟩
 
 /-- The actual prime amplitudes are square summable for sigma > 1. -/
 theorem primeAmplitude_memlp (sigma : ℝ) (hsigma : 1 < sigma) :
@@ -38,13 +38,13 @@ theorem actualPrimeVector_apply (sigma : ℝ) (hsigma : 1 < sigma) (n : ℕ) :
 /-- An actual Hilbert vector from the stated square-summability input. -/
 def primeVector (sigma : ℝ)
     (hsq : Summable (fun n : ℕ =>
-      ‖PrimeSpectralTheta.amplitude sigma n‖ ^ (2 : ℝ≥0∞).toReal)) :
+      ‖PrimeSpectralTheta.amplitude sigma n‖ ^ (2 : ENNReal).toReal)) :
     PrimeHilbert :=
   ⟨PrimeSpectralTheta.amplitude sigma, memℓp_gen hsq⟩
 
 theorem primeVector_apply (sigma : ℝ)
     (hsq : Summable (fun n : ℕ =>
-      ‖PrimeSpectralTheta.amplitude sigma n‖ ^ (2 : ℝ≥0∞).toReal))
+      ‖PrimeSpectralTheta.amplitude sigma n‖ ^ (2 : ENNReal).toReal))
     (n : ℕ) : primeVector sigma hsq n = PrimeSpectralTheta.amplitude sigma n := by
   rfl
 
@@ -68,7 +68,7 @@ theorem finiteDiagonal_matrix_element (s : Finset ℕ) (weight : ℕ → ℝ)
     inner ℝ v (finiteDiagonal s weight v) =
       ∑ n ∈ s, v n * (weight n * v n) := by
   classical
-  simp [finiteDiagonal, coordinate_apply, inner_sum,
+  simp [finiteDiagonal, coordinate_apply, inner_sum, real_inner_smul_right,
     lp.inner_single_right, Real.inner_apply, mul_comm, mul_left_comm, mul_assoc]
 
 /-- The exact theta cutoff, conditional only on the exhibited amplitudes being
@@ -94,7 +94,7 @@ theorem theta_matrix_element_of_coordinates (sigma x : ℝ) (v : PrimeHilbert)
 supplied.  No analytic continuation or PNT premise appears. -/
 theorem theta_matrix_element_of_square_summability (sigma x : ℝ)
     (hsq : Summable (fun n : ℕ =>
-      ‖PrimeSpectralTheta.amplitude sigma n‖ ^ (2 : ℝ≥0∞).toReal)) :
+      ‖PrimeSpectralTheta.amplitude sigma n‖ ^ (2 : ENNReal).toReal)) :
     inner ℝ (primeVector sigma hsq)
       (finiteDiagonal ((Finset.Ioc 0 ⌊x⌋₊).filter Nat.Prime)
         (PrimeSpectralTheta.unweight sigma) (primeVector sigma hsq)) =

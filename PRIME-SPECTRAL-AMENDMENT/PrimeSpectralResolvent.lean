@@ -26,7 +26,8 @@ theorem mode_integral (a e w : ℝ) (h : 0 < w + e) :
     (∫ t : ℝ in Set.Ioi 0, a * Real.exp (-(w + e) * t)) = a / (w + e) := by
   have hneg : -(w + e) < 0 := by linarith
   have hexp : (∫ t : ℝ in Set.Ioi 0, Real.exp (-(w + e) * t)) = (w + e)⁻¹ := by
-    simpa [div_eq_mul_inv] using (integral_exp_mul_Ioi (a := -(w + e)) hneg 0)
+    simpa only [mul_zero, Real.exp_zero, neg_div_neg_eq, one_div] using
+      (integral_exp_mul_Ioi (a := -(w + e)) hneg 0)
   rw [integral_const_mul, hexp]
   simp only [div_eq_mul_inv]
 
@@ -76,7 +77,6 @@ theorem heat_series_resolvent_laplace
     rw [← Real.exp_add]
     have harg : -w * t + -energy n * t = -(w + energy n) * t := by ring
     rw [harg]
-    ring
   rw [heq]
   exact spectral_resolvent_laplace weight energy w hpos hnorm
 
