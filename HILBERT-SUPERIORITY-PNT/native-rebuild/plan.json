@@ -1,0 +1,476 @@
+[
+  {
+    "module": "NativeMangoldtNonneg",
+    "names": [
+      "HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPrime",
+    "names": [
+      "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPow",
+    "names": [
+      "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeMangoldtBound",
+    "names": [
+      "HVRNativeMangoldtBound.vonMangoldt_le_log_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeZetaLogDerivative",
+    "names": [
+      "HVRNativeZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_of_bridges"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "names": [
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "HVRSimpleMangoldtOne",
+    "names": [
+      "HVRSimpleMangoldtOne.vonMangoldt_one"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "HVRSimpleMoebiusBound",
+    "names": [
+      "HVRSimpleMoebiusBound.abs_moebius_le_one"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "HVRSimplePrimePowDisjoint",
+    "names": [
+      "HVRSimplePrimePowDisjoint.disjoint_divisors"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeOneZetaSummability",
+    "names": [
+      "HVRNativeOneZetaSummability.one_summable",
+      "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+      "HVRNativeOneZetaSummability.one_abscissa_lt"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeSeriesInfrastructure",
+    "names": [
+      "HVRNativeSeriesInfrastructure.hasSum_scale",
+      "HVRNativeSeriesInfrastructure.hasSum_identifies_tsum",
+      "HVRNativeSeriesInfrastructure.complex_summable_of_majorant"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "HVRNativePrimePowerRegroup",
+    "names": [
+      "HVRNativePrimePowerRegroup.regroup"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "IntegratedZetaNonzero",
+    "names": [
+      "HVRIntegratedZetaNonzero.moebiusLSeries_summable",
+      "HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries",
+      "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse",
+      "HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div",
+      "ArithmeticFunction.LSeries_vonMangoldt_eq",
+      "ArithmeticFunction.vonMangoldt_sum",
+      "ArithmeticFunction.vonMangoldt_mul_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_const_one",
+      "ArithmeticFunction.vonMangoldt_apply_prime",
+      "ArithmeticFunction.vonMangoldt_apply_pow",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log",
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "LSeries_one_ne_zero_of_one_lt_re",
+      "riemannZeta_ne_zero_of_one_lt_re",
+      "ArithmeticFunction.LSeriesSummable_moebius_iff",
+      "ArithmeticFunction.vonMangoldt_apply_one",
+      "Nat.disjoint_divisors_filter_isPrimePow",
+      "ArithmeticFunction.abs_moebius_le_one",
+      "ArithmeticFunction.LSeriesSummable_zeta_iff",
+      "LSeriesSummable_one_iff",
+      "LSeries.abscissaOfAbsConv_one",
+      "Complex.natCast_cpow_natCast_mul",
+      "tsum_eq_tsum_primes_of_support_subset_prime_powers",
+      "tsum_primes_pow_eq"
+    ]
+  },
+  {
+    "module": "HVRNativeLogRpow",
+    "names": [
+      "HVRNativeLogRpow.log_le_rpow_div_nonneg",
+      "HVRNativeLogRpow.log_natCast_le_rpow_div"
+    ],
+    "banned": [
+      "Real.log_natCast_le_rpow_div",
+      "Real.log_le_rpow_div"
+    ]
+  },
+  {
+    "module": "HVRNativePrimePowerDivisorSum",
+    "names": [
+      "HVRNativePrimePowerDivisorSum.sum_divisors_prime_pow"
+    ],
+    "banned": [
+      "Nat.sum_divisors_prime_pow"
+    ]
+  },
+  {
+    "module": "HVRNativeCoprimePrimePowerDivisors",
+    "names": [
+      "HVRNativeCoprimePrimePowerDivisors.filtered_divisors_mul"
+    ],
+    "banned": [
+      "Nat.mul_divisors_filter_prime_pow"
+    ]
+  },
+  {
+    "module": "HVRNativeArithmeticZeta",
+    "names": [
+      "HVRNativeArithmeticZeta.mangoldt_mul_zeta_apply"
+    ],
+    "banned": [
+      "ArithmeticFunction.coe_mul_zeta_apply",
+      "ArithmeticFunction.coe_zeta_mul_apply",
+      "ArithmeticFunction.coe_zeta_smul_apply"
+    ]
+  },
+  {
+    "module": "HVRNativeLSeriesNorm",
+    "names": [
+      "HVRNativeLSeriesNorm.norm_term"
+    ],
+    "banned": [
+      "LSeries.norm_term_eq"
+    ]
+  },
+  {
+    "module": "HVRComplexLogNative",
+    "names": [
+      "HVRComplexLogNative.complex_log_of_nonneg",
+      "HVRComplexLogNative.complex_log_nat"
+    ],
+    "banned": [
+      "Complex.ofReal_log",
+      "Complex.natCast_log"
+    ]
+  },
+  {
+    "module": "HVRComplexNormExpNative",
+    "names": [
+      "HVRComplexNormExpNative.norm_exp_rebuild"
+    ],
+    "banned": [
+      "Complex.norm_exp"
+    ]
+  },
+  {
+    "module": "HVRPrimePowComplexNoOldLog",
+    "names": [
+      "HVRPrimePowComplexNoOldLog.nat_pow_cpow_eq_exp_pow",
+      "HVRPrimePowComplexNoOldLog.prime_pow_cpow_eq_ratio"
+    ],
+    "banned": [
+      "Complex.ofReal_log",
+      "Complex.natCast_log",
+      "Complex.natCast_cpow_natCast_mul",
+      "Complex.cpow_nat_mul",
+      "Complex.cpow_def_of_ne_zero"
+    ]
+  },
+  {
+    "module": "NextSummability",
+    "names": [
+      "HVRNextSummability.vonMangoldt_lseries_summable"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div",
+      "ArithmeticFunction.LSeries_vonMangoldt_eq",
+      "ArithmeticFunction.vonMangoldt_sum",
+      "ArithmeticFunction.vonMangoldt_mul_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_const_one",
+      "ArithmeticFunction.vonMangoldt_apply_prime",
+      "ArithmeticFunction.vonMangoldt_apply_pow",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log",
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "LSeries_one_ne_zero_of_one_lt_re",
+      "riemannZeta_ne_zero_of_one_lt_re",
+      "ArithmeticFunction.LSeriesSummable_moebius_iff",
+      "ArithmeticFunction.vonMangoldt_apply_one",
+      "Nat.disjoint_divisors_filter_isPrimePow",
+      "ArithmeticFunction.abs_moebius_le_one",
+      "ArithmeticFunction.LSeriesSummable_zeta_iff",
+      "LSeriesSummable_one_iff",
+      "LSeries.abscissaOfAbsConv_one",
+      "Complex.natCast_cpow_natCast_mul",
+      "Complex.cpow_nat_mul",
+      "Complex.cpow_def_of_ne_zero",
+      "tsum_eq_tsum_primes_of_support_subset_prime_powers",
+      "tsum_primes_pow_eq",
+      "HasSum.mul_left",
+      "HasSum.tsum_eq",
+      "Summable.of_norm",
+      "Summable.of_nonneg_of_le",
+      "Real.log_natCast_le_rpow_div",
+      "Real.log_le_rpow_div",
+      "LSeries.norm_term_eq",
+      "Complex.norm_exp",
+      "Complex.ofReal_log",
+      "Complex.natCast_log",
+      "Nat.sum_divisors_prime_pow",
+      "Nat.mul_divisors_filter_prime_pow",
+      "ArithmeticFunction.coe_mul_zeta_apply",
+      "ArithmeticFunction.coe_zeta_mul_apply",
+      "ArithmeticFunction.coe_zeta_smul_apply"
+    ]
+  },
+  {
+    "module": "NextMangoldtDivisorSum",
+    "names": [
+      "HVRNextMangoldtDivisorSum.vonMangoldt_sum_native",
+      "HVRNextMangoldtDivisorSum.vonMangoldt_mul_zeta_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div",
+      "ArithmeticFunction.LSeries_vonMangoldt_eq",
+      "ArithmeticFunction.vonMangoldt_sum",
+      "ArithmeticFunction.vonMangoldt_mul_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_const_one",
+      "ArithmeticFunction.vonMangoldt_apply_prime",
+      "ArithmeticFunction.vonMangoldt_apply_pow",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log",
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "LSeries_one_ne_zero_of_one_lt_re",
+      "riemannZeta_ne_zero_of_one_lt_re",
+      "ArithmeticFunction.LSeriesSummable_moebius_iff",
+      "ArithmeticFunction.vonMangoldt_apply_one",
+      "Nat.disjoint_divisors_filter_isPrimePow",
+      "ArithmeticFunction.abs_moebius_le_one",
+      "ArithmeticFunction.LSeriesSummable_zeta_iff",
+      "LSeriesSummable_one_iff",
+      "LSeries.abscissaOfAbsConv_one",
+      "Complex.natCast_cpow_natCast_mul",
+      "Complex.cpow_nat_mul",
+      "Complex.cpow_def_of_ne_zero",
+      "tsum_eq_tsum_primes_of_support_subset_prime_powers",
+      "tsum_primes_pow_eq",
+      "HasSum.mul_left",
+      "HasSum.tsum_eq",
+      "Summable.of_norm",
+      "Summable.of_nonneg_of_le",
+      "Real.log_natCast_le_rpow_div",
+      "Real.log_le_rpow_div",
+      "LSeries.norm_term_eq",
+      "Complex.norm_exp",
+      "Complex.ofReal_log",
+      "Complex.natCast_log",
+      "Nat.sum_divisors_prime_pow",
+      "Nat.mul_divisors_filter_prime_pow",
+      "ArithmeticFunction.coe_mul_zeta_apply",
+      "ArithmeticFunction.coe_zeta_mul_apply",
+      "ArithmeticFunction.coe_zeta_smul_apply"
+    ]
+  },
+  {
+    "module": "NextPrimePowerReindex",
+    "names": [
+      "HVRNextPrimePowerReindex.primeRatio_eq_cpow",
+      "HVRNextPrimePowerReindex.primeRatio_norm_lt_one",
+      "HVRNextPrimePowerReindex.cpow_prime_power_eq_primeRatio",
+      "HVRNextPrimePowerReindex.primePowerReindexing"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div",
+      "ArithmeticFunction.LSeries_vonMangoldt_eq",
+      "ArithmeticFunction.vonMangoldt_sum",
+      "ArithmeticFunction.vonMangoldt_mul_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_const_one",
+      "ArithmeticFunction.vonMangoldt_apply_prime",
+      "ArithmeticFunction.vonMangoldt_apply_pow",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log",
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "LSeries_one_ne_zero_of_one_lt_re",
+      "riemannZeta_ne_zero_of_one_lt_re",
+      "ArithmeticFunction.LSeriesSummable_moebius_iff",
+      "ArithmeticFunction.vonMangoldt_apply_one",
+      "Nat.disjoint_divisors_filter_isPrimePow",
+      "ArithmeticFunction.abs_moebius_le_one",
+      "ArithmeticFunction.LSeriesSummable_zeta_iff",
+      "LSeriesSummable_one_iff",
+      "LSeries.abscissaOfAbsConv_one",
+      "Complex.natCast_cpow_natCast_mul",
+      "Complex.cpow_nat_mul",
+      "Complex.cpow_def_of_ne_zero",
+      "tsum_eq_tsum_primes_of_support_subset_prime_powers",
+      "tsum_primes_pow_eq",
+      "HasSum.mul_left",
+      "HasSum.tsum_eq",
+      "Summable.of_norm",
+      "Summable.of_nonneg_of_le",
+      "Real.log_natCast_le_rpow_div",
+      "Real.log_le_rpow_div",
+      "LSeries.norm_term_eq",
+      "Complex.norm_exp",
+      "Complex.ofReal_log",
+      "Complex.natCast_log",
+      "Nat.sum_divisors_prime_pow",
+      "Nat.mul_divisors_filter_prime_pow",
+      "ArithmeticFunction.coe_mul_zeta_apply",
+      "ArithmeticFunction.coe_zeta_mul_apply",
+      "ArithmeticFunction.coe_zeta_smul_apply"
+    ]
+  },
+  {
+    "module": "NextZetaLogDerivative",
+    "names": [
+      "HVRNextZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
+      "HVRNextZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div",
+      "ArithmeticFunction.LSeries_vonMangoldt_eq",
+      "ArithmeticFunction.vonMangoldt_sum",
+      "ArithmeticFunction.vonMangoldt_mul_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_const_one",
+      "ArithmeticFunction.vonMangoldt_apply_prime",
+      "ArithmeticFunction.vonMangoldt_apply_pow",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log",
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "LSeries_one_ne_zero_of_one_lt_re",
+      "riemannZeta_ne_zero_of_one_lt_re",
+      "ArithmeticFunction.LSeriesSummable_moebius_iff",
+      "ArithmeticFunction.vonMangoldt_apply_one",
+      "Nat.disjoint_divisors_filter_isPrimePow",
+      "ArithmeticFunction.abs_moebius_le_one",
+      "ArithmeticFunction.LSeriesSummable_zeta_iff",
+      "LSeriesSummable_one_iff",
+      "LSeries.abscissaOfAbsConv_one",
+      "Complex.natCast_cpow_natCast_mul",
+      "Complex.cpow_nat_mul",
+      "Complex.cpow_def_of_ne_zero",
+      "tsum_eq_tsum_primes_of_support_subset_prime_powers",
+      "tsum_primes_pow_eq",
+      "HasSum.mul_left",
+      "HasSum.tsum_eq",
+      "Summable.of_norm",
+      "Summable.of_nonneg_of_le",
+      "Real.log_natCast_le_rpow_div",
+      "Real.log_le_rpow_div",
+      "LSeries.norm_term_eq",
+      "Complex.norm_exp",
+      "Complex.ofReal_log",
+      "Complex.natCast_log",
+      "Nat.sum_divisors_prime_pow",
+      "Nat.mul_divisors_filter_prime_pow",
+      "ArithmeticFunction.coe_mul_zeta_apply",
+      "ArithmeticFunction.coe_zeta_mul_apply",
+      "ArithmeticFunction.coe_zeta_smul_apply"
+    ]
+  },
+  {
+    "module": "NextEulerPrimeZetaBridge",
+    "names": [
+      "HVRNextEulerPrimeZetaBridge.eulerProductLogDerivative"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div",
+      "ArithmeticFunction.LSeries_vonMangoldt_eq",
+      "ArithmeticFunction.vonMangoldt_sum",
+      "ArithmeticFunction.vonMangoldt_mul_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_zeta",
+      "ArithmeticFunction.convolution_vonMangoldt_const_one",
+      "ArithmeticFunction.vonMangoldt_apply_prime",
+      "ArithmeticFunction.vonMangoldt_apply_pow",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log",
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "LSeries_one_ne_zero_of_one_lt_re",
+      "riemannZeta_ne_zero_of_one_lt_re",
+      "ArithmeticFunction.LSeriesSummable_moebius_iff",
+      "ArithmeticFunction.vonMangoldt_apply_one",
+      "Nat.disjoint_divisors_filter_isPrimePow",
+      "ArithmeticFunction.abs_moebius_le_one",
+      "ArithmeticFunction.LSeriesSummable_zeta_iff",
+      "LSeriesSummable_one_iff",
+      "LSeries.abscissaOfAbsConv_one",
+      "Complex.natCast_cpow_natCast_mul",
+      "Complex.cpow_nat_mul",
+      "Complex.cpow_def_of_ne_zero",
+      "tsum_eq_tsum_primes_of_support_subset_prime_powers",
+      "tsum_primes_pow_eq",
+      "HasSum.mul_left",
+      "HasSum.tsum_eq",
+      "Summable.of_norm",
+      "Summable.of_nonneg_of_le",
+      "Real.log_natCast_le_rpow_div",
+      "Real.log_le_rpow_div",
+      "LSeries.norm_term_eq",
+      "Complex.norm_exp",
+      "Complex.ofReal_log",
+      "Complex.natCast_log",
+      "Nat.sum_divisors_prime_pow",
+      "Nat.mul_divisors_filter_prime_pow",
+      "ArithmeticFunction.coe_mul_zeta_apply",
+      "ArithmeticFunction.coe_zeta_mul_apply",
+      "ArithmeticFunction.coe_zeta_smul_apply"
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+import PrimeSpectralSeries
+
+#check PrimeSpectralSeries.weight_nonneg
+#print axioms PrimeSpectralSeries.weight_nonneg
+#check PrimeSpectralSeries.vector_sq
+#print axioms PrimeSpectralSeries.vector_sq
+#check PrimeSpectralSeries.vector_eq_amplitude
+#print axioms PrimeSpectralSeries.vector_eq_amplitude
+#check PrimeSpectralSeries.heatTerm_eq_dirichlet
+#print axioms PrimeSpectralSeries.heatTerm_eq_dirichlet
+#check PrimeSpectralSeries.heatTerm_eq_LSeries_term
+#print axioms PrimeSpectralSeries.heatTerm_eq_LSeries_term
+#check PrimeSpectralSeries.heat_summable
+#print axioms PrimeSpectralSeries.heat_summable
+#check PrimeSpectralSeries.vector_sq_summable
+#print axioms PrimeSpectralSeries.vector_sq_summable
+#check PrimeSpectralSeries.heat_hasSum_actual_zeta
+#print axioms PrimeSpectralSeries.heat_hasSum_actual_zeta

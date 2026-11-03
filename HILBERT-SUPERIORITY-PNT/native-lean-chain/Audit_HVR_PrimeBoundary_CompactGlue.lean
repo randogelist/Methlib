@@ -1,0 +1,3 @@
+import HVR_PrimeBoundary_CompactGlue
+#print axioms HVRPrimeBoundaryCompactGlue.undamped_eq_ordinaryBoundary_of_compact
+#print axioms HVRPrimeBoundaryCompactGlue.undamped_tendsto_zero_of_compact

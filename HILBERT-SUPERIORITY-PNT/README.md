@@ -87,3 +87,86 @@ call run.cmd
 
 The unchanged source package came from `HVR_PNT_THETA_ASSEMBLY_RC1_FIX2.zip`,
 SHA-256 `1691e27682d7be2dd52fa4cae841d5b73a5034a5f11d4767068a49009f0a7566`.
+
+## Additional prime-power and zeta bridge
+
+The [`native-rebuild/`](native-rebuild/) subdirectory contains a separate
+Lean development of the prime-power reindexing and zeta logarithmic-derivative
+bridge. Its named root is
+`HVRNextEulerPrimeZetaBridge.eulerProductLogDerivative`, of type
+`HVRNativeZetaLogDerivative.EulerProductLogDerivative`. For `s : ℂ` with
+`1 < s.re`, that proposition states
+
+```math
+  \sum_p \frac{\log(p)\,p^{-s}}{1-p^{-s}}
+  = -\frac{\zeta'(s)}{\zeta(s)}.
+```
+
+The Lean statement uses a totalized `tsum`; it is not a separate theorem
+asserting summability of the outer prime series. The result is a bridge in the
+right half-plane, not a proof of the PNT root above. The replacement bridge
+has **not** been wired into the original PNT proof: in particular, the
+original [`HVR_Zeta_LogDerivative.lean`](HVR_Zeta_LogDerivative.lean) directly
+uses Mathlib's `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div`.
+
+In [Linux CI run 41712052899](https://github.com/randogelist/Methlib/actions/runs/41712052899),
+all 26 modules compiled and all 41 named declarations passed the standard-only
+axiom audit, including the exact bridge root. The **overall run failed** its
+separate full dependency gate: the root trace found the following 14 named
+Mathlib declarations indirectly used:
+
+```text
+ArithmeticFunction.coe_mul_zeta_apply
+ArithmeticFunction.coe_zeta_mul_apply
+ArithmeticFunction.coe_zeta_smul_apply
+Complex.cpow_def_of_ne_zero
+Complex.cpow_nat_mul
+Complex.natCast_log
+Complex.norm_exp
+Complex.ofReal_log
+HasSum.mul_left
+HasSum.tsum_eq
+LSeries.norm_term_eq
+Nat.sum_divisors_prime_pow
+Summable.of_nonneg_of_le
+Summable.of_norm
+```
+
+Other inspected names were not seen by that trace, whose coverage is
+explicitly unverified; this is not a certificate of their complete transitive
+absence. The proofs retain Mathlib's definitions and general arithmetic,
+factorization, complex analysis and L-series infrastructure. Some source
+comments describe the pre-CI candidate state; the hash-matched source was
+subsequently compiled and audited in the linked run. The Mathlib proofs adapted
+in the package retain their attribution and Apache 2.0 license.
+
+The [HVR zeta bridge Linux workflow](https://github.com/randogelist/Methlib/actions/workflows/hvr-native-bridge.yml)
+rebuilds the named declarations and retains the full dependency trace. Its
+`--allow-known-dependencies` mode records the previously observed findings
+against hash-pinned source and theorem names; new findings or mismatched source
+do not qualify for that allowance. Its success means the build and named axiom
+audits passed, not that the bridge is independent of the listed dependencies.
+Check the actual workflow result and its uploaded evidence for each run.
+
+To run the named-theorem build and axiom audits on Windows using a populated
+compatible cache, from this directory:
+
+```cmd
+set "MATHLIB_CACHE_ROOT=C:\path\to\mathlib"
+call "native-rebuild\run.cmd"
+```
+
+The optional command `call "native-rebuild\run.cmd" -TraceDependencies` also
+checks the full target list and is expected to report a failing dependency gate
+while the known targets above remain present. A normal runner pass does not
+certify dependency coverage. Compiler and full Mathlib cache provenance remain
+distinct: the latter is not independently established by the source hashes.
+
+The earlier 22-candidate source set is retained separately in
+[`native22-rebuild/`](native22-rebuild/), and the original spectral amendment
+and native-chain package are retained in
+[`prime-spectral-amendment/`](prime-spectral-amendment/) and
+[`native-lean-chain/`](native-lean-chain/). They are separate packages with
+their own proof scopes and audits; inclusion here does not merge their
+theorems into the original PNT root.
+

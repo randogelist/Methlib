@@ -1,0 +1,2 @@
+import HVR_PrimeDensity_SpatialAbel
+#print axioms HVRPrimeDensitySpatialAbel.spatial_abel_tendsto

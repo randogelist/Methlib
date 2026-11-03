@@ -1,0 +1,3 @@
+import HVR_SpectralSeedCorrelation
+#print axioms HVRSpectralSeedCorrelation.correlation_nonneg
+#print axioms HVRSpectralSeedCorrelation.correlation_zero_of_band

@@ -1,0 +1,5 @@
+import HVR_Prime_Summability
+#check HVRPrimeSummability.primeWeightSeries_nonneg
+#print axioms HVRPrimeSummability.primeWeightSeries_nonneg
+#check HVRPrimeSummability.primeWeightSeries_summable
+#print axioms HVRPrimeSummability.primeWeightSeries_summable

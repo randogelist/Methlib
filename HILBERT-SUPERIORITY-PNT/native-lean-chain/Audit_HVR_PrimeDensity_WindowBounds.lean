@@ -1,0 +1,4 @@
+import HVR_PrimeDensity_WindowBounds
+#print axioms HVRPrimeDensityWindowBounds.future_window_lower
+#print axioms HVRPrimeDensityWindowBounds.past_window_upper
+#print axioms HVRPrimeDensityWindowBounds.weighted_density_upper

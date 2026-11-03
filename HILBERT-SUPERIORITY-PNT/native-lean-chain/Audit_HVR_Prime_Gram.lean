@@ -1,0 +1,13 @@
+import HVR_Prime_Gram
+#check HVRPrimeGram.kernel_identity
+#print axioms HVRPrimeGram.kernel_identity
+#check HVRPrimeGram.primeWeight_nonneg
+#print axioms HVRPrimeGram.primeWeight_nonneg
+#check HVRPrimeGram.finite_prime_gram_identity
+#print axioms HVRPrimeGram.finite_prime_gram_identity
+#check HVRPrimeGram.finite_prime_gram_nonnegative
+#print axioms HVRPrimeGram.finite_prime_gram_nonnegative
+#check HVRPrimeGram.normalized_limit_excludes_zero_order
+#print axioms HVRPrimeGram.normalized_limit_excludes_zero_order
+#check HVRPrimeGram.finite_prime_limit_excludes_zero_order
+#print axioms HVRPrimeGram.finite_prime_limit_excludes_zero_order

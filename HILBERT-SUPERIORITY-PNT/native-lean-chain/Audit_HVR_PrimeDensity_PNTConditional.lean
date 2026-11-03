@@ -1,0 +1,3 @@
+import HVR_PrimeDensity_PNTConditional
+#print axioms HVRPrimeDensityPNTConditional.theta_ratio_tendsto_one_of_density
+#print axioms HVRPrimeDensityPNTConditional.theta_ratio_tendsto_one_of_concentrated_smoothing

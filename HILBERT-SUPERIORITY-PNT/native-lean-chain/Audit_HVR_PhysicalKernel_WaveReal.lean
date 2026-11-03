@@ -1,0 +1,2 @@
+import HVR_PhysicalKernel_WaveReal
+#print axioms HVRPhysicalKernelWaveReal.wave_im_zero

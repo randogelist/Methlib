@@ -1,0 +1,5 @@
+*.lean -text
+*.ps1 -text
+*.cmd -text
+*.json -text
+*.sha256 -text

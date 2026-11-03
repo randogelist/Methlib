@@ -1,0 +1,3 @@
+import HVR_PrimeDensity_ScaledPhysicalDecay
+#print axioms HVRPrimeDensityScaledPhysicalDecay.scaledSpectrum_inverseKernel_integrable
+#print axioms HVRPrimeDensityScaledPhysicalDecay.scaledPhysical_undamped_tendsto_zero

@@ -1,0 +1,4 @@
+import HVR_PrimeDensity_HalfLineSmoothing
+#print axioms HVRPrimeDensityHalfLineSmoothing.smoothing_tendsto_one_of_halfLine_error
+#print axioms HVRPrimeDensityHalfLineSmoothing.both_smoothing_limits_of_halfLine_errors
+#print axioms HVRPrimeDensityHalfLineSmoothing.smoothing_tendsto_one_of_frequency_test

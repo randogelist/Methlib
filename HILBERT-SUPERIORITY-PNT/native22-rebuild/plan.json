@@ -1,0 +1,222 @@
+[
+  {
+    "module": "NativeExpIntegral",
+    "names": [
+      "NativeExpIntegral.exp_primitive_derivative",
+      "NativeExpIntegral.exp_primitive_tendsto_zero",
+      "NativeExpIntegral.exp_negative_integrable",
+      "NativeExpIntegral.exp_negative_integral",
+      "NativeExpIntegral.mode_integrable",
+      "NativeExpIntegral.mode_integral"
+    ],
+    "banned": [
+      "integrableOn_exp_mul_Ioi",
+      "integral_exp_mul_Ioi"
+    ]
+  },
+  {
+    "module": "NativeFourierInverse",
+    "names": [
+      "NativeFourierInverse.inverse_as_forward_at_negative"
+    ],
+    "banned": [
+      "Real.fourierInv_eq_fourier_neg"
+    ]
+  },
+  {
+    "module": "NativeSummability",
+    "names": [
+      "HVRNativeSummability.vonMangoldt_lseries_summable"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPrime",
+    "names": [
+      "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.vonMangoldt_apply_prime"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPow",
+    "names": [
+      "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.vonMangoldt_apply_pow"
+    ]
+  },
+  {
+    "module": "NativeMangoldtNonneg",
+    "names": [
+      "HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native"
+    ],
+    "banned": [
+      "ArithmeticFunction.vonMangoldt_nonneg"
+    ]
+  },
+  {
+    "module": "NativeSummabilityUnified",
+    "names": [
+      "HVRNativeSummabilityUnified.vonMangoldt_le_log_native",
+      "HVRNativeSummabilityUnified.vonMangoldt_lseries_summable"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "ArithmeticFunction.vonMangoldt_nonneg",
+      "ArithmeticFunction.vonMangoldt_le_log"
+    ]
+  },
+  {
+    "module": "NativeThetaNonneg",
+    "names": [
+      "NativeThetaNonneg.theta_sum_nonnegative"
+    ],
+    "banned": [
+      "Chebyshev.theta_nonneg"
+    ]
+  },
+  {
+    "module": "NativeThetaMono",
+    "names": [
+      "NativeThetaMono.theta_monotone_from_cutoffs"
+    ],
+    "banned": [
+      "Chebyshev.theta_mono"
+    ]
+  },
+  {
+    "module": "NativeChebyshevBound",
+    "names": [
+      "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+      "HVRNativeChebyshevBound.primorial_le_four_pow_native",
+      "HVRNativeChebyshevBound.theta_le_log4_mul_x_native"
+    ],
+    "banned": [
+      "Chebyshev.theta_le_log4_mul_x"
+    ]
+  },
+  {
+    "module": "NativeMellinAbel",
+    "names": [
+      "HVRNativeMellinAbel.primeCoefficientC_zero",
+      "HVRNativeMellinAbel.finite_prime_abel",
+      "HVRNativeMellinAbel.finite_prime_mellin_abel"
+    ],
+    "banned": [
+      "LSeries_eq_mul_integral"
+    ]
+  },
+  {
+    "module": "NativeZetaAnalytic",
+    "names": [
+      "HVRNativeZetaAnalytic.differentiableOn_zeta_via_regularized",
+      "HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized"
+    ],
+    "banned": [
+      "analyticOn_riemannZeta"
+    ]
+  },
+  {
+    "module": "NativeZetaPoleLittleO",
+    "names": [
+      "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto",
+      "HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO"
+    ],
+    "banned": [
+      "log_deriv_riemannZeta_add_inv_sub_sub_isLittleO"
+    ]
+  },
+  {
+    "module": "NativeZetaPoleEquality",
+    "names": [
+      "HVRNativeZetaPoleEquality.log_derivative_eq",
+      "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+    ],
+    "banned": [
+      "log_deriv_riemannZeta_eq_neg_inv_sub_add"
+    ]
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "names": [
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse",
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse"
+    ],
+    "banned": [
+      "riemannZeta_ne_zero_of_one_lt_re"
+    ]
+  },
+  {
+    "module": "NativeZetaLogDerivative",
+    "names": [
+      "HVRNativeZetaLogDerivative.primeEulerFactor_algebra",
+      "HVRNativeZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_of_bridges"
+    ],
+    "banned": [
+      "ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div"
+    ]
+  },
+  {
+    "module": "NativeFourierDecay",
+    "names": [
+      "NativeFourierDecay.decay_from_half_period_obligations"
+    ],
+    "banned": [
+      "Real.tendsto_integral_exp_smul_cocompact"
+    ]
+  },
+  {
+    "module": "NativeFourierConvolution",
+    "names": [
+      "NativeFourierConvolution.real_complex_convolution_product"
+    ],
+    "banned": [
+      "Real.fourier_mul_convolution_eq"
+    ]
+  },
+  {
+    "module": "NativeFubini",
+    "names": [
+      "HVRNativeFubini.separable_integral_swap",
+      "HVRNativeFubini.fixed_frequency_factorization",
+      "HVRNativeFubini.fixed_frequency_laplace"
+    ],
+    "banned": [
+      "MeasureTheory.integral_integral_swap"
+    ]
+  },
+  {
+    "module": "NativeDominatedLimit",
+    "names": [
+      "HVRNativeDominatedLimit.integral_error_le_weighted",
+      "HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence"
+    ]
+  },
+  {
+    "module": "NativeSpectralSumIntegral",
+    "names": [
+      "NativeSpectralSumIntegral.nonnegative_integral_tsum",
+      "NativeSpectralSumIntegral.nonnegative_spectral_mode_interchange"
+    ],
+    "banned": [
+      "MeasureTheory.integral_tsum_of_summable_integral_norm"
+    ]
+  },
+  {
+    "module": "NativeLpInner",
+    "names": [
+      "NativeLpInner.lp_inner_as_coordinate_series"
+    ],
+    "banned": [
+      "lp.inner_eq_tsum"
+    ]
+  }
+]

@@ -1,0 +1,4 @@
+import HVR_PhysicalKernel_CanonicalWindow
+#print axioms HVRPhysicalKernelCanonicalWindow.canonicalWindow_pos
+#print axioms HVRPhysicalKernelCanonicalWindow.canonicalWindow_exp
+#print axioms HVRPhysicalKernelCanonicalWindow.canonicalWindow_bounds_of_tail

@@ -1,0 +1,81 @@
+name: HVR zeta bridge (Linux)
+
+on:
+  push:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/native-rebuild/**'
+      - '.github/workflows/hvr-native-bridge.yml'
+  pull_request:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/native-rebuild/**'
+      - '.github/workflows/hvr-native-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zeta-bridge-linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Install pinned Lean toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Verify checkout and fetch Mathlib cache
+        working-directory: .ci-mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Verify bridge source hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          export HVR_REBUILD_ROOT="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/native-rebuild"
+          python3 "$HVR_REBUILD_ROOT/runner/native_audit.py" --check-plan
+      - name: Build, audit, and report all dependency targets
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export HVR_REBUILD_ROOT="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/native-rebuild"
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$HVR_REBUILD_ROOT/runner/native_audit.py" --allow-known-dependencies
+      - name: Summarize proof and dependency scope
+        if: always()
+        shell: bash
+        run: |
+          echo '## Zeta bridge build and dependency diagnostics' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This job separately reports named Lean axiom audits and all recorded dependency targets.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Previously recorded findings are nonblocking only for their source-hash-matched theorems; new findings fail the job.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'A negative dependency trace has unverified coverage and does not certify independence.' >> "$GITHUB_STEP_SUMMARY"
+          find "$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/native-rebuild/evidence-linux" -name result.txt -type f -exec cat {} \; >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+      - name: Upload named audit and dependency evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: hvr-native-bridge-linux-evidence
+          path: HILBERT-SUPERIORITY-PNT/native-rebuild/evidence-linux/
+          if-no-files-found: warn

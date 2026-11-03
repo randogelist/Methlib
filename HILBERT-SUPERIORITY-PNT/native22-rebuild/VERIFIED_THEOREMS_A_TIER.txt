@@ -1,0 +1,276 @@
+EXACT CHECKED THEOREMS AND AXIOM REPORTS
+CI https://github.com/randogelist/Methlib/actions/runs/41697649026
+The signature records all explicit premises. TARGET INDEPENDENCE IS NOT ESTABLISHED.
+
+======================================================================
+MODULE NativeExpIntegral
+MAPPED MATHLIB CALL(S): integrableOn_exp_mul_Ioi, integral_exp_mul_Ioi
+======================================================================
+NativeExpIntegral.exp_primitive_derivative (c : ℝ) (hc : c ≠ 0) (x : ℝ) :
+  HasDerivAt (fun t => Real.exp (c * t) / c) (Real.exp (c * x)) x
+'NativeExpIntegral.exp_primitive_derivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+NativeExpIntegral.exp_primitive_tendsto_zero (c : ℝ) (hc : c < 0) :
+  Filter.Tendsto (fun t => Real.exp (c * t) / c) Filter.atTop (nhds 0)
+'NativeExpIntegral.exp_primitive_tendsto_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+NativeExpIntegral.exp_negative_integrable (c b : ℝ) (hc : c < 0) :
+  MeasureTheory.IntegrableOn (fun t => Real.exp (c * t)) (Set.Ioi b) MeasureTheory.volume
+'NativeExpIntegral.exp_negative_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+NativeExpIntegral.exp_negative_integral (c b : ℝ) (hc : c < 0) :
+  ∫ (t : ℝ) in Set.Ioi b, Real.exp (c * t) = -Real.exp (c * b) / c
+'NativeExpIntegral.exp_negative_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+NativeExpIntegral.mode_integrable (a e w : ℝ) (h : 0 < w + e) :
+  MeasureTheory.IntegrableOn (fun t => a * Real.exp (-(w + e) * t)) (Set.Ioi 0) MeasureTheory.volume
+'NativeExpIntegral.mode_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+NativeExpIntegral.mode_integral (a e w : ℝ) (h : 0 < w + e) :
+  ∫ (t : ℝ) in Set.Ioi 0, a * Real.exp (-(w + e) * t) = a / (w + e)
+'NativeExpIntegral.mode_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeFourierInverse
+MAPPED MATHLIB CALL(S): Real.fourierInv_eq_fourier_neg
+======================================================================
+NativeFourierInverse.inverse_as_forward_at_negative.{u_1, u_2} {V : Type u_1} {E : Type u_2} [NormedAddCommGroup V]
+  [InnerProductSpace ℝ V] [MeasurableSpace V] [BorelSpace V] [FiniteDimensional ℝ V] [NormedAddCommGroup E]
+  [NormedSpace ℂ E] (f : V → E) (w : V) : FourierTransformInv.fourierInv f w = FourierTransform.fourier f (-w)
+'NativeFourierInverse.inverse_as_forward_at_negative' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeSummability
+MAPPED MATHLIB CALL(S): ArithmeticFunction.LSeriesSummable_vonMangoldt
+======================================================================
+HVRNativeSummability.vonMangoldt_lseries_summable {s : ℂ} (hs : 1 < s.re) :
+  LSeriesSummable (fun n => ↑(ArithmeticFunction.vonMangoldt n)) s
+'HVRNativeSummability.vonMangoldt_lseries_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeMangoldtPrime
+MAPPED MATHLIB CALL(S): ArithmeticFunction.vonMangoldt_apply_prime
+======================================================================
+HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native {p : ℕ} (hp : Nat.Prime p) :
+  ArithmeticFunction.vonMangoldt p = Real.log ↑p
+'HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeMangoldtPow
+MAPPED MATHLIB CALL(S): ArithmeticFunction.vonMangoldt_apply_pow
+======================================================================
+HVRNativeMangoldtPow.vonMangoldt_apply_pow_native {n k : ℕ} (hk : k ≠ 0) :
+  ArithmeticFunction.vonMangoldt (n ^ k) = ArithmeticFunction.vonMangoldt n
+'HVRNativeMangoldtPow.vonMangoldt_apply_pow_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeMangoldtNonneg
+MAPPED MATHLIB CALL(S): ArithmeticFunction.vonMangoldt_nonneg
+======================================================================
+HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native (n : ℕ) : 0 ≤ ArithmeticFunction.vonMangoldt n
+'HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeSummabilityUnified
+MAPPED MATHLIB CALL(S): ArithmeticFunction.LSeriesSummable_vonMangoldt, ArithmeticFunction.vonMangoldt_nonneg, ArithmeticFunction.vonMangoldt_le_log
+======================================================================
+HVRNativeSummabilityUnified.vonMangoldt_le_log_native (n : ℕ) : ArithmeticFunction.vonMangoldt n ≤ Real.log ↑n
+'HVRNativeSummabilityUnified.vonMangoldt_le_log_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeSummabilityUnified.vonMangoldt_lseries_summable {s : ℂ} (hs : 1 < s.re) :
+  LSeriesSummable (fun n => ↑(ArithmeticFunction.vonMangoldt n)) s
+'HVRNativeSummabilityUnified.vonMangoldt_lseries_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeThetaNonneg
+MAPPED MATHLIB CALL(S): Chebyshev.theta_nonneg
+======================================================================
+NativeThetaNonneg.theta_sum_nonnegative (x : ℝ) : 0 ≤ Chebyshev.theta x
+'NativeThetaNonneg.theta_sum_nonnegative' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeThetaMono
+MAPPED MATHLIB CALL(S): Chebyshev.theta_mono
+======================================================================
+NativeThetaMono.theta_monotone_from_cutoffs : Monotone Chebyshev.theta
+'NativeThetaMono.theta_monotone_from_cutoffs' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeChebyshevBound
+MAPPED MATHLIB CALL(S): Chebyshev.theta_le_log4_mul_x
+======================================================================
+HVRNativeChebyshevBound.primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) : primorial n < 4 ^ n
+'HVRNativeChebyshevBound.primorial_lt_four_pow_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeChebyshevBound.primorial_le_four_pow_native (n : ℕ) : primorial n ≤ 4 ^ n
+'HVRNativeChebyshevBound.primorial_le_four_pow_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeChebyshevBound.theta_le_log4_mul_x_native {x : ℝ} (hx : 0 ≤ x) : Chebyshev.theta x ≤ Real.log 4 * x
+'HVRNativeChebyshevBound.theta_le_log4_mul_x_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeMellinAbel
+MAPPED MATHLIB CALL(S): LSeries_eq_mul_integral
+======================================================================
+HVRNativeMellinAbel.primeCoefficientC_zero : HVRNativeMellinAbel.primeCoefficientC 0 = 0
+'HVRNativeMellinAbel.primeCoefficientC_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeMellinAbel.finite_prime_abel (f : ℝ → ℂ) (N : ℕ) (hf_diff : ∀ t ∈ Set.Icc 1 ↑N, DifferentiableAt ℝ f t)
+  (hf_int : MeasureTheory.IntegrableOn (deriv f) (Set.Icc 1 ↑N) MeasureTheory.volume) :
+  ∑ k ∈ Finset.Icc 0 N, f ↑k * HVRNativeMellinAbel.primeCoefficientC k =
+    f ↑N * HVRNativeMellinAbel.primeMass N - ∫ (t : ℝ) in Set.Ioc 1 ↑N, deriv f t * HVRNativeMellinAbel.primeMass ⌊t⌋₊
+'HVRNativeMellinAbel.finite_prime_abel' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeMellinAbel.finite_prime_mellin_abel (s : ℂ) (hs : s ≠ 0) (N : ℕ)
+  (hf_diff : ∀ t ∈ Set.Icc 1 ↑N, DifferentiableAt ℝ (fun x => ↑x ^ (-s)) t)
+  (hf_int : MeasureTheory.IntegrableOn (deriv fun x => ↑x ^ (-s)) (Set.Icc 1 ↑N) MeasureTheory.volume) :
+  ∑ k ∈ Finset.Icc 0 N, ↑k ^ (-s) * HVRNativeMellinAbel.primeCoefficientC k =
+    ↑N ^ (-s) * HVRNativeMellinAbel.primeMass N -
+      ∫ (t : ℝ) in Set.Ioc 1 ↑N, -s * ↑t ^ (-s - 1) * HVRNativeMellinAbel.primeMass ⌊t⌋₊
+'HVRNativeMellinAbel.finite_prime_mellin_abel' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeZetaAnalytic
+MAPPED MATHLIB CALL(S): analyticOn_riemannZeta
+======================================================================
+HVRNativeZetaAnalytic.differentiableOn_zeta_via_regularized : DifferentiableOn ℂ riemannZeta {1}ᶜ
+'HVRNativeZetaAnalytic.differentiableOn_zeta_via_regularized' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized : AnalyticOnNhd ℂ riemannZeta {1}ᶜ
+'HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeZetaPoleLittleO
+MAPPED MATHLIB CALL(S): log_deriv_riemannZeta_add_inv_sub_sub_isLittleO
+======================================================================
+HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto :
+  Filter.Tendsto (fun s => deriv riemannZeta₁ s / riemannZeta₁ s) (nhdsWithin 1 {1}ᶜ)
+    (nhds ↑Real.eulerMascheroniConstant)
+'HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO :
+  (fun s => deriv riemannZeta s / riemannZeta s + (s - 1)⁻¹ - ↑Real.eulerMascheroniConstant) =o[nhdsWithin 1 {1}ᶜ]
+    fun x => 1
+'HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+======================================================================
+MODULE NativeZetaPoleEquality
+MAPPED MATHLIB CALL(S): log_deriv_riemannZeta_eq_neg_inv_sub_add
+======================================================================
+HVRNativeZetaPoleEquality.log_derivative_eq {s : ℂ} (hs : s ≠ 1) (hreg : riemannZeta₁ s ≠ 0) :
+  deriv riemannZeta s / riemannZeta s = -(s - 1)⁻¹ + deriv riemannZeta₁ s / riemannZeta₁ s
+'HVRNativeZetaPoleEquality.log_derivative_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeZetaPoleEquality.log_derivative_eventually_eq :
+  ∀ᶠ (s : ℂ) in nhdsWithin 1 {1}ᶜ,
+    deriv riemannZeta s / riemannZeta s = -(s - 1)⁻¹ + deriv riemannZeta₁ s / riemannZeta₁ s
+'HVRNativeZetaPoleEquality.log_derivative_eventually_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeZetaNonzero
+MAPPED MATHLIB CALL(S): riemannZeta_ne_zero_of_one_lt_re
+======================================================================
+HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse (s : ℂ)
+  (hinv : riemannZeta s * HVRNativeZetaNonzero.moebiusLSeries s = 1) : riemannZeta s ≠ 0
+'HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse
+  (hinv : HVRNativeZetaNonzero.RightHalfPlaneMoebiusInverse) {s : ℂ} (hs : 1 < s.re) : riemannZeta s ≠ 0
+'HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+======================================================================
+MODULE NativeZetaLogDerivative
+MAPPED MATHLIB CALL(S): ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div
+======================================================================
+HVRNativeZetaLogDerivative.primeEulerFactor_algebra (q : ℂ) (hq : 1 - q ≠ 0) : q / (1 - q) = (1 - q)⁻¹ - 1
+'HVRNativeZetaLogDerivative.primeEulerFactor_algebra' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_of_bridges
+  (hprime : HVRNativeZetaLogDerivative.PrimePowerReindexing)
+  (heuler : HVRNativeZetaLogDerivative.EulerProductLogDerivative) {s : ℂ} (hs : 1 < s.re) :
+  LSeries (fun n => ↑(ArithmeticFunction.vonMangoldt n)) s = -deriv riemannZeta s / riemannZeta s
+'HVRNativeZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_of_bridges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+======================================================================
+MODULE NativeFourierDecay
+MAPPED MATHLIB CALL(S): Real.tendsto_integral_exp_smul_cocompact
+======================================================================
+NativeFourierDecay.decay_from_half_period_obligations (g : ℝ → ℂ)
+  (hphase :
+    ∀ᶠ (ξ : ℝ) in Filter.atTop,
+      2 * NativeFourierDecay.integralTransform g ξ =
+        -∫ (t : ℝ), Real.fourierChar (-(t * ξ)) • (g (t + NativeFourierDecay.halfPeriod ξ) - g t))
+  (htranslation : Filter.Tendsto (NativeFourierDecay.translationDifference g) Filter.atTop (nhds 0)) :
+  Filter.Tendsto (NativeFourierDecay.integralTransform g) Filter.atTop (nhds 0)
+'NativeFourierDecay.decay_from_half_period_obligations' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeFourierConvolution
+MAPPED MATHLIB CALL(S): Real.fourier_mul_convolution_eq
+======================================================================
+NativeFourierConvolution.real_complex_convolution_product {f g : ℝ → ℂ}
+  (hf : MeasureTheory.Integrable f MeasureTheory.volume) (hg : MeasureTheory.Integrable g MeasureTheory.volume)
+  (ξ : ℝ) :
+  FourierTransform.fourier (MeasureTheory.convolution f g (ContinuousLinearMap.mul ℂ ℂ) MeasureTheory.volume) ξ =
+    FourierTransform.fourier f ξ * FourierTransform.fourier g ξ
+'NativeFourierConvolution.real_complex_convolution_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeFubini
+MAPPED MATHLIB CALL(S): MeasureTheory.integral_integral_swap
+======================================================================
+HVRNativeFubini.separable_integral_swap (A B : Set ℝ) (f g : ℝ → ℂ) :
+  ∫ (u : ℝ) in A, ∫ (t : ℝ) in B, f u * g t = ∫ (t : ℝ) in B, ∫ (u : ℝ) in A, f u * g t
+'HVRNativeFubini.separable_integral_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeFubini.fixed_frequency_factorization (rho : ℝ → ℂ) (psi : ℂ) (a x t u : ℝ) :
+  HVRNativeFubini.fixedFrequencyMixed rho psi a x t u =
+    psi * Complex.exp (↑t * Complex.I * ↑x) * ((rho u - 1) * Complex.exp (-(↑a + ↑t * Complex.I) * ↑u))
+'HVRNativeFubini.fixed_frequency_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeFubini.fixed_frequency_laplace (rho : ℝ → ℂ) (psi : ℂ) (a x t : ℝ) :
+  ∫ (u : ℝ) in Set.Ioi 0, HVRNativeFubini.fixedFrequencyMixed rho psi a x t u =
+    psi * Complex.exp (↑t * Complex.I * ↑x) * HVRNativeFubini.densityLaplace rho (↑a + ↑t * Complex.I)
+'HVRNativeFubini.fixed_frequency_laplace' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+======================================================================
+MODULE NativeDominatedLimit
+MAPPED MATHLIB CALL(S): MeasureTheory.tendsto_integral_of_dominated_convergence
+======================================================================
+HVRNativeDominatedLimit.integral_error_le_weighted.{u_1} {α : Type u_1} [MeasurableSpace α]
+  {μ : MeasureTheory.Measure α} {f g : α → ℂ} {weight : α → ℝ} (e : ℝ) (hf : MeasureTheory.Integrable f μ)
+  (hg : MeasureTheory.Integrable g μ) (hw : MeasureTheory.Integrable weight μ)
+  (hbound : ∀ᵐ (x : α) ∂μ, ‖f x - g x‖ ≤ e * weight x) :
+  ‖∫ (x : α), f x ∂μ - ∫ (x : α), g x ∂μ‖ ≤ e * ∫ (x : α), weight x ∂μ
+'HVRNativeDominatedLimit.integral_error_le_weighted' depends on axioms: [propext, Classical.choice, Quot.sound]
+HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error.{u_1} {α : Type u_1} [MeasurableSpace α]
+  {μ : MeasureTheory.Measure α} {f : ℕ → α → ℂ} {g : α → ℂ} {weight : α → ℝ} {e : ℕ → ℝ}
+  (hf : ∀ (n : ℕ), MeasureTheory.Integrable (f n) μ) (hg : MeasureTheory.Integrable g μ)
+  (hw : MeasureTheory.Integrable weight μ) (he : Filter.Tendsto e Filter.atTop (nhds 0))
+  (hbound : ∀ (n : ℕ), ∀ᵐ (x : α) ∂μ, ‖f n x - g x‖ ≤ e n * weight x) :
+  Filter.Tendsto (fun n => ∫ (x : α), f n x ∂μ) Filter.atTop (nhds (∫ (x : α), g x ∂μ))
+'HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+======================================================================
+MODULE NativeSpectralSumIntegral
+MAPPED MATHLIB CALL(S): MeasureTheory.integral_tsum_of_summable_integral_norm
+======================================================================
+NativeSpectralSumIntegral.nonnegative_integral_tsum.{u_1} {α : Type u_1} [MeasurableSpace α]
+  (μ : MeasureTheory.Measure α) (f : ℕ → α → ℝ) (hpos : ∀ (n : ℕ) (x : α), 0 ≤ f n x)
+  (hi : ∀ (n : ℕ), MeasureTheory.Integrable (f n) μ) (hfi : MeasureTheory.Integrable (fun x => ∑' (n : ℕ), f n x) μ)
+  (hs : ∀ᵐ (x : α) ∂μ, Summable fun n => f n x) (hsi : Summable fun n => ∫ (x : α), f n x ∂μ) :
+  ∫ (x : α), ∑' (n : ℕ), f n x ∂μ = ∑' (n : ℕ), ∫ (x : α), f n x ∂μ
+'NativeSpectralSumIntegral.nonnegative_integral_tsum' depends on axioms: [propext, Classical.choice, Quot.sound]
+NativeSpectralSumIntegral.nonnegative_spectral_mode_interchange (weight energy : ℕ → ℝ) (w : ℝ)
+  (hw : ∀ (n : ℕ), 0 ≤ weight n) (hpos : ∀ (n : ℕ), 0 < w + energy n)
+  (hfi :
+    MeasureTheory.IntegrableOn (fun t => ∑' (n : ℕ), weight n * Real.exp (-(w + energy n) * t)) (Set.Ioi 0)
+      MeasureTheory.volume)
+  (hs :
+    ∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioi 0), Summable fun n => weight n * Real.exp (-(w + energy n) * t))
+  (hsi : Summable fun n => ∫ (t : ℝ) in Set.Ioi 0, weight n * Real.exp (-(w + energy n) * t)) :
+  ∫ (t : ℝ) in Set.Ioi 0, ∑' (n : ℕ), weight n * Real.exp (-(w + energy n) * t) =
+    ∑' (n : ℕ), ∫ (t : ℝ) in Set.Ioi 0, weight n * Real.exp (-(w + energy n) * t)
+'NativeSpectralSumIntegral.nonnegative_spectral_mode_interchange' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+======================================================================
+MODULE NativeLpInner
+MAPPED MATHLIB CALL(S): lp.inner_eq_tsum
+======================================================================
+NativeLpInner.lp_inner_as_coordinate_series.{u_1, u_2, u_3} {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {G : ι → Type u_3}
+  [(i : ι) → NormedAddCommGroup (G i)] [(i : ι) → InnerProductSpace 𝕜 (G i)] (f g : ↥(lp G 2)) :
+  inner 𝕜 f g = ∑' (i : ι), inner 𝕜 (↑f i) (↑g i)
+'NativeLpInner.lp_inner_as_coordinate_series' depends on axioms: [propext, Classical.choice, Quot.sound]

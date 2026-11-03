@@ -1,0 +1,9 @@
+import HVR_PrimeLogDensity
+#print axioms HVRPrimeLogDensity.logPrimeMass_eq_primeTheta
+#print axioms HVRPrimeLogDensity.logPrimeMass_monotone
+#print axioms HVRPrimeLogDensity.logPrimeDensity_nonneg
+#print axioms HVRPrimeLogDensity.logPrimeDensity_le_log_four
+#print axioms HVRPrimeLogDensity.logPrimeDensity_le
+#print axioms HVRPrimeLogDensity.weighted_logPrimeDensity_le
+#print axioms HVRPrimeLogDensity.logPrimeDensity_past_le
+#print axioms HVRPrimeLogDensity.logPrimeDensity_le_future

@@ -1,0 +1,26 @@
+import PrimeSpectralOperators
+
+#check PrimeSpectralOperators.diagonal_apply
+#print axioms PrimeSpectralOperators.diagonal_apply
+#check PrimeSpectralOperators.diagonal_matrix_element
+#print axioms PrimeSpectralOperators.diagonal_matrix_element
+#check PrimeSpectralOperators.heatMultiplier_bound
+#print axioms PrimeSpectralOperators.heatMultiplier_bound
+#check PrimeSpectralOperators.heatOperator_apply
+#print axioms PrimeSpectralOperators.heatOperator_apply
+#check PrimeSpectralOperators.heatOperator_add
+#print axioms PrimeSpectralOperators.heatOperator_add
+#check PrimeSpectralOperators.heat_matrix_element
+#print axioms PrimeSpectralOperators.heat_matrix_element
+#check PrimeSpectralOperators.heat_matrix_element_actual_zeta
+#print axioms PrimeSpectralOperators.heat_matrix_element_actual_zeta
+#check PrimeSpectralOperators.resolventMultiplier_bound
+#print axioms PrimeSpectralOperators.resolventMultiplier_bound
+#check PrimeSpectralOperators.diagonalResolvent_apply
+#print axioms PrimeSpectralOperators.diagonalResolvent_apply
+#check PrimeSpectralOperators.diagonalResolvent_identity
+#print axioms PrimeSpectralOperators.diagonalResolvent_identity
+#check PrimeSpectralOperators.resolvent_matrix_element
+#print axioms PrimeSpectralOperators.resolvent_matrix_element
+#check PrimeSpectralOperators.zeta_laplace_eq_resolvent_matrix_element
+#print axioms PrimeSpectralOperators.zeta_laplace_eq_resolvent_matrix_element

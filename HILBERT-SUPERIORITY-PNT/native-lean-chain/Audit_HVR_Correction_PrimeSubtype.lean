@@ -1,0 +1,8 @@
+import HVR_Correction_PrimeSubtype
+
+#check HVRCorrectionPrimeSubtype.complexCorrectionTerm_support
+#print axioms HVRCorrectionPrimeSubtype.complexCorrectionTerm_support
+#check HVRCorrectionPrimeSubtype.complexCorrection_eq_prime_tsum
+#print axioms HVRCorrectionPrimeSubtype.complexCorrection_eq_prime_tsum
+#check HVRCorrectionPrimeSubtype.complexCorrectionTerm_at_prime
+#print axioms HVRCorrectionPrimeSubtype.complexCorrectionTerm_at_prime

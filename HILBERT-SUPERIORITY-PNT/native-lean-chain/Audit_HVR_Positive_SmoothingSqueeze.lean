@@ -1,0 +1,6 @@
+import HVR_Positive_SmoothingSqueeze
+
+#check HVRPositiveSmoothingSqueeze.eventually_lt_four_of_upper_smoothing
+#print axioms HVRPositiveSmoothingSqueeze.eventually_lt_four_of_upper_smoothing
+#check HVRPositiveSmoothingSqueeze.tendsto_one_of_one_sided_smoothing
+#print axioms HVRPositiveSmoothingSqueeze.tendsto_one_of_one_sided_smoothing

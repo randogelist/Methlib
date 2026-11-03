@@ -1,0 +1,15 @@
+import HVR_Prime_PowerCorrection
+#check HVRPrimePowerCorrection.denominator_uniform_pos
+#print axioms HVRPrimePowerCorrection.denominator_uniform_pos
+#check HVRPrimePowerCorrection.ratio_le_two
+#print axioms HVRPrimePowerCorrection.ratio_le_two
+#check HVRPrimePowerCorrection.correctionTerm_nonneg
+#print axioms HVRPrimePowerCorrection.correctionTerm_nonneg
+#check HVRPrimePowerCorrection.correctionTerm_le
+#print axioms HVRPrimePowerCorrection.correctionTerm_le
+#check HVRPrimePowerCorrection.correction_summable
+#print axioms HVRPrimePowerCorrection.correction_summable
+#check HVRPrimePowerCorrection.correction_abs_summable
+#print axioms HVRPrimePowerCorrection.correction_abs_summable
+#check HVRPrimePowerCorrection.correction_geometric_hasSum
+#print axioms HVRPrimePowerCorrection.correction_geometric_hasSum

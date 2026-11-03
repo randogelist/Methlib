@@ -1,0 +1,3 @@
+import HVR_PrimeDensity_ReflectedPhysicalDecay
+#print axioms HVRPrimeDensityReflectedPhysicalDecay.reflectedSpectrum_kernel_eq_reflectedPhysical
+#print axioms HVRPrimeDensityReflectedPhysicalDecay.reflectedPhysical_undamped_tendsto_zero

@@ -1,0 +1,86 @@
+{
+  "dependency_trace_coverage": "UNVERIFIED",
+  "evidence_run": "https://github.com/randogelist/Methlib/actions/runs/41712052899",
+  "theorems": {
+    "HVRNextEulerPrimeZetaBridge.eulerProductLogDerivative": {
+      "module": "NextEulerPrimeZetaBridge",
+      "source_sha256": "f7690a0f8787756f3721f32570679eb140cd136debaddc5e984d19f580ee28ab",
+      "targets": [
+        "ArithmeticFunction.coe_mul_zeta_apply",
+        "ArithmeticFunction.coe_zeta_mul_apply",
+        "ArithmeticFunction.coe_zeta_smul_apply",
+        "Complex.cpow_def_of_ne_zero",
+        "Complex.cpow_nat_mul",
+        "Complex.natCast_log",
+        "Complex.norm_exp",
+        "Complex.ofReal_log",
+        "HasSum.mul_left",
+        "HasSum.tsum_eq",
+        "LSeries.norm_term_eq",
+        "Nat.sum_divisors_prime_pow",
+        "Summable.of_nonneg_of_le",
+        "Summable.of_norm"
+      ]
+    },
+    "HVRNextPrimePowerReindex.primePowerReindexing": {
+      "module": "NextPrimePowerReindex",
+      "source_sha256": "a854f2e01e054c1d2f24355cb4e70e3e86501fb847dba1725cf48260889242d9",
+      "targets": [
+        "Complex.cpow_def_of_ne_zero",
+        "Complex.norm_exp",
+        "Complex.ofReal_log",
+        "HasSum.tsum_eq"
+      ]
+    },
+    "HVRNextSummability.vonMangoldt_lseries_summable": {
+      "module": "NextSummability",
+      "source_sha256": "203f07bdefc621050da0112c2590cef76d83c3837909d21913b7fec39e6d9419",
+      "targets": [
+        "Complex.cpow_def_of_ne_zero",
+        "Complex.norm_exp",
+        "Complex.ofReal_log",
+        "HasSum.tsum_eq"
+      ]
+    },
+    "HVRNextZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one": {
+      "module": "NextZetaLogDerivative",
+      "source_sha256": "2894afed229c7918fd0053136f7ac2b225af80e32fe9198fae21290af2fe91b6",
+      "targets": [
+        "ArithmeticFunction.coe_mul_zeta_apply",
+        "ArithmeticFunction.coe_zeta_mul_apply",
+        "ArithmeticFunction.coe_zeta_smul_apply",
+        "Complex.cpow_def_of_ne_zero",
+        "Complex.cpow_nat_mul",
+        "Complex.natCast_log",
+        "Complex.norm_exp",
+        "Complex.ofReal_log",
+        "HasSum.mul_left",
+        "HasSum.tsum_eq",
+        "LSeries.norm_term_eq",
+        "Nat.sum_divisors_prime_pow",
+        "Summable.of_nonneg_of_le",
+        "Summable.of_norm"
+      ]
+    },
+    "HVRNextZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta": {
+      "module": "NextZetaLogDerivative",
+      "source_sha256": "2894afed229c7918fd0053136f7ac2b225af80e32fe9198fae21290af2fe91b6",
+      "targets": [
+        "ArithmeticFunction.coe_mul_zeta_apply",
+        "ArithmeticFunction.coe_zeta_mul_apply",
+        "ArithmeticFunction.coe_zeta_smul_apply",
+        "Complex.cpow_def_of_ne_zero",
+        "Complex.cpow_nat_mul",
+        "Complex.natCast_log",
+        "Complex.norm_exp",
+        "Complex.ofReal_log",
+        "HasSum.mul_left",
+        "HasSum.tsum_eq",
+        "LSeries.norm_term_eq",
+        "Nat.sum_divisors_prime_pow",
+        "Summable.of_nonneg_of_le",
+        "Summable.of_norm"
+      ]
+    }
+  }
+}

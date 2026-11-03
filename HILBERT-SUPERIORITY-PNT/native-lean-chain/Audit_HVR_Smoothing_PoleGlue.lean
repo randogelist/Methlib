@@ -1,0 +1,4 @@
+import HVR_Smoothing_PoleGlue
+
+#check HVRSmoothingAnalyticGerms.poleRegularPart_eventuallyEq_raw
+#print axioms HVRSmoothingAnalyticGerms.poleRegularPart_eventuallyEq_raw

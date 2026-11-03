@@ -1,0 +1,14 @@
+import PrimeSpectralResolvent
+
+#check PrimeSpectralResolvent.mode_integrable
+#print axioms PrimeSpectralResolvent.mode_integrable
+#check PrimeSpectralResolvent.mode_integral
+#print axioms PrimeSpectralResolvent.mode_integral
+#check PrimeSpectralResolvent.spectral_resolvent_laplace
+#print axioms PrimeSpectralResolvent.spectral_resolvent_laplace
+#check PrimeSpectralResolvent.heat_series_resolvent_laplace
+#print axioms PrimeSpectralResolvent.heat_series_resolvent_laplace
+#check PrimeSpectralResolvent.summable_mode_integral_norm
+#print axioms PrimeSpectralResolvent.summable_mode_integral_norm
+#check PrimeSpectralResolvent.heat_series_resolvent_of_summable_mass
+#print axioms PrimeSpectralResolvent.heat_series_resolvent_of_summable_mass

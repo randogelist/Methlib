@@ -1,0 +1,10 @@
+import PrimeSpectralBridge
+
+#check PrimeSpectralBridge.weight_summable
+#print axioms PrimeSpectralBridge.weight_summable
+#check PrimeSpectralBridge.prime_heat_resolvent_laplace
+#print axioms PrimeSpectralBridge.prime_heat_resolvent_laplace
+#check PrimeSpectralBridge.heat_series_eq_zeta_realpart
+#print axioms PrimeSpectralBridge.heat_series_eq_zeta_realpart
+#check PrimeSpectralBridge.zeta_realpart_resolvent_laplace
+#print axioms PrimeSpectralBridge.zeta_realpart_resolvent_laplace

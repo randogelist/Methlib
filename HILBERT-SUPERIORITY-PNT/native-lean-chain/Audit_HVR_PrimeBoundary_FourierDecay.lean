@@ -1,0 +1,5 @@
+import HVR_PrimeBoundary_FourierDecay
+#print axioms HVRPrimeBoundaryFourierDecay.weightedBoundary_continuous
+#print axioms HVRPrimeBoundaryFourierDecay.weightedBoundary_hasCompactSupport
+#print axioms HVRPrimeBoundaryFourierDecay.weightedBoundary_integrable
+#print axioms HVRPrimeBoundaryFourierDecay.weightedBoundary_fourier_tendsto_zero

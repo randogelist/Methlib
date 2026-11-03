@@ -1,0 +1,17 @@
+HVR FULL NATIVE LEAN CHAIN — CANDIDATE
+
+STATUS: The new integration is a candidate until the complete package is compiled and its named theorems are axiom-audited with Lean 4.34.0-rc1. Previous passing results applied to the original theta package and the six-module amendment individually, not to this changed combined chain. A passing run of this package is required before assigning it A-tier status.
+
+TARGET: HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one states Chebyshev.theta x / x tends to 1 as x tends to +infinity. The new spectral-cutoff asymptotic has the explicit parameter condition 1 < sigma. This package does not establish a separate prime-counting pi(x) asymptotic.
+
+INTEGRATION: The changed HVR_PrimeCount_GrowthCandidate source proves its prime partial-sum identity through the finite Hilbert-space theta matrix element; the existing growth proof uses that identity. HVR_PrimeSpectral_FullChain also relates the spectral cutoff to HVR prime mass, normalized density, and theta limits, and relates the heat matrix element to the original prime Mellin expression plus the higher-prime-power correction. The heat and resolvent results are built and audited; they have not been shown to be necessary dependencies of the final PNT theorem.
+
+DEPENDENCIES: Mathlib is still used. In particular, the amendment and original chain use the Mathlib von Mangoldt L-series / zeta logarithmic-derivative identity; the growth proof still uses the Chebyshev bound. The project does not independently derive all previously listed Mathlib endpoints. It does not establish an unbounded self-adjoint generator and identify all operators with its functional calculus.
+
+WINDOWS: Set MATHLIB_CACHE_ROOT to the existing compatible cached Mathlib project or its lib/lean folder, then run run.cmd. The expected Lean version is 4.34.0-rc1 and the intended Mathlib source revision is fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0. The script searches installed native elan toolchains, or accepts LEAN_EXE as the full path to the native lean.exe. It rebuilds all 92 project modules against the supplied cache, checks source hashes, and audits 328 named declarations. Project object reuse is disabled. Evidence is written under evidence/. The user-supplied Mathlib cache's full provenance is not independently verified by this runner.
+
+Illustrative Command Prompt usage, replacing the path with the existing cache:
+  set "MATHLIB_CACHE_ROOT=C:\path\to\mathlib4"
+  call "HVR_NATIVE_LEAN_CHAIN\run.cmd"
+
+A successful external result reports RESULT=PASS and AXIOM_AUDIT=STANDARD_ONLY. If it fails, share the console output and evidence directory so the actual failure can be investigated.

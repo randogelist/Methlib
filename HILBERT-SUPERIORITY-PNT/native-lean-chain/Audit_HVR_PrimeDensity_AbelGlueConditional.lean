@@ -1,0 +1,3 @@
+import HVR_PrimeDensity_AbelGlueConditional
+#print axioms HVRPrimeDensityAbelGlueConditional.undamped_eq_ordinaryBoundary_of_dominated
+#print axioms HVRPrimeDensityAbelGlueConditional.undamped_tendsto_zero_of_dominated

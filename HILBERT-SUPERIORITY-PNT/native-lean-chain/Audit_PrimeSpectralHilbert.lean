@@ -1,0 +1,22 @@
+import PrimeSpectralHilbert
+
+#check PrimeSpectralHilbert.primeAmplitude_memlp
+#print axioms PrimeSpectralHilbert.primeAmplitude_memlp
+#check PrimeSpectralHilbert.actualPrimeVector_apply
+#print axioms PrimeSpectralHilbert.actualPrimeVector_apply
+#check PrimeSpectralHilbert.coordinate_apply
+#print axioms PrimeSpectralHilbert.coordinate_apply
+#check PrimeSpectralHilbert.finiteDiagonal_matrix_element
+#print axioms PrimeSpectralHilbert.finiteDiagonal_matrix_element
+#check PrimeSpectralHilbert.theta_matrix_element_of_coordinates
+#print axioms PrimeSpectralHilbert.theta_matrix_element_of_coordinates
+#check PrimeSpectralHilbert.primeVector_apply
+#print axioms PrimeSpectralHilbert.primeVector_apply
+#check PrimeSpectralHilbert.theta_matrix_element_of_square_summability
+#print axioms PrimeSpectralHilbert.theta_matrix_element_of_square_summability
+#check PrimeSpectralHilbert.theta_matrix_element
+#print axioms PrimeSpectralHilbert.theta_matrix_element
+#check PrimeSpectralHilbert.finite_heat_matrix_element
+#print axioms PrimeSpectralHilbert.finite_heat_matrix_element
+#check PrimeSpectralHilbert.finite_heat_matrix_elements_tendsto_zeta
+#print axioms PrimeSpectralHilbert.finite_heat_matrix_elements_tendsto_zeta

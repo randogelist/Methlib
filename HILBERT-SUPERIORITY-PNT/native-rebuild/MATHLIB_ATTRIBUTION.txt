@@ -1,0 +1,1 @@
+Proofs adapt parts of Mathlib revision fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0 under Apache License 2.0. See source headers for file-specific copyright and authors and MATHLIB_LICENSE.txt for the license.

@@ -1,0 +1,6 @@
+import HVR_PhysicalKernel_Tail
+#print axioms HVRPhysicalKernelTail.symmetricTail_antitone
+#print axioms HVRPhysicalKernelTail.symmetricTail_iInter
+#print axioms HVRPhysicalKernelTail.normalizedKernel_symmetricTail_tendsto
+#print axioms HVRPhysicalKernelTail.normalizedKernel_exists_small_tail
+#print axioms HVRPhysicalKernelTail.outside_window_scaled

@@ -1,0 +1,68 @@
+HVR NATIVE REBUILD: 22 CALLS — VERIFIED CANDIDATE THEOREMS
+==========================================================
+
+MATCHING EXTERNAL RESULT: PASS, Lean 4.34.0-rc1 on Linux, pinned Mathlib
+fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0. All 22 source modules in this
+package compiled and all 41 named declarations in plan.json passed the axiom
+audit with only propext, Classical.choice, and Quot.sound. Exact source hashes,
+plan and signatures were compared with the included evidence. The matching run:
+https://github.com/randogelist/Methlib/actions/runs/41697649026
+Git commit 1ba1e660c27471dfceb4925b46a3b8c99939fcfc
+verification/batch4_ci_evidence.zip SHA-256:
+cb80fc1abd4be1fd293a179bc0882bed682703c4bcc906e5d52416ed5f3a6eaa
+
+The result means the 41 EXACT theorem statements compiled and passed their
+named axiom audits. Several exact theorem statements are implications with
+explicit unresolved premises or restricted specializations. The run does NOT
+prove that all 22 Mathlib calls can now be removed or that the PNT root was
+rebuilt from these candidate sources. The original verified PNT chain remains
+a separate build. It does not prove freedom from equivalent results, nor a
+complete transitive declaration-level dependency audit. The trace in this run
+reports DEPENDENCY_TRACE_COVERAGE=UNVERIFIED. No additional PNT root audit was
+performed. The Linux run is verified; the native Windows launcher has not yet
+been tested for this package.
+
+MAIN OPEN SCOPES:
+- Actual von Mangoldt/zeta log derivative: exact identity obtained as an
+  implication assuming PrimePowerReindexing AND EulerProductLogDerivative;
+  neither is proved in this package. A tsum alone does not prove convergence.
+- Zeta nonvanishing for Re(s)>1: derived conditionally from an actual
+  zeta-Moebius L-series inverse identity, which is not proved here.
+- Riemann-Lebesgue: real-frequency helper with explicit half-period phase
+  cancellation and L1 translation-limit assumptions; neither is discharged.
+- Mellin: finite Abel and finite complex-power identities, with differentiability
+  and integrability premises; the infinite limit and coefficient adapter are open.
+- Fubini: separable exchange and fixed-frequency algebra, not the full coupled
+  continuous-frequency swap.
+- Dominated-limit helper assumes a weighted-uniform-error bound and integrability;
+  it is not the general dominated convergence theorem.
+- Nonnegative sum-integral interchange requires integrability of the total
+  series, almost-everywhere pointwise summability, and summable mode integrals.
+- Fourier convolution is the real-line complex-valued specialization and uses a
+  Mathlib convolution-integral helper that itself uses Mathlib Fubini.
+- The l2 inner identity uses Mathlib's existing Hilbert-space inner product.
+- Zeta analyticity uses Mathlib regularized-zeta differentiability, whose
+  foundation is not independently reconstructed by this package.
+
+CROSS-TARGET DEPENDENCIES:
+- NativeSummability calls Mathlib vonMangoldt_nonneg and vonMangoldt_le_log.
+  NativeSummabilityUnified instead uses NativeMangoldtNonneg and its own
+  divisor-sum upper bound; its matched external build and named axiom audit pass,
+  but the full recursive dependency analysis for all three targets is incomplete.
+- NativeZetaPoleLittleO uses Mathlib log_deriv_riemannZeta_eq_neg_inv_sub_add,
+  itself a separate targeted endpoint; no joint removal has been shown.
+- NativeFourierConvolution retains Mathlib Fubini through its imported helper.
+- Every module uses Mathlib for definitions and/or supporting lemmas.
+
+WINDOWS: Extract this ZIP to Downloads, set MATHLIB_CACHE_ROOT to your existing
+compatible Mathlib project or lib/lean folder, then call native_rebuild\run.cmd.
+Optionally call with -TraceDependencies if the ImportGraph cached objects are
+available. The runner selects installed Lean 4.34.0-rc1 or LEAN_EXE, rebuilds
+all candidate project modules and audits named declarations. It uses a supplied
+cached Mathlib; full cache provenance is not independently verified. Trace
+absence is not a proven independence certificate. Evidence is written to a
+fresh evidence/ subfolder.
+
+For all 41 exact compiled signatures and reports, see
+VERIFIED_THEOREMS_A_TIER.txt. Full external logs, object hashes, source hashes,
+plan, and diagnostic statuses are in verification/batch4_ci_evidence.zip.

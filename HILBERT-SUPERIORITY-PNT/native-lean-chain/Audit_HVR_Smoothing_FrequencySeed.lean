@@ -1,0 +1,9 @@
+import HVR_Smoothing_FrequencySeed
+#print axioms HVRSmoothingFrequencySeed.seed_nonneg
+#print axioms HVRSmoothingFrequencySeed.seed_even
+#print axioms HVRSmoothingFrequencySeed.seed_smooth_Cinfty
+#print axioms HVRSmoothingFrequencySeed.seed_compact
+#print axioms HVRSmoothingFrequencySeed.seed_integrable
+#print axioms HVRSmoothingFrequencySeed.seed_integral
+#print axioms HVRSmoothingFrequencySeed.seed_support
+#print axioms HVRSmoothingFrequencySeed.seed_zero_of_band

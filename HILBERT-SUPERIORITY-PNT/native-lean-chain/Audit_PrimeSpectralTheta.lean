@@ -1,0 +1,6 @@
+import PrimeSpectralTheta
+
+#check PrimeSpectralTheta.prime_coordinate_cancellation
+#print axioms PrimeSpectralTheta.prime_coordinate_cancellation
+#check PrimeSpectralTheta.cutoffPairing_eq_chebyshev_theta
+#print axioms PrimeSpectralTheta.cutoffPairing_eq_chebyshev_theta

@@ -1,0 +1,8 @@
+import HVR_Zeta_BoundaryFactor
+
+#check HVRZetaBoundaryFactor.zeta_boundary_finite_order
+#print axioms HVRZetaBoundaryFactor.zeta_boundary_finite_order
+#check HVRZetaBoundaryFactor.zeta_boundary_local_factor
+#print axioms HVRZetaBoundaryFactor.zeta_boundary_local_factor
+#check HVRZetaBoundaryFactor.zeta_boundary_zero_order_pos
+#print axioms HVRZetaBoundaryFactor.zeta_boundary_zero_order_pos
