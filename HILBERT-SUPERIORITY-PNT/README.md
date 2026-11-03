@@ -1,4 +1,4 @@
-# Hilbert–Superioriority PNT
+# Hilbert–Superiority PNT
 
 This directory contains the unchanged Lean sources and Windows runner from
 `HVR_PNT_THETA_ASSEMBLY_RC1_FIX2.zip`. The root declaration is
