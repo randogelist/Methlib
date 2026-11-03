@@ -1,0 +1,6 @@
+HVR HALF-LINE KERNEL TAIL CANDIDATES
+STATUS=A_TIER_CANDIDATE until matching external cached Lean build and theorem-level audit.
+
+Two routes attempt the exact old PNT half-line cumulative integral limit for real integrable k: tendsto (x -> integral_{t<=x} k(t)) atTop (nhds (integral k)), and its normalized indicator-convolution consequence. HVRSpatialTail uses Mathlib monotone set-integral convergence. HVRNativeHalfLineTail splits positive/negative parts and uses monotone lower-integral exhaustion. HVRNativeHalfLineApplication uses the actual original indicator-convolution definition. Neither proves general dominated convergence; both retain lower Mathlib measure-theory infrastructure.
+
+The HVRDCTTailDiagnostic imports the original DCT declarations and direct/two-hop controls only in the diagnostic files after candidate proof compilation, and checks both DCT targets. Until audit and controlled trace finish, no target-freedom or Lean pass is claimed. Integration into the existing PNT root is not performed.
