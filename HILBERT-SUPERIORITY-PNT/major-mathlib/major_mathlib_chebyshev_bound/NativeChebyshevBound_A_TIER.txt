@@ -1,0 +1,21 @@
+TARGET: Chebyshev.theta_le_log4_mul_x
+DECLARATION: HVRNativeChebyshevBound.theta_le_log4_mul_x_native
+STATEMENT: for every real x >= 0, theta(x) <= log(4) * x.
+
+STATUS: Source-hash-matched Linux Lean 4.34.0-rc1 build and named audit
+passed in https://github.com/randogelist/Methlib/actions/runs/41697649026.
+The matching source SHA-256 is
+1ac31507b29d58cc123c80e1b0063a134a60b7c9b59f0c594a126938091d397c.
+This is an externally kernel-checked exact theorem, with standard-only
+axioms in the named audit. It has NOT been integrated into the PNT chain.
+
+PROOF: Strong induction gives primorial(n) <= 4^n using a finite
+central-binomial inequality. Take logs and use floor(x) <= x.
+
+DEPENDENCIES: Mathlib's definitions, primorial_add_le, primorial_succ,
+Nat.choose_middle_le_pow, Chebyshev.theta_eq_log_primorial, and general
+arithmetic and real-logarithm infrastructure. The proof source does not
+directly call the target, but its prior target-not-seen dependency trace had
+unverified coverage. Recursive independence from the target is NOT proven.
+The proof uses elementary building blocks adapted from Mathlib; retain the
+Mathlib attribution and Apache-2.0 license distributed in the project.
