@@ -1,0 +1,15 @@
+{
+  "module": "NativeFourierConvolution",
+  "source": "NativeFourierConvolution.lean",
+  "audit": "Audit_NativeFourierConvolution.lean",
+  "theorems": [
+    "NativeFourierConvolution.real_complex_convolution_product"
+  ],
+  "target": "Real.fourier_mul_convolution_eq",
+  "source_sha256": "7150f799268dc7e9811b1f0934ec4cf85c4985a060966c69d373831fc7d2f977",
+  "proof_scope": "complex-valued integrable real-line functions; relies on Real.fourier_bilin_convolution_eq_integral",
+  "source_imports": [
+    "Mathlib.Analysis.Fourier.Convolution",
+    "Mathlib.Tactic"
+  ]
+}

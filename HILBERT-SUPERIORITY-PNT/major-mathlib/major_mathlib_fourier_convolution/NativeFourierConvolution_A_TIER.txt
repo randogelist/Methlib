@@ -1,0 +1,9 @@
+TARGET: Real.fourier_mul_convolution_eq
+SCOPE: HVR convolution-product candidate for integrable complex functions on the real line, with the Mathlib Fourier and convolution definitions.
+
+THEOREM: NativeFourierConvolution.real_complex_convolution_product.
+For integrable f,g : R -> C and every real frequency, this proves that the Fourier transform of their convolution is the product of their Fourier transforms. The proof factors a double integral, using Real.fourier_bilin_convolution_eq_integral and standard integration infrastructure. This is not a self-contained reconstruction of the double-integral theorem; no blanket independence from Mathlib is claimed.
+
+SOURCE PROVENANCE: Byte-identical to main/native22-rebuild/candidates/NativeFourierConvolution.lean, SHA256 7150f799268dc7e9811b1f0934ec4cf85c4985a060966c69d373831fc7d2f977. The user supplied an earlier matching Windows run reporting this SHA, a passed build, and a standard-only axiom audit. Re-run the branch audit to reproduce evidence. Dependency-trace coverage was unverified, so the named target's transitive absence is not established.
+
+OPEN: check the alternative integral identity's transitive dependencies, connect the theorem to the original PNT proof, and rebuild/audit the integrated root.

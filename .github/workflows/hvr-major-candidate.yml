@@ -1,0 +1,58 @@
+name: HVR major Mathlib candidate (Linux)
+on:
+  push:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/major-mathlib/**'
+      - '.github/workflows/hvr-major-candidate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Install Lean 4.34.0-rc1
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned Mathlib cache
+        working-directory: .ci-mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Build and audit candidate
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export HVR_REBUILD_ROOT="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/major-mathlib/major_mathlib_fourier_convolution"
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          python3 "$HVR_REBUILD_ROOT/runner/native_audit.py"
+      - name: Upload candidate audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hvr-major-candidate-evidence
+          path: HILBERT-SUPERIORITY-PNT/major-mathlib/major_mathlib_fourier_convolution/evidence-linux/
+          if-no-files-found: warn
