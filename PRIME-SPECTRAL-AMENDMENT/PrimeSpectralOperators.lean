@@ -130,7 +130,8 @@ theorem diagonalResolvent_identity (a b : ℝ) (ha : 0 < a) (hb : 0 < b) :
       (b - a) • ((diagonalResolvent a ha).comp (diagonalResolvent b hb)) := by
   ext v n
   simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.smul_apply,
-    ContinuousLinearMap.comp_apply, diagonalResolvent_apply, smul_eq_mul]
+    ContinuousLinearMap.comp_apply, lp.coeFn_sub, lp.coeFn_smul,
+    Pi.sub_apply, Pi.smul_apply, diagonalResolvent_apply, smul_eq_mul]
   have hn : 0 ≤ Real.log (n : ℝ) := Real.log_natCast_nonneg n
   have hna : a + Real.log (n : ℝ) ≠ 0 := ne_of_gt (by linarith)
   have hnb : b + Real.log (n : ℝ) ≠ 0 := ne_of_gt (by linarith)
