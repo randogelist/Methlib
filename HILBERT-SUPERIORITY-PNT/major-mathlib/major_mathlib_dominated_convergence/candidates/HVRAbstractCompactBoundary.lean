@@ -1,5 +1,6 @@
 import NativeDominatedLimit
 import Mathlib.Analysis.Normed.Group.Bounded
+import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 An abstract one-dimensional compact-uniform integral-limit reduction. The

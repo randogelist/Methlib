@@ -291,5 +291,10 @@
     "module": "HVRDCTShortestPaths",
     "names": [],
     "banned": []
+  },
+  {
+    "module": "HVRDCTHalfLineDiagnostic",
+    "names": [],
+    "banned": []
   }
 ]

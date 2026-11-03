@@ -205,7 +205,7 @@ def main():
             if trace_requested and entry['names'] and entry['banned']: trace_incomplete = True
             continue
         rec['build'] = 'PASS'; rec['object_sha256'] = sha256(obj)
-        if module.startswith('HVRDCT') and 'Diagnostic' in module:
+        if module.startswith('HVRDCT') and ('Diagnostic' in module or 'ShortestPaths' in module):
             print((ev / ('build_' + module + '.stdout.log')).read_text(encoding='utf-8', errors='replace'), flush=True)
         if not entry['names']:
             rec['axiom_audit'] = 'NOT_REQUESTED_FOR_DEPENDENCY_MODULE'
