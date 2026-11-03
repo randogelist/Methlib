@@ -58,5 +58,23 @@
       "PrimeSpectralBridge.heat_series_eq_zeta_realpart",
       "PrimeSpectralBridge.zeta_realpart_resolvent_laplace"
     ]
+  },
+  {
+    "module": "PrimeSpectralOperators",
+    "deps": ["PrimeSpectralHilbert", "PrimeSpectralBridge"],
+    "names": [
+      "PrimeSpectralOperators.diagonal_apply",
+      "PrimeSpectralOperators.diagonal_matrix_element",
+      "PrimeSpectralOperators.heatMultiplier_bound",
+      "PrimeSpectralOperators.heatOperator_apply",
+      "PrimeSpectralOperators.heatOperator_add",
+      "PrimeSpectralOperators.heat_matrix_element",
+      "PrimeSpectralOperators.heat_matrix_element_actual_zeta",
+      "PrimeSpectralOperators.resolventMultiplier_bound",
+      "PrimeSpectralOperators.diagonalResolvent_apply",
+      "PrimeSpectralOperators.diagonalResolvent_identity",
+      "PrimeSpectralOperators.resolvent_matrix_element",
+      "PrimeSpectralOperators.zeta_laplace_eq_resolvent_matrix_element"
+    ]
   }
 ]
