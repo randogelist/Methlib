@@ -23,11 +23,18 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Verify all original Lean sources and build plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "64fe7a61f7009ab2a62b5f5c4d0a017ac67eedeb91f08714ed84348209479ca9  HILBERT-SUPERIORITY-PNT/original_sources.sha256" | sha256sum --check
+          (cd HILBERT-SUPERIORITY-PNT && sha256sum --check original_sources.sha256)
+
       - name: Check out pinned Mathlib
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: leanprover-community/mathlib4
-          ref: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
           path: .ci-mathlib
           persist-credentials: false
 
@@ -48,15 +55,8 @@ jobs:
         run: |
           set -euo pipefail
           test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
-          test "$(git rev-parse HEAD)" = 'de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
           "$HOME/.elan/bin/lake" exe cache get
-
-      - name: Verify all original Lean sources and build plan
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "64fe7a61f7009ab2a62b5f5c4d0a017ac67eedeb91f08714ed84348209479ca9  HILBERT-SUPERIORITY-PNT/original_sources.sha256" | sha256sum --check
-          (cd HILBERT-SUPERIORITY-PNT && sha256sum --check original_sources.sha256)
 
       - name: Build and audit theta root
         shell: bash

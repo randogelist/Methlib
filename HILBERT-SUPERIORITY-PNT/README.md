@@ -62,13 +62,12 @@ print("Nonblank lines:", sum(bool(line.strip()) for line in lines))
 ## Reproduction
 
 GitHub Actions uses Linux Lean `4.34.0-rc1` and Mathlib commit
-`de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11` (the `v4.34.0-rc1` release).
+`fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0` (an RC1-toolchain-compatible revision).
 It downloads Mathlib's cache, verifies all 174 original Lean source hashes and
 the original build-plan script, and uses the Linux runner to build and audit
 the same 85-stage plan. It rebuilds the package's own objects on Linux.
 This Mathlib revision was selected for CI; it is not an identified match for
-the earlier external cache. A separate [manual Windows workflow](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt-windows.yml)
-and the original Windows runner remain available.
+the earlier external cache. The original Windows runner remains available.
 
 The workflow checks these original source hashes before building:
 
