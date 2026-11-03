@@ -11,6 +11,7 @@ The finite identity itself retains Mathlib's general Abel summation theorem.
 noncomputable section
 
 open Finset Filter MeasureTheory
+open scoped Topology
 
 namespace HVRPrimeMellinLimit
 
