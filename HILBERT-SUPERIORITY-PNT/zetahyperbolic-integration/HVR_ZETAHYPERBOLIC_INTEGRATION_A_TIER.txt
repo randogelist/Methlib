@@ -1,0 +1,42 @@
+HVR ZETAHYPERBOLIC INTEGRATION -- RC1 CANDIDATE
+
+STATUS: A_TIER_CANDIDATE. Source prepared; external compilation and theorem-
+level axiom audit must pass for these exact source hashes before promotion.
+Old audits of Lean 4.33 donor code do not validate the RC1 adaptation.
+
+This package contains a source-level PNT root integration candidate plus
+separate finite-dimensional and conditional interfaces:
+1. HVR_PrimeMellin_Abel adapts the pinned Mathlib Abel-summation proof by
+   Xavier Roblot (Apache 2.0); HVR_PrimeCount_MellinCandidate preserves both
+   original theorem signatures while calling the adapted lemma. The package
+   builds the actual theta root from this changed source. This is not the
+   Zetahyperbolic mode derivation and does not establish Mathlib independence.
+2. HVR_PrimeMellin_Modes contains actual prime mode calculations and a
+   conditional theta exponential integral assembly. The exact a.e. theta
+   expansion and the change of variables remain explicit open obligations.
+3. HVRPrimeAtomicGram and HVRPrimeGramJacobiBridge prove finite-cutoff prime
+   Gram identities and connect them to the adapted Jacobi matrix. Strict
+   positivity is proved only with an explicit nonzero prime-witness premise.
+4. HVR_PrimeMomentJacobi composes actual finite HVR prime moments with a port
+   of Zetahyperbolic finite matrix/Jacobi algebra. Its general log-determinant
+   theorem has an explicit determinant-nonzero hypothesis.
+5. HVRZetaHyperbolicFiniteFrequency connects the fixed-frequency Fubini
+   identity to the actual prime-density transform and finite frequency sums.
+   The continuous-frequency equality is conditional on TWO convergence
+   hypotheses. It does not replace the PNT root's continuous swap.
+
+Sources adapted from Mathlib retain attribution and the Apache 2.0 license;
+see HVR_PrimeMellin_Abel.lean. Generic finite Jacobi source provenance is
+recorded in its source headers.
+
+RUN: Set MATHLIB_CACHE_ROOT to a populated Mathlib cache compatible with
+Lean 4.34.0-rc1, then run this package's run.cmd. Lean is not installed or
+run by the author locally. The runner prints EVIDENCE and records source,
+compiler, and object hashes and exact named theorem axiom reports.
+Cache provenance remains USER_SUPPLIED_NOT_INDEPENDENTLY_VERIFIED.
+
+Even a green named-axiom audit alone does not establish removal of a
+transitive Mathlib declaration. No dependency elimination, complete PNT
+independence, or closure of the conditional Fubini/Mellin premises is claimed.
+Check result.txt and logs, and run a separate controlled dependency trace.
+

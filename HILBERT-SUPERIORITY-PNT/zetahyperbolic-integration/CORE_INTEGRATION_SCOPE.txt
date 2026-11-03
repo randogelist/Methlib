@@ -1,0 +1,38 @@
+ZETAHYPERBOLIC-HVR FINITE PRIME MOMENT/JACOBI CANDIDATE
+
+Status: PREPARED ONLY. No matching external 4.34.0-rc1 build/audit is yet
+available for these files. No Lean was run locally.
+
+Dependencies and build order (all local source modules, or audited compatible
+cache objects):
+1. Existing HVR_Prime_Gram.lean from HILBERT-SUPERIORITY-PNT.
+2. HVR_ZetaHyperAffineJacobi.lean (imports pinned Mathlib).
+3. HVR_ZetaHyperMatrixJacobi.lean (imports HVR_ZetaHyperAffineJacobi).
+4. HVR_PrimeMomentJacobi.lean (imports HVR_Prime_Gram and HVR_ZetaHyperMatrixJacobi).
+5. Audit_HVR_PrimeMomentJacobi.lean (imports HVR_PrimeMomentJacobi).
+
+Core declarations:
+- moment_zero_eq_primeMass: the zeroth finite moment is the actual existing
+  finite HVR prime mass, same cutoff and sigma.
+- moment_hasDerivAt and gram_entry_hasDerivAt: finite prime-sum derivatives.
+- finite_prime_gram_logDet_hasDerivAt: exact finite Jacobi formula, with the
+  prime moment matrix determinant being nonzero as an explicit premise.
+- primeMass_pos and log_primeMass_hasDerivAt: actual finite prime mass and its
+  logarithmic derivative for any real sigma when the cutoff is at least 2.
+
+Upstream source:
+https://github.com/randogelist/zetahyperbolic-axiom/blob/b56c8102d25b931a601992c93bf30b19cc7ee103/src/LeanPaper/ImportedSection3/Jacobi.lean
+https://github.com/randogelist/zetahyperbolic-axiom/blob/b56c8102d25b931a601992c93bf30b19cc7ee103/src/LeanPaper/MatrixCurveJacobi.lean
+The finite generic parts were extracted from these sources; dependencies on
+the odd-zeta manuscript-specific matrix and its theorem were omitted, and the
+generic matrix file imports the extracted affine part.
+
+Limits:
+- Nothing here asserts the nonzero determinant for every dimension, infinite
+  moments, the prime-power Hilbert-space vector, zeta'/zeta, theta asymptotic,
+  or removal of any Mathlib dependency.
+- Original donor identities were audited in the donor's Lean 4.33 environment.
+  That is not a substitute for compiling this exact port and theorem-level
+  axiom auditing it under the target 4.34.0-rc1 environment.
+- If successful these statements extend the existing HVR prime finite-gram
+  source; the candidate does not yet replace a dependency in the PNT root.
