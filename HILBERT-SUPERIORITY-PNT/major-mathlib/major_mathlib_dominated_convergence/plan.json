@@ -1,0 +1,11 @@
+[
+  {
+    "module": "NativeDominatedLimit",
+    "names": [
+      "HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error"
+    ],
+    "banned": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence"
+    ]
+  }
+]
