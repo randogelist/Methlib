@@ -15,9 +15,13 @@ namespace PrimeSpectralBridge
 
 theorem weight_summable (sigma : ℝ) (hsigma : 1 < sigma) :
     Summable (PrimeSpectralSeries.weight sigma) := by
-  have hs := PrimeSpectralSeries.heat_summable sigma 0 hsigma (le_refl 0)
-  have hr := Complex.summable_ofReal.mp hs
-  simpa [PrimeSpectralSeries.heatTerm, PrimeSpectralSeries.vector_sq] using hr
+  have hs := PrimeSpectralSeries.vector_sq_summable sigma hsigma
+  have heq : (fun n : ℕ => (PrimeSpectralSeries.vector sigma n) ^ 2) =
+      PrimeSpectralSeries.weight sigma := by
+    funext n
+    exact PrimeSpectralSeries.vector_sq sigma n
+  rw [heq] at hs
+  exact hs
 
 /-- The actual weighted prime-power heat series has the diagonal resolvent
 as its Laplace integral. -/
@@ -30,7 +34,11 @@ theorem prime_heat_resolvent_laplace (sigma w : ℝ)
       (PrimeSpectralSeries.weight sigma) (fun n : ℕ => Real.log (n : ℝ)) w hw
       (fun n => Real.log_natCast_nonneg n)
       (PrimeSpectralSeries.weight_nonneg sigma) (weight_summable sigma hsigma)
-  simpa only [PrimeSpectralSeries.heatTerm, PrimeSpectralSeries.vector_sq] using h
+  have hterm (t : ℝ) (n : ℕ) : PrimeSpectralSeries.heatTerm sigma t n =
+      PrimeSpectralSeries.weight sigma n * Real.exp (-Real.log (n : ℝ) * t) := by
+    have harg : -t * Real.log (n : ℝ) = -Real.log (n : ℝ) * t := by ring
+    simp only [PrimeSpectralSeries.heatTerm, PrimeSpectralSeries.vector_sq, harg]
+  simpa only [hterm] using h
 
 /-- For real positive time, the heat sum equals the real part of the actual
 zeta logarithmic derivative. The proof reuses the Mathlib endpoint. -/

@@ -69,7 +69,7 @@ theorem finiteDiagonal_matrix_element (s : Finset ℕ) (weight : ℕ → ℝ)
       ∑ n ∈ s, v n * (weight n * v n) := by
   classical
   simp [finiteDiagonal, coordinate_apply, inner_sum, real_inner_smul_right,
-    lp.inner_single_right, Real.inner_apply, mul_comm, mul_left_comm, mul_assoc]
+    lp.inner_single_right, Real.inner_apply, pow_two, mul_comm, mul_left_comm, mul_assoc]
 
 /-- The exact theta cutoff, conditional only on the exhibited amplitudes being
 the coordinates of an actual `lp` vector. -/
