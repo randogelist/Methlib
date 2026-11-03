@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Run the original Windows package's 85-stage plan on Linux.
+"""Run the Windows package's 86-stage plan on Linux.
 
-The plan and expected theorem names are read from the unmodified run.ps1. Every
+The plan and expected theorem names are read from run.ps1. Every
 project module is rebuilt from source and its named declarations are audited;
 only the separately obtained Mathlib/dependency cache is reused.
 """
@@ -54,8 +54,8 @@ def get_plan():
                 raise ValueError('invalid quoted list')
             return out
         entries.append({'module': module, 'deps': items(deps), 'names': items(names)})
-    if len(entries) != 85:
-        raise ValueError(f'expected 85 modules; found {len(entries)}')
+    if len(entries) != 86:
+        raise ValueError(f'expected 86 modules; found {len(entries)}')
     seen = set()
     for entry in entries:
         mod = entry['module']

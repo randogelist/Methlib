@@ -1,12 +1,17 @@
 # Hilbert–Superiority PNT
 
+> **Integration candidate:** The Mellin proof has been changed to use a
+> separately staged, attributed Abel-summation helper. The previous green
+> root run applies to the earlier source; this changed source requires a new
+> full cached Lean build, named axiom audit, and dependency diagnostic.
+
 > The original half-line cumulative-integral proof has been replaced with a monotone lower-integral route. See [HALFLINE_REPLACEMENT.md](HALFLINE_REPLACEMENT.md) for verification scope and provenance. The original PNT source manifest remains historical; the PNT CI verifies `branch_sources.sha256`.
 
-[![HVR theta PNT Linux — main-branch CI](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml/badge.svg?branch=main)](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
+[HVR theta PNT Linux CI](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
 
-## Unconditional theta theorem
+## Theta theorem statement
 
-The root theorem states the theta form of the prime number theorem:
+The root statement is the theta form of the prime number theorem:
 
 ```lean
 HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one :
@@ -17,8 +22,8 @@ HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one :
 [Named axiom audit](Audit_HVR_PrimeDensity_FinalRoot.lean) ·
 [CI runs and evidence](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
 
-The badge shows the latest **main-branch workflow** result; it is not a separate
-per-theorem badge. The workflow builds the 85 staged modules and audits their
+The workflow result is not a separate per-theorem badge. The candidate workflow
+builds the 86 staged modules and audits their
 named declarations, including the root theorem and its two named supporting
 declarations. The runner rejects missing audit reports and axioms outside
 `propext`, `Classical.choice`, and `Quot.sound`. Open a run above and download
@@ -38,10 +43,10 @@ nonblank lines still include comments and imports.
 
 | Files | Lean files | Physical lines | Nonblank lines |
 |---|---:|---:|---:|
-| Source modules, excluding trace files | 85 | 5,568 | 4,935 |
-| Named audit files (`Audit_*.lean`) | 85 | 505 | 485 |
+| Source modules, excluding trace files | 86 | 5,633 | 4,993 |
+| Named audit files (`Audit_*.lean`) | 86 | 507 | 487 |
 | Diagnostic trace files | 4 | 288 | 268 |
-| **Total** | **174** | **6,361** | **5,688** |
+| **Total** | **176** | **6,428** | **5,748** |
 
 The [final root file](HVR_PrimeDensity_FinalRoot.lean) has **52 physical
 lines** and its audit file has **7**. The root imports earlier modules, so 52
@@ -65,9 +70,10 @@ print("Nonblank lines:", sum(bool(line.strip()) for line in lines))
 
 GitHub Actions uses Linux Lean `4.34.0-rc1` and Mathlib commit
 `fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0` (an RC1-toolchain-compatible revision).
-It downloads Mathlib's cache, verifies all 174 branch Lean source hashes and
-the original build-plan script, and uses the Linux runner to build and audit
-the same 85-stage plan. It rebuilds the package's own objects on Linux.
+It downloads Mathlib's cache, verifies the branch source manifest, including
+the top-level Lean files, build-plan script, Linux runner and Mellin diagnostic,
+and uses the Linux runner to build and audit the 86-stage plan. It rebuilds
+the package's own objects on Linux.
 This Mathlib revision was selected for CI; it is not an identified match for
 the earlier external cache. The original Windows runner remains available.
 
@@ -89,6 +95,23 @@ call run.cmd
 
 The original source package came from `HVR_PNT_THETA_ASSEMBLY_RC1_FIX2.zip`; the project replaces the half-line proof as described above. The original package SHA-256 is
 `1691e27682d7be2dd52fa4cae841d5b73a5034a5f11d4767068a49009f0a7566`.
+
+## Mellin integration candidate
+
+`HVR_PrimeMellin_Abel.lean` adapts the relevant zero-coefficient Abel
+summation case from Mathlib's `Mathlib/NumberTheory/LSeries/SumCoeff.lean`
+at the pinned revision, retaining the original attribution and Apache 2.0
+license in [LICENSE-MATHLIB.txt](LICENSE-MATHLIB.txt). The candidate
+`HVR_PrimeCount_MellinCandidate.lean` invokes that helper while preserving
+the previous theorem statements and hypotheses. The helper still uses
+Mathlib's general Abel-summation and analysis infrastructure.
+
+Neither compilation nor an axiom audit of these changed sources is claimed
+until the corresponding CI evidence exists. The Mellin diagnostic uses
+separate direct and indirect positive controls and reports whether the exact
+`LSeries_eq_mul_integral` declaration is seen from the helper, its callers,
+and the final PNT root. A negative result has unverified coverage and is not
+a claim of semantic or Mathlib independence.
 
 ## Additional prime-power and zeta bridge
 
@@ -192,6 +215,13 @@ The [`major-mathlib/`](major-mathlib/) directory contains the ten separately dev
 | [`major_mathlib_fubini_swap`](major-mathlib/major_mathlib_fubini_swap/) | Separable-integrand and fixed-frequency identities only; the coupled PNT interchange and general Fubini remain separate. |
 | [`major_mathlib_dominated_convergence`](major-mathlib/major_mathlib_dominated_convergence/) | An abstract compact-uniform integral transfer and the actual PNT compact-frequency boundary limit. The actual boundary proof still reaches the selected dominated-convergence declarations through upstream analytic infrastructure. The separate half-line kernel proof has been substituted into the PNT module; see [HALFLINE_REPLACEMENT.md](HALFLINE_REPLACEMENT.md). |
 
-The half-line replacement preserves the PNT theorem and its 85-stage build plan. In [cached Linux CI run 41732097102](https://github.com/randogelist/Methlib/actions/runs/41732097102), the modified half-line source and full PNT root built and passed named standard-only axiom audits. A controlled diagnostic found neither selected dominated-convergence declaration in the two modified half-line theorems, but **found both in the full PNT root**. Negative trace coverage remains unverified; this does not establish semantic or general Mathlib independence.
+The earlier half-line replacement preserved the PNT theorem and its then
+85-stage build plan. In [cached Linux CI run 41732097102](https://github.com/randogelist/Methlib/actions/runs/41732097102),
+the half-line source and full PNT root built and passed named standard-only
+axiom audits. That historical run predates the present Mellin changes. A
+controlled diagnostic found neither selected dominated-convergence declaration
+in the two modified half-line theorems, but **found both in the full PNT root**.
+Negative trace coverage remains unverified; this does not establish semantic or
+general Mathlib independence.
 
 The Fourier compact-support candidate passed its own [cached Linux CI run 41726247514](https://github.com/randogelist/Methlib/actions/runs/41726247514). Its controlled trace did not see the selected Fourier endpoint in the scoped candidate roots, with negative coverage unverified. This does not mean the candidate has replaced the original Fourier call in the PNT chain.

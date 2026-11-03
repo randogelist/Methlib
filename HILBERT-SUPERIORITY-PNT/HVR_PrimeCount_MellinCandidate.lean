@@ -1,5 +1,5 @@
 import HVR_Zeta_CorrectionIdentity
-import Mathlib.NumberTheory.LSeries.SumCoeff
+import HVR_PrimeMellin_Abel
 
 noncomputable section
 open scoped BigOperators
@@ -47,7 +47,7 @@ theorem primeSeries_eq_mul_primeThetaMellin (sigma t r : ℝ)
       zetaPoint sigma t * primeThetaMellin (zetaPoint sigma t) := by
   have hrs' : r < (zetaPoint sigma t).re := by
     simpa [zetaPoint] using hrs
-  have h := LSeries_eq_mul_integral primeCoefficientC hr hrs'
+  have h := HVRPrimeMellinAbel.lseries_eq_mellin_of_zero primeCoefficientC_zero hr hrs'
     (prime_lseries_summable sigma t hsigma) hO
   rw [prime_lseries_eq_primeSeries] at h
   simpa [primeThetaMellin, primeTheta] using h

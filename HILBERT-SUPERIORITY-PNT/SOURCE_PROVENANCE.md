@@ -1,5 +1,21 @@
 # Source provenance and scope
 
+## Pending Mellin integration candidate
+
+`HVR_PrimeMellin_Abel.lean` adapts the `f 0 = 0` Abel-summation case of
+`Mathlib/NumberTheory/LSeries/SumCoeff.lean` from Mathlib revision
+`fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0`. Its source preserves the
+upstream attribution; the Apache 2.0 text is in `LICENSE-MATHLIB.txt`.
+The existing Mellin theorem statements and premises are preserved, while
+their proof calls the new helper. Mathlib's Abel-summation and analysis
+infrastructure remain dependencies.
+
+This source modification, its new 86-stage root build and its dependency
+diagnostic require new matching external evidence. The earlier root and
+half-line CI runs predate this modification; they cannot certify the changed
+source. The positive-control diagnostic must not be imported into the proof
+chain. No target absence or full dependency coverage is claimed.
+
 These additions consolidate the HVR source packages developed alongside the original `HILBERT-SUPERIORITY-PNT` project. The original half-line source is replaced as described in HALFLINE_REPLACEMENT.md. `original_sources.sha256` is retained as historical provenance; `branch_sources.sha256` is the input lock used for the PNT job.
 
 - `native-lean-chain/` is the extracted source of `archives/HVR_NATIVE_LEAN_CHAIN.zip`, exactly the original archive tracked on the development branch. It includes the six prime-spectral modules and its own source manifest, build plan and Linux/Windows runners. Its named-theorem Linux build and axiom audit passed in [run 41688856236](https://github.com/randogelist/Methlib/actions/runs/41688856236). Consult the individual theorem signatures: an audit of a conditional implication does not discharge its hypotheses.
