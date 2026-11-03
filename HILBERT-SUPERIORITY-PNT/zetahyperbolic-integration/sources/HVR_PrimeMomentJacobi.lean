@@ -53,12 +53,20 @@ theorem moment_hasDerivAt (N : ℕ) (σ : ℝ) (k : ℕ) :
         funext z
         ring
       rw [hfun]
-      simpa only [one_mul] using
+      simpa [id] using
         (hasDerivAt_id σ).mul_const (-(Real.log (p : ℝ)))
     have hexp := (Real.hasDerivAt_exp (-(σ * Real.log (p : ℝ)))).comp σ harg
     have hprod := (hexp.const_mul (Real.log (p : ℝ))).mul_const
       ((Real.log (p : ℝ)) ^ k)
-    convert hprod using 1 <;> try { simp [primeWeight, pow_succ] } <;> try ring
+    have hcoeff :
+        Real.log (p : ℝ) *
+          (Real.exp (-(σ * Real.log (p : ℝ))) * -(Real.log (p : ℝ))) *
+            (Real.log (p : ℝ)) ^ k =
+        -(primeWeight σ p * (Real.log (p : ℝ)) ^ (k + 1)) := by
+      simp only [primeWeight, pow_succ]
+      ring
+    rw [hcoeff] at hprod
+    simpa only [primeWeight, Function.comp_apply] using hprod
   have hsum := HasDerivAt.fun_sum (u := primesUpTo N) (fun p _ => hterm p)
   simpa only [moment, Finset.sum_neg_distrib] using hsum
 
