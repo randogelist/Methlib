@@ -24,14 +24,14 @@ theorem halfPeriod_tendsto_atTop : Tendsto halfPeriod atTop (𝓝 0) := by
   have hmul : Tendsto (fun ξ : ℝ => 2 * ξ) atTop atTop :=
     (Filter.tendsto_const_mul_atTop_of_pos (show (0 : ℝ) < 2 by norm_num)).2 tendsto_id
   change Tendsto (fun ξ : ℝ => (2 * ξ)⁻¹) atTop (𝓝 0)
-  simpa only [Pi.inv_apply] using hmul.inv_tendsto_atTop
+  simpa only [Pi.inv_def] using hmul.inv_tendsto_atTop
 
 /-- The half-period approaches zero also along negative frequencies. -/
 theorem halfPeriod_tendsto_atBot : Tendsto halfPeriod atBot (𝓝 0) := by
   have hmul : Tendsto (fun ξ : ℝ => 2 * ξ) atBot atBot :=
     (Filter.tendsto_const_mul_atBot_of_pos (show (0 : ℝ) < 2 by norm_num)).2 tendsto_id
   change Tendsto (fun ξ : ℝ => (2 * ξ)⁻¹) atBot (𝓝 0)
-  simpa only [Pi.inv_apply] using hmul.inv_tendsto_atBot
+  simpa only [Pi.inv_def] using hmul.inv_tendsto_atBot
 
 /-- Positive-frequency decay for a continuous compactly supported function. -/
 theorem fourier_tendsto_atTop (g : ℝ → ℂ) (hg : Continuous g)

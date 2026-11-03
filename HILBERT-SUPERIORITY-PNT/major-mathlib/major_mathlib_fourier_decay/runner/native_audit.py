@@ -207,6 +207,9 @@ def main():
         rec['build'] = 'PASS'; rec['object_sha256'] = sha256(obj)
         if module.startswith('HVRFourierDependencyDiagnostic'):
             print((ev / ('build_' + module + '.stdout.log')).read_text(encoding='utf-8', errors='replace'), flush=True)
+        if not entry['names']:
+            rec['axiom_audit'] = 'NOT_REQUESTED_FOR_DEPENDENCY_MODULE'
+            continue
         audit = ev / ('audit_' + module + '.lean')
         audit.write_text('import ' + module + '\n' + ''.join('#check ' + n + '\n#print axioms ' + n + '\n' for n in entry['names']), encoding='utf-8')
         rec['audit_source_sha256'] = sha256(audit)
