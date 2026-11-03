@@ -1,0 +1,7 @@
+STATUS=A_TIER_CANDIDATE: source not yet externally compiled or audited.
+
+Candidate: HVRCompactBoundaryLimit.frequency_integral_tendsto_boundary, reproducing the original compact-support frequency integral limit for arbitrary integrable psi supported on compact K, with the original frequency-integrand measurability assumption. It imports the project prime-density compact-uniform boundary theorem and proves the limit through a weighted integral error estimate. Its fresh frequency/boundary integrands have the same bodies as the original project expressions. Integrability and phase bounds are established in the candidate.
+
+The project dependency closure includes 38 project modules and continues to use other Mathlib and HVR results. The two dominated-convergence declarations are tested by separate diagnostic files with direct and two-hop positive controls; those control imports are not used in the proof. A negative trace is not a semantic independence certificate; compilation and all trace outcomes must be inspected.
+
+This candidate targets the frequency-side application only, not the general dominated convergence theorem. It is not wired into the PNT root. Other project call sites use filter dominated convergence for spatial damping and half-line integrals.
