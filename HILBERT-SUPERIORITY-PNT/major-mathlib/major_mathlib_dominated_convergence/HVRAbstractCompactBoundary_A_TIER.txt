@@ -1,0 +1,6 @@
+HVR ABSTRACT COMPACT-UNIFORM BOUNDARY TRANSFER
+STATUS=A_TIER for HVRAbstractCompactBoundary.frequency_integral_tendsto_boundary with its displayed premises. Cached Lean 4.34.0-rc1 Linux build and named standard-only axiom audit PASS in https://github.com/randogelist/Methlib/actions/runs/41730665577 (overall run FAILED on separate optional HVRSpatialTail).
+
+The theorem assumes an integrable frequency weight supported in a compact set, a continuous limiting function, compact-uniform convergence and measurable approximating integrands; it concludes convergence of the corresponding weighted integrals. Its controlled transitive diagnostic reported neither selected dominated-convergence declaration, detected all four direct/two-hop controls and reported no missing reached declarations/theorem bodies or target-module declarations. Coverage remains unverified.
+
+The actual prime-density instantiation is separately proved and audited by HVRCompactBoundaryLimit, but its trace FOUND both selected dominated-convergence endpoints through the existing upstream boundary infrastructure. Therefore the abstract result does not establish target independence of the actual PNT root.

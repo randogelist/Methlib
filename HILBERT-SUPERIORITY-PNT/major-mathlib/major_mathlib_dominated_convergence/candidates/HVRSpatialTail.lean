@@ -1,5 +1,6 @@
 import Mathlib.MeasureTheory.Integral.Bochner.Set
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.MeasureTheory.Group.Integral
 import Mathlib.Tactic
 
 /-!

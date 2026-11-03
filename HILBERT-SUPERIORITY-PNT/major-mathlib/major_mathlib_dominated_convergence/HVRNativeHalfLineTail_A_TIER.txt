@@ -1,6 +1,9 @@
-HVR HALF-LINE KERNEL TAIL CANDIDATES
-STATUS=A_TIER_CANDIDATE until matching external cached Lean build and theorem-level audit.
+HVR HALF-LINE KERNEL TAIL AND INDICATOR CONVOLUTION
+STATUS=A_TIER for the two named exact statements and their explicit premises.
 
-Two routes attempt the exact old PNT half-line cumulative integral limit for real integrable k: tendsto (x -> integral_{t<=x} k(t)) atTop (nhds (integral k)), and its normalized indicator-convolution consequence. HVRSpatialTail uses Mathlib monotone set-integral convergence. HVRNativeHalfLineTail splits positive/negative parts and uses monotone lower-integral exhaustion. HVRNativeHalfLineApplication uses the actual original indicator-convolution definition. Neither proves general dominated convergence; both retain lower Mathlib measure-theory infrastructure.
+HVRNativeHalfLineTail.integral_Iic_tendsto_integral: for any real integrable kernel k, the integral over Iic x tends to its total integral at x -> +infinity.
+HVRNativeHalfLineApplication.halfLineConvolution_tendsto_one: if in addition the total integral equals 1, the convolution with the positive-halfline indicator tends to 1. This definition has the same body and theorem scope as the original PNT half-line module.
 
-The HVRDCTTailDiagnostic imports the original DCT declarations and direct/two-hop controls only in the diagnostic files after candidate proof compilation, and checks both DCT targets. Until audit and controlled trace finish, no target-freedom or Lean pass is claimed. Integration into the existing PNT root is not performed.
+Both build and named standard-only axiom audits passed in cached Linux Lean 4.34.0-rc1 CI https://github.com/randogelist/Methlib/actions/runs/41730665577. The complete job failed because an optional separate HVRSpatialTail helper did not compile. Source hashes: HVRNativeHalfLineTail.lean 2b33d781b835cdef6883a047531ed74b763c4d703d3aa5c38b9e3fab315d2245; HVRNativeHalfLineApplication.lean 9e51276dee87787ed31cf5c80a56560b609c611555ae9d41b7f4959007ba3336.
+
+Controlled dependency diagnostic found neither sequential nor filter DCT target, four direct/two-hop controls detected, 0 missing reached declarations, 0 unavailable reached theorem bodies, and 0 reached declarations from Mathlib.MeasureTheory.Integral.DominatedConvergence. Negative dependency coverage remains UNVERIFIED; equivalent measure results may remain. The original PNT module/root is not yet modified or rebuilt with this replacement.
