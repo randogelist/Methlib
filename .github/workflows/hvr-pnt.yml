@@ -23,12 +23,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Verify all original Lean sources and build plan
+      - name: Verify branch Lean sources and build plan
         shell: bash
         run: |
           set -euo pipefail
-          echo "64fe7a61f7009ab2a62b5f5c4d0a017ac67eedeb91f08714ed84348209479ca9  HILBERT-SUPERIORITY-PNT/original_sources.sha256" | sha256sum --check
-          (cd HILBERT-SUPERIORITY-PNT && sha256sum --check original_sources.sha256)
+          echo "5bfb583e80aed4fca602254cff18d3ba4a236c746b09eee3e025904b499f0ce3  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -69,6 +69,24 @@ jobs:
           "$LEAN_EXE" --version
           python3 HILBERT-SUPERIORITY-PNT/hvr_linux.py
 
+      - name: Diagnose DCT dependencies of root and half-line theorem
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          export HVR_CAND="$HVR_PKG/major-mathlib/major_mathlib_dominated_convergence"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$HVR_EVIDENCE"
+          test -f "$HVR_EVIDENCE/lean-path.txt"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          (cd "$HVR_CAND/candidates" && "$LEAN_EXE" -o "$HVR_EVIDENCE/olean/HVRDCTTraceControlLeaf.olean" HVRDCTTraceControlLeaf.lean)
+          (cd "$HVR_CAND/candidates" && "$LEAN_EXE" -o "$HVR_EVIDENCE/olean/HVRDCTTraceControlBridge.olean" HVRDCTTraceControlBridge.lean)
+          "$LEAN_EXE" "$HVR_CAND/diagnostics/HVRRootDCTDiagnostic.lean" | tee "$HVR_EVIDENCE/root-dct-diagnostic.stdout.log"
+          echo 'Root diagnostic reports findings; it does not assert semantic independence.' >> "$GITHUB_STEP_SUMMARY"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|TARGET_MODULE_DECLARATIONS_COUNT|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-dct-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
