@@ -69,6 +69,11 @@ jobs:
         shell: pwsh
         run: |
           $env:MATHLIB_CACHE_ROOT = Join-Path $env:GITHUB_WORKSPACE '.ci-mathlib'
+          # run.cmd starts Windows PowerShell 5.1; include its native modules when
+          # invoked from the GitHub-hosted PowerShell 7 environment.
+          $nativeModules = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\Modules'
+          $sharedModules = Join-Path $env:ProgramFiles 'WindowsPowerShell\Modules'
+          $env:PSModulePath = "$nativeModules;$sharedModules;$env:PSModulePath"
           & (Join-Path $env:GITHUB_WORKSPACE 'HILBERT-SUPERIORITY-PNT/run.cmd')
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
