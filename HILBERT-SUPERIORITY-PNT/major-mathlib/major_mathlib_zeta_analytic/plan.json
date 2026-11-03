@@ -1,0 +1,11 @@
+[
+  {
+    "module": "NativeZetaAnalytic",
+    "names": [
+      "HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized"
+    ],
+    "banned": [
+      "analyticOn_riemannZeta"
+    ]
+  }
+]

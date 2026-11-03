@@ -1,0 +1,6 @@
+import NativeZetaAnalytic
+
+#check HVRNativeZetaAnalytic.differentiableOn_zeta_via_regularized
+#print axioms HVRNativeZetaAnalytic.differentiableOn_zeta_via_regularized
+#check HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized
+#print axioms HVRNativeZetaAnalytic.analyticOn_zeta_via_regularized
