@@ -1,0 +1,80 @@
+name: HVR native Lean chain (Linux)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'HVR_NATIVE_LEAN_CHAIN.zip'
+      - '.github/workflows/hvr-native-chain.yml'
+  pull_request:
+    paths:
+      - 'HVR_NATIVE_LEAN_CHAIN.zip'
+      - '.github/workflows/hvr-native-chain.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lean-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+
+      - name: Install pinned Lean toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Verify checkout and fetch Mathlib cache
+        working-directory: .ci-mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+
+      - name: Unpack and check build plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          unzip -q HVR_NATIVE_LEAN_CHAIN.zip -d "$RUNNER_TEMP/hvr-native"
+          test -f "$RUNNER_TEMP/hvr-native/HVR_NATIVE_LEAN_CHAIN/hvr_combined_linux.py"
+          export HVR_PACKAGE_ROOT="$RUNNER_TEMP/hvr-native/HVR_NATIVE_LEAN_CHAIN"
+          python3 "$HVR_PACKAGE_ROOT/hvr_combined_linux.py" --check-plan
+
+      - name: Rebuild and audit combined chain
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export HVR_PACKAGE_ROOT="$RUNNER_TEMP/hvr-native/HVR_NATIVE_LEAN_CHAIN"
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$HVR_PACKAGE_ROOT/hvr_combined_linux.py"
+
+      - name: Upload build and axiom audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: hvr-native-chain-linux-evidence
+          path: ${{ runner.temp }}/hvr-native/HVR_NATIVE_LEAN_CHAIN/evidence-linux/
+          if-no-files-found: warn
