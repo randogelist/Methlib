@@ -1,0 +1,8 @@
+[
+  {
+    "module": "HVRZetaComputationalProjection",
+    "theorems": [
+      "HVRZetaComputationalProjection.projectedZeta_apply"
+    ]
+  }
+]

@@ -35,6 +35,7 @@ theorem phase_hasDerivAt (ξ t : ℝ) :
   change HasDerivAt (fun s : ℝ => Complex.exp ((s : ℂ) * c)) _ t at hd
   rw [heq] at hd
   have heval : Complex.exp ((t : ℂ) * c) = phase t ξ := congrFun heq t
+  simp only [Complex.ofRealCLM_apply] at hd
   rw [heval] at hd
   convert hd using 1 <;> simp [c, Complex.ofRealCLM_apply] <;> ring
 
