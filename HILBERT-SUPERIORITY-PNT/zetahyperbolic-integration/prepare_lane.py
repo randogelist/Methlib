@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 ROOTS = {
+    "fubini_budget": "HVRFrequencyCellBudget",
     "snd": "HVRPrimeSndAssembly",
     "matrix": "HVRPrimeGramJacobiBridge",
     "frequency": "HVRZetaHyperbolicFiniteFrequency",

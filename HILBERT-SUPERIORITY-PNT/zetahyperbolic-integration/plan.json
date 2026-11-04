@@ -514,5 +514,13 @@
     "theorems": [
       "HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt"
     ]
+  },
+  {
+    "module": "HVRFrequencyCellBudget",
+    "theorems": [
+      "HVRFrequencyCellBudget.disjoint_cells_integral_norm_sum_le",
+      "HVRFrequencyCellBudget.disjoint_cells_coefficient_norm_sum_le",
+      "HVRFrequencyCellBudget.finite_cells_phase_error_of_disjoint"
+    ]
   }
 ]
