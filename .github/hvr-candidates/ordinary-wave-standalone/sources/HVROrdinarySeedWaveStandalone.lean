@@ -89,8 +89,9 @@ theorem ordinaryWave_continuous (w : ℝ) (hw : 0 < w) :
       have heq : -(2 * Real.pi * x) - -(2 * Real.pi * y) =
           -(2 * Real.pi) * (x - y) := by ring
       rw [heq, abs_mul, abs_neg, abs_of_pos (show 0 < 2 * Real.pi by positivity)]
+    rw [habs] at h
     simpa only [ordinaryWave, HVRAnalyticPhaseBasics.phase_symm,
-      dist_eq_norm, Real.norm_eq_abs, habs, M,
+      dist_eq_norm, Real.norm_eq_abs, M,
       mul_assoc, mul_comm, mul_left_comm] using h
   exact hL.continuous
 
@@ -140,6 +141,7 @@ theorem ordinaryWave_norm_sq_integrable (w : ℝ) (hw : 0 < w) :
   have hpos : 0 < 1 + x ^ 2 := by positivity
   have hpoint : ‖ordinaryWave w hw x‖ ^ 2 ≤ C * (1 + x ^ 2)⁻¹ :=
     (le_mul_inv_iff₀ hpos).2 htotal
-  simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hpoint
+  rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg ‖ordinaryWave w hw x‖)]
+  exact hpoint
 
 end HVROrdinarySeedWave
