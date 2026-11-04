@@ -49,9 +49,6 @@ theorem dampedError_integrable_direct (a : ℝ) (ha : 0 < a) :
       rw [dampedError, norm_mul, hexpnorm]
     _ ≤ (1 + Real.log 4) * Real.exp (-a * u) :=
       mul_le_mul_of_nonneg_right hρ (le_of_lt (Real.exp_pos _))
-    _ = ‖(1 + Real.log 4) * Real.exp (-a * u)‖ := by
-      rw [Real.norm_eq_abs, abs_of_nonneg]
-      positivity
 
 /-- Mode integrability follows from the direct damped bound and unit phase. -/
 theorem damped_phase_integrable_direct (a t : ℝ) (ha : 0 < a) :
