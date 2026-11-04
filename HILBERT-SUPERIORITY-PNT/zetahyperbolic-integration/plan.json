@@ -58,6 +58,133 @@
     "theorems": []
   },
   {
+    "module": "HVRNativePrimePowerDivisorSum",
+    "theorems": [
+      "HVRNativePrimePowerDivisorSum.sum_divisors_prime_pow"
+    ]
+  },
+  {
+    "module": "HVRNativeCoprimePrimePowerDivisors",
+    "theorems": [
+      "HVRNativeCoprimePrimePowerDivisors.filtered_divisors_mul"
+    ]
+  },
+  {
+    "module": "HVRNativeArithmeticZeta",
+    "theorems": [
+      "HVRNativeArithmeticZeta.mangoldt_mul_zeta_apply"
+    ]
+  },
+  {
+    "module": "HVRSimpleMangoldtOne",
+    "theorems": [
+      "HVRSimpleMangoldtOne.vonMangoldt_one"
+    ]
+  },
+  {
+    "module": "HVRSimplePrimePowDisjoint",
+    "theorems": [
+      "HVRSimplePrimePowDisjoint.disjoint_divisors"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPrime",
+    "theorems": [
+      "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPow",
+    "theorems": [
+      "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native"
+    ]
+  },
+  {
+    "module": "NextMangoldtDivisorSum",
+    "theorems": [
+      "HVRNextMangoldtDivisorSum.vonMangoldt_sum_native",
+      "HVRNextMangoldtDivisorSum.vonMangoldt_mul_zeta_native"
+    ]
+  },
+  {
+    "module": "HVRNativeLogRpow",
+    "theorems": [
+      "HVRNativeLogRpow.log_le_rpow_div_nonneg",
+      "HVRNativeLogRpow.log_natCast_le_rpow_div"
+    ]
+  },
+  {
+    "module": "HVRNativeLSeriesNorm",
+    "theorems": [
+      "HVRNativeLSeriesNorm.norm_term"
+    ]
+  },
+  {
+    "module": "NativeMangoldtNonneg",
+    "theorems": [
+      "HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native"
+    ]
+  },
+  {
+    "module": "NativeMangoldtBound",
+    "theorems": [
+      "HVRNativeMangoldtBound.vonMangoldt_le_log_native"
+    ]
+  },
+  {
+    "module": "NativeSeriesInfrastructure",
+    "theorems": [
+      "HVRNativeSeriesInfrastructure.hasSum_scale",
+      "HVRNativeSeriesInfrastructure.hasSum_identifies_tsum",
+      "HVRNativeSeriesInfrastructure.complex_summable_of_majorant"
+    ]
+  },
+  {
+    "module": "NextSummability",
+    "theorems": [
+      "HVRNextSummability.vonMangoldt_lseries_summable"
+    ]
+  },
+  {
+    "module": "HVRSimpleMoebiusBound",
+    "theorems": [
+      "HVRSimpleMoebiusBound.abs_moebius_le_one"
+    ]
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "theorems": [
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse",
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse"
+    ]
+  },
+  {
+    "module": "NativeOneZetaSummability",
+    "theorems": [
+      "HVRNativeOneZetaSummability.one_summable",
+      "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+      "HVRNativeOneZetaSummability.one_abscissa_lt"
+    ]
+  },
+  {
+    "module": "IntegratedZetaNonzero",
+    "theorems": [
+      "HVRIntegratedZetaNonzero.moebiusLSeries_summable",
+      "HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries",
+      "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse",
+      "HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re"
+    ]
+  },
+  {
+    "module": "HVRMajorZetaLogDerivative",
+    "theorems": [
+      "HVRMajorZetaLogDerivative.convolution_vonMangoldt_zeta_native",
+      "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native",
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta"
+    ]
+  },
+  {
     "module": "HVR_Zeta_LogDerivative",
     "theorems": []
   },

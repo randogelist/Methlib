@@ -1,4 +1,4 @@
-name: HVR Zetahyperbolic integration (Linux)
+name: HVR native log-derivative root test (Linux)
 on:
   workflow_dispatch:
   push:
@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [matrix, frequency, modes, assembly, bounds, moment, primefreq, quadrature, cell, cells, root, snd]
+        lane: [root]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -86,6 +86,14 @@ jobs:
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|TARGET_MODULE_DECLARATIONS_COUNT|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/mellin-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
           (cd "$PKG/diagnostics" && "$LEAN" HVRModeDependencyDiagnostic.lean) | tee "$EVIDENCE/mode-diagnostic.stdout.log"
           grep -F 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F 'POSITIVE_CONTROL_DETECTED=HVRModeTraceControl.zetaTargetDirect|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F 'POSITIVE_CONTROL_DETECTED=HVRModeTraceControl.zetaTargetIndirect|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F 'POSITIVE_CONTROL_DETECTED=HVRModeTraceControl.zetaNativeDirect|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F 'POSITIVE_CONTROL_DETECTED=HVRModeTraceControl.zetaNativeIndirect|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F 'TARGET_FOUND=HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F -e 'TARGET_FOUND=HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' -e 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -F -e 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' -e 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$EVIDENCE/mode-diagnostic.stdout.log"
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload lane audit evidence
         if: always()

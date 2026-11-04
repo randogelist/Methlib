@@ -24,6 +24,10 @@ def primePowerDirect := @HVRSnditerationPrimePowerTail.higher_prime_power_hasSum
 def primePowerIndirect := @primePowerDirect
 def correctionDirect := @HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection
 def correctionIndirect := correctionDirect
+def zetaTargetDirect := @ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div
+def zetaTargetIndirect := @zetaTargetDirect
+def zetaNativeDirect := @HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta
+def zetaNativeIndirect := @zetaNativeDirect
 end HVRModeTraceControl
 
 set_option maxHeartbeats 0 in
@@ -39,7 +43,11 @@ run_cmd do
     (`HVRModeTraceControl.primePowerDirect, `HVRSnditerationPrimePowerTail.higher_prime_power_hasSum),
     (`HVRModeTraceControl.primePowerIndirect, `HVRSnditerationPrimePowerTail.higher_prime_power_hasSum),
     (`HVRModeTraceControl.correctionDirect, `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection),
-    (`HVRModeTraceControl.correctionIndirect, `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection)]
+    (`HVRModeTraceControl.correctionIndirect, `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection),
+    (`HVRModeTraceControl.zetaTargetDirect, `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div),
+    (`HVRModeTraceControl.zetaTargetIndirect, `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div),
+    (`HVRModeTraceControl.zetaNativeDirect, `HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta),
+    (`HVRModeTraceControl.zetaNativeIndirect, `HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta)]
   for (root, target) in controls do
     if (env.find? root).isNone || (env.find? target).isNone then
       throwError "CONTROL_OR_TARGET_UNKNOWN={root}|{target}"
@@ -55,6 +63,8 @@ run_cmd do
     `HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes,
     `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection,
     `HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection,
+    `HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta,
+    `HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv,
     `HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one]
   let targets : Array Name := #[
     `HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin,
@@ -65,6 +75,10 @@ run_cmd do
     `HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection,
     `LSeries_eq_mul_integral,
     `HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv,
+    `ArithmeticFunction.LSeries_vonMangoldt_eq,
+    `ArithmeticFunction.vonMangoldt_mul_zeta,
+    `riemannZeta_ne_zero_of_one_lt_re,
+    `HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta,
     `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div]
   for root in roots do
     if (env.find? root).isNone then
