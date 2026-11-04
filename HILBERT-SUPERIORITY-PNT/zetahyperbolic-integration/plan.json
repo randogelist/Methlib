@@ -557,5 +557,18 @@
       "HVRFrequencyMeshLimit.grid_mesh_tendsto_zero",
       "HVRFrequencyMeshLimit.tendsto_of_grid_error"
     ]
+  },
+  {
+    "module": "HVRFrequencyTransformCells",
+    "theorems": [
+      "HVRFrequencyTransformCells.integral_cell_lipschitz_error"
+    ]
+  },
+  {
+    "module": "HVRFrequencyTransformGrid",
+    "theorems": [
+      "HVRFrequencyTransformGrid.finite_cells_lipschitz_error",
+      "HVRFrequencyTransformGrid.actual_prime_grid_cell_error"
+    ]
   }
 ]
