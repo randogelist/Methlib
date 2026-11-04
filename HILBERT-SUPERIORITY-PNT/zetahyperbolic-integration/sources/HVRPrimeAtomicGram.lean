@@ -104,6 +104,9 @@ theorem quadratic_pos_of_prime_witness (N : ℕ) (sigma : ℝ) (h : ℕ)
       ∑ q ∈ HVRPrimeGram.primesUpTo N,
         HVRPrimeGram.primeWeight sigma q * (evalFeature c q) ^ 2 := by
     apply Finset.single_le_sum
+      (f := fun q : ℕ =>
+        HVRPrimeGram.primeWeight sigma q * (evalFeature c q) ^ 2)
+      (s := HVRPrimeGram.primesUpTo N)
     · intro q hq
       exact mul_nonneg
         (HVRPrimeGram.primeWeight_nonneg sigma (Finset.mem_filter.mp hq).2)
