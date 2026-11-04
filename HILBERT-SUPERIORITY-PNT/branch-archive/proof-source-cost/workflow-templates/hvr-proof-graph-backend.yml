@@ -1,0 +1,220 @@
+name: HVR fast Mathlib backend graphs (Linux)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/backend/**'
+      - '.github/workflows/hvr-proof-graph-backend.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  census:
+    name: Graph / ${{ matrix.lane }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - lane: math_geom
+            project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
+            package_lane: snd
+          - lane: math_detpos
+            project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
+            package_lane: snd
+          - lane: math_detderiv
+            project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
+            package_lane: snd
+          - lane: math_logle
+            project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
+            package_lane: snd
+          - lane: math_zeta
+            project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
+            package_lane: snd
+    steps:
+      - name: Check out measurement harness
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: harness
+          persist-credentials: false
+      - name: Check out exact project revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ matrix.project_ref }}
+          path: project
+          persist-credentials: false
+      - name: Verify project revision and prepare source lane
+        shell: bash
+        env:
+          PROJECT_REF: ${{ matrix.project_ref }}
+          PACKAGE_LANE: ${{ matrix.package_lane }}
+        run: |
+          set -euo pipefail
+          test "$(git -C "$GITHUB_WORKSPACE/project" rev-parse HEAD)" = "$PROJECT_REF"
+          PKG="$GITHUB_WORKSPACE/project/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          python3 "$PKG/prepare_lane.py" --package "$PKG" --output "$RUNNER_TEMP/hvr-graph" --lane "$PACKAGE_LANE"
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Verify and fetch pinned Mathlib cache
+        shell: bash
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Build and audit selected project lane
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$RUNNER_TEMP/hvr-graph/run_linux.py"
+      - name: Export proof graph and coverage counters
+        shell: bash
+        env:
+          GRAPH_LANE: ${{ matrix.lane }}
+          PROJECT_REF: ${{ matrix.project_ref }}
+        run: |
+          set -euo pipefail
+          LANE="$RUNNER_TEMP/hvr-graph"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$EVIDENCE"
+          test -f "$EVIDENCE/lean-path.txt"
+          export GRAPH_EVIDENCE="$EVIDENCE"
+          export GRAPH_SOURCE="$GITHUB_WORKSPACE/harness/.github/backend/HVRProofGraphBackendFast.lean"
+          cp "$GRAPH_SOURCE" "$EVIDENCE/HVRProofGraphExport.lean"
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          {
+            printf 'LANE=%s\nPROJECT_REF=%s\n' "$GRAPH_LANE" "$PROJECT_REF"
+            git -C "$GITHUB_WORKSPACE/.ci-mathlib" rev-parse HEAD
+            "$LEAN" --version
+            sha256sum "$GRAPH_SOURCE" "$EVIDENCE/HVRProofGraphExport.lean"
+          } > "$EVIDENCE/graph-provenance.txt"
+          export HVR_GRAPH_ROOT="$GRAPH_LANE"
+          (cd "$LANE/sources" && "$LEAN" "$EVIDENCE/HVRProofGraphExport.lean") > "$EVIDENCE/graph-stdout.txt" 2> "$EVIDENCE/graph-stderr.txt"
+          test -s "$LANE/sources/hvr-proof-graph.tsv"
+          cp "$LANE/sources/hvr-proof-graph.tsv" "$EVIDENCE/graph-rows.tsv"
+          cp "$EVIDENCE/graph-stdout.txt" "$EVIDENCE/graph-raw.txt"
+          grep -E '^GRAPH_(CONST|MISSING)\|' "$EVIDENCE/graph-rows.tsv" >> "$EVIDENCE/graph-raw.txt"
+          grep -E '^GRAPH_(CONTROL_PASS|ROOT_ABSENT|SUMMARY|COVERAGE|EXCLUDES)' "$EVIDENCE/graph-raw.txt" > "$EVIDENCE/graph-summary.txt" || true
+          cat "$EVIDENCE/graph-summary.txt"
+          grep -q '^GRAPH_CONTROL_PASS|' "$EVIDENCE/graph-summary.txt"
+          grep -q '^GRAPH_SUMMARY|' "$EVIDENCE/graph-summary.txt"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          ev = Path(os.environ['GRAPH_EVIDENCE'])
+          lines = ev.joinpath('graph-summary.txt').read_text(encoding='utf-8').splitlines()
+          controls = [s for s in lines if s.startswith('GRAPH_CONTROL_PASS|')]
+          summaries = []
+          for line in lines:
+              if not line.startswith('GRAPH_SUMMARY|'):
+                  continue
+              fields = line.split('|')
+              if len(fields) != 8:
+                  raise ValueError('Unexpected GRAPH_SUMMARY format')
+              root, count, missing, hidden, unknown_module, missing_range, axioms = fields[1:]
+              summaries.append(dict(root=root, reached=int(count), missing_declarations=int(missing),
+                                    unavailable_bodies=int(hidden), unknown_module=int(unknown_module),
+                                    missing_range=int(missing_range), axioms=int(axioms)))
+          lane = os.environ['GRAPH_LANE']
+          expected = 1
+          absent = [s.split('|', 1)[1] for s in lines if s.startswith('GRAPH_ROOT_ABSENT|')]
+          if len(controls) != 2 or len(summaries) != expected or len(absent) != 0:
+              raise ValueError('Unexpected graph roots or control coverage')
+          report = dict(lane=lane, project_ref=os.environ['PROJECT_REF'],
+                        mathlib_ref='fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0',
+                        source_coverage='UNVALIDATED', controls=controls,
+                        absent_roots=absent, roots=summaries)
+          ev.joinpath('graph-report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+          PY
+      - name: Map available declarations to unique source lines
+        shell: bash
+        env:
+          GRAPH_LANE: ${{ matrix.lane }}
+        run: |
+          set -euo pipefail
+          LANE="$RUNNER_TEMP/hvr-graph"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$EVIDENCE"
+          export GRAPH_EVIDENCE="$EVIDENCE"
+          export GRAPH_LANE_SOURCE="$LANE/sources"
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          ws = Path(os.environ['GITHUB_WORKSPACE'])
+          ev = Path(os.environ['GRAPH_EVIDENCE'])
+          mathlib = ws / '.ci-mathlib'
+          mapper = ws / 'harness/graph_backend/map_graph.py'
+          if not mapper.is_file():
+              raise FileNotFoundError(f'missing source mapper: {mapper}')
+          report = json.loads((ev / 'graph-report.json').read_text(encoding='utf-8'))
+          optional_lean = Path.home() / '.elan/toolchains/leanprover--lean4---v4.34.0-rc1/src/lean'
+          packages = mathlib / '.lake/packages'
+          summaries = []
+          for i, info in enumerate(report['roots'], 1):
+              label = info['root']
+              output = ev / f'graph-map-{i:02}.json'
+              command = [sys.executable, str(mapper), '--graph', f'{label}={ev / "graph-raw.txt"}',
+                         '--source-root', f'{label}:Mathlib={mathlib}',
+                         '--source-root', f'{label}:HVR={os.environ["GRAPH_LANE_SOURCE"]}',
+                         '--output', str(output)]
+              if optional_lean.is_dir():
+                  command += ['--source-root', f'{label}:Lean={optional_lean}']
+              if packages.is_dir():
+                  for pkg in sorted(packages.iterdir()):
+                      if pkg.is_dir():
+                          command += ['--source-root', f'{label}:Dependency={pkg}']
+              subprocess.run(command, check=True)
+              mapped = json.loads(output.read_text(encoding='utf-8'))['roots'][0]
+              summaries.append({'root': label, 'export': info, 'categories': mapped['categories'],
+                                'issues': mapped['issues'], 'report': output.name})
+          result = {'lane': os.environ['GRAPH_LANE'], 'source_coverage': 'UNVALIDATED',
+                    'lean_source_available': optional_lean.is_dir(), 'roots': summaries}
+          (ev / 'graph-mapping-summary.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+          print('GRAPH_MAPPING_SUMMARY=' + json.dumps(result, sort_keys=True), flush=True)
+          with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as summary:
+              summary.write('### ' + result['lane'] + ': partial proof graph source mapping\n\n')
+              for row in summaries:
+                  category_lines = {key: val['unique_lines'] for key, val in row['categories'].items()}
+                  summary.write('- `' + row['root'] + '`: unique lines ' + json.dumps(category_lines, sort_keys=True)
+                                + '; missing ranges=' + str(row['export']['missing_range'])
+                                + '; unavailable bodies=' + str(row['export']['unavailable_bodies'])
+                                + '; mapping issues=' + json.dumps(row['issues'], sort_keys=True) + '\n')
+              summary.write('\nCoverage is unvalidated; source spans are not a complete proof-to-axioms count.\n')
+          PY
+      - name: Upload full graph and evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hvr-proof-graph-backend-${{ matrix.lane }}
+          path: ${{ runner.temp }}/hvr-graph/evidence-linux/
+          if-no-files-found: warn
+

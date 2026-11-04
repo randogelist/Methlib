@@ -1,0 +1,4 @@
+Experimental branch only. Mode assembly imports the existing upstream Mellin
+chain and cannot replace that upstream call without factoring and dependency
+trace. Frequency bounds retain weighted moment and integrability premises.
+No theorem is promoted until external compiler and named axiom audit pass.
