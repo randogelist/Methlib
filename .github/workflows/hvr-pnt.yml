@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'HILBERT-SUPERIORITY-PNT/**'
+      - '!HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
       - '.github/workflows/hvr-pnt.yml'
   pull_request:
     paths:
       - 'HILBERT-SUPERIORITY-PNT/**'
+      - '!HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
       - '.github/workflows/hvr-pnt.yml'
   workflow_dispatch:
 

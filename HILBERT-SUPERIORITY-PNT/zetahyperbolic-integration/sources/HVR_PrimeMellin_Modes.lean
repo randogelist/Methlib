@@ -82,8 +82,9 @@ theorem primeMode_integral_norm (sigma t : ℝ) (n : ℕ) (hsigma : 1 < sigma) :
         apply integral_congr_ae
         filter_upwards [] with u
         by_cases hu : u ∈ Set.Ioi (Real.log (n : ℝ))
-        · simp [primeMode, hp, hu, norm_mul, Complex.norm_exp, hre,
-            Real.norm_eq_abs, abs_of_nonneg hlog]
+        · simp only [primeMode, hp, if_true, Set.indicator_of_mem hu, norm_mul,
+            Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hlog,
+            Complex.norm_exp, hre]
         · simp [primeMode, hp, hu]
       _ = ∫ u : ℝ in Set.Ioi (Real.log (n : ℝ)),
           Real.log (n : ℝ) * Real.exp (-sigma * u) :=
