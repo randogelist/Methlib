@@ -1,0 +1,49 @@
+[
+  {
+    "module": "HVR_Smoothing_FrequencySeed",
+    "theorems": []
+  },
+  {
+    "module": "HVROneDimensionalCompactDecay",
+    "theorems": [
+      "HVROneDimensionalCompactDecay.phase_integral_mul_eq_neg_derivative_integral",
+      "HVROneDimensionalCompactDecay.phase_integral_derivative_bound"
+    ]
+  },
+  {
+    "module": "HVRAnalyticPhaseBasics",
+    "theorems": [
+      "HVRAnalyticPhaseBasics.phase_symm",
+      "HVRAnalyticPhaseBasics.phase_frequency_lipschitz",
+      "HVRAnalyticPhaseBasics.phase_mul_integrable",
+      "HVRAnalyticPhaseBasics.integral_phase_frequency_lipschitz"
+    ]
+  },
+  {
+    "module": "HVROrdinarySeed",
+    "theorems": [
+      "HVROrdinarySeed.complexSeed_compact",
+      "HVROrdinarySeed.complexSeed_smooth"
+    ]
+  },
+  {
+    "module": "HVRStandaloneSeedIntervalDecay",
+    "theorems": [
+      "HVRStandaloneSeedIntervalDecay.seed_deriv_integrable",
+      "HVRStandaloneSeedIntervalDecay.phase_hasDerivAt",
+      "HVRStandaloneSeedIntervalDecay.seed_phase_first_derivative_bound"
+    ]
+  },
+  {
+    "module": "HVROrdinarySeedWaveStandalone",
+    "theorems": [
+      "HVROrdinarySeedWaveStandalone.ordinaryWave_eq_fourierInv",
+      "HVROrdinarySeedWaveStandalone.seed_integrable",
+      "HVROrdinarySeedWaveStandalone.seed_first_moment_integrable",
+      "HVROrdinarySeedWaveStandalone.ordinaryWave_norm_le",
+      "HVROrdinarySeedWaveStandalone.ordinaryWave_continuous",
+      "HVROrdinarySeedWaveStandalone.ordinaryWave_first_derivative_bound",
+      "HVROrdinarySeedWaveStandalone.ordinaryWave_norm_sq_integrable"
+    ]
+  }
+]
