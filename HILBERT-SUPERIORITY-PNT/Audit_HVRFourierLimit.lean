@@ -1,0 +1,2 @@
+import HVRFourierLimit
+#print axioms HVRFourierLimit.decay_of_half_period_obligations

@@ -1,0 +1,3 @@
+import HVRNativePrimePowerDivisorSum
+#check HVRNativePrimePowerDivisorSum.sum_divisors_prime_pow
+#print axioms HVRNativePrimePowerDivisorSum.sum_divisors_prime_pow

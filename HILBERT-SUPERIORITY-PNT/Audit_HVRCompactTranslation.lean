@@ -1,0 +1,2 @@
+import HVRCompactTranslation
+#print axioms HVRCompactTranslation.translation_integral_tendsto

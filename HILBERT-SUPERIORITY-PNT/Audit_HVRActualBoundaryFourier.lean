@@ -1,0 +1,3 @@
+import HVRActualBoundaryFourier
+#print axioms HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero
+#print axioms HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero

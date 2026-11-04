@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "e98a8dc6a1e8d0c4a3a6b4e698661c58da43bdf19f10ddc816e7beb1c5ed6b7d  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          echo "4e702bb8119f0281169212ec92fad2ab7c4a57fb724a462782cf253a5194a843  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
           (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib
@@ -120,7 +120,50 @@ jobs:
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRModeDependencyDiagnostic.lean" | tee "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log"
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRZetaBoundaryFactor.zeta_boundary_finite_order|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose Chebyshev bound dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$HVR_EVIDENCE"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRChebyshevDependencyDiagnostic.lean" | tee "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeChebyshevBound.theta_le_log4_mul_x_native' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose integrated Fourier replacement
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$HVR_EVIDENCE"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRFourierTargetDiagnostic.lean" | tee "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log"
+          grep -Fx 'FOURIER_CANDIDATE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero' "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log" >/dev/null
+          grep -E '^FOURIER_' "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Diagnose near-pole dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$HVR_EVIDENCE"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRPoleFeatureTrace.lean" | tee "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log"
+          grep -Fx 'FEATURE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >/dev/null
+          grep -E '^FEATURE_' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Upload evidence
         if: always()

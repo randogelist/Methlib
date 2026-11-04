@@ -1,0 +1,3 @@
+import HVRNativeLSeriesNorm
+#check HVRNativeLSeriesNorm.norm_term
+#print axioms HVRNativeLSeriesNorm.norm_term

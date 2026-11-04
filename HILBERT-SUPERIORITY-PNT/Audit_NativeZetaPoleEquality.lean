@@ -1,0 +1,6 @@
+import NativeZetaPoleEquality
+
+#check HVRNativeZetaPoleEquality.log_derivative_eq
+#print axioms HVRNativeZetaPoleEquality.log_derivative_eq
+#check HVRNativeZetaPoleEquality.log_derivative_eventually_eq
+#print axioms HVRNativeZetaPoleEquality.log_derivative_eventually_eq

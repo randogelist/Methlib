@@ -1,0 +1,3 @@
+import HVRSimplePrimePowDisjoint
+#check HVRSimplePrimePowDisjoint.disjoint_divisors
+#print axioms HVRSimplePrimePowDisjoint.disjoint_divisors

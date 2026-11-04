@@ -1,14 +1,15 @@
 import HVR_Zeta_CorrectionIdentity
+import NativeZetaPoleLittleO
 import Mathlib.NumberTheory.Harmonic.ZetaAsymp
 
 noncomputable section
 
 /-!
 Candidate normalized log-derivative residue at the pole of the actual zeta
-function. This uses Mathlib's near-pole zeta asymptotic; it proves no boundary
-nonvanishing or PNT. The imported theorem's transitive dependencies and the
-pinned cache availability must be independently checked. No Lean execution
-has been performed on this source.
+function. The little-o step is supplied by the HVR regularized-factor proof;
+that proof still uses Mathlib zeta analyticity, regularization, and the value
+of the regularized derivative at one. External build, axiom audit, and
+declaration dependency inspection remain required for this composition.
 -/
 namespace HVRZetaPoleResidue
 
@@ -24,7 +25,7 @@ theorem logDerivative_regular_part_tendsto :
       (fun s : ℂ => deriv riemannZeta s / riemannZeta s + (s - 1)⁻¹ -
         (Real.eulerMascheroniConstant : ℂ))
       (𝓝[≠] (1 : ℂ)) (𝓝 (0 : ℂ)) :=
-    (isLittleO_one_iff ℂ).mp log_deriv_riemannZeta_add_inv_sub_sub_isLittleO
+    (isLittleO_one_iff ℂ).mp HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO
   have ha := hz.add_const (Real.eulerMascheroniConstant : ℂ)
   simpa only [sub_add_cancel, zero_add] using ha
 

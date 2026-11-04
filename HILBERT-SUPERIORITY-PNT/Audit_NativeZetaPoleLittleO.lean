@@ -1,0 +1,6 @@
+import NativeZetaPoleLittleO
+
+#check HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto
+#print axioms HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto
+#check HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO
+#print axioms HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO

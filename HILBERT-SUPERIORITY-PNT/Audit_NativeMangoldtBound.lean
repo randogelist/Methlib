@@ -1,0 +1,3 @@
+import NativeMangoldtBound
+#check HVRNativeMangoldtBound.vonMangoldt_le_log_native
+#print axioms HVRNativeMangoldtBound.vonMangoldt_le_log_native

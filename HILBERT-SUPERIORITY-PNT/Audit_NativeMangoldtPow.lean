@@ -1,0 +1,3 @@
+import NativeMangoldtPow
+#check HVRNativeMangoldtPow.vonMangoldt_apply_pow_native
+#print axioms HVRNativeMangoldtPow.vonMangoldt_apply_pow_native

@@ -1,0 +1,3 @@
+import HVRSimpleMangoldtOne
+#check HVRSimpleMangoldtOne.vonMangoldt_one
+#print axioms HVRSimpleMangoldtOne.vonMangoldt_one

@@ -1,0 +1,3 @@
+import HVROrdinaryFourier
+#print axioms HVROrdinaryFourier.ordinaryIntegral_eq_scaled
+#print axioms HVROrdinaryFourier.ordinaryIntegral_tendsto_zero_of_atBot
