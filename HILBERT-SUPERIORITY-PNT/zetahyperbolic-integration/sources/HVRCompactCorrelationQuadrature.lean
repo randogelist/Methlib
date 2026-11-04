@@ -120,7 +120,6 @@ theorem complexCorrelation_grid_error_of_lipschitz
     apply Finset.sum_congr rfl
     intro i hi
     rw [integral_mul_const]
-    rfl
   rw [Finset.sum_sub_distrib, ← hunion, hfull, hsample] at h
   simpa only [R, φ, T, complexCorrelation_eq_integral] using h
 
