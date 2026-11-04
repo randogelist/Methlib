@@ -1202,6 +1202,82 @@
       ],
       "basis": "An HVR complex L¹ induction proves the product-to-iterated integral identity from finite-measure indicators, additivity, a.e. congruence and L¹ continuity; its indicator argument is adapted from the pinned Mathlib proof. The local identity and a one-variable measure-preserving change of variables exchange the two orders for the mixed kernel under the original product-integrability hypothesis, for arbitrary real a and x. Scalar Tonelli remains beneath L¹ continuity. The upstream swap through Mathlib riemannZeta remains a separate root dependency. External compiler and direct-edge evidence pending.",
       "patch": "patches/measure-03.patch"
+    },
+    {
+      "id": "pole-09",
+      "key": "pole-09",
+      "target": "differentiable_riemannZeta₀",
+      "lean_target": "differentiable_riemannZeta₀",
+      "catalog_additions": {
+        "differentiable_riemannZeta₀": [
+          "differentiable_riemannZeta₀"
+        ]
+      },
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "a429bf2b946536fbb1a34355010aedbb67a5ce5e",
+          "new": "6345de9e2120646d0a42af92a79a0cc4e31b86d0"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.additive_regularizer_differentiable",
+        "HVRNativeZetaPoleEquality.differentiableAt_of_ne_one",
+        "HVRNativeZetaPoleEquality.continuousAt_one",
+        "HVRNativeZetaPoleEquality.finitePart_limit",
+        "HVRNativeZetaPoleEquality.finitePart_limit_of_residue_and_real_limit",
+        "HVRNativeZetaPoleEquality.zeta_finite_part_tendsto_real_right",
+        "HVRNativeZetaPoleEquality.real_dirichlet_finite_part_eq_cells"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.regularized_hasDerivAt",
+          "helper": "HVRNativeZetaPoleEquality.additive_regularizer_differentiable"
+        },
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.additive_regularizer_differentiable",
+          "helper": "HVRNativeZetaPoleEquality.differentiableAt_of_ne_one"
+        },
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.additive_regularizer_differentiable",
+          "helper": "HVRNativeZetaPoleEquality.continuousAt_one"
+        },
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.continuousAt_one",
+          "helper": "HVRNativeZetaPoleEquality.finitePart_limit"
+        },
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.finitePart_limit",
+          "helper": "HVRNativeZetaPoleEquality.finitePart_limit_of_residue_and_real_limit"
+        },
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.finitePart_limit",
+          "helper": "HVRNativeZetaPoleEquality.zeta_finite_part_tendsto_real_right"
+        },
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.zeta_finite_part_tendsto_real_right",
+          "helper": "HVRNativeZetaPoleEquality.real_dirichlet_finite_part_eq_cells"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.additive_regularizer_differentiable",
+        "HVRNativeZetaPoleEquality.regularized_hasDerivAt"
+      ],
+      "basis": "Real Dirichlet expansion, continuity and value of the harmonic cell sum. Raw off-pole differentiability and residue one give the punctured removable finite part. The real right limit determines its value at one. Uses general removable-singularity theory. The entire additive regularizer supplies both derivative inputs to the HVR multiplicative pole proof.",
+      "patch": "patches/pole-09.patch",
+      "also_forbid": [
+        "tendsto_riemannZeta_sub_one_div",
+        "ZetaAsymptotics.tendsto_riemannZeta_sub_one_div_nhds_right"
+      ]
     }
   ],
   "deferred": []

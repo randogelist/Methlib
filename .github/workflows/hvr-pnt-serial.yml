@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scope: [first, full]
+        scope: [first, latest, full]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -69,6 +69,7 @@ jobs:
           export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           args=()
           if [[ "$SCOPE" == first ]]; then args+=(--prefix 1); fi
+          if [[ "$SCOPE" == latest ]]; then args+=(--latest-only); fi
           tools=HILBERT-SUPERIORITY-PNT/serial
           python3 "$tools/replay_stages.py" --repo "$GITHUB_WORKSPACE" --stages "$tools/stages.json" --catalog "$tools/catalog.json" --objects "$RUNNER_TEMP/hvr-serial-objects" --evidence "$RUNNER_TEMP/hvr-serial-evidence" "${args[@]}"
       - name: Upload stage receipts

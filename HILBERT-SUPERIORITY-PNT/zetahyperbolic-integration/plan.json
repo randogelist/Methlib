@@ -176,7 +176,14 @@
       "HVRNativeZetaPoleEquality.regularized_eventually_ne",
       "HVRNativeZetaPoleEquality.quotient_eventually_eq_zeta",
       "HVRNativeZetaPoleEquality.zeta_derivative_of_regularized_quotient",
-      "HVRNativeZetaPoleEquality.zeta_analyticAt"
+      "HVRNativeZetaPoleEquality.zeta_analyticAt",
+      "HVRNativeZetaPoleEquality.real_dirichlet_finite_part_eq_cells",
+      "HVRNativeZetaPoleEquality.zeta_finite_part_tendsto_real_right",
+      "HVRNativeZetaPoleEquality.finitePart_limit_of_residue_and_real_limit",
+      "HVRNativeZetaPoleEquality.finitePart_limit",
+      "HVRNativeZetaPoleEquality.differentiableAt_of_ne_one",
+      "HVRNativeZetaPoleEquality.continuousAt_one",
+      "HVRNativeZetaPoleEquality.additive_regularizer_differentiable"
     ]
   },
   {
