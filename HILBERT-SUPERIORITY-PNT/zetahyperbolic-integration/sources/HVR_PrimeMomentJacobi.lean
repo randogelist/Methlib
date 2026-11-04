@@ -66,7 +66,7 @@ theorem moment_hasDerivAt (N : ℕ) (σ : ℝ) (k : ℕ) :
       simp only [primeWeight, pow_succ]
       ring
     rw [hcoeff] at hprod
-    simpa only [primeWeight, Function.comp_apply] using hprod
+    simpa only [primeWeight, Function.comp_apply, neg_mul] using hprod
   have hsum := HasDerivAt.fun_sum (u := primesUpTo N) (fun p _ => hterm p)
   simpa only [moment, Finset.sum_neg_distrib] using hsum
 
