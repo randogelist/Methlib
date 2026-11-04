@@ -1,9 +1,9 @@
 import HVR_PrimeDensity_BoundaryLimit
 import HVR_PrimeBoundary_OrdinaryFrequencyDecay
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
 
 noncomputable section
-open Filter MeasureTheory
+open Filter MeasureTheory ENNReal
 open scoped Topology
 open HVRCorrectionBoundaryLimit HVRPrimeDensityLaplace
 open HVRPrimeDensityBoundaryLimit HVRPrimeBoundaryOrdinaryFrequencyDecay
@@ -43,8 +43,11 @@ theorem frequency_integral_tendsto_boundary_of_dominated
       tendsto_const_nhds
     have h := hcst.mul (primeDensityLaplace_boundaryEps_tendsto t)
     simpa only [frequencyIntegrand] using h
-  have hc := tendsto_integral_of_dominated_convergence (fun t : ℝ => C * ‖ψ t‖)
-    hmeas hmajor hdom hlim
-  simpa only [ordinaryBoundary] using hc
+  unfold ordinaryBoundary
+  refine tendsto_integral_of_L1 _
+    (aestronglyMeasurable_of_tendsto_ae _ hmeas hlim)
+    (Filter.Eventually.of_forall (fun n => hmajor.mono' (hmeas n) (hdom n))) ?_
+  simpa only [ofReal_norm] using
+    (tendsto_lintegral_norm_of_dominated_convergence hmeas hmajor.hasFiniteIntegral hdom hlim)
 
 end HVRPrimeBoundaryAbelLimitConditional

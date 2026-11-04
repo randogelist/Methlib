@@ -5,7 +5,7 @@ The single-prime geometric factor for the actual von Mangoldt coefficients,
 inspired by snditeration's real Bose geometric expansion.  The argument is
 valid for every complex s with 0 < s.re.  It says nothing about convergence
 after summing over primes or identifying that sum with the zeta logarithmic
-derivative.  It still uses Mathlib's geometric-series theorem.
+derivative.  The complex geometric sum follows from the real norm majorant.
 -/
 
 noncomputable section
@@ -33,8 +33,8 @@ theorem higher_prime_power_hasSum {p : ℕ} (hp : Nat.Prime p) (s : ℂ)
     (hs : 0 < s.re) :
     HasSum (fun k : ℕ => LSeries.term higherCoefficientC s (p ^ (k + 2)))
       (complexCorrectionTerm p s) := by
-  have hgeom := hasSum_geometric_of_norm_lt_one (prime_ratio_norm_lt_one hp s hs)
-  have hscaled := hgeom.mul_left
+  have hgeom := complex_geometric_hasSum (prime_ratio_norm_lt_one hp s hs)
+  have hscaled := HVRNativeSeriesInfrastructure.hasSum_scale hgeom
     ((Real.log (p : ℝ) : ℂ) * (complexRatio p s) ^ 2)
   have hfun :
       (fun k : ℕ => LSeries.term higherCoefficientC s (p ^ (k + 2))) =
@@ -61,8 +61,9 @@ theorem mangoldt_prime_power_hasSum {p : ℕ} (hp : Nat.Prime p) (s : ℂ)
     (hs : 0 < s.re) :
     HasSum (fun k : ℕ => LSeries.term vonMangoldtC s (p ^ (k + 1)))
       ((Real.log (p : ℝ) : ℂ) * complexRatio p s / (1 - complexRatio p s)) := by
-  have hgeom := hasSum_geometric_of_norm_lt_one (prime_ratio_norm_lt_one hp s hs)
-  have hscaled := hgeom.mul_left ((Real.log (p : ℝ) : ℂ) * complexRatio p s)
+  have hgeom := complex_geometric_hasSum (prime_ratio_norm_lt_one hp s hs)
+  have hscaled := HVRNativeSeriesInfrastructure.hasSum_scale hgeom
+    ((Real.log (p : ℝ) : ℂ) * complexRatio p s)
   have hfun :
       (fun k : ℕ => LSeries.term vonMangoldtC s (p ^ (k + 1))) =
       (fun k : ℕ => ((Real.log (p : ℝ) : ℂ) * complexRatio p s) *
@@ -77,6 +78,6 @@ theorem mangoldt_prime_power_tsum {p : ℕ} (hp : Nat.Prime p) (s : ℂ)
     (hs : 0 < s.re) :
     (∑' k : ℕ, LSeries.term vonMangoldtC s (p ^ (k + 1))) =
       (Real.log (p : ℝ) : ℂ) * complexRatio p s / (1 - complexRatio p s) :=
-  (mangoldt_prime_power_hasSum hp s hs).tsum_eq
+  HVRNativeSeriesInfrastructure.hasSum_identifies_tsum (mangoldt_prime_power_hasSum hp s hs)
 
 end HVRSnditerationPrimePowerTail

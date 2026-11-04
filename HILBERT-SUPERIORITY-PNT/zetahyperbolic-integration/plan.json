@@ -51,11 +51,20 @@
     ]
   },
   {
+    "module": "HVRNativeLSeriesNorm",
+    "theorems": [
+      "HVRNativeLSeriesNorm.norm_term"
+    ]
+  },
+  {
     "module": "NativeOneZetaSummability",
     "theorems": [
       "HVRNativeOneZetaSummability.one_summable",
       "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
-      "HVRNativeOneZetaSummability.one_abscissa_lt"
+      "HVRNativeOneZetaSummability.one_abscissa_lt",
+      "HVRNativeOneZetaSummability.summable_of_unit_bound",
+      "HVRNativeOneZetaSummability.convolution_sum",
+      "HVRNativeOneZetaSummability.one_series_eq_zeta"
     ]
   },
   {
@@ -128,12 +137,6 @@
     ]
   },
   {
-    "module": "HVRNativeLSeriesNorm",
-    "theorems": [
-      "HVRNativeLSeriesNorm.norm_term"
-    ]
-  },
-  {
     "module": "NativeMangoldtNonneg",
     "theorems": [
       "HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native"
@@ -157,7 +160,14 @@
     "module": "NativeZetaPoleEquality",
     "theorems": [
       "HVRNativeZetaPoleEquality.log_derivative_eq",
-      "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+      "HVRNativeZetaPoleEquality.log_derivative_eventually_eq",
+      "HVRNativeZetaPoleEquality.regularized_hasDerivAt",
+      "HVRNativeZetaPoleEquality.regularized_differentiable",
+      "HVRNativeZetaPoleEquality.regularized_value_one",
+      "HVRNativeZetaPoleEquality.regularized_div_sub_one",
+      "HVRNativeZetaPoleEquality.quotient_eventually_eq_zeta",
+      "HVRNativeZetaPoleEquality.zeta_analyticAt",
+      "HVRNativeZetaPoleEquality.regularized_eventually_ne"
     ]
   },
   {
@@ -260,7 +270,8 @@
       "HVRMajorZetaLogDerivative.convolution_vonMangoldt_zeta_native",
       "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native",
       "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
-      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta"
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta",
+      "HVRMajorZetaLogDerivative.deriv_one_series"
     ]
   },
   {
@@ -333,7 +344,9 @@
   },
   {
     "module": "HVR_HigherCoefficient_Geometric",
-    "theorems": []
+    "theorems": [
+      "HVRHigherCoefficientGeometric.complex_geometric_hasSum"
+    ]
   },
   {
     "module": "HVR_Correction_PrimeSubtype",

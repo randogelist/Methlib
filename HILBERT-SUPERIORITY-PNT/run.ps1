@@ -153,7 +153,8 @@ try {
     @{ module = 'HVR_HalfLine_IndicatorConvolution'; deps = @(); names = @('HVRHalfLineIndicatorConvolution.halfLineConvolution_eq_integral_Iic', 'HVRHalfLineIndicatorConvolution.integral_Iic_tendsto_integral', 'HVRHalfLineIndicatorConvolution.halfLineConvolution_tendsto_one') },
     @{ module = 'HVRSimpleMoebiusBound'; deps = @(); names = @('HVRSimpleMoebiusBound.abs_moebius_le_one') },
     @{ module = 'NativeZetaNonzero'; deps = @(); names = @('HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse', 'HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse') },
-    @{ module = 'NativeOneZetaSummability'; deps = @(); names = @('HVRNativeOneZetaSummability.one_summable', 'HVRNativeOneZetaSummability.arithmetic_zeta_summable', 'HVRNativeOneZetaSummability.one_abscissa_lt') },
+    @{ module = 'HVRNativeLSeriesNorm'; deps = @(); names = @('HVRNativeLSeriesNorm.norm_term') },
+    @{ module = 'NativeOneZetaSummability'; deps = @('HVRNativeLSeriesNorm'); names = @('HVRNativeOneZetaSummability.one_summable', 'HVRNativeOneZetaSummability.arithmetic_zeta_summable', 'HVRNativeOneZetaSummability.one_abscissa_lt', 'HVRNativeOneZetaSummability.summable_of_unit_bound', 'HVRNativeOneZetaSummability.convolution_sum', 'HVRNativeOneZetaSummability.one_series_eq_zeta') },
     @{ module = 'NativeChebyshevBound'; deps = @(); names = @('HVRNativeChebyshevBound.primorial_lt_four_pow_native', 'HVRNativeChebyshevBound.primorial_le_four_pow_native', 'HVRNativeChebyshevBound.theta_le_log4_mul_x_native') },
     @{ module = 'NativeFourierDecay'; deps = @(); names = @('NativeFourierDecay.decay_from_half_period_obligations') },
     @{ module = 'HVRCompactTranslation'; deps = @(); names = @('HVRCompactTranslation.translation_integral_tendsto') },
@@ -165,11 +166,10 @@ try {
     @{ module = 'NativeMangoldtPrime'; deps = @(); names = @('HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native') },
     @{ module = 'NativeMangoldtPow'; deps = @(); names = @('HVRNativeMangoldtPow.vonMangoldt_apply_pow_native') },
     @{ module = 'HVRNativeLogRpow'; deps = @(); names = @('HVRNativeLogRpow.log_le_rpow_div_nonneg', 'HVRNativeLogRpow.log_natCast_le_rpow_div') },
-    @{ module = 'HVRNativeLSeriesNorm'; deps = @(); names = @('HVRNativeLSeriesNorm.norm_term') },
     @{ module = 'NativeMangoldtNonneg'; deps = @(); names = @('HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native') },
     @{ module = 'NativeMangoldtBound'; deps = @(); names = @('HVRNativeMangoldtBound.vonMangoldt_le_log_native') },
     @{ module = 'NativeSeriesInfrastructure'; deps = @(); names = @('HVRNativeSeriesInfrastructure.hasSum_scale', 'HVRNativeSeriesInfrastructure.hasSum_identifies_tsum', 'HVRNativeSeriesInfrastructure.complex_summable_of_majorant') },
-    @{ module = 'NativeZetaPoleEquality'; deps = @(); names = @('HVRNativeZetaPoleEquality.log_derivative_eq', 'HVRNativeZetaPoleEquality.log_derivative_eventually_eq') },
+    @{ module = 'NativeZetaPoleEquality'; deps = @(); names = @('HVRNativeZetaPoleEquality.log_derivative_eq', 'HVRNativeZetaPoleEquality.log_derivative_eventually_eq', 'HVRNativeZetaPoleEquality.regularized_hasDerivAt', 'HVRNativeZetaPoleEquality.regularized_differentiable', 'HVRNativeZetaPoleEquality.regularized_value_one', 'HVRNativeZetaPoleEquality.regularized_div_sub_one', 'HVRNativeZetaPoleEquality.quotient_eventually_eq_zeta', 'HVRNativeZetaPoleEquality.zeta_analyticAt', 'HVRNativeZetaPoleEquality.regularized_eventually_ne') },
     @{ module = 'HVR_Prime_Summability'; deps = @('HVR_Prime_Gram'); names = @('HVRPrimeSummability.primeWeightSeries_nonneg', 'HVRPrimeSummability.primeWeightSeries_summable') },
     @{ module = 'IntegratedZetaNonzero'; deps = @('HVRSimpleMoebiusBound', 'NativeZetaNonzero', 'NativeOneZetaSummability'); names = @('HVRIntegratedZetaNonzero.moebiusLSeries_summable', 'HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries', 'HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse', 'HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re') },
     @{ module = 'HVRFourierPhase'; deps = @('NativeFourierDecay'); names = @('HVRFourierPhase.half_period_shift', 'HVRFourierPhase.half_period_cancellation') },
@@ -181,7 +181,7 @@ try {
     @{ module = 'HVR_Prime_InfiniteGram'; deps = @('HVR_Prime_Summability'); names = @('HVRPrimeInfinite.cosMoment_summable', 'HVRPrimeInfinite.gramTerm_nonneg', 'HVRPrimeInfinite.infinite_prime_gram_nonnegative') },
     @{ module = 'HVR_Prime_PowerCorrection'; deps = @('HVR_Prime_Summability'); names = @('HVRPrimePowerCorrection.denominator_uniform_pos', 'HVRPrimePowerCorrection.ratio_le_two', 'HVRPrimePowerCorrection.correctionTerm_nonneg', 'HVRPrimePowerCorrection.correctionTerm_le', 'HVRPrimePowerCorrection.correction_summable', 'HVRPrimePowerCorrection.correction_abs_summable', 'HVRPrimePowerCorrection.correction_geometric_hasSum') },
     @{ module = 'HVRCompactFourierDecay'; deps = @('HVRCompactTranslation', 'HVRFourierPhase', 'HVRFourierLimit', 'HVROrdinaryFourier'); names = @('HVRCompactFourierDecay.fourier_tendsto_atTop', 'HVRCompactFourierDecay.fourier_tendsto_atBot', 'HVRCompactFourierDecay.ordinary_tendsto_atTop', 'HVRCompactFourierDecay.weighted_boundary_tendsto_atTop') },
-    @{ module = 'HVRMajorZetaLogDerivative'; deps = @('IntegratedZetaNonzero', 'NextMangoldtDivisorSum', 'NextSummability'); names = @('HVRMajorZetaLogDerivative.convolution_vonMangoldt_zeta_native', 'HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native', 'HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one', 'HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta') },
+    @{ module = 'HVRMajorZetaLogDerivative'; deps = @('IntegratedZetaNonzero', 'NextMangoldtDivisorSum', 'NextSummability'); names = @('HVRMajorZetaLogDerivative.convolution_vonMangoldt_zeta_native', 'HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native', 'HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one', 'HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta', 'HVRMajorZetaLogDerivative.deriv_one_series') },
     @{ module = 'HVR_Prime_BoundaryBridge'; deps = @('HVR_Prime_InfiniteGram'); names = @('HVRPrimeBoundaryBridge.residue_limits_contradict_prime_gram') },
     @{ module = 'HVR_Zeta_LogDerivative'; deps = @('HVR_Prime_InfiniteGram', 'HVRMajorZetaLogDerivative'); names = @('HVRZetaLogDerivative.vonMangoldt_coefficient_split', 'HVRZetaLogDerivative.higherCoefficient_eq_zero_of_prime', 'HVRZetaLogDerivative.higherCoefficient_eq_zero_of_not_prime_pow', 'HVRZetaLogDerivative.higherCoefficient_support', 'HVRZetaLogDerivative.vonMangoldt_at_prime_pow', 'HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv') },
     @{ module = 'HVR_Prime_Complex'; deps = @('HVR_Prime_InfiniteGram'); names = @('HVRPrimeComplex.primeTerm_summable', 'HVRPrimeComplex.primeTerm_re', 'HVRPrimeComplex.primeSeries_re', 'HVRPrimeComplex.primeTerm_eq_dirichlet', 'HVRPrimeComplex.primeTerm_eq_dirichlet_indicator', 'HVRPrimeComplex.primeSeries_eq_dirichlet', 'HVRPrimeComplex.infinite_complex_gram_nonnegative') },
@@ -192,13 +192,13 @@ try {
     @{ module = 'HVR_Correction_UniformBound'; deps = @('HVR_Correction_TermHolomorphic'); names = @('HVRCorrectionUniformBound.ratio_antitone_re', 'HVRCorrectionUniformBound.ratio_sq_eq_weight_exp', 'HVRCorrectionUniformBound.complexCorrectionTerm_uniform_bound', 'HVRCorrectionUniformBound.complexCorrection_differentiableOn', 'HVRCorrectionUniformBound.complexCorrection_summable') },
     @{ module = 'HVR_HigherCoefficient_Reindex'; deps = @('HVR_Prime_ZetaSplit'); names = @('HVRHigherCoefficientReindex.higher_lseries_support_prime_powers', 'HVRHigherCoefficientReindex.higher_lseries_term_at_prime', 'HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum') },
     @{ module = 'HVR_Correction_PrimeSubtype'; deps = @('HVR_Correction_UniformBound'); names = @('HVRCorrectionPrimeSubtype.complexCorrectionTerm_support', 'HVRCorrectionPrimeSubtype.complexCorrection_eq_prime_tsum', 'HVRCorrectionPrimeSubtype.complexCorrectionTerm_at_prime') },
-    @{ module = 'HVR_HigherCoefficient_Geometric'; deps = @('HVR_Correction_UniformBound', 'HVR_HigherCoefficient_Reindex'); names = @('HVRHigherCoefficientGeometric.higherCoefficient_prime_power', 'HVRHigherCoefficientGeometric.complexRatio_eq_cpow_neg', 'HVRHigherCoefficientGeometric.cpow_prime_power_eq_ratio', 'HVRHigherCoefficientGeometric.higher_lseries_term_prime_power', 'HVRHigherCoefficientGeometric.correction_prime_power_hasSum', 'HVRHigherCoefficientGeometric.correction_prime_power_tsum') },
+    @{ module = 'HVR_HigherCoefficient_Geometric'; deps = @('HVR_Correction_UniformBound', 'HVR_HigherCoefficient_Reindex'); names = @('HVRHigherCoefficientGeometric.higherCoefficient_prime_power', 'HVRHigherCoefficientGeometric.complexRatio_eq_cpow_neg', 'HVRHigherCoefficientGeometric.cpow_prime_power_eq_ratio', 'HVRHigherCoefficientGeometric.higher_lseries_term_prime_power', 'HVRHigherCoefficientGeometric.correction_prime_power_hasSum', 'HVRHigherCoefficientGeometric.correction_prime_power_tsum', 'HVRHigherCoefficientGeometric.complex_geometric_hasSum') },
     @{ module = 'HVR_Correction_BoundaryLimit'; deps = @('HVR_Prime_ZetaSplit', 'HVR_Correction_UniformBound'); names = @('HVRCorrectionBoundaryLimit.boundaryEps_pos', 'HVRCorrectionBoundaryLimit.boundarySigma_gt_one', 'HVRCorrectionBoundaryLimit.boundaryEps_tendsto', 'HVRCorrectionBoundaryLimit.boundaryEps_complex_tendsto', 'HVRCorrectionBoundaryLimit.boundaryApproach_eq', 'HVRCorrectionBoundaryLimit.boundaryApproach_tendsto', 'HVRCorrectionBoundaryLimit.complexCorrection_continuousAt', 'HVRCorrectionBoundaryLimit.complexCorrection_tendsto_boundary', 'HVRCorrectionBoundaryLimit.normalized_correction_tendsto_zero', 'HVRCorrectionBoundaryLimit.normalized_correction_re_tendsto_zero') },
     @{ module = 'HVR_Snditeration_PrimePowerTail'; deps = @('HVR_HigherCoefficient_Geometric'); names = @('HVRSnditerationPrimePowerTail.prime_ratio_norm_lt_one', 'HVRSnditerationPrimePowerTail.higher_prime_power_hasSum', 'HVRSnditerationPrimePowerTail.mangoldt_term_prime_power', 'HVRSnditerationPrimePowerTail.mangoldt_prime_power_hasSum', 'HVRSnditerationPrimePowerTail.mangoldt_prime_power_tsum') },
     @{ module = 'HVR_Zeta_CorrectionIdentity'; deps = @('HVR_Correction_PrimeSubtype', 'HVR_Snditeration_PrimePowerTail'); names = @('HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection', 'HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection') },
     @{ module = 'HVR_Zeta_PoleResidue'; deps = @('NativeZetaPoleLittleO', 'HVR_Zeta_CorrectionIdentity'); names = @('HVRZetaPoleResidue.logDerivative_regular_part_tendsto', 'HVRZetaPoleResidue.normalized_zeta_logDerivative_tendsto_one') },
     @{ module = 'HVR_Prime_ResidueTransfer'; deps = @('HVR_Prime_BoundaryBridge', 'HVR_Zeta_CorrectionIdentity'); names = @('HVRPrimeResidueTransfer.cosMoment_frequency_one', 'HVRPrimeResidueTransfer.cosMoment_zero_eq_primeMass', 'HVRPrimeResidueTransfer.primeSeries_limit_of_log_derivative', 'HVRPrimeResidueTransfer.cosMoment_limit_of_log_derivative', 'HVRPrimeResidueTransfer.primeMass_limit_of_log_derivative') },
-    @{ module = 'HVR_Zeta_BoundaryFactor'; deps = @('IntegratedZetaNonzero', 'HVR_Zeta_CorrectionIdentity'); names = @('HVRZetaBoundaryFactor.zeta_boundary_finite_order', 'HVRZetaBoundaryFactor.zeta_boundary_local_factor', 'HVRZetaBoundaryFactor.zeta_boundary_zero_order_pos') },
+    @{ module = 'HVR_Zeta_BoundaryFactor'; deps = @('IntegratedZetaNonzero', 'HVR_Zeta_CorrectionIdentity', 'NativeZetaPoleEquality'); names = @('HVRZetaBoundaryFactor.zeta_boundary_finite_order', 'HVRZetaBoundaryFactor.zeta_boundary_local_factor', 'HVRZetaBoundaryFactor.zeta_boundary_zero_order_pos') },
     @{ module = 'HVR_PrimeCount_MellinDefs'; deps = @('HVR_Zeta_CorrectionIdentity'); names = @('HVRPrimeCountMellin.primeTheta_eq_log_prime_sum') },
     @{ module = 'HVR_PrimeMellin_Modes'; deps = @('HVRComplexExpIntegralDirect', 'HVRExpIntegralGeneralDirect', 'HVR_Zeta_CorrectionIdentity'); names = @('HVRPrimeMellinModes.weighted_exponential_mode', 'HVRPrimeMellinModes.primeMode_integral', 'HVRPrimeMellinModes.primeMode_integrable', 'HVRPrimeMellinModes.primeMode_integral_norm', 'HVRPrimeMellinModes.primeMode_integral_norm_summable', 'HVRPrimeMellinModes.primeMode_integral_eq_primeTerm', 'HVRPrimeMellinModes.theta_exp_laplace_of_modes', 'HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion') },
     @{ module = 'HVR_Prime_PoleMass'; deps = @('HVR_Correction_BoundaryLimit', 'HVR_Zeta_PoleResidue', 'HVR_Prime_ResidueTransfer'); names = @('HVRPrimePoleMass.boundaryApproach_zero_ne_one', 'HVRPrimePoleMass.boundaryApproach_zero_sub_one', 'HVRPrimePoleMass.boundaryApproach_zero_punctured', 'HVRPrimePoleMass.normalized_zeta_pole_along_boundary', 'HVRPrimePoleMass.normalized_primeMass_pole_limit') },
@@ -209,7 +209,7 @@ try {
     @{ module = 'HVR_PrimeMellin_ModeAssembly'; deps = @('HVR_PrimeMellin_Modes', 'HVR_PrimeCount_MellinConversion'); names = @('HVRPrimeMellinModeAssembly.mem_primeCutoff_iff', 'HVRPrimeMellinModeAssembly.theta_exp_modes_pointwise', 'HVRPrimeMellinModeAssembly.theta_exp_modes_ae', 'HVRPrimeMellinModeAssembly.theta_exp_laplace_unconditional', 'HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes') },
     @{ module = 'HVR_Zeta_ZeroFreeBoundary'; deps = @('HVR_Zeta_GramResidueConditional', 'HVR_Zeta_BoundarySequence'); names = @('HVRZetaZeroFreeBoundary.zeta_nonzero_on_one_line') },
     @{ module = 'HVR_PrimeCount_MellinCandidate'; deps = @('HVR_Zeta_CorrectionIdentity', 'HVR_PrimeMellin_ModeAssembly'); names = @('HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin', 'HVRPrimeCountMellin.zeta_log_deriv_eq_primeThetaMellin_add_correction') },
-    @{ module = 'HVR_Smoothing_AnalyticGerms'; deps = @('HVR_Zeta_ZeroFreeBoundary'); names = @('HVRSmoothingAnalyticGerms.complexCorrection_differentiableAt_halfPlane', 'HVRSmoothingAnalyticGerms.poleRegularPart_differentiableAt_zero', 'HVRSmoothingAnalyticGerms.regularPartAt_differentiableAt', 'HVRSmoothingAnalyticGerms.regularPartAt_differentiableAt_boundary') },
+    @{ module = 'HVR_Smoothing_AnalyticGerms'; deps = @('HVR_Zeta_ZeroFreeBoundary', 'NativeZetaPoleEquality'); names = @('HVRSmoothingAnalyticGerms.complexCorrection_differentiableAt_halfPlane', 'HVRSmoothingAnalyticGerms.poleRegularPart_differentiableAt_zero', 'HVRSmoothingAnalyticGerms.regularPartAt_differentiableAt', 'HVRSmoothingAnalyticGerms.regularPartAt_differentiableAt_boundary') },
     @{ module = 'HVR_PrimeCount_GrowthCandidate'; deps = @('NativeChebyshevBound', 'HVR_PrimeCount_MellinConversion', 'HVR_PrimeCount_MellinCandidate'); names = @('HVRPrimeCountGrowth.primeCoefficient_partial_sum_isBigO', 'HVRPrimeCountGrowth.primeSeries_eq_mul_primeThetaMellin_unconditional', 'HVRPrimeCountGrowth.zeta_log_deriv_eq_primeThetaMellin_add_correction_unconditional') },
     @{ module = 'HVR_Smoothing_PoleGlue'; deps = @('HVR_Smoothing_AnalyticGerms'); names = @('HVRSmoothingAnalyticGerms.poleRegularPart_eventuallyEq_raw') },
     @{ module = 'HVR_PrimeCount_MellinGerm'; deps = @('HVR_Smoothing_AnalyticGerms', 'HVR_PrimeCount_GrowthCandidate'); names = @('HVRPrimeCountMellinGerm.primeThetaMellin_sub_pole_eq_regularPartAt', 'HVRPrimeCountMellinGerm.primeThetaMellin_sub_pole_eq_regularPartAt_of_growth') },
@@ -267,7 +267,7 @@ try {
     @{ module = 'HVRPrimeRightQuadrature'; deps = @('HVRPrimeGridIntegrability', 'HVRFrequencyMeshLimit'); names = @('HVRPrimeRightQuadrature.gridCells_union_eq_interval', 'HVRPrimeRightQuadrature.sampledRightGrid_tendsto_interval', 'HVRPrimeRightQuadrature.sampledRightGrid_tendsto_full') },
     @{ module = 'HVRPrimeRightCompactSupport'; deps = @('HVRPrimeRightQuadrature'); names = @('HVRPrimeRightCompactSupport.exists_grid_support_radius', 'HVRPrimeRightCompactSupport.exists_compact_right_grid_limit') },
     @{ module = 'HVRPrimeGridSwapDirect'; deps = @('HVRPrimeFiniteFrequencyDirect', 'HVRPrimeLeftFull', 'HVRPrimeRightCompactSupport'); names = @('HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_support_interval', 'HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_compact_support') },
-    @{ module = 'HVR_PrimeBoundary_EventualAbelGlue'; deps = @('HVR_PrimeDensity_FubiniIntegrable', 'HVR_PrimeBoundary_EventualDomination', 'HVR_PrimeDensity_SpatialAbel', 'HVRPrimeGridSwapDirect'); names = @('HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support', 'HVRPrimeBoundaryEventualAbelGlue.undamped_eq_ordinaryBoundary_of_compact_support') },
+    @{ module = 'HVR_PrimeBoundary_EventualAbelGlue'; deps = @('HVR_PrimeDensity_FubiniIntegrable', 'HVR_PrimeBoundary_EventualDomination', 'HVR_PrimeDensity_SpatialAbel', 'HVRPrimeGridSwapDirect', 'NativeDominatedLimit'); names = @('HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support', 'HVRPrimeBoundaryEventualAbelGlue.undamped_eq_ordinaryBoundary_of_compact_support') },
     @{ module = 'HVR_PrimeBoundary_CompactGlue'; deps = @('HVR_PrimeBoundary_FrequencyMeasurable', 'HVR_PrimeBoundary_EventualAbelGlue'); names = @('HVRPrimeBoundaryCompactGlue.undamped_eq_ordinaryBoundary_of_compact', 'HVRPrimeBoundaryCompactGlue.undamped_tendsto_zero_of_compact') },
     @{ module = 'HVROrdinarySeed'; deps = @('HVR_Smoothing_FrequencySeed'); names = @('HVROrdinarySeed.complexSeed_compact', 'HVROrdinarySeed.complexSeed_smooth') },
     @{ module = 'HVRAnalyticPhaseBasics'; deps = @(); names = @('HVRAnalyticPhaseBasics.phase_symm', 'HVRAnalyticPhaseBasics.phase_frequency_lipschitz', 'HVRAnalyticPhaseBasics.phase_mul_integrable', 'HVRAnalyticPhaseBasics.integral_phase_frequency_lipschitz') },
@@ -630,6 +630,31 @@ try {
       if ($complete) { $cacheEv = $candidateDir.FullName; break }
     }
   }
+  # Prefer recent successful runs in this package, with matching compiler and Mathlib context.
+  $samePackageCache = $false
+  $currentProvenance = Get-Content -LiteralPath (Join-Path $ev 'provenance.txt') -Encoding UTF8
+  $contextRows = @($currentProvenance | Where-Object { $_ -match '^(COMPILER_SHA256|MATHLIB_ROOT|MATHLIB_WITNESS_SHA256)=' })
+  $currentDepsPath = (@($pathList | Select-Object -Skip 1) -join ';')
+  foreach ($dir in @(Get-ChildItem -LiteralPath (Join-Path $pkg 'evidence') -Directory | Sort-Object Name -Descending)) {
+    if ($dir.FullName -ieq $ev) { continue }
+    $candidateResult = Join-Path $dir.FullName 'result.txt'
+    $candidateProv = Join-Path $dir.FullName 'provenance.txt'
+    $candidatePaths = Join-Path $dir.FullName 'lean-path.txt'
+    if (-not ((Test-Path -LiteralPath $candidateResult -PathType Leaf) -and
+              (Test-Path -LiteralPath $candidateProv -PathType Leaf) -and
+              (Test-Path -LiteralPath $candidatePaths -PathType Leaf))) { continue }
+    $resultRows = @(Get-Content -LiteralPath $candidateResult -Encoding UTF8)
+    if ('RESULT=PASS' -notin $resultRows -or 'THETA_ROOT_BUILD_AND_NAMED_AXIOM_AUDIT=PASS' -notin $resultRows) { continue }
+    $provenanceRows = @(Get-Content -LiteralPath $candidateProv -Encoding UTF8)
+    if ('CACHE_SCHEMA=HVR_OBJECT_SET_V1' -notin $provenanceRows) { continue }
+    if (@($contextRows | Where-Object { $_ -notin $provenanceRows }).Count -ne 0) { continue }
+    $previousDepsPath = (@(Get-Content -LiteralPath $candidatePaths -Encoding UTF8 | Select-Object -Skip 1) -join ';')
+    if ($previousDepsPath -ine $currentDepsPath) { continue }
+    $cacheEv = $dir.FullName
+    $samePackageCache = $true
+    break
+  }
+  Add-Content -LiteralPath (Join-Path $ev 'provenance.txt') -Value 'CACHE_SCHEMA=HVR_OBJECT_SET_V1'
   Write-Host "CACHE_SOURCE=$cacheEv"
   $cacheMeta = @{}
   $cacheOk = $false
@@ -693,6 +718,10 @@ try {
     'HVR_PrimeDensity_ScaledConditionalEndpoint',
     'HVR_PhysicalKernel_ScaledRepresentation', 'HVR_PrimeDensity_ScaledPhysicalDecay',
     'HVR_PrimeDensity_IndicatorIntegral', 'HVR_PrimeDensity_ReflectedPhysicalDecay')
+  if ($samePackageCache) { $priorPassed = @($plan | ForEach-Object { $_.module }) }
+  $objectExtensions = @('.olean','.olean.private','.olean.server','.ir','.ilean')
+  $cacheHits = @{}
+  $objectHashes = @{}
   $state = @{}
   $allOk = $true
   foreach ($entry in $plan) {
@@ -710,39 +739,62 @@ try {
     $reused = $false
     if ($cacheOk -and $module -in $priorPassed) {
       try {
-        $oldObject = Join-Path (Join-Path $cacheEv 'olean') ($module + '.olean')
+        $oldDir = Join-Path $cacheEv 'olean'
         $expectedSource = $cacheMeta["SOURCE_${module}_SHA256"]
         $expectedObject = $cacheMeta["OBJECT_${module}_SHA256"]
         $depsMatch = $true
         foreach ($dep in $entry.deps) {
-          $depPath = Join-Path $ol ($dep + '.olean')
+          # A cache hit certifies the entire upstream object set by induction.
+          if (-not $cacheHits[$dep]) { $depsMatch = $false; break }
           $expectedDep = $cacheMeta["OBJECT_${dep}_SHA256"]
-          if ([string]::IsNullOrWhiteSpace($expectedDep) -or -not (Test-Path -LiteralPath $depPath -PathType Leaf)) { $depsMatch = $false; break }
-          $actualDep = (Get-FileHash -LiteralPath $depPath -Algorithm SHA256).Hash
-          if ($actualDep -ine $expectedDep) { $depsMatch = $false; break }
+          if ($objectHashes[$dep] -ine $expectedDep) { $depsMatch = $false; break }
         }
-        if ($depsMatch -and -not [string]::IsNullOrWhiteSpace($expectedSource) -and
-            -not [string]::IsNullOrWhiteSpace($expectedObject) -and
-            $hash -ieq $expectedSource -and (Test-Path -LiteralPath $oldObject -PathType Leaf)) {
-          $oldHash = (Get-FileHash -LiteralPath $oldObject -Algorithm SHA256).Hash
-          if ($oldHash -ieq $expectedObject) {
-            Copy-Item -LiteralPath $oldObject -Destination $object
-            $copyHash = (Get-FileHash -LiteralPath $object -Algorithm SHA256).Hash
-            if ($copyHash -ieq $expectedObject) { $reused = $true }
+        if ($depsMatch -and $hash -ieq $expectedSource -and
+            $expectedObject -match '^[0-9a-fA-F]{64}$' -and
+            $cacheMeta['CACHE_SCHEMA'] -eq 'HVR_OBJECT_SET_V1') {
+          # Each present companion MUST match its recorded hash. Absence is explicitly recorded.
+          foreach ($ext in $objectExtensions) {
+            $key = if ($ext -eq '.olean') { "OBJECT_${module}_SHA256" } else { "COMPANION_${module}${ext}_SHA256" }
+            $expected = $cacheMeta[$key]
+            $oldPart = Join-Path $oldDir ($module + $ext)
+            if ($expected -eq 'ABSENT' -and $ext -ne '.olean') {
+              if (Test-Path -LiteralPath $oldPart) { throw "Unexpected companion: $oldPart" }
+              continue
+            }
+            if ($expected -notmatch '^[0-9a-fA-F]{64}$' -or -not (Test-Path -LiteralPath $oldPart -PathType Leaf)) {
+              throw "Missing digest or object: $key"
+            }
+            $destPart = Join-Path $ol ($module + $ext)
+            Copy-Item -LiteralPath $oldPart -Destination $destPart
+            if ((Get-FileHash -LiteralPath $destPart -Algorithm SHA256).Hash -ine $expected) {
+              throw "Object digest mismatch: $key"
+            }
           }
+          $reused = $true
         }
       } catch { Write-Host "CACHE_REUSE_ERROR=$module FALLBACK=REBUILD" }
     }
     if ($reused) { Write-Host "CACHE_REUSE=$module FRESH_AUDIT_PENDING" }
     else {
       Write-Host "CACHE_MISS=$module BUILD_FROM_SOURCE"
-      if (Test-Path -LiteralPath $object -PathType Leaf) { Remove-Item -LiteralPath $object -Force }
+      foreach ($ext in $objectExtensions) {
+        $part = Join-Path $ol ($module + $ext)
+        if (Test-Path -LiteralPath $part -PathType Leaf) { Remove-Item -LiteralPath $part -Force }
+      }
       $ok = Invoke-Lean @('-o', $object, ($module + '.lean')) ('build_' + $module)
       if (-not $ok -or -not (Test-Path -LiteralPath $object -PathType Leaf)) { $state[$module] = 'FAIL'; $allOk = $false; continue }
+    }
+    $cacheHits[$module] = $reused
+    foreach ($ext in $objectExtensions) {
+      if ($ext -eq '.olean') { continue }
+      $part = Join-Path $ol ($module + $ext)
+      $partHash = if (Test-Path -LiteralPath $part -PathType Leaf) { (Get-FileHash -LiteralPath $part -Algorithm SHA256).Hash.ToLowerInvariant() } else { 'ABSENT' }
+      Add-Content -LiteralPath (Join-Path $ev 'provenance.txt') -Value "COMPANION_${module}${ext}_SHA256=$partHash"
     }
     $state[$module] = 'PASS'
     $hash = (Get-FileHash -LiteralPath $object -Algorithm SHA256).Hash.ToLowerInvariant()
     Add-Content -LiteralPath (Join-Path $ev 'provenance.txt') -Value "OBJECT_${module}_SHA256=$hash"
+    $objectHashes[$module] = $hash
   }
   foreach ($entry in $plan) {
     $module = $entry.module
@@ -798,6 +850,11 @@ try {
     } else { Write-Host 'FINAL_ROOT_TRACE=BLOCKED_ROOT_NOT_BUILT' }
   }
   if (-not $allOk) { Fail 'One_or_more_build_or_audit_stages_failed' }
+  $traceOk = Invoke-Lean @('HVR_CallReduction_DependencyTrace.lean') 'call_reduction_trace'
+  if (-not $traceOk) { Fail 'Call_reduction_trace_process_failed' }
+  $traceLog = Join-Path $ev 'call_reduction_trace.stdout.log'
+  if (-not (Select-String -LiteralPath $traceLog -Pattern '^CALL_REDUCTION_TRACE=COMPLETE$' -Quiet)) { Fail 'Call_reduction_trace_incomplete' }
+  Write-Host 'CALL_REDUCTION_TRACE=COMPLETE'
   @('RESULT=PASS', 'SCOPE=THETA_RATIO_ROOT', 'THETA_ROOT_BUILD_AND_NAMED_AXIOM_AUDIT=PASS', 'DEPENDENCY_INDEPENDENCE=NOT_YET_VERIFIED', 'PNT=THETA_ROOT_PASS_REVIEW_PENDING', 'AXIOM_AUDIT=STANDARD_ONLY', 'MATHLIB_CACHE_PROVENANCE=USER_SUPPLIED_NOT_INDEPENDENTLY_VERIFIED') |
     Set-Content -LiteralPath (Join-Path $ev 'result.txt') -Encoding UTF8
   Write-Host 'RESULT=PASS'

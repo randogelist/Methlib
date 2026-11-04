@@ -4,13 +4,10 @@ import Mathlib.Analysis.Complex.CauchyIntegral
 import Mathlib.Tactic
 
 /-!
-Candidate local zeta logarithmic-derivative asymptotic from a regularized
-analytic factor. The proof uses the native candidate eventual logarithmic-derivative
-factorization and Mathlib's regularized function, its value and derivative
-at one. The exact source remains an unverified candidate until this modified
-composition passes a matching external compiler and axiom audit. These
-regularized-factor ingredients remain Mathlib dependencies; transitive
-independence from the selected endpoint has not been established.
+The logarithmic derivative near the pole, using the derivative of the
+multiplicative regularization and the value of the additive regularization
+at one. The latter is definitional. The differentiability of the additive
+regularization enters upstream in `regularized_hasDerivAt`.
 -/
 
 noncomputable section
@@ -20,22 +17,27 @@ open scoped Topology
 
 namespace HVRNativeZetaPoleLittleO
 
+open HVRNativeZetaPoleEquality
+
 /-- The logarithmic derivative of the regularized factor tends to the
 Euler--Mascheroni constant at the pole. -/
 theorem regularized_log_derivative_tendsto :
     Tendsto (fun s : ℂ => deriv riemannZeta₁ s / riemannZeta₁ s)
       (𝓝[≠] (1 : ℂ)) (𝓝 (Real.eulerMascheroniConstant : ℂ)) := by
   have hnum : ContinuousAt (fun s : ℂ => deriv riemannZeta₁ s) (1 : ℂ) :=
-    differentiable_riemannZeta₁.deriv.continuous.continuousAt
+    regularized_differentiable.deriv.continuous.continuousAt
   have hden : ContinuousAt riemannZeta₁ (1 : ℂ) :=
-    differentiable_riemannZeta₁.continuous.continuousAt
-  have hne : riemannZeta₁ (1 : ℂ) ≠ 0 := by simp
+    regularized_differentiable.continuous.continuousAt
+  have hne : riemannZeta₁ (1 : ℂ) ≠ 0 := regularized_value_one.trans_ne one_ne_zero
   have hc := hnum.div hden hne
   have ht : Tendsto (fun s : ℂ => deriv riemannZeta₁ s / riemannZeta₁ s)
       (𝓝[≠] (1 : ℂ))
       (𝓝 (deriv riemannZeta₁ (1 : ℂ) / riemannZeta₁ (1 : ℂ))) :=
     hc.tendsto.mono_left nhdsWithin_le_nhds
-  simpa only [deriv_riemannZeta₁_one, riemannZeta₁_one, div_one] using ht
+  have hder : deriv riemannZeta₁ 1 = (Real.eulerMascheroniConstant : ℂ) := by
+    simpa only [sub_self, zero_mul, add_zero, riemannZeta₀, if_pos rfl] using
+      (regularized_hasDerivAt 1).deriv
+  simpa only [hder, regularized_value_one, div_one] using ht
 
 /-- At the actual zeta pole, the regularized logarithmic derivative minus
 Euler's constant is little-o of the constant one. -/

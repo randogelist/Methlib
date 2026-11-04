@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "cb5cfb4453da4f68d1c6cacd80c6f6cf02b73dcd7fd4e3998a3ad24b83f3c027  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          echo "868cc33df1ca66854395aff89bc73832d188e9f747c4d915ed85a115fac8444d  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
           (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib
@@ -238,6 +238,17 @@ jobs:
           grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVROrdinarySeedWave.ordinaryWave|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >/dev/null
           grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPhysicalKernelSpectralIdentity.fourierInv_correlation_eq_rawKernel|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Trace candidate PNT dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/HVR_CallReduction_DependencyTrace.lean" | tee "$HVR_EVIDENCE/call_reduction_trace.stdout.log"
+          grep -Fx 'CALL_REDUCTION_TRACE=COMPLETE' "$HVR_EVIDENCE/call_reduction_trace.stdout.log" >/dev/null
 
       - name: Upload evidence
         if: always()

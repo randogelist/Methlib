@@ -32,15 +32,17 @@ theorem vonMangoldt_coefficient_split (n : ℕ) :
 /-- No higher correction occurs at a prime. -/
 theorem higherCoefficient_eq_zero_of_prime {p : ℕ} (hp : Nat.Prime p) :
     higherCoefficient p = 0 := by
-  simp [higherCoefficient, primeCoefficient, hp, ArithmeticFunction.vonMangoldt_apply_prime hp]
+  simp only [higherCoefficient, primeCoefficient, if_pos hp,
+    HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native hp, sub_self]
 
 /-- Outside prime powers the higher correction vanishes. -/
 theorem higherCoefficient_eq_zero_of_not_prime_pow {n : ℕ}
     (hn : ¬ IsPrimePow n) : higherCoefficient n = 0 := by
   have hnprime : ¬ Nat.Prime n := fun hp => hn hp.isPrimePow
-  have hzero : ArithmeticFunction.vonMangoldt n = 0 :=
-    ArithmeticFunction.vonMangoldt_eq_zero_iff.mpr hn
-  simp [higherCoefficient, primeCoefficient, hnprime, hzero]
+  have hzero : ArithmeticFunction.vonMangoldt n = 0 := by
+    change (if IsPrimePow n then Real.log (Nat.minFac n) else 0) = 0
+    exact if_neg hn
+  simp only [higherCoefficient, primeCoefficient, if_neg hnprime, hzero, sub_self]
 
 /-- Nonzero higher coefficients are supported on composite prime powers. -/
 theorem higherCoefficient_support {n : ℕ} (hn : higherCoefficient n ≠ 0) :
@@ -53,9 +55,9 @@ theorem higherCoefficient_support {n : ℕ} (hn : higherCoefficient n ≠ 0) :
 
 /-- The von Mangoldt coefficient at a positive power of a prime. -/
 theorem vonMangoldt_at_prime_pow {p k : ℕ} (hp : Nat.Prime p) (hk : k ≠ 0) :
-    ArithmeticFunction.vonMangoldt (p ^ k) = Real.log (p : ℝ) := by
-  rw [ArithmeticFunction.vonMangoldt_apply_pow hk,
-    ArithmeticFunction.vonMangoldt_apply_prime hp]
+    ArithmeticFunction.vonMangoldt (p ^ k) = Real.log (p : ℝ) :=
+  (HVRNativeMangoldtPow.vonMangoldt_apply_pow_native (n := p) hk).trans
+    (HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native hp)
 
 /-- The actual zeta log-derivative bridge on Re(s) > 1. The proof is the
 reconstructed theorem. It does not by itself split off the prime series. -/

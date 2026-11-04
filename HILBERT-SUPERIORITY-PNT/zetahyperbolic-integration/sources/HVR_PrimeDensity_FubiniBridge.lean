@@ -63,7 +63,9 @@ theorem abel_smoothing_eq_frequency_integral (ψ : ℝ → ℂ) (a x : ℝ)
       unfold kernel mixed
       rw [integral_const_mul]
     _ = ∫ t : ℝ, ∫ u : ℝ in Set.Ioi 0, mixed ψ a x u t := by
-      exact integral_integral_swap hpair
+      let f : ℝ × ℝ → ℂ := fun p => mixed ψ a x p.1 p.2
+      exact (MeasureTheory.integral_prod f hpair).symm.trans
+        (MeasureTheory.integral_prod_symm f hpair)
     _ = ∫ t : ℝ, (ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) *
         primeDensityLaplace ((a : ℂ) + (t : ℂ) * Complex.I) := by
       apply integral_congr_ae

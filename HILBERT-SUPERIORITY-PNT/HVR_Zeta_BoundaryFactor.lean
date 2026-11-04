@@ -1,5 +1,6 @@
 import HVR_Zeta_CorrectionIdentity
 import IntegratedZetaNonzero
+import NativeZetaPoleEquality
 import Mathlib.Analysis.Analytic.Order
 
 noncomputable section
@@ -39,9 +40,7 @@ theorem zeta_boundary_local_factor (s : ℂ) (hsre : s.re = 1) (hsne : s ≠ 1) 
     ∃ g : ℂ → ℂ, AnalyticAt ℂ g s ∧ g s ≠ 0 ∧
       riemannZeta =ᶠ[nhds s] fun z =>
         (z - s) ^ (analyticOrderNatAt riemannZeta s) * g z := by
-  have ha : AnalyticAt ℂ riemannZeta s := by
-    apply analyticOn_riemannZeta
-    simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using hsne
+  have ha : AnalyticAt ℂ riemannZeta s := HVRNativeZetaPoleEquality.zeta_analyticAt hsne
   obtain ⟨g, hg, hgn, hfac⟩ :=
     ha.analyticOrderAt_ne_top.mp (zeta_boundary_finite_order s hsre)
   refine ⟨g, hg, hgn, ?_⟩

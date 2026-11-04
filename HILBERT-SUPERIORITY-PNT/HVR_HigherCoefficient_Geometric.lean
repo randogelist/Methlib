@@ -55,6 +55,27 @@ theorem higher_lseries_term_prime_power {p : ℕ} (hp : Nat.Prime p)
     simp only [higherCoefficientC, higherCoefficient_prime_power hp]]
   rw [cpow_prime_power_eq_ratio hp]
 
+open Filter in
+open scoped Topology in
+/-- Evaluation of the complex geometric sum from its finite sums and the
+summable real norm majorant. Adapted from Mathlib/Analysis/SpecificLimits/Normed.lean,
+copyright (c) 2020 Sébastien Gouëzel, Apache License 2.0. -/
+theorem complex_geometric_hasSum {q : ℂ} (hq : ‖q‖ < 1) :
+    HasSum (fun k : ℕ => q ^ k) (1 - q)⁻¹ := by
+  have hne : q ≠ 1 := by
+    intro heq
+    simpa [heq] using hq
+  have hmajorant : Summable (fun k : ℕ => ‖q ^ k‖) := by
+    simpa only [norm_pow] using (summable_geometric_of_lt_one (norm_nonneg q) hq)
+  have hsum : Summable (fun k : ℕ => q ^ k) :=
+    HVRNativeSeriesInfrastructure.complex_summable_of_majorant hmajorant (fun _ => le_rfl)
+  have hlim : Tendsto (fun k : ℕ => (q ^ k - 1) * (q - 1)⁻¹) atTop
+      (𝓝 ((0 - 1) * (q - 1)⁻¹)) :=
+    (hsum.tendsto_atTop_zero.sub tendsto_const_nhds).mul tendsto_const_nhds
+  rw [hasSum_iff_tendsto_nat_of_summable_norm]
+  · simpa [geom_sum_eq, hne, neg_inv, div_eq_mul_inv] using hlim
+  · exact hmajorant
+
 /-- Each prime-power tail is the geometric correction at that prime. -/
 theorem correction_prime_power_hasSum {p : ℕ} (hp : Nat.Prime p)
     (sigma t : ℝ) (hsigma : 1 < sigma) :
@@ -67,8 +88,8 @@ theorem correction_prime_power_hasSum {p : ℕ} (hp : Nat.Prime p)
     have hle := ratio_le_two sigma hsigma' hp
     have hpos := denominator_uniform_pos sigma hsigma'
     linarith
-  have hgeom := hasSum_geometric_of_norm_lt_one hsmall
-  have hscaled := hgeom.mul_left
+  have hgeom := complex_geometric_hasSum hsmall
+  have hscaled := HVRNativeSeriesInfrastructure.hasSum_scale hgeom
     ((Real.log (p : ℝ) : ℂ) * (complexRatio p (zetaPoint sigma t)) ^ 2)
   have hfun :
       (fun k : ℕ => LSeries.term higherCoefficientC (zetaPoint sigma t)
@@ -86,6 +107,6 @@ theorem correction_prime_power_tsum {p : ℕ} (hp : Nat.Prime p)
     (sigma t : ℝ) (hsigma : 1 < sigma) :
     (∑' k : ℕ, LSeries.term higherCoefficientC (zetaPoint sigma t)
       (p ^ (k + 2))) = complexCorrectionTerm p (zetaPoint sigma t) :=
-  (correction_prime_power_hasSum hp sigma t hsigma).tsum_eq
+  HVRNativeSeriesInfrastructure.hasSum_identifies_tsum (correction_prime_power_hasSum hp sigma t hsigma)
 
 end HVRHigherCoefficientGeometric

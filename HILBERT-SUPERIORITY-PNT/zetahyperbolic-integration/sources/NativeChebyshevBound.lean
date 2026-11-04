@@ -1,32 +1,60 @@
+import Mathlib.Data.Nat.Choose.Dvd
 import Mathlib.NumberTheory.Chebyshev
 import Mathlib.Tactic
 
 /-!
-Candidate native derivation of the exact Chebyshev upper bound.
+Finite-product proof of the elementary bound on Chebyshev's theta function.
+The odd binomial row bounds its equal middle coefficients using their sum.
+Primes in the upper interval divide the binomial coefficient and therefore
+bound the ratio of the two primorials.
 
-No local Lean execution or theorem-level axiom audit has been performed for
-this file.  In particular, this is not yet an A-tier result.
-
-The proof DOES NOT invoke `Chebyshev.theta_le_log4_mul_x` or a PNT endpoint.
-It does use Mathlib's elementary primorial/central-binomial building blocks
-`primorial_add_le`, `primorial_succ`, `Nat.choose_middle_le_pow`, and
-`Chebyshev.theta_eq_log_primorial`.  The source-level dependencies of those
-building blocks must still be checked recursively before claiming independence
-from the target or other prohibited results.  This is not an all-native
-construction from elementary prime factorization and is not a Mathlib-free
-proof.
-
-The primorial induction follows the elementary central-binomial argument also
-used by Mathlib's `Mathlib/NumberTheory/Primorial.lean`; see that file and its
-Apache-2.0 copyright notice for attribution.  Mathlib revision intended for
-the eventual external run: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0.
+Portions adapted from Mathlib4, revision
+fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0, under Apache-2.0:
+* NumberTheory/Primorial.lean, copyright 2020 Patrick Stevens (authors
+  Patrick Stevens, Yury Kudryashov, Bhavik Mehta);
+* NumberTheory/Chebyshev.lean, copyright 2025 Alastair Irving (authors
+  Alastair Irving, Terry Tao, Ruben Van de Velde).
+See LICENSE-MATHLIB.txt.
 -/
 
 noncomputable section
 
 namespace HVRNativeChebyshevBound
 
-/-- A candidate central-binomial proof for the elementary primorial bound. -/
+open Finset Nat
+
+private theorem interval_prime_product_bound {m n : ℕ} (hnm : n ≤ m) :
+    primorial (m + n) ≤ primorial m * (m + n).choose m := by
+  let block := (Ico (m + 1) (m + n + 1)).filter Nat.Prime
+  have hsplit : primorial (m + n) = primorial m * ∏ p ∈ block, p := by
+    dsimp only [block]
+    simp_rw [primorial, ← Ico_zero_eq_range]
+    rw [← prod_union, ← filter_union, Ico_union_Ico_eq_Ico]
+    exacts [Nat.zero_le _, by omega, disjoint_filter_filter <| Ico_disjoint_Ico_consecutive _ _ _]
+  have hd : (∏ p ∈ block, p) ∣ (m + n).choose m := by
+    refine prod_primes_dvd _ (fun _ hp => (mem_filter.1 hp).2.prime) ?_
+    intro p hp
+    change p ∈ (Ico (m + 1) (m + n + 1)).filter Nat.Prime at hp
+    rw [mem_filter, mem_Ico] at hp
+    exact hp.2.dvd_choose_add hp.1.1 (hnm.trans_lt (m.lt_succ_self.trans_le hp.1.1))
+      (Nat.lt_succ_iff.1 hp.1.2)
+  rw [hsplit]
+  exact Nat.mul_le_mul_left _ (Nat.le_of_dvd (Nat.choose_pos (Nat.le_add_right _ _)) hd)
+
+private theorem odd_middle_bound (m : ℕ) : (2 * m + 1).choose m ≤ 4 ^ m := by
+  have hp : (2 * m + 1).choose m + (2 * m + 1).choose (m + 1) ≤
+      ∑ j ∈ range ((2 * m + 1) + 1), (2 * m + 1).choose j :=
+    Finset.add_le_sum (s := range ((2 * m + 1) + 1)) (i := m) (j := m + 1)
+      (f := fun j => (2 * m + 1).choose j) (fun _ _ => Nat.zero_le _)
+      (mem_range.mpr (by omega)) (mem_range.mpr (by omega)) (by omega)
+  have hsym : (2 * m + 1).choose (m + 1) = (2 * m + 1).choose m :=
+    Nat.choose_symm_of_eq_add (by omega)
+  have hpow : (2 : ℕ) ^ (2 * m + 1) = 2 * 4 ^ m := by
+    rw [pow_succ, pow_mul, mul_comm] <;> rfl
+  rw [hsym, Nat.sum_range_choose, hpow] at hp
+  omega
+
+/-- Elementary primorial bound from prime divisibility and a finite binomial row. -/
 theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
     primorial n < 4 ^ n := by
   induction n using Nat.strong_induction_on with
@@ -43,11 +71,11 @@ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
             ih (m + 1) (by omega) (by omega)
           have hsplit : primorial ((m + 1) + m) ≤
               primorial (m + 1) * Nat.choose ((m + 1) + m) (m + 1) :=
-            primorial_add_le (by omega)
+            interval_prime_product_bound (by omega)
           have hindex : (m + 1) + m = 2 * m + 1 := by omega
-          rw [hindex, Nat.choose_symm_half] at hsplit
+          rw [Nat.choose_symm_add, hindex] at hsplit
           have hmiddle : Nat.choose (2 * m + 1) m ≤ 4 ^ m :=
-            Nat.choose_middle_le_pow m
+            odd_middle_bound m
           have hproduct : primorial (2 * m + 1) <
               4 ^ (m + 1) * 4 ^ m :=
             lt_of_le_of_lt hsplit
@@ -66,8 +94,10 @@ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
             simp at hkodd
           have hprior : primorial k < 4 ^ k :=
             ih k (Nat.lt_succ_self k) hk0
-          have heq : primorial (k + 1) = primorial k :=
-            primorial_succ hk1 hkodd
+          have heq : primorial (k + 1) = primorial k := by
+            refine prod_congr ?_ fun _ _ => rfl
+            rw [range_add_one, filter_insert, ite_eq_right fun h => not_even_iff_odd.2 hkodd _]
+            exact fun h => h.even_sub_one <| mt Nat.succ.inj hk1
           have hpow : 4 ^ k ≤ 4 ^ (k + 1) :=
             Nat.pow_le_pow_right (by decide) (Nat.le_succ k)
           simpa only [Nat.succ_eq_add_one, heq] using lt_of_lt_of_le hprior hpow
@@ -78,14 +108,21 @@ theorem primorial_le_four_pow_native (n : ℕ) : primorial n ≤ 4 ^ n := by
     decide
   · exact (primorial_lt_four_pow_native n hn).le
 
-/-- Exact theta upper bound, via the candidate central-binomial induction. -/
+/-- Exact theta upper bound from the finite prime product. -/
 theorem theta_le_log4_mul_x_native {x : ℝ} (hx : 0 ≤ x) :
     Chebyshev.theta x ≤ Real.log 4 * x := by
-  rw [Chebyshev.theta_eq_log_primorial]
+  have htheta : Chebyshev.theta x = Real.log (primorial ⌊x⌋₊ : ℝ) := by
+    unfold Chebyshev.theta primorial
+    rw [Nat.cast_prod, Real.log_prod (fun p hp => mod_cast (mem_filter.mp hp).2.pos.ne')]
+    congr 1 with p
+    simp_all [Nat.Prime.pos]
+  rw [htheta]
   calc
     Real.log (primorial ⌊x⌋₊ : ℝ) ≤ Real.log ((4 : ℝ) ^ ⌊x⌋₊) := by
       apply Real.log_le_log
-      · exact_mod_cast primorial_pos ⌊x⌋₊
+      · have hp : 0 < primorial ⌊x⌋₊ :=
+          prod_pos (fun _ h => (mem_filter.1 h).2.pos)
+        exact_mod_cast hp
       · exact_mod_cast primorial_le_four_pow_native ⌊x⌋₊
     _ = Real.log 4 * (⌊x⌋₊ : ℝ) := by rw [Real.log_pow]; ring
     _ ≤ Real.log 4 * x := by

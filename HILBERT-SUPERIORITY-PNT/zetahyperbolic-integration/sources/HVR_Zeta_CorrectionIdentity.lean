@@ -21,7 +21,9 @@ theorem higher_lseries_eq_complexCorrection (sigma t : ℝ) (hsigma : 1 < sigma)
     complexCorrection_eq_prime_tsum]
   apply tsum_congr
   intro p
-  exact (HVRSnditerationPrimePowerTail.higher_prime_power_hasSum p.property (zetaPoint sigma t) (by simp [zetaPoint]; linarith)).tsum_eq
+  exact HVRNativeSeriesInfrastructure.hasSum_identifies_tsum
+    (HVRSnditerationPrimePowerTail.higher_prime_power_hasSum p.property
+      (zetaPoint sigma t) (by simp [zetaPoint]; linarith))
 
 theorem zeta_log_deriv_eq_primeSeries_add_complexCorrection
     (sigma t : ℝ) (hsigma : 1 < sigma) :

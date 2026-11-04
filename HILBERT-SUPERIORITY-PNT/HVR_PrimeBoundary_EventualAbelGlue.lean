@@ -2,6 +2,7 @@ import HVR_PrimeBoundary_EventualDomination
 import HVR_PrimeDensity_SpatialAbel
 import HVR_PrimeDensity_FubiniIntegrable
 import HVRPrimeGridSwapDirect
+import NativeDominatedLimit
 
 noncomputable section
 open Filter MeasureTheory
@@ -12,15 +13,21 @@ open HVRPrimeBoundaryOrdinaryFrequencyDecay HVRPrimeBoundaryEventualDomination
 open HVRPrimeDensityFubiniBridge HVRPrimeDensityFubiniIntegrable
 open HVRPrimeDensitySpatialAbel HVRSmoothingBoundaryExtension
 
-/-!
-Candidate improvement of the conditional Abel glue: compact frequency
-support supplies the eventual domination automatically, using the filter form
-of dominated convergence. Measurability of the frequency integrands and L1
-integrability of the inverse kernel remain explicit. Not locally compiled.
--/
+/-! Abel limits on compact frequency support via the uniform boundary estimate
+and the one-variable weighted integral error bound. -/
 namespace HVRPrimeBoundaryEventualAbelGlue
 
-/-- Compact support removes the common domination hypothesis. -/
+private def boundaryIntegrand (ψ : ℝ → ℂ) (x t : ℝ) : ℂ :=
+  (ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) *
+    patchedShift ((t : ℂ) * Complex.I)
+
+/-- Norm of the ordinary exponential frequency factor. -/
+private theorem norm_frequency_phase (t x : ℝ) :
+    ‖Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))‖ = 1 := by
+  rw [Complex.norm_exp]
+  simp [Complex.mul_re, Complex.mul_im]
+
+/-- Compact uniform convergence controls the integral error by the L¹ mass of ψ. -/
 theorem frequency_integral_tendsto_boundary_of_compact_support
     (ψ : ℝ → ℂ) (x : ℝ) (K : Set ℝ) (hK : IsCompact K)
     (hsupport : ∀ t : ℝ, ψ t ≠ 0 → t ∈ K)
@@ -29,28 +36,76 @@ theorem frequency_integral_tendsto_boundary_of_compact_support
       (frequencyIntegrand ψ x (boundaryEps n)) volume) :
     Tendsto (fun n : ℕ => ∫ t : ℝ, frequencyIntegrand ψ x (boundaryEps n) t)
       atTop (𝓝 (ordinaryBoundary ψ x)) := by
-  obtain ⟨C, hC⟩ := frequency_eventually_dominated_on_compact ψ x K hK hsupport
-  have hmajor : Integrable (fun t : ℝ => C * ‖ψ t‖) volume := hψ.norm.const_mul C
-  have hlim : ∀ᵐ t : ℝ ∂volume,
-      Tendsto (fun n : ℕ => frequencyIntegrand ψ x (boundaryEps n) t)
-        atTop (𝓝 ((ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) *
-          patchedShift ((t : ℂ) * Complex.I))) := by
+  change Tendsto _ atTop (𝓝 (∫ t : ℝ, boundaryIntegrand ψ x t))
+  have hw : Integrable (fun t : ℝ => ‖ψ t‖) volume := hψ.norm
+  have hW : 0 ≤ ∫ t : ℝ, ‖ψ t‖ := integral_nonneg fun t => norm_nonneg _
+  obtain ⟨B, hB⟩ := hK.exists_bound_of_continuousOn
+    patchedShift_continuous_boundary.continuousOn
+  have he : Continuous (fun t : ℝ => Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) := by
+    fun_prop
+  have hmeasG : AEStronglyMeasurable (boundaryIntegrand ψ x) volume := by
+    exact (hψ.aestronglyMeasurable.mul he.aestronglyMeasurable).mul
+      patchedShift_continuous_boundary.aestronglyMeasurable
+  have hmajorG : Integrable (fun t : ℝ => (|B| + 1) * ‖ψ t‖) volume :=
+    hw.const_mul (|B| + 1)
+  have hg : Integrable (boundaryIntegrand ψ x) volume := by
+    apply hmajorG.mono' hmeasG
     filter_upwards [] with t
-    have hcst : Tendsto (fun _ : ℕ =>
-        ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) atTop
-        (𝓝 (ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ)))) :=
-      tendsto_const_nhds
-    have h := hcst.mul (primeDensityLaplace_boundaryEps_tendsto t)
-    simpa only [frequencyIntegrand] using h
-  have hmeas' : ∀ᶠ n : ℕ in atTop, AEStronglyMeasurable
-      (frequencyIntegrand ψ x (boundaryEps n)) volume := Filter.Eventually.of_forall hmeas
-  have hdom : ∀ᶠ n : ℕ in atTop, ∀ᵐ t : ℝ ∂volume,
-      ‖frequencyIntegrand ψ x (boundaryEps n) t‖ ≤ C * ‖ψ t‖ := by
-    filter_upwards [hC] with n hn
-    exact Filter.Eventually.of_forall hn
-  have hc := tendsto_integral_filter_of_dominated_convergence
-    (fun t : ℝ => C * ‖ψ t‖) hmeas' hdom hmajor hlim
-  simpa only [ordinaryBoundary] using hc
+    by_cases ht : ψ t = 0
+    · simp [boundaryIntegrand, ht]
+    · have hBt : ‖patchedShift ((t : ℂ) * Complex.I)‖ ≤ |B| + 1 := by
+        have h0 := hB t (hsupport t ht)
+        linarith [le_abs_self B]
+      have hm := mul_le_mul_of_nonneg_left hBt (norm_nonneg (ψ t))
+      simp only [boundaryIntegrand, norm_mul, norm_frequency_phase, mul_one]
+      nlinarith
+  refine Metric.tendsto_nhds.mpr fun ε hε => ?_
+  let W : ℝ := ∫ t : ℝ, ‖ψ t‖
+  let η : ℝ := ε / (W + 1)
+  have hW' : 0 ≤ W := hW
+  have hden : 0 < W + 1 := by linarith
+  have hη : 0 < η := by dsimp [η]; exact div_pos hε hden
+  have hsmall : η * W < ε := by
+    dsimp [η]
+    rw [div_mul_eq_mul_div]
+    apply (div_lt_iff₀ hden).2
+    have hmul : ε * W < ε * (W + 1) :=
+      mul_lt_mul_of_pos_left (by linarith : W < W + 1) hε
+    nlinarith
+  obtain ⟨δ, hδ, huniform⟩ := primeDensityLaplace_uniform_on_compact K hK η hη
+  have heps : ∀ᶠ n : ℕ in atTop, boundaryEps n < δ :=
+    boundaryEps_tendsto.eventually (Iio_mem_nhds hδ)
+  obtain ⟨C, hdom⟩ := frequency_eventually_dominated_on_compact ψ x K hK hsupport
+  have hmajorF : Integrable (fun t : ℝ => C * ‖ψ t‖) volume := hw.const_mul C
+  filter_upwards [heps, hdom] with n hn hCn
+  have hnear (t : ℝ) (ht : t ∈ K) :
+      ‖primeDensityLaplace ((boundaryEps n : ℂ) + (t : ℂ) * Complex.I) -
+        patchedShift ((t : ℂ) * Complex.I)‖ < η := by
+    simpa only [dist_eq_norm] using
+      huniform (boundaryEps n) t (boundaryEps_pos n) hn ht
+  have hf : Integrable (frequencyIntegrand ψ x (boundaryEps n)) volume :=
+    hmajorF.mono' (hmeas n) (Filter.Eventually.of_forall hCn)
+  have hbound : ∀ᵐ t : ℝ ∂volume,
+      ‖frequencyIntegrand ψ x (boundaryEps n) t - boundaryIntegrand ψ x t‖ ≤
+        η * ‖ψ t‖ := by
+    filter_upwards [] with t
+    by_cases ht : ψ t = 0
+    · simp [frequencyIntegrand, boundaryIntegrand, ht]
+    · have hfactor : frequencyIntegrand ψ x (boundaryEps n) t - boundaryIntegrand ψ x t =
+          (ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) *
+          (primeDensityLaplace ((boundaryEps n : ℂ) + (t : ℂ) * Complex.I) -
+            patchedShift ((t : ℂ) * Complex.I)) := by
+        simp only [frequencyIntegrand, boundaryIntegrand]
+        ring
+      have hm := mul_le_mul_of_nonneg_left (le_of_lt (hnear t (hsupport t ht)))
+        (norm_nonneg (ψ t))
+      rw [hfactor, norm_mul, norm_mul, norm_frequency_phase, mul_one]
+      nlinarith
+  have herror := HVRNativeDominatedLimit.integral_error_le_weighted η hf hg hw hbound
+  have hfinal : ‖(∫ t : ℝ, frequencyIntegrand ψ x (boundaryEps n) t) -
+      (∫ t : ℝ, boundaryIntegrand ψ x t)‖ < ε :=
+    lt_of_le_of_lt herror hsmall
+  simpa only [dist_eq_norm] using hfinal
 
 /-- The undamped actual prime-error convolution is the boundary integral;
 measurability and integrability of the inverse kernel are still hypotheses. -/
