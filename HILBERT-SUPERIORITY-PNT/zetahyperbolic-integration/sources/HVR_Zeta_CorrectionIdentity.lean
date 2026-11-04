@@ -1,4 +1,4 @@
-import HVR_HigherCoefficient_Geometric
+import HVR_Snditeration_PrimePowerTail
 import HVR_Correction_PrimeSubtype
 
 noncomputable section
@@ -21,7 +21,7 @@ theorem higher_lseries_eq_complexCorrection (sigma t : ℝ) (hsigma : 1 < sigma)
     complexCorrection_eq_prime_tsum]
   apply tsum_congr
   intro p
-  exact correction_prime_power_tsum p.property sigma t hsigma
+  exact (HVRSnditerationPrimePowerTail.higher_prime_power_hasSum p.property (zetaPoint sigma t) (by simp [zetaPoint]; linarith)).tsum_eq
 
 theorem zeta_log_deriv_eq_primeSeries_add_complexCorrection
     (sigma t : ℝ) (hsigma : 1 < sigma) :

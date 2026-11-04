@@ -94,8 +94,21 @@
     "theorems": []
   },
   {
+    "module": "HVR_Snditeration_PrimePowerTail",
+    "theorems": [
+      "HVRSnditerationPrimePowerTail.prime_ratio_norm_lt_one",
+      "HVRSnditerationPrimePowerTail.higher_prime_power_hasSum",
+      "HVRSnditerationPrimePowerTail.mangoldt_term_prime_power",
+      "HVRSnditerationPrimePowerTail.mangoldt_prime_power_hasSum",
+      "HVRSnditerationPrimePowerTail.mangoldt_prime_power_tsum"
+    ]
+  },
+  {
     "module": "HVR_Zeta_CorrectionIdentity",
-    "theorems": []
+    "theorems": [
+      "HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection",
+      "HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection"
+    ]
   },
   {
     "module": "HVR_PrimeMellin_Modes",
@@ -466,6 +479,40 @@
       "HVRPrimeDensityFinalRoot.backwardDecomposition",
       "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
       "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
+    ]
+  },
+  {
+    "module": "HVRPrimeKernelTrace",
+    "theorems": [
+      "HVRPrimeKernelTrace.trace_shifted_eq_prime_kernel_sum",
+      "HVRPrimeKernelTrace.prime_gram_logDet_kernel_hasDerivAt"
+    ]
+  },
+  {
+    "module": "HVRTwoPrimeGram",
+    "theorems": [
+      "HVRTwoPrimeGram.evalFeature_two",
+      "HVRTwoPrimeGram.log_two_lt_log_three",
+      "HVRTwoPrimeGram.exists_nonzero_prime_node",
+      "HVRTwoPrimeGram.prime_two_mem",
+      "HVRTwoPrimeGram.prime_three_mem",
+      "HVRTwoPrimeGram.quadratic_pos",
+      "HVRTwoPrimeGram.gram_posDef",
+      "HVRTwoPrimeGram.gram_det_pos",
+      "HVRTwoPrimeGram.gram_logDet_hasDerivAt"
+    ]
+  },
+  {
+    "module": "HVRPrimeMomentDecay",
+    "theorems": [
+      "HVRPrimeMomentDecay.log_two_mul_mass_le_first_moment",
+      "HVRPrimeMomentDecay.log_mass_derivative_le_neg_log_two"
+    ]
+  },
+  {
+    "module": "HVRPrimeSndAssembly",
+    "theorems": [
+      "HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt"
     ]
   }
 ]

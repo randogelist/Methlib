@@ -1,3 +1,7 @@
+# New snditeration-derived candidate: external audit pending
+
+New declarations are candidates until the matching build and theorem-level axiom audit pass. Original results and references follow.
+
 # HVR–Zetahyperbolic integration candidate
 
 The package rebuilds the theta PNT root with the direct prime-mode Mellin

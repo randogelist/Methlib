@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 ROOTS = {
+    "snd": "HVRPrimeSndAssembly",
     "matrix": "HVRPrimeGramJacobiBridge",
     "frequency": "HVRZetaHyperbolicFiniteFrequency",
     "modes": "HVR_PrimeMellin_Modes",
