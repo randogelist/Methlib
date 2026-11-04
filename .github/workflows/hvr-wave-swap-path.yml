@@ -21,14 +21,14 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: ${{ github.repository }}
-          ref: 27b98f2336b1fb1836ab8d43ac3e7801fbb3
+          ref: 27b98f2336b1fb1836ab8d43ac3e7801fbb6bff3
           path: .ci-wave-source
           persist-credentials: false
       - name: Validate and select dependency-closed sources
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C "$GITHUB_WORKSPACE/.ci-wave-source" rev-parse HEAD)" = 27b98f2336b1fb1836ab8d43ac3e7801fbb3
+          test "$(git -C "$GITHUB_WORKSPACE/.ci-wave-source" rev-parse HEAD)" = 27b98f2336b1fb1836ab8d43ac3e7801fbb6bff3
           PKG="$GITHUB_WORKSPACE/.ci-wave-source/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
           python3 "$PKG/prepare_lane.py" --package "$PKG" --output "$RUNNER_TEMP/hvr-wave-swap-path" --lane fubini_fourier_candidate
       - name: Check out pinned Mathlib
