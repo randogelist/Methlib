@@ -1,4 +1,6 @@
 import HVR_Zeta_CorrectionIdentity
+import HVRComplexExpIntegralDirect
+import HVRExpIntegralGeneralDirect
 import Mathlib.NumberTheory.Chebyshev
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
@@ -37,7 +39,7 @@ theorem weighted_exponential_mode (s : ℂ) (a : ℝ) (c : ℂ) (hs : 0 < s.re) 
     (∫ u : ℝ in Set.Ioi a, c * Complex.exp (-s * (u : ℂ))) =
       c * Complex.exp (-s * (a : ℂ)) / s := by
   have hz : (-s).re < 0 := by simpa using neg_neg_of_pos hs
-  rw [integral_const_mul, integral_exp_mul_complex_Ioi hz]
+  rw [integral_const_mul, HVRExpIntegralGeneralDirect.complex_integral_exp_mul_Ioi hz]
   simp only [neg_div_neg_eq]
   ring
 
@@ -60,8 +62,12 @@ theorem primeMode_integrable (s : ℂ) (n : ℕ) (hs : 0 < s.re) :
   by_cases hp : Nat.Prime n
   · simp only [primeMode, hp, if_true]
     rw [integrable_indicator_iff measurableSet_Ioi]
-    have hz : (-s).re < 0 := by simpa using neg_neg_of_pos hs
-    exact (integrableOn_exp_mul_complex_Ioi hz (Real.log (n : ℝ))).const_mul _
+    have hn : (1 : ℝ) ≤ n := by exact_mod_cast hp.one_le
+    have hlog : 0 ≤ Real.log (n : ℝ) := Real.log_nonneg hn
+    have hsubset : Set.Ioi (Real.log (n : ℝ)) ⊆ Set.Ioi (0 : ℝ) := by
+      intro u hu
+      exact lt_of_le_of_lt hlog hu
+    exact ((HVRComplexExpIntegralDirect.exponential_integrable_direct s hs).mono_set hsubset).const_mul _
   · simp [primeMode, hp]
 
 /-- The integrated norm is the existing prime weight divided by sigma. -/
@@ -90,7 +96,7 @@ theorem primeMode_integral_norm (sigma t : ℝ) (n : ℕ) (hsigma : 1 < sigma) :
           Real.log (n : ℝ) * Real.exp (-sigma * u) :=
         integral_indicator measurableSet_Ioi
       _ = HVRPrimeSummability.primeWeightSeries sigma n / sigma := by
-        rw [integral_const_mul, integral_exp_mul_Ioi hneg]
+        rw [integral_const_mul, HVRExpIntegralGeneralDirect.real_integral_exp_mul_Ioi hneg]
         simp only [neg_div_neg_eq, HVRPrimeSummability.primeWeightSeries, hp,
           if_true, HVRPrimeGram.primeWeight]
         ring

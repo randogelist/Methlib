@@ -1,22 +1,22 @@
-import HVRExpIntegralGeneralDirect
+import HVR_PrimeMellin_Modes
 import Mathlib.MeasureTheory.Integral.Prod
 import ImportGraph.Imports.RequiredModules
 import ImportGraph.Lean.Environment
-/-! Controlled dependency diagnostic; no semantic independence claimed. -/
+/-! Controlled mode dependency diagnostic; negative coverage is unverified. -/
 open Lean Elab Command
-namespace HVRExpTailTraceControls
+namespace HVRPrimeMellinModeSwapTraceControl
 def direct := @MeasureTheory.integral_integral_swap
 def indirect := @direct
-end HVRExpTailTraceControls
+end HVRPrimeMellinModeSwapTraceControl
 set_option maxHeartbeats 0 in
 run_cmd do
   let env ← getEnv
   let target := `MeasureTheory.integral_integral_swap
-  for root in #[`HVRExpTailTraceControls.direct, `HVRExpTailTraceControls.indirect] do
+  for root in #[`HVRPrimeMellinModeSwapTraceControl.direct, `HVRPrimeMellinModeSwapTraceControl.indirect] do
     let ds ← liftCoreM root.transitivelyUsedConstants
     unless ds.contains target do throwError "POSITIVE_CONTROL_MISSED={root}|{target}"
     IO.println s!"POSITIVE_CONTROL_DETECTED={root}|{target}"
-  for root in #[`HVRExpIntegralGeneralDirect.complex_exponential_integrable_tail, `HVRExpIntegralGeneralDirect.complex_integrable_exp_mul_Ioi, `HVRExpIntegralGeneralDirect.complex_integral_exp_mul_Ioi, `HVRExpIntegralGeneralDirect.real_integral_exp_mul_Ioi, `integrableOn_exp_mul_complex_Ioi, `integral_exp_mul_complex_Ioi] do
+  for root in #[`HVRPrimeMellinModes.weighted_exponential_mode, `HVRPrimeMellinModes.primeMode_integral, `HVRPrimeMellinModes.primeMode_integrable, `HVRPrimeMellinModes.primeMode_integral_norm, `HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion] do
     if (env.find? root).isNone then throwError "ROOT_UNKNOWN={root}"
     let ds ← liftCoreM root.transitivelyUsedConstants
     if ds.contains target then IO.println s!"TARGET_FOUND={root}|{target}"

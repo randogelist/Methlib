@@ -1,0 +1,5 @@
+import HVRExpIntegralGeneralDirect
+#print axioms HVRExpIntegralGeneralDirect.complex_exponential_integrable_tail
+#print axioms HVRExpIntegralGeneralDirect.complex_integrable_exp_mul_Ioi
+#print axioms HVRExpIntegralGeneralDirect.complex_integral_exp_mul_Ioi
+#print axioms HVRExpIntegralGeneralDirect.real_integral_exp_mul_Ioi

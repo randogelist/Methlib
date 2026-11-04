@@ -15,7 +15,6 @@ import sys
 from pathlib import Path
 
 ROOTS = {
-    "fubini_fourier_candidate": "HVRCompactCorrelationFourierSquare",
     "fubini_swap_candidate": "HVRPrimeGridSwapDirect",
     "fubini_bridge": "HVRPrimeFiniteFrequencyDirect",
     "fubini_right_candidate": "HVRPrimeRightCompactSupport",

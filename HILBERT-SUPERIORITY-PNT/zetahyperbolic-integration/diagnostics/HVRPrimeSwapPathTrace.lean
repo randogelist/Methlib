@@ -25,6 +25,9 @@ run_cmd do
     `HVRSpectralCorrelationRegularity.correlation_continuous,
     `HVRSpectralCorrelationRegularity.correlation_integrable,
     `Real.fourier_mul_convolution_eq,
+    `HVRPrimeMellinModes.weighted_exponential_mode,
+    `HVRPrimeMellinModes.primeMode_integral_norm,
+    `HVRPrimeMellinModes.primeMode_integrable,
     `HVRPrimeDensityBoundaryLink.primeDensityLaplace_eq_patchedShift,
     `HVRPrimeDensityLaplace.primeDensityLaplace_eq_regularPartAt,
     `HVRPrimeDensityLaplace.primeDensity_integrable]
