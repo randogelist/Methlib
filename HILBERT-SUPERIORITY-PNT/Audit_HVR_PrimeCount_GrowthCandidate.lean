@@ -1,5 +1,4 @@
 import HVR_PrimeCount_GrowthCandidate
-#print axioms HVRPrimeCountGrowth.primeTheta_eq_chebyshev
 #print axioms HVRPrimeCountGrowth.primeCoefficient_partial_sum_isBigO
 #print axioms HVRPrimeCountGrowth.primeSeries_eq_mul_primeThetaMellin_unconditional
 #print axioms HVRPrimeCountGrowth.zeta_log_deriv_eq_primeThetaMellin_add_correction_unconditional

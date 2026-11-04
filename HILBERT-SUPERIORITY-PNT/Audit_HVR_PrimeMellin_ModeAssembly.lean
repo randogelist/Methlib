@@ -1,0 +1,6 @@
+import HVR_PrimeMellin_ModeAssembly
+#print axioms HVRPrimeMellinModeAssembly.mem_primeCutoff_iff
+#print axioms HVRPrimeMellinModeAssembly.theta_exp_modes_pointwise
+#print axioms HVRPrimeMellinModeAssembly.theta_exp_modes_ae
+#print axioms HVRPrimeMellinModeAssembly.theta_exp_laplace_unconditional
+#print axioms HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes

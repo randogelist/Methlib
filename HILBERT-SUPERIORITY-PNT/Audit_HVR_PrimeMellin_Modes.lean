@@ -1,0 +1,9 @@
+import HVR_PrimeMellin_Modes
+#print axioms HVRPrimeMellinModes.weighted_exponential_mode
+#print axioms HVRPrimeMellinModes.primeMode_integral
+#print axioms HVRPrimeMellinModes.primeMode_integrable
+#print axioms HVRPrimeMellinModes.primeMode_integral_norm
+#print axioms HVRPrimeMellinModes.primeMode_integral_norm_summable
+#print axioms HVRPrimeMellinModes.primeMode_integral_eq_primeTerm
+#print axioms HVRPrimeMellinModes.theta_exp_laplace_of_modes
+#print axioms HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion

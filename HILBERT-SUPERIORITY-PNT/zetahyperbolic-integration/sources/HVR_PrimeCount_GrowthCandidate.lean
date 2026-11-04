@@ -1,4 +1,5 @@
 import HVR_PrimeCount_MellinCandidate
+import HVR_PrimeCount_MellinConversion
 import Mathlib.NumberTheory.Chebyshev
 
 noncomputable section
@@ -11,19 +12,6 @@ Mathlib's Chebyshev theta bound. This is not a PNT or a Laplace identity.
 The imported theta bound's full proof dependencies require independence review.
 No Lean run was performed in preparing this file. -/
 namespace HVRPrimeCountGrowth
-
-theorem primeTheta_eq_chebyshev (x : ℝ) :
-    primeTheta x = (Chebyshev.theta x : ℂ) := by
-  have hset : Finset.Icc 1 ⌊x⌋₊ = Finset.Ioc 0 ⌊x⌋₊ := by
-    ext n
-    simp only [Finset.mem_Icc, Finset.mem_Ioc]
-    omega
-  have hreal : (∑ n ∈ Finset.Icc 1 ⌊x⌋₊, primeCoefficient n) =
-      Chebyshev.theta x := by
-    rw [Chebyshev.theta, ← hset]
-    simp only [primeCoefficient, Finset.sum_filter]
-  unfold primeTheta
-  simp only [primeCoefficientC, ← Complex.ofReal_sum, hreal]
 
 /-- The actual log-prime coefficient partial sums have linear growth. -/
 theorem primeCoefficient_partial_sum_isBigO :

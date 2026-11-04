@@ -1,6 +1,5 @@
 import HVR_PrimeMellin_Modes
-import HVR_PrimeCount_LogSubstitution
-import HVR_PrimeCount_GrowthCandidate
+import HVR_PrimeCount_MellinConversion
 import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 import Mathlib.Tactic
 
@@ -16,13 +15,11 @@ Prime-mode theta expansion and assembly candidate.
 
 The strictly open mode cutoffs differ from Chebyshev.theta exactly at log-prime
 endpoints; countable singleton-nullness gives the required a.e. identity. The
-last theorem uses the already existing primeThetaMellin exponential change
-of variables. This is a DOWNSTREAM integration candidate: its imports include
-HVR_PrimeCount_MellinCandidate through the existing growth and substitution
-modules. It cannot replace that file in the root without first factoring its
-definitions and substitution proof into modules upstream of MellinCandidate.
-Transitive dependency independence is not established. No local Lean run has
-been performed; external cached build and named axiom audit are required.
+last theorem uses the primeThetaMellin exponential change of variables.
+The required definitions, change-of-variable proof, and theta identification
+are factored into upstream modules to avoid the former import cycle. This
+exact refactor requires external cached build and named theorem axiom audits.
+Transitive dependency independence is not established.
 -/
 namespace HVRPrimeMellinModeAssembly
 
@@ -134,7 +131,8 @@ theorem theta_exp_laplace_unconditional (sigma t : ℝ) (hsigma : 1 < sigma) :
     (theta_exp_modes_ae (zetaPoint sigma t))
 
 /-- The existing exponential substitution identifies its Mellin integral with
-the prime-mode Laplace integral. This is downstream, not an upstream root swap. -/
+the prime-mode Laplace integral. The factored upstream interface avoids the
+former module-import cycle; this exact port requires an external audit. -/
 theorem primeSeries_eq_mul_mellin_via_modes (sigma t : ℝ) (hsigma : 1 < sigma) :
     primeSeries sigma t 1 =
       zetaPoint sigma t * primeThetaMellin (zetaPoint sigma t) := by

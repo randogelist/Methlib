@@ -1,5 +1,23 @@
 # Source provenance and scope
 
+**Direct-mode root:** The refactored 88-module root source chain compiled and
+passed its named standard-only axiom audits in cached Linux
+[run 41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013)
+at commit 0ca20094873e770e44ac584f14aaf7dcc0703652. All 88 tested source
+blobs match the canonical candidate byte-for-byte. The prior 86-stage
+Abel-root run below is historical. The complete 90-stage canonical runner
+and its separate DCT diagnostic still require a fresh matching run.
+Mathlib sum-integral and change-of-variable infrastructure remain.
+
+The direct-mode diagnostic detected six direct/two-hop positive controls.
+It found the prime-mode theorem and original wrapper in the actual root;
+it did not see the prior Abel helper or Mathlib LSeries_eq_mul_integral
+there. Negative trace coverage remains unverified. It found Mathlib's
+von Mangoldt log-derivative theorem in the root. The earlier Abel-root
+diagnostic found both selected dominated-convergence declarations; their
+new-root diagnostic remains to be run.
+
+
 ## Mellin integration and checked scope
 
 `HVR_PrimeMellin_Abel.lean` adapts the `f 0 = 0` Abel-summation case of
@@ -7,10 +25,11 @@
 `fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0`. Its source preserves the
 upstream attribution; the Apache 2.0 text is in `LICENSE-MATHLIB.txt`.
 The existing Mellin theorem statements and premises are preserved, while
-their proof calls the new helper. Mathlib's Abel-summation and analysis
-infrastructure remain dependencies.
+the earlier proof called that helper. The helper retains Mathlib's general
+Abel-summation and analysis infrastructure; the current candidate root uses
+the prime-mode route instead.
 
-The changed 86-stage source was built and its named declarations were
+The earlier 86-stage source was built and its named declarations were
 standard-only axiom audited under cached Linux Lean 4.34.0-rc1 in
 [run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
 at commit `688397970101fa1a0e43c1f46b34a931ff10eb74`. Its artifact is

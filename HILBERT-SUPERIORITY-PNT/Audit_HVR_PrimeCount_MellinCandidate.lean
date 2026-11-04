@@ -1,4 +1,3 @@
 import HVR_PrimeCount_MellinCandidate
-#print axioms HVRPrimeCountMellin.primeTheta_eq_log_prime_sum
 #print axioms HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin
 #print axioms HVRPrimeCountMellin.zeta_log_deriv_eq_primeThetaMellin_add_correction

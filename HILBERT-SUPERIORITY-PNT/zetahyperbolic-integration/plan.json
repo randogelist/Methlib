@@ -1,5 +1,11 @@
 [
   {
+    "module": "HVR_PrimeMellin_Abel",
+    "theorems": [
+      "HVRPrimeMellinAbel.lseries_eq_mellin_of_zero"
+    ]
+  },
+  {
     "module": "HVR_Prime_Gram",
     "theorems": []
   },
@@ -92,9 +98,34 @@
     "theorems": []
   },
   {
-    "module": "HVR_PrimeMellin_Abel",
+    "module": "HVR_PrimeMellin_Modes",
     "theorems": [
-      "HVRPrimeMellinAbel.lseries_eq_mellin_of_zero"
+      "HVRPrimeMellinModes.weighted_exponential_mode",
+      "HVRPrimeMellinModes.primeMode_integral",
+      "HVRPrimeMellinModes.primeMode_integrable",
+      "HVRPrimeMellinModes.primeMode_integral_norm",
+      "HVRPrimeMellinModes.primeMode_integral_norm_summable",
+      "HVRPrimeMellinModes.primeMode_integral_eq_primeTerm",
+      "HVRPrimeMellinModes.theta_exp_laplace_of_modes",
+      "HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion"
+    ]
+  },
+  {
+    "module": "HVR_PrimeCount_MellinDefs",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeCount_MellinConversion",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeMellin_ModeAssembly",
+    "theorems": [
+      "HVRPrimeMellinModeAssembly.mem_primeCutoff_iff",
+      "HVRPrimeMellinModeAssembly.theta_exp_modes_pointwise",
+      "HVRPrimeMellinModeAssembly.theta_exp_modes_ae",
+      "HVRPrimeMellinModeAssembly.theta_exp_laplace_unconditional",
+      "HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes"
     ]
   },
   {
@@ -198,29 +229,6 @@
     ]
   },
   {
-    "module": "HVR_PrimeMellin_Modes",
-    "theorems": [
-      "HVRPrimeMellinModes.weighted_exponential_mode",
-      "HVRPrimeMellinModes.primeMode_integral",
-      "HVRPrimeMellinModes.primeMode_integrable",
-      "HVRPrimeMellinModes.primeMode_integral_norm",
-      "HVRPrimeMellinModes.primeMode_integral_norm_summable",
-      "HVRPrimeMellinModes.primeMode_integral_eq_primeTerm",
-      "HVRPrimeMellinModes.theta_exp_laplace_of_modes",
-      "HVRPrimeMellinModes.theta_exp_laplace_of_prime_expansion"
-    ]
-  },
-  {
-    "module": "HVR_PrimeMellin_ModeAssembly",
-    "theorems": [
-      "HVRPrimeMellinModeAssembly.mem_primeCutoff_iff",
-      "HVRPrimeMellinModeAssembly.theta_exp_modes_pointwise",
-      "HVRPrimeMellinModeAssembly.theta_exp_modes_ae",
-      "HVRPrimeMellinModeAssembly.theta_exp_laplace_unconditional",
-      "HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes"
-    ]
-  },
-  {
     "module": "NativeDominatedLimit",
     "theorems": []
   },
@@ -256,6 +264,12 @@
     "module": "HVRFrequencyCellError",
     "theorems": [
       "HVRFrequencyCellError.integral_cell_phase_error"
+    ]
+  },
+  {
+    "module": "HVRFrequencyFiniteCells",
+    "theorems": [
+      "HVRFrequencyFiniteCells.finite_cells_phase_error"
     ]
   },
   {

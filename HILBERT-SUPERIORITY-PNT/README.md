@@ -1,8 +1,17 @@
 # Hilbert–Superiority PNT
 
-> **Mellin integration:** [Cached Linux CI run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
+**Direct-mode theta root:** The 88-module proof chain at
+[run 41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013)
+compiled and passed its named standard-only axiom audits under cached Linux
+Lean 4.34.0-rc1. All 88 tested source files match this canonical source
+byte-for-byte. The larger 90-stage canonical runner and its DCT diagnostic
+still require a matching external run. Windows execution is also unverified.
+Mathlib sum-integral and change-of-variable infrastructure remain.
+
+
+> **Historical Abel-root CI:** [Cached Linux CI run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
 > built the 86-stage chain and passed its named axiom audits at commit
-> `688397970101fa1a0e43c1f46b34a931ff10eb74`. The changed Mellin proof uses
+> `688397970101fa1a0e43c1f46b34a931ff10eb74`. That earlier Mellin proof used
 > an attributed Abel-summation helper. A controlled proof trace did not see
 > the selected `LSeries_eq_mul_integral` declaration in the final root;
 > negative trace coverage remains unverified.
@@ -24,7 +33,7 @@ HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one :
 [Named axiom audit](Audit_HVR_PrimeDensity_FinalRoot.lean) ·
 [CI runs and evidence](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
 
-The workflow builds the 86 staged modules and audits their
+The candidate workflow builds the 90 staged modules and audits their
 named declarations, including the root theorem and its two named supporting
 declarations. The runner rejects missing audit reports and axioms outside
 `propext`, `Classical.choice`, and `Quot.sound`. Open a run above and download
@@ -33,7 +42,8 @@ its `hvr-theta-linux-evidence` artifact for its logs and recorded hashes.
 An earlier external Windows run of the original source package was reported to
 have passed the root build and named standard-axiom audit. Its full Mathlib
 cache provenance was not recorded, and it predates the present Mellin source.
-The successful Linux run above is matching evidence for the changed source.
+The historical Abel-root run above predates this source; the separate
+88-module direct-mode CI run at the top is matching source evidence.
 Neither an axiom audit nor a green workflow establishes independence from other
 PNT proofs.
 
@@ -45,10 +55,10 @@ nonblank lines still include comments and imports.
 
 | Files | Lean files | Physical lines | Nonblank lines |
 |---|---:|---:|---:|
-| Source modules, excluding trace files | 86 | 5,633 | 4,993 |
-| Named audit files (`Audit_*.lean`) | 86 | 507 | 487 |
+| Source modules, excluding trace files | 90 | 6,008 | 5,333 |
+| Named audit files (`Audit_*.lean`) | 90 | 524 | 504 |
 | Diagnostic trace files | 4 | 288 | 268 |
-| **Total** | **176** | **6,428** | **5,748** |
+| **Total** | **184** | **6,820** | **6,105** |
 
 The [final root file](HVR_PrimeDensity_FinalRoot.lean) has **52 physical
 lines** and its audit file has **7**. The root imports earlier modules, so 52
@@ -74,7 +84,7 @@ GitHub Actions uses Linux Lean `4.34.0-rc1` and Mathlib commit
 `fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0` (an RC1-toolchain-compatible revision).
 It downloads Mathlib's cache, verifies the branch source manifest, including
 the top-level Lean files, build-plan script, Linux runner and Mellin diagnostic,
-and uses the Linux runner to build and audit the 86-stage plan. It rebuilds
+and uses the Linux runner to build and audit the 90-stage plan. It rebuilds
 the package's own objects on Linux.
 This Mathlib revision was selected for CI; it is not an identified match for
 the earlier external cache. The original Windows runner remains available.
@@ -103,10 +113,23 @@ The original source package came from `HVR_PNT_THETA_ASSEMBLY_RC1_FIX2.zip`; the
 `HVR_PrimeMellin_Abel.lean` adapts the relevant zero-coefficient Abel
 summation case from Mathlib's `Mathlib/NumberTheory/LSeries/SumCoeff.lean`
 at the pinned revision, retaining the original attribution and Apache 2.0
-license in [LICENSE-MATHLIB.txt](LICENSE-MATHLIB.txt). The modified
-`HVR_PrimeCount_MellinCandidate.lean` invokes that helper while preserving
-the previous theorem statements and hypotheses. The helper still uses
-Mathlib's general Abel-summation and analysis infrastructure.
+license in [LICENSE-MATHLIB.txt](LICENSE-MATHLIB.txt). The earlier
+MellinCandidate proof invoked that helper. The current
+candidate preserves its theorem statements but instead calls the
+prime-mode assembly. The helper remains as a separately audited
+historical stage. The candidate uses Mathlib sum-integral and
+change-of-variables infrastructure.
+
+The direct-mode proof factors the theta definitions and conversion lemmas
+upstream to avoid the prior import cycle. Its theta root and named mode
+declarations passed standard-only axiom audits in
+[run 41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013).
+The controlled diagnostic detected six direct/two-hop positive controls and
+found the mode theorem in the actual theta root. It did not see the Abel helper
+or selected Mathlib Mellin theorem in that root; negative dependency coverage
+remains unverified. It found the Mathlib von Mangoldt log-derivative theorem,
+so this is not a Mathlib-free PNT proof. The exact [evidence artifact](https://github.com/randogelist/Methlib/actions/runs/41747091013/artifacts/13283363826)
+records the tested source and object hashes, audits, and diagnostics.
 
 [Run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
 built the helper and modified Mellin module, passed their named standard-only
@@ -129,11 +152,13 @@ frequency identities. Its [four-lane cached Linux run 41744680137](https://githu
 compiled its named declarations and passed their standard-only axiom audits.
 The finite strict-positivity theorem retains a prime-node witness; the general
 Jacobi theorem retains determinant nonvanishing. The continuous frequency
-identity retains two explicit approximation limits. A separate downstream
-prime-mode assembly discharges its prime/theta expansion and derives a Mellin
-identity, but imports modules downstream of the original Mellin module; it
-is not an upstream root replacement. These statements remain separate from
-the canonical root. The downstream mode assembly and abstract frequency
+identity retains two explicit approximation limits. The separately audited
+earlier downstream prime-mode assembly discharges its
+prime/theta expansion and derives a Mellin identity. This 90-stage
+candidate factors the necessary modules upstream to remove its import cycle.
+The 88-module root and controlled trace passed in the mode-root run above;
+the full 90-stage canonical runner remains to be verified. The
+downstream mode assembly and abstract frequency
 bounds passed named audits in [run 41745623568](https://github.com/randogelist/Methlib/actions/runs/41745623568);
 the actual positively damped prime-error first-moment theorem passed in
 [run 41745700135](https://github.com/randogelist/Methlib/actions/runs/41745700135).
@@ -142,6 +167,8 @@ adapter passed in [run 41746159554](https://github.com/randogelist/Methlib/actio
 the adapter's two continuous approximation limits remain explicit premises.
 The one-cell error estimate passed in [run 41746760052](https://github.com/randogelist/Methlib/actions/runs/41746760052)
 under its explicit integrability and mesh hypotheses.
+The finite-cells aggregation passed in [run 41747466498](https://github.com/randogelist/Methlib/actions/runs/41747466498)
+with explicit cell integrability, mesh and mass-budget hypotheses.
 
 ## Additional prime-power and zeta bridge
 

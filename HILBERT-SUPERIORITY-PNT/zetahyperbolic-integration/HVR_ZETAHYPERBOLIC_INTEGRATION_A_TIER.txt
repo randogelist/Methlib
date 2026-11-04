@@ -1,8 +1,8 @@
 HVR ZETAHYPERBOLIC INTEGRATION -- RC1 CANDIDATE
 
 STATUS: NAMED THEOREMS PASS on external cached Linux Lean 4.34.0-rc1.
-The 31 named declarations in the four dependency-closed CI lanes compiled and
-passed standard-only axiom audits for their exact signatures and source hashes:
+The initial 31 named declarations in four dependency-closed CI lanes compiled
+and passed standard-only axiom audits:
 https://github.com/randogelist/Methlib/actions/runs/41744680137
 Five downstream mode-assembly declarations and two weighted frequency-bound
 declarations also passed matching-source cached Linux named audits:
@@ -15,23 +15,30 @@ adapter passed five further named audits:
 https://github.com/randogelist/Methlib/actions/runs/41746159554
 The finite frequency-cell phase error bound passed its named audit:
 https://github.com/randogelist/Methlib/actions/runs/41746760052
+The finite-cells aggregation also passed its named audit:
+https://github.com/randogelist/Methlib/actions/runs/41747466498
 Windows execution of this package is pending. Old Lean 4.33 donor audits
 are separate and do not validate source edits by themselves.
+The refactored prime-mode PNT root and named mode theorems passed an external
+88-source Linux RC1 build and audit at the exact refactored source hashes:
+https://github.com/randogelist/Methlib/actions/runs/41747091013
 
 This package contains a source-level PNT root integration candidate plus
 separate finite-dimensional and conditional interfaces:
-1. HVR_PrimeMellin_Abel adapts the pinned Mathlib Abel-summation proof by
-   Xavier Roblot (Apache 2.0); HVR_PrimeCount_MellinCandidate preserves both
-   original theorem signatures while calling the adapted lemma. The package
-   builds the actual theta root from this changed source. This is not the
-   Zetahyperbolic mode derivation and does not establish Mathlib independence.
+1. HVR_PrimeCount_MellinCandidate preserves both original theorem signatures
+   while calling the refactored prime-mode assembly. The final root reaches
+   that exact mode theorem according to the positive-controlled proof trace.
+   HVR_PrimeMellin_Abel remains an independently audited historical helper;
+   it adapts a pinned Mathlib proof by Xavier Roblot (Apache 2.0). The trace
+   did not see that helper or LSeries_eq_mul_integral in the mode root, with
+   negative coverage unverified.
 2. HVR_PrimeMellin_Modes contains actual prime mode calculations and a
    conditional theta exponential integral assembly. The separate downstream
    HVR_PrimeMellin_ModeAssembly discharges its a.e. theta expansion and
    applies the existing change of variables to obtain the Mellin identity.
-   It imports GrowthCandidate and LogSubstitution downstream of the original
-   Mellin module. It is not an upstream root replacement or an independence
-   proof; eliminating that import cycle needs a separate refactor and trace.
+   Definitions and conversion lemmas have been factored upstream to avoid
+   the former import cycle, and the root now uses this assembly. It still
+   uses Mathlib integral_tsum, Jacobian and other analysis infrastructure.
 3. HVRPrimeAtomicGram and HVRPrimeGramJacobiBridge prove finite-cutoff prime
    Gram identities and connect them to the adapted Jacobi matrix. Strict
    positivity is proved only with an explicit nonzero prime-witness premise.
@@ -49,7 +56,8 @@ separate finite-dimensional and conditional interfaces:
    actual frequency Lipschitz control. HVRPrimeWeightedFrequencyApproximation
    gives a weighted finite-frequency adapter. Its continuous identity still
    assumes both approximation limits; they remain open. HVRFrequencyCellError
-   adds a one-cell bound with explicit integrability and mesh hypotheses.
+   adds a one-cell bound, and HVRFrequencyFiniteCells aggregates it over a
+   given finite family. Cell integrability, mesh and budget hypotheses remain.
 
 Sources adapted from Mathlib retain attribution and the Apache 2.0 license;
 see HVR_PrimeMellin_Abel.lean. Generic finite Jacobi source provenance is
@@ -61,8 +69,10 @@ run by the author locally. The runner prints EVIDENCE and records source,
 compiler, and object hashes and exact named theorem axiom reports.
 Cache provenance remains USER_SUPPLIED_NOT_INDEPENDENTLY_VERIFIED.
 
-The controlled trace did not see LSeries_eq_mul_integral in the checked
-Mellin roots or PNT root; direct and two-hop positive controls were detected.
+The controlled trace detected six direct and two-hop positive controls and
+FOUND the mode theorem in the final PNT root. It did not see the Abel helper
+or LSeries_eq_mul_integral in that root. The root still reaches Mathlib's
+von Mangoldt/zeta logarithmic-derivative theorem.
 Negative trace coverage remains unverified. Both selected dominated-
 convergence declarations remain found in the canonical PNT root.
 No complete Mathlib independence or closure of the conditional Fubini

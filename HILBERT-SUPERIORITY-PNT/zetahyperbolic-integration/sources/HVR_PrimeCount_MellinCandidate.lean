@@ -1,5 +1,5 @@
 import HVR_Zeta_CorrectionIdentity
-import HVR_PrimeMellin_Abel
+import HVR_PrimeMellin_ModeAssembly
 
 noncomputable section
 open scoped BigOperators
@@ -8,34 +8,15 @@ open HVRPrimeZetaSplit HVRZetaLogDerivative
 open HVRPowerCorrectionHolomorphic HVRZetaCorrectionIdentity
 
 /-!
-Candidate prime-count Mellin bridge.  The coefficient function is the
-actual log-prime coefficient from the already audited zeta split.  The
-partial-sum growth hypothesis is explicit and is NOT discharged here; neither
-the exponential change of variables nor a Laplace-transform identity is
-claimed. The imported Mathlib integral theorem and all transitive dependencies
-still require route-independence review. This source has not been compiled.
+Direct prime-mode candidate for the prime-count Mellin bridge. The original
+public theorem signatures, including hr, hrs and hO, are preserved exactly;
+the new proof establishes the identity using only sigma > 1 and does not
+require those extra arguments.
+The mode-series interchange still uses Mathlib integral_tsum, and all
+transitive dependency/axiom claims require separate external audit.
+This refactored source has not yet been compiled.
 -/
 namespace HVRPrimeCountMellin
-
-/-- Complex-valued logarithmic prime count up to a real threshold. -/
-def primeTheta (x : ℝ) : ℂ :=
-  ∑ n ∈ Finset.Icc 1 ⌊x⌋₊, primeCoefficientC n
-
-/-- The Mellin integral of the actual logarithmic prime count. -/
-def primeThetaMellin (s : ℂ) : ℂ :=
-  ∫ x : ℝ in Set.Ioi 1, primeTheta x * (x : ℂ) ^ (-(s + 1))
-
-theorem primeTheta_eq_log_prime_sum (x : ℝ) :
-    primeTheta x =
-      ∑ n ∈ Finset.Icc 1 ⌊x⌋₊,
-        if Nat.Prime n then (Real.log (n : ℝ) : ℂ) else 0 := by
-  unfold primeTheta
-  apply Finset.sum_congr rfl
-  intro n hn
-  change ((if Nat.Prime n then Real.log (n : ℝ) else 0 : ℝ) : ℂ) =
-    (if Nat.Prime n then (Real.log (n : ℝ) : ℂ) else 0)
-  by_cases hp : Nat.Prime n <;>
-    simp only [hp, if_true, if_false, Complex.ofReal_zero]
 
 /-- Partial summation for the actual prime series, conditional on its stated
 elementary partial-sum growth bound. -/
@@ -45,12 +26,7 @@ theorem primeSeries_eq_mul_primeThetaMellin (sigma t r : ℝ)
       =O[atTop] (fun n : ℕ => (n : ℝ) ^ r)) :
     HVRPrimeComplex.primeSeries sigma t 1 =
       zetaPoint sigma t * primeThetaMellin (zetaPoint sigma t) := by
-  have hrs' : r < (zetaPoint sigma t).re := by
-    simpa [zetaPoint] using hrs
-  have h := HVRPrimeMellinAbel.lseries_eq_mellin_of_zero primeCoefficientC_zero hr hrs'
-    (prime_lseries_summable sigma t hsigma) hO
-  rw [prime_lseries_eq_primeSeries] at h
-  simpa [primeThetaMellin, primeTheta] using h
+  exact HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes sigma t hsigma
 
 /-- The audited zeta/prime correction identity, now expressed through the
 prime-count Mellin integral under the same explicit growth hypothesis. -/

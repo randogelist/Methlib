@@ -24,6 +24,7 @@ ROOTS = {
     "primefreq": "HVRPrimeLaplaceFrequencyBounds",
     "quadrature": "HVRPrimeWeightedFrequencyApproximation",
     "cell": "HVRFrequencyCellError",
+    "cells": "HVRFrequencyFiniteCells",
     "root": "HVR_PrimeDensity_FinalRoot",
 }
 IMPORT_LINE = re.compile(r"^\s*(?:(?:public|meta)\s+)*import\s+([^\n-]+)")
@@ -80,6 +81,11 @@ def main():
 
     root = ROOTS[args.lane]
     visit(root)
+    # The root no longer imports the historical Abel helper, but the separate
+    # diagnostic traces that helper as a control. Compile it without
+    # introducing a dependency into the root theorem.
+    if args.lane == "root":
+        visit("HVR_PrimeMellin_Abel")
     subset = [entry for entry in original_plan if entry["module"] in visited]
     installed = set()
     for entry in subset:
