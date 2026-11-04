@@ -1,5 +1,5 @@
 diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
-index 60aab4cc965e52ed4b86f846b386f2569fb0268c..8178b828d29a17a77adbd521031b7c6aa1e19ac7 100644
+index 41f66fdc26686682b95595cdef3790638ebd0b12..19486310dfcb229d6529ed07cf60812602001509 100644
 --- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 +++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 @@ -43,17 +43,31 @@ theorem regularized_div_sub_one {s : ℂ} (hs : s ≠ 1) :

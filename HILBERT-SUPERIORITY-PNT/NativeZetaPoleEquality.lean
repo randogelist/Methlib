@@ -35,7 +35,7 @@ theorem regularized_value_one : riemannZeta₁ 1 = 1 := by
 
 /-- At the pole the linear factor cancels the additive regularizer's derivative. -/
 theorem regularized_derivative_one : deriv riemannZeta₁ (1 : ℂ) = (Real.eulerMascheroniConstant : ℂ) := by
-  simpa only [sub_self, zero_mul, add_zero, riemannZeta₀, if_pos rfl] using
+  simpa only [sub_self, zero_mul, add_zero, riemannZeta₀, if_pos rfl, if_true] using
     (regularized_hasDerivAt 1).deriv
 
 /-- Off the pole, undo both regularizations using their definitions. -/

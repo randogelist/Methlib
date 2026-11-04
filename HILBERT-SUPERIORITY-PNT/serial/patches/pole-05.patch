@@ -12,7 +12,7 @@ index 03dcf958964c33d1c50bca78fa3902702b1734c5..a5bd7373d3923de04caeb0a4dd8a77be
      have hne : ∀ᶠ z : ℂ in 𝓝 (1 : ℂ), z ≠ 0 :=
        continuousAt_id.eventually_ne (show (1 : ℂ) ≠ 0 by norm_num)
 diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
-index a2efc53f37b784a580ed2e5269e7f7dc20a941ec..60aab4cc965e52ed4b86f846b386f2569fb0268c 100644
+index 8ac6598621dfec2a32bf128665ef4fae733f20aa..41f66fdc26686682b95595cdef3790638ebd0b12 100644
 --- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 +++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 @@ -55,16 +55,18 @@ theorem log_derivative_eq {s : ℂ} (hs : s ≠ 1)

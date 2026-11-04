@@ -1,5 +1,5 @@
 diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
-index 845427f096cffa3d2b784acf3e4a6608a9bac592..a2efc53f37b784a580ed2e5269e7f7dc20a941ec 100644
+index 845427f096cffa3d2b784acf3e4a6608a9bac592..8ac6598621dfec2a32bf128665ef4fae733f20aa 100644
 --- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 +++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 @@ -32,6 +32,11 @@ theorem regularized_differentiable : Differentiable ℂ riemannZeta₁ :=
@@ -8,7 +8,7 @@ index 845427f096cffa3d2b784acf3e4a6608a9bac592..a2efc53f37b784a580ed2e5269e7f7dc
  
 +/-- At the pole the linear factor cancels the additive regularizer's derivative. -/
 +theorem regularized_derivative_one : deriv riemannZeta₁ (1 : ℂ) = (Real.eulerMascheroniConstant : ℂ) := by
-+  simpa only [sub_self, zero_mul, add_zero, riemannZeta₀, if_pos rfl] using
++  simpa only [sub_self, zero_mul, add_zero, riemannZeta₀, if_pos rfl, if_true] using
 +    (regularized_hasDerivAt 1).deriv
 +
  /-- Off the pole, undo both regularizations using their definitions. -/

@@ -36,7 +36,7 @@ index 230eaedc9f4bb81818c08d93672b8d34067d5bb1..4b5f07a87c9082eb9b0f1e41d00a07a9
      ha.analyticOrderAt_ne_top.mp (zeta_boundary_finite_order s hsre)
    refine ⟨g, hg, hgn, ?_⟩
 diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
-index 8178b828d29a17a77adbd521031b7c6aa1e19ac7..2452ce08a1e24770b3914107d0811e0f9c660778 100644
+index 19486310dfcb229d6529ed07cf60812602001509..a429bf2b946536fbb1a34355010aedbb67a5ce5e 100644
 --- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 +++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
 @@ -1,4 +1,5 @@

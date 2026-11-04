@@ -327,7 +327,7 @@
       "modules": {
         "NativeZetaPoleEquality": {
           "old": "845427f096cffa3d2b784acf3e4a6608a9bac592",
-          "new": "a2efc53f37b784a580ed2e5269e7f7dc20a941ec"
+          "new": "8ac6598621dfec2a32bf128665ef4fae733f20aa"
         },
         "NativeZetaPoleLittleO": {
           "old": "6b978ea4eee4892c422bc702915392dec1a7afb5",
@@ -362,8 +362,8 @@
       "lean_target": "riemannZeta₁_ne_zero_of_near_one",
       "modules": {
         "NativeZetaPoleEquality": {
-          "old": "a2efc53f37b784a580ed2e5269e7f7dc20a941ec",
-          "new": "60aab4cc965e52ed4b86f846b386f2569fb0268c"
+          "old": "8ac6598621dfec2a32bf128665ef4fae733f20aa",
+          "new": "41f66fdc26686682b95595cdef3790638ebd0b12"
         },
         "HVR_Smoothing_PoleGlue": {
           "old": "03dcf958964c33d1c50bca78fa3902702b1734c5",
@@ -398,8 +398,8 @@
       "lean_target": "deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add",
       "modules": {
         "NativeZetaPoleEquality": {
-          "old": "60aab4cc965e52ed4b86f846b386f2569fb0268c",
-          "new": "8178b828d29a17a77adbd521031b7c6aa1e19ac7"
+          "old": "41f66fdc26686682b95595cdef3790638ebd0b12",
+          "new": "19486310dfcb229d6529ed07cf60812602001509"
         }
       },
       "files": [
@@ -461,8 +461,8 @@
       "lean_target": "analyticOn_riemannZeta",
       "modules": {
         "NativeZetaPoleEquality": {
-          "old": "8178b828d29a17a77adbd521031b7c6aa1e19ac7",
-          "new": "2452ce08a1e24770b3914107d0811e0f9c660778"
+          "old": "19486310dfcb229d6529ed07cf60812602001509",
+          "new": "a429bf2b946536fbb1a34355010aedbb67a5ce5e"
         },
         "HVR_Smoothing_AnalyticGerms": {
           "old": "1dc05786586e388d354b42c7f9e1d18fed3b6dd9",
