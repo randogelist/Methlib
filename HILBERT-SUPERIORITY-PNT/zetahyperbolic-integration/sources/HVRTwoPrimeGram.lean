@@ -1,4 +1,5 @@
 import HVRPrimeGramJacobiBridge
+import Mathlib.LinearAlgebra.Matrix.PosDef
 
 /-!
 Two-prime finite Gram support. This adapts the nonzero-polynomial support
