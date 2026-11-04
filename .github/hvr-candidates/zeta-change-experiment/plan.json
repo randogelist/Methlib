@@ -1,0 +1,16 @@
+[
+  {
+    "module": "HVRZetaDefeqProjection",
+    "theorems": [
+      "HVRZetaDefeqProjection.rawZeta_apply"
+    ]
+  },
+  {
+    "module": "HVRZetaChangeExperiment",
+    "theorems": [
+      "HVRZetaChangeExperiment.raw_reflexivity",
+      "HVRZetaChangeExperiment.raw_statement_changed_to_zeta",
+      "HVRZetaChangeExperiment.zeta_statement_changed_to_raw"
+    ]
+  }
+]
