@@ -15,11 +15,10 @@ import sys
 from pathlib import Path
 
 ROOTS = {
-    "matrix": "HVRPrimeGramJacobiBridge",
-    "frequency": "HVRZetaHyperbolicFiniteFrequency",
-    "modes": "HVR_PrimeMellin_Modes",
-    "root": "HVR_PrimeDensity_FinalRoot",
+    "assembly": "HVR_PrimeMellin_ModeAssembly",
+    "bounds": "HVRZetaHyperbolicFrequencyBounds",
 }
+
 IMPORT_LINE = re.compile(r"^\s*(?:(?:public|meta)\s+)*import\s+([^\n-]+)")
 MODULE = re.compile(r"^[A-Za-z_][A-Za-z0-9_.]*$")
 

@@ -1,4 +1,4 @@
-name: HVR Zetahyperbolic integration (Linux)
+name: HVR optional analytic closures (Linux)
 on:
   workflow_dispatch:
   push:
@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [matrix, frequency, modes, root]
+        lane: [assembly, bounds]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
