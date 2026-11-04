@@ -30,7 +30,10 @@ jobs:
           set -euo pipefail
           test "$(git -C "$GITHUB_WORKSPACE/.ci-wave-source" rev-parse HEAD)" = 27b98f2336b1fb1836ab8d43ac3e7801fbb6bff3
           PKG="$GITHUB_WORKSPACE/.ci-wave-source/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          DIAG="$GITHUB_WORKSPACE/.github/hvr-candidates/wave-trace"
+          (cd "$DIAG" && sha256sum --check wave-trace.sha256)
           python3 "$PKG/prepare_lane.py" --package "$PKG" --output "$RUNNER_TEMP/hvr-wave-swap-path" --lane fubini_fourier_candidate
+          python3 "$DIAG/append_ordinary.py" "$RUNNER_TEMP/hvr-wave-swap-path"
       - name: Check out pinned Mathlib
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -80,6 +83,8 @@ jobs:
           (cd "$DIAG" && timeout 480 "$LEAN" HVRWaveSwapPathTrace.lean) | tee "$EVIDENCE/wave-swap-path.stdout.log"
           grep -F 'SWAP_PATH_FOUND=HVRWaveSwapPathControl.indirect' "$EVIDENCE/wave-swap-path.stdout.log" >/dev/null
           grep -E '^SWAP_PATH_|^DEPENDENCY_COVERAGE=' "$EVIDENCE/wave-swap-path.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          (cd "$DIAG" && "$LEAN" HVRCompactCorrelationOrdinaryWaveTrace.lean) | tee "$EVIDENCE/ordinary-wave-trace.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/ordinary-wave-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload candidate audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
