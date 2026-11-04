@@ -1,5 +1,7 @@
 # Hilbert–Superiority PNT
 
+The [unified PNT CI](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml) runs on each push and pull request. Its final status requires the canonical theta build and named axiom audits, the complete Zetahyperbolic integration plan, the legacy compatibility audit, and the Windows launcher syntax check. It uses Linux Lean 4.34.0-rc1 and the pinned Mathlib cache; the separate candidate workflows remain available for manual dispatch. The audited PNT root is the theta asymptotic stated below. Check each run and its uploaded evidence for its actual result.
+
 **Direct-mode theta root:** The full 90-stage canonical build, named
 standard-only axiom audits, and controlled dependency diagnostics passed in
 [cached Linux run 41748517704](https://github.com/randogelist/Methlib/actions/runs/41748517704)

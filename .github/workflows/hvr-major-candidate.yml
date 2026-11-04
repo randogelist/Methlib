@@ -1,14 +1,6 @@
 name: HVR major Mathlib candidates (Linux)
 
 on:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/major-mathlib/**'
-      - '.github/workflows/hvr-major-candidate.yml'
-  pull_request:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/major-mathlib/**'
-      - '.github/workflows/hvr-major-candidate.yml'
   workflow_dispatch:
 
 permissions:

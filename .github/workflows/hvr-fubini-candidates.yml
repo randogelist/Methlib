@@ -1,10 +1,6 @@
 name: HVR finite-frequency quadrature candidates (Linux)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
-      - '.github/workflows/hvr-fubini-candidates.yml'
 
 permissions:
   contents: read

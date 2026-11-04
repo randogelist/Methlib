@@ -1,10 +1,6 @@
 name: HVR direct real reflection candidate (Linux)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/hvr-candidates/real-reflection/**'
-      - '.github/workflows/hvr-reflection-candidate.yml'
 
 permissions:
   contents: read

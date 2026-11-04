@@ -1,10 +1,6 @@
 name: HVR Mellin mode direct exponential candidate (Linux)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
-      - '.github/workflows/hvr-mellin-mode-candidate.yml'
 
 permissions:
   contents: read

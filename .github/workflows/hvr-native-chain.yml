@@ -2,14 +2,6 @@ name: HVR native Lean chain (Linux)
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/native-lean-chain/**'
-      - '.github/workflows/hvr-native-chain.yml'
-  pull_request:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/native-lean-chain/**'
-      - '.github/workflows/hvr-native-chain.yml'
 
 permissions:
   contents: read

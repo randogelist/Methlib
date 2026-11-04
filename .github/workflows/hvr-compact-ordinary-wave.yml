@@ -1,10 +1,6 @@
 name: HVR compact ordinary-wave identity (Linux)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
-      - '.github/workflows/hvr-compact-ordinary-wave.yml'
 
 permissions:
   contents: read

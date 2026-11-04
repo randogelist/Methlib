@@ -1,14 +1,6 @@
 name: HVR zeta bridge (Linux)
 
 on:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/native-rebuild/**'
-      - '.github/workflows/hvr-native-bridge.yml'
-  pull_request:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/native-rebuild/**'
-      - '.github/workflows/hvr-native-bridge.yml'
   workflow_dispatch:
 
 permissions:

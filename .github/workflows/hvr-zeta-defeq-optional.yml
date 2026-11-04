@@ -1,10 +1,6 @@
 name: HVR definitionally equal zeta optional lane (Linux)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
-      - '.github/workflows/hvr-zeta-defeq-optional.yml'
 
 permissions:
   contents: read
