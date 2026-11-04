@@ -14,8 +14,211 @@
     "theorems": []
   },
   {
+    "module": "HVR_Smoothing_MonotoneNormalization",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Complex_PoleLaplace",
+    "theorems": []
+  },
+  {
+    "module": "NativeFubini",
+    "theorems": []
+  },
+  {
+    "module": "NativeDominatedLimit",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Smoothing_FrequencySeed",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Positive_SmoothingSqueeze",
+    "theorems": []
+  },
+  {
+    "module": "HVR_HalfLine_IndicatorConvolution",
+    "theorems": []
+  },
+  {
+    "module": "HVRSimpleMoebiusBound",
+    "theorems": [
+      "HVRSimpleMoebiusBound.abs_moebius_le_one"
+    ]
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "theorems": [
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse",
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse"
+    ]
+  },
+  {
+    "module": "NativeOneZetaSummability",
+    "theorems": [
+      "HVRNativeOneZetaSummability.one_summable",
+      "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+      "HVRNativeOneZetaSummability.one_abscissa_lt"
+    ]
+  },
+  {
+    "module": "NativeChebyshevBound",
+    "theorems": [
+      "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+      "HVRNativeChebyshevBound.primorial_le_four_pow_native",
+      "HVRNativeChebyshevBound.theta_le_log4_mul_x_native"
+    ]
+  },
+  {
+    "module": "NativeFourierDecay",
+    "theorems": [
+      "NativeFourierDecay.decay_from_half_period_obligations"
+    ]
+  },
+  {
+    "module": "HVRCompactTranslation",
+    "theorems": [
+      "HVRCompactTranslation.translation_integral_tendsto"
+    ]
+  },
+  {
+    "module": "HVRNativePrimePowerDivisorSum",
+    "theorems": [
+      "HVRNativePrimePowerDivisorSum.sum_divisors_prime_pow"
+    ]
+  },
+  {
+    "module": "HVRNativeCoprimePrimePowerDivisors",
+    "theorems": [
+      "HVRNativeCoprimePrimePowerDivisors.filtered_divisors_mul"
+    ]
+  },
+  {
+    "module": "HVRNativeArithmeticZeta",
+    "theorems": [
+      "HVRNativeArithmeticZeta.mangoldt_mul_zeta_apply"
+    ]
+  },
+  {
+    "module": "HVRSimpleMangoldtOne",
+    "theorems": [
+      "HVRSimpleMangoldtOne.vonMangoldt_one"
+    ]
+  },
+  {
+    "module": "HVRSimplePrimePowDisjoint",
+    "theorems": [
+      "HVRSimplePrimePowDisjoint.disjoint_divisors"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPrime",
+    "theorems": [
+      "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+    ]
+  },
+  {
+    "module": "NativeMangoldtPow",
+    "theorems": [
+      "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native"
+    ]
+  },
+  {
+    "module": "HVRNativeLogRpow",
+    "theorems": [
+      "HVRNativeLogRpow.log_le_rpow_div_nonneg",
+      "HVRNativeLogRpow.log_natCast_le_rpow_div"
+    ]
+  },
+  {
+    "module": "HVRNativeLSeriesNorm",
+    "theorems": [
+      "HVRNativeLSeriesNorm.norm_term"
+    ]
+  },
+  {
+    "module": "NativeMangoldtNonneg",
+    "theorems": [
+      "HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native"
+    ]
+  },
+  {
+    "module": "NativeMangoldtBound",
+    "theorems": [
+      "HVRNativeMangoldtBound.vonMangoldt_le_log_native"
+    ]
+  },
+  {
+    "module": "NativeSeriesInfrastructure",
+    "theorems": [
+      "HVRNativeSeriesInfrastructure.hasSum_scale",
+      "HVRNativeSeriesInfrastructure.hasSum_identifies_tsum",
+      "HVRNativeSeriesInfrastructure.complex_summable_of_majorant"
+    ]
+  },
+  {
     "module": "HVR_ZetaHyperMatrixJacobi",
     "theorems": []
+  },
+  {
+    "module": "HVRPrimeAtomicGram",
+    "theorems": [
+      "HVRPrimeAtomicGram.quadratic_eq_prime_sum",
+      "HVRPrimeAtomicGram.quadratic_nonnegative",
+      "HVRPrimeAtomicGram.quadratic_pos_of_prime_witness",
+      "HVRPrimeAtomicGram.gramEntry_zero_zero"
+    ]
+  },
+  {
+    "module": "HVR_Prime_Summability",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_Candidate",
+    "theorems": []
+  },
+  {
+    "module": "IntegratedZetaNonzero",
+    "theorems": [
+      "HVRIntegratedZetaNonzero.moebiusLSeries_summable",
+      "HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries",
+      "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse",
+      "HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re"
+    ]
+  },
+  {
+    "module": "HVRFourierPhase",
+    "theorems": [
+      "HVRFourierPhase.half_period_shift",
+      "HVRFourierPhase.half_period_cancellation"
+    ]
+  },
+  {
+    "module": "HVRFourierLimit",
+    "theorems": [
+      "HVRFourierLimit.decay_of_half_period_obligations"
+    ]
+  },
+  {
+    "module": "HVROrdinaryFourier",
+    "theorems": [
+      "HVROrdinaryFourier.ordinaryIntegral_eq_scaled",
+      "HVROrdinaryFourier.ordinaryIntegral_tendsto_zero_of_atBot"
+    ]
+  },
+  {
+    "module": "NextMangoldtDivisorSum",
+    "theorems": [
+      "HVRNextMangoldtDivisorSum.vonMangoldt_sum_native",
+      "HVRNextMangoldtDivisorSum.vonMangoldt_mul_zeta_native"
+    ]
+  },
+  {
+    "module": "NextSummability",
+    "theorems": [
+      "HVRNextSummability.vonMangoldt_lseries_summable"
+    ]
   },
   {
     "module": "HVR_PrimeMomentJacobi",
@@ -29,12 +232,41 @@
     ]
   },
   {
-    "module": "HVRPrimeAtomicGram",
+    "module": "HVR_Prime_InfiniteGram",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Prime_PowerCorrection",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralSeedCorrelation",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_PositiveMass",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_WaveReal",
+    "theorems": []
+  },
+  {
+    "module": "HVRCompactFourierDecay",
     "theorems": [
-      "HVRPrimeAtomicGram.quadratic_eq_prime_sum",
-      "HVRPrimeAtomicGram.quadratic_nonnegative",
-      "HVRPrimeAtomicGram.quadratic_pos_of_prime_witness",
-      "HVRPrimeAtomicGram.gramEntry_zero_zero"
+      "HVRCompactFourierDecay.fourier_tendsto_atTop",
+      "HVRCompactFourierDecay.fourier_tendsto_atBot",
+      "HVRCompactFourierDecay.ordinary_tendsto_atTop",
+      "HVRCompactFourierDecay.weighted_boundary_tendsto_atTop"
+    ]
+  },
+  {
+    "module": "HVRMajorZetaLogDerivative",
+    "theorems": [
+      "HVRMajorZetaLogDerivative.convolution_vonMangoldt_zeta_native",
+      "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native",
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta"
     ]
   },
   {
@@ -46,14 +278,6 @@
     ]
   },
   {
-    "module": "HVR_Prime_Summability",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Prime_InfiniteGram",
-    "theorems": []
-  },
-  {
     "module": "HVR_Prime_Complex",
     "theorems": []
   },
@@ -62,19 +286,33 @@
     "theorems": []
   },
   {
-    "module": "HVR_Prime_ZetaSplit",
-    "theorems": []
-  },
-  {
-    "module": "HVR_HigherCoefficient_Reindex",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Prime_PowerCorrection",
-    "theorems": []
-  },
-  {
     "module": "HVR_PowerCorrection_Holomorphic",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Prime_BoundaryBridge",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralCorrelation_Compact",
+    "theorems": []
+  },
+  {
+    "module": "HVRPrimeKernelTrace",
+    "theorems": [
+      "HVRPrimeKernelTrace.trace_shifted_eq_prime_kernel_sum",
+      "HVRPrimeKernelTrace.prime_gram_logDet_kernel_hasDerivAt"
+    ]
+  },
+  {
+    "module": "HVRPrimeMomentDecay",
+    "theorems": [
+      "HVRPrimeMomentDecay.log_two_mul_mass_le_first_moment",
+      "HVRPrimeMomentDecay.log_mass_derivative_le_neg_log_two"
+    ]
+  },
+  {
+    "module": "HVR_Prime_ZetaSplit",
     "theorems": []
   },
   {
@@ -82,7 +320,37 @@
     "theorems": []
   },
   {
+    "module": "HVR_SpectralCorrelation_Regularity",
+    "theorems": []
+  },
+  {
+    "module": "HVRTwoPrimeGram",
+    "theorems": [
+      "HVRTwoPrimeGram.evalFeature_two",
+      "HVRTwoPrimeGram.log_two_lt_log_three",
+      "HVRTwoPrimeGram.exists_nonzero_prime_node",
+      "HVRTwoPrimeGram.prime_two_mem",
+      "HVRTwoPrimeGram.prime_three_mem",
+      "HVRTwoPrimeGram.quadratic_pos",
+      "HVRTwoPrimeGram.gram_posDef",
+      "HVRTwoPrimeGram.gram_det_pos",
+      "HVRTwoPrimeGram.gram_logDet_hasDerivAt"
+    ]
+  },
+  {
+    "module": "HVR_HigherCoefficient_Reindex",
+    "theorems": []
+  },
+  {
     "module": "HVR_Correction_UniformBound",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledSpectrum",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralCorrelation_FourierSquare",
     "theorems": []
   },
   {
@@ -91,6 +359,14 @@
   },
   {
     "module": "HVR_Correction_PrimeSubtype",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Correction_BoundaryLimit",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_SpectralIdentity",
     "theorems": []
   },
   {
@@ -111,6 +387,12 @@
     ]
   },
   {
+    "module": "HVRPrimeSndAssembly",
+    "theorems": [
+      "HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt"
+    ]
+  },
+  {
     "module": "HVR_PrimeMellin_Modes",
     "theorems": [
       "HVRPrimeMellinModes.weighted_exponential_mode",
@@ -128,7 +410,27 @@
     "theorems": []
   },
   {
+    "module": "HVR_Zeta_PoleResidue",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Prime_ResidueTransfer",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Zeta_BoundaryFactor",
+    "theorems": []
+  },
+  {
     "module": "HVR_PrimeCount_MellinConversion",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Prime_PoleMass",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Analytic_Residue",
     "theorems": []
   },
   {
@@ -142,46 +444,7 @@
     ]
   },
   {
-    "module": "HVR_PrimeCount_MellinCandidate",
-    "theorems": [
-      "HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin",
-      "HVRPrimeCountMellin.zeta_log_deriv_eq_primeThetaMellin_add_correction"
-    ]
-  },
-  {
-    "module": "HVR_PrimeCount_GrowthCandidate",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Zeta_PoleResidue",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Correction_BoundaryLimit",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Prime_BoundaryBridge",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Prime_ResidueTransfer",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Prime_PoleMass",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Zeta_BoundaryFactor",
-    "theorems": []
-  },
-  {
     "module": "HVR_Zeta_GramResidueConditional",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Analytic_Residue",
     "theorems": []
   },
   {
@@ -189,7 +452,18 @@
     "theorems": []
   },
   {
+    "module": "HVR_PrimeCount_MellinCandidate",
+    "theorems": [
+      "HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin",
+      "HVRPrimeCountMellin.zeta_log_deriv_eq_primeThetaMellin_add_correction"
+    ]
+  },
+  {
     "module": "HVR_Zeta_ZeroFreeBoundary",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeCount_GrowthCandidate",
     "theorems": []
   },
   {
@@ -201,15 +475,15 @@
     "theorems": []
   },
   {
-    "module": "HVR_PrimeCount_LogSubstitution",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Smoothing_MonotoneNormalization",
-    "theorems": []
-  },
-  {
     "module": "HVR_PrimeLogDensity",
+    "theorems": []
+  },
+  {
+    "module": "HVR_Smoothing_PoleGlue",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeCount_LogSubstitution",
     "theorems": []
   },
   {
@@ -217,7 +491,11 @@
     "theorems": []
   },
   {
-    "module": "HVR_Complex_PoleLaplace",
+    "module": "HVR_PrimeDensity_WeightedIntegrability",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_WindowBounds",
     "theorems": []
   },
   {
@@ -225,12 +503,31 @@
     "theorems": []
   },
   {
+    "module": "HVR_Smoothing_BoundaryExtension",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_WindowBridge",
+    "theorems": []
+  },
+  {
     "module": "HVR_PrimeDensity_FubiniBridge",
     "theorems": []
   },
   {
-    "module": "NativeFubini",
+    "module": "HVR_PrimeDensity_BoundaryLink",
     "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ConcentratedSqueeze",
+    "theorems": []
+  },
+  {
+    "module": "HVRActualBoundaryFourier",
+    "theorems": [
+      "HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero",
+      "HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero"
+    ]
   },
   {
     "module": "HVRZetaHyperbolicFiniteFrequency",
@@ -242,7 +539,25 @@
     ]
   },
   {
-    "module": "NativeDominatedLimit",
+    "module": "HVR_PrimeDensity_BoundaryLimit",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_FourierDecay",
+    "theorems": [
+      "HVRPrimeBoundaryFourierDecay.weightedBoundary_fourier_tendsto_zero"
+    ]
+  },
+  {
+    "module": "HVR_PrimeDensity_FubiniIntegrable",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_WindowAlgebra",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_PNTConditional",
     "theorems": []
   },
   {
@@ -259,14 +574,6 @@
     ]
   },
   {
-    "module": "HVRPrimeLaplaceFrequencyBounds",
-    "theorems": [
-      "HVRPrimeLaplaceFrequencyBounds.actual_mixed_eq_damped_phase",
-      "HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_eq_damped_phase",
-      "HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_frequency_lipschitz"
-    ]
-  },
-  {
     "module": "HVRPrimeWeightedFrequencyApproximation",
     "theorems": [
       "HVRPrimeWeightedFrequencyApproximation.weighted_finite_frequency_identity",
@@ -274,155 +581,17 @@
     ]
   },
   {
-    "module": "HVRFrequencyCellError",
-    "theorems": [
-      "HVRFrequencyCellError.integral_cell_phase_error"
-    ]
-  },
-  {
-    "module": "HVRFrequencyFiniteCells",
-    "theorems": [
-      "HVRFrequencyFiniteCells.finite_cells_phase_error"
-    ]
-  },
-  {
-    "module": "HVR_Smoothing_FrequencySeed",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_Candidate",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralSeedCorrelation",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralCorrelation_Compact",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralCorrelation_Regularity",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_PositiveMass",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledSpectrum",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Smoothing_PoleGlue",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Smoothing_BoundaryExtension",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_BoundaryLink",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_BoundaryLimit",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_FourierDecay",
-    "theorems": []
-  },
-  {
     "module": "HVR_PrimeBoundary_OrdinaryFrequencyDecay",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_AbelLimitConditional",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_EventualDomination",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_FubiniIntegrable",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_WeightedIntegrability",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_tendsto_zero"
+    ]
   },
   {
     "module": "HVR_PrimeDensity_SpatialAbel",
     "theorems": []
   },
   {
-    "module": "HVR_PrimeBoundary_EventualAbelGlue",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_FrequencyMeasurable",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_CompactGlue",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ScaledSpectrumDecay",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ReflectedSpectrum",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralCorrelation_FourierSquare",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_WaveReal",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_SpectralIdentity",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_WindowBounds",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_WindowBridge",
-    "theorems": []
-  },
-  {
-    "module": "HVR_Positive_SmoothingSqueeze",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ConcentratedSqueeze",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_WindowAlgebra",
-    "theorems": []
-  },
-  {
     "module": "HVR_PhysicalKernel_ScaledTranslate",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledRepresentation",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ScaledPhysicalDecay",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ReflectedPhysicalDecay",
     "theorems": []
   },
   {
@@ -434,35 +603,29 @@
     "theorems": []
   },
   {
+    "module": "HVRPrimeLaplaceFrequencyBounds",
+    "theorems": [
+      "HVRPrimeLaplaceFrequencyBounds.actual_mixed_eq_damped_phase",
+      "HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_eq_damped_phase",
+      "HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_frequency_lipschitz"
+    ]
+  },
+  {
+    "module": "HVRFrequencyCellError",
+    "theorems": [
+      "HVRFrequencyCellError.integral_cell_phase_error"
+    ]
+  },
+  {
+    "module": "HVR_PrimeBoundary_AbelLimitConditional",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledRepresentation",
+    "theorems": []
+  },
+  {
     "module": "HVR_PhysicalKernel_TailScaling",
-    "theorems": []
-  },
-  {
-    "module": "HVR_HalfLine_IndicatorConvolution",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_AbelGlueConditional",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_HalfLineSmoothing",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_SmoothingDecomposition",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_IntegralDecomposition",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_PNTConditional",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_DecompositionEndpoint",
     "theorems": []
   },
   {
@@ -470,7 +633,65 @@
     "theorems": []
   },
   {
+    "module": "HVRFrequencyFiniteCells",
+    "theorems": [
+      "HVRFrequencyFiniteCells.finite_cells_phase_error"
+    ]
+  },
+  {
+    "module": "HVR_PrimeBoundary_EventualDomination",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_FrequencyMeasurable",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_AbelGlueConditional",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_EventualAbelGlue",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_HalfLineSmoothing",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_CompactGlue",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_SmoothingDecomposition",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ScaledSpectrumDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_IntegralDecomposition",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ReflectedSpectrum",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ScaledPhysicalDecay",
+    "theorems": []
+  },
+  {
     "module": "HVR_PrimeDensity_BackwardDecomposition",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ReflectedPhysicalDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_DecompositionEndpoint",
     "theorems": []
   },
   {
@@ -479,40 +700,6 @@
       "HVRPrimeDensityFinalRoot.backwardDecomposition",
       "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
       "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
-    ]
-  },
-  {
-    "module": "HVRPrimeKernelTrace",
-    "theorems": [
-      "HVRPrimeKernelTrace.trace_shifted_eq_prime_kernel_sum",
-      "HVRPrimeKernelTrace.prime_gram_logDet_kernel_hasDerivAt"
-    ]
-  },
-  {
-    "module": "HVRTwoPrimeGram",
-    "theorems": [
-      "HVRTwoPrimeGram.evalFeature_two",
-      "HVRTwoPrimeGram.log_two_lt_log_three",
-      "HVRTwoPrimeGram.exists_nonzero_prime_node",
-      "HVRTwoPrimeGram.prime_two_mem",
-      "HVRTwoPrimeGram.prime_three_mem",
-      "HVRTwoPrimeGram.quadratic_pos",
-      "HVRTwoPrimeGram.gram_posDef",
-      "HVRTwoPrimeGram.gram_det_pos",
-      "HVRTwoPrimeGram.gram_logDet_hasDerivAt"
-    ]
-  },
-  {
-    "module": "HVRPrimeMomentDecay",
-    "theorems": [
-      "HVRPrimeMomentDecay.log_two_mul_mass_le_first_moment",
-      "HVRPrimeMomentDecay.log_mass_derivative_le_neg_log_two"
-    ]
-  },
-  {
-    "module": "HVRPrimeSndAssembly",
-    "theorems": [
-      "HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt"
     ]
   }
 ]

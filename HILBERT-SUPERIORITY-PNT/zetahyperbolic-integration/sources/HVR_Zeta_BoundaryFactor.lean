@@ -1,4 +1,5 @@
 import HVR_Zeta_CorrectionIdentity
+import IntegratedZetaNonzero
 import Mathlib.Analysis.Analytic.Order
 
 noncomputable section
@@ -30,7 +31,7 @@ theorem zeta_boundary_finite_order (s : ℂ) (hsre : s.re = 1) :
     have heq : s + ((ε / 2 : ℝ) : ℂ) - s = ((ε / 2 : ℝ) : ℂ) := by ring
     rw [heq, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hhalf]
     linarith
-  exact (riemannZeta_ne_zero_of_one_lt_re hright) (hball hdist)
+  exact (HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re hright) (hball hdist)
 
 /-- At every such regular point, zeta has its actual finite-order analytic
 factorization. Order zero covers a nonzero value. -/

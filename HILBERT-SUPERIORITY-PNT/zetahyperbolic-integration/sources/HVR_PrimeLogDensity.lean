@@ -1,3 +1,4 @@
+import NativeChebyshevBound
 import HVR_PrimeCount_GrowthCandidate
 import HVR_Smoothing_MonotoneNormalization
 
@@ -40,7 +41,7 @@ theorem logPrimeDensity_le_log_four (t : ℝ) :
   calc
     Real.exp (-t) * Chebyshev.theta (Real.exp t) ≤
         Real.exp (-t) * (Real.log 4 * Real.exp t) :=
-      mul_le_mul_of_nonneg_left (Chebyshev.theta_le_log4_mul_x ht)
+      mul_le_mul_of_nonneg_left (HVRNativeChebyshevBound.theta_le_log4_mul_x_native ht)
         (le_of_lt (Real.exp_pos (-t)))
     _ = (Real.exp (-t) * Real.exp t) * Real.log 4 := by ring
     _ = Real.log 4 := by rw [← Real.exp_add]; simp

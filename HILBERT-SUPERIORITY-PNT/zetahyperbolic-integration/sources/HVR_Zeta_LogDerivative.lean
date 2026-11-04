@@ -1,11 +1,12 @@
 import HVR_Prime_InfiniteGram
+import HVRMajorZetaLogDerivative
 import Mathlib.NumberTheory.LSeries.Dirichlet
 
 noncomputable section
 
 /-!
 Open-half-plane bridge to the actual Riemann zeta function. This module uses
-Mathlib's pre-existing von Mangoldt L-series logarithmic-derivative theorem.
+the reconstructed von Mangoldt L-series logarithmic-derivative theorem.
 The arithmetic coefficient split is pointwise: it does not prove convergence
 or holomorphic continuation of the higher-prime-power correction, does not
 identify the first part with the preceding HVR real cosine sum, and does not
@@ -57,11 +58,11 @@ theorem vonMangoldt_at_prime_pow {p k : ℕ} (hp : Nat.Prime p) (hk : k ≠ 0) :
     ArithmeticFunction.vonMangoldt_apply_prime hp]
 
 /-- The actual zeta log-derivative bridge on Re(s) > 1. The proof is the
-named Mathlib theorem. It does not by itself split off the prime series. -/
+reconstructed theorem. It does not by itself split off the prime series. -/
 theorem vonMangoldt_series_eq_zeta_log_deriv {s : ℂ} (hs : 1 < s.re) :
     LSeries (fun n : ℕ => (ArithmeticFunction.vonMangoldt n : ℂ)) s =
       -deriv riemannZeta s / riemannZeta s := by
-  exact ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div hs
+  exact HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta hs
 
 end HVRZetaLogDerivative
 

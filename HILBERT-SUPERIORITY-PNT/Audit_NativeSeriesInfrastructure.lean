@@ -1,0 +1,7 @@
+import NativeSeriesInfrastructure
+#check HVRNativeSeriesInfrastructure.hasSum_scale
+#print axioms HVRNativeSeriesInfrastructure.hasSum_scale
+#check HVRNativeSeriesInfrastructure.hasSum_identifies_tsum
+#print axioms HVRNativeSeriesInfrastructure.hasSum_identifies_tsum
+#check HVRNativeSeriesInfrastructure.complex_summable_of_majorant
+#print axioms HVRNativeSeriesInfrastructure.complex_summable_of_majorant

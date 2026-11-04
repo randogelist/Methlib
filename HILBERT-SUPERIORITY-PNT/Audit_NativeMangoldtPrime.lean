@@ -1,0 +1,3 @@
+import NativeMangoldtPrime
+#check HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native
+#print axioms HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native

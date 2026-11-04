@@ -1,0 +1,5 @@
+import NextMangoldtDivisorSum
+#check HVRNextMangoldtDivisorSum.vonMangoldt_sum_native
+#print axioms HVRNextMangoldtDivisorSum.vonMangoldt_sum_native
+#check HVRNextMangoldtDivisorSum.vonMangoldt_mul_zeta_native
+#print axioms HVRNextMangoldtDivisorSum.vonMangoldt_mul_zeta_native
