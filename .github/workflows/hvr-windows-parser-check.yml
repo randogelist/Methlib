@@ -38,3 +38,24 @@ jobs:
           if ($nameCount -ne 350) { throw 'Unexpected canonical audit count' }
           if ($plan[-1].module -ne 'HVR_PrimeDensity_FinalRoot') { throw 'Unexpected canonical final module' }
           Write-Host 'POWERSHELL_PLAN_CHECK=PASS'
+      - name: Exercise launcher without an installed Lean toolchain
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $sandbox = Join-Path $env:RUNNER_TEMP 'hvr-launcher-test'
+          $pkg = Join-Path $sandbox 'HILBERT-SUPERIORITY-PNT'
+          New-Item -ItemType Directory -Force -Path $pkg | Out-Null
+          Copy-Item (Join-Path $env:GITHUB_WORKSPACE '.github/powershell-validation/top-run.cmd') (Join-Path $sandbox 'run.cmd')
+          Copy-Item (Join-Path $env:GITHUB_WORKSPACE 'HILBERT-SUPERIORITY-PNT/run.cmd') $pkg
+          Copy-Item (Join-Path $env:GITHUB_WORKSPACE 'HILBERT-SUPERIORITY-PNT/run.ps1') $pkg
+          $env:USERPROFILE = Join-Path $sandbox 'empty-user'
+          $env:ELAN_HOME = Join-Path $sandbox 'empty-elan'
+          $env:LEAN_EXE = Join-Path $sandbox 'missing-lean.exe'
+          $out = @(& cmd.exe /d /c (Join-Path $sandbox 'run.cmd') 2>&1)
+          $code = $LASTEXITCODE
+          $out | ForEach-Object { Write-Host $_ }
+          if ($code -ne 1) { throw "Expected graceful missing-toolchain exit; got $code" }
+          if (-not ($out -match '^EVIDENCE=')) { throw 'Runner did not start' }
+          if (-not ($out -match '^REASON=Lean_4_34_0_rc1_not_runnable_set_LEAN_EXE')) { throw 'Expected missing-toolchain diagnostic' }
+          if (-not ($out -match '^LAUNCHER_EXIT_CODE=1')) { throw 'Expected launcher exit code' }
+          Write-Host 'NO_LEAN_STARTUP_SMOKE=PASS'
