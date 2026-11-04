@@ -59,3 +59,4 @@ jobs:
           if (-not ($out -match '^REASON=Lean_4_34_0_rc1_not_runnable_set_LEAN_EXE')) { throw 'Expected missing-toolchain diagnostic' }
           if (-not ($out -match '^LAUNCHER_EXIT_CODE=1')) { throw 'Expected launcher exit code' }
           Write-Host 'NO_LEAN_STARTUP_SMOKE=PASS'
+          $global:LASTEXITCODE = 0
