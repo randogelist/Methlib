@@ -37,18 +37,7 @@ theorem ordinaryBoundary_eq_scaled_fourier (ψ : ℝ → ℂ) (x : ℝ) :
 theorem ordinaryBoundary_tendsto_zero (ψ : ℝ → ℂ)
     (hψ : Continuous ψ) (hcompact : HasCompactSupport ψ) :
     Tendsto (ordinaryBoundary ψ) atTop (𝓝 0) := by
-  have hscale : Tendsto (fun x : ℝ => x * (-(2 * Real.pi)⁻¹)) atTop atBot := by
-    have hc : -(2 * Real.pi)⁻¹ < (0 : ℝ) :=
-      neg_lt_zero.mpr (inv_pos.mpr (mul_pos (by norm_num) Real.pi_pos))
-    apply (Filter.tendsto_mul_const_atBot_of_neg hc).2
-    exact tendsto_id
-  have hfreq : Tendsto (fun y : ℝ => ∫ t : ℝ,
-      Real.fourierChar (-(t * y)) • weightedBoundary ψ t) atBot (𝓝 0) := by
-    exact (Real.tendsto_integral_exp_smul_cocompact (weightedBoundary ψ)).mono_left
-      atBot_le_cocompact
-  have hscaled := hfreq.comp hscale
-  apply hscaled.congr'
-  filter_upwards [] with x
-  exact (ordinaryBoundary_eq_scaled_fourier ψ x).symm
+  simpa only [ordinaryBoundary, HVRActualBoundaryFourier.ordinaryBoundary] using
+    HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero ψ hψ hcompact
 
 end HVRPrimeBoundaryOrdinaryFrequencyDecay

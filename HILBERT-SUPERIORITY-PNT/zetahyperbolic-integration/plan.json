@@ -330,12 +330,64 @@
     "theorems": []
   },
   {
+    "module": "NativeFourierDecay",
+    "theorems": [
+      "NativeFourierDecay.decay_from_half_period_obligations"
+    ]
+  },
+  {
+    "module": "HVRFourierPhase",
+    "theorems": [
+      "HVRFourierPhase.half_period_shift",
+      "HVRFourierPhase.half_period_cancellation"
+    ]
+  },
+  {
+    "module": "HVRCompactTranslation",
+    "theorems": [
+      "HVRCompactTranslation.translation_integral_tendsto"
+    ]
+  },
+  {
+    "module": "HVRFourierLimit",
+    "theorems": [
+      "HVRFourierLimit.decay_of_half_period_obligations"
+    ]
+  },
+  {
+    "module": "HVROrdinaryFourier",
+    "theorems": [
+      "HVROrdinaryFourier.ordinaryIntegral_eq_scaled",
+      "HVROrdinaryFourier.ordinaryIntegral_tendsto_zero_of_atBot"
+    ]
+  },
+  {
+    "module": "HVRCompactFourierDecay",
+    "theorems": [
+      "HVRCompactFourierDecay.fourier_tendsto_atTop",
+      "HVRCompactFourierDecay.fourier_tendsto_atBot",
+      "HVRCompactFourierDecay.ordinary_tendsto_atTop",
+      "HVRCompactFourierDecay.weighted_boundary_tendsto_atTop"
+    ]
+  },
+  {
+    "module": "HVRActualBoundaryFourier",
+    "theorems": [
+      "HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero",
+      "HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero"
+    ]
+  },
+  {
     "module": "HVR_PrimeBoundary_FourierDecay",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeBoundaryFourierDecay.weightedBoundary_fourier_tendsto_zero"
+    ]
   },
   {
     "module": "HVR_PrimeBoundary_OrdinaryFrequencyDecay",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_tendsto_zero"
+    ]
   },
   {
     "module": "HVR_PrimeBoundary_AbelLimitConditional",
