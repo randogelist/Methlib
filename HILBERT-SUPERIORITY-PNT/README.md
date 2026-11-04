@@ -1,12 +1,11 @@
 # Hilbert–Superiority PNT
 
-**Direct-mode theta root:** The 88-module proof chain at
-[run 41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013)
-compiled and passed its named standard-only axiom audits under cached Linux
-Lean 4.34.0-rc1. All 88 tested source files match this canonical source
-byte-for-byte. The larger 90-stage canonical runner and its DCT diagnostic
-still require a matching external run. Windows execution is also unverified.
-Mathlib sum-integral and change-of-variable infrastructure remain.
+**Direct-mode theta root:** The full 90-stage canonical build, named
+standard-only axiom audits, and controlled dependency diagnostics passed in
+[cached Linux run 41748517704](https://github.com/randogelist/Methlib/actions/runs/41748517704)
+at commit `673d97bd2fc7b4d80fda00b84de8b82072e340c7`, using Lean 4.34.0-rc1.
+Windows execution of this revised source is unverified. Mathlib sum-integral
+and change-of-variable infrastructure remain.
 
 
 > **Historical Abel-root CI:** [Cached Linux CI run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
@@ -33,7 +32,7 @@ HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one :
 [Named axiom audit](Audit_HVR_PrimeDensity_FinalRoot.lean) ·
 [CI runs and evidence](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
 
-The candidate workflow builds the 90 staged modules and audits their
+The workflow builds the 90 staged modules and audits their 293 named
 named declarations, including the root theorem and its two named supporting
 declarations. The runner rejects missing audit reports and axioms outside
 `propext`, `Classical.choice`, and `Quot.sound`. Open a run above and download
@@ -42,8 +41,8 @@ its `hvr-theta-linux-evidence` artifact for its logs and recorded hashes.
 An earlier external Windows run of the original source package was reported to
 have passed the root build and named standard-axiom audit. Its full Mathlib
 cache provenance was not recorded, and it predates the present Mellin source.
-The historical Abel-root run above predates this source; the separate
-88-module direct-mode CI run at the top is matching source evidence.
+The historical Abel-root run above predates this source; the full 90-stage
+direct-mode CI run at the top is matching source evidence.
 Neither an axiom audit nor a green workflow establishes independence from other
 PNT proofs.
 
@@ -115,21 +114,24 @@ summation case from Mathlib's `Mathlib/NumberTheory/LSeries/SumCoeff.lean`
 at the pinned revision, retaining the original attribution and Apache 2.0
 license in [LICENSE-MATHLIB.txt](LICENSE-MATHLIB.txt). The earlier
 MellinCandidate proof invoked that helper. The current
-candidate preserves its theorem statements but instead calls the
+proof preserves its theorem statements but instead calls the
 prime-mode assembly. The helper remains as a separately audited
-historical stage. The candidate uses Mathlib sum-integral and
+historical stage. The proof uses Mathlib sum-integral and
 change-of-variables infrastructure.
 
 The direct-mode proof factors the theta definitions and conversion lemmas
 upstream to avoid the prior import cycle. Its theta root and named mode
-declarations passed standard-only axiom audits in
-[run 41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013).
+declarations passed standard-only axiom audits in the full 90-stage
+[run 41748517704](https://github.com/randogelist/Methlib/actions/runs/41748517704).
 The controlled diagnostic detected six direct/two-hop positive controls and
 found the mode theorem in the actual theta root. It did not see the Abel helper
 or selected Mathlib Mellin theorem in that root; negative dependency coverage
 remains unverified. It found the Mathlib von Mangoldt log-derivative theorem,
-so this is not a Mathlib-free PNT proof. The exact [evidence artifact](https://github.com/randogelist/Methlib/actions/runs/41747091013/artifacts/13283363826)
+so this is not a Mathlib-free PNT proof. The exact [evidence artifact](https://github.com/randogelist/Methlib/actions/runs/41748517704/artifacts/13285471045)
 records the tested source and object hashes, audits, and diagnostics.
+
+The same 90-stage run found both selected dominated-convergence declarations
+in the final root, with all direct/two-hop DCT positive controls detected.
 
 [Run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
 built the helper and modified Mellin module, passed their named standard-only
@@ -154,10 +156,9 @@ The finite strict-positivity theorem retains a prime-node witness; the general
 Jacobi theorem retains determinant nonvanishing. The continuous frequency
 identity retains two explicit approximation limits. The separately audited
 earlier downstream prime-mode assembly discharges its
-prime/theta expansion and derives a Mellin identity. This 90-stage
-candidate factors the necessary modules upstream to remove its import cycle.
-The 88-module root and controlled trace passed in the mode-root run above;
-the full 90-stage canonical runner remains to be verified. The
+prime/theta expansion and derives a Mellin identity. The current 90-stage
+chain factors the necessary modules upstream to remove its import cycle.
+The root and controlled trace passed in the run above. The
 downstream mode assembly and abstract frequency
 bounds passed named audits in [run 41745623568](https://github.com/randogelist/Methlib/actions/runs/41745623568);
 the actual positively damped prime-error first-moment theorem passed in

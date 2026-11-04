@@ -7,9 +7,9 @@ downstream prime-mode Mellin assembly, and a conditional finite-frequency
 bridge with explicit weighted frequency bounds. See
 HVR_ZETAHYPERBOLIC_INTEGRATION_A_TIER.txt for exact scope and open premises.
 
-The named theorems passed the cached Linux Lean 4.34.0-rc1 build and
-standard-only axiom audits in
-https://github.com/randogelist/Methlib/actions/runs/41744680137 . The exact
+All 46 named declarations in the 11-lane plan passed cached Linux Lean
+4.34.0-rc1 builds and standard-only axiom audits in
+https://github.com/randogelist/Methlib/actions/runs/41748517642 . The exact
 additional mode assembly and weighted bounds passed in
 https://github.com/randogelist/Methlib/actions/runs/41745623568 .
 The actual prime-error weighted moment passed in

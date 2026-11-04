@@ -1,6 +1,9 @@
 HVR ZETAHYPERBOLIC INTEGRATION -- RC1 CANDIDATE
 
 STATUS: NAMED THEOREMS PASS on external cached Linux Lean 4.34.0-rc1.
+All 46 named declarations in this complete package passed the 11-lane
+integration build and standard-only axiom audits for these source hashes:
+https://github.com/randogelist/Methlib/actions/runs/41748517642
 The initial 31 named declarations in four dependency-closed CI lanes compiled
 and passed standard-only axiom audits:
 https://github.com/randogelist/Methlib/actions/runs/41744680137
@@ -22,6 +25,8 @@ are separate and do not validate source edits by themselves.
 The refactored prime-mode PNT root and named mode theorems passed an external
 88-source Linux RC1 build and audit at the exact refactored source hashes:
 https://github.com/randogelist/Methlib/actions/runs/41747091013
+The complete canonical 90-stage root and 293 named audits also passed:
+https://github.com/randogelist/Methlib/actions/runs/41748517704
 
 This package contains a source-level PNT root integration candidate plus
 separate finite-dimensional and conditional interfaces:

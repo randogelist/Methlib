@@ -1,21 +1,24 @@
 # Source provenance and scope
 
-**Direct-mode root:** The refactored 88-module root source chain compiled and
-passed its named standard-only axiom audits in cached Linux
-[run 41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013)
-at commit 0ca20094873e770e44ac584f14aaf7dcc0703652. All 88 tested source
-blobs match the canonical candidate byte-for-byte. The prior 86-stage
-Abel-root run below is historical. The complete 90-stage canonical runner
-and its separate DCT diagnostic still require a fresh matching run.
-Mathlib sum-integral and change-of-variable infrastructure remain.
+**Direct-mode root:** The full 90-stage canonical build and named standard-only
+axiom audits passed in cached Linux
+[run 41748517704](https://github.com/randogelist/Methlib/actions/runs/41748517704)
+at commit `673d97bd2fc7b4d80fda00b84de8b82072e340c7`. Its
+[evidence artifact](https://github.com/randogelist/Methlib/actions/runs/41748517704/artifacts/13285471045)
+records source/object hashes and diagnostic outputs. An earlier matching
+88-module proof-chain run was
+[41747091013](https://github.com/randogelist/Methlib/actions/runs/41747091013).
+The prior 86-stage Abel-root run below is historical. Windows execution
+of this revised source remains unverified. Mathlib sum-integral and
+change-of-variable infrastructure remain.
 
 The direct-mode diagnostic detected six direct/two-hop positive controls.
 It found the prime-mode theorem and original wrapper in the actual root;
 it did not see the prior Abel helper or Mathlib LSeries_eq_mul_integral
 there. Negative trace coverage remains unverified. It found Mathlib's
-von Mangoldt log-derivative theorem in the root. The earlier Abel-root
-diagnostic found both selected dominated-convergence declarations; their
-new-root diagnostic remains to be run.
+von Mangoldt log-derivative theorem in the root. The 90-stage run's DCT
+diagnostic detected all four positive controls and found both selected
+dominated-convergence declarations in the revised root.
 
 
 ## Mellin integration and checked scope
@@ -26,7 +29,7 @@ new-root diagnostic remains to be run.
 upstream attribution; the Apache 2.0 text is in `LICENSE-MATHLIB.txt`.
 The existing Mellin theorem statements and premises are preserved, while
 the earlier proof called that helper. The helper retains Mathlib's general
-Abel-summation and analysis infrastructure; the current candidate root uses
+Abel-summation and analysis infrastructure; the current root uses
 the prime-mode route instead.
 
 The earlier 86-stage source was built and its named declarations were
