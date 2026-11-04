@@ -87,6 +87,9 @@ jobs:
           (cd "$PKG/diagnostics" && "$LEAN" HVRModeDependencyDiagnostic.lean) | tee "$EVIDENCE/mode-diagnostic.stdout.log"
           grep -F 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes' "$EVIDENCE/mode-diagnostic.stdout.log"
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          (cd "$PKG/diagnostics" && "$LEAN" HVRChebyshevDependencyDiagnostic.lean) | tee "$EVIDENCE/chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeChebyshevBound.theta_le_log4_mul_x_native' "$EVIDENCE/chebyshev-diagnostic.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/chebyshev-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload lane audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

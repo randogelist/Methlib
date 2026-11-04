@@ -149,6 +149,14 @@
     ]
   },
   {
+    "module": "NativeChebyshevBound",
+    "theorems": [
+      "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+      "HVRNativeChebyshevBound.primorial_le_four_pow_native",
+      "HVRNativeChebyshevBound.theta_le_log4_mul_x_native"
+    ]
+  },
+  {
     "module": "HVR_PrimeCount_GrowthCandidate",
     "theorems": []
   },

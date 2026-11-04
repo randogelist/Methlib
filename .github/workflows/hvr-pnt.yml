@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "e98a8dc6a1e8d0c4a3a6b4e698661c58da43bdf19f10ddc816e7beb1c5ed6b7d  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          echo "45350f95bca9b7910f0383b1d85203e53d7c0d85dce362b10e7fc41791e416a1  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
           (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib
@@ -121,6 +121,19 @@ jobs:
           "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRModeDependencyDiagnostic.lean" | tee "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log"
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose Chebyshev bound dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$HVR_EVIDENCE"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRChebyshevDependencyDiagnostic.lean" | tee "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeChebyshevBound.theta_le_log4_mul_x_native' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Upload evidence
         if: always()

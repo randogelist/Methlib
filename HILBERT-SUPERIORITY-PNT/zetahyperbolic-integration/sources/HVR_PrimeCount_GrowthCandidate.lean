@@ -1,3 +1,4 @@
+import NativeChebyshevBound
 import HVR_PrimeCount_MellinCandidate
 import HVR_PrimeCount_MellinConversion
 import Mathlib.NumberTheory.Chebyshev
@@ -28,7 +29,7 @@ theorem primeCoefficient_partial_sum_isBigO :
   simpa only [Real.rpow_one, Complex.norm_real, Real.norm_eq_abs,
     abs_of_nonneg (Chebyshev.theta_nonneg (n : ℝ)),
     abs_of_nonneg hn] using
-      (Chebyshev.theta_le_log4_mul_x hn)
+      (HVRNativeChebyshevBound.theta_le_log4_mul_x_native hn)
 
 /-- Mellin identity with no prime-count growth premise. -/
 theorem primeSeries_eq_mul_primeThetaMellin_unconditional
