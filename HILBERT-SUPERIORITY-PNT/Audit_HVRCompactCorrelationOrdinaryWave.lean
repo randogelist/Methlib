@@ -1,0 +1,3 @@
+import HVRCompactCorrelationOrdinaryWave
+
+#print axioms HVRCompactCorrelationOrdinaryWave.fourierInv_correlation_eq_seed_transform_sq

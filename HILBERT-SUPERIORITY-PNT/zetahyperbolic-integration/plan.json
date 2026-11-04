@@ -178,10 +178,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_PhysicalKernel_Candidate",
-    "theorems": []
-  },
-  {
     "module": "IntegratedZetaNonzero",
     "theorems": [
       "HVRIntegratedZetaNonzero.moebiusLSeries_summable",
@@ -250,14 +246,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_SpectralSeedCorrelation",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_PositiveMass",
-    "theorems": []
-  },
-  {
     "module": "HVRCompactFourierDecay",
     "theorems": [
       "HVRCompactFourierDecay.fourier_tendsto_atTop",
@@ -300,10 +288,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_SpectralCorrelation_Compact",
-    "theorems": []
-  },
-  {
     "module": "HVRPrimeKernelTrace",
     "theorems": [
       "HVRPrimeKernelTrace.trace_shifted_eq_prime_kernel_sum",
@@ -326,10 +310,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_SpectralCorrelation_Regularity",
-    "theorems": []
-  },
-  {
     "module": "HVRTwoPrimeGram",
     "theorems": [
       "HVRTwoPrimeGram.evalFeature_two",
@@ -349,14 +329,6 @@
   },
   {
     "module": "HVR_Correction_UniformBound",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledSpectrum",
-    "theorems": []
-  },
-  {
-    "module": "HVR_SpectralCorrelation_FourierSquare",
     "theorems": []
   },
   {
@@ -542,10 +514,6 @@
     ]
   },
   {
-    "module": "HVR_PhysicalKernel_WindowAlgebra",
-    "theorems": []
-  },
-  {
     "module": "HVR_PrimeDensity_PNTConditional",
     "theorems": []
   },
@@ -554,22 +522,6 @@
     "theorems": [
       "HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_tendsto_zero"
     ]
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledTranslate",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_Tail",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_CanonicalWindow",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_TailScaling",
-    "theorems": []
   },
   {
     "module": "HVR_Complex_PoleLaplace",
@@ -828,19 +780,7 @@
     ]
   },
   {
-    "module": "HVR_PhysicalKernel_WaveReal",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_SpectralIdentity",
-    "theorems": []
-  },
-  {
     "module": "HVR_PrimeDensity_SpatialAbel",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledRepresentation",
     "theorems": []
   },
   {
@@ -868,19 +808,7 @@
     "theorems": []
   },
   {
-    "module": "HVR_PrimeDensity_ScaledSpectrumDecay",
-    "theorems": []
-  },
-  {
     "module": "HVR_PrimeDensity_IntegralDecomposition",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ReflectedSpectrum",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ScaledPhysicalDecay",
     "theorems": []
   },
   {
@@ -888,11 +816,119 @@
     "theorems": []
   },
   {
-    "module": "HVR_PrimeDensity_ReflectedPhysicalDecay",
+    "module": "HVRPhaseTranslationDirect",
+    "theorems": [
+      "HVRPhaseTranslationDirect.phase_add",
+      "HVRPhaseTranslationDirect.translated_phase_integral"
+    ]
+  },
+  {
+    "module": "HVROrdinarySeed",
+    "theorems": [
+      "HVROrdinarySeed.complexSeed_compact",
+      "HVROrdinarySeed.complexSeed_smooth"
+    ]
+  },
+  {
+    "module": "HVRAnalyticPhaseBasics",
+    "theorems": [
+      "HVRAnalyticPhaseBasics.phase_symm",
+      "HVRAnalyticPhaseBasics.phase_frequency_lipschitz",
+      "HVRAnalyticPhaseBasics.phase_mul_integrable",
+      "HVRAnalyticPhaseBasics.integral_phase_frequency_lipschitz"
+    ]
+  },
+  {
+    "module": "HVROneDimensionalCompactDecay",
+    "theorems": [
+      "HVROneDimensionalCompactDecay.phase_integral_mul_eq_neg_derivative_integral",
+      "HVROneDimensionalCompactDecay.phase_integral_derivative_bound"
+    ]
+  },
+  {
+    "module": "HVRStandaloneSeedIntervalDecay",
+    "theorems": [
+      "HVRStandaloneSeedIntervalDecay.seed_deriv_integrable",
+      "HVRStandaloneSeedIntervalDecay.phase_hasDerivAt",
+      "HVRStandaloneSeedIntervalDecay.seed_phase_first_derivative_bound"
+    ]
+  },
+  {
+    "module": "HVROrdinarySeedWaveStandalone",
+    "theorems": [
+      "HVROrdinarySeedWave.ordinaryWave_eq_fourierInv",
+      "HVROrdinarySeedWave.seed_integrable",
+      "HVROrdinarySeedWave.seed_first_moment_integrable",
+      "HVROrdinarySeedWave.ordinaryWave_norm_le",
+      "HVROrdinarySeedWave.ordinaryWave_continuous",
+      "HVROrdinarySeedWave.ordinaryWave_first_derivative_bound",
+      "HVROrdinarySeedWave.ordinaryWave_norm_sq_integrable"
+    ]
+  },
+  {
+    "module": "HVR_PhysicalKernel_Candidate",
+    "theorems": [
+      "HVRPhysicalKernelCandidate.rawKernel_nonneg",
+      "HVRPhysicalKernelCandidate.rawKernel_continuous",
+      "HVRPhysicalKernelCandidate.rawKernel_integrable"
+    ]
+  },
+  {
+    "module": "HVR_SpectralSeedCorrelation",
     "theorems": []
   },
   {
-    "module": "HVR_PrimeDensity_DecompositionEndpoint",
+    "module": "HVR_PhysicalKernel_PositiveMass",
+    "theorems": [
+      "HVRPhysicalKernelCandidate.ordinaryWave_at_zero",
+      "HVRPhysicalKernelCandidate.rawKernel_at_zero",
+      "HVRPhysicalKernelCandidate.mass_pos"
+    ]
+  },
+  {
+    "module": "HVR_SpectralCorrelation_Compact",
+    "theorems": []
+  },
+  {
+    "module": "HVR_SpectralCorrelation_Regularity",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledSpectrum",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_WindowAlgebra",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledTranslate",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_Tail",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_CanonicalWindow",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_TailScaling",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_WaveReal",
+    "theorems": [
+      "HVRPhysicalKernelWaveReal.ordinaryWave_im_zero"
+    ]
+  },
+  {
+    "module": "HVR_PrimeDensity_ScaledSpectrumDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ReflectedSpectrum",
     "theorems": []
   },
   {
@@ -932,13 +968,6 @@
     ]
   },
   {
-    "module": "HVRPhaseTranslationDirect",
-    "theorems": [
-      "HVRPhaseTranslationDirect.phase_add",
-      "HVRPhaseTranslationDirect.translated_phase_integral"
-    ]
-  },
-  {
     "module": "HVRCompactCorrelationPhaseSum",
     "theorems": [
       "HVRCompactCorrelationPhaseSum.complexSeed_even",
@@ -957,10 +986,41 @@
     ]
   },
   {
+    "module": "HVR_SpectralCorrelation_FourierSquare",
+    "theorems": [
+      "HVRSpectralCorrelationFourierSquare.ordinaryWave_eq_legacy_wave",
+      "HVRSpectralCorrelationFourierSquare.rawKernel_eq_legacy_wave_sq",
+      "HVRSpectralCorrelationFourierSquare.fourierInv_correlation_eq_wave_sq",
+      "HVRSpectralCorrelationFourierSquare.fourierInv_correlation_eq_rawKernel_of_im_zero"
+    ]
+  },
+  {
     "module": "HVRCompactCorrelationOrdinaryWave",
     "theorems": [
       "HVRCompactCorrelationOrdinaryWave.fourierInv_correlation_eq_seed_transform_sq"
     ]
+  },
+  {
+    "module": "HVR_PhysicalKernel_SpectralIdentity",
+    "theorems": [
+      "HVRPhysicalKernelSpectralIdentity.fourierInv_correlation_eq_rawKernel"
+    ]
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledRepresentation",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ScaledPhysicalDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ReflectedPhysicalDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_DecompositionEndpoint",
+    "theorems": []
   },
   {
     "module": "HVR_PrimeDensity_FinalRoot",

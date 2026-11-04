@@ -5,3 +5,4 @@ import HVR_PhysicalKernel_PositiveMass
 #print axioms HVRPhysicalKernelCandidate.mass_pos
 #print axioms HVRPhysicalKernelCandidate.normalizedKernel_nonneg_unconditional
 #print axioms HVRPhysicalKernelCandidate.normalizedKernel_integral_unconditional
+#print axioms HVRPhysicalKernelCandidate.ordinaryWave_at_zero

@@ -1,0 +1,5 @@
+import HVRStandaloneSeedIntervalDecay
+
+#print axioms HVRStandaloneSeedIntervalDecay.seed_deriv_integrable
+#print axioms HVRStandaloneSeedIntervalDecay.phase_hasDerivAt
+#print axioms HVRStandaloneSeedIntervalDecay.seed_phase_first_derivative_bound

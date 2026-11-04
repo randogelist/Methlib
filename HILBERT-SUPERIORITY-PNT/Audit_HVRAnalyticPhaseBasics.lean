@@ -1,0 +1,6 @@
+import HVRAnalyticPhaseBasics
+
+#print axioms HVRAnalyticPhaseBasics.phase_symm
+#print axioms HVRAnalyticPhaseBasics.phase_frequency_lipschitz
+#print axioms HVRAnalyticPhaseBasics.phase_mul_integrable
+#print axioms HVRAnalyticPhaseBasics.integral_phase_frequency_lipschitz

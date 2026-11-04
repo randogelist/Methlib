@@ -1,3 +1,4 @@
+import HVROrdinarySeedWaveStandalone
 import HVR_Smoothing_FrequencySeed
 import Mathlib.Analysis.Distribution.SchwartzSpace.Fourier
 import Mathlib.MeasureTheory.Function.L2Space
@@ -7,12 +8,11 @@ noncomputable section
 open MeasureTheory
 
 /-!
-Candidate construction, not locally compiled. The physical wave is the inverse
-Fourier transform of the already-audited compactly supported frequency seed.
-Its squared norm is a continuous, nonnegative, integrable function. The displayed
-normalization is conditional on positivity of its integral: that positivity,
-the Fourier-support estimate for the square, and the smoothing limit itself
-are not proved here. No PNT or independence claim is made.
+Candidate refactor: `wave` is retained as the original Schwartz-valued
+declaration. `rawKernel` now uses the independently constructed ordinary
+phase-integral wave, with direct one-variable continuity and integrability.
+The root and named theorems require a fresh external Lean build and audit.
+No dependency-independence or PNT closure claim is made by this module.
 -/
 namespace HVRPhysicalKernelCandidate
 
@@ -46,7 +46,7 @@ def wave (w : ℝ) (hw : 0 < w) : SchwartzMap ℝ ℂ :=
   FourierTransformInv.fourierInv (seedSchwartz w hw)
 
 def rawKernel (w : ℝ) (hw : 0 < w) (x : ℝ) : ℝ :=
-  ‖wave w hw x‖ ^ 2
+  ‖HVROrdinarySeedWave.ordinaryWave w hw x‖ ^ 2
 
 theorem rawKernel_nonneg (w : ℝ) (hw : 0 < w) (x : ℝ) :
     0 ≤ rawKernel w hw x := by
@@ -54,12 +54,11 @@ theorem rawKernel_nonneg (w : ℝ) (hw : 0 < w) (x : ℝ) :
 
 theorem rawKernel_continuous (w : ℝ) (hw : 0 < w) :
     Continuous (rawKernel w hw) := by
-  exact ((wave w hw).continuous.norm).pow 2
+  exact (HVROrdinarySeedWave.ordinaryWave_continuous w hw).norm.pow 2
 
 theorem rawKernel_integrable (w : ℝ) (hw : 0 < w) :
     Integrable (rawKernel w hw) volume := by
-  exact (memLp_two_iff_integrable_sq_norm
-    (wave w hw).continuous.aestronglyMeasurable).mp ((wave w hw).memLp 2 volume)
+  exact HVROrdinarySeedWave.ordinaryWave_norm_sq_integrable w hw
 
 def mass (w : ℝ) (hw : 0 < w) : ℝ :=
   ∫ x : ℝ, rawKernel w hw x

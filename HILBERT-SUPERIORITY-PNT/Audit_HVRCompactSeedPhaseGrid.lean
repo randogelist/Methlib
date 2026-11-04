@@ -1,0 +1,3 @@
+import HVRCompactSeedPhaseGrid
+
+#print axioms HVRCompactSeedPhaseGrid.sampledPhase_tendsto

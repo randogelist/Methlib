@@ -1,0 +1,4 @@
+import HVROneDimensionalCompactDecay
+
+#print axioms HVROneDimensionalCompactDecay.phase_integral_mul_eq_neg_derivative_integral
+#print axioms HVROneDimensionalCompactDecay.phase_integral_derivative_bound

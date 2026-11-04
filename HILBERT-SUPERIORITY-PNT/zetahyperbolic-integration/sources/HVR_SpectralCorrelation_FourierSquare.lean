@@ -1,3 +1,4 @@
+import HVRCompactCorrelationFourierSquare
 import HVR_SpectralCorrelation_Regularity
 import HVR_PhysicalKernel_Candidate
 import Mathlib.Analysis.Fourier.Convolution
@@ -39,6 +40,20 @@ theorem wave_eq_fourierInv_complexSeed (w : ℝ) (hw : 0 < w) (x : ℝ) :
   rw [SchwartzMap.fourierInv_coe]
   congr 1
 
+/-- Compatibility with the original Schwartz wave. This theorem is for
+comparison and is not used by the new ordinary-wave PNT proof. -/
+theorem ordinaryWave_eq_legacy_wave (w : ℝ) (hw : 0 < w) (x : ℝ) :
+    HVROrdinarySeedWave.ordinaryWave w hw x = wave w hw x := by
+  rw [wave_eq_fourierInv_complexSeed,
+    HVRCompactCorrelationFourierSquare.fourierInv_eq_phase_integral]
+  rfl
+
+/-- The refactored physical kernel has exactly the old pointwise values.
+This compatibility proof may use the legacy Schwartz Fourier construction. -/
+theorem rawKernel_eq_legacy_wave_sq (w : ℝ) (hw : 0 < w) (x : ℝ) :
+    rawKernel w hw x = ‖wave w hw x‖ ^ 2 := by
+  rw [rawKernel, ordinaryWave_eq_legacy_wave]
+
 /-- Exact inverse-Fourier correlation identity up to the wave-realness step. -/
 theorem fourierInv_correlation_eq_wave_sq (w : ℝ) (hw : 0 < w) (x : ℝ) :
     FourierTransformInv.fourierInv (complexCorrelation w hw) x = (wave w hw x) ^ 2 := by
@@ -62,7 +77,9 @@ theorem fourierInv_correlation_eq_rawKernel_of_im_zero
       (rawKernel w hw x : ℂ) := by
   have hz : wave w hw x = ((wave w hw x).re : ℂ) := by
     apply Complex.ext <;> simp [hreal]
-  rw [fourierInv_correlation_eq_wave_sq, rawKernel, hz]
+  have hord : HVROrdinarySeedWave.ordinaryWave w hw x = wave w hw x :=
+    ordinaryWave_eq_legacy_wave w hw x
+  rw [fourierInv_correlation_eq_wave_sq, rawKernel, hord, hz]
   simp [Complex.norm_real, Real.norm_eq_abs, sq_abs]
 
 end HVRSpectralCorrelationFourierSquare

@@ -1,0 +1,6 @@
+import HVRCompactCorrelationFourierSquare
+
+#print axioms HVRCompactCorrelationFourierSquare.correlation_phase_integral_eq_square
+#print axioms HVRCompactCorrelationFourierSquare.fourierInv_eq_phase_integral
+#print axioms HVRCompactCorrelationFourierSquare.wave_eq_fourierInv_seed
+#print axioms HVRCompactCorrelationFourierSquare.fourierInv_correlation_eq_wave_sq_direct

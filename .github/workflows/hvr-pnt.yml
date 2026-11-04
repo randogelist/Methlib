@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "c3d4e605f036f65cb01ec7ab7655cac4b75067af358acd71c2bc3b313a118cbf  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          echo "6cb9e4b951e1c2ec986c482950028cba81dd7074f4f238ec81d1f1810c9a4064  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
           (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib
@@ -209,8 +209,7 @@ jobs:
           done
           grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRRealReflection.real_volume_negInvariant_direct|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/HVRRealReflectionTrace.stdout.log" >/dev/null
 
-      - name: Inspect explicit root swap path (diagnostic only)
-        continue-on-error: true
+      - name: Inspect explicit root swap path
         timeout-minutes: 10
         shell: bash
         run: |
@@ -220,7 +219,33 @@ jobs:
           export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           timeout 480 "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRPrimeSwapPathTrace.lean" | tee "$HVR_EVIDENCE/root-swap-path.stdout.log"
-          grep -E '^SWAP_PATH_|^DEPENDENCY_COVERAGE=' "$HVR_EVIDENCE/root-swap-path.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          for ENTRY in \
+            'HVRPrimeSwapPathControl.swapDirect|MeasureTheory.integral_integral_swap' \
+            'HVRPrimeSwapPathControl.swapIndirect|MeasureTheory.integral_integral_swap' \
+            'HVRPrimeSwapPathControl.convolutionDirect|Real.fourier_mul_convolution_eq' \
+            'HVRPrimeSwapPathControl.convolutionIndirect|Real.fourier_mul_convolution_eq'; do
+            grep -Fx "PATH_CONTROL_DETECTED=$ENTRY" "$HVR_EVIDENCE/root-swap-path.stdout.log" >/dev/null
+          done
+          ROOT_OBSERVATIONS="$(grep -Ec '^PATH_TARGET_(FOUND|NOT_SEEN_COVERAGE_UNVERIFIED)=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one\|(MeasureTheory.integral_integral_swap|Real.fourier_mul_convolution_eq)$' "$HVR_EVIDENCE/root-swap-path.stdout.log")"
+          test "$ROOT_OBSERVATIONS" -eq 2
+          grep -Fx 'PATH_THEOREM_BODIES_UNAVAILABLE=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|0' "$HVR_EVIDENCE/root-swap-path.stdout.log" >/dev/null
+          grep -Fx 'PATH_DECLARATIONS_MISSING=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|0' "$HVR_EVIDENCE/root-swap-path.stdout.log" >/dev/null
+          grep -E '^PATH_|^SWAP_PATH_|^DEPENDENCY_COVERAGE|^SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-swap-path.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose direct ordinary-wave root dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVROrdinaryWaveRootTrace.lean" | tee "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log"
+          grep -Fx 'POSITIVE_CONTROL_DETECTED=HVRCompactConvolutionTraceControls.swapIndirect|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRPhysicalKernelCandidate.wave|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVROrdinarySeedWave.ordinaryWave|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPhysicalKernelSpectralIdentity.fourierInv_correlation_eq_rawKernel|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >/dev/null
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/ordinary-wave-root-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Upload evidence
         if: always()

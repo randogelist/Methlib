@@ -25,8 +25,21 @@ theorem wave_at_zero (w : ℝ) (hw : 0 < w) : wave w hw 0 = 1 := by
       simp [Real.fourierInv_eq', seedSchwartz_apply]
     _ = 1 := by rw [hreal, seed_integral]; norm_num
 
+/-- The replacement ordinary integral wave has the same normalization,
+without using the legacy Schwartz wave. -/
+theorem ordinaryWave_at_zero (w : ℝ) (hw : 0 < w) :
+    HVROrdinarySeedWave.ordinaryWave w hw 0 = 1 := by
+  have hreal :
+      (∫ x : ℝ, (seed w hw x : ℂ)) =
+        (((∫ x : ℝ, seed w hw x) : ℝ) : ℂ) := integral_complex_ofReal
+  calc
+    HVROrdinarySeedWave.ordinaryWave w hw 0 = ∫ x : ℝ, (seed w hw x : ℂ) := by
+      simp [HVROrdinarySeedWave.ordinaryWave, HVROrdinarySeed.complexSeed,
+        HVRAnalyticPhaseBasics.phase]
+    _ = 1 := by rw [hreal, seed_integral]; norm_num
+
 theorem rawKernel_at_zero (w : ℝ) (hw : 0 < w) : rawKernel w hw 0 = 1 := by
-  simp [rawKernel, wave_at_zero]
+  simp [rawKernel, ordinaryWave_at_zero]
 
 theorem mass_pos (w : ℝ) (hw : 0 < w) : 0 < mass w hw := by
   unfold mass

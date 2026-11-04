@@ -1,0 +1,6 @@
+import HVRCompactCorrelationPhaseSum
+
+#print axioms HVRCompactCorrelationPhaseSum.complexSeed_even
+#print axioms HVRCompactCorrelationPhaseSum.translated_seed_phase_integrable
+#print axioms HVRCompactCorrelationPhaseSum.sampled_phase_integral_eq_product
+#print axioms HVRCompactCorrelationPhaseSum.sampled_phase_integrals_tendsto_square

@@ -1,0 +1,9 @@
+import HVROrdinarySeedWaveStandalone
+
+#print axioms HVROrdinarySeedWave.ordinaryWave_eq_fourierInv
+#print axioms HVROrdinarySeedWave.seed_integrable
+#print axioms HVROrdinarySeedWave.seed_first_moment_integrable
+#print axioms HVROrdinarySeedWave.ordinaryWave_norm_le
+#print axioms HVROrdinarySeedWave.ordinaryWave_continuous
+#print axioms HVROrdinarySeedWave.ordinaryWave_first_derivative_bound
+#print axioms HVROrdinarySeedWave.ordinaryWave_norm_sq_integrable
