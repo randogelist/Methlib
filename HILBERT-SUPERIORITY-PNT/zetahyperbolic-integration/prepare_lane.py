@@ -17,7 +17,7 @@ from pathlib import Path
 ROOTS = {
     "fubini_budget": "HVRFrequencyCellBudget",
     "fubini_grid": "HVRFrequencyMeshLimit",
-    "fubini_right": "HVRPrimeLaplaceFrequencyConditional",
+    "fubini_right": "HVRPrimeDirectFrequency",
     "snd": "HVRPrimeSndAssembly",
     "matrix": "HVRPrimeGramJacobiBridge",
     "frequency": "HVRZetaHyperbolicFiniteFrequency",

@@ -1,4 +1,4 @@
-import HVRPrimeLaplaceFrequencyConditional
+import HVRPrimeDirectFrequency
 import ImportGraph.Imports.RequiredModules
 import ImportGraph.Lean.Environment
 
@@ -30,6 +30,10 @@ run_cmd do
       throwError "POSITIVE_CONTROL_MISSED={root}|{target}"
     IO.println s!"POSITIVE_CONTROL_DETECTED={root}|{target}"
   let roots : Array Name := #[
+    `HVRPrimeDirectFrequency.dampedError_integrable_direct,
+    `HVRPrimeDirectFrequency.damped_phase_integrable_direct,
+    `HVRPrimeDirectFrequency.first_moment_integrable_direct,
+    `HVRPrimeDirectFrequency.primeDensity_frequency_lipschitz_direct,
     `HVRFrequencyTransformGrid.actual_prime_grid_cell_error,
     `HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_frequency_lipschitz,
     `HVRPrimeLaplaceFrequencyConditional.frequency_lipschitz_of_integrable_modes_moment,

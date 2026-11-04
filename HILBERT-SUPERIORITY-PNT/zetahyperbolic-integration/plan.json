@@ -576,5 +576,14 @@
     "theorems": [
       "HVRPrimeLaplaceFrequencyConditional.frequency_lipschitz_of_integrable_modes_moment"
     ]
+  },
+  {
+    "module": "HVRPrimeDirectFrequency",
+    "theorems": [
+      "HVRPrimeDirectFrequency.dampedError_integrable_direct",
+      "HVRPrimeDirectFrequency.damped_phase_integrable_direct",
+      "HVRPrimeDirectFrequency.first_moment_integrable_direct",
+      "HVRPrimeDirectFrequency.primeDensity_frequency_lipschitz_direct"
+    ]
   }
 ]
