@@ -1087,7 +1087,7 @@
       "modules": {
         "HVR_PrimeBoundary_EventualAbelGlue": {
           "old": "cc68fada393648d1de98687a342cca77268c9671",
-          "new": "f6a1d9bf2d58527f7c0d25cd5e3f1c3564d4601a"
+          "new": "22b37bc711cb0446ef7fdee6b3182164f49b930a"
         },
         "HVR_PrimeDensity_SpatialAbel": {
           "old": "30c20b196b5743c92392595a3a25aef8c055c648",
@@ -1102,12 +1102,18 @@
         "HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support",
         "HVRNativeDominatedLimit.integral_error_le_weighted",
         "HVRPrimeDensitySpatialAbel.spatial_abel_tendsto",
-        "HVRPrimeDensitySpatialAbel.exp_neg_boundaryEps_mul_monotone"
+        "HVRPrimeDensitySpatialAbel.exp_neg_boundaryEps_mul_monotone",
+        "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error"
       ],
       "edges": [
         {
           "module": "HVR_PrimeBoundary_EventualAbelGlue",
           "caller": "HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support",
+          "helper": "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error"
+        },
+        {
+          "module": "HVR_PrimeBoundary_EventualAbelGlue",
+          "caller": "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error",
           "helper": "HVRNativeDominatedLimit.integral_error_le_weighted"
         },
         {
@@ -1117,10 +1123,10 @@
         }
       ],
       "derivations": [
-        "HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support",
+        "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error",
         "HVRPrimeDensitySpatialAbel.spatial_abel_tendsto"
       ],
-      "basis": "Compact frequency support and compact-uniform convergence give integral error ≤ η∫‖ψ‖. For the spatial Abel factor the pointwise norm error decreases to zero, so real antitone integral convergence and the integral norm inequality suffice. Both original public statements retain all their binders. Retains real monotone convergence and lower integration infrastructure.",
+      "basis": "The generic eventual weighted-uniform integral limit is isolated with all analytic facts as explicit hypotheses. Its proof uses the basic weighted integral error inequality and ε/(∫weight+1), with nonnegative weight integral and eventual integrability explicit. The original compact-frequency theorem discharges these hypotheses using its existing compact-uniform boundary and eventual-domination facts, preserving every original caller binder. The generic theorem and the spatial Abel theorem are the scoped negative-dependency endpoints. The zeta-specific caller retains independent DCT dependencies through its analytic inputs. Spatial Abel uses real antitone integral convergence.",
       "patch": "patches/measure-01.patch"
     },
     {

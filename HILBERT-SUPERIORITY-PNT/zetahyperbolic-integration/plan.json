@@ -826,7 +826,9 @@
   },
   {
     "module": "HVR_PrimeBoundary_EventualAbelGlue",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error"
+    ]
   },
   {
     "module": "HVR_PrimeDensity_HalfLineSmoothing",
