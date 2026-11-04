@@ -893,5 +893,66 @@
       "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
       "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
     ]
+  },
+  {
+    "module": "HVRCompactCorrelationQuadrature",
+    "theorems": [
+      "HVRCompactCorrelationQuadrature.complexSeed_exists_lipschitz",
+      "HVRCompactCorrelationQuadrature.complexCorrelation_eq_integral",
+      "HVRCompactCorrelationQuadrature.complexSeed_zero_off_interval",
+      "HVRCompactCorrelationQuadrature.complexCorrelation_grid_error_of_lipschitz",
+      "HVRCompactCorrelationQuadrature.sample_abs_le_half_band",
+      "HVRCompactCorrelationQuadrature.sampledCorrelation_zero_of_band",
+      "HVRCompactCorrelationQuadrature.frequency_interval_error_of_lipschitz",
+      "HVRCompactCorrelationQuadrature.sampled_frequency_integral_tendsto_interval"
+    ]
+  },
+  {
+    "module": "HVRCompactCorrelationRegularity",
+    "theorems": [
+      "HVRCompactCorrelationRegularity.seed_correlation_mode_integrable",
+      "HVRCompactCorrelationRegularity.complexCorrelation_frequency_lipschitz",
+      "HVRCompactCorrelationRegularity.complexCorrelation_continuous_direct",
+      "HVRCompactCorrelationRegularity.complexCorrelation_integrable_direct",
+      "HVRCompactCorrelationRegularity.sampledCorrelation_continuous",
+      "HVRCompactCorrelationRegularity.sampledCorrelation_hasCompactSupport",
+      "HVRCompactCorrelationRegularity.modulated_correlation_integrable",
+      "HVRCompactCorrelationRegularity.modulated_sampledCorrelation_integrable",
+      "HVRCompactCorrelationRegularity.sampled_frequency_integral_tendsto_interval_direct",
+      "HVRCompactCorrelationRegularity.modulated_correlation_interval_eq_full",
+      "HVRCompactCorrelationRegularity.modulated_sampled_interval_eq_full",
+      "HVRCompactCorrelationRegularity.sampled_frequency_integral_tendsto_full"
+    ]
+  },
+  {
+    "module": "HVRCompactSeedPhaseGrid",
+    "theorems": [
+      "HVRCompactSeedPhaseGrid.sampledPhase_tendsto"
+    ]
+  },
+  {
+    "module": "HVRPhaseTranslationDirect",
+    "theorems": [
+      "HVRPhaseTranslationDirect.phase_add",
+      "HVRPhaseTranslationDirect.translated_phase_integral"
+    ]
+  },
+  {
+    "module": "HVRCompactCorrelationPhaseSum",
+    "theorems": [
+      "HVRCompactCorrelationPhaseSum.complexSeed_even",
+      "HVRCompactCorrelationPhaseSum.translated_seed_phase_integrable",
+      "HVRCompactCorrelationPhaseSum.sampled_phase_integral_eq_product",
+      "HVRCompactCorrelationPhaseSum.sampled_phase_integrals_tendsto_square"
+    ]
+  },
+  {
+    "module": "HVRCompactCorrelationFourierSquare",
+    "theorems": [
+      "HVRCompactCorrelationFourierSquare.correlation_phase_integral_eq_square",
+      "HVRCompactCorrelationFourierSquare.fourierInv_eq_phase_integral",
+      "HVRCompactCorrelationFourierSquare.wave_eq_fourierInv_seed",
+      "HVRCompactCorrelationFourierSquare.fourierInv_correlation_eq_wave_sq_direct"
+    ]
   }
 ]
