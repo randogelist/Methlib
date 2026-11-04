@@ -211,6 +211,33 @@
     ]
   },
   {
+    "module": "HVR_PrimeMellin_ModeAssembly",
+    "theorems": [
+      "HVRPrimeMellinModeAssembly.mem_primeCutoff_iff",
+      "HVRPrimeMellinModeAssembly.theta_exp_modes_pointwise",
+      "HVRPrimeMellinModeAssembly.theta_exp_modes_ae",
+      "HVRPrimeMellinModeAssembly.theta_exp_laplace_unconditional",
+      "HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes"
+    ]
+  },
+  {
+    "module": "NativeDominatedLimit",
+    "theorems": []
+  },
+  {
+    "module": "HVRZetaHyperbolicFrequencyBounds",
+    "theorems": [
+      "HVRZetaHyperbolicFrequencyBounds.phase_frequency_lipschitz",
+      "HVRZetaHyperbolicFrequencyBounds.integral_phase_frequency_lipschitz"
+    ]
+  },
+  {
+    "module": "HVRPrimeWeightedMoment",
+    "theorems": [
+      "HVRPrimeWeightedMoment.dampedError_first_moment_integrable"
+    ]
+  },
+  {
     "module": "HVR_Smoothing_FrequencySeed",
     "theorems": []
   },

@@ -129,9 +129,14 @@ frequency identities. Its [four-lane cached Linux run 41744680137](https://githu
 compiled its named declarations and passed their standard-only axiom audits.
 The finite strict-positivity theorem retains a prime-node witness; the general
 Jacobi theorem retains determinant nonvanishing. The continuous frequency
-identity retains two explicit approximation limits. The prime-mode Mellin
-assembly retains its actual prime/theta expansion premise. These statements
-remain separate from the canonical root and do not discharge those premises.
+identity retains two explicit approximation limits. A separate downstream
+prime-mode assembly discharges its prime/theta expansion and derives a Mellin
+identity, but imports modules downstream of the original Mellin module; it
+is not an upstream root replacement. These statements remain separate from
+the canonical root. The downstream mode assembly and abstract frequency
+bounds passed named audits in [run 41745623568](https://github.com/randogelist/Methlib/actions/runs/41745623568);
+the actual positively damped prime-error first-moment theorem passed in
+[run 41745700135](https://github.com/randogelist/Methlib/actions/runs/41745700135).
 
 ## Additional prime-power and zeta bridge
 

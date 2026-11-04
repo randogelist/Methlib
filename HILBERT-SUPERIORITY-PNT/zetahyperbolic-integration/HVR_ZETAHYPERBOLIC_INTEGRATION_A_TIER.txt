@@ -4,6 +4,12 @@ STATUS: NAMED THEOREMS PASS on external cached Linux Lean 4.34.0-rc1.
 The 31 named declarations in the four dependency-closed CI lanes compiled and
 passed standard-only axiom audits for their exact signatures and source hashes:
 https://github.com/randogelist/Methlib/actions/runs/41744680137
+Five downstream mode-assembly declarations and two weighted frequency-bound
+declarations also passed matching-source cached Linux named audits:
+https://github.com/randogelist/Methlib/actions/runs/41745623568
+The actual damped-prime-error first-moment integrability theorem also passed
+its matching-source named audit:
+https://github.com/randogelist/Methlib/actions/runs/41745700135
 Windows execution of this package is pending. Old Lean 4.33 donor audits
 are separate and do not validate source edits by themselves.
 
@@ -15,8 +21,12 @@ separate finite-dimensional and conditional interfaces:
    builds the actual theta root from this changed source. This is not the
    Zetahyperbolic mode derivation and does not establish Mathlib independence.
 2. HVR_PrimeMellin_Modes contains actual prime mode calculations and a
-   conditional theta exponential integral assembly. The exact a.e. theta
-   expansion and the change of variables remain explicit open obligations.
+   conditional theta exponential integral assembly. The separate downstream
+   HVR_PrimeMellin_ModeAssembly discharges its a.e. theta expansion and
+   applies the existing change of variables to obtain the Mellin identity.
+   It imports GrowthCandidate and LogSubstitution downstream of the original
+   Mellin module. It is not an upstream root replacement or an independence
+   proof; eliminating that import cycle needs a separate refactor and trace.
 3. HVRPrimeAtomicGram and HVRPrimeGramJacobiBridge prove finite-cutoff prime
    Gram identities and connect them to the adapted Jacobi matrix. Strict
    positivity is proved only with an explicit nonzero prime-witness premise.
@@ -27,6 +37,11 @@ separate finite-dimensional and conditional interfaces:
    identity to the actual prime-density transform and finite frequency sums.
    The continuous-frequency equality is conditional on TWO convergence
    hypotheses. It does not replace the PNT root's continuous swap.
+6. HVRZetaHyperbolicFrequencyBounds proves the phase and weighted-integral
+   Lipschitz estimates under explicit integrability and moment hypotheses.
+   HVRPrimeWeightedMoment establishes the actual damped prime-error moment
+   for a positive damping parameter. These do not discharge the two
+   continuous approximation limits.
 
 Sources adapted from Mathlib retain attribution and the Apache 2.0 license;
 see HVR_PrimeMellin_Abel.lean. Generic finite Jacobi source provenance is
@@ -42,6 +57,6 @@ The controlled trace did not see LSeries_eq_mul_integral in the checked
 Mellin roots or PNT root; direct and two-hop positive controls were detected.
 Negative trace coverage remains unverified. Both selected dominated-
 convergence declarations remain found in the canonical PNT root.
-No complete Mathlib independence or closure of the conditional Fubini/Mellin
+No complete Mathlib independence or closure of the conditional Fubini
 premises is claimed. Inspect the CI logs and local result.txt for exact scope.
 

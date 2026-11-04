@@ -18,6 +18,9 @@ ROOTS = {
     "matrix": "HVRPrimeGramJacobiBridge",
     "frequency": "HVRZetaHyperbolicFiniteFrequency",
     "modes": "HVR_PrimeMellin_Modes",
+    "assembly": "HVR_PrimeMellin_ModeAssembly",
+    "bounds": "HVRZetaHyperbolicFrequencyBounds",
+    "moment": "HVRPrimeWeightedMoment",
     "root": "HVR_PrimeDensity_FinalRoot",
 }
 IMPORT_LINE = re.compile(r"^\s*(?:(?:public|meta)\s+)*import\s+([^\n-]+)")
