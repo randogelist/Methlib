@@ -453,5 +453,11 @@
     "theorems": [
       "HVRFrequencyCellError.integral_cell_phase_error"
     ]
+  },
+  {
+    "module": "HVRFrequencyFiniteCells",
+    "theorems": [
+      "HVRFrequencyFiniteCells.finite_cells_phase_error"
+    ]
   }
 ]

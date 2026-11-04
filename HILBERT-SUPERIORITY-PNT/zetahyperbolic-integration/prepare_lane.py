@@ -21,6 +21,7 @@ ROOTS = {
     "primefreq": "HVRPrimeLaplaceFrequencyBounds",
     "quadrature": "HVRPrimeWeightedFrequencyApproximation",
     "cell": "HVRFrequencyCellError",
+    "cells": "HVRFrequencyFiniteCells",
 }
 
 IMPORT_LINE = re.compile(r"^\s*(?:(?:public|meta)\s+)*import\s+([^\n-]+)")
