@@ -6,8 +6,11 @@ finite prime Gram and Jacobi identities, their actual matrix bridge, a
 prime-mode Mellin candidate, and a conditional finite-frequency bridge. See
 HVR_ZETAHYPERBOLIC_INTEGRATION_A_TIER.txt for exact scope and open premises.
 
-Prepared source is not a compiled or audited theorem. A named axiom audit does
-not establish dependency removal. The intended toolchain is Lean 4.34.0-rc1
-with a populated Mathlib cache at revision
+The named theorems passed the cached Linux Lean 4.34.0-rc1 build and
+standard-only axiom audits in
+https://github.com/randogelist/Methlib/actions/runs/41744680137 . The exact
+conditional premises remain part of their statements. A named axiom audit does
+not establish dependency removal. Windows execution of this package is pending.
+The intended toolchain uses a populated Mathlib cache at revision
 fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0.
 

@@ -1,6 +1,6 @@
 # Source provenance and scope
 
-## Pending Mellin integration candidate
+## Mellin integration and checked scope
 
 `HVR_PrimeMellin_Abel.lean` adapts the `f 0 = 0` Abel-summation case of
 `Mathlib/NumberTheory/LSeries/SumCoeff.lean` from Mathlib revision
@@ -10,11 +10,24 @@ The existing Mellin theorem statements and premises are preserved, while
 their proof calls the new helper. Mathlib's Abel-summation and analysis
 infrastructure remain dependencies.
 
-This source modification, its new 86-stage root build and its dependency
-diagnostic require new matching external evidence. The earlier root and
-half-line CI runs predate this modification; they cannot certify the changed
-source. The positive-control diagnostic must not be imported into the proof
-chain. No target absence or full dependency coverage is claimed.
+The changed 86-stage source was built and its named declarations were
+standard-only axiom audited under cached Linux Lean 4.34.0-rc1 in
+[run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
+at commit `688397970101fa1a0e43c1f46b34a931ff10eb74`. Its artifact is
+[13281534383](https://github.com/randogelist/Methlib/actions/runs/41742938933/artifacts/13281534383).
+The checked helper source SHA-256 was
+`939eaae7a226e79c47d7915a22715995010d94344eafd4b02f36ee547486d93d`;
+the modified Mellin source SHA-256 was
+`476cc82171e5e8ff457198959e4a4eafa84617c4b3af8e8f4182251b24dd2b66`.
+
+The direct and two-hop positive controls were detected. The trace did not see
+`LSeries_eq_mul_integral` in the helper, the checked callers or the final
+root. Zero reached theorem bodies and zero declarations were reported missing
+for those roots, but negative dependency coverage remains unverified; no
+semantic independence is claimed. The run's separate DCT root diagnostic still
+found both selected dominated-convergence declarations. The positive-control diagnostic
+is separate and must not be imported into the proof chain. The prior
+half-line runs predate this change and do not certify these changed sources.
 
 These additions consolidate the HVR source packages developed alongside the original `HILBERT-SUPERIORITY-PNT` project. The original half-line source is replaced as described in HALFLINE_REPLACEMENT.md. `original_sources.sha256` is retained as historical provenance; `branch_sources.sha256` is the input lock used for the PNT job.
 

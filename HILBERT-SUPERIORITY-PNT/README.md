@@ -1,9 +1,11 @@
 # Hilbert–Superiority PNT
 
-> **Integration candidate:** The Mellin proof has been changed to use a
-> separately staged, attributed Abel-summation helper. The previous green
-> root run applies to the earlier source; this changed source requires a new
-> full cached Lean build, named axiom audit, and dependency diagnostic.
+> **Mellin integration:** [Cached Linux CI run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
+> built the 86-stage chain and passed its named axiom audits at commit
+> `688397970101fa1a0e43c1f46b34a931ff10eb74`. The changed Mellin proof uses
+> an attributed Abel-summation helper. A controlled proof trace did not see
+> the selected `LSeries_eq_mul_integral` declaration in the final root;
+> negative trace coverage remains unverified.
 
 > The original half-line cumulative-integral proof has been replaced with a monotone lower-integral route. See [HALFLINE_REPLACEMENT.md](HALFLINE_REPLACEMENT.md) for verification scope and provenance. The original PNT source manifest remains historical; the PNT CI verifies `branch_sources.sha256`.
 
@@ -22,18 +24,18 @@ HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one :
 [Named axiom audit](Audit_HVR_PrimeDensity_FinalRoot.lean) ·
 [CI runs and evidence](https://github.com/randogelist/Methlib/actions/workflows/hvr-pnt.yml)
 
-The workflow result is not a separate per-theorem badge. The candidate workflow
-builds the 86 staged modules and audits their
+The workflow builds the 86 staged modules and audits their
 named declarations, including the root theorem and its two named supporting
 declarations. The runner rejects missing audit reports and axioms outside
 `propext`, `Classical.choice`, and `Quot.sound`. Open a run above and download
 its `hvr-theta-linux-evidence` artifact for its logs and recorded hashes.
 
-An earlier external Windows run of the original source package was reported to have passed the root build and
-named standard-axiom audit. Its full Mathlib cache provenance was not recorded.
-The GitHub Actions run is a separate reproduction attempt: check its actual
-result before claiming that CI has passed. Neither an axiom audit nor a green
-badge establishes independence from other PNT proofs.
+An earlier external Windows run of the original source package was reported to
+have passed the root build and named standard-axiom audit. Its full Mathlib
+cache provenance was not recorded, and it predates the present Mellin source.
+The successful Linux run above is matching evidence for the changed source.
+Neither an axiom audit nor a green workflow establishes independence from other
+PNT proofs.
 
 ## Lean source size
 
@@ -96,22 +98,40 @@ call run.cmd
 The original source package came from `HVR_PNT_THETA_ASSEMBLY_RC1_FIX2.zip`; the project replaces the half-line proof as described above. The original package SHA-256 is
 `1691e27682d7be2dd52fa4cae841d5b73a5034a5f11d4767068a49009f0a7566`.
 
-## Mellin integration candidate
+## Mellin integration
 
 `HVR_PrimeMellin_Abel.lean` adapts the relevant zero-coefficient Abel
 summation case from Mathlib's `Mathlib/NumberTheory/LSeries/SumCoeff.lean`
 at the pinned revision, retaining the original attribution and Apache 2.0
-license in [LICENSE-MATHLIB.txt](LICENSE-MATHLIB.txt). The candidate
+license in [LICENSE-MATHLIB.txt](LICENSE-MATHLIB.txt). The modified
 `HVR_PrimeCount_MellinCandidate.lean` invokes that helper while preserving
 the previous theorem statements and hypotheses. The helper still uses
 Mathlib's general Abel-summation and analysis infrastructure.
 
-Neither compilation nor an axiom audit of these changed sources is claimed
-until the corresponding CI evidence exists. The Mellin diagnostic uses
-separate direct and indirect positive controls and reports whether the exact
-`LSeries_eq_mul_integral` declaration is seen from the helper, its callers,
-and the final PNT root. A negative result has unverified coverage and is not
-a claim of semantic or Mathlib independence.
+[Run 41742938933](https://github.com/randogelist/Methlib/actions/runs/41742938933)
+built the helper and modified Mellin module, passed their named standard-only
+axiom audits, and rebuilt and audited the final root. Its Mellin diagnostic
+detected both direct and two-hop positive controls; it did not see the exact
+`LSeries_eq_mul_integral` declaration in the helper, the checked Mellin
+callers, or the final PNT root. All five checked roots reported zero missing
+declarations and zero unavailable theorem bodies. Negative coverage remains
+unverified; this is not a claim of semantic or Mathlib independence.
+
+The same run still found both selected dominated-convergence declarations in
+the final root. The [evidence artifact](https://github.com/randogelist/Methlib/actions/runs/41742938933/artifacts/13281534383)
+contains the source/object hashes, named audit outputs and diagnostic logs.
+
+## Zetahyperbolic integration
+
+The separate [integration package](zetahyperbolic-integration/) connects the
+actual finite HVR prime weights and cutoff to finite Gram, matrix Jacobi and
+frequency identities. Its [four-lane cached Linux run 41744680137](https://github.com/randogelist/Methlib/actions/runs/41744680137)
+compiled its named declarations and passed their standard-only axiom audits.
+The finite strict-positivity theorem retains a prime-node witness; the general
+Jacobi theorem retains determinant nonvanishing. The continuous frequency
+identity retains two explicit approximation limits. The prime-mode Mellin
+assembly retains its actual prime/theta expansion premise. These statements
+remain separate from the canonical root and do not discharge those premises.
 
 ## Additional prime-power and zeta bridge
 

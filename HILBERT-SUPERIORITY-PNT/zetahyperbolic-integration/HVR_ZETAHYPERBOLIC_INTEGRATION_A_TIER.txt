@@ -1,8 +1,11 @@
 HVR ZETAHYPERBOLIC INTEGRATION -- RC1 CANDIDATE
 
-STATUS: A_TIER_CANDIDATE. Source prepared; external compilation and theorem-
-level axiom audit must pass for these exact source hashes before promotion.
-Old audits of Lean 4.33 donor code do not validate the RC1 adaptation.
+STATUS: NAMED THEOREMS PASS on external cached Linux Lean 4.34.0-rc1.
+The 31 named declarations in the four dependency-closed CI lanes compiled and
+passed standard-only axiom audits for their exact signatures and source hashes:
+https://github.com/randogelist/Methlib/actions/runs/41744680137
+Windows execution of this package is pending. Old Lean 4.33 donor audits
+are separate and do not validate source edits by themselves.
 
 This package contains a source-level PNT root integration candidate plus
 separate finite-dimensional and conditional interfaces:
@@ -35,8 +38,10 @@ run by the author locally. The runner prints EVIDENCE and records source,
 compiler, and object hashes and exact named theorem axiom reports.
 Cache provenance remains USER_SUPPLIED_NOT_INDEPENDENTLY_VERIFIED.
 
-Even a green named-axiom audit alone does not establish removal of a
-transitive Mathlib declaration. No dependency elimination, complete PNT
-independence, or closure of the conditional Fubini/Mellin premises is claimed.
-Check result.txt and logs, and run a separate controlled dependency trace.
+The controlled trace did not see LSeries_eq_mul_integral in the checked
+Mellin roots or PNT root; direct and two-hop positive controls were detected.
+Negative trace coverage remains unverified. Both selected dominated-
+convergence declarations remain found in the canonical PNT root.
+No complete Mathlib independence or closure of the conditional Fubini/Mellin
+premises is claimed. Inspect the CI logs and local result.txt for exact scope.
 
