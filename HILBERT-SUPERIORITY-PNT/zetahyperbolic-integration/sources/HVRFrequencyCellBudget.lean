@@ -27,7 +27,7 @@ theorem disjoint_cells_integral_norm_sum_le
     (S : Finset ι) (cell : ι → Set ℝ) (φ : ℝ → ℂ)
     (hφ : Integrable φ μ)
     (hcell : ∀ i ∈ S, MeasurableSet (cell i))
-    (hdisj : Set.Pairwise (↑S : Set ι) (Disjoint on cell)) :
+    (hdisj : Set.Pairwise (↑S : Set ι) (fun i j => Disjoint (cell i) (cell j))) :
     (∑ i ∈ S, ∫ t : ℝ in cell i, ‖φ t‖ ∂μ) ≤
       ∫ t : ℝ, ‖φ t‖ ∂μ := by
   have hint : ∀ i ∈ S, IntegrableOn (fun t : ℝ => ‖φ t‖) (cell i) μ := by
@@ -46,7 +46,7 @@ theorem disjoint_cells_coefficient_norm_sum_le
     (S : Finset ι) (cell : ι → Set ℝ) (φ : ℝ → ℂ)
     (hφ : Integrable φ μ)
     (hcell : ∀ i ∈ S, MeasurableSet (cell i))
-    (hdisj : Set.Pairwise (↑S : Set ι) (Disjoint on cell)) :
+    (hdisj : Set.Pairwise (↑S : Set ι) (fun i j => Disjoint (cell i) (cell j))) :
     (∑ i ∈ S, ‖∫ t : ℝ in cell i, φ t ∂μ‖) ≤
       ∫ t : ℝ, ‖φ t‖ ∂μ := by
   calc
@@ -65,7 +65,7 @@ theorem finite_cells_phase_error_of_disjoint
     (sample : ι → ℝ) (u δ : ℝ) (hδ : 0 ≤ δ)
     (hφ : Integrable φ μ)
     (hcell : ∀ i ∈ S, MeasurableSet (cell i))
-    (hdisj : Set.Pairwise (↑S : Set ι) (Disjoint on cell))
+    (hdisj : Set.Pairwise (↑S : Set ι) (fun i j => Disjoint (cell i) (cell j)))
     (hf : ∀ i ∈ S, IntegrableOn
       (fun t : ℝ => φ t * HVRZetaHyperbolicFrequencyBounds.phase t u) (cell i) μ)
     (hg : ∀ i ∈ S, IntegrableOn
