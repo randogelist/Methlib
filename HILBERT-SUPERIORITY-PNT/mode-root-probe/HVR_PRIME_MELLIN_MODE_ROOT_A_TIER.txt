@@ -1,0 +1,32 @@
+HVR PRIME MELLIN MODE ROOT -- EXTERNAL TEST CANDIDATE
+
+Prepared refactor only. No local Lean execution was performed. Exact source,
+module, theorem, compiler, and axiom evidence from a cached external run are
+required before any promotion. An earlier Lean 4.34-rc1 external audit passed
+the downstream version of the direct prime-mode theorem, but this exact
+upstream refactor has new imports and has not yet been compiled or audited.
+
+SCOPE
+- Move existing primeTheta/primeThetaMellin definitions and their theta and
+  exponential-change-of-variables lemmas into earlier modules with the same
+  namespaces and statements. This eliminates the module import cycle.
+- Import the actual prime-mode expansion and directly prove the original
+  HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin theorem, preserving
+  its sigma,t,r and hsigma,hr,hrs,hO parameters and conclusion. The new proof
+  uses only hsigma; the extra premises stay in the unchanged public signature.
+- Retain and rebuild HVR_PrimeMellin_Abel as a diagnostic comparison, but it
+  is no longer an import of the new Mellin theorem. The 88-module plan counts
+  the 87-module actual project root closure plus the Abel sentinel.
+- Compile and axiom-audit the actual final theta PNT root and named assembly
+  theorems. Match exact checks and hashes to this package's evidence.
+- Do NOT infer Mathlib independence: the mode proof uses Mathlib sum-integral
+  interchange, the conversion uses the Jacobian theorem, and other upstream
+  infrastructure remains. The five-target diagnostic is informational and
+  reports negative coverage as unverified.
+- Prior direct/two-hop controls passed against the earlier downstream theorem.
+  The diagnostic shipped here has extra root/mode controls and itself needs
+  a fresh external compilation. It is never imported by the proof chain.
+
+WINDOWS: use a populated compatible Mathlib cache and Lean 4.34.0-rc1. Set
+MATHLIB_CACHE_ROOT to that cache, then call run.cmd. A Windows pass and
+theorem-level named audits establish only the exact printed theorem scopes.
