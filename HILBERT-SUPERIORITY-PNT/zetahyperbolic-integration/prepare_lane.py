@@ -19,6 +19,7 @@ ROOTS = {
     "fubini_bridge": "HVRPrimeFiniteFrequencyDirect",
     "fubini_right_candidate": "HVRPrimeRightCompactSupport",
     "fubini_left_candidate": "HVRPrimeLeftFull",
+    "compact_ordinary_fourier": "HVRCompactCorrelationOrdinaryWave",
     "fubini_exp_candidate": "HVRComplexExpIntegralDirect",
     "fubini_candidates": "HVRFubiniCandidateLane",
     "fubini_right": "HVRPrimeGridIntegrability",

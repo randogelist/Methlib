@@ -1,0 +1,20 @@
+HVR COMPACT ORDINARY WAVE — AUDITED OPTIONAL THEOREMS
+
+Existing external cached Lean 4.34.0-rc1 evidence: GitHub Actions 41776184900
+(six modules, named axiom audits), and 41777668349 (ordinary-wave theorem).
+
+HVRCompactCorrelationOrdinaryWave.fourierInv_correlation_eq_seed_transform_sq:
+for w > 0 and any x, the inverse Fourier transform of the project compact-seed
+autocorrelation equals the square of the ordinary inverse Fourier transform
+of the seed. This theorem does not mention the Schwartz-valued wave object.
+
+The controlled diagnostic found neither MeasureTheory.integral_integral_swap
+nor Real.fourier_mul_convolution_eq in that theorem's transitive trace, while
+direct and indirect positive controls found each target. Negative traversal
+coverage remains UNVERIFIED and semantic independence is NOT ESTABLISHED.
+
+The old project Schwartz-valued wave definition and the theorem stated using
+that object DO reach integral_integral_swap through the Fourier transform
+continuous-linear-map proof fields. The ordinary-wave identity is optional,
+is not wired to the PNT root, and does not remove that root dependency.
+Windows execution of this updated package has not yet been performed.

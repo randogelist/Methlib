@@ -1,25 +1,28 @@
-import HVROneDimensionalDecay
-import Mathlib.MeasureTheory.Integral.Prod
+import HVRCompactCorrelationOrdinaryWave
 import Mathlib.Analysis.Fourier.Convolution
 import ImportGraph.Imports.RequiredModules
 import ImportGraph.Lean.Environment
-/-! Controlled diagnostic only; absence does not establish independence. -/
 open Lean Elab Command
-namespace HVRDecayTraceControl
+namespace HVRCompactOrdinaryTraceControl
 def swapDirect := @MeasureTheory.integral_integral_swap
 def swapIndirect := @swapDirect
 def convolutionDirect := @Real.fourier_mul_convolution_eq
 def convolutionIndirect := @convolutionDirect
-end HVRDecayTraceControl
+end HVRCompactOrdinaryTraceControl
 set_option maxHeartbeats 0 in
 run_cmd do
   let env ← getEnv
-  let controls : Array (Name × Name) := #[(`HVRDecayTraceControl.swapDirect, `MeasureTheory.integral_integral_swap), (`HVRDecayTraceControl.swapIndirect, `MeasureTheory.integral_integral_swap), (`HVRDecayTraceControl.convolutionDirect, `Real.fourier_mul_convolution_eq), (`HVRDecayTraceControl.convolutionIndirect, `Real.fourier_mul_convolution_eq)]
+  let controls : Array (Name × Name) := #[(`HVRCompactOrdinaryTraceControl.swapDirect, `MeasureTheory.integral_integral_swap), (`HVRCompactOrdinaryTraceControl.swapIndirect, `MeasureTheory.integral_integral_swap), (`HVRCompactOrdinaryTraceControl.convolutionDirect, `Real.fourier_mul_convolution_eq), (`HVRCompactOrdinaryTraceControl.convolutionIndirect, `Real.fourier_mul_convolution_eq)]
   for (root, target) in controls do
     let ds ← liftCoreM root.transitivelyUsedConstants
     unless ds.contains target do throwError "POSITIVE_CONTROL_MISSED={root}|{target}"
     IO.println s!"POSITIVE_CONTROL_DETECTED={root}|{target}"
-  for root in #[`HVROneDimensionalDecay.phase_integral_mul_eq_neg_derivative_integral, `HVROneDimensionalDecay.phase_integral_derivative_bound, `MeasureTheory.integral_mul_deriv_eq_deriv_mul_of_integrable] do
+  let roots : Array Name := #[
+    `HVRCompactCorrelationOrdinaryWave.fourierInv_correlation_eq_seed_transform_sq,
+    `HVRCompactCorrelationFourierSquare.correlation_phase_integral_eq_square,
+    `HVRCompactCorrelationFourierSquare.wave_eq_fourierInv_seed,
+    `HVRCompactCorrelationFourierSquare.fourierInv_correlation_eq_wave_sq_direct]
+  for root in roots do
     if (env.find? root).isNone then throwError "ROOT_UNKNOWN={root}"
     let ds ← liftCoreM root.transitivelyUsedConstants
     for target in #[`MeasureTheory.integral_integral_swap, `Real.fourier_mul_convolution_eq] do
