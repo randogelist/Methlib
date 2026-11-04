@@ -1,0 +1,5 @@
+import HVRCompactFourierDecay
+#print axioms HVRCompactFourierDecay.fourier_tendsto_atTop
+#print axioms HVRCompactFourierDecay.fourier_tendsto_atBot
+#print axioms HVRCompactFourierDecay.ordinary_tendsto_atTop
+#print axioms HVRCompactFourierDecay.weighted_boundary_tendsto_atTop
