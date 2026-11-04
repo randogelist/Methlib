@@ -54,8 +54,9 @@ theorem spatial_abel_tendsto (K : ℝ → ℂ) (hK : Integrable K volume) (x : �
       · have hlog : 0 ≤ Real.log 4 := by positivity
         linarith [logPrimeDensity_nonneg u]
       · linarith [logPrimeDensity_le_log_four u]
-    simpa only [F, norm_mul] using
-      mul_le_mul_of_nonneg_right hdenBound (norm_nonneg (K (x - u)))
+    change ‖((logPrimeDensity u : ℂ) - 1) * K (x - u)‖ ≤ (Real.log 4 + 1) * ‖K (x - u)‖
+    rw [norm_mul]
+    exact mul_le_mul_of_nonneg_right hdenBound (norm_nonneg (K (x - u)))
   have hpos : ∀ᵐ u : ℝ ∂μ, 0 < u := ae_restrict_mem measurableSet_Ioi
   have hqle (n : ℕ) (u : ℝ) (hu : 0 < u) : q n u ≤ 1 :=
     Real.exp_le_one_iff.mpr (mul_nonpos_of_nonpos_of_nonneg
@@ -65,8 +66,8 @@ theorem spatial_abel_tendsto (K : ℝ → ℂ) (hK : Integrable K volume) (x : �
     have hc : Continuous (fun u : ℝ => (q n u : ℂ)) := by dsimp [q]; fun_prop
     apply hF.norm.mono' (hc.aestronglyMeasurable.mul hF.aestronglyMeasurable)
     filter_upwards [hpos] with u hu
-    simp only [f, norm_mul, Complex.norm_real, Real.norm_eq_abs,
-      abs_of_nonneg (hqnonneg n u)]
+    change ‖(q n u : ℂ) * F u‖ ≤ ‖F u‖
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (hqnonneg n u)]
     exact mul_le_of_le_one_left (norm_nonneg _) (hqle n u hu)
   have hnorm (n : ℕ) (u : ℝ) (hu : 0 < u) :
       ‖f n u - F u‖ = (1 - q n u) * ‖F u‖ := by
@@ -79,6 +80,7 @@ theorem spatial_abel_tendsto (K : ℝ → ℂ) (hK : Integrable K volume) (x : �
   have hanti : ∀ᵐ u : ℝ ∂μ, Antitone (fun n : ℕ => ‖f n u - F u‖) := by
     filter_upwards [hpos] with u hu
     intro i j hij
+    change ‖f j u - F u‖ ≤ ‖f i u - F u‖
     rw [hnorm j u hu, hnorm i u hu]
     have hij' : q i u ≤ q j u := exp_neg_boundaryEps_mul_monotone u hu.le hij
     exact mul_le_mul_of_nonneg_right (sub_le_sub_left hij' 1) (norm_nonneg _)
