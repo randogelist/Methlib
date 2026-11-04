@@ -1,4 +1,4 @@
-import HVRFrequencyTransformGrid
+import HVRPrimeLaplaceFrequencyConditional
 import ImportGraph.Imports.RequiredModules
 import ImportGraph.Lean.Environment
 
@@ -30,19 +30,18 @@ run_cmd do
       throwError "POSITIVE_CONTROL_MISSED={root}|{target}"
     IO.println s!"POSITIVE_CONTROL_DETECTED={root}|{target}"
   let roots : Array Name := #[
-    `HVRFrequencyCellBudget.disjoint_cells_integral_norm_sum_le,
-    `HVRFrequencyCellBudget.disjoint_cells_coefficient_norm_sum_le,
-    `HVRFrequencyCellBudget.finite_cells_phase_error_of_disjoint,
-    `HVRFrequencyWeightedCoefficients.norm_weightedFrequency,
-    `HVRFrequencyWeightedCoefficients.weightedFrequency_integrable,
-    `HVRFrequencyWeightedCoefficients.actual_coefficients_norm_sum_le,
-    `HVRFrequencyIntervalCells.gridCells_pairwise_disjoint,
-    `HVRFrequencyIntervalCells.gridCells_cover,
-    `HVRFrequencyIntervalCells.gridCells_close_ae,
-    `HVRFrequencyGridWeights.actual_grid_coefficients_norm_sum_le,
-    `HVRFrequencyTransformCells.integral_cell_lipschitz_error,
-    `HVRFrequencyTransformGrid.finite_cells_lipschitz_error,
-    `HVRFrequencyTransformGrid.actual_prime_grid_cell_error]
+    `HVRFrequencyTransformGrid.actual_prime_grid_cell_error,
+    `HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_frequency_lipschitz,
+    `HVRPrimeLaplaceFrequencyConditional.frequency_lipschitz_of_integrable_modes_moment,
+    `HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_eq_damped_phase,
+    `HVRPrimeLaplaceFrequencyBounds.actual_mixed_eq_damped_phase,
+    `HVRZetaHyperbolicFrequencyBounds.integral_phase_frequency_lipschitz,
+    `HVRPrimeWeightedMoment.dampedError_first_moment_integrable,
+    `HVRZetaHyperbolicFiniteFrequency.actual_fixed_frequency_integrable,
+    `HVRZetaHyperbolicFiniteFrequency.actual_fixed_frequency,
+    `HVRNativeFubini.fixed_frequency_laplace,
+    `HVRPrimeDensityLaplace.primeDensity_integrable,
+    `HVRPrimeLogDensity.logPrimeDensity_le_log_four]
   for root in roots do
     if (env.find? root).isNone then
       throwError "ROOT_UNKNOWN={root}"

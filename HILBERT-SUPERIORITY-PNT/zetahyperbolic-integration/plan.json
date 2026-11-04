@@ -570,5 +570,11 @@
       "HVRFrequencyTransformGrid.finite_cells_lipschitz_error",
       "HVRFrequencyTransformGrid.actual_prime_grid_cell_error"
     ]
+  },
+  {
+    "module": "HVRPrimeLaplaceFrequencyConditional",
+    "theorems": [
+      "HVRPrimeLaplaceFrequencyConditional.frequency_lipschitz_of_integrable_modes_moment"
+    ]
   }
 ]
