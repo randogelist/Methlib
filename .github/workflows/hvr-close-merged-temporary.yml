@@ -1,0 +1,99 @@
+name: Close already-merged HVR branches
+
+on:
+  push:
+    paths:
+      - '.github/workflows/hvr-close-merged-temporary.yml'
+
+permissions:
+  contents: write
+  actions: read
+  pull-requests: read
+
+jobs:
+  close-merged:
+    if: github.repository == 'randogelist/Methlib' && github.ref == 'refs/heads/hvr-consolidated-grid-20261104'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Verify and remove unchanged merged branch references
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main'
+          main_sha="$(git rev-parse refs/remotes/origin/main)"
+          declare -a leases=()
+          declare -a refspecs=()
+          declare -a selected=()
+          while read -r branch expected; do
+            [[ "$branch" =~ ^[A-Za-z0-9_-]+$ ]] || { echo "INVALID_BRANCH=$branch"; exit 1; }
+            [[ "$expected" =~ ^[0-9a-f]{40}$ ]] || { echo "INVALID_EXPECTED_SHA=$branch"; exit 1; }
+            [[ "$branch" != main && "$branch" != hvr-consolidated-grid-20261104 ]] || { echo "FORBIDDEN_BRANCH=$branch"; exit 1; }
+            ref="refs/heads/$branch"
+            actual="$(git ls-remote --heads origin "$ref" | awk '{print $1}')"
+            if [[ -z "$actual" ]]; then echo "SKIP_MISSING=$branch"; continue; fi
+            if [[ "$actual" != "$expected" ]]; then echo "SKIP_CHANGED=$branch"; continue; fi
+            if ! git merge-base --is-ancestor "$actual" "$main_sha"; then echo "SKIP_UNMERGED=$branch"; continue; fi
+            protected="$(gh api "repos/$GITHUB_REPOSITORY/branches/$branch" --jq '.protected')"
+            if [[ "$protected" != false ]]; then echo "SKIP_PROTECTED=$branch"; continue; fi
+            busy=0
+            for status in queued in_progress waiting requested pending; do
+              n="$(gh api --method GET "repos/$GITHUB_REPOSITORY/actions/runs?branch=$branch&status=$status&per_page=1" --jq '.total_count')"
+              [[ "$n" =~ ^[0-9]+$ ]] || { echo "INVALID_RUN_COUNT=$branch"; exit 1; }
+              if (( n > 0 )); then busy=1; break; fi
+            done
+            if (( busy )); then echo "SKIP_ACTIVE_RUN=$branch"; continue; fi
+            open_prs="$(gh api "repos/$GITHUB_REPOSITORY/pulls?state=open&head=randogelist:$branch&per_page=1" --jq 'length')"
+            [[ "$open_prs" =~ ^[0-9]+$ ]] || { echo "INVALID_PR_COUNT=$branch"; exit 1; }
+            if (( open_prs > 0 )); then echo "SKIP_OPEN_PR=$branch"; continue; fi
+            selected+=("$branch")
+            echo "VERIFIED_MERGED_UNCHANGED=$branch"
+            leases+=("--force-with-lease=$ref:$expected")
+            refspecs+=(":$ref")
+          done <<'BRANCHES'
+          hvr-chebyshev-root-native 03aac778c8e80b6904e9610ab99d72b3dc0b85d4
+          hvr-fourier-root-native 07a87d376e7c934e9ab3f205f2d5638d4265cf4f
+          hvr-fubini-cell-budget d75957d6a37486aa4a0d32efd96e7011c763f5e5
+          hvr-fubini-frequency-grid-20261104 5adb99849564e21a3913dc66f0c8efc1c748774a
+          hvr-native-combined3 059ac4a262c5857b02397edc25dbfa52413fe54b
+          hvr-native-combined4 b5991c638d64a54f785125ecef38ce30bdc0b360
+          hvr-native-combined5 962ef223f8e2c7860bfbc8dfde915246ff55422e
+          hvr-prime-mellin-mode-root 0ca20094873e770e44ac584f14aaf7dcc0703652
+          hvr-prime-right-grid-20261104 9ae77611a01933255ea5772750b59cabbba6825e
+          hvr-proof-source-cost f5894947cd24b58c8de4964e6d7f8091c893cbf9
+          hvr-snditeration-prime-integration 6542c5db9f0686f3019a56c919d5389407a27e6a
+          hvr-windows-parser-check 6bd99e8c0a33b1b30cb5d7cf08b6f3e34fefee91
+          hvr-zeta-logderiv-native b982f7132b643311ff122a0e434f94fe56c84463
+          hvr-zeta-nonzero-native ffec3f97d82fe1c3e74488895f4092cd9cf88cca
+          hvr-zeta-pole-native a938f19096e8c549a912f7fc48f24f5eaad825e4
+          hvr-zetahyperbolic-analytic-closures 553ab8ae6eb1213cf46b205d9865e18cea1b5fbe
+          hvr-zetahyperbolic-integration 4e927ec77e8ba13f6237f48738445c78ded114a3
+          major_mathlib_chebyshev_bound c1a4317a6b5e0ff77db93e99c5e8b8acc2d0f30d
+          major_mathlib_dominated_convergence 1f652258b970c370da14f36149d305ed1d7e2ec4
+          major_mathlib_fourier_convolution 430c481b6bd43c1272b713ee022766ee9d84d427
+          major_mathlib_fourier_decay be3ff33cb8025680b034719a3628ec6c388902e3
+          major_mathlib_fubini_swap 25b5f1c484a2f1572fc757c69840ec5d1d5df956
+          major_mathlib_lseries_integral 84934930322a474b1a25dd709685165680f36268
+          major_mathlib_von_mangoldt_log_derivative 823603a1780a131a6ff7cfa579d0ff8c2a24bbf7
+          major_mathlib_zeta_analytic f5c35da4f16acb69863d84e103227cff5a454cd3
+          major_mathlib_zeta_nonzero a9b5dc79f0689e9b48ca5cc480c3796281f5c42c
+          major_mathlib_zeta_pole_asymptotic 03f0fa659700222ae8fa5efaccc0ceca166a3587
+          BRANCHES
+          if (( ${#refspecs[@]} == 0 )); then echo 'NOTHING_ELIGIBLE'; exit 0; fi
+          current_main="$(git ls-remote --heads origin refs/heads/main | awk '{print $1}')"
+          if [[ "$current_main" != "$main_sha" ]]; then echo 'MAIN_MOVED_ABORT'; exit 1; fi
+          git push --atomic "${leases[@]}" origin "${refspecs[@]}"
+          for branch in "${selected[@]}"; do
+            if [[ -n "$(git ls-remote --refs origin "refs/heads/$branch")" ]]; then
+              echo "ERROR_REF_REMAINS=$branch"; exit 1
+            fi
+            echo "DELETED_BRANCH=$branch"
+          done
+          echo "DELETED_COUNT=${#refspecs[@]}"
+
