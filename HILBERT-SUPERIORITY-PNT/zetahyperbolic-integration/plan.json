@@ -426,5 +426,11 @@
       "HVRZetaHyperbolicFrequencyBounds.phase_frequency_lipschitz",
       "HVRZetaHyperbolicFrequencyBounds.integral_phase_frequency_lipschitz"
     ]
+  },
+  {
+    "module": "HVRPrimeWeightedMoment",
+    "theorems": [
+      "HVRPrimeWeightedMoment.dampedError_first_moment_integrable"
+    ]
   }
 ]

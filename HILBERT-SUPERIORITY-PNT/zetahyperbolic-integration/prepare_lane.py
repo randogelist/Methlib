@@ -17,6 +17,7 @@ from pathlib import Path
 ROOTS = {
     "assembly": "HVR_PrimeMellin_ModeAssembly",
     "bounds": "HVRZetaHyperbolicFrequencyBounds",
+    "moment": "HVRPrimeWeightedMoment",
 }
 
 IMPORT_LINE = re.compile(r"^\s*(?:(?:public|meta)\s+)*import\s+([^\n-]+)")
