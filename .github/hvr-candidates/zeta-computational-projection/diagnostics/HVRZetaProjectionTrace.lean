@@ -7,6 +7,7 @@ import Mathlib.MeasureTheory.Integral.Prod
 skipped. Found paths witness syntactic reachability; absence is not a proof of
 semantic independence or complete traversal coverage. -/
 open Lean Elab Command
+noncomputable section
 namespace HVRZetaProjectionTraceControl
 def swapDirect := @MeasureTheory.integral_integral_swap
 def swapIndirect := @swapDirect
