@@ -1,0 +1,58 @@
+name: HVR Windows PowerShell syntax
+
+on:
+  push:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/run.ps1'
+      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/run.ps1'
+      - '.github/workflows/windows-powershell-syntax.yml'
+  pull_request:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/run.ps1'
+      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/run.ps1'
+      - '.github/workflows/windows-powershell-syntax.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Parse PowerShell scripts and check canonical plan
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Write-Host "POWERSHELL_VERSION=$($PSVersionTable.PSVersion)"
+          if ($PSVersionTable.PSVersion.Major -ne 5) { throw 'Expected Windows PowerShell 5.1' }
+          $root = Join-Path $env:GITHUB_WORKSPACE 'HILBERT-SUPERIORITY-PNT'
+          foreach ($file in @('run.ps1', 'zetahyperbolic-integration/run.ps1')) {
+            $path = Join-Path $root $file
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($path, [ref]$tokens, [ref]$parseErrors) | Out-Null
+            if ($parseErrors.Count -gt 0) {
+              $parseErrors | ForEach-Object { Write-Host ("PARSER_ERROR={0}:{1}:{2}" -f $file,$_.Extent.StartLineNumber,$_.Message) }
+              throw "Parsing failed: $file"
+            }
+            Write-Host "PARSER_PASS=$file"
+          }
+          # Evaluate only the literal plan, not the runner or Lean.
+          $canonical = Get-Content -LiteralPath (Join-Path $root 'run.ps1') -Raw
+          $match = [regex]::Match($canonical, '(?ms)^[ \t]*\$plan[ \t]*=[ \t]*@\([^\r\n]*\r?\n.*?^[ \t]*\)')
+          if (-not $match.Success) { throw 'Canonical plan was not located' }
+          $block = [scriptblock]::Create($match.Value + [Environment]::NewLine + 'return ,$plan')
+          $plan = & $block
+          $auditCount = ($plan | ForEach-Object { $_.names.Count } | Measure-Object -Sum).Sum
+          Write-Host "CANONICAL_PLAN_COUNT=$($plan.Count)"
+          Write-Host "CANONICAL_NAMED_AUDITS=$auditCount"
+          if ($plan.Count -eq 0 -or $auditCount -eq 0) { throw 'Empty canonical plan or audit list' }
+          if ($plan[-1].module -ne 'HVR_PrimeDensity_FinalRoot') { throw 'Unexpected canonical final module' }
+          $names = @($plan | ForEach-Object { $_.module })
+          if (($names | Select-Object -Unique).Count -ne $names.Count) { throw 'Duplicate modules in canonical plan' }
+          Write-Host 'POWERSHELL_PLAN_CHECK=PASS'
