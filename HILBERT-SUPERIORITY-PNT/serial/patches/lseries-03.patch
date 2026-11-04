@@ -1,0 +1,19 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+index 1f83aff16f3c421716d171bb3d57863afbfc4689..68eafc5a3e2ed6b7ad4d96ff817f8e784865c13a 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+@@ -50,11 +50,9 @@ theorem one_summable {s : ℂ} (hs : 1 < s.re) :
+ /-- The arithmetic zeta L-series converges absolutely on the half-plane. -/
+ theorem arithmetic_zeta_summable {s : ℂ} (hs : 1 < s.re) :
+     LSeriesSummable (fun n : ℕ => (ArithmeticFunction.zeta n : ℂ)) s := by
+-  have heq : ∀ {n : ℕ}, n ≠ 0 →
+-      (1 : ℕ → ℂ) n = (ArithmeticFunction.zeta n : ℂ) := by
+-    intro n hn
+-    exact (positive_zeta_coefficient hn).symm
+-  exact (LSeriesSummable_congr s heq).mp (one_summable hs)
++  apply summable_of_unit_bound ?_ hs
++  intro n hn
++  simp only [positive_zeta_coefficient hn, norm_one, le_refl]
+ 
+ /-- The one-sided abscissa bound sufficient for termwise differentiation. -/
+ theorem one_abscissa_lt {s : ℂ} (hs : 1 < s.re) :

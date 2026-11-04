@@ -1,0 +1,33 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+index fa733f5fe627607b714d84ba86fdda422b13ed31..bb10bbe8e852a288c43546023b2155c6ee275ba5 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+@@ -54,6 +54,19 @@ theorem choose_symm_half_native (m : ℕ) :
+     (2 * m + 1).choose (m + 1) = (2 * m + 1).choose m :=
+   Nat.choose_symm_of_eq_add (by omega)
+ 
++open Finset in
++/-- Two equal central coefficients occur at different positions in the full row. -/
++theorem choose_middle_le_pow_native (m : ℕ) : (2 * m + 1).choose m ≤ 4 ^ m := by
++  have hp : (2 * m + 1).choose m + (2 * m + 1).choose (m + 1) ≤
++      ∑ j ∈ range ((2 * m + 1) + 1), (2 * m + 1).choose j :=
++    Finset.add_le_sum (s := range ((2 * m + 1) + 1)) (i := m) (j := m + 1)
++      (f := fun j => (2 * m + 1).choose j) (fun _ _ => Nat.zero_le _)
++      (mem_range.mpr (by omega)) (mem_range.mpr (by omega)) (by omega)
++  have hpow : (2 : ℕ) ^ (2 * m + 1) = 2 * 4 ^ m := by
++    rw [pow_succ, pow_mul, mul_comm] <;> rfl
++  rw [choose_symm_half_native, Nat.sum_range_choose, hpow] at hp
++  omega
++
+ /-- A candidate central-binomial proof for the elementary primorial bound. -/
+ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+     primorial n < 4 ^ n := by
+@@ -75,7 +88,7 @@ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+           have hindex : (m + 1) + m = 2 * m + 1 := by omega
+           rw [hindex, choose_symm_half_native] at hsplit
+           have hmiddle : Nat.choose (2 * m + 1) m ≤ 4 ^ m :=
+-            Nat.choose_middle_le_pow m
++            choose_middle_le_pow_native m
+           have hproduct : primorial (2 * m + 1) <
+               4 ^ (m + 1) * 4 ^ m :=
+             lt_of_le_of_lt hsplit

@@ -1,0 +1,91 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
+index 2d33aacfff4ffd15dbebe3804cad08f075c61ea3..4ca94e88e4d5e1224ec3e9b7f386894aff7f2565 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
+@@ -1,4 +1,5 @@
+ import HVR_Zeta_ZeroFreeBoundary
++import NativeZetaPoleEquality
+ import Mathlib.NumberTheory.Harmonic.ZetaAsymp
+ import Mathlib.Analysis.Complex.CauchyIntegral
+ 
+@@ -37,9 +38,9 @@ theorem poleRegularPart_differentiableAt_zero :
+     DifferentiableAt ℂ poleRegularPart 0 := by
+   have hshift : DifferentiableAt ℂ (fun z : ℂ => 1 + z) 0 := by fun_prop
+   have hzeta : DifferentiableAt ℂ (fun z : ℂ => riemannZeta₁ (1 + z)) 0 := by
+-    exact (differentiable_riemannZeta₁ (1 + 0)).comp 0 hshift
++    exact (HVRNativeZetaPoleEquality.regularized_differentiable (1 + 0)).comp 0 hshift
+   have hderiv : DifferentiableAt ℂ (fun z : ℂ => deriv riemannZeta₁ (1 + z)) 0 := by
+-    exact (differentiable_riemannZeta₁.deriv (1 + 0)).comp 0 hshift
++    exact (HVRNativeZetaPoleEquality.regularized_differentiable.deriv (1 + 0)).comp 0 hshift
+   have hnz : riemannZeta₁ (1 + (0 : ℂ)) ≠ 0 := by simp
+   have hratio := hderiv.div hzeta hnz
+   have hc : DifferentiableAt ℂ (fun z : ℂ => complexCorrection (1 + z)) 0 := by
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index eb9fa169058bbf19c582709b40a4e4e7499d1c59..6efa8f9a7664aae9f0018de22044e7bfcc541927 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -13,6 +13,22 @@ open scoped Topology
+ 
+ namespace HVRNativeZetaPoleEquality
+ 
++/-- Product rule for the entire factor `1 + (s - 1) * riemannZeta₀ s`. -/
++theorem regularized_hasDerivAt (s : ℂ) :
++    HasDerivAt riemannZeta₁ (riemannZeta₀ s + (s - 1) * deriv riemannZeta₀ s) s := by
++  have hdiff : Differentiable ℂ riemannZeta₁ := by
++    unfold riemannZeta₁
++    fun_prop
++  have hd : deriv riemannZeta₁ s = riemannZeta₀ s + (s - 1) * deriv riemannZeta₀ s := by
++    unfold riemannZeta₁
++    rw [deriv_const_add, deriv_fun_mul (by fun_prop) (differentiable_riemannZeta₀ s)]
++    simp
++  rw [← hd]
++  exact (hdiff s).hasDerivAt
++
++theorem regularized_differentiable : Differentiable ℂ riemannZeta₁ :=
++  fun s => (regularized_hasDerivAt s).differentiableAt
++
+ /-- Off the pole, undo both regularizations using their definitions. -/
+ theorem regularized_div_sub_one {s : ℂ} (hs : s ≠ 1) :
+     riemannZeta₁ s / (s - 1) = riemannZeta s := by
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
+index 7be64c91e833041d12f41da06def4712f2c2d42a..7082eabc63c3e92e4092a467fe6f6acf91c20be1 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
+@@ -4,13 +4,10 @@ import Mathlib.Analysis.Complex.CauchyIntegral
+ import Mathlib.Tactic
+ 
+ /-!
+-Candidate local zeta logarithmic-derivative asymptotic from a regularized
+-analytic factor. The proof uses the native candidate eventual logarithmic-derivative
+-factorization and Mathlib's regularized function, its value and derivative
+-at one. The exact source remains an unverified candidate until this modified
+-composition passes a matching external compiler and axiom audit. These
+-regularized-factor ingredients remain Mathlib dependencies; transitive
+-independence from the selected endpoint has not been established.
++The logarithmic derivative near the pole, using the derivative of the
++multiplicative regularization and the value of the additive regularization
++at one. The latter is definitional. The differentiability of the additive
++regularization enters upstream in `regularized_hasDerivAt`.
+ -/
+ 
+ noncomputable section
+@@ -20,15 +17,17 @@ open scoped Topology
+ 
+ namespace HVRNativeZetaPoleLittleO
+ 
++open HVRNativeZetaPoleEquality
++
+ /-- The logarithmic derivative of the regularized factor tends to the
+ Euler--Mascheroni constant at the pole. -/
+ theorem regularized_log_derivative_tendsto :
+     Tendsto (fun s : ℂ => deriv riemannZeta₁ s / riemannZeta₁ s)
+       (𝓝[≠] (1 : ℂ)) (𝓝 (Real.eulerMascheroniConstant : ℂ)) := by
+   have hnum : ContinuousAt (fun s : ℂ => deriv riemannZeta₁ s) (1 : ℂ) :=
+-    differentiable_riemannZeta₁.deriv.continuous.continuousAt
++    regularized_differentiable.deriv.continuous.continuousAt
+   have hden : ContinuousAt riemannZeta₁ (1 : ℂ) :=
+-    differentiable_riemannZeta₁.continuous.continuousAt
++    regularized_differentiable.continuous.continuousAt
+   have hne : riemannZeta₁ (1 : ℂ) ≠ 0 := by simp
+   have hc := hnum.div hden hne
+   have ht : Tendsto (fun s : ℂ => deriv riemannZeta₁ s / riemannZeta₁ s)

@@ -1,0 +1,43 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index 60aab4cc965e52ed4b86f846b386f2569fb0268c..8178b828d29a17a77adbd521031b7c6aa1e19ac7 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -43,17 +43,31 @@ theorem regularized_div_sub_one {s : ℂ} (hs : s ≠ 1) :
+   simp only [riemannZeta₁, riemannZeta₀, if_neg hs]
+   field_simp [sub_ne_zero.mpr hs] <;> ring
+ 
+-/-- Pointwise logarithmic-derivative factorization when the regularized zeta
+-factor is nonzero. -/
++/-- Away from one the quotient of the entire regularized factor by the
++linear factor agrees locally with the actual zeta function. -/
++theorem quotient_eventually_eq_zeta {s : ℂ} (hs : s ≠ 1) :
++    (fun z : ℂ => riemannZeta₁ z / (z - 1)) =ᶠ[𝓝 s] riemannZeta := by
++  filter_upwards [compl_singleton_mem_nhds hs] with z hz
++  exact regularized_div_sub_one (Set.mem_compl_singleton_iff.mp hz)
++
++/-- Differentiation of u(z)/(z−1) on a neighborhood disjoint from one. -/
++theorem zeta_derivative_of_regularized_quotient {s : ℂ} (hs : s ≠ 1) :
++    deriv riemannZeta s =
++      -((s - 1)⁻¹) ^ 2 * riemannZeta₁ s + (s - 1)⁻¹ * deriv riemannZeta₁ s := by
++  have hsub : s - 1 ≠ 0 := sub_ne_zero.mpr hs
++  have hf := quotient_eventually_eq_zeta hs
++  have hlin : HasDerivAt (fun z : ℂ => z - 1) 1 s := (hasDerivAt_id s).sub_const 1
++  have hd := ((regularized_differentiable s).hasDerivAt.fun_div hlin hsub).deriv
++  rw [← hf.deriv_eq, hd]
++  field_simp [hsub] <;> ring
++
++/-- Pointwise logarithmic-derivative identity from the derivative of a quotient. -/
+ theorem log_derivative_eq {s : ℂ} (hs : s ≠ 1)
+     (hreg : riemannZeta₁ s ≠ 0) :
+     deriv riemannZeta s / riemannZeta s =
+       - (s - 1)⁻¹ + deriv riemannZeta₁ s / riemannZeta₁ s := by
+-  rw [deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add hs,
+-    ← regularized_div_sub_one hs]
+-  have hsub : s - 1 ≠ 0 := sub_ne_zero.mpr hs
+-  field_simp [hsub, hreg]
+-  <;> ring
++  rw [zeta_derivative_of_regularized_quotient hs, ← regularized_div_sub_one hs]
++  field_simp [sub_ne_zero.mpr hs, hreg] <;> ring
+ 
+ /-- Nonvanishing of the regularized factor near its unit value. -/
+ theorem regularized_eventually_ne : ∀ᶠ s : ℂ in 𝓝 1, riemannZeta₁ s ≠ 0 :=

@@ -10,7 +10,8 @@ A candidate, concrete split of the von Mangoldt L-series into the
 already-audited complex prime series plus the L-series of the coefficient
 correction, in the open half-plane sigma > 1. No analyticity or
 identification of that correction with the resummed prime-power expression
-is asserted here. The Mathlib von Mangoldt/zeta identity is used explicitly.
+is asserted here. The von Mangoldt summability and zeta identities use the
+HVR proofs imported upstream.
 -/
 namespace HVRPrimeZetaSplit
 
@@ -58,14 +59,30 @@ theorem prime_lseries_summable (sigma t : ℝ) (hsigma : 1 < sigma) :
   rw [hfun]
   exact primeTerm_summable sigma t 1 hsigma
 
+theorem higher_lseries_hasSum (sigma t : ℝ) (hsigma : 1 < sigma) :
+    HasSum (LSeries.term higherCoefficientC (zetaPoint sigma t))
+      (LSeries vonMangoldtC (zetaPoint sigma t) - primeSeries sigma t 1) := by
+  let s := zetaPoint sigma t
+  have hv : Summable (LSeries.term vonMangoldtC s) :=
+    HVRNextSummability.vonMangoldt_lseries_summable (s := s)
+      (by simpa [s, zetaPoint] using hsigma)
+  have hp : Summable (LSeries.term primeCoefficientC s) :=
+    prime_lseries_summable sigma t hsigma
+  have hterms : LSeries.term higherCoefficientC s =
+      fun n => LSeries.term vonMangoldtC s n - LSeries.term primeCoefficientC s n := by
+    funext n
+    rw [higherCoefficientC_eq_sub]
+    by_cases hn : n = 0
+    · simp only [LSeries.term, if_pos hn, sub_self]
+    · simp only [LSeries.term, if_neg hn, Pi.sub_apply, sub_div]
+  change HasSum (LSeries.term higherCoefficientC s) (LSeries vonMangoldtC s - _)
+  rw [hterms, ← prime_lseries_eq_primeSeries sigma t]
+  exact hv.hasSum.sub hp.hasSum
+
 /-- The correction series is genuinely summable for sigma > 1. -/
 theorem higher_lseries_summable (sigma t : ℝ) (hsigma : 1 < sigma) :
-    LSeriesSummable higherCoefficientC (zetaPoint sigma t) := by
-  rw [higherCoefficientC_eq_sub]
-  apply LSeriesSummable.sub
-  · apply ArithmeticFunction.LSeriesSummable_vonMangoldt
-    simpa [zetaPoint] using hsigma
-  · exact prime_lseries_summable sigma t hsigma
+    LSeriesSummable higherCoefficientC (zetaPoint sigma t) :=
+  (higher_lseries_hasSum sigma t hsigma).summable
 
 /-- The actual zeta log derivative is the prime-only HVR series plus the
 L-series of the coefficient correction, for real sigma > 1 and real t. -/
@@ -73,16 +90,14 @@ theorem zeta_log_deriv_eq_primeSeries_add_higher (sigma t : ℝ)
     (hsigma : 1 < sigma) :
     -deriv riemannZeta (zetaPoint sigma t) / riemannZeta (zetaPoint sigma t) =
       primeSeries sigma t 1 + LSeries higherCoefficientC (zetaPoint sigma t) := by
-  have hv : LSeriesSummable vonMangoldtC (zetaPoint sigma t) := by
-    apply ArithmeticFunction.LSeriesSummable_vonMangoldt
-    simpa [zetaPoint] using hsigma
-  have hp := prime_lseries_summable sigma t hsigma
   have hz : LSeries vonMangoldtC (zetaPoint sigma t) =
       -deriv riemannZeta (zetaPoint sigma t) / riemannZeta (zetaPoint sigma t) := by
     apply vonMangoldt_series_eq_zeta_log_deriv
     simpa [zetaPoint] using hsigma
-  rw [higherCoefficientC_eq_sub, LSeries_sub hv hp, prime_lseries_eq_primeSeries]
-  rw [hz]
+  have hc : LSeries higherCoefficientC (zetaPoint sigma t) =
+      LSeries vonMangoldtC (zetaPoint sigma t) - primeSeries sigma t 1 :=
+    (higher_lseries_hasSum sigma t hsigma).tsum_eq
+  rw [hc, hz]
   ring
 
 end HVRPrimeZetaSplit

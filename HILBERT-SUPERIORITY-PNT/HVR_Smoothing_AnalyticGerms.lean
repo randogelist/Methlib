@@ -1,4 +1,5 @@
 import HVR_Zeta_ZeroFreeBoundary
+import NativeZetaPoleEquality
 import Mathlib.NumberTheory.Harmonic.ZetaAsymp
 import Mathlib.Analysis.Complex.CauchyIntegral
 
@@ -37,10 +38,11 @@ theorem poleRegularPart_differentiableAt_zero :
     DifferentiableAt ℂ poleRegularPart 0 := by
   have hshift : DifferentiableAt ℂ (fun z : ℂ => 1 + z) 0 := by fun_prop
   have hzeta : DifferentiableAt ℂ (fun z : ℂ => riemannZeta₁ (1 + z)) 0 := by
-    exact (differentiable_riemannZeta₁ (1 + 0)).comp 0 hshift
+    exact (HVRNativeZetaPoleEquality.regularized_differentiable (1 + 0)).comp 0 hshift
   have hderiv : DifferentiableAt ℂ (fun z : ℂ => deriv riemannZeta₁ (1 + z)) 0 := by
-    exact (differentiable_riemannZeta₁.deriv (1 + 0)).comp 0 hshift
-  have hnz : riemannZeta₁ (1 + (0 : ℂ)) ≠ 0 := by simp
+    exact (HVRNativeZetaPoleEquality.regularized_differentiable.deriv (1 + 0)).comp 0 hshift
+  have hnz : riemannZeta₁ (1 + (0 : ℂ)) ≠ 0 := by
+    simpa only [add_zero] using HVRNativeZetaPoleEquality.regularized_value_one.trans_ne one_ne_zero
   have hratio := hderiv.div hzeta hnz
   have hc : DifferentiableAt ℂ (fun z : ℂ => complexCorrection (1 + z)) 0 := by
     apply (complexCorrection_differentiableAt_halfPlane (1 + 0) ?_).comp 0 hshift
@@ -59,9 +61,7 @@ is holomorphic. Zeta nonvanishing is an explicit pointwise hypothesis here. -/
 theorem regularPartAt_differentiableAt (s : ℂ)
     (hs : s ≠ 1) (hs0 : s ≠ 0) (hz : riemannZeta s ≠ 0)
     (hre : (1 / 2 : ℝ) < s.re) : DifferentiableAt ℂ regularPartAt s := by
-  have ha : AnalyticAt ℂ riemannZeta s := by
-    apply analyticOn_riemannZeta
-    simpa using hs
+  have ha : AnalyticAt ℂ riemannZeta s := HVRNativeZetaPoleEquality.zeta_analyticAt hs
   have hderiv : DifferentiableAt ℂ (deriv riemannZeta) s := ha.deriv.differentiableAt
   have hquot : DifferentiableAt ℂ (fun z : ℂ => -deriv riemannZeta z / riemannZeta z) s :=
     hderiv.neg.div ha.differentiableAt hz

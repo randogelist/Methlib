@@ -1,0 +1,28 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+index 549458136027dcc5d91d3a7f943d42ce37e751cb..90677b21e8efe5b9fa78e83ca6abbf36c6da8738 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+@@ -41,6 +41,14 @@ theorem theta_eq_log_primorial_native (x : ℝ) :
+   congr 1 with p
+   simp_all [Nat.Prime.pos]
+ 
++open Finset Nat in
++/-- Appending the even successor of an odd integer different from 1 adds no prime factor. -/
++theorem primorial_succ_odd_native {n : ℕ} (hn1 : n ≠ 1) (hn : Odd n) :
++    primorial (n + 1) = primorial n := by
++  refine prod_congr ?_ fun _ _ => rfl
++  rw [range_add_one, filter_insert, ite_eq_right fun h => not_even_iff_odd.2 hn _]
++  exact fun h => h.even_sub_one <| mt Nat.succ.inj hn1
++
+ /-- A candidate central-binomial proof for the elementary primorial bound. -/
+ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+     primorial n < 4 ^ n := by
+@@ -82,7 +90,7 @@ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+           have hprior : primorial k < 4 ^ k :=
+             ih k (Nat.lt_succ_self k) hk0
+           have heq : primorial (k + 1) = primorial k :=
+-            primorial_succ hk1 hkodd
++            primorial_succ_odd_native hk1 hkodd
+           have hpow : 4 ^ k ≤ 4 ^ (k + 1) :=
+             Nat.pow_le_pow_right (by decide) (Nat.le_succ k)
+           simpa only [Nat.succ_eq_add_one, heq] using lt_of_lt_of_le hprior hpow

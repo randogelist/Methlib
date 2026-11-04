@@ -1,0 +1,42 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean
+index 03dcf958964c33d1c50bca78fa3902702b1734c5..a5bd7373d3923de04caeb0a4dd8a77be0fdf2992 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean
+@@ -24,7 +24,7 @@ theorem poleRegularPart_eventuallyEq_raw :
+       apply hz
+       simpa only [add_eq_left] using heq
+   have hlog := hpunct.eventually log_deriv_riemannZeta_eq_neg_inv_sub_add
+-  have hzeta1 := hshift.eventually riemannZeta₁_ne_zero_of_near_one
++  have hzeta1 := hshift.eventually HVRNativeZetaPoleEquality.regularized_eventually_ne
+   have hnear : ∀ᶠ z : ℂ in 𝓝[≠] (0 : ℂ), 1 + z ≠ 0 := by
+     have hne : ∀ᶠ z : ℂ in 𝓝 (1 : ℂ), z ≠ 0 :=
+       continuousAt_id.eventually_ne (show (1 : ℂ) ≠ 0 by norm_num)
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index a2efc53f37b784a580ed2e5269e7f7dc20a941ec..60aab4cc965e52ed4b86f846b386f2569fb0268c 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -55,16 +55,18 @@ theorem log_derivative_eq {s : ℂ} (hs : s ≠ 1)
+   field_simp [hsub, hreg]
+   <;> ring
+ 
+-/-- The pointwise identity holds eventually in the punctured neighborhood of
+-the actual zeta pole. -/
++/-- Nonvanishing of the regularized factor near its unit value. -/
++theorem regularized_eventually_ne : ∀ᶠ s : ℂ in 𝓝 1, riemannZeta₁ s ≠ 0 :=
++  (regularized_differentiable 1).continuousAt.tendsto.eventually_ne
++    (regularized_value_one.trans_ne one_ne_zero)
++
++/-- The pointwise identity holds on a punctured neighborhood of the pole. -/
+ theorem log_derivative_eventually_eq :
+     ∀ᶠ s : ℂ in 𝓝[≠] (1 : ℂ),
+       deriv riemannZeta s / riemannZeta s =
+         - (s - 1)⁻¹ + deriv riemannZeta₁ s / riemannZeta₁ s := by
+-  filter_upwards [self_mem_nhdsWithin,
+-    riemannZeta₁_ne_zero_of_near_one.filter_mono nhdsWithin_le_nhds] with s hs hreg
+-  have hs' : s ≠ (1 : ℂ) := by simpa using hs
+-  exact log_derivative_eq hs' hreg
++  filter_upwards [self_mem_nhdsWithin, regularized_eventually_ne.filter_mono nhdsWithin_le_nhds] with s hs hreg
++  exact log_derivative_eq (Set.mem_compl_singleton_iff.mp hs) hreg
+ 
+ end HVRNativeZetaPoleEquality
+ 

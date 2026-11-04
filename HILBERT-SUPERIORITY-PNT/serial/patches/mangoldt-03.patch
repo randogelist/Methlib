@@ -1,0 +1,18 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean b/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean
+index 01b73b99e54b6ce7e8a7c14dc52aa7951d2fce9b..f861327f385379b21df6147282b2876d4c13a504 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean
+@@ -39,9 +39,10 @@ theorem higherCoefficient_eq_zero_of_prime {p : ℕ} (hp : Nat.Prime p) :
+ theorem higherCoefficient_eq_zero_of_not_prime_pow {n : ℕ}
+     (hn : ¬ IsPrimePow n) : higherCoefficient n = 0 := by
+   have hnprime : ¬ Nat.Prime n := fun hp => hn hp.isPrimePow
+-  have hzero : ArithmeticFunction.vonMangoldt n = 0 :=
+-    ArithmeticFunction.vonMangoldt_eq_zero_iff.mpr hn
+-  simp [higherCoefficient, primeCoefficient, hnprime, hzero]
++  have hzero : ArithmeticFunction.vonMangoldt n = 0 := by
++    change (if IsPrimePow n then Real.log (Nat.minFac n) else 0) = 0
++    exact if_neg hn
++  simp only [higherCoefficient, primeCoefficient, if_neg hnprime, hzero, sub_self]
+ 
+ /-- Nonzero higher coefficients are supported on composite prime powers. -/
+ theorem higherCoefficient_support {n : ℕ} (hn : higherCoefficient n ≠ 0) :

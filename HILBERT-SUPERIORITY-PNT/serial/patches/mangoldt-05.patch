@@ -1,0 +1,41 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean b/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
+index 4c63765146e5ade08672d82203e7af74fa3bf9c0..a9f21ccca47abe870face6e188d6f87638e9aab8 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
+@@ -59,14 +59,30 @@ theorem prime_lseries_summable (sigma t : ℝ) (hsigma : 1 < sigma) :
+   rw [hfun]
+   exact primeTerm_summable sigma t 1 hsigma
+ 
++theorem higher_lseries_hasSum (sigma t : ℝ) (hsigma : 1 < sigma) :
++    HasSum (LSeries.term higherCoefficientC (zetaPoint sigma t))
++      (LSeries vonMangoldtC (zetaPoint sigma t) - primeSeries sigma t 1) := by
++  let s := zetaPoint sigma t
++  have hv : Summable (LSeries.term vonMangoldtC s) :=
++    HVRNextSummability.vonMangoldt_lseries_summable (s := s)
++      (by simpa [s, zetaPoint] using hsigma)
++  have hp : Summable (LSeries.term primeCoefficientC s) :=
++    prime_lseries_summable sigma t hsigma
++  have hterms : LSeries.term higherCoefficientC s =
++      fun n => LSeries.term vonMangoldtC s n - LSeries.term primeCoefficientC s n := by
++    funext n
++    rw [higherCoefficientC_eq_sub]
++    by_cases hn : n = 0
++    · simp only [LSeries.term, if_pos hn, sub_self]
++    · simp only [LSeries.term, if_neg hn, Pi.sub_apply, sub_div]
++  change HasSum (LSeries.term higherCoefficientC s) (LSeries vonMangoldtC s - _)
++  rw [hterms, ← prime_lseries_eq_primeSeries sigma t]
++  exact hv.hasSum.sub hp.hasSum
++
+ /-- The correction series is genuinely summable for sigma > 1. -/
+ theorem higher_lseries_summable (sigma t : ℝ) (hsigma : 1 < sigma) :
+-    LSeriesSummable higherCoefficientC (zetaPoint sigma t) := by
+-  rw [higherCoefficientC_eq_sub]
+-  apply LSeriesSummable.sub
+-  · apply HVRNextSummability.vonMangoldt_lseries_summable
+-    simpa [zetaPoint] using hsigma
+-  · exact prime_lseries_summable sigma t hsigma
++    LSeriesSummable higherCoefficientC (zetaPoint sigma t) :=
++  (higher_lseries_hasSum sigma t hsigma).summable
+ 
+ /-- The actual zeta log derivative is the prime-only HVR series plus the
+ L-series of the coefficient correction, for real sigma > 1 and real t. -/

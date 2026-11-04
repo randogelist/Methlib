@@ -1,0 +1,61 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
+index 1dc05786586e388d354b42c7f9e1d18fed3b6dd9..f9feda8bf7168e5e7ce58d03a9eb0f7532df6a63 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
+@@ -61,9 +61,7 @@ is holomorphic. Zeta nonvanishing is an explicit pointwise hypothesis here. -/
+ theorem regularPartAt_differentiableAt (s : ℂ)
+     (hs : s ≠ 1) (hs0 : s ≠ 0) (hz : riemannZeta s ≠ 0)
+     (hre : (1 / 2 : ℝ) < s.re) : DifferentiableAt ℂ regularPartAt s := by
+-  have ha : AnalyticAt ℂ riemannZeta s := by
+-    apply analyticOn_riemannZeta
+-    simpa using hs
++  have ha : AnalyticAt ℂ riemannZeta s := HVRNativeZetaPoleEquality.zeta_analyticAt hs
+   have hderiv : DifferentiableAt ℂ (deriv riemannZeta) s := ha.deriv.differentiableAt
+   have hquot : DifferentiableAt ℂ (fun z : ℂ => -deriv riemannZeta z / riemannZeta z) s :=
+     hderiv.neg.div ha.differentiableAt hz
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Zeta_BoundaryFactor.lean b/HILBERT-SUPERIORITY-PNT/HVR_Zeta_BoundaryFactor.lean
+index 230eaedc9f4bb81818c08d93672b8d34067d5bb1..4b5f07a87c9082eb9b0f1e41d00a07a962257650 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Zeta_BoundaryFactor.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Zeta_BoundaryFactor.lean
+@@ -1,5 +1,6 @@
+ import HVR_Zeta_CorrectionIdentity
+ import IntegratedZetaNonzero
++import NativeZetaPoleEquality
+ import Mathlib.Analysis.Analytic.Order
+ 
+ noncomputable section
+@@ -39,9 +40,7 @@ theorem zeta_boundary_local_factor (s : ℂ) (hsre : s.re = 1) (hsne : s ≠ 1)
+     ∃ g : ℂ → ℂ, AnalyticAt ℂ g s ∧ g s ≠ 0 ∧
+       riemannZeta =ᶠ[nhds s] fun z =>
+         (z - s) ^ (analyticOrderNatAt riemannZeta s) * g z := by
+-  have ha : AnalyticAt ℂ riemannZeta s := by
+-    apply analyticOn_riemannZeta
+-    simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using hsne
++  have ha : AnalyticAt ℂ riemannZeta s := HVRNativeZetaPoleEquality.zeta_analyticAt hsne
+   obtain ⟨g, hg, hgn, hfac⟩ :=
+     ha.analyticOrderAt_ne_top.mp (zeta_boundary_finite_order s hsre)
+   refine ⟨g, hg, hgn, ?_⟩
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index 8178b828d29a17a77adbd521031b7c6aa1e19ac7..2452ce08a1e24770b3914107d0811e0f9c660778 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -1,4 +1,5 @@
+ import Mathlib.NumberTheory.Harmonic.ZetaAsymp
++import Mathlib.Analysis.Complex.CauchyIntegral
+ import Mathlib.Tactic
+ 
+ /-!
+@@ -50,6 +51,13 @@ theorem quotient_eventually_eq_zeta {s : ℂ} (hs : s ≠ 1) :
+   filter_upwards [compl_singleton_mem_nhds hs] with z hz
+   exact regularized_div_sub_one (Set.mem_compl_singleton_iff.mp hz)
+ 
++/-- The actual zeta function is analytic at each point other than one. -/
++theorem zeta_analyticAt {s : ℂ} (hs : s ≠ 1) : AnalyticAt ℂ riemannZeta s := by
++  have hlin : AnalyticAt ℂ (fun z : ℂ => z - 1) s := analyticAt_id.sub analyticAt_const
++  have hquot : AnalyticAt ℂ (fun z : ℂ => riemannZeta₁ z / (z - 1)) s :=
++    (regularized_differentiable.analyticAt s).div hlin (sub_ne_zero.mpr hs)
++  exact hquot.congr (quotient_eventually_eq_zeta hs)
++
+ /-- Differentiation of u(z)/(z−1) on a neighborhood disjoint from one. -/
+ theorem zeta_derivative_of_regularized_quotient {s : ℂ} (hs : s ≠ 1) :
+     deriv riemannZeta s =

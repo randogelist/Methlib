@@ -1,0 +1,25 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+index f9ed4bc9ce068b0a0d76eccf42c1b0c9e0bd18d8..1f83aff16f3c421716d171bb3d57863afbfc4689 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+@@ -35,6 +35,11 @@ theorem summable_of_unit_bound {f : ℕ → ℂ} {s : ℂ}
+         div_le_div_of_nonneg_right (hf n hn) (Real.rpow_nonneg (Nat.cast_nonneg n) _)
+       _ = (n : ℝ) ^ (-s.re) := by simp [Real.rpow_neg (Nat.cast_nonneg n), one_div]
+ 
++/-- On a positive index the complex coefficient of arithmetic zeta is one. -/
++theorem positive_zeta_coefficient {n : ℕ} (hn : n ≠ 0) :
++    (ArithmeticFunction.zeta n : ℂ) = 1 := by
++  simp only [ArithmeticFunction.zeta_apply, if_neg hn, Nat.cast_one]
++
+ /-- The constant-one L-series converges absolutely on the half-plane. -/
+ theorem one_summable {s : ℂ} (hs : 1 < s.re) :
+     LSeriesSummable (1 : ℕ → ℂ) s := by
+@@ -48,7 +53,7 @@ theorem arithmetic_zeta_summable {s : ℂ} (hs : 1 < s.re) :
+   have heq : ∀ {n : ℕ}, n ≠ 0 →
+       (1 : ℕ → ℂ) n = (ArithmeticFunction.zeta n : ℂ) := by
+     intro n hn
+-    simpa using (ArithmeticFunction.const_one_eq_zeta (R := ℂ) hn)
++    exact (positive_zeta_coefficient hn).symm
+   exact (LSeriesSummable_congr s heq).mp (one_summable hs)
+ 
+ /-- The one-sided abscissa bound sufficient for termwise differentiation. -/

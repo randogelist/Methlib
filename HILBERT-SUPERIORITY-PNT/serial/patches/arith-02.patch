@@ -1,0 +1,51 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+index 57cf0af8c19d8b8d36d569bc39f2644600d83fba..549458136027dcc5d91d3a7f943d42ce37e751cb 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+@@ -8,13 +8,15 @@ No local Lean execution or theorem-level axiom audit has been performed for
+ this file.  In particular, this is not yet an A-tier result.
+ 
+ The proof DOES NOT invoke `Chebyshev.theta_le_log4_mul_x` or a PNT endpoint.
+-It does use Mathlib's elementary primorial/central-binomial building blocks
+-`primorial_add_le`, `primorial_succ`, `Nat.choose_middle_le_pow`, and
+-`Chebyshev.theta_eq_log_primorial`.  The source-level dependencies of those
+-building blocks must still be checked recursively before claiming independence
+-from the target or other prohibited results.  This is not an all-native
+-construction from elementary prime factorization and is not a Mathlib-free
+-proof.
++The original primorial induction used library bounds, binomial symmetry, and
++the logarithm of the primorial. The local lemmas in this revision supply the
++indicated steps. All transitive dependencies are subject to a separate trace.
++Finite-product arguments adapted from Mathlib/NumberTheory/Primorial.lean,
++copyright 2020 Patrick Stevens (authors Patrick Stevens, Yury Kudryashov,
++Bhavik Mehta). The finite log-product calculation is adapted from
++Mathlib/NumberTheory/Chebyshev.lean, copyright 2025 Alastair Irving (authors
++Alastair Irving, Terry Tao, Ruben Van de Velde). Apache-2.0; see
++LICENSE-MATHLIB.txt.
+ 
+ The primorial induction follows the elementary central-binomial argument also
+ used by Mathlib's `Mathlib/NumberTheory/Primorial.lean`; see that file and its
+@@ -31,6 +33,14 @@ theorem primorial_pos_native (n : ℕ) : 0 < primorial n := by
+   unfold primorial
+   exact Finset.prod_pos fun p hp => (Finset.mem_filter.mp hp).2.pos
+ 
++/-- The finite sum giving theta equals the log of the finite prime product. -/
++theorem theta_eq_log_primorial_native (x : ℝ) :
++    Chebyshev.theta x = Real.log (primorial ⌊x⌋₊ : ℝ) := by
++  unfold Chebyshev.theta primorial
++  rw [Nat.cast_prod, Real.log_prod (fun p hp => mod_cast (Finset.mem_filter.mp hp).2.pos.ne')]
++  congr 1 with p
++  simp_all [Nat.Prime.pos]
++
+ /-- A candidate central-binomial proof for the elementary primorial bound. -/
+ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+     primorial n < 4 ^ n := by
+@@ -86,7 +96,7 @@ theorem primorial_le_four_pow_native (n : ℕ) : primorial n ≤ 4 ^ n := by
+ /-- Exact theta upper bound, via the candidate central-binomial induction. -/
+ theorem theta_le_log4_mul_x_native {x : ℝ} (hx : 0 ≤ x) :
+     Chebyshev.theta x ≤ Real.log 4 * x := by
+-  rw [Chebyshev.theta_eq_log_primorial]
++  rw [theta_eq_log_primorial_native]
+   calc
+     Real.log (primorial ⌊x⌋₊ : ℝ) ≤ Real.log ((4 : ℝ) ^ ⌊x⌋₊) := by
+       apply Real.log_le_log

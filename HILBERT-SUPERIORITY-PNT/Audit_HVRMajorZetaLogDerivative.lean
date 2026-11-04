@@ -7,3 +7,5 @@ import HVRMajorZetaLogDerivative
 #print axioms HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one
 #check HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta
 #print axioms HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta
+#print axioms HVRMajorZetaLogDerivative.deriv_one_series
+#print axioms HVRMajorZetaLogDerivative.logMul_one_coefficients

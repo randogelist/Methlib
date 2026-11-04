@@ -23,8 +23,8 @@ theorem poleRegularPart_eventuallyEq_raw :
       intro heq
       apply hz
       simpa only [add_eq_left] using heq
-  have hlog := hpunct.eventually log_deriv_riemannZeta_eq_neg_inv_sub_add
-  have hzeta1 := hshift.eventually riemannZeta₁_ne_zero_of_near_one
+  have hlog := hpunct.eventually HVRNativeZetaPoleEquality.log_derivative_eventually_eq
+  have hzeta1 := hshift.eventually HVRNativeZetaPoleEquality.regularized_eventually_ne
   have hnear : ∀ᶠ z : ℂ in 𝓝[≠] (0 : ℂ), 1 + z ≠ 0 := by
     have hne : ∀ᶠ z : ℂ in 𝓝 (1 : ℂ), z ≠ 0 :=
       continuousAt_id.eventually_ne (show (1 : ℂ) ≠ 0 by norm_num)

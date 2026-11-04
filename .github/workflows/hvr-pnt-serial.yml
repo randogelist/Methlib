@@ -1,0 +1,82 @@
+name: PNT serial source exchanges
+on:
+  pull_request:
+    paths:
+      - 'HILBERT-SUPERIORITY-PNT/serial/**'
+      - '.github/workflows/hvr-pnt-serial.yml'
+  push:
+    branches:
+      - 'pnt/serial-exchanges-rc1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exchange:
+    name: PNT serial / ${{ matrix.scope }}
+    if: github.event_name != 'pull_request' || startsWith(github.head_ref, 'pnt/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    strategy:
+      fail-fast: false
+      matrix:
+        scope: [first, full]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned Mathlib object cache
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Restore local project object sets
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ${{ runner.temp }}/hvr-serial-objects
+          key: hvr-serial-v1-${{ runner.os }}-${{ runner.arch }}-${{ matrix.scope }}-${{ github.event.pull_request.head.sha || github.sha }}
+          restore-keys: |
+            hvr-serial-v1-${{ runner.os }}-${{ runner.arch }}-${{ matrix.scope }}-
+      - name: Replay stages and audit exchanged theorems
+        env:
+          SCOPE: ${{ matrix.scope }}
+          TESTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$TESTED_HEAD"
+          export MATHLIB_CACHE_ROOT="$GITHUB_WORKSPACE/.ci-mathlib"
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          args=()
+          if [[ "$SCOPE" == first ]]; then args+=(--prefix 1); fi
+          tools=HILBERT-SUPERIORITY-PNT/serial
+          python3 "$tools/replay_stages.py" --repo "$GITHUB_WORKSPACE" --stages "$tools/stages.json" --catalog "$tools/catalog.json" --objects "$RUNNER_TEMP/hvr-serial-objects" --evidence "$RUNNER_TEMP/hvr-serial-evidence" "${args[@]}"
+      - name: Upload stage receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pnt-serial-${{ matrix.scope }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/hvr-serial-evidence
+            !${{ runner.temp }}/hvr-serial-evidence/**/olean
+          if-no-files-found: warn

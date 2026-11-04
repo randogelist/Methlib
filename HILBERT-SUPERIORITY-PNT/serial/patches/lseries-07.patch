@@ -1,0 +1,21 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+index c3bcfd7422c385ea46a446159c39c1e6305b00fe..4d34a34ffac0c7d39b57ec4a267e28568ee26ea4 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+@@ -28,8 +28,14 @@ theorem convolution_vonMangoldt_zeta_native : (fun n : ℕ => (ArithmeticFunctio
+     using congr_arg (ofReal <| · n)
+       HVRNextMangoldtDivisorSum.vonMangoldt_mul_zeta_native
+ 
+-theorem convolution_vonMangoldt_const_one_native : (fun n : ℕ => (ArithmeticFunction.vonMangoldt n : ℂ)) ⍟ 1 = (fun n : ℕ => Complex.log (n : ℂ)) :=
+-  (LSeries.convolution_one_eq_convolution_zeta _).trans convolution_vonMangoldt_zeta_native
++theorem convolution_vonMangoldt_const_one_native : (fun n : ℕ => (ArithmeticFunction.vonMangoldt n : ℂ)) ⍟ 1 = (fun n : ℕ => Complex.log (n : ℂ)) := by
++  calc
++    _ = (fun n : ℕ => (ArithmeticFunction.vonMangoldt n : ℂ)) ⍟
++        (fun n : ℕ => (ArithmeticFunction.zeta n : ℂ)) := by
++      apply LSeries.convolution_congr (fun _ => rfl)
++      intro n hn
++      exact (HVRNativeOneZetaSummability.positive_zeta_coefficient hn).symm
++    _ = _ := convolution_vonMangoldt_zeta_native
+ 
+ /-- The actual von Mangoldt L-series equals minus the logarithmic derivative
+ of the constant-one L-series in the open half-plane. -/

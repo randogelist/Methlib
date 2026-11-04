@@ -1,0 +1,29 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index 845427f096cffa3d2b784acf3e4a6608a9bac592..a2efc53f37b784a580ed2e5269e7f7dc20a941ec 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -32,6 +32,11 @@ theorem regularized_differentiable : Differentiable ℂ riemannZeta₁ :=
+ theorem regularized_value_one : riemannZeta₁ 1 = 1 := by
+   simp only [riemannZeta₁, sub_self, zero_mul, add_zero]
+ 
++/-- At the pole the linear factor cancels the additive regularizer's derivative. -/
++theorem regularized_derivative_one : deriv riemannZeta₁ (1 : ℂ) = (Real.eulerMascheroniConstant : ℂ) := by
++  simpa only [sub_self, zero_mul, add_zero, riemannZeta₀, if_pos rfl] using
++    (regularized_hasDerivAt 1).deriv
++
+ /-- Off the pole, undo both regularizations using their definitions. -/
+ theorem regularized_div_sub_one {s : ℂ} (hs : s ≠ 1) :
+     riemannZeta₁ s / (s - 1) = riemannZeta s := by
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
+index 6b978ea4eee4892c422bc702915392dec1a7afb5..705fcaf5ac3ebc6964bbd7368f75df5efc3e46ee 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
+@@ -34,7 +34,7 @@ theorem regularized_log_derivative_tendsto :
+       (𝓝[≠] (1 : ℂ))
+       (𝓝 (deriv riemannZeta₁ (1 : ℂ) / riemannZeta₁ (1 : ℂ))) :=
+     hc.tendsto.mono_left nhdsWithin_le_nhds
+-  simpa only [deriv_riemannZeta₁_one, regularized_value_one, div_one] using ht
++  simpa only [regularized_derivative_one, regularized_value_one, div_one] using ht
+ 
+ /-- At the actual zeta pole, the regularized logarithmic derivative minus
+ Euler's constant is little-o of the constant one. -/

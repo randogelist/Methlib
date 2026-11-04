@@ -1,0 +1,44 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+index 17eae095a0b86949fa57a63f8d6d1e0e6d910d07..c3bcfd7422c385ea46a446159c39c1e6305b00fe 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+@@ -41,7 +41,7 @@ theorem vonMangoldt_LSeries_eq_neg_logDeriv_one {s : ℂ} (hs : 1 < s.re) :
+   have hΛ : LSeriesSummable ((fun n : ℕ => (ArithmeticFunction.vonMangoldt n : ℂ))) s :=
+     HVRNextSummability.vonMangoldt_lseries_summable hs
+   have hne : L 1 s ≠ 0 := by
+-    rw [LSeries_one_eq_riemannZeta hs]
++    rw [HVRNativeOneZetaSummability.one_series_eq_zeta hs]
+     exact HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re hs
+   rw [eq_div_iff hne,
+     ← HVRNativeOneZetaSummability.convolution_sum hΛ h1,
+@@ -54,8 +54,8 @@ theorem vonMangoldt_LSeries_eq_neg_logDeriv_zeta {s : ℂ} (hs : 1 < s.re) :
+   have hderiv : deriv (L 1) s = deriv riemannZeta s := by
+     refine Filter.EventuallyEq.deriv_eq <| Filter.eventuallyEq_iff_exists_mem.mpr ?_
+     exact ⟨{z | 1 < z.re}, (isOpen_lt continuous_const continuous_re).mem_nhds hs,
+-      fun _ ↦ LSeries_one_eq_riemannZeta⟩
++      fun _ ↦ HVRNativeOneZetaSummability.one_series_eq_zeta⟩
+   rw [vonMangoldt_LSeries_eq_neg_logDeriv_one hs,
+-    LSeries_one_eq_riemannZeta hs, hderiv]
++    HVRNativeOneZetaSummability.one_series_eq_zeta hs, hderiv]
+ 
+ end HVRMajorZetaLogDerivative
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+index e8551a324e4fb56d5ff57428bd1108aff66241b4..53b51c3a563b5c9e3781a237d737abc96cb0f950 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+@@ -54,6 +54,15 @@ theorem convolution_sum {f g : ℕ → ℂ} {s : ℂ}
+       (fun p : ℕ × ℕ => p.1 * p.2)
+   exact hsum.tsum_eq
+ 
++/-- Identify the constant-one series term by term with the half-plane
++Dirichlet expansion of the actual zeta function. -/
++theorem one_series_eq_zeta {s : ℂ} (hs : 1 < s.re) :
++    LSeries (1 : ℕ → ℂ) s = riemannZeta s := by
++  rw [zeta_eq_tsum_one_div_nat_cpow hs]
++  unfold LSeries
++  refine tsum_congr fun n => ?_
++  exact LSeries.term_of_ne_zero' (ne_zero_of_one_lt_re hs) (1 : ℕ → ℂ) n
++
+ /-- The constant-one L-series converges absolutely on the half-plane. -/
+ theorem one_summable {s : ℂ} (hs : 1 < s.re) :
+     LSeriesSummable (1 : ℕ → ℂ) s := by

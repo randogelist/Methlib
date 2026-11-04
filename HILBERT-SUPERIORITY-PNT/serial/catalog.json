@@ -1,0 +1,117 @@
+{
+  "tendsto_integral_filter_of_dominated_convergence": [
+    "tendsto_integral_filter_of_dominated_convergence",
+    "MeasureTheory.tendsto_integral_filter_of_dominated_convergence"
+  ],
+  "tendsto_integral_of_dominated_convergence": [
+    "tendsto_integral_of_dominated_convergence",
+    "MeasureTheory.tendsto_integral_of_dominated_convergence"
+  ],
+  "integral_integral_swap": [
+    "integral_integral_swap",
+    "MeasureTheory.integral_integral_swap"
+  ],
+  "primorial_add_le": [
+    "primorial_add_le"
+  ],
+  "primorial_succ": [
+    "primorial_succ"
+  ],
+  "primorial_pos": [
+    "primorial_pos"
+  ],
+  "Nat.choose_middle_le_pow": [
+    "Nat.choose_middle_le_pow",
+    "choose_middle_le_pow"
+  ],
+  "Nat.choose_symm_half": [
+    "Nat.choose_symm_half",
+    "choose_symm_half"
+  ],
+  "Chebyshev.theta_eq_log_primorial": [
+    "Chebyshev.theta_eq_log_primorial",
+    "theta_eq_log_primorial"
+  ],
+  "deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add": [
+    "deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add"
+  ],
+  "riemannZeta_eq_inv_sub_mul": [
+    "riemannZeta_eq_inv_sub_mul"
+  ],
+  "riemannZeta\u2081_ne_zero_of_near_one": [
+    "riemannZeta\u2081_ne_zero_of_near_one"
+  ],
+  "differentiable_riemannZeta\u2081": [
+    "differentiable_riemannZeta\u2081"
+  ],
+  "deriv_riemannZeta\u2081_one": [
+    "deriv_riemannZeta\u2081_one"
+  ],
+  "riemannZeta\u2081_one": [
+    "riemannZeta\u2081_one"
+  ],
+  "log_deriv_riemannZeta_eq_neg_inv_sub_add": [
+    "log_deriv_riemannZeta_eq_neg_inv_sub_add"
+  ],
+  "analyticOn_riemannZeta": [
+    "analyticOn_riemannZeta"
+  ],
+  "LSeries_convolution'": [
+    "LSeries_convolution'"
+  ],
+  "LSeries_deriv": [
+    "LSeries_deriv"
+  ],
+  "LSeries_congr": [
+    "LSeries_congr"
+  ],
+  "LSeries_one_eq_riemannZeta": [
+    "LSeries_one_eq_riemannZeta"
+  ],
+  "ArithmeticFunction.LSeries_zeta_eq_riemannZeta": [
+    "ArithmeticFunction.LSeries_zeta_eq_riemannZeta",
+    "LSeries_zeta_eq_riemannZeta"
+  ],
+  "LSeriesSummable_of_bounded_of_one_lt_re": [
+    "LSeriesSummable_of_bounded_of_one_lt_re"
+  ],
+  "LSeries.convolution_one_eq_convolution_zeta": [
+    "LSeries.convolution_one_eq_convolution_zeta",
+    "convolution_one_eq_convolution_zeta"
+  ],
+  "ArithmeticFunction.const_one_eq_zeta": [
+    "ArithmeticFunction.const_one_eq_zeta",
+    "const_one_eq_zeta"
+  ],
+  "LSeriesSummable_congr": [
+    "LSeriesSummable_congr"
+  ],
+  "ArithmeticFunction.vonMangoldt_apply_prime": [
+    "ArithmeticFunction.vonMangoldt_apply_prime",
+    "vonMangoldt_apply_prime"
+  ],
+  "ArithmeticFunction.vonMangoldt_apply_pow": [
+    "ArithmeticFunction.vonMangoldt_apply_pow",
+    "vonMangoldt_apply_pow"
+  ],
+  "ArithmeticFunction.vonMangoldt_eq_zero_iff": [
+    "ArithmeticFunction.vonMangoldt_eq_zero_iff",
+    "vonMangoldt_eq_zero_iff"
+  ],
+  "ArithmeticFunction.LSeriesSummable_vonMangoldt": [
+    "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+    "LSeriesSummable_vonMangoldt"
+  ],
+  "LSeriesSummable.sub": [
+    "LSeriesSummable.sub"
+  ],
+  "LSeries_sub": [
+    "LSeries_sub"
+  ],
+  "tsum_eq_tsum_primes_add_tsum_primes_of_support_subset_prime_powers": [
+    "tsum_eq_tsum_primes_add_tsum_primes_of_support_subset_prime_powers"
+  ],
+  "hasSum_geometric_of_norm_lt_one": [
+    "hasSum_geometric_of_norm_lt_one"
+  ]
+}
