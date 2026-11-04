@@ -26,6 +26,11 @@ noncomputable section
 
 namespace HVRNativeChebyshevBound
 
+/-- Every prime in the defining finite product is positive. -/
+theorem primorial_pos_native (n : ℕ) : 0 < primorial n := by
+  unfold primorial
+  exact Finset.prod_pos fun p hp => (Finset.mem_filter.mp hp).2.pos
+
 /-- A candidate central-binomial proof for the elementary primorial bound. -/
 theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
     primorial n < 4 ^ n := by
@@ -85,7 +90,7 @@ theorem theta_le_log4_mul_x_native {x : ℝ} (hx : 0 ≤ x) :
   calc
     Real.log (primorial ⌊x⌋₊ : ℝ) ≤ Real.log ((4 : ℝ) ^ ⌊x⌋₊) := by
       apply Real.log_le_log
-      · exact_mod_cast primorial_pos ⌊x⌋₊
+      · exact_mod_cast primorial_pos_native ⌊x⌋₊
       · exact_mod_cast primorial_le_four_pow_native ⌊x⌋₊
     _ = Real.log 4 * (⌊x⌋₊ : ℝ) := by rw [Real.log_pow]; ring
     _ ≤ Real.log 4 * x := by

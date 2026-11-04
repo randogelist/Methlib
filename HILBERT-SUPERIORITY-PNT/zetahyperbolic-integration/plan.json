@@ -63,7 +63,8 @@
     "theorems": [
       "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
       "HVRNativeChebyshevBound.primorial_le_four_pow_native",
-      "HVRNativeChebyshevBound.theta_le_log4_mul_x_native"
+      "HVRNativeChebyshevBound.theta_le_log4_mul_x_native",
+      "HVRNativeChebyshevBound.primorial_pos_native"
     ]
   },
   {
