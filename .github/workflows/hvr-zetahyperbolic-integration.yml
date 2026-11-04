@@ -87,18 +87,23 @@ jobs:
           (cd "$PKG/diagnostics" && "$LEAN" HVRModeDependencyDiagnostic.lean) | tee "$EVIDENCE/mode-diagnostic.stdout.log"
           (cd "$PKG/diagnostics" && "$LEAN" HVRFeatureTrace.lean) | tee "$EVIDENCE/pole-diagnostic.stdout.log"
           grep -Fx 'FEATURE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO' "$EVIDENCE/pole-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FEATURE_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|log_deriv_riemannZeta_add_inv_sub_sub_isLittleO' "$EVIDENCE/pole-diagnostic.stdout.log" >/dev/null
           grep -E '^FEATURE_' "$EVIDENCE/pole-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
           (cd "$PKG/diagnostics" && "$LEAN" HVRFourierTargetDiagnostic.lean) | tee "$EVIDENCE/fourier-diagnostic.stdout.log"
           grep -Fx 'FOURIER_CANDIDATE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero' "$EVIDENCE/fourier-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FOURIER_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|Real.tendsto_integral_exp_smul_cocompact' "$EVIDENCE/fourier-diagnostic.stdout.log" >/dev/null
           grep -E '^FOURIER_' "$EVIDENCE/fourier-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
           grep -F 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes' "$EVIDENCE/mode-diagnostic.stdout.log"
           grep -Fx 'TARGET_FOUND=HVRZetaBoundaryFactor.zeta_boundary_finite_order|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
           grep -Fx 'TARGET_FOUND=HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|riemannZeta_ne_zero_of_one_lt_re' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
           (cd "$PKG/diagnostics" && "$LEAN" HVRChebyshevDependencyDiagnostic.lean) | tee "$EVIDENCE/chebyshev-diagnostic.stdout.log"
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeChebyshevBound.theta_le_log4_mul_x_native' "$EVIDENCE/chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|Chebyshev.theta_le_log4_mul_x' "$EVIDENCE/chebyshev-diagnostic.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/chebyshev-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload lane audit evidence
         if: always()

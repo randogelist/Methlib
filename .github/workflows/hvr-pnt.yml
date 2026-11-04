@@ -124,6 +124,8 @@ jobs:
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
           grep -Fx 'TARGET_FOUND=HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|riemannZeta_ne_zero_of_one_lt_re' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Diagnose Chebyshev bound dependencies
@@ -137,6 +139,7 @@ jobs:
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRChebyshevDependencyDiagnostic.lean" | tee "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log"
           grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeChebyshevBound.theta_le_log4_mul_x_native' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|Chebyshev.theta_le_log4_mul_x' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log" >/dev/null
           grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/root-chebyshev-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Diagnose integrated Fourier replacement
@@ -150,6 +153,7 @@ jobs:
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRFourierTargetDiagnostic.lean" | tee "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log"
           grep -Fx 'FOURIER_CANDIDATE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero' "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FOURIER_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|Real.tendsto_integral_exp_smul_cocompact' "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log" >/dev/null
           grep -E '^FOURIER_' "$HVR_EVIDENCE/root-fourier-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Diagnose near-pole dependency
@@ -163,6 +167,7 @@ jobs:
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRPoleFeatureTrace.lean" | tee "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log"
           grep -Fx 'FEATURE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FEATURE_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|log_deriv_riemannZeta_add_inv_sub_sub_isLittleO' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >/dev/null
           grep -E '^FEATURE_' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Upload evidence
