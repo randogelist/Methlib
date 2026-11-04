@@ -46,7 +46,6 @@ theorem weightedBoundary_fourier_tendsto_zero (ψ : ℝ → ℂ)
     Tendsto (fun x : ℝ =>
       ∫ t : ℝ, Real.fourierChar (-(t * x)) • weightedBoundary ψ t)
       atTop (𝓝 0) := by
-  simpa only [weightedBoundary, HVRActualBoundaryFourier.weightedBoundary] using
-    HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero ψ hψ hcompact
+  exact HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero ψ hψ hcompact
 
 end HVRPrimeBoundaryFourierDecay

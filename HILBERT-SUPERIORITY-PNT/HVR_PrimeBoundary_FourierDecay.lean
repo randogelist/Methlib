@@ -1,5 +1,5 @@
 import HVR_Smoothing_BoundaryExtension
-import Mathlib.Analysis.Fourier.RiemannLebesgueLemma
+import HVRActualBoundaryFourier
 
 noncomputable section
 open Filter MeasureTheory HVRSmoothingBoundaryExtension
@@ -46,8 +46,6 @@ theorem weightedBoundary_fourier_tendsto_zero (ψ : ℝ → ℂ)
     Tendsto (fun x : ℝ =>
       ∫ t : ℝ, Real.fourierChar (-(t * x)) • weightedBoundary ψ t)
       atTop (𝓝 0) := by
-  exact ⟨weightedBoundary_integrable ψ hψ hcompact,
-    (Real.tendsto_integral_exp_smul_cocompact (weightedBoundary ψ)).mono_left
-      atTop_le_cocompact⟩
+  exact HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero ψ hψ hcompact
 
 end HVRPrimeBoundaryFourierDecay

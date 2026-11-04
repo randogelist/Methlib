@@ -37,7 +37,6 @@ theorem ordinaryBoundary_eq_scaled_fourier (ψ : ℝ → ℂ) (x : ℝ) :
 theorem ordinaryBoundary_tendsto_zero (ψ : ℝ → ℂ)
     (hψ : Continuous ψ) (hcompact : HasCompactSupport ψ) :
     Tendsto (ordinaryBoundary ψ) atTop (𝓝 0) := by
-  simpa only [ordinaryBoundary, HVRActualBoundaryFourier.ordinaryBoundary] using
-    HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero ψ hψ hcompact
+  exact HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero ψ hψ hcompact
 
 end HVRPrimeBoundaryOrdinaryFrequencyDecay
