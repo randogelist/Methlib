@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "110c26b099c830b530d9f232ef76d7793d21ee0722820990980966a011dbcca6  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          echo "685d315fedc1f8a0366d578c39610f4e0e8a7fed0575a7dbcd454c16fc6d51c2  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
           (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib

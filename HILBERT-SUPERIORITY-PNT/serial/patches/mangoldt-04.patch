@@ -1,0 +1,32 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean b/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
+index c3ddf3141c12101c5028e2756d89a720093d4b7e..4c63765146e5ade08672d82203e7af74fa3bf9c0 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
+@@ -10,7 +10,8 @@ A candidate, concrete split of the von Mangoldt L-series into the
+ already-audited complex prime series plus the L-series of the coefficient
+ correction, in the open half-plane sigma > 1. No analyticity or
+ identification of that correction with the resummed prime-power expression
+-is asserted here. The Mathlib von Mangoldt/zeta identity is used explicitly.
++is asserted here. The von Mangoldt summability and zeta identities use the
++HVR proofs imported upstream.
+ -/
+ namespace HVRPrimeZetaSplit
+ 
+@@ -63,7 +64,7 @@ theorem higher_lseries_summable (sigma t : ℝ) (hsigma : 1 < sigma) :
+     LSeriesSummable higherCoefficientC (zetaPoint sigma t) := by
+   rw [higherCoefficientC_eq_sub]
+   apply LSeriesSummable.sub
+-  · apply ArithmeticFunction.LSeriesSummable_vonMangoldt
++  · apply HVRNextSummability.vonMangoldt_lseries_summable
+     simpa [zetaPoint] using hsigma
+   · exact prime_lseries_summable sigma t hsigma
+ 
+@@ -74,7 +75,7 @@ theorem zeta_log_deriv_eq_primeSeries_add_higher (sigma t : ℝ)
+     -deriv riemannZeta (zetaPoint sigma t) / riemannZeta (zetaPoint sigma t) =
+       primeSeries sigma t 1 + LSeries higherCoefficientC (zetaPoint sigma t) := by
+   have hv : LSeriesSummable vonMangoldtC (zetaPoint sigma t) := by
+-    apply ArithmeticFunction.LSeriesSummable_vonMangoldt
++    apply HVRNextSummability.vonMangoldt_lseries_summable
+     simpa [zetaPoint] using hsigma
+   have hp := prime_lseries_summable sigma t hsigma
+   have hz : LSeries vonMangoldtC (zetaPoint sigma t) =

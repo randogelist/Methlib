@@ -12,3 +12,4 @@ import HVR_HigherCoefficient_Geometric
 #print axioms HVRHigherCoefficientGeometric.correction_prime_power_hasSum
 #check HVRHigherCoefficientGeometric.correction_prime_power_tsum
 #print axioms HVRHigherCoefficientGeometric.correction_prime_power_tsum
+#print axioms HVRHigherCoefficientGeometric.complex_geometric_hasSum

@@ -4,3 +4,12 @@ import NativeZetaPoleEquality
 #print axioms HVRNativeZetaPoleEquality.log_derivative_eq
 #check HVRNativeZetaPoleEquality.log_derivative_eventually_eq
 #print axioms HVRNativeZetaPoleEquality.log_derivative_eventually_eq
+#print axioms HVRNativeZetaPoleEquality.regularized_div_sub_one
+#print axioms HVRNativeZetaPoleEquality.regularized_hasDerivAt
+#print axioms HVRNativeZetaPoleEquality.regularized_differentiable
+#print axioms HVRNativeZetaPoleEquality.regularized_value_one
+#print axioms HVRNativeZetaPoleEquality.regularized_derivative_one
+#print axioms HVRNativeZetaPoleEquality.regularized_eventually_ne
+#print axioms HVRNativeZetaPoleEquality.quotient_eventually_eq_zeta
+#print axioms HVRNativeZetaPoleEquality.zeta_derivative_of_regularized_quotient
+#print axioms HVRNativeZetaPoleEquality.zeta_analyticAt

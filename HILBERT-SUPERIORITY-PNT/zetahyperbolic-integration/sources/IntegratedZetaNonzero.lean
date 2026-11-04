@@ -25,22 +25,29 @@ namespace HVRIntegratedZetaNonzero
 `ArithmeticFunction.LSeriesSummable_moebius_iff`. -/
 theorem moebiusLSeries_summable {s : ℂ} (hs : 1 < s.re) :
     LSeriesSummable ((fun n : ℕ => (ArithmeticFunction.moebius n : ℂ))) s := by
-  apply LSeriesSummable_of_bounded_of_one_lt_re (m := 1) ?_ hs
+  apply HVRNativeOneZetaSummability.summable_of_unit_bound ?_ hs
   intro n hn
   norm_cast
   exact HVRSimpleMoebiusBound.abs_moebius_le_one n
 
 theorem zetaLSeries_mul_moebiusLSeries {s : ℂ} (hs : 1 < s.re) :
     L (fun n : ℕ => (ArithmeticFunction.zeta n : ℂ)) s * L (fun n : ℕ => (ArithmeticFunction.moebius n : ℂ)) s = 1 := by
-  rw [← LSeries_convolution' (HVRNativeOneZetaSummability.arithmetic_zeta_summable hs)
+  rw [← HVRNativeOneZetaSummability.convolution_sum
+    (HVRNativeOneZetaSummability.arithmetic_zeta_summable hs)
     (moebiusLSeries_summable hs)]
   simp [← natCoe_apply, ← intCoe_apply, coe_mul, one_eq_delta, LSeries_delta, -zeta_apply]
 
 theorem rightHalfPlaneMoebiusInverse : HVRNativeZetaNonzero.RightHalfPlaneMoebiusInverse := by
   intro s hs
   have h := zetaLSeries_mul_moebiusLSeries hs
-  rw [ArithmeticFunction.LSeries_zeta_eq_riemannZeta hs] at h
-  exact h
+  have hz : L (fun n : ℕ => (ArithmeticFunction.zeta n : ℂ)) s = L 1 s := by
+    unfold LSeries
+    apply tsum_congr
+    intro n
+    rcases eq_or_ne n 0 with rfl | hn
+    · simp
+    · simp [LSeries.term, hn, ArithmeticFunction.zeta_apply_ne hn]
+  rwa [hz, HVRNativeOneZetaSummability.one_series_eq_zeta hs] at h
 
 theorem zeta_ne_zero_of_one_lt_re {s : ℂ} (hs : 1 < s.re) : riemannZeta s ≠ 0 :=
   HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse

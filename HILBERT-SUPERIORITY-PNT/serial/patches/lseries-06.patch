@@ -1,0 +1,21 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean b/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
+index 025b567ed7d93669d9a8eb4b3ae99c73c1be6de0..91b9cb48cbe307efb5cb45a7d94c17396646ae57 100644
+--- a/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
++++ b/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
+@@ -40,8 +40,14 @@ theorem zetaLSeries_mul_moebiusLSeries {s : ℂ} (hs : 1 < s.re) :
+ theorem rightHalfPlaneMoebiusInverse : HVRNativeZetaNonzero.RightHalfPlaneMoebiusInverse := by
+   intro s hs
+   have h := zetaLSeries_mul_moebiusLSeries hs
+-  rw [ArithmeticFunction.LSeries_zeta_eq_riemannZeta hs] at h
+-  exact h
++  have hz : L (fun n : ℕ => (ArithmeticFunction.zeta n : ℂ)) s = L 1 s := by
++    unfold LSeries
++    apply tsum_congr
++    intro n
++    rcases eq_or_ne n 0 with rfl | hn
++    · simp
++    · simp [LSeries.term, hn, ArithmeticFunction.zeta_apply_ne hn]
++  rwa [hz, HVRNativeOneZetaSummability.one_series_eq_zeta hs] at h
+ 
+ theorem zeta_ne_zero_of_one_lt_re {s : ℂ} (hs : 1 < s.re) : riemannZeta s ≠ 0 :=
+   HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse

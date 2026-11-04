@@ -5,3 +5,7 @@ import NativeOneZetaSummability
 #print axioms HVRNativeOneZetaSummability.arithmetic_zeta_summable
 #check HVRNativeOneZetaSummability.one_abscissa_lt
 #print axioms HVRNativeOneZetaSummability.one_abscissa_lt
+#print axioms HVRNativeOneZetaSummability.summable_of_unit_bound
+#print axioms HVRNativeOneZetaSummability.positive_zeta_coefficient
+#print axioms HVRNativeOneZetaSummability.convolution_sum
+#print axioms HVRNativeOneZetaSummability.one_series_eq_zeta

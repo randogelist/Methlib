@@ -13,3 +13,4 @@ import HVR_Prime_ZetaSplit
 #print axioms HVRPrimeZetaSplit.higher_lseries_summable
 #check HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher
 #print axioms HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher
+#print axioms HVRPrimeZetaSplit.higher_lseries_hasSum

@@ -1,0 +1,23 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean b/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean
+index d97de42522d096543e88a62752da818d16564ecd..98a19cca5dc2de064975c531b17d584604149cca 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Zeta_LogDerivative.lean
+@@ -32,7 +32,8 @@ theorem vonMangoldt_coefficient_split (n : ℕ) :
+ /-- No higher correction occurs at a prime. -/
+ theorem higherCoefficient_eq_zero_of_prime {p : ℕ} (hp : Nat.Prime p) :
+     higherCoefficient p = 0 := by
+-  simp [higherCoefficient, primeCoefficient, hp, ArithmeticFunction.vonMangoldt_apply_prime hp]
++  simp only [higherCoefficient, primeCoefficient, if_pos hp,
++    HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native hp, sub_self]
+ 
+ /-- Outside prime powers the higher correction vanishes. -/
+ theorem higherCoefficient_eq_zero_of_not_prime_pow {n : ℕ}
+@@ -55,7 +56,7 @@ theorem higherCoefficient_support {n : ℕ} (hn : higherCoefficient n ≠ 0) :
+ theorem vonMangoldt_at_prime_pow {p k : ℕ} (hp : Nat.Prime p) (hk : k ≠ 0) :
+     ArithmeticFunction.vonMangoldt (p ^ k) = Real.log (p : ℝ) := by
+   rw [ArithmeticFunction.vonMangoldt_apply_pow hk,
+-    ArithmeticFunction.vonMangoldt_apply_prime hp]
++    HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native hp]
+ 
+ /-- The actual zeta log-derivative bridge on Re(s) > 1. The proof is the
+ reconstructed theorem. It does not by itself split off the prime series. -/

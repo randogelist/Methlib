@@ -3,7 +3,7 @@ import HVR_PrimeDensity_FubiniIntegrable
 import HVR_PrimeDensity_WeightedIntegrability
 import HVR_Correction_BoundaryLimit
 import Mathlib.MeasureTheory.Group.Integral
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
 
 noncomputable section
 open MeasureTheory
@@ -14,18 +14,21 @@ open Filter MeasureTheory HVRPrimeLogDensity HVRPrimeDensityFubiniBridge
 open HVRPrimeDensityWeightedIntegrability HVRCorrectionBoundaryLimit
 open scoped Topology
 
-/-!
-Candidate spatial dominated-convergence step for the actual prime density.
-For an arbitrary complex integrable kernel, positive reciprocal damping can
-be removed in the half-line convolution. No frequency-side limit, spectral
-support, kernel concentration, PNT, or dependency-independence is asserted.
-This file has not been compiled or audited. No Lean was run locally.
--/
+/-! Spatial Abel convergence from monotone decay of the scalar damping error in L¹. -/
 namespace HVRPrimeDensitySpatialAbel
 
 /-- The undamped actual prime-density error convolved on the positive half-line. -/
 def undamped (K : ℝ → ℂ) (x : ℝ) : ℂ :=
   ∫ u : ℝ in Set.Ioi 0, ((logPrimeDensity u : ℂ) - 1) * K (x - u)
+
+/-- Reciprocal Abel multipliers increase with the sequence index on the positive half-line. -/
+theorem exp_neg_boundaryEps_mul_monotone (u : ℝ) (hu : 0 ≤ u) :
+    Monotone (fun n : ℕ => Real.exp (-boundaryEps n * u)) := by
+  intro i j hij
+  have heps : boundaryEps j ≤ boundaryEps i := by
+    unfold boundaryEps
+    exact one_div_le_one_div_of_le (by positivity) (by exact_mod_cast Nat.add_le_add_right hij 1)
+  exact Real.exp_le_exp.mpr (mul_le_mul_of_nonneg_right (neg_le_neg heps) hu)
 
 /-- Remove positive reciprocal Abel damping under the spatial integral. -/
 theorem spatial_abel_tendsto (K : ℝ → ℂ) (hK : Integrable K volume) (x : ℝ) :
@@ -36,49 +39,74 @@ theorem spatial_abel_tendsto (K : ℝ → ℂ) (hK : Integrable K volume) (x : �
     hshift.mono_measure Measure.restrict_le_self
   have hden : Measurable (fun u : ℝ => (logPrimeDensity u : ℂ) - 1) := by
     exact (Complex.continuous_ofReal.measurable.comp logPrimeDensity_measurable).sub measurable_const
-  unfold undamped
-  apply tendsto_integral_filter_of_dominated_convergence
-    (fun u : ℝ => (Real.log 4 + 1) * ‖K (x - u)‖)
-  · filter_upwards [] with n
-    have hexp : Continuous (fun u : ℝ => Complex.exp (-(boundaryEps n : ℂ) * (u : ℂ))) := by
-      fun_prop
-    exact ((hden.aestronglyMeasurable.mul hexp.measurable.aestronglyMeasurable).mul
-      hshift'.aestronglyMeasurable)
-  · filter_upwards [] with n
-    filter_upwards [ae_restrict_mem measurableSet_Ioi] with u hu
-    have hu0 : (0 : ℝ) < u := hu
-    have hu' : 0 ≤ u := le_of_lt hu0
-    have ha : 0 ≤ boundaryEps n := le_of_lt (boundaryEps_pos n)
-    have hnormden : ‖(logPrimeDensity u : ℂ) - 1‖ ≤ Real.log 4 + 1 := by
+  let μ : Measure ℝ := volume.restrict (Set.Ioi 0)
+  let F (u : ℝ) : ℂ := ((logPrimeDensity u : ℂ) - 1) * K (x - u)
+  let q (n : ℕ) (u : ℝ) : ℝ := Real.exp (-boundaryEps n * u)
+  let f (n : ℕ) (u : ℝ) : ℂ := (q n u : ℂ) * F u
+  have hF : Integrable F μ := by
+    apply (hshift'.norm.const_mul (Real.log 4 + 1)).mono'
+      (hden.aestronglyMeasurable.mul hshift'.aestronglyMeasurable)
+    filter_upwards [] with u
+    have hdenBound : ‖(logPrimeDensity u : ℂ) - 1‖ ≤ Real.log 4 + 1 := by
       rw [← Complex.ofReal_one, ← Complex.ofReal_sub, Complex.norm_real, Real.norm_eq_abs]
       apply abs_le.mpr
       constructor
       · have hlog : 0 ≤ Real.log 4 := by positivity
         linarith [logPrimeDensity_nonneg u]
       · linarith [logPrimeDensity_le_log_four u]
-    have hnormexp : ‖Complex.exp (-(boundaryEps n : ℂ) * (u : ℂ))‖ ≤ 1 := by
-      rw [Complex.norm_exp]
-      apply Real.exp_le_one_iff.mpr
-      simp only [Complex.mul_re, Complex.neg_re, Complex.neg_im,
-        Complex.ofReal_re, Complex.ofReal_im, mul_zero, sub_zero]
-      nlinarith
-    have hprod : ‖(logPrimeDensity u : ℂ) - 1‖ *
-        ‖Complex.exp (-(boundaryEps n : ℂ) * (u : ℂ))‖ ≤ Real.log 4 + 1 := by
-      calc
-        _ ≤ ‖(logPrimeDensity u : ℂ) - 1‖ :=
-          mul_le_of_le_one_right (norm_nonneg _) hnormexp
-        _ ≤ _ := hnormden
-    simp only [dampedError, norm_mul]
-    exact mul_le_mul_of_nonneg_right hprod (norm_nonneg _)
-  · exact (hshift'.norm.const_mul (Real.log 4 + 1))
-  · filter_upwards [] with u
-    have he : Tendsto (fun n : ℕ => Complex.exp (-(boundaryEps n : ℂ) * (u : ℂ)))
-        atTop (𝓝 1) := by
-      have hc : ContinuousAt (fun a : ℝ => Complex.exp (-(a : ℂ) * (u : ℂ))) 0 := by
-        fun_prop
-      simpa only [Function.comp_def, Complex.ofReal_zero, neg_zero, zero_mul, Complex.exp_zero] using
+    change ‖((logPrimeDensity u : ℂ) - 1) * K (x - u)‖ ≤ (Real.log 4 + 1) * ‖K (x - u)‖
+    rw [norm_mul]
+    exact mul_le_mul_of_nonneg_right hdenBound (norm_nonneg (K (x - u)))
+  have hpos : ∀ᵐ u : ℝ ∂μ, 0 < u := ae_restrict_mem measurableSet_Ioi
+  have hqle (n : ℕ) (u : ℝ) (hu : 0 < u) : q n u ≤ 1 :=
+    Real.exp_le_one_iff.mpr (mul_nonpos_of_nonpos_of_nonneg
+      (neg_nonpos.mpr (boundaryEps_pos n).le) hu.le)
+  have hqnonneg (n : ℕ) (u : ℝ) : 0 ≤ q n u := (Real.exp_pos _).le
+  have hf (n : ℕ) : Integrable (f n) μ := by
+    have hc : Continuous (fun u : ℝ => (q n u : ℂ)) := by dsimp [q]; fun_prop
+    apply hF.norm.mono' (hc.aestronglyMeasurable.mul hF.aestronglyMeasurable)
+    filter_upwards [hpos] with u hu
+    change ‖(q n u : ℂ) * F u‖ ≤ ‖F u‖
+    rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (hqnonneg n u)]
+    exact mul_le_of_le_one_left (norm_nonneg _) (hqle n u hu)
+  have hnorm (n : ℕ) (u : ℝ) (hu : 0 < u) :
+      ‖f n u - F u‖ = (1 - q n u) * ‖F u‖ := by
+    have hfac : f n u - F u = ((q n u - 1 : ℝ) : ℂ) * F u := by
+      simp only [f, Complex.ofReal_sub, Complex.ofReal_one]
+      ring
+    rw [hfac, norm_mul, Complex.norm_real, Real.norm_eq_abs,
+      abs_of_nonpos (sub_nonpos.mpr (hqle n u hu))]
+    ring
+  have hanti : ∀ᵐ u : ℝ ∂μ, Antitone (fun n : ℕ => ‖f n u - F u‖) := by
+    filter_upwards [hpos] with u hu
+    intro i j hij
+    change ‖f j u - F u‖ ≤ ‖f i u - F u‖
+    rw [hnorm j u hu, hnorm i u hu]
+    have hij' : q i u ≤ q j u := exp_neg_boundaryEps_mul_monotone u hu.le hij
+    exact mul_le_mul_of_nonneg_right (sub_le_sub_left hij' 1) (norm_nonneg _)
+  have hlim : ∀ᵐ u : ℝ ∂μ,
+      Tendsto (fun n : ℕ => ‖f n u - F u‖) atTop (𝓝 (0 : ℝ)) := by
+    filter_upwards [hpos] with u hu
+    have hc : ContinuousAt (fun a : ℝ => Real.exp (-a * u)) 0 := by fun_prop
+    have hq : Tendsto (fun n => q n u) atTop (𝓝 (1 : ℝ)) := by
+      simpa only [q, Function.comp_def, neg_zero, zero_mul, Real.exp_zero] using
         hc.tendsto.comp boundaryEps_tendsto
-    simpa only [dampedError, mul_one] using
-      ((tendsto_const_nhds.mul he).mul tendsto_const_nhds)
+    have h : Tendsto (fun n => (1 - q n u) * ‖F u‖) atTop
+        (𝓝 ((1 - 1 : ℝ) * ‖F u‖)) :=
+      (tendsto_const_nhds.sub hq).mul tendsto_const_nhds
+    simp_rw [fun n => hnorm n u hu]
+    simpa only [sub_self, zero_mul] using h
+  have hL1 : Tendsto (fun n => ∫ u, ‖f n u - F u‖ ∂μ) atTop (𝓝 (0 : ℝ)) := by
+    simpa only [integral_zero] using
+      (integral_tendsto_of_tendsto_of_antitone (μ := μ)
+        (f := fun n u => ‖f n u - F u‖) (F := fun _ => (0 : ℝ))
+        (fun n => ((hf n).sub hF).norm) (by simp) hanti hlim)
+  have hmain : Tendsto (fun n => ∫ u, f n u ∂μ) atTop (𝓝 (∫ u, F u ∂μ)) := by
+    apply tendsto_iff_norm_sub_tendsto_zero.mpr
+    refine squeeze_zero (fun n => norm_nonneg _) (fun n => ?_) hL1
+    rw [← integral_sub (hf n) hF]
+    exact norm_integral_le_integral_norm _
+  simpa only [μ, f, F, q, dampedError, undamped, Complex.ofReal_exp,
+    Complex.ofReal_neg, Complex.ofReal_mul, mul_comm, mul_assoc, mul_left_comm] using hmain
 
 end HVRPrimeDensitySpatialAbel

@@ -1,0 +1,52 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+index ac3b1ecb2391b25da85064baf1fba6e919dd7795..17eae095a0b86949fa57a63f8d6d1e0e6d910d07 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+@@ -44,7 +44,7 @@ theorem vonMangoldt_LSeries_eq_neg_logDeriv_one {s : ℂ} (hs : 1 < s.re) :
+     rw [LSeries_one_eq_riemannZeta hs]
+     exact HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re hs
+   rw [eq_div_iff hne,
+-    ← LSeries_convolution' hΛ h1,
++    ← HVRNativeOneZetaSummability.convolution_sum hΛ h1,
+     convolution_vonMangoldt_const_one_native, LSeries_deriv hs', neg_neg]
+   exact LSeries_congr (fun _ ↦ by simp [mul_comm, logMul]) s
+ 
+diff --git a/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean b/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
+index 5407a2ef608989d289ef7293dcedf4ae7f34e5c7..025b567ed7d93669d9a8eb4b3ae99c73c1be6de0 100644
+--- a/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
++++ b/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
+@@ -32,7 +32,8 @@ theorem moebiusLSeries_summable {s : ℂ} (hs : 1 < s.re) :
+ 
+ theorem zetaLSeries_mul_moebiusLSeries {s : ℂ} (hs : 1 < s.re) :
+     L (fun n : ℕ => (ArithmeticFunction.zeta n : ℂ)) s * L (fun n : ℕ => (ArithmeticFunction.moebius n : ℂ)) s = 1 := by
+-  rw [← LSeries_convolution' (HVRNativeOneZetaSummability.arithmetic_zeta_summable hs)
++  rw [← HVRNativeOneZetaSummability.convolution_sum
++    (HVRNativeOneZetaSummability.arithmetic_zeta_summable hs)
+     (moebiusLSeries_summable hs)]
+   simp [← natCoe_apply, ← intCoe_apply, coe_mul, one_eq_delta, LSeries_delta, -zeta_apply]
+ 
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+index 68eafc5a3e2ed6b7ad4d96ff817f8e784865c13a..e8551a324e4fb56d5ff57428bd1108aff66241b4 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+@@ -40,6 +40,20 @@ theorem positive_zeta_coefficient {n : ℕ} (hn : n ≠ 0) :
+     (ArithmeticFunction.zeta n : ℂ) = 1 := by
+   simp only [ArithmeticFunction.zeta_apply, if_neg hn, Nat.cast_one]
+ 
++/-- Multiply the two convergent series and group by the natural-number
++product map. Zero indices are included in the fiber identity. -/
++theorem convolution_sum {f g : ℕ → ℂ} {s : ℂ}
++    (hf : LSeriesSummable f s) (hg : LSeriesSummable g s) :
++    LSeries (LSeries.convolution f g) s = LSeries f s * LSeries g s := by
++  have hf' : HasSum (LSeries.term f s) (LSeries f s) := hf.LSeriesHasSum
++  have hg' : HasSum (LSeries.term g s) (LSeries g s) := hg.LSeriesHasSum
++  have hcross := summable_mul_of_summable_norm hf'.summable.norm hg'.summable.norm
++  have hsum : HasSum (LSeries.term (LSeries.convolution f g) s)
++      (LSeries f s * LSeries g s) := by
++    simpa only [LSeries.term_convolution'] using (hf'.mul hg' hcross).tsum_fiberwise
++      (fun p : ℕ × ℕ => p.1 * p.2)
++  exact hsum.tsum_eq
++
+ /-- The constant-one L-series converges absolutely on the half-plane. -/
+ theorem one_summable {s : ℂ} (hs : 1 < s.re) :
+     LSeriesSummable (1 : ℕ → ℂ) s := by

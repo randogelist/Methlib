@@ -1,0 +1,25 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+index 90677b21e8efe5b9fa78e83ca6abbf36c6da8738..fa733f5fe627607b714d84ba86fdda422b13ed31 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeChebyshevBound.lean
+@@ -49,6 +49,11 @@ theorem primorial_succ_odd_native {n : ℕ} (hn1 : n ≠ 1) (hn : Odd n) :
+   rw [range_add_one, filter_insert, ite_eq_right fun h => not_even_iff_odd.2 hn _]
+   exact fun h => h.even_sub_one <| mt Nat.succ.inj hn1
+ 
++/-- The two middle coefficients in an odd binomial row are reflections. -/
++theorem choose_symm_half_native (m : ℕ) :
++    (2 * m + 1).choose (m + 1) = (2 * m + 1).choose m :=
++  Nat.choose_symm_of_eq_add (by omega)
++
+ /-- A candidate central-binomial proof for the elementary primorial bound. -/
+ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+     primorial n < 4 ^ n := by
+@@ -68,7 +73,7 @@ theorem primorial_lt_four_pow_native (n : ℕ) (hn : n ≠ 0) :
+               primorial (m + 1) * Nat.choose ((m + 1) + m) (m + 1) :=
+             primorial_add_le (by omega)
+           have hindex : (m + 1) + m = 2 * m + 1 := by omega
+-          rw [hindex, Nat.choose_symm_half] at hsplit
++          rw [hindex, choose_symm_half_native] at hsplit
+           have hmiddle : Nat.choose (2 * m + 1) m ≤ 4 ^ m :=
+             Nat.choose_middle_le_pow m
+           have hproduct : primorial (2 * m + 1) <

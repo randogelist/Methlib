@@ -51,11 +51,21 @@
     ]
   },
   {
+    "module": "HVRNativeLSeriesNorm",
+    "theorems": [
+      "HVRNativeLSeriesNorm.norm_term"
+    ]
+  },
+  {
     "module": "NativeOneZetaSummability",
     "theorems": [
       "HVRNativeOneZetaSummability.one_summable",
       "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
-      "HVRNativeOneZetaSummability.one_abscissa_lt"
+      "HVRNativeOneZetaSummability.one_abscissa_lt",
+      "HVRNativeOneZetaSummability.summable_of_unit_bound",
+      "HVRNativeOneZetaSummability.positive_zeta_coefficient",
+      "HVRNativeOneZetaSummability.convolution_sum",
+      "HVRNativeOneZetaSummability.one_series_eq_zeta"
     ]
   },
   {
@@ -64,7 +74,12 @@
       "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
       "HVRNativeChebyshevBound.primorial_le_four_pow_native",
       "HVRNativeChebyshevBound.theta_le_log4_mul_x_native",
-      "HVRNativeChebyshevBound.primorial_pos_native"
+      "HVRNativeChebyshevBound.primorial_pos_native",
+      "HVRNativeChebyshevBound.theta_eq_log_primorial_native",
+      "HVRNativeChebyshevBound.primorial_succ_odd_native",
+      "HVRNativeChebyshevBound.choose_symm_half_native",
+      "HVRNativeChebyshevBound.choose_middle_le_pow_native",
+      "HVRNativeChebyshevBound.primorial_add_le_native"
     ]
   },
   {
@@ -129,12 +144,6 @@
     ]
   },
   {
-    "module": "HVRNativeLSeriesNorm",
-    "theorems": [
-      "HVRNativeLSeriesNorm.norm_term"
-    ]
-  },
-  {
     "module": "NativeMangoldtNonneg",
     "theorems": [
       "HVRNativeMangoldtNonneg.vonMangoldt_nonneg_native"
@@ -158,7 +167,16 @@
     "module": "NativeZetaPoleEquality",
     "theorems": [
       "HVRNativeZetaPoleEquality.log_derivative_eq",
-      "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+      "HVRNativeZetaPoleEquality.log_derivative_eventually_eq",
+      "HVRNativeZetaPoleEquality.regularized_div_sub_one",
+      "HVRNativeZetaPoleEquality.regularized_hasDerivAt",
+      "HVRNativeZetaPoleEquality.regularized_differentiable",
+      "HVRNativeZetaPoleEquality.regularized_value_one",
+      "HVRNativeZetaPoleEquality.regularized_derivative_one",
+      "HVRNativeZetaPoleEquality.regularized_eventually_ne",
+      "HVRNativeZetaPoleEquality.quotient_eventually_eq_zeta",
+      "HVRNativeZetaPoleEquality.zeta_derivative_of_regularized_quotient",
+      "HVRNativeZetaPoleEquality.zeta_analyticAt"
     ]
   },
   {
@@ -261,7 +279,9 @@
       "HVRMajorZetaLogDerivative.convolution_vonMangoldt_zeta_native",
       "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native",
       "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
-      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta"
+      "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta",
+      "HVRMajorZetaLogDerivative.deriv_one_series",
+      "HVRMajorZetaLogDerivative.logMul_one_coefficients"
     ]
   },
   {
@@ -304,7 +324,9 @@
   },
   {
     "module": "HVR_Prime_ZetaSplit",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeZetaSplit.higher_lseries_hasSum"
+    ]
   },
   {
     "module": "HVR_Correction_TermHolomorphic",
@@ -334,7 +356,9 @@
   },
   {
     "module": "HVR_HigherCoefficient_Geometric",
-    "theorems": []
+    "theorems": [
+      "HVRHigherCoefficientGeometric.complex_geometric_hasSum"
+    ]
   },
   {
     "module": "HVR_Correction_PrimeSubtype",
@@ -537,7 +561,10 @@
   },
   {
     "module": "HVR_PrimeDensity_FubiniBridge",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeDensityFubiniBridge.complex_integral_from_sections",
+      "HVRPrimeDensityFubiniBridge.mixed_integral_exchange"
+    ]
   },
   {
     "module": "HVR_PrimeDensity_BoundaryLink",
@@ -596,7 +623,10 @@
   },
   {
     "module": "HVR_PrimeBoundary_AbelLimitConditional",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeBoundaryAbelLimitConditional.lintegral_error_zero_of_reverse_fatou",
+      "HVRPrimeBoundaryAbelLimitConditional.integral_tendsto_of_fatou_error"
+    ]
   },
   {
     "module": "HVRFrequencyFiniteCells",
@@ -782,7 +812,9 @@
   },
   {
     "module": "HVR_PrimeDensity_SpatialAbel",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeDensitySpatialAbel.exp_neg_boundaryEps_mul_monotone"
+    ]
   },
   {
     "module": "HVR_PrimeDensity_IndicatorIntegral",
@@ -794,7 +826,9 @@
   },
   {
     "module": "HVR_PrimeBoundary_EventualAbelGlue",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error"
+    ]
   },
   {
     "module": "HVR_PrimeDensity_HalfLineSmoothing",

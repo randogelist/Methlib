@@ -1,2 +1,3 @@
 import HVR_PrimeDensity_SpatialAbel
 #print axioms HVRPrimeDensitySpatialAbel.spatial_abel_tendsto
+#print axioms HVRPrimeDensitySpatialAbel.exp_neg_boundaryEps_mul_monotone

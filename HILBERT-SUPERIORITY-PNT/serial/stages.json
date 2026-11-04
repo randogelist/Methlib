@@ -1,0 +1,1208 @@
+{
+  "base": "94fb1e3303d1ffd70e492a38fd749403daf9ac19",
+  "stages": [
+    {
+      "id": "arith-01",
+      "key": "arith-01",
+      "target": "primorial_pos",
+      "lean_target": "primorial_pos",
+      "modules": {
+        "NativeChebyshevBound": {
+          "old": "faf126a62b6e38795b5fa452f632dcf9875115e5",
+          "new": "57cf0af8c19d8b8d36d569bc39f2644600d83fba"
+        }
+      },
+      "files": [
+        "NativeChebyshevBound.lean"
+      ],
+      "helpers": [
+        "HVRNativeChebyshevBound.primorial_pos_native"
+      ],
+      "edges": [
+        {
+          "module": "NativeChebyshevBound",
+          "caller": "HVRNativeChebyshevBound.theta_le_log4_mul_x_native",
+          "helper": "HVRNativeChebyshevBound.primorial_pos_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeChebyshevBound.primorial_pos_native"
+      ],
+      "basis": [
+        "Finset.prod_pos",
+        "Finset.mem_filter",
+        "Nat.Prime.pos"
+      ],
+      "patch": "patches/arith-01.patch"
+    },
+    {
+      "id": "arith-02",
+      "key": "arith-02",
+      "target": "Chebyshev.theta_eq_log_primorial",
+      "lean_target": "Chebyshev.theta_eq_log_primorial",
+      "modules": {
+        "NativeChebyshevBound": {
+          "old": "57cf0af8c19d8b8d36d569bc39f2644600d83fba",
+          "new": "549458136027dcc5d91d3a7f943d42ce37e751cb"
+        }
+      },
+      "files": [
+        "NativeChebyshevBound.lean"
+      ],
+      "helpers": [
+        "HVRNativeChebyshevBound.theta_eq_log_primorial_native"
+      ],
+      "edges": [
+        {
+          "module": "NativeChebyshevBound",
+          "caller": "HVRNativeChebyshevBound.theta_le_log4_mul_x_native",
+          "helper": "HVRNativeChebyshevBound.theta_eq_log_primorial_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeChebyshevBound.theta_eq_log_primorial_native"
+      ],
+      "basis": [
+        "Nat.cast_prod",
+        "Real.log_prod",
+        "Nat.Prime.pos"
+      ],
+      "patch": "patches/arith-02.patch"
+    },
+    {
+      "id": "arith-03",
+      "key": "arith-03",
+      "target": "primorial_succ",
+      "lean_target": "primorial_succ",
+      "modules": {
+        "NativeChebyshevBound": {
+          "old": "549458136027dcc5d91d3a7f943d42ce37e751cb",
+          "new": "90677b21e8efe5b9fa78e83ca6abbf36c6da8738"
+        }
+      },
+      "files": [
+        "NativeChebyshevBound.lean"
+      ],
+      "helpers": [
+        "HVRNativeChebyshevBound.primorial_succ_odd_native"
+      ],
+      "edges": [
+        {
+          "module": "NativeChebyshevBound",
+          "caller": "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+          "helper": "HVRNativeChebyshevBound.primorial_succ_odd_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeChebyshevBound.primorial_succ_odd_native"
+      ],
+      "basis": [
+        "Finset.prod_congr",
+        "Finset.range_add_one",
+        "Finset.filter_insert",
+        "Nat.Prime.even_sub_one"
+      ],
+      "patch": "patches/arith-03.patch"
+    },
+    {
+      "id": "arith-04",
+      "key": "arith-04",
+      "target": "Nat.choose_symm_half",
+      "lean_target": "Nat.choose_symm_half",
+      "modules": {
+        "NativeChebyshevBound": {
+          "old": "90677b21e8efe5b9fa78e83ca6abbf36c6da8738",
+          "new": "fa733f5fe627607b714d84ba86fdda422b13ed31"
+        }
+      },
+      "files": [
+        "NativeChebyshevBound.lean"
+      ],
+      "helpers": [
+        "HVRNativeChebyshevBound.choose_symm_half_native"
+      ],
+      "edges": [
+        {
+          "module": "NativeChebyshevBound",
+          "caller": "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+          "helper": "HVRNativeChebyshevBound.choose_symm_half_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeChebyshevBound.choose_symm_half_native"
+      ],
+      "basis": [
+        "Nat.choose_symm_of_eq_add"
+      ],
+      "patch": "patches/arith-04.patch"
+    },
+    {
+      "id": "arith-05",
+      "key": "arith-05",
+      "target": "Nat.choose_middle_le_pow",
+      "lean_target": "Nat.choose_middle_le_pow",
+      "modules": {
+        "NativeChebyshevBound": {
+          "old": "fa733f5fe627607b714d84ba86fdda422b13ed31",
+          "new": "bb10bbe8e852a288c43546023b2155c6ee275ba5"
+        }
+      },
+      "files": [
+        "NativeChebyshevBound.lean"
+      ],
+      "helpers": [
+        "HVRNativeChebyshevBound.choose_middle_le_pow_native"
+      ],
+      "edges": [
+        {
+          "module": "NativeChebyshevBound",
+          "caller": "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+          "helper": "HVRNativeChebyshevBound.choose_middle_le_pow_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeChebyshevBound.choose_middle_le_pow_native"
+      ],
+      "basis": [
+        "HVRNativeChebyshevBound.choose_symm_half_native",
+        "Finset.add_le_sum",
+        "Nat.sum_range_choose"
+      ],
+      "patch": "patches/arith-05.patch"
+    },
+    {
+      "id": "arith-06",
+      "key": "arith-06",
+      "target": "primorial_add_le",
+      "lean_target": "primorial_add_le",
+      "modules": {
+        "NativeChebyshevBound": {
+          "old": "bb10bbe8e852a288c43546023b2155c6ee275ba5",
+          "new": "9d2c6a6bcffc5104ae24cd9065d1a86db75a858b"
+        }
+      },
+      "files": [
+        "NativeChebyshevBound.lean"
+      ],
+      "helpers": [
+        "HVRNativeChebyshevBound.primorial_add_le_native"
+      ],
+      "edges": [
+        {
+          "module": "NativeChebyshevBound",
+          "caller": "HVRNativeChebyshevBound.primorial_lt_four_pow_native",
+          "helper": "HVRNativeChebyshevBound.primorial_add_le_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeChebyshevBound.primorial_add_le_native"
+      ],
+      "basis": [
+        "Finset.prod_union",
+        "Finset.prod_primes_dvd",
+        "Nat.Prime.dvd_choose_add",
+        "Nat.le_of_dvd"
+      ],
+      "patch": "patches/arith-06.patch"
+    },
+    {
+      "id": "pole-01",
+      "key": "pole-01",
+      "target": "riemannZeta_eq_inv_sub_mul",
+      "lean_target": "riemannZeta_eq_inv_sub_mul",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "4bbc46653fc0d0370390c58ff0df9ce35caaadbf",
+          "new": "eb9fa169058bbf19c582709b40a4e4e7499d1c59"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.regularized_div_sub_one",
+        "HVRNativeZetaPoleEquality.log_derivative_eq"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.log_derivative_eq",
+          "helper": "HVRNativeZetaPoleEquality.regularized_div_sub_one"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.regularized_div_sub_one"
+      ],
+      "basis": "u(s)=1+(s-1)v(s); s≠1 ⇒ v(s)=ζ(s)−(s−1)⁻¹ ⇒ u(s)/(s−1)=ζ(s).",
+      "patch": "patches/pole-01.patch"
+    },
+    {
+      "id": "pole-02",
+      "key": "pole-02",
+      "target": "differentiable_riemannZeta₁",
+      "lean_target": "differentiable_riemannZeta₁",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "eb9fa169058bbf19c582709b40a4e4e7499d1c59",
+          "new": "6efa8f9a7664aae9f0018de22044e7bfcc541927"
+        },
+        "NativeZetaPoleLittleO": {
+          "old": "7be64c91e833041d12f41da06def4712f2c2d42a",
+          "new": "7082eabc63c3e92e4092a467fe6f6acf91c20be1"
+        },
+        "HVR_Smoothing_AnalyticGerms": {
+          "old": "2d33aacfff4ffd15dbebe3804cad08f075c61ea3",
+          "new": "4ca94e88e4d5e1224ec3e9b7f386894aff7f2565"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean",
+        "NativeZetaPoleLittleO.lean",
+        "HVR_Smoothing_AnalyticGerms.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.regularized_hasDerivAt",
+        "HVRNativeZetaPoleEquality.regularized_differentiable",
+        "HVRSmoothingAnalyticGerms.poleRegularPart_differentiableAt_zero"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleLittleO",
+          "caller": "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto",
+          "helper": "HVRNativeZetaPoleEquality.regularized_differentiable"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.regularized_differentiable"
+      ],
+      "basis": "D(v) ⇒ u′(s)=v(s)+(s−1)v′(s), by the generic product rule for u=1+(id−1)v.",
+      "patch": "patches/pole-02.patch"
+    },
+    {
+      "id": "pole-03",
+      "key": "pole-03",
+      "target": "riemannZeta₁_one",
+      "lean_target": "riemannZeta₁_one",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "6efa8f9a7664aae9f0018de22044e7bfcc541927",
+          "new": "845427f096cffa3d2b784acf3e4a6608a9bac592"
+        },
+        "NativeZetaPoleLittleO": {
+          "old": "7082eabc63c3e92e4092a467fe6f6acf91c20be1",
+          "new": "6b978ea4eee4892c422bc702915392dec1a7afb5"
+        },
+        "HVR_Smoothing_AnalyticGerms": {
+          "old": "4ca94e88e4d5e1224ec3e9b7f386894aff7f2565",
+          "new": "1dc05786586e388d354b42c7f9e1d18fed3b6dd9"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean",
+        "NativeZetaPoleLittleO.lean",
+        "HVR_Smoothing_AnalyticGerms.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.regularized_value_one",
+        "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleLittleO",
+          "caller": "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto",
+          "helper": "HVRNativeZetaPoleEquality.regularized_value_one"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.regularized_value_one"
+      ],
+      "basis": "u(1)=1+(1−1)v(1)=1.",
+      "patch": "patches/pole-03.patch"
+    },
+    {
+      "id": "pole-04",
+      "key": "pole-04",
+      "target": "deriv_riemannZeta₁_one",
+      "lean_target": "deriv_riemannZeta₁_one",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "845427f096cffa3d2b784acf3e4a6608a9bac592",
+          "new": "8ac6598621dfec2a32bf128665ef4fae733f20aa"
+        },
+        "NativeZetaPoleLittleO": {
+          "old": "6b978ea4eee4892c422bc702915392dec1a7afb5",
+          "new": "705fcaf5ac3ebc6964bbd7368f75df5efc3e46ee"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean",
+        "NativeZetaPoleLittleO.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.regularized_derivative_one",
+        "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleLittleO",
+          "caller": "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto",
+          "helper": "HVRNativeZetaPoleEquality.regularized_derivative_one"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.regularized_derivative_one"
+      ],
+      "basis": "u′(1)=v(1)+(1−1)v′(1)=γ, with v(1)=γ by definition.",
+      "patch": "patches/pole-04.patch"
+    },
+    {
+      "id": "pole-05",
+      "key": "pole-05",
+      "target": "riemannZeta₁_ne_zero_of_near_one",
+      "lean_target": "riemannZeta₁_ne_zero_of_near_one",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "8ac6598621dfec2a32bf128665ef4fae733f20aa",
+          "new": "41f66fdc26686682b95595cdef3790638ebd0b12"
+        },
+        "HVR_Smoothing_PoleGlue": {
+          "old": "03dcf958964c33d1c50bca78fa3902702b1734c5",
+          "new": "a5bd7373d3923de04caeb0a4dd8a77be0fdf2992"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean",
+        "HVR_Smoothing_PoleGlue.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.regularized_eventually_ne",
+        "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.log_derivative_eventually_eq",
+          "helper": "HVRNativeZetaPoleEquality.regularized_eventually_ne"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.regularized_eventually_ne"
+      ],
+      "basis": "Continuity of u at 1 together with u(1)=1≠0 gives eventual nonvanishing.",
+      "patch": "patches/pole-05.patch"
+    },
+    {
+      "id": "pole-06",
+      "key": "pole-06",
+      "target": "deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add",
+      "lean_target": "deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "41f66fdc26686682b95595cdef3790638ebd0b12",
+          "new": "19486310dfcb229d6529ed07cf60812602001509"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.quotient_eventually_eq_zeta",
+        "HVRNativeZetaPoleEquality.zeta_derivative_of_regularized_quotient",
+        "HVRNativeZetaPoleEquality.log_derivative_eq"
+      ],
+      "edges": [
+        {
+          "module": "NativeZetaPoleEquality",
+          "caller": "HVRNativeZetaPoleEquality.log_derivative_eq",
+          "helper": "HVRNativeZetaPoleEquality.zeta_derivative_of_regularized_quotient"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.zeta_derivative_of_regularized_quotient"
+      ],
+      "basis": "ζ(z)=u(z)/(z−1) locally off 1 ⇒ ζ′(s)=u′(s)/(s−1)−u(s)/(s−1)² by the quotient rule.",
+      "patch": "patches/pole-06.patch"
+    },
+    {
+      "id": "pole-07",
+      "key": "pole-07",
+      "target": "log_deriv_riemannZeta_eq_neg_inv_sub_add",
+      "lean_target": "log_deriv_riemannZeta_eq_neg_inv_sub_add",
+      "modules": {
+        "HVR_Smoothing_PoleGlue": {
+          "old": "a5bd7373d3923de04caeb0a4dd8a77be0fdf2992",
+          "new": "b3616304a31d01df194bc382db3f1fe14a8f5510"
+        }
+      },
+      "files": [
+        "HVR_Smoothing_PoleGlue.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.log_derivative_eventually_eq",
+        "HVRSmoothingAnalyticGerms.poleRegularPart_eventuallyEq_raw"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Smoothing_PoleGlue",
+          "caller": "HVRSmoothingAnalyticGerms.poleRegularPart_eventuallyEq_raw",
+          "helper": "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+      ],
+      "basis": "Eventual nonvanishing + pointwise identity on the punctured neighborhood ⇒ eventual log-derivative factorization.",
+      "patch": "patches/pole-07.patch"
+    },
+    {
+      "id": "pole-08",
+      "key": "pole-08",
+      "target": "analyticOn_riemannZeta",
+      "lean_target": "analyticOn_riemannZeta",
+      "modules": {
+        "NativeZetaPoleEquality": {
+          "old": "19486310dfcb229d6529ed07cf60812602001509",
+          "new": "a429bf2b946536fbb1a34355010aedbb67a5ce5e"
+        },
+        "HVR_Smoothing_AnalyticGerms": {
+          "old": "1dc05786586e388d354b42c7f9e1d18fed3b6dd9",
+          "new": "f9feda8bf7168e5e7ce58d03a9eb0f7532df6a63"
+        },
+        "HVR_Zeta_BoundaryFactor": {
+          "old": "230eaedc9f4bb81818c08d93672b8d34067d5bb1",
+          "new": "4b5f07a87c9082eb9b0f1e41d00a07a962257650"
+        }
+      },
+      "files": [
+        "NativeZetaPoleEquality.lean",
+        "HVR_Smoothing_AnalyticGerms.lean",
+        "HVR_Zeta_BoundaryFactor.lean"
+      ],
+      "helpers": [
+        "HVRNativeZetaPoleEquality.zeta_analyticAt",
+        "HVRZetaBoundaryFactor.zeta_boundary_local_factor",
+        "HVRSmoothingAnalyticGerms.regularPartAt_differentiableAt"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Zeta_BoundaryFactor",
+          "caller": "HVRZetaBoundaryFactor.zeta_boundary_local_factor",
+          "helper": "HVRNativeZetaPoleEquality.zeta_analyticAt"
+        }
+      ],
+      "derivations": [
+        "HVRNativeZetaPoleEquality.zeta_analyticAt"
+      ],
+      "basis": "Entire u and analytic nonzero z↦z−1 at s≠1 ⇒ u/(id−1) analytic at s; local equality transports this to ζ.",
+      "patch": "patches/pole-08.patch"
+    },
+    {
+      "id": "lseries-01",
+      "key": "lseries-01",
+      "target": "LSeriesSummable_of_bounded_of_one_lt_re",
+      "lean_target": "LSeriesSummable_of_bounded_of_one_lt_re",
+      "modules": {
+        "NativeOneZetaSummability": {
+          "old": "9b3cc8f3e464409d2fd7eef401d89e4a71709a22",
+          "new": "f9ed4bc9ce068b0a0d76eccf42c1b0c9e0bd18d8"
+        },
+        "IntegratedZetaNonzero": {
+          "old": "bf8445480bbb1f90dff8e70a4c3b0ea646d73885",
+          "new": "5407a2ef608989d289ef7293dcedf4ae7f34e5c7"
+        }
+      },
+      "files": [
+        "NativeOneZetaSummability.lean",
+        "IntegratedZetaNonzero.lean"
+      ],
+      "helpers": [
+        "HVRNativeOneZetaSummability.summable_of_unit_bound"
+      ],
+      "edges": [
+        {
+          "module": "NativeOneZetaSummability",
+          "caller": "HVRNativeOneZetaSummability.one_summable",
+          "helper": "HVRNativeOneZetaSummability.summable_of_unit_bound"
+        },
+        {
+          "module": "IntegratedZetaNonzero",
+          "caller": "HVRIntegratedZetaNonzero.moebiusLSeries_summable",
+          "helper": "HVRNativeOneZetaSummability.summable_of_unit_bound"
+        }
+      ],
+      "derivations": [
+        "HVRNativeOneZetaSummability.summable_of_unit_bound"
+      ],
+      "basis": "Pointwise bound by n^(-Re(s)); HVRNativeLSeriesNorm.norm_term, Real.summable_nat_rpow, Summable.of_norm_bounded.",
+      "patch": "patches/lseries-01.patch"
+    },
+    {
+      "id": "lseries-02",
+      "key": "lseries-02",
+      "target": "ArithmeticFunction.const_one_eq_zeta",
+      "lean_target": "ArithmeticFunction.const_one_eq_zeta",
+      "modules": {
+        "NativeOneZetaSummability": {
+          "old": "f9ed4bc9ce068b0a0d76eccf42c1b0c9e0bd18d8",
+          "new": "1f83aff16f3c421716d171bb3d57863afbfc4689"
+        }
+      },
+      "files": [
+        "NativeOneZetaSummability.lean"
+      ],
+      "helpers": [
+        "HVRNativeOneZetaSummability.positive_zeta_coefficient"
+      ],
+      "edges": [
+        {
+          "module": "NativeOneZetaSummability",
+          "caller": "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+          "helper": "HVRNativeOneZetaSummability.positive_zeta_coefficient"
+        }
+      ],
+      "derivations": [
+        "HVRNativeOneZetaSummability.positive_zeta_coefficient"
+      ],
+      "basis": "Positive-index arithmetic zeta equals one via ArithmeticFunction.zeta_apply_ne applied pointwise.",
+      "patch": "patches/lseries-02.patch"
+    },
+    {
+      "id": "lseries-03",
+      "key": "lseries-03",
+      "target": "LSeriesSummable_congr",
+      "lean_target": "LSeriesSummable_congr",
+      "modules": {
+        "NativeOneZetaSummability": {
+          "old": "1f83aff16f3c421716d171bb3d57863afbfc4689",
+          "new": "68eafc5a3e2ed6b7ad4d96ff817f8e784865c13a"
+        }
+      },
+      "files": [
+        "NativeOneZetaSummability.lean"
+      ],
+      "helpers": [
+        "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+        "HVRNativeOneZetaSummability.summable_of_unit_bound"
+      ],
+      "edges": [
+        {
+          "module": "NativeOneZetaSummability",
+          "caller": "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+          "helper": "HVRNativeOneZetaSummability.summable_of_unit_bound"
+        }
+      ],
+      "derivations": [
+        "HVRNativeOneZetaSummability.arithmetic_zeta_summable"
+      ],
+      "basis": "Apply the proved positive-index unit bound directly to arithmetic zeta, retaining the zero-index convention.",
+      "patch": "patches/lseries-03.patch"
+    },
+    {
+      "id": "lseries-04",
+      "key": "lseries-04",
+      "target": "LSeries_convolution'",
+      "lean_target": "LSeries_convolution'",
+      "modules": {
+        "NativeOneZetaSummability": {
+          "old": "68eafc5a3e2ed6b7ad4d96ff817f8e784865c13a",
+          "new": "e8551a324e4fb56d5ff57428bd1108aff66241b4"
+        },
+        "IntegratedZetaNonzero": {
+          "old": "5407a2ef608989d289ef7293dcedf4ae7f34e5c7",
+          "new": "025b567ed7d93669d9a8eb4b3ae99c73c1be6de0"
+        },
+        "HVRMajorZetaLogDerivative": {
+          "old": "ac3b1ecb2391b25da85064baf1fba6e919dd7795",
+          "new": "17eae095a0b86949fa57a63f8d6d1e0e6d910d07"
+        }
+      },
+      "files": [
+        "NativeOneZetaSummability.lean",
+        "IntegratedZetaNonzero.lean",
+        "HVRMajorZetaLogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRNativeOneZetaSummability.convolution_sum"
+      ],
+      "edges": [
+        {
+          "module": "IntegratedZetaNonzero",
+          "caller": "HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries",
+          "helper": "HVRNativeOneZetaSummability.convolution_sum"
+        },
+        {
+          "module": "HVRMajorZetaLogDerivative",
+          "caller": "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
+          "helper": "HVRNativeOneZetaSummability.convolution_sum"
+        }
+      ],
+      "derivations": [
+        "HVRNativeOneZetaSummability.convolution_sum"
+      ],
+      "basis": "HasSum.mul on the summable product family, followed by HasSum.tsum_fiberwise and LSeries.term_convolution'.",
+      "patch": "patches/lseries-04.patch"
+    },
+    {
+      "id": "lseries-05",
+      "key": "lseries-05",
+      "target": "LSeries_one_eq_riemannZeta",
+      "lean_target": "LSeries_one_eq_riemannZeta",
+      "modules": {
+        "NativeOneZetaSummability": {
+          "old": "e8551a324e4fb56d5ff57428bd1108aff66241b4",
+          "new": "53b51c3a563b5c9e3781a237d737abc96cb0f950"
+        },
+        "HVRMajorZetaLogDerivative": {
+          "old": "17eae095a0b86949fa57a63f8d6d1e0e6d910d07",
+          "new": "c3bcfd7422c385ea46a446159c39c1e6305b00fe"
+        }
+      },
+      "files": [
+        "NativeOneZetaSummability.lean",
+        "HVRMajorZetaLogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRNativeOneZetaSummability.one_series_eq_zeta"
+      ],
+      "edges": [
+        {
+          "module": "HVRMajorZetaLogDerivative",
+          "caller": "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta",
+          "helper": "HVRNativeOneZetaSummability.one_series_eq_zeta"
+        }
+      ],
+      "derivations": [
+        "HVRNativeOneZetaSummability.one_series_eq_zeta"
+      ],
+      "basis": "Use zeta_eq_tsum_one_div_nat_cpow and the nonzero-exponent term identity to identify the two sums termwise.",
+      "patch": "patches/lseries-05.patch"
+    },
+    {
+      "id": "lseries-06",
+      "key": "lseries-06",
+      "target": "ArithmeticFunction.LSeries_zeta_eq_riemannZeta",
+      "lean_target": "ArithmeticFunction.LSeries_zeta_eq_riemannZeta",
+      "modules": {
+        "IntegratedZetaNonzero": {
+          "old": "025b567ed7d93669d9a8eb4b3ae99c73c1be6de0",
+          "new": "91b9cb48cbe307efb5cb45a7d94c17396646ae57"
+        }
+      },
+      "files": [
+        "IntegratedZetaNonzero.lean"
+      ],
+      "helpers": [
+        "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse",
+        "HVRNativeOneZetaSummability.one_series_eq_zeta"
+      ],
+      "edges": [
+        {
+          "module": "IntegratedZetaNonzero",
+          "caller": "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse",
+          "helper": "HVRNativeOneZetaSummability.one_series_eq_zeta"
+        }
+      ],
+      "derivations": [
+        "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse"
+      ],
+      "basis": "Compare arithmetic zeta and the constant-one sequence termwise, accounting for the zero index, then use the stage 5 identification.",
+      "patch": "patches/lseries-06.patch"
+    },
+    {
+      "id": "lseries-07",
+      "key": "lseries-07",
+      "target": "LSeries.convolution_one_eq_convolution_zeta",
+      "lean_target": "LSeries.convolution_one_eq_convolution_zeta",
+      "modules": {
+        "HVRMajorZetaLogDerivative": {
+          "old": "c3bcfd7422c385ea46a446159c39c1e6305b00fe",
+          "new": "4d34a34ffac0c7d39b57ec4a267e28568ee26ea4"
+        }
+      },
+      "files": [
+        "HVRMajorZetaLogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native"
+      ],
+      "edges": [
+        {
+          "module": "HVRMajorZetaLogDerivative",
+          "caller": "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native",
+          "helper": "HVRNativeOneZetaSummability.positive_zeta_coefficient"
+        }
+      ],
+      "derivations": [
+        "HVRMajorZetaLogDerivative.convolution_vonMangoldt_const_one_native"
+      ],
+      "basis": "Use positive-index equality inside Dirichlet convolution and the existing Mangoldt divisor identity.",
+      "patch": "patches/lseries-07.patch"
+    },
+    {
+      "id": "lseries-08",
+      "key": "lseries-08",
+      "target": "LSeries_deriv",
+      "lean_target": "LSeries_deriv",
+      "modules": {
+        "HVRMajorZetaLogDerivative": {
+          "old": "4d34a34ffac0c7d39b57ec4a267e28568ee26ea4",
+          "new": "d8e1d525a20f0f5d3c264dcb68902ef62608905d"
+        }
+      },
+      "files": [
+        "HVRMajorZetaLogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRMajorZetaLogDerivative.deriv_one_series"
+      ],
+      "edges": [
+        {
+          "module": "HVRMajorZetaLogDerivative",
+          "caller": "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
+          "helper": "HVRMajorZetaLogDerivative.deriv_one_series"
+        }
+      ],
+      "derivations": [
+        "HVRMajorZetaLogDerivative.deriv_one_series"
+      ],
+      "basis": "Choose x=(1+Re(s))/2 and differentiate the uniformly dominated term sum on Re(z)>x with hasSum_deriv_of_summable_norm.",
+      "patch": "patches/lseries-08.patch"
+    },
+    {
+      "id": "lseries-09",
+      "key": "lseries-09",
+      "target": "LSeries_congr",
+      "lean_target": "LSeries_congr",
+      "modules": {
+        "HVRMajorZetaLogDerivative": {
+          "old": "d8e1d525a20f0f5d3c264dcb68902ef62608905d",
+          "new": "5c38d0231e918b3597cafcde08d78f086c367376"
+        }
+      },
+      "files": [
+        "HVRMajorZetaLogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRMajorZetaLogDerivative.logMul_one_coefficients"
+      ],
+      "edges": [
+        {
+          "module": "HVRMajorZetaLogDerivative",
+          "caller": "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one",
+          "helper": "HVRMajorZetaLogDerivative.logMul_one_coefficients"
+        }
+      ],
+      "derivations": [
+        "HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_one"
+      ],
+      "basis": "All coefficients agree, including the index zero; ordinary function extensionality suffices before applying LSeries.",
+      "patch": "patches/lseries-09.patch"
+    },
+    {
+      "id": "mangoldt-01",
+      "key": "mangoldt-01",
+      "target": "ArithmeticFunction.vonMangoldt_apply_prime",
+      "lean_target": "ArithmeticFunction.vonMangoldt_apply_prime",
+      "modules": {
+        "HVR_Zeta_LogDerivative": {
+          "old": "d97de42522d096543e88a62752da818d16564ecd",
+          "new": "98a19cca5dc2de064975c531b17d584604149cca"
+        }
+      },
+      "files": [
+        "HVR_Zeta_LogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native",
+        "HVRZetaLogDerivative.higherCoefficient_eq_zero_of_prime",
+        "HVRZetaLogDerivative.vonMangoldt_at_prime_pow"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Zeta_LogDerivative",
+          "caller": "HVRZetaLogDerivative.higherCoefficient_eq_zero_of_prime",
+          "helper": "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+        },
+        {
+          "module": "HVR_Zeta_LogDerivative",
+          "caller": "HVRZetaLogDerivative.vonMangoldt_at_prime_pow",
+          "helper": "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeMangoldtPrime.vonMangoldt_apply_prime_native"
+      ],
+      "basis": "Unfold vonMangoldt on a prime; IsPrimePow and Nat.Prime.minFac_eq give log p.",
+      "patch": "patches/mangoldt-01.patch"
+    },
+    {
+      "id": "mangoldt-02",
+      "key": "mangoldt-02",
+      "target": "ArithmeticFunction.vonMangoldt_apply_pow",
+      "lean_target": "ArithmeticFunction.vonMangoldt_apply_pow",
+      "modules": {
+        "HVR_Zeta_LogDerivative": {
+          "old": "98a19cca5dc2de064975c531b17d584604149cca",
+          "new": "01b73b99e54b6ce7e8a7c14dc52aa7951d2fce9b"
+        }
+      },
+      "files": [
+        "HVR_Zeta_LogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native",
+        "HVRZetaLogDerivative.vonMangoldt_at_prime_pow"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Zeta_LogDerivative",
+          "caller": "HVRZetaLogDerivative.vonMangoldt_at_prime_pow",
+          "helper": "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native"
+        }
+      ],
+      "derivations": [
+        "HVRNativeMangoldtPow.vonMangoldt_apply_pow_native"
+      ],
+      "basis": "Unfold vonMangoldt at n^k and n; isPrimePow_pow_iff and Nat.pow_minFac for k ≠ 0; compose with stage 1 prime evaluation.",
+      "patch": "patches/mangoldt-02.patch"
+    },
+    {
+      "id": "mangoldt-03",
+      "key": "mangoldt-03",
+      "target": "ArithmeticFunction.vonMangoldt_eq_zero_iff",
+      "lean_target": "ArithmeticFunction.vonMangoldt_eq_zero_iff",
+      "modules": {
+        "HVR_Zeta_LogDerivative": {
+          "old": "01b73b99e54b6ce7e8a7c14dc52aa7951d2fce9b",
+          "new": "f861327f385379b21df6147282b2876d4c13a504"
+        }
+      },
+      "files": [
+        "HVR_Zeta_LogDerivative.lean"
+      ],
+      "helpers": [
+        "HVRZetaLogDerivative.higherCoefficient_eq_zero_of_not_prime_pow",
+        "HVRZetaLogDerivative.higherCoefficient_support"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Zeta_LogDerivative",
+          "caller": "HVRZetaLogDerivative.higherCoefficient_support",
+          "helper": "HVRZetaLogDerivative.higherCoefficient_eq_zero_of_not_prime_pow"
+        }
+      ],
+      "derivations": [
+        "HVRZetaLogDerivative.higherCoefficient_eq_zero_of_not_prime_pow"
+      ],
+      "basis": "Definitional negative IsPrimePow branch gives zero; a prime would be a prime power, so the prime indicator is also zero. Only the required implication is used.",
+      "patch": "patches/mangoldt-03.patch"
+    },
+    {
+      "id": "mangoldt-04",
+      "key": "mangoldt-04",
+      "target": "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "lean_target": "ArithmeticFunction.LSeriesSummable_vonMangoldt",
+      "modules": {
+        "HVR_Prime_ZetaSplit": {
+          "old": "c3ddf3141c12101c5028e2756d89a720093d4b7e",
+          "new": "4c63765146e5ade08672d82203e7af74fa3bf9c0"
+        }
+      },
+      "files": [
+        "HVR_Prime_ZetaSplit.lean"
+      ],
+      "helpers": [
+        "HVRNextSummability.vonMangoldt_lseries_summable",
+        "HVRPrimeZetaSplit.higher_lseries_summable",
+        "HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Prime_ZetaSplit",
+          "caller": "HVRPrimeZetaSplit.higher_lseries_summable",
+          "helper": "HVRNextSummability.vonMangoldt_lseries_summable"
+        },
+        {
+          "module": "HVR_Prime_ZetaSplit",
+          "caller": "HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher",
+          "helper": "HVRNextSummability.vonMangoldt_lseries_summable"
+        }
+      ],
+      "derivations": [
+        "HVRNextSummability.vonMangoldt_lseries_summable"
+      ],
+      "basis": "Bound vonMangoldt n by log n and then n^ε/ε; the exponent ε−Re s is below −1. Real p-series summability, pointwise norm comparison.",
+      "patch": "patches/mangoldt-04.patch"
+    },
+    {
+      "id": "mangoldt-05",
+      "key": "mangoldt-05",
+      "target": "LSeriesSummable.sub",
+      "lean_target": "LSeriesSummable.sub",
+      "modules": {
+        "HVR_Prime_ZetaSplit": {
+          "old": "4c63765146e5ade08672d82203e7af74fa3bf9c0",
+          "new": "a9f21ccca47abe870face6e188d6f87638e9aab8"
+        }
+      },
+      "files": [
+        "HVR_Prime_ZetaSplit.lean"
+      ],
+      "helpers": [
+        "HVRPrimeZetaSplit.higher_lseries_hasSum",
+        "HVRPrimeZetaSplit.higher_lseries_summable"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Prime_ZetaSplit",
+          "caller": "HVRPrimeZetaSplit.higher_lseries_summable",
+          "helper": "HVRPrimeZetaSplit.higher_lseries_hasSum"
+        }
+      ],
+      "derivations": [
+        "HVRPrimeZetaSplit.higher_lseries_hasSum"
+      ],
+      "basis": "LSeries.term subtraction at n=0 and n≠0 follows from the definition and sub_div. Generic HasSum.sub and HasSum.summable give the correction series.",
+      "patch": "patches/mangoldt-05.patch"
+    },
+    {
+      "id": "mangoldt-06",
+      "key": "mangoldt-06",
+      "target": "LSeries_sub",
+      "lean_target": "LSeries_sub",
+      "modules": {
+        "HVR_Prime_ZetaSplit": {
+          "old": "a9f21ccca47abe870face6e188d6f87638e9aab8",
+          "new": "c4efb1d69ad4b97243b1f78c60a5534423bad144"
+        }
+      },
+      "files": [
+        "HVR_Prime_ZetaSplit.lean"
+      ],
+      "helpers": [
+        "HVRPrimeZetaSplit.higher_lseries_hasSum",
+        "HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher"
+      ],
+      "edges": [
+        {
+          "module": "HVR_Prime_ZetaSplit",
+          "caller": "HVRPrimeZetaSplit.zeta_log_deriv_eq_primeSeries_add_higher",
+          "helper": "HVRPrimeZetaSplit.higher_lseries_hasSum"
+        }
+      ],
+      "derivations": [
+        "HVRPrimeZetaSplit.higher_lseries_hasSum"
+      ],
+      "basis": "Take the tsum of the stage 5 HasSum identity; substitute the HVR logarithmic derivative and cancel by ring arithmetic.",
+      "patch": "patches/mangoldt-06.patch"
+    },
+    {
+      "id": "mangoldt-07",
+      "key": "mangoldt-07",
+      "target": "tsum_eq_tsum_primes_add_tsum_primes_of_support_subset_prime_powers",
+      "lean_target": "tsum_eq_tsum_primes_add_tsum_primes_of_support_subset_prime_powers",
+      "modules": {
+        "HVR_HigherCoefficient_Reindex": {
+          "old": "56126db0a6c9c955a77ad8098d7d3c6d26c017a5",
+          "new": "b70b3cd888f05f2604ec2b539d5cdee2a6f1e55d"
+        }
+      },
+      "files": [
+        "HVR_HigherCoefficient_Reindex.lean"
+      ],
+      "helpers": [
+        "HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum"
+      ],
+      "edges": [
+        {
+          "module": "HVR_HigherCoefficient_Reindex",
+          "caller": "HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum",
+          "helper": "HVRHigherCoefficientReindex.higher_lseries_support_prime_powers"
+        },
+        {
+          "module": "HVR_HigherCoefficient_Reindex",
+          "caller": "HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum",
+          "helper": "HVRHigherCoefficientReindex.higher_lseries_term_at_prime"
+        }
+      ],
+      "derivations": [
+        "HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum"
+      ],
+      "basis": "Restrict to prime-power support; Nat.Primes.prodNatEquiv, Equiv.tsum_eq, and Summable.tsum_prod split the sum by prime and positive exponent. The first term in every prime fiber vanishes.",
+      "patch": "patches/mangoldt-07.patch"
+    },
+    {
+      "id": "mangoldt-08",
+      "key": "mangoldt-08",
+      "target": "hasSum_geometric_of_norm_lt_one",
+      "lean_target": "hasSum_geometric_of_norm_lt_one",
+      "modules": {
+        "HVR_HigherCoefficient_Geometric": {
+          "old": "be238992b95df14c89cf083f532e02dd0f4b968f",
+          "new": "02bc580e5fd183dfb657ab45c1b8466f959b16a1"
+        },
+        "HVR_Snditeration_PrimePowerTail": {
+          "old": "7401ccfc569a631d8b581371eba4474e3d2bdd3d",
+          "new": "e5b8f4c905f615fa15787ddf7440884077166a64"
+        }
+      },
+      "files": [
+        "HVR_HigherCoefficient_Geometric.lean",
+        "HVR_Snditeration_PrimePowerTail.lean"
+      ],
+      "helpers": [
+        "HVRHigherCoefficientGeometric.complex_geometric_hasSum",
+        "HVRHigherCoefficientGeometric.correction_prime_power_hasSum",
+        "HVRSnditerationPrimePowerTail.higher_prime_power_hasSum",
+        "HVRSnditerationPrimePowerTail.mangoldt_prime_power_hasSum"
+      ],
+      "edges": [
+        {
+          "module": "HVR_HigherCoefficient_Geometric",
+          "caller": "HVRHigherCoefficientGeometric.correction_prime_power_hasSum",
+          "helper": "HVRHigherCoefficientGeometric.complex_geometric_hasSum"
+        },
+        {
+          "module": "HVR_Snditeration_PrimePowerTail",
+          "caller": "HVRSnditerationPrimePowerTail.higher_prime_power_hasSum",
+          "helper": "HVRHigherCoefficientGeometric.complex_geometric_hasSum"
+        },
+        {
+          "module": "HVR_Snditeration_PrimePowerTail",
+          "caller": "HVRSnditerationPrimePowerTail.mangoldt_prime_power_hasSum",
+          "helper": "HVRHigherCoefficientGeometric.complex_geometric_hasSum"
+        }
+      ],
+      "derivations": [
+        "HVRHigherCoefficientGeometric.complex_geometric_hasSum"
+      ],
+      "basis": "Use summable_geometric_of_lt_one for the real norms; complex summability gives q^n → 0. The finite geom_sum_eq and hasSum_iff_tendsto_nat_of_summable_norm give the complex limit.",
+      "patch": "patches/mangoldt-08.patch"
+    },
+    {
+      "id": "measure-01",
+      "key": "measure-01",
+      "target": "tendsto_integral_filter_of_dominated_convergence",
+      "lean_target": "MeasureTheory.tendsto_integral_filter_of_dominated_convergence",
+      "modules": {
+        "HVR_PrimeBoundary_EventualAbelGlue": {
+          "old": "cc68fada393648d1de98687a342cca77268c9671",
+          "new": "22b37bc711cb0446ef7fdee6b3182164f49b930a"
+        },
+        "HVR_PrimeDensity_SpatialAbel": {
+          "old": "30c20b196b5743c92392595a3a25aef8c055c648",
+          "new": "4825ab80b04261dc60d1755d630259ce29288917"
+        }
+      },
+      "files": [
+        "HVR_PrimeBoundary_EventualAbelGlue.lean",
+        "HVR_PrimeDensity_SpatialAbel.lean"
+      ],
+      "helpers": [
+        "HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support",
+        "HVRNativeDominatedLimit.integral_error_le_weighted",
+        "HVRPrimeDensitySpatialAbel.spatial_abel_tendsto",
+        "HVRPrimeDensitySpatialAbel.exp_neg_boundaryEps_mul_monotone",
+        "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error"
+      ],
+      "edges": [
+        {
+          "module": "HVR_PrimeBoundary_EventualAbelGlue",
+          "caller": "HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support",
+          "helper": "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error"
+        },
+        {
+          "module": "HVR_PrimeBoundary_EventualAbelGlue",
+          "caller": "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error",
+          "helper": "HVRNativeDominatedLimit.integral_error_le_weighted"
+        },
+        {
+          "module": "HVR_PrimeDensity_SpatialAbel",
+          "caller": "HVRPrimeDensitySpatialAbel.spatial_abel_tendsto",
+          "helper": "HVRPrimeDensitySpatialAbel.exp_neg_boundaryEps_mul_monotone"
+        }
+      ],
+      "derivations": [
+        "HVRPrimeBoundaryEventualAbelGlue.integral_tendsto_of_eventual_weighted_uniform_error",
+        "HVRPrimeDensitySpatialAbel.spatial_abel_tendsto"
+      ],
+      "basis": "The generic eventual weighted-uniform integral limit is isolated with all analytic facts as explicit hypotheses. Its proof uses the basic weighted integral error inequality and ε/(∫weight+1), with nonnegative weight integral and eventual integrability explicit. The original compact-frequency theorem discharges these hypotheses using its existing compact-uniform boundary and eventual-domination facts, preserving every original caller binder. The generic theorem and the spatial Abel theorem are the scoped negative-dependency endpoints. The zeta-specific caller retains independent DCT dependencies through its analytic inputs. Spatial Abel uses real antitone integral convergence.",
+      "patch": "patches/measure-01.patch"
+    },
+    {
+      "id": "measure-02",
+      "key": "measure-02",
+      "target": "tendsto_integral_of_dominated_convergence",
+      "lean_target": "MeasureTheory.tendsto_integral_of_dominated_convergence",
+      "modules": {
+        "HVR_PrimeBoundary_AbelLimitConditional": {
+          "old": "83f5d4f47479fb84047ca2fad6a7d1709988f8d3",
+          "new": "60ff1e551e56bf70fe33c47f77bf0d9382be4947"
+        }
+      },
+      "files": [
+        "HVR_PrimeBoundary_AbelLimitConditional.lean"
+      ],
+      "helpers": [
+        "HVRPrimeBoundaryAbelLimitConditional.lintegral_error_zero_of_reverse_fatou",
+        "HVRPrimeBoundaryAbelLimitConditional.integral_tendsto_of_fatou_error",
+        "HVRPrimeBoundaryAbelLimitConditional.frequency_integral_tendsto_boundary_of_dominated"
+      ],
+      "edges": [
+        {
+          "module": "HVR_PrimeBoundary_AbelLimitConditional",
+          "caller": "HVRPrimeBoundaryAbelLimitConditional.frequency_integral_tendsto_boundary_of_dominated",
+          "helper": "HVRPrimeBoundaryAbelLimitConditional.integral_tendsto_of_fatou_error"
+        },
+        {
+          "module": "HVR_PrimeBoundary_AbelLimitConditional",
+          "caller": "HVRPrimeBoundaryAbelLimitConditional.integral_tendsto_of_fatou_error",
+          "helper": "HVRPrimeBoundaryAbelLimitConditional.lintegral_error_zero_of_reverse_fatou"
+        }
+      ],
+      "derivations": [
+        "HVRPrimeBoundaryAbelLimitConditional.integral_tendsto_of_fatou_error"
+      ],
+      "basis": "Take scalar ENNReal L¹ errors with majorant ofReal(w+w), choose measurable representatives simultaneously almost everywhere, apply the reverse Fatou limsup inequality, then continuity of the Bochner integral in L¹. No named scalar or vector dominated convergence theorem is called by this proof. Retains Mathlib limsup_lintegral_le, its decreasing-lintegral machinery, AEStronglyMeasurable limit, and tendsto_integral_of_L1. Transitive independence remains unaudited.",
+      "patch": "patches/measure-02.patch"
+    },
+    {
+      "id": "measure-03",
+      "key": "measure-03",
+      "target": "integral_integral_swap",
+      "lean_target": "MeasureTheory.integral_integral_swap",
+      "modules": {
+        "HVR_PrimeDensity_FubiniBridge": {
+          "old": "c3811ba1aae29725c85e1bc9b7b88cdfbea2c333",
+          "new": "3a905495424273a2e6125691d2e794d1ac2f1abe"
+        }
+      },
+      "files": [
+        "HVR_PrimeDensity_FubiniBridge.lean"
+      ],
+      "helpers": [
+        "HVRPrimeDensityFubiniBridge.abel_smoothing_eq_frequency_integral",
+        "HVRPrimeDensityFubiniBridge.mixed_integral_exchange",
+        "HVRPrimeDensityFubiniBridge.complex_integral_from_sections"
+      ],
+      "edges": [
+        {
+          "module": "HVR_PrimeDensity_FubiniBridge",
+          "caller": "HVRPrimeDensityFubiniBridge.abel_smoothing_eq_frequency_integral",
+          "helper": "HVRPrimeDensityFubiniBridge.mixed_integral_exchange"
+        },
+        {
+          "module": "HVR_PrimeDensity_FubiniBridge",
+          "caller": "HVRPrimeDensityFubiniBridge.mixed_integral_exchange",
+          "helper": "HVRPrimeDensityFubiniBridge.complex_integral_from_sections"
+        }
+      ],
+      "derivations": [
+        "HVRPrimeDensityFubiniBridge.complex_integral_from_sections"
+      ],
+      "basis": "An HVR complex L¹ induction proves the product-to-iterated integral identity from finite-measure indicators, additivity, a.e. congruence and L¹ continuity; its indicator argument is adapted from the pinned Mathlib proof. The local identity and a one-variable measure-preserving change of variables exchange the two orders for the mixed kernel under the original product-integrability hypothesis, for arbitrary real a and x. Scalar Tonelli remains beneath L¹ continuity. The upstream swap through Mathlib riemannZeta remains a separate root dependency. External compiler and direct-edge evidence pending.",
+      "patch": "patches/measure-03.patch"
+    }
+  ],
+  "deferred": []
+}

@@ -3,3 +3,8 @@ import NativeChebyshevBound
 #print axioms HVRNativeChebyshevBound.primorial_le_four_pow_native
 #print axioms HVRNativeChebyshevBound.theta_le_log4_mul_x_native
 #print axioms HVRNativeChebyshevBound.primorial_pos_native
+#print axioms HVRNativeChebyshevBound.theta_eq_log_primorial_native
+#print axioms HVRNativeChebyshevBound.primorial_succ_odd_native
+#print axioms HVRNativeChebyshevBound.choose_symm_half_native
+#print axioms HVRNativeChebyshevBound.choose_middle_le_pow_native
+#print axioms HVRNativeChebyshevBound.primorial_add_le_native

@@ -1,0 +1,25 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean b/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
+index a9f21ccca47abe870face6e188d6f87638e9aab8..c4efb1d69ad4b97243b1f78c60a5534423bad144 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Prime_ZetaSplit.lean
+@@ -90,16 +90,14 @@ theorem zeta_log_deriv_eq_primeSeries_add_higher (sigma t : ℝ)
+     (hsigma : 1 < sigma) :
+     -deriv riemannZeta (zetaPoint sigma t) / riemannZeta (zetaPoint sigma t) =
+       primeSeries sigma t 1 + LSeries higherCoefficientC (zetaPoint sigma t) := by
+-  have hv : LSeriesSummable vonMangoldtC (zetaPoint sigma t) := by
+-    apply HVRNextSummability.vonMangoldt_lseries_summable
+-    simpa [zetaPoint] using hsigma
+-  have hp := prime_lseries_summable sigma t hsigma
+   have hz : LSeries vonMangoldtC (zetaPoint sigma t) =
+       -deriv riemannZeta (zetaPoint sigma t) / riemannZeta (zetaPoint sigma t) := by
+     apply vonMangoldt_series_eq_zeta_log_deriv
+     simpa [zetaPoint] using hsigma
+-  rw [higherCoefficientC_eq_sub, LSeries_sub hv hp, prime_lseries_eq_primeSeries]
+-  rw [hz]
++  have hc : LSeries higherCoefficientC (zetaPoint sigma t) =
++      LSeries vonMangoldtC (zetaPoint sigma t) - primeSeries sigma t 1 :=
++    (higher_lseries_hasSum sigma t hsigma).tsum_eq
++  rw [hc, hz]
+   ring
+ 
+ end HVRPrimeZetaSplit

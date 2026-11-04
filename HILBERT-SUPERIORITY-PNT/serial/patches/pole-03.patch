@@ -1,0 +1,48 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
+index 4ca94e88e4d5e1224ec3e9b7f386894aff7f2565..1dc05786586e388d354b42c7f9e1d18fed3b6dd9 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_AnalyticGerms.lean
+@@ -41,7 +41,8 @@ theorem poleRegularPart_differentiableAt_zero :
+     exact (HVRNativeZetaPoleEquality.regularized_differentiable (1 + 0)).comp 0 hshift
+   have hderiv : DifferentiableAt ℂ (fun z : ℂ => deriv riemannZeta₁ (1 + z)) 0 := by
+     exact (HVRNativeZetaPoleEquality.regularized_differentiable.deriv (1 + 0)).comp 0 hshift
+-  have hnz : riemannZeta₁ (1 + (0 : ℂ)) ≠ 0 := by simp
++  have hnz : riemannZeta₁ (1 + (0 : ℂ)) ≠ 0 := by
++    simpa only [add_zero] using HVRNativeZetaPoleEquality.regularized_value_one.trans_ne one_ne_zero
+   have hratio := hderiv.div hzeta hnz
+   have hc : DifferentiableAt ℂ (fun z : ℂ => complexCorrection (1 + z)) 0 := by
+     apply (complexCorrection_differentiableAt_halfPlane (1 + 0) ?_).comp 0 hshift
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index 6efa8f9a7664aae9f0018de22044e7bfcc541927..845427f096cffa3d2b784acf3e4a6608a9bac592 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -29,6 +29,9 @@ theorem regularized_hasDerivAt (s : ℂ) :
+ theorem regularized_differentiable : Differentiable ℂ riemannZeta₁ :=
+   fun s => (regularized_hasDerivAt s).differentiableAt
+ 
++theorem regularized_value_one : riemannZeta₁ 1 = 1 := by
++  simp only [riemannZeta₁, sub_self, zero_mul, add_zero]
++
+ /-- Off the pole, undo both regularizations using their definitions. -/
+ theorem regularized_div_sub_one {s : ℂ} (hs : s ≠ 1) :
+     riemannZeta₁ s / (s - 1) = riemannZeta s := by
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
+index 7082eabc63c3e92e4092a467fe6f6acf91c20be1..6b978ea4eee4892c422bc702915392dec1a7afb5 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleLittleO.lean
+@@ -28,13 +28,13 @@ theorem regularized_log_derivative_tendsto :
+     regularized_differentiable.deriv.continuous.continuousAt
+   have hden : ContinuousAt riemannZeta₁ (1 : ℂ) :=
+     regularized_differentiable.continuous.continuousAt
+-  have hne : riemannZeta₁ (1 : ℂ) ≠ 0 := by simp
++  have hne : riemannZeta₁ (1 : ℂ) ≠ 0 := regularized_value_one.trans_ne one_ne_zero
+   have hc := hnum.div hden hne
+   have ht : Tendsto (fun s : ℂ => deriv riemannZeta₁ s / riemannZeta₁ s)
+       (𝓝[≠] (1 : ℂ))
+       (𝓝 (deriv riemannZeta₁ (1 : ℂ) / riemannZeta₁ (1 : ℂ))) :=
+     hc.tendsto.mono_left nhdsWithin_le_nhds
+-  simpa only [deriv_riemannZeta₁_one, riemannZeta₁_one, div_one] using ht
++  simpa only [deriv_riemannZeta₁_one, regularized_value_one, div_one] using ht
+ 
+ /-- At the actual zeta pole, the regularized logarithmic derivative minus
+ Euler's constant is little-o of the constant one. -/

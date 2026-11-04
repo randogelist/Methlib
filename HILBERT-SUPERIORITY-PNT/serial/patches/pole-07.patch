@@ -1,0 +1,13 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean
+index a5bd7373d3923de04caeb0a4dd8a77be0fdf2992..b3616304a31d01df194bc382db3f1fe14a8f5510 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVR_Smoothing_PoleGlue.lean
+@@ -23,7 +23,7 @@ theorem poleRegularPart_eventuallyEq_raw :
+       intro heq
+       apply hz
+       simpa only [add_eq_left] using heq
+-  have hlog := hpunct.eventually log_deriv_riemannZeta_eq_neg_inv_sub_add
++  have hlog := hpunct.eventually HVRNativeZetaPoleEquality.log_derivative_eventually_eq
+   have hzeta1 := hshift.eventually HVRNativeZetaPoleEquality.regularized_eventually_ne
+   have hnear : ∀ᶠ z : ℂ in 𝓝[≠] (0 : ℂ), 1 + z ≠ 0 := by
+     have hne : ∀ᶠ z : ℂ in 𝓝 (1 : ℂ), z ≠ 0 :=

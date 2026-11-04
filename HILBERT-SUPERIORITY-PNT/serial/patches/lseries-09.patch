@@ -1,0 +1,26 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+index d8e1d525a20f0f5d3c264dcb68902ef62608905d..5c38d0231e918b3597cafcde08d78f086c367376 100644
+--- a/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
++++ b/HILBERT-SUPERIORITY-PNT/HVRMajorZetaLogDerivative.lean
+@@ -62,6 +62,12 @@ theorem deriv_one_series {s : ℂ} (hs : 1 < s.re) :
+   rw [hfun]
+   simpa only [LSeries, tsum_neg] using! h.tsum_eq.symm
+ 
++/-- The coefficient vectors agree at every index, including zero. -/
++theorem logMul_one_coefficients :
++    logMul (1 : ℕ → ℂ) = (fun n : ℕ => Complex.log (n : ℂ)) := by
++  funext n
++  simp [logMul]
++
+ /-- The actual von Mangoldt L-series equals minus the logarithmic derivative
+ of the constant-one L-series in the open half-plane. -/
+ theorem vonMangoldt_LSeries_eq_neg_logDeriv_one {s : ℂ} (hs : 1 < s.re) :
+@@ -75,7 +81,7 @@ theorem vonMangoldt_LSeries_eq_neg_logDeriv_one {s : ℂ} (hs : 1 < s.re) :
+   rw [eq_div_iff hne,
+     ← HVRNativeOneZetaSummability.convolution_sum hΛ h1,
+     convolution_vonMangoldt_const_one_native, deriv_one_series hs, neg_neg]
+-  exact LSeries_congr (fun _ ↦ by simp [mul_comm, logMul]) s
++  exact congrArg (fun f : ℕ → ℂ => LSeries f s) logMul_one_coefficients.symm
+ 
+ /-- The actual von Mangoldt L-series equals minus ζ'/ζ for Re(s) > 1. -/
+ theorem vonMangoldt_LSeries_eq_neg_logDeriv_zeta {s : ℂ} (hs : 1 < s.re) :

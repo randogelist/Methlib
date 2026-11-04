@@ -38,20 +38,32 @@ theorem higher_lseries_eq_prime_power_tsum (sigma t : ℝ) (hsigma : 1 < sigma) 
     LSeries higherCoefficientC (zetaPoint sigma t) =
       ∑' p : Nat.Primes, ∑' k : ℕ,
         LSeries.term higherCoefficientC (zetaPoint sigma t) ((p : ℕ) ^ (k + 2)) := by
-  have hsum : Summable (LSeries.term higherCoefficientC (zetaPoint sigma t)) := by
-    exact higher_lseries_summable sigma t hsigma
-  have hprime : (∑' p : Nat.Primes,
-      LSeries.term higherCoefficientC (zetaPoint sigma t) (p : ℕ)) = 0 := by
+  let f := LSeries.term higherCoefficientC (zetaPoint sigma t)
+  have hsum : Summable f := higher_lseries_summable sigma t hsigma
+  have hsupport : Function.support f ⊆ {n : ℕ | IsPrimePow n} :=
+    higher_lseries_support_prime_powers (zetaPoint sigma t)
+  have hsub : Summable (fun n : {n : ℕ // IsPrimePow n} => f n.1) :=
+    hsum.subtype _
+  -- The native regrouping argument uses the prime-base/exponent equivalence.
+  -- Adapted from HVRNativePrimePowerRegroup and Mathlib/NumberTheory/EulerProduct/Basic.lean,
+  -- copyright (c) 2023 Michael Stoll, Apache License 2.0.
+  have hindex :
+      (∑' (p : Nat.Primes) (k : ℕ), f ((p : ℕ) ^ (k + 1))) =
+        ∑' n : {n : ℕ // IsPrimePow n}, f n.1 := by
     calc
-      (∑' p : Nat.Primes, LSeries.term higherCoefficientC (zetaPoint sigma t) (p : ℕ)) =
-          ∑' _p : Nat.Primes, (0 : ℂ) := by
-        apply tsum_congr
-        intro p
-        exact higher_lseries_term_at_prime (zetaPoint sigma t) p
-      _ = 0 := tsum_zero
-  have hreindex := tsum_eq_tsum_primes_add_tsum_primes_of_support_subset_prime_powers
-    hsum (higher_lseries_support_prime_powers (zetaPoint sigma t))
-  change (∑' n : ℕ, LSeries.term higherCoefficientC (zetaPoint sigma t) n) = _
-  rw [hreindex, hprime, zero_add]
+      _ = ∑' pk : Nat.Primes × ℕ, f (Nat.Primes.prodNatEquiv pk) := by
+        simpa using (hsub.comp_injective Nat.Primes.prodNatEquiv.injective).tsum_prod.symm
+      _ = _ := by rw [← Equiv.tsum_eq Nat.Primes.prodNatEquiv]
+  have hrestrict : (∑' n : ℕ, f n) = ∑' n : {n : ℕ // IsPrimePow n}, f n.1 :=
+    (tsum_subtype_eq_of_support_subset hsupport).symm
+  change (∑' n : ℕ, f n) = ∑' (p : Nat.Primes) (k : ℕ), f ((p : ℕ) ^ (k + 2))
+  refine hrestrict.trans (hindex.symm.trans ?_)
+  apply tsum_congr
+  intro p
+  have hfiber : Summable (fun k : ℕ => f ((p : ℕ) ^ (k + 1))) :=
+    hsum.comp_injective <| (strictMono_nat_of_lt_succ
+      (pow_lt_pow_right₀ p.property.one_lt <| lt_add_one <| · + 1)).injective
+  have hp : f (p : ℕ) = 0 := higher_lseries_term_at_prime (zetaPoint sigma t) p
+  simpa only [zero_add, pow_one, hp] using hfiber.tsum_eq_zero_add
 
 end HVRHigherCoefficientReindex

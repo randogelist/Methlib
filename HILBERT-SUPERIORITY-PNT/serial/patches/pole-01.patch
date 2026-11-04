@@ -1,0 +1,41 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+index 4bbc46653fc0d0370390c58ff0df9ce35caaadbf..eb9fa169058bbf19c582709b40a4e4e7499d1c59 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeZetaPoleEquality.lean
+@@ -2,12 +2,8 @@ import Mathlib.NumberTheory.Harmonic.ZetaAsymp
+ import Mathlib.Tactic
+ 
+ /-!
+-Candidate logarithmic-derivative identity from the regularized zeta factor.
+-The proof reconstructs the local algebra from separate Mathlib factorization,
+-derivative, and nonvanishing statements. It does not call the corresponding
+-pre-existing eventual logarithmic-derivative identity. The factorization and
+-derivative results remain Mathlib dependencies. No external Lean build or
+-named axiom audit has yet been recorded for this source.
++Local calculus for the actual multiplicative regularization of zeta. The
++punctured quotient formula follows from the additive regularization.
+ -/
+ 
+ noncomputable section
+@@ -17,6 +13,12 @@ open scoped Topology
+ 
+ namespace HVRNativeZetaPoleEquality
+ 
++/-- Off the pole, undo both regularizations using their definitions. -/
++theorem regularized_div_sub_one {s : ℂ} (hs : s ≠ 1) :
++    riemannZeta₁ s / (s - 1) = riemannZeta s := by
++  simp only [riemannZeta₁, riemannZeta₀, if_neg hs]
++  field_simp [sub_ne_zero.mpr hs] <;> ring
++
+ /-- Pointwise logarithmic-derivative factorization when the regularized zeta
+ factor is nonzero. -/
+ theorem log_derivative_eq {s : ℂ} (hs : s ≠ 1)
+@@ -24,7 +26,7 @@ theorem log_derivative_eq {s : ℂ} (hs : s ≠ 1)
+     deriv riemannZeta s / riemannZeta s =
+       - (s - 1)⁻¹ + deriv riemannZeta₁ s / riemannZeta₁ s := by
+   rw [deriv_riemannZeta_eq_neg_inv_sub_sq_mul_add hs,
+-    riemannZeta_eq_inv_sub_mul hs]
++    ← regularized_div_sub_one hs]
+   have hsub : s - 1 ≠ 0 := sub_ne_zero.mpr hs
+   field_simp [hsub, hreg]
+   <;> ring

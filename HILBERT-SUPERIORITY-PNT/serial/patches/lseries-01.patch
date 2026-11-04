@@ -1,0 +1,71 @@
+diff --git a/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean b/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
+index bf8445480bbb1f90dff8e70a4c3b0ea646d73885..5407a2ef608989d289ef7293dcedf4ae7f34e5c7 100644
+--- a/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
++++ b/HILBERT-SUPERIORITY-PNT/IntegratedZetaNonzero.lean
+@@ -25,7 +25,7 @@ namespace HVRIntegratedZetaNonzero
+ `ArithmeticFunction.LSeriesSummable_moebius_iff`. -/
+ theorem moebiusLSeries_summable {s : ℂ} (hs : 1 < s.re) :
+     LSeriesSummable ((fun n : ℕ => (ArithmeticFunction.moebius n : ℂ))) s := by
+-  apply LSeriesSummable_of_bounded_of_one_lt_re (m := 1) ?_ hs
++  apply HVRNativeOneZetaSummability.summable_of_unit_bound ?_ hs
+   intro n hn
+   norm_cast
+   exact HVRSimpleMoebiusBound.abs_moebius_le_one n
+diff --git a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+index 9b3cc8f3e464409d2fd7eef401d89e4a71709a22..f9ed4bc9ce068b0a0d76eccf42c1b0c9e0bd18d8 100644
+--- a/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
++++ b/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+@@ -1,25 +1,44 @@
++import HVRNativeLSeriesNorm
+ import Mathlib.NumberTheory.LSeries.Dirichlet
+ import Mathlib.Tactic
+ 
+ /-!
+-Specialized convergence replacements for the HVR zeta bridge. These statements
+-only prove convergence on the strict right half-plane and the one-sided
+-abscissa bound required by differentiation. They use the generic Mathlib
+-bounded-coefficient convergence theorem and generic abscissa infrastructure.
+-They do not assert the converses or the exact value of an abscissa.
+-
+-These are source candidates until checked by the external cached Lean compiler,
+-named-theorem axiom audit, and declaration-dependency diagnostic.
++Right-half-plane convergence by a p-series bound. The product identity groups
++an absolutely convergent double series by the product of its indices. The
++fiberwise regrouping follows Mathlib/NumberTheory/LSeries/Convolution.lean
++(Michael Stoll, Apache 2.0).
+ -/
+ 
+ noncomputable section
+ 
+ namespace HVRNativeOneZetaSummability
+ 
++open Complex LSeries
++
++/-- A p-series dominates the Dirichlet series of any sequence bounded by one
++on the positive integers. The term at zero vanishes by definition. -/
++theorem summable_of_unit_bound {f : ℕ → ℂ} {s : ℂ}
++    (hf : ∀ n ≠ 0, ‖f n‖ ≤ 1) (hs : 1 < s.re) :
++    LSeriesSummable f s := by
++  have hsum : Summable (fun n : ℕ => (n : ℝ) ^ (-s.re)) :=
++    Real.summable_nat_rpow.mpr (by linarith)
++  change Summable (LSeries.term f s)
++  refine hsum.of_norm_bounded ?_
++  intro n
++  rw [HVRNativeLSeriesNorm.norm_term]
++  by_cases hn : n = 0
++  · rw [if_pos hn]
++    exact Real.rpow_nonneg (Nat.cast_nonneg n) _
++  · rw [if_neg hn]
++    calc
++      ‖f n‖ / (n : ℝ) ^ s.re ≤ 1 / (n : ℝ) ^ s.re :=
++        div_le_div_of_nonneg_right (hf n hn) (Real.rpow_nonneg (Nat.cast_nonneg n) _)
++      _ = (n : ℝ) ^ (-s.re) := by simp [Real.rpow_neg (Nat.cast_nonneg n), one_div]
++
+ /-- The constant-one L-series converges absolutely on the half-plane. -/
+ theorem one_summable {s : ℂ} (hs : 1 < s.re) :
+     LSeriesSummable (1 : ℕ → ℂ) s := by
+-  apply LSeriesSummable_of_bounded_of_one_lt_re (m := 1) ?_ hs
++  apply summable_of_unit_bound ?_ hs
+   intro n hn
+   simp
+ 
