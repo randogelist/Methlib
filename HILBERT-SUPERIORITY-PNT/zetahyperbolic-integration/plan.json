@@ -981,5 +981,23 @@
     "theorems": [
       "HVRZetaComputationalProjection.projectedZeta_eq_riemannZeta"
     ]
+  },
+  {
+    "module": "HVRZetaDefeqProjection",
+    "theorems": [
+      "HVRZetaDefeqProjection.rawZeta_apply"
+    ]
+  },
+  {
+    "module": "HVRZetaDefeqProjectionEquality",
+    "theorems": [
+      "HVRZetaDefeqProjection.rawZeta_eq_riemannZeta"
+    ]
+  },
+  {
+    "module": "HVRZetaDefeqProjectionRfl",
+    "theorems": [
+      "HVRZetaDefeqProjection.rawZeta_defeq_riemannZeta"
+    ]
   }
 ]

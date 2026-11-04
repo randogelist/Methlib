@@ -1,10 +1,10 @@
-name: HVR zeta change experiment (Linux)
+name: HVR definitionally equal zeta optional lane (Linux)
 on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/hvr-candidates/zeta-change-experiment/**'
-      - '.github/workflows/hvr-zeta-change-experiment.yml'
+      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
+      - '.github/workflows/hvr-zeta-defeq-optional.yml'
 
 permissions:
   contents: read
@@ -21,8 +21,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-change-experiment"
-          python3 "$PKG/run_linux.py" --check-plan
+          PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          python3 "$PKG/prepare_lane.py" --package "$PKG" --output "$RUNNER_TEMP/hvr-zeta-defeq-optional" --lane zeta_defeq_projection
       - name: Check out pinned Mathlib
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -56,25 +56,24 @@ jobs:
           set -euo pipefail
           export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           test -x "$LEAN_EXE"
-          python3 "$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-change-experiment/run_linux.py"
+          python3 "$RUNNER_TEMP/hvr-zeta-defeq-optional/run_linux.py"
       - name: Diagnose swap reachability
         shell: bash
         run: |
           set -euo pipefail
-          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-change-experiment"
-          LANE="$PKG"
+          PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          LANE="$RUNNER_TEMP/hvr-zeta-defeq-optional"
           EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
           test -n "$EVIDENCE"
           (cd "$PKG" && sha256sum --check diagnostics.sha256)
           export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
-          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaChangeTrace.lean) | tee "$EVIDENCE/zeta-change-trace.stdout.log"
-          grep -E 'ZETA_CHANGE_' "$EVIDENCE/zeta-change-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaDefeqProjectionTrace.lean) | tee "$EVIDENCE/zeta-defeq-trace.stdout.log"
+          grep -E 'DEFEQ_(CONTROL|TARGET)|COVERAGE|UNKNOWN' "$EVIDENCE/zeta-defeq-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload candidate audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: hvr-zeta-change-experiment-linux-evidence
-          path: ${{ github.workspace }}/.github/hvr-candidates/zeta-change-experiment/evidence-linux/
+          name: hvr-zeta-defeq-optional-linux-evidence
+          path: ${{ runner.temp }}/hvr-zeta-defeq-optional/evidence-linux/
           if-no-files-found: warn
-          include-hidden-files: true

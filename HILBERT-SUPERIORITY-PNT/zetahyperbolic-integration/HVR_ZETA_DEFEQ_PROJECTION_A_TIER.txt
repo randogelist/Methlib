@@ -1,0 +1,13 @@
+HVR DEFINITIONAL ZETA PROJECTION - AUDIT SCOPE
+
+Pinned cached Linux Lean 4.34.0-rc1 CI 41781143660 compiled the raw
+projection and audited rawZeta_apply and rawZeta_eq_riemannZeta with
+standard-only axioms. A separate exploratory rfl example emitted no errors.
+The new named rawZeta_defeq_riemannZeta theorem is an A-tier candidate
+until this integration lane independently compiles and audits it.
+
+The controlled declaration trace did not see integral_integral_swap in the
+rawZeta definition; coverage is unverified. The equality statement refers
+to Mathlib riemannZeta, which does reach that target through its definition.
+This candidate has not replaced zeta-dependent analytic theorems in the PNT
+root, and neither root-level independence nor Windows execution is verified.
