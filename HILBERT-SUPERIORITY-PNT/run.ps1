@@ -154,7 +154,7 @@ try {
     @{ module = 'HVRSimpleMoebiusBound'; deps = @(); names = @('HVRSimpleMoebiusBound.abs_moebius_le_one') },
     @{ module = 'NativeZetaNonzero'; deps = @(); names = @('HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse', 'HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse') },
     @{ module = 'NativeOneZetaSummability'; deps = @(); names = @('HVRNativeOneZetaSummability.one_summable', 'HVRNativeOneZetaSummability.arithmetic_zeta_summable', 'HVRNativeOneZetaSummability.one_abscissa_lt') },
-    @{ module = 'NativeChebyshevBound'; deps = @(); names = @('HVRNativeChebyshevBound.primorial_lt_four_pow_native', 'HVRNativeChebyshevBound.primorial_le_four_pow_native', 'HVRNativeChebyshevBound.theta_le_log4_mul_x_native') },
+    @{ module = 'NativeChebyshevBound'; deps = @(); names = @('HVRNativeChebyshevBound.primorial_lt_four_pow_native', 'HVRNativeChebyshevBound.primorial_le_four_pow_native', 'HVRNativeChebyshevBound.theta_le_log4_mul_x_native', 'HVRNativeChebyshevBound.primorial_pos_native') },
     @{ module = 'NativeFourierDecay'; deps = @(); names = @('NativeFourierDecay.decay_from_half_period_obligations') },
     @{ module = 'HVRCompactTranslation'; deps = @(); names = @('HVRCompactTranslation.translation_integral_tendsto') },
     @{ module = 'HVRNativePrimePowerDivisorSum'; deps = @(); names = @('HVRNativePrimePowerDivisorSum.sum_divisors_prime_pow') },
