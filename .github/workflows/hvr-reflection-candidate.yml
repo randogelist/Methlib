@@ -1,0 +1,80 @@
+name: HVR direct real reflection candidate (Linux)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/hvr-candidates/real-reflection/**'
+      - '.github/workflows/hvr-reflection-candidate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  right:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Validate and select dependency-closed sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/real-reflection"
+          python3 "$PKG/run_linux.py" --check-plan
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Install Lean
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Verify Mathlib and fetch cache
+        shell: bash
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Build and audit named declarations
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$GITHUB_WORKSPACE/.github/hvr-candidates/real-reflection/run_linux.py"
+      - name: Diagnose swap reachability
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/real-reflection"
+          LANE="$PKG"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          test -n "$EVIDENCE"
+          (cd "$PKG" && sha256sum --check diagnostics.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          (cd "$PKG/diagnostics" && "$LEAN" HVRRealReflectionTrace.lean) | tee "$EVIDENCE/reflection-trace.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/reflection-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Upload candidate audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hvr-reflection-candidate-linux-evidence
+          path: ${{ github.workspace }}/.github/hvr-candidates/real-reflection/evidence-linux/
+          if-no-files-found: warn
+          include-hidden-files: true
