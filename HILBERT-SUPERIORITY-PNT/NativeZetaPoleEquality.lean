@@ -1,28 +1,156 @@
-import Mathlib.NumberTheory.Harmonic.ZetaAsymp
 import Mathlib.Analysis.Complex.CauchyIntegral
+import Mathlib.Analysis.Complex.RemovableSingularity
+import Mathlib.NumberTheory.Harmonic.ZetaAsymp
 import Mathlib.Tactic
 
 /-!
-Local calculus for the actual multiplicative regularization of zeta. The
-punctured quotient formula follows from the additive regularization.
+The additive finite part is calibrated by the harmonic unit cells, extended
+from the punctured plane by the residue-one criterion, and then used in the
+multiplicative regularizer. The calibration and punctured little-o argument
+adapt Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean at
+fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0, copyright 2024 David Loeffler,
+authors David Loeffler and Terence Tao, under Apache 2.0.
 -/
 
 noncomputable section
 
-open Filter
+open Filter Set
 open scoped Topology
 
 namespace HVRNativeZetaPoleEquality
+
+/-- On the real half-line, pole subtraction turns the Dirichlet sum into
+the continuous expression formed from the sum of the unit-interval cells. -/
+theorem real_dirichlet_finite_part_eq_cells {s : ℝ} (hs : 1 < s) :
+    (∑' n : ℕ, 1 / (n + 1 : ℝ) ^ s) - 1 / (s - 1) =
+      1 - s * ZetaAsymptotics.termTSum s := by
+  rw [ZetaAsymptotics.termTSum_of_lt hs]
+  generalize (∑' n : ℕ, 1 / (n + 1 : ℝ) ^ s) = D
+  have hs0 : s ≠ 0 := (zero_lt_one.trans hs).ne'
+  have hs1 : s - 1 ≠ 0 := sub_ne_zero.mpr hs.ne'
+  field_simp [hs0, hs1] <;> ring
+
+/-- At one the summed cells have value `1 − γ`. Their right continuity
+therefore calibrates the finite part of the actual zeta function to `γ`. -/
+theorem zeta_finite_part_tendsto_real_right :
+    Tendsto (fun s : ℝ ↦ riemannZeta s - 1 / (s - 1)) (𝓝[>] 1)
+      (𝓝 (Real.eulerMascheroniConstant : ℂ)) := by
+  have hat : ZetaAsymptotics.termTSum 1 = 1 - Real.eulerMascheroniConstant :=
+    ZetaAsymptotics.term_tsum_one.tsum_eq
+  have hcells : Tendsto ZetaAsymptotics.termTSum (𝓝[>] 1)
+      (𝓝 (ZetaAsymptotics.termTSum 1)) :=
+    (ZetaAsymptotics.continuousOn_termTSum.continuousWithinAt self_mem_Ici).tendsto.mono_left
+      (nhdsWithin_mono _ Ioi_subset_Ici_self)
+  have hid : Tendsto (fun s : ℝ ↦ s) (𝓝[>] 1) (𝓝 1) :=
+    tendsto_id.mono_left nhdsWithin_le_nhds
+  have hlim : Tendsto (fun s : ℝ ↦ 1 - s * ZetaAsymptotics.termTSum s)
+      (𝓝[>] 1) (𝓝 (1 - 1 * ZetaAsymptotics.termTSum 1)) :=
+    tendsto_const_nhds.sub (hid.mul hcells)
+  have hvalue : 1 - 1 * ZetaAsymptotics.termTSum 1 = Real.eulerMascheroniConstant := by
+    rw [hat]
+    ring
+  rw [hvalue] at hlim
+  apply ((Complex.continuous_ofReal.tendsto _).comp hlim).congr'
+  filter_upwards [self_mem_nhdsWithin] with s hs
+  change ((1 - s * ZetaAsymptotics.termTSum s : ℝ) : ℂ) = _
+  rw [← real_dirichlet_finite_part_eq_cells hs]
+  simp only [Complex.ofReal_sub, Complex.ofReal_div, Complex.ofReal_one,
+    sub_left_inj, Complex.ofReal_tsum]
+  rw [zeta_eq_tsum_one_div_nat_add_one_cpow (by simpa using hs)]
+  congr 1 with n
+  rw [Complex.ofReal_cpow (by positivity)]
+  norm_cast
+
+/-- A function holomorphic away from a simple pole of residue one admits a
+finite part there. Its real right limit determines the complex value. -/
+theorem finitePart_limit_of_residue_and_real_limit (g : ℂ → ℂ) (a : ℂ)
+    (hhol : ∀ {s : ℂ}, s ≠ 1 → DifferentiableAt ℂ g s)
+    (hres : Tendsto (fun s : ℂ => (s - 1) * g s) (𝓝[≠] 1) (𝓝 1))
+    (hright : Tendsto (fun s : ℝ => g s - 1 / (s - 1)) (𝓝[>] 1) (𝓝 a)) :
+    Tendsto (fun s : ℂ => g s - 1 / (s - 1)) (𝓝[≠] 1) (𝓝 a) := by
+  -- The punctured little-o calculation generalizes the residue argument in
+  -- Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean, copyright (c) 2024 David
+  -- Loeffler, authors David Loeffler and Terence Tao, Apache License 2.0.
+  let f (s : ℂ) := g s - 1 / (s - 1)
+  suffices ∃ C, Tendsto f (𝓝[≠] 1) (𝓝 C) by
+    obtain ⟨C, hC⟩ := this
+    suffices hreal : Tendsto (fun s : ℝ => f s) (𝓝[>] 1) (𝓝 C) by
+      exact (tendsto_nhds_unique hreal hright) ▸ hC
+    refine hC.comp (tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within _ ?_ ?_)
+    · exact (Complex.continuous_ofReal.tendsto 1).mono_left (nhdsWithin_le_nhds ..)
+    · filter_upwards [self_mem_nhdsWithin] with t ht
+      rw [mem_compl_singleton_iff, ← Complex.ofReal_one, Ne, Complex.ofReal_inj]
+      exact ne_of_gt ht
+  refine ⟨_, Complex.tendsto_limUnder_of_differentiable_on_punctured_nhds_of_isLittleO ?_ ?_⟩
+  · filter_upwards [self_mem_nhdsWithin] with s hs
+    refine (hhol hs).sub ((differentiableAt_const _).div ?_ ?_)
+    · exact differentiableAt_id.sub_const 1
+    · rwa [mem_compl_singleton_iff, ← sub_ne_zero] at hs
+  · refine Asymptotics.isLittleO_of_tendsto' ?_ ?_
+    · filter_upwards [self_mem_nhdsWithin] with t ht ht'
+      rw [inv_eq_zero, sub_eq_zero] at ht'
+      tauto
+    · simp_rw [div_eq_mul_inv, inv_inv, sub_mul,
+        (by ring_nf : 𝓝 (0 : ℂ) = 𝓝 ((1 - 1) - f 1 * (1 - 1)))]
+      apply Tendsto.sub
+      · simp_rw [mul_comm (f _), f, mul_sub]
+        apply hres.sub
+        refine Tendsto.congr' ?_ (tendsto_const_nhds.mono_left nhdsWithin_le_nhds)
+        filter_upwards [self_mem_nhdsWithin] with z hz
+        field [sub_ne_zero.mpr (mem_compl_singleton_iff.mp hz)]
+      · exact ((tendsto_id.sub tendsto_const_nhds).mono_left nhdsWithin_le_nhds).const_mul _
+
+/-- The real cell-sum calibration fixes the constant term of the zeta pole. -/
+theorem finitePart_limit : Tendsto (fun s : ℂ => riemannZeta s - 1 / (s - 1))
+    (𝓝[≠] 1) (𝓝 (Real.eulerMascheroniConstant : ℂ)) :=
+  finitePart_limit_of_residue_and_real_limit riemannZeta _
+    differentiableAt_riemannZeta riemannZeta_residue_one
+    HVRNativeZetaPoleEquality.zeta_finite_part_tendsto_real_right
+
+/-- At each ordinary point, the additive regularizer is locally the zeta
+function minus the reciprocal of the linear pole factor. -/
+theorem differentiableAt_of_ne_one {s : ℂ} (hs : s ≠ 1) :
+    DifferentiableAt ℂ riemannZeta₀ s := by
+  have hlin : DifferentiableAt ℂ (fun z : ℂ => z - 1) s :=
+    differentiableAt_id.sub_const 1
+  have hreg : DifferentiableAt ℂ (fun z : ℂ => riemannZeta z - (z - 1)⁻¹) s :=
+    (differentiableAt_riemannZeta hs).fun_sub (hlin.fun_inv (sub_ne_zero.mpr hs))
+  apply hreg.congr_of_eventuallyEq
+  filter_upwards [compl_singleton_mem_nhds hs] with z hz
+  simp only [riemannZeta₀, if_neg (mem_compl_singleton_iff.mp hz)]
+
+/-- The prescribed value at one is the punctured limit of the additive
+regularizer. -/
+theorem continuousAt_one : ContinuousAt riemannZeta₀ (1 : ℂ) := by
+  rw [continuousAt_iff_punctured_nhds]
+  have hval : riemannZeta₀ 1 = (Real.eulerMascheroniConstant : ℂ) := by
+    simp [riemannZeta₀]
+  rw [hval]
+  apply finitePart_limit.congr'
+  filter_upwards [self_mem_nhdsWithin] with z hz
+  rw [riemannZeta₀, if_neg (mem_compl_singleton_iff.mp hz), one_div]
+
+/-- The completed additive regularizer is entire. -/
+theorem additive_regularizer_differentiable : Differentiable ℂ riemannZeta₀ := by
+  intro s
+  rcases eq_or_ne s 1 with rfl | hs
+  · apply (Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt
+      (f := riemannZeta₀) (c := 1) ?_ continuousAt_one).differentiableAt
+    filter_upwards [self_mem_nhdsWithin] with z hz
+    exact differentiableAt_of_ne_one (mem_compl_singleton_iff.mp hz)
+  · exact differentiableAt_of_ne_one hs
 
 /-- Product rule for the entire factor `1 + (s - 1) * riemannZeta₀ s`. -/
 theorem regularized_hasDerivAt (s : ℂ) :
     HasDerivAt riemannZeta₁ (riemannZeta₀ s + (s - 1) * deriv riemannZeta₀ s) s := by
   have hdiff : Differentiable ℂ riemannZeta₁ := by
+    intro z
     unfold riemannZeta₁
-    fun_prop
+    apply (differentiableAt_const_add_iff 1).mpr
+    exact (differentiableAt_id.sub_const 1).fun_mul (additive_regularizer_differentiable z)
   have hd : deriv riemannZeta₁ s = riemannZeta₀ s + (s - 1) * deriv riemannZeta₀ s := by
     unfold riemannZeta₁
-    rw [deriv_const_add, deriv_fun_mul (by fun_prop) (differentiable_riemannZeta₀ s)]
+    rw [deriv_const_add, deriv_fun_mul (by fun_prop) (additive_regularizer_differentiable s)]
     simp
   rw [← hd]
   exact (hdiff s).hasDerivAt
@@ -91,4 +219,3 @@ theorem log_derivative_eventually_eq :
   exact log_derivative_eq (Set.mem_compl_singleton_iff.mp hs) hreg
 
 end HVRNativeZetaPoleEquality
-

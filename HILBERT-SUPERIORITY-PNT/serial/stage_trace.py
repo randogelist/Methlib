@@ -42,6 +42,17 @@ def trace_lines(spec):
         raise ValueError('invalid stage dependency names')
     if not set(proofs)<=reachable:
         raise ValueError('designated derivations must be on the audited caller/helper edges')
+    others = spec.get('also_forbid', [])
+    if any(not LEAN_IDENT.fullmatch(n) for n in others):
+        raise ValueError('invalid additional dependency name')
+    extra_check = ''
+    if others:
+        extra_check = f'''
+    for t in {lean_array(others)} do
+      if (env.find? t).isNone then throwError m!"EXTRA_TARGET_UNKNOWN={{t}}"
+      if n == t || reached.contains t then throwError m!"EXTRA_TARGET_FOUND={{n}}|{{t}}"
+      IO.println s!"EXTRA_TARGET_NOT_SEEN={{n}}|{{t}}"
+'''
     return f'''
 run_cmd do
   let env ← getEnv
@@ -89,7 +100,7 @@ run_cmd do
       IO.println s!"TARGET_UNKNOWN_INCOMPLETE_COVERAGE={{n}}|{{target}}"
     else
       IO.println s!"TARGET_NOT_SEEN_COVERAGE_UNVERIFIED={{n}}|{{target}}"
-  IO.println "DEPENDENCY_COVERAGE=UNVERIFIED"
+{extra_check}  IO.println "DEPENDENCY_COVERAGE=UNVERIFIED"
   unless complete do throwError "STAGE_DEFERRED_TRANSITIVE_REUSE_OR_INCOMPLETE_COVERAGE"
   IO.println "SCOPED_EXCHANGE_TRACE=PASS"
 '''.splitlines()
