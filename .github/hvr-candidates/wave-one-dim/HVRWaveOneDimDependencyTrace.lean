@@ -1,5 +1,7 @@
 import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 import Mathlib.Analysis.Fourier.FourierTransformDeriv
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 import Mathlib.MeasureTheory.Integral.Prod
 import ImportGraph.Imports.RequiredModules
 
@@ -26,7 +28,14 @@ run_cmd do
     `MeasureTheory.integral_mul_deriv_eq_deriv_mul_of_integrable,
     `Real.fourier_deriv,
     `Real.hasDerivAt_fourierChar,
-    `VectorFourier.fourierIntegral_fderiv]
+    `VectorFourier.fourierIntegral_fderiv,
+    `intervalIntegral.integral_mul_deriv_eq_deriv_mul,
+    `intervalIntegral.integral_deriv_mul_eq_sub,
+    `intervalIntegral.integral_mul_deriv_eq_deriv_mul_of_hasDerivAt,
+    `intervalIntegral.integral_deriv_mul_eq_sub_of_hasDerivAt,
+    `intervalIntegral.integral_eq_sub_of_hasDerivAt,
+    `MeasureTheory.setIntegral_eq_integral_of_ae_compl_eq_zero,
+    `integrable_inv_one_add_sq]
   for root in roots do
     if (env.find? root).isNone then
       IO.println s!"ROOT_UNKNOWN={root}"
