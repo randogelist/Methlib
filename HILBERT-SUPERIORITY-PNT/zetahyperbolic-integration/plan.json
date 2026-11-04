@@ -561,7 +561,10 @@
   },
   {
     "module": "HVR_PrimeDensity_FubiniBridge",
-    "theorems": []
+    "theorems": [
+      "HVRPrimeDensityFubiniBridge.complex_integral_from_sections",
+      "HVRPrimeDensityFubiniBridge.mixed_integral_exchange"
+    ]
   },
   {
     "module": "HVR_PrimeDensity_BoundaryLink",

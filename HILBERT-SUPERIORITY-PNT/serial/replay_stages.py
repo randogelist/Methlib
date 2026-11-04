@@ -3,10 +3,9 @@
 import argparse
 import hashlib
 import json
-import os
 import re
 import subprocess
-import sys
+import shutil
 import tempfile
 from pathlib import Path
 from verify_stage import PKG, ROOT, external, git, need, read_plan, verify_sources
@@ -33,7 +32,7 @@ def main():
     if args.prefix is not None: need(0<args.prefix<=len(stages),'invalid replay prefix')
     queued=stages[:args.prefix]; complete=len(queued)==len(stages)
     ev=args.evidence.resolve();ev.mkdir(parents=True,exist_ok=False)
-    partial=[]
+    partial=[];active_stage=None
     track=dict(head=git(repo,'rev-parse','HEAD').decode().strip(),base=base,stage_count=len(stages),requested_count=len(queued),source_only=args.source_only)
     result_file=ev/'result.txt'
     try:
@@ -44,7 +43,8 @@ def main():
             for i,s in enumerate(queued):
                 work=dict(s);work['final_root']=complete and i==len(queued)-1
                 print('STAGE_BEGIN='+s['id'],flush=True)
-                d=ev/s['id'];d.mkdir()
+                d=ev/s['id'];d.mkdir();active_stage=d
+                (d/'result.txt').write_text('RESULT=RUNNING\n')
                 patch=(spec_root/s['patch']).resolve()
                 need(patch.is_relative_to(spec_root) and patch.is_file(),'patch must reside inside the serial package')
                 bp=git(w,'rev-parse','HEAD').decode().strip()
@@ -62,10 +62,13 @@ def main():
                 plan=read_plan(w/PKG)
                 counts=verify_sources(w,bp,work,catalog,plan)
                 info=dict(id=s['id'],target=s['target'],parent=bp,post=git(w,'rev-parse','HEAD').decode().strip(),patch_sha256=hashlib.sha256(patch.read_bytes()).hexdigest(),direct_source_counts=counts)
-                if not args.source_only: info.update(external(w,d,args.objects.resolve(),work,plan))
+                if not args.source_only:
+                    try: info.update(external(w,d,args.objects.resolve(),work,plan))
+                    finally: shutil.rmtree(d/'olean',ignore_errors=True)
                 (d/'summary.json').write_text(json.dumps(info,indent=2))
                 stamp='SOURCE_CHECK_PASS' if args.source_only else 'STAGE_BUILD_AND_NAMED_AUDIT_PASS'
                 (d/'result.txt').write_text('RESULT='+stamp+'\n')
+                active_stage=None
                 partial.append(dict(id=s['id'],target=s['target'],result=stamp));print(f'STAGE_RESULT={s["id"]}|{stamp}',flush=True)
             if complete:
                 # Every canonical production module in aggregate HEAD must equal its exact replay postimage.
@@ -76,6 +79,9 @@ def main():
         result=('SERIES' if complete else 'PREFIX')+('_SOURCE_CHECK_PASS' if args.source_only else '_KERNEL_AND_AXIOM_AUDIT_PASS')
         result_file.write_text('RESULT='+result+'\n');print('RESULT='+result)
     except Exception as exc:
+        if active_stage is not None:
+            track['failed_stage']=active_stage.name
+            (active_stage/'result.txt').write_text('RESULT=FAIL\nERROR='+str(exc)+'\n')
         result_file.write_text('RESULT=FAIL\nERROR='+str(exc)+'\n');raise
     finally:
         track['stages_completed']=partial;(ev/'summary.json').write_text(json.dumps(track,indent=2))

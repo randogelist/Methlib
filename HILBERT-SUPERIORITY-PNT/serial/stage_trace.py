@@ -3,6 +3,33 @@ import re
 
 LEAN_IDENT = re.compile(r"[A-Za-z_][\w']*(?:\.[A-Za-z_][\w']*)*\Z")
 
+# These modules are included in the pinned PNT dependency closure. The
+# umbrella Mathlib.olean is optional in targeted Linux and Windows caches.
+DIAGNOSTIC_IMPORTS = (
+    'Mathlib.NumberTheory.Chebyshev',
+    'Mathlib.NumberTheory.Harmonic.ZetaAsymp',
+    'Mathlib.NumberTheory.LSeries.Dirichlet',
+    'Mathlib.NumberTheory.EulerProduct.Basic',
+    'Mathlib.Analysis.SpecificLimits.Normed',
+    'Mathlib.MeasureTheory.Integral.DominatedConvergence',
+    'Mathlib.MeasureTheory.Integral.Prod',
+)
+
+def diagnostic_imports(target):
+    if target.startswith('MeasureTheory.'):
+        return (DIAGNOSTIC_IMPORTS[6 if target == 'MeasureTheory.integral_integral_swap' else 5],)
+    if target == 'hasSum_geometric_of_norm_lt_one':
+        return (DIAGNOSTIC_IMPORTS[4],)
+    if target == 'tsum_eq_tsum_primes_add_tsum_primes_of_support_subset_prime_powers':
+        return (DIAGNOSTIC_IMPORTS[3],)
+    if target.startswith(('primorial_', 'Nat.choose_', 'Chebyshev.')):
+        return (DIAGNOSTIC_IMPORTS[0],)
+    if 'LSeries' in target or target.startswith('ArithmeticFunction.'):
+        return (DIAGNOSTIC_IMPORTS[2],)
+    if 'riemannZeta' in target:
+        return (DIAGNOSTIC_IMPORTS[1],)
+    raise ValueError('diagnostic module missing for ' + target)
+
 def lean_array(names):
     return '#['+', '.join('`'+n for n in names)+']'
 
@@ -38,12 +65,12 @@ run_cmd do
   let actual : Array Name := {lean_array(proofs)}
   for n in explicit do
     let info ← liftCoreM (getConstInfo n)
-    if info.isTheorem && (info.value? true).isNone then throwError "STAGE_BODY_UNAVAILABLE={{n}}"
+    if (info.value? true).isNone then throwError "STAGE_BODY_UNAVAILABLE={{n}}"
     if info.getUsedConstantsAsSet.contains target then
       IO.println s!"DIRECT_TARGET_FOUND={{n}}|{{target}}"
       throwError "STAGE_DEFERRED_DIRECT_REUSE={{n}}|{{target}}"
     IO.println s!"DIRECT_TARGET_NOT_SEEN={{n}}|{{target}}"
-  let mut eligible := false
+  let mut complete := true
   for n in actual do
     let reached ← liftCoreM n.transitivelyUsedConstants
     let mut missing : Nat := 0
@@ -55,11 +82,14 @@ run_cmd do
     IO.println s!"REACHED_DECLARATIONS_MISSING={{n}}|{{missing}}"
     IO.println s!"REACHED_THEOREM_BODIES_UNAVAILABLE={{n}}|{{hidden}}"
     if n == target || reached.contains target then
+      complete := false
       IO.println s!"TARGET_FOUND={{n}}|{{target}}"
+    else if missing != 0 || hidden != 0 then
+      complete := false
+      IO.println s!"TARGET_UNKNOWN_INCOMPLETE_COVERAGE={{n}}|{{target}}"
     else
       IO.println s!"TARGET_NOT_SEEN_COVERAGE_UNVERIFIED={{n}}|{{target}}"
-      if missing == 0 && hidden == 0 then eligible := true
   IO.println "DEPENDENCY_COVERAGE=UNVERIFIED"
-  unless eligible do throwError "STAGE_DEFERRED_TRANSITIVE_REUSE_OR_INCOMPLETE_COVERAGE"
+  unless complete do throwError "STAGE_DEFERRED_TRANSITIVE_REUSE_OR_INCOMPLETE_COVERAGE"
   IO.println "SCOPED_EXCHANGE_TRACE=PASS"
 '''.splitlines()

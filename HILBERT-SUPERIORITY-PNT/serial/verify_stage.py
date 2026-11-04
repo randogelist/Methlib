@@ -10,7 +10,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from stage_trace import trace_lines
+from stage_trace import LEAN_IDENT, diagnostic_imports, trace_lines
 
 MATHLIB = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
 PKG = 'HILBERT-SUPERIORITY-PNT'
@@ -18,7 +18,7 @@ ROOT = 'HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one'
 ROOT_MODULE = 'HVR_PrimeDensity_FinalRoot'
 ALLOWED = {'propext','Classical.choice','Quot.sound'}
 MOD = re.compile(r'[A-Za-z][\w]*\Z')
-NAME = re.compile(r"[\w']+(?:\.[\w']+)+\Z")
+NAME = LEAN_IDENT
 TOKEN = re.compile(r"[\w']+(?:\.[\w']+)*")
 EXT = ('.olean','.olean.private','.olean.server','.ir','.ilean')
 
@@ -98,7 +98,10 @@ def verify_sources(repo,base,spec,catalog,plan):
         path=f'{PKG}/{mod}.lean'; before=git(repo,'show',f'{base}:{path}');after=(repo/path).read_bytes()
         need(blob(before)==rec['old'] and blob(after)==rec['new'],'source SHA mismatch '+mod)
         need(after==git(repo,'show',f'HEAD:{path}'),'working source differs from HEAD')
-        inputs=[TOKEN.findall(code(s)) for s in (before,after)]
+        clean=[code(s) for s in (before,after)]
+        admissions=re.compile(r'''\b(?:axiom|axioms|sorry|admit)\b''')
+        need(not admissions.search(clean[1]),'source contains an axiom declaration or admission: '+mod)
+        inputs=[TOKEN.findall(s) for s in clean]
         for k,forms in catalog.items():
             delta=[sum(any(t==x or t.startswith(x+'.') for x in forms) for t in tokens) for tokens in inputs]
             if k==target:
@@ -187,7 +190,8 @@ def external(repo, ev, obj_cache, spec,plan):
     explicit=[n for names in spec.get('audits',{}).values() for n in names]
     names=list(dict.fromkeys([n for m in sorted(force) for n in plan[m][1]]+publics+explicit+[n for e in spec['edges'] for n in [e['caller'],e['helper']]]))
     need(all(NAME.fullmatch(n) for n in names),'unrecognized named audit')
-    audit=['import '+m for m in sorted(force)]+['import Mathlib','import ImportGraph.Imports.RequiredModules','import ImportGraph.Lean.Environment','open Lean Elab Command']
+    audit=['import '+m for m in [*sorted(force),*diagnostic_imports(spec['lean_target'])]]
+    audit+=['import ImportGraph.Imports.RequiredModules','import ImportGraph.Lean.Environment','open Lean Elab Command']
     if spec.get('final_root'):
         audit+=['open Filter','open scoped Topology','example : Tendsto (fun x : ℝ => Chebyshev.theta x / x) atTop (𝓝 1) := '+ROOT]
     audit+=['#print axioms '+n for n in names]

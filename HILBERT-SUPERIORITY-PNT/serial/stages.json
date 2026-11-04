@@ -1159,18 +1159,44 @@
       ],
       "basis": "Take scalar ENNReal L¹ errors with majorant ofReal(w+w), choose measurable representatives simultaneously almost everywhere, apply the reverse Fatou limsup inequality, then continuity of the Bochner integral in L¹. No named scalar or vector dominated convergence theorem is called by this proof. Retains Mathlib limsup_lintegral_le, its decreasing-lintegral machinery, AEStronglyMeasurable limit, and tendsto_integral_of_L1. Transitive independence remains unaudited.",
       "patch": "patches/measure-02.patch"
+    },
+    {
+      "id": "measure-03",
+      "key": "measure-03",
+      "target": "integral_integral_swap",
+      "lean_target": "MeasureTheory.integral_integral_swap",
+      "modules": {
+        "HVR_PrimeDensity_FubiniBridge": {
+          "old": "c3811ba1aae29725c85e1bc9b7b88cdfbea2c333",
+          "new": "3a905495424273a2e6125691d2e794d1ac2f1abe"
+        }
+      },
+      "files": [
+        "HVR_PrimeDensity_FubiniBridge.lean"
+      ],
+      "helpers": [
+        "HVRPrimeDensityFubiniBridge.abel_smoothing_eq_frequency_integral",
+        "HVRPrimeDensityFubiniBridge.mixed_integral_exchange",
+        "HVRPrimeDensityFubiniBridge.complex_integral_from_sections"
+      ],
+      "edges": [
+        {
+          "module": "HVR_PrimeDensity_FubiniBridge",
+          "caller": "HVRPrimeDensityFubiniBridge.abel_smoothing_eq_frequency_integral",
+          "helper": "HVRPrimeDensityFubiniBridge.mixed_integral_exchange"
+        },
+        {
+          "module": "HVR_PrimeDensity_FubiniBridge",
+          "caller": "HVRPrimeDensityFubiniBridge.mixed_integral_exchange",
+          "helper": "HVRPrimeDensityFubiniBridge.complex_integral_from_sections"
+        }
+      ],
+      "derivations": [
+        "HVRPrimeDensityFubiniBridge.complex_integral_from_sections"
+      ],
+      "basis": "An HVR complex L¹ induction proves the product-to-iterated integral identity from finite-measure indicators, additivity, a.e. congruence and L¹ continuity; its indicator argument is adapted from the pinned Mathlib proof. The local identity and a one-variable measure-preserving change of variables exchange the two orders for the mixed kernel under the original product-integrability hypothesis, for arbitrary real a and x. Scalar Tonelli remains beneath L¹ continuity. The upstream swap through Mathlib riemannZeta remains a separate root dependency. External compiler and direct-edge evidence pending.",
+      "patch": "patches/measure-03.patch"
     }
   ],
-  "deferred": [
-    {
-      "target": "MeasureTheory.integral_integral_swap",
-      "files": [],
-      "helpers": [
-        "HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_compact_support"
-      ],
-      "basis": "Compact support: existing project finite-grid argument, already called by the PNT assembly. Unrestricted conditional FubiniBridge.abel_smoothing_eq_frequency_integral assumes integrability of its mixed product integrand but does not assume compact support or separate global L¹ of the frequency weight. No approximation proof under this exact signature yet. The baseline integral_integral_swap remains; the previous product-measure wrapper is excluded. Root also reaches a separate swap through Mathlib riemannZeta.",
-      "status": "DEFERRED",
-      "edges": []
-    }
-  ]
+  "deferred": []
 }

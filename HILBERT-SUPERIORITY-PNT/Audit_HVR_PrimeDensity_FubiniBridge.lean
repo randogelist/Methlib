@@ -1,3 +1,5 @@
 import HVR_PrimeDensity_FubiniBridge
 #print axioms HVRPrimeDensityFubiniBridge.mixed_factorization
 #print axioms HVRPrimeDensityFubiniBridge.abel_smoothing_eq_frequency_integral
+#print axioms HVRPrimeDensityFubiniBridge.complex_integral_from_sections
+#print axioms HVRPrimeDensityFubiniBridge.mixed_integral_exchange
