@@ -1,0 +1,179 @@
+name: HVR ordinary physical wave focused root (Linux)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/hvr-candidates/ordinary-wave-root/**'
+      - '.github/workflows/hvr-ordinary-wave-focused-root.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    name: Integration / ${{ matrix.lane }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [root]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare isolated candidate overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a "$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration" "$RUNNER_TEMP/hvr-physical-candidate"
+          cp -a "$GITHUB_WORKSPACE/.github/hvr-candidates/ordinary-wave-root/." "$RUNNER_TEMP/hvr-physical-candidate/"
+      - name: Verify full source manifest and prepare the independent lane
+        shell: bash
+        env:
+          HVR_LANE: ${{ matrix.lane }}
+        run: |
+          set -euo pipefail
+          PKG="$RUNNER_TEMP/hvr-physical-candidate"
+          python3 "$PKG/prepare_lane.py" --package "$PKG" --output "$RUNNER_TEMP/hvr-$HVR_LANE" --lane "$HVR_LANE"
+      - name: Check out pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Install Lean
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Verify pinned Mathlib and fetch its cache
+        shell: bash
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Build and audit named theorems
+        shell: bash
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+          HVR_LANE: ${{ matrix.lane }}
+        run: |
+          set -euo pipefail
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$RUNNER_TEMP/hvr-$HVR_LANE/run_linux.py"
+      - name: Diagnose the selected Mellin dependency
+        if: always() && matrix.lane == 'root'
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$RUNNER_TEMP/hvr-physical-candidate"
+          LANE="$RUNNER_TEMP/hvr-root"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -z "$EVIDENCE" ] || [ ! -f "$EVIDENCE/olean/HVR_PrimeDensity_FinalRoot.olean" ]; then
+            echo 'MELLIN_DIAGNOSTIC=NOT_RUN_ROOT_NOT_BUILT'
+            exit 0
+          fi
+          (cd "$PKG" && sha256sum --check diagnostics.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          (cd "$PKG/diagnostics" && "$LEAN" -o "$EVIDENCE/olean/HVRMellinTraceControlLeaf.olean" HVRMellinTraceControlLeaf.lean)
+          (cd "$PKG/diagnostics" && "$LEAN" -o "$EVIDENCE/olean/HVRMellinTraceControlBridge.olean" HVRMellinTraceControlBridge.lean)
+          (cd "$PKG/diagnostics" && "$LEAN" HVRMellinRootDiagnostic.lean) | tee "$EVIDENCE/mellin-diagnostic.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|TARGET_MODULE_DECLARATIONS_COUNT|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/mellin-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          (cd "$PKG/diagnostics" && "$LEAN" HVRModeDependencyDiagnostic.lean) | tee "$EVIDENCE/mode-diagnostic.stdout.log"
+          (cd "$PKG/diagnostics" && "$LEAN" HVRFeatureTrace.lean) | tee "$EVIDENCE/pole-diagnostic.stdout.log"
+          grep -Fx 'FEATURE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO' "$EVIDENCE/pole-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FEATURE_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|log_deriv_riemannZeta_add_inv_sub_sub_isLittleO' "$EVIDENCE/pole-diagnostic.stdout.log" >/dev/null
+          grep -E '^FEATURE_' "$EVIDENCE/pole-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          (cd "$PKG/diagnostics" && "$LEAN" HVRFourierTargetDiagnostic.lean) | tee "$EVIDENCE/fourier-diagnostic.stdout.log"
+          grep -Fx 'FOURIER_CANDIDATE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero' "$EVIDENCE/fourier-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FOURIER_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|Real.tendsto_integral_exp_smul_cocompact' "$EVIDENCE/fourier-diagnostic.stdout.log" >/dev/null
+          grep -E '^FOURIER_' "$EVIDENCE/fourier-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          grep -F 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes' "$EVIDENCE/mode-diagnostic.stdout.log"
+          grep -Fx 'TARGET_FOUND=HVRZetaBoundaryFactor.zeta_boundary_finite_order|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRMajorZetaLogDerivative.vonMangoldt_LSeries_eq_neg_logDeriv_zeta' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|riemannZeta_ne_zero_of_one_lt_re' "$EVIDENCE/mode-diagnostic.stdout.log" >/dev/null
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/mode-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          (cd "$PKG/diagnostics" && "$LEAN" HVRChebyshevDependencyDiagnostic.lean) | tee "$EVIDENCE/chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeChebyshevBound.theta_le_log4_mul_x_native' "$EVIDENCE/chebyshev-diagnostic.stdout.log"
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|Chebyshev.theta_le_log4_mul_x' "$EVIDENCE/chebyshev-diagnostic.stdout.log" >/dev/null
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/chebyshev-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Diagnose remaining root swap dependency
+        if: always() && matrix.lane == 'root'
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$RUNNER_TEMP/hvr-physical-candidate"
+          LANE="$RUNNER_TEMP/hvr-root"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -z "$EVIDENCE" ] || [ ! -f "$EVIDENCE/olean/HVR_PrimeDensity_FinalRoot.olean" ]; then
+            echo 'ROOT_SWAP_DIAGNOSTIC=NOT_RUN_ROOT_NOT_BUILT'
+            exit 0
+          fi
+          (cd "$PKG" && sha256sum --check diagnostics.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          (cd "$PKG/diagnostics" && "$LEAN" HVRPrimeResidualSwapTrace.lean) | tee "$EVIDENCE/residual-swap-diagnostic.stdout.log"
+          grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/residual-swap-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Inspect explicit swap path (diagnostic only)
+        if: always() && matrix.lane == 'root'
+        continue-on-error: true
+        timeout-minutes: 10
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$RUNNER_TEMP/hvr-physical-candidate"
+          LANE="$RUNNER_TEMP/hvr-root"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -z "$EVIDENCE" ] || [ ! -f "$EVIDENCE/olean/HVR_PrimeDensity_FinalRoot.olean" ]; then
+            echo 'ROOT_SWAP_PATH=NOT_RUN_ROOT_NOT_BUILT'
+            exit 0
+          fi
+          (cd "$PKG" && sha256sum --check diagnostics.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          (cd "$PKG/diagnostics" && timeout 480 "$LEAN" HVRPrimeSwapPathTrace.lean) | tee "$EVIDENCE/swap-path-diagnostic.stdout.log"
+          grep -E '^SWAP_PATH_|^DEPENDENCY_COVERAGE=' "$EVIDENCE/swap-path-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Diagnose root replacement components
+        if: always() && matrix.lane == 'root'
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$RUNNER_TEMP/hvr-physical-candidate"
+          LANE="$RUNNER_TEMP/hvr-root"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -z "$EVIDENCE" ] || [ ! -f "$EVIDENCE/olean/HVR_PrimeDensity_FinalRoot.olean" ]; then
+            echo 'REPLACEMENT_DIAGNOSTICS=NOT_RUN_ROOT_NOT_BUILT'
+            exit 0
+          fi
+          (cd "$PKG" && sha256sum --check HVRFrequencyMeasurableTrace.sha256 HVRComplexExpDirectTrace.sha256 HVRRealReflectionTrace.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          for NAME in HVRFrequencyMeasurableTrace HVRComplexExpDirectTrace HVRRealReflectionTrace; do
+            (cd "$PKG/diagnostics" && "$LEAN" "$NAME.lean") | tee "$EVIDENCE/$NAME.stdout.log"
+            grep -E 'CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|BODIES_UNAVAILABLE|DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/$NAME.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          done
+          grep -Fx 'FREQ_MEAS_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable|MeasureTheory.integral_integral_swap' "$EVIDENCE/HVRFrequencyMeasurableTrace.stdout.log" >/dev/null
+          grep -Fx 'FREQ_MEAS_TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable' "$EVIDENCE/HVRFrequencyMeasurableTrace.stdout.log" >/dev/null
+          grep -Fx 'EXP_DIRECT_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRComplexPoleLaplace.exponential_integrable|MeasureTheory.integral_integral_swap' "$EVIDENCE/HVRComplexExpDirectTrace.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRRealReflection.real_volume_negInvariant_direct|MeasureTheory.integral_integral_swap' "$EVIDENCE/HVRRealReflectionTrace.stdout.log" >/dev/null
+      - name: Upload lane audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: hvr-ordinary-wave-focused-root-linux-evidence
+          path: ${{ runner.temp }}/hvr-${{ matrix.lane }}/evidence-linux/
+          if-no-files-found: warn
