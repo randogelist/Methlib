@@ -153,6 +153,20 @@
     "theorems": []
   },
   {
+    "module": "NativeZetaPoleEquality",
+    "theorems": [
+      "HVRNativeZetaPoleEquality.log_derivative_eq",
+      "HVRNativeZetaPoleEquality.log_derivative_eventually_eq"
+    ]
+  },
+  {
+    "module": "NativeZetaPoleLittleO",
+    "theorems": [
+      "HVRNativeZetaPoleLittleO.regularized_log_derivative_tendsto",
+      "HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO"
+    ]
+  },
+  {
     "module": "HVR_Zeta_PoleResidue",
     "theorems": []
   },
