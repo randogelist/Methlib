@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 ROOTS = {
+    "fubini_candidates": "HVRFubiniCandidateLane",
     "fubini_right": "HVRPrimeGridIntegrability",
     "snd": "HVRPrimeSndAssembly",
     "matrix": "HVRPrimeGramJacobiBridge",
