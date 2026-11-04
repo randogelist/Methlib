@@ -15,6 +15,10 @@ import sys
 from pathlib import Path
 
 ROOTS = {
+    "fubini_bridge": "HVRPrimeFiniteFrequencyDirect",
+    "fubini_right_candidate": "HVRPrimeRightCompactSupport",
+    "fubini_left_candidate": "HVRPrimeLeftFull",
+    "fubini_exp_candidate": "HVRComplexExpIntegralDirect",
     "fubini_candidates": "HVRFubiniCandidateLane",
     "fubini_right": "HVRPrimeGridIntegrability",
     "snd": "HVRPrimeSndAssembly",
@@ -89,6 +93,10 @@ def main():
     # introducing a dependency into the root theorem.
     if args.lane == "root":
         visit("HVR_PrimeMellin_Abel")
+    if args.lane == "fubini_bridge":
+        visit("HVRPrimeWeightedFrequencyApproximation")
+    if args.lane == "fubini_exp_candidate":
+        visit("HVR_Complex_PoleLaplace")
     subset = [entry for entry in original_plan if entry["module"] in visited]
     installed = set()
     for entry in subset:
