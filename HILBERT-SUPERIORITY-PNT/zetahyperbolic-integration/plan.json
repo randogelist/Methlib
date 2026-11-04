@@ -514,5 +514,48 @@
     "theorems": [
       "HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt"
     ]
+  },
+  {
+    "module": "HVRFrequencyCellBudget",
+    "theorems": [
+      "HVRFrequencyCellBudget.disjoint_cells_integral_norm_sum_le",
+      "HVRFrequencyCellBudget.disjoint_cells_coefficient_norm_sum_le",
+      "HVRFrequencyCellBudget.finite_cells_phase_error_of_disjoint"
+    ]
+  },
+  {
+    "module": "HVRFrequencyWeightedCoefficients",
+    "theorems": [
+      "HVRFrequencyWeightedCoefficients.norm_weightedFrequency",
+      "HVRFrequencyWeightedCoefficients.weightedFrequency_integrable",
+      "HVRFrequencyWeightedCoefficients.actual_coefficients_norm_sum_le"
+    ]
+  },
+  {
+    "module": "HVRFrequencyIntervalCells",
+    "theorems": [
+      "HVRFrequencyIntervalCells.gridPoint_zero",
+      "HVRFrequencyIntervalCells.gridPoint_end",
+      "HVRFrequencyIntervalCells.gridPoint_step",
+      "HVRFrequencyIntervalCells.gridPoint_monotone",
+      "HVRFrequencyIntervalCells.gridCells_pairwise_disjoint",
+      "HVRFrequencyIntervalCells.gridCells_measurable",
+      "HVRFrequencyIntervalCells.gridCells_cover",
+      "HVRFrequencyIntervalCells.gridCell_close",
+      "HVRFrequencyIntervalCells.gridCells_close_ae"
+    ]
+  },
+  {
+    "module": "HVRFrequencyGridWeights",
+    "theorems": [
+      "HVRFrequencyGridWeights.actual_grid_coefficients_norm_sum_le"
+    ]
+  },
+  {
+    "module": "HVRFrequencyMeshLimit",
+    "theorems": [
+      "HVRFrequencyMeshLimit.grid_mesh_tendsto_zero",
+      "HVRFrequencyMeshLimit.tendsto_of_grid_error"
+    ]
   }
 ]
