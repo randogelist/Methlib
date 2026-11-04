@@ -1,4 +1,4 @@
-import HVRPrimeDirectFrequency
+import HVRPrimeDirectGrid
 import ImportGraph.Imports.RequiredModules
 import ImportGraph.Lean.Environment
 
@@ -30,6 +30,7 @@ run_cmd do
       throwError "POSITIVE_CONTROL_MISSED={root}|{target}"
     IO.println s!"POSITIVE_CONTROL_DETECTED={root}|{target}"
   let roots : Array Name := #[
+    `HVRPrimeDirectGrid.actual_prime_grid_cell_error_direct,
     `HVRPrimeDirectFrequency.dampedError_integrable_direct,
     `HVRPrimeDirectFrequency.damped_phase_integrable_direct,
     `HVRPrimeDirectFrequency.first_moment_integrable_direct,

@@ -585,5 +585,11 @@
       "HVRPrimeDirectFrequency.first_moment_integrable_direct",
       "HVRPrimeDirectFrequency.primeDensity_frequency_lipschitz_direct"
     ]
+  },
+  {
+    "module": "HVRPrimeDirectGrid",
+    "theorems": [
+      "HVRPrimeDirectGrid.actual_prime_grid_cell_error_direct"
+    ]
   }
 ]
