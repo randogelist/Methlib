@@ -1,0 +1,14 @@
+[
+  {
+    "module": "HVRZetaDefeqProjection",
+    "theorems": [
+      "HVRZetaDefeqProjection.rawZeta_apply"
+    ]
+  },
+  {
+    "module": "HVRZetaDefeqProjectionEquality",
+    "theorems": [
+      "HVRZetaDefeqProjection.rawZeta_eq_riemannZeta"
+    ]
+  }
+]
