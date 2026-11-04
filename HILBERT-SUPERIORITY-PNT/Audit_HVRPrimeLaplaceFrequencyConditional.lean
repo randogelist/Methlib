@@ -1,0 +1,2 @@
+import HVRPrimeLaplaceFrequencyConditional
+#print axioms HVRPrimeLaplaceFrequencyConditional.frequency_lipschitz_of_integrable_modes_moment

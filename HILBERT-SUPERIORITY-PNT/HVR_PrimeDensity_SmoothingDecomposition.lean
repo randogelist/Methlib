@@ -1,7 +1,12 @@
+import HVRRealReflection
 import HVR_PrimeDensity_HalfLineSmoothing
 import Mathlib.MeasureTheory.Group.Integral
 
 noncomputable section
+open MeasureTheory
+
+local instance : (volume : Measure ℝ).IsNegInvariant :=
+  HVRRealReflection.real_volume_negInvariant_direct
 open MeasureTheory HVRPrimeLogDensity HVRMonotoneNormalization
 
 /-!

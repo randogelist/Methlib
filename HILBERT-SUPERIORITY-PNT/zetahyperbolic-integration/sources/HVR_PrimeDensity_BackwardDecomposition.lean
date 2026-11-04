@@ -1,9 +1,14 @@
+import HVRRealReflection
 import HVR_PrimeDensity_IndicatorIntegral
 import HVR_PrimeDensity_IntegralDecomposition
 import HVR_PrimeDensity_WeightedIntegrability
 import Mathlib.MeasureTheory.Group.Integral
 
 noncomputable section
+open MeasureTheory
+
+local instance : (volume : Measure ℝ).IsNegInvariant :=
+  HVRRealReflection.real_volume_negInvariant_direct
 open Filter MeasureTheory
 open HVRPrimeLogDensity HVRPrimeDensitySpatialAbel
 open HVRPrimeDensityConcentratedSqueeze HVRPrimeDensityWeightedIntegrability

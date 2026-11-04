@@ -1,6 +1,7 @@
 import HVR_PrimeBoundary_EventualDomination
 import HVR_PrimeDensity_SpatialAbel
 import HVR_PrimeDensity_FubiniIntegrable
+import HVRPrimeGridSwapDirect
 
 noncomputable section
 open Filter MeasureTheory
@@ -60,6 +61,10 @@ theorem undamped_eq_ordinaryBoundary_of_compact_support
     (hmeas : ∀ n : ℕ, AEStronglyMeasurable
       (frequencyIntegrand ψ x (boundaryEps n)) volume) :
     undamped (kernel ψ) x = ordinaryBoundary ψ x := by
+  have hcompact : HasCompactSupport ψ :=
+    HasCompactSupport.of_support_subset_isCompact hK (by
+      intro t ht
+      exact hsupport t ht)
   have hs := spatial_abel_tendsto (kernel ψ) hkernel x
   have hf := frequency_integral_tendsto_boundary_of_compact_support
     ψ x K hK hsupport hψ hmeas
@@ -69,8 +74,8 @@ theorem undamped_eq_ordinaryBoundary_of_compact_support
       (∫ t : ℝ, frequencyIntegrand ψ x (boundaryEps n) t) := by
     intro n
     simpa only [frequencyIntegrand] using
-      abel_smoothing_eq_frequency_integral_of_integrable ψ (boundaryEps n) x hψ
-        (boundaryEps_pos n)
+      HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_compact_support
+        ψ (boundaryEps n) x (boundaryEps_pos n) hψ hcompact
   have hf' : Tendsto (fun n : ℕ => ∫ u : ℝ in Set.Ioi 0,
       dampedError (boundaryEps n) u * kernel ψ (x - u)) atTop
       (𝓝 (ordinaryBoundary ψ x)) := by

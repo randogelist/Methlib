@@ -141,6 +141,29 @@ jobs:
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           (cd "$PKG/diagnostics" && timeout 480 "$LEAN" HVRPrimeSwapPathTrace.lean) | tee "$EVIDENCE/swap-path-diagnostic.stdout.log"
           grep -E '^SWAP_PATH_|^DEPENDENCY_COVERAGE=' "$EVIDENCE/swap-path-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Diagnose root replacement components
+        if: always() && matrix.lane == 'root'
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          LANE="$RUNNER_TEMP/hvr-root"
+          EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -z "$EVIDENCE" ] || [ ! -f "$EVIDENCE/olean/HVR_PrimeDensity_FinalRoot.olean" ]; then
+            echo 'REPLACEMENT_DIAGNOSTICS=NOT_RUN_ROOT_NOT_BUILT'
+            exit 0
+          fi
+          (cd "$PKG" && sha256sum --check HVRFrequencyMeasurableTrace.sha256 HVRComplexExpDirectTrace.sha256 HVRRealReflectionTrace.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          for NAME in HVRFrequencyMeasurableTrace HVRComplexExpDirectTrace HVRRealReflectionTrace; do
+            (cd "$PKG/diagnostics" && "$LEAN" "$NAME.lean") | tee "$EVIDENCE/$NAME.stdout.log"
+            grep -E 'CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|BODIES_UNAVAILABLE|DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/$NAME.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          done
+          grep -Fx 'FREQ_MEAS_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable|MeasureTheory.integral_integral_swap' "$EVIDENCE/HVRFrequencyMeasurableTrace.stdout.log" >/dev/null
+          grep -Fx 'FREQ_MEAS_TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable' "$EVIDENCE/HVRFrequencyMeasurableTrace.stdout.log" >/dev/null
+          grep -Fx 'EXP_DIRECT_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRComplexPoleLaplace.exponential_integrable|MeasureTheory.integral_integral_swap' "$EVIDENCE/HVRComplexExpDirectTrace.stdout.log" >/dev/null
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRRealReflection.real_volume_negInvariant_direct|MeasureTheory.integral_integral_swap' "$EVIDENCE/HVRRealReflectionTrace.stdout.log" >/dev/null
       - name: Upload lane audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

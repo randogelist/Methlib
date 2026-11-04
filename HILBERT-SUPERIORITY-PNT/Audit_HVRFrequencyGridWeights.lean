@@ -1,0 +1,2 @@
+import HVRFrequencyGridWeights
+#print axioms HVRFrequencyGridWeights.actual_grid_coefficients_norm_sum_le

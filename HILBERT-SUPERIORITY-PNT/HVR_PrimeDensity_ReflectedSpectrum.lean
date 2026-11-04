@@ -1,7 +1,12 @@
+import HVRRealReflection
 import HVR_PrimeDensity_ScaledSpectrumDecay
 import Mathlib.MeasureTheory.Group.Integral
 
 noncomputable section
+open MeasureTheory
+
+local instance : (volume : Measure ℝ).IsNegInvariant :=
+  HVRRealReflection.real_volume_negInvariant_direct
 open Filter MeasureTheory
 open scoped Topology
 open HVRPhysicalKernelScaledSpectrum HVRPrimeBoundaryCompactGlue

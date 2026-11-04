@@ -1,8 +1,13 @@
+import HVRRealReflection
 import HVR_PhysicalKernel_Candidate
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Group.Integral
 
 noncomputable section
+open MeasureTheory
+
+local instance : (volume : Measure ℝ).IsNegInvariant :=
+  HVRRealReflection.real_volume_negInvariant_direct
 open MeasureTheory HVRSmoothingFrequencySeed HVRPhysicalKernelCandidate
 
 /-! Candidate realness of the physical wave from the real even seed. The

@@ -1,0 +1,3 @@
+import HVRPrimeRightCompactSupport
+#print axioms HVRPrimeRightCompactSupport.exists_grid_support_radius
+#print axioms HVRPrimeRightCompactSupport.exists_compact_right_grid_limit

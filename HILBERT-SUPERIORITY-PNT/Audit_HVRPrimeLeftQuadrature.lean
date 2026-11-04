@@ -1,0 +1,6 @@
+import HVRPrimeLeftQuadrature
+#print axioms HVRPrimeLeftQuadrature.phase_mul_integrable
+#print axioms HVRPrimeLeftQuadrature.gridCells_eq_Ioc
+#print axioms HVRPrimeLeftQuadrature.intervalKernel_sample_error
+#print axioms HVRPrimeLeftQuadrature.left_integral_error
+#print axioms HVRPrimeLeftQuadrature.left_integrals_tendsto

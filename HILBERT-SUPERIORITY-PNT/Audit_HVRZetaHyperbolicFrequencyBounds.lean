@@ -1,0 +1,3 @@
+import HVRZetaHyperbolicFrequencyBounds
+#print axioms HVRZetaHyperbolicFrequencyBounds.phase_frequency_lipschitz
+#print axioms HVRZetaHyperbolicFrequencyBounds.integral_phase_frequency_lipschitz

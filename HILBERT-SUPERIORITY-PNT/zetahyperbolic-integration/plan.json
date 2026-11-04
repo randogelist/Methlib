@@ -18,10 +18,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_Complex_PoleLaplace",
-    "theorems": []
-  },
-  {
     "module": "NativeFubini",
     "theorems": []
   },
@@ -262,10 +258,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_PhysicalKernel_WaveReal",
-    "theorems": []
-  },
-  {
     "module": "HVRCompactFourierDecay",
     "theorems": [
       "HVRCompactFourierDecay.fourier_tendsto_atTop",
@@ -377,10 +369,6 @@
   },
   {
     "module": "HVR_Correction_BoundaryLimit",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_SpectralIdentity",
     "theorems": []
   },
   {
@@ -513,23 +501,11 @@
     "theorems": []
   },
   {
-    "module": "HVR_PrimeDensity_Laplace",
-    "theorems": []
-  },
-  {
     "module": "HVR_Smoothing_BoundaryExtension",
     "theorems": []
   },
   {
     "module": "HVR_PrimeDensity_WindowBridge",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_FubiniBridge",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_BoundaryLink",
     "theorems": []
   },
   {
@@ -542,6 +518,68 @@
       "HVRActualBoundaryFourier.weightedBoundary_fourier_tendsto_zero",
       "HVRActualBoundaryFourier.ordinaryBoundary_tendsto_zero"
     ]
+  },
+  {
+    "module": "HVR_PrimeBoundary_FourierDecay",
+    "theorems": [
+      "HVRPrimeBoundaryFourierDecay.weightedBoundary_fourier_tendsto_zero"
+    ]
+  },
+  {
+    "module": "HVR_PhysicalKernel_WindowAlgebra",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_PNTConditional",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_OrdinaryFrequencyDecay",
+    "theorems": [
+      "HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_tendsto_zero"
+    ]
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledTranslate",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_Tail",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_CanonicalWindow",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_TailScaling",
+    "theorems": []
+  },
+  {
+    "module": "HVRComplexExpIntegralDirect",
+    "theorems": [
+      "HVRComplexExpIntegralDirect.exponential_integrable_direct",
+      "HVRComplexExpIntegralDirect.exponential_integral_eq_inv_direct"
+    ]
+  },
+  {
+    "module": "HVR_Complex_PoleLaplace",
+    "theorems": [
+      "HVRComplexPoleLaplace.exponential_integrable",
+      "HVRComplexPoleLaplace.exponential_integral_eq_inv"
+    ]
+  },
+  {
+    "module": "HVR_PrimeDensity_Laplace",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_FubiniBridge",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_BoundaryLink",
+    "theorems": []
   },
   {
     "module": "HVRZetaHyperbolicFiniteFrequency",
@@ -557,21 +595,7 @@
     "theorems": []
   },
   {
-    "module": "HVR_PrimeBoundary_FourierDecay",
-    "theorems": [
-      "HVRPrimeBoundaryFourierDecay.weightedBoundary_fourier_tendsto_zero"
-    ]
-  },
-  {
     "module": "HVR_PrimeDensity_FubiniIntegrable",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_WindowAlgebra",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_PNTConditional",
     "theorems": []
   },
   {
@@ -595,28 +619,6 @@
     ]
   },
   {
-    "module": "HVR_PrimeBoundary_OrdinaryFrequencyDecay",
-    "theorems": [
-      "HVRPrimeBoundaryOrdinaryFrequencyDecay.ordinaryBoundary_tendsto_zero"
-    ]
-  },
-  {
-    "module": "HVR_PrimeDensity_SpatialAbel",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_ScaledTranslate",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_Tail",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_CanonicalWindow",
-    "theorems": []
-  },
-  {
     "module": "HVRPrimeLaplaceFrequencyBounds",
     "theorems": [
       "HVRPrimeLaplaceFrequencyBounds.actual_mixed_eq_damped_phase",
@@ -635,18 +637,6 @@
     "theorems": []
   },
   {
-    "module": "HVR_PhysicalKernel_ScaledRepresentation",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PhysicalKernel_TailScaling",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_IndicatorIntegral",
-    "theorems": []
-  },
-  {
     "module": "HVRFrequencyFiniteCells",
     "theorems": [
       "HVRFrequencyFiniteCells.finite_cells_phase_error"
@@ -655,66 +645,6 @@
   {
     "module": "HVR_PrimeBoundary_EventualDomination",
     "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_FrequencyMeasurable",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_AbelGlueConditional",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_EventualAbelGlue",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_HalfLineSmoothing",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeBoundary_CompactGlue",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_SmoothingDecomposition",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ScaledSpectrumDecay",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_IntegralDecomposition",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ReflectedSpectrum",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ScaledPhysicalDecay",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_BackwardDecomposition",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_ReflectedPhysicalDecay",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_DecompositionEndpoint",
-    "theorems": []
-  },
-  {
-    "module": "HVR_PrimeDensity_FinalRoot",
-    "theorems": [
-      "HVRPrimeDensityFinalRoot.backwardDecomposition",
-      "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
-      "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
-    ]
   },
   {
     "module": "HVRFrequencyCellBudget",
@@ -788,6 +718,13 @@
     ]
   },
   {
+    "module": "HVR_PrimeBoundary_FrequencyMeasurable",
+    "theorems": [
+      "HVRPrimeBoundaryFrequencyMeasurable.primeDensity_frequency_continuous_native",
+      "HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable"
+    ]
+  },
+  {
     "module": "HVRPrimeDirectGrid",
     "theorems": [
       "HVRPrimeDirectGrid.actual_prime_grid_cell_error_direct"
@@ -857,13 +794,6 @@
     ]
   },
   {
-    "module": "HVRComplexExpIntegralDirect",
-    "theorems": [
-      "HVRComplexExpIntegralDirect.exponential_integrable_direct",
-      "HVRComplexExpIntegralDirect.exponential_integral_eq_inv_direct"
-    ]
-  },
-  {
     "module": "HVRPrimeGridSwapDirect",
     "theorems": [
       "HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_support_interval",
@@ -874,6 +804,94 @@
     "module": "HVRFubiniCandidateLane",
     "theorems": [
       "HVRFubiniCandidateLane.lane_marker"
+    ]
+  },
+  {
+    "module": "HVRRealReflection",
+    "theorems": [
+      "HVRRealReflection.neg_measurePreserving",
+      "HVRRealReflection.real_volume_negInvariant_direct",
+      "HVRRealReflection.subLeft_measurePreserving",
+      "HVRRealReflection.subLeft_measurableEmbedding",
+      "HVRRealReflection.integrable_subLeft",
+      "HVRRealReflection.integral_subLeft",
+      "HVRRealReflection.integrable_neg"
+    ]
+  },
+  {
+    "module": "HVR_PhysicalKernel_WaveReal",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_SpectralIdentity",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_SpatialAbel",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PhysicalKernel_ScaledRepresentation",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_IndicatorIntegral",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_AbelGlueConditional",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_EventualAbelGlue",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_HalfLineSmoothing",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeBoundary_CompactGlue",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_SmoothingDecomposition",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ScaledSpectrumDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_IntegralDecomposition",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ReflectedSpectrum",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ScaledPhysicalDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_BackwardDecomposition",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_ReflectedPhysicalDecay",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_DecompositionEndpoint",
+    "theorems": []
+  },
+  {
+    "module": "HVR_PrimeDensity_FinalRoot",
+    "theorems": [
+      "HVRPrimeDensityFinalRoot.backwardDecomposition",
+      "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
+      "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
     ]
   }
 ]

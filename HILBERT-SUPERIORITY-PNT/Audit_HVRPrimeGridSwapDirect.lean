@@ -1,0 +1,3 @@
+import HVRPrimeGridSwapDirect
+#print axioms HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_support_interval
+#print axioms HVRPrimeGridSwapDirect.abel_smoothing_eq_frequency_integral_of_compact_support

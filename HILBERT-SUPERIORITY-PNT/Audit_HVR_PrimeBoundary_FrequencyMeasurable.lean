@@ -1,2 +1,3 @@
 import HVR_PrimeBoundary_FrequencyMeasurable
 #print axioms HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable
+#print axioms HVRPrimeBoundaryFrequencyMeasurable.primeDensity_frequency_continuous_native

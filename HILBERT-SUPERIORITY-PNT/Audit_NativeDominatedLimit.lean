@@ -1,0 +1,3 @@
+import NativeDominatedLimit
+#print axioms HVRNativeDominatedLimit.integral_error_le_weighted
+#print axioms HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error

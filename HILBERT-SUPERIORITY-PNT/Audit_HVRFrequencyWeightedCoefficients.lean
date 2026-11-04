@@ -1,0 +1,4 @@
+import HVRFrequencyWeightedCoefficients
+#print axioms HVRFrequencyWeightedCoefficients.norm_weightedFrequency
+#print axioms HVRFrequencyWeightedCoefficients.weightedFrequency_integrable
+#print axioms HVRFrequencyWeightedCoefficients.actual_coefficients_norm_sum_le

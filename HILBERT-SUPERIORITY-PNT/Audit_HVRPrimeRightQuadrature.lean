@@ -1,0 +1,4 @@
+import HVRPrimeRightQuadrature
+#print axioms HVRPrimeRightQuadrature.gridCells_union_eq_interval
+#print axioms HVRPrimeRightQuadrature.sampledRightGrid_tendsto_interval
+#print axioms HVRPrimeRightQuadrature.sampledRightGrid_tendsto_full

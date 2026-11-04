@@ -28,7 +28,9 @@ run_cmd do
     `HVRPrimeDensityLaplace.primeDensity_integrable,
     `HVRPrimeDensityLaplace.primeMass_complex_integrable,
     `HVRPrimeCountExpGrowth.logPrimeMass_integrableOn_exp_neg_mul,
-    `HVRComplexPoleLaplace.exponential_integrable]
+    `HVRComplexPoleLaplace.exponential_integrable,
+    `HVRComplexPoleLaplace.exponential_integral_eq_inv,
+    `HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin]
   for root in roots do
     if (env.find? root).isNone then throwError "ROOT_UNKNOWN={root}"
     let deps ← liftCoreM root.transitivelyUsedConstants

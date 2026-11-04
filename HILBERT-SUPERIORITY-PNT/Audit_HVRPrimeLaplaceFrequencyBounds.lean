@@ -1,0 +1,4 @@
+import HVRPrimeLaplaceFrequencyBounds
+#print axioms HVRPrimeLaplaceFrequencyBounds.actual_mixed_eq_damped_phase
+#print axioms HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_eq_damped_phase
+#print axioms HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_frequency_lipschitz

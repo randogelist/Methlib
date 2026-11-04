@@ -1,3 +1,4 @@
+import HVRRealReflection
 import HVR_PrimeDensity_FubiniIntegrable
 import HVR_PrimeDensity_WeightedIntegrability
 import HVR_Correction_BoundaryLimit
@@ -5,6 +6,10 @@ import Mathlib.MeasureTheory.Group.Integral
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 noncomputable section
+open MeasureTheory
+
+local instance : (volume : Measure ℝ).IsNegInvariant :=
+  HVRRealReflection.real_volume_negInvariant_direct
 open Filter MeasureTheory HVRPrimeLogDensity HVRPrimeDensityFubiniBridge
 open HVRPrimeDensityWeightedIntegrability HVRCorrectionBoundaryLimit
 open scoped Topology

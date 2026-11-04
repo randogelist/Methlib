@@ -1,0 +1,8 @@
+import HVRPrimeLeftIntegrable
+#print axioms HVRPrimeLeftIntegrable.sample_outer_integrable
+#print axioms HVRPrimeLeftIntegrable.phase_symm
+#print axioms HVRPrimeLeftIntegrable.intervalKernel_norm_le
+#print axioms HVRPrimeLeftIntegrable.weighted_frequency_moment_integrable
+#print axioms HVRPrimeLeftIntegrable.intervalKernel_continuous
+#print axioms HVRPrimeLeftIntegrable.interval_outer_integrable
+#print axioms HVRPrimeLeftIntegrable.left_integrals_tendsto_direct

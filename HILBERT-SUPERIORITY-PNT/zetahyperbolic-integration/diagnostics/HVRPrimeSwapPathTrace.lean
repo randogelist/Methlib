@@ -20,6 +20,11 @@ run_cmd do
   let roots : Array Name := #[
     `HVRPrimeSwapPathControl.indirect,
     `HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one,
+    `HVRPhysicalKernelSpectralIdentity.fourierInv_correlation_eq_rawKernel,
+    `HVRSpectralCorrelationFourierSquare.fourierInv_correlation_eq_wave_sq,
+    `HVRSpectralCorrelationRegularity.correlation_continuous,
+    `HVRSpectralCorrelationRegularity.correlation_integrable,
+    `Real.fourier_mul_convolution_eq,
     `HVRPrimeDensityBoundaryLink.primeDensityLaplace_eq_patchedShift,
     `HVRPrimeDensityLaplace.primeDensityLaplace_eq_regularPartAt,
     `HVRPrimeDensityLaplace.primeDensity_integrable]

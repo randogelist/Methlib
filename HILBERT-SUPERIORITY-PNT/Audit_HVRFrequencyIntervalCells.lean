@@ -1,0 +1,10 @@
+import HVRFrequencyIntervalCells
+#print axioms HVRFrequencyIntervalCells.gridPoint_zero
+#print axioms HVRFrequencyIntervalCells.gridPoint_end
+#print axioms HVRFrequencyIntervalCells.gridPoint_step
+#print axioms HVRFrequencyIntervalCells.gridPoint_monotone
+#print axioms HVRFrequencyIntervalCells.gridCells_pairwise_disjoint
+#print axioms HVRFrequencyIntervalCells.gridCells_measurable
+#print axioms HVRFrequencyIntervalCells.gridCells_cover
+#print axioms HVRFrequencyIntervalCells.gridCell_close
+#print axioms HVRFrequencyIntervalCells.gridCells_close_ae

@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "b7708ab7592a6b386afa8b1d31ecca8dada6a3e8b6f89ff8820b4237b8ca1c2a  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
+          echo "e996644019b2aaf9425696238278b91bd3bf87b960d1e0d3748d7a95f0435519  HILBERT-SUPERIORITY-PNT/branch_sources.sha256" | sha256sum --check
           (cd HILBERT-SUPERIORITY-PNT && sha256sum --check branch_sources.sha256)
 
       - name: Check out pinned Mathlib
@@ -169,6 +169,58 @@ jobs:
           grep -Fx 'FEATURE_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRNativeZetaPoleLittleO.zeta_log_derivative_regularized_isLittleO' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >/dev/null
           grep -Fx 'FEATURE_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|log_deriv_riemannZeta_add_inv_sub_sub_isLittleO' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >/dev/null
           grep -E '^FEATURE_' "$HVR_EVIDENCE/root-pole-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose direct frequency measurability
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRFrequencyMeasurableTrace.lean" | tee "$HVR_EVIDENCE/root-frequency-measurable-diagnostic.stdout.log"
+          grep -Fx 'FREQ_MEAS_TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/root-frequency-measurable-diagnostic.stdout.log" >/dev/null
+          grep -Fx 'FREQ_MEAS_TARGET_FOUND=HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one|HVRPrimeBoundaryFrequencyMeasurable.frequencyIntegrand_aestronglyMeasurable' "$HVR_EVIDENCE/root-frequency-measurable-diagnostic.stdout.log" >/dev/null
+          grep -E '^FREQ_MEAS_' "$HVR_EVIDENCE/root-frequency-measurable-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose direct complex exponential path
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRComplexExpDirectTrace.lean" | tee "$HVR_EVIDENCE/root-complex-exp-diagnostic.stdout.log"
+          grep -Fx 'EXP_DIRECT_TARGET_FOUND=HVRComplexPoleLaplace.exponential_integrable|HVRComplexExpIntegralDirect.exponential_integrable_direct' "$HVR_EVIDENCE/root-complex-exp-diagnostic.stdout.log" >/dev/null
+          grep -E '^EXP_DIRECT_' "$HVR_EVIDENCE/root-complex-exp-diagnostic.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Diagnose real reflection and residual swap paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          for NAME in HVRRealReflectionTrace HVRPrimeResidualSwapTrace; do
+            "$LEAN" "$HVR_PKG/mellin-diagnostics/$NAME.lean" | tee "$HVR_EVIDENCE/$NAME.stdout.log"
+            grep -E 'POSITIVE_CONTROL|TARGET_FOUND|TARGET_NOT_SEEN|REACHED_THEOREM|REACHED_DECLARATIONS_MISSING|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$HVR_EVIDENCE/$NAME.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          done
+          grep -Fx 'TARGET_NOT_SEEN_COVERAGE_UNVERIFIED=HVRRealReflection.real_volume_negInvariant_direct|MeasureTheory.integral_integral_swap' "$HVR_EVIDENCE/HVRRealReflectionTrace.stdout.log" >/dev/null
+
+      - name: Inspect explicit root swap path (diagnostic only)
+        continue-on-error: true
+        timeout-minutes: 10
+        shell: bash
+        run: |
+          set -euo pipefail
+          HVR_PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT"
+          HVR_EVIDENCE="$(find "$HVR_PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -1)"
+          export LEAN_PATH="$(paste -sd ':' "$HVR_EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          timeout 480 "$LEAN" "$HVR_PKG/mellin-diagnostics/HVRPrimeSwapPathTrace.lean" | tee "$HVR_EVIDENCE/root-swap-path.stdout.log"
+          grep -E '^SWAP_PATH_|^DEPENDENCY_COVERAGE=' "$HVR_EVIDENCE/root-swap-path.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Upload evidence
         if: always()

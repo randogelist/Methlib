@@ -1,0 +1,5 @@
+import HVRPrimeDirectFrequency
+#print axioms HVRPrimeDirectFrequency.dampedError_integrable_direct
+#print axioms HVRPrimeDirectFrequency.damped_phase_integrable_direct
+#print axioms HVRPrimeDirectFrequency.first_moment_integrable_direct
+#print axioms HVRPrimeDirectFrequency.primeDensity_frequency_lipschitz_direct

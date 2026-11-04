@@ -1,0 +1,6 @@
+import HVRPrimeLeftFull
+#print axioms HVRPrimeLeftFull.weighted_phase_eq_kernel_integrand
+#print axioms HVRPrimeLeftFull.intervalKernel_eq_full_kernel
+#print axioms HVRPrimeLeftFull.left_integrals_tendsto_actual_kernel
+#print axioms HVRPrimeLeftFull.sampleKernel_mul_eq_weighted_modes
+#print axioms HVRPrimeLeftFull.left_weighted_modes_tendsto_actual_kernel

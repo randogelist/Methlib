@@ -1,0 +1,2 @@
+import HVRPrimeWeightedMoment
+#print axioms HVRPrimeWeightedMoment.dampedError_first_moment_integrable

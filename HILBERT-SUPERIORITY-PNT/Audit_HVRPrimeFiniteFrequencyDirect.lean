@@ -1,0 +1,4 @@
+import HVRPrimeFiniteFrequencyDirect
+#print axioms HVRPrimeFiniteFrequencyDirect.actual_unit_mixed_integrable
+#print axioms HVRPrimeFiniteFrequencyDirect.weighted_finite_identity
+#print axioms HVRPrimeFiniteFrequencyDirect.identity_of_weighted_frequency_approximation

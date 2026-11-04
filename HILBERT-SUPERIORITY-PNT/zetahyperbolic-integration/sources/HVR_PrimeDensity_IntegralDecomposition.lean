@@ -1,7 +1,12 @@
+import HVRRealReflection
 import HVR_PrimeDensity_SmoothingDecomposition
 import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 noncomputable section
+open MeasureTheory
+
+local instance : (volume : Measure ℝ).IsNegInvariant :=
+  HVRRealReflection.real_volume_negInvariant_direct
 open MeasureTheory HVRPrimeLogDensity HVRPrimeDensitySpatialAbel
 open HVRPrimeDensityConcentratedSqueeze
 
