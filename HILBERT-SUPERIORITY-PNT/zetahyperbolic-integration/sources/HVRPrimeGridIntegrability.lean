@@ -48,7 +48,7 @@ theorem primeDensity_frequency_continuous (a : ℝ) (ha : 0 < a) :
   have hM : 0 ≤ M := by
     dsimp [M]
     exact integral_nonneg (fun u => mul_nonneg (abs_nonneg u) (norm_nonneg _))
-  let K : ℝ≥0 := ⟨M, hM⟩
+  let K : NNReal := ⟨M, hM⟩
   have hL : LipschitzWith K
       (fun t : ℝ => primeDensityLaplace ((a : ℂ) + (t : ℂ) * Complex.I)) := by
     apply LipschitzWith.of_dist_le_mul
