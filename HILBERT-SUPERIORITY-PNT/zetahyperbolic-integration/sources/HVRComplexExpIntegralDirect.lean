@@ -43,7 +43,7 @@ theorem exponential_integral_eq_inv_direct (z : ℂ) (hz : 0 < z.re) :
         (exponential_integrable_direct z hz) tendsto_id) ?_
     simp_rw [integral_exp_mul_complex (c := -z) (by aesop), id_eq]
     suffices Tendsto (fun x : ℝ => Complex.exp ((-z) * x)) atTop (𝓝 0) by
-      simpa using this.sub_const _ |>.div_const _
+      simpa using (this.sub_const (1 : ℂ)).div_const (-z)
     simpa [Complex.tendsto_exp_nhds_zero_iff] using
       tendsto_const_nhds.neg_mul_atTop hzneg tendsto_id
   simpa using h

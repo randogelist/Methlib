@@ -14,19 +14,22 @@ namespace HVRPrimeRightCompactSupport
 
 /-- Every compactly supported frequency test is zero outside one grid interval. -/
 theorem exists_grid_support_radius (ψ : ℝ → ℂ) (hcompact : HasCompactSupport ψ) :
-    ∃ R : ℝ, 0 ≤ R ∧ ∀ᵐ t : ℝ, t ∉ Set.Ioc (-R) R → ψ t = 0 := by
+    ∃ R : ℝ, 0 ≤ R ∧ ∀ t : ℝ, t ∉ Set.Ioc (-R) R → ψ t = 0 := by
   obtain ⟨R, hR, hzero⟩ := hcompact.exists_pos_le_norm
   refine ⟨R, le_of_lt hR, ?_⟩
-  filter_upwards [] with t ht
+  intro t ht
   apply hzero t
   rw [Real.norm_eq_abs]
   have ht' : ¬ (-R < t ∧ t ≤ R) := ht
-  push_neg at ht'
-  rcases ht' with hleft | hright
+  by_cases hleft : t ≤ -R
   · have hneg : t ≤ 0 := by linarith
     rw [abs_of_nonpos hneg]
     linarith
-  · have hpos : 0 ≤ t := by linarith
+  · have hright : R < t := by
+      apply lt_of_not_ge
+      intro hle
+      exact ht' ⟨lt_of_not_ge hleft, hle⟩
+    have hpos : 0 ≤ t := by linarith
     rw [abs_of_nonneg hpos]
     linarith
 
@@ -40,6 +43,6 @@ theorem exists_compact_right_grid_limit (ψ : ℝ → ℂ) (x a : ℝ)
         primeDensityLaplace ((a : ℂ) + (t : ℂ) * Complex.I))) := by
   obtain ⟨R, hR, hsupport⟩ := exists_grid_support_radius ψ hcompact
   exact ⟨R, hR, HVRPrimeRightQuadrature.sampledRightGrid_tendsto_full
-    R ψ x a hR ha hψ hsupport⟩
+    R ψ x a hR ha hψ (Filter.Eventually.of_forall hsupport)⟩
 
 end HVRPrimeRightCompactSupport

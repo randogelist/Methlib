@@ -23,6 +23,8 @@ jobs:
             diagnostic: HVRPrimeLeftTrace
           - lane: fubini_exp_candidate
             diagnostic: HVRComplexExpIntegralDirectTrace
+          - lane: fubini_swap_candidate
+            diagnostic: HVRPrimeGridSwapDirectTrace
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
