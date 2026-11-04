@@ -1,0 +1,14 @@
+HVR ZETA COMPUTATIONAL PROJECTION - EXACT AUDIT SCOPE
+
+Pinned external Linux Lean 4.34.0-rc1 CI: 41780817326.
+The exact named theorem projectedZeta_eq_riemannZeta passed a theorem-level
+standard-only axiom audit. Its statement is equality of functions.
+The controlled declaration trace did not see integral_integral_swap or
+riemannZeta in the projected value definition; coverage is unverified.
+The equality theorem does reach both riemannZeta and integral_integral_swap
+through its statement/dependencies. It is NOT a swap-free bridge.
+A separate plain rfl conversion test failed. Equality does not imply root
+independence and this optional lane is not integrated into the PNT root.
+Mathlib remains a dependency. Native Windows Lean execution is NOT VERIFIED.
+
+Sources from the successful CI are copied byte-for-byte.

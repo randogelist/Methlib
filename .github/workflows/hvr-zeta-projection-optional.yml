@@ -1,10 +1,10 @@
-name: HVR zeta defeq projection candidate (Linux)
+name: HVR projected zeta optional lane (Linux)
 on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/hvr-candidates/zeta-defeq-projection/**'
-      - '.github/workflows/hvr-zeta-defeq-projection.yml'
+      - 'HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration/**'
+      - '.github/workflows/hvr-zeta-projection-optional.yml'
 
 permissions:
   contents: read
@@ -21,8 +21,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-defeq-projection"
-          python3 "$PKG/run_linux.py" --check-plan
+          PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          python3 "$PKG/prepare_lane.py" --package "$PKG" --output "$RUNNER_TEMP/hvr-zeta-projection-optional" --lane zeta_projection
       - name: Check out pinned Mathlib
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -56,35 +56,26 @@ jobs:
           set -euo pipefail
           export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           test -x "$LEAN_EXE"
-          python3 "$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-defeq-projection/run_linux.py"
+          python3 "$RUNNER_TEMP/hvr-zeta-projection-optional/run_linux.py"
       - name: Diagnose swap reachability
         shell: bash
         run: |
           set -euo pipefail
-          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-defeq-projection"
-          LANE="$PKG"
+          PKG="$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration"
+          LANE="$RUNNER_TEMP/hvr-zeta-projection-optional"
           EVIDENCE="$(find "$LANE/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
           test -n "$EVIDENCE"
           (cd "$PKG" && sha256sum --check diagnostics.sha256)
           export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
-          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaDefeqProjectionTrace.lean) | tee "$EVIDENCE/zeta-defeq-trace.stdout.log"
-          grep -E 'ZETA_DEFEQ_' "$EVIDENCE/zeta-defeq-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
-      - name: Test definitional equality (exploratory)
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-defeq-projection"
-          EVIDENCE="$(find "$PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
-          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
-          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
-          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaDefeqProjectionRflTest.lean) 2>&1 | tee "$EVIDENCE/zeta-defeq-rfl-exploratory.log"
+          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaProjectionTrace.lean) | tee "$EVIDENCE/zeta-projection-trace.stdout.log"
+          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaEqualityTrace.lean) | tee "$EVIDENCE/zeta-equality-trace.stdout.log"
+          grep -E 'CONTROL|NOT_SEEN|PATH_FOUND|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/zeta-projection-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+          grep -E 'CONTROL|NOT_SEEN|FOUND|DEPENDENCY_COVERAGE|SEMANTIC_INDEPENDENCE' "$EVIDENCE/zeta-equality-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
       - name: Upload candidate audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: hvr-zeta-defeq-projection-linux-evidence
-          path: ${{ github.workspace }}/.github/hvr-candidates/zeta-defeq-projection/evidence-linux/
+          name: hvr-zeta-projection-optional-linux-evidence
+          path: ${{ runner.temp }}/hvr-zeta-projection-optional/evidence-linux/
           if-no-files-found: warn
-          include-hidden-files: true

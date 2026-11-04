@@ -969,5 +969,17 @@
       "HVRPrimeDensityFinalRoot.actual_prime_concentrated_smoothing",
       "HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one"
     ]
+  },
+  {
+    "module": "HVRZetaComputationalProjection",
+    "theorems": [
+      "HVRZetaComputationalProjection.projectedZeta_apply"
+    ]
+  },
+  {
+    "module": "HVRZetaComputationalEquality",
+    "theorems": [
+      "HVRZetaComputationalProjection.projectedZeta_eq_riemannZeta"
+    ]
   }
 ]
