@@ -18,6 +18,8 @@ ROOTS = {
     "assembly": "HVR_PrimeMellin_ModeAssembly",
     "bounds": "HVRZetaHyperbolicFrequencyBounds",
     "moment": "HVRPrimeWeightedMoment",
+    "primefreq": "HVRPrimeLaplaceFrequencyBounds",
+    "quadrature": "HVRPrimeWeightedFrequencyApproximation",
 }
 
 IMPORT_LINE = re.compile(r"^\s*(?:(?:public|meta)\s+)*import\s+([^\n-]+)")

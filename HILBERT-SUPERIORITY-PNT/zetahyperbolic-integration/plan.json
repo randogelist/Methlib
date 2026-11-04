@@ -432,5 +432,20 @@
     "theorems": [
       "HVRPrimeWeightedMoment.dampedError_first_moment_integrable"
     ]
+  },
+  {
+    "module": "HVRPrimeLaplaceFrequencyBounds",
+    "theorems": [
+      "HVRPrimeLaplaceFrequencyBounds.actual_mixed_eq_damped_phase",
+      "HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_eq_damped_phase",
+      "HVRPrimeLaplaceFrequencyBounds.primeDensityLaplace_frequency_lipschitz"
+    ]
+  },
+  {
+    "module": "HVRPrimeWeightedFrequencyApproximation",
+    "theorems": [
+      "HVRPrimeWeightedFrequencyApproximation.weighted_finite_frequency_identity",
+      "HVRPrimeWeightedFrequencyApproximation.actual_identity_of_weighted_frequency_approximation"
+    ]
   }
 ]
