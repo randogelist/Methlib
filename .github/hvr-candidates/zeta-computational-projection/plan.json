@@ -4,5 +4,11 @@
     "theorems": [
       "HVRZetaComputationalProjection.projectedZeta_apply"
     ]
+  },
+  {
+    "module": "HVRZetaComputationalEquality",
+    "theorems": [
+      "HVRZetaComputationalProjection.projectedZeta_eq_riemannZeta"
+    ]
   }
 ]

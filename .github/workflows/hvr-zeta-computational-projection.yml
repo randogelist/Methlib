@@ -70,6 +70,16 @@ jobs:
           LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
           (cd "$PKG/diagnostics" && "$LEAN" HVRZetaProjectionTrace.lean) | tee "$EVIDENCE/zeta-projection-trace.stdout.log"
           grep -E 'ZETA_PROJECTION_' "$EVIDENCE/zeta-projection-trace.stdout.log" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Diagnose equality dependency reachability
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="$GITHUB_WORKSPACE/.github/hvr-candidates/zeta-computational-projection"
+          EVIDENCE="$(find "$PKG/evidence-linux" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          (cd "$PKG" && sha256sum --check diagnostics.sha256)
+          export LEAN_PATH="$(cat "$EVIDENCE/lean-path.txt")"
+          LEAN="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          (cd "$PKG/diagnostics" && "$LEAN" HVRZetaEqualityTrace.lean) | tee "$EVIDENCE/zeta-equality-trace.stdout.log"
       - name: Test propositional equality (exploratory)
         continue-on-error: true
         shell: bash
