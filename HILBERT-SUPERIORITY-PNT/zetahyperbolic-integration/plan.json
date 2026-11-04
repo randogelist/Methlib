@@ -447,5 +447,11 @@
       "HVRPrimeWeightedFrequencyApproximation.weighted_finite_frequency_identity",
       "HVRPrimeWeightedFrequencyApproximation.actual_identity_of_weighted_frequency_approximation"
     ]
+  },
+  {
+    "module": "HVRFrequencyCellError",
+    "theorems": [
+      "HVRFrequencyCellError.integral_cell_phase_error"
+    ]
   }
 ]
