@@ -53,7 +53,7 @@ theorem primeDensity_frequency_continuous (a : ℝ) (ha : 0 < a) :
       (fun t : ℝ => primeDensityLaplace ((a : ℂ) + (t : ℂ) * Complex.I)) := by
     apply LipschitzWith.of_dist_le_mul
     intro t r
-    simpa only [dist_eq_norm, Real.norm_eq_abs, K, NNReal.coe_mk, mul_comm] using
+    simpa [dist_eq_norm, Real.norm_eq_abs, K, M, mul_comm] using
       HVRPrimeDirectFrequency.primeDensity_frequency_lipschitz_direct a t r ha
   exact hL.continuous
 
