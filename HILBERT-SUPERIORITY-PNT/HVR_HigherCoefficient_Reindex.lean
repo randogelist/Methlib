@@ -54,8 +54,10 @@ theorem higher_lseries_eq_prime_power_tsum (sigma t : ℝ) (hsigma : 1 < sigma) 
       _ = ∑' pk : Nat.Primes × ℕ, f (Nat.Primes.prodNatEquiv pk) := by
         simpa using (hsub.comp_injective Nat.Primes.prodNatEquiv.injective).tsum_prod.symm
       _ = _ := by rw [← Equiv.tsum_eq Nat.Primes.prodNatEquiv]
+  have hrestrict : (∑' n : ℕ, f n) = ∑' n : {n : ℕ // IsPrimePow n}, f n.1 :=
+    (tsum_subtype_eq_of_support_subset hsupport).symm
   change (∑' n : ℕ, f n) = ∑' (p : Nat.Primes) (k : ℕ), f ((p : ℕ) ^ (k + 2))
-  rw [← tsum_subtype_eq_of_support_subset hsupport, ← hindex]
+  refine hrestrict.trans (hindex.symm.trans ?_)
   apply tsum_congr
   intro p
   have hfiber : Summable (fun k : ℕ => f ((p : ℕ) ^ (k + 1))) :=
