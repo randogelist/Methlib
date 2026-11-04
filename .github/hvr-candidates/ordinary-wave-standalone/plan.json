@@ -37,13 +37,13 @@
   {
     "module": "HVROrdinarySeedWaveStandalone",
     "theorems": [
-      "HVROrdinarySeedWaveStandalone.ordinaryWave_eq_fourierInv",
-      "HVROrdinarySeedWaveStandalone.seed_integrable",
-      "HVROrdinarySeedWaveStandalone.seed_first_moment_integrable",
-      "HVROrdinarySeedWaveStandalone.ordinaryWave_norm_le",
-      "HVROrdinarySeedWaveStandalone.ordinaryWave_continuous",
-      "HVROrdinarySeedWaveStandalone.ordinaryWave_first_derivative_bound",
-      "HVROrdinarySeedWaveStandalone.ordinaryWave_norm_sq_integrable"
+      "HVROrdinarySeedWave.ordinaryWave_eq_fourierInv",
+      "HVROrdinarySeedWave.seed_integrable",
+      "HVROrdinarySeedWave.seed_first_moment_integrable",
+      "HVROrdinarySeedWave.ordinaryWave_norm_le",
+      "HVROrdinarySeedWave.ordinaryWave_continuous",
+      "HVROrdinarySeedWave.ordinaryWave_first_derivative_bound",
+      "HVROrdinarySeedWave.ordinaryWave_norm_sq_integrable"
     ]
   }
 ]
