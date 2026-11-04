@@ -173,6 +173,36 @@
     "theorems": []
   },
   {
+    "module": "HVRSimpleMoebiusBound",
+    "theorems": [
+      "HVRSimpleMoebiusBound.abs_moebius_le_one"
+    ]
+  },
+  {
+    "module": "NativeZetaNonzero",
+    "theorems": [
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse",
+      "HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse"
+    ]
+  },
+  {
+    "module": "NativeOneZetaSummability",
+    "theorems": [
+      "HVRNativeOneZetaSummability.one_summable",
+      "HVRNativeOneZetaSummability.arithmetic_zeta_summable",
+      "HVRNativeOneZetaSummability.one_abscissa_lt"
+    ]
+  },
+  {
+    "module": "IntegratedZetaNonzero",
+    "theorems": [
+      "HVRIntegratedZetaNonzero.moebiusLSeries_summable",
+      "HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries",
+      "HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse",
+      "HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re"
+    ]
+  },
+  {
     "module": "HVR_Zeta_BoundaryFactor",
     "theorems": []
   },

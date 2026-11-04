@@ -24,6 +24,10 @@ def primePowerDirect := @HVRSnditerationPrimePowerTail.higher_prime_power_hasSum
 def primePowerIndirect := @primePowerDirect
 def correctionDirect := @HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection
 def correctionIndirect := correctionDirect
+def nonzeroOldDirect := @riemannZeta_ne_zero_of_one_lt_re
+def nonzeroOldIndirect := @nonzeroOldDirect
+def nonzeroHVRDirect := @HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re
+def nonzeroHVRIndirect := @nonzeroHVRDirect
 end HVRModeTraceControl
 
 set_option maxHeartbeats 0 in
@@ -39,7 +43,11 @@ run_cmd do
     (`HVRModeTraceControl.primePowerDirect, `HVRSnditerationPrimePowerTail.higher_prime_power_hasSum),
     (`HVRModeTraceControl.primePowerIndirect, `HVRSnditerationPrimePowerTail.higher_prime_power_hasSum),
     (`HVRModeTraceControl.correctionDirect, `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection),
-    (`HVRModeTraceControl.correctionIndirect, `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection)]
+    (`HVRModeTraceControl.correctionIndirect, `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection),
+    (`HVRModeTraceControl.nonzeroOldDirect, `riemannZeta_ne_zero_of_one_lt_re),
+    (`HVRModeTraceControl.nonzeroOldIndirect, `riemannZeta_ne_zero_of_one_lt_re),
+    (`HVRModeTraceControl.nonzeroHVRDirect, `HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re),
+    (`HVRModeTraceControl.nonzeroHVRIndirect, `HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re)]
   for (root, target) in controls do
     if (env.find? root).isNone || (env.find? target).isNone then
       throwError "CONTROL_OR_TARGET_UNKNOWN={root}|{target}"
@@ -55,6 +63,8 @@ run_cmd do
     `HVRPrimeMellinModeAssembly.primeSeries_eq_mul_mellin_via_modes,
     `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection,
     `HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection,
+    `HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re,
+    `HVRZetaBoundaryFactor.zeta_boundary_finite_order,
     `HVRPrimeDensityFinalRoot.theta_ratio_tendsto_one]
   let targets : Array Name := #[
     `HVRPrimeCountMellin.primeSeries_eq_mul_primeThetaMellin,
@@ -64,6 +74,10 @@ run_cmd do
     `HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection,
     `HVRZetaCorrectionIdentity.zeta_log_deriv_eq_primeSeries_add_complexCorrection,
     `LSeries_eq_mul_integral,
+    `HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re,
+    `riemannZeta_ne_zero_of_one_lt_re,
+    `LSeries_one_ne_zero_of_one_lt_re,
+    `ArithmeticFunction.LSeries_zeta_ne_zero_of_one_lt_re,
     `HVRZetaLogDerivative.vonMangoldt_series_eq_zeta_log_deriv,
     `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div]
   for root in roots do
