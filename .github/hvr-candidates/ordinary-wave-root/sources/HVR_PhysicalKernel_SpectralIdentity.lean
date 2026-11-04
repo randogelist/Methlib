@@ -15,8 +15,8 @@ theorem fourierInv_correlation_eq_rawKernel (w : ℝ) (hw : 0 < w) (x : ℝ) :
       (rawKernel w hw x : ℂ) := by
   have heq : FourierTransformInv.fourierInv (complexSeed w hw) x =
       HVROrdinarySeedWave.ordinaryWave w hw x := by
-    rw [HVRCompactCorrelationFourierSquare.fourierInv_eq_phase_integral]
-    rfl
+    simpa only [HVRPhysicalKernelCandidate.complexSeed, HVROrdinarySeed.complexSeed] using
+      (HVROrdinarySeedWave.ordinaryWave_eq_fourierInv w hw x).symm
   have hreal := HVRPhysicalKernelWaveReal.ordinaryWave_im_zero w hw x
   have hz : HVROrdinarySeedWave.ordinaryWave w hw x =
       ((HVROrdinarySeedWave.ordinaryWave w hw x).re : ℂ) := by
