@@ -169,6 +169,13 @@ def summarize(label: str, declaration: str, graph: Path, roots, convention):
         body_counts[body] += 1
         if body in INCOMPLETE_BODY and kind not in ('axiom', 'axiomInfo'):
             issues['body_' + body] += 1
+        start, end = row.get('start_line'), row.get('end_line')
+        if (type(start) is not int or type(end) is not int or start <= 0 or end <= 0):
+            issues['missing_range'] += 1
+            issues_detail.append({'name': name, 'module': module, 'reason': 'missing_range'})
+            if not isinstance(module, str) or not module or module == '_unknown':
+                issues['missing_module'] += 1
+            continue
         if not isinstance(module, str) or not module or module == '_unknown':
             issues['missing_module'] += 1
             issues_detail.append({'name': name, 'reason': 'missing_module'})

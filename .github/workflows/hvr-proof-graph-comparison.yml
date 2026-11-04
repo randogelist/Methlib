@@ -18,12 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - lane: old_root
-            project_ref: 4e927ec77e8ba13f6237f48738445c78ded114a3
-            package_lane: root
-          - lane: new_root
-            project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
-            package_lane: root
           - lane: new_snd
             project_ref: 6542c5db9f0686f3019a56c919d5389407a27e6a
             package_lane: snd
@@ -115,7 +109,12 @@ jobs:
               `HVRTwoPrimeGram.gram_posDef,
               `HVRPrimeKernelTrace.prime_gram_logDet_kernel_hasDerivAt,
               `HVRPrimeMomentDecay.log_mass_derivative_le_neg_log_two,
-              `HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt]
+              `HVRPrimeSndAssembly.two_prime_logDet_kernel_hasDerivAt,
+              `hasSum_geometric_of_norm_lt_one,
+              `Matrix.PosDef.det_pos,
+              `Matrix.derivative_det_one_add_X_smul,
+              `Real.log_le_log,
+              `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div]
           '''
               src = before + roots + after + tail
           Path(os.environ['GRAPH_EVIDENCE'], 'HVRProofGraphExport.lean').write_text(src, encoding='utf-8')
@@ -153,7 +152,7 @@ jobs:
                                     unavailable_bodies=int(hidden), unknown_module=int(unknown_module),
                                     missing_range=int(missing_range), axioms=int(axioms)))
           lane = os.environ['GRAPH_LANE']
-          expected = {'old_root': 3, 'new_root': 4, 'new_snd': 5}[lane]
+          expected = {'old_root': 3, 'new_root': 4, 'new_snd': 10}[lane]
           absent = [s.split('|', 1)[1] for s in lines if s.startswith('GRAPH_ROOT_ABSENT|')]
           if len(controls) != 2 or len(summaries) != expected or len(absent) != (1 if lane == 'old_root' else 0):
               raise ValueError('Unexpected graph roots or control coverage')
