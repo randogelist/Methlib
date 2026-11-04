@@ -137,6 +137,9 @@ the canonical root. The downstream mode assembly and abstract frequency
 bounds passed named audits in [run 41745623568](https://github.com/randogelist/Methlib/actions/runs/41745623568);
 the actual positively damped prime-error first-moment theorem passed in
 [run 41745700135](https://github.com/randogelist/Methlib/actions/runs/41745700135).
+The actual prime Laplace frequency bounds and weighted finite-frequency
+adapter passed in [run 41746159554](https://github.com/randogelist/Methlib/actions/runs/41746159554);
+the adapter's two continuous approximation limits remain explicit premises.
 
 ## Additional prime-power and zeta bridge
 
