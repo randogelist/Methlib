@@ -28,6 +28,7 @@ jobs:
           set -euo pipefail
           cp -a "$GITHUB_WORKSPACE/HILBERT-SUPERIORITY-PNT/zetahyperbolic-integration" "$RUNNER_TEMP/hvr-physical-candidate"
           cp -a "$GITHUB_WORKSPACE/.github/hvr-candidates/ordinary-wave-root/." "$RUNNER_TEMP/hvr-physical-candidate/"
+          rm -f "$RUNNER_TEMP/hvr-physical-candidate/sources/HVRZetaComputationalProjection.lean" "$RUNNER_TEMP/hvr-physical-candidate/sources/HVRZetaComputationalEquality.lean"
       - name: Verify full source manifest and prepare the independent lane
         shell: bash
         env:
