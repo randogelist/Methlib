@@ -44,7 +44,8 @@ theorem gridPoint_monotone (R : ℝ) (N : ℕ) (hR : 0 ≤ R) :
   intro i j hij
   have hreal : (i : ℝ) ≤ (j : ℝ) := by exact_mod_cast hij
   have hstep : 0 ≤ 2 * R / (N : ℝ) := by positivity
-  exact add_le_add_left (mul_le_mul_of_nonneg_right hreal hstep) (-R)
+  simpa only [gridPoint, add_comm] using
+    add_le_add_left (mul_le_mul_of_nonneg_right hreal hstep) (-R)
 
 /-- The grid intervals are pairwise disjoint even though their endpoints
 touch. -/
