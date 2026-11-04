@@ -591,5 +591,13 @@
     "theorems": [
       "HVRPrimeDirectGrid.actual_prime_grid_cell_error_direct"
     ]
+  },
+  {
+    "module": "HVRPrimeGridIntegrability",
+    "theorems": [
+      "HVRPrimeGridIntegrability.weighted_lipschitz_integrable_on_cell",
+      "HVRPrimeGridIntegrability.primeDensity_frequency_continuous",
+      "HVRPrimeGridIntegrability.actual_prime_grid_error_no_cell_integrability"
+    ]
   }
 ]
