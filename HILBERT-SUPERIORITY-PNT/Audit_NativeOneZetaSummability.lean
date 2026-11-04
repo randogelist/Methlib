@@ -1,0 +1,7 @@
+import NativeOneZetaSummability
+#check HVRNativeOneZetaSummability.one_summable
+#print axioms HVRNativeOneZetaSummability.one_summable
+#check HVRNativeOneZetaSummability.arithmetic_zeta_summable
+#print axioms HVRNativeOneZetaSummability.arithmetic_zeta_summable
+#check HVRNativeOneZetaSummability.one_abscissa_lt
+#print axioms HVRNativeOneZetaSummability.one_abscissa_lt

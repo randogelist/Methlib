@@ -1,3 +1,4 @@
+import NativeChebyshevBound
 import HVR_PrimeLogDensity
 import Mathlib.MeasureTheory.Integral.ExpDecay
 
@@ -21,7 +22,7 @@ theorem logPrimeMass_isBigO_exp :
   intro u
   have hn : 0 ≤ logPrimeMass u := Chebyshev.theta_nonneg (Real.exp u)
   have hb : logPrimeMass u ≤ Real.log 4 * Real.exp u :=
-    Chebyshev.theta_le_log4_mul_x (le_of_lt (Real.exp_pos u))
+    HVRNativeChebyshevBound.theta_le_log4_mul_x_native (le_of_lt (Real.exp_pos u))
   simpa only [one_mul, Real.norm_eq_abs,
     abs_of_nonneg hn, abs_of_pos (Real.exp_pos u)] using hb
 
@@ -49,7 +50,7 @@ theorem logPrimeMass_integrableOn_exp_neg_mul (b : ℝ) (hb : 1 < b) :
   intro u
   have hn : 0 ≤ logPrimeMass u := Chebyshev.theta_nonneg (Real.exp u)
   have hbnd : logPrimeMass u ≤ Real.log 4 * Real.exp u :=
-    Chebyshev.theta_le_log4_mul_x (le_of_lt (Real.exp_pos u))
+    HVRNativeChebyshevBound.theta_le_log4_mul_x_native (le_of_lt (Real.exp_pos u))
   have hexp : Real.exp (-b * u) * Real.exp u = Real.exp (-(b - 1) * u) := by
     rw [← Real.exp_add]
     congr 1

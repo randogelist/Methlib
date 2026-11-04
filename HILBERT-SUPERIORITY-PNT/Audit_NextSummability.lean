@@ -1,0 +1,3 @@
+import NextSummability
+#check HVRNextSummability.vonMangoldt_lseries_summable
+#print axioms HVRNextSummability.vonMangoldt_lseries_summable

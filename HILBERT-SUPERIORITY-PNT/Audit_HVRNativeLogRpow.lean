@@ -1,0 +1,5 @@
+import HVRNativeLogRpow
+#check HVRNativeLogRpow.log_le_rpow_div_nonneg
+#print axioms HVRNativeLogRpow.log_le_rpow_div_nonneg
+#check HVRNativeLogRpow.log_natCast_le_rpow_div
+#print axioms HVRNativeLogRpow.log_natCast_le_rpow_div

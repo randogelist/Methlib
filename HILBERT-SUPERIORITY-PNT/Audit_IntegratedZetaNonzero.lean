@@ -1,0 +1,9 @@
+import IntegratedZetaNonzero
+#check HVRIntegratedZetaNonzero.moebiusLSeries_summable
+#print axioms HVRIntegratedZetaNonzero.moebiusLSeries_summable
+#check HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries
+#print axioms HVRIntegratedZetaNonzero.zetaLSeries_mul_moebiusLSeries
+#check HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse
+#print axioms HVRIntegratedZetaNonzero.rightHalfPlaneMoebiusInverse
+#check HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re
+#print axioms HVRIntegratedZetaNonzero.zeta_ne_zero_of_one_lt_re

@@ -1,0 +1,5 @@
+import NativeZetaNonzero
+#check HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse
+#print axioms HVRNativeZetaNonzero.zeta_ne_zero_of_moebius_inverse
+#check HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse
+#print axioms HVRNativeZetaNonzero.zeta_ne_zero_of_one_lt_re_of_moebius_inverse
