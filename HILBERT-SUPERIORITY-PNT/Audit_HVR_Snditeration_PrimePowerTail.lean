@@ -1,0 +1,6 @@
+import HVR_Snditeration_PrimePowerTail
+#print axioms HVRSnditerationPrimePowerTail.prime_ratio_norm_lt_one
+#print axioms HVRSnditerationPrimePowerTail.higher_prime_power_hasSum
+#print axioms HVRSnditerationPrimePowerTail.mangoldt_term_prime_power
+#print axioms HVRSnditerationPrimePowerTail.mangoldt_prime_power_hasSum
+#print axioms HVRSnditerationPrimePowerTail.mangoldt_prime_power_tsum

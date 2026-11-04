@@ -21,7 +21,7 @@ def modeIndirect := modeDirect
 def targetDirect := @LSeries_eq_mul_integral
 def targetIndirect := targetDirect
 def primePowerDirect := @HVRSnditerationPrimePowerTail.higher_prime_power_hasSum
-def primePowerIndirect := primePowerDirect
+def primePowerIndirect := @primePowerDirect
 def correctionDirect := @HVRZetaCorrectionIdentity.higher_lseries_eq_complexCorrection
 def correctionIndirect := correctionDirect
 end HVRModeTraceControl
