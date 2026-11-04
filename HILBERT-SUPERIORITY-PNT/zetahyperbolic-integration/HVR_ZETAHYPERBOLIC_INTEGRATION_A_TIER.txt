@@ -13,6 +13,8 @@ https://github.com/randogelist/Methlib/actions/runs/41745700135
 The actual prime Laplace-frequency bounds and weighted finite-frequency
 adapter passed five further named audits:
 https://github.com/randogelist/Methlib/actions/runs/41746159554
+The finite frequency-cell phase error bound passed its named audit:
+https://github.com/randogelist/Methlib/actions/runs/41746760052
 Windows execution of this package is pending. Old Lean 4.33 donor audits
 are separate and do not validate source edits by themselves.
 
@@ -46,7 +48,8 @@ separate finite-dimensional and conditional interfaces:
    for a positive damping parameter. HVRPrimeLaplaceFrequencyBounds establishes
    actual frequency Lipschitz control. HVRPrimeWeightedFrequencyApproximation
    gives a weighted finite-frequency adapter. Its continuous identity still
-   assumes both approximation limits; they remain open.
+   assumes both approximation limits; they remain open. HVRFrequencyCellError
+   adds a one-cell bound with explicit integrability and mesh hypotheses.
 
 Sources adapted from Mathlib retain attribution and the Apache 2.0 license;
 see HVR_PrimeMellin_Abel.lean. Generic finite Jacobi source provenance is

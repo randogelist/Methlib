@@ -140,6 +140,8 @@ the actual positively damped prime-error first-moment theorem passed in
 The actual prime Laplace frequency bounds and weighted finite-frequency
 adapter passed in [run 41746159554](https://github.com/randogelist/Methlib/actions/runs/41746159554);
 the adapter's two continuous approximation limits remain explicit premises.
+The one-cell error estimate passed in [run 41746760052](https://github.com/randogelist/Methlib/actions/runs/41746760052)
+under its explicit integrability and mesh hypotheses.
 
 ## Additional prime-power and zeta bridge
 

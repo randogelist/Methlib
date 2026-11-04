@@ -16,6 +16,8 @@ The actual prime-error weighted moment passed in
 https://github.com/randogelist/Methlib/actions/runs/41745700135 .
 The actual prime Laplace frequency bounds and weighted finite-frequency
 adapter passed in https://github.com/randogelist/Methlib/actions/runs/41746159554 .
+The finite-cell error bound passed in
+https://github.com/randogelist/Methlib/actions/runs/41746760052 .
 The downstream mode assembly imports the original Mellin module; it is not
 an upstream replacement. The exact
 conditional premises remain part of their statements. A named axiom audit does

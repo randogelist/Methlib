@@ -253,6 +253,12 @@
     ]
   },
   {
+    "module": "HVRFrequencyCellError",
+    "theorems": [
+      "HVRFrequencyCellError.integral_cell_phase_error"
+    ]
+  },
+  {
     "module": "HVR_Smoothing_FrequencySeed",
     "theorems": []
   },
