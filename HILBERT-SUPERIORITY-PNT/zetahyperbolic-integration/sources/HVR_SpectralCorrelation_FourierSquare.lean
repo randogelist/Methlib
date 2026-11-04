@@ -45,7 +45,7 @@ comparison and is not used by the new ordinary-wave PNT proof. -/
 theorem ordinaryWave_eq_legacy_wave (w : ℝ) (hw : 0 < w) (x : ℝ) :
     HVROrdinarySeedWave.ordinaryWave w hw x = wave w hw x := by
   rw [wave_eq_fourierInv_complexSeed,
-    HVRCompactCorrelationFourierSquare.fourierInv_eq_phase_integral]
+    HVROrdinarySeedWave.ordinaryWave_eq_fourierInv]
   rfl
 
 /-- The refactored physical kernel has exactly the old pointwise values.

@@ -16,6 +16,7 @@ from pathlib import Path
 
 ROOTS = {
     "zeta_defeq_projection": "HVRZetaDefeqProjectionRfl",
+    "wave_legacy_compatibility": "HVR_SpectralCorrelation_FourierSquare",
     "zeta_projection": "HVRZetaComputationalEquality",
     "fubini_swap_candidate": "HVRPrimeGridSwapDirect",
     "fubini_bridge": "HVRPrimeFiniteFrequencyDirect",
