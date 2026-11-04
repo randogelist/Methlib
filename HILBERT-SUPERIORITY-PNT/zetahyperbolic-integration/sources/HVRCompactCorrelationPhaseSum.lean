@@ -86,12 +86,12 @@ theorem sampled_phase_integrals_tendsto_square
   let F : ℂ := ∫ t : ℝ, complexSeed w hw t * phase t x
   have hprod : Tendsto (fun N : ℕ => sampledPhase w hw N x * F) atTop (𝓝 (F * F)) :=
     (sampledPhase_tendsto w hw x).mul_const F
-  have heventual : ∀ᶠ N : ℕ in atTop,
-      (∫ t : ℝ in Set.Ioc (-w) w, sampledCorrelation w hw N t * phase t x) =
-        sampledPhase w hw N x * F := by
+  have heventual : (fun N : ℕ => sampledPhase w hw N x * F) =ᶠ[atTop]
+      (fun N : ℕ => ∫ t : ℝ in Set.Ioc (-w) w,
+        sampledCorrelation w hw N t * phase t x) := by
     filter_upwards [eventually_gt_atTop (0 : ℕ)] with N hN
-    exact sampled_phase_integral_eq_product w hw N hN x
-  have hlim := hprod.congr' heventual.symm
+    exact (sampled_phase_integral_eq_product w hw N hN x).symm
+  have hlim := Tendsto.congr' heventual hprod
   simpa only [F, pow_two] using hlim
 
 end HVRCompactCorrelationPhaseSum
