@@ -1,0 +1,7 @@
+/cache/
+/evidence/
+*.olean
+*.olean.private
+*.olean.server
+*.ilean
+*.ir

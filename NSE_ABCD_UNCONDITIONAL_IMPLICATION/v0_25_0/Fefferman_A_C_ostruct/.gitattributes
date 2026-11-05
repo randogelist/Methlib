@@ -1,0 +1,4 @@
+# Preserve source and audit fingerprints on Windows checkouts.
+*.lean -text
+*.cmd -text
+*.txt -text

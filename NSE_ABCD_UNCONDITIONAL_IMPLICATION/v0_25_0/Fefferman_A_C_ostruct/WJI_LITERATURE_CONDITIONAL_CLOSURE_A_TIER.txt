@@ -1,0 +1,113 @@
+WORKFLOW=YOU_ARE_GOODWORKFLOWFRONTIER
+MODE=A_TIER_DERIVATION
+PACKAGE=WJI_LITERATURE_CONDITIONAL_433
+STATUS=A_TIER
+MARKER=!!! CONDITIONAL_FORMAL_CLOSURE
+COMPILER_TARGET=Native Windows Lean 4.33.0
+LOCAL_LEAN_EXECUTIONS=0
+EXTERNAL_COMPILATION=PASS
+EVIDENCE_SOURCE=User-supplied native Windows console transcript
+EVIDENCE_FILE=verification/native-output.txt
+EVIDENCE_RUN_ID=NOT_PRESENT_IN_SUPPLIED_EXCERPT
+EXACT_THEOREM_AXIOM_AUDIT=PASS_STANDARD_ONLY
+ROOT=CondFeffA.Literature.WJI_LITERATURE_CONDITIONAL_CLOSURE
+SCOPE=Literal v0.25.0 whole-space analytic-at-initial-time endpoint; viscosity 1; force 0
+LITERATURE_INPUT=CondFeffA.Literature.LiteratureSchwartzSlabRegularity
+LITERATURE_INPUT_FORM=Explicit theorem argument; no new axiom declaration
+LITERATURE_INPUT_LEAN_PROOF=NOT_PROVIDED
+PERMITTED_AXIOMS=propext, Classical.choice, Quot.sound
+CONDITIONAL_FORMAL_CLOSURE=EXTERNAL_NATIVE_RUN_AND_ROOT_AUDIT_PASS
+UNCONDITIONAL_CLOSURE=OPEN
+REQUESTED_LABEL=!!!!(conditional on literature)
+FORMAL_CLASSIFICATION=Conditional on the displayed literature hypothesis; not premise-free !!!!
+QUALIFIED_MARKER_MEANING=A standard-only Lean proof of the exact literature input discharges the sole remaining premise
+FEFFERMAN_C=NOT_ASSERTED_OR_AUDITED
+CLASSICAL_C_INFINITY_FEFFERMAN_A=NOT_REFUTED
+
+EXACT ROOT
+LiteratureSchwartzSlabRegularity ->
+  (exists c in (0,1), admissibleInitial realAnalysis .wholeSpace (datum c)
+    and not FactorialJetBound (fun n => (jetPolynomial n).eval c)
+    and not GlobalAt c)
+  and not WholeSpaceZeroForceGlobalRegularity
+  and not Fefferman.A realAnalysis.
+
+SOLE LITERATURE HYPOTHESIS
+For every c, s, T>0, if SmoothFiniteEnergySlab c T s holds and every component
+of datum c has a Schwartz representative, then for every time order n and
+finite spatial order k there is C : ENNReal with C < infinity such that,
+for every component i and spatial word w with length(w)<=k, almost every
+t in (0,T) satisfies
+  eLpNorm (wjiPositiveTimeWord s n i w t) 2 volume
+  + eLpNorm (wjiPositiveTimeWord s n i w t) infinity volume <= C.
+The new source displays the exact Lean type. The fresh root audit prints it.
+No jet equality, jet-polynomial growth, analytic obstruction, or endpoint
+failure is included in this hypothesis. It is a derived literature corollary,
+not a verbatim paper theorem and not an imported Lean proof of Tao's results.
+
+LITERATURE DERIVATION OF THE ADMITTED COROLLARY
+Reference: Terence Tao, Analysis & PDE 6 (2013), 25-107,
+doi:10.2140/apde.2013.6.25.
+https://msp.org/apde/2013/6-1/apde-v6-n1-p02-s.pdf
+1. Schwartz initial data and zero force give H1 data.
+2. Corollary 11.1 upgrades the smooth finite-energy slab to an H1 solution.
+3. Corollary 4.3 produces a mild H1 solution with the same velocity after
+   pressure normalization.
+4. Theorem 5.4(iv) gives every time derivative in L-infinity_t H^m_x on
+   [0,T], for every m, including the initial-time endpoint.
+5. For spatial order k use m=k+2. Sobolev embedding in dimension three and
+   the finitely many components and words of length at most k give a finite
+   common L2-plus-L-infinity bound. Convert that bound to ENNReal.
+Steps 1-5 and the correspondence with the literal slab definition are outside
+the new Lean proof. Their combined conclusion is the explicit hypothesis.
+
+IMPLEMENTED LEAN IMPLICATION
+Apply the literature hypothesis with T=1, using the existing declarations
+  CondFeffA.WJISlab.witness_finite_slab
+  CondFeffA.WJISlab.datum_schwartz.
+Set k=length(w); separate the two nonnegative norm summands.
+This gives WJIPositiveTimeWordBounds 1. Apply the existing
+  CondFeffA.wji_one_of_positive_time_bounds
+  CondFeffA.COND_FEFF_A_OBSTRUCT.
+The final source also derives the endpoint projection and ae_no_global.
+
+EXTERNAL CACHED RUN
+From a Windows command prompt in this directory, execute: call run.cmd
+The runner discovers sibling WJI/COND caches, including the mixed FIX17 cache.
+Prior caches are read-only. Every reused object is checked against the source,
+compiler/Mathlib/dependency key and byte receipt. Writes remain in this package.
+Use /reuse PRIOR_EVIDENCE and /mathlib NATIVE_MATHLIB if auto-discovery is insufficient.
+No network downloads, lake update, Mathlib rebuild or other-branch edits occur.
+The new theorem alone needs compilation when all 56 upstream modules hit cache.
+An import tree is assembled locally with olean, olean.private, olean.server and
+ir sidecars when present. Missing project cache entries compile from pinned sources.
+All 5 new theorem targets receive a fresh standard-only axiom audit.
+RUN=PASS certifies the displayed conditional implication only.
+
+DELIVERABLES
+WJI_LITERATURE_CONDITIONAL_CLOSURE.lean = sole new formalization
+WJI_LITERATURE_CONDITIONAL_CLOSURE_A_TIER.txt = this manifest
+run.cmd = cached native runner
+deps/ = unchanged upstream Lean sources, audit checker, and pinned build metadata
+
+SOURCE PROVENANCE
+BASE_LIBRARY_ID=libfile_13f8c8f5c4288191bd89109597a938f8
+BASE_LIBRARY_VERSION=18
+BASE_ARCHIVE=WJI_UNIFORM_MIXED_JET_BOUND_433_FIX17_A_TIER.zip
+BASE_ARCHIVE_SHA256=429d45b966874fb3d453608ccfabdb5a7b86008326d73f50697265cfb3e124bf
+UPSTREAM_MODULES=56
+UPSTREAM_SOURCE_CHANGES=0
+NEW_SOURCE_SHA256=bbba5c6d673a67fe747bce47abc026319889d240193b1e9c5af07cc82a58093c
+RUNNER_SHA256=41422632f70184275a876ef7acb57356d7de5e5c55d6a4412809b3ac217b71ff
+AUDIT_CHECKER_SHA256=60683e8a88af47ff71ccfb8ae16bf9518cc61ae0906b58a23f802a898f9e33d0
+
+PUBLICATION PROVENANCE
+PUBLICATION_DIRECTORY=Fefferman_A_C_ostruct
+SOURCE_PACKAGE=WJI_LITERATURE_CONDITIONAL_433.zip
+SOURCE_PACKAGE_SHA256=7b8c78212f8c688f3e34d9869b3fe962f341f0997c8f78915fd3682b81c4806e
+ROOT_SOURCE_CHANGES=0
+RUNNER_CHANGES=0
+DEPENDENCY_SOURCE_CHANGES=0
+PUBLICATION_STATUS_UPDATE=External PASS recorded from the supplied console excerpt
+RECEIPT_CRYPTOGRAPHIC_SOURCE_BINDING=Not included in the supplied excerpt
+LOCAL_LEAN_EXECUTIONS=0
