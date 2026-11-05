@@ -1,0 +1,17 @@
+Fefferman\Analysis
+Fefferman\Statements
+ConcreteABCDUnifiedClosure
+PeriodicShearGrowth
+PeriodicShearProfile
+PeriodicShearTrace
+PeriodicShearAnalytic
+PeriodicShearHeat
+PeriodicShearFlux
+PeriodicCellTime
+PeriodicShearLocalBalance
+PeriodicShearUniqueness
+PeriodicShearMomentum
+PeriodicShearFluxRegularity
+PeriodicShearEnergyTime
+PeriodicShearComparison
+COND_FEFF_B_OBSTRUCT

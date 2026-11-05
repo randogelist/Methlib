@@ -1,0 +1,72 @@
+COND_FEFF_B_OBSTRUCT_433_FIX5
+STATUS=A_TIER
+CLOSURE=!!!! UNCONDITIONAL_CLOSURE
+SCOPE=V0_25_0_ANALYTIC_PERIODIC_B
+TARGET_SOURCE=FEF_NSE_ABCD_A_TIER_UNIFIED_CLOSURE_LEAN_v0_25_0
+
+External compiler and theorem audit
+  Source of evidence: native Windows CMD output supplied by the user.
+  Evidence directory: COND_FEFF_B_OBSTRUCT_433_FIX5/evidence/r-14451-13052-25954
+  Lean: 4.33.0, x86_64-w64-windows-gnu, Release
+  Lean commit: d8b18978322de05a8f3dba51ef03cf5461676c17
+  Audited release ZIP SHA256: 9412fd55249ec548086d494179a10cb2e46efbdaa473e1bbc994853a4b90e779
+  RUN=PASS
+  THEOREM=CondFeffB.COND_FEFF_B_OBSTRUCT
+  THEOREM_AXIOM_AUDITS=32
+  THEOREM_AXIOM_AUDIT=STANDARD_ONLY
+  ROOT_AXIOMS=[propext, Classical.choice, Quot.sound]
+  FINAL=ANALYTIC_PERIODIC_OBSTRUCTION_AUDITED
+  Build path: 14 evidence hits, one cache hit (PeriodicShearEnergyTime),
+  then native compilation of PeriodicShearComparison and COND_FEFF_B_OBSTRUCT.
+
+Exact root
+  CondFeffB.COND_FEFF_B_OBSTRUCT : ¬ Fefferman.B Fefferman.ConcreteReal.realAnalysis
+  CondFeffB.periodic_endpoint_obstruct : ¬ PeriodicZeroForceGlobalRegularity
+
+Fixed-datum result
+  For every ν : PositiveViscosity realAnalysis,
+      ¬ hasGlobalSolution realAnalysis Domain.periodic ν shearDatum (zeroForce realAnalysis).
+  shearDatum_admissible proves admissibility on the original periodic class.
+
+Scope
+  Unit torus R³/Z³. Forcing zero. Any positive viscosity.
+  v0.25.0 requires ContDiffOn ℝ ⊤ on the closed half-space, including t=0.
+  Classical Fefferman B requires C∞. The displayed shear is globally smooth.
+
+Fourier construction
+  K = 1,2,... .  a(x) = e₁ Σ exp(-K) cos(2πK x₂).
+  v(x,t) = e₁ Σ exp(-K) exp(-4π² ν K² t) cos(2πK x₂),   p = 0.
+  The geometric sum gives the analytic initial profile and identifies its trace.
+  The convection term vanishes. The time derivative is ν times the spatial curvature.
+  On the nonnegative time ray the origin trace has absolute order-m derivative
+      (4π²ν)^m Σ K^(2m) exp(-K).
+  Retaining K=m for m≥1 gives a lower bound faster than C m! R^m
+  for every pair C,R>0. The analyticWithinAt germ would supply such a bound.
+
+Exclusion of every package witness
+  For a candidate velocity U and W = U - v, the source integrates |W|²
+  on [-1/2,1/2]³. The boundary flux cancels by periodicity of velocity and
+  pressure. The derivative satisfies E' ≤ shearSlopeBound · E on t>0.
+  Continuity at t=0 and identical data give E(0)=0. The integrating factor
+  gives E(t)=0 for t≥0. Continuity in space gives U(0,t)=v(0,t).
+  The analytic requirement on U would make the same scalar trace analytic
+  within t≥0 at t=0. The Fourier coefficient bound excludes that germ.
+  The comparison uses the PDE on t>0 and continuity of the initial trace.
+
+Proof status
+  The exact root has zero additional analytic or semantic premises.
+  Audit.lean typechecked admissibility of shearDatum, the failed analytic
+  time germ, exclusion of a global witness for every positive viscosity,
+  the negated periodic endpoint, and the negation of Fefferman.B realAnalysis.
+  All 32 named transitive axiom reports passed. The reported dependencies
+  for the root are propext, Classical.choice, and Quot.sound.
+
+Native execution
+  From an open Windows CMD in Downloads:
+  tar.exe -xf "COND_FEFF_B_OBSTRUCT_433_FIX5.zip" && call "COND_FEFF_B_OBSTRUCT_433_FIX5\run.cmd" /keep /reuse "COND_FEFF_B_OBSTRUCT_433_FIX4\evidence\r-21566-9001-7907"
+  Optional manual pause: run.cmd /keep
+  Optional explicit native Mathlib: run.cmd /mathlib "path to the cached Mathlib project"
+  Optional rerun using previous compatible evidence: run.cmd /reuse "path to the previous evidence directory"
+  A parent evidence directory selects its newest completed eligible run.
+  Receipts: evidence\<run>\result.txt, signature.log, audit.log.
+  The reported successful run is recorded above.
