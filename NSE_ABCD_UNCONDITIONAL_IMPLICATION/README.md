@@ -21,16 +21,23 @@ Given `p : ABCDPhysicalPort`, the proof of the conjunction is `ABCD_PHYSICAL_POR
 
 For A and B, every positive viscosity and every admissible initial datum must admit a global solution at zero force on the indicated domain. For C and D, at each positive viscosity one must exhibit admissible initial data and an admissible force for which no global solution exists on that domain. The construction of these four fields remains open in this package. [Lean structure](ConcreteABCDUnifiedClosure.lean#L2972)
 
-## Package and external verification
+## Build and theorem audit
 
-[Download the original v0.25.0 ZIP](https://raw.githubusercontent.com/randogelist/Methlib/main/NSE_ABCD_UNCONDITIONAL_IMPLICATION/FEF_NSE_ABCD_A_TIER_UNIFIED_CLOSURE_LEAN_v0_25_0.zip) · [Package notes](README.txt) · [Windows runner](run.cmd)
+This directory is a Lean 4.33.0 Lake project. It contains the v0.25.0 theorem source and its two project imports, copied byte-for-byte from the v0.11.0 base package. The manifest pins Mathlib to `db584cd6d46c92f209a44c0f1c829460d327499d`.
 
-| Native Windows prerequisite | Value |
+| Verification | Evidence |
 | --- | --- |
-| Lean | `4.33.0` |
-| Compiled Mathlib cache | Under `%USERPROFILE%\lean-native`, matching Lean 4.33.0 |
-| Base package | `%USERPROFILE%\Downloads\FEF_NSE_MASTERAC_TWO_LAYER_LEAN_v0_11_0.zip` |
+| Build the extracted source | `lake build ConcreteABCDUnifiedClosure` |
+| Re-import the compiled theorem and typecheck its forward implication | `lake env lean ci/Audit.lean` |
+| Audit the six named declarations | Exactly one report per declaration, with axioms contained in `{propext, Classical.choice, Quot.sound}` |
 
-From the directory containing `ConcreteABCDUnifiedClosure.lean`, run `call run.cmd`. The runner recreates its versioned worktree under Downloads. The theorem-level `#print axioms` output is written to `concrete_build\ConcreteABCDUnifiedClosure.log` in that worktree. The published archive contains the Lean source, the runner and the original package notes. The external compiler and theorem-level audit log must be supplied separately for A-tier verification.
+GitHub Actions runs on changes to this directory or its workflow, and by manual dispatch. Each run publishes the tested revision, source hashes, compiler version, build log and theorem-level reports. [Workflow](../.github/workflows/nse-abcd-implication.yml) · [CI runs](https://github.com/randogelist/Methlib/actions/workflows/nse-abcd-implication.yml)
 
-Archive SHA-256: `463dec3a7e1638c5e078dcfe732a9648a8ed129ce3dc7ec54b9aaa949b42e19c`.
+**Native Windows** · With Git, elan and Python 3 installed, run `call run.cmd` from this directory. The runner uses the pinned Lake dependencies and precompiled Mathlib cache. [Windows runner](run.cmd)
+
+**Source provenance** · [Original v0.25.0 ZIP](https://raw.githubusercontent.com/randogelist/Methlib/a10286aedbe60e344fff4327237bf90ac551b281/NSE_ABCD_UNCONDITIONAL_IMPLICATION/FEF_NSE_ABCD_A_TIER_UNIFIED_CLOSURE_LEAN_v0_25_0.zip) · [Original package notes](README.txt)
+
+| Original source archive | SHA-256 |
+| --- | --- |
+| v0.25.0 unified closure | `463dec3a7e1638c5e078dcfe732a9648a8ed129ce3dc7ec54b9aaa949b42e19c` |
+| v0.11.0 two-layer base | `bddd0a0b0a6a38b343002bf141e902bfb1cf8664770e910882778f4037bdefb8` |

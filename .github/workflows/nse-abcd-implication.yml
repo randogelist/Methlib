@@ -1,0 +1,88 @@
+name: NSE ABCD implication
+
+on:
+  push:
+    paths:
+      - 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/**'
+      - '.github/workflows/nse-abcd-implication.yml'
+  pull_request:
+    paths:
+      - 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/**'
+      - '.github/workflows/nse-abcd-implication.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  implication:
+    name: Lean 4.33.0 / Fefferman ABCD
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION
+        shell: bash
+    env:
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Record tested revision and source hashes
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD | tee evidence/commit.txt
+          test "$(cat evidence/commit.txt)" = "$GITHUB_SHA"
+          sha256sum lean-toolchain lakefile.toml lake-manifest.json Fefferman/*.lean \
+            ConcreteABCDUnifiedClosure.lean ci/Audit.lean ci/check_axioms.py > evidence/sources.sha256
+
+      - name: Reserve space for the full Mathlib object cache
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          df -h . | tee evidence/disk.txt
+
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Fetch and verify the pinned Mathlib object cache
+        run: |
+          set -euo pipefail
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+
+      - name: Restore the project build by exact source and dependency hashes
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/.lake/build
+          key: nse-abcd-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('NSE_ABCD_UNCONDITIONAL_IMPLICATION/lean-toolchain', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/lake*', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/**/*.lean') }}
+
+      - name: Build the source and audit the implication
+        run: |
+          set -euo pipefail
+          lake build ConcreteABCDUnifiedClosure 2>&1 | tee evidence/build.log
+          test -s .lake/build/lib/lean/ConcreteABCDUnifiedClosure.olean
+          lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
+          python3 ci/check_axioms.py evidence/axioms.log | tee evidence/audit.json
+
+      - name: Upload compiler and axiom evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nse-abcd-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/evidence
+          if-no-files-found: error
