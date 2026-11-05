@@ -1,0 +1,48 @@
+FEF_B_POSITIVE_TIME
+STATUS=A_TIER_CANDIDATE
+TOOLCHAIN=Native Windows Lean 4.33.0; cached Mathlib
+ENDPOINT=Fefferman.ConcreteReal.AdjustedB.FEF_B_POSITIVE_TIME
+TYPE=∀ ε : ℝ, Fefferman_adjusted_B ε
+
+THEOREM
+For every positive viscosity ν, admissible periodic u₀, and exhibited
+positive-time state u₀ of a small periodic unforced flow at age τ>0,
+there exists s with globalSolution realAnalysis .periodic ν u₀ zeroForce s.
+
+INPUT CLASS
+The smallness condition is per unit spatial cell: the integral of |b|³
+is finite and strictly less than (εν)³. The seed is smooth, solenoidal
+and unit-periodic. The exhibited ancestor has periodic velocity and
+pressure, satisfies the unforced PDE, has trace b, and is jointly
+analytic for strictly positive times. PositiveTimeState identifies
+u₀ with its velocity at τ. The original admissibility of u₀ is retained.
+
+WITNESS
+Set u(x,t)=w(x,t+τ), p(x,t)=q(x,t+τ). At t=0 the trace is u₀.
+Time translation preserves momentum (01), divergence (02), and
+the new trace (03). It preserves unit-periodicity of velocity (10)
+and pressure (pressure erratum). Since t≥0 implies t+τ>0, the translated
+velocity and pressure satisfy the literal analytic regularity clause (11),
+including the new initial time. These are exactly the v0.25.0 periodic
+solution clauses.
+
+SCOPE
+The root constructs the shifted witness for the exhibited-flow class.
+Construction of a global ancestor for arbitrary small periodic seeds
+and its agreement with a given finite history is the separate input
+SeedExtension ε. regularity_of_seed_extension names that input explicitly.
+Universal Fefferman B remains outside the proved scope of this restriction.
+
+EXPLICIT NONZERO INSTANCE
+For ε>0 and ν>0 take c=εν/2, b(x)=(c,0,0), w(x,t)=b(x), q(x,t)=0,
+and τ=1. The cube integral over the unit cell is c³ < (εν)³. The theorem
+ConstantSeed.exists_nonzero_positive_time_state supplies admissibility,
+class membership and global existence for this nonzero datum.
+
+VERIFICATION
+Run run.cmd on native Windows with the installed Lean 4.33.0 toolchain
+and cached Mathlib. The runner checks the exact periodic type, prints
+the 16 theorem-level axiom reports and records version.txt, axioms.log and
+result.txt in the run's evidence directory. Promotion requires the
+matching external RUN=PASS with AXIOMS=STANDARD_ONLY. Allowed axioms
+are propext, Classical.choice, Quot.sound or subsets.
