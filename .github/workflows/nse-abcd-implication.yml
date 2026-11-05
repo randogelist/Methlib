@@ -3,11 +3,11 @@ name: NSE ABCD implication
 on:
   push:
     paths:
-      - 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/**'
+      - 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/**'
       - '.github/workflows/nse-abcd-implication.yml'
   pull_request:
     paths:
-      - 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/**'
+      - 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/**'
       - '.github/workflows/nse-abcd-implication.yml'
   workflow_dispatch:
 
@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 90
     defaults:
       run:
-        working-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION
+        working-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0
         shell: bash
     env:
       MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
@@ -47,7 +47,7 @@ jobs:
       - name: Install pinned Lean
         uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
         with:
-          lake-package-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION
+          lake-package-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0
           auto-config: 'false'
           build: 'false'
           test: 'false'
@@ -68,8 +68,8 @@ jobs:
       - name: Restore the project build by exact source and dependency hashes
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
-          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/.lake/build
-          key: nse-abcd-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('NSE_ABCD_UNCONDITIONAL_IMPLICATION/lean-toolchain', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/lake*', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/**/*.lean') }}
+          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/.lake/build
+          key: nse-abcd-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/lean-toolchain', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/lake*', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/**/*.lean') }}
 
       - name: Build the source and audit the implication
         run: |
@@ -84,5 +84,5 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: nse-abcd-audit-${{ github.run_id }}-${{ github.run_attempt }}
-          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/evidence
+          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/evidence
           if-no-files-found: error

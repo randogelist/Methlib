@@ -31,7 +31,7 @@ This directory is a Lean 4.33.0 Lake project. It contains the v0.25.0 theorem so
 | Re-import the compiled theorem and typecheck its forward implication | `lake env lean ci/Audit.lean` |
 | Audit the six named declarations | Exactly one report per declaration, with axioms contained in `{propext, Classical.choice, Quot.sound}` |
 
-GitHub Actions runs on changes to this directory or its workflow, and by manual dispatch. Each run publishes the tested revision, source hashes, compiler version, build log and theorem-level reports. [Workflow](../.github/workflows/nse-abcd-implication.yml) · [CI runs](https://github.com/randogelist/Methlib/actions/workflows/nse-abcd-implication.yml)
+GitHub Actions runs on changes to this directory or its workflow, and by manual dispatch. Each run publishes the tested revision, source hashes, compiler version, build log and theorem-level reports. [Workflow](../../.github/workflows/nse-abcd-implication.yml) · [CI runs](https://github.com/randogelist/Methlib/actions/workflows/nse-abcd-implication.yml)
 
 **Native Windows** · With Git, elan and Python 3 installed, run `call run.cmd` from this directory. The runner uses the pinned Lake dependencies and precompiled Mathlib cache. [Windows runner](run.cmd)
 
