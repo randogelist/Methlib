@@ -1,13 +1,18 @@
 # Fefferman B · Periodic regularity at zero force
 
+## Unconditional equivalences
+
 ```lean
-periodicZeroForceGlobalRegularity_implies_B :
-  PeriodicZeroForceGlobalRegularity → B realAnalysis
+PERIODIC_ZERO_FORCE_GLOBAL_REGULARITY_IFF_B :
+  PeriodicZeroForceGlobalRegularity ↔ B realAnalysis
+
+masterABSemantic_iff_A_and_B :
+  MasterABSemantic ↔ (A realAnalysis ∧ B realAnalysis)
 ```
 
-The implication is unconditional. Deriving `B realAnalysis` by this implication requires a proof of `PeriodicZeroForceGlobalRegularity`. For every positive viscosity and every admissible periodic initial datum, the construction must supply a global solution with zero force. [Named theorem](ConcreteABCDUnifiedClosure.lean#L2455)
+Both declarations take no construction premise. The forward direction for B is `periodicZeroForceGlobalRegularity_implies_B`. [Endpoint equivalence](ConcreteABCDUnifiedClosure.lean#L2467) · [Joint equivalence](ConcreteABCDUnifiedClosure.lean#L2982) · [Endpoint entry point](FeffermanB.lean)
 
-The converse is included in `PERIODIC_ZERO_FORCE_GLOBAL_REGULARITY_IFF_B`. [Endpoint entry point](FeffermanB.lean)
+**`MASTERABSEMANTIC_CONSTRUCTION = OPEN`** in v0.25.0. Constructing `MasterABSemantic` requires proofs of both `WholeSpaceZeroForceGlobalRegularity` and `PeriodicZeroForceGlobalRegularity`. [Definition](ConcreteABCDUnifiedClosure.lean#L2956)
 
 ## Standalone build
 

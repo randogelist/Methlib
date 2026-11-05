@@ -10,6 +10,16 @@ ABCD_PHYSICAL_PORT_IFF_FEFFERMAN_ABCD :
 
 Given `p : ABCDPhysicalPort`, the proof of the conjunction is `ABCD_PHYSICAL_PORT_IFF_FEFFERMAN_ABCD.mp p`. The reverse direction recovers the port from the conjunction. [Lean theorem](Fefferman_A/ConcreteABCDUnifiedClosure.lean#L3022)
 
+## Unconditional A and B equivalences
+
+| Audited Lean declaration | Equivalence |
+| --- | --- |
+| `WHOLESPACE_ZERO_FORCE_GLOBAL_REGULARITY_IFF_A` | `WholeSpaceZeroForceGlobalRegularity ↔ A realAnalysis` |
+| `PERIODIC_ZERO_FORCE_GLOBAL_REGULARITY_IFF_B` | `PeriodicZeroForceGlobalRegularity ↔ B realAnalysis` |
+| `masterABSemantic_iff_A_and_B` | `MasterABSemantic ↔ (A realAnalysis ∧ B realAnalysis)` |
+
+**`MASTERABSEMANTIC_CONSTRUCTION = OPEN`** in v0.25.0. By definition, a proof of `MasterABSemantic` requires both a proof of `WholeSpaceZeroForceGlobalRegularity` and a proof of `PeriodicZeroForceGlobalRegularity`. The three equivalence theorems take no construction premise. [Definition](Fefferman_A/ConcreteABCDUnifiedClosure.lean#L2956) · [Joint equivalence](Fefferman_A/ConcreteABCDUnifiedClosure.lean#L2982)
+
 ## Fefferman list
 
 | Project | Endpoint | Construction premise |
