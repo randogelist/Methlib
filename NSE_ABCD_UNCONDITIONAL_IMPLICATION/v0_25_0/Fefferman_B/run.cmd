@@ -10,7 +10,7 @@ if not errorlevel 1 set "PYTHON=py -3"
 
 call lake exe cache get
 if errorlevel 1 goto :failed
-call lake build ConcreteABCDUnifiedClosure
+call lake build FeffermanB
 if errorlevel 1 goto :failed
 
 call lake env lean ci\Audit.lean >audit.log 2>&1

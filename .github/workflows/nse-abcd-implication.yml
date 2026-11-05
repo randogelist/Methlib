@@ -16,28 +16,45 @@ permissions:
 
 jobs:
   implication:
-    name: Lean 4.33.0 / Fefferman ABCD
+    name: Lean 4.33.0 / Fefferman ${{ matrix.endpoint }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        endpoint: [A, B, C, D]
     defaults:
       run:
-        working-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0
+        working-directory: package
         shell: bash
     env:
+      ENDPOINT: ${{ matrix.endpoint }}
+      PROJECT: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_${{ matrix.endpoint }}
       MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
       MATHLIB_NO_CACHE_ON_UPDATE: '1'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          path: repository
+          sparse-checkout: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_${{ matrix.endpoint }}
           persist-credentials: false
 
-      - name: Record tested revision and source hashes
+      - name: Extract the standalone endpoint at the tested revision
+        working-directory: .
         run: |
-          mkdir -p evidence
-          git rev-parse HEAD | tee evidence/commit.txt
-          test "$(cat evidence/commit.txt)" = "$GITHUB_SHA"
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir package
+          git -C repository archive "$GITHUB_SHA:$PROJECT" | tar -xf - -C package
+          cp -R package "$RUNNER_TEMP/endpoint-source"
+
+      - name: Record source hashes for this endpoint
+        run: |
+          mkdir evidence
+          echo "$GITHUB_SHA" | tee evidence/commit.txt
+          echo "$PROJECT" | tee evidence/project.txt
           sha256sum lean-toolchain lakefile.toml lake-manifest.json Fefferman/*.lean \
-            ConcreteABCDUnifiedClosure.lean ci/Audit.lean ci/check_axioms.py > evidence/sources.sha256
+            "Fefferman$ENDPOINT.lean" ConcreteABCDUnifiedClosure.lean ci/Audit.lean ci/check_axioms.py > evidence/sources.sha256
 
       - name: Reserve space for the full Mathlib object cache
         run: |
@@ -47,7 +64,7 @@ jobs:
       - name: Install pinned Lean
         uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
         with:
-          lake-package-directory: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0
+          lake-package-directory: package
           auto-config: 'false'
           build: 'false'
           test: 'false'
@@ -68,21 +85,29 @@ jobs:
       - name: Restore the project build by exact source and dependency hashes
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
-          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/.lake/build
-          key: nse-abcd-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/lean-toolchain', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/lake*', 'NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/**/*.lean') }}
+          path: package/.lake/build
+          key: nse-v025-${{ matrix.endpoint }}-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake*', 'package/*.lean', 'package/Fefferman/*.lean', 'package/ci/Audit.lean') }}
 
       - name: Build the source and audit the implication
         run: |
           set -euo pipefail
-          lake build ConcreteABCDUnifiedClosure 2>&1 | tee evidence/build.log
-          test -s .lake/build/lib/lean/ConcreteABCDUnifiedClosure.olean
+          lake build "Fefferman$ENDPOINT" 2>&1 | tee evidence/build.log
+          test -s ".lake/build/lib/lean/Fefferman$ENDPOINT.olean"
           lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
           python3 ci/check_axioms.py evidence/axioms.log | tee evidence/audit.json
+
+      - name: Publish the independently built source directory
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Fefferman_${{ matrix.endpoint }}
+          path: ${{ runner.temp }}/endpoint-source
+          include-hidden-files: true
+          if-no-files-found: error
 
       - name: Upload compiler and axiom evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: nse-abcd-audit-${{ github.run_id }}-${{ github.run_attempt }}
-          path: NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/evidence
+          name: Fefferman_${{ matrix.endpoint }}-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
           if-no-files-found: error

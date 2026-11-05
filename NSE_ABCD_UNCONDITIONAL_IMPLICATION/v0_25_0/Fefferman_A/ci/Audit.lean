@@ -1,4 +1,4 @@
-import ConcreteABCDUnifiedClosure
+import FeffermanA
 
 namespace Fefferman.ConcreteReal
 
@@ -14,3 +14,5 @@ end Fefferman.ConcreteReal
 #print axioms Fefferman.ConcreteReal.ABCD_PHYSICAL_PORT_IFF_FEFFERMAN_ABCD
 #print axioms Fefferman.ConcreteReal.MASTER_CD_SEMANTIC_IFF_C_AND_D
 #print axioms Fefferman.ConcreteReal.FEFFERMAN_ABCD_A_TIER_UNIFIED_CLOSURE_ATLAS
+#print axioms Fefferman.ConcreteReal.wholeSpaceZeroForceGlobalRegularity_implies_A
+#print axioms Fefferman.ConcreteReal.WHOLESPACE_ZERO_FORCE_GLOBAL_REGULARITY_IFF_A

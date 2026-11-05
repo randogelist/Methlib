@@ -1,7 +1,7 @@
-name = "nse_abcd_unconditional_implication"
+name = "fefferman_b"
 version = "0.25.0"
 fixedToolchain = true
-defaultTargets = ["ConcreteABCDUnifiedClosure"]
+defaultTargets = ["FeffermanB"]
 
 [[require]]
 name = "mathlib"
@@ -10,5 +10,5 @@ git = "https://github.com/leanprover-community/mathlib4"
 rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
 
 [[lean_lib]]
-name = "ConcreteABCDUnifiedClosure"
-roots = ["ConcreteABCDUnifiedClosure", "Fefferman.Analysis", "Fefferman.Statements"]
+name = "FeffermanB"
+roots = ["FeffermanB", "ConcreteABCDUnifiedClosure", "Fefferman.Analysis", "Fefferman.Statements"]

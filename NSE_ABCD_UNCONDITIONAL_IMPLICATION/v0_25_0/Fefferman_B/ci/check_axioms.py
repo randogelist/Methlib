@@ -1,4 +1,4 @@
-"""Validate the six final #print axioms reports in a plain Lean compiler log."""
+"""Validate the endpoint and unified #print axioms reports in a plain Lean compiler log."""
 
 import argparse
 import json
@@ -8,6 +8,8 @@ from pathlib import Path
 
 NAMESPACE = "Fefferman.ConcreteReal."
 THEOREMS = (
+    "periodicZeroForceGlobalRegularity_implies_B",
+    "PERIODIC_ZERO_FORCE_GLOBAL_REGULARITY_IFF_B",
     "masterABSemantic_iff_A_and_B",
     "masterCDSemantic_iff_C_and_D",
     "abcdPhysicalEndpoints_iff_ABCD",
