@@ -1,0 +1,76 @@
+Fefferman_adjusted_A  |  Proof theorem FEF_A_POSITIVE_TIME
+! B_TIER  |  ℝ³, f=0  |  original v0.25.0 solution predicate
+
+THEOREM
+There is a universal ε*>0 with the following property. Fix ν>0.
+Let b be a classical divergence-free Schwartz field on ℝ³ with
+‖b‖_{L³}<ε*ν. Let w=Sν(·)b be its unforced evolution. For τ>0 put
+u₀=w(τ). Whenever u₀ belongs to the original v0.25.0 admissible class,
+there exists a whole-space zero-force solution in the exact v0.25.0 sense
+with viscosity ν and initial datum u₀. The same conclusion holds if u₀
+is specified by a classical finite-energy history from b on [0,τ].
+
+CONSTRUCTION
+1. At viscosity one, Wang, Gao and Xue, Theorem 1.1(ii), give a global
+mild velocity for sufficiently small L³ data and joint analyticity on
+t>0. For viscosity ν apply that theorem to b/ν and set
+w(x,s)=ν v(x,νs), p(x,s)=ν²q(x,νs). This gives the threshold ε*ν.
+Local H¹ theory for Schwartz data supplies smoothness up to elapsed
+time zero. On each compact interval the mild trajectory is a strong
+solution and obeys the unforced energy identity, so
+    ∫|w(x,s)|²dx ≤ ‖b‖₂²,    s≥0.
+For this energy assertion one may first identify the small L³ trajectory
+with the H¹ solution on its local interval by mild uniqueness. A putative
+finite H¹ endpoint is excluded by smoothing bounds on compact positive
+time intervals and the H¹ energy estimate. In detail the small-data
+theorem bounds ‖w‖∞ away from zero on each such interval; testing against
+−Δw gives d‖∇w‖₂²/ds ≤ Cν⁻¹‖w‖∞²‖∇w‖₂². The H¹ norm then stays bounded.
+The elementary integrations by parts are valid on the strong solution's
+lifespan; the resulting estimates extend to each finite elapsed time.
+
+2. At positive elapsed times F=νΔw−∂sw−(w·∇)w is jointly real analytic
+and is a spatial gradient by the NSE. The normalization
+    p(x,s)=∫₀¹ x·F(λx,s) dλ
+has ∇p=F. It is jointly analytic locally: along each compact integration
+segment the analytic integrand has uniform local factorial bounds,
+by a finite cover, which survive integration. At s=0 the smooth pressure
+from Schwartz local theory can be given the same normalization. For
+the original ambient time derivative at zero one may extend velocity
+to s<0 by b+s∂s⁺w(·,0); no equation is required there.
+
+3. For every t≥0 put
+    u(x,t)=w(x,t+τ),       π(x,t)=p(x,t+τ).
+The time derivative at t equals the ancestor's derivative at t+τ.
+All spatial derivatives are unchanged at the corresponding point.
+Thus u solves the same unforced NSE at viscosity ν, is divergence-free
+and has trace u₀. The shift maps the closed half-space inside s>0.
+Consequently u and π are jointly real analytic within t≥0. Every
+velocity slice is square integrable and satisfies the single strict bound
+    ∫|u(x,t)|²dx < 1+‖b‖₂².
+These are precisely clauses 01, 02, 03, 06 and 07. Admissibility of the
+snapshot, including its rapid spatial decay, is retained as an input.
+
+4. If an earlier segment [0,τ] is specified instead of w itself, any
+smooth finite-energy unforced history there with datum b has the same
+velocity. Tao, Corollary 11.1, upgrades it to L∞H¹ ∩ L²H², and Lemma
+4.1(i) identifies the pressure gradient. Subtracting the strong solution
+gives, with d the difference,
+    (1/2) d‖d‖₂²/dt + ν‖∇d‖₂² ≤ ‖∇w‖∞‖d‖₂².
+Both traces are b and the coefficient is integrable on [0,τ]. Grönwall
+gives equality, including at τ. Steps 1–4 supply SeedExtension ε*
+mathematically. This construction uses published analytic theorems.
+
+SCOPE
+Strict τ>0 is essential for this argument. The ancestor b need only be
+classically smooth, whereas u₀ and (u,π) use the original analytic-order
+predicates. The restriction acts on initial states. It does not assert
+the unrestricted Fefferman A proposition. The zero field supplies a
+member for all ν and τ; no assertion about rapid decay of all snapshots
+is used.
+
+REFERENCES
+C. Wang, Y. Gao, X. Xue, Joint space-time analyticity of mild solutions to
+the Navier–Stokes equations, Theorem 1.1. https://doi.org/10.1016/j.jmaa.2022.126428
+T. Tao, Localisation and compactness properties of the Navier–Stokes
+global regularity problem, Lemma 4.1(i), Theorem 5.4(ii)–(iv), Corollary
+11.1. https://doi.org/10.2140/apde.2013.6.25

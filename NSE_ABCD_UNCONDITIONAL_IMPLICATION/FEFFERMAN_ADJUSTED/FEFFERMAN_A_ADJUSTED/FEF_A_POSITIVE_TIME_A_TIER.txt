@@ -1,0 +1,78 @@
+FEF_A_POSITIVE_TIME
+STATUS=A_TIER_CANDIDATE
+TOOLCHAIN=Lean 4.33.0, native Windows x64
+SCOPE=whole space ℝ³, zero force, Fefferman A only
+BASE=v0.25.0 concrete real analysis with literal analytic order ⊤
+EXTERNAL_BUILD_AND_AXIOM_AUDIT=PENDING
+
+PRIMARY THEOREM
+  Fefferman.ConcreteReal.AdjustedA.FEF_A_POSITIVE_TIME
+  ∀ ε, Fefferman_adjusted_A ε.
+  AdjustedFeffermanA is a compatibility abbreviation for Fefferman_adjusted_A.
+
+Unfolded:
+  ∀ ε ν u₀, admissibleInitial .wholeSpace u₀ →
+  PositiveTimeState ε ν u₀ →
+  hasGlobalSolution .wholeSpace ν u₀ zeroForce.
+
+PositiveTimeState gives a Schwartz solenoidal seed b, its L³ smallness
+relative to εν, an age τ>0 and an exhibited flow w with u₀=w(τ).
+GlobalPositiveFlow requires that the earlier fields solve the unforced
+equation, have seed b and uniformly bounded kinetic energy, and have
+analytic velocity and pressure at strictly positive times. At its seed
+the velocity is C∞. Its pressure need only be analytic at positive times.
+The seed norm uses the Euclidean vector length. Its cube is integrable
+and satisfies ∫ |b|³ < (εν)³.
+
+The constructive witness is w(x,t+τ), with the pressure translated by
+the same amount. ShiftAnalytic.lean proves that the closed restarted
+half-space is mapped inside the open analytic region. ShiftCore.lean
+translates the original momentum equation, divergence, initial condition
+and uniform energy, preserving its bound. No assumption of Fefferman A,
+global solution at u₀, Diamond realization, or abstract regularity exit
+is a proof parameter of the primary theorem. The proof uses a global
+ancestor supplied by the initial-state class.
+
+FINITE-HISTORY VARIANT
+  regularity_of_seed_extension
+  ∀ ε, SeedExtension ε → ∀ ν u₀,
+  admissibleInitial .wholeSpace u₀ → FinitePositiveTimeState ε ν u₀ →
+  hasGlobalSolution .wholeSpace ν u₀ zeroForce.
+
+FiniteHistory specifies the actual PDE and bounded energy on [0,τ];
+there is no future continuation in this input. SeedExtension specifies
+existence of a small-data global flow and equality of its snapshot with
+any such finite history. The B-tier file derives existence of a positive
+threshold ε* using the published PDE results. The Lean module does not
+prove ∃ ε*>0, SeedExtension ε*. It exposes the premise in the finite-history
+theorem. No numerical value is assigned to the universal threshold.
+
+NONEMPTY CLASS
+  zero_is_positive_time_state supplies an actual seed, flow and age τ=1
+  at every ε>0 and ν>0. ZeroSeed.admissible_zero supplies original
+  admissibility, and ZeroSeed.zero_global constructs the physical solution.
+  The explicit example is zero. The primary theorem applies to every
+  admitted member of its restricted class.
+
+EXTERNAL CHECK
+  From Windows Command Prompt in Downloads:
+  tar.exe -xf FEF_A_POSITIVE_TIME_433.zip
+  call FEF_A_POSITIVE_TIME_433\run.cmd
+
+  A compatible prebuilt Mathlib is required. The runner probes the usual
+  lean-native projects. To select an existing build explicitly:
+  call FEF_A_POSITIVE_TIME_433\run.cmd -MathlibProject "C:\path\to\project"
+
+  No downloads. The SHA256-pinned v0.25.0 source and original core imports
+  are bundled. Compatible module builds are reused. Evidence goes to the
+  printed evidence directory. Audit.lean checks the conclusion types and
+  requests 12 named theorem-level axiom reports; each report must contain
+  only propext, Classical.choice, Quot.sound, or a subset. A positive
+  run records result.txt, inputs.txt and axioms.log. Cached modules still
+  undergo the theorem-level audit. A candidate becomes A-tier only upon
+  matching external compilation and audit for its exact theorem.
+
+  The initial external verification here is pending. A PASS promotes
+  the witnessed-class root and the finite-history implication at their
+  stated types. The small-data existence and uniqueness input would
+  require its own formal construction and audit.
