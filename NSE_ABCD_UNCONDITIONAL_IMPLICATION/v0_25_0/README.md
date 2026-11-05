@@ -31,7 +31,7 @@ Given `p : ABCDPhysicalPort`, the proof of the conjunction is `ABCD_PHYSICAL_POR
 
 Each directory is a standalone Lean 4.33.0 project with its own copy of the complete proof source, local imports, pinned Lake manifest, Windows runner and theorem audit. Copy any one directory to build it independently. The original v0.25.0 package leaves the four construction premises as inputs.
 
-The companion obstruction proves `¬ Fefferman.B realAnalysis` for the literal analytic endpoint. Its periodic shear is globally smooth and has zero time Taylor radius at the initial time. [Self-contained proof and native audit](Fefferman_B_ostruct/)
+The companion obstruction proves `¬ Fefferman.B realAnalysis` for the literal analytic endpoint. Its periodic shear is globally smooth and has zero time Taylor radius at the initial time. [Self-contained proof and native audit](Fefferman_B_D_ostruct/)
 
 CI builds each committed endpoint directory in isolation, audits its two named endpoint declarations and the six unified declarations, and publishes a standalone source ZIP and evidence for each endpoint. [Workflow](../../.github/workflows/nse-abcd-implication.yml) · [CI runs](https://github.com/randogelist/Methlib/actions/workflows/nse-abcd-implication.yml)
 

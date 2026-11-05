@@ -1,5 +1,7 @@
 # Fefferman B obstruction
 
+We have only shown Fefferman B here - D is left for the reader.
+
 `CondFeffB.COND_FEFF_B_OBSTRUCT` proves the negation of the **v0.25.0 analytic periodic B** endpoint.
 
 ```lean
