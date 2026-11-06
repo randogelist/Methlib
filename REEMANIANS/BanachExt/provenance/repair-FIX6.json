@@ -1,0 +1,46 @@
+{
+  "schema": "HXY_SOURCE_AND_RUNNER_REPAIR_V1",
+  "revision": "FIX6",
+  "baseline_revision": "FIX5",
+  "diagnostic_file": "provenance/native-transcript-FIX5-partial.txt",
+  "modified_lean_sources": [
+    {
+      "path": "HXYThreeSpaces/Holomorphic.lean",
+      "previous_source_sha256_label": "70f5cc017ca3562b683eb2334bf006e79484274d979cb5131c7ac05e2c8d3338",
+      "source_sha256_label": "eff3459053cacfc94aeff973d7e7a894a052467c9f2271cd11b6e82548dda93c",
+      "bytes": 7386
+    }
+  ],
+  "changed_proof_fragment": "entire_local_ode_nonvanishing: hbad only",
+  "repair": "typed calc; normalize addition commutativity before composing with hderiv",
+  "modified_runner_source": null,
+  "all_forward_sources_preserved": true,
+  "C1_and_C2_sources_preserved": true,
+  "native_runner_and_cache_code_preserved": true,
+  "frozen_predicates_preserved": 3,
+  "frozen_endpoint_signatures_preserved": 9,
+  "frozen_upstream_sources_preserved": 118,
+  "frozen_candidates_record_preserved": true,
+  "new_mathematical_premises_or_admissions": [],
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "retained_FIX5_forward_promotions": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "retained_FIX5_equivalence_promotions": [
+    "C1",
+    "C2"
+  ],
+  "promotion_evidence_origin": "user_supplied_native_console_excerpt",
+  "runtime_hashing": false,
+  "local_lean_execution": false,
+  "external_FIX6_C3_equivalence_validation": "PENDING",
+  "external_aggregate_validation": "PENDING",
+  "classification": "A_TIER_CANDIDATE",
+  "classification_scope": "repaired C3 equivalence and assembled root theorem"
+}

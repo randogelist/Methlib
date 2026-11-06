@@ -1,0 +1,89 @@
+{
+  "schema": "REEMANIANS_SELECTED_RH_ENDPOINT_V1",
+  "folder": "HilbertRep",
+  "candidate": "C2",
+  "selected_endpoint": {
+    "declaration": "HXYThreeSpaces.hilbertRep_of_nativeRH",
+    "exact_type": "_root_.RiemannHypothesis -> HXYThreeSpaces.HilbertRep",
+    "source": "HXYThreeSpaces/HilbertForward.lean",
+    "module": "HXYThreeSpaces.HilbertForward",
+    "predicate": "HXYThreeSpaces.HilbertRep",
+    "predicate_semantics": "A complex complete Hilbert space, a positive selfadjoint contraction, and a unit vector matching every actual normalized moment.",
+    "explicit_premises": [
+      "_root_.RiemannHypothesis"
+    ],
+    "additional_research_premises": [],
+    "additional_unresolved_construction_obligations": [],
+    "classification": "A_TIER",
+    "qualified_marker": "!!!!(cond on RH)"
+  },
+  "equivalence_reference": {
+    "declaration": "HXYThreeSpaces.nativeRH_iff_hilbertRep",
+    "exact_type": "_root_.RiemannHypothesis <-> HXYThreeSpaces.HilbertRep",
+    "source": "HXYThreeSpaces/Hilbert.lean",
+    "classification": "A_TIER",
+    "marker": "!!"
+  },
+  "evidence": {
+    "origin": "USER_REPORTED_NATIVE_WINDOWS_CONSOLE_EXCERPTS",
+    "verified_source_revision": "FIX6",
+    "latest_native_result": "PASS",
+    "exact_type_check": "PASS",
+    "theorem_level_axiom_audit": "STANDARD_ONLY",
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "latest_transcript": "provenance/native-transcript-FIX6-pass.txt",
+    "supporting_prior_transcript": "provenance/native-transcript-FIX5-partial.txt",
+    "promotion_record": "provenance/promotion-FIX6.json",
+    "raw_native_audit_receipt_files_supplied": false,
+    "local_assistant_lean_execution": false
+  },
+  "source_copy": {
+    "archive": "HXY_THREE_SPACES_433_v0_1_0_PASS",
+    "source_revision": "FIX6",
+    "lean_files_preserved_byte_for_byte": 127,
+    "frozen_upstream_lean_files_preserved": 118,
+    "native_runner_preserved_byte_for_byte": true,
+    "source_manifests_preserved_byte_for_byte": true,
+    "sibling_folder_dependencies": [],
+    "source_manifests": [
+      "provenance/frozen-sources.json",
+      "provenance/new-sources.json"
+    ],
+    "original_package_status": "STATUS.json",
+    "original_package_documentation": "README.txt",
+    "original_launcher": "provenance/run-FIX6.cmd",
+    "proof_source_changes": 0,
+    "new_lean_wrappers": 0
+  },
+  "reproduction": {
+    "launcher": "run.cmd",
+    "default_selection": "C2",
+    "lean_version": "4.33.0",
+    "lean_toolchain": "leanprover/lean4:v4.33.0",
+    "platform": "native Windows x86_64",
+    "mathlib_commit": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "frozen_source_commit": "c6b95fd9e3d792270026da083bddddbc72bacb22",
+    "external_dependencies": [
+      "native Windows Lean 4.33.0 compiler",
+      "existing pinned Mathlib and package cache"
+    ],
+    "dependency_cache_environment_variable": "MATHLIB_CACHE_ROOT",
+    "dependency_cache_default": "%USERPROFILE%\\lean-native\\awpi_phi_rh_lean_sieved_v0_1_1",
+    "project_cache_family": "HXY_THREE_SPACES_433",
+    "policy": "TRUSTED_FAST_V2",
+    "runtime_hashing": false,
+    "recursive_dependency_inventory": false,
+    "post_repackaging_lean_execution": false
+  },
+  "repackaging_changes": [
+    "README.md",
+    "ENDPOINT.json",
+    "run.cmd",
+    "provenance/run-FIX6.cmd",
+    "SHA256SUMS.txt"
+  ]
+}

@@ -1,0 +1,166 @@
+HXY_THREE_SPACES_433_v0_1_0_PASS -- VERIFIED FIX6 SOURCE CHECKPOINT
+CURRENT_STATUS := A_TIER
+ROOT_EQUIVALENCES := PASS
+ROOT_RH_CONSTRUCTIONS := PASS
+EVIDENCE := provenance/native-transcript-FIX6-pass.txt
+POST_VALIDATION_LEAN_CHANGES := 0
+RUNNER_AND_MANIFEST := BYTE_PRESERVED_FROM_FIX6
+
+HXY_THREE_SPACES_433_v0_1_0_FIX6 -- TRUSTED_FAST_V2
+
+TARGET
+  Native Windows x86_64 Lean 4.33.0.
+  Mathlib commit db584cd6d46c92f209a44c0f1c829460d327499d.
+  Frozen HVR commit c6b95fd9e3d792270026da083bddddbc72bacb22.
+  Assistant-local Lean/Lake/compiler execution: NONE.
+
+INVOCATION
+  run.cmd
+  run.cmd C1
+  run.cmd C2
+  run.cmd C3
+  run.cmd all /force
+
+DEFAULTS
+  HXY_LEAN_EXE:
+    %USERPROFILE%\.elan\toolchains\leanprover--lean4---v4.33.0\bin\lean.exe
+  Fallback compiler variables: LEAN_EXE; AWPIRH_LEAN_EXE.
+  MATHLIB_CACHE_ROOT:
+    %USERPROFILE%\lean-native\awpi_phi_rh_lean_sieved_v0_1_1
+  Fallback dependency variable: RH_MATHLIB_ROOT.
+  LEAN_THREADS: 16. Fallback: LEAN_JOBS.
+  Compiler limits: maxHeartbeats=4000000; maxRecDepth=4096.
+  LEAN_ANCHORINGS_HOME: %LOCALAPPDATA%\LEAN_ANCHORINGS.
+
+TRUSTED ENVIRONMENT
+  Policy: TRUSTED_FAST_V2, requested by the user.
+  Runtime hashing: NONE.
+  Recursive external-cache enumeration: NONE.
+  Compiler/DLL/cache binary hashing: NONE.
+  External hashing processes: NONE.
+  Existing Mathlib and its packages: cache-only; no downloads or rebuilds.
+  Network / Lake / PowerShell / Python / WSL: unused.
+  /rehash is unsupported in this policy.
+
+INCREMENTAL RECEIPTS
+  Schema: HXY_TRUSTED_TEXT_MODULE_2.
+  Own source identity: exact UTF-8 text, read once for dependency analysis.
+  Direct dependency identity: module generation and artifact size/mtime.
+  Cached artifact identity: size/mtime of the explicitly named .olean and
+  any .olean.private, .olean.server, .ilean, and .ir companions.
+  Environment identity: readable compiler path/version, cache path,
+  pinned package revisions, import roots, and compiler options.
+  Archive filename, extraction directory, run identifier, and package
+  version do not enter the environment identity.
+  A genuine recompilation creates a new generation and invalidates its
+  dependent project receipts, even if output size/mtime coincides.
+  Unmanifested package-local Lean imports are rejected.
+  Runtime metadata checks cover only observed direct inputs/artifacts.
+  /force rebuilds project modules; Mathlib remains cache-only.
+
+LEGACY CACHE MIGRATION
+  HXY_NATIVE_MODULE_1 receipts from the previous HXY native 4.33.0 runner
+  may migrate in the same HXY_THREE_SPACES_433 cache family.
+  Required: prior compile PASS; same module; prior source SHA label equal
+  to the packaged source-manifest label; expected source size; cached
+  artifact and recorded companions present; unchanged dependency labels
+  and matching retained legacy artifact identities.
+  A newly compiled dependency prevents ancestor legacy migration.
+  Explicit conflicting compiler/toolchain/Mathlib metadata is rejected.
+  Packaged and legacy SHA fields are provenance labels, not recomputed
+  digests. Original native 4.33 provenance and correspondence between the
+  package and its source labels are trusted under the requested policy.
+  The migrated receipt records this assumption and the legacy labels.
+  Old artifacts are retained; the policy change alone does not trigger
+  recompilation of all cached HVR sources.
+
+INDEPENDENT STAGES
+  C1 forward:     HXYThreeSpaces.BanachForward.
+  C1 equivalence: HXYThreeSpaces.Banach.
+  C2 forward:     HXYThreeSpaces.HilbertForward.
+  C2 equivalence: HXYThreeSpaces.Hilbert.
+  C3 forward:     HXYThreeSpaces.HolomorphicForward.
+  C3 equivalence: HXYThreeSpaces.Holomorphic.
+  Each forward stage is independent of its reverse stage.
+  Aggregate execution requires all individual equivalences to pass.
+
+UNCHANGED PROOF AUDITS
+  Every execution freshly compiles a named wrapper of exactly:
+    RiemannHypothesis -> Candidate_i
+  or:
+    Iff RiemannHypothesis Candidate_i.
+  No additional research binder occurs in the wrapper.
+  Both the original theorem and exact-type wrapper receive fresh axiom
+  audits. Cached or migrated compile receipts cannot replace this audit.
+  Allowed axioms: propext, Classical.choice, Quot.sound.
+  Missing/duplicate delimiters, wrong declarations, missing reports,
+  sorryAx, and unapproved axioms are rejected.
+  The public aggregate is checked against its explicit full conjunction,
+  including all H_XY pairs. RH -> all three is checked separately.
+
+PROMOTION
+  Prepared files: A_TIER_CANDIDATE.
+  Fresh exact-type compilation and standard-only axiom audit of the
+  forward endpoint authorize: C_i_CLOSURE=!!!!(cond on RH).
+  A separately passing equivalence authorizes: C_i_EQUIVALENCE_A_TIER=!!.
+  The conditional marker certifies RH -> Candidate_i.
+  Premise-free RH or Candidate_i is not asserted.
+  A reverse/other-candidate failure preserves a passed forward receipt.
+  RUN=PASS requires all requested endpoint audits; an all run additionally
+  requires the exact public aggregate and RH -> all-three audits.
+
+EVIDENCE
+  evidence\r-<timestamp>-<nonce>\run-build.log
+  evidence\r-<timestamp>-<nonce>\run-audit.log
+  evidence\r-<timestamp>-<nonce>\lean-version.log
+  evidence\r-<timestamp>-<nonce>\RESULTS.json
+  evidence\r-<timestamp>-<nonce>\environment.json
+  evidence\r-<timestamp>-<nonce>\source-inputs.json
+  evidence\r-<timestamp>-<nonce>\audit\*.lean
+  evidence\r-<timestamp>-<nonce>\audit\*.log
+  evidence\r-<timestamp>-<nonce>\audit\*.receipt.json
+
+  A lock directory protects the persistent cache against simultaneous
+  writers. Stale locks are reported and never removed automatically.
+  Before external execution: NOT_COMPILED_NOT_AUDITED.
+
+FIX4 AXIOM REFERENCE FORMAT
+  Printed references may carry explicit Lean universe instantiations.
+  Parsing validates the whole reference and compares its canonical base name
+  against exactly propext, Classical.choice, Quot.sound.
+  Raw printed references remain in the audit evidence.
+  Unknown declarations, sorryAx and malformed references remain rejected.
+  The format repair does not invalidate compatible module compilation caches.
+
+FIX5 NATIVE JSCRIPT CAPTURE COMPATIBILITY
+  Nonparticipating captures may be empty strings in native JScript.
+  Parser control flow no longer depends on undefined optional captures.
+  Plain/annotated references and list/axiom-free reports are separate complete
+  forms with mandatory captures only.
+  Tests: 74 modern + 74 emulated legacy regression checks passed;
+  independent review: 40 modern + 40 emulated legacy cases passed.
+  Emulation is source/runtime-logic validation, not native Lean proof evidence.
+  Exact axiom allowlist, raw evidence, fresh audits and promotion rules unchanged.
+
+FIX6 OBSERVED ENDPOINT PROMOTIONS
+  Reported FIX5 exact-type and theorem-level axiom audit passes:
+    C1 forward and equivalence; C2 forward and equivalence; C3 forward.
+  Preserved conditional markers := C1/C2/C3_CLOSURE=!!!!(cond on RH).
+  Preserved equivalence markers := C1/C2_EQUIVALENCE_A_TIER=!!.
+  C3 reverse module failed at addition orientation; FIX6 repairs its proof.
+  Aggregate audits were not reached in the reported FIX5 run.
+  Compatible project-module cache reuse and fresh endpoint audits remain active.
+  C3 reverse failure does not invalidate an independent forward audit.
+  CACHE_COMPILED_MODULES counts successful new project modules; it excludes
+  fresh endpoint wrappers. FIX5 reported 106 project-module cache reuses.
+  Evidence origin := user-supplied native console excerpt, stored in
+    provenance/native-transcript-FIX5-partial.txt.
+
+FIX6 EXTERNAL COMPLETION
+  User-reported native RUN=PASS.
+  C1/C2/C3 equivalences and constructions all carry the required PASS markers.
+  Exact public conjunction and exact all-three RH implication both passed
+  fresh type-wrapper compilation and standard-only theorem-level axiom audits.
+  Observed cache reuse := 106 modules; newly compiled project modules := 4.
+  PASS archive := evidence/documentation checkpoint of the same FIX6 code.
+  Latest status := STATUS.json and provenance/promotion-FIX6.json.

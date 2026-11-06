@@ -1,0 +1,51 @@
+{
+  "schema": "HXY_THREE_SPACES_NEW_SOURCE_V1",
+  "package": "HXY_THREE_SPACES_433_v0_1_0_FIX6",
+  "sources": [
+    {
+      "path": "HXYThreeSpaces/Banach.lean",
+      "sha256": "633c536365c72cc763f18647cae802531050bab3aa11ec4864d9d904b2dfb903",
+      "bytes": 6292
+    },
+    {
+      "path": "HXYThreeSpaces/BanachForward.lean",
+      "sha256": "e09effb35073da93f0c2c61928030d2d3cb7c8c7c016d0480c1e0078b577af72",
+      "bytes": 2795
+    },
+    {
+      "path": "HXYThreeSpaces/HXY.lean",
+      "sha256": "04a2451d200e7a0a7fa71fd2b660a62874efd164ba63c6bb33a424b3ed506fd6",
+      "bytes": 863
+    },
+    {
+      "path": "HXYThreeSpaces/Hilbert.lean",
+      "sha256": "6431982d40449d52f46a43c09b126963a7cd4c8c81b8e3687d897e7713a2ab04",
+      "bytes": 4387
+    },
+    {
+      "path": "HXYThreeSpaces/HilbertForward.lean",
+      "sha256": "855314116ae217b0ad3a2da013d0aa934f547e63173bdfdcb04b52fcf8257bd8",
+      "bytes": 12749
+    },
+    {
+      "path": "HXYThreeSpaces/Holomorphic.lean",
+      "sha256": "eff3459053cacfc94aeff973d7e7a894a052467c9f2271cd11b6e82548dda93c",
+      "bytes": 7386
+    },
+    {
+      "path": "HXYThreeSpaces/HolomorphicForward.lean",
+      "sha256": "f273484ed1df2c3a00a4abf045980924aed69f3d02f0ab5d683908ce852793e9",
+      "bytes": 8353
+    },
+    {
+      "path": "HXYThreeSpaces/Main.lean",
+      "sha256": "156e2f0a6cd986acafcbdf5ef8b4dc18e6538a63774a5d55aca39d4071021ef6",
+      "bytes": 1951
+    },
+    {
+      "path": "HXY_THREE_FUNCTION_SPACE_EQUIVALENCES.lean",
+      "sha256": "35d294a0155d9857fff60a53c8e328f921422c8fd06c4405d07670f0e9c56758",
+      "bytes": 474
+    }
+  ]
+}

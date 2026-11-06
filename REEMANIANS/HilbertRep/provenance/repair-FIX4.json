@@ -1,0 +1,38 @@
+{
+  "schema": "HXY_SOURCE_AND_RUNNER_REPAIR_V1",
+  "revision": "FIX4",
+  "baseline_revision": "FIX3",
+  "diagnostic_revision": "FIX3",
+  "diagnostic_file": "provenance/native-diagnostics-FIX3-partial.txt",
+  "modified_lean_sources": [
+    {
+      "path": "HXYThreeSpaces/HilbertForward.lean",
+      "previous_source_sha256_label": "9f59a136611a2ca31ab1347ab45ab72fa42bd7cec26ddf1e3092432f1159bf9f",
+      "source_sha256_label": "855314116ae217b0ad3a2da013d0aa934f547e63173bdfdcb04b52fcf8257bd8",
+      "bytes": 12749
+    }
+  ],
+  "modified_runner_source": "scripts/native-runner.js",
+  "axiom_reference_policy": "EXACT_BASE_NAME_WITH_VALIDATED_NAMED_UNIVERSE_PARAMETERS",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "raw_axiom_evidence_preserved": true,
+  "parser_js_regressions_passed": 74,
+  "independent_parser_cases_passed": 38,
+  "native_runtime_and_cache_code_preserved": true,
+  "C1_and_C3_proof_sources_preserved": true,
+  "frozen_predicates_preserved": 3,
+  "frozen_endpoint_signatures_preserved": 9,
+  "frozen_upstream_sources_preserved": 118,
+  "additional_premises": [],
+  "new_axioms_or_admissions": [],
+  "cache_family": "HXY_THREE_SPACES_433",
+  "runtime_hashing": false,
+  "local_lean_execution": false,
+  "external_FIX4_compilation": "PENDING",
+  "external_FIX4_axiom_audit": "PENDING",
+  "classification": "A_TIER_CANDIDATE"
+}

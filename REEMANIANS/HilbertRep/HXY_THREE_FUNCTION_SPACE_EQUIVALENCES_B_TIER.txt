@@ -1,0 +1,586 @@
+HXY_THREE_FUNCTION_SPACE_EQUIVALENCES_B_TIER
+VERSION := v0_1_0
+DATE_UTC := 2026-11-06
+MODE := B_TIER_DERIVATION
+MARKER := !
+
+EXACT_ROOT_THEOREM
+  [forall X,Y in N, H^xi_(X,Y) <=> RH]
+  /\ [BanachExt_xi <=> RH]
+  /\ [HilbertRep_xi <=> RH]
+  /\ [HolExt_xi <=> RH].
+
+EQUIVALENT_HXY_ROOT
+  forall X,Y in N,
+    [H^xi_(X,Y) <=> RH]
+    /\ [H^xi_(X,Y) <=> BanachExt_xi]
+    /\ [H^xi_(X,Y) <=> HilbertRep_xi]
+    /\ [H^xi_(X,Y) <=> HolExt_xi].
+
+ROOT_STATUS
+  Complete mathematical derivation of the exact equivalences := !.
+  Unresolved research premises of these equivalences := NONE.
+  Actual xi / actual logarithmic moments := FIXED.
+  Ordinary RH / existence of an admissible H_XY witness := NOT_PROVED.
+  Premise-free inhabitants of the three existence predicates := NOT_PROVED.
+  New Lean source / local Lean execution := NONE.
+  New matching external compiler and theorem-level axiom audit := ABSENT.
+  New A_TIER / FORMAL_CLOSURE / UNCONDITIONAL_CLOSURE := NOT_ESTABLISHED.
+
+LOGICAL_CONVENTION
+  A displayed equivalence atlas denotes the explicit conjunction above.
+  An iterated binary biconditional is not the formal root proposition.
+  All temporary hypotheses are discharged in the stated implications.
+
+======================================================================
+0. FIXED ACTUAL DATA AND ESTABLISHED FOUNDATIONS
+======================================================================
+
+DEFINITION 0.1 -- ACTUAL RIEMANN DATA
+  xi(s) := the actual entire completed Riemann xi function.
+  Theta_xi(w^2) := xi(1/2+w).
+  R_xi(z) := Theta_xi'(z)/Theta_xi(z), initially near z=0.
+  kappa := R_xi(0).
+
+ESTABLISHED ACTUAL FACTS [S1-S5]
+  Theta_xi is real entire and nonzero.
+  order(Theta_xi) <= 1/2 < 1.
+  Theta_xi(0) != 0.
+  kappa is real and kappa > 0.
+  RH <=> every zero of Theta_xi lies in (-infinity,0).
+
+  These are previously established properties of the fixed actual xi
+  construction. They are not research assumptions and are not obtained
+  by assuming H_XY or RH.
+
+  Native endpoint: _root_.RiemannHypothesis.
+  Exact positivity declaration: RH_HilbertLimit.actualKappa_pos.
+  Moment-reality declarations:
+    RH_HilbertLimit.actualComplexMoment_im_eq_zero;
+    RH_HilbertLimit.actualComplexMoment_eq_ofReal_actualMoment.
+
+DEFINITION 0.2 -- UNIT NORMALIZATION
+  F(z) := Theta_xi(z/kappa)/Theta_xi(0).
+  g(z) := F'(z)/F(z), as the analytic germ at zero.
+  u_n := (-1)^n g^(n)(0)/n!, n in N.
+
+  F is real entire, order(F)<1, F(0)=1, F'(0)=1.
+  g(z) = kappa^(-1) R_xi(z/kappa).
+  u_n = (-1)^n R_xi^(n)(0)/(n! kappa^(n+1)).
+  u_n is real; u_0=1.
+  g(z) = sum_(n>=0) (-1)^n u_n z^n near zero.
+
+  These u_n are the original actualNormalizedMoment values.
+  A zero -b of Theta_xi becomes the zero -a=-kappa*b of F.
+
+DEFINITION 0.3 -- MOMENT FUNCTIONAL AND DOMAINS
+  I := [0,1].
+  P := R[t].
+  ell : P -> R is the real-linear functional ell(t^n)=u_n.
+  ell_C := its complex-linear extension to C[t].
+  ||p||_I := max_(t in I) |p(t)|.
+  Omega := C \ (-infinity,-1].
+
+  Omega is open and connected; 0 belongs to Omega.
+  C(I,R)^* denotes the bounded real-linear dual, with the supremum norm
+  on C(I,R). O(Omega) denotes holomorphic complex-valued functions.
+
+CLASSICAL BACKGROUND THEOREMS
+  Identity theorem and finite zero multiplicity for holomorphic functions.
+  Genus-zero Hadamard factorization for an entire function of order <1.
+  Uniformly convergent power-series calculus and differentiation.
+  Finite positive Borel measures, integration, and complex L^2 spaces.
+  Bounded selfadjoint spectral theory: 0<=T<=I implies spectrum(T) subset [0,1].
+  Spectral mapping, bounded-operator resolvents, and the Neumann series.
+  Weierstrass polynomial approximation, used only for uniqueness below.
+
+  These are established analysis theorems. Availability of every theorem
+  as a particular Lean import is a later formalization question.
+
+======================================================================
+1. EXACT PREDICATES
+======================================================================
+
+DEFINITION 1.1 -- ORIGINAL CANCELLATION BUDGET
+  B_(d,j)(t) := binomial(d,j)t^j(1-t)^(d-j), 0<=j<=d.
+  w_(d,j) := ell(B_(d,j)).
+  V_d := sum_(j=0)^d |w_(d,j)|.
+  C_d := (d+1)(V_(d+1)-V_d).
+
+  H^xi_(X,Y) := forall d>=X, C_d <= Y V_d, X,Y in N.
+
+  Existing source encoding:
+    RH_HilbertLimit.CancellationBudget.Admissible <X,Y>.
+  The original pair is cutoff X and coefficient Y.
+
+DEFINITION 1.2 -- BANACH EXTENSION
+  BanachExt_xi :=
+    exists L in C(I,R)^*,
+      forall p in R[t], L(p restricted to I)=ell(p).
+
+  Positivity is not a premise of BanachExt_xi.
+  The matching quantifier covers every polynomial.
+
+DEFINITION 1.3 -- HILBERT REALIZATION
+  HilbertRep_xi :=
+    exists (H,T,v),
+      H a complex Hilbert space,
+      T:H->H bounded and complex-linear,
+      T=T*, 0<=T<=I_H,
+      v in H, ||v||=1,
+      forall n in N, <v,T^n v>=(u_n:C).
+
+  The inner product is conjugate-linear in its first argument.
+  No finite spectral rank or cyclicity premise is imposed.
+
+DEFINITION 1.4 -- HOLOMORPHIC EXTENSION
+  HolExt_xi :=
+    exists G in O(Omega), G=g as germs at zero.
+
+DEFINITION 1.5 -- HOLOMORPHIC ODE PRESENTATION
+  HolODE_xi :=
+    exists G in O(Omega),
+      forall z in Omega, F'(z)=G(z)F(z).
+
+THEOREM 1.6 -- EXACT GERM/ODE IDENTIFICATION                         !
+  HolExt_xi <=> HolODE_xi.
+
+PROOF
+  Forward: F'-GF is holomorphic on connected Omega and vanishes near
+  zero, hence throughout Omega by the identity theorem.
+  Reverse: F(0)=1; continuity supplies a neighborhood of zero on which
+  F is nonzero. On that neighborhood the ODE gives G=F'/F=g.
+  QED.
+
+======================================================================
+2. H_XY IMPLIES RH
+======================================================================
+
+LEMMA 2.1 -- EXACT BERNSTEIN REFINEMENT                             !
+  sum_(j=0)^d w_(d,j)=1.
+  (d+1)w_(d,j)
+    =(d+1-j)w_(d+1,j)+(j+1)w_(d+1,j+1).
+  V_(d+1)>=V_d>=1.
+
+PROOF
+  sum_j B_(d,j)=1 and ell(1)=1 give the first identity.
+  Apply ell to the polynomial degree-elevation identity to obtain the
+  second identity. Apply the triangle inequality and sum over j.
+  Every next-row absolute weight receives total coefficient d+1,
+  including the two boundary cells. Therefore V_d<=V_(d+1).
+  Finally 1=|sum_j w_(d,j)|<=V_d.
+  QED.
+
+LEMMA 2.2 -- CANCELLATION BUDGET GIVES SUBEXPONENTIAL VARIATION       !
+  H^xi_(X,Y) => forall d>=0, V_d<=exp(Y)V_X(d+1)^Y.
+  Consequently,
+    forall eps>0, exists K>0, forall d>=0, V_d<=K exp(eps d).
+
+PROOF
+  For d>=X, the budget rearranges to
+    V_(d+1)<=(1+Y/(d+1))V_d.
+  Induction gives
+    V_d<=V_X product_(j=X)^(d-1)(1+Y/(j+1)).
+  The product is <=exp(Y sum_(j=X)^(d-1)1/(j+1))
+  and hence <=exp(Y)(d+1)^Y.
+  For d<X use V_d<=V_X. The case d=X uses the empty product 1.
+  For eps>0 the sequence (d+1)^Y exp(-eps d) is bounded; enlarge the
+  resulting constant to a positive K. X=0 and Y=0 are included.
+  QED.
+
+LEMMA 2.3 -- ACTUAL OFF-RAY ZERO DETECTOR                            !
+  Subexponential(V) => Z(F) subset (-infinity,-1].
+
+PROOF
+  Suppose F(rho)=0 and rho is outside (-infinity,-1].
+  Since F(0)=1, rho!=0. Define
+    tau:=-1/rho;
+    B:=|tau|+|1-tau|;
+    alpha:=conj(1-tau)/|1-tau|;
+    beta:=conj(tau)/|tau|;
+    p(t):=alpha(1-t)+beta*t.
+
+  tau is outside [0,1]. Thus tau!=0, tau!=1, B>1,
+  |alpha|=|beta|=1, alpha!=beta, and p(tau)=B.
+
+  The exact Bernstein expansion is
+    p(t)^d=sum_(j=0)^d alpha^(d-j)beta^j B_(d,j)(t).
+  Therefore |ell_C(p^d)|<=V_d.
+
+  Define A(z):=sum_(d>=0)ell_C(p^d)z^d.
+  For each r<1 choose eps>0 with r exp(eps)<1. The subexponential
+  bound gives uniform absolute convergence for |z|<=r. Hence A is
+  holomorphic throughout the unit disk.
+
+  Coefficient expansion near zero, using g(-w)=sum_n u_n w^n, gives
+    A(z)=(1-alpha*z)^(-1)g(w(z)),
+    w(z):=-(beta-alpha)z/(1-alpha*z).
+  The rearrangement is justified for sufficiently small |z| by the
+  positive convergence radius of the original analytic germ g.
+
+  On the unit disk, 1-alpha*z never vanishes. Define
+    D(z):=(1-alpha*z)A(z)F(w(z))-F'(w(z)).
+  D is holomorphic throughout the disk and is zero near zero.
+  Hence D is identically zero.
+
+  At z0:=1/B, one has 0<z0<1,
+    B-alpha=(beta-alpha)tau,
+    w(z0)=rho,
+    w'(z0)=-(beta-alpha)/(1-alpha*z0)^2 !=0.
+
+  Let m>=1 be the multiplicity of rho as a zero of F.
+  F(w(z)) has order m at z0. The term
+    (1-alpha*z)A(z)F(w(z))
+  has order at least m, whereas F'(w(z)) has order m-1.
+  This contradicts D=0. Therefore no such rho exists.
+  QED.
+
+THEOREM 2.4 -- ORIGINAL H_XY EXIT                                   !
+  forall X,Y in N, H^xi_(X,Y) => RH.
+
+PROOF
+  Lemmas 2.2 and 2.3 give Z(F) subset (-infinity,-1].
+  Since kappa>0, Z(Theta_xi) subset (-infinity,-1/kappa].
+  Apply the fixed actual square-descent calibration.
+  QED.
+
+======================================================================
+3. TEMPORARY RH HYPOTHESIS: ONE SHARED REPRESENTING MEASURE
+======================================================================
+
+THEOREM 3.1 -- CANONICAL PROBABILITY MEASURE                         !
+  RH => exists a Borel probability measure mu on I,
+    forall n in N, u_n=integral_I t^n dmu(t).
+
+PROOF
+  Assume hRH:RH temporarily.
+  The zeros of Theta_xi are -b_j, with b_j>0 and multiplicities m_j>=1.
+  Genus-zero Hadamard factorization applies because Theta_xi is entire
+  of order <1 and Theta_xi(0)!=0:
+    Theta_xi(z)/Theta_xi(0)=product_j(1+z/b_j)^(m_j),
+    sum_j m_j/b_j<infinity.
+
+  Logarithmic differentiation near zero gives
+    kappa=sum_j m_j/b_j.
+  Put a_j:=kappa*b_j. Then
+    F(z)=product_j(1+z/a_j)^(m_j),
+    sum_j m_j/a_j=1.
+  Each summand is nonnegative, so m_j/a_j<=1 and
+    a_j>=m_j>=1.
+
+  The empty-zero-set case would give F=1 by Hadamard factorization,
+  contradicting F'(0)=1. A finite nonempty or countable divisor is
+  sufficient; no zero-infinitude theorem is used.
+
+  Define
+    mu:=sum_j (m_j/a_j) delta_(1/a_j).
+  Its atoms lie in I, all weights are nonnegative, and its mass is 1.
+
+  For |z|<=r<1,
+    |m_j/(z+a_j)|<=(m_j/a_j)/(1-r).
+  Thus the logarithmic-derivative series converges normally near zero:
+    g(z)=sum_j m_j/(z+a_j)
+        =integral_I (1+z*t)^(-1) dmu(t).
+  Expanding the geometric series uniformly for |z|<=r<1 gives
+    g(z)=sum_(n>=0)(-z)^n integral_I t^n dmu(t).
+  Equality with the exact actual Taylor coefficients proves the moments.
+  Discharge hRH.
+  QED.
+
+COROLLARY 3.2 -- RETURN TO EVERY ORIGINAL BUDGET                     !
+  RH => forall X,Y in N, H^xi_(X,Y).
+
+PROOF
+  Under the probability representation,
+    w_(d,j)=integral_I B_(d,j)(t) dmu(t)>=0.
+  Consequently V_d=sum_j w_(d,j)=1 and C_d=0 for every d.
+  Since Y>=0, C_d<=Y V_d holds for every d, hence for d>=X.
+  Discharge RH.
+  QED.
+
+COROLLARY 3.3 -- EXACT ORDINARY ENTRY                               !
+  forall X,Y in N, H^xi_(X,Y) <=> RH.
+
+======================================================================
+4. FORWARD CONSTRUCTION OF ALL THREE FUNCTION-SPACE OBJECTS
+======================================================================
+
+BEGINNING ENDPOINT -- RH_TO_SHARED_FUNCTION_SPACE_REALIZATION
+
+  TEMPORARY INPUT
+    hRH:RH.
+
+  SHARED MEASURE
+    mu supplied by Theorem 3.1.
+
+  BANACH DUAL
+    L_mu(f):=integral_I f dmu, f in C(I,R).
+    |L_mu(f)|<=||f||_infinity.
+    L_mu(1)=1, ||L_mu||=1, L_mu>=0.
+    L_mu(p restricted to I)=ell(p) for every real polynomial p.
+    Therefore BanachExt_xi.
+
+  HILBERT SPACE
+    H_mu:=L^2(I,mu;C).
+    T_mu f(t):=t*f(t).
+    v_mu(t):=1.
+
+    ||T_mu f||_2<=||f||_2; T_mu is bounded.
+    Multiplication by real t makes T_mu selfadjoint.
+    <f,T_mu f>=integral_I t|f(t)|^2 dmu>=0.
+    <f,(I_H-T_mu)f>=integral_I (1-t)|f(t)|^2 dmu>=0.
+    Thus 0<=T_mu<=I_H.
+    ||v_mu||_2^2=mu(I)=1.
+    <v_mu,T_mu^n v_mu>=integral_I t^n dmu=u_n.
+    Therefore HilbertRep_xi.
+
+  HOLOMORPHIC FUNCTION
+    G_mu(z):=integral_I (1+z*t)^(-1) dmu(t), z in Omega.
+
+    For z in Omega and t in I, 1+z*t!=0.
+    For every compact K subset Omega,
+      min_((z,t) in K x I)|1+z*t|>0.
+    Local uniformly convergent expansions justify holomorphy of G_mu.
+    By Theorem 3.1, G_mu=g near zero.
+    Therefore HolExt_xi; Theorem 1.6 also gives F'=G_mu F on Omega.
+
+  JOINT IDENTITIES
+    Extend L_mu complex-linearly to C(I,C).
+    For z in Omega, (I_H+z*T_mu)^(-1) is multiplication by
+      t -> (1+z*t)^(-1).
+    Hence
+      G_mu(z)
+        =L_mu,C(t -> (1+z*t)^(-1))
+        =<v_mu,(I_H+z*T_mu)^(-1)v_mu>.
+
+  DISCHARGED OUTPUT
+    RH => BanachExt_xi /\ HilbertRep_xi /\ HolExt_xi.
+
+END ENDPOINT
+
+======================================================================
+5. BANACH EXTENSION: REVERSE DIRECTION WITHOUT POSITIVITY
+======================================================================
+
+THEOREM 5.1 -- BANACH EXTENSION GIVES HOLOMORPHIC EXTENSION           !
+  BanachExt_xi => HolExt_xi.
+
+PROOF
+  Assume L in C(I,R)^* with exact matching on every polynomial.
+  Define the complex-linear extension
+    L_C(f):=L(Re f)+i L(Im f), f in C(I,C).
+  It is bounded: |L_C(f)|<=2||L|| ||f||_infinity.
+
+  For z in Omega, let k_z(t):=(1+z*t)^(-1).
+  Fix z0 in Omega and put delta:=min_(t in I)|1+z0*t|>0.
+  For |h|<delta,
+    k_(z0+h)(t)
+      =sum_(n>=0)(-h)^n t^n/(1+z0*t)^(n+1).
+  The n-th term is bounded in C(I,C) norm by
+    |h|^n delta^(-n-1).
+  Thus z -> k_z is locally a convergent C(I,C)-valued power series.
+
+  Define G(z):=L_C(k_z). Bounded linearity makes G holomorphic.
+  For |z|<1,
+    k_z=sum_(n>=0)(-z)^n t^n
+  converges in the supremum norm, hence
+    G(z)=sum_(n>=0)(-z)^n L_C(t^n)
+        =sum_(n>=0)(-z)^n u_n.
+  This equals the original germ g on a neighborhood of zero.
+  Therefore HolExt_xi. No positivity hypothesis on L was used.
+  QED.
+
+ALTERNATIVE HVR CHECK
+  Put e_j:=sign(w_(d,j)), p_d:=sum_j e_j B_(d,j).
+  On I, ||p_d||_infinity<=1 and ell(p_d)=V_d.
+  Therefore V_d=L(p_d)<=||L|| for every d.
+  Bounded variation is subexponential; Lemma 2.3 then yields RH.
+
+======================================================================
+6. HILBERT REALIZATION: REVERSE DIRECTION
+======================================================================
+
+THEOREM 6.1 -- HILBERT REALIZATION GIVES HOLOMORPHIC EXTENSION        !
+  HilbertRep_xi => HolExt_xi.
+
+PROOF
+  Assume (H,T,v) as in Definition 1.3.
+  Bounded selfadjoint spectral theory gives
+    spectrum(T) subset [0,1], ||T||<=1.
+
+  For z in Omega, 0 is outside the spectrum of I_H+z*T:
+    1+z*t!=0 for every t in [0,1].
+  Thus R_T(z):=(I_H+z*T)^(-1) exists as a bounded operator.
+
+  Fix z0 in Omega, R0:=R_T(z0).
+  The factorization
+    I_H+(z0+h)T=(I_H+z0*T)(I_H+h*R0*T)
+  and the Neumann series, for ||h*R0*T||<1, give
+    R_T(z0+h)=sum_(n>=0)(-h)^n(R0*T)^n R0.
+  Hence R_T is operator-norm holomorphic throughout Omega.
+
+  Define G(z):=<v,R_T(z)v>.
+  This scalar function is holomorphic on Omega.
+  For |z|<1, the operator Neumann series gives
+    G(z)=sum_(n>=0)(-z)^n <v,T^n v>
+        =sum_(n>=0)(-z)^n u_n.
+  Therefore G=g near zero, proving HolExt_xi.
+  QED.
+
+======================================================================
+7. HOLOMORPHIC EXTENSION: REVERSE DIRECTION
+======================================================================
+
+THEOREM 7.1 -- HOLOMORPHIC EXTENSION FORCES RH                       !
+  HolExt_xi => RH.
+
+PROOF
+  Assume G in O(Omega) with G=g near zero.
+  By Theorem 1.6, F'=GF throughout connected Omega.
+
+  Suppose F(z0)=0 for z0 in Omega.
+  F is nonzero as an entire function because F(0)=1.
+  Let m>=1 be the finite multiplicity of z0.
+  Then F' has order m-1 at z0, whereas GF has order at least m.
+  Contradiction. Thus F has no zero in Omega.
+
+  Therefore Z(F) subset (-infinity,-1].
+  Positive scaling gives Z(Theta_xi) subset (-infinity,-1/kappa].
+  The actual square-descent calibration yields RH.
+  Discharge HolExt_xi.
+  QED.
+
+======================================================================
+8. FINAL ASSUMPTION DISCHARGE
+======================================================================
+
+THEOREM 8.1 -- THREE INDIVIDUAL UNCONDITIONAL CHARACTERIZATIONS      !
+  [BanachExt_xi <=> RH]
+  /\ [HilbertRep_xi <=> RH]
+  /\ [HolExt_xi <=> RH].
+
+PROOF
+  RH => each candidate: Section 4.
+  BanachExt_xi => HolExt_xi => RH: Theorems 5.1 and 7.1.
+  HilbertRep_xi => HolExt_xi => RH: Theorems 6.1 and 7.1.
+  HolExt_xi => RH: Theorem 7.1.
+  Introduce both directions of each biconditional; form their conjunction.
+  QED.
+
+THEOREM 8.2 -- EXACT HXY THREE-SPACE ROOT                            !
+  forall X,Y in N,
+    [H^xi_(X,Y) <=> RH]
+    /\ [H^xi_(X,Y) <=> BanachExt_xi]
+    /\ [H^xi_(X,Y) <=> HilbertRep_xi]
+    /\ [H^xi_(X,Y) <=> HolExt_xi].
+
+PROOF
+  Fix arbitrary X,Y in N.
+  Theorem 3.3 supplies H^xi_(X,Y)<=>RH.
+  Compose this equivalence with each equivalence from Theorem 8.1.
+  Conjoin the four conclusions and universally generalize X,Y.
+  QED.
+
+BEGINNING ENDPOINT -- HXY_TO_THREE_FUNCTION_SPACES
+  INPUT: hXY:H^xi_(X,Y), X,Y in N.
+  hXY => hRH:RH                         [Theorem 2.4]
+      => mu                            [Theorem 3.1]
+      => L_mu                          [Section 4]
+      => (H_mu,T_mu,v_mu)               [Section 4]
+      => G_mu                          [Section 4].
+  OUTPUT: BanachExt_xi /\ HilbertRep_xi /\ HolExt_xi.
+  DISCHARGED THEOREM:
+    H^xi_(X,Y) => BanachExt_xi /\ HilbertRep_xi /\ HolExt_xi.
+END ENDPOINT
+
+BEGINNING ENDPOINT -- ANY_ONE_SPACE_TO_ORIGINAL_HXY
+  INPUT: one of BanachExt_xi, HilbertRep_xi, HolExt_xi.
+  INPUT => HolExt_xi                    [Theorems 5.1, 6.1, or identity]
+        => RH                          [Theorem 7.1]
+        => H^xi_(X,Y) for every X,Y     [Corollary 3.2].
+  OUTPUT: forall X,Y in N, H^xi_(X,Y).
+END ENDPOINT
+
+LOGICAL LEDGER
+  The forward construction temporarily assumes hRH:RH.
+  Discharging hRH proves RH=>Candidate_i.
+  The independently derived reverse edges prove Candidate_i=>RH.
+  The resulting biconditional is an unconditional mathematical theorem.
+
+  H_XY=>RH and RH=>Candidate_i alone would establish only H_XY=>Candidate_i.
+  The reverse implications above are indispensable for the equivalences.
+
+  No step concludes RH without an H_XY or function-space hypothesis.
+  No step constructs a premise-free admissibility proof for H_XY.
+  No finite Boolean acceptance theorem is claimed for the universal
+  all-degree predicate H_XY.
+
+======================================================================
+9. OPTIONAL SHARPENING OF THE BANACH ENDPOINT
+======================================================================
+
+COROLLARY 9.1 -- POSITIVITY AND NORMALIZATION ARE FORCED             !
+  Every L witnessing BanachExt_xi is positive and ||L||=L(1)=1.
+
+PROOF
+  Such an L implies RH by Theorems 5.1 and 7.1.
+  Construct L_mu from the canonical probability measure of Theorem 3.1.
+  L and L_mu agree on all polynomials. Polynomials are dense in C(I,R)
+  by Weierstrass approximation; continuity gives L=L_mu.
+  The conclusion follows from Section 4.
+  QED.
+
+COROLLARY 9.2 -- UNIQUENESS OF THE HOLOMORPHIC EXTENSION             !
+  Any two witnesses G1,G2 of HolExt_xi agree on Omega.
+
+PROOF
+  They agree near zero with the same fixed actual germ g.
+  Apply the identity theorem on connected Omega.
+  QED.
+
+======================================================================
+10. SOURCE AND VERIFICATION SCOPE
+======================================================================
+
+[S1] Existing mathematical derivation:
+  HVR_HXY_RH_TO_GRH_ENDPOINT_CHAIN_B_TIER.txt, v0_3_0.
+  Sections 1-3; Lemmas 2.2-2.7; Theorem 3.1; Corollary 3.2.
+  https://chatgpt.com/library?file_id=libfile_9931c89cca9481919099474092be5264&account_id=personal
+
+[S2] Actual calibration and unconditional kappa positivity:
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/blob/c6b95fd9e3d792270026da083bddddbc72bacb22/RH_HilbertLimit/ActualCalibrationProgress.lean
+
+[S3] Actual ordinary cancellation-budget interface:
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/blob/c6b95fd9e3d792270026da083bddddbc72bacb22/RH_HilbertLimit/ActualCancellationWitness.lean
+
+[S4] Ordinary H00 / native RH equivalence:
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/blob/c6b95fd9e3d792270026da083bddddbc72bacb22/RH_HilbertLimit/TwoRoutes/RouteOne.lean
+
+[S5] Actual analytic closure:
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/blob/c6b95fd9e3d792270026da083bddddbc72bacb22/RH_HilbertLimit/AnalyticClosure.lean
+
+[S6] Existing positive-measure construction:
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/blob/c6b95fd9e3d792270026da083bddddbc72bacb22/RH_HilbertLimit/TwoRoutes/HausdorffMeasure.lean
+
+[S7] Retained cached external evidence, previously inspected:
+  source commit: c6b95fd9e3d792270026da083bddddbc72bacb22.
+  Lean: 4.33.0.
+  cached run: 40712534224.
+  audited declarations: 641.
+  allowed reported axioms: propext, Classical.choice, Quot.sound.
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/actions/runs/40712534224
+  https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/blob/29249c8ff158e97b20475320323206a29626e3b5/evidence/GITHUB_CI_PASS_CHECKPOINT.json
+
+EVIDENCE_BOUNDARY
+  S7 certifies its named existing source declarations.
+  S7 is not a compiler/audit receipt for this newly assembled theorem.
+  This deliverable is a complete mathematical derivation: B_TIER, !.
+  No local Lean execution or new external compiler run was performed.
+
+FINAL_ROOT
+  [forall X,Y in N, H^xi_(X,Y)<=>RH]
+  /\ [BanachExt_xi<=>RH]
+  /\ [HilbertRep_xi<=>RH]
+  /\ [HolExt_xi<=>RH].                                           !
+
+END

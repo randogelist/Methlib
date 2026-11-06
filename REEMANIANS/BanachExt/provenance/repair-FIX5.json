@@ -1,0 +1,37 @@
+{
+  "schema": "HXY_SOURCE_AND_RUNNER_REPAIR_V1",
+  "revision": "FIX5",
+  "baseline_revision": "FIX4",
+  "diagnostic_file": "provenance/native-transcript-FIX4-partial.txt",
+  "modified_lean_sources": [
+    {
+      "path": "HXYThreeSpaces/Hilbert.lean",
+      "previous_source_sha256_label": "dbbcc5becbd02285913fe58caef3c0e2757ac365b0642a4c4f7479e08e5b8c95",
+      "source_sha256_label": "6431982d40449d52f46a43c09b126963a7cd4c8c81b8e3687d897e7713a2ab04",
+      "bytes": 4387
+    }
+  ],
+  "modified_runner_source": "scripts/native-runner.js",
+  "parser_change": "separate complete syntax branches with mandatory captures; no undefined/empty optional-capture dependence",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "raw_evidence_preserved": true,
+  "FIX4_exact_failure_reproduced": true,
+  "modern_parser_regression_passed": 74,
+  "emulated_JScript_parser_regression_passed": 74,
+  "independent_cases_per_mode_passed": 40,
+  "all_forward_sources_preserved": true,
+  "C1_and_C3_sources_preserved": true,
+  "native_runtime_and_cache_code_preserved": true,
+  "frozen_predicates_preserved": 3,
+  "frozen_endpoint_signatures_preserved": 9,
+  "frozen_upstream_sources_preserved": 118,
+  "new_mathematical_premises_or_admissions": [],
+  "runtime_hashing": false,
+  "local_lean_execution": false,
+  "external_FIX5_validation": "PENDING",
+  "classification": "A_TIER_CANDIDATE"
+}

@@ -1,0 +1,24 @@
+SOURCE := USER_SUPPLIED_PARTIAL_NATIVE_TRANSCRIPT
+PACKAGE := HXY_THREE_SPACES_433_v0_1_0_FIX3
+RUN := r-1793928486363-469228
+
+COMPILE_PASS=HXYThreeSpaces.BanachForward
+C1_FORWARD=FAIL|AXIOM_AUDIT_UNAPPROVED=Classical.choice.{u} DECL=HXYThreeSpaces.banachExt_of_nativeRH
+COMPILE_PASS=HXYThreeSpaces.Banach
+C1_EQUIVALENCE=FAIL|AXIOM_AUDIT_UNAPPROVED=Classical.choice.{u} DECL=HXYThreeSpaces.nativeRH_iff_banachExt
+
+HXYThreeSpaces/HilbertForward.lean:144:8: error(lean.unknownIdentifier): Unknown identifier `integral_nonneg_ae`
+HXYThreeSpaces/HilbertForward.lean:145:2: error: No goals to be solved
+HXYThreeSpaces/HilbertForward.lean:216:4: error: Type mismatch: After simplification
+Actual continuous function: fun x => Complex.ofReal ((Subtype.val ^ n) x)
+Expected continuous function: fun q => Complex.ofReal ((q : Real) ^ n)
+HXYThreeSpaces/HilbertForward.lean:231:53: error: expected token
+HXYThreeSpaces/HilbertForward.lean:231:50: error(lean.synthInstanceFailed): LE Type
+HXYThreeSpaces/HilbertForward.lean:231:52: error(lean.synthInstanceFailed): OfNat Type 0
+C2_FORWARD=FAIL|LEAN_COMPILATION_FAILED
+C2_EQUIVALENCE=FAIL|DEPENDENCY_PREVIOUSLY_FAILED=HXYThreeSpaces.HilbertForward
+
+MODULE_CACHE_HIT=HXYThreeSpaces.HolomorphicForward
+C3_FORWARD=FAIL|AXIOM_AUDIT_UNAPPROVED=Classical.choice.{u} DECL=HXYThreeSpaces.holExt_of_nativeRH
+COMPILE=HXYThreeSpaces.Holomorphic
+C3_REVERSE_RESULT := NOT_SUPPLIED

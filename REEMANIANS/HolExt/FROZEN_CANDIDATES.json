@@ -1,0 +1,66 @@
+{
+  "schema": "HXY_THREE_FUNCTION_SPACE_CANDIDATES_V1",
+  "frozen_date": "2026-11-06",
+  "mode": "A_TIER_DERIVATION",
+  "source_anchor": "c6b95fd9e3d792270026da083bddddbc72bacb22",
+  "lean_toolchain": "leanprover/lean4:v4.33.0",
+  "mathlib_commit": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "mathematical_derivation": {
+    "file": "HXY_THREE_FUNCTION_SPACE_EQUIVALENCES_B_TIER.txt",
+    "sha256": "a5cce2443aaeb1e70a08ba0da6045d528337c4cceb1cb1984ada4db2913f03bd"
+  },
+  "candidates": [
+    {
+      "id": "C1",
+      "name": "BanachExt_xi",
+      "lean_predicate": "HXYThreeSpaces.BanachExt",
+      "semantics": "exists L : C([0,1],R) ->L[R] R, forall n, L(t^n)=actualNormalizedMoment n",
+      "positive_extension_required_as_input": false,
+      "forward": "HXYThreeSpaces.banachExt_of_nativeRH",
+      "reverse": "HXYThreeSpaces.nativeRH_of_banachExt",
+      "iff": "HXYThreeSpaces.nativeRH_iff_banachExt"
+    },
+    {
+      "id": "C2",
+      "name": "HilbertRep_xi",
+      "lean_predicate": "HXYThreeSpaces.HilbertRep",
+      "semantics": "exists complex Hilbert H and bounded complex-linear T and v, T selfadjoint, T positive, I-T positive, norm(v)=1, forall n, inner(v,T^n v)=actualNormalizedMoment n",
+      "canonical_witness": "L2([0,1],actualHausdorffMeasure), coordinate multiplication, constant one",
+      "forward": "HXYThreeSpaces.hilbertRep_of_nativeRH",
+      "reverse": "HXYThreeSpaces.nativeRH_of_hilbertRep",
+      "iff": "HXYThreeSpaces.nativeRH_iff_hilbertRep"
+    },
+    {
+      "id": "C3",
+      "name": "HolExt_xi",
+      "lean_predicate": "HXYThreeSpaces.HolExt",
+      "semantics": "exists complex G analytic on Omega={z | -1<Re z or Im z!=0}, G agrees near zero with actualLogDerivative(z/actualKappa)/actualKappa",
+      "normalized_entire_function": "F(z)=theta(z/actualKappa)/theta(0)",
+      "equivalent_ode": "Fprime=G*F on Omega",
+      "forward": "HXYThreeSpaces.holExt_of_nativeRH",
+      "reverse": "HXYThreeSpaces.nativeRH_of_holExt",
+      "iff": "HXYThreeSpaces.nativeRH_iff_holExt"
+    }
+  ],
+  "promotion": {
+    "conditional_label": "!!!!(cond on RH)",
+    "conditional_label_endpoint": "RiemannHypothesis -> candidate, exactly",
+    "required": [
+      "matching external native Windows Lean 4.33.0 compilation",
+      "exact theorem type with RH as the sole input",
+      "theorem-level transitive axiom audit",
+      "source-bound receipts and matching dependency/compiler identity"
+    ],
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "current_status": "A_TIER_CANDIDATE",
+    "current_promotions": [],
+    "iff_status_independent_of_forward_status": true
+  },
+  "runner_policy": "TRUSTED_FAST_V2",
+  "runtime_hashing": false,
+  "recursive_dependency_inventory": false
+}

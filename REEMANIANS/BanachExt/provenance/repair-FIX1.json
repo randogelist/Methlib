@@ -1,0 +1,19 @@
+{
+  "schema": "HXY_SOURCE_REPAIR_V1",
+  "revision": "FIX1",
+  "source": "HXYThreeSpaces/BanachForward.lean",
+  "declaration": "HXYThreeSpaces.hausdorffLinear",
+  "field": "map_smul'",
+  "previous_source_sha256_label": "ea565486d23676813b44f6ba93f19d9ee91c281846376e4131f31dcd92d595dd",
+  "new_source_sha256_label": "19eeed11168f96de5d77f62bd0c431e303f1c9328eed7faca0931d85bd4acb64",
+  "diagnostic_origin": "user_supplied_native_Windows_Lean_4.33.0_excerpt",
+  "diagnostic": "expected scalar (RingHom.id R) c; supplied scalar c after restricted simplification",
+  "repair": "change to the explicit real scalar equation; exact hausdorffValue_smul",
+  "theorem_statements_changed": false,
+  "premises_changed": false,
+  "frozen_upstream_sources_changed": false,
+  "runtime_hashing": false,
+  "local_lean_execution": false,
+  "external_fix1_compilation": "PENDING",
+  "external_fix1_axiom_audit": "PENDING"
+}

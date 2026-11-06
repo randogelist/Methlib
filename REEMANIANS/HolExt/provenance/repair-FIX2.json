@@ -1,0 +1,84 @@
+{
+  "schema": "HXY_SOURCE_REPAIR_V1",
+  "revision": "FIX2",
+  "baseline_revision": "FIX1",
+  "diagnostic_revision": "v0_1_0",
+  "diagnostic_origin": "user_attachment",
+  "diagnostic_file": "provenance/native-failure-v0_1_0.txt",
+  "mathlib_pin": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "modified_sources": [
+    {
+      "path": "HXYThreeSpaces/Banach.lean",
+      "previous_source_sha256_label": "d8312dead3ca71e023868c26df0529e9b12b5ed519c6dc710d70101700529583",
+      "source_sha256_label": "633c536365c72cc763f18647cae802531050bab3aa11ec4864d9d904b2dfb903",
+      "bytes": 6292
+    },
+    {
+      "path": "HXYThreeSpaces/BanachForward.lean",
+      "previous_source_sha256_label": "19eeed11168f96de5d77f62bd0c431e303f1c9328eed7faca0931d85bd4acb64",
+      "source_sha256_label": "9d2bb9b282ac93a6bf3c4658aa5e1ce0bbd5ca82320b14fc6b76fad70e73abfd",
+      "bytes": 2497
+    },
+    {
+      "path": "HXYThreeSpaces/Hilbert.lean",
+      "previous_source_sha256_label": "a924c33461af3310f6b01bfbaba7b57116a34275041d3c2fec2de9a411a612f9",
+      "source_sha256_label": "dbbcc5becbd02285913fe58caef3c0e2757ac365b0642a4c4f7479e08e5b8c95",
+      "bytes": 4333
+    },
+    {
+      "path": "HXYThreeSpaces/HilbertForward.lean",
+      "previous_source_sha256_label": "2b81ea1e3421f447558849b193d1ca676a2fede3234a09e844e4de12006b3504",
+      "source_sha256_label": "f647b7093c67dc66922efb3a81b900727516ca1df5de76bbeccc8da2cee557a8",
+      "bytes": 12461
+    },
+    {
+      "path": "HXYThreeSpaces/Holomorphic.lean",
+      "previous_source_sha256_label": "cafaaede6e8c4313770b1baf9b5c187ff0233b5c89d256f32020392e22947c4c",
+      "source_sha256_label": "70f5cc017ca3562b683eb2334bf006e79484274d979cb5131c7ac05e2c8d3338",
+      "bytes": 7235
+    },
+    {
+      "path": "HXYThreeSpaces/HolomorphicForward.lean",
+      "previous_source_sha256_label": "abcb3db485e1c270315176ad44695c75dafce88fa04a19e5d1318809df318940",
+      "source_sha256_label": "f273484ed1df2c3a00a4abf045980924aed69f3d02f0ab5d683908ce852793e9",
+      "bytes": 8353
+    }
+  ],
+  "repair_groups": {
+    "C1": [
+      "RingHom.id_apply in hausdorffLinear scalar field",
+      "same scalar normalization in polynomialRestriction"
+    ],
+    "C2": [
+      "explicit realMultiplierLinear unfolding",
+      "commutative scalar ring identity",
+      "RCLike.re and Complex.re normalization",
+      "Complex.ofReal of real powers and real integrals",
+      "explicit Lp scalar and exponent",
+      "real inner-self norm conversion",
+      "congrArg Complex.ofReal for calibrated moments",
+      "reverse positive-operator real-part normalization"
+    ],
+    "C3": [
+      "explicit AnalyticAt.comp g/f/x parameters",
+      "mul_div_cancel0 and complex unit conversion",
+      "div_eq_iff cancellation",
+      "germ composition reduction",
+      "matching reverse cancellation"
+    ]
+  },
+  "frozen_predicates_preserved": 3,
+  "frozen_endpoint_signatures_preserved": 9,
+  "frozen_upstream_sources_preserved": 118,
+  "HXY_and_aggregate_source_preserved": true,
+  "internal_helper_type_clarification": "unitVector_moment explicitly uses Complex.ofReal(real integral); monomials explicitly use Complex.ofReal(real power)",
+  "additional_research_premises": [],
+  "new_axioms_or_admissions": [],
+  "cache_family": "HXY_THREE_SPACES_433",
+  "native_runner_changed": false,
+  "runtime_hashing": false,
+  "local_lean_execution": false,
+  "external_compilation": "PENDING",
+  "exact_type_and_axiom_audit": "PENDING",
+  "classification": "A_TIER_CANDIDATE"
+}

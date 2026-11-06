@@ -1,0 +1,52 @@
+{
+  "schema": "HXY_EXACT_ENDPOINT_PROMOTION_V1",
+  "source_revision": "FIX6",
+  "distribution": "HXY_THREE_SPACES_433_v0_1_0_PASS.zip",
+  "evidence_file": "provenance/native-transcript-FIX6-pass.txt",
+  "evidence_origin": "user_supplied_native_console_excerpt",
+  "evidence_supporting_previous_file": "provenance/native-transcript-FIX5-partial.txt",
+  "classification": "A_TIER",
+  "unconditional_root": {
+    "declaration": "HXY_THREE_FUNCTION_SPACE_EQUIVALENCES",
+    "type": "(forall X Y : Nat, HXY X Y <-> RiemannHypothesis) /\\ (RiemannHypothesis <-> BanachExt) /\\ (RiemannHypothesis <-> HilbertRep) /\\ (RiemannHypothesis <-> HolExt)",
+    "marker": "!!!!",
+    "explicit_research_premises": [],
+    "unresolved_certificates_witnesses_checker_endpoints_admissions_semantic_or_analytic_premises": [],
+    "exact_type_check": "PASS",
+    "theorem_axiom_audit": "STANDARD_ONLY"
+  },
+  "conditional_construction": {
+    "declaration": "HXYThreeSpaces.all_three_of_nativeRH",
+    "type": "RiemannHypothesis -> BanachExt /\\ HilbertRep /\\ HolExt",
+    "marker": "!!!!(cond on RH)",
+    "premises": [
+      "RiemannHypothesis"
+    ],
+    "additional_unresolved_obligations": [],
+    "exact_type_check": "PASS",
+    "theorem_axiom_audit": "STANDARD_ONLY"
+  },
+  "equivalence_declarations": [
+    "HXYThreeSpaces.nativeRH_iff_banachExt",
+    "HXYThreeSpaces.nativeRH_iff_hilbertRep",
+    "HXYThreeSpaces.nativeRH_iff_holExt"
+  ],
+  "forward_declarations": [
+    "HXYThreeSpaces.banachExt_of_nativeRH",
+    "HXYThreeSpaces.hilbertRep_of_nativeRH",
+    "HXYThreeSpaces.holExt_of_nativeRH"
+  ],
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "post_validation_lean_changes": 0,
+  "preserved_lean_files": 127,
+  "preserved_upstream_lean_files": 118,
+  "runner_and_run_cmd_preserved": true,
+  "frozen_definitions_and_endpoint_signatures_preserved": true,
+  "local_lean_execution": false,
+  "runtime_hashing": false,
+  "run": "PASS"
+}

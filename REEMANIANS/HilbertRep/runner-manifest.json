@@ -1,0 +1,46 @@
+{
+  "schema": "HXY_THREE_SPACES_NATIVE_TRUSTED_2",
+  "package": "HXY_THREE_SPACES_433_v0_1_0_FIX6",
+  "cacheFamily": "HXY_THREE_SPACES_433",
+  "leanVersion": "4.33.0",
+  "leanToolchain": "leanprover/lean4:v4.33.0",
+  "mathlibRev": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "frozenCommit": "c6b95fd9e3d792270026da083bddddbc72bacb22",
+  "frozenManifest": "provenance/frozen-sources.json",
+  "candidates": [
+    {
+      "id": "C1",
+      "label": "BANACH_EXTENSION",
+      "module": "HXYThreeSpaces.Banach",
+      "forwardModule": "HXYThreeSpaces.BanachForward",
+      "equivalenceModule": "HXYThreeSpaces.Banach",
+      "predicate": "HXYThreeSpaces.BanachExt",
+      "forward": "HXYThreeSpaces.banachExt_of_nativeRH",
+      "equivalence": "HXYThreeSpaces.nativeRH_iff_banachExt"
+    },
+    {
+      "id": "C2",
+      "label": "HILBERT_REALIZATION",
+      "module": "HXYThreeSpaces.Hilbert",
+      "forwardModule": "HXYThreeSpaces.HilbertForward",
+      "equivalenceModule": "HXYThreeSpaces.Hilbert",
+      "predicate": "HXYThreeSpaces.HilbertRep",
+      "forward": "HXYThreeSpaces.hilbertRep_of_nativeRH",
+      "equivalence": "HXYThreeSpaces.nativeRH_iff_hilbertRep"
+    },
+    {
+      "id": "C3",
+      "label": "HOLOMORPHIC_EXTENSION",
+      "module": "HXYThreeSpaces.Holomorphic",
+      "forwardModule": "HXYThreeSpaces.HolomorphicForward",
+      "equivalenceModule": "HXYThreeSpaces.Holomorphic",
+      "predicate": "HXYThreeSpaces.HolExt",
+      "forward": "HXYThreeSpaces.holExt_of_nativeRH",
+      "equivalence": "HXYThreeSpaces.nativeRH_iff_holExt"
+    }
+  ],
+  "aggregateModule": "HXY_THREE_FUNCTION_SPACE_EQUIVALENCES",
+  "environmentPolicy": "TRUSTED_FAST_V2",
+  "axiomReferencePolicy": "EXACT_BASE_NAME_WITH_VALIDATED_UNIVERSE_ANNOTATION",
+  "axiomParserRevision": "FIX5_LEGACY_JSCRIPT_COMPAT"
+}

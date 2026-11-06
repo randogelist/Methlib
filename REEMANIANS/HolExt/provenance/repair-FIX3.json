@@ -1,0 +1,35 @@
+{
+  "schema": "HXY_SOURCE_REPAIR_V1",
+  "revision": "FIX3",
+  "baseline_revision": "FIX2",
+  "diagnostic_revision": "FIX2",
+  "diagnostic_file": "provenance/native-failure-FIX2-partial.txt",
+  "modified_sources": [
+    {
+      "path": "HXYThreeSpaces/BanachForward.lean",
+      "previous_source_sha256_label": "9d2bb9b282ac93a6bf3c4658aa5e1ce0bbd5ca82320b14fc6b76fad70e73abfd",
+      "source_sha256_label": "e09effb35073da93f0c2c61928030d2d3cb7c8c7c016d0480c1e0078b577af72",
+      "bytes": 2795
+    },
+    {
+      "path": "HXYThreeSpaces/HilbertForward.lean",
+      "previous_source_sha256_label": "f647b7093c67dc66922efb3a81b900727516ca1df5de76bbeccc8da2cee557a8",
+      "source_sha256_label": "9f59a136611a2ca31ab1347ab45ab72fa42bd7cec26ddf1e3092432f1159bf9f",
+      "bytes": 12598
+    }
+  ],
+  "repair": "rfl map-evaluation lemmas followed by explicit norm-bound rewriting",
+  "frozen_predicates_preserved": 3,
+  "frozen_endpoint_signatures_preserved": 9,
+  "upstream_sources_preserved": 118,
+  "additional_premises": [],
+  "new_axioms_or_admissions": [],
+  "runner_unchanged": true,
+  "cache_family": "HXY_THREE_SPACES_433",
+  "runtime_hashing": false,
+  "local_lean_execution": false,
+  "external_compilation": "PENDING",
+  "axiom_audit": "PENDING",
+  "classification": "A_TIER_CANDIDATE",
+  "adjacent_evaluation_repair": "hausdorffBounded_monomial explicitly rewrites LinearMap.mkContinuous_apply and hausdorffLinear_apply"
+}

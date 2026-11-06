@@ -1,0 +1,85 @@
+DULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalQuotientThetaCharacteristicGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.UnconditionalLagariasEquivalence
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CompletedLFunctionInstance
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalProductPairedGrowth
+MODULE_CACHE_HIT=AngularMaster.ActualHadamard
+MODULE_CACHE_HIT=AngularMaster.ComplexScaleProduct
+MODULE_CACHE_HIT=AngularMaster.ZeroGeometry
+MODULE_CACHE_HIT=AngularMaster.ThetaKernelExplicitBound
+MODULE_CACHE_HIT=AngularMaster.ZeroFreeSeed
+MODULE_CACHE_HIT=OriginTrace
+MODULE_CACHE_HIT=AngularMaster.QQRHGeometry
+MODULE_CACHE_HIT=AngularMaster.LowHeightGeometry
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualCalibrationProgress
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualMomentReality
+MODULE_CACHE_HIT=RH_HilbertLimit.Spectral
+MODULE_CACHE_HIT=RH_HilbertLimit.Growth
+MODULE_CACHE_HIT=RH_HilbertLimit.Vandermonde
+MODULE_CACHE_HIT=RH_HilbertLimit.Main
+MODULE_CACHE_HIT=RH_HilbertLimit.GrowthStep
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralTail
+MODULE_CACHE_HIT=RH_HilbertLimit.CanonicalBridge
+MODULE_CACHE_HIT=RH_HilbertLimit.CanonicalPowerSums
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralPhase
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralGenerating
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralExtraction
+MODULE_CACHE_HIT=RH_HilbertLimit.AnalyticClosure
+MODULE_CACHE_HIT=RH_HilbertLimit.Cancellation
+MODULE_CACHE_HIT=RH_HilbertLimit.EventualGrowth
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualCancellationWitness
+MODULE_CACHE_HIT=RH_HilbertLimit.ZeroBudgetCandidate
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.RouteOne
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ActualPositivePrefix
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.HausdorffMeasure
+MODULE_CACHE_HIT=HXYThreeSpaces.BanachForward
+EXACT_TYPE_CHECK=PASS|HXYThreeSpaces.banachExt_of_nativeRH
+AXIOM_AUDIT_STANDARD_ONLY=HXYThreeSpaces.banachExt_of_nativeRH
+C1_FORWARD=PASS
+MODULE_CACHE_HIT=HXYThreeSpaces.Banach
+EXACT_TYPE_CHECK=PASS|HXYThreeSpaces.nativeRH_iff_banachExt
+AXIOM_AUDIT_STANDARD_ONLY=HXYThreeSpaces.nativeRH_iff_banachExt
+C1_EQUIVALENCE=PASS
+MODULE_CACHE_HIT=HXYThreeSpaces.HilbertForward
+EXACT_TYPE_CHECK=PASS|HXYThreeSpaces.hilbertRep_of_nativeRH
+AXIOM_AUDIT_STANDARD_ONLY=HXYThreeSpaces.hilbertRep_of_nativeRH
+C2_FORWARD=PASS
+MODULE_CACHE_HIT=HXYThreeSpaces.Hilbert
+EXACT_TYPE_CHECK=PASS|HXYThreeSpaces.nativeRH_iff_hilbertRep
+AXIOM_AUDIT_STANDARD_ONLY=HXYThreeSpaces.nativeRH_iff_hilbertRep
+C2_EQUIVALENCE=PASS
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ResolventAnalytic
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ActualHerglotzClosure
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ActualResolventContinuation
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.MeasureResolvent
+MODULE_CACHE_HIT=HXYThreeSpaces.HolomorphicForward
+EXACT_TYPE_CHECK=PASS|HXYThreeSpaces.holExt_of_nativeRH
+AXIOM_AUDIT_STANDARD_ONLY=HXYThreeSpaces.holExt_of_nativeRH
+C3_FORWARD=PASS
+COMPILE=HXYThreeSpaces.Holomorphic
+LEAN_EXIT=1|LOG=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0_FIX5\evidence\r-1793929957453-787198\compile\HXYThreeSpaces.Holomorphic.log
+HXYThreeSpaces\Holomorphic.lean:102:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+HXYThreeSpaces\Holomorphic.lean:105:4: error: Type mismatch
+  LE.le.trans (add_le_add_right hle 1) ?m.272
+has type
+  1 + analyticOrderAt Y z ≤ ?m.267
+but is expected to have type
+  analyticOrderAt Y z + 1 ≤ analyticOrderAt Y z
+HXYThreeSpaces\Holomorphic.lean:165:4: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+
+C3_EQUIVALENCE=FAIL|LEAN_COMPILATION_FAILED=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0_FIX5\evidence\r-1793929957453-787198\compile\HXYThreeSpaces.Holomorphic.log
+C1_CLOSURE=!!!!(cond on RH)
+C1_EQUIVALENCE_A_TIER=!!
+C2_CLOSURE=!!!!(cond on RH)
+C2_EQUIVALENCE_A_TIER=!!
+C3_CLOSURE=!!!!(cond on RH)
+CACHE_REUSED_MODULES=106
+CACHE_MIGRATED_MODULES=0
+CACHE_COMPILED_MODULES=0
+PREMISE_FREE_RH=NOT_CLAIMED
+RUN=PARTIAL_OR_FAILED
+
+C:\Users\Simon\Downloads>

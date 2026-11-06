@@ -1,0 +1,187 @@
+E_MANIFEST_LABELS=LOADED|FROZEN=118|NEW=9
+SOURCE_RECEIPT_IDENTITY=EXACT_UTF8_TEXT
+PROJECT_CACHE=C:\Users\Simon\AppData\Local\LEAN_ANCHORINGS\HXY_THREE_SPACES_433
+Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+ENVIRONMENT=TRUSTED_FAST_V2
+RUNTIME_HASHING=NONE
+RECURSIVE_EXTERNAL_CACHE_SCAN=NONE
+MATHLIB_CACHE=C:\Users\Simon\lean-native\awpi_phi_rh_lean_sieved_v0_1_1
+DEPENDENCY_DOWNLOAD=DISABLED
+MATHLIB_REBUILD=DISABLED
+MODULE_CACHE_HIT=RH_HilbertLimit.Bernstein
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.PositiveMomentBridge
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.BernsteinMomentLimit
+MODULE_CACHE_HIT=AWPIRH.XiCore
+MODULE_CACHE_HIT=AWPIRH.ThetaEntire
+MODULE_CACHE_HIT=RH_HilbertLimit.Geometry
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualXi
+MODULE_CACHE_HIT=AngularMaster.ZeroExclusion
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.GrowthRigidity
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.RealPartGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.ProximityGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.AntiHerglotz
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.LogDerivative
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.GenusOne
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.InfiniteProducts
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.LogDerivative
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.CanonicalProductGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.DyadicZeroCount
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.CanonicalProductDyadicGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.PairedGenusOne
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.PairedCanonicalProductGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.CanonicalProductDivisor
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.IndexedRealZeroSign
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.PoleProbe
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.RealSymmetry
+MODULE_CACHE_HIT=RiemannHypothesis.RealZeros.Engine
+MODULE_CACHE_HIT=RiemannHypothesis.RealZeros.EntireFunctions
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.CompletedLFunction
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.Definitions
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.FunctionalEquation
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.Pullback
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.SignTargets
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalDivisor
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.CanonicalProductMultiplicity
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalProductCharacteristicGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.EvenAnalyticOrder
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.EntireQuotient
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.BacklundTuringBridge
+MODULE_CACHE_HIT=RiemannHypothesis.GammaCancellation.PoleSet
+MODULE_CACHE_HIT=RiemannHypothesis.GammaCancellation.CompletedZeta
+MODULE_CACHE_HIT=RiemannHypothesis.GammaCancellation.TextbookXi
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.RiemannHypothesisBridge
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.ZetaMultiplicityBridge
+MODULE_CACHE_HIT=RiemannHypothesis.ZeroCounting.SmoothMainTerm
+MODULE_CACHE_HIT=RiemannHypothesis.ZeroCounting.ZetaZeros
+MODULE_CACHE_HIT=RiemannHypothesis.Reduction.BacklundCanonicalDivisor
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.DyadicZeroCountBridge
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.ExponentialPrefactor
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.NatZeroData
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.RealZeroSign
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.StrictRealZeroCriterion
+MODULE_CACHE_HIT=RiemannHypothesis.HadamardProduct.OriginMultiplicityCriterion
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.StrictLagariasCriterion
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.HadamardLogDerivativeCriterion
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalQuotientCriterion
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalProductSymmetry
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalQuotientLogNormGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalQuotientCharacteristicGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.MellinGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.ThetaKernelMellinGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.ComplexAnalysis.FactorialDyadicGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.JensenDyadicCountBridge
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.EntireXiMellinGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.EntireXiLogNormGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalQuotientThetaCharacteristicGrowth
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.UnconditionalLagariasEquivalence
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CompletedLFunctionInstance
+MODULE_CACHE_HIT=RiemannHypothesis.Xi.CanonicalProductPairedGrowth
+MODULE_CACHE_HIT=AngularMaster.ActualHadamard
+MODULE_CACHE_HIT=AngularMaster.ComplexScaleProduct
+MODULE_CACHE_HIT=AngularMaster.ZeroGeometry
+MODULE_CACHE_HIT=AngularMaster.ThetaKernelExplicitBound
+MODULE_CACHE_HIT=AngularMaster.ZeroFreeSeed
+MODULE_CACHE_HIT=OriginTrace
+MODULE_CACHE_HIT=AngularMaster.QQRHGeometry
+MODULE_CACHE_HIT=AngularMaster.LowHeightGeometry
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualCalibrationProgress
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualMomentReality
+MODULE_CACHE_HIT=RH_HilbertLimit.Spectral
+MODULE_CACHE_HIT=RH_HilbertLimit.Growth
+MODULE_CACHE_HIT=RH_HilbertLimit.Vandermonde
+MODULE_CACHE_HIT=RH_HilbertLimit.Main
+MODULE_CACHE_HIT=RH_HilbertLimit.GrowthStep
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralTail
+MODULE_CACHE_HIT=RH_HilbertLimit.CanonicalBridge
+MODULE_CACHE_HIT=RH_HilbertLimit.CanonicalPowerSums
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralPhase
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralGenerating
+MODULE_CACHE_HIT=RH_HilbertLimit.SpectralExtraction
+MODULE_CACHE_HIT=RH_HilbertLimit.AnalyticClosure
+MODULE_CACHE_HIT=RH_HilbertLimit.Cancellation
+MODULE_CACHE_HIT=RH_HilbertLimit.EventualGrowth
+MODULE_CACHE_HIT=RH_HilbertLimit.ActualCancellationWitness
+MODULE_CACHE_HIT=RH_HilbertLimit.ZeroBudgetCandidate
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.RouteOne
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ActualPositivePrefix
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.HausdorffMeasure
+MODULE_CACHE_HIT=HXYThreeSpaces.BanachForward
+C1_FORWARD=FAIL|AXIOM_AUDIT_MALFORMED_UNIVERSES=propext DECL=HXYThreeSpaces.banachExt_of_nativeRH
+MODULE_CACHE_HIT=HXYThreeSpaces.Banach
+C1_EQUIVALENCE=FAIL|AXIOM_AUDIT_MALFORMED_UNIVERSES=propext DECL=HXYThreeSpaces.nativeRH_iff_banachExt
+COMPILE=HXYThreeSpaces.HilbertForward
+COMPILE_PASS=HXYThreeSpaces.HilbertForward
+C2_FORWARD=FAIL|AXIOM_AUDIT_MALFORMED_UNIVERSES=propext DECL=HXYThreeSpaces.hilbertRep_of_nativeRH
+COMPILE=HXYThreeSpaces.Hilbert
+LEAN_EXIT=1|LOG=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0_FIX4\evidence\r-1793929056384-307416\compile\HXYThreeSpaces.Hilbert.log
+HXYThreeSpaces\Hilbert.lean:34:26: warning: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+HXYThreeSpaces\Hilbert.lean:40:17: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+HXYThreeSpaces\Hilbert.lean:41:8: warning: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+HXYThreeSpaces\Hilbert.lean:41:40: error(lean.unknownIdentifier): Unknown constant `ContinuousLinearMap.one_apply_eq_self`
+HXYThreeSpaces\Hilbert.lean:43:6: error: 'change' tactic failed, pattern
+  c * u n = (↑c * ↑(u n)).re
+is not definitionally equal to target
+  c * u n = ((algebraMap ℝ ℂ) c * ⟪v, 1 ((T ^ n) v)⟫_ℂ).re
+HXYThreeSpaces\Hilbert.lean:42:26: warning: This simp argument is unused:
+  hmom
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [ContinuousLinearMap.mul_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.one_apply_eq_self, inner_smul_right]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+HXYThreeSpaces\Hilbert.lean:61:69: error: Invalid field notation: Identifier or numeral expected
+HXYThreeSpaces\Hilbert.lean:51:45: error: unsolved goals
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+u : ℕ → ℝ
+T : H →L[ℂ] H
+v : H
+hT : T.IsPositive
+hI : (1 - T).IsPositive
+hmom : ∀ (n : ℕ), ⟪v, (T ^ n) v⟫_ℂ = ↑(u n)
+N j : ℕ
+hT0 : 0 ≤ T
+hI0 : 0 ≤ 1 - T
+hcomm : Commute T (1 - T)
+hprod : 0 ≤ T ^ j * (1 - T) ^ (N - j)
+⊢ 0 ≤ bernsteinWeight u N j
+HXYThreeSpaces\Hilbert.lean:89:2: warning: Try this:
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+HXYThreeSpaces\Hilbert.lean:91:2: warning: Try this:
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+HXYThreeSpaces\Hilbert.lean:93:2: warning: Try this:
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+
+C2_EQUIVALENCE=FAIL|LEAN_COMPILATION_FAILED=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0_FIX4\evidence\r-1793929056384-307416\compile\HXYThreeSpaces.Hilbert.log
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ResolventAnalytic
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ActualHerglotzClosure
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.ActualResolventContinuation
+MODULE_CACHE_HIT=RH_HilbertLimit.TwoRoutes.MeasureResolvent
+MODULE_CACHE_HIT=HXYThreeSpaces.HolomorphicForward

@@ -1,0 +1,745 @@
+HXY_THREE_FUNCTION_SPACE_EQUIVALENCES_A_TIER
+PACKAGE := HXY_THREE_SPACES_433_v0_1_0_PASS
+VERIFIED_SOURCE_PACKAGE := HXY_THREE_SPACES_433_v0_1_0_FIX6
+VERSION := v0_1_0_FIX6_PASS
+RUNNER_REVISION := TRUSTED_FAST_V2
+DISTRIBUTION := HXY_THREE_SPACES_433_v0_1_0_PASS.zip
+DATE := 2026-11-06
+MODE := A_TIER_DERIVATION
+CURRENT_CLASSIFICATION := A_TIER
+ROOT_CLOSURE := UNCONDITIONAL_CLOSURE
+ROOT_MARKER := !!!!
+CLASSIFICATION_SCOPE := exact frozen equivalence conjunction and RH constructions
+POST_VALIDATION_LEAN_CHANGES := 0
+PASSED_FORWARDS := {C1, C2, C3}; EACH := A_TIER; MARKER := !!!!(cond on RH)
+PASSED_EQUIVALENCES := {C1, C2, C3}; EACH := A_TIER; MARKER := !!
+EVIDENCE_ORIGIN := USER_SUPPLIED_FIX6_NATIVE_CONSOLE_EXCERPT
+EVIDENCE_FILE := provenance/native-transcript-FIX6-pass.txt
+SUPPORTING_EVIDENCE := provenance/native-transcript-FIX5-partial.txt
+PROMOTION_RECORD := provenance/promotion-FIX6.json
+
+FROZEN_CANDIDATES := {C1, C2, C3}
+FREEZE_RECORD := FROZEN_CANDIDATES.json
+FREEZE_RECORD_STATUS := historical freeze-time values
+CURRENT_STATUS_RECORD := STATUS.json
+MUTABLE_SCOPE := NONE
+
+======================================================================
+0. EXACT ROOT
+======================================================================
+
+  [forall X,Y in N, HXY X Y <=> RiemannHypothesis]
+  /\ [RiemannHypothesis <=> BanachExt]
+  /\ [RiemannHypothesis <=> HilbertRep]
+  /\ [RiemannHypothesis <=> HolExt].
+
+  Public declaration:
+    HXY_THREE_FUNCTION_SPACE_EQUIVALENCES
+
+  Public source:
+    HXY_THREE_FUNCTION_SPACE_EQUIVALENCES.lean
+
+  Deterministic composition:
+    HXYThreeSpaces.Main
+    HXYThreeSpaces.frozen_three_equivalences
+    HXYThreeSpaces.frozen_HXY_equivalences
+
+  Ordinary native endpoint:
+    _root_.RiemannHypothesis
+
+  Explicit additional research premises:
+    NONE in any prepared forward, reverse, or equivalence endpoint.
+
+  Native FIX6 exact endpoint validation:
+    C1 forward and equivalence := PASS.
+    C2 forward and equivalence := PASS.
+    C3 forward and equivalence := PASS.
+    Public equivalence conjunction := PASS.
+    Exact all-three RH construction := PASS.
+    RUN := PASS.
+    Axiom dependencies subset := {propext, Classical.choice, Quot.sound}.
+
+  Root conclusion := the displayed equivalence conjunction.
+  Root research premises := NONE.
+  Root unresolved obligations := NONE.
+  Root closure := UNCONDITIONAL_CLOSURE; !!!!.
+
+  Construction conclusion := BanachExt /\ HilbertRep /\ HolExt.
+  Construction input := RH only.
+  Additional construction obligations := NONE.
+  Construction marker := !!!!(cond on RH).
+
+======================================================================
+1. ACTUAL DATA AND NORMALIZATION
+======================================================================
+
+  theta := AWPIRH.theta, the fixed actual completed-xi construction.
+  kappa := RH_HilbertLimit.actualKappa.
+  kappa > 0 := retained source theorem actualKappa_pos.
+
+  F(z) := theta(z/kappa) / theta(0).
+  g(z) := actualLogDerivative(z/kappa) / kappa.
+  u_n := RH_HilbertLimit.actualNormalizedMoment n.
+  I := [0,1].
+  Omega := {z in C : -1 < Re(z) or Im(z) != 0}
+         = C \ (-infinity,-1].
+
+  The normalized F/g identity has a new explicit proof body:
+    HXYThreeSpaces.normalizedLogDerivative_eq_logDerivative.
+
+  All moment predicates quantify over every natural degree.
+  No finite truncation replaces the all-order identities.
+
+======================================================================
+2. C1 -- BANACH EXTENSION
+======================================================================
+
+PREDICATE
+  BanachExt := exists L in C(I,R)^*, forall n in N, L(t^n)=u_n.
+
+  L is a bounded real-linear map.
+  Positivity is not an input.
+  Matching every monomial is proved equivalent to matching the original
+  polynomial moment functional on every real polynomial.
+
+FORWARD SOURCE
+  HXYThreeSpaces/BanachForward.lean
+
+FORWARD ENDPOINT
+  HXYThreeSpaces.banachExt_of_nativeRH :
+    RiemannHypothesis -> HXYThreeSpaces.BanachExt.
+
+FORWARD CONSTRUCTION
+  RH -> H00 -> actual Bernstein positivity
+     -> retained Hausdorff functional
+     -> linear map with proved norm bound
+     -> continuous linear functional with every actual moment.
+
+REVERSE SOURCE
+  HXYThreeSpaces/Banach.lean
+
+REVERSE ENDPOINT
+  HXYThreeSpaces.nativeRH_of_banachExt :
+    HXYThreeSpaces.BanachExt -> RiemannHypothesis.
+
+REVERSE CONSTRUCTION
+  Bounded extension
+    -> signed Bernstein test function with sup norm <= 1
+    -> forall N, V_N <= norm L
+    -> natural uniform bound
+    -> retained constructed HVR criterion
+    -> native RH.
+
+IFF ENDPOINT
+  HXYThreeSpaces.nativeRH_iff_banachExt :
+    RiemannHypothesis <-> HXYThreeSpaces.BanachExt.
+
+STATUS
+  Mathematical derivation := B_TIER, !.
+  Forward exact theorem := A_TIER; !!!!(cond on RH).
+  Equivalence exact theorem := A_TIER; !!.
+  Evidence := user-reported native exact-type and standard-only audit PASS; FIX6 RUN=PASS.
+  PASS archive proof source and dependency closure := byte-preserved from FIX6.
+  Additional input to the equivalence theorem := NONE.
+  Input to the construction theorem := RH only.
+
+======================================================================
+3. C2 -- COMPLEX HILBERT POSITIVE-CONTRACTION REALIZATION
+======================================================================
+
+PREDICATE
+  HilbertRep := exists H,T,v,
+    H is a complex complete inner-product space,
+    T:H->H is bounded and complex-linear,
+    T=T*, T is positive, I-T is positive,
+    norm v=1,
+    forall n in N, inner_C v (T^n v)=(u_n:C).
+
+  The existential witness is a type in Type 0, sufficient for the canonical
+  complex L2 realization. The reverse lemmas are universe-polymorphic.
+  The instance binders are explicit in the formal predicate.
+
+FORWARD SOURCE
+  HXYThreeSpaces/HilbertForward.lean
+
+FORWARD ENDPOINT
+  HXYThreeSpaces.hilbertRep_of_nativeRH :
+    RiemannHypothesis -> HXYThreeSpaces.HilbertRep.
+
+FORWARD CONSTRUCTION
+  RH -> H00 -> actualHausdorffMeasure sigma
+     -> H = Lp C 2 sigma
+     -> T = coordinate multiplication
+     -> v = constant one
+     -> boundedness, selfadjointness, positivity of T and I-T
+     -> all natural powers and actual moments.
+
+REVERSE SOURCE
+  HXYThreeSpaces/Hilbert.lean
+
+REVERSE ENDPOINT
+  HXYThreeSpaces.nativeRH_of_hilbertRep :
+    HXYThreeSpaces.HilbertRep -> RiemannHypothesis.
+
+REVERSE CONSTRUCTION
+  Positive contraction
+    -> commuting positive powers T^j and (I-T)^(N-j)
+    -> positive Bernstein polynomial operators
+    -> nonnegative actual Bernstein weights
+    -> H00
+    -> native RH.
+
+IFF ENDPOINT
+  HXYThreeSpaces.nativeRH_iff_hilbertRep :
+    RiemannHypothesis <-> HXYThreeSpaces.HilbertRep.
+
+STATUS
+  Mathematical derivation := B_TIER, !.
+  Forward exact theorem := A_TIER; !!!!(cond on RH).
+  Equivalence exact theorem := A_TIER; !!.
+  Evidence := user-reported native exact-type and standard-only audit PASS; FIX6 RUN=PASS.
+  PASS archive proof source and dependency closure := byte-preserved from FIX6.
+  Additional input to the equivalence theorem := NONE.
+  Input to the construction theorem := RH only.
+
+======================================================================
+4. C3 -- HOLOMORPHIC EXTENSION ON THE FIXED CUT PLANE
+======================================================================
+
+PREDICATE
+  HolExt := exists G:C->C,
+    AnalyticOnNhd C G Omega,
+    g = G on a neighborhood of 0.
+
+  On the open set Omega, complex analyticity is the holomorphic endpoint.
+  No positivity, measure representation, or ODE witness is an input.
+
+FORWARD SOURCE
+  HXYThreeSpaces/HolomorphicForward.lean
+
+FORWARD ENDPOINT
+  HXYThreeSpaces.holExt_of_nativeRH :
+    RiemannHypothesis -> HXYThreeSpaces.HolExt.
+
+FORWARD CONSTRUCTION
+  RH -> H00 -> actualHausdorffMeasure sigma
+     -> G(z) = integral_I (1+zt)^(-1) d sigma(t)
+     -> analyticity on Omega
+     -> equality with the normalized actual germ.
+
+REVERSE SOURCE
+  HXYThreeSpaces/Holomorphic.lean
+
+REVERSE ENDPOINT
+  HXYThreeSpaces.nativeRH_of_holExt :
+    HXYThreeSpaces.HolExt -> RiemannHypothesis.
+
+REVERSE CONSTRUCTION
+  Germ equality -> analytic defect Fprime-GF vanishes near zero
+     -> defect vanishes on connected Omega
+     -> analytic-order contradiction at any zero in Omega
+     -> real theta zeros
+     -> actual xi zero geometry
+     -> native RH.
+
+ADDITIONAL EXACT IDENTITY
+  HXYThreeSpaces.holExt_iff_holODE : HolExt <-> HolODE,
+  HolODE := exists G analytic on Omega, Fprime = G*F on Omega.
+
+IFF ENDPOINT
+  HXYThreeSpaces.nativeRH_iff_holExt :
+    RiemannHypothesis <-> HXYThreeSpaces.HolExt.
+
+STATUS
+  Mathematical derivation := B_TIER, !.
+  Forward exact theorem := A_TIER; !!!!(cond on RH).
+  Equivalence exact theorem := A_TIER; !!.
+  C3 equivalence exact-type check := PASS.
+  C3 equivalence theorem-level axiom audit := STANDARD_ONLY.
+  Evidence := user-reported FIX6 native transcript; C3_EQUIVALENCE=PASS.
+  PASS archive proof source and dependency closure := byte-preserved from FIX6.
+  Additional input to the equivalence theorem := NONE.
+  Input to the construction theorem := RH only.
+
+======================================================================
+5. H_XY AND DETERMINISTIC FINAL COMPOSITION
+======================================================================
+
+  HXY X Y := CancellationBudget.Admissible <X,Y>.
+
+  Fixed-pair declaration:
+    HXYThreeSpaces.HXY_iff_nativeRH X Y.
+
+  Cross-endpoint declarations:
+    HXYThreeSpaces.HXY_iff_banachExt X Y;
+    HXYThreeSpaces.HXY_iff_hilbertRep X Y;
+    HXYThreeSpaces.HXY_iff_holExt X Y.
+
+  Conditional common construction:
+    HXYThreeSpaces.all_three_of_nativeRH :
+      RH -> BanachExt /\ HilbertRep /\ HolExt.
+
+  The proof of RH is temporary in each forward theorem.
+  Every biconditional has both directed proof bodies.
+  No admissible H_XY pair is constructed without RH or an equivalent input.
+
+======================================================================
+6. PROMOTION CONTRACT
+======================================================================
+
+  Requested qualified label:
+    !!!!(cond on RH).
+
+  Endpoint denoted by that label for C_i:
+    The exact theorem RH -> C_i has passed external compilation and the
+    theorem-level axiom audit; every construction obligation except the
+    displayed RH hypothesis is discharged.
+
+  Required evidence:
+    1. Matching native Windows Lean 4.33.0 compiler identity.
+    2. Recorded exact project source and matching pinned compiler/package identities.
+    3. Successful external compilation of the endpoint and its dependencies.
+    4. Exact-type wrapper with RH as its sole input.
+    5. Transitive theorem-level axiom audit.
+    6. Axiom set subset {propext, Classical.choice, Quot.sound}.
+
+  Explicit exclusions from promotion:
+    Prepared code alone;
+    historical receipts for different declarations;
+    source inspection alone;
+    a wrapper containing unresolved construction hypotheses;
+    a partial compile or missing audit;
+    sorryAx or any unapproved axiom.
+
+  The forward and equivalence statuses are separately recorded.
+  A successful forward audit can certify the qualified RH-construction
+  label even if a different candidate or a reverse module needs repair.
+
+  Bare !!!! is now assigned to the exact hypothesis-free equivalence root,
+  on the supplied matching native compile/type/axiom-audit evidence.
+  The construction marker remains !!!!(cond on RH).
+  RH itself is not proved by this package.
+
+======================================================================
+7. CACHE AND PROVENANCE
+======================================================================
+
+  Frozen upstream:
+    https://github.com/randogelist/Hilber-Vector-Resolvent-Theory
+    commit c6b95fd9e3d792270026da083bddddbc72bacb22.
+
+  Toolchain:
+    leanprover/lean4:v4.33.0.
+
+  Pinned Mathlib:
+    db584cd6d46c92f209a44c0f1c829460d327499d.
+
+  Preserved upstream Lean sources:
+    118 files; byte-preserved; reference manifest in
+    provenance/frozen-sources.json.
+    The reference hashes are archival data, not a runtime hashing task.
+
+  Cached historical evidence:
+    GitHub run 40712534224; previously inspected 641-declaration audit.
+    Applies to the named upstream declarations only.
+    Does not certify this new source package.
+
+  Native execution:
+    run.cmd; TRUSTED_FAST_V2; existing cached Mathlib.
+    Runtime cryptographic hashing := DISABLED.
+    Recursive external-cache inventory := DISABLED.
+    Project source content and direct artifact metadata determine cache reuse.
+    Compatible receipts from the previous runner remain eligible for reuse.
+    New or unreceipted project modules compile on the user's native target.
+    Compiler version, pinned package revisions, exact endpoint types, and
+    theorem-level standard-only axiom audits remain mandatory.
+    No local assistant Lean/Lake/compiler execution.
+
+  Complete mathematical derivation:
+    HXY_THREE_FUNCTION_SPACE_EQUIVALENCES_B_TIER.txt.
+
+FINAL_STATUS
+  C1_FORWARD := A_TIER; C1_CLOSURE := !!!!(cond on RH).
+  C1_EQUIVALENCE := A_TIER; C1_EQUIVALENCE_A_TIER := !!.
+  C2_FORWARD := A_TIER; C2_CLOSURE := !!!!(cond on RH).
+  C2_EQUIVALENCE := A_TIER; C2_EQUIVALENCE_A_TIER := !!.
+  C3_FORWARD := A_TIER; C3_CLOSURE := !!!!(cond on RH).
+  C3_EQUIVALENCE := A_TIER; C3_EQUIVALENCE_A_TIER := !!.
+  HXY_THREE_FUNCTION_SPACE_EQUIVALENCES := A_TIER; UNCONDITIONAL_CLOSURE; !!!!.
+  HXYThreeSpaces.all_three_of_nativeRH := A_TIER; !!!!(cond on RH).
+  ROOT_EQUIVALENCES := PASS.
+  ROOT_RH_CONSTRUCTIONS := PASS.
+  RUN := PASS.
+  Native evidence := USER_REPORTED_EXACT_TYPE_AND_STANDARD_AXIOM_PASS.
+  Latest evidence := provenance/native-transcript-FIX6-pass.txt.
+  Supporting evidence := provenance/native-transcript-FIX5-partial.txt.
+  Raw individual audit receipts := not supplied in these excerpts.
+  Exact equivalence root unresolved obligations := NONE.
+  Additional construction obligations beyond RH := NONE.
+  Source edits after successful external validation := NONE.
+  Premise-free RH := NOT_CLAIMED.
+  Textbook GRH / finite-checker equivalence := outside this theorem.
+
+END_CURRENT_STATUS
+
+HISTORICAL_REPAIR_RECORDS
+  Status fields below record earlier preparation-time observations.
+  Latest authoritative closure := FINAL_STATUS above and the PASS record below.
+
+======================================================================
+FIX1. NATIVE SCALAR-ELABORATION REPAIR
+======================================================================
+
+  Prior external observation := user-supplied native run excerpt.
+  Prior C1_FORWARD := FAIL at BanachForward.lean:35.
+  Prior C1_EQUIVALENCE := BLOCKED by BanachForward.
+  Prior C2/C3 audit results := NOT_SUPPLIED.
+
+  Cause := scalar target contains (RingHom.id R) c.
+  Replacement := explicit definitional target normalization via change,
+                 followed by the retained hausdorffValue_smul theorem.
+  Modified Lean declarations := hausdorffLinear proof field only.
+  Modified candidate predicates / theorem statements / premises := NONE.
+  Preserved upstream Lean files := 118/118.
+  Source repair record := provenance/repair-FIX1.json.
+
+  Cache family := HXY_THREE_SPACES_433 (unchanged).
+  Compatible successful module receipts := REUSED.
+  Changed source and dependent modules := RECOMPILED as needed.
+  Runtime hashing := DISABLED.
+  Local Lean execution := NONE.
+  FIX1 external compilation / exact-type audit / axiom audit := PENDING.
+  FIX1 classification := A_TIER_CANDIDATE.
+
+======================================================================
+FIX2. FULL NATIVE DIAGNOSTIC REPAIR
+======================================================================
+
+  Imported evidence := provenance/native-failure-v0_1_0.txt.
+  Observed revision := v0_1_0; no FIX1 result supplied.
+  Observed C1/C2/C3 forward modules := FAIL.
+  Observed C1/C2/C3 equivalences := BLOCKED by corresponding forwards.
+  Observed upstream project modules compiled := 95.
+  Observed legacy modules migrated := 6.
+  New candidate promotions := NONE.
+
+  C1 scalar field:
+    Explicit RingHom.id_apply and smul_eq_mul.
+    Retained hausdorffValue_smul is the proof input.
+    Matching scalar normalization in polynomialRestriction.
+
+  C2 Hilbert construction:
+    Explicit reduction of the bundled multiplication map.
+    Commutative scalar multiplication normalization.
+    Explicit RCLike.re / Complex.re conversion.
+    Explicit real-valued monomials and real Bochner integrals.
+    Complex.ofReal transports the real moment identity.
+    The auxiliary moment theorem explicitly types its integral as real.
+    Reverse operator positivity normalizes RCLike.re to Complex.re.
+    Explicit Lp exponent and scalar parameters.
+
+  C3 holomorphic construction:
+    Explicit analytic composition function and point parameters.
+    Exact nonzero-scalar cancellation; explicit complex unit cast.
+    Explicit Function.comp reduction for the germ equality.
+    Matching cancellation repaired in the reverse implication.
+
+  Frozen candidate predicates := UNCHANGED.
+  Frozen forward / reverse / iff / aggregate endpoints := UNCHANGED.
+  Additional premises / admitted proofs / axioms := NONE ADDED.
+  Mathematical B-tier derivation := UNCHANGED.
+  Lean / Mathlib / HVR pins := UNCHANGED.
+  Native runner := UNCHANGED, TRUSTED_FAST_V2.
+  Cache family := UNCHANGED, HXY_THREE_SPACES_433.
+  Runtime cryptographic hashing / recursive cache scan := DISABLED.
+  Local Lean / Lake / compiler execution := NONE.
+
+  Source repair record := provenance/repair-FIX2.json.
+  Modified new Lean sources := 6/9.
+  Preserved upstream Lean sources := 118/118.
+  Preserved exact candidate endpoint signatures := 9/9.
+
+  FIX2 source preparation := A_TIER_CANDIDATE.
+  FIX2 external compiler result := PENDING.
+  FIX2 exact-type and theorem-level axiom audits := PENDING.
+  !!!!(cond on RH) := NOT_YET_ASSIGNED.
+
+======================================================================
+FIX3. EXPLICIT BUNDLED-MAP EVALUATION
+======================================================================
+
+  Evidence := provenance/native-failure-FIX2-partial.txt.
+  Observed revision := FIX2.
+  C1 forward := FAIL at the norm-bound constructor application.
+  C1 equivalence := BLOCKED by C1 forward.
+  C2 / C3 result := NOT_SUPPLIED in this partial transcript.
+
+  C1 repair:
+    hausdorffLinear_apply : hausdorffLinear ... f = hausdorffValue ... f.
+    Proof := rfl.
+    Bound proof := rewrite hausdorffLinear_apply, Real.norm_eq_abs, one_mul;
+                   exact hausdorffValue_abs_le.
+    Monomial evaluation := explicit LinearMap.mkContinuous_apply
+                           and hausdorffLinear_apply rewrites.
+
+  C2 corresponding constructor site:
+    realMultiplierLinear_apply : realMultiplierLinear ... f = realMultiplierValue ... f.
+    Proof := rfl.
+    Bound proof := rewrite realMultiplierLinear_apply, one_mul;
+                   exact realMultiplierValue_norm_le.
+
+  Modified Lean files := BanachForward.lean, HilbertForward.lean.
+  Frozen candidate predicates / endpoint signatures := UNCHANGED.
+  Upstream Lean sources := 118/118 PRESERVED.
+  Additional premises / axioms / admissions := NONE.
+  Existing compatible compilation receipts := REUSED.
+  Native runner := UNCHANGED, TRUSTED_FAST_V2.
+  Runtime hashing / recursive cache inventory := DISABLED.
+  Local Lean / Lake / compiler execution := NONE.
+
+  FIX3 external compilation := PENDING.
+  FIX3 exact-type and theorem-level axiom audits := PENDING.
+  FIX3 classification := A_TIER_CANDIDATE.
+  Source repair record := provenance/repair-FIX3.json.
+
+======================================================================
+FIX4. UNIVERSE-ANNOTATED AXIOM REFERENCES AND C2 SOURCE REPAIR
+======================================================================
+
+  Evidence := provenance/native-diagnostics-FIX3-partial.txt.
+  Evidence form := summarized user-supplied partial native transcript.
+  Observed revision := FIX3.
+  C1 forward module := COMPILE_PASS.
+  C1 equivalence module := COMPILE_PASS.
+  C1 theorem audits := BLOCKED by parser rejection of Classical.choice.{u}.
+  C2 forward := FAIL at the reported theorem-name, function-power and notation sites.
+  C2 equivalence := BLOCKED by forward-module failure.
+  C3 forward module := MATCHING_CACHE_HIT.
+  C3 forward audit := BLOCKED by parser rejection of Classical.choice.{u}.
+  C3 reverse result := NOT_SUPPLIED.
+
+  Axiom reference repair:
+    Printed universe annotations are parsed separately from declaration names.
+    Validation uses the exact canonical base name.
+    Standard allowlist := {propext, Classical.choice, Quot.sound}, unchanged.
+    Raw printed axiom references remain recorded.
+    Unknown axioms, sorryAx, malformed references and invalid report structure
+    remain rejected.
+    All exact-type wrappers and theorem-level audits remain fresh native runs.
+
+  C2 source repair:
+    Correct theorem := MeasureTheory.integral_nonneg_of_ae.
+    Import the theorem's defining Bochner module explicitly.
+    Normalize continuous function powers to pointwise real powers explicitly.
+    Supply the Lp exponent as p := 2 without scoped surface notation.
+
+  Frozen candidate predicates / root endpoint signatures := UNCHANGED.
+  Upstream source files := 118/118 PRESERVED.
+  C1 forward / reverse sources := UNCHANGED; FIX3 module passes observed.
+  C3 forward source := UNCHANGED; FIX3 matching cache hit observed.
+  C3 reverse source := UNCHANGED; native result NOT_SUPPLIED.
+  Additional mathematical premises / axioms / admissions := NONE.
+  Cache family and environment identity := UNCHANGED.
+  Compatible compiled modules := REUSED.
+  Runtime hashing / recursive cache inventory := DISABLED.
+  Local Lean / Lake / compiler execution := NONE.
+
+  Parser validation := 74 targeted + 38 independent pure-JavaScript checks PASS.
+  Parser validation record := provenance/parser-validation-FIX4.txt.
+  Source/runner repair record := provenance/repair-FIX4.json.
+
+  FIX4 external compilation and theorem-level axiom audit := PENDING.
+  Current classification := A_TIER_CANDIDATE.
+  !!!!(cond on RH) := NOT_YET_ASSIGNED.
+
+======================================================================
+FIX5. NATIVE JSCRIPT COMPATIBILITY AND C2 REVERSE EVALUATION
+======================================================================
+
+  Evidence := provenance/native-transcript-FIX4-partial.txt (verbatim attachment).
+  Observed native compiler := Lean 4.33.0, x86_64-w64-windows-gnu.
+  Observed C1 forward/equivalence modules := MATCHING_CACHE_HIT.
+  Observed C2 forward module := COMPILE_PASS.
+  Observed C3 forward module := MATCHING_CACHE_HIT.
+  C1 and C2 forward audit blocker := parser rejection of plain propext.
+  C2 reverse blockers := unknown identity-evaluation constant and broken field notation.
+  C3 audit/reverse result := NOT_SUPPLIED in this transcript.
+
+  Parser repair:
+    FIX4's exact propext rejection is reproduced by legacy RegExp capture semantics.
+    Plain names and universe-annotated names use separate complete-syntax branches.
+    Axiom-list and axiom-free reports use separate complete-syntax branches.
+    Every accessed capture is mandatory within its selected branch.
+    Exact allowlist := propext, Classical.choice, Quot.sound, unchanged.
+    Unknown axioms / sorryAx / malformed or mismatched reports := REJECTED.
+    Raw printed references and raw reports := RETAINED.
+
+  C2 reverse repair:
+    Typed identity operator application hOne := rfl.
+    Explicit Complex.coe_algebraMap normalization at both scalar sites.
+    Fully qualified positive-operator inner-product theorem application.
+    No field name occurs after a dangling dot/newline.
+    Existing Bernstein operator polynomial evaluation := UNCHANGED.
+
+  Modern JavaScript parser regression := 74/74 PASS.
+  Emulated native JScript parser regression := 74/74 PASS.
+  Independent parser checks := 40/40 PASS in each mode.
+  Native Windows JScript execution in assistant environment := NONE.
+  Local Lean / Lake / compiler execution := NONE.
+
+  Modified Lean file := HXYThreeSpaces/Hilbert.lean only.
+  All forward proof sources := BYTE_PRESERVED from FIX4.
+  C1 and C3 proof sources := BYTE_PRESERVED from FIX4.
+  Frozen candidate predicates / endpoint signatures := UNCHANGED.
+  Upstream source files := 118/118 PRESERVED.
+  Additional mathematical premises / axioms / admissions := NONE.
+  Cache family / environment / compiler / audit promotion gates := UNCHANGED.
+  Compatible compiled modules := REUSED.
+  Runtime hashing / recursive cache inventory := DISABLED.
+
+  Repair record := provenance/repair-FIX5.json.
+  Parser validation record := provenance/parser-validation-FIX5.txt.
+  FIX5 native reverse compilation and theorem-level audits := PENDING.
+  Current classification := A_TIER_CANDIDATE.
+  !!!!(cond on RH) := NOT_YET_ASSIGNED.
+
+
+======================================================================
+FIX6. FIVE NATIVE ENDPOINT PASSES; C3 ANALYTIC-ORDER NORMALIZATION
+======================================================================
+
+  Evidence := provenance/native-transcript-FIX5-partial.txt.
+  Evidence origin := verbatim user-supplied console excerpt, normalized newlines.
+  Observed revision := FIX5.
+  Native run identifier := r-1793929957453-787198.
+  Compiler header := outside the supplied excerpt.
+  Retained compiler context := native Windows Lean 4.33.0.
+
+  Reported exact-type + standard-only axiom-audit passes:
+    HXYThreeSpaces.banachExt_of_nativeRH;
+    HXYThreeSpaces.nativeRH_iff_banachExt;
+    HXYThreeSpaces.hilbertRep_of_nativeRH;
+    HXYThreeSpaces.nativeRH_iff_hilbertRep;
+    HXYThreeSpaces.holExt_of_nativeRH.
+
+  Recorded forward promotions:
+    C1_CLOSURE=!!!!(cond on RH).
+    C2_CLOSURE=!!!!(cond on RH).
+    C3_CLOSURE=!!!!(cond on RH).
+
+  Recorded equivalence promotions:
+    C1_EQUIVALENCE_A_TIER=!!.
+    C2_EQUIVALENCE_A_TIER=!!.
+
+  Remaining C3 error:
+    required := analyticOrderAt Y z + 1 <= analyticOrderAt Y z;
+    inferred initial orientation := 1 + analyticOrderAt Y z <= ... .
+
+  Proof data:
+    m := analyticOrderAt Y z;
+    k := analyticOrderAt (deriv Y) z;
+    m != infinity;
+    k + 1 = m;
+    m <= k.
+
+  FIX6 proof chain:
+    m + 1 <= k + 1 = m;
+    m in N;
+    contradiction.
+
+  Lean normalization:
+    calc
+      analyticOrderAt Y z + 1 <= analyticOrderAt (deriv Y) z + 1 := by
+        simpa only [add_comm] using (add_le_add_right hle (1 : ENat))
+      _ = analyticOrderAt Y z := hderiv
+
+  Exact source := HXYThreeSpaces/Holomorphic.lean.
+  Modified declaration body := entire_local_ode_nonvanishing, hbad only.
+  Theorem statement / hypotheses / root endpoints := UNCHANGED.
+  Candidate predicates and freeze record := UNCHANGED.
+  C1/C2 proofs and all three forward proofs := BYTE_PRESERVED.
+  Frozen upstream Lean files := 118/118 BYTE_PRESERVED.
+  Runner / allowlist / compiler pins / cache family := UNCHANGED.
+  New premises / axioms / admissions := NONE.
+  Local Lean / Lake / compiler execution := NONE.
+
+  Observed FIX5 cache reuse := 106 modules.
+  Observed FIX5 successful fresh project-module compilations := 0.
+  Fresh endpoint wrapper compilations are independent of that project count.
+  Compatible caches remain enabled; runtime hashing remains disabled.
+
+  C3 equivalence := A_TIER_CANDIDATE pending external FIX6 compilation/audit.
+  Public aggregate and exact RH -> all-three declaration := audit pending.
+  Source preparation alone does not promote these remaining declarations.
+  Record := provenance/repair-FIX6.json.
+
+
+======================================================================
+PASS. MATCHING NATIVE FIX6 ROOT AND CONSTRUCTION CLOSURE
+======================================================================
+
+  Evidence := provenance/native-transcript-FIX6-pass.txt.
+  Evidence origin := user-supplied console excerpt, normalized newlines.
+  Source revision := FIX6, associated by the immediately preceding delivery.
+  Compiler header / run identifier := outside the supplied excerpt.
+  Retained compiler context := native Windows Lean 4.33.0.
+
+  Explicit final exact-type + standard-only axiom-audit passes:
+    HXYThreeSpaces.nativeRH_iff_holExt;
+    HXY_THREE_FUNCTION_SPACE_EQUIVALENCES;
+    HXYThreeSpaces.all_three_of_nativeRH.
+
+  Complete runner summary:
+    C1_CLOSURE=!!!!(cond on RH)
+    C1_EQUIVALENCE_A_TIER=!!
+    C2_CLOSURE=!!!!(cond on RH)
+    C2_EQUIVALENCE_A_TIER=!!
+    C3_CLOSURE=!!!!(cond on RH)
+    C3_EQUIVALENCE_A_TIER=!!
+    ROOT_EQUIVALENCES=PASS
+    ROOT_RH_CONSTRUCTIONS=PASS
+    CACHE_REUSED_MODULES=106
+    CACHE_MIGRATED_MODULES=0
+    CACHE_COMPILED_MODULES=4
+    PREMISE_FREE_RH=NOT_CLAIMED
+    RUN=PASS
+
+  Exact unconditional root:
+    (forall X Y : Nat, HXY X Y <-> RH)
+    /\ (RH <-> BanachExt)
+    /\ (RH <-> HilbertRep)
+    /\ (RH <-> HolExt).
+
+  Exact conditional common construction:
+    RH -> BanachExt /\ HilbertRep /\ HolExt.
+
+  Equivalence-root research premises := NONE.
+  Equivalence-root unresolved certificate/witness/checker/admission/
+    semantic/analytic premises := NONE.
+  Construction input := RH.
+  Construction additional unresolved obligations := NONE.
+  Axiom dependencies subset := {propext, Classical.choice, Quot.sound}.
+
+  The frozen predicates retain actual xi/theta moments and the actual germ.
+  BanachExt and HilbertRep retain forall n : Nat.
+  HolExt retains the fixed open cut plane and neighborhood equality.
+  The root contains no family of Dirichlet L-functions or textbook GRH.
+  The root contains no finite-witness existence or terminating-checker theorem.
+
+  Distribution := HXY_THREE_SPACES_433_v0_1_0_PASS.zip.
+  Source package identity := HXY_THREE_SPACES_433_v0_1_0_FIX6.
+  PASS archive changes := documentation and supplied evidence only.
+  Lean files byte-preserved from validated FIX6 := 127/127.
+  Frozen upstream Lean files byte-preserved := 118/118.
+  Runner / run.cmd / runner manifest / source manifests := BYTE_PRESERVED.
+  Candidate predicates / endpoint signatures := BYTE_PRESERVED.
+  Local Lean / Lake / compiler execution := NONE.
+  Runtime hashing := DISABLED.
+
+  ROOT_CLASSIFICATION := A_TIER.
+  ROOT_CLOSURE := UNCONDITIONAL_CLOSURE.
+  ROOT_MARKER := !!!!.
+  CONSTRUCTION_MARKER := !!!!(cond on RH).
+  Record := provenance/promotion-FIX6.json.
+
+END

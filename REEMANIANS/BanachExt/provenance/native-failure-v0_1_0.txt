@@ -1,0 +1,198 @@
+ilbertLimit.SpectralExtraction
+COMPILE=RH_HilbertLimit.AnalyticClosure
+COMPILE_PASS=RH_HilbertLimit.AnalyticClosure
+COMPILE=RH_HilbertLimit.Cancellation
+COMPILE_PASS=RH_HilbertLimit.Cancellation
+COMPILE=RH_HilbertLimit.EventualGrowth
+COMPILE_PASS=RH_HilbertLimit.EventualGrowth
+COMPILE=RH_HilbertLimit.ActualCancellationWitness
+COMPILE_PASS=RH_HilbertLimit.ActualCancellationWitness
+COMPILE=RH_HilbertLimit.ZeroBudgetCandidate
+COMPILE_PASS=RH_HilbertLimit.ZeroBudgetCandidate
+COMPILE=RH_HilbertLimit.TwoRoutes.RouteOne
+COMPILE_PASS=RH_HilbertLimit.TwoRoutes.RouteOne
+COMPILE=RH_HilbertLimit.TwoRoutes.ActualPositivePrefix
+COMPILE_PASS=RH_HilbertLimit.TwoRoutes.ActualPositivePrefix
+COMPILE=RH_HilbertLimit.TwoRoutes.HausdorffMeasure
+COMPILE_PASS=RH_HilbertLimit.TwoRoutes.HausdorffMeasure
+COMPILE=HXYThreeSpaces.BanachForward
+LEAN_EXIT=1|LOG=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0\evidence\r-1793926555897-511246\compile\HXYThreeSpaces.BanachForward.log
+HXYThreeSpaces\BanachForward.lean:35:4: error: Type mismatch: After simplification, term
+  hausdorffValue_smul u hzero hpos c f
+ has type
+  @Eq ℝ (hausdorffValue u hzero hpos (c • f)) (c * hausdorffValue u hzero hpos f)
+but is expected to have type
+  @Eq ℝ (hausdorffValue u hzero hpos (c • f)) ((RingHom.id ℝ) c * hausdorffValue u hzero hpos f)
+HXYThreeSpaces\BanachForward.lean:42:16: warning: declaration uses `sorry`
+HXYThreeSpaces\BanachForward.lean:38:4: warning: declaration uses `sorry`
+
+C1_FORWARD=FAIL|LEAN_COMPILATION_FAILED=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0\evidence\r-1793926555897-511246\compile\HXYThreeSpaces.BanachForward.log
+C1_EQUIVALENCE=FAIL|DEPENDENCY_PREVIOUSLY_FAILED=HXYThreeSpaces.BanachForward
+COMPILE=HXYThreeSpaces.HilbertForward
+LEAN_EXIT=1|LOG=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0\evidence\r-1793926555897-511246\compile\HXYThreeSpaces.HilbertForward.log
+HXYThreeSpaces\HilbertForward.lean:107:4: error: Type mismatch: After simplification, term
+  realMultiplierValue_norm_le σ a ha f
+ has type
+  @LE.le ℝ Real.instLE ‖realMultiplierValue σ a ha f‖ ‖f‖
+but is expected to have type
+  @LE.le ℝ Real.instLE ‖(realMultiplierLinear σ a ha) f‖ ‖f‖
+HXYThreeSpaces\HilbertForward.lean:117:74: error: unsolved goals
+σ : Measure ↑HausdorffInterval
+a : C(↑HausdorffInterval, ℝ)
+ha : ∀ (q : ↑HausdorffInterval), |a q| ≤ 1
+f g : ↥(HausdorffL2 σ)
+q : ↑HausdorffInterval
+hf : ↑↑((realMultiplier σ a ha) f) q = ↑(a q) * ↑↑f q
+hg : ↑↑((realMultiplier σ a ha) g) q = ↑(a q) * ↑↑g q
+⊢ ↑↑g q * (↑(a q) * (starRingEnd ℂ) (↑↑f q)) = ↑(a q) * ↑↑g q * (starRingEnd ℂ) (↑↑f q)
+HXYThreeSpaces\HilbertForward.lean:128:8: warning: This simp argument is unused:
+  inner_smul_left
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [inner_smul_right]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+HXYThreeSpaces\HilbertForward.lean:128:25: warning: This simp argument is unused:
+  inner_smul_right
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [inner_smul_left]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+HXYThreeSpaces\HilbertForward.lean:136:4: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  RCLike.re (∫ (x : ↑HausdorffInterval), ⟪↑↑((realMultiplier σ a ha) f) x, ↑↑f x⟫_ℂ ∂σ)
+in the target expression
+  0 ≤ (∫ (a_1 : ↑HausdorffInterval), ⟪↑↑((realMultiplier σ a ha) f) a_1, ↑↑f a_1⟫_ℂ ∂σ).re
+
+σ : Measure ↑HausdorffInterval
+a : C(↑HausdorffInterval, ℝ)
+ha : ∀ (q : ↑HausdorffInterval), |a q| ≤ 1
+ha0 : ∀ (q : ↑HausdorffInterval), 0 ≤ a q
+f : ↥(HausdorffL2 σ)
+⊢ 0 ≤ (∫ (a_1 : ↑HausdorffInterval), ⟪↑↑((realMultiplier σ a ha) f) a_1, ↑↑f a_1⟫_ℂ ∂σ).re
+HXYThreeSpaces\HilbertForward.lean:205:22: error: Type mismatch
+  Continuous.comp Complex.continuous_ofReal (Continuous.pow continuous_subtype_val n)
+has type
+  Continuous (Complex.ofReal ∘ (Subtype.val ^ n))
+but is expected to have type
+  Continuous fun q => ↑↑q ^ n
+HXYThreeSpaces\HilbertForward.lean:216:2: error: Type mismatch
+  ContinuousMap.coeFn_toLp σ (complexIntervalMonomial n)
+has type
+  ↑↑((ContinuousMap.toLp ?m.20 σ ?m.27) (complexIntervalMonomial n)) =ᵐ[σ] ⇑(complexIntervalMonomial n)
+but is expected to have type
+  ↑↑(monomialVector σ n) =ᵐ[σ] fun q => ↑↑q ^ n
+HXYThreeSpaces\HilbertForward.lean:226:2: warning: Unused tactic linter: `change ((q : ℝ) : ℂ) * ((q : ℝ) ^ n : ℂ) = ((q : ℝ) ^ (n + 1) : ℂ)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+HXYThreeSpaces\HilbertForward.lean:227:2: warning: Unused tactic linter: `push_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+HXYThreeSpaces\HilbertForward.lean:237:21: warning: `ContinuousLinearMap.mul_apply` has been deprecated: Use `mul_apply_eq_comp` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.mul_apply` to `mul_apply_eq_comp x`).
+HXYThreeSpaces\HilbertForward.lean:248:2: error: 'change' tactic failed, pattern
+  ∫ (q : ↑HausdorffInterval), ↑↑q ^ n * (starRingEnd ℂ) (↑↑q ^ 0) ∂σ = ?m.109
+is not definitionally equal to target
+  ∫ (x : ↑HausdorffInterval), (complexIntervalMonomial n) x * (starRingEnd ℂ) ((complexIntervalMonomial 0) x) ∂σ =
+    ∫ (q : ↑HausdorffInterval), ↑↑q ^ n ∂σ
+HXYThreeSpaces\HilbertForward.lean:257:4: error: Type mismatch: After simplification, term
+  congrArg Complex.re hself
+ has type
+  (⟪unitVector σ, unitVector σ⟫_ℂ).re = 1
+but is expected to have type
+  ‖unitVector σ‖ ^ 2 = 1
+HXYThreeSpaces\HilbertForward.lean:271:25: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (q : ↑HausdorffInterval), ↑q ^ ?n ∂σ
+in the target expression
+  ∫ (q : ↑HausdorffInterval), ↑↑q ^ n ∂σ = ↑(actualNormalizedMoment n)
+
+σ : Measure ↑HausdorffInterval
+inst✝ : IsProbabilityMeasure σ
+hmom : ∀ (n : ℕ), ∫ (q : ↑HausdorffInterval), ↑q ^ n ∂σ = actualNormalizedMoment n
+n : ℕ
+⊢ ∫ (q : ↑HausdorffInterval), ↑↑q ^ n ∂σ = ↑(actualNormalizedMoment n)
+
+C2_FORWARD=FAIL|LEAN_COMPILATION_FAILED=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0\evidence\r-1793926555897-511246\compile\HXYThreeSpaces.HilbertForward.log
+C2_EQUIVALENCE=FAIL|DEPENDENCY_PREVIOUSLY_FAILED=HXYThreeSpaces.HilbertForward
+MODULE_CACHE_MIGRATED=RH_HilbertLimit.TwoRoutes.ResolventAnalytic|TRUSTED_LEGACY_433
+COMPILE=RH_HilbertLimit.TwoRoutes.ActualHerglotzClosure
+COMPILE_PASS=RH_HilbertLimit.TwoRoutes.ActualHerglotzClosure
+COMPILE=RH_HilbertLimit.TwoRoutes.ActualResolventContinuation
+COMPILE_PASS=RH_HilbertLimit.TwoRoutes.ActualResolventContinuation
+COMPILE=RH_HilbertLimit.TwoRoutes.MeasureResolvent
+COMPILE_PASS=RH_HilbertLimit.TwoRoutes.MeasureResolvent
+COMPILE=HXYThreeSpaces.HolomorphicForward
+LEAN_EXIT=1|LOG=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0\evidence\r-1793926555897-511246\compile\HXYThreeSpaces.HolomorphicForward.log
+HXYThreeSpaces\HolomorphicForward.lean:66:64: error: Application type mismatch: The argument
+  hscale
+has type
+  AnalyticAt ℂ (fun w => w / ↑actualKappa) z
+but is expected to have type
+  AnalyticAt ℂ (HDiv.hDiv z) ↑actualKappa
+in the application
+  AnalyticAt.comp (AWPIRH.theta_analyticAt (z / ↑actualKappa)) hscale
+HXYThreeSpaces\HolomorphicForward.lean:95:8: warning: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+HXYThreeSpaces\HolomorphicForward.lean:95:8: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+HXYThreeSpaces\HolomorphicForward.lean:110:4: warning: Try `simp at hzero` instead of `simpa using hzero`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Try this:
+  [apply] ring_nf
+
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+HXYThreeSpaces\HolomorphicForward.lean:136:46: error: unsolved goals
+σ : Measure ↑MeasureResolvent.UnitInterval
+z : ℂ
+q : ↑MeasureResolvent.UnitInterval
+⊢ 1 + ↑actualKappa * z * ↑↑q * (↑actualKappa)⁻¹ = 1 + z * ↑↑q * ↑1
+Try this:
+  [apply] ring_nf
+
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+HXYThreeSpaces\HolomorphicForward.lean:133:66: error: unsolved goals
+σ : Measure ↑MeasureResolvent.UnitInterval
+z : ℂ
+hden :
+  ∀ (q : ↑MeasureResolvent.UnitInterval),
+    MeasureResolvent.denominator actualKappa (z / ↑actualKappa) q = MeasureResolvent.denominator 1 z q
+htransform : MeasureResolvent.transform actualKappa σ 0 (z / ↑actualKappa) = MeasureResolvent.transform 1 σ 0 z
+⊢ ↑actualKappa * MeasureResolvent.transform 1 σ 0 z * (↑actualKappa)⁻¹ = MeasureResolvent.transform 1 σ 0 z
+HXYThreeSpaces\HolomorphicForward.lean:166:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (actualLogDerivative ∘ fun z => z / ↑actualKappa) z
+in the target expression
+  actualLogDerivative (z / ↑actualKappa) / ↑actualKappa = MeasureResolvent.transform 1 σ 0 z
+
+σ : Measure ↑MeasureResolvent.UnitInterval
+inst✝ : IsFiniteMeasure σ
+hmoment : ∀ (n : ℕ), ∫ (q : ↑MeasureResolvent.UnitInterval), ↑q ^ n ∂σ = actualNormalizedMoment n
+hscale : Tendsto (fun z => z / ↑actualKappa) (𝓝 0) (𝓝 0)
+hscaled :
+  (actualLogDerivative ∘ fun z => z / ↑actualKappa) =ᶠ[𝓝 0]
+    MeasureResolvent.resolvent actualKappa σ ∘ fun z => z / ↑actualKappa
+z : ℂ
+hz :
+  (actualLogDerivative ∘ fun z => z / ↑actualKappa) z =
+    (MeasureResolvent.resolvent actualKappa σ ∘ fun z => z / ↑actualKappa) z
+⊢ actualLogDerivative (z / ↑actualKappa) / ↑actualKappa = MeasureResolvent.transform 1 σ 0 z
+
+C3_FORWARD=FAIL|LEAN_COMPILATION_FAILED=C:\Users\Simon\Downloads\HXY_THREE_SPACES_433_v0_1_0\evidence\r-1793926555897-511246\compile\HXYThreeSpaces.HolomorphicForward.log
+C3_EQUIVALENCE=FAIL|DEPENDENCY_PREVIOUSLY_FAILED=HXYThreeSpaces.HolomorphicForward
+C1_CLOSURE=PENDING
+C2_CLOSURE=PENDING
+C3_CLOSURE=PENDING
+CACHE_REUSED_MODULES=0
+CACHE_MIGRATED_MODULES=6
+CACHE_COMPILED_MODULES=95
+PREMISE_FREE_RH=NOT_CLAIMED
+RUN=PARTIAL_OR_FAILED
+
+C:\Users\Simon\Downloads>

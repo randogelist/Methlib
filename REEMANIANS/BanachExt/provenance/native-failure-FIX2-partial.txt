@@ -1,0 +1,19 @@
+SOURCE := USER_SUPPLIED_PARTIAL_NATIVE_TRANSCRIPT
+PACKAGE := HXY_THREE_SPACES_433_v0_1_0_FIX2
+RUN := r-1793928186863-959085
+
+COMPILE=HXYThreeSpaces.BanachForward
+LEAN_EXIT=1
+HXYThreeSpaces\BanachForward.lean:43:4: error: Type mismatch: After simplification, term
+  hausdorffValue_abs_le u hzero hpos f
+ has type
+  @LE.le ℝ Real.instLE |hausdorffValue u hzero hpos f| ‖f‖
+but is expected to have type
+  @LE.le ℝ Real.instLE |{ toFun := hausdorffValue u hzero hpos, map_add' := ⋯, map_smul' := ⋯ } f| ‖f‖
+
+C1_FORWARD=FAIL
+C1_EQUIVALENCE=FAIL|DEPENDENCY_PREVIOUSLY_FAILED=HXYThreeSpaces.BanachForward
+COMPILE=HXYThreeSpaces.HilbertForward
+
+C2_RESULT := NOT_SUPPLIED
+C3_RESULT := NOT_SUPPLIED

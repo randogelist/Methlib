@@ -1,0 +1,596 @@
+{
+  "repository": "randogelist/Hilber-Vector-Resolvent-Theory",
+  "commit": "c6b95fd9e3d792270026da083bddddbc72bacb22",
+  "sources": [
+    {
+      "path": "AWPIRH/ThetaEntire.lean",
+      "sha256": "cb1f0838f2d90a1ba30e696afd05337e721ee7cc7e021a30ec28cdf2f810533b",
+      "bytes": 4727
+    },
+    {
+      "path": "AWPIRH/XiCore.lean",
+      "sha256": "6bda1a14b59a508811b9f9a8bff400ed824d86f366b2ddeecd728571be7fd9db",
+      "bytes": 4652
+    },
+    {
+      "path": "AngularMaster/ActualHadamard.lean",
+      "sha256": "99f424e8e0e87247c76b9f638850de67dcaaf7a5559e7158eeb1883efcee3664",
+      "bytes": 3303
+    },
+    {
+      "path": "AngularMaster/ComplexScaleProduct.lean",
+      "sha256": "2a25b446accead2b314877c8eace2764f775e8b6b8675aa9909be89f421f535d",
+      "bytes": 4057
+    },
+    {
+      "path": "AngularMaster/LowHeightGeometry.lean",
+      "sha256": "524de1676223e39ace67404892e5ff78a69a37a77efbbe66aa8263498954a392",
+      "bytes": 2315
+    },
+    {
+      "path": "AngularMaster/QQRHGeometry.lean",
+      "sha256": "f661ee3f0359af3539d30a297a23f0edc160699495725f2888bd2facaf637906",
+      "bytes": 4045
+    },
+    {
+      "path": "AngularMaster/ThetaKernelExplicitBound.lean",
+      "sha256": "9a01fbfd31a48c096eb8c27fcfd07c7fec716d7069669dfc28dd7c77c9d37122",
+      "bytes": 3439
+    },
+    {
+      "path": "AngularMaster/ZeroExclusion.lean",
+      "sha256": "2061f954006832ba899ab454ce08168e449b1d69c3104d5a2a3dddf201865b96",
+      "bytes": 3257
+    },
+    {
+      "path": "AngularMaster/ZeroFreeSeed.lean",
+      "sha256": "4c617c74b545f1473f85c8ea59dd31818b5de9e8b5a35814d0a0e8a7ca1a3aa4",
+      "bytes": 5188
+    },
+    {
+      "path": "AngularMaster/ZeroGeometry.lean",
+      "sha256": "b0812a3b5f8bdf2a162553b24fa9801aa71d3dc2227d02400f9abca0e1888bc9",
+      "bytes": 2549
+    },
+    {
+      "path": "Core/ActualThetaCayley.lean",
+      "sha256": "703ea9f4d122a58af8500a03710129d4728135edef59a78ab30d4507df20dff0",
+      "bytes": 2770
+    },
+    {
+      "path": "Core/Observable.lean",
+      "sha256": "3d5ac15448a67cb6d94ed6bd0624fe29ed7efb1385af092bdf6c245510384377",
+      "bytes": 1390
+    },
+    {
+      "path": "Derivations/BKQR/DefectGramSquare.lean",
+      "sha256": "506098a10986844f4289364b6cfe25bd74fb9cb542f79f15c6981ba2123f8cdd",
+      "bytes": 4683
+    },
+    {
+      "path": "Derivations/BKQR/HardyCoefficientTransfer.lean",
+      "sha256": "9dcf1f17cb2243810796625ee3b1f22e3a1348230dd1a05cc099878d7fa24919",
+      "bytes": 6899
+    },
+    {
+      "path": "Derivations/BKQR/ScalarProduct.lean",
+      "sha256": "0c04160d298d82d397df7b3a8147c4097950808bed5fb5fd11c666353ce2d2f4",
+      "bytes": 404
+    },
+    {
+      "path": "Frontier/BKQRHardyCoeffFrontier.lean",
+      "sha256": "26c8ed5221e417a08d77a058b59f9ccbbb20bfccf784cefa6d1697e9034b4a12",
+      "bytes": 1686
+    },
+    {
+      "path": "Frontier/BKQRPiFrontier.lean",
+      "sha256": "b726410187b55c8874e7a8a4cd84dc41e332b83db8ed286b3b0d79ad2808840d",
+      "bytes": 2669
+    },
+    {
+      "path": "Frontier/BKQRStrictPiFrontier.lean",
+      "sha256": "ff46f54eb0caeee8e72afbf605acbd000a1042c94a6e10f153f9829cc14b94ff",
+      "bytes": 1275
+    },
+    {
+      "path": "Frontier/ContractiveOrbitFrontier.lean",
+      "sha256": "8924fb52ecca604c3ab6e67b5f5d0a695a946b8481802eb8c2e4f5f7bd7c7c56",
+      "bytes": 2389
+    },
+    {
+      "path": "Frontier/FreeEnergyFrontier.lean",
+      "sha256": "4a62fe30d6aeeea42deb619f553c79c12535bc497c5121b8f97a0a70403a78fc",
+      "bytes": 4656
+    },
+    {
+      "path": "Frontier/OurFrontier.lean",
+      "sha256": "f61c487207f52e36fbbae8fd65ee6ea5ef43842ca630b3b645d03109948f69fd",
+      "bytes": 3581
+    },
+    {
+      "path": "OriginTrace.lean",
+      "sha256": "01c0d483964ef1b3cff5883267eec10ad65830ac2251d8db206434e85c73bedf",
+      "bytes": 5009
+    },
+    {
+      "path": "RH_HilbertLimit/ActualCalibrationProgress.lean",
+      "sha256": "8d268760cc235fdcf95ea4514aec2dbf126d90056df5e06730ee5b06bd4a275e",
+      "bytes": 7675
+    },
+    {
+      "path": "RH_HilbertLimit/ActualCancellationWitness.lean",
+      "sha256": "0daeeb9fab456f2d399cc95cfda2b94c55f03d2c403b92d3a18579a0a7d622d6",
+      "bytes": 6038
+    },
+    {
+      "path": "RH_HilbertLimit/ActualMomentReality.lean",
+      "sha256": "992ce87c48b93143e50a81c1a5318992bef251589d94494de1fafe2beb5ba34e",
+      "bytes": 3309
+    },
+    {
+      "path": "RH_HilbertLimit/ActualXi.lean",
+      "sha256": "d1fe6b5d5a8a3d6caf398790fe4a6b519ad0510a229c3cf88e3e20267d003322",
+      "bytes": 6857
+    },
+    {
+      "path": "RH_HilbertLimit/AnalyticClosure.lean",
+      "sha256": "ed440ff35623939ee3b5b7d58b0c85836d0c3e425e9db60ed95e7cb3eb465c16",
+      "bytes": 3623
+    },
+    {
+      "path": "RH_HilbertLimit/Bernstein.lean",
+      "sha256": "e0b488ee02ec770a436348f8ebd9ff607e0480adddb23a6edc89c4272131f0b1",
+      "bytes": 14713
+    },
+    {
+      "path": "RH_HilbertLimit/Cancellation.lean",
+      "sha256": "985602ead4c4b3581b6aef194a36da6ca1f78defbeaaadf328e0cf97749b9528",
+      "bytes": 7936
+    },
+    {
+      "path": "RH_HilbertLimit/CanonicalBridge.lean",
+      "sha256": "103d1917e0fa30b2ec50fb03217176235ebd045d65c3740eba5914f4860822fd",
+      "bytes": 4299
+    },
+    {
+      "path": "RH_HilbertLimit/CanonicalPowerSums.lean",
+      "sha256": "55e10b78e84bb2ec7cfbd693e5275f46b4ada256bda0530ccb4c0e80337e65de",
+      "bytes": 14777
+    },
+    {
+      "path": "RH_HilbertLimit/EventualGrowth.lean",
+      "sha256": "f846d1a1b897542c460783a9ab5702ff1b713e5788fe149034d1ead5f0d178c0",
+      "bytes": 2954
+    },
+    {
+      "path": "RH_HilbertLimit/Geometry.lean",
+      "sha256": "87cf597061c1c297a58faeabc246af3129965b47be3f47971201628f940e1543",
+      "bytes": 8145
+    },
+    {
+      "path": "RH_HilbertLimit/Growth.lean",
+      "sha256": "5fce21c7df7955ab1146418865141e3f3f7d2df23a92994032bcfb7008fc87fb",
+      "bytes": 14594
+    },
+    {
+      "path": "RH_HilbertLimit/GrowthStep.lean",
+      "sha256": "07fa8dfc108c4dd5dabb844719d84a5b0f09c56f92960e90e085017a216839b5",
+      "bytes": 6806
+    },
+    {
+      "path": "RH_HilbertLimit/Main.lean",
+      "sha256": "3b04858da84d6e0331228db9c020a562b6395f7dc0c5d0a54ae3c23387919081",
+      "bytes": 8342
+    },
+    {
+      "path": "RH_HilbertLimit/Spectral.lean",
+      "sha256": "8d6ea31f8e591db5d5ed0fb3929282b8a08cb4a4b98432115ed5958a7e742166",
+      "bytes": 6831
+    },
+    {
+      "path": "RH_HilbertLimit/SpectralExtraction.lean",
+      "sha256": "4c3381a0d090c9f27f06453797360ad765e018d2776001816bf3b91272fbdc16",
+      "bytes": 8971
+    },
+    {
+      "path": "RH_HilbertLimit/SpectralGenerating.lean",
+      "sha256": "06fb12f6dba0872527cba2bcc5a10cf3029c8df73af46131db36efa372828977",
+      "bytes": 9369
+    },
+    {
+      "path": "RH_HilbertLimit/SpectralPhase.lean",
+      "sha256": "e5d3e26af0da7eb222dac75252480975eb4fa46150ebb342a58c42ab20063db3",
+      "bytes": 5337
+    },
+    {
+      "path": "RH_HilbertLimit/SpectralTail.lean",
+      "sha256": "9c382b2097f6ef5e0a37502d02742061646772f74c34848853a6344b441ffb5e",
+      "bytes": 6853
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/ActualHerglotzClosure.lean",
+      "sha256": "d7972ba0fbf42107f34db2d8ab346bb7a54062a9519c3553e56b216a9c026a32",
+      "bytes": 6100
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/ActualLimitBridge.lean",
+      "sha256": "58addb68991e01abb5745a29ad231f358cd94702da735c4dc07858b2eb0d1ca2",
+      "bytes": 4035
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/ActualPositivePrefix.lean",
+      "sha256": "5b4ce6ddc8069f3caa2197b5954fa4d7b6c839582374aa1d5896e6d77722cd30",
+      "bytes": 5411
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/ActualResolventContinuation.lean",
+      "sha256": "f09eea1459735645a64dee01ecd00fa6e63184cc0494acba1d9294d51a363172",
+      "bytes": 5283
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/AngularGeometry.lean",
+      "sha256": "bf82735b7d5b0859a6a416f719cd054fe281672d17e23c49520494219393f1e7",
+      "bytes": 2928
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/AngularPoleClosure.lean",
+      "sha256": "f8840e1ec2017b7c4ba0d9cc925fe0bdbdd0c8c21a866a12bfe575a32cc907cc",
+      "bytes": 3815
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/BernsteinMomentLimit.lean",
+      "sha256": "126d043be990bd340dbcbe65915cebac6dbde7c1e340981bb589f86448adcb02",
+      "bytes": 6329
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/HausdorffMeasure.lean",
+      "sha256": "27a7dae5ba67d89b88886d71065884c2317147341e0d60b9718dd8d9b4d72e2a",
+      "bytes": 13413
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/MeasureResolvent.lean",
+      "sha256": "5aa79706ad565127dded326b3194da332a19e011e8c460a41a8a3212a9cced13",
+      "bytes": 9642
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/PositiveMomentBridge.lean",
+      "sha256": "c3fc5526c908b81d4ff1a0d9d8398f8a7944f370bf308c7898f6b3611125bac7",
+      "bytes": 7503
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/ResolventAnalytic.lean",
+      "sha256": "6741e4ab78fc06f9ee92f33360f71339c72eb15fec5e0aa7709f168575867cf2",
+      "bytes": 8477
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/RouteOne.lean",
+      "sha256": "e8679c92e0142b2ed1e57a0b22c3fda95eafd0fff88dec769e6ee4f00a77efea",
+      "bytes": 4160
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/RouteTwo.lean",
+      "sha256": "6d1d5a5aaea77647dda2d1769b9eee9cfbe5f5bacd3afead8f272b44f6177316",
+      "bytes": 1190
+    },
+    {
+      "path": "RH_HilbertLimit/TwoRoutes/RouteTwoContractive.lean",
+      "sha256": "b4f301a1f36610f4347e08a40b3da93178a662a15d6cc0ccd25d96da21109baa",
+      "bytes": 4763
+    },
+    {
+      "path": "RH_HilbertLimit/Vandermonde.lean",
+      "sha256": "b3bdc529531308962e66e3e9d36f37321c77169b1c7c4d70295be713dbaaacfe",
+      "bytes": 11614
+    },
+    {
+      "path": "RH_HilbertLimit/ZeroBudgetCandidate.lean",
+      "sha256": "6bd77ae2b11382699d612b90205a3c31c0db6055163dcdd85dfa3a72f6835f65",
+      "bytes": 9055
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/AntiHerglotz.lean",
+      "sha256": "1792b68059adde42fba35af15461764462d9b686e4a702eae240d5db0012fa88",
+      "bytes": 7748
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/EntireQuotient.lean",
+      "sha256": "ca9213e5608b0d63e5d3a2a5fe982ffb72bf77b815c8a0f29ce6420cd471105e",
+      "bytes": 7952
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/EvenAnalyticOrder.lean",
+      "sha256": "1b40cdb7861734c5f5e13d55be65abc211cbcfcf5e1f27e8e89b9ab4a9f01659",
+      "bytes": 1748
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/FactorialDyadicGrowth.lean",
+      "sha256": "4f0c560effde7259d8fa6ef52b17df85aebb39294dc71ad3bf8009769954a50c",
+      "bytes": 12580
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/GrowthRigidity.lean",
+      "sha256": "6393cb9257fb39f5979974b9eb01a86c2b426aaa9199f310bbb021d4c015cc4e",
+      "bytes": 9639
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/LogDerivative.lean",
+      "sha256": "46e6818321ea99f466740578e0b16a0ba0b8a57f8b8ae5f3fb91921c9f7ffe64",
+      "bytes": 47569
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/MellinGrowth.lean",
+      "sha256": "95150cb0fec21a8ffb62ef6eb59bee9d7fc9570cd4d150fdc67a49b848e7db0e",
+      "bytes": 12009
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/PoleProbe.lean",
+      "sha256": "40401afe8024afdf5feb81be0da723a25139047f8e6d209281cb387ff2abffaa",
+      "bytes": 15307
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/ProximityGrowth.lean",
+      "sha256": "2c4130bb3afe29e94aaf339599a4aef2f50b2b68da53361ffb0755d1c0850b9d",
+      "bytes": 16340
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/RealPartGrowth.lean",
+      "sha256": "17f4a7906ac32639c2187ebcade312bbcf0fa91dbc1dc49bb14669aafb6a7128",
+      "bytes": 12554
+    },
+    {
+      "path": "RiemannHypothesis/ComplexAnalysis/RealSymmetry.lean",
+      "sha256": "5f83e842a50fe85e7601290db5f7620244da46951ee129ac4135e8d6a07726ea",
+      "bytes": 693
+    },
+    {
+      "path": "RiemannHypothesis/GammaCancellation/CompletedZeta.lean",
+      "sha256": "a68c5c838f8a4b7666f4fe579908946212ea0f052d81cdb6d6d2b929f88c001b",
+      "bytes": 5014
+    },
+    {
+      "path": "RiemannHypothesis/GammaCancellation/PoleSet.lean",
+      "sha256": "eb5c37f7ded790b001f868fc8e6991973ae9a3ac1c74eea51e5d05746ae3eb63",
+      "bytes": 5260
+    },
+    {
+      "path": "RiemannHypothesis/GammaCancellation/TextbookXi.lean",
+      "sha256": "b08c3353a4bade05487631009f2ebbd1d993d524481274a858886105fe6059c7",
+      "bytes": 7409
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/CanonicalProductDivisor.lean",
+      "sha256": "7c26232ff13951e9a30df96fa8066aca71064d99790a0ff2e5343537b860f950",
+      "bytes": 9496
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/CanonicalProductDyadicGrowth.lean",
+      "sha256": "8adf77b92fa13a212eece3131d72cac0df2e07bf364ede8a01c2843191d12c29",
+      "bytes": 33815
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/CanonicalProductGrowth.lean",
+      "sha256": "677a9e98c5e9a8a7073ff2b14d9c1a1af325dff5ae880ba3524aab49f1d5219a",
+      "bytes": 13064
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/CanonicalProductMultiplicity.lean",
+      "sha256": "10da8fd539dee790695e73c76bc30565171aff83c5b3d72b8cfad091063b786f",
+      "bytes": 5496
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/CompletedLFunction.lean",
+      "sha256": "25e2ea5bd1238b6c15bbafa05cfe06f4eca5dd4ea6ecdde4cc433bb8c5f699be",
+      "bytes": 12525
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/DyadicZeroCount.lean",
+      "sha256": "c1a3b871311e0a4b8af3b7c8c10ba5071874db3105a6005ac176c85421148b00",
+      "bytes": 13671
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/ExponentialPrefactor.lean",
+      "sha256": "b567173b5bce7c312e65f755ea29757e0339e9237abe1cd3fbf6f39fe5feb024",
+      "bytes": 5936
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/GenusOne.lean",
+      "sha256": "6ea6e3041c9db215831e4fd3b5825797dea27f0fb6a497aec5523f61aab5ea69",
+      "bytes": 6947
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/IndexedRealZeroSign.lean",
+      "sha256": "5cc725c58ee37d7e6fa286157d4e6f66d6c3ed1eab918d1700cda30ad39df26f",
+      "bytes": 7650
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/InfiniteProducts.lean",
+      "sha256": "0a52a01b6f1a79e490d794f470cd6096fec3ca683d5d7d7d725a91f84ad8ce48",
+      "bytes": 9125
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/LogDerivative.lean",
+      "sha256": "0f6d76241e3da7221cf486c748faf51f44a262d75a9142b207529e36caf56586",
+      "bytes": 50896
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/NatZeroData.lean",
+      "sha256": "54ca9e5f26fd1d7e7e2e70bb63590425ecd058b6d9a6740b4d2eef5d95fd4934",
+      "bytes": 2645
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/OriginMultiplicityCriterion.lean",
+      "sha256": "5c304d933e1fd7ef22b80d5901153483abca28a8f81056a4467d1f9e5dfe8f0e",
+      "bytes": 15066
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/PairedCanonicalProductGrowth.lean",
+      "sha256": "ec5a9bcb065e2c3e286321ef0924014f97544ddb50d126895f4d7ba3a170aa24",
+      "bytes": 45985
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/PairedGenusOne.lean",
+      "sha256": "8b5a6002231a9ed90995c4a8a252c6772114e4ff9ed78e5cded7bdc4965fe0c2",
+      "bytes": 2130
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/RealZeroSign.lean",
+      "sha256": "4309deef7755b23c1f1da8aca5cec5566a2269d5ffca0eb2d61ece83abfa193e",
+      "bytes": 14080
+    },
+    {
+      "path": "RiemannHypothesis/HadamardProduct/StrictRealZeroCriterion.lean",
+      "sha256": "832d9b74b67b4d916d21808acb0280445e1f63cc3438a066670ae8e7f6d41028",
+      "bytes": 8966
+    },
+    {
+      "path": "RiemannHypothesis/RealZeros/Engine.lean",
+      "sha256": "0f48d57c45672a56f354c8cacc6e017c0a6c45e4809b5f89b44c96e6819c77c7",
+      "bytes": 4354
+    },
+    {
+      "path": "RiemannHypothesis/RealZeros/EntireFunctions.lean",
+      "sha256": "cf7b51cbe17e56e7bc4a2674c0d122a4d42fab3b8a2b2204da5a5d6ae6ec3902",
+      "bytes": 25025
+    },
+    {
+      "path": "RiemannHypothesis/Reduction/BacklundCanonicalDivisor.lean",
+      "sha256": "ca04cd2aa7b38d0443f1316c3c61ce2d0c79c32256d0490cdbb743d37aaee43c",
+      "bytes": 32311
+    },
+    {
+      "path": "RiemannHypothesis/Xi/BacklundTuringBridge.lean",
+      "sha256": "415689e15ab1afc103378d0817d6c23137d7bacada4b85b1b33c62db14888ffc",
+      "bytes": 9394
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalDivisor.lean",
+      "sha256": "7fe314d6754729e36ffcbb43978d59d8226d47e007338493ca1b6a751eb299ec",
+      "bytes": 18728
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalProductCharacteristicGrowth.lean",
+      "sha256": "173dc74a9f1dce4e868eb5cc2fbde83c6648ff4cf9c2e827a22009183f44ee86",
+      "bytes": 2135
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalProductPairedGrowth.lean",
+      "sha256": "1c3708464031f711376c6a2727fe5e9fc85c221f05fb87b841e8f1ff92d05184",
+      "bytes": 4579
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalProductSymmetry.lean",
+      "sha256": "6940c75da42737642c461e82e62b964edd85a678eaf8773d3cae66dabee5af12",
+      "bytes": 6122
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalQuotientCharacteristicGrowth.lean",
+      "sha256": "c92a5502f4fd4a1c8f9d796ce199ca9332d2fd7fd5dddbdddbfbd8c29e00ab23",
+      "bytes": 11731
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalQuotientCriterion.lean",
+      "sha256": "39a5b9d0917f4a261e0fd826c4105da87805af19c2b94c264209796eb4b7da19",
+      "bytes": 26550
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalQuotientLogNormGrowth.lean",
+      "sha256": "e2a7504dce7dbeb659c74c3914ad98ff819c8d2a37ff062543f5f146e3a3e2a8",
+      "bytes": 11256
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CanonicalQuotientThetaCharacteristicGrowth.lean",
+      "sha256": "398c3e9ae6a72d47a178ca1d346400ab92b946d7b145927e1739ae0e52d38662",
+      "bytes": 3045
+    },
+    {
+      "path": "RiemannHypothesis/Xi/CompletedLFunctionInstance.lean",
+      "sha256": "b31ea04b198a71519a650c1da1954d242c280bdaec1742e7c1110b41ede2f576",
+      "bytes": 2944
+    },
+    {
+      "path": "RiemannHypothesis/Xi/Definitions.lean",
+      "sha256": "a421e366b8a199e997d88ff8cc822b51aff637bfab17e59e19f60ab663c70280",
+      "bytes": 5058
+    },
+    {
+      "path": "RiemannHypothesis/Xi/DyadicZeroCountBridge.lean",
+      "sha256": "a8e22bbbe7c4fdff270926860d890608c499bf1aedd93bfd6441186e40bfd622",
+      "bytes": 1848
+    },
+    {
+      "path": "RiemannHypothesis/Xi/EntireXiLogNormGrowth.lean",
+      "sha256": "2be4e49647505f922cb097e3e781487fe4cbdb8e8a84024d684e640d09acac57",
+      "bytes": 7160
+    },
+    {
+      "path": "RiemannHypothesis/Xi/EntireXiMellinGrowth.lean",
+      "sha256": "7e917cc060fcc9f2358526e55f02538c3e42a905b8e0b38f11fb8086bbd650d4",
+      "bytes": 10799
+    },
+    {
+      "path": "RiemannHypothesis/Xi/FunctionalEquation.lean",
+      "sha256": "c8b22abfc9b7d193c2b7060fca2524263f606e10ab12ffc890f59ecaee5db34a",
+      "bytes": 11287
+    },
+    {
+      "path": "RiemannHypothesis/Xi/HadamardLogDerivativeCriterion.lean",
+      "sha256": "66f396b981d181a8eed8a62e5de61b2b98d96a670ac30a7a2c9841caa1aaf062",
+      "bytes": 22639
+    },
+    {
+      "path": "RiemannHypothesis/Xi/JensenDyadicCountBridge.lean",
+      "sha256": "3712fa9953497863b55cfe7e260dba68d985a57706064b1bc480d78e5b337eda",
+      "bytes": 26849
+    },
+    {
+      "path": "RiemannHypothesis/Xi/Pullback.lean",
+      "sha256": "8fd6242f9e252abbfa3c3b391923d44944b409bd87d05ea23ac6b050263a5b43",
+      "bytes": 5099
+    },
+    {
+      "path": "RiemannHypothesis/Xi/RiemannHypothesisBridge.lean",
+      "sha256": "4dc024d08641c4e8f8da5da7ac6c67af29fae3ca2e74c249042bb5b5a0fa7c04",
+      "bytes": 17604
+    },
+    {
+      "path": "RiemannHypothesis/Xi/SignTargets.lean",
+      "sha256": "5408924103ee1b4bc2fa939d6de918eadb3b225dc253df60a808f40414e7d65f",
+      "bytes": 12078
+    },
+    {
+      "path": "RiemannHypothesis/Xi/StrictLagariasCriterion.lean",
+      "sha256": "64be344e40e2ec962da464bc337df22d0f2eefd7305dd224721bb3cb8239494d",
+      "bytes": 15406
+    },
+    {
+      "path": "RiemannHypothesis/Xi/ThetaKernelMellinGrowth.lean",
+      "sha256": "26bbe69ddcc599a2bfcbbe378e411b03043eddc3e85ee5663cea382743d1ec9b",
+      "bytes": 10037
+    },
+    {
+      "path": "RiemannHypothesis/Xi/UnconditionalLagariasEquivalence.lean",
+      "sha256": "d1e3f6cb7a1a6f8200fe6cb53026b004855d4953272b2875de64c4d75a619275",
+      "bytes": 4283
+    },
+    {
+      "path": "RiemannHypothesis/Xi/ZetaMultiplicityBridge.lean",
+      "sha256": "4ad8d6b8140d745a0e3841c700bd097064648480bcc51117363e53be9f750579",
+      "bytes": 2345
+    },
+    {
+      "path": "RiemannHypothesis/ZeroCounting/SmoothMainTerm.lean",
+      "sha256": "a734783488373589e5502cb01e33e3c0db9b7d5bf261030e4786249af9c94223",
+      "bytes": 34306
+    },
+    {
+      "path": "RiemannHypothesis/ZeroCounting/ZetaZeros.lean",
+      "sha256": "9015953ecae3abec20c23f337d005edefe60c56e183a436254b4c4a5a2a219c9",
+      "bytes": 6038
+    },
+    {
+      "path": "ci/EndpointTypes.lean",
+      "sha256": "3869293291abfd1aebd6b9c1df22b3b9cbdf4167a1599e4ce3a1f16ad68ceed7",
+      "bytes": 668
+    }
+  ]
+}
