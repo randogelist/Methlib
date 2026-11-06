@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 echo STAGE=CMD_RUNNER_ENTERED
-echo PACKAGE=AIM025_EXACT_FORMALIZATION_433_v0_1_0
+echo PACKAGE=AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1
 set "AIM_STAGE=BOOTSTRAP"
 set "AIM_FAILURE="
 set "AIM_EXIT=1"
@@ -26,7 +26,7 @@ if defined AIM_FAILURE goto finish
 set "AIM_LOG=%AIM_EVIDENCE%\run.log"
 set "AIM_SOURCE=%AIM_EVIDENCE%\source"
 set "AIM_BUILD=%AIM_EVIDENCE%\build\lib\lean"
-call :log "PACKAGE=AIM025_EXACT_FORMALIZATION_433_v0_1_0"
+call :log "PACKAGE=AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1"
 call :log "EVIDENCE=%AIM_EVIDENCE%"
 call :log "RUNNER=NATIVE_CMD_ONLY"
 call :log "CACHE_ACQUISITION=DISABLED"
@@ -187,6 +187,7 @@ popd
 type "%AIM_EVIDENCE%\run-audit.log"
 call :log "NATIVE_EXIT=AUDIT:%AIM_NATIVE_CODE%"
 if not "%AIM_NATIVE_CODE%"=="0" set "AIM_FAILURE=NATIVE_AUDIT_COMPILATION_FAILED"
+if defined AIM_FAILURE goto finish
 if not exist "%AIM_BUILD%\Audit.olean" set "AIM_FAILURE=AUDIT_OBJECT_MISSING"
 if defined AIM_FAILURE goto finish
 "%AIM_FINDSTR%" /l /c:"AIM025_EXACT_NATIVE_AXIOM_AUDIT=PASS_STANDARD_ONLY" "%AIM_EVIDENCE%\run-audit.log" >nul
@@ -391,6 +392,7 @@ type "%AIM_MODULE_LOG%" >>"%AIM_EVIDENCE%\run-build.log"
 call :append_line "%AIM_EVIDENCE%\run-build.log" "NATIVE_EXIT=%AIM_NATIVE_CODE%"
 call :log "NATIVE_EXIT=%AIM_MODULE%:%AIM_NATIVE_CODE%"
 if not "%AIM_NATIVE_CODE%"=="0" set "AIM_FAILURE=MODULE_COMPILATION_FAILED:%AIM_MODULE%"
+if defined AIM_FAILURE exit /b 1
 if not exist "%AIM_BUILD%\%AIM_MODULE_STEM%.olean" set "AIM_FAILURE=MODULE_OBJECT_MISSING:%AIM_MODULE%"
 if defined AIM_FAILURE exit /b 1
 set /a AIM_MODULE_COUNT+=1 >nul

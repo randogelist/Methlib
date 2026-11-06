@@ -2,7 +2,7 @@ AIM025_EXACT_FORMALIZATION_A_TIER
 ================================
 
 MODE = A_TIER_DERIVATION
-PACKAGE = AIM025_EXACT_FORMALIZATION_433_v0_1_0
+PACKAGE = AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1
 NEW_SOURCE_STATUS = A_TIER_CANDIDATE
 TARGET_PROPOSITION = AIM025.Exact.CholletConjecture
 RESTRICTED_ROOT = AIM025.Exact.AIM025_CHOLLET_PSD_REAL_NONNEGATIVE
@@ -299,11 +299,30 @@ Completed:
   - Static audit-list and runner consistency checks.
   - File-integrity and archive checks.
 
+Prior external run, initial v0_1_0 package:
+  - Source manifest, baseline hash, and audit hash match the supplied transcript.
+  - Native Windows Lean 4.33.0 compiler identity matches the declared compiler.
+  - AIM025CholletNonnegative.lean compiled with exit 0.
+  - AIM025Exact.lean compiled with exit 0.
+  - AIM025Bridge.lean failed with exit 1 at the permanent scalar ascription.
+  - The theorem-level axiom audit was not reached.
+  - Evidence basis: user-supplied console transcript; evidence ZIP uninspected.
+
+FIX1 correction:
+  - Replace (Matrix.permanent A : complex) with the explicit embedding
+    Complex.ofReal (Matrix.permanent A).
+  - The permanent is elaborated in the real scalar type before embedding.
+  - No theorem premise, intended conclusion, or audit target changes.
+  - Preserve the original compiler failure before checking output objects.
+  - Baseline, exact-target, and audit source bytes remain unchanged.
+
 Not performed:
   - Local Lean or Lake execution.
-  - External compilation of the new source.
-  - External theorem-level axiom audit of the new source.
-  - Native Windows execution of the adjusted runner.
+  - External compilation of the corrected FIX1 bridge.
+  - External theorem-level axiom audit of the new declarations.
+  - Native Windows execution of the FIX1 runner.
+
+Detailed partial evidence: provenance/EXTERNAL_RUN_v0_1_0.md.
 
 The prior accepted core's evidence basis is retained separately in
 provenance/BASELINE_VERIFICATION.md. It must not be reused as evidence

@@ -34,7 +34,7 @@ def complexify (A : Matrix ι ι ℝ) : Matrix ι ι ℂ :=
 
 /-- The native permanent commutes with the canonical real embedding. -/
 theorem permanent_complexify (A : Matrix ι ι ℝ) :
-    Matrix.permanent (complexify A) = (Matrix.permanent A : ℂ) := by
+    Matrix.permanent (complexify A) = Complex.ofReal (Matrix.permanent A) := by
   change
     (∑ σ : Equiv.Perm ι, ∏ i, Complex.ofRealHom (A (σ i) i)) =
       Complex.ofRealHom (∑ σ : Equiv.Perm ι, ∏ i, A (σ i) i)

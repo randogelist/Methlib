@@ -1,5 +1,5 @@
 {
-  "package_id": "AIM025_EXACT_FORMALIZATION_433_v0_1_0",
+  "package_id": "AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1",
   "aim_id": "025",
   "mode": "A_TIER_DERIVATION",
   "source_status": "A_TIER_CANDIDATE",
@@ -125,10 +125,19 @@
   "local_lean_execution": "PROHIBITED",
   "local_lean_execution_count": 0,
   "external_validation": {
-    "new_compiler_result": "ABSENT",
+    "prior_package": "AIM025_EXACT_FORMALIZATION_433_v0_1_0",
+    "prior_source_manifest_sha256": "a7fa722ae8f178a44cb2b91b15ed6ab439b691a850247a19b8d35c3e9d65ae91",
+    "evidence_basis": "USER_SUPPLIED_CONSOLE_TRANSCRIPT",
+    "evidence_zip_inspected": false,
+    "unchanged_core_compile_exit": 0,
+    "unchanged_exact_module_compile_exit": 0,
+    "prior_bridge_compile_exit": 1,
+    "prior_audit": "NOT_REACHED",
+    "fix1_bridge_compilation": "PENDING",
     "new_theorem_axiom_audit_result": "ABSENT",
-    "runner_execution": "NOT_PERFORMED",
-    "promotion": "REVIEW_REQUIRED"
+    "fix1_runner_execution": "NOT_PERFORMED",
+    "promotion": "REVIEW_REQUIRED",
+    "partial_evidence_record": "provenance/EXTERNAL_RUN_v0_1_0.md"
   },
   "unresolved_obligations": [
     "MATCHING_EXTERNAL_COMPILER_AND_57_THEOREM_AXIOM_AUDIT",
@@ -140,9 +149,13 @@
   "source_sha256": {
     "AIM025CholletNonnegative.lean": "8d6371fb72c496f43400bb93ba73a9df96c9e1cdac3b9aa35b384197d47acd17",
     "AIM025Exact.lean": "0b361a488cfb6e17f2e26cac8ac9bc5e6666611be7a5d2c52eac7cb9a479c25f",
-    "AIM025Bridge.lean": "83e55f70d3c587ff2739aa4bc800cf8b52cd69eac731b2a1c1e370e8645b2812",
+    "AIM025Bridge.lean": "a7da8ccd26bda1af13023e661c6e8e5154beb19e2df96d5df779d331903e6ed0",
     "Audit.lean": "94f84ae4447134c0b2cfffe5c919927b5e7ef059079a0b81afad7ebf8d4676e5",
-    "run.cmd": "3f377d7c266879ef14a3147cfc9a02f5ee4cd9f9e7c65cd7e6e3128272537919"
-  }
+    "run.cmd": "2c8dc6b639b888b7ca11774d7d9381d910a6e4237420ac27226e38e422ef3be7"
+  },
+  "packaging_revision": "FIX1_EXPLICIT_REAL_PERMANENT_EMBEDDING",
+  "fix1_changes": [
+    "EXPLICIT_COMPLEX_OFREAL_PERMANENT_EMBEDDING",
+    "PRESERVE_PRIMARY_COMPILER_FAILURE_DIAGNOSIS"
+  ]
 }
-

@@ -1,7 +1,7 @@
 # AIM025 — exact complex Hermitian PSD formalization candidate
 
 ```text
-PACKAGE=AIM025_EXACT_FORMALIZATION_433_v0_1_0
+PACKAGE=AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1
 MODE=A_TIER_DERIVATION
 NEW_SOURCE_STATUS=A_TIER_CANDIDATE
 EXACT_TARGET_STATEMENT=DEFINED
@@ -121,6 +121,7 @@ alone has not been shown to imply the target.
 | [SHA256SUMS](SHA256SUMS) | Package file integrity |
 | [provenance/SOURCES.md](provenance/SOURCES.md) | Pinned source references |
 | [provenance/BASELINE_VERIFICATION.md](provenance/BASELINE_VERIFICATION.md) | Prior accepted core evidence boundary |
+| [provenance/EXTERNAL_RUN_v0_1_0.md](provenance/EXTERNAL_RUN_v0_1_0.md) | Initial external compilation results and FIX1 correction |
 
 ## Cached native Windows execution
 
@@ -136,7 +137,7 @@ Default existing cache project:
 Save the supplied ZIP in Downloads. Execute in Windows CMD:
 
 ```bat
-cd /d "%USERPROFILE%\Downloads" && tar -xf "AIM025_EXACT_FORMALIZATION_433_v0_1_0.zip" && call "AIM025_EXACT_FORMALIZATION_433_v0_1_0\run.cmd"
+cd /d "%USERPROFILE%\Downloads" && tar -xf "AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1.zip" && call "AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1\run.cmd"
 ```
 
 A different existing compatible cache project or Mathlib root can be supplied
@@ -157,10 +158,23 @@ an evidence ZIP.
 
 ## Promotion boundary
 
+The supplied initial external transcript matches the original source manifest.
+The unchanged baseline and exact-target modules compiled successfully. The
+bridge failed at an ambiguous permanent-to-complex ascription; the remaining
+unknown-identifier errors depended on that failed declaration. FIX1 uses
+`Complex.ofReal (Matrix.permanent A)` to fix the permanent's scalar type.
+The theorem signatures retain their mathematical meaning and all 57 audit
+targets remain unchanged. The initial run did not reach the axiom audit.
+
+The runner also preserves a nonzero compiler exit as the primary failure
+instead of replacing it with a missing-output-object diagnosis.
+
 ```text
 STATIC_SOURCE_REVIEW=COMPLETED
 LOCAL_COMPILER_RUN=NONE
-NEW_EXTERNAL_COMPILER_RESULT=ABSENT
+PRIOR_EXTERNAL_CORE_COMPILE=PASS
+PRIOR_EXTERNAL_EXACT_COMPILE=PASS
+FIX1_EXTERNAL_BRIDGE_COMPILE=PENDING
 NEW_THEOREM_AXIOM_AUDIT_RESULT=ABSENT
 A_TIER_PROMOTION=REVIEW_REQUIRED
 ORIGINAL_AIM025_CLOSURE=OPEN

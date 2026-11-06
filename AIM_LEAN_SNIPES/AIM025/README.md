@@ -42,8 +42,10 @@ equivalence, the counterexample criterion, and transfer of this accepted
 nonnegative theorem to its corresponding native complex PSD subclass.
 
 The candidate uses a byte-identical copy of the accepted core and a separate
-57-target audit and cached native Windows runner. Its new declarations have
-no external compilation or axiom-audit evidence yet. The universal PSD
+57-target audit and cached native Windows runner. The initial external run compiled the
+unchanged core and exact-target module; FIX1 corrects the bridge's explicit
+real-to-complex embedding. Full compilation and the 57-target axiom audit
+remain pending. The universal PSD
 residual inequality remains unresolved; defining the exact target does not
 prove it. See the [candidate status record](ExactTarget/AIM025_EXACT_FORMALIZATION_A_TIER.txt).
 
@@ -85,4 +87,5 @@ The runner retains its audited package label `AIM025_CHOLLET_NONNEGATIVE_433_FIX
 ## Evidence boundary
 
 Acceptance uses reviewed user-supplied external Windows output: the FIX2 core transcript, identical FIX3 core source, the successful FIX3 completion excerpt, and the known runner's source/compiler/audit gates. The complete FIX3 evidence ZIP was not uploaded or inspected. Raw transcripts and personal filesystem paths are omitted from publication. No local Lean/Lake execution or new publication-time compiler run is claimed. See [VERIFICATION.md](evidence/VERIFICATION.md).
+
 
