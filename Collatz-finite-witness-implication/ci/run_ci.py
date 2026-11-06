@@ -2,8 +2,9 @@
 """GitHub Actions audit of the frozen conditional Collatz implication.
 
 --check-source performs read-only Python validation, with no subprocesses.
-Full execution is restricted to GITHUB_ACTIONS=true. Dependencies must already
-be cached; this script neither downloads nor builds Mathlib or its dependencies.
+Full execution is restricted to GITHUB_ACTIONS=true. Theorem dependencies must
+already be cached, and the Mathlib umbrella must already be cached or prepared
+by the import-only CI bootstrap. This script downloads or builds neither.
 """
 
 from __future__ import annotations
@@ -225,7 +226,11 @@ def run_ci(threads: int, timeout: int) -> int:
         require((cache / "lean-toolchain").read_text(encoding="utf-8").strip() == TOOLCHAIN,
                 "Mathlib lean-toolchain mismatch")
         library = cache / ".lake/build/lib/lean"
-        require((library / "Mathlib.olean").is_file(), "Predownloaded Mathlib.olean is missing")
+        require((library / "Mathlib.olean").is_file(), "Mathlib.olean is missing after cache/bootstrap preparation")
+        origin_file = ROOT / "evidence/bootstrap/mathlib-umbrella-origin.txt"
+        umbrella_origin = origin_file.read_text(encoding="utf-8").strip()
+        require(umbrella_origin in ("OFFICIAL_CACHE", "CI_IMPORT_ONLY_UMBRELLA_FROM_CACHED_DEPENDENCIES"),
+                "Unrecognized Mathlib umbrella origin")
         libraries = [library]
         packages = cache / ".lake/packages"
         if packages.is_dir():
@@ -249,11 +254,14 @@ def run_ci(threads: int, timeout: int) -> int:
             "mathlib_checkout": str(cache), "mathlib_revision": revision,
             "mathlib_toolchain_sha256": sha256(cache / "lean-toolchain"),
             "mathlib_lake_manifest_sha256": sha256(cache / "lake-manifest.json"),
+            "mathlib_umbrella_source_sha256": sha256(cache / "Mathlib.lean"),
             "mathlib_umbrella_olean_sha256": sha256(library / "Mathlib.olean"),
+            "mathlib_umbrella_origin": umbrella_origin,
+            "mathlib_umbrella_origin_record_sha256": sha256(origin_file),
             "cached_library_paths": [str(p) for p in libraries],
             "cache_provenance": "PINNED_CHECKOUT_AND_RECORDED_CACHE_HASHES_NOT_INDEPENDENTLY_REBUILT",
             "cache_hash_coverage": "Mathlib.olean umbrella only; not every dependency object",
-            "local_source_modules": "COMPILED_FRESH", "dependencies": "EXISTING_CACHE_ONLY",
+            "local_source_modules": "COMPILED_FRESH", "theorem_dependencies": "EXISTING_CACHE_ONLY",
             "source_and_config_hashes": before,
         }
         write_json(evidence / "provenance.json", provenance)
@@ -306,7 +314,8 @@ def run_ci(threads: int, timeout: int) -> int:
                 stream.write("Scope: the existing checker-to-ordinary-Collatz implication and necessary filters. "
                              "No accepted witness, C implementation equivalence, or C search is supplied.\n\n")
                 stream.write(f"Lean: `{TOOLCHAIN}`; Mathlib: `{MATHLIB_REVISION}`.\n\n")
-                stream.write("Cached dependencies were reused; their objects were not independently rebuilt.\n\n")
+                stream.write("Cached theorem dependencies were reused; their objects were not independently rebuilt. "
+                             "The Mathlib umbrella origin is recorded separately in provenance.json.\n\n")
                 stream.write(f"Evidence: `{evidence.relative_to(ROOT)}`.\n\n")
         print(f"EVIDENCE={evidence}", flush=True)
     return status
