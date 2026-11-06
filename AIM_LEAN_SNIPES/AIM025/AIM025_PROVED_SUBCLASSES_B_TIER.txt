@@ -1,0 +1,800 @@
+AIM025_PROVED_SUBCLASSES_B_TIER
+==============================
+
+VERSION = v0_1_0
+MODE = B_TIER_DERIVATION
+STATUS = ! B_TIER
+SCOPE_STATE = FROZEN
+RETAINED_ROOTS = R1, R3, R4, R6
+ROOT_FORM = Universal implications for explicitly defined matrix or measure classes.
+MATHEMATICAL_DEPENDENCIES = DISCHARGED_WITHIN_THE_STATED_SCOPES
+UNPROVIDED_CERTIFICATE_PREMISES = NONE
+CONJECTURAL_AUXILIARY_PREMISES = NONE
+NEW_EXTERNAL_LEAN_VERIFICATION = NONE
+NEW_A_TIER_PROMOTION = NONE
+ORIGINAL_AIM025_CLOSURE = NOT_ESTABLISHED
+
+BEGINNING ENDPOINT
+
+Every retained root is proved for all data satisfying its stated structural
+hypotheses. These hypotheses define the theorem's domain; no additional
+positivity conjecture, unspecified witness, or unprovided checker result
+is assumed. The mathematical derivations below are B_TIER. The project's
+formal UNCONDITIONAL_CLOSURE marker requires matching external Lean evidence
+and is not assigned to these new roots.
+
+The previously accepted nonnegative-entry Lean core retains its existing
+A_TIER status and scoped !!!! classification. In particular, for every
+finite pair of real entrywise nonnegative matrices A,B,
+
+  per(A o B) <= per(A) per(B).
+
+Its proof writes the gap as the sum of cross-permutation terms
+sum_{sigma!=tau} a_sigma b_tau, each nonnegative. Its previously accepted
+residual, normalization, and equality theorems remain part of that package.
+No existing Lean source or accepted evidence is altered by this scope freeze.
+
+The four retained mathematical subclasses are:
+
+  R1: Hermitian unit-diagonal matrices with off-diagonal modulus at most
+      1/[2(n-1)], including arbitrary complex phases.
+  R3: A phase-adjustable nonnegative PSD factor paired with an arbitrary
+      complex PSD factor.
+  R4: Nondegenerate positive-resolvent Gram matrices from finite positive
+      measures, with explicit parameter-dependent margins.
+  R6: Correlation matrices whose simple cycle products have nonnegative
+      real parts, with a sharp gap coefficient.
+
+The finite cycle estimates and Cauchy-Schwarz reduction are proved below
+as supporting lemmas. No residual certificate-selection problem forms
+part of the retained root statements.
+
+1. DEFINITIONS AND EXACT ENDPOINTS
+---------------------------------
+
+Throughout, n is an integer with n>=1. Every matrix is finite of order n.
+The unnormalized permanent is
+
+  per(A) = sum_{sigma in S_n} product_{i=1}^n A[i,sigma(i)].
+
+Write A o B for entrywise multiplication and bar(A) for entrywise complex
+conjugation. The pair gap and self gap are
+
+  Delta(A,B) = per(A) per(B) - per(A o B),
+  delta(C)   = per(C)^2 - per(C o bar(C)).
+
+For Hermitian matrices these quantities are real. A correlation matrix is
+a Hermitian positive semidefinite matrix with every diagonal entry equal
+to one. For any Hermitian unit-diagonal matrix C, set
+
+  r(C)  = max_{i<j} |C[i,j]|, with r(C)=0 if n=1,
+  E(C)  = sum_{i<j} |C[i,j]|^2,
+  E4(C) = sum_{i<j} |C[i,j]|^4.
+
+For n>=2 put
+
+  d_n = 4 n^2 - 9 n + 6,
+  g_n(E) = (4/n - 1/d_n) E + 4 E^2/n^2.
+
+THEOREM R1: UNIFORM SMALL-CORRELATION CERTIFICATE.
+
+  Let n>=2 and let C be Hermitian with C[i,i]=1 and
+  r(C)<=1/[2(n-1)]. Then
+
+    C >=_PSD (1/2) I,
+    delta(C) >= g_n(E(C)) >= 0.
+
+  The coefficient 4/n-1/d_n is strictly positive. Consequently
+
+    delta(C)=0 iff C=I.
+
+  No phase or sign restriction is imposed on the off-diagonal entries.
+
+THEOREM R3: ONE-SIDED QUANTITATIVE CHOLLET.
+
+  Let C,D be correlation matrices. Assume that C is entrywise nonnegative,
+  or can be made entrywise nonnegative by diagonal-unitary conjugation.
+  Set
+
+    P=per(C), Q=per(D), rho=max_{i<j}|D[i,j]|^2,
+
+  with rho=0 for n=1. Then
+
+    Delta(C,D) >= P+Q-2 >= E(C)+rho >=0.
+
+  The original pair inequality is an equality, Delta(C,D)=0, iff C=D=I.
+
+  For unnormalized PSD A,B with positive diagonal, apply this result after
+  diagonal normalization. If either matrix has a zero diagonal entry,
+  the pair gap is zero. Thus, within the one-sided phase-adjustable class,
+  equality is equivalent to a zero diagonal entry in either matrix or to
+  both matrices being diagonal.
+
+THEOREM R4: PARAMETER-EXPLICIT RESOLVENT GRAM MARGIN.
+
+  Let mu be a finite positive Borel measure on [0,infinity), with
+  mu((0,infinity))>0. Let a_1,...,a_n>0 and set
+
+    f_i(lambda)=lambda/(1+a_i lambda),
+    A[i,j]=integral f_i f_j dmu.
+
+  Define C[i,j]=A[i,j]/sqrt(A[i,i] A[j,j]) and
+
+    H(a)[i,j]=2 sqrt(a_i a_j)/(a_i+a_j),
+    L(a)=per(H(a)).
+
+  Then C is an entrywise positive correlation matrix,
+
+    C[i,j]>=H(a)[i,j],
+    per(C)>=L(a)>=1+sum_{i<j} 4 a_i a_j/(a_i+a_j)^2.
+
+  For two such independently constructed Gram matrices A,B, with
+  parameter lists a,b and positive permanent,
+
+    per(A o B)/(per(A)per(B)) <= 1/max(L(a),L(b)).
+
+  Further dimension/parameter-spread bounds are derived in Section 7.
+
+THEOREM R6: NONNEGATIVE REAL PARTS OF CYCLE PRODUCTS.
+
+  Let C be a correlation matrix. Assume that every simple support cycle
+  gamma of length at least three satisfies
+
+    Re(product_{(i,j) along gamma} C[i,j])>=0.
+
+  Let M be the sum over all matchings of the support graph, including the
+  empty matching, with edge weight |C[i,j]|^2. Then
+
+    delta(C)>=2(M-1)>=2E(C)>=0.
+
+  The self gap is zero iff C=I. The coefficient 2 in front of E(C) is
+  optimal uniformly over this class. The cycle premise permits nonzero
+  complex phases; it is weaker than requiring positive real cycle products.
+
+  Any two matrices satisfying R6 at the same order satisfy the pair
+  inequality by the proved Cauchy-Schwarz reduction in Section 2.5.
+
+2. PSD FOUNDATIONS, NORMALIZATION, AND SELF-REDUCTION
+---------------------------------------------------
+
+2.1 PSD entries and zero diagonal.
+
+Every finite Hermitian PSD matrix is a Gram matrix:
+
+  C[i,j]=<v_i,v_j>.
+
+Cauchy-Schwarz gives |C[i,j]|^2<=C[i,i]C[j,j]. Thus a zero diagonal
+entry forces the corresponding row and column to be zero. Every permanent
+monomial then vanishes. If A or B has a zero diagonal entry, both its
+permanent and per(A o B) vanish, so Delta(A,B)=0.
+
+2.2 Permanent positivity and a two-vector lower bound.
+
+The following finite polynomial argument proves all permanent positivity
+facts used below, including the diagonal-product inequality.
+
+For finitely many commuting variables z_1,...,z_m, give monomials the
+inner product
+
+  <z^alpha,z^beta> = 0 if alpha!=beta,
+  <z^alpha,z^alpha> = alpha! = product_j alpha_j!.
+
+The inner product is conjugate linear in the first argument. For a vector
+v in C^m, define multiplication by
+
+  L_v(z)=sum_j v_j z_j
+
+and the differential operator
+
+  D_v=sum_j conjugate(v_j) partial/partial z_j.
+
+The monomial definition gives L_v^*=D_v. The product rule gives
+
+  D_v L_v - L_v D_v = ||v||^2 I.
+
+Consequently, for every polynomial p,
+
+  ||L_v p||^2
+    = <p,D_v L_v p>
+    = ||v||^2 ||p||^2 + <p,L_v D_v p>
+    = ||v||^2 ||p||^2 + ||D_v p||^2.                 (2.1)
+
+Expansion of the product polynomial gives
+
+  || product_i L_{v_i} ||^2 = per(Gram(v_1,...,v_n)). (2.2)
+
+For completeness, a term of the product expansion assigns a coordinate
+to each vector. Two assignments contribute to its squared norm precisely
+when each coordinate is used equally often. If the common multiplicities
+are alpha, there are alpha! permutations pairing the assignments. Summing
+over such pairings is exactly the permanent expansion. This proves (2.2).
+
+Repeated use of (2.1), starting from the constant polynomial 1, proves
+
+  per(Gram(v_i)) >= product_i ||v_i||^2 >=0.         (2.3)
+
+For unit Gram vectors, multiplication by each remaining L_v cannot
+decrease squared norm. Starting with any two indices i!=j yields
+
+  ||L_{v_i}L_{v_j}||^2 = 1+|<v_i,v_j>|^2.
+
+Therefore every correlation matrix C satisfies
+
+  per(C)>=1+max_{i<j}|C[i,j]|^2>=1.                (2.4)
+
+For n=1, per(C)=1. Formula (2.4) also shows that per(C)=1 iff C=I:
+per(C)=1 forces every off-diagonal modulus to be zero, and the converse
+follows from the permanent of I.
+
+2.3 Reality and Schur products.
+
+For a Hermitian C, conjugation of a permanent monomial corresponds to
+inverting its permutation. Therefore per(C) is real. If A=Gram(v_i) and
+B=Gram(w_i), then A o B=Gram(v_i tensor w_i), so A o B is PSD and its
+permanent is nonnegative by (2.2). Entrywise conjugation preserves PSD,
+as witnessed by conjugating the Gram vectors.
+
+2.4 Diagonal normalization and phase invariance.
+
+Suppose A has positive diagonal and define d_A=product_i A[i,i]. Set
+
+  C[i,j]=A[i,j]/sqrt(A[i,i]A[j,j]).
+
+Each permanent monomial acquires the same factor d_A. Thus
+
+  per(A)=d_A per(C).
+
+If B similarly normalizes to D, then
+
+  per(A o B)=d_A d_B per(C o D),
+  Delta(A,B)=d_A d_B Delta(C,D).                    (2.5)
+
+For a diagonal unitary U=diag(u_i), every monomial of U^* A U contains
+the phase product
+
+  product_i conjugate(u_i) u_{sigma(i)}=1.
+
+Hence each permutation monomial, each permanent, the self gap, and the
+pair gap are invariant under independent diagonal-unitary conjugations
+of their matrix arguments. For the pair gap this also follows directly
+from the monomial products in per(A o B).
+
+2.5 Self-conjugate reduction.
+
+For arbitrary complex matrices A,B, put
+
+  a_sigma=product_i A[i,sigma(i)],
+  b_sigma=product_i B[i,sigma(i)].
+
+Finite Cauchy-Schwarz implies
+
+  |per(A o B)|^2
+    <= (sum_sigma |a_sigma|^2)(sum_sigma |b_sigma|^2)
+    = per(A o bar(A)) per(B o bar(B)).              (2.6)
+
+If A,B are PSD and their two self gaps are nonnegative, then (2.6) and
+permanent nonnegativity give
+
+  per(A o B)<=per(A)per(B).
+
+Conversely, the universal PSD pair inequality implies the self inequality
+by taking B=bar(A); per(bar(A))=per(A). This proves the equivalence between the universal pair and self forms.
+The reduction is recorded in [S1] and is fully derived here.
+
+In particular, a violating PSD pair requires a self-violating matrix
+among its two factors. A family of individually self-certified matrices
+can be paired arbitrarily, even if the two certificates have different
+forms. If per(A),per(B)>0 and delta(A)>=g_A>=0, delta(B)>=g_B>=0, then
+
+  per(A o B)/(per(A)per(B))
+    <= sqrt((1-g_A/per(A)^2)(1-g_B/per(B)^2)).       (2.7)
+
+3. PHASE ADJUSTMENT AND PERMUTATION POSITIVITY
+---------------------------------------------
+
+3.1 Phase-balanced support criterion.
+
+Let A be Hermitian with strictly positive diagonal. The following are
+equivalent:
+
+  (i) Every permutation monomial of A is a nonnegative real number.
+  (ii) Every simple cycle of nonzero off-diagonal entries has a positive
+       real product around that cycle.
+  (iii) There is a diagonal unitary U such that U^* A U is entrywise
+        nonnegative.
+
+Proof of (i)=>(ii): choose the cycle as one permutation cycle and fix all
+remaining vertices. The remaining diagonal factors are strictly positive.
+The cycle entries are nonzero, so its product must be strictly positive.
+
+Proof of (ii)=>(iii): choose a spanning tree in each connected component
+of the support graph. Choose a unit phase at the root. Along each tree
+edge, choose the next vertex phase to make the transformed edge positive.
+For every non-tree edge, its fundamental cycle has phase one. The already
+positive tree edges then force the transformed non-tree edge to be
+positive as well. Hermitian symmetry gives the reverse edge. The diagonal
+is unchanged and positive; zero edges remain zero.
+
+Proof of (iii)=>(i): diagonal-unitary phases cancel in every permutation
+monomial, and all monomials of U^* A U are nonnegative.
+
+Thus abstract permutation positivity is an exact recognition criterion;
+for positive-diagonal Hermitian matrices it is equivalent to phase
+adjustment to the original nonnegative class. A zero PSD diagonal belongs
+to the already settled zero-row branch of Section 2.
+
+4. FINITE CYCLE ESTIMATES USED IN THE PROOF OF R1
+-------------------------------------------
+
+4.1 Counting coefficients.
+
+Let D_k be the number of derangements of k labelled objects:
+
+  D_0=1, D_1=0,
+  D_k=(k-1)(D_{k-1}+D_{k-2}) for k>=2.
+
+Let J_k be the number of fixed-point-free involutions:
+
+  J_k=0 for odd k,
+  J_k=k!/[2^(k/2)(k/2)!] for even k.
+
+Set L_k=D_k-J_k. Then L_k counts derangements containing a cycle of
+length at least three. For n>=2 define the nonnegative polynomials
+
+  H_n(x)=sum_{k=3}^n
+          [2 binom(n-2,k-2) L_k/(k(k-1))] x^(k-2),
+
+  K_n(x)=sum_{k=3}^n
+          [2 binom(n-2,k-2) D_k/(k(k-1))] x^(k-2).
+
+An empty sum, including n=2, equals zero.
+
+4.2 Product bound.
+
+If k>=2 and 0<=x_1,...,x_k<=r, then
+
+  product_j x_j <= r^(k-2) (sum_j x_j^2)/k.         (4.1)
+
+Indeed, for every distinct pair a,b,
+
+  product_j x_j <= r^(k-2) x_a x_b
+                 <= r^(k-2)(x_a^2+x_b^2)/2.
+
+Average over the binom(k,2) pairs. Each square occurs k-1 times, giving
+(4.1). The case r=0 follows directly; when k=2 use the displayed
+two-factor inequality without any ambiguous zero-power convention.
+
+4.3 Non-involution contribution.
+
+Let C be Hermitian with unit diagonal. A permutation consisting only of
+fixed points and transpositions has a nonnegative monomial, since a
+transposition (i j) contributes |C[i,j]|^2. Denote the sum over all such
+permutations by M. Identity and single-transposition terms give
+
+  M>=1+E(C).                                       (4.2)
+
+Let T be the sum of absolute monomials over all remaining permutations.
+Hermitian reality gives
+
+  per(C)>=M-T>=1+E(C)-T.                           (4.3)
+
+There are binom(n,k)L_k remaining permutations moving exactly k indices.
+Their class is invariant under relabelling. Each has k directed moved
+edges. Hence a specified directed edge (i,j), i!=j, appears in exactly
+
+  binom(n,k)L_k k/[n(n-1)]
+    =binom(n-2,k-2)L_k/(k-1)
+
+members of this class. Apply (4.1) to each monomial and sum. Since
+sum_{i!=j}|C[i,j]|^2=2E(C), the k-moved contribution is bounded by
+
+  E(C) [2 binom(n-2,k-2)L_k/(k(k-1))] r(C)^(k-2).
+
+Summing gives T<=E(C)H_n(r(C)). Equation (4.3) now proves
+
+  per(C)>=1+[1-H_n(r(C))]E(C)=ell.                 (4.4)
+
+4.4 Squared-modulus permanent.
+
+The matrix C o bar(C) has unit diagonal and nonnegative entries
+|C[i,j]|^2. Its identity contribution is 1 and its two-moved contribution
+is E4(C). For each k>=3 include all derangements, not only non-involutions.
+Apply the same counting argument and (4.1) with entry bound r(C)^2 and
+edge-square sum 2E4(C). Therefore
+
+  per(C o bar(C))
+    <=1+[1+K_n(r(C)^2)]E4(C)=U.                   (4.5)
+
+Equations (4.4) and (4.5) are universal estimates under the stated
+Hermitian unit-diagonal hypotheses. Section 5 supplies the explicit
+radius bound that makes their resulting gap positive.
+
+5. UNIFORM CORRELATION REGION: COMPLETE PROOF OF R1
+--------------------------------------------------
+
+5.1 A derangement bound.
+
+For k>=2,
+
+  D_k<=k!/2.                                      (5.1)
+
+The bases D_2=1 and D_3=2 satisfy (5.1). For k>=4 the recurrence and
+induction give
+
+  D_k<=(k-1)[(k-1)!+(k-2)!]/2=k!/2.
+
+Since L_k<=D_k, every coefficient in H_n and K_n is at most
+
+  binom(n-2,k-2)(k-2)!
+    =(n-2)(n-3)...(n-k+1)
+    <=(n-2)^(k-2).
+
+Thus, whenever x>=0 and (n-2)x<1,
+
+  H_n(x)<= (n-2)x/[1-(n-2)x],
+  K_n(x)<= (n-2)x/[1-(n-2)x].                     (5.2)
+
+This includes n=2, where both sides vanish. It follows by bounding the
+finite sum by the convergent geometric series over positive powers.
+
+5.2 Apply the stated radius.
+
+Suppose r<=1/[2(n-1)]. Then
+
+  t=(n-2)r <= (n-2)/[2(n-1)]<1,
+  H_n(r)<=t/(1-t)<=(n-2)/n.
+
+Equation (4.4) gives
+
+  per(C)>=1+2E(C)/n.                              (5.3)
+
+Also E4(C)<=r^2 E(C). With u=(n-2)r^2<1, (4.5) gives
+
+  per(C o bar(C))
+    <=1+E4(C)/(1-u)
+    <=1+[r^2/(1-(n-2)r^2)]E(C)
+    <=1+E(C)/[4(n-1)^2-(n-2)]
+    =1+E(C)/d_n.                                 (5.4)
+
+The last comparison follows because x/(1-(n-2)x) is increasing for
+0<=x<1/(n-2), with the n=2 case read directly.
+
+Square (5.3), whose right side is positive, and subtract (5.4):
+
+  delta(C)
+    >=(4/n-1/d_n)E(C)+4E(C)^2/n^2
+    =g_n(E(C)).                                  (5.5)
+
+For n>=2,
+
+  d_n=4(n-2)^2+7(n-2)+4>0,
+  4d_n-n=(n-2)(16n-5)+14>0.
+
+Hence 4/n-1/d_n>0. Equation (5.5) is strictly positive whenever E(C)>0.
+Because C has unit diagonal, E(C)=0 iff C=I, and delta(I)=0.
+
+5.3 PSD verification.
+
+For every vector z,
+
+  z^* C z
+    >=sum_i |z_i|^2-2 sum_{i<j}|C[i,j]||z_i||z_j|
+    >=sum_i [1-sum_{j!=i}|C[i,j]|]|z_i|^2
+    >=(1/2)sum_i |z_i|^2.
+
+The middle step uses 2ab<=a^2+b^2. Thus C>_PSD0, proving every assertion
+of R1 without an additional PSD certificate.
+
+5.4 Consequences for pairs and original scaling.
+
+Any two matrices satisfying R1 at the same order satisfy the pair
+inequality by (2.6), including arbitrary and independently chosen phases.
+If either matrix differs from I, the corresponding self gap is positive,
+and Cauchy-Schwarz then makes the pair inequality strict.
+
+For positive-diagonal PSD A, the condition is equivalently
+
+  |A[i,j]|/sqrt(A[i,i]A[j,j]) <=1/[2(n-1)]
+  for every i!=j.
+
+The self gap is scaled by d_A^2, so (5.5) becomes
+
+  delta(A)>=d_A^2 g_n(E(C)).
+
+If an original pair has a zero diagonal entry, use Section 2.1 instead
+of dividing by the diagonal. Order n=1 always gives equality.
+
+6. ONE-SIDED QUANTITATIVE THEOREM: COMPLETE PROOF OF R3
+-----------------------------------------------------
+
+Assume first that C is entrywise nonnegative. Set
+
+  a_sigma=product_i C[i,sigma(i)]>=0,
+  b_sigma=product_i D[i,sigma(i)].
+
+Every diagonal is one, so a_id=b_id=1. For n>=2, 0<=rho<=1 by the PSD
+entry bound. Every nonidentity permutation moves at least two indices.
+All moved entries of D have modulus at most sqrt(rho), and all remaining
+entries have modulus at most one. Hence
+
+  |b_sigma|<=rho for sigma!=id.                   (6.1)
+
+Taking real parts and using (6.1),
+
+  per(C o D)<=1+rho sum_{sigma!=id}a_sigma
+             =1+rho(P-1).                         (6.2)
+
+Section 2.2 gives Q>=1+rho. Therefore
+
+  Delta(C,D)
+    >=PQ-1-rho(P-1)
+    =(P-1)(Q-rho)+(Q-1)
+    >=P+Q-2.                                    (6.3)
+
+Identity and single-transposition monomials of C give P>=1+E(C).
+Together with Q>=1+rho, (6.3) yields
+
+  Delta(C,D)>=P+Q-2>=E(C)+rho.                    (6.4)
+
+The right side vanishes only if C=D=I. Conversely, both identity matrices
+give equality. The n=1 case is immediate. If C is only phase-adjustable
+to a nonnegative matrix, use the invariance in Section 2.4; E(C) is also
+unchanged. Diagonal normalization and the zero-row branch prove the
+unnormalized equality classification in R3.
+
+An equivalent dimensional form for positive-diagonal A,B is
+
+  Delta(A,B)>=per(A)d_B+per(B)d_A-2d_A d_B.
+
+Known baseline versus present quantitative derivation:
+
+  The simpler one-sided inequality |per(A o B)|<=per(A)d_B for nonnegative
+  A and PSD B is recorded by Zhang [S1], citing his 1989 result [S2].
+  Its proof is immediate from |b_sigma|<=d_B. The complete quantitative
+  derivation used here is (6.1)-(6.4).
+
+7. POSITIVE RESOLVENT GRAM BOUNDS: COMPLETE PROOF OF R4
+-----------------------------------------------------
+
+7.1 Well-defined matrices.
+
+For a_i>0, 0<=f_i(lambda)<=1/a_i. Since mu is finite, all integrals in R4
+are finite. Each f_i is strictly positive on (0,infinity), which has
+positive measure. Thus every A[i,j]>0. The matrix is Gram in L^2(mu), so
+it is PSD, and its diagonal is positive. Its normalization C is an
+entrywise positive correlation matrix.
+
+7.2 Pairwise parameter estimate.
+
+Fix i,j. Write f=f_i, g=f_j and
+
+  m=min(1,a_j/a_i), M=max(1,a_j/a_i).
+
+For lambda>0,
+
+  m<=f(lambda)/g(lambda)=(1+a_j lambda)/(1+a_i lambda)<=M.
+
+At lambda=0, f=g=0. Therefore (f-mg)(Mg-f)>=0 everywhere. Integrating,
+
+  ||f||^2+mM||g||^2 <=(m+M)<f,g>.
+
+The nonnegative square (||f||-sqrt(mM)||g||)^2 gives
+
+  ||f||^2+mM||g||^2 >=2sqrt(mM)||f||||g||.
+
+Division by the positive norms yields
+
+  C[i,j]>=2sqrt(mM)/(m+M)
+          =2sqrt(a_i a_j)/(a_i+a_j)=H(a)[i,j].     (7.1)
+
+All entries are nonnegative, so permanent monotonicity follows directly
+by multiplying entrywise bounds in each monomial and summing. Hence
+
+  per(C)>=per(H(a))=L(a).
+
+Keeping identity and transposition terms of H(a) proves the additional
+lower bound in R4. For n>=2, this gives L(a)>1.
+
+7.3 Permanent-ratio margin.
+
+For entrywise nonnegative correlation matrices C,D, each permutation
+monomial lies in [0,1]. Consequently
+
+  per(C o D)<=min(per(C),per(D)).
+
+Since both permanents are positive,
+
+  per(C o D)/(per(C)per(D)) <=1/max(per(C),per(D)). (7.2)
+
+Apply (7.1) to each family and then (7.2). The ratio is invariant under
+positive diagonal normalization, so R4 follows for the original A,B.
+Independent diagonal-unitary conjugations preserve the result as well.
+
+7.4 Dimension and parameter-spread bound.
+
+Let q=max_i a_i/min_i a_i>=1 and c=2sqrt(q)/(1+q). For every pair,
+
+  H(a)[i,j]>=c,
+
+because 2sqrt(t)/(1+t) is invariant under t->1/t and decreases for t>=1.
+Define
+
+  F_n(c)=sum_{k=0}^n binom(n,k)D_k c^k.
+
+There are binom(n,k)D_k permutations moving k indices. The corresponding
+monomial of H(a) is at least c^k, so
+
+  L(a)>=F_n(c)>=1+binom(n,2)c^2.                  (7.3)
+
+For two resolvent families, let c_a,c_b be their spread parameters. Then
+
+  per(A o B)/(per(A)per(B))
+    <=1/max(F_n(c_a),F_n(c_b)).                   (7.4)
+
+Example: if n=3 and at least one parameter list has spread q<=4, then
+c>=4/5 and
+
+  F_3(4/5)=1+3(4/5)^2+2(4/5)^3=493/125.
+
+Thus the pair ratio is at most 125/493, and the relative gap is at least
+368/493. Both matrices here remain within the specified positive
+resolvent Gram class. This is not a bound for arbitrary PSD matrices.
+
+7.5 Operator interpretation and scope.
+
+For a positive selfadjoint operator K and vector v, the finite positive
+spectral measure mu_v gives
+
+  A[i,j]=<K(I+a_i K)^(-1)v, K(I+a_j K)^(-1)v>
+        =integral f_i f_j dmu_v.
+
+The bounded functions f_i avoid unbounded-domain assumptions on v. R4
+applies when mu_v((0,infinity))>0. If this measure is zero, every resolvent
+vector is zero and the permanent comparison is the zero equality branch.
+
+8. CYCLE-PHASE THEOREM: COMPLETE PROOF OF R6
+----------------------------------------------
+
+8.1 A weighted matching inequality.
+
+Let X be real symmetric, with X[i,i]=1 and 0<=X[i,j]<=1. For an undirected
+matching m, set w(m)=product_{edges {i,j} in m}X[i,j], with w(empty)=1.
+Write M(X)=sum_m w(m). Then
+
+  per(X)<=1+(M(X)-1)^2.                            (8.1)
+
+To prove (8.1), encode each permutation as an ordered pair of matchings,
+whose edges are called red and blue. Work on its disjoint cycles.
+
+  A fixed point supplies no edge.
+
+  A transposition supplies its edge in both colors.
+
+  An even cycle of length at least four receives alternating edge colors.
+  Choose the coloring whose outgoing edge at its least-labelled vertex
+  is red. Thus its two orientations yield its two distinct colorings.
+
+  For an odd cycle of length at least three, remove its lexicographically
+  least unordered edge. This choice depends on the undirected cycle, not
+  on its orientation. The remaining path has positive even length. Start
+  at the endpoint whose original outgoing edge lies in the path, color
+  that edge red, and alternate along the path. The final edge is blue.
+
+Each color is a matching. The colored union reconstructs the permutation:
+doubled edges recover transpositions; alternating even cycles recover
+their orientation from the red edge at their least vertex; even-length
+paths recover their orientation from the red endpoint to the blue
+endpoint, followed by the missing closing edge. Isolated vertices recover
+fixed points. These are distinct component types, so the encoding is
+injective.
+
+For transpositions and even cycles the image weight equals the original
+permutation weight. An odd cycle loses one factor in [0,1], so its image
+weight is at least the original weight. Disjoint components preserve this
+comparison on multiplication. The identity maps to (empty,empty), of
+weight one. Every nonidentity permutation maps to two nonempty matchings.
+Thus its total weight is bounded by
+
+  1+sum_{m1 nonempty}sum_{m2 nonempty}w(m1)w(m2)
+    =1+(M(X)-1)^2,
+
+which proves (8.1). Zero edges cause no exception: an original zero weight
+is still bounded by its image weight, and the combinatorial encoding is
+defined independently of the weights.
+
+8.2 Group opposite cycle orientations.
+
+Let C satisfy R6 and set X[i,j]=|C[i,j]|^2. PSD gives X[i,j]<=1.
+The identity and all products of disjoint transpositions contribute
+exactly M(X) to per(C). Group each remaining set of monomials by its
+underlying undirected disjoint cycles. For every cycle gamma of length
+at least three, its two orientations have conjugate products z_gamma
+and conjugate(z_gamma). Summing its orientations gives
+
+  z_gamma+conjugate(z_gamma)=2Re(z_gamma)>=0.
+
+Orientations of disjoint cycles are independent. Hence the complete group
+sum is the product of these nonnegative factors and the nonnegative
+transposition factors. It follows that
+
+  per(C)>=M(X)>=1+E(C).
+
+Apply (8.1) to X=C o bar(C). Squaring the positive lower bound gives
+
+  delta(C)>=M(X)^2-[1+(M(X)-1)^2]
+           =2(M(X)-1)>=2E(C).                      (8.2)
+
+Thus delta(C)=0 forces E(C)=0, hence C=I. The converse is immediate.
+The same proof is valid for any Hermitian unit-diagonal C with entries
+bounded in modulus by one; PSD is needed only for the original domain.
+
+8.3 Sharpness of coefficient 2.
+
+For n>=2, let C=I except C[1,2]=z and C[2,1]=bar(z), with 0<|z|<=1.
+This is a direct sum of a PSD 2-by-2 correlation block and identities.
+There are no support cycles of length at least three, so the premise
+holds. Direct expansion gives
+
+  per(C)=1+|z|^2,
+  per(C o bar(C))=1+|z|^4,
+  delta(C)=2|z|^2=2E(C)=2(M(X)-1).
+
+Consequently no larger universal coefficient can replace 2 in (8.2).
+This proves sharpness of that estimate.
+
+9. EXACT NONREAL EXAMPLE
+-----------------------
+
+Let i denote the imaginary unit and set
+
+  C = [ 1     1/2   -i/2 ]
+      [ 1/2   1      1/2 ]
+      [ i/2   1/2    1   ].
+
+Its leading principal minors are 1,3/4,1/4, so C is positive definite.
+Its oriented triangle product is i/8. This excludes phase adjustment
+to a nonnegative matrix, but its real part is zero, so R6 applies.
+
+  E=3/4,
+  M=per(C)=7/4,
+  per(C o bar(C))=39/32,
+  delta(C)=59/32>=2E=3/2.
+
+This is the pair (C,bar(C)) for the original conjecture. Entrywise C o C
+is different: its permanent is 37/32. Both C and bar(C) satisfy R6 and
+fail exact phase balancing. This verifies the phase scope of R6 beyond exact phase balancing.
+
+10. SOURCE AND STATUS RECORD
+----------------------------
+
+SOURCE_DERIVATION = AIM025_QUANTITATIVE_CERTIFICATES_B_TIER.txt
+SOURCE_SHA256 = 75758a0c3670b56798153998ea20b467b69538e6fb23a7a971d415322018d136
+SELECTION = R1, R3, R4, R6, and their complete supporting derivations.
+PROOF_CHANGE = NONE; scope and presentation consolidation only.
+
+[S1] Fuzhen Zhang, An update on a few permanent conjectures,
+     Special Matrices 4 (2016), 305-316.
+     https://arxiv.org/pdf/1608.02844
+     Relevant locations: immediately before Section 6; Section 6.
+[S2] Fuzhen Zhang, Notes on Hadamard products of matrices,
+     Linear and Multilinear Algebra 25 (1989), 237-242.
+     https://doi.org/10.1080/03081088908817946
+     Historical attribution is recorded in [S1]. The present mathematical
+     endpoints rely on their complete derivations above.
+
+PREVIOUS_ACCEPTED_PACKAGE =
+  AIM025_EXACT_FORMALIZATION_433_v0_1_0_FIX1_ACCEPTED.zip
+PREVIOUS_ACCEPTED_CORE = AIM025.AIM025_CHOLLET_NONNEGATIVE
+PREVIOUS_ACCEPTED_CORE_SHA256 =
+  8d6371fb72c496f43400bb93ba73a9df96c9e1cdac3b9aa35b384197d47acd17
+PREVIOUS_VERIFICATION = External native Windows Lean 4.33.0 with matching
+  theorem-level standard-axiom audit, under its recorded cache trust model.
+
+END ENDPOINT
+
+RETAINED_MATHEMATICAL_ROOTS = ! B_TIER
+UNRESOLVED_MATHEMATICAL_OBLIGATIONS_WITHIN_RETAINED_SCOPES = NONE
+NEW_FORMAL_UNCONDITIONAL_CLOSURE = NOT_CLAIMED
+EXISTING_A_TIER_SCOPED_CLOSURE = PRESERVED
+LOCAL_LEAN_LAKE_EXECUTIONS = 0
+UNRESTRICTED_AIM025 = OUTSIDE_THE_FROZEN_CLOSURE_CLAIM

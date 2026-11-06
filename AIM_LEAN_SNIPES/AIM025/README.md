@@ -49,6 +49,25 @@ remain pending. The universal PSD
 residual inequality remains unresolved; defining the exact target does not
 prove it. See the [candidate status record](ExactTarget/AIM025_EXACT_FORMALIZATION_A_TIER.txt).
 
+## Additional B-tier subclass theorems
+
+[AIM025_PROVED_SUBCLASSES_B_TIER.txt](AIM025_PROVED_SUBCLASSES_B_TIER.txt)
+contains the complete derivations for four frozen subclasses:
+
+| Endpoint | Explicit scope | Proved result |
+| --- | --- | --- |
+| R1 | Hermitian unit-diagonal matrices with off-diagonal moduli at most `1/[2(n-1)]`, `n >= 2` | PSD and a quantitative self-Chollet gap; strict away from the identity |
+| R3 | One phase-adjustable nonnegative PSD factor and one arbitrary complex PSD factor | Quantitative pair inequality and complete scoped equality classification |
+| R4 | Nondegenerate positive-resolvent Gram families from finite positive Borel measures | Explicit parameter-dependent margins |
+| R6 | Correlation matrices whose simple support-cycle products have nonnegative real parts | Self-Chollet gap at least twice the off-diagonal squared-modulus sum; coefficient sharp |
+
+**Status: `! B_TIER` for R1, R3, R4 and R6.** Their mathematical derivations
+are complete under the stated class hypotheses. Matching external Lean
+compilation and theorem-level axiom-audit evidence have not been supplied
+for these additional roots. The file also proves the supporting normalization,
+matching, permutation-counting and self-to-pair transfer lemmas.
+Unrestricted AIM025 closure is not established.
+
 ## Files
 
 | File | Content |
@@ -56,6 +75,7 @@ prove it. See the [candidate status record](ExactTarget/AIM025_EXACT_FORMALIZATI
 | [AIM025CholletNonnegative.lean](AIM025CholletNonnegative.lean) | Accepted definitions, 36 theorem targets and root theorem |
 | [Audit.lean](Audit.lean) | Native signatures, axiom reports and `Lean.collectAxioms` allowlist guard |
 | [AIM025_CHOLLET_NONNEGATIVE_B_TIER.txt](AIM025_CHOLLET_NONNEGATIVE_B_TIER.txt) | Complete finite mathematical derivation |
+| [AIM025_PROVED_SUBCLASSES_B_TIER.txt](AIM025_PROVED_SUBCLASSES_B_TIER.txt) | Frozen B-tier derivations for R1, R3, R4 and R6 |
 | [AIM025_CHOLLET_NONNEGATIVE_A_TIER.txt](AIM025_CHOLLET_NONNEGATIVE_A_TIER.txt) | Accepted scope, exact root signature and closure record |
 | [evidence/VERIFICATION.md](evidence/VERIFICATION.md) | External evidence summary and completeness statement |
 | [run.cmd](run.cmd) | Native cached Windows reproduction and evidence capture |
