@@ -1,0 +1,181 @@
+AIM025_CHOLLET_NONNEGATIVE_A_TIER
+RECORD_VERSION=ACCEPTED_2026_11_06_GITHUB_LAYOUT
+PROJECT=conjecture_bonetooth
+ENDPOINT=CB-AIM-0025/HVR-01
+ROOT=AIM025.AIM025_CHOLLET_NONNEGATIVE
+STATUS=A_TIER
+MARKER=!!!!
+FORMAL_CLOSURE=ESTABLISHED
+UNCONDITIONAL_CLOSURE=ESTABLISHED_FOR_EXACT_FINITE_NONNEGATIVE_SCOPE
+AUDITED_THEOREMS=36
+UNRESOLVED_OBLIGATIONS_WITHIN_SCOPE=0
+LOCAL_LEAN_EXECUTIONS=0
+LOCAL_LAKE_EXECUTIONS=0
+ADDITIONAL_COMPILER_RUN_REQUIRED=NO
+ORIGINAL_AIM025_CLOSURE=OPEN
+NOVELTY_CLAIM=NONE
+
+1. EXACT ACCEPTED SCOPE
+
+For every finite type n with Fintype n and DecidableEq n, and matrices
+A,B : Matrix n n Real, assume all entries of A and B are nonnegative.
+The accepted root gives the exact permanent residual, Hadamard permanent
+inequality, and complete equality classification. Its normalization branch
+is quantified under positive-permanent antecedents. These assumptions define
+the theorem's domain; they are not unresolved construction obligations.
+
+Let a_sigma=product_i A(i,sigma(i)), b_sigma=product_i B(i,sigma(i)),
+P=per(A), Q=per(B), and Delta=P*Q-per(A o B). Then
+  Delta=sum_(sigma!=tau) a_sigma*b_tau >= 0,
+  per(A o B)<=per(A)*per(B),
+  Delta=0 iff P=0 or Q=0 or common unique positive permutation support.
+Common unique positive support means an index kappa with a_kappa,b_kappa>0
+and a_rho=b_rho=0 for every rho!=kappa.
+For P,Q>0, pi_A=a/P and pi_B=b/Q have mass one and
+  per(A o B)/(P*Q)=sum_sigma pi_A(sigma)*pi_B(sigma),
+  Delta/(P*Q)=1-sum_sigma pi_A(sigma)*pi_B(sigma).
+The overlap is in [0,1] and equals one exactly for common singleton support.
+Finite nonnegative weighted-Gram specialization is also among the audited
+theorems. No positive-semidefiniteness assumption is needed for this root.
+
+2. EXACT NATIVE ROOT SIGNATURE
+
+Namespace: AIM025.
+Implicit parameters: {n : Type*} [Fintype n] [DecidableEq n].
+
+theorem AIM025_CHOLLET_NONNEGATIVE
+    (A B : Matrix n n ℝ)
+    (hA : ∀ i j, 0 ≤ A i j) (hB : ∀ i j, 0 ≤ B i j) :
+    cholletGap A B = offDiagonalPair (permTerm A) (permTerm B) ∧
+    Matrix.permanent (Matrix.hadamard A B) ≤
+      Matrix.permanent A * Matrix.permanent B ∧
+    (cholletGap A B = 0 ↔
+      Matrix.permanent A = 0 ∨ Matrix.permanent B = 0 ∨
+        CommonUniquePositive (permTerm A) (permTerm B)) ∧
+    (0 < Matrix.permanent A → 0 < Matrix.permanent B →
+      (∑ σ, permutationDistribution A σ) = 1 ∧
+      (∑ σ, permutationDistribution B σ) = 1 ∧
+      Matrix.permanent (Matrix.hadamard A B) /
+          (Matrix.permanent A * Matrix.permanent B) =
+        diagonalPair (permutationDistribution A) (permutationDistribution B) ∧
+      cholletGap A B / (Matrix.permanent A * Matrix.permanent B) =
+        1 - diagonalPair (permutationDistribution A) (permutationDistribution B) ∧
+      (0 ≤ diagonalPair (permutationDistribution A) (permutationDistribution B) ∧
+        diagonalPair (permutationDistribution A) (permutationDistribution B) ≤ 1) ∧
+      (diagonalPair (permutationDistribution A) (permutationDistribution B) = 1 ↔
+        CommonUniquePositive (permTerm A) (permTerm B)))
+
+3. ACCEPTED SOURCE IDENTITIES
+
+AUDITED_PACKAGE=AIM025_CHOLLET_NONNEGATIVE_433_FIX3
+MAIN_SOURCE_SHA256=8d6371fb72c496f43400bb93ba73a9df96c9e1cdac3b9aa35b384197d47acd17
+AUDIT_SOURCE_SHA256=78914fadf40e5bb7cb453070c2f55e67978e66b2311a710ce6bda057a58460ac
+ORIGINAL_FIX3_SOURCE_MANIFEST_SHA256=3aafa00e5aa05a8304d5e3cf463f5c418e6a785118c26237a2f889a73fb332c1
+ORIGINAL_FIX3_ZIP_SHA256=679e2bde6d21810ded232f6391ce1bd1749d21ae2b24222df0795eecc5488bfd
+NATIVE_LEAN=4.33.0
+NATIVE_TARGET=x86_64-w64-windows-gnu
+NATIVE_LEAN_COMMIT=d8b18978322de05a8f3dba51ef03cf5461676c17
+
+The main Lean source, Audit.lean, run.cmd, audit-theorems.txt and
+lean-toolchain remain byte-for-byte identical to the reviewed FIX3 package.
+Publication documentation and status metadata use this flattened folder.
+SHA256SUMS is the publication-specific manifest; the original manifest and
+ZIP hashes above identify the reviewed source package, not this new layout.
+The dependency assumptions and accepted theorem statements are unchanged.
+
+4. EXTERNAL EVIDENCE AND REVIEW
+
+The reviewed user-supplied FIX2 transcript supplies the native compiler identity,
+matching original source hashes and source-manifest check, core compile
+exit zero, all 36 theorem-level standard-only axiom reports, and all 36
+native guard pass markers. Its audit-module exit was one because of the
+unsupported pp.width option. This failure was not accepted as a full run.
+
+FIX3 preserves the entire core source and removes exactly that unsupported
+formatting-option line from Audit.lean. The successful user-supplied FIX3
+excerpt records all 36 guard markers, the explicit standard-only root
+axiom report, audit compiler exit zero, Audit.lean compilation pass, full
+external compiler/audit pass, and final exit zero.
+
+Evidence was reviewed jointly with the exact known runner. That runner
+requires the reviewed core hash, source-snapshot hashes, exact native
+version/target/commit, core compiler completion, audit compiler completion,
+all target reports and native allowlist markers before its final success.
+This is the source-matching basis for acceptance of the successful excerpt.
+The full FIX3 evidence ZIP has not been uploaded or inspected. The public
+evidence/VERIFICATION.md records the evidence basis and limitations.
+Raw user transcripts and personal filesystem paths are not included.
+No redundant native compiler run is required for the accepted source.
+
+FIX3 root dependency list:
+  propext, Classical.choice, Quot.sound.
+Universe suffixes such as .{u} are printed universe parameters of these
+same declaration names. No sorryAx or unapproved axiom passed the guard.
+The accepted 36-target list is exactly the configured list below.
+
+5. CLOSURE CLASSIFICATION
+
+!!   A_TIER: matching external compiler and theorem-level audit accepted.
+!!!  FORMAL_CLOSURE: the exact quantified root implication is proved.
+!!!! UNCONDITIONAL_CLOSURE: no unresolved certificate, witness, checker,
+     admission, semantic bridge or analytic endpoint occurs in this scope.
+
+Entrywise nonnegativity is part of the quantified matrix class. Positivity
+of permanents is an explicit antecedent of the normalization branch.
+Neither is being silently asserted for arbitrary matrices.
+
+The original AIM025 target covers arbitrary complex Hermitian positive-
+semidefinite matrices without the entrywise sign restriction. This accepted
+result does not establish that unrestricted target. Broader unbounded-
+operator/HVR calibration from the original B-tier source is outside this
+audited finite root. No novelty conclusion has been inferred from Lean.
+
+6. AUDITED THEOREMS
+
+AIM025.mass_mul_eq_diagonal_add_offDiagonal
+AIM025.mass_mul_sub_diagonal_eq_offDiagonal
+AIM025.mass_nonneg
+AIM025.diagonalPair_nonneg
+AIM025.offDiagonalPair_nonneg
+AIM025.diagonalPair_le_mass_mul
+AIM025.mass_eq_zero_iff
+AIM025.exists_pos_of_mass_ne_zero
+AIM025.offDiagonalPair_eq_zero_iff
+AIM025.offDiagonalPair_eq_zero_iff_zero_or_commonUnique
+AIM025.normalized_nonneg
+AIM025.mass_normalized
+AIM025.normalized_overlap
+AIM025.normalized_overlap_le_one
+AIM025.permanent_eq_mass_permTerm
+AIM025.permTerm_nonneg
+AIM025.permanent_nonneg
+AIM025.permTerm_hadamard
+AIM025.permanent_hadamard_eq_diagonalPair
+AIM025.cholletGap_eq_offDiagonal
+AIM025.cholletGap_nonneg
+AIM025.permanent_hadamard_le
+AIM025.cholletGap_eq_zero_iff_crossTerms
+AIM025.cholletGap_eq_zero_iff
+AIM025.permanent_hadamard_eq_iff
+AIM025.cholletGap_eq_zero_iff_commonUnique
+AIM025.permutationDistribution_eq_normalized
+AIM025.permutationDistribution_nonneg
+AIM025.permutationDistribution_sum
+AIM025.normalized_permanent_overlap
+AIM025.normalized_cholletGap
+AIM025.permutation_overlap_bounds
+AIM025.permutation_overlap_eq_one_iff
+AIM025.AIM025_CHOLLET_NONNEGATIVE
+AIM025.weightedGram_entrywise_nonneg
+AIM025.weightedGram_chollet
+
+7. PUBLICATION REFERENCES
+
+README.md
+evidence/VERIFICATION.md
+AIM025CholletNonnegative.lean
+Audit.lean
+AIM025_CHOLLET_NONNEGATIVE_B_TIER.txt
+audit-theorems.txt
+run.cmd
+provenance/SOURCES.md

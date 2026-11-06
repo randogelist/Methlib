@@ -1,0 +1,192 @@
+AIM025_CHOLLET_NONNEGATIVE_B_TIER
+VERSION=v0_1_0
+PROJECT=conjecture_bonetooth
+REGISTER_ID=CB-AIM-0025/HVR-01
+MODE=B_TIER_DERIVATION
+STATUS=! B_TIER
+FORMAL_STATUS=A_TIER
+ROOT_SCOPE=arbitrary finite square real matrices with entrywise nonnegative entries;
+exact permanent residual, inequality, normalized overlap and complete equality
+classification on this specified class.
+ORIGINAL_AIM025_CLOSURE=OPEN
+NOVELTY_CLAIM=NONE
+
+PROVENANCE
+SOURCE=AIM025_CHOLLET_HVR_SUBCLASS_B_TIER.txt
+SOURCE_SHA256=786f287dd4307099204450a82277b607f3bc362136c6a781f35a2977687cf7dd
+SELECTED_SUBENDPOINTS=Sections 1-2, normalized-overlap identity of Section 3,
+and complete nonnegative equality classification of Section 5.
+The original record is retained unchanged in provenance/.
+The positive-operator calibration, PSD-specific equality refinement and
+unrestricted complex Hermitian target are outside this Lean package's scope.
+
+BEGINNING ENDPOINT
+
+1. DEFINITIONS AND EXACT QUANTIFIERS
+
+Let n be any natural number. Let A,B : Fin n -> Fin n -> R satisfy
+  for every i,j, A(i,j)>=0 and B(i,j)>=0.
+Let S_n be the finite permutation group of Fin n. For sigma in S_n define
+  a_sigma = product_i A(i,sigma(i)),
+  b_sigma = product_i B(i,sigma(i)),
+  P = sum_sigma a_sigma,
+  Q = sum_sigma b_sigma,
+  C = sum_sigma a_sigma*b_sigma,
+  D = sum_sigma sum_(tau!=sigma) a_sigma*b_tau,
+  Delta = P*Q-C.
+
+Each row-product definition is the ordinary permanent convention. Mathlib's
+native permanent uses product_i A(sigma(i),i); invariance under transpose
+identifies the two finite sums exactly. The formal root uses native
+Matrix.permanent and Matrix.hadamard.
+
+Set (A circ B)(i,j)=A(i,j)*B(i,j). Then C=per(A circ B), P=per(A), Q=per(B).
+
+The case n=0 is admitted by the finite-sum conventions: S_0 has one element,
+the empty product is 1, P=Q=C=1 and D=Delta=0. The original source's n>=1
+scope follows by specialization.
+
+2. UNIVERSAL FINITE RESIDUAL IDENTITY
+
+Distributivity over the two finite sums gives
+  P*Q = sum_sigma sum_tau a_sigma*b_tau.
+
+For each fixed sigma, split the tau sum into tau=sigma and tau!=sigma:
+  sum_tau a_sigma*b_tau
+    = a_sigma*b_sigma + sum_(tau!=sigma) a_sigma*b_tau.
+
+Summing that equality in sigma gives
+  P*Q = C+D,
+and consequently
+  per(A)*per(B)-per(A circ B)
+    = sum_sigma sum_(tau!=sigma) a_sigma*b_tau.
+
+This identity is algebraic and requires no entrywise sign assumption.
+
+3. NONNEGATIVITY AND THE PERMANENT INEQUALITY
+
+A finite product of nonnegative real numbers is nonnegative. Thus
+  a_sigma>=0 and b_tau>=0
+for every sigma,tau. Every term of D is nonnegative, so D>=0.
+
+Using Section 2,
+  Delta=D>=0,
+hence
+  per(A circ B)<=per(A)*per(B).
+
+The proof is universal in n. No asymptotic passage, numerical observation,
+spectral hypothesis, certificate search or unprovided witness is used.
+
+4. VANISHING CROSS TERMS
+
+A finite sum of nonnegative reals is zero exactly when every summand is zero.
+Apply this fact twice to D:
+  Delta=0
+    iff for all sigma,tau with sigma!=tau, a_sigma*b_tau=0.       (E1)
+
+This is an exact equality criterion, including zero-permanent cases.
+
+5. ZERO-PERMANENT CASES
+
+Since all a_sigma are nonnegative,
+  P=0 iff a_sigma=0 for every sigma.
+Similarly,
+  Q=0 iff b_tau=0 for every tau.
+
+Either condition makes every cross term zero and therefore makes Delta=0.
+No normalization or division is used on these branches.
+
+6. COMMON SINGLETON SUPPORT
+
+Suppose Delta=0, P!=0 and Q!=0. Nonnegativity of P and Q implies P>0,Q>0.
+There is a sigma with a_sigma>0 and a tau with b_tau>0, because the finite
+sums P,Q are positive.
+
+If sigma!=tau, their product is positive, contradicting (E1). Thus sigma=tau;
+call the common permutation kappa. Then a_kappa>0 and b_kappa>0.
+
+For any rho!=kappa, (E1) gives
+  a_rho*b_kappa=0 and a_kappa*b_rho=0.
+The positive factors imply a_rho=0 and b_rho=0.
+
+Conversely, suppose there exists kappa such that
+  a_kappa>0, b_kappa>0,
+  and for every rho!=kappa, a_rho=b_rho=0.
+For sigma!=tau, at least one of sigma,tau differs from kappa. The associated
+factor is zero; therefore all cross terms vanish and Delta=0.
+
+Combining Sections 5 and 6 gives the exact full classification:
+  Delta=0
+    iff P=0
+      or Q=0
+      or exists kappa in S_n:
+           a_kappa>0 and b_kappa>0
+           and for every rho!=kappa, a_rho=0 and b_rho=0.        (E2)
+
+Equivalently, when P,Q>0, each matrix has a unique positive permutation
+product, and the two positive permutations coincide.
+This does not require either arbitrary nonnegative matrix to be diagonal.
+
+7. NORMALIZED OVERLAP
+
+Assume P>0 and Q>0. Define
+  pi_A(sigma)=a_sigma/P,
+  pi_B(sigma)=b_sigma/Q.
+Then both functions are nonnegative and their finite sums equal 1.
+
+Using distributivity of division over a finite sum and
+  (a_sigma/P)*(b_sigma/Q)=(a_sigma*b_sigma)/(P*Q),
+obtain
+  per(A circ B)/(per(A)*per(B))
+    = sum_sigma pi_A(sigma)*pi_B(sigma).                       (N1)
+
+Subtracting this expression from 1 gives
+  Delta/(P*Q)=1-sum_sigma pi_A(sigma)*pi_B(sigma).              (N2)
+
+Since P*Q>0 and 0<=C<=P*Q, the normalized overlap belongs to [0,1].
+Equality at 1 has exactly the common-singleton-support condition in (E2),
+with the zero-permanent alternatives excluded by P,Q>0.
+
+8. FINITE NONNEGATIVE WEIGHTED-GRAM SPECIALIZATION
+
+Let alpha,beta be finite index sets. Let w:alpha->R and v:beta->R
+be nonnegative. Let f:Fin n->alpha->R and g:Fin n->beta->R be
+entrywise nonnegative. Define
+  A(i,j)=sum_k w(k)*f(i,k)*f(j,k),
+  B(i,j)=sum_l v(l)*g(i,l)*g(j,l).
+Each summand is nonnegative, so every entry of A and B is nonnegative.
+Section 3 therefore yields per(A circ B)<=per(A)*per(B).
+This finite corollary requires no operator-domain or spectral bridge.
+The Lean source asserts the entrywise sign and the permanent inequality;
+it does not assert a separate positive-semidefiniteness theorem.
+
+9. EXACT SCOPE BOUNDARY
+
+The original AIM025 problem asks for all complex Hermitian positive
+semidefinite matrices, without entrywise sign conditions.
+The proof in Section 3 uses nonnegative permutation products. Hermitian
+positive semidefiniteness alone does not imply that sign property.
+
+Consequently this endpoint proves the stated nonnegative-entry subclass
+in every dimension. It does not resolve the unrestricted AIM025 target.
+No replacement of an unresolved full-target premise by an axiom is made.
+
+END ENDPOINT
+
+MATHEMATICAL_DERIVATION=COMPLETE_FOR_THE_DISPLAYED_SCOPE
+B_TIER_MARKER=!
+LEAN_SOURCE_STATUS=A_TIER
+MATCHING_EXTERNAL_COMPILER_EVIDENCE=ACCEPTED
+MATCHING_THEOREM_AXIOM_AUDIT=36_OF_36_STANDARD_ONLY
+A_TIER_PROMOTION=ACCEPTED
+FORMAL_ACCEPTANCE_RECORD=AIM025_CHOLLET_NONNEGATIVE_A_TIER.txt
+
+SOURCES
+Original B-tier derivation:
+  provenance/AIM025_CHOLLET_HVR_SUBCLASS_B_TIER.txt
+Pinned AIM statement:
+  https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/problems/025-chollet-permanent.md
+Native permanent API:
+  https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/LinearAlgebra/Matrix/Permanent.lean
+Native Hadamard API:
+  https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/LinearAlgebra/Matrix/Hadamard.lean

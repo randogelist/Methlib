@@ -1,0 +1,338 @@
+AIM025_CHOLLET_HVR_SUBCLASS_B_TIER
+VERSION = v0_1_0
+MODE = B_TIER_DERIVATION
+STATUS = ! B_TIER
+ROOT_SCOPE = Chollet inequality on entrywise nonnegative matrices and the specified HVR Gram subclass; normalized overlap and complete equality classification within that scope.
+ORIGINAL_AIM025_CLOSURE = OPEN
+A_TIER_CLAIM = NONE
+
+BEGINNING ENDPOINT
+
+PARAMETERS.
+  n>=1 is an integer.
+  A,B are specified real n x n matrices with nonnegative entries.
+  PSD is not needed for the basic combinatorial theorem.
+  Additional PSD or HVR hypotheses are introduced explicitly below.
+
+DEFINITIONS.
+  S_n is the permutation group of {1,...,n}.
+  For sigma,tau in S_n, set
+    a_sigma := product_i a_(i,sigma(i)),
+    b_tau   := product_i b_(i,tau(i)).
+  P := per(A) := sum_sigma a_sigma.
+  Q := per(B) := sum_tau b_tau.
+  (A o B)_ij := a_ij b_ij.
+  Delta(A,B) := P Q - per(A o B).
+
+ROOT THEOREM.
+  (C1) Delta(A,B)>=0.
+  (C2) If P,Q>0, the normalized permutation distributions satisfy
+         per(A o B)/(P Q) = <pi_A,pi_B>,
+       with exact gap and equality formulas in Sections 3-5.
+  (C3) Delta(A,B)=0 iff
+         P=0, or Q=0, or A and B have the same unique permutation with
+         positive permutation product.
+  (C4) If A,B are additionally symmetric PSD, then Delta(A,B)=0 iff
+         some diagonal entry of A is zero,
+         or some diagonal entry of B is zero,
+         or both A and B are diagonal.
+  (C5) The positive-operator moment/resolvent Gram matrices in Sections
+       7-9 satisfy the hypotheses above. Their stated strictness,
+       degeneracy, and diagonal-unitary extensions follow exactly.
+
+FULL NUMBERED DERIVATION
+
+1. EXACT PERMUTATION RESIDUAL.
+
+  The definition of the Hadamard product gives
+    per(A o B) = sum_sigma a_sigma b_sigma.
+  Expanding P Q gives
+    P Q = sum_(sigma,tau) a_sigma b_tau.
+  Subtracting the diagonal part yields the identity
+    Delta(A,B) = sum_(sigma!=tau) a_sigma b_tau.                (1)
+
+  Identity (1) is algebraic and holds for arbitrary complex entries.
+  Under the stated entrywise nonnegative hypotheses, each summand is
+  a nonnegative real number. Therefore C1 follows.
+
+2. ZERO-PERMANENT BRANCHES.
+
+  Since all a_sigma>=0, P=0 iff every a_sigma=0.
+  In that case per(A o B)=0 and Delta=0 for every nonnegative B.
+  The same conclusion holds when Q=0.
+
+  Normalized distributions are defined only on the remaining branch
+  P>0 and Q>0. No division by zero is used in any equality statement.
+
+3. NORMALIZED PERMUTATION OVERLAP.
+
+  Assume P,Q>0 and define
+    pi_A(sigma):=a_sigma/P,
+    pi_B(sigma):=b_sigma/Q.
+  Then
+    pi_A(sigma),pi_B(sigma)>=0,
+    sum_sigma pi_A(sigma)=sum_sigma pi_B(sigma)=1.
+
+  Therefore
+    theta(A,B):=per(A o B)/(P Q)
+      = sum_sigma pi_A(sigma)pi_B(sigma)
+      = <pi_A,pi_B>,
+    Delta(A,B)/(P Q)=1-<pi_A,pi_B>.
+
+  If sigma and tau are independently sampled from these two finite
+  distributions, theta is exactly the probability sigma=tau. This is
+  an interpretation of the finite sum, with no stochastic premise in
+  the algebraic theorem.
+
+  The following bounds are immediate finite-sum consequences:
+    0<=theta<=min{max_sigma pi_A(sigma), max_sigma pi_B(sigma)}<=1.
+  For example,
+    sum_sigma pi_A(sigma)pi_B(sigma)
+      <= (max_sigma pi_A(sigma)) sum_sigma pi_B(sigma).
+  Interchanging A,B gives the other bound.
+
+  Hence, if either distribution has maximum at most 1-epsilon with
+  epsilon>0, then
+    Delta(A,B)>=epsilon P Q>0.
+
+4. EXACT NONNEGATIVE DECOMPOSITION OF THE NORMALIZED GAP.
+
+  Regard pi_A,pi_B as real Euclidean vectors indexed by S_n. Expansion
+  of their squared distance gives
+    1-<pi_A,pi_B>
+      = (1/2)||pi_A-pi_B||_2^2
+        +(1/2)(1-||pi_A||_2^2)
+        +(1/2)(1-||pi_B||_2^2).                              (2)
+
+  For any probability vector pi on a finite set,
+    1-||pi||_2^2 = 2 sum_(sigma<tau) pi(sigma)pi(tau)>=0,
+  where any fixed ordering of S_n may be used.
+  Thus every term on the right of (2) is nonnegative. This proves again
+  that theta<=1, now separating distribution mismatch from nontrivial
+  support within each distribution.
+
+5. COMPLETE EQUALITY CLASSIFICATION FOR NONNEGATIVE MATRICES.
+
+  Continue to assume P,Q>0. Equality Delta=0 is equivalent to theta=1.
+  Equality in (2) implies
+    pi_A=pi_B,
+    ||pi_A||_2^2=||pi_B||_2^2=1.
+  For a nonnegative probability vector, squared norm one implies
+    sum_(sigma<tau) pi(sigma)pi(tau)=0.
+  Consequently at most one coordinate is positive; its value must be 1.
+  Thus
+    Delta=0 <=> there exists sigma_0 with
+      pi_A=pi_B=delta_(sigma_0).
+
+  In matrix terms, each matrix has exactly one permutation with positive
+  permutation product, and the two permutations are the same.
+  Conversely, this condition gives theta=1 directly.
+
+  Combining with Section 2 proves C3.
+  This condition is not a claim that arbitrary nonnegative matrices must
+  be permutation-diagonal: entries outside their unique positive
+  matching can remain positive without creating another matching.
+  For example, [1 1; 0 1] has only the identity positive permutation
+  product, although its upper-right entry is positive.
+
+  Also, on the branch P,Q>0,
+    theta=0 <=> supports(pi_A) and supports(pi_B) are disjoint,
+  because every summand pi_A(sigma)pi_B(sigma) is nonnegative.
+
+6. SHARPENED EQUALITY CLASSIFICATION FOR NONNEGATIVE PSD MATRICES.
+
+  Suppose now A=A^T>=_PSD0 and B=B^T>=_PSD0, still with nonnegative entries.
+
+  Every PSD matrix is a Gram matrix, so
+    |a_ij|^2<=a_ii a_jj.
+  Thus a_ii=0 forces the entire i-th row and column to vanish, and hence
+  per(A)=0. Conversely, if every a_ii>0, then the identity-permutation
+  product is positive:
+    a_id=product_i a_ii>0,
+  so P>0. Therefore
+    P=0 <=> some a_ii=0,
+  and likewise for B.
+
+  Assume all diagonals of A,B are positive. Their identity-permutation
+  products are positive, so a unique positive permutation, if present,
+  must be the identity.
+
+  If a_ij>0 for some i!=j, symmetry and positivity of the remaining
+  diagonals give the positive transposition product
+    a_((ij))=a_ij^2 product_(k!=i,j) a_kk>0.
+  This is a second positive permutation product. Hence the identity is
+  the unique positive permutation iff all off-diagonal entries vanish.
+  The same argument holds for B.
+
+  Section 5 now proves C4. Equivalently, for nonzero Gram vectors,
+  equality holds iff each of the two Gram families is pairwise orthogonal.
+  For n=1 both matrices are diagonal, so equality always holds, as required.
+
+7. POSITIVE-FUNCTION HVR GRAM CALIBRATION.
+
+  Let K be a positive selfadjoint operator on a complex Hilbert space H,
+  possibly unbounded, and v in H. Let f_1,...,f_n be bounded, real,
+  nonnegative Borel functions on [0,infinity). Define
+    u_i:=f_i(K)v,
+    A_ij:=<u_i,u_j>.
+  Let mu_v be the finite positive spectral measure of K at v. Then
+    A_ij=integral f_i(lambda)f_j(lambda) dmu_v(lambda)>=0.
+  The integrals are real. Also, for every complex coefficient vector c,
+    sum_(i,j) conjugate(c_i) A_ij c_j
+      = ||sum_j c_j u_j||^2>=0.
+  Thus A is a real symmetric PSD matrix with nonnegative entries.
+
+  An independently chosen positive operator, vector, and nonnegative
+  functions define B with the same properties. Sections 1-6 therefore
+  apply to these actual HVR Gram matrices without any additional
+  positivity conjecture.
+
+8. MOMENT AND RESOLVENT SPECIALIZATIONS.
+
+  For a>0,
+    T_a:=K(I+aK)^(-1)
+  is the bounded nonnegative spectral function lambda/(1+a lambda).
+  For i,j=0,...,n-1, the moment Gram matrix is
+    A_(i,j)=<T_a^i v,T_a^j v>
+            =<v,T_a^(i+j)v>.
+  Every entry is nonnegative by the spectral integral. This is a Hankel
+  matrix of the actual moments of the specified positive operator.
+
+  For a_1,...,a_n>0, the resolvent Gram matrix is
+    A_ij=<T_(a_i)v,T_(a_j)v>
+         =integral lambda^2/[(1+a_i lambda)(1+a_j lambda)] dmu_v(lambda).
+
+  Put F(a):=<v,T_a v>. For a!=b, the scalar resolvent identity gives
+    [F(a)-F(b)]/(b-a)
+      =integral lambda^2/[(1+a lambda)(1+b lambda)] dmu_v(lambda)
+      =<T_a v,T_b v>.
+  At a=b the continuous diagonal value is
+    -F'(a)=||T_a v||^2.
+  Differentiation is justified locally by the bound
+    lambda^2/(1+a lambda)^2<=1/a^2
+  and finiteness of mu_v; on a compact positive-a neighborhood the same
+  finite bound dominates all difference quotients.
+
+  Hence the divided-difference kernel is both PSD and entrywise
+  nonnegative, and is calibrated to the specified operator and vector.
+
+9. DEGENERACY AND STRICTNESS IN THE HVR SUBCLASS.
+
+  For the general positive-function construction of Section 7,
+    A_ii=||u_i||^2.
+  Therefore per(A)=0 iff at least one u_i=0. Otherwise per(A)>0.
+  By Section 6, equality between two such nondegenerate Gram families
+  holds iff both families are pairwise orthogonal.
+
+  For the resolvent family T_(a_i)v, the measure condition
+    mu_v((0,infinity))=0
+  makes every T_(a_i)v zero. If instead mu_v((0,infinity))>0, then every
+  integrand in the resolvent Gram formula is strictly positive on that
+  set, so every A_ij is strictly positive.
+
+  If n>=2 and every entry of A is strictly positive, then all n!
+  permutation products are positive. Its probability vector has at
+  least two positive entries, and max pi_A<1. Thus, for every nonnegative
+  B with per(B)>0,
+    per(A o B)<per(A)per(B).
+
+  In particular, two nondegenerate common-vector resolvent Gram matrices
+  satisfy strict Chollet inequality for n>=2. The zero-vector branch and
+  n=1 branch retain equality as already classified.
+
+10. DIAGONAL-UNITARY EXTENSION OF THE PROVED SUBCLASS.
+
+  Let A_0,B_0 be matrices from the proved nonnegative subclass, and let
+    D=diag(d_1,...,d_n), E=diag(e_1,...,e_n),
+    |d_i|=|e_i|=1.
+  Define A=D^*A_0D and B=E^*B_0E.
+  In each permutation product the phase factor is
+    product_i conjugate(d_i)d_(sigma(i))=1.
+  Consequently every permutation product, and therefore every permanent,
+  agrees with the corresponding quantity for A_0. The same holds for B.
+  Furthermore
+    A o B=(DE)^*(A_0 o B_0)(DE).
+  Thus
+    Delta(A,B)=Delta(A_0,B_0),
+  and all proved inequalities and equality statements transfer exactly.
+  This is a specified complex subclass, not all complex PSD pairs.
+
+11. GENERAL GRAM/TENSOR IDENTITY AND ITS LIMIT.
+
+  For arbitrary complex Gram vectors u_1,...,u_n, put
+    x=u_1 tensor ... tensor u_n,
+    Sym=(1/n!) sum_(sigma in S_n) U_sigma,
+  where U_sigma permutes the tensor factors. The group average Sym is
+  selfadjoint and idempotent, hence an orthogonal projection. Thus
+    ||Sym x||^2=<x,Sym x>
+      =(1/n!) sum_sigma product_i <u_i,u_(sigma(i))>
+      =per(Gram(u_1,...,u_n))/n!.
+
+  For A=Gram(u_i) and B=Gram(w_i),
+    A o B=Gram(u_i tensor w_i).
+  Therefore the general conjectural inequality is exactly the comparison
+    n! ||Sym tensor_i(u_i tensor w_i)||^2
+      <= (n!)^2 ||Sym tensor_i u_i||^2 ||Sym tensor_i w_i||^2.
+  The nonnegativity of these separate squared norms does not prove this
+  comparison. Sections 1-10 prove it only under their specified subclass
+  premises.
+
+12. EXACT OBSTRUCTION TO DROPPING THE SIGN PREMISE.
+
+  Let J_3 be the 3 x 3 all-ones matrix and set
+    A=(3I_3-J_3)/2.
+  Its eigenvalues are 0,3/2,3/2, so A is PSD. Its diagonal entries are 1
+  and its off-diagonal entries are -1/2. The 3-cycle product is
+    a_((123))=-1/8<0.
+  Thus PSD alone does not imply the nonnegative permutation-product
+  premise used in (1).
+
+  For explicit calibration,
+    per(A)=3/2,
+    per(A o A)=39/32,
+    per(A)^2-per(A o A)=33/32>0.
+  This example witnesses failure of the subclass premise, not failure
+  of Chollet's inequality.
+
+13. FIXED-INPUT EXACT ARITHMETIC.
+
+  For rational nonnegative A,B, the permutation products, permanents,
+  Delta, and the normalized distributions on the branch P,Q>0 are
+  rational and computable by finite sums and products. Equality can be
+  checked exactly by the classifications above.
+
+  For finite rational symmetric PSD K, rational v, and positive rational
+  a_i, the matrices T_(a_i)=K(I+a_iK)^(-1) and their Gram entries are
+  rational. The inverse exists by positivity. Hence these calibrated
+  HVR instances admit exact rational checking.
+
+  No rationality is asserted for arbitrary infinite-dimensional spectral
+  data or arbitrary real parameters. Their subclass theorem is analytic
+  via the specified positive spectral measure, not an unprovided finite
+  rational certificate.
+
+END ENDPOINT
+
+PROVED CONCLUSION = ! B_TIER
+  C1-C5, the exact normalized-overlap decomposition, the complete equality
+  classification within the stated hypotheses, the HVR strictness
+  statements, and the diagonal-unitary extension are derived above.
+
+REMAINING ORIGINAL AIM025 OBLIGATION.
+  For every n>=1 and arbitrary complex Hermitian PSD matrices A,B, prove
+  or disprove
+    per(A o B)<=per(A)per(B).
+  The original target imposes no entrywise sign condition. Extending the
+  residual comparison to arbitrary signed/complex permutation products
+  remains unresolved here. Positivity of HVR moment kernels, separate
+  Gram matrices, or separate symmetric-tensor norms does not discharge
+  that comparison.
+
+PRIMARY TARGET URL.
+  https://github.com/MColbrook/AIM/blob/main/problems/025-chollet-permanent.md
+
+CATALOG AND STATUS SCOPE.
+  https://github.com/MColbrook/AIM/blob/main/CATALOG.md
+  AIM025 is listed OPEN. The problem page records review 2026-09-08.
+  The present ! marker applies only to the explicitly scoped subclass
+  theorem and identities in this file, not to a resolution of AIM025.

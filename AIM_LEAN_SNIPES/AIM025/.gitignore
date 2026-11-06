@@ -1,0 +1,6 @@
+/evidence/r-*
+*.olean
+*.ilean
+*.c
+*.o
+*.trace
