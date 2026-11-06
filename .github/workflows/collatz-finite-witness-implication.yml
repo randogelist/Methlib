@@ -1,0 +1,106 @@
+name: Collatz finite witness implication
+
+on:
+  push:
+    paths:
+      - 'Collatz-finite-witness-implication/**'
+      - '.github/workflows/collatz-finite-witness-implication.yml'
+  pull_request:
+    paths:
+      - 'Collatz-finite-witness-implication/**'
+      - '.github/workflows/collatz-finite-witness-implication.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: collatz-finite-witness-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lean-pass:
+    name: Lean 4.34.0-rc1 / finite witness implies Collatz
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      PACKAGE: Collatz-finite-witness-implication
+      MATHLIB_REV: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      LEAN_NUM_THREADS: '4'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out the exact package revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          sparse-checkout: Collatz-finite-witness-implication
+          persist-credentials: false
+
+      - name: Verify the original source manifest
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 "$PACKAGE/ci/run_ci.py" --check-source
+
+      - name: Check out the pinned Mathlib dependency
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+
+      - name: Reserve space for cached dependency objects
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          df -h .
+
+      - name: Install the pinned Lean compiler
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore downloaded Mathlib cache archives
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: collatz-mathlib-${{ runner.os }}-${{ runner.arch }}-${{ env.MATHLIB_REV }}
+
+      - name: Fetch the pinned Mathlib object cache
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/$PACKAGE/evidence/bootstrap"
+          test "$(git rev-parse HEAD)" = "$MATHLIB_REV"
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          "$HOME/.elan/bin/lean" --version | tee "$GITHUB_WORKSPACE/$PACKAGE/evidence/bootstrap/lean-version.txt"
+          "$HOME/.elan/bin/lake" exe cache get 2>&1 | tee "$GITHUB_WORKSPACE/$PACKAGE/evidence/bootstrap/mathlib-cache.log"
+          test -s .lake/build/lib/lean/Mathlib.olean
+          git rev-parse HEAD > "$GITHUB_WORKSPACE/$PACKAGE/evidence/bootstrap/mathlib-revision.txt"
+          sha256sum lean-toolchain lake-manifest.json > "$GITHUB_WORKSPACE/$PACKAGE/evidence/bootstrap/mathlib-inputs.sha256"
+
+      - name: Compile the implication and audit all thirteen endpoints
+        env:
+          MATHLIB_CACHE_ROOT: ${{ github.workspace }}/.ci-mathlib
+        run: |
+          set -euo pipefail
+          export LEAN_EXE="$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc1/bin/lean"
+          test -x "$LEAN_EXE"
+          python3 "$PACKAGE/ci/run_ci.py" --threads "$LEAN_NUM_THREADS"
+
+      - name: Upload compiler and theorem-level axiom evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: collatz-finite-witness-implication-${{ github.run_id }}-${{ github.run_attempt }}
+          path: Collatz-finite-witness-implication/evidence/
+          if-no-files-found: warn
+          retention-days: 90

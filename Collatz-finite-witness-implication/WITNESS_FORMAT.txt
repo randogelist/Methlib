@@ -1,0 +1,37 @@
+COLLATZ_AFFINE_INTEGER_V1: Exact witness interchange format
+
+Tokens are separated by whitespace; labels are case sensitive and must occur
+exactly in the indicated order. Integers use canonical signed base-10 text:
+0, a positive integer without leading zeroes, or - followed by a positive
+integer without leading zeroes. No plus signs, decimal points or -0.
+
+COLLATZ_AFFINE_INTEGER_V1
+dimension d
+denominator D
+B0 matrix <d*d integers, row-major> offset <d integers>
+B1 matrix <d*d integers, row-major> offset <d integers>
+G0 matrix <d*d integers, row-major> offset <d integers>
+G1 matrix <d*d integers, row-major> offset <d integers>
+G2 matrix <d*d integers, row-major> offset <d integers>
+seed <d integers>
+weight <d integers>
+END
+
+Decoder uses E.den = D, the five integer matrices and offsets exactly as
+listed, and seed and weight exactly as listed. Denominator positivity,
+nonnegativity of B0 and B1, and ALL other arithmetic constraints are checked
+by Lean's IntegerValid predicate, not by the parser. G values may be signed.
+
+Current generator implementation supports 1 <= d <= 256, at most 64 MiB per
+input file, and at most 100000 characters per integer token. Invalid format or
+resource limits are generation errors, not mathematical rejection. A failing
+or interrupted Lean run is not automatically a certified rejection either.
+
+EXAMPLE_INVALID_WITNESS.txt is deliberately mathematically invalid; it parses
+but Lean's `decide` must fail because the gap condition is false. It is not a
+Collatz certificate. EXAMPLE_MALFORMED_WITNESS.txt must be rejected by the
+parser. There is no accepted witness in this package.
+
+Generated source uses `by decide`, not `native_decide`. Lean must kernel-check
+the entire predicate and audit the final theorem. Large inputs may exceed
+resources or practical limits; this generator does not guarantee a fast check.

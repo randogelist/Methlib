@@ -1,0 +1,24 @@
+MAJOR LEAN COLLATZ - A_TIER_CANDIDATE
+
+The main entry point src/major_lean_collatz.lean imports the complete bundled
+proof chain: FiniteAffine, RankToCollatz, BinaryAdapter, Main, and
+CollatzIntegerBridge. The bundle includes the actual existing integer witness
+checker and a generator/replay for concrete input. The entry point does not
+physically duplicate the proof modules. No axioms, sorry or accepted candidate
+were added. Its endpoints require external compilation and theorem-level audit.
+
+EXTERNAL RUN: set MATHLIB_CACHE_ROOT to the existing RC1 Mathlib cache.
+call COLLATZ_MAJOR_LEAN_RC1_CANDIDATE\run.cmd
+This builds the source chain and audits every named entry point.
+To replay a real candidate:
+call COLLATZ_MAJOR_LEAN_RC1_CANDIDATE\run.cmd "C:\path\to\witness.txt"
+The latter uses the production generator and the actual IntegerValid check.
+The signal only appears after all production witness and root audits succeed.
+Example invalid files are supplied; no accepted candidate is supplied.
+No positive witness acceptance test or Lean run was executed locally.
+
+The sign filters are necessary, not sufficient, for acceptance. No C source,
+C-Lean implementation equivalence, completed search, accepted witness,
+or guarantee of one is provided. Resource failures are inconclusive.
+The Mathlib cache is supplied by the user; source/object provenance is not
+independently verified by this package.

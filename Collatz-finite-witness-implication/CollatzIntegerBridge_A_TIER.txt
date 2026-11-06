@@ -1,0 +1,76 @@
+COLLATZ INTEGER-CHECKER BRIDGE -- A_TIER_CANDIDATE
+Compiler target: native Windows Lean 4.34.0-rc1, cached Mathlib only.
+
+EXACT ENDPOINTS
+  CollatzIntegerBridge.integerValid_iff_original_check:
+    IntegerValid E <-> 0 < E.den /\ (decode E).check = true.
+  CollatzIntegerBridge.integerCheck_iff_original_check:
+    integerCheck E = true <-> 0 < E.den /\ (decode E).check = true.
+  CollatzIntegerBridge.integerValid_implies_collatz:
+    IntegerValid E -> forall n : Nat, 0 < n -> OrdinaryReachesOne n.
+
+The source's IntegerValid is an independently stated integer predicate for
+all six affine coefficient comparisons, all three seed inequalities,
+all positivity clauses, both weighted rows and the unit gap. The common
+positive denominator decode maps each integer numerator to the EXACT
+rational original certificate. The G matrices/offsets remain signed.
+The cubic seed comparison is represented by evalTwo and D * evalOne;
+this is the nested integer equivalent of the expanded paper formula.
+
+PURPOSE AND LIMITATION
+The prepared endpoints do not establish equivalence of an actual C program,
+parser, integer backend or compiled binary. They do not find a witness or
+prove Collatz without the explicit IntegerValid premise. Search enumeration
+and completeness, rational encoding surjectivity and the residual HVR
+adapter are not stated or proved in this package. The exact source and full
+integer formulation were inspected independently on paper; this is not Lean
+compiler evidence. No Lean was run locally.
+
+FIX1 REPAIR
+The initial external run built all four original modules but failed on the
+bridge: IntegerValid and integerCheck were incorrectly used in Encoding field
+notation. FIX1 uses ordinary function application. The no-goals diagnostic
+may be cascading; the rest of the proof is unchanged and still needs a run.
+
+STATUS
+A_TIER_CANDIDATE. The proof script is uncompiled and unaudited; Lean 4.34.0-rc1
+syntax, elaboration, the revised bridge and cache provenance
+remain unverified until the matching external run. Do not promote because the
+file merely has no intentional admissions. The named root axiom audits must
+pass on the actual external run. Mathlib .olean cache source/object provenance
+is not independently verified. No statement about a C implementation or a
+passing finite witness is implied by a successful conditional build.
+
+RUN IN NATIVE WINDOWS CMD
+  cd /d "%USERPROFILE%\Downloads"
+  tar -xf "COLLATZ_INTEGER_CHECKER_RC1_FIX1.zip"
+  set "MATHLIB_CACHE_ROOT=%USERPROFILE%\Downloads\KTHETA_MO_RC1_CACHE"
+  call "COLLATZ_INTEGER_CHECKER_RC1_FIX1\run.cmd"
+
+If the Mathlib cache is elsewhere, replace MATHLIB_CACHE_ROOT with its actual
+root or path containing Mathlib.olean. Set LEAN_EXE to the real native RC1
+lean.exe if the user's default elan install is elsewhere. No network, no
+mathlib build, no local Linux Lean, no stopped processes, no C searcher.
+All four original source modules and the new bridge compile freshly, against
+existing cached Mathlib dependencies. A clean failure records stage and logs.
+
+EXPECTED PASS OUTPUT, ONLY IF EXTERNAL RUN SUCCEEDS
+  BUILD_AND_NAMED_AXIOM_AUDITS=PASS
+  RESULT_SCOPE=CONDITIONAL_INTEGER_SPEC_TO_ORIGINAL_CHECKER
+  C_SOURCE_EQUIVALENCE=NOT_ESTABLISHED
+  COLLATZ_WITNESS=NOT_SUPPLIED
+  MATHLIB_CACHE_PROVENANCE=USER_SUPPLIED_NOT_INDEPENDENTLY_VERIFIED
+  RESULT=PASS
+
+A PASS demonstrates only the recorded exact theorem types and audited axioms
+under the recorded compiler and imported cache; it does not independently
+establish every cache object's source provenance. Evidence contains all named
+#check and #print axioms outputs and hashes. If a build fails, inspect the
+stage named BUILD_FAIL and the two corresponding evidence/logs files.
+
+ORIGINAL SOURCE
+Original source: COLLATZ_POINCARE_SECOND_FINITE_WITNESS_LEAN_v0_1_2_FAST16.zip.
+Four original modules are included verbatim and checked against frozen SHA256
+values by the runner. Original package targeted Lean 4.33.0 and its README
+reported a full v0.1.2 run pending at time of packaging. The new bridge is a
+fresh, unverified 4.34.0-rc1 candidate.

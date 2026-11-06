@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "lean_toolchain": "leanprover/lean4:v4.34.0-rc1",
+  "mathlib_revision": "fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0",
+  "module_order": [
+    "FiniteAffine",
+    "RankToCollatz",
+    "BinaryAdapter",
+    "Main",
+    "CollatzIntegerBridge",
+    "major_lean_collatz"
+  ],
+  "allowed_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "audit_targets": [
+    "PoincareSecond.Certificate.check_eq_true_iff",
+    "PoincareSecond.CHECKER_SOUND",
+    "PoincareSecond.FINITE_WITNESS_IMPLIES_COLLATZ",
+    "CollatzIntegerBridge.integerValid_iff_original_check",
+    "CollatzIntegerBridge.integerCheck_iff_original_check",
+    "CollatzIntegerBridge.integerValid_implies_collatz",
+    "MajorLeanCollatz.integer_check_iff_original",
+    "MajorLeanCollatz.integer_check_implies_collatz",
+    "MajorLeanCollatz.denominator_positive",
+    "MajorLeanCollatz.b0_nonnegative",
+    "MajorLeanCollatz.b1_nonnegative",
+    "MajorLeanCollatz.seed_nonnegative",
+    "MajorLeanCollatz.weight_nonnegative"
+  ]
+}

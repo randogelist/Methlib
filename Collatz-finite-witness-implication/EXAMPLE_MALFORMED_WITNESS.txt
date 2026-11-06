@@ -1,0 +1,11 @@
+COLLATZ_AFFINE_INTEGER_V1
+dimension 1
+denominator 1
+B0 matrix 0 offset 0
+B1 matrix 0 offset 0
+G0 matrix 0 offset 0
+G1 matrix 0 offset 0
+G2 matrix 0 offset 0
+seed 0
+weight 0
+END extra
