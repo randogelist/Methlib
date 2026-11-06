@@ -1,0 +1,12 @@
+AIM939.fOf_coefficients
+AIM939.f_diagonal
+AIM939.coefficients_pos
+AIM939.diagonal_curvature_identity
+AIM939.diagonal_concave
+AIM939.qMinus_pow4_lt
+AIM939.qMid_pow4_gt
+AIM939.qPlus_pow4_lt
+AIM939.midpoint_violation
+AIM939.not_concaveOn_rootQuarter_f
+AIM939.exists_counterexample
+AIM939.AIM939_COUNTEREXAMPLE

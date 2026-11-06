@@ -147,8 +147,13 @@ obligations must not be hidden as discharged premises.
 | Directory | Exact scope | Recorded status |
 | --- | --- | --- |
 | [AIM025](AIM025/) | Finite entrywise nonnegative real matrices: permanent residual, inequality, equality classification and normalized overlap. | `!!!!` for the scoped endpoint; unrestricted complex Hermitian PSD AIM025 is not closed by this result. |
+| [AIM939](AIM939/) | Explicit `n = p = 4` counterexample to diagonal-to-full concavity for positive-coefficient sums of elementary symmetric polynomials. | `!!!!` for `¬ AIM939.DiagonalConcavityAssertion4`; the universal source implication is refuted by this instance. |
 
 AIM025's accepted source and external verification basis are recorded in its
 [README](AIM025/README.md) and
 [verification record](AIM025/evidence/VERIFICATION.md).
 
+
+AIM939's accepted source, exact negative root and external verification basis are
+recorded in its [README](AIM939/README.md) and
+[verification record](AIM939/evidence/VERIFICATION.md).

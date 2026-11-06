@@ -1,0 +1,92 @@
+AIM939: SOURCE AND TARGET CORRESPONDENCE
+DATE_UTC = 2026-11-06
+PROJECT = conjecture_bonetooth
+REVIEW_TYPE = MATHEMATICAL_AND_SOURCE_COMPARISON; AI_ASSISTED
+
+1. FROZEN SOURCE IDENTITY
+
+Repository: https://github.com/MColbrook/AIM
+Repository revision: 4f5b1659355cb61d194da94ef14615214e1363a8
+Problem path:
+  problems/939-diagonal-concavity-for-sums-of-elementary-symmetric-polynomials.md
+Problem blob SHA: 2268c665d811c7dd1dc5ec8b41200e263e33785e
+Problem title: Diagonal concavity for sums of elementary symmetric polynomials
+Recorded catalogue status at retrieval: PARTIAL
+Recorded source review date: 2026-10-30
+
+Immutable problem link:
+https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/problems/939-diagonal-concavity-for-sums-of-elementary-symmetric-polynomials.md
+
+Original primary source:
+Xavier Lachaume, On the concavity of a sum of elementary symmetric
+polynomials, arXiv:1712.10327v1, 12 December 2017.
+https://arxiv.org/html/1712.10327v1
+https://arxiv.org/abs/1712.10327
+
+Relevant original locations: Definition 1.1, Definition 1.2, Conjecture 1
+in the introduction and Section 3. The original positive cone Gamma_n is
+explicitly the strictly positive orthant. One-quarter concavity means
+ordinary concavity of the one-quarter power.
+
+2. EXACT CORRESPONDENCE
+
+Source quantifier                 Supplied counterexample
+1 <= p <= n                      n=p=4
+Nonnegative a_0,...,a_p           (1,2,3,5,1), all strictly positive
+Nonzero coefficient vector       a_0=a_4=1
+Elementary symmetric sigma_k     Explicit four-variable elementary sums
+Exponent 1/p                     1/4
+Positive diagonal t>0            Entire interval (0,infinity)
+Positive orthant                  Every coordinate of both witnesses >0
+Diagonal power is concave        Global second-derivative proof
+Full power is concave            Explicit strict midpoint counterexample
+
+The construction does not assume real-rootedness of the diagonal
+polynomial. Such an assumption does not occur in AIM939 or in the original
+Conjecture 1. The separate real-rootedness sufficient condition and the
+derivative-convolution conjectures are different targets.
+
+The two interior points are:
+  xMinus=(1/200,397/100,1/200,1/200),
+  xPlus =(3/200,403/100,3/200,3/200).
+Their midpoint is (1/100,4,1/100,1/100). The coefficients, degree and domain
+therefore satisfy every hypothesis of the original universal implication.
+
+3. RESEARCH AND VERIFICATION STATUS
+
+The exact counterexample was obtained in this conversation after a broader
+screen of currently open or partially resolved catalogue targets. A finite
+numerical search was used for discovery only. The retained mathematical
+proof uses exact polynomial identities and rational fourth-power
+comparisons; no numerical eigenvalue or floating-point root approximation
+is an evidentiary premise.
+
+The primary source and frozen catalogue entry match the exact target.
+Bounded searches for subsequent resolutions did not identify a matching
+earlier counterexample. This is not an exhaustive novelty certification.
+
+The record includes independent AI reviews and a separate exact-rational
+arithmetic computation. The supplied FIX3 native Windows Lean 4.33.0
+transcript records successful compilation of all four proof modules and
+successful transitive axiom audits for all twelve named endpoints, including
+the root. Each reported axiom set is propext, Classical.choice and Quot.sound.
+The exact negative root is promoted to !!!! UNCONDITIONAL_CLOSURE on that
+matching external evidence. Evidence identifier: r-22262-14523-14555.
+Public evidence summary: evidence/VERIFICATION.md.
+Human peer review is not asserted.
+
+4. ADMISSION BOUNDARY
+
+AIM's contribution instructions distinguish a complete submitted solution
+claim from a reviewed solution and a Lean-verified solution. The retrieved
+guide requires proof-to-target correspondence and matching verification
+evidence; its formal checker uses a separately pinned Linux environment.
+
+References:
+https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/CONTRIBUTING.md
+https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/docs/lean/README.md
+
+This record supplies a complete ordinary mathematical counterexample and
+matching external native Lean compilation and root axiom-audit evidence.
+It does not establish public submission, catalogue acceptance or completion
+of the catalogue-specific Linux verification procedure.

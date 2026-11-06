@@ -1,0 +1,81 @@
+{
+  "project": "conjecture_bonetooth",
+  "aim_id": "AIM939",
+  "publication_directory": "AIM_LEAN_SNIPES/AIM939",
+  "status": "A_TIER",
+  "closure": "UNCONDITIONAL_CLOSURE",
+  "marker": "!!!!",
+  "root": "AIM939.AIM939_COUNTEREXAMPLE",
+  "root_type": "¬ AIM939.DiagonalConcavityAssertion4",
+  "exact_scope": "Negation of the n=p=4 diagonal-to-full-concavity assertion",
+  "coefficients": [
+    1,
+    2,
+    3,
+    5,
+    1
+  ],
+  "unresolved_obligations_within_root": [],
+  "original_universal_implication": "REFUTED_BY_EXPLICIT_ADMISSIBLE_INSTANCE",
+  "public_aim_catalogue_admission": "NOT_ESTABLISHED",
+  "historical_priority": "NOT_ASSERTED",
+  "compiler": {
+    "version": "4.33.0",
+    "target": "x86_64-w64-windows-gnu",
+    "commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+    "build": "Release"
+  },
+  "compiled_package": "AIM939_DIAGONAL_CONCAVITY_COUNTEREXAMPLE_433_v0_1_0_FIX3",
+  "evidence_id": "r-22262-14523-14555",
+  "evidence_basis": "USER_SUPPLIED_MATCHING_EXTERNAL_COMPILER_AND_THEOREM_AXIOM_AUDIT_TRANSCRIPT",
+  "evidence_summary": "evidence/VERIFICATION.md",
+  "full_raw_evidence_directory_received": false,
+  "external_source_hash_log_independently_received": false,
+  "source_gate_basis": "ORIGINAL_RUNNER_MANDATORY_CONTROL_FLOW_AND_MATCHING_RETAINED_PACKAGE",
+  "native_result": "PASS",
+  "theorem_audit_result": "PASS_STANDARD_ONLY",
+  "audit_targets": [
+    "AIM939.fOf_coefficients",
+    "AIM939.f_diagonal",
+    "AIM939.coefficients_pos",
+    "AIM939.diagonal_curvature_identity",
+    "AIM939.diagonal_concave",
+    "AIM939.qMinus_pow4_lt",
+    "AIM939.qMid_pow4_gt",
+    "AIM939.qPlus_pow4_lt",
+    "AIM939.midpoint_violation",
+    "AIM939.not_concaveOn_rootQuarter_f",
+    "AIM939.exists_counterexample",
+    "AIM939.AIM939_COUNTEREXAMPLE"
+  ],
+  "allowed_transitive_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "local_lean_execution": false,
+  "local_lake_execution": false,
+  "publication_compiler_run": "NONE",
+  "actual_external_mathlib_git_revision": "NOT_INDEPENDENTLY_MEASURED",
+  "mathlib_api_reference_revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "upstream_problem": {
+    "repository": "MColbrook/AIM",
+    "revision": "4f5b1659355cb61d194da94ef14615214e1363a8",
+    "path": "problems/939-diagonal-concavity-for-sums-of-elementary-symmetric-polynomials.md",
+    "blob_sha": "2268c665d811c7dd1dc5ec8b41200e263e33785e"
+  },
+  "original_zip_sha256": "51a08514472acae3a3d9c5de5db06b4c146171ac5577ab54733bcb67a81fcc48",
+  "original_manifest_sha256": "40f58256c3932ec193dd56b1fa5c49e1ccee749479600c3582418286443c8d8f",
+  "publication_manifest": "sources.sha256",
+  "byte_identical_original_files": {
+    "AIM939/Core.lean": "437835bf7a64ad326f382d104ad0086254d7bc9341240799639aecb62aa70575",
+    "AIM939/Diagonal.lean": "1cc1a3c046bde701209ff27f9c508a9a6d706bf3c329e384e488ea6146f06852",
+    "AIM939/FiniteWitness.lean": "8aa33ef387c052bf239223e795f81d7cf176c21a0161154c315f36c3d70909bc",
+    "AIM939_COUNTEREXAMPLE.lean": "eaf22f61cf830750dfb5bb14401fb6bc2a020507baefc0189175478717826318",
+    "Audit.lean": "7e4d876d8735242acf42164301028b30c957ccf61a4f6044b9e74369a01dcaa7",
+    "run.cmd": "1ef83cd7feb9362c57945a950dd227a11aa709dc2eb828307fed934cdcb25cef",
+    "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "checks/EXACT_RATIONAL_CHECK.json": "de2cf59fce45488670517c08749f8f54bafb0ba6071ccb84b8554bafd1174054"
+  },
+  "documentation_adapted_for_repository": true
+}

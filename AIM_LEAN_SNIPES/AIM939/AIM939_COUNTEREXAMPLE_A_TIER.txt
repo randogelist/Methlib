@@ -1,0 +1,200 @@
+AIM939_COUNTEREXAMPLE
+PROJECT = conjecture_bonetooth
+DATE_UTC = 2026-11-06
+MODE = A_TIER_DERIVATION
+COMPILED_PACKAGE = AIM939_DIAGONAL_CONCAVITY_COUNTEREXAMPLE_433_v0_1_0_FIX3
+FORMAL_STATUS = A_TIER
+FORMAL_CLOSURE = ESTABLISHED
+UNCONDITIONAL_CLOSURE = ESTABLISHED_FOR_EXACT_ROOT
+MARKER = !!!!
+ROOT = AIM939.AIM939_COUNTEREXAMPLE
+ROOT_TYPE = NOT AIM939.DiagonalConcavityAssertion4
+EVIDENCE_BASIS = USER_SUPPLIED_MATCHING_EXTERNAL_COMPILER_AND_AXIOM_AUDIT_TRANSCRIPT
+EXTERNAL_EVIDENCE_ID = r-22262-14523-14555
+PERMITTED_TRANSITIVE_AXIOMS = propext, Classical.choice, Quot.sound
+UNRESOLVED_CERTIFICATES = NONE
+UNRESOLVED_WITNESSES = NONE
+UNRESOLVED_CHECKER_ENDPOINTS = NONE
+UNRESOLVED_ANALYTIC_OR_SEMANTIC_PREMISES = NONE
+UNAPPROVED_AXIOMS_OR_SORRYAX_IN_ROOT_AUDIT = NONE
+PUBLIC_CATALOGUE_ADMISSION = NOT_ESTABLISHED_BY_THIS_RUN
+
+1. EXACT VERIFIED ROOT
+
+AIM939.AIM939_COUNTEREXAMPLE :
+  NOT AIM939.DiagonalConcavityAssertion4.
+
+Expanded assertion being refuted:
+
+For every a : Fin 5 -> Real,
+  if every coefficient is nonnegative,
+  and at least one coefficient is nonzero,
+  and t |-> [sum_(k=0)^4 a_k binom(4,k) t^k]^(1/4)
+      is concave for every t>0,
+  then x |-> [sum_(k=0)^4 a_k sigma_k(x)]^(1/4)
+      is concave on (0,infinity)^4.
+
+The existential predecessor was also compiled and audited:
+
+AIM939.exists_counterexample :
+  there exists a : Fin 5 -> Real such that
+    (for every k, 0 < a k) AND
+    ConcaveOn Real (Ioi 0)
+      (fun t => rootQuarter (fOf a (fun _ => t))) AND
+    NOT ConcaveOn Real orthant
+      (fun x => rootQuarter (fOf a x)).
+
+The negative root has no theorem parameters or unresolved premises.
+All coefficient, domain, diagonal-concavity and finite-witness obligations
+are discharged inside its proof dependency chain.
+
+2. EXPLICIT COUNTEREXAMPLE
+
+n=p=4.
+a=(1,2,3,5,1).
+
+f(x)=1+2 sigma_1(x)+3 sigma_2(x)+5 sigma_3(x)+sigma_4(x),
+where sigma_k are the ordinary unnormalized elementary symmetric sums.
+Core.lean explicitly enumerates every term in four variables.
+
+P(t)=f(t,t,t,t)=1+8t+18t^2+20t^3+t^4.
+
+The verified diagonal branch uses
+  P'(t)=8+36t+60t^2+4t^3,
+  P''(t)=36+120t+12t^2,
+  W(t)=1+2t+6t^2+26t^3+22t^4,
+  4P(t)P''(t)-3P'(t)^2=-48W(t).
+
+For t>0, P(t)>0 and W(t)>0. The second derivative of P^(1/4) is
+  -3 W(t) P(t)^(-7/4),
+which is nonpositive. The compiled theorem diagonal_concave applies on
+the entire interval (0,infinity).
+
+The interior midpoint witness is
+  xMinus=(1/200,397/100,1/200,1/200),
+  xMid=(1/100,4,1/100,1/100),
+  xPlus=(3/200,403/100,3/200,3/200),
+with xMid=(xMinus+xPlus)/2.
+
+Exact values:
+  f(xMinus)=7320291897/800000000,
+  f(xMid)=9426909/1000000,
+  f(xPlus)=7767765381/800000000.
+
+Let
+  qMinus=17392403/10000000,
+  qMid=17522350/10000000,
+  qPlus=17652309/10000000.
+
+Compiled rational comparisons give
+  qMinus^4 < f(xMinus),
+  f(xMid) < qMid^4,
+  qPlus^4 < f(xPlus),
+  (qMinus+qPlus)/2 - qMid = 3/5000000 > 0.
+
+Fourth-root monotonicity and cancellation yield
+  f(xMid)^(1/4)
+    < qMid
+    < (qMinus+qPlus)/2
+    < [f(xMinus)^(1/4)+f(xPlus)^(1/4)]/2.
+
+Therefore midpoint concavity fails at interior points.
+
+The final theorem specializes an assumed universal coefficient assertion
+to this explicit vector and contradicts the certified midpoint failure.
+
+3. EXTERNAL COMPILATION AND AXIOM AUDIT
+
+Received compiler:
+  Lean 4.33.0
+  x86_64-w64-windows-gnu
+  Release
+  commit d8b18978322de05a8f3dba51ef03cf5461676c17
+
+All four proof modules report COMPILE_PASS:
+  AIM939/Core.lean
+  AIM939/Diagonal.lean
+  AIM939/FiniteWitness.lean
+  AIM939_COUNTEREXAMPLE.lean
+
+The transcript reports AXIOM_AUDIT_PASS for twelve endpoints:
+  AIM939.fOf_coefficients
+  AIM939.f_diagonal
+  AIM939.coefficients_pos
+  AIM939.diagonal_curvature_identity
+  AIM939.diagonal_concave
+  AIM939.qMinus_pow4_lt
+  AIM939.qMid_pow4_gt
+  AIM939.qPlus_pow4_lt
+  AIM939.midpoint_violation
+  AIM939.not_concaveOn_rootQuarter_f
+  AIM939.exists_counterexample
+  AIM939.AIM939_COUNTEREXAMPLE
+
+Each reported transitive axiom set is exactly
+  [propext, Classical.choice, Quot.sound].
+
+Terminal success markers:
+  AIM939_THEOREM_AUDIT=PASS_STANDARD_ONLY
+  AIM939_NATIVE_RESULT=PASS.
+
+The inspected Audit.lean requires every target to be a theorem declaration
+and rejects every axiom outside that whitelist. The root itself is audited.
+
+The inspected original run.cmd admits its final PASS only after the
+version check, every source-manifest check, successful compilation of all
+four modules, successful audit execution and the final audit marker.
+Its build directory precedes cached Mathlib dependencies in LEAN_PATH.
+
+4. EVIDENCE IDENTITY AND PUBLICATION
+
+Publication directory: AIM_LEAN_SNIPES/AIM939.
+External evidence identifier: r-22262-14523-14555.
+Public evidence summary: evidence/VERIFICATION.md.
+Machine-readable status and source identities: package.json.
+
+Original FIX3 ZIP SHA256:
+  51a08514472acae3a3d9c5de5db06b4c146171ac5577ab54733bcb67a81fcc48
+Original sources.sha256 SHA256:
+  40f58256c3932ec193dd56b1fa5c49e1ccee749479600c3582418286443c8d8f
+
+All four proof modules, Audit.lean, run.cmd and lean-toolchain retain their
+exact accepted FIX3 bytes. Historical candidate-status comments remain in
+the source files; this accepted status record supersedes those comments.
+The original manifest's 25 entries match the retained original package.
+The publication sources.sha256 is a new manifest covering this directory's
+files. Documentation is adapted to this publication; unrelated baseline
+records and personal filesystem paths are omitted.
+
+The acceptance basis is the user-supplied external compiler and theorem-audit
+transcript. The full raw evidence directory, external source-hashes.log and
+compiled objects were not separately received. Successful source gating is
+inferred from the original runner's mandatory control flow and matching
+fixed package. Publication supplies an evidence summary, not a raw log.
+
+No local Lean or Lake execution and no publication-time compiler run are
+claimed. The actual external cache's Mathlib Git revision was not measured.
+The Mathlib revision in source/API references is a reference revision only.
+
+5. EXACT SCOPE OF UNCONDITIONAL CLOSURE
+
+!!!! applies to the exact formal negation
+  NOT AIM939.DiagonalConcavityAssertion4.
+
+Every coefficient, domain, diagonal-concavity and midpoint obligation
+within this negative root is discharged. The source conjecture quantifies
+over all 1<=p<=n and permits n=p=4. This explicit instance therefore
+mathematically refutes its universal diagonal-to-full-concavity implication.
+The Lean root is the negation of the n=p=4 specialization.
+
+Fixed source correspondence:
+https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/problems/939-diagonal-concavity-for-sums-of-elementary-symmetric-polynomials.md
+
+No real-rootedness premise belongs to this source target. Public catalogue
+acceptance, historical priority, human peer review and the catalogue's
+separate Linux verification procedure are not established by this record.
+
+Complete mathematical derivation:
+  AIM939_DIAGONAL_CONCAVITY_COUNTEREXAMPLE_B_TIER.txt.
+Exact source-to-target mapping:
+  AIM939_SOURCE_SCOPE.txt.

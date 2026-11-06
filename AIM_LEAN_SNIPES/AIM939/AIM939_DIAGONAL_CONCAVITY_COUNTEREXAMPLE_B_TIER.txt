@@ -1,0 +1,302 @@
+AIM939 — COUNTEREXAMPLE TO DIAGONAL CONCAVITY TRANSFER
+VERSION: 0.1.0
+MODE: B_TIER_DERIVATION
+STATUS: ! B_TIER — COMPLETE MATHEMATICAL COUNTEREXAMPLE
+LEAN STATUS: !!!! UNCONDITIONAL_CLOSURE; EXTERNAL LEAN 4.33.0 AND ROOT AXIOM AUDIT PASS
+EVIDENCE: r-22262-14523-14555; EXACT ROOT = NOT AIM939.DiagonalConcavityAssertion4
+PUBLIC ACCEPTANCE STATUS: NOT ASSERTED
+NOVELTY STATUS: NOT ASSERTED
+
+==========================================================================
+BEGINNING ENDPOINT
+==========================================================================
+
+ORIGINAL TARGET.
+
+For 1<=p<=n and nonnegative coefficients a_0,...,a_p, not all zero, define
+
+    sigma_0(x)=1,
+    sigma_k(x)=sum_(i_1<...<i_k) x_(i_1)...x_(i_k),
+    f_a(x)=sum_(k=0)^p a_k sigma_k(x),
+    P_a(t)=f_a(t,...,t)=sum_(k=0)^p a_k binomial(n,k)t^k.
+
+The diagonal-concavity assertion requires that concavity of P_a^(1/p) on
+(0,infinity) imply concavity of f_a^(1/p) on (0,infinity)^n.
+
+THEOREM AIM939_COUNTEREXAMPLE.
+
+Set n=p=4 and
+
+    (a_0,a_1,a_2,a_3,a_4)=(1,2,3,5,1),
+    f(x)=1+2sigma_1(x)+3sigma_2(x)+5sigma_3(x)+sigma_4(x),
+    P(t)=1+8t+18t^2+20t^3+t^4.
+
+Then all coefficients are strictly positive, P(t)=f(t,t,t,t), and
+
+    (i)  P(t)^(1/4) is strictly concave for all t>0;
+    (ii) f(x)^(1/4) is not concave on (0,infinity)^4.
+
+Consequently, the original universally quantified diagonal-concavity
+assertion is false. No additional real-rootedness premise is assumed or
+disproved by this theorem.
+
+==========================================================================
+DEFINITIONS AND PREMISES
+==========================================================================
+
+All variables and coefficients are real. The notation u^(1/4), for u>0,
+means the unique positive fourth root. The functions considered below are
+positive on their stated domains. Concavity has the usual Jensen meaning:
+
+    g((1-lambda)x+lambda y)
+      >=(1-lambda)g(x)+lambda g(y)
+
+for all points of the convex domain and every lambda in [0,1].
+
+The elementary symmetric polynomials are the ordinary unnormalized
+polynomials. In four variables,
+
+    sigma_1=x_1+x_2+x_3+x_4,
+    sigma_2=x_1x_2+x_1x_3+x_1x_4+x_2x_3+x_2x_4+x_3x_4,
+    sigma_3=x_1x_2x_3+x_1x_2x_4+x_1x_3x_4+x_2x_3x_4,
+    sigma_4=x_1x_2x_3x_4.
+
+No unknown existence premise, numerical approximation premise, semidefinite
+certificate premise, or finite sampling premise is used in the derivation.
+
+==========================================================================
+NUMBERED FULL DERIVATION
+==========================================================================
+
+1. Admissible coefficients and positivity.
+
+The vector (1,2,3,5,1) has five strictly positive entries. For every
+x in (0,infinity)^4, each sigma_k(x) is nonnegative and f(x)>=1>0.
+Likewise P(t)>=1>0 for every t>0. Therefore both fourth-root functions are
+well-defined; the diagonal fourth root is twice continuously differentiable.
+
+2. Exact diagonal restriction.
+
+On the diagonal x=(t,t,t,t),
+
+    sigma_1=4t,
+    sigma_2=6t^2,
+    sigma_3=4t^3,
+    sigma_4=t^4.
+
+It follows that f(t,t,t,t)=1+8t+18t^2+20t^3+t^4=P(t).
+
+3. Global scalar concavity certificate.
+
+Differentiation gives
+
+    P'(t)=8+36t+60t^2+4t^3,
+    P''(t)=36+120t+12t^2.
+
+Exact polynomial multiplication yields
+
+    4P(t)P''(t)-3P'(t)^2
+      =-48-96t-288t^2-1248t^3-1056t^4
+      =-48(1+2t+6t^2+26t^3+22t^4).              (3.1)
+
+All terms in the parenthesis are nonnegative for t>0, and the constant
+term is positive. Hence the expression in (3.1) is strictly negative
+for every t>0, without a finite parameter restriction.
+
+For g(t)=P(t)^(1/4), the chain rule gives
+
+    g''(t)
+      =[4P(t)P''(t)-3P'(t)^2]/[16P(t)^(7/4)]<0.  (3.2)
+
+The denominator is positive by paragraph 1. A twice continuously
+differentiable function with negative second derivative on an interval
+has strictly decreasing first derivative. The mean value theorem then
+gives the strict Jensen inequality between any two distinct points of
+that interval. Therefore g is strictly concave on all of (0,infinity).
+
+4. Three explicit interior points.
+
+Define
+
+    x_minus=(1/200, 397/100, 1/200, 1/200),
+    x_mid  =(1/100, 4,       1/100, 1/100),
+    x_plus =(3/200, 403/100, 3/200, 3/200).
+
+Every coordinate is positive, and coordinatewise arithmetic gives
+
+    x_mid=(x_minus+x_plus)/2.                   (4.1)
+
+Equivalently, these are points on the line through x_mid with direction
+v=(1,6,1,1) and steps plus or minus 1/200.
+
+5. Exact values of the multivariate polynomial.
+
+For x=(s,M,s,s), direct evaluation of the elementary symmetric
+polynomials gives
+
+    sigma_1=M+3s,
+    sigma_2=3Ms+3s^2,
+    sigma_3=3Ms^2+s^3,
+    sigma_4=Ms^3.
+
+Thus
+
+    f(s,M,s,s)
+      =1+6s+9s^2+5s^3+M(2+9s+15s^2+s^3).       (5.1)
+
+For the three points in paragraph 4, M=197/50+6s. Substitution in
+(5.1) gives the one-variable expression
+
+    F(s)=222/25+(2673/50)s+(1221/10)s^2
+           +(4947/50)s^3+6s^4.
+
+Evaluation at s=1/200,1/100,3/200 proves
+
+    f(x_minus)=7320291897/800000000,
+    f(x_mid)  =9426909/1000000,
+    f(x_plus) =7767765381/800000000.              (5.2)
+
+These are exact rational equalities.
+
+6. Rational fourth-root brackets.
+
+Set D=10000000 and
+
+    q_minus=17392403/D,
+    q_mid  =17522350/D,
+    q_plus =17652309/D.
+
+All three numbers are positive. Exact integer arithmetic proves
+
+    f(x_minus)-q_minus^4
+      =11014638419023034580719/10^28>0,
+
+    q_mid^4-f(x_mid)
+      =19279346223978006250000/10^28>0,
+
+    f(x_plus)-q_plus^4
+      =6325176619132502946639/10^28>0.           (6.1)
+
+The map r->r^4 is strictly increasing for r>=0. Therefore (6.1) implies
+
+    q_minus<f(x_minus)^(1/4),
+    f(x_mid)^(1/4)<q_mid,
+    q_plus<f(x_plus)^(1/4).                     (6.2)
+
+No floating-point approximation is used in (6.1) or (6.2).
+
+7. Strict midpoint violation.
+
+The rational bounds themselves satisfy
+
+    (q_minus+q_plus)/2-q_mid
+      =(17392403+17652309-2*17522350)/(2*10^7)
+      =12/(2*10^7)
+      =3/5000000>0.                             (7.1)
+
+Combining (6.2) and (7.1) yields the quantitative inequality
+
+    [f(x_minus)^(1/4)+f(x_plus)^(1/4)]/2
+       -f(x_mid)^(1/4)
+      >3/5000000>0.                              (7.2)
+
+Equation (4.1) identifies x_mid as the midpoint of x_minus and x_plus.
+Concavity would require the left side of (7.2) to be nonpositive.
+Consequently f^(1/4) is not concave on the positive orthant.
+
+8. Negation of the original universal assertion.
+
+Paragraphs 1-3 establish every coefficient, positivity, exponent, and
+global diagonal-concavity hypothesis of the n=p=4 instance. Paragraphs
+4-7 establish failure of its full-concavity conclusion at admissible
+interior points. Hence that instance is false, and the original assertion
+quantified over every 1<=p<=n is false.
+
+The source separately discusses a real-rootedness sufficient condition.
+The counterexample does not assume that condition. In particular, the
+normalized coefficient sequence fails a Newton log-concavity inequality:
+
+    a_2^2=9<10=a_1a_3.
+
+The full statement refuted here is the diagonal-concavity conjecture,
+not a statement with a real-rootedness hypothesis added.
+
+==========================================================================
+END ENDPOINT
+==========================================================================
+
+! B_TIER ROOT THEOREM: AIM939_COUNTEREXAMPLE.
+
+There exists a coefficient vector with n=p=4, namely (1,2,3,5,1), for
+which the fourth root of the diagonal restriction is concave on the
+entire positive half-line and the fourth root of the associated sum of
+elementary symmetric polynomials is not concave on the positive orthant.
+
+All mathematical premises of this counterexample are discharged in the
+derivation above. The matching FIX3 Lean sources have passed the external
+native Lean 4.33.0 compiler and theorem-level axiom audit. The exact formal
+root is NOT AIM939.DiagonalConcavityAssertion4; its recorded status is
+!!!! UNCONDITIONAL_CLOSURE. See evidence/VERIFICATION.md for the evidence
+basis. The stronger strict diagonal concavity derived above is a B-tier
+conclusion; the formal root requires and proves ordinary ConcaveOn.
+
+==========================================================================
+FORMAL SOURCE RELATION
+==========================================================================
+
+Core.lean defines the coefficient vector, the four elementary symmetric
+polynomials, their sum, the scalar diagonal polynomial, the positive
+orthant, and the real fourth-root function.
+
+FiniteWitness.lean records the three points, the exact rational values,
+the fourth-power inequalities, the midpoint identity, and the resulting
+failure of ConcaveOn. Its root comparisons use monotonicity of Real.rpow
+and cancellation of a fourth power at nonnegative arguments.
+
+Diagonal.lean supplies the derivative certificate and global ConcaveOn
+theorem. The external FIX3 transcript records COMPILE_PASS for that source
+and the remaining proof modules, with standard-only audits for all twelve
+named targets, including the exact negative root.
+
+The accepted status uses matching external compiler and axiom-audit
+evidence. No local Lean execution or publication-time rerun is claimed.
+
+==========================================================================
+SOURCES AND EXACT-SCOPE CHECK
+==========================================================================
+
+[S1] X. Lachaume, On the concavity of a sum of elementary symmetric
+     polynomials, arXiv:1712.10327v1 (2017).
+     https://arxiv.org/abs/1712.10327
+     https://arxiv.org/pdf/1712.10327
+
+     Definition 1.1: unnormalized elementary symmetric polynomials,
+     the positive orthant Gamma_n, the diagonal, and coefficient notation.
+     Conjecture 1, printed p.3: the diagonal/full concavity equivalence
+     for nonnegative coefficients, without a real-rootedness premise.
+     Definition 1.2: the meaning of mu-concavity.
+     Lemma 1.3: the derivative/Hessian criterion for power concavity.
+
+[S2] AIM catalogue, problem 939.
+     https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/problems/939-diagonal-concavity-for-sums-of-elementary-symmetric-polynomials.md
+
+     The inspected entry states the exact universal implication used
+     here and records Partial status after a 2026-10-30 review.
+     The present mathematical derivation does not assert that the
+     catalogue has been updated or that a public admission has occurred.
+
+[S3] Mathlib real-power implementation, read for formal API compatibility.
+     https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean
+
+     Relevant interfaces: Real.pow_rpow_inv_natCast and
+     Real.rpow_lt_rpow. This is an API reference revision; the external
+     cache's actual Git revision was not independently measured.
+
+PROVENANCE.
+
+The coefficient choice and finite witnesses are explicit. The proof
+consists of polynomial identities, rational inequalities, elementary
+one-variable calculus, and the defining midpoint test for concavity.
+No claim of historical priority is included.
+
+END OF FILE
