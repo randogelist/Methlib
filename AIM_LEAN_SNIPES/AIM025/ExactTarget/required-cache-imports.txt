@@ -1,0 +1,10 @@
+Mathlib.LinearAlgebra.Matrix.Permanent
+Mathlib.LinearAlgebra.Matrix.Hadamard
+Mathlib.Data.Real.Basic
+Mathlib.Algebra.Order.BigOperators.Group.Finset
+Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+Mathlib.Algebra.BigOperators.Field
+Mathlib.Algebra.Star.BigOperators
+Mathlib.Analysis.Complex.Order
+Mathlib.LinearAlgebra.Matrix.PosDef
+

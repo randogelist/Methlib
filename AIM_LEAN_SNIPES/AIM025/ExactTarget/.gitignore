@@ -1,0 +1,7 @@
+evidence/r-*/
+evidence/r-*.zip
+*.olean
+*.ilean
+*.c
+*.o
+

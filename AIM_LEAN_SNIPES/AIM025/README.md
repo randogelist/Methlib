@@ -32,6 +32,21 @@ Equality holds exactly when either permanent is zero or the two permutation-weig
 
 Entrywise nonnegativity is an explicit hypothesis. Positive semidefiniteness is not required for this scoped result. The unrestricted complex Hermitian positive-semidefinite AIM025 conjecture and the broader operator/HVR endpoints are outside this formalized scope. No novelty claim is asserted.
 
+## Exact AIM025 formalization candidate
+
+[ExactTarget](ExactTarget/) contains a separate `A_TIER_CANDIDATE` package
+for the original complex Hermitian positive-semidefinite statement. Its
+target `AIM025.Exact.CholletConjecture` has no additional entry restrictions.
+Prepared lemmas establish Hermitian-permanent reality, the exact real-residual
+equivalence, the counterexample criterion, and transfer of this accepted
+nonnegative theorem to its corresponding native complex PSD subclass.
+
+The candidate uses a byte-identical copy of the accepted core and a separate
+57-target audit and cached native Windows runner. Its new declarations have
+no external compilation or axiom-audit evidence yet. The universal PSD
+residual inequality remains unresolved; defining the exact target does not
+prove it. See the [candidate status record](ExactTarget/AIM025_EXACT_FORMALIZATION_A_TIER.txt).
+
 ## Files
 
 | File | Content |
@@ -70,3 +85,4 @@ The runner retains its audited package label `AIM025_CHOLLET_NONNEGATIVE_433_FIX
 ## Evidence boundary
 
 Acceptance uses reviewed user-supplied external Windows output: the FIX2 core transcript, identical FIX3 core source, the successful FIX3 completion excerpt, and the known runner's source/compiler/audit gates. The complete FIX3 evidence ZIP was not uploaded or inspected. Raw transcripts and personal filesystem paths are omitted from publication. No local Lean/Lake execution or new publication-time compiler run is claimed. See [VERIFICATION.md](evidence/VERIFICATION.md).
+

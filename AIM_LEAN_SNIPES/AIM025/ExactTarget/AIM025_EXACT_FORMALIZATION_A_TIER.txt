@@ -1,0 +1,356 @@
+AIM025_EXACT_FORMALIZATION_A_TIER
+================================
+
+MODE = A_TIER_DERIVATION
+PACKAGE = AIM025_EXACT_FORMALIZATION_433_v0_1_0
+NEW_SOURCE_STATUS = A_TIER_CANDIDATE
+TARGET_PROPOSITION = AIM025.Exact.CholletConjecture
+RESTRICTED_ROOT = AIM025.Exact.AIM025_CHOLLET_PSD_REAL_NONNEGATIVE
+ORIGINAL_AIM025_CLOSURE = OPEN
+FORMAL_CLOSURE_OF_ORIGINAL_TARGET = NOT_ESTABLISHED
+UNCONDITIONAL_CLOSURE_OF_ORIGINAL_TARGET = NOT_ESTABLISHED
+LOCAL_LEAN_LAKE_EXECUTIONS = 0
+
+1. FROZEN SOURCE IDENTITIES
+--------------------------
+
+AIM_ID = 025
+ORIGINAL_REPOSITORY = MColbrook/AIM
+ORIGINAL_REVISION = 4f5b1659355cb61d194da94ef14615214e1363a8
+ORIGINAL_PATH = problems/025-chollet-permanent.md
+ORIGINAL_BLOB = 5c9eb64e2b6472f1f926996576059b008c633fdf
+
+BASELINE_REPOSITORY = randogelist/Methlib
+BASELINE_REVISION = dacf8ea7e5574df25b99dbcb89e8eb531311fb8f
+BASELINE_PATH = AIM_LEAN_SNIPES/AIM025/AIM025CholletNonnegative.lean
+BASELINE_SHA256 =
+8d6371fb72c496f43400bb93ba73a9df96c9e1cdac3b9aa35b384197d47acd17
+BASELINE_SOURCE_STATUS = A_TIER, prior accepted scoped evidence
+BASELINE_SOURCE_CHANGE = NONE
+
+REFERENCE_MATHLIB_REVISION = db584cd6d46c92f209a44c0f1c829460d327499d
+EXTERNAL_COMPILER = native Windows Lean 4.33.0
+EXTERNAL_COMPILER_TARGET = x86_64-w64-windows-gnu
+EXTERNAL_COMPILER_REVISION = d8b18978322de05a8f3dba51ef03cf5461676c17
+DEPENDENCY_ACQUISITION = DISABLED
+DEPENDENCY_REBUILD = DISABLED
+DEPENDENCY_OBJECT_HASH_CENSUS = DISABLED
+EXISTING_CACHE_SOURCE_OBJECT_CORRESPONDENCE = TRUSTED
+
+2. EXACT UNIVERSAL TARGET
+------------------------
+
+For every integer n >= 1, and every A,B in M_n(C), assume:
+
+  (P1) A is Hermitian positive semidefinite.
+  (P2) B is Hermitian positive semidefinite.
+
+The required conclusion is:
+
+  per(A o B) <= per(A) per(B),
+
+where o denotes entrywise multiplication, and
+
+  per(M) = sum_{sigma in S_n} product_i M[i,sigma(i)].
+
+There is no factorial normalization. No sign condition on individual entries,
+zero-imaginary-part condition, rank bound, Gram-entry sign restriction,
+or matrix-size upper bound is part of the universal target.
+
+Lean namespace: AIM025.Exact.
+Finite index assumptions: {iota : Type*} [Fintype iota] [DecidableEq iota].
+
+  def CholletFor (A B : Matrix iota iota C) : Prop :=
+    Matrix.permanent (Matrix.hadamard A B) <=
+      Matrix.permanent A * Matrix.permanent B
+
+  def CholletAt (n : Nat) : Prop :=
+    forall A B : Matrix (Fin n) (Fin n) C,
+      A.PosSemidef -> B.PosSemidef -> CholletFor A B
+
+  def CholletConjecture : Prop :=
+    forall n : Nat, 1 <= n -> CholletAt n
+
+The actual Lean source uses the native Unicode real and complex types and
+the native ComplexOrder notation. This ASCII display records the semantics.
+
+Matrix.PosSemidef is the native Mathlib predicate. It includes Hermitian
+symmetry and nonnegative quadratic forms. For finite matrices,
+Matrix.posSemidef_iff_dotProduct_mulVec identifies it with the ordinary
+condition that every quadratic form star(x) dot (M *v x) is nonnegative.
+
+The native permanent expands as sum_sigma product_i M[sigma(i),i].
+This equals the displayed row-index convention by reindexing permutations
+with inversion. No alternate permanent definition replaces Matrix.permanent.
+
+3. REALITY AND EXACT ORDER SEMANTICS
+-----------------------------------
+
+For every finite complex matrix A,
+
+  per(A^*) = conjugate(per(A)).
+
+Derivation:
+  (i) scalar conjugation commutes with finite sums and finite products;
+  (ii) per(A^T) = per(A);
+  (iii) A^* is the entrywise conjugate of A^T.
+
+If A is Hermitian, A^* = A. Consequently,
+
+  conjugate(per(A)) = per(A),
+  Im(per(A)) = 0,
+  per(A) = ofReal(Re(per(A))).
+
+If A and B are Hermitian, then A o B is Hermitian:
+
+  conjugate(A[j,i] B[j,i])
+  = conjugate(A[j,i]) conjugate(B[j,i])
+  = A[i,j] B[i,j].
+
+Thus per(A), per(B), and per(A o B) all have imaginary part zero.
+
+In ComplexOrder,
+
+  z <= w iff Re(z) <= Re(w) and Im(z) = Im(w).
+
+The imaginary equality is automatic for the three permanents above, and
+
+  Re(per(A) per(B)) = Re(per(A)) Re(per(B)).
+
+Therefore, under the stated Hermitian hypotheses,
+
+  CholletFor A B
+  iff Re(per(A o B)) <= Re(per(A)) Re(per(B)).
+
+This equivalence prevents a silent weakening or strengthening caused by
+using the complex partial order.
+
+4. EXACT RESIDUAL AND COUNTEREXAMPLE ENDPOINT
+-------------------------------------------
+
+Define
+
+  Delta(A,B) = Re(per(A)) Re(per(B)) - Re(per(A o B)).
+
+For Hermitian A and B,
+
+  CholletFor A B iff 0 <= Delta(A,B),
+
+by the preceding order equivalence and the real identity
+
+  x <= y iff 0 <= y-x.
+
+Since Delta is real,
+
+  not CholletFor A B iff Delta(A,B) < 0.
+
+Define PSDResidualNonnegative by
+
+  forall n >= 1, forall native PSD A,B in M_n(C), 0 <= Delta(A,B).
+
+Then
+
+  CholletConjecture iff PSDResidualNonnegative.
+
+This is an exact reformulation. It supplies no independent positivity
+argument or certificate.
+
+Define Counterexample by
+
+  exists n >= 1, exists A,B in M_n(C),
+    A.PosSemidef and B.PosSemidef and Delta(A,B) < 0.
+
+An explicit witness of Counterexample contradicts CholletConjecture,
+because the universal comparison forces the same real residual to be
+nonnegative.
+
+Conversely, classical negation of the universal statement yields a
+dimension and a native PSD pair with negative residual. The source proves
+
+  not CholletConjecture iff Counterexample.
+
+A counterexample schema is not a counterexample witness. This package
+supplies no matrices satisfying its strict-negative-residual endpoint.
+
+5. TRANSFER OF THE ACCEPTED THEOREM
+----------------------------------
+
+For a real matrix X, define complexify(X)[i,j] = ofReal(X[i,j]).
+
+Because ofReal is a ring homomorphism,
+
+  per(complexify(X)) = ofReal(per(X)),
+
+by commuting ofReal with every finite sum and product. Likewise,
+
+  complexify(X o Y) = complexify(X) o complexify(Y).
+
+Since ofReal preserves and reflects real order,
+
+  CholletFor(complexify(X),complexify(Y))
+  iff per(X o Y) <= per(X) per(Y).
+
+The exact complex residual restricts to the accepted real residual:
+
+  Delta(complexify(X),complexify(Y))
+  = AIM025.cholletGap X Y.
+
+Suppose every entry of X and Y is nonnegative. The accepted theorem
+AIM025.permanent_hadamard_le supplies
+
+  per(X o Y) <= per(X) per(Y).
+
+Its combinatorial basis is the finite expansion
+
+  per(X) per(Y) - per(X o Y)
+  = sum_{sigma != tau} x_sigma y_tau >= 0,
+
+where x_sigma and y_tau are nonnegative permutation weights.
+Complexification therefore yields CholletFor on these matrices.
+
+Now suppose complex matrices A and B satisfy
+
+  forall i,j, Im(A[i,j]) = 0;
+  forall i,j, Im(B[i,j]) = 0;
+  forall i,j, 0 <= Re(A[i,j]);
+  forall i,j, 0 <= Re(B[i,j]).
+
+Then A = complexify(Re(A)) and B = complexify(Re(B)), entry by entry.
+The preceding transfer proves CholletFor A B.
+
+Adding the native PSD hypotheses permits the exact residual equivalence.
+The prepared restricted root is:
+
+  theorem AIM025_CHOLLET_PSD_REAL_NONNEGATIVE
+      (A B : Matrix iota iota C)
+      (hA : A.PosSemidef) (hB : B.PosSemidef)
+      (hAim : forall i j, (A i j).im = 0)
+      (hBim : forall i j, (B i j).im = 0)
+      (hAre : forall i j, 0 <= (A i j).re)
+      (hBre : forall i j, 0 <= (B i j).re) :
+      CholletFor A B and 0 <= cholletGap A B
+
+No theorem removes hAim, hBim, hAre, or hBre from this restricted root.
+The root is a genuine special case of AIM025.
+
+6. LIMIT OF THE NONNEGATIVE PERMUTATION ARGUMENT
+----------------------------------------------
+
+Positive semidefiniteness does not imply nonnegative individual
+permutation weights.
+
+For the real Hermitian matrix C = (3 I_3 - J_3)/2,
+
+  eigenvalues(C) = {0, 3/2, 3/2},
+  C[1,2] C[2,3] C[3,1] = -1/8.
+
+Its six permutation contributions sum to
+
+  per(C) = 1 + 3/4 - 1/4 = 3/2.
+
+The entries of C o C are 1 on the diagonal and 1/4 off the diagonal, so
+
+  per(C o C) = 1 + 3/16 + 1/32 = 39/32,
+  Delta(C,C) = 9/4 - 39/32 = 33/32 > 0.
+
+This matrix obstructs the proposed termwise-nonnegative extension.
+It is not a counterexample to AIM025. These explanatory computations
+are not new Lean declarations in the present package.
+
+7. MODULES, AUDIT AND PROOF SCHEDULING
+------------------------------------
+
+Deterministic compilation order:
+
+  1. AIM025CholletNonnegative.lean
+  2. AIM025Exact.lean
+  3. AIM025Bridge.lean
+  4. Audit.lean
+
+The first three modules use native asynchronous elaboration where
+applicable. Their exported theorem signatures and the final dependency
+chain remain fixed. Scheduling supplies no proof evidence.
+
+Audit coverage:
+
+  BASELINE_THEOREMS = 36
+  EXACT_TARGET_THEOREMS = 12
+  TRANSFER_THEOREMS = 9
+  TOTAL_THEOREMS = 57
+
+Audit.lean prints the exact target definitions, full theorem signatures,
+and theorem-level axiom reports. It calls Lean.collectAxioms on every
+target and rejects all transitive axioms outside
+
+  propext
+  Classical.choice
+  Quot.sound
+
+The exact list is audit-theorems.txt. The conjecture definition itself
+is not counted as a theorem proving the conjecture.
+
+8. VERIFICATION STATUS AND PROMOTION RULE
+----------------------------------------
+
+Completed:
+  - Original target and pinned Mathlib API inspection.
+  - Independent mathematical and source-level review of both new modules.
+  - Preservation of the accepted core source bytes.
+  - Static audit-list and runner consistency checks.
+  - File-integrity and archive checks.
+
+Not performed:
+  - Local Lean or Lake execution.
+  - External compilation of the new source.
+  - External theorem-level axiom audit of the new source.
+  - Native Windows execution of the adjusted runner.
+
+The prior accepted core's evidence basis is retained separately in
+provenance/BASELINE_VERIFICATION.md. It must not be reused as evidence
+for the new declarations.
+
+Promotion of a new theorem to A_TIER requires successful matching native
+compilation and standard-only theorem-level axiom audit. The runner emits
+
+  A_TIER_PROMOTION=REVIEW_REQUIRED
+  ORIGINAL_AIM025_CLOSURE=OPEN
+
+even after successful completion. A passing run validates the listed
+semantic and restricted theorems; it does not establish the unresolved
+universal positivity theorem.
+
+9. REMAINING OBLIGATIONS
+-----------------------
+
+EXTERNAL_VALIDATION:
+  Compile these exact source bytes with the declared native compiler
+  against the existing compatible dependency cache, and inspect all
+  57 standard-only axiom reports.
+
+FULL_AIM025:
+  Prove PSDResidualNonnegative without additional entry restrictions,
+  or supply a concrete Counterexample with both native PSD witnesses
+  and a strict-negative exact residual.
+
+UNRESOLVED_WITNESS:
+  No full-domain proof certificate or negative-residual witness is supplied.
+
+CURRENT_MARKER:
+  No new !!, !!!, or !!!! promotion is asserted.
+  The accepted baseline retains its prior scoped status only.
+
+10. DIRECT REFERENCES
+---------------------
+
+Original exact statement:
+https://github.com/MColbrook/AIM/blob/4f5b1659355cb61d194da94ef14615214e1363a8/problems/025-chollet-permanent.md
+
+Accepted baseline source:
+https://github.com/randogelist/Methlib/blob/dacf8ea7e5574df25b99dbcb89e8eb531311fb8f/AIM_LEAN_SNIPES/AIM025/AIM025CholletNonnegative.lean
+
+Accepted baseline evidence:
+https://github.com/randogelist/Methlib/blob/dacf8ea7e5574df25b99dbcb89e8eb531311fb8f/AIM_LEAN_SNIPES/AIM025/evidence/VERIFICATION.md
+
+Pinned Mathlib:
+https://github.com/leanprover-community/mathlib4/tree/db584cd6d46c92f209a44c0f1c829460d327499d
+
