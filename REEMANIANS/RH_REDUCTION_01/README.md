@@ -22,6 +22,6 @@ Certified cross-outs preserve the accepted witness set exactly.
 
 Concrete accepted-witness existence remains open.
 
-## Package
+## Source layout
 
-`RH_NSE_CERTIFIED_MARGIN_CROSSOUT_433_v0_1_0.zip` is the complete source-DAG package used for the verified run.
+The current reduction spine is retained directly under `RHShiftedHausdorff/NSEJoint/`. The earlier Hilbert/HXY backend is imported from the existing REEMANIANS material.
