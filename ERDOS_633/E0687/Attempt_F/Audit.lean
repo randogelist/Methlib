@@ -1,0 +1,23 @@
+import ExternalRoot
+
+#check MethlibErdos687.AttemptF.survivor_pos_iff
+#check MethlibErdos687.AttemptF.two_blocks
+#check MethlibErdos687.AttemptF.moment_strict_forces_all_positive
+#check MethlibErdos687.AttemptF.moment_certificate_sound
+#check MethlibErdos687.AttemptF.moment_certificate_accepted
+#check MethlibErdos687.AttemptF.certificate_excludes_cover
+#check MethlibErdos687.AttemptF.external_part_ii
+#check MethlibErdos687.AttemptF.external_quantitative
+#check MethlibErdos687.AttemptF.external_two_blocks
+#check MethlibErdos687.AttemptF.external_plus_certificate
+
+#print axioms MethlibErdos687.AttemptF.survivor_pos_iff
+#print axioms MethlibErdos687.AttemptF.two_blocks
+#print axioms MethlibErdos687.AttemptF.moment_strict_forces_all_positive
+#print axioms MethlibErdos687.AttemptF.moment_certificate_sound
+#print axioms MethlibErdos687.AttemptF.moment_certificate_accepted
+#print axioms MethlibErdos687.AttemptF.certificate_excludes_cover
+#print axioms MethlibErdos687.AttemptF.external_part_ii
+#print axioms MethlibErdos687.AttemptF.external_quantitative
+#print axioms MethlibErdos687.AttemptF.external_two_blocks
+#print axioms MethlibErdos687.AttemptF.external_plus_certificate
