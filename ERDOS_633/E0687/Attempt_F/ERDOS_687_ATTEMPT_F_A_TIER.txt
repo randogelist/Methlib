@@ -1,0 +1,48 @@
+ERDOS #687 — METHLIB ATTEMPT_F
+DATE: 2026-11-07
+MODE: A_TIER_DERIVATION
+STATUS: A_TIER_CANDIDATE UNTIL MATCHING EXTERNAL CI COMPILER AND AXIOM-AUDIT EVIDENCE
+DIRECTORY: ERDOS_633/E0687/Attempt_F
+WORKFLOW: .github/workflows/erdos-687-attempt-f.yml
+
+I. DEFINITIONS (UNCONDITIONAL)
+P,q,y natural, t mod P.
+C_r(t)=#{0 <= i < y : gcd(|t+i|,P)=1, i ≡ r (mod q)}.
+Delta(t)=sum_{r != u (mod q)} C_r(t) C_u(t) >= 0.
+U=sum_{t mod P} Delta(t). B=sum_{t mod P} Delta(t)^2.
+
+II. EXACT BKQR SECOND MOMENT CERTIFICATE
+!! If U^2 > (P-1)B then every Delta(t)>0.
+Proof: Suppose Delta(t0)=0. Removing the zero term from U and B leaves at
+most P-1 summands. Cauchy-Schwarz gives U^2 <= (P-1)B, contradiction.
+The checker checkDelta is a finite Boolean reflection of all-positivity.
+
+III. QUANTITATIVE EXTERNAL PARTIAL SOLUTION
+Import published formal bridge (pinned source):
+Y(x)=o(x^2);
+Y(x)=O(x^2/(log x log log x)^2).
+Import OpenAI iterative Jacobsthal theorem:
+exists C>0, for every k>=1 there is m<=C*k^2/(log log (3k))^2,
+such that every length-m interval contains a number coprime to
+each n>0 with <=k distinct prime factors.
+Consequence: two disjoint length-m blocks yield distinct coprime
+survivors i<j<2m in every shifted block of length 2m.
+
+IV. NAMED MISSING BRIDGE
+CRTDispersionBridge(P,q,y) :=
+  (forall t mod P, Delta(t)>0) iff (not FullyCovered(P*q,y)).
+The finite proof explicitly ASSUMES this proposition. For the intended
+prime induction, require q prime and gcd(P,q)=1. The CRT proof has not
+been provided in this Lean candidate.
+
+V. FORMAL ROOT
+external_plus_certificate (hCRT : CRTDispersionBridge P q y)
+ (hCert : (P-1)*B < U^2) :
+  [Erdos687.Y =o x^2] AND [not FullyCovered(P*q,y)].
+This does not imply any unproved asymptotic strengthening.
+
+VI. AUDIT RULE
+External toolchain 4.34.1 (not mixed with native RC1), exact pinned imports,
+all ten listed theorem endpoints compile, all theorem-level axiom sets
+restricted to propext, Classical.choice, Quot.sound, no sorryAx.
+No A_TIER promotion until matching actual CI logs show PASS.
