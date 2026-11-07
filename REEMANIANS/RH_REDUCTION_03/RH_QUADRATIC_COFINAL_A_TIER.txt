@@ -1,0 +1,29 @@
+RH_QUADRATIC_COFINAL — A_TIER_CANDIDATE
+Native cached compiler target: Lean 4.33.0 x86_64-w64-windows-gnu
+Dependency: existing cached RH_HilbertLimit.AnalyticClosure and Mathlib.
+No local Lean execution; external run.cmd and axiom audit pending.
+
+Prepared root:
+  RHQuadratic.cofinal_squareEnergy_iff_nativeRH
+  (exists K:Nat, forall cutoff:Nat, exists n>=cutoff with
+   actualSquareEnergy n <= K) ↔ _root_.RiemannHypothesis.
+
+Additional:
+  actualVariation_le_affineMajorant_of_squareEnergy_le
+  nativeRH_of_cofinal_squareEnergy_bound
+  eventual_large_squareEnergy_of_not_nativeRH.
+
+A priori imported and previously audited:
+  canonical_actual_root_limit_exists
+  canonical_actual_root_one_iff_nativeRH
+
+EXCLUDED FROM A_TIER CLAIM:
+  a fixed actual-xi finite witness checker;
+  actual xi interval enclosure verification;
+  the cofinal sequence of accepted witness packets;
+  actual RH.
+
+Promotion only after matching native Windows compile and standard-only
+theorem-level axiom report (propext, Classical.choice, Quot.sound allowed).
+
+FIX1 (2026-11-07): Correct non-equality reversal with Ne.symm, use push Not, restore base Audit.lean, enforce both audit source files in run.cmd. No local Lean execution.

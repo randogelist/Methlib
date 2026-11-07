@@ -1,0 +1,13 @@
+import RH_QUADRATIC_COFINAL
+
+set_option autoImplicit false
+
+#check RHQuadratic.actualVariation_le_affineMajorant_of_squareEnergy_le
+#check RHQuadratic.nativeRH_of_cofinal_squareEnergy_bound
+#check RHQuadratic.cofinal_squareEnergy_iff_nativeRH
+#check RHQuadratic.eventual_large_squareEnergy_of_not_nativeRH
+
+#print axioms RHQuadratic.actualVariation_le_affineMajorant_of_squareEnergy_le
+#print axioms RHQuadratic.nativeRH_of_cofinal_squareEnergy_bound
+#print axioms RHQuadratic.cofinal_squareEnergy_iff_nativeRH
+#print axioms RHQuadratic.eventual_large_squareEnergy_of_not_nativeRH

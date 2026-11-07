@@ -1,0 +1,26 @@
+import RH_QUADRATIC_LYAPUNOV
+
+set_option autoImplicit false
+
+#print RHQuadratic.squareEnergy
+#print RHQuadratic.actualSquareEnergy
+#check RHQuadratic.actual_squareEnergy_le_one_iff_nativeRH
+#check RHQuadratic.actual_exists_uniform_squareEnergy_iff_nativeRH
+#check RHQuadratic.actual_quadratic_unit_steps_iff_nativeRH
+#check RHQuadratic.actual_all_scalar_gates_iff_nativeRH
+#check RHQuadratic.source_quadratic_gate_iff
+#check RHQuadratic.checkRationalSquareGate_sound
+
+#print axioms RHQuadratic.rowVariation_le_squareEnergy_add_card
+#print axioms RHQuadratic.actual_squareEnergy_le_one_of_nativeRH
+#print axioms RHQuadratic.actual_squareEnergy_le_one_iff_nativeRH
+#print axioms RHQuadratic.actual_exists_uniform_squareEnergy_iff_nativeRH
+#print axioms RHQuadratic.nativeRH_of_quadratic_unit_steps
+#print axioms RHQuadratic.actual_quadratic_unit_steps_iff_nativeRH
+#print axioms RHQuadratic.bernsteinWeight_prefix_decompose
+#print axioms RHQuadratic.squareEnergy_polynomial
+#print axioms RHQuadratic.quadratic_unit_step_iff_scalar_square
+#print axioms RHQuadratic.quadratic_monotone_step_iff_scalar_square
+#print axioms RHQuadratic.actual_all_scalar_gates_iff_nativeRH
+#print axioms RHQuadratic.source_quadratic_gate_iff
+#print axioms RHQuadratic.checkRationalSquareGate_sound

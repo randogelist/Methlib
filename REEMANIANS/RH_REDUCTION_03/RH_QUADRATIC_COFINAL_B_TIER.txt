@@ -1,0 +1,145 @@
+RH_QUADRATIC_COFINAL
+STATUS: B_TIER mathematical derivation
+DATE: 2026-11-07
+SOURCE: Actual Riemann xi, via the previously native-audited HVR
+        Bernstein variation root limit and actual quadratic Lyapunov algebra.
+LEAN STATUS: separate A_TIER_CANDIDATE, external compiler/audit PENDING.
+
+0. DEFINITIONS
+
+Actual moments:
+  u_n = RH_HilbertLimit.actualNormalizedMoment(n).
+Bernstein weights:
+  w_(N,j) = binom(N,j) sum_(r=0)^(N-j)
+              (-1)^r binom(N-j,r) u_(j+r).
+Variation:
+  V_N = sum_(j=0)^N |w_(N,j)|.
+Quadratic energy:
+  S_N = sum_(j=0)^N w_(N,j)^2.
+
+Unconditional previously audited facts:
+  V_0=1, V_N>=1;
+  V_N <= V_(N+1);
+  V_N <= S_N + N + 1;
+  there is R>=1 with lim_(N->infinity) V_N^(1/N)=R;
+  R=1 iff native RH;
+  RH => S_N<=1 for all N.
+
+1. THEOREM: COFINAL QUADRATIC-ENERGY CERTIFICATES
+
+  RH iff exists K in N, for every cutoff M in N there exists
+      N>=M with S_N<=K.                                 (C1)
+
+PROOF RH => cofinal:
+  Under RH, S_N<=1 for every N. Choose K=1 and N=M.
+
+PROOF cofinal => RH:
+  Fix K and assume the right side.
+  Define L_N=K+N+1.
+  From V_N<=S_N+N+1, at every certified hit S_N<=K,
+       V_N<=L_N.                                        (C2)
+  An elementary exponential estimate gives
+       lim_(N->infinity) L_N^(1/N)=1.                    (C3)
+  The native HVR root limit gives
+       lim_(N->infinity) V_N^(1/N)=R, R>=1.              (C4)
+  If R>1, choose a=(R+1)/2 in (1,R). Equations
+  (C3)-(C4) imply that for every sufficiently large N:
+       V_N^(1/N)>a>L_N^(1/N).
+  But (C1) supplies a certified hit N beyond that cutoff,
+  and (C2), with positive 1/N, gives the opposite inequality.
+  Contradiction. Thus R=1, hence native RH. QED.
+
+COROLLARY: if RH is false, for each integer K there exists M such
+that S_N>K for EVERY N>=M. This is eventual divergence, not merely
+unboundedness on a subsequence.
+
+2. FINITE ARITHMETIC SINGLE-DEGREE CHECK
+
+For integers N,p>=0, let Q=2^p and let
+a=(a_0,...,a_N) be integer numerators.
+Let uhat_k=a_k/Q. Define integer row weights
+
+  B_(N,j)=binom(N,j) sum_(r=0)^(N-j)
+                (-1)^r binom(N-j,r) a_(j+r), 0<=j<=N.
+
+Set
+  T_N=sum_(j=0)^N B_(N,j)^2.
+
+The raw integer gate with fixed K=3 is
+
+  checkHit3(N,p,a) = true iff
+      length(a)=N+1 AND
+      2*T_N + 2*9^N <= 3*Q^2.                         (C5)
+
+Every expression in (C5) is integer arithmetic.
+
+SOURCE-CERTIFICATION PREMISE (not silently part of C5):
+  |u_k-uhat_k| <= 1/Q for 0<=k<=N.                   (C6)
+
+Let d_j=w_(N,j)-B_(N,j)/Q. Expanding finite binomial
+differences and summing absolute coefficients gives
+  sum_j |d_j|
+      <=sum_(k=0)^N binom(N,k)*2^k/Q
+      = 3^N/Q.                                         (C7)
+
+By (x+y)^2 <= 2x^2+2y^2 and sum_j d_j^2 <=
+(sum_j |d_j|)^2,
+
+  S_N <= 2*T_N/Q^2 + 2*9^N/Q^2.                      (C8)
+
+Combining (C5),(C6),(C8) proves S_N<=3.
+This is a complete B-tier finite arithmetic soundness implication
+conditional on correctly certified enclosures of the actual xi moments.
+
+Under RH, S_N<=1, so for each fixed N one can choose p large
+enough for certified dyadic approximations to force (C5) with
+strict slack 3-2=1, provided the source enclosure mechanism
+can produce arbitrarily narrow enclosures.
+
+3. COFINAL CERTIFICATE EQUIVALENCE
+
+Suppose a source enclosure validator can soundly and completely
+certify (C6) at every fixed degree and arbitrary precision.
+Then
+
+  RH iff for every cutoff M there exists a finite packet
+      W=(N,p,a), N>=M, for which the validated gate (C5)
+      accepts.                                         (C9)
+
+The implication toward RH follows from (C8) and (C1).
+The converse follows by taking N=M and sufficiently precise
+dyadic enclosures when RH supplies S_M<=1.
+
+(C9) is NOT an existential single finite witness:
+     forall M, exists W_M ...
+cannot be changed to:
+     exists W, check(W)=true -> RH.
+No single accepted finite-prefix packet, including N=0,
+certifies RH by itself. N=0 always has S_0=1.
+
+4. RELATION TO THE FEFFERMAN B ADJUSTED PROGRAM
+
+The squared Bernstein row energy admits a Hilbert-space
+embedding and an NSE shear-mode encoding. That encoding is an
+identity about the chosen Fourier data, not an unconditional
+estimate on the actual xi moments. The B-adjusted regularity
+theorem does not discharge the cofinal source bound (C1) or
+construct a sequence of accepted actual-xi certificates.
+
+5. NEXT ENDPOINT
+
+A finite symbolic generator G (rather than an isolated packet)
+with a sound kernel-checked invariant would need to satisfy:
+
+  forall M, exists W output by G,
+       degree(W)>=M
+       and certifiedMomentEnclosures(W)
+       and checkHit3(W)=true.
+
+Proving this for the actual xi source yields RH via (C1).
+
+This is still a universal analytic or inductive obligation.
+No actual-xi source inequality, accepted witness, or unconditional
+RH proof is claimed.
+
+END B_TIER.
