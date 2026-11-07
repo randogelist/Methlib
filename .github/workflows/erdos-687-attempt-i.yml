@@ -1,0 +1,140 @@
+name: Erdős 687 Attempt_I Lean proof and axiom audit
+
+on:
+  push:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_I/**'
+      - '.github/workflows/erdos-687-attempt-i.yml'
+  pull_request:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_I/**'
+      - '.github/workflows/erdos-687-attempt-i.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: erdos-687-attempt-i
+  cancel-in-progress: true
+
+jobs:
+  lean-audit:
+    name: Lean 4.34.0-rc1 / exact eight-theorem audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      PACKAGE: ERDOS_633/E0687/Attempt_I
+      MATHLIB_REV: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+      LEAN_NUM_THREADS: '4'
+    steps:
+      - name: Checkout exact proposed revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          sparse-checkout: ERDOS_633/E0687/Attempt_I
+          persist-credentials: false
+
+      - name: Checkout pinned Mathlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+
+      - name: Free disk space for cached dependencies
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          df -h .
+
+      - name: Install pinned compiler without a local Mathlib build
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore Mathlib downloaded-archive cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-mathlib-lean434-rc1-fd9375dc
+
+      - name: Download official pinned Mathlib object cache
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$MATHLIB_REV"
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          "$HOME/.elan/bin/lake" exe cache get
+          if ! test -s .lake/build/lib/lean/Mathlib.olean; then
+            "$HOME/.elan/bin/lake" env lean "-j$LEAN_NUM_THREADS" -o .lake/build/lib/lean/Mathlib.olean Mathlib.lean
+          fi
+          test -s .lake/build/lib/lean/Mathlib.olean
+
+      - name: Compile actual candidate source
+        run: |
+          set -euo pipefail
+          mkdir -p "$PACKAGE/evidence" "$PACKAGE/.olean"
+          git rev-parse HEAD > "$PACKAGE/evidence/source-commit.txt"
+          "$HOME/.elan/bin/lean" --version | tee "$PACKAGE/evidence/lean-version.txt"
+          export LEAN_PATH="$GITHUB_WORKSPACE/.ci-mathlib/.lake/build/lib/lean:$GITHUB_WORKSPACE/$PACKAGE/.olean"
+          "$HOME/.elan/bin/lean" "-j$LEAN_NUM_THREADS" -o "$PACKAGE/.olean/Erdos687.olean" "$PACKAGE/Erdos687.lean" 2>&1 | tee "$PACKAGE/evidence/compile.log"
+          echo 'DAG_COMPILE=PASS' | tee -a "$PACKAGE/evidence/compile.log"
+
+      - name: Compile audit and reject unapproved axioms
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$GITHUB_WORKSPACE/.ci-mathlib/.lake/build/lib/lean:$GITHUB_WORKSPACE/$PACKAGE/.olean"
+          "$HOME/.elan/bin/lean" "$PACKAGE/Audit.lean" 2>&1 | tee "$PACKAGE/evidence/audit.log"
+          python3 - <<'PY'
+          import pathlib, re, sys
+          p = pathlib.Path("ERDOS_633/E0687/Attempt_I/evidence/audit.log")
+          s = p.read_text(encoding="utf-8")
+          names = (
+            "hankel_ne_zero_iff_card_pos",
+            "check_iff_hankel_nonzero",
+            "yMod_lt_iff_check",
+            "verify_sound",
+            "verify_complete",
+            "erdos687_finite_witness_iff",
+            "uniformAcceptance_implies_erdos687",
+            "erdos687_iff_uniformAcceptance",
+          )
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          failed = []
+          for name in names:
+            endpoint = "Erdos687." + name
+            pat = re.compile(r"(?m)^" + re.escape(endpoint) + r"\s+depends on axioms:\s*\[([^\]]*)\]")
+            match = pat.search(s)
+            if match:
+              axioms = {item.strip() for item in match.group(1).split(",") if item.strip()}
+              if axioms - allowed:
+                failed.append((endpoint, "unapproved axioms", sorted(axioms - allowed)))
+              else:
+                print("AXIOM_AUDIT=PASS_STANDARD_ONLY|" + endpoint)
+            elif re.search(r"(?m)^" + re.escape(endpoint) + r"\s+does not depend on any axioms", s):
+              print("AXIOM_AUDIT=PASS_STANDARD_ONLY|" + endpoint)
+            else:
+              failed.append((endpoint, "missing audit signature"))
+          if "sorryAx" in s or "sorry" in pathlib.Path("ERDOS_633/E0687/Attempt_I/Erdos687.lean").read_text():
+            failed.append(("GLOBAL", "sorry/sorryAx detected"))
+          if failed:
+            print("AXIOM_AUDIT=FAIL", failed)
+            sys.exit(1)
+          print("THEOREM_AXIOM_AUDIT=PASS_STANDARD_ONLY|count=8")
+          print("CONDITIONAL_THEOREM=PASS|universalAcceptance unresolved")
+          PY
+
+      - name: Upload complete proof evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos-687-attempt-i
+          path: ERDOS_633/E0687/Attempt_I/evidence/
+          if-no-files-found: warn
+          retention-days: 90
