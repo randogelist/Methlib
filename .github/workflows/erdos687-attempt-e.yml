@@ -1,0 +1,117 @@
+name: Erdős 687 Attempt_E — finite certificate and imported Jacobsthal
+
+on:
+  push:
+    branches: [erdos/e0687/attempt-e]
+    paths: ['ERDOS_633/E0687/Attempt_E/**', '.github/workflows/erdos687-attempt-e.yml']
+  pull_request:
+    paths: ['ERDOS_633/E0687/Attempt_E/**', '.github/workflows/erdos687-attempt-e.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+          path: .ci-mathlib
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Restore pinned Mathlib object cache
+        working-directory: .ci-mathlib
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc1'
+          test "$(git rev-parse HEAD)" = 'fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0'
+          "$HOME/.elan/bin/lake" exe cache get
+      - name: Kernel-compile and audit finite core
+        run: |
+          set -euo pipefail
+          ACT="$GITHUB_WORKSPACE/ERDOS_633/E0687/Attempt_E"
+          EVD="$ACT/_evidence/core"
+          mkdir -p "$EVD"
+          git rev-parse HEAD > "$EVD/methlib-sha.txt"
+          git -C .ci-mathlib rev-parse HEAD > "$EVD/mathlib-sha.txt"
+          sha256sum "$ACT/AttemptE.lean" > "$EVD/source.sha256"
+          cd .ci-mathlib
+          "$HOME/.elan/bin/lake" env lean --version | tee "$EVD/compiler.log"
+          "$HOME/.elan/bin/lake" env lean -DautoImplicit=false "$ACT/AttemptE.lean" 2>&1 | tee "$EVD/build.log"
+          python3 "$ACT/check_axioms.py" "$EVD/build.log" core | tee "$EVD/audit.log"
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos687-attempt-e-core
+          path: ERDOS_633/E0687/Attempt_E/_evidence/core
+          if-no-files-found: warn
+
+  imported-upstream:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: 4eaee87548250b2682affda7d05d947c05554bae
+          path: .external
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .external/lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: .external/lean/.lake/build
+          key: erdos687-oai-4.34.1-4eaee875-quadroot-v1
+      - name: Compile pinned external Jacobsthal root and exact certificate
+        run: |
+          set -euo pipefail
+          ACT="$GITHUB_WORKSPACE/ERDOS_633/E0687/Attempt_E"
+          EVD="$ACT/_evidence/external"
+          mkdir -p "$EVD"
+          git rev-parse HEAD > "$EVD/methlib-sha.txt"
+          git -C .external rev-parse HEAD > "$EVD/upstream-sha.txt"
+          test "$(cat "$EVD/upstream-sha.txt")" = 4eaee87548250b2682affda7d05d947c05554bae
+          test "$(cat .external/lean/lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          sha256sum "$ACT/AttemptE.lean" "$ACT/ExternalRoot.lean" > "$EVD/source.sha256"
+          cd .external/lean
+          lake env lean --version | tee "$EVD/compiler.log"
+          lake exe cache get 2>&1 | tee "$EVD/cache.log"
+          lake build OAI.NumberTheory.Jacobsthal.Conclusions.QuadraticBound 2>&1 | tee "$EVD/upstream-build.log"
+          test -s .lake/build/lib/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.olean
+          cp "$ACT/AttemptE.lean" AttemptE.lean
+          cp "$ACT/ExternalRoot.lean" ExternalRoot.lean
+          lake env lean -DautoImplicit=false -o .lake/build/lib/lean/AttemptE.olean AttemptE.lean 2>&1 | tee "$EVD/core-build.log"
+          lake env lean -DautoImplicit=false ExternalRoot.lean 2>&1 | tee "$EVD/external-build.log"
+          cat "$EVD/core-build.log" "$EVD/external-build.log" > "$EVD/combined.log"
+          python3 "$ACT/check_axioms.py" "$EVD/combined.log" external | tee "$EVD/audit.log"
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos687-attempt-e-external
+          path: ERDOS_633/E0687/Attempt_E/_evidence/external
+          if-no-files-found: warn
