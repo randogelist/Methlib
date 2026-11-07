@@ -64,7 +64,7 @@ jobs:
         run: bash "$GITHUB_WORKSPACE/.ci-lean-action/scripts/install_elan.sh"
 
       - name: Resolve pinned toolchain executable
-        run: elan run leanprover/lean4:v4.33.0 lean --version
+        run: '"%USERPROFILE%\.elan\toolchains\leanprover--lean4---v4.33.0\bin\lean.exe" --version'
 
       - name: Compile, audit, and test rejection through native runner
         run: call run.cmd
