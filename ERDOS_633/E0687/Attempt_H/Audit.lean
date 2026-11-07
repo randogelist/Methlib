@@ -1,0 +1,8 @@
+import Erdos687AttemptH
+#print axioms Erdos687AttemptH.prefix_second_difference
+#print axioms Erdos687AttemptH.gapCheck_iff_siftedY
+#print axioms Erdos687AttemptH.threshold_iff_gap
+#print axioms Erdos687AttemptH.sampleCheck_iff_gapCheck
+#print axioms Erdos687AttemptH.SiftedPeriod.interior_not_coprime
+#print axioms Erdos687AttemptH.curvatureCheck_iff_certifiedPeriod
+#print axioms Erdos687AttemptH.erdosPrimeCheck_iff_certifiedPeriod

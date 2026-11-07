@@ -1,0 +1,107 @@
+name: Erdos 687 Attempt_H sifted Toda and external audit
+on:
+  push:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_H/**'
+      - '.github/workflows/erdos-687-attempt-h.yml'
+  pull_request:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_H/**'
+      - '.github/workflows/erdos-687-attempt-h.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: erdos687-attempt-h
+  cancel-in-progress: true
+jobs:
+  finite-toda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: '1'
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: 1581d4cbdd69a0faf34b2089614fe2a814316a6a
+          path: .ci-openai
+          sparse-checkout: |
+            lean
+          persist-credentials: false
+      - name: Free disk space
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-openai/lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-jacobsthal-mathlib-lean4341-d13f23b723b8a846827a245b89c10fc7d3f11612
+      - name: Compile finite theorem and audit exact endpoints
+        run: bash ERDOS_633/E0687/Attempt_H/ci/run.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: erdos687-h-finite
+          path: ERDOS_633/E0687/Attempt_H/evidence/finite/
+          if-no-files-found: warn
+  external-part-ii:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    env:
+      LEAN_NUM_THREADS: '1'
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: 1581d4cbdd69a0faf34b2089614fe2a814316a6a
+          path: .ci-openai
+          sparse-checkout: |
+            lean
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: pw/erdosproblemaday-verification
+          ref: 634b667ee7844f12590117c4c2d7bc0143f2fdd9
+          path: .ci-referee
+          sparse-checkout: |
+            970/openai-jacobsthal-quadratic-refereed/bridge687
+          persist-credentials: false
+      - name: Free disk space
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-openai/lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-jacobsthal-mathlib-lean4341-d13f23b723b8a846827a245b89c10fc7d3f11612
+      - name: Compile external part II and theorem-level audit
+        run: bash ERDOS_633/E0687/Attempt_H/ci/run_external.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: erdos687-h-external
+          path: ERDOS_633/E0687/Attempt_H/evidence/external/
+          if-no-files-found: warn

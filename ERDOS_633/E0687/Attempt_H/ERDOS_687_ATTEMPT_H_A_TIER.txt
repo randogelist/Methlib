@@ -1,0 +1,14 @@
+ERDOS_687_ATTEMPT_H_A_TIER
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE
+!! PREFIX_SECOND_DIFFERENCE: S_(i+2)+S_i-2*S_(i+1)=r_(i+1)-r_i.
+!! GAP_CHECK: all finite consecutive gaps <= L iff max gap <= L.
+!!! CONDITIONAL_FINITE_ROOT:
+  SiftedPeriod + CertifiedCurvatureMargin + m>0 + L>=1
+  => curvatureCheck P m b L iff siftedY <= L-1.
+EXTERNAL_ROOT: Imported published proof of Y(x)=o(x^2), NOT an independent derivation.
+OPEN_LEAN: Hankel determinant identity, uniform separation, primorial residue enumeration, CRT.
+OPEN_MATH: Y(x) <= x^(1+o(1)) independently from spectral curvature.
+NO_LOCAL_LEAN=TRUE
+LEAN=4.34.1 on pinned existing CI runner
+CERTIFICATION=A_TIER only after compiler and standard-only theorem-level axiom audit.
