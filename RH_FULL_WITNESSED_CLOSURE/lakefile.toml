@@ -1,0 +1,12 @@
+name = "rhFullWitnessedClosure"
+version = "0.1.0"
+defaultTargets = ["RHFullWitnessedClosure"]
+
+[[require]]
+name = "hilberVectorResolvent"
+git = "https://github.com/randogelist/Hilber-Vector-Resolvent-Theory"
+rev = "c6b95fd9e3d792270026da083bddddbc72bacb22"
+
+[[lean_lib]]
+name = "RHFullWitnessedClosure"
+roots = ["Architecture", "NegativeControl"]
