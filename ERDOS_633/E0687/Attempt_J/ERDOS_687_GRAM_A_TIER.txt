@@ -1,0 +1,37 @@
+ERDOS #687 / ATTEMPT_J — A_TIER_DERIVATION
+STATUS: A_TIER_CANDIDATE, NOT YET A_TIER
+PIN: Lean 4.34.1; mathlib d13f23b723b8a846827a245b89c10fc7d3f11612
+EXTERNAL: openai/math@1581d4cbdd69a0faf34b2089614fe2a814316a6a
+BRIDGE: pw/erdosproblemaday-verification@634b667ee7844f12590117c4c2d7bc0143f2fdd9
+BRIDGE_BLOB: 64a1cf3ff88a4f655ae7284aa3fb99ed9eab4932
+
+EXACT ROOTS
+1. pairCount(A,q)>0 iff A meets at least two distinct residue classes modulo q.
+2. pairCount(A,q)>0 iff deleting any one residue class leaves a member of A.
+3. noCover(insert q ps,m) iff every pre-admission survivor set has
+   strictly positive pairCount, q notin ps. Exact finite N -> N+1.
+4. Published formalized CRT theorem Erdos687.lt_of_covered plus
+   IsJacobsthalBound(k,m) and pi(x)<=k imply noCover(primesLE x,m).
+5. Uniform Gram positivity for every subset ps of primesLE x and
+   each new prime q in primesLE x not in ps.
+6. External quadratic bound: exists C>0, forall k>0 exists m<=C*k^2
+   such that the uniform Gram positivity holds for all x with pi(x)<=k.
+7. Exact separately established Erdős 687 part (ii):
+   Y(x)=o(x^2).
+8. Quantitative endpoint:
+   Y(x)=O(x^2 / (log x loglog x)^2).
+
+SEMANTIC ADMISSION: Discharged by imported Erdos687.lt_of_covered.
+No TranslationAdmission axiom or certificate is postulated.
+
+NOT PROVED: The stronger conjecture Y(x)=x^(1+o(1)) or O(x^(1+epsilon))
+for every epsilon>0.
+
+REQUIRED EXTERNAL EVIDENCE:
+  CI runner must compile the pinned external Jacobsthal DAG, original
+  Bridge687.lean, Erdos687AttemptJ.lean, and Audit.lean under trust=0,
+  and theorem-level #print axioms must yield only
+  propext, Classical.choice, Quot.sound.
+Until matching logs are inspected: A_TIER_CANDIDATE.
+
+No local Lean execution was performed to prepare these files.
