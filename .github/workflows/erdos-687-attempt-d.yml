@@ -1,0 +1,143 @@
+name: Erdos 687 Attempt_D | cached Lean 4.34.1
+
+on:
+  push:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_D/**'
+      - '.github/workflows/erdos-687-attempt-d.yml'
+  pull_request:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_D/**'
+      - '.github/workflows/erdos-687-attempt-d.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: erdos687-attempt-d
+  cancel-in-progress: false
+
+jobs:
+  core:
+    name: Finite covering implication + axiom audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    env:
+      PKG: ERDOS_633/E0687/Attempt_D
+      MATHLIB_REV: d13f23b723b8a846827a245b89c10fc7d3f11612
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      LEAN_NUM_THREADS: '4'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: d13f23b723b8a846827a245b89c10fc7d3f11612
+          path: .ci-mathlib
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-attempt-d-mathlib-4341-d13f23b7
+      - name: Verify exact pinned Mathlib + Lean and retrieve cached objects
+        run: |
+          set -euo pipefail
+          test "$(git -C .ci-mathlib rev-parse HEAD)" = "$MATHLIB_REV"
+          test "$(cat .ci-mathlib/lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          "$HOME/.elan/bin/lean" --version
+          cd .ci-mathlib
+          "$HOME/.elan/bin/lake" exe cache get
+          test -s .lake/build/lib/lean/Mathlib.olean || "$HOME/.elan/bin/lake" env lean -o .lake/build/lib/lean/Mathlib.olean Mathlib.lean
+      - name: Compile and kernel-audit the exact finite theorem
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/$PKG/evidence"
+          cd .ci-mathlib
+          "$HOME/.elan/bin/lake" env lean -j4 -o "$GITHUB_WORKSPACE/$PKG/evidence/ERDOS_687.olean" "$GITHUB_WORKSPACE/$PKG/ERDOS_687.lean" 2>&1 | tee "$GITHUB_WORKSPACE/$PKG/evidence/core-build.log"
+          python3 "$GITHUB_WORKSPACE/$PKG/ci/audit.py" --log "$GITHUB_WORKSPACE/$PKG/evidence/core-build.log" --scope core
+      - name: Save finite core evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: erdos687-attempt-d-core-evidence
+          path: ERDOS_633/E0687/Attempt_D/evidence/
+          if-no-files-found: warn
+
+  external:
+    name: Import pinned external Jacobsthal + audit
+    needs: core
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    env:
+      PKG: ERDOS_633/E0687/Attempt_D
+      EXTERNAL_REV: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      LEAN_NUM_THREADS: '4'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: .ci-openai
+          sparse-checkout: lean
+          persist-credentials: false
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-openai/lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            ~/.cache/mathlib
+            .ci-openai/lean/.lake/build
+          key: erdos687-attempt-d-external-4341-adc7f124
+      - name: Verify upstream pin and cached dependency setup
+        run: |
+          set -euo pipefail
+          test "$(git -C .ci-openai rev-parse HEAD)" = "$EXTERNAL_REV"
+          test "$(cat .ci-openai/lean/lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          grep -F 'd13f23b723b8a846827a245b89c10fc7d3f11612' .ci-openai/lean/lake-manifest.json
+          "$HOME/.elan/bin/lean" --version
+      - name: Compile pinned imported Jacobsthal modules and overlay
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/$PKG/evidence"
+          cd .ci-openai/lean
+          "$HOME/.elan/bin/lake" exe cache get 2>&1 | tee "$GITHUB_WORKSPACE/$PKG/evidence/external-cache.log"
+          "$HOME/.elan/bin/lake" build OAI.NumberTheory.Jacobsthal.Conclusions.QuadraticBound OAI.NumberTheory.Jacobsthal.Conclusions.IteratedLogBound 2>&1 | tee "$GITHUB_WORKSPACE/$PKG/evidence/external-dependencies.log"
+          "$HOME/.elan/bin/lake" env lean -j4 -o .lake/build/lib/lean/ERDOS_687.olean "$GITHUB_WORKSPACE/$PKG/ERDOS_687.lean" 2>&1 | tee "$GITHUB_WORKSPACE/$PKG/evidence/external-core-build.log"
+          "$HOME/.elan/bin/lake" env lean -j4 -o .lake/build/lib/lean/ERDOS_687_EXTERNAL.olean "$GITHUB_WORKSPACE/$PKG/ERDOS_687_EXTERNAL.lean" 2>&1 | tee "$GITHUB_WORKSPACE/$PKG/evidence/external-build.log"
+          python3 "$GITHUB_WORKSPACE/$PKG/ci/audit.py" --log "$GITHUB_WORKSPACE/$PKG/evidence/external-build.log" --scope external
+      - name: Save imported theorem evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos687-attempt-d-external-evidence
+          path: ERDOS_633/E0687/Attempt_D/evidence/
+          if-no-files-found: warn
