@@ -1,0 +1,190 @@
+RH_FINITE_DODGSON_PRUNER
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE
+TOOLCHAIN=Lean_4.33.0
+BASELINE=RH_FINITE_ADMISSION_FRONTIER_433_v0_1_0_FIX6
+BASELINE_ZIP_SHA256=4a9220bd4aac810db62f7f2167d68bf67dddb729dfd5db891206d6b47a56cfc8
+NO_LOCAL_LEAN=TRUE
+EXTERNAL_COMPILER_EVIDENCE=PENDING
+THEOREM_LEVEL_AXIOM_AUDIT=PENDING
+PROMOTION=NONE
+
+EXACT_REQUESTED_DEFINITION
+
+  checkPruned(W) := necessaryDodgsonTests(W) && check(W).
+
+The finite necessary tests execute before the original checker.
+The original checker and its actual-RH implication remain unchanged.
+No universal tail proposition is added to the RH acceptance argument.
+
+SOURCE_MODULES
+
+  RHFinitePruning/PruningCore.lean
+    Generic Boolean composition and preservation theorems.
+
+  RHFinitePruning/DodgsonCells.lean
+    Finite rational Dodgson cells, positivity tests, family exclusions.
+
+  Tail16Frontier/DodgsonPruning.lean
+    Existing TailKernel adapter; concrete FIX6 checkBudget adapter;
+    fail-closed byte-verification wrapper; certified projection interface.
+
+  Tail16Frontier/DodgsonPruningAudit.lean
+    Exact endpoint type checks and theorem-level axiom audit requests.
+
+  RH_FINITE_DODGSON_PRUNER.lean
+    Package root. The separate root file requires the modules in the ZIP.
+
+ROOT_SOUNDNESS_WITHOUT_A_NECESSITY_PREMISE
+
+  RHFrozenWitness.TailKernel.checkPruned_sound
+
+    forall K : TailKernel,
+    forall project : K.Cert -> List Dodgson.Cell,
+    forall c : K.Cert,
+
+      checkPruned K project c = true
+        -> _root_.RiemannHypothesis.
+
+  Proof dependency:
+    filtered acceptance -> original acceptance
+      -> existing K.check_sound -> literal RiemannHypothesis.
+
+  Tail16Frontier.checkBudgetPruned_sound
+
+    checkBudgetPruned project Y p = true -> RiemannHypothesis.
+
+  RHFrozenWitness.TailKernel.verifyPruned_sound
+
+    verifyPruned K project decoder bytes = true -> RiemannHypothesis.
+
+  An incorrect filter can discard valid candidates. It cannot create an
+  acceptance that the original checker would reject. Thus the root soundness
+  theorem does not require the filter's mathematical necessity proof.
+
+ACCEPTED_WITNESS_PRESERVATION
+
+  CertifiedDodgsonProjection K contains:
+
+    cells : K.Cert -> List Dodgson.Cell,
+    valid_of_accepted :
+      forall c, K.check c=true -> AllValid(cells c).
+
+  This is a fixed projection correctness proof, not a new universal RH-tail
+  premise supplied for each submitted witness.
+
+  The finite-cell theorem derives
+
+    K.check c=true -> necessaryDodgsonTests K cells c=true.
+
+  Therefore the following endpoints hold for a certified projection F:
+
+    checkPruned K F.cells c = K.check c,
+
+    checkPruned K F.cells c=true <-> K.check c=true,
+
+    (exists c, checkPruned K F.cells c=true)
+      <-> (exists c, K.check c=true),
+
+    verifyPruned K F.cells decoder bytes = K.verify decoder bytes.
+
+  No original accepted witness is lost under these explicit hypotheses.
+  The empty certified projection is included as a concrete identity control.
+  It performs no search reduction.
+
+DODGSON_CELL_SCOPE
+
+  A rational Cell contains:
+    leftEntry, middleEntry, rightEntry, nextDet, pivot : Rat.
+
+  turan(c) := leftEntry*rightEntry - middleEntry^2.
+
+  Valid(c) :=
+    nextDet*pivot=turan(c) /\ 0<nextDet /\ 0<pivot.
+
+  necessaryTest(c) := decide(0<turan(c)).
+
+  Valid(c) -> necessaryTest(c)=true.
+  necessaryTest(c)=false -> not Valid(c).
+
+  The recurrence identity alone does not discriminate between genuine Hankel
+  moment sequences; every correctly computed determinant array satisfies it.
+  Strict positivity supplies the exclusion condition used here.
+
+  The separate recurrenceTest checks exact rational recurrence consistency.
+  It is available as an additional diagnostic; the requested main presieve
+  currently tests the necessary Turan positivity condition.
+
+FAMILY_EXCLUSIONS
+
+  geometricCell(a,q,nextDet,pivot):
+    leftEntry=a, middleEntry=a*q, rightEntry=a*q^2.
+
+  turan(geometricCell(...))=0.
+  necessaryTest(geometricCell(...))=false.
+  not Valid(geometricCell(...)).
+
+  These conclusions hold for every rational a,q,nextDet,pivot.
+  They exclude geometric triples only from the specified strict-positive
+  cell class. Zero determinants can remain valid for unregularized
+  semidefinite or finite-rank representations.
+
+  If family(theta).turan <= U for every theta in region P and U<=0,
+  then no family(theta) in P is Valid.
+
+  For a certified projection F, a proved finite-test failure throughout a
+  candidate region gives original-check rejection throughout that region.
+
+IMPLEMENTED_BOUNDARY
+
+  FINITE_BOOLEAN_WRAPPER=PREPARED
+  RATIONAL_DODGSON_TESTS=PREPARED
+  GEOMETRIC_FAMILY_EXCLUSION=PREPARED
+  GENERIC_PARAMETER_REGION_EXCLUSION=PREPARED
+  EXISTING_FIX6_RH_ROOT_ADAPTER=PREPARED
+  CERTIFIED_PRESERVATION_INTERFACE=PREPARED
+  EMPTY_PROJECTION_IDENTITY_CONTROL=PREPARED
+
+  NONTRIVIAL_ACTUAL_XI_TO_RATIONAL_CELL_PROJECTION=NOT_INSTANTIATED
+  UNCONDITIONAL_ACTUAL_CANDIDATE_FAMILY_ELIMINATION=NOT_ESTABLISHED
+  CERTIFIED_SEARCH_SPEEDUP=NOT_ESTABLISHED
+  RH_WITNESS_EXHIBITED=FALSE
+
+  A rational triple does not automatically denote actual-xi determinants.
+  A concrete nonempty projection must prove its semantic/necessity bridge.
+  If interval bounds are used, their uniform validity must be proved as well;
+  floating-point estimates alone do not instantiate this interface.
+
+  The stronger comparison chi_actual<=chi_reference is not assumed necessary.
+  Failure of that sufficient comparison must not be used for lossless pruning.
+
+BASELINE_LIMIT
+
+  The FIX6 restricted primitive registry is unchanged. Its previously derived
+  B-tier empty-acceptance obstruction is not removed by this wrapper.
+  A filter cannot create an accepted certificate for an empty original checker.
+  The generic TailKernel adapter remains reusable for other certified kernels.
+
+RUNNER
+
+  Native Windows Lean 4.33.0 only.
+  Network, lake, PowerShell, local assistant-side Lean execution: none.
+  Cached Mathlib and standard dependencies are required.
+  Custom object reuse requires matching source/dependency and version evidence.
+  Current audit modules execute and their actual axiom lists are checked against
+    propext, Classical.choice, Quot.sound.
+  Negative controls must fail for the specified reasons.
+  Missing caches or mismatched versions fail explicitly.
+
+  Static Python configuration checks are not Lean compilation.
+  A successful future runner invocation establishes the matching scoped
+  theorem/audit evidence. It does not establish an RH witness or instantiate
+  the presently missing nontrivial actual determinant projection.
+
+PROMOTION_RULE
+
+  A_TIER_CANDIDATE until matching external native compiler output and
+  theorem-level standard-only axiom audits are supplied.
+
+  NEW_A_TIER=NOT_ESTABLISHED
+  UNCONDITIONAL_RH=NOT_ESTABLISHED

@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "mode": "sign_row",
+  "index": 1,
+  "coefficient": 1,
+  "centers": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "radii": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ]
+  ]
+}
+

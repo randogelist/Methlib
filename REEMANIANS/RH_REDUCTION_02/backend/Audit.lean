@@ -1,0 +1,420 @@
+import RH_HilbertLimit.Main
+
+/- Exact theorem types and actual kernel axiom dependencies.
+   This file is executed only on the user's native Windows compiler. -/
+
+#print RH_HilbertLimit.ActualSpectralCalibration
+#print RH_HilbertLimit.DominantTailData
+#print RH_HilbertLimit.DominantExtraction
+#print RH_HilbertLimit.ActualSubexponentialBound
+
+#check AWPIRH.xi_differentiable
+#print axioms AWPIRH.xi_differentiable
+
+#check AWPIRH.xi_reflection
+#print axioms AWPIRH.xi_reflection
+
+#check AWPIRH.centeredXi_differentiable
+#print axioms AWPIRH.centeredXi_differentiable
+
+#check AWPIRH.centeredXi_even
+#print axioms AWPIRH.centeredXi_even
+
+#check AWPIRH.nontrivialZero_ne_zero
+#print axioms AWPIRH.nontrivialZero_ne_zero
+
+#check AWPIRH.gammaR_ne_zero_of_nontrivialZero
+#print axioms AWPIRH.gammaR_ne_zero_of_nontrivialZero
+
+#check AWPIRH.completedZeta_zero_of_nontrivialZero
+#print axioms AWPIRH.completedZeta_zero_of_nontrivialZero
+
+#check AWPIRH.xi_eq_completed
+#print axioms AWPIRH.xi_eq_completed
+
+#check AWPIRH.xi_zero_of_nontrivialZero
+#print axioms AWPIRH.xi_zero_of_nontrivialZero
+
+#check AWPIRH.xi_ne_zero_of_one_le_re
+#print axioms AWPIRH.xi_ne_zero_of_one_le_re
+
+#check AWPIRH.complex_sqrt_sq
+#print axioms AWPIRH.complex_sqrt_sq
+
+#check AWPIRH.theta_square
+#print axioms AWPIRH.theta_square
+
+#check AWPIRH.theta_one
+#print axioms AWPIRH.theta_one
+
+#check AWPIRH.theta_one_ne_zero
+#print axioms AWPIRH.theta_one_ne_zero
+
+#check AWPIRH.theta_zero_of_nontrivialZero
+#print axioms AWPIRH.theta_zero_of_nontrivialZero
+
+#check AWPIRH.sqrt_differentiableAt_one
+#print axioms AWPIRH.sqrt_differentiableAt_one
+
+#check AWPIRH.sqrt_continuousAt_zero
+#print axioms AWPIRH.sqrt_continuousAt_zero
+
+#check AWPIRH.normalizedSqrt_sq
+#print axioms AWPIRH.normalizedSqrt_sq
+
+#check AWPIRH.normalizedSqrt_differentiableAt
+#print axioms AWPIRH.normalizedSqrt_differentiableAt
+
+#check AWPIRH.theta_eq_normalizedSqrt
+#print axioms AWPIRH.theta_eq_normalizedSqrt
+
+#check AWPIRH.theta_differentiableAt_of_ne_zero
+#print axioms AWPIRH.theta_differentiableAt_of_ne_zero
+
+#check AWPIRH.theta_continuousAt_zero
+#print axioms AWPIRH.theta_continuousAt_zero
+
+#check AWPIRH.theta_analyticAt_zero
+#print axioms AWPIRH.theta_analyticAt_zero
+
+#check AWPIRH.theta_differentiable
+#print axioms AWPIRH.theta_differentiable
+
+#check AWPIRH.theta_analyticAt
+#print axioms AWPIRH.theta_analyticAt
+
+#check AWPIRH.theta_entire
+#print axioms AWPIRH.theta_entire
+
+#check AWPIRH.theta_continuous
+#print axioms AWPIRH.theta_continuous
+
+#check RH_HilbertLimit.momentFunctional_monomial
+#print axioms RH_HilbertLimit.momentFunctional_monomial
+
+#check RH_HilbertLimit.momentFunctional_one
+#print axioms RH_HilbertLimit.momentFunctional_one
+
+#check RH_HilbertLimit.momentFunctional_C_mul
+#print axioms RH_HilbertLimit.momentFunctional_C_mul
+
+#check RH_HilbertLimit.bernsteinPolynomial_expansion
+#print axioms RH_HilbertLimit.bernsteinPolynomial_expansion
+
+#check RH_HilbertLimit.momentFunctional_bernsteinPolynomial
+#print axioms RH_HilbertLimit.momentFunctional_bernsteinPolynomial
+
+#check RH_HilbertLimit.polynomial_moment_hasSum
+#print axioms RH_HilbertLimit.polynomial_moment_hasSum
+
+#check RH_HilbertLimit.bernsteinWeight_hasSum
+#print axioms RH_HilbertLimit.bernsteinWeight_hasSum
+
+#check RH_HilbertLimit.bernsteinWeight_zero_zero
+#print axioms RH_HilbertLimit.bernsteinWeight_zero_zero
+
+#check RH_HilbertLimit.rowVariation_zero
+#print axioms RH_HilbertLimit.rowVariation_zero
+
+#check RH_HilbertLimit.sum_bernsteinWeight_eq
+#print axioms RH_HilbertLimit.sum_bernsteinWeight_eq
+
+#check RH_HilbertLimit.sum_bernsteinWeight_eq_one
+#print axioms RH_HilbertLimit.sum_bernsteinWeight_eq_one
+
+#check RH_HilbertLimit.rowVariation_nonneg
+#print axioms RH_HilbertLimit.rowVariation_nonneg
+
+#check RH_HilbertLimit.one_le_rowVariation
+#print axioms RH_HilbertLimit.one_le_rowVariation
+
+#check RH_HilbertLimit.rowVariation_eq_one_iff
+#print axioms RH_HilbertLimit.rowVariation_eq_one_iff
+
+#check RH_HilbertLimit.bernsteinWeight_coarsening
+#print axioms RH_HilbertLimit.bernsteinWeight_coarsening
+
+#check RH_HilbertLimit.rowVariation_le_succ
+#print axioms RH_HilbertLimit.rowVariation_le_succ
+
+#check RH_HilbertLimit.rowVariation_monotone
+#print axioms RH_HilbertLimit.rowVariation_monotone
+
+#check RH_HilbertLimit.all_rowVariation_eq_one_iff
+#print axioms RH_HilbertLimit.all_rowVariation_eq_one_iff
+
+#check RH_HilbertLimit.rootScale_eq_exp_logScale
+#print axioms RH_HilbertLimit.rootScale_eq_exp_logScale
+
+#check RH_HilbertLimit.log_rootScale_eq_logScale
+#print axioms RH_HilbertLimit.log_rootScale_eq_logScale
+
+#check RH_HilbertLimit.logScale_tendsto_iff_rootScale_tendsto
+#print axioms RH_HilbertLimit.logScale_tendsto_iff_rootScale_tendsto
+
+#check RH_HilbertLimit.logScale_zero_iff_rootScale_one
+#print axioms RH_HilbertLimit.logScale_zero_iff_rootScale_one
+
+#check RH_HilbertLimit.eventually_pos_of_geometric_lower
+#print axioms RH_HilbertLimit.eventually_pos_of_geometric_lower
+
+#check RH_HilbertLimit.geometric_sandwich_log_tendsto
+#print axioms RH_HilbertLimit.geometric_sandwich_log_tendsto
+
+#check RH_HilbertLimit.geometric_sandwich_root_tendsto
+#print axioms RH_HilbertLimit.geometric_sandwich_root_tendsto
+
+#check RH_HilbertLimit.block_lower_to_eventual_lower
+#print axioms RH_HilbertLimit.block_lower_to_eventual_lower
+
+#check RH_HilbertLimit.root_tendsto_of_monotone_block_bounds
+#print axioms RH_HilbertLimit.root_tendsto_of_monotone_block_bounds
+
+#check RH_HilbertLimit.subexponential_of_eventual_exp_upper
+#print axioms RH_HilbertLimit.subexponential_of_eventual_exp_upper
+
+#check RH_HilbertLimit.subexponential_of_logScale_tendsto_zero
+#print axioms RH_HilbertLimit.subexponential_of_logScale_tendsto_zero
+
+#check RH_HilbertLimit.log_limit_nonpos_of_subexponential
+#print axioms RH_HilbertLimit.log_limit_nonpos_of_subexponential
+
+#check RH_HilbertLimit.logScale_tendsto_zero_of_subexponential
+#print axioms RH_HilbertLimit.logScale_tendsto_zero_of_subexponential
+
+#check RH_HilbertLimit.subexponential_iff_logScale_zero
+#print axioms RH_HilbertLimit.subexponential_iff_logScale_zero
+
+#check RH_HilbertLimit.subexponential_iff_rootScale_one
+#print axioms RH_HilbertLimit.subexponential_iff_rootScale_one
+
+#check RH_HilbertLimit.rate_le_one_of_subexponential
+#print axioms RH_HilbertLimit.rate_le_one_of_subexponential
+
+#check RH_HilbertLimit.geometric_rate_eq_one_iff_subexponential
+#print axioms RH_HilbertLimit.geometric_rate_eq_one_iff_subexponential
+
+#check RH_HilbertLimit.geometric_root_one_iff_rate_one
+#print axioms RH_HilbertLimit.geometric_root_one_iff_rate_one
+
+#check RH_HilbertLimit.geometric_root_one_iff_subexponential
+#print axioms RH_HilbertLimit.geometric_root_one_iff_subexponential
+
+#check RH_HilbertLimit.one_le_ellipseRadius
+#print axioms RH_HilbertLimit.one_le_ellipseRadius
+
+#check RH_HilbertLimit.ellipseRadius_eq_one_iff
+#print axioms RH_HilbertLimit.ellipseRadius_eq_one_iff
+
+#check RH_HilbertLimit.ellipseRadius_le_one_iff
+#print axioms RH_HilbertLimit.ellipseRadius_le_one_iff
+
+#check RH_HilbertLimit.one_lt_ellipseRadius_iff
+#print axioms RH_HilbertLimit.one_lt_ellipseRadius_iff
+
+#check RH_HilbertLimit.spectralBounded_of_norm_bound
+#print axioms RH_HilbertLimit.spectralBounded_of_norm_bound
+
+#check RH_HilbertLimit.one_le_spectralRadius
+#print axioms RH_HilbertLimit.one_le_spectralRadius
+
+#check RH_HilbertLimit.ellipseRadius_le_spectralRadius
+#print axioms RH_HilbertLimit.ellipseRadius_le_spectralRadius
+
+#check RH_HilbertLimit.spectralRadius_eq_sSup_range
+#print axioms RH_HilbertLimit.spectralRadius_eq_sSup_range
+
+#check RH_HilbertLimit.spectralRadius_eq_one_iff
+#print axioms RH_HilbertLimit.spectralRadius_eq_one_iff
+
+#check RH_HilbertLimit.one_lt_spectralRadius_of_node
+#print axioms RH_HilbertLimit.one_lt_spectralRadius_of_node
+
+#check RH_HilbertLimit.norm_affine_le_ellipseRadius
+#print axioms RH_HilbertLimit.norm_affine_le_ellipseRadius
+
+#check RH_HilbertLimit.rootOfNode_nonpositive_iff
+#print axioms RH_HilbertLimit.rootOfNode_nonpositive_iff
+
+#check RH_HilbertLimit.square_nonpositive_iff_re_zero
+#print axioms RH_HilbertLimit.square_nonpositive_iff_re_zero
+
+#check RH_HilbertLimit.xi_zero_iff_nontrivialZero
+#print axioms RH_HilbertLimit.xi_zero_iff_nontrivialZero
+
+#check RH_HilbertLimit.nativeRH_iff_xiZerosCritical
+#print axioms RH_HilbertLimit.nativeRH_iff_xiZerosCritical
+
+#check RH_HilbertLimit.nativeRH_iff_thetaZerosNonpositive
+#print axioms RH_HilbertLimit.nativeRH_iff_thetaZerosNonpositive
+
+#check RH_HilbertLimit.actualNormalizedMoment_zero
+#print axioms RH_HilbertLimit.actualNormalizedMoment_zero
+
+#check RH_HilbertLimit.ActualSpectralCalibration.complexMoment_eq_real
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.complexMoment_eq_real
+
+#check RH_HilbertLimit.ActualSpectralCalibration.mass_one
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.mass_one
+
+#check RH_HilbertLimit.ActualSpectralCalibration.re_mass_one
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.re_mass_one
+
+#check RH_HilbertLimit.ActualSpectralCalibration.norm_node_le_total
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.norm_node_le_total
+
+#check RH_HilbertLimit.ActualSpectralCalibration.bounded
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.bounded
+
+#check RH_HilbertLimit.ActualSpectralCalibration.nodes_nonnegative_iff_nativeRH
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.nodes_nonnegative_iff_nativeRH
+
+#check RH_HilbertLimit.ActualSpectralCalibration.nodes_segment_iff_nativeRH
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.nodes_segment_iff_nativeRH
+
+#check RH_HilbertLimit.ActualSpectralCalibration.radius_one_iff_nativeRH
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.radius_one_iff_nativeRH
+
+#check RH_HilbertLimit.norm_spectralTerm
+#print axioms RH_HilbertLimit.norm_spectralTerm
+
+#check RH_HilbertLimit.sum_norm_spectralTerm
+#print axioms RH_HilbertLimit.sum_norm_spectralTerm
+
+#check RH_HilbertLimit.norm_spectralTerm_le
+#print axioms RH_HilbertLimit.norm_spectralTerm_le
+
+#check RH_HilbertLimit.spectralTerm_re_nonneg
+#print axioms RH_HilbertLimit.spectralTerm_re_nonneg
+
+#check RH_HilbertLimit.norm_rowGenerating_le
+#print axioms RH_HilbertLimit.norm_rowGenerating_le
+
+#check RH_HilbertLimit.ActualSpectralCalibration.weight_hasSum
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.weight_hasSum
+
+#check RH_HilbertLimit.ActualSpectralCalibration.variation_one_le
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.variation_one_le
+
+#check RH_HilbertLimit.ActualSpectralCalibration.variation_monotone
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.variation_monotone
+
+#check RH_HilbertLimit.ActualSpectralCalibration.term_norm_summable
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.term_norm_summable
+
+#check RH_HilbertLimit.ActualSpectralCalibration.variation_upper
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.variation_upper
+
+#check RH_HilbertLimit.ActualSpectralCalibration.total_norm_pos
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.total_norm_pos
+
+#check RH_HilbertLimit.ActualSpectralCalibration.weights_nonneg_of_nativeRH
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.weights_nonneg_of_nativeRH
+
+#check RH_HilbertLimit.ActualSpectralCalibration.variation_eq_one_of_nativeRH
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.variation_eq_one_of_nativeRH
+
+#check RH_HilbertLimit.ActualSpectralCalibration.variation_eq_one_of_radius_one
+#print axioms RH_HilbertLimit.ActualSpectralCalibration.variation_eq_one_of_radius_one
+
+#check RH_HilbertLimit.inverseRowControl_pos
+#print axioms RH_HilbertLimit.inverseRowControl_pos
+
+#check RH_HilbertLimit.recoveryConstant_pos
+#print axioms RH_HilbertLimit.recoveryConstant_pos
+
+#check RH_HilbertLimit.finiteBlockMatrix_det_ne_zero
+#print axioms RH_HilbertLimit.finiteBlockMatrix_det_ne_zero
+
+#check RH_HilbertLimit.finiteExponential_block_mulVec
+#print axioms RH_HilbertLimit.finiteExponential_block_mulVec
+
+#check RH_HilbertLimit.finite_exponential_recovery
+#print axioms RH_HilbertLimit.finite_exponential_recovery
+
+#check RH_HilbertLimit.coefficient_norm_le_block_bound
+#print axioms RH_HilbertLimit.coefficient_norm_le_block_bound
+
+#check RH_HilbertLimit.recoveryConstant_mul_pow_le_block_bound
+#print axioms RH_HilbertLimit.recoveryConstant_mul_pow_le_block_bound
+
+#check RH_HilbertLimit.finite_exponential_shifted_lower
+#print axioms RH_HilbertLimit.finite_exponential_shifted_lower
+
+#check RH_HilbertLimit.absorb_subdominant_tail
+#print axioms RH_HilbertLimit.absorb_subdominant_tail
+
+#check RH_HilbertLimit.finite_tail_preliminary_lower
+#print axioms RH_HilbertLimit.finite_tail_preliminary_lower
+
+#check RH_HilbertLimit.finite_tail_block_lower
+#print axioms RH_HilbertLimit.finite_tail_block_lower
+
+#check RH_HilbertLimit.root_tendsto_of_finite_dominant_tail
+#print axioms RH_HilbertLimit.root_tendsto_of_finite_dominant_tail
+
+#check RH_HilbertLimit.DominantTailData.envelope
+#print axioms RH_HilbertLimit.DominantTailData.envelope
+
+#check RH_HilbertLimit.actual_root_tendsto_of_dominant_tail
+#print axioms RH_HilbertLimit.actual_root_tendsto_of_dominant_tail
+
+#check RH_HilbertLimit.actual_root_tendsto_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_root_tendsto_of_analytic_inputs
+
+#check RH_HilbertLimit.exists_actual_root_limit_of_analytic_inputs
+#print axioms RH_HilbertLimit.exists_actual_root_limit_of_analytic_inputs
+
+#check RH_HilbertLimit.actual_root_one_iff_nativeRH_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_root_one_iff_nativeRH_of_analytic_inputs
+
+#check RH_HilbertLimit.actual_subexponential_iff_nativeRH_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_subexponential_iff_nativeRH_of_analytic_inputs
+
+#check RH_HilbertLimit.actual_logScale_zero_iff_nativeRH_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_logScale_zero_iff_nativeRH_of_analytic_inputs
+
+#check RH_HilbertLimit.actual_all_variation_one_iff_nativeRH_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_all_variation_one_iff_nativeRH_of_analytic_inputs
+
+#check RH_HilbertLimit.actual_weights_nonnegative_iff_nativeRH_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_weights_nonnegative_iff_nativeRH_of_analytic_inputs
+
+#check RH_HilbertLimit.actual_bounded_variation_iff_nativeRH_of_analytic_inputs
+#print axioms RH_HilbertLimit.actual_bounded_variation_iff_nativeRH_of_analytic_inputs
+
+#check RH_HilbertLimit.nativeRH_of_actual_subexponential_bound
+#print axioms RH_HilbertLimit.nativeRH_of_actual_subexponential_bound
+
+
+import RH_HilbertLimit.FiniteFluxInduction
+
+#check RH_HilbertLimit.finiteFluxBudget
+#print axioms RH_HilbertLimit.finiteFluxBudget
+
+#check RH_HilbertLimit.CancellationBudget.FluxGood
+#print axioms RH_HilbertLimit.CancellationBudget.FluxGood
+
+#check RH_HilbertLimit.cancellationDefect_eq_zero_of_rowCancellation_eq_zero
+#print axioms RH_HilbertLimit.cancellationDefect_eq_zero_of_rowCancellation_eq_zero
+
+#check RH_HilbertLimit.CancellationBudget.rowCancellation_le_of_fluxGood
+#print axioms RH_HilbertLimit.CancellationBudget.rowCancellation_le_of_fluxGood
+
+#check RH_HilbertLimit.finiteFluxBudget_fluxGood_nine_of_anchor
+#print axioms RH_HilbertLimit.finiteFluxBudget_fluxGood_nine_of_anchor
+
+#check RH_HilbertLimit.FluxStepFromNine
+#print axioms RH_HilbertLimit.FluxStepFromNine
+
+#check RH_HilbertLimit.finiteFluxBudget_localFlux_of_anchor_and_step
+#print axioms RH_HilbertLimit.finiteFluxBudget_localFlux_of_anchor_and_step
+
+#check RH_HilbertLimit.finiteFluxBudget_admissible_of_anchor_and_step
+#print axioms RH_HilbertLimit.finiteFluxBudget_admissible_of_anchor_and_step
+
+#check RH_HilbertLimit.nativeRH_of_finiteFlux_anchor_and_step
+#print axioms RH_HilbertLimit.nativeRH_of_finiteFlux_anchor_and_step
+
+#check RH_HilbertLimit.nativeRH_of_exists_finiteFlux_semantic_step
+#print axioms RH_HilbertLimit.nativeRH_of_exists_finiteFlux_semantic_step

@@ -1,0 +1,10 @@
+EXPECTED_FILE=UserTail.lean
+REQUIRED_IMPORTS=SubmissionData, Tail16Frontier.NativeAdmission
+REQUIRED_CLOSED_THEOREM=SubmissionTail.tail
+EXPECTED_TYPE=Tail16Frontier.Tail SubmissionData.coefficient SubmissionData.tailCutoff
+NO_FREE_PROOF_HYPOTHESES
+NO_SORRY
+NO_NEW_AXIOMS
+NO_TAIL_PROOF_IS_INCLUDED
+The supplied proof is externally compiled and its dependencies audited before RH admission.
+

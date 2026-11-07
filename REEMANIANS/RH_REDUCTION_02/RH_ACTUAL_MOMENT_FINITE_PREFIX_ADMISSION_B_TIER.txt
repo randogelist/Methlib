@@ -1,0 +1,874 @@
+RH_ACTUAL_MOMENT_FINITE_PREFIX_ADMISSION_B_TIER
+DATE=2026-11-07
+MODE=B_TIER_DERIVATION
+MARKER=!
+LOCAL_LEAN_EXECUTION=NONE
+A_TIER_PROMOTION=NONE
+
+EXACT SCOPE
+
+The following finite verification layer is derived:
+
+  fixed actual-xi theta identity
+  -> rational source-coefficient certificates
+  -> certified actual normalized-moment intervals
+  -> rational MARGIN_STEP or SIGN_ROW acceptance
+  -> the corresponding finite cancellation-budget statements.
+
+The source identity is a named standard analytic input, stated precisely
+in Section 1. Its identification with the pinned Lean definitions remains
+an explicit A-tier implementation obligation. It is not witness data.
+
+The mathematical derivation establishes arbitrary-precision obtainability
+of each fixed finite moment prefix, without assuming RH. Acceptance of a
+particular cancellation inequality additionally requires that inequality
+with a sufficient margin, or certified Bernstein signs.
+
+No universal tail certificate is constructed. No complete accepted RH
+witness is exhibited. No small-certificate or practical runtime bound is
+claimed.
+
+MAIN THEOREMS
+
+T1. ACTUAL_MOMENT_CERTIFICATE_SOUNDNESS.
+For every d in Nat and every well-formed finite rational source packet c,
+the checker specified below terminates. If its output intervals are
+I_0,...,I_d, then actualNormalizedMoment(k) belongs to I_k for every k<=d.
+
+T2. EFFECTIVE_FINITE_MOMENT_ENCLOSURES.
+For every d in Nat and rational epsilon>0, a terminating search constructs
+such a packet whose normalized-moment interval widths are <=epsilon.
+
+T3. FINITE_MARGIN_ADMISSION.
+A passing MARGIN_STEP(n,Y) proves
+  C_xi(n) <= Y V_xi(n).
+
+T4. FINITE_SIGN_ADMISSION.
+A passing SIGN_ROW(M) proves
+  V_xi(r)=1 for every r<=M,
+  C_xi(n)=0 for every n<M.
+Consequently it certifies every Tail16 budget step 16<=n<M, for every
+Y in Nat, including Y=0.
+
+T5. POSITIVE_BUDGET_PREFIX_OBTAINABILITY.
+Using the fixed actual-backend implication RH -> forall n, V_xi(n)=1:
+  RH -> forall M>=16, forall Y>=1,
+    an obtainable finite MARGIN prefix certificate exists.
+
+T6. FINITE_JET_EXTENSION_OBSTRUCTION.
+Finitely many closed-index actual-moment constraints, combined only with
+rules valid for arbitrary sequences, do not imply a universal Tail16
+budget. A concrete countermodel construction is given in Section 11.
+
+T1--T6 have mathematical derivations below. T1--T2 use the fixed source
+identity; T5 uses the explicitly identified existing RH-to-variation
+theorem. These mathematical dependencies are not external compiler
+evidence.
+
+======================================================================
+1. FIXED ACTUAL FUNCTION AND EXACT NORMALIZATION
+======================================================================
+
+Let
+  xi(s) = (1/2)s(s-1) pi^(-s/2) Gamma(s/2) zeta(s),
+with its entire continuation, and let
+  Theta(z) = xi(1/2 + sqrt(z)).
+The functional equation makes this an entire function of z: equivalently,
+Theta is the descent of the even entire function w |-> xi(1/2+w).
+
+FIXED INPUT THETA_ACTUAL:
+  Theta(z) = integral_0^infinity Phi(x) cosh(x sqrt(z)) dx,
+  Phi(x) = sum_(m>=1) Phi_m(x),
+  Phi_m(x) = 4 exp(x/2) (2 a^2 - 3 a) exp(-a),
+  a = pi m^2 exp(2x).
+
+The right-hand side is interpreted by its entire even-power-series
+descent, independently of a choice of square root.
+
+Source normalization:
+Lagarias--Montague [R1], equations (1.1)--(1.2), write
+  Xi(t)=xi(1/2+it)=2 integral_0^infinity Phi_LM(x) cos(tx) dx.
+Here Phi=2 Phi_LM. Substitution t=-i sqrt(z) gives THETA_ACTUAL.
+The completed-xi normalization also agrees with [R2].
+
+This is a fixed established analytic identity, not an assumed RH
+conclusion. Its Lean proof/transport to AWPIRH.theta is not supplied or
+promoted by this TXT.
+
+Define
+  a_k = integral_0^infinity Phi(x) x^(2k)/(2k)! dx.
+
+For x>=0, a=pi m^2 exp(2x)>3/2, hence Phi_m(x)>0.
+Every a_k is strictly positive: the integrand is positive on x>0.
+
+Double-exponential decay dominates exp(Cx) for every fixed C.
+On compact z-sets, |cosh(x sqrt(z))|<=exp(Cx). The mode sum is locally
+uniformly dominated by a convergent Gaussian series in m, and its radial
+decay dominates every fixed exponential in x. Dominated expansion gives
+  Theta(z)=sum_(k>=0) a_k z^k.
+In particular Theta(0)=a_0>0 and Theta'(0)=a_1>0.
+
+Set
+  kappa=a_1/a_0>0,
+  F(z)=Theta(z/kappa)/a_0=sum_(k>=0) b_k z^k.
+Then
+  b_0=b_1=1,
+  b_k=a_k a_0^(k-1)/a_1^k       (k>=2).
+
+Write locally
+  F'(z)/F(z)=sum_(n>=0) ell_n z^n.
+The identity F(F'/F)=F' yields
+  ell_0=1,
+  ell_n=(n+1)b_(n+1)-sum_(j=1)^n b_j ell_(n-j)   (n>=1),
+  u_n=(-1)^n ell_n.
+
+Since
+  F'(z)/F(z)=(1/kappa)Theta'(z/kappa)/Theta(z/kappa),
+we obtain
+  u_n=(-1)^n [z^n](Theta'/Theta)/kappa^(n+1).
+
+This is exactly the derivative/factorial normalization
+  actualComplexMoment n =
+    (-1)^n (iteratedDeriv n (Theta'/Theta) 0)/n!,
+  actualMoment n = Re(actualComplexMoment n),
+  actualKappa = actualMoment 0,
+  actualNormalizedMoment n = actualMoment n / actualKappa^(n+1).
+Reality follows from the real Taylor coefficients. Thus u_0=1 exactly.
+
+Consequently:
+  source coefficients a_0,...,a_(d+1)
+  determine normalized moments u_0,...,u_d
+by finitely many rational operations on the source coefficients.
+The only variable denominators are powers of the strictly positive a_1.
+
+======================================================================
+2. EXACT RATIONAL ELEMENTARY CERTIFICATES
+======================================================================
+
+All numerical verification uses exact integers and rationals.
+
+2.1. Pi certificates.
+
+For integer P>=1, put g(t)=1/(1+t^2) and define
+  piLow(P) = (4/P) sum_(j=1)^P g(j/P),
+  piHigh(P)= (4/P) sum_(j=0)^(P-1) g(j/P).
+
+The standard identity integral_0^1 g(t)dt=arctan(1)=pi/4 and the
+monotonicity of g give
+  piLow(P) <= pi <= piHigh(P),
+  piHigh(P)-piLow(P)=2/P.
+
+Thus these finite rational sums yield arbitrary precision. No decimal
+digits of pi are trusted.
+
+The auxiliary bound 3<pi<4 is also certified:
+  piLow(8)=48901837037/16224958100 > 3;
+the integral is strictly less than 1, giving pi<4.
+
+2.2. Exponential certificates.
+
+For rational x>=0 and K in Nat satisfying
+  x/(K+2)<=1/2,
+define
+  S_K(x)=sum_(i=0)^K x^i/i!,
+  U_K(x)=S_K(x)+2 x^(K+1)/(K+1)!.
+
+Every term after the first omitted term has ratio at most 1/2 to its
+predecessor. Hence
+  S_K(x)<=exp(x)<=U_K(x).
+
+For fixed x, U_K(x)-S_K(x) tends to zero as K tends to infinity.
+For x<0 apply the same rule to -x and invert:
+  1/U_K(-x)<=exp(x)<=1/S_K(-x).
+The denominators are positive since S_K(-x)>=1.
+
+For interval input [l,r], compute a lower endpoint certificate at l and
+an upper endpoint certificate at r. Monotonicity encloses exp(t) for
+every t in [l,r].
+
+Auxiliary estimates:
+  exp(1)<3,
+  exp(2)>2,
+  exp(3)>sum_(i=0)^8 3^i/i!=89641/4480>20.
+The first follows from the factorial series and n!>=2^(n-1) for n>=1,
+with strict inequality for some n. The second follows already from
+the first two positive series terms.
+
+2.3. Interval operations.
+
+For rational intervals, addition and subtraction use endpoint formulas;
+multiplication uses the minimum and maximum of the four endpoint
+products; inversion is allowed only when zero is excluded. Integer
+powers and finite sums are evaluated by repeated sound operations.
+
+Induction on the finite expression tree proves enclosure soundness.
+All domain guards and all exponential ratio guards are rational tests.
+
+Each individual certificate is finite: P and every K are explicitly
+stored natural numbers. Verification performs bounded finite loops.
+A failed guard rejects the packet; verification never starts an
+unbounded search for a missing guard.
+
+Arbitrary-precision certificate GENERATION is a separate process:
+increase P and the K values until the required rational width test
+passes. Its termination for the expressions used here is proved below.
+
+======================================================================
+3. UNIFORM RATIONAL SOURCE TAILS
+======================================================================
+
+For k>=0 and x>=0,
+  w_k(x):=x^(2k)/(2k)! <= exp(x).
+
+Dropping the negative term of Phi_m and substituting y=exp(2x) gives,
+for any lower limit with y>=A>=1,
+  integral Phi_m(x)w_k(x)dx
+  <=4 pi^2 m^4 integral_A^infinity y^(7/4)exp(-pi m^2 y)dy
+  <=4 pi^2 m^4 integral_A^infinity y^2 exp(-pi m^2 y)dy
+  =exp(-pi m^2 A)
+     (4 pi m^2 A^2 + 8A + 8/(pi m^2)).
+The equality follows by two integrations by parts; the exponential
+boundary terms vanish.
+
+3.1. Mode tail.
+
+At A=1, the last expression is bounded by
+  32 m^2 exp(-3m^2).
+Indeed 3<pi<4 and m>=1 give
+  4pi m^2+8+8/(pi m^2) <= (16+8+8/3)m^2 <32m^2.
+
+The consecutive ratio of m^2 exp(-3m^2) is at most
+  4 exp(-9)<1/2.
+Therefore, for integer M>=1,
+  sum_(m>M) integral_0^infinity Phi_m(x)w_k(x)dx
+  <= Tmode(M):=64(M+1)^2 / 20^((M+1)^2).
+
+Here exp(3)>20 converts the exponential estimate to a rational one.
+Tmode(M) tends to zero as M increases.
+
+3.2. Radial tail.
+
+For integer R>=1, set T=2^R. Since exp(2R)>=T, positivity permits
+enlarging the transformed domain to [T,infinity). Hence
+  integral_R^infinity Phi_m(x)w_k(x)dx
+  <=(16T^2+8T+8/3)m^2 exp(-3m^2 T).
+
+The consecutive ratio is at most 4exp(-9T)<1/2. Thus
+  sum_(m>=1) integral_R^infinity Phi_m(x)w_k(x)dx
+  <= Tspace(R):=(32T^2+16T+16/3)/20^T.
+
+Tspace(R) tends to zero as R increases.
+
+Both bounds are uniform in k. Summing them can count part of the
+omitted region twice, which preserves an upper bound since every
+source term is nonnegative.
+
+======================================================================
+4. FINITE RATIONAL QUADRATURE
+======================================================================
+
+Choose integers R,M,J>=1. Set
+  h=R/J,
+  x_j=jh                         (0<=j<J),
+  f_k(x)=(sum_(m=1)^M Phi_m(x))w_k(x),
+  Q_k=h sum_(j=0)^(J-1) f_k(x_j).
+
+Define the rational constants
+  A=4M^2 9^R,
+  L=M 9^R (16A^3+68A^2+42A),
+  Equad=L R^2/(2J).
+
+For x in [0,R] and m<=M, a=pi m^2 exp(2x)<=A.
+Differentiation gives
+  Phi'_m(x)
+    =4 exp(x/2)exp(-a)(-4a^3+15a^2-(15/2)a).
+
+Consequently,
+  |Phi'_m(x)|<=3^R(16A^3+60A^2+30A),
+  |Phi_m(x)| <=3^R(8A^2+12A).
+Also
+  |w_k(x)|<=exp(x)<=3^R,
+  |w'_k(x)|<=exp(x)<=3^R,
+where w'_0=0. The product rule therefore gives |f'_k(x)|<=L,
+uniformly in k.
+
+For x_j<=x<=x_(j+1), the mean-value bound gives
+  |f_k(x)-f_k(x_j)|<=L(x-x_j).
+Integrating over the J panels yields
+  |integral_0^R f_k(x)dx-Q_k|<=L R^2/(2J)=Equad.
+
+The finite expression Q_k uses only:
+  rational arithmetic, pi, exp(x_j/2), exp(2x_j),
+  and exp(-pi m^2 exp(2x_j)).
+Section 2 supplies finite rational interval certificates for all of them,
+including the nested exponential through interval monotonicity.
+
+If their exact evaluation gives Q_k in [Qlow_k,Qhigh_k], then
+  A_low_k := Qlow_k-Equad <= a_k,
+  a_k <= A_high_k :=
+    Qhigh_k+Equad+Tmode(M)+Tspace(R).                  (4.1)
+
+Thus (4.1) is an actual-source coefficient enclosure, rather than an
+unchecked assertion that a proposed coordinate approximates a_k.
+
+The quadrature bound is deliberately coarse. Its role is an explicit
+terminating certificate construction. No practical complexity bound
+follows from it.
+
+======================================================================
+5. SOURCE PACKET, MOMENT CHECKER, AND OBTAINABILITY
+======================================================================
+
+5.1. Finite packet.
+
+A source packet for maximum coefficient degree D contains:
+  D,R,M,J,P in Nat;
+  the finite list of K values for the exponential endpoint evaluations;
+  any claimed rational output intervals to be compared with recomputed
+  intervals.
+
+Require R,M,J,P>=1 and the exact expected expression/list structure.
+Every rational is encoded by an integer numerator and a strictly
+positive natural denominator.
+
+The evaluator:
+  (i)   computes the Section 2 pi enclosure;
+  (ii)  checks all exponential guards and evaluates the finite Q_k;
+  (iii) computes the rational errors in Sections 3--4;
+  (iv)  returns the intervals (4.1) for 0<=k<=D;
+  (v)   rejects if claimed output intervals fail to contain these
+        recomputed intervals, if dimensions differ, or if data remain
+        after complete parsing.
+
+A canonical finite integer/list codec supplies a byte representation.
+The decoder must reject malformed or truncated data and trailing bytes.
+Neither byte parsing nor the source packet contains an analytic Prop
+field or a caller-supplied soundness proof.
+
+Every operation is total on the finite decoded packet. Huge parameters
+can make evaluation expensive; mathematical termination does not assert
+feasibility within a prescribed resource limit.
+
+5.2. Arbitrary coefficient precision.
+
+Fix finite D and rational eta>0.
+
+Choose M,R so that
+  Tmode(M)<eta/8,
+  Tspace(R)<eta/8.
+Then choose J so that Equad<eta/8.
+All choices terminate by the displayed explicit bounds.
+
+Fixing R,M,J leaves finitely many real expression trees Q_0,...,Q_D.
+Their elementary certificate intervals converge to their exact values
+as P and the endpoint exponential degrees increase. This follows by
+induction over the expression trees from continuity of arithmetic and
+exp and convergence of the elementary enclosures.
+
+Refine until every Q_k interval has width <eta/2.
+Then (4.1) has width less than
+  eta/2 + 2eta/8 + eta/8 + eta/8 = eta.
+
+Every stopping condition above is a decidable rational inequality.
+This proves a terminating generator of arbitrarily narrow actual
+coefficient enclosures. RH is not used.
+
+5.3. Normalized moments.
+
+For moments through degree d, take D=d+1.
+Refine until the source intervals for a_0 and a_1 have positive lower
+endpoints. This terminates because a_0,a_1>0 and their widths tend to
+zero.
+
+Evaluate the exact formulas of Section 1 using rational intervals:
+  b_0=b_1=1,
+  b_k=a_k a_0^(k-1)/a_1^k,
+  ell_0=1,
+  ell_n=(n+1)b_(n+1)-sum_(j=1)^n b_j ell_(n-j),
+  u_n=(-1)^n ell_n.
+
+Every division guard is now certified. Interval induction gives
+  u_k in I_k                         (0<=k<=d).
+
+These are finitely many continuous expressions at the actual positive
+source coefficients. Their interval widths tend to zero with the source
+widths. Repeated refinement therefore terminates at any requested
+positive rational moment width.
+
+This proves T1 and T2, relative to the fixed THETA_ACTUAL identity.
+
+For I_k=[l_k,r_k], define
+  q_k=(l_k+r_k)/2,
+  epsilon_k=(r_k-l_k)/2.
+Then
+  |u_k-q_k|<=epsilon_k,  epsilon_k>=0.
+
+Use u_0=1 exactly, hence q_0=1 and epsilon_0=0, if desired.
+
+Required source degrees:
+  MARGIN_STEP(n,Y): moments through n+1; source through n+2.
+  SIGN_ROW(M):      moments through M;   source through M+1.
+
+======================================================================
+6. EXACT BERNSTEIN ERROR TRANSPORT
+======================================================================
+
+For any real sequence u define
+  B(N,j)=C(N,j) sum_(r=0)^(N-j) (-1)^r C(N-j,r) u_(j+r)
+                                                        (0<=j<=N),
+  V_N=sum_(j=0)^N |B(N,j)|,
+  C_n=(n+1)(V_(n+1)-V_n).
+
+For certified moments |u_k-q_k|<=epsilon_k, define rational approximants
+  Btilde(N,j)=C(N,j)
+    sum_(r=0)^(N-j) (-1)^r C(N-j,r) q_(j+r),
+  Vtilde_N=sum_(j=0)^N |Btilde(N,j)|,
+  e_(N,j)=C(N,j)
+    sum_(r=0)^(N-j) C(N-j,r) epsilon_(j+r).
+
+The triangle inequality gives
+  |B(N,j)-Btilde(N,j)|<=e_(N,j).
+
+The inequality ||x|-|y||<=|x-y| then yields
+  |V_N-Vtilde_N|<=E_N:=sum_(j=0)^N e_(N,j).
+
+Reindex k=j+r and use
+  C(N,j)C(N-j,k-j)=C(N,k)C(k,j).
+It follows that
+  E_N=sum_(k=0)^N C(N,k) 2^k epsilon_k.             (6.1)
+
+For a common bound epsilon_k<=epsilon,
+  E_N<=3^N epsilon.                                (6.2)
+
+No RH assumption is involved in these inequalities. Actual meaning
+enters through the certified moment inputs of Section 5.
+
+======================================================================
+7. MARGIN_STEP: EXACT FINITE ADMISSION
+======================================================================
+
+Let n,Y be natural numbers. Define
+  G_n(Y)=(Y+n+1)V_n-(n+1)V_(n+1),
+  Gtilde_n(Y)=(Y+n+1)Vtilde_n-(n+1)Vtilde_(n+1),
+  EG=(Y+n+1)E_n+(n+1)E_(n+1).
+
+All displayed coefficients are nonnegative, so Section 6 gives
+  |G_n(Y)-Gtilde_n(Y)|<=EG.
+
+Define the finite rational acceptance predicate:
+  MARGIN_STEP(n,Y)=true iff
+    the actual moment packet is accepted through degree n+1
+    and Gtilde_n(Y)-EG>=0.                          (7.1)
+
+Soundness:
+  (7.1) -> G_n(Y)>=Gtilde_n(Y)-EG>=0
+        -> (n+1)(V_(n+1)-V_n)<=YV_n
+        -> C_n<=YV_n.
+
+This proves T3. No unchecked real inequality is tested computationally:
+the final comparison in (7.1) is between exact rationals.
+
+If epsilon_k<=epsilon, then
+  EG<=3^n (Y+4(n+1))epsilon.                        (7.2)
+
+If epsilon_0=0 and all other epsilon_k<=epsilon, this improves to
+  EG<=[3^n(Y+4(n+1))-(Y+2(n+1))]epsilon.
+
+7.1. Strict-margin obtainability.
+
+If the actual residual satisfies G_n(Y)>0, then
+  Gtilde_n(Y)-EG >= G_n(Y)-2EG.
+As precision increases, EG tends to zero. Hence the rational test
+eventually accepts.
+
+A merely nonnegative residual with exact value zero does not give this
+termination conclusion.
+
+7.2. Positive budgets under RH.
+
+The fixed actual backend supplies
+  RH -> forall n, V_n=1.
+Therefore under RH,
+  G_n(Y)=Y.
+
+For Y>=1, a sufficient uniform radius is
+  epsilon < Y/[2*3^n*(Y+4(n+1))].                   (7.3)
+
+For n=16,Y=1, the denominator in (7.3) is
+  2*3^16*69 = 5,940,447,498.
+Thus epsilon_k<=2^(-33) for all required moments is sufficient under RH.
+This is an error radius for NORMALIZED MOMENTS, not a claim that 33-bit
+floating-point arithmetic suffices for the full source computation.
+
+For a finite prefix 16<=n<M with M>16, it suffices to use one shared
+moment vector through M with
+  epsilon < Y/[2*3^(M-1)*(Y+4M)].
+The factor on the right bounds the corresponding factors for every
+step in the prefix.
+
+T2 constructs the needed moment precision; finitely many rational tests
+then accept under RH. This proves T5.
+For M=16 the Tail16 prefix is empty.
+
+======================================================================
+8. ZERO-BUDGET OBSTRUCTION FOR THE SYMMETRIC MARGIN TEST
+======================================================================
+
+Bernstein coarsening holds for every real sequence, including q:
+  (n+1)B(n,j)
+    =(n+1-j)B(n+1,j)+(j+1)B(n+1,j+1).
+
+Taking absolute values and summing proves
+  V_(n+1)>=V_n.
+The same holds for the approximate sequence:
+  Vtilde_(n+1)>=Vtilde_n.
+
+Thus
+  Gtilde_n(0)=(n+1)(Vtilde_n-Vtilde_(n+1))<=0.
+
+For Y=0, acceptance of (7.1) forces
+  0<=Gtilde_n(0)-EG<=-EG<=0,
+hence EG=0.
+
+Since
+  EG=(n+1)(E_n+E_(n+1))
+and every coefficient C(n+1,k)2^k in E_(n+1) is strictly positive,
+  epsilon_0=...=epsilon_(n+1)=0.
+
+Therefore nonzero moment radii cannot pass THIS symmetric-error margin
+test at Y=0.
+
+This is not an impossibility theorem for all finite interval methods.
+Section 9 supplies a different finite rule that proves exact zero
+cancellation from nonzero-width enclosures.
+
+======================================================================
+9. SIGN_ROW: ZERO CANCELLATION FROM CERTIFIED SIGNS
+======================================================================
+
+For a fixed maximum row M, define
+  SIGN_ROW(M)=true iff
+    the actual moment packet is accepted through degree M
+    and Btilde(M,j)-e_(M,j)>=0 for every j<=M.
+
+Every final comparison is rational. Section 6 proves
+  SIGN_ROW(M)=true -> forall j<=M, B(M,j)>=0.        (9.1)
+
+Positive coarsening propagates (9.1) to every earlier row:
+  if all entries of row r+1 are nonnegative, then all entries of row r
+  are nonnegative, since the coarsening coefficients are nonnegative
+  and r+1>0.
+
+The Bernstein partition identity is
+  sum_(j=0)^r B(r,j)=u_0.
+One derivation: apply the linear functional x^k |-> u_k to
+  sum_(j=0)^r C(r,j)x^j(1-x)^(r-j)=1.
+
+Therefore every nonnegative row has
+  V_r=sum_j |B(r,j)|=sum_j B(r,j)=u_0.
+For the actual moments u_0=1, so
+  SIGN_ROW(M)=true
+  -> V_0=...=V_M=1
+  -> C_n=0 for every n<M.
+
+This proves T4. A SINGLE certificate at the maximum row certifies the
+entire earlier finite prefix. Separate SIGN_ROW certificates for each
+earlier row are unnecessary.
+
+9.1. Obtainability with strict signs.
+
+For uniform errors epsilon_k<=epsilon,
+  e_(M,j)<=c_(M,j)epsilon,
+  c_(M,j)=C(M,j)2^(M-j)>0.
+
+If every actual entry of row M is strictly positive, let
+  delta_M=min_(j<=M) B(M,j)/(2c_(M,j))>0.
+Then epsilon<delta_M implies
+  Btilde(M,j)-e_(M,j)
+    >= B(M,j)-2c_(M,j)epsilon>0.
+
+Arbitrary-precision moment generation therefore eventually finds a
+passing SIGN_ROW(M). The unknown real delta_M need not be supplied to
+the generator: decreasing rational radii and checking the finite
+rational sign tests is sufficient.
+
+Nonnegativity alone does not imply this strict-sign termination result.
+
+9.2. Optional actual spectral corollary, with explicit dependencies.
+
+Suppose the matching actual paired-product theorem under RH gives
+  Theta(z)/Theta(0)
+    = product_i (1+z/gamma_i^2)^(m_i),
+where gamma_i>0 are distinct positive zero ordinates, m_i>=1,
+and
+  0<kappa=sum_i m_i/gamma_i^2<infinity.
+Suppose at least two positive-ordinate occurrences exist.
+
+Count each +/-gamma pair once, with its multiplicity. Logarithmic
+differentiation near zero and Section 1 then give exactly
+  u_k=kappa^(-(k+1))sum_i m_i gamma_i^(-2(k+1)).
+
+Put x_i=1/(kappa gamma_i^2). Then
+  x_i>0,  sum_i m_i x_i=1.
+At least two counted occurrences imply x_i<1 for every i, including
+the case m_i>=2 at a single ordinate.
+
+Finite expansion and absolute convergence yield
+  B(M,j)=C(M,j)sum_i m_i x_i^(j+1)(1-x_i)^(M-j)>0.
+
+Thus the actual paired-product/moment identification removes the
+separate strict-sign premise under RH. Combined with T2:
+  RH + this fixed analytic representation
+  -> every finite maximum row has an obtainable SIGN_ROW certificate.
+
+This corollary explicitly depends on the paired-product identification,
+inverse-square summability, and zero count. The finite algebra alone
+does not prove those analytic facts. No new Lean proof or audit of
+those dependencies is asserted here.
+
+======================================================================
+10. FINITE PREFIX COMPOSITION WITH THE EXISTING ROOT
+======================================================================
+
+Define
+  Prefix(Y,M) := forall n, 16<=n<M -> C_n<=YV_n,
+  Tail(Y,M)   := forall n, M<=n -> C_n<=YV_n,
+  A16(Y)      := forall n, 16<=n -> C_n<=YV_n.
+
+For M>=16:
+  Prefix(Y,M) and Tail(Y,M) -> A16(Y),
+by splitting each n>=16 according to n<M or M<=n.
+
+The present finite checker supplies Prefix:
+  either all MARGIN_STEP(n,Y) for 16<=n<M,
+  or one SIGN_ROW(M).
+
+A complete assembly still needs Tail(Y,M).
+
+Pinned actual-backend endpoint:
+  RH_HilbertLimit.nativeRH_of_admissible_cancellationBudget
+    (W : CancellationBudget)
+    (hW : W.Admissible) : _root_.RiemannHypothesis.
+
+At cutoff 16 and coefficient Y, W.Admissible is A16(Y).
+Therefore the exact composition is
+  finitePrefixCheck(Y,M,c)=true
+  + Tail(Y,M)
+  -> A16(Y)
+  -> _root_.RiemannHypothesis.                       (10.1)
+
+Tail(Y,M) may be supplied as an externally checked native Lean proof.
+For a fully INTERNAL raw Bool theorem it must instead be discharged by
+a concrete, proved-sound internal tail checker/rule. Merely placing
+Tail(Y,M) in a record field does not supply that checker.
+
+The inspected RH_FROZEN_WITNESS_ARCHITECTURE_LAYER1.lean defines:
+  structure TailKernel where
+    Cert : Type
+    coefficient : Cert -> Nat
+    check : Cert -> Bool
+    sound : forall c, check c=true ->
+      (budget16 (coefficient c)).Admissible.
+
+Its assembly theorem correctly consumes K.sound. It does not itself
+construct K.sound or a concrete finite certificate language.
+This artifact supplies concrete finite-prefix components for such a
+future instance; it does not fill the universal tail field.
+
+======================================================================
+11. FINITE-JET EXTENSION OBSTRUCTION
+======================================================================
+
+Theorem.
+For every K in Nat, real prefix a_0,...,a_K, and Y>=0, there exists a
+real sequence v agreeing with this prefix but violating the Tail16
+budget at some n>=16.
+
+Proof.
+Set n=max(16,K).
+Set v_k=a_k for k<=K and v_k=0 for K<k<=n.
+Then V_v(n) is fixed independently of v_(n+1).
+
+Write v_(n+1)=T. For each j<=n+1,
+  B_v(n+1,j)=d_j+(-1)^(n+1-j)C(n+1,j)T,
+where d_j depends only on v_0,...,v_n.
+Put D=sum_(j=0)^(n+1)|d_j|.
+
+For T>=0, the reverse triangle inequality gives
+  V_v(n+1)>=2^(n+1)T-D.
+
+By the Archimedean property choose an integer T satisfying
+  T > [D+((n+1+Y)/(n+1))V_v(n)]/2^(n+1).
+Then
+  V_v(n+1)>((n+1+Y)/(n+1))V_v(n),
+hence
+  C_v(n)>YV_v(n).
+Later entries can be arbitrary. QED.
+
+Restricted-calculus consequence.
+
+Assume:
+  (i)   u is interpreted as an abstract real sequence;
+  (ii)  every generic primitive is valid for every such sequence;
+  (iii) every actual-specific leaf used in the proof constrains only
+        finitely many CLOSED moment indices;
+  (iv)  the logical rules preserve semantic truth.
+
+A finite proof has a common finite bound K on these actual indices.
+Apply the preceding theorem with the true actual prefix through K.
+The resulting sequence satisfies every finite leaf and every generic
+primitive, but falsifies the universal Tail16 budget.
+
+Therefore:
+  finite ground actual-moment certificates
+  + generic Bernstein/ring/order/induction rules
+  do not derive the universal Tail16 budget.
+
+Applicability boundary:
+A universal analytic source relation, the complete actual function
+definition with its analytic theorems, or a source-checker soundness
+theorem used with genuinely variable-index content can invalidate
+this countermodel. Such an addition may itself have finite syntax.
+
+The obstruction is consequently not a theorem against finite RH
+proofs, native Lean proofs, or all possible certificate languages.
+It identifies the missing kind of rule: a uniform actual-source
+argument relating arbitrarily large indices.
+
+The new finite interval leaves cannot by themselves discharge that
+uniform obligation.
+
+======================================================================
+12. CONCRETE A-TIER IMPLEMENTATION ORDER
+======================================================================
+
+The following are proposed module obligations, not compiled files.
+
+Module                         Exact mathematical endpoint
+----------------------------------------------------------------------
+RationalExpCertificates        expCert=true -> endpoint enclosure
+RationalPiCertificates         piLow<=Real.pi<=piHigh
+ActualThetaSource              THETA_ACTUAL for AWPIRH.theta
+ActualSourceTail                Tmode and Tspace bounds
+ActualSourceQuadrature          source packet -> coefficient intervals
+ActualMomentIntervals          momentCheck=true -> actual u enclosures
+BernsteinIntervalTransport     equations (6.1), (6.2), entry error
+FiniteMarginAdmission          marginCheck=true -> C(n)<=YV(n)
+FiniteSignAdmission            signRowCheck=true -> forall n<M, C(n)=0
+FinitePrefixAdmission          prefixCheck=true -> Prefix(Y,M)
+UniversalTailAdmission         tailCheck=true -> Tail(Y,M)
+NativeRHAssembly               prefixCheck and tailCheck -> literal RH
+
+UniversalTailAdmission remains mathematically unresolved for a useful
+concrete internal witness language. The preceding modules do not make
+this last row automatic.
+
+For each module:
+  endpoint signature
+  -> independent proof body
+  -> externally compiled dependency
+  -> theorem-level axiom audit
+  -> deterministic composition.
+
+No module is A_TIER until matching external native Windows compiler
+and theorem-level approved-axiom evidence exists.
+The source identity and the literal RH backend must both be audited.
+A source hash, a structural coordinate pass, or a rational presieve hit
+does not replace those checks.
+
+A C presieve may propose packets. Only the exact checker and the fixed
+proved soundness chain may establish the theorem.
+
+======================================================================
+13. COORDINATE STATUS AND FINAL CLAIM BOUNDARIES
+======================================================================
+
+The legacy vector
+  [1380464198, 2, 1, 0, 16, 0]
+does not contain the moment certificates, a SIGN_ROW proof, or a
+universal tail proof constructed in this document.
+
+It remains a structural/canonical zero-budget target, not an admitted
+RH certificate.
+
+The new route gives:
+  actual finite coefficient enclosures: obtainable;
+  actual finite normalized-moment enclosures: obtainable;
+  finite strict-margin admission: obtainable under strict validity;
+  zero-budget finite admission: available through certified row signs;
+  finite prefix under RH, Y>=1: obtainable;
+  finite prefix under RH, Y=0: obtainable with the stated actual
+    spectral identification;
+  universal tail: unresolved;
+  full accepted witness existence: unresolved;
+  smallness/practical complexity: unestablished.
+
+The quantifiers remain distinct:
+  RH -> forall M, exists finite certificate of Prefix(Y,M)
+does not imply
+  RH -> exists finite certificate of forall n>=16, C(n)<=YV(n)
+for the chosen restricted certificate language.
+
+No interchange of "forall finite M, exists certificate" with
+"exists one certificate, forall n" is made.
+
+FINAL STATUS
+
+ACTUAL_FIXED_DEGREE_ENCLOSURE_DERIVATION=COMPLETE_WITH_NAMED_SOURCE_IDENTITY
+ACTUAL_MOMENT_ENCLOSURE_OBTAINABILITY=B_TIER
+MARGIN_STEP_SOUNDNESS=B_TIER
+SIGN_ROW_PREFIX_SOUNDNESS=B_TIER
+ZERO_MARGIN_CHECKER_OBSTRUCTION=B_TIER
+FINITE_JET_EXTENSION_OBSTRUCTION=B_TIER
+FINITE_PREFIX_TO_RH=CONDITIONAL_ON_NAMED_UNIVERSAL_TAIL
+UNIVERSAL_ACTUAL_TAIL_RULE=OPEN
+COMPLETE_RH_WITNESS_EXISTENCE=OPEN
+SMALL_WITNESS_BOUND=NOT_ESTABLISHED
+NEW_LEAN_COMPILATION_EVIDENCE=NONE
+A_TIER_PROMOTION=NONE
+UNCONDITIONAL_RH_CLOSURE=NOT_ESTABLISHED
+
+======================================================================
+14. REFERENCES AND INSPECTED DEPENDENCIES
+======================================================================
+
+[R1] Jeffrey C. Lagarias and David Montague,
+     The Integral of the Riemann xi-Function, arXiv:1106.4348v3,
+     equations (1.1)--(1.2).
+     https://arxiv.org/pdf/1106.4348
+     Dependency: exact completed-xi Fourier/theta normalization.
+
+[R2] NIST Digital Library of Mathematical Functions, Section 25.4,
+     equations 25.4.3--25.4.4.
+     https://dlmf.nist.gov/25.4
+     Dependency: completed-xi definition and reflection symmetry.
+
+[R3] ACTUAL_XI_TRUNCATED_SUCCESSOR_16_B_TIER.txt.
+     Existing cross-branch source identity and normalization recurrence.
+     The earlier concrete computation used external Decimal.exp
+     rounding semantics. The present elementary certificates replace
+     that numerical trust dependency; no earlier numerical table is
+     silently promoted.
+
+[R4] RH_INTERNAL_BOOL_BOUNDARY_VM_B_TIER.txt.
+     Existing single-step interval proposal, refined here into explicit
+     rational source bounds and the zero-budget SIGN_ROW alternative.
+
+[R5] RH_TAIL16_RESTRICTED_ADMISSION_EXTENSION_B_TIER.txt.
+     Existing restricted proof-language derivation. Section 11 sharpens
+     the boundary for adding only finite ground actual-moment leaves.
+
+[R6] RH_FROZEN_WITNESS_ARCHITECTURE_LAYER1.lean.
+     Inspected TailKernel interface; soundness remains a field of K.
+
+[R7] RH_HILBERT_LIMIT_LEAN_v0_2_37_ACTUAL_FLUX_INTERPRETATION_FIX1_construction:
+       AWPIRH/XiCore.lean;
+       RH_HilbertLimit/ActualXi.lean;
+       RH_HilbertLimit/Bernstein.lean;
+       RH_HilbertLimit/Cancellation.lean;
+       RH_HilbertLimit/AnalyticClosure.lean;
+       RH_HilbertLimit/ActualCancellationWitness.lean.
+     Source definitions and signatures inspected. No local Lean run.
+
+END_OF_DERIVATION
+

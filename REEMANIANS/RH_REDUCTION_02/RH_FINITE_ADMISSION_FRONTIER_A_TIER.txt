@@ -1,0 +1,338 @@
+RH_FINITE_ADMISSION_FRONTIER_433_v0_1_0_FIX6
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE
+TOOLCHAIN_TARGET=Lean 4.33.0
+LOCAL_LEAN_EXECUTION=NONE
+NEW_EXTERNAL_COMPILER_EVIDENCE=NONE
+A_TIER_PROMOTION=NONE
+
+FIX6 REPAIR
+
+FIX5_EXTERNAL_RUN=FAIL_OR_INCONCLUSIVE
+REPORTED_PRIMARY_FAILURE=Tail16Admission.Soundness:167_AND_216
+CAUSE=subst_k_SELECTS_AND_CONSUMES_hlen
+SOURCE_FIX=rcases_hk_with_rfl
+REPAIR_SITES=allI_AND_natInd
+RETAINED_HYPOTHESIS=hlen:rho.length=0
+CHECKER_DEFINITIONS=UNCHANGED
+THEOREM_PREMISES_AND_CONCLUSIONS=UNCHANGED
+BACKEND_SOURCES=UNCHANGED
+FIX6_EXTERNAL_COMPILER_AND_AXIOM_AUDIT=PENDING
+
+FIX5_REPORTED_COMPILE_PASS:
+  Tail16Frontier.NumericalChecks
+  Tail16Admission.Calculus
+  Tail16Frontier.CheckedAdmission
+  Tail16Frontier.ScopeAgreement
+
+COMPILE_PASS_WITHOUT_MATCHING_AXIOM_AUDIT=NO_A_TIER_PROMOTION
+
+FIX5 REPAIR
+
+FIX4_EXTERNAL_RUN=FAIL_OR_INCONCLUSIVE
+REPORTED_PRIMARY_FAILURE=Tail16Admission.Calculus:NExpr.subst0
+CAUSE=SAME_TYPED_DOT_RECEIVER_REVERSED_REPLACEMENT_AND_SOURCE
+ERRONEOUS_APPLICATION=a.subst0_t_ELABORATES_AS_NExpr.subst0_a_t
+CORRECT_APPLICATION=NExpr.subst0_t_a
+NExpr_SUBSTITUTION_API=REPLACEMENT_FIRST_PRESERVED
+NExpr_RECURSION=STRUCTURAL_ON_SOURCE_EXPRESSION
+NExpr_SEMANTIC_LEMMA=CORRECTED_TO_EXPLICIT_ARGUMENT_ORDER
+RExpr_AND_Formula_SUBSTITUTION_APPLICATIONS=EXPLICIT
+LOGICAL_CHECKER_SUBSTITUTION=SEMANTIC_SOURCE_CORRECTION
+NUMERICAL_CHECKER_DEFINITIONS=UNCHANGED
+RH_ROOT_AND_ANALYTIC_PREMISES=UNCHANGED
+REGRESSION_ENDPOINTS=4_CLOSED_SUBSTITUTION_EQUALITIES
+REGRESSION_PROOFS=rfl
+AUDIT_ENDPOINTS=58
+BACKEND_SOURCES=UNCHANGED
+FAILED_ELABORATION_sorryAx=REJECTED
+CheckedAdmission_STATUS=CANCELLED_AFTER_PRIMARY_FAILURE
+CheckedAdmission_INDEPENDENT_FAILURE=NOT_ESTABLISHED
+FIX5_COMPLETE_COMPILER_AND_AXIOM_AUDIT=NOT_PASSED
+
+FIX4 REPAIR
+
+FIX3_EXTERNAL_RUN=FAIL_OR_INCONCLUSIVE
+REPORTED_PRIMARY_FAILURE=Tail16Frontier.NumericalChecks
+BOOLEAN_ERROR=UNKNOWN_Bool.and_eq_true.mp
+BOOLEAN_REPLACEMENT=Tail16Bool.andTrue
+BOOLEAN_HELPER_PROOF=EXPLICIT_Bool_CASES
+BOOLEAN_CALL_SITES_UPDATED=19
+ARITHMETIC_ERROR=DIRECT_decide_REDUCTION_BLOCKED
+EXACT_INTERNAL_REDUCTION_BLOCKER=NOT_IDENTIFIED_FROM_DIAGNOSTIC
+ARITHMETIC_PROOF=norm_num_WITH_EXPLICIT_FINITE_SUM_AND_RATIONAL_NORMALIZATION
+POSITIVE_CONTROLS_UPDATED=3
+GENERATED_ADMISSION_MODES_UPDATED=sign_row_AND_margin_step
+BOOLEAN_CHECKER_DEFINITIONS=UNCHANGED
+EXISTING_THEOREM_PREMISES_AND_CONCLUSIONS=UNCHANGED
+BACKEND_SOURCES=UNCHANGED
+AUDIT_ENDPOINTS=51
+FIX3_REPORTED_COMPILE_PASS=Tail16Admission.ActualPrimitives
+Calculus_STATUS=CANCELLED_AFTER_PRIMARY_FAILURE
+Calculus_INDEPENDENT_FAILURE=NOT_ESTABLISHED
+FIX4_COMPLETE_COMPILER_AND_AXIOM_AUDIT=NOT_PASSED
+
+FIX3 REPAIR
+
+FIX2_EXTERNAL_RUN=FAIL_OR_INCONCLUSIVE
+REPORTED_PRIMARY_FAILURE=Tail16Frontier.BernsteinIntervals:51
+CAUSE=ADJACENT_ABSOLUTE_VALUE_BARS_LEXED_AS_BOOLEAN_OR
+SOURCE_FIX=abs_(abs_x_-_abs_y)_LE_abs_(x_-_y)
+PRIVATE_LEMMA_MATHEMATICAL_STATEMENT=UNCHANGED
+PROOF_BODY=UNCHANGED
+PUBLIC_THEOREM_PREMISES_AND_CONCLUSIONS=UNCHANGED
+DOWNSTREAM_sorry_WARNING=FAILED_ELABORATION_NOT_ACCEPTED_EVIDENCE
+ActualPrimitives_STATUS=CANCELLED_AFTER_PRIMARY_FAILURE
+ActualPrimitives_INDEPENDENT_FAILURE=NOT_ESTABLISHED
+BACKEND_SOURCES=UNCHANGED
+CACHE_REUSE=EXACT_SOURCE_CLOSURE_AND_TOOLCHAIN_MATCH_REQUIRED
+FIX3_COMPLETE_COMPILER_AND_AXIOM_AUDIT=NOT_PASSED
+
+FIX2_REPORTED_COMPILE_PASS:
+  RHFrozenWitnessArchitecture
+  Tail16Frontier.NativeAdmission
+  Tail16Frontier.MomentData
+  Tail16Admission.Syntax
+  Tail16Admission.Semantics
+
+COMPILE_PASS_WITHOUT_MATCHING_AXIOM_AUDIT=NO_A_TIER_PROMOTION
+
+FIX2 REPAIR
+
+FIX1_EXTERNAL_RUN=FAIL_OR_INCONCLUSIVE
+REPORTED_PRIMARY_FAILURE=Tail16Frontier.NativeAdmission:148
+CAUSE=RESERVED_TOKEN_prefix_AS_UNQUOTED_STRUCTURE_FIELD
+FIELD_RENAME=NativePrefixTailAdmission.prefix_TO_prefixProof
+DEPENDENT_PROJECTION_UPDATES=2
+FIELD_TYPE=Prefix_coefficient_cutoff_UNCHANGED
+THEOREM_PREMISES_AND_CONCLUSIONS=UNCHANGED
+QUALIFIED_CheckedPrefixAdmission.prefix=UNCHANGED
+QUALIFIED_CheckedSignAdmission.prefix=UNCHANGED
+RHFrozenWitnessArchitecture_STATUS=CANCELLED_AFTER_PRIMARY_FAILURE
+RHFrozenWitnessArchitecture_INDEPENDENT_FAILURE=NOT_ESTABLISHED
+BACKEND_SOURCES=UNCHANGED
+CACHE_REUSE=EXACT_SOURCE_CLOSURE_AND_TOOLCHAIN_MATCH_REQUIRED
+FIX2_COMPLETE_COMPILER_AND_AXIOM_AUDIT=NOT_PASSED
+
+FIX1 REPAIR
+
+PREDECESSOR_EXTERNAL_RUN=FAIL_OR_INCONCLUSIVE
+REPORTED_PRIMARY_FAILURE=Tail16Admission.ActualPrimitives:82
+CAUSE=actualVariation_NOT_UNFOLDED_BY_SIMPLIFIER
+SOURCE_FIX=EXPLICIT_actualVariation_UNFOLDING
+THEOREM_STATEMENTS=UNCHANGED
+AXIOM_POLICY=UNCHANGED
+
+PREDECESSOR_PARTIAL_COMPILE_PASS:
+  RH_HilbertLimit.ZeroBudgetFirstMoment
+  Tail16Admission.Semantics
+  Tail16Frontier.MomentData
+
+FAILED_DECLARATION_sorryAx=REJECTED
+BERNSTEIN_INTERVALS_DIAGNOSTIC=NOT_SUPPLIED
+BERNSTEIN_INTERVALS_INDEPENDENT_FAILURE=NOT_ESTABLISHED
+
+RUNNER_FIX=EXPLICIT_SIBLING_CANCELLATION_PROVENANCE
+CANCELLED_CHILD_STATUS=COMPILE_CANCELLED_AFTER_FAILURE
+INDEPENDENT_FAILURE_STATUS=COMPILE_FAIL
+CANCELLATION_REGRESSION=PYTHON_FAKE_CHILDREN_ONLY
+CACHE_REUSE=EXACT_SOURCE_CLOSURE_AND_TOOLCHAIN_MATCH_REQUIRED
+PREDECESSOR_BACKEND_CACHE=ELIGIBLE_IF_MATCHING
+FIX1_COMPLETE_COMPILER_AND_AXIOM_AUDIT=NOT_PASSED
+
+EXACT IMPLEMENTED ROUTE
+
+  finite rational coordinates
+  + native actual-moment enclosure proof
+  + exact rational margin/sign acceptance
+  -> finite actual-xi admission.
+
+  native universal-tail proof
+  -> literal _root_.RiemannHypothesis.
+
+  finite prefix proof + native tail proof
+  -> frozen cutoff-16 admission
+  -> literal _root_.RiemannHypothesis.
+
+The complete native witness includes the proof of its universal tail.
+No complete witness is supplied.
+
+CURRENT B-TIER FRONTIER: IMPLEMENTATION STATUS
+
+Prepared Lean:
+  scoped environment agreement and induction-environment repair;
+  fixed-primitive logical checker and semantic soundness;
+  actual MomentData.Encloses predicate and native proof admission;
+  exact rational Bernstein evaluation;
+  entrywise and row-variation error transport;
+  marginCheck and signCheck;
+  finite prefix aggregate checker;
+  maximum-row sign propagation;
+  native tail admission;
+  conditional literal-RH roots;
+  actual degree-zero/one controls.
+
+Not formalized in this package:
+  the general rational theta-integral evaluator's soundness;
+  arbitrary source-coefficient interval generation tied to AWPIRH.theta;
+  the internal varint proof-byte codec from the B-tier specification;
+  a useful coordinate-only universal tail checker.
+
+The external JSON adapter emits literal Lean data and checks a supplied
+closed native actual-moment proof. It is not an internal proof-byte
+decoder theorem. The source evaluator gap is not hidden in a new axiom:
+the precise actual enclosure proposition remains a named theorem input.
+
+KEY ENDPOINTS
+
+Tail16Admission.checkProof_sound:
+  checkProof 0 [] p F = true -> Holds [] F.
+
+Tail16Frontier.marginCheck_sound:
+  d.Encloses (n+1)
+  -> marginCheck d n Y = true
+  -> BudgetStep Y n.
+
+Tail16Frontier.signCheck_sound:
+  d.Encloses M
+  -> signCheck d M = true
+  -> forall j<=M, actual Bernstein weight(M,j)>=0.
+
+Tail16Frontier.signCheck_prefix:
+  d.Encloses M
+  -> signCheck d M = true
+  -> Prefix Y M.
+
+Tail16Frontier.prefixData_check_sound:
+  d.Encloses -> d.check=true -> Prefix d.coefficient d.cutoff.
+
+Tail16Frontier.tail_nativeRH:
+  Tail Y M -> _root_.RiemannHypothesis.
+
+Tail16Frontier.CompleteAdmission.nativeRH:
+  CompleteAdmission -> _root_.RiemannHypothesis.
+
+Tail16Frontier.nativeRH_of_completeAdmission_exists:
+  Nonempty CompleteAdmission -> _root_.RiemannHypothesis.
+
+Tail16Frontier.checkBudget_sound:
+  checkBudget Y p=true -> _root_.RiemannHypothesis.
+
+The fixed logical primitive registry is not asserted to contain an
+accepted universal-budget proof. Its generic identities and finitely
+many ground actual facts do not discharge the universal-tail obligation.
+
+POSITIVE CONTROL
+
+firstMomentData:
+  centers=[1,1/2];
+  radii=[0,1/2];
+  degree=1.
+
+The actual backend supplies u_0=1 and 0<=u_1<=1.
+The exact sign test accepts row 1; its native enclosure proof is closed.
+The resulting finite theorem is C_xi(0)=0.
+
+This is a finite control, not an RH witness or an initial RH search guess.
+
+NEGATIVE CONTROLS
+
+  missing moment coordinates cannot pass the sign checker;
+  logical True cannot be accepted as the universal budget;
+  the finite cancellation control cannot be used as a proof of RH.
+
+RUNNER
+
+  absolute package-root handling through %~dp0;
+  Python standard library;
+  no network, Lake, or PowerShell;
+  cached Mathlib/dependency use;
+  pinned custom backend source included;
+  cached custom modules reused only with matching source closure and
+    matching toolchain evidence;
+  bounded parallel compilation, fresh local-module/audit compilation;
+  source manifests and cache provenance;
+  theorem-level allowed-axiom checks;
+  negative controls;
+  no stale .olean use after a failed compile.
+
+Default native command:
+
+  cd /d "%USERPROFILE%\Downloads" && tar.exe -xf "RH_FINITE_ADMISSION_FRONTIER_433_v0_1_0_FIX6.zip" && call "%USERPROFILE%\Downloads\RH_FINITE_ADMISSION_FRONTIER_433_v0_1_0_FIX6\run.cmd"
+
+Optional cache variables:
+
+  LEAN_EXE=<absolute Lean 4.33.0 lean.exe>
+  MATHLIB_CACHE_ROOT=<existing cached Mathlib project>
+  RH_CACHE_ROOTS=<semicolon-separated existing cache package roots>
+  RH_LEAN_JOBS=2
+  RH_LEAN_THREADS=2
+
+Existing known locations are also discovered automatically.
+
+COORDINATE ADMISSION
+
+The included example uses:
+  examples/first_moment_sign.json
+  examples/FirstMomentEvidence.lean
+
+Execute from the extracted package directory:
+
+  call admit.cmd "examples\first_moment_sign.json" "examples\FirstMomentEvidence.lean"
+
+General interface:
+
+  call admit.cmd "candidate.json" "ActualMomentProof.lean"
+
+  call admit.cmd "candidate.json" "ActualMomentProof.lean" --tail-proof "UniversalTailProof.lean"
+
+ActualMomentProof.lean must define the CLOSED theorem:
+
+  SubmissionEvidence.encloses :
+    SubmissionData.moments.Encloses SubmissionData.degree
+
+UniversalTailProof.lean must define the CLOSED theorem:
+
+  SubmissionTail.tail :
+    Tail16Frontier.Tail
+      SubmissionData.coefficient SubmissionData.tailCutoff
+
+The data module is generated from canonical exact rationals.
+Numerical acceptance uses kernel-checked norm_num proofs with explicit
+finite-sum and rational normalization. Structural and logical controls
+retain ordinary decide. No native_decide is used.
+The resulting source is externally compiled and audited.
+An optional RH root is additionally checked against a closed literal-RH
+wrapper before the runner can report native RH admission.
+
+No local proof hypothesis, sorryAx, or unapproved axiom may survive.
+
+VALIDATION PERFORMED HERE
+
+  source-level independent review;
+  Python syntax and runner self-tests;
+  exact-rational control calculations;
+  malformed-coordinate parser controls;
+  generated-source/manifest checks;
+  static dependency graph and package manifest checks;
+  no Lean execution.
+
+PROMOTION
+
+A_TIER_CANDIDATE: prepared source only.
+
+A_TIER: matching external native compiler and theorem-level axiom audit
+for the exact theorem and source.
+
+Conditional theorem audits do not discharge their actual-moment or
+universal-tail premises. A default package PASS does not establish RH.
+
+FINAL STATUS
+
+NATIVE_PROOF_CARRYING_FINITE_ADMISSION=PREPARED
+CONDITIONAL_NATIVE_RH_ADMISSION=PREPARED
+RAW_THETA_SOURCE_CHECKER=NOT_FORMALIZED
+UNIFORM_NUMERICAL_TAIL_CHECKER=OPEN
+COMPLETE_RH_WITNESS=NOT_SUPPLIED
+A_TIER_PROMOTION=NONE
+

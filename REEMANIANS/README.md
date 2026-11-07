@@ -1,6 +1,6 @@
 # REEMANIANS
 
-This folder contains only endpoints that hold under the Riemann Hypothesis (RH).
+This folder contains endpoints conditional on the Riemann Hypothesis (RH), together with finite-certificate reductions to RH. Reduction projects state their admission premises explicitly; they do not assert an exhibited RH witness.
 
 | Folder | Exact endpoint | Native evidence | Marker |
 | --- | --- | --- | --- |
@@ -54,3 +54,11 @@ STATUS.json := PRESERVED_ORIGINAL_PACKAGE_STATUS
 README.txt := PRESERVED_ORIGINAL_PACKAGE_DOCUMENTATION
 FROZEN_CANDIDATES.json := PRESERVED_FREEZE_RECORD
 ```
+
+## Finite-certificate reductions
+
+| Folder | Exact scope | Evidence | Status |
+| --- | --- | --- | --- |
+| [RH_REDUCTION_02](RH_REDUCTION_02/) | Finite Dodgson presieve; filtered acceptance implies RH; certified projections preserve original acceptance | [User-reported native PASS](RH_REDUCTION_02/provenance/user-reported-native-pass.txt) | Scoped A-tier; conditional formal closure |
+
+`RH_REDUCTION_02/VERIFIED_STATUS.txt` records current verification scope. Original package documentation remains preserved as source provenance.

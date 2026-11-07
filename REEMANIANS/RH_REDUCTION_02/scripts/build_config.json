@@ -1,0 +1,174 @@
+{
+  "package": "RH_FINITE_DODGSON_PRUNER_433_v0_1_0_CANDIDATE",
+  "toolchain": "4.33.0",
+  "targets": [
+    "RH_FINITE_DODGSON_PRUNER"
+  ],
+  "audit_modules": [
+    {
+      "module": "Tail16Frontier.Audit",
+      "theorems": [
+        "Tail16Admission.subst0_literal_control",
+        "Tail16Admission.subst0_var_zero_control",
+        "Tail16Admission.subst0_var_succ_control",
+        "Tail16Admission.subst0_compound_control",
+        "Tail16Admission.denoteN_subst0",
+        "Tail16Admission.denoteR_subst0_of_binderFree",
+        "Tail16Admission.holds_subst0_of_binderFree",
+        "Tail16Bool.andTrue",
+        "Tail16Frontier.allBelow_sound",
+        "Tail16Frontier.allBelow_complete",
+        "Tail16Frontier.zeroMomentData_signCheck",
+        "Tail16Frontier.firstMomentData_signCheck",
+        "Tail16Frontier.firstMomentData_marginCheck",
+        "Tail16Admission.denoteN_agree",
+        "Tail16Admission.denoteR_agree",
+        "Tail16Admission.holds_agree",
+        "Tail16Admission.holds_trim_one",
+        "Tail16Admission.actualPrimitive_sound",
+        "Tail16Admission.infer_sound",
+        "Tail16Admission.checkProof_sound",
+        "Tail16Frontier.checkBudget_admissible",
+        "Tail16Frontier.checkBudget_sound",
+        "Tail16Frontier.allCancellationNonnegative_valid",
+        "Tail16Frontier.inductionTruth_valid",
+        "Tail16Frontier.MomentData.encloses_mono",
+        "Tail16Frontier.zeroMomentData_encloses",
+        "Tail16Frontier.firstMomentData_encloses",
+        "Tail16Frontier.entry_error_bound",
+        "Tail16Frontier.variation_error_bound",
+        "Tail16Frontier.marginCheck_sound",
+        "Tail16Frontier.signCheck_sound",
+        "Tail16Frontier.firstMomentData_row_nonnegative",
+        "Tail16Frontier.firstMomentData_budgetStep",
+        "Tail16Frontier.missingMomentData_signCheck_rejected",
+        "Tail16Frontier.tail_nativeRH",
+        "Tail16Frontier.prefix_tail_admissible16",
+        "Tail16Frontier.prefix_tail_nativeRH",
+        "Tail16Frontier.variation_eq_one_of_nonnegative_row",
+        "Tail16Frontier.cancellation_eq_zero_of_nonnegative_row",
+        "Tail16Frontier.prefix_of_nonnegative_row",
+        "Tail16Frontier.checkPrefixRows_sound",
+        "Tail16Frontier.prefixData_check_sound",
+        "Tail16Frontier.signCheck_prefix",
+        "Tail16Frontier.prefixData_check_nativeRH",
+        "Tail16Frontier.signCheck_nativeRH",
+        "Tail16Frontier.CheckedPrefixAdmission.nativeRH",
+        "Tail16Frontier.CheckedSignAdmission.nativeRH",
+        "Tail16Frontier.emptyPrefixData_valid",
+        "Tail16Frontier.CompleteAdmission.nativeRH",
+        "Tail16Frontier.nativeRH_of_completeAdmission_exists",
+        "Tail16Frontier.firstRowCancellation",
+        "Tail16Frontier.firstRowFinitePrefix",
+        "Tail16Frontier.momentZeroProof_check",
+        "Tail16Frontier.momentZeroProof_valid",
+        "Tail16Frontier.momentZeroProof_actual",
+        "Tail16Frontier.momentOneBounds_check",
+        "Tail16Frontier.momentOneBounds_valid",
+        "Tail16Frontier.momentOneBounds_actual"
+      ]
+    },
+    {
+      "module": "Tail16Frontier.DodgsonPruningAudit",
+      "theorems": [
+        "RHFinitePruning.checkPruned_accepts_keep",
+        "RHFinitePruning.checkPruned_accepts_check",
+        "RHFinitePruning.checkPruned_sound",
+        "RHFinitePruning.checkPruned_sound_at",
+        "RHFinitePruning.checkPruned_eq_check",
+        "RHFinitePruning.checkPruned_eq",
+        "RHFinitePruning.checkPruned_accept_iff",
+        "RHFinitePruning.checkPruned_exists_iff",
+        "RHFinitePruning.checkPruned_false_of_keep_false",
+        "RHFinitePruning.check_false_of_keep_false",
+        "RHFinitePruning.Dodgson.Cell.valid_turan_pos",
+        "RHFinitePruning.Dodgson.Cell.valid_necessaryTest",
+        "RHFinitePruning.Dodgson.Cell.valid_recurrenceTest",
+        "RHFinitePruning.Dodgson.Cell.necessaryTest_false_not_valid",
+        "RHFinitePruning.Dodgson.Cell.recurrenceTest_false_not_valid",
+        "RHFinitePruning.Dodgson.Cell.not_valid_of_turan_nonpos",
+        "RHFinitePruning.Dodgson.allValid_necessaryDodgsonTests",
+        "RHFinitePruning.Dodgson.necessaryDodgsonTests_false_not_allValid",
+        "RHFinitePruning.Dodgson.geometricCell_turan",
+        "RHFinitePruning.Dodgson.geometricCell_rejected",
+        "RHFinitePruning.Dodgson.geometricCell_not_valid",
+        "RHFinitePruning.Dodgson.family_excluded_of_upper_bound",
+        "RHFinitePruning.Dodgson.positiveControl_valid",
+        "RHFinitePruning.Dodgson.positiveControl_accepted",
+        "RHFinitePruning.Dodgson.negativeControl_rejected",
+        "RHFinitePruning.Dodgson.mixedControls_rejected",
+        "RHFrozenWitness.TailKernel.checkPruned_implies_original",
+        "RHFrozenWitness.TailKernel.checkPruned_sound",
+        "RHFrozenWitness.TailKernel.verifyPruned_sound",
+        "RHFrozenWitness.TailKernel.verifyPruned_eq_original",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.necessary",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.checkPruned_eq_original",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.acceptance_iff",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.exists_accepted_iff",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.original_rejected_of_crossout",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.family_rejected_of_crossout",
+        "RHFrozenWitness.TailKernel.CertifiedDodgsonProjection.empty_check_eq_original",
+        "Tail16Frontier.checkBudgetPruned_sound",
+        "Tail16Frontier.checkBudgetPruned_eq_original",
+        "Tail16Frontier.checkBudgetPruned_truth_rejected"
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "file": "negative/RejectMissingMoments.lean",
+      "expected_fragments": [
+        "error",
+        "false"
+      ]
+    },
+    {
+      "file": "negative/RejectTruthAsBudget.lean",
+      "expected_fragments": [
+        "error",
+        "false"
+      ]
+    },
+    {
+      "file": "negative/RejectFiniteAsRH.lean",
+      "expected_fragments": [
+        "error",
+        "RiemannHypothesis"
+      ]
+    },
+    {
+      "file": "negative/RejectDodgsonFiniteAsRH.lean",
+      "expected_fragments": [
+        "error",
+        "RiemannHypothesis"
+      ]
+    },
+    {
+      "file": "negative/RejectDodgsonNegativeCell.lean",
+      "expected_fragments": [
+        "error",
+        "false"
+      ]
+    },
+    {
+      "file": "negative/RejectPruningWithoutNecessity.lean",
+      "expected_fragments": [
+        "error",
+        "false"
+      ]
+    },
+    {
+      "file": "negative/RejectUncertifiedProjection.lean",
+      "expected_fragments": [
+        "error",
+        "valid_of_accepted"
+      ]
+    }
+  ],
+  "source_roots": [
+    ".",
+    "backend"
+  ],
+  "scope": "FINITE_DODGSON_PRESIEVE_WITH_UNCHANGED_RH_SOUNDNESS_AND_CERTIFIED_PROJECTION_PRESERVATION",
+  "pass_status": "PASS_FINITE_DODGSON_PRUNER"
+}

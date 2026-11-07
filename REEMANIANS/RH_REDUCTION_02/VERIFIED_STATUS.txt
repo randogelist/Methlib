@@ -1,0 +1,87 @@
+RH_REDUCTION_02_VERIFIED_STATUS
+DATE=2026-11-07
+STATUS=A_TIER
+CLOSURE=CONDITIONAL_FORMAL_CLOSURE
+MARKER_A_TIER=!!
+MARKER_CONDITIONAL_FORMAL_CLOSURE=!!!
+EVIDENCE_ORIGIN=USER_REPORTED_NATIVE_WINDOWS_TRANSCRIPT
+EXTERNAL_RUN=PASS_FINITE_DODGSON_PRUNER
+THEOREM_AXIOM_AUDIT_ALL=PASS_STANDARD_ONLY
+APPROVED_AXIOMS=propext,Classical.choice,Quot.sound
+NEGATIVE_CONTROLS=7_PASS
+TOOLCHAIN_TARGET=Lean_4.33.0
+LOCAL_ASSISTANT_LEAN_EXECUTION=NONE
+
+EXACT_SCOPED_ROOT
+
+  checkPruned(W) := necessaryDodgsonTests(W) && originalCheck(W).
+
+  RHFrozenWitness.TailKernel.checkPruned_sound:
+    checkPruned K project c=true -> RiemannHypothesis.
+
+  Tail16Frontier.checkBudgetPruned_sound:
+    checkBudgetPruned project Y p=true -> RiemannHypothesis.
+
+  RHFrozenWitness.TailKernel.verifyPruned_sound:
+    verifyPruned K project decoder bytes=true -> RiemannHypothesis.
+
+  The accepted-checker premise remains explicit. No RH witness is exhibited.
+  Arbitrary pruning preserves RH soundness because every pruned acceptance
+  is an acceptance of the original checker.
+
+CERTIFIED_ACCEPTED_SET_PRESERVATION
+
+  CertifiedDodgsonProjection K includes a proved implication:
+    original acceptance -> AllValid(projected finite cells).
+
+  Under that fixed projection correctness proof:
+    prunedCheck(c)=originalCheck(c),
+    prunedAcceptance(c)<->originalAcceptance(c),
+    existence of pruned acceptance <-> existence of original acceptance,
+    verified-byte acceptance is unchanged.
+
+  An uncertified filter can discard an accepted certificate; its RH soundness
+  does not imply accepted-set preservation.
+
+DODGSON_CELL_SCOPE
+
+  Finite rational Cell data are checked through a Turan numerator.
+  Strict cell validity implies positive Turan numerator.
+  A failed necessary test excludes that strict cell class.
+  Geometric triples have zero Turan numerator and are excluded from that class.
+  A proved uniform nonpositive Turan upper bound excludes the represented
+  parameter region. Semidefinite unregularized zero determinants are not
+  excluded merely by these strict-cell claims.
+
+UNRESOLVED
+
+  RH_WITNESS_EXHIBITED=FALSE
+  NONTRIVIAL_ACTUAL_XI_TO_RATIONAL_CELL_PROJECTION=NOT_INSTANTIATED
+  UNCONDITIONAL_ACTUAL_CANDIDATE_FAMILY_ELIMINATION=NOT_ESTABLISHED
+  CERTIFIED_SEARCH_SPEEDUP=NOT_ESTABLISHED
+  RAW_THETA_SOURCE_CHECKER=NOT_ESTABLISHED
+  UNIVERSAL_NUMERICAL_TAIL_CHECKER=OPEN
+  UNCONDITIONAL_RH_CLOSURE=NOT_ESTABLISHED
+  MARKER_UNCONDITIONAL_CLOSURE_!!!!=NOT_ASSIGNED
+
+SOURCE_STATUS_PRECEDENCE
+
+  README.txt and *_A_TIER.txt files from the candidate archive are immutable
+  preparation records. Their STATUS=A_TIER_CANDIDATE and pending-evidence
+  lines are preserved byte for byte. This VERIFIED_STATUS.txt records the
+  subsequent user-reported external PASS and governs the current scoped status.
+
+EVIDENCE_LIMITATION
+
+  The retained evidence is a verbatim user-supplied ending excerpt, not a newly
+  replayed run or an independently acquired complete compiler log. Its first
+  line is truncated in the supplied text. The final shell prompt is omitted.
+  Source association and archive hashes are recorded separately.
+
+COUNTS
+
+  ORIGINAL_PACKAGED_FILES=161
+  ORIGINAL_LEAN_FILES=148
+  REACHABLE_CUSTOM_DAG_MODULES=114
+  CONFIGURED_THEOREM_AUDIT_ROOTS=98
+  CONFIGURED_NEGATIVE_CONTROLS=7

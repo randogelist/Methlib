@@ -1,0 +1,54 @@
+RH_REDUCTION_02_SOURCE_ASSOCIATION
+DATE=2026-11-07
+SOURCE_ARCHIVE=RH_FINITE_DODGSON_PRUNER_433_v0_1_0_CANDIDATE.zip
+SOURCE_ARCHIVE_SHA256=1114b771d1523114f46fa823dbe72289d7a0658bb38ebee0d6b008252423b9af
+ORIGINAL_SOURCE_MANIFEST_SHA256=b4d53a5820ae223a4505ee24ad671764388a69d71303690b50fa4b76214777d8
+USER_REPORTED_TRANSCRIPT_SHA256=c8ed61304f86d1f24950aee66e91718f85bd8fc20dca6f8212d881ce0e4eb57a
+SOURCE_ROOT_IN_ARCHIVE=RH_FINITE_DODGSON_PRUNER_433_v0_1_0_CANDIDATE
+REPOSITORY_DESTINATION=REEMANIANS/RH_REDUCTION_02
+ORIGINAL_FILES=161
+ORIGINAL_LEAN_FILES=148
+REACHABLE_CUSTOM_DAG_MODULES=114
+CONFIGURED_THEOREM_AUDIT_ROOTS=98
+CONFIGURED_NEGATIVE_CONTROLS=7
+
+COPY_POLICY
+
+  Every original archive file is preserved byte for byte at its corresponding
+  relative path. Source-manifest bytes, source files, runner, configuration,
+  candidate-status documents, and historical derivations are unchanged.
+  _build, _evidence, and __pycache__ are not published.
+
+ADDITIONAL_REPOSITORY_DOCUMENTS
+
+  .gitignore
+  README.md
+  VERIFIED_STATUS.txt
+  provenance/user-reported-native-pass.txt
+  provenance/SOURCE_ASSOCIATION.txt
+
+  These four documentation files and .gitignore were added after the candidate archive.
+  They are outside the original source manifest. No manifest-covered source
+  byte has changed.
+
+EVIDENCE_ASSOCIATION
+
+  The user supplied the ending native run excerpt in continuation of testing
+  this candidate package. It reports THEOREM_AXIOM_AUDIT_ALL=PASS_STANDARD_ONLY,
+  seven negative controls, the exact new SOURCE_SCOPE, and
+  RUN=PASS_FINITE_DODGSON_PRUNER.
+
+  provenance/user-reported-native-pass.txt preserves the supplied excerpt.
+  The first line genuinely starts with _AXIOM_AUDIT; it is not reconstructed.
+  The final Windows shell prompt is omitted. No audit entries or compiler
+  lines missing from the excerpt are invented.
+
+  The excerpt itself does not contain the compiler-version banner, package
+  root, full compiler logs, or archive/source hash. The source association is
+  the conversation's package/run continuation; the archive hash above is
+  independently computed from the retained original archive.
+
+  EXTERNAL_REPLAY_PERFORMED_BY_ASSISTANT=FALSE
+  LOCAL_LEAN_EXECUTION=NONE
+  PROMOTION_SCOPE=EXACT_SCOPED_ENDPOINTS_WITH_EXPLICIT_PREMISES
+  UNCONDITIONAL_RH_CLOSURE=NOT_ESTABLISHED

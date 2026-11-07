@@ -1,0 +1,1100 @@
+RH_CURRENT_LEAN_TO_CHECKED_FINITE_FRONTIER_B_TIER
+DATE=2026-11-07
+MODE=B_TIER_DERIVATION
+MARKER=!
+BASE=RH_TAIL16_RESTRICTED_CHECKER_433_v0_1_0_FIX1
+TARGET=CHECKED_ACTUAL_MOMENT_LEAVES_AND_FINITE_PREFIX_ADMISSION
+LOCAL_LEAN_EXECUTION=NONE
+A_TIER_PROMOTION=NONE
+
+EXACT EXTENSION THEOREM
+
+The current finite syntax and literal actual-xi semantics admit a fixed,
+computable extension with three numerical certificate constructors:
+  momentBounds;
+  marginStep;
+  signRow.
+
+For the extended proof language:
+  inferFrontier k Gamma p = some F
+  -> forall rho, length(rho)=k ->
+       Sat Gamma rho -> Holds rho F.                         (E1)
+
+Consequently:
+  checkFrontier 0 [] p F = true -> Holds [] F.                (E2)
+
+For the exact finite target:
+  checkFrontier 0 [] p (prefixGround Y M) = true
+  -> forall n, 16<=n -> n<M -> BudgetStep Y n.                 (E3)
+
+For the sign-row target:
+  checkFrontier 0 [] p (rowGround M) = true
+  -> forall n<M, rowCancellation actualNormalizedMoment n=0.  (E4)
+
+For the existing native tail type:
+  pTail : forall n, M<=n -> BudgetStep Y n
+  -> _root_.RiemannHypothesis.                               (E5)
+
+For the specifically frozen cutoff:
+  finite prefix acceptance + pTail
+  -> (RHFrozenWitness.budget16 Y).Admissible
+  -> _root_.RiemannHypothesis.                               (E6)
+
+E1--E6 are derived mathematically below. The exact fixed analytic
+dependencies used by the numerical certificate evaluator are recorded
+in Section 4. No witness-side soundness axiom is introduced.
+
+This document derives the source extension to the CURRENT finite
+admission frontier. It does not derive a numerical checker for the
+universal tail or exhibit a complete RH witness.
+
+======================================================================
+1. AUDITED CURRENT SOURCE AND EXACT DELTA
+======================================================================
+
+Inspected archive:
+  RH_TAIL16_RESTRICTED_CHECKER_433_v0_1_0_FIX1.zip
+
+1.1. Already represented in source.
+
+Syntax.lean:
+  NExpr: literal, variable, successor, add, multiply, truncated subtract.
+  RExpr: rational, Nat cast, actual u,V,C,B,D, negate, add, multiply,
+         literal natural power, absolute value, bounded sum.
+  Formula: top, bottom, Nat/Real equality/order, and, implication,
+           forall Nat.
+  Explicit scope checks and nonzero rational-denominator check.
+  budgetFormula Y.
+
+Semantics.lean:
+  denoteN, denoteR, Holds, BudgetSemantics.
+  The symbols u,V,C,B,D refer to the actual RH_HilbertLimit definitions.
+  budgetFormula_semantics.
+  budgetFormula_iff_admissible.
+
+Calculus.lean:
+  Proof.hyp, triv, andI, andEL, andER, impI, impE, falseE,
+        allI, allE, natInd.
+  Total formulaAt? lookup.
+  Deterministic infer.
+  checkProof := decide (infer k Gamma p = some F).
+  Binder-free substitution lemmas.
+
+Soundness.lean:
+  Candidate proof bodies for infer_sound and checkProof_sound.
+
+1.2. Exact current guards.
+
+allI:
+  k=0, Gamma=[], inferred body scoped at arity 1.
+  The SOURCE does not require the body to be binder-free.
+
+allE:
+  instantiating Nat term scoped at the current arity;
+  quantified body binder-free.
+
+natInd:
+  k=0, Gamma=[];
+  predicate scoped at arity 1 and binder-free.
+
+Binder-free excludes RExpr.sum and nested Formula.all.
+Current subst0 does not implement general capture-avoiding substitution
+beneath these binders. Existing guarded substitution uses remain valid;
+the extension below does not remove their guards.
+
+The accompanying status TXT describes allI more restrictively than its
+source. The source guard list above is authoritative for this derivation.
+
+1.3. Missing from the inspected source.
+
+  Concrete actual-source coefficient certificates.
+  Concrete normalized-moment certificates.
+  Actual numerical primitive constructors.
+  MARGIN_STEP and SIGN_ROW rules.
+  A concrete proof-byte decoder.
+  A concrete TailKernel instance.
+  A uniform actual numerical tail rule.
+
+The archive status is A_TIER_CANDIDATE. It contains no matching completed
+external compiler/theorem-level audit evidence establishing these new
+endpoints.
+
+1.4. Minimal extension.
+
+No new NExpr, RExpr, or Formula constructor is required.
+
+New numerical machinery belongs in a finite certificate evaluator.
+Its theorem maps rational computations to the existing actual semantic
+symbols. Pi, exp, integrals, and source coefficients do not need to be
+added to the object-language expression syntax.
+
+Required additions:
+  scope-dependent environment invariance;
+  finite ActualLeaf data;
+  fixed inferLeaf evaluator and proved soundness;
+  extended proof constructor;
+  extended contextual soundness;
+  finite-prefix/sign-row adapters;
+  native tail-proof adapter;
+  total byte encoding and decoding.
+
+======================================================================
+2. SCOPE AGREEMENT: THE REQUIRED CURRENT-CORE PROOF LEMMA
+======================================================================
+
+Use the source's total lookup:
+  lookupNat [] i = 0;
+  lookupNat (x::rho) 0 = x;
+  lookupNat (x::rho) (i+1) = lookupNat rho i.
+
+Define
+  Agree(k,rho,tau) :=
+    forall i<k, lookupNat rho i = lookupNat tau i.
+
+No list-length assumption is required for the following invariance
+lemmas.
+
+L2N:
+  a.wellScoped k=true and Agree(k,rho,tau)
+  -> denoteN rho a = denoteN tau a.
+
+Proof by induction on a.
+A literal is independent of the environment. A scoped variable has
+index i<k, so Agree supplies its equality. Successor and the three
+binary arithmetic constructors preserve equality. QED.
+
+L2R:
+  a.wellScoped k=true and Agree(k,rho,tau)
+  -> denoteR rho a = denoteR tau a.
+
+Proof by induction on a.
+Rationals are independent of the environment. Cast and actual symbols
+use L2N to identify their arguments. Arithmetic, powers, and absolute
+value preserve equality.
+
+For sum bound body:
+  L2N identifies the two finite bounds.
+  For every summation index j,
+    Agree(k+1,j::rho,j::tau).
+  At index 0 both sides equal j; at index i+1 equality follows from
+  Agree(k,rho,tau).
+  Since body is scoped at k+1, its induction hypothesis identifies each
+  summand. Equal bounds and equal summands identify the sums. QED.
+
+L2F:
+  F.wellScoped k=true and Agree(k,rho,tau)
+  -> (Holds rho F <-> Holds tau F).
+
+Proof by induction on F.
+Atomic equality/order uses L2N or L2R. Top, bottom, conjunction, and
+implication preserve the equivalence.
+For forall Nat P, compare the bodies at n::rho and n::tau for each n.
+Their environments agree at arity k+1 by the preceding argument. QED.
+
+Corollary CLOSED:
+  F.wellScoped 0=true
+  -> forall rho, (Holds rho F <-> Holds [] F).
+Agreement at arity zero is vacuous.
+
+Corollary TRIM1:
+  P.wellScoped 1=true
+  -> (Holds [n+1,n] P <-> Holds [n+1] P).
+Both environments have the same index-zero value.
+
+Scope monotonicity also follows by structural induction:
+  scoped k and k<=ell -> scoped ell.
+For each binder, increase both scope bounds by one.
+
+2.1. Current natInd successor repair.
+
+The existing source obtains
+  hs : Holds [n] (P.subst0 (succ(var 0))).
+The binder-free substitution theorem gives
+  hs' : Holds [n+1,n] P.
+
+The desired conclusion is Holds [n+1] P.
+Apply TRIM1 using the guard P.wellScoped 1=true.
+
+This supplies the explicit mathematical step missing from the displayed
+final source invocation
+  simpa [denoteN, lookupNat] using hs'
+when P is an abstract Formula.
+
+This is a proof-body obligation, not a counterexample to the induction
+rule. No local compiler result is claimed.
+
+Boolean equality guards should likewise be extracted explicitly:
+  decide(A=P0) && decide(B=PS)=true
+  -> decide(A=P0)=true and decide(B=PS)=true
+  -> A=P0 and B=PS.
+This records the proof step independently of elaborator simplification.
+
+2.2. Current core soundness.
+
+After the preceding environment lemma, the current logical rules have
+the following complete semantic induction:
+
+  hyp: lookup in Sat Gamma rho gives the requested hypothesis.
+  triv: True.
+  andI/andEL/andER: conjunction introduction/projection.
+  impI: extend Sat by the antecedent, then apply the child theorem.
+  impE: apply the proved implication to the matching antecedent.
+  falseE: eliminate False.
+  allI: k=0 and empty context force rho=[]; apply the child theorem
+        at [n] for every n.
+  allE: instantiate the universal semantic proposition at denoteN rho t,
+        then use the guarded substitution theorem.
+  natInd: base follows from substitution at 0; successor follows from
+          the child theorem, substitution at n+1, and TRIM1.
+
+Hence the core contextual soundness theorem is mathematically derived
+with the exact current guards. Full substitution beneath binders is
+unnecessary at this frontier.
+
+======================================================================
+3. FIXED FORMULA COMPILERS
+======================================================================
+
+Use the existing literal constructors:
+  N(n) := NExpr.lit n;
+  Q(a/b) := RExpr.rat a b, with b>0;
+  UN(n) := RExpr.u (N(n));
+  VN(n) := RExpr.V (N(n));
+  CN(n) := RExpr.C (N(n));
+  BN(n,j) := RExpr.B (N(n)) (N(j)).
+
+Q uses a canonical signed rational representation with a positive
+denominator. Its denotation is the real embedding of that rational.
+
+Define
+  StepF(n,Y) :=
+    rLe (CN(n)) (mul (natCast (N(Y))) (VN(n))).
+
+Then
+  Holds rho StepF(n,Y) <-> BudgetStep Y n,                  (3.1)
+where
+  BudgetStep Y n :=
+    rowCancellation actualNormalizedMoment n
+      <= (Y:Real)*actualVariation n.
+
+For rational l<=r:
+  BoundF(k,l,r) :=
+    conj (rLe (Q(l)) (UN(k))) (rLe (UN(k)) (Q(r)).
+
+Then
+  Holds rho BoundF(k,l,r) <-> l<=u_k and u_k<=r.             (3.2)
+
+Define finite conjunction:
+  andList [] = top;
+  andList (F::Fs) = conj F (andList Fs).
+
+Induction on the list yields
+  Holds rho (andList Fs) <-> forall F in Fs, Holds rho F.    (3.3)
+
+Define
+  rowGround M :=
+    andList [rLe (Q(0)) (BN(M,j)) | j=0,...,M].
+
+Thus
+  Holds rho (rowGround M)
+    <-> forall j<=M, 0<=bernsteinWeight actualNormalizedMoment M j.
+                                                               (3.4)
+
+Define the exact finite target:
+  prefixGround Y M :=
+    andList [StepF(n,Y) | n=16,...,M-1].
+For M<=16 this enumeration is empty.
+
+Equations (3.1) and (3.3), with the interval enumeration, give
+  Holds rho (prefixGround Y M)
+  <-> forall n, 16<=n -> n<M -> BudgetStep Y n.               (3.5)
+
+All these formula compilers produce:
+  wellScoped 0=true;
+  binderFree=true;
+  no variable expressions;
+  no bounded-sum expression.
+
+The finite target therefore requires no new binder operation.
+
+======================================================================
+4. FIXED NUMERICAL CERTIFIER: EXACT MATHEMATICAL INPUTS
+======================================================================
+
+Reference derivation:
+  RH_ACTUAL_MOMENT_FINITE_PREFIX_ADMISSION_B_TIER.txt
+  SHA256=35de08de4e72657ee1c8e1198b40045a5c256035038e127315b92e15e73a8817
+
+The following fixed results are used. They are mathematical theorems of
+that derivation, not fields supplied by a witness.
+
+4.1. Actual source identity.
+
+  Theta(z)=xi(1/2+sqrt(z))
+          =integral_0^infinity Phi(x)cosh(x sqrt(z))dx,
+  Phi(x)=sum_(m>=1)4 exp(x/2)(2a^2-3a)exp(-a),
+  a=pi m^2 exp(2x).
+
+The entire even-power-series interpretation fixes the square-root
+descent. Its identification with AWPIRH.theta is an explicit fixed
+analytic formalization obligation, not an RH assumption.
+
+4.2. Actual source coefficients and rational enclosures.
+
+  a_k=integral_0^infinity Phi(x)x^(2k)/(2k)!dx > 0.
+
+For integers M,R,J>=1 and T=2^R:
+  Tmode=64(M+1)^2/20^((M+1)^2);
+  Tspace=(32T^2+16T+16/3)/20^T;
+  A=4M^2 9^R;
+  L=M 9^R(16A^3+68A^2+42A);
+  Equad=L R^2/(2J).
+
+For h=R/J, define
+  Q_k=h sum_(j=0)^(J-1)
+        [sum_(m=1)^M Phi_m(jh)] (jh)^(2k)/(2k)!.
+
+Exact rational pi/exp interval evaluation produces
+  Q_k in [Qlow_k,Qhigh_k],
+hence
+  a_k in [Qlow_k-Equad,
+          Qhigh_k+Equad+Tmode+Tspace].                       (4.1)
+
+The pi enclosures are the left/right rational sums for
+  pi=4 integral_0^1 (1+t^2)^(-1)dt,
+with interval width 2/P.
+
+For rational x>=0 and K satisfying x/(K+2)<=1/2:
+  S_K(x)<=exp(x)<=S_K(x)+2x^(K+1)/(K+1)!.
+Negative arguments use reciprocals; interval inputs use monotonicity
+at both endpoints.
+
+All guards and arithmetic in the evaluator are decidable over exact
+integers/rationals.
+
+4.3. Normalized-moment transport.
+
+  b_0=b_1=1;
+  b_k=a_k a_0^(k-1)/a_1^k                       (k>=2);
+  ell_0=1;
+  ell_n=(n+1)b_(n+1)-sum_(j=1)^n b_j ell_(n-j);
+  u_n=(-1)^n ell_n.
+
+This equals the pinned actualNormalizedMoment definition, including its
+sign, derivative/factorial, and kappa normalization.
+
+Source intervals through degree d+1, with positive lower endpoints for
+a_0,a_1, yield certified intervals for u_0,...,u_d.
+
+A source packet contains only finite data:
+  source maximum degree;
+  mode cutoff;
+  radial cutoff;
+  number of quadrature panels;
+  pi precision index;
+  finite exponential truncation indices.
+
+Fix its field order as
+  (D, R, modeCutoff, J, P, Ks).
+The first five fields are naturals; Ks is a finite natural list.
+Require R,modeCutoff,J,P>=1. For source evaluation, enumerate triples
+  k=0,...,D; j=0,...,J-1; m=1,...,modeCutoff
+in that lexicographic order. At x=jR/J evaluate, in order:
+  exp([x/2,x/2]);
+  exp([2x,2x]);
+  exp(-[pi]*m^2*exp([2x,2x])).
+Each interval exponential consumes two consecutive K values, one for
+each rational endpoint. Reuse the second computed interval within the
+third expression. Form Phi_m(x) by the displayed rational interval
+operations, multiply by x^(2k)/(2k)!, and accumulate the quadrature sum.
+Thus the expected list length is exactly
+  6*(D+1)*J*modeCutoff.
+This deliberately unreduced evaluation order fixes a completely finite
+certificate grammar. Later common-subexpression reuse requires its own
+equality-preservation proof and is unnecessary for the present theorem.
+
+For evalMoments(d,c), require D>=d+1; retain only the required output
+coefficients after evaluating the stated source packet.
+
+Its shape, guards, and all claimed output dimensions are checked.
+Source and moment intervals are recomputed. No unchecked output interval
+or arbitrary semantic formula is accepted.
+
+For clarity, define the total computational function
+  evalMoments(d,c) : Option(List RationalInterval).
+
+If it returns I, it returns exactly d+1 intervals with
+  forall k<=d, actualNormalizedMoment k belongs to I[k].      (4.2)
+
+Source-degree sufficiency and positive-denominator checks are part of
+this fixed evaluator.
+
+4.4. Termination and obtainability.
+
+Certificate checking uses only finite loops over stored natural
+parameters and finite expression trees. Invalid guards return none.
+
+For every fixed d and requested positive rational width epsilon,
+certificate generation terminates:
+  increase mode and radial cutoffs until both explicit tails are small;
+  increase J until Equad is small;
+  refine the finite elementary certificates;
+  refine source intervals until a_0,a_1 have positive lower endpoints;
+  propagate the finite continuous normalized-moment expressions.
+
+The explicit tails tend to zero; quadrature error tends to zero with J;
+the elementary enclosures converge; a_0,a_1 are strictly positive.
+Therefore every required finite rational stopping test eventually passes.
+
+This is finite obtainability without an asserted smallness or practical
+complexity bound.
+
+======================================================================
+5. CONCRETE ACTUAL LEAVES
+======================================================================
+
+Finite datatype:
+  ActualLeaf :=
+    momentBounds(d, sourcePacket)
+    marginStep(n, Y, sourcePacket)
+    signRow(M, sourcePacket).
+
+All d,n,Y,M are literal natural numbers. A leaf cannot carry a variable
+index, an arbitrary formula, a Prop field, or a custom soundness premise.
+
+5.1. momentBounds(d,c).
+
+Compute evalMoments(d,c).
+If it rejects, return none.
+If it returns I_0,...,I_d, return
+  some(andList [BoundF(k,I_k.low,I_k.high) | k=0,...,d]).
+
+By (4.2), (3.2), and (3.3), the returned formula holds in every environment.
+
+5.2. marginStep(n,Y,c).
+
+Compute evalMoments(n+1,c).
+Let q_k and epsilon_k be the rational midpoint and radius of I_k.
+Then |u_k-q_k|<=epsilon_k and epsilon_k>=0.
+
+Compute rational Bernstein rows:
+  Btilde(N,j)=C(N,j)
+    sum_(r=0)^(N-j)(-1)^r C(N-j,r)q_(j+r);
+  Vtilde_N=sum_(j=0)^N|Btilde(N,j)|;
+  E_N=sum_(k=0)^N C(N,k)2^k epsilon_k.
+
+The coefficient error theorem gives
+  |actualVariation N - Vtilde_N|<=E_N.
+
+Compute
+  Gtilde=(Y+n+1)Vtilde_n-(n+1)Vtilde_(n+1);
+  EG=(Y+n+1)E_n+(n+1)E_(n+1).
+
+Reject unless Gtilde-EG>=0.
+On success return some(StepF(n,Y)).
+
+Indeed, putting V_n=actualVariation n:
+  (Y+n+1)V_n-(n+1)V_(n+1)>=Gtilde-EG>=0.
+The existing backend identity
+  rowCancellation actualNormalizedMoment n
+    =((n:Real)+1)(V_(n+1)-V_n)
+therefore proves BudgetStep Y n. Equation (3.1) proves leaf soundness.
+
+The increment expression is an existing THEOREM about rowCancellation;
+it is not its source definition. This identification must be applied
+explicitly in Lean.
+
+5.3. signRow(M,c).
+
+Compute evalMoments(M,c).
+Compute Btilde(M,j) and
+  e_(M,j)=C(M,j)
+    sum_(r=0)^(M-j)C(M-j,r)epsilon_(j+r).
+
+Reject unless
+  Btilde(M,j)-e_(M,j)>=0 for every j<=M.
+On success return some(rowGround M).
+
+The entrywise error theorem gives
+  |B(M,j)-Btilde(M,j)|<=e_(M,j),
+so each actual row entry is nonnegative. Equation (3.4) proves soundness.
+
+5.4. Exact fixed leaf theorem.
+
+By case analysis on the three constructors:
+  inferLeaf(c)=some F
+  -> F.wellScoped 0=true
+     and forall rho, Holds rho F.                           (5.1)
+
+The returned formula is compiled internally from the checked packet.
+The witness cannot substitute another formula with the same tag.
+
+No universal actual tail rule occurs in this registry.
+
+======================================================================
+6. EXTENDED LOGICAL CHECKER AND SOUNDNESS DERIVATION
+======================================================================
+
+To preserve the current source namespace, define a new Frontier.Proof
+with the same logical constructors as Tail16Admission.Proof, recursively
+using Frontier.Proof, plus:
+  actualLeaf : ActualLeaf -> Frontier.Proof.
+
+Define inferFrontier by the same inference clauses as current infer,
+using inferFrontier recursively, and the additional clause:
+  inferFrontier k Gamma (actualLeaf c) := inferLeaf c.
+
+All current guards are retained exactly.
+
+Termination:
+  each logical recursive call consumes a strict proof subtree;
+  the leaf evaluator is total by Section 4;
+  all formula comparisons and scope checks recurse over finite syntax.
+
+The extension is therefore a total deterministic function
+  inferFrontier :
+    Nat -> List Formula -> Frontier.Proof -> Option Formula.
+
+Define
+  checkFrontier k Gamma p F :=
+    decide(inferFrontier k Gamma p = some F).
+
+THEOREM E1:
+  inferFrontier k Gamma p=some F
+  -> forall rho, length(rho)=k ->
+       Sat Gamma rho -> Holds rho F.
+
+Proof by structural induction on p.
+Every old constructor uses exactly Section 2.2, with the corresponding
+child induction hypotheses.
+For actualLeaf c, (5.1) gives Holds rho F independently of Gamma and rho.
+This completes every constructor case. QED.
+
+THEOREM E2:
+  checkFrontier 0 [] p F=true -> Holds [] F.
+
+Proof.
+Boolean reflection gives inferFrontier 0 [] p=some F.
+Apply E1 at rho=[]; length([])=0 and Sat [] [] is True. QED.
+
+OLD-CHECKER COMPATIBILITY:
+Define embedOld by recursively copying each old constructor.
+Induction on the old proof gives
+  inferFrontier k Gamma (embedOld p) = infer k Gamma p.
+Every branch and guard is identical. Hence every old acceptance is
+preserved.
+
+This is acceptance compatibility and semantic preservation. It is not
+conservative provability: the new actual leaves deliberately establish
+additional actual facts.
+
+No theorem asserting unrestricted Lean-kernel self-soundness is used.
+
+======================================================================
+7. FINITE PREFIX ADMISSION AND EXACT TARGETS
+======================================================================
+
+Define
+  Prefix(Y,M) :=
+    forall n, 16<=n -> n<M -> BudgetStep Y n.
+
+E2 and (3.5) immediately give E3:
+  checkFrontier 0 [] p (prefixGround Y M)=true -> Prefix(Y,M).
+
+7.1. Explicit margin proof construction.
+
+Suppose each n in [16,M) has a source packet c_n accepted by
+marginStep(n,Y,c_n).
+Form the finite proof:
+  andI(actualLeaf(marginStep(16,Y,c_16)),
+    andI(actualLeaf(marginStep(17,Y,c_17)), ... triv ...)).
+
+Its inferred formula is exactly prefixGround Y M.
+This follows by induction over the enumerated interval.
+
+For M<=16, the proof triv infers the empty conjunction top.
+A protocol may require M>=16 without changing the theorem.
+
+Thus the prefix is not merely an abstract structure field:
+the finite proof term has an explicit construction from accepted leaves.
+
+7.2. Sign-row adapter.
+
+E2 and (3.4) give nonnegativity of every entry of row M.
+
+The source coarsening identity, for j<=n, is
+  (n+1)B(n,j)
+    =(n+1-j)B(n+1,j)+(j+1)B(n+1,j+1).
+Its coefficients are nonnegative and n+1>0.
+Therefore nonnegativity of row n+1 implies nonnegativity of row n.
+
+Descending from M proves nonnegative rows for every r<=M.
+The partition identity gives
+  sum_(j=0)^r B(r,j)=u_0=1.
+Hence
+  actualVariation r=1 for every r<=M.
+
+For n<M, both n and n+1 are <=M. The existing cancellation identity gives
+  rowCancellation actualNormalizedMoment n
+    =(n+1)(1-1)=0.
+This proves E4.
+
+Since Y>=0 and actualVariation n>=0:
+  0<=Y*actualVariation n.
+Thus E4 implies Prefix(Y,M) for every natural Y.
+
+A separate macro inference returning prefixGround Y M from an accepted
+signRow may be added using this proof. It is optional: a native adapter
+from checkFrontier(rowGround M) to Prefix(Y,M) already reaches the
+current mathematical frontier.
+
+7.3. Native normalization dependency.
+
+The pinned source has
+  actualNormalizedMoment_zero (hKappa : actualKappa != 0).
+
+The fixed actual canonical calibration supplies kappa_pos, hence
+hKappa. These are backend proof dependencies, not candidate coordinates.
+The alternative source derivation in Section 4 also proves
+actualKappa=a_1/a_0>0 after the exact identification.
+
+Both routes must identify the same pinned actualNormalizedMoment.
+
+7.4. Obtainability scope.
+
+Actual finite moment enclosures are obtainable independently of RH.
+
+For fixed n,Y with actual residual
+  (Y+n+1)V_n-(n+1)V_(n+1)>0,
+increasing interval precision eventually makes marginStep accept.
+
+The existing fixed backend theorem
+  canonical_actual_all_variation_one_iff_nativeRH
+identifies RH with forall n, V_n=1.
+Thus under RH, every fixed finite prefix with Y>=1 has obtainable margin
+leaves, since the residual is exactly Y.
+
+Sign-row obtainability follows when the maximum row entries are strictly
+positive. The actual paired-product corollary and its exact dependencies
+are stated in the preceding finite-frontier TXT.
+
+None of these finite-prefix statements supplies a universal tail proof.
+
+======================================================================
+8. NATIVE TAIL ADMISSION: THE MINIMAL RH ENDPOINT
+======================================================================
+
+The existing source has:
+  structure CancellationBudget where
+    cutoff : Nat
+    coefficient : Nat
+
+  Admissible(W) :=
+    forall n, W.cutoff<=n ->
+      rowCancellation actualNormalizedMoment n
+        <= (W.coefficient:Real)*actualVariation n.
+
+Its endpoint is:
+  nativeRH_of_admissible_cancellationBudget
+    (W : CancellationBudget) (hW : W.Admissible)
+      : _root_.RiemannHypothesis.
+
+Define
+  Tail(Y,M) :=
+    forall n, M<=n -> BudgetStep Y n.
+
+By unfolding the definitions:
+  Tail(Y,M) <-> Admissible({cutoff:=M, coefficient:=Y}).      (8.1)
+
+THEOREM E5:
+  Tail(Y,M) -> _root_.RiemannHypothesis.
+
+Proof.
+Use (8.1), then apply the existing endpoint with cutoff M and
+coefficient Y. QED.
+
+This endpoint accepts an ARBITRARY cutoff. Once a native proof of the
+universal tail exists, a finite prefix is not logically required for RH.
+
+8.1. Frozen-cutoff normalization.
+
+THEOREM E6:
+  (Prefix(Y,M) and Tail(Y,M))
+  -> Admissible({cutoff:=16, coefficient:=Y}).
+The fixed root separately gives
+  Admissible({cutoff:=16, coefficient:=Y}) -> RH.
+Thus the two hypotheses construct admissibility rather than assuming it
+as an additional premise.
+
+Proof.
+For any n>=16, split on n<M.
+If n<M, use Prefix(Y,M).
+Otherwise M<=n, so use Tail(Y,M).
+Apply the root at cutoff 16. QED.
+
+The split is valid even when M<16; M>=16 is a protocol convention.
+
+8.2. Proof-carrying input and typed output.
+
+An external native replay packet may contain:
+  Y, M, finite prefix certificate, finite native proof syntax pTail.
+
+The replay environment fixes the expected type from the decoded Y,M:
+  pTail : Tail(Y,M).
+
+After external kernel validation, construct the typed output:
+  admittedPrefix : Prefix(Y,M), when requested;
+  admittedTail   : Tail(Y,M);
+  admittedRH     : _root_.RiemannHypothesis.
+
+A Lean structure with a field tail : Tail(Y,M) is the RESULT of this
+admission. It is not by itself a byte decoder or a numerical tail
+checker.
+
+The native proof syntax must elaborate in the pinned environment and
+pass the exact expected type and theorem-level axiom audit. Arbitrary
+new assumptions or endpoint substitutions do not constitute admission.
+After decoding, Y and M are fixed natural literals. The submitted tail
+proof and resulting RH theorem must be closed over the fixed trusted
+environment, with no free local proof hypotheses. A theorem that still
+abstracts over an assumed tail is not an admitted complete witness.
+
+This is an external proof-checking protocol. No internal Bool theorem
+for unrestricted Lean proof self-verification is asserted.
+
+======================================================================
+9. TOTAL BYTE ADMISSION FOR THE RESTRICTED FINITE CHECKER
+======================================================================
+
+The current archive contains no concrete decoder for its Proof datatype.
+The following supplies a precise finite encoding design and its
+mathematical correctness obligations.
+
+9.1. Natural and integer encoding.
+
+Use canonical base-128 unsigned varints:
+  each byte contributes its low 7 bits;
+  the high bit indicates another byte;
+  the last byte has high bit 0;
+  for encodings longer than one byte, the last 7-bit digit is nonzero.
+Zero is encoded by one zero byte.
+
+The value is sum_i digit_i*128^i.
+Reject unterminated encodings and noncanonical redundant final zero
+digits. The representation is unique.
+
+Signed integers use zigzag:
+  z>=0 -> 2z;
+  z<0  -> -2z-1.
+The inverse is determined by parity.
+
+A rational uses encoded signed numerator and positive denominator.
+Optional reduction to coprime form is deterministic; soundness requires
+only the positive-denominator guard.
+
+9.2. Tree encoding.
+
+A constructor is encoded by its natural tag, followed by its scalar
+fields and recursively encoded children in declaration order.
+
+Fixed tag order:
+  NExpr: lit,var,succ,add,mul,tsub.
+  RExpr: rat,natCast,u,V,C,B,D,neg,add,mul,pow,abs,sum.
+  Formula: top,bot,nEq,nLe,rEq,rLe,conj,impl,all.
+  Frontier.Proof:
+    hyp,triv,andI,andEL,andER,impI,impE,falseE,allI,allE,natInd,actualLeaf.
+  ActualLeaf: momentBounds,marginStep,signRow.
+
+Tags are numbered from zero in these displayed orders.
+Lists/arrays are prefixed by their natural length.
+
+SourcePacket is encoded by D,R,modeCutoff,J,P, followed by the
+length-prefixed Ks list, in the exact order specified in Section 4.
+The source-packet decoder validates this field layout and the stated
+positive R,modeCutoff,J,P and list-length conditions. Exponential
+inequality guards are checked by
+the evaluator, not asserted by parsing.
+
+The outer frame is the eight ASCII bytes RHFPRF01, followed by the
+canonical varint payload length and exactly that many proof-tree bytes.
+No bytes may follow this frame. The
+decoder rejects unknown tags, incomplete fields, malformed varints,
+shape mismatches, and unconsumed payload bytes.
+
+This is a proposed new restricted-frontier format; it does not reinterpret
+the legacy coordinate vector [1380464198,2,1,0,16,0].
+
+9.3. Total parsing.
+
+Use remaining input length as fuel.
+Each varint byte step consumes one byte.
+Each tree constructor first consumes at least its tag.
+Every recursive child parser receives the strictly shorter remaining
+input and rejects at exhausted fuel.
+List parsing additionally decreases the stored remaining element count.
+
+Thus the parser terminates for every finite ByteArray.
+All natural arithmetic is arbitrary precision: a long varint is not
+interpreted by overflowing machine arithmetic.
+
+Let CodecWF(p) mean that every embedded rational has positive denominator
+and every embedded source packet satisfies the structural field/list
+conditions checked by the decoder. This does not assert numerical leaf
+acceptance or any analytic proposition.
+
+Structural induction proves:
+  CodecWF(p) -> decode(encode(p))=some p,
+with complete consumption for the framed canonical encoding.
+The scalar base case is uniqueness of positional base-128 expansion;
+the constructor case consumes the unique tag and applies each child
+induction hypothesis in order.
+
+For syntax failing CodecWF, rejection is permitted; no unconditional
+roundtrip theorem for malformed syntax is claimed.
+
+9.4. Restricted raw soundness.
+
+For fixed closed target F, define
+  verifyFrontier(blob,F) :=
+    match decodeProof(blob) with
+    | none => false
+    | some p => checkFrontier 0 [] p F.
+
+Then:
+  verifyFrontier(blob,F)=true -> Holds [] F.
+Proof: invert the decoder match, then apply E2.
+
+The parser's roundtrip theorem establishes representability. Semantic
+soundness requires only that accepted decoded syntax is passed to the
+fixed checker.
+
+For the finite target, take F=prefixGround Y M or F=rowGround M.
+If Y,M are part of the outer packet, derive F from those same decoded
+values. The packet must not independently select a different target.
+
+======================================================================
+10. INTERNAL ROOT SOUNDNESS AND THE NONEMPTY-LANGUAGE BOUNDARY
+======================================================================
+
+The current literal semantic bridge is:
+  Holds [] (budgetFormula Y)
+  <-> (RHFrozenWitness.budget16 Y).Admissible.
+
+Therefore E2 gives:
+  checkFrontier 0 [] p (budgetFormula Y)=true
+  -> _root_.RiemannHypothesis.                              (10.1)
+
+A concrete interface instance is mathematically definable:
+  Cert := Nat x Frontier.Proof;
+  coefficient(Y,p) := Y;
+  check(Y,p) := checkFrontier 0 [] p (budgetFormula Y);
+  sound := E2 followed by budgetFormula_iff_admissible.
+
+This removes a caller-supplied TailKernel.sound field from the
+SPECIFICATION of this particular instance. Its proof is the fixed
+derived soundness theorem.
+
+However, (10.1) alone does not make root searching useful.
+
+10.1. Exact obstruction for this registry.
+
+Every new actual leaf has a fixed finite bound on the moment indices it
+constrains. The logical rules introduce no uniform analytic relation.
+A finite proof therefore uses only a finite amount of actual moment
+information.
+
+For any prescribed prefix through K and Y>=0, choose n=max(16,K).
+Keep that prefix, choose any remaining values through n, and write
+u_(n+1)=T. Then
+  B(n+1,j)=d_j+(-1)^(n+1-j)C(n+1,j)T.
+Putting D=sum_j|d_j| yields
+  V_(n+1)>=2^(n+1)T-D.
+Choose integer T larger than
+  [D+((n+1+Y)/(n+1))V_n]/2^(n+1).
+Then C_n>YV_n, while all earlier moment constraints remain unchanged.
+
+Thus finite ground actual leaves plus rules valid for arbitrary
+sequences cannot derive the universal budget. This applies to the
+finite leaf registry specified here.
+
+The statement does not apply after a genuinely uniform actual-source
+rule or full native analytic proof is added. Finite syntax can express
+such a uniform theorem.
+
+Consequently:
+  FINITE_FRONTIER_CHECKER=USEFUL_AND_SPECIFIED;
+  INTERNAL_ROOT_SOUNDNESS=DERIVED;
+  INTERNAL_ROOT_SEARCH_WITH_ONLY_THIS_REGISTRY=INSUFFICIENT;
+  USEFUL_UNIFORM_TAIL_RULE=STILL_REQUIRED.
+
+The native pTail route in Section 8 is the explicitly separate admission
+path under existence of a complete proof-carrying witness.
+
+======================================================================
+11. SOURCE EXTENSION LAYOUT AND PROOF DEPENDENCIES
+======================================================================
+
+Proposed modules; no Lean files are generated by this B-tier artifact.
+
+Tail16Admission/Frontier/ScopeAgreement.lean
+  Imports current Semantics.
+  Proves L2N, L2R, L2F, CLOSED, TRIM1.
+  No analytic premise.
+
+Tail16Admission/Frontier/CoreSoundness.lean
+  Imports current Calculus and ScopeAgreement.
+  Supplies the explicit current-core proof with TRIM1.
+  Preserves all inference guards and endpoint semantics.
+
+Tail16Admission/Frontier/SourceCertificates.lean
+  Finite packet types, rational pi/exp evaluation, rational quadrature.
+  Total evaluator uses no noncomputable real comparison.
+
+Tail16Admission/Frontier/ActualSourceSoundness.lean
+  Actual theta identity, mode/radial tails, quadrature soundness.
+  Fixed identity must connect to the pinned AWPIRH.theta.
+
+Tail16Admission/Frontier/MomentCertificates.lean
+  Exact normalized-moment recurrence and interval soundness.
+  Output is tied to RH_HilbertLimit.actualNormalizedMoment.
+
+Tail16Admission/Frontier/BernsteinIntervals.lean
+  Entrywise and variation error transport.
+  Reuses actual backend Bernstein definitions and cancellation identity.
+
+Tail16Admission/Frontier/ActualLeaves.lean
+  Three constructors, inferLeaf, and theorem (5.1).
+
+Tail16Admission/Frontier/Calculus.lean
+  Frontier.Proof, inferFrontier, checkFrontier, embedOld.
+  Syntax is separate from the frozen old Proof datatype.
+
+Tail16Admission/Frontier/Soundness.lean
+  E1, E2 and old-checker compatibility.
+
+Tail16Admission/Frontier/FiniteAdmission.lean
+  Formula compilers, E3, E4, explicit prefix proof assembly.
+
+Tail16Admission/Frontier/NativeTailAdmission.lean
+  E5, E6, exact literal RH output.
+  Tail proof remains an explicit typed input.
+
+Tail16Admission/Frontier/Codec.lean
+  Canonical finite encoding, total parser, roundtrip,
+  verifyFrontier semantic soundness.
+
+Independent proof edges:
+  scope agreement;
+  elementary rational certificates;
+  actual source interpretation;
+  Bernstein finite algebra;
+  codec correctness.
+
+Dependent composition:
+  source interpretation + rational certificates -> moment soundness;
+  moment soundness + Bernstein algebra -> actual leaf soundness;
+  logical core + leaf soundness -> E1/E2;
+  E2 + exact target interpretation -> E3/E4;
+  typed native tail + fixed backend -> E5;
+  E3/E4 + typed tail -> frozen16 E6.
+
+Future A-tier implementation:
+  reuse pinned cached dependencies;
+  prepare independent opaque edge theorems;
+  perform external native Lean asynchronous elaboration where safe;
+  compose deterministic final endpoints after their bodies pass.
+Scheduling cannot alter propositions, premises, axioms, or targets.
+
+======================================================================
+12. EXACT VERIFICATION AND PROMOTION CONTRACT
+======================================================================
+
+B-tier conclusion:
+  the current source-to-finite-frontier extension has explicit finite
+  datatypes, total algorithms, formula translations, and complete
+  mathematical soundness arguments.
+
+New Lean implementation:
+  not emitted by this TXT;
+  no local Lean execution;
+  no external successful compilation asserted.
+
+External acceptance requires:
+  the pinned source and dependency versions;
+  successful native Windows Lean compilation;
+  exact theorem signatures;
+  theorem-level axiom audit excluding sorryAx and unapproved axioms;
+  exact actual-xi normalization and literal RH target.
+
+The following are distinct:
+  numerical packet checks;
+  restricted calculus proof checks;
+  native Lean proof replay;
+  theorem-level axiom audit.
+
+A native replay resource limit or timeout is not a mathematical
+counterexample. It yields no promotion.
+
+Prepared code would be A_TIER_CANDIDATE only.
+This B-tier TXT itself is not a formal compiler result.
+
+FINAL STATUS
+
+CURRENT_SOURCE_AUDIT=COMPLETE
+SCOPE_AGREEMENT_REPAIR=B_TIER_DERIVED
+ACTUAL_LEAF_EXTENSION=B_TIER_DERIVED
+EXTENDED_CONTEXTUAL_SOUNDNESS=B_TIER_DERIVED
+FINITE_PREFIX_AND_SIGN_ADMISSION=B_TIER_DERIVED
+TOTAL_RESTRICTED_BYTE_ADMISSION=B_TIER_DERIVED
+NATIVE_TAIL_PROOF_TO_RH=B_TIER_DERIVED
+FROZEN16_ASSEMBLY=B_TIER_DERIVED
+UNIFORM_NUMERICAL_TAIL_RULE=OPEN
+COMPLETE_RH_WITNESS_EXISTENCE=OPEN
+SMALL_WITNESS_BOUND=NOT_ESTABLISHED
+LEAN_FILES_GENERATED_THIS_STEP=NONE
+LOCAL_LEAN_EXECUTION=NONE
+A_TIER_PROMOTION=NONE
+UNCONDITIONAL_RH_CLOSURE=NOT_ESTABLISHED
+
+======================================================================
+13. PINNED SOURCE PROVENANCE
+======================================================================
+
+Base:
+  RH_TAIL16_RESTRICTED_CHECKER_433_v0_1_0_FIX1
+
+SHA256:
+  Tail16Admission/Syntax.lean
+    fbcd3c21643b483ff180ac6a5fcc77c9beb71d49e1cc67f2da4f467d3513680a
+  Tail16Admission/Semantics.lean
+    4aab62ab05f048db0e61f63eb73d827113a534f0a0188d15b9f9fec88953c23c
+  Tail16Admission/Calculus.lean
+    d732e545e1d05e863e53631ee9c71f4ea1c3be131089440f2e4c7da78214ef0c
+  Tail16Admission/Soundness.lean
+    fff106f3fe3001ba86de4027b51e15ffa2f01fe0b44705d180275348c330bc83
+  RHFrozenWitnessArchitecture.lean
+    51a7cc47ac89bfd80119866843e78b659cb1e48018f582a6e887b5111526b3c4
+
+Backend source:
+  RH_HILBERT_LIMIT_LEAN_v0_2_37_ACTUAL_FLUX_INTERPRETATION_FIX1_construction/
+    RH_HilbertLimit/ActualXi.lean
+    RH_HilbertLimit/Bernstein.lean
+    RH_HilbertLimit/Cancellation.lean
+    RH_HilbertLimit/AnalyticClosure.lean
+    RH_HilbertLimit/ActualCancellationWitness.lean
+
+Exact endpoint:
+  RH_HilbertLimit.nativeRH_of_admissible_cancellationBudget.
+
+Prior mathematical derivation:
+  RH_ACTUAL_MOMENT_FINITE_PREFIX_ADMISSION_B_TIER.txt
+  https://chatgpt.com/api/library/files/libfile_c674d104248881919c94f5f80a777c7a/download
+
+Analytic references used by that fixed source derivation:
+  Lagarias--Montague, arXiv:1106.4348v3, equations (1.1)--(1.2).
+  https://arxiv.org/pdf/1106.4348
+  NIST DLMF 25.4.3--25.4.4.
+  https://dlmf.nist.gov/25.4
+
+END_OF_DERIVATION
+
