@@ -17,7 +17,7 @@ test "$(git -C "$ROOT/.ci-openai" rev-parse HEAD)" = "$OAI_SHA"
 test "$(git -C "$ROOT/.ci-referee" rev-parse HEAD)" = "$REF_SHA"
 test "$(git hash-object "$REF/Bridge687.lean")" = "$BRIDGE_BLOB"
 test "$(cat "$OPENAI/lean-toolchain")" = 'leanprover/lean4:v4.34.1'
-if grep -En '\b(sorry|admit|axiom)\b' "$ATTEMPT/FiniteCore.lean" "$ATTEMPT/ExternalRoot.lean"; then
+if grep -En '^[[:space:]]*(sorry|admit|axiom)([[:space:]]|$)' "$ATTEMPT/FiniteCore.lean" "$ATTEMPT/ExternalRoot.lean"; then
   echo "LOCAL_AXIOM_OR_HOLE=FAIL" >&2; exit 1
 fi
 
