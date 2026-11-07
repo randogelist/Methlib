@@ -2,16 +2,64 @@
 
 Fail-closed CI admission scaffold for a future finite coordinate witness.
 
+## Concrete coordinate testing
+
+`CoordinateTesting.lean` implements a terminating, data-only test of an exact
+finite specification. `run.cmd` accepts `coordinates/example.json` by default,
+or one supplied JSON path:
+
+```bat
+run.cmd
+run.cmd "C:\path\coordinates.json"
+```
+
+The input schema is the existing `RawCert`: integer numerators, natural
+denominators, cutoff/split coordinates, near/cell/tail records and finite
+payload lists. The host parser emits only numeric Lean constructors. Lean
+then proves `CoordinateWellFormed submittedCoordinate` with `by decide`.
+
+The scoped checker tests positive denominators, exact rational order, a
+single cell covering `[etaSplit, 1]`, matching cutoffs and split coordinates,
+ordered advertised bounds, and the finite G2/G3 sign alternatives. All
+comparisons use integer arithmetic. No actual-xi enclosure is inferred from
+the advertised rational labels; `proofData` remains opaque.
+
+The native runner requires Python 3.10+ and installed Windows Lean 4.33.0.
+It uses the compiler's bundled Std cache and hash-matched project objects;
+it performs no network access, Lake invocation or Mathlib rebuild. The
+separate Windows workflow compiles fresh project objects first and repeats
+the run using its matching cache. Every run performs theorem-level axiom
+audits and checks that a deliberately invalid admission fails.
+
+```text
+FINITE_COORDINATE_TESTING=IMPLEMENTED_CANDIDATE
+EXPECTED_FINITE_CONCLUSION=CoordinateWellFormed submittedCoordinate
+ACTUAL_XI_ENCLOSURE_VERIFICATION=OPEN
+RH_COORDINATE_ADMISSION=NOT_ESTABLISHED
+```
+
+The new finite theorem is documented in `CoordinateTesting_A_TIER.txt`.
+Prepared source is `A_TIER_CANDIDATE` until matching external compiler and
+theorem-level audit evidence is available. A pass of the finite testing
+workflow never establishes RH admission.
+
 ## Current state
 
 `RH_WITNESS_STATE=EMPTY`.
 
-The workflow currently proves only:
+The RH scaffold workflow is intended to check:
 
 - the actual-xi witness architecture compiles against pinned dependencies;
 - a deliberately wrong coordinate packet is rejected by Lean;
 - no concrete witness or unconditional RH root is present;
 - the maximum displayed marker is `!!!`.
+
+The inspected base revision's workflow failed at the source-manifest check
+before Lean compilation. This revision refreshes that manifest. Neither the
+manifest repair nor the finite coordinate checker supplies the missing
+`ConcreteSystem.lean`: actual near-boundary/cell/tail soundness and the
+`NativeAnalyticPremises` fields still require proofs. `PROMOTION_CAP=!!!`
+is a publication ceiling, not evidence that this revision achieved `!!!`.
 
 The existing local experimental environment used Lean 4.33.0 with no network
 or Lake during native replay. Its negative control evaluated the wrong packet

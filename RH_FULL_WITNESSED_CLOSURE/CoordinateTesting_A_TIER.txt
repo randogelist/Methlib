@@ -1,0 +1,79 @@
+THEOREM=RHFullWitnessedClosure.CoordinateTesting.coordinateCheck_iff
+STATUS=A_TIER_CANDIDATE
+MATCHING_EXTERNAL_NATIVE_COMPILER_EVIDENCE=NOT_YET_ATTACHED
+MATCHING_THEOREM_LEVEL_AXIOM_AUDIT=NOT_YET_ATTACHED
+LOCAL_LEAN_EXECUTION=NONE
+
+EXACT_THEOREM:
+  forall w : RawCert,
+    coordinateCheck w = true <-> CoordinateWellFormed w
+
+SECOND_ENDPOINT:
+  coordinateCheck w = true -> CoordinateWellFormed w
+
+CONCRETE_INPUT:
+  RawCert containing exact integer numerators, natural denominators,
+  spectralCutoff, etaSplit, nearCert, cells, tailCert, finite proofData.
+  Host JSON input is emitted into a numeric-only Lean declaration.
+  No checker, proof, semantic bridge, or RH hypothesis is an input to
+  coordinateCheck.
+
+FINITE_SPECIFICATION:
+  spectralCutoff > 0
+  etaSplit and near split denominators > 0
+  0 < etaSplit <= 1
+  near split = etaSplit as exact coordinate data
+  tail cutoff = spectralCutoff
+  exactly one compact cell
+  all six cell rational denominators > 0
+  left <= right; left <= etaSplit; 1 <= right
+  g2Lower <= g2Upper; g3Lower <= g3Upper
+  g2Upper < 0 OR 0 < g2Lower OR 0 < g3Lower
+
+COMPARISON_IMPLEMENTATION:
+  Exact Int cross multiplication with separately checked positive
+  denominators. No floating-point or actual-real computation.
+
+FINITE_ADMISSION:
+  AdmittedCoordinate = {w : RawCert // CoordinateWellFormed w}
+  This name denotes only admission to the finite specification.
+
+UNRESOLVED_ORIGINAL_TARGET:
+  The new test does not establish actualG2/actualG3 enclosures.
+  The proofData fields remain opaque and unverified.
+  No concrete near-boundary or spectral-tail soundness proof is supplied.
+  NativeAnalyticPremises is not instantiated.
+  No concreteSystem : ClosedSystem is supplied.
+  No coordinate-only implication to actual Mathlib RH is claimed.
+  The positive example is a finite-format control, not an RH witness.
+
+NATIVE_RUN:
+  run.cmd
+  run.cmd "C:\absolute\path\coordinates.json"
+  optional LEAN_EXE override must point to Lean 4.33.0 lean.exe.
+  Python >= 3.10 is required for the host runner.
+  Lean imports installed Std and matching cached local modules only.
+  No Lake, network, HVR recompilation, or Mathlib rebuild is performed.
+  Source, executable, Std, Init and local-import hashes bind cache reuse.
+  A fresh theorem-level audit is run even when objects are reused.
+
+EXPECTED_SCOPED_SUCCESS:
+  FINITE_COORDINATE_ADMISSION=PASS
+  EXACT_CONCLUSION=CoordinateWellFormed submittedCoordinate
+  RH_ADMISSION=BLOCKED_ANALYTIC_OBLIGATIONS
+  RH_PROMOTION=NONE
+  RUN=PASS_FINITE_COORDINATE_TEST_ONLY
+
+NEGATIVE_CONTROLS:
+  zero denominator
+  coverage gap
+  empty cells
+  cutoff mismatch
+  reversed enclosure labels
+  missing sign alternative
+  attempted admission of zero-denominator packet must fail by decide.
+
+PROMOTION_RULE:
+  Only matching external compilation and theorem-level standard-only
+  axiom audit may promote this finite theorem to A_TIER.
+  Such promotion is not promotion of the RH admission target.

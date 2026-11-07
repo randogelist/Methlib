@@ -1,0 +1,80 @@
+name: RH coordinates - finite tests only
+
+on:
+  push:
+    paths:
+      - 'RH_FULL_WITNESSED_CLOSURE/Coordinate*.lean'
+      - 'RH_FULL_WITNESSED_CLOSURE/coordinates/**'
+      - 'RH_FULL_WITNESSED_CLOSURE/ci/coordinate_input.py'
+      - 'RH_FULL_WITNESSED_CLOSURE/ci/run_coordinates.py'
+      - 'RH_FULL_WITNESSED_CLOSURE/negative/CoordinateNegativeAdmission.lean'
+      - 'RH_FULL_WITNESSED_CLOSURE/tests/**'
+      - 'RH_FULL_WITNESSED_CLOSURE/run.cmd'
+      - '.github/workflows/rh-coordinate-testing.yml'
+  pull_request:
+    paths:
+      - 'RH_FULL_WITNESSED_CLOSURE/**'
+      - '.github/workflows/rh-coordinate-testing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-coordinate-testing-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  finite-coordinates:
+    name: Windows Lean 4.33 - finite coordinate specification only
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: cmd
+        working-directory: RH_FULL_WITNESSED_CLOSURE
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Verify sources and host parser tests
+        run: |
+          python ci/run_coordinates.py --check-source
+          if errorlevel 1 exit /b 1
+          python -m unittest discover -s tests -v
+          if errorlevel 1 exit /b 1
+
+      - name: Restore pinned compiler and bundled Std cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan/toolchains
+          key: rh-coordinate-lean-${{ runner.os }}-${{ runner.arch }}-4.33.0
+
+      - name: Install pinned compiler if absent
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: RH_FULL_WITNESSED_CLOSURE
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Resolve pinned toolchain executable
+        run: elan run leanprover/lean4:v4.33.0 lean --version
+
+      - name: Compile, audit, and test rejection through native runner
+        run: call run.cmd
+
+      - name: Replay using matching cached project objects
+        run: call run.cmd
+
+      - name: Upload scoped compiler and theorem audits
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-finite-coordinate-evidence-${{ github.run_id }}
+          path: RH_FULL_WITNESSED_CLOSURE/evidence/coordinates/
+          if-no-files-found: warn

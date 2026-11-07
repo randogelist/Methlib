@@ -3,3 +3,6 @@ evidence/
 GeneratedWitness.lean
 *.olean
 *.ilean
+_build/
+__pycache__/
+*.pyc

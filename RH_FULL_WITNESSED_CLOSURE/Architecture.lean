@@ -1,3 +1,4 @@
+import CoordinateData
 import RH_HilbertLimit.AnalyticClosure
 import Mathlib.Analysis.Calculus.Deriv.Basic
 import Std
@@ -19,41 +20,6 @@ noncomputable section
 open scoped BigOperators
 
 namespace RHFullWitnessedClosure
-
-abbrev FiniteCode := List Nat
-
-structure ExactRat where
-  numerator : Int
-  denominator : Nat
-deriving Repr, DecidableEq
-
-structure CellCert where
-  left : ExactRat
-  right : ExactRat
-  g2Lower : ExactRat
-  g2Upper : ExactRat
-  g3Lower : ExactRat
-  g3Upper : ExactRat
-  proofData : FiniteCode
-deriving Repr, DecidableEq
-
-structure NearCert where
-  splitPoint : ExactRat
-  proofData : FiniteCode
-deriving Repr, DecidableEq
-
-structure TailCert where
-  cutoff : Nat
-  proofData : FiniteCode
-deriving Repr, DecidableEq
-
-structure RawCert where
-  spectralCutoff : Nat
-  etaSplit : ExactRat
-  nearCert : NearCert
-  cells : List CellCert
-  tailCert : TailCert
-deriving Repr, DecidableEq
 
 def heatRate (ν : ℝ) : ℝ :=
   8 * Real.pi ^ 2 * ν
