@@ -1,8 +1,31 @@
 THEOREM=RHFullWitnessedClosure.CoordinateTesting.coordinateCheck_iff
-STATUS=A_TIER_CANDIDATE
-MATCHING_EXTERNAL_NATIVE_COMPILER_EVIDENCE=NOT_YET_ATTACHED
-MATCHING_THEOREM_LEVEL_AXIOM_AUDIT=NOT_YET_ATTACHED
+STATUS=A_TIER
+MARKER=!!
+SCOPE=FINITE_COORDINATE_SPECIFICATION_ONLY
+VERIFIED_SOURCE_REVISION=b3baf95d8fede82b4b3abd395889828fe2eef2fd
+EXTERNAL_WINDOWS_CI=https://github.com/randogelist/Methlib/actions/runs/42342213966
+EXTERNAL_WINDOWS_JOB=128312168406
+MATCHING_EXTERNAL_NATIVE_COMPILER_EVIDENCE=PASS
+MATCHING_THEOREM_LEVEL_AXIOM_AUDIT=PASS_STANDARD_ONLY
+OBSERVED_AXIOMS=propext
+NEGATIVE_CONTROL=PASS
+CACHED_REPLAY=PASS
+HOST_TESTS=20_PASS
 LOCAL_LEAN_EXECUTION=NONE
+
+VERIFIED_PROOF_SOURCE_SHA256:
+  CoordinateData.lean=1a60c13f830411288b2fdba18e2fa9b89a67541e01fdd14bafe14952e553fa1c
+  CoordinateTesting.lean=3450eb2708ba2186da2575e7793280fb651690a7b50e24ee420c24ade5369594
+  CoordinateAudit.lean=9b43628f81fea674547cfa806c3ae4386808bc1eaf8b9fa0772e1a2a516936bd
+
+EVIDENCE_SCOPE:
+  External GitHub-hosted native Windows Lean 4.33.0, compiler commit
+  d8b18978322de05a8f3dba51ef03cf5461676c17.
+  Both initial compilation and matching cached replay passed.
+  This record updates documentation after verification; the verified Lean
+  source files are unchanged. Their candidate header records preparation
+  status before the external run; this document records the later audit.
+  No claim is made that the user's own Windows machine executed this run.
 
 EXACT_THEOREM:
   forall w : RawCert,

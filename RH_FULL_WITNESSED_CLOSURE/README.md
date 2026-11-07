@@ -32,16 +32,19 @@ the run using its matching cache. Every run performs theorem-level axiom
 audits and checks that a deliberately invalid admission fails.
 
 ```text
-FINITE_COORDINATE_TESTING=IMPLEMENTED_CANDIDATE
+FINITE_COORDINATE_TESTING=A_TIER_FINITE_SCOPE
 EXPECTED_FINITE_CONCLUSION=CoordinateWellFormed submittedCoordinate
 ACTUAL_XI_ENCLOSURE_VERIFICATION=OPEN
 RH_COORDINATE_ADMISSION=NOT_ESTABLISHED
 ```
 
 The new finite theorem is documented in `CoordinateTesting_A_TIER.txt`.
-Prepared source is `A_TIER_CANDIDATE` until matching external compiler and
-theorem-level audit evidence is available. A pass of the finite testing
-workflow never establishes RH admission.
+Native Windows Lean 4.33.0 compilation, theorem-level audits (only
+`propext`), negative admission and matching cache replay passed in
+[run 42342213966](https://github.com/randogelist/Methlib/actions/runs/42342213966),
+at source revision `b3baf95d8fede82b4b3abd395889828fe2eef2fd`.
+The verified Lean source files are unchanged by this evidence update.
+A pass of the finite testing workflow never establishes RH admission.
 
 ## Current state
 
