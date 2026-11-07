@@ -1,0 +1,21 @@
+import ConcreteSystem
+import GeneratedWitness
+
+namespace RHFullWitnessedClosure
+
+theorem committedWitnessAccepted :
+    verifyBlob concreteSystem.kernel committedWitness = true := by
+  decide
+
+theorem RH_FULL_WITNESSED_CLOSURE :
+    _root_.RiemannHypothesis :=
+  verified_blob_implies_nativeRH
+    concreteSystem
+    committedWitness
+    committedWitnessAccepted
+
+#check RH_FULL_WITNESSED_CLOSURE
+#print axioms RHFullWitnessedClosure.committedWitnessAccepted
+#print axioms RHFullWitnessedClosure.RH_FULL_WITNESSED_CLOSURE
+
+end RHFullWitnessedClosure
