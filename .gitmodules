@@ -1,0 +1,19 @@
+[submodule "REEMANIANS/Generalized-Dirichlet-L-Function-Hypothesis"]
+	path = REEMANIANS/Generalized-Dirichlet-L-Function-Hypothesis
+	url = https://github.com/randogelist/Generalized-Dirichlet-L-Function-Hypothesis.git
+
+[submodule "REEMANIANS/snditeration"]
+	path = REEMANIANS/snditeration
+	url = https://github.com/randogelist/snditeration.git
+
+[submodule "REEMANIANS/zetahyperbolic-axiom"]
+	path = REEMANIANS/zetahyperbolic-axiom
+	url = https://github.com/randogelist/zetahyperbolic-axiom.git
+
+[submodule "REEMANIANS/Riemann-Hypothesis-Final"]
+	path = REEMANIANS/Riemann-Hypothesis-Final
+	url = https://github.com/randogelist/Riemann-Hypothesis-Final.git
+
+[submodule "REEMANIANS/Hilber-Vector-Resolvent-Theory"]
+	path = REEMANIANS/Hilber-Vector-Resolvent-Theory
+	url = https://github.com/randogelist/Hilber-Vector-Resolvent-Theory.git
