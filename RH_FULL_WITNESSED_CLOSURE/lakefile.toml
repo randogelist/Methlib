@@ -9,4 +9,4 @@ rev = "c6b95fd9e3d792270026da083bddddbc72bacb22"
 
 [[lean_lib]]
 name = "RHFullWitnessedClosure"
-roots = ["Architecture", "NegativeControl"]
+roots = ["CoordinateData", "CoordinateTesting", "CoordinateAudit", "Architecture", "NegativeControl"]

@@ -30,11 +30,12 @@ def digest(path: pathlib.Path) -> str:
 
 
 def verify_manifest() -> None:
-    manifest = ROOT / "provenance/source-manifest.sha256"
+    root = ROOT.resolve()
+    manifest = root / "provenance/source-manifest.sha256"
     for line in manifest.read_text(encoding="utf-8").splitlines():
         expected, rel = line.split("  ", 1)
-        path = (ROOT / rel).resolve()
-        if not path.is_relative_to(ROOT) or digest(path) != expected:
+        path = (root / rel).resolve()
+        if not path.is_relative_to(root) or digest(path) != expected:
             raise ValueError("SOURCE_MANIFEST_MISMATCH=" + rel)
 
 
@@ -62,6 +63,9 @@ def audit_axioms(text: str, names: list[str]) -> None:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", nargs="?", type=pathlib.Path,
                         default=ROOT / "coordinates/example.json")

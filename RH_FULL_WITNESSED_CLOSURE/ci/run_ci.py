@@ -134,9 +134,20 @@ def candidate_mode(status: dict[str, str]) -> None:
         ROOT / "RH_FULL_WITNESSED_CLOSURE.lean",
         ROOT / "GeneratedWitness.lean",
     ])
-    run(["lake", "env", "lean", "ConcreteSystem.lean"], log="concrete-system.log")
-    run(["lake", "env", "lean", "GeneratedWitness.lean"], log="generated-witness.log")
-    run(["lake", "env", "lean", "RH_FULL_WITNESSED_CLOSURE.lean"], log="root.log")
+    objects = ROOT / ".lake" / "build" / "lib" / "lean"
+    objects.mkdir(parents=True, exist_ok=True)
+    run(["lake", "env", "lean", "-o", str(objects / "ConcreteSystem.olean"), "ConcreteSystem.lean"], log="concrete-system.log")
+    run(["lake", "env", "lean", "-o", str(objects / "GeneratedWitness.olean"), "GeneratedWitness.lean"], log="generated-witness.log")
+    run(["lake", "env", "lean", "-o", str(objects / "RH_FULL_WITNESSED_CLOSURE.olean"), "RH_FULL_WITNESSED_CLOSURE.lean"], log="root.log")
+
+    exact_audit = EVIDENCE / "ExactRHRootAudit.lean"
+    exact_audit.write_text(
+        "import RH_FULL_WITNESSED_CLOSURE\n"
+        "example : _root_.RiemannHypothesis :=\n"
+        "  RHFullWitnessedClosure.RH_FULL_WITNESSED_CLOSURE\n",
+        encoding="utf-8",
+    )
+    run(["lake", "env", "lean", str(exact_audit)], log="exact-root-type.log")
 
     root_log = EVIDENCE / "root.log"
     root_text = root_log.read_text(encoding="utf-8")

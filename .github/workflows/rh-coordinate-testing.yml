@@ -51,16 +51,17 @@ jobs:
           path: ~/.elan/toolchains
           key: rh-coordinate-lean-${{ runner.os }}-${{ runner.arch }}-4.33.0
 
-      - name: Install pinned compiler if absent
-        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+      - name: Fetch pinned compiler installer
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          lake-package-directory: RH_FULL_WITNESSED_CLOSURE
-          auto-config: 'false'
-          build: 'false'
-          test: 'false'
-          lint: 'false'
-          use-mathlib-cache: 'false'
-          use-github-cache: 'false'
+          repository: leanprover/lean-action
+          ref: fe408643ea7367d8c0404a8be3975bb145f5fb64
+          path: .ci-lean-action
+          persist-credentials: false
+
+      - name: Install pinned compiler without Lake workspace configuration
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.ci-lean-action/scripts/install_elan.sh"
 
       - name: Resolve pinned toolchain executable
         run: elan run leanprover/lean4:v4.33.0 lean --version

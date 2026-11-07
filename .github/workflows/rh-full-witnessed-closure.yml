@@ -45,16 +45,16 @@ jobs:
           test "$(git -C "$GITHUB_WORKSPACE" rev-parse HEAD)" = "$GITHUB_SHA"
           python3 ci/run_ci.py --check-source
 
-      - name: Install pinned Lean toolchain
-        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+      - name: Fetch pinned Lean installer
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          lake-package-directory: RH_FULL_WITNESSED_CLOSURE
-          auto-config: 'false'
-          build: 'false'
-          test: 'false'
-          lint: 'false'
-          use-mathlib-cache: 'false'
-          use-github-cache: 'false'
+          repository: leanprover/lean-action
+          ref: fe408643ea7367d8c0404a8be3975bb145f5fb64
+          path: .ci-lean-action
+          persist-credentials: false
+
+      - name: Install pinned Lean toolchain
+        run: bash "$GITHUB_WORKSPACE/.ci-lean-action/scripts/install_elan.sh"
 
       - name: Restore Mathlib cache archives
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
