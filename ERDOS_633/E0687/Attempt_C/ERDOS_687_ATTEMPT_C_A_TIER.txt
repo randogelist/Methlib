@@ -1,0 +1,15 @@
+ERDOS_687_ATTEMPT_C_A_TIER
+MODE=A_TIER_DERIVATION
+PATH=ERDOS_633/E0687/Attempt_C
+PROOF_SCOPE=Exact finite rational CRT/BKQR survivor certificate; conditional external o(x^2) composition
+!! B_TIER: M(P,y;Q_y)<1 iff every translated interval of length y has a coprime survivor.
+! B_TIER: Any rational q with q(0)=1 and q(s)^2<=1/(P+1) for 1<=s<=y gives the same equivalence.
+EXTERNAL_PARTIAL: Published OAI Jacobsthal formalization and 30k30/scholia glue prove Y(x)=o(x^2).
+CORE_CI: GitHub Actions, pinned Lean 4.34.0-rc1 + Mathlib fd9375dc1, cache get + named axiom audit.
+EXTERNAL_TOOLCHAIN: Lean 4.34.1 + Mathlib d13f23b7 (requires a distinct compatible compiler and object cache).
+MISSING_1=Uniform certificate mass <1 at y=ceil(x^(1+epsilon)) for all large x.
+MISSING_2=CRTSemanticBridge in Lean.
+MISSING_3=External source package compilation with its exact compatible compiler.
+A_TIER_CANDIDATE until matching external CI compiler and theorem-level axiom evidence passes.
+FRONTIER_PROOF=OPEN.
+NO_LOCAL_LEAN=YES.
