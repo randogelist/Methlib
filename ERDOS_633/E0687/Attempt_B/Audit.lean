@@ -1,0 +1,15 @@
+import ExternalRoot
+
+#check MethlibErdos687.AttemptB.jacobsthal_spectral_bound
+#check MethlibErdos687.AttemptB.jacobsthal_no_cover
+#check MethlibErdos687.AttemptB.erdos_687_part_ii
+#check MethlibErdos687.AttemptB.erdos_687_quantitative
+
+#print axioms Erdos687Spectral.gramDet_eq_prod
+#print axioms Erdos687Spectral.gramDet_pos_iff
+#print axioms Erdos687Spectral.gramDet_zero_iff_covered
+#print axioms Erdos687Spectral.gramDet_pos_propagates
+#print axioms MethlibErdos687.AttemptB.jacobsthal_spectral_bound
+#print axioms MethlibErdos687.AttemptB.jacobsthal_no_cover
+#print axioms MethlibErdos687.AttemptB.erdos_687_part_ii
+#print axioms MethlibErdos687.AttemptB.erdos_687_quantitative

@@ -1,0 +1,15 @@
+ERDOS687_ATTEMPT_B
+MODE=A_TIER_DERIVATION
+CURRENT_STATUS=A_TIER_CANDIDATE
+THEOREM_1=Erdos687Spectral.gramDet_zero_iff_covered
+THEOREM_2=Erdos687Spectral.gramDet_pos_propagates
+THEOREM_3=MethlibErdos687.AttemptB.jacobsthal_spectral_bound
+THEOREM_4=MethlibErdos687.AttemptB.jacobsthal_no_cover
+EXTERNAL_ROOT=MethlibErdos687.AttemptB.erdos_687_part_ii
+QUANTITATIVE_ROOT=MethlibErdos687.AttemptB.erdos_687_quantitative
+EXTERNAL_REVIEW_BRIDGE=pw/erdosproblemaday-verification@634b667ee7844f12590117c4c2d7bc0143f2fdd9
+EXTERNAL_JACOBSTHAL=openai/math@1581d4cbdd69a0faf34b2089614fe2a814316a6a
+LEAN_VERSION=4.34.1
+MATHLIB_COMMIT=d13f23b723b8a846827a245b89c10fc7d3f11612
+UNRESOLVED=full Fourier-conjugation formalization; near-linear bound
+PROMOTION=requires matching external GitHub CI build and axiom audit

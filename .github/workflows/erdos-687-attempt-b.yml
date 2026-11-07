@@ -1,0 +1,87 @@
+name: Erdos 687 Attempt_B spectral Gram external proof
+
+on:
+  push:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_B/**'
+      - '.github/workflows/erdos-687-attempt-b.yml'
+  pull_request:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_B/**'
+      - '.github/workflows/erdos-687-attempt-b.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: erdos687-attempt-b
+  cancel-in-progress: true
+
+jobs:
+  spectral-bridge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    env:
+      LEAN_NUM_THREADS: '1'
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - name: Checkout Methlib
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout pinned OpenAI proof
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: 1581d4cbdd69a0faf34b2089614fe2a814316a6a
+          path: .ci-openai
+          sparse-checkout: |
+            lean
+          persist-credentials: false
+
+      - name: Checkout pinned external Erdős bridge
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: pw/erdosproblemaday-verification
+          ref: 634b667ee7844f12590117c4c2d7bc0143f2fdd9
+          path: .ci-referee
+          sparse-checkout: |
+            970/openai-jacobsthal-quadratic-refereed/bridge687
+          persist-credentials: false
+
+      - name: Make room for cached Mathlib
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          df -h .
+
+      - name: Install external pinned Lean 4.34.1
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-openai/lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore official Mathlib cache archive
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-jacobsthal-mathlib-lean4341-d13f23b723b8a846827a245b89c10fc7d3f11612
+
+      - name: Compile finite Gram, external root, and standard-only axiom audit
+        shell: bash
+        run: bash ERDOS_633/E0687/Attempt_B/ci/run.sh
+
+      - name: Upload compiler and audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos687-attempt-b
+          path: ERDOS_633/E0687/Attempt_B/evidence/
+          if-no-files-found: warn
+          retention-days: 90
