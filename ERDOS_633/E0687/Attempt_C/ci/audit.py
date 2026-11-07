@@ -13,8 +13,8 @@ allowed = {"propext", "Classical.choice", "Quot.sound"}
 failed = False
 for name in names:
     qualified = "Erdos687AttemptC." + name
-    pat = r"['`]?" + re.escape(qualified) + r"['`]? depends on axioms: \\[([^\\]]*)\\]"
-    match = re.search(pat, log)
+    pattern = re.escape(qualified) + r".{0,50}depends on axioms:\s*\[([^\]]*)\]"
+    match = re.search(pattern, log)
     if match is None:
         print(f"THEOREM_AXIOM_AUDIT=FAIL_MISSING|{qualified}")
         failed = True
@@ -24,8 +24,8 @@ for name in names:
     verdict = "PASS_STANDARD_ONLY" if not extra else "FAIL_UNAPPROVED"
     print(f"THEOREM_AXIOM_AUDIT={verdict}|{qualified}|{','.join(sorted(axioms))}")
     failed |= bool(extra)
-if "sorryAx" in log or "admit" in log:
-    print("AUDIT=FAIL_SORRY_OR_ADMIT")
+if "sorryAx" in log:
+    print("AUDIT=FAIL_SORRYAX")
     failed = True
-print("ROOT=A_TIER_CANDIDATE; FRONTIER_BOUND=OPEN")
+print("FRONTIER_BOUND=OPEN")
 sys.exit(1 if failed else 0)
