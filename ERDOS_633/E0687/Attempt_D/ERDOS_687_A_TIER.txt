@@ -1,0 +1,42 @@
+ERDOS_687_ATTEMPT_D_A_TIER
+DATE=2026-11-07
+REPOSITORY=randogelist/Methlib
+PATH=ERDOS_633/E0687/Attempt_D
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE_UNTIL_EXTERNAL_CI_AUDIT
+
+PINNED_EXTERNAL_INPUT
+  repo=https://github.com/openai/math
+  revision=adc7f1241b42e322a6451854ab7e4b4c146bf78a
+  Lean=4.34.1
+  Mathlib=d13f23b723b8a846827a245b89c10fc7d3f11612
+  IsJacobsthalBound(k,m), JacobsthalQuadratic, JacobsthalIteratedLog.
+
+EXACT ROOT
+  StrongNoCover:
+    forall eps>0, eventually for all x and all residue assignments a(p),
+    [0,ceil(x^(1+eps))) is not fully covered by one class mod every p<=x.
+  This x^(1+o(1)) statement remains OPEN.
+
+!! UNCONDITIONAL FINITE IMPLICATION
+  survivors(lo,y,a) > sum_{p in hi} forbidden(p,y,a)
+  -> not Covered(lo union hi,y,a).
+
+! CONDITIONAL STRONG IMPLICATION
+  UniformExactMargin -> StrongNoCover.
+  ResidueCountCap + UniformShortBudget -> StrongNoCover.
+
+!! IMPORTED JACOBSTHAL EDGE
+  IsJacobsthalBound(k,m) and 0<n and omega(n)<=k ->
+  no completely noncoprime translate of width m for n.
+
+EXTERNAL RESULT
+  erdos_970_quadratic : JacobsthalQuadratic
+  erdos_970_iterated_log : JacobsthalIteratedLog.
+  No exponent improvement follows from these alone.
+
+OPEN_ADMISSION=UniformExactMargin
+OPEN_ALTERNATIVE=UniformShortBudget
+CERTIFICATION=Requires CI success for exact source and theorem-level axiom audit.
+NO_LOCAL_LEAN=Lean not executed by assistant in local environment.
+NO_UNCONDITIONAL_CLOSURE=StrongNoCover remains unproved.
