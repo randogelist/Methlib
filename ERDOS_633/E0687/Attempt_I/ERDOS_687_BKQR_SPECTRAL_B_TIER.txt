@@ -1,0 +1,146 @@
+ERDOS_687_BKQR_SPECTRAL_B_TIER
+MODE=B_TIER_DERIVATION
+STATUS=! B_TIER (exact finite mathematical reductions)
+NOT_STATUS=!! A_TIER (no external Lean compilation or theorem-level axiom audit)
+ROOT_TARGET=Erdos problem #687, specifically Y(x) <= x^(1+o(1))
+ROOT_TARGET_STATUS=OPEN; not proved by the identities in this file.
+
+0. DEFINITIONS
+Assume real x>=2; set P=P_x=product_{prime p<=x} p, and let T>=1 be an integer.
+For integer b, define f_b(n)=1 if gcd(b+n,P)=1, else f_b(n)=0,
+S_b(T)=sum_{n=1}^T f_b(n).
+Define Y(x) as the longest interval [1,L] which can be covered by one
+congruence class modulo each prime p<=x. Chinese remainder theorem (CRT)
+identifies such a covering with a shift b for which S_b(L)=0.
+All b can be reduced modulo P. This makes Y(x) finite (Y(x)<P).
+
+! THEOREM 1 (CRT/JACOBSTHAL EQUIVALENCE, UNCONDITIONAL)
+Y(x) = j(P)-1
+and for every integer T>=1,
+Y(x)<T  <=>  (for all b modulo P, S_b(T)>=1).
+Proof: Given residue classes a_p mod p, CRT supplies b=-a_p mod p
+simultaneously. n lies in one chosen class iff p divides b+n for some
+p<=x, iff gcd(b+n,P)>1. Conversely any shift b supplies the classes
+-namely a_p=-b mod p. Thus maximal covered intervals are maximal runs
+of non-units modulo P. The least length of a block containing a unit
+is exactly one plus the maximal run of non-units. QED.
+
+1. COMMUTING PRIME PROJECTION REPRESENTATION
+Let E=R^T with standard basis e_1,...,e_T. For p<=x prime define
+(R_{p,b} e_n) = 1_{p|(b+n)} e_n.
+Each R_{p,b} is an orthogonal projection; all R_{p,b} commute.
+Define A_{x,T}(b)=product_{p<=x}(I-R_{p,b}).
+Then A e_n = f_b(n)e_n; A=A^*=A^2; and
+rank A = tr A = S_b(T).
+Let V be the T x T integer Vandermonde matrix V_{i,n}=n^i for
+0<=i<T and 1<=n<=T (with rows numbered 0 through T-1).
+Its determinant is product_{1<=a<c<=T}(c-a) !=0.
+Set H_T(b)=V A_{x,T}(b) V^t.
+Its (i,j) entry is m_{i+j}(b,T)=sum_{n=1}^T n^(i+j) f_b(n).
+
+! THEOREM 2 (BKQR/HOPF-GRAM EXACT RANK, UNCONDITIONAL)
+H_T(b) is positive semidefinite and
+rank H_T(b)=rank A_{x,T}(b)=tr A_{x,T}(b)=S_b(T).
+Consequently,
+Y(x)<T <=> for all b mod P, rank H_T(b)>0
+       <=> for all b mod P, H_T(b) != 0.
+Proof: Product of commuting coordinate projections is the diagonal
+orthogonal projection described above; V is invertible; congruence
+by invertible V preserves rank; tr A counts its 1-eigenvalues. QED.
+
+2. EXACT POSITIVE HANKEL MINORS
+For 1<=r<=T let H_r(b) be the leading r x r principal submatrix
+of H_T(b) and D_r(b,T)=det(H_r(b)); set D_0=1.
+
+! THEOREM 3 (CAUCHY-BINET WITNESS COUNT, UNCONDITIONAL)
+D_r(b,T)=sum_{1<=n_1<...<n_r<=T}
+  [ product_{a=1}^r f_b(n_a) ]
+  [ product_{1<=a<c<=r} (n_c-n_a)^2 ].
+Hence D_r(b,T)>0 <=> S_b(T)>=r.
+Proof: H_r=V_r A V_r^t with V_r an r x T Vandermonde;
+Cauchy-Binet expands det(H_r) over all r-column subsets.
+Every term is nonnegative and is strictly positive exactly when all
+chosen indices are distinct survivors. QED.
+
+! COROLLARY 3A (UNIFORM MULTIPLE-SURVIVOR GENERALIZATION)
+For every 1<=r<=T,
+(min_{b mod P} D_r(b,T)>0) <=>
+(each length-T interval contains at least r integers coprime to P).
+This strengthens the r=1 rank language but is a reformulation, not
+an independent analytic lower bound.
+
+3. EXACT FOURIER/RAMANUJAN EXPANSION
+Write zeta_P=exp(2*pi*i/P), and for k mod P define
+c_P(k)=sum_{u mod P, gcd(u,P)=1} zeta_P^(k*u).
+For squarefree P,
+c_P(k)=product_{p<=x} [(p-1) if p|k, else -1].
+Let B_T(k)=sum_{n=1}^T zeta_P^(k*n).
+By Fourier inversion on Z/PZ,
+S_b(T) = T*phi(P)/P + (1/P)*sum_{k=1}^{P-1}
+          c_P(k)*zeta_P^(k*b)*B_T(k).
+The complex sum is real, because terms pair under k -> P-k.
+
+! THEOREM 4 (EXACT UNIFORM FOURIER SUFFICIENT CONDITION)
+If, for any x>=2 and integer T>=1,
+sum_{k=1}^{P-1} |c_P(k)|*|B_T(k)| < T*phi(P),
+then Y(x)<T.
+Proof: The nonzero-frequency contribution to S_b(T), multiplied
+by P, has absolute value <= the left side independently of b.
+Thus S_b(T)>0 for all b, hence Theorem 1. QED.
+
+! THEOREM 5 (EXACT FOURIER VARIANCE IDENTITY)
+Define mu=T*phi(P)/P. Then
+(1/P)*sum_{b=0}^{P-1} (S_b(T)-mu)^2
+  = (1/P^2)*sum_{k=1}^{P-1}|c_P(k)|^2*|B_T(k)|^2.
+Proof: Finite Parseval orthogonality applied to the expansion above.
+This controls average fluctuations, not the supremum needed for #687.
+
+4. CONDITIONAL POWER-BOUND TRANSFER (EXACT ROOT IMPLICATION)
+For eps>0 let T_eps(x)=ceil(x^(1+eps)).
+Define hypothesis F(eps): there exists x0(eps) such that every x>=x0
+satisfies
+sum_{k=1}^{P_x-1}|c_{P_x}(k)| |B_{T_eps(x)}(k)|
+       < T_eps(x)*phi(P_x).
+
+! THEOREM 6 (CONDITIONAL SPECTRAL-FOURIER CLOSURE)
+[For every eps>0, F(eps)] => [Y(x) <= x^(1+o(1))], in the precise
+sense: for every eps>0, all sufficiently large x satisfy
+Y(x)<x^(1+eps).
+Proof: Theorem 4 at T=ceil(x^(1+eps)) gives integer Y(x)<T.
+For any real A, an integer Y<ceil(A) implies Y<A. QED.
+
+A weaker and logically exact required premise is:
+U(eps): for all sufficiently large x and all b mod P_x,
+S_b(T_eps(x))>=1.
+Theorem 1 shows [for every eps>0, U(eps)] is equivalent to the
+asymptotic target. F(eps) is a sufficient but NOT known necessary
+route to U(eps). The missing work is to PROVE F(eps), or another
+uniform survivor bound, from independent number-theoretic estimates.
+
+5. LOGICAL/PUBLICATION AUDIT
+! Unconditional: Theorems 1-5 and Corollary 3A and conditional
+   implication in Theorem 6.
+NOT_PROVED: the premise F(eps) for all eps>0.
+NOT_PROVED: the new upper bound Y(x) << x^(1+o(1)).
+NOT_PROVED: computational efficiency of finite certificates; P_x is huge.
+NOT_CLAIMED: novelty or published-priority for CRT, Cauchy-Binet,
+           Ramanujan sums, Parseval, or positive semidefinite Gram matrices.
+NOT_LEAN_RUN: no local Lean execution, matching external compiler/audit.
+
+6. LITERATURE CONTEXT (external inputs, not established in this derivation)
+Erdos Problems #687: https://www.erdosproblems.com/687
+Ford et al. (2018), Long gaps between primes:
+https://arxiv.org/abs/1412.5029
+OpenAI (2026), A quadratic bound for Jacobsthal's function:
+https://github.com/openai/math/tree/main/preprints/A-quadratic-bound-for-Jacobsthals-function-September-25-2026
+This 2026 preprint reports h(k) << k^2/(log log(3k))^2, which,
+combined with k=pi(x) << x/log x, implies the reported partial
+Y(x) << x^2/((log x)^2 (log log x)^2).
+Its deep sieve theorem is an external input; we have not reproduced
+or audited its proof here. It does not give the exponent 1+o(1).
+
+FINAL STATUS:
+! B_TIER exact equivalence and conditional Fourier-spectral bridge.
+UNCONDITIONAL_CLOSURE=NO
+CONDITIONAL_FORMAL_CLOSURE=NO (Lean implication not checked).
+ERDOS_687_STRONG_TARGET=OPEN.
