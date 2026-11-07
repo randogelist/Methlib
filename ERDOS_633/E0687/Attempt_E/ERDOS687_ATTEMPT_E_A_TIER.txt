@@ -1,0 +1,21 @@
+ERDOS #687 — ATTEMPT_E — 2026-11-07
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE UNTIL MATCHING GITHUB CI COMPILER + AXIOM AUDIT
+PROOF SPINE:
+ (i) exactDetector H 0 = 1; (1<=u<=H) => exactDetector H u = 0.
+ (ii) momentCertificate n H = (coveredCount n H : Q) exactly.
+ (iii) IsJacobsthalBound k m, omega(n)<=k, H>=m
+       => not CoveredBlock n H and coveredCount=0 and certificate=0.
+ (iv) JacobsthalQuadratic => exists C>0, m<=C*k^2 for every k>0.
+ (v) primorial(x) has pi(x) distinct prime factors; m<=C*pi(x)^2.
+ (vi) ExternalRoot imports actual upstream OAI erdos_970_quadratic.
+UPSTREAM:
+  https://github.com/openai/math
+  commit 4eaee87548250b2682affda7d05d947c05554bae
+  lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean
+  Lean 4.34.1 (distinct from Methlib 4.34.0-rc1 cache).
+NOT PROVED:
+  original #687 CRT bridge in Lean
+  Y(x) << x^(1+o(1)) near-linear conjecture.
+COMPILER: NOT YET VERIFIED
+AXIOM AUDIT: NOT YET VERIFIED
