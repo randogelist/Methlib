@@ -1,0 +1,28 @@
+ERDOS_687_BKQR_HANKEL_A_TIER
+MODE=A_TIER_DERIVATION
+PACKAGE=ERDOS_633/E0687/Attempt_I
+TOOLCHAIN=Lean 4.34.0-rc1
+MATHLIB_REV=fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+CURRENT_STATUS=A_TIER_CANDIDATE
+NO_LOCAL_LEAN=ENFORCED
+
+UNCONDITIONAL MATHEMATICAL IMPLICATIONS
+ ! hankel_ne_zero_iff_card_pos
+ ! check_iff_hankel_nonzero
+ ! yMod_lt_iff_check
+ ! verify_sound
+ ! verify_complete
+ ! erdos687_finite_witness_iff
+ ! uniformAcceptance_implies_erdos687
+ ! erdos687_iff_uniformAcceptance
+
+UNRESOLVED
+  uniformAcceptance := ∀ ε>0, ∃ X, ∀ x≥X, check687(x,ceil(x^(1+ε)))=true.
+  No general proof of this premise has been supplied.
+  CRT alignment with original Erdős #687 and the real-x extension not Lean-certified here.
+  Finite coordinate witness for fixed x,T is NOT a finite proof of the infinite target.
+  No new unconditional exponent estimate is claimed.
+
+PROMOTION
+  Require CI compiler PASS for exact source SHA and theorem-level audit of eight roots.
+  A-tier certification of conditional implication does not resolve Erdős #687.
