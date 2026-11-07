@@ -45,6 +45,10 @@ jobs:
           python -m unittest discover -s tests -v
           if errorlevel 1 exit /b 1
 
+      - name: Verify relative wrapper invocation from parent directory
+        working-directory: .
+        run: call "RH_FULL_WITNESSED_CLOSURE\run.cmd" --check-source
+
       - name: Restore pinned compiler and bundled Std cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
