@@ -1,0 +1,9 @@
+# Erdős Problem #1041
+
+- **Status (source snapshot):** falsifiable
+- **Prize (source metadata):** no
+- **Topics:** analysis, polynomials
+- **Problem statement:** https://www.erdosproblems.com/1041
+- **Upstream record:** https://github.com/teorth/erdosproblems/blob/acb2d48c137bbfb9dc73f941b08c4e3c90c70ba8/data/problems.yaml
+
+This folder is a research workspace. Its existence does **not** assert a proof, disproof, B-tier closure, or Lean A-tier audit.
