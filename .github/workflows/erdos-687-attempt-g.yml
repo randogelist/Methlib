@@ -1,0 +1,166 @@
+name: Erdos 687 Attempt_G - Lean CI
+
+on:
+  push:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_G/**'
+      - '.github/workflows/erdos-687-attempt-g.yml'
+  pull_request:
+    paths:
+      - 'ERDOS_633/E0687/Attempt_G/**'
+      - '.github/workflows/erdos-687-attempt-g.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-bridge:
+    name: Finite Gram - Lean 4.34.1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          sparse-checkout: ERDOS_633/E0687/Attempt_G
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: leanprover-community/mathlib4
+          ref: d13f23b723b8a846827a245b89c10fc7d3f11612
+          path: .ci-mathlib
+          persist-credentials: false
+      - name: Reserve disk
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: .ci-mathlib
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-g-mathlib-4341-d13f23b723b8a846827a245b89c10fc7d3f11612
+      - name: Compile and audit finite bridge
+        working-directory: .ci-mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="$GITHUB_WORKSPACE/repository/ERDOS_633/E0687/Attempt_G"
+          E="$P/evidence/finite"
+          mkdir -p "$E"
+          test "$(git -C "$GITHUB_WORKSPACE/repository" rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          lean --version | tee "$E/lean-version.log"
+          grep -F "version 4.34.1" "$E/lean-version.log"
+          lake exe cache get 2>&1 | tee "$E/mathlib-cache.log"
+          if ! test -s .lake/build/lib/lean/Mathlib.olean; then
+            lake env lean -j4 -o .lake/build/lib/lean/Mathlib.olean Mathlib.lean 2>&1 | tee "$E/mathlib-umbrella.log"
+          fi
+          sha256sum "$P/FiniteBridge.lean" > "$E/bridge.sha256"
+          lake env lean -j4 --trust=0 "$P/FiniteBridge.lean" 2>&1 | tee "$E/finite-root.log"
+          python3 "$P/ci/check_axioms.py" finite "$E/finite-root.log" | tee "$E/audit.log"
+          echo "DAG_COMPILE=PASS"
+          echo "A_TIER_FINITE_BRIDGE=PASS_STANDARD_ONLY"
+      - name: Upload finite audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos687-attempt-g-finite
+          path: repository/ERDOS_633/E0687/Attempt_G/evidence/finite/
+          if-no-files-found: warn
+          retention-days: 90
+
+  external-root:
+    name: External Jacobsthal - Lean 4.34.1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          sparse-checkout: ERDOS_633/E0687/Attempt_G
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: 4eaee87548250b2682affda7d05d947c05554bae
+          path: external
+          sparse-checkout: lean
+          persist-credentials: false
+      - name: Reserve disk
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: external/lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/mathlib
+          key: erdos687-g-mathlib-4341-d13f23b723b8a846827a245b89c10fc7d3f11612
+      - name: Verify source and install pinned dependencies
+        working-directory: external/lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="$GITHUB_WORKSPACE/repository/ERDOS_633/E0687/Attempt_G"
+          E="$P/evidence/external"
+          mkdir -p "$E"
+          test "$(git -C "$GITHUB_WORKSPACE/repository" rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git -C .. rev-parse HEAD)" = 4eaee87548250b2682affda7d05d947c05554bae
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          lean --version | tee "$E/lean-version.log"
+          sha256sum "$P/FiniteBridge.lean" "$P/ExternalRoot.lean" > "$E/source.sha256"
+          lake update 2>&1 | tee "$E/lake-update.log"
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          lake exe cache get 2>&1 | tee "$E/mathlib-cache.log"
+          if ! test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean; then
+            (cd .lake/packages/mathlib && lake env lean -j4 -o .lake/build/lib/lean/Mathlib.olean Mathlib.lean) 2>&1 | tee "$E/mathlib-umbrella.log"
+          fi
+      - name: Build external theorem from pinned OpenAI source
+        working-directory: external/lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          E="$GITHUB_WORKSPACE/repository/ERDOS_633/E0687/Attempt_G/evidence/external"
+          lake build OAI.NumberTheory.Jacobsthal.Main 2>&1 | tee "$E/jacobsthal-build.log"
+          test -s .lake/build/lib/lean/OAI/NumberTheory/Jacobsthal/Main.olean
+      - name: Compile and audit imported external root
+        working-directory: external/lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="$GITHUB_WORKSPACE/repository/ERDOS_633/E0687/Attempt_G"
+          E="$P/evidence/external"
+          mkdir -p AttemptG .lake/build/lib/lean/AttemptG
+          cp "$P/FiniteBridge.lean" AttemptG/FiniteBridge.lean
+          cp "$P/ExternalRoot.lean" AttemptG/ExternalRoot.lean
+          lake env lean -j4 --trust=0 -o .lake/build/lib/lean/AttemptG/FiniteBridge.olean AttemptG/FiniteBridge.lean 2>&1 | tee "$E/finite-in-external.log"
+          test -s .lake/build/lib/lean/AttemptG/FiniteBridge.olean
+          lake env lean -j4 --trust=0 AttemptG/ExternalRoot.lean 2>&1 | tee "$E/external-root.log"
+          python3 "$P/ci/check_axioms.py" external "$E/external-root.log" | tee "$E/audit.log"
+          echo "DAG_COMPILE=PASS"
+          echo "A_TIER_EXTERNAL_ROOT=PASS_STANDARD_ONLY"
+      - name: Upload full compiler and axiom evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: erdos687-attempt-g-external
+          path: repository/ERDOS_633/E0687/Attempt_G/evidence/external/
+          if-no-files-found: warn
+          retention-days: 90
