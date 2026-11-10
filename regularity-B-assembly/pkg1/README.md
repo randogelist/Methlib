@@ -21,7 +21,9 @@ This directory preserves the principal Lean source files from the GOODWORKFLOWFR
 \to
 \texttt{NSE\_PAIRING\_POINTWISE\_LP\_LIFT}^{!!,!!!}
 \to
-\texttt{NSE\_PHYSICAL\_LP\_DATA\_CONSTRUCTION}^{!!,!!!}.
+\texttt{NSE\_PHYSICAL\_LP\_DATA\_CONSTRUCTION}^{!!,!!!}
+\to
+\texttt{PERIODIC\_STRONG\_SLICE\_TO\_RAW\_PHYSICAL\_FIELDS}^{!!,!!!}.
 \]
 
 Here:
@@ -40,60 +42,68 @@ Here:
 | `H12_HOLDER_LP_ADAPTER.lean` | A_TIER |
 | `NSE_POINTWISE_PAIRING_IDENTIFICATION.lean` | A_TIER |
 | `NSE_PAIRING_POINTWISE_LP_LIFT.lean` | A_TIER |
-| `NSE_PHYSICAL_LP_DATA_CONSTRUCTION.lean` | A_TIER; constructs all physical `Lp` representatives and proves the actual pairing is in `L¹` |
-| `PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean` | A_TIER_CANDIDATE |
+| `NSE_PHYSICAL_LP_DATA_CONSTRUCTION.lean` | A_TIER |
+| `PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean` | A_TIER; derives pairing measurability and constructs `RawPhysicalFields` |
+| `H12_CRITICAL_PAIRING_INTEGRAL.lean` | A_TIER_CANDIDATE; current FIX3 source; external native pass pending |
 
 ## Latest certified endpoint
 
-`NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION`
+`PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS`
 
 Native Lean 4.33.0 evidence:
 
 ```text
 COMPILE=PASS
 SIGNATURE_CHECK=PASS
-THEOREM_AXIOM_AUDITS=12
+THEOREM_AXIOM_AUDITS=8
 THEOREM_AXIOM_AUDIT=STANDARD_ONLY
 RUN=PASS
 ROOT_AXIOMS=propext,Classical.choice,Quot.sound
-PHYSICAL_LP_DATA=CONSTRUCTED
-PAIRING_MEMLP_ONE=DERIVED
+PAIRING_MEASURABILITY=DERIVED
+RAW_PHYSICAL_FIELDS=CONSTRUCTED
 ```
 
-The package starts from `RawPhysicalFields`:
+A periodic strong slice contains
 
 \[
-J,u,w\in L^3,
-\qquad
-x\mapsto \langle J(x)u(x),w(x)\rangle
-\text{ measurable}.
+J,u,w\in L^3(\mathbb T^3).
 \]
 
-It derives
+The certified theorem derives almost-everywhere strong measurability of
 
 \[
-|u|\,|J|\,|w|\in L^1,
-\qquad
-\langle Ju,w\rangle\in L^1,
+x\mapsto J(x)u(x)
 \]
 
-constructs canonical `MemLp.toLp` representatives, and proves
+and
 
 \[
+x\mapsto\langle J(x)u(x),w(x)\rangle,
+\]
+
+then constructs `RawPhysicalFields` canonically.
+
+Therefore the nonlinear semantic chain is now A-tier complete:
+
+\[
+\texttt{PeriodicStrongSlice}
+\Longrightarrow
 \texttt{RawPhysicalFields}
 \Longrightarrow
 \texttt{PhysicalLpData}
 \Longrightarrow
+\texttt{NSEPairingRealization}
+\Longrightarrow
 \texttt{CriticalHolder}.
 \]
 
-With `PeriodicHhalfL3`:
+With the remaining analytic endpoint `PeriodicHhalfL3`, the certified compiler yields
 
 \[
 I_{\rm abs}\le C_3^3ED^2.
 \]
 
-Inside the critical radius:
+Inside the critical radius,
 
 \[
 E\le\frac{\nu}{4C_3^3}
@@ -101,42 +111,20 @@ E\le\frac{\nu}{4C_3^3}
 I_{\rm abs}\le\frac{\nu}{4}D^2.
 \]
 
-## Current candidate endpoint
+## Remaining principal targets
 
-`PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS`
+1. formalize `PeriodicHhalfL3`;
+2. formalize the rough \(H^{1/2}\) local-existence / continuation interface `H12_LOCAL_CONTINUATION`;
+3. compile `H12_SIGMA_SMALL_GLOBAL_REGULARITY`.
 
-A periodic strong slice supplies
-
-\[
-J,u,w\in L^3(\mathbb T^3).
-\]
-
-The candidate derives measurability of
-
-\[
-x\mapsto\langle J(x)u(x),w(x)\rangle
-\]
-
-from continuity of continuous-linear-map application and the real inner product, then constructs `RawPhysicalFields` canonically.
-
-After promotion, the nonlinear semantic chain is complete up to the sole independent analytic endpoint
+Thus the remaining independent seams are exactly
 
 ```text
 PeriodicHhalfL3
-```
-
-and the later global theorem additionally requires
-
-```text
 H12_LOCAL_CONTINUATION
 ```
 
-## Remaining principal targets
-
-1. promote `PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS`;
-2. formalize `PeriodicHhalfL3`;
-3. formalize the rough \(H^{1/2}\) local-existence / continuation interface;
-4. compile `H12_SIGMA_SMALL_GLOBAL_REGULARITY`.
+for the final small-\(H^{1/2}_\sigma\) global regularity theorem.
 
 ## Source-layout note
 
