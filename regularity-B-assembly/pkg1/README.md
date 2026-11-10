@@ -35,9 +35,10 @@ Here:
 | `H12_CRITICAL_TRILINEAR_COMPILER.lean` | A_TIER; CONDITIONAL_FORMAL_CLOSURE |
 | `H12_HOLDER_LP_ADAPTER.lean` | A_TIER |
 | `NSE_POINTWISE_PAIRING_IDENTIFICATION.lean` | A_TIER; pointwise pairing unconditional; root conditional on `NSEPairingRealization.pointwiseLift` |
+| `NSE_PAIRING_POINTWISE_LP_LIFT.lean` | A_TIER_CANDIDATE; removes the norm-level `pointwiseLift` premise from an a.e. pointwise estimate |
 | `H12_CRITICAL_PAIRING_INTEGRAL.lean` | A_TIER_CANDIDATE; current FIX3 source; external native pass pending |
 
-## Latest native endpoint
+## Latest certified endpoint
 
 `NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION`
 
@@ -67,17 +68,49 @@ The audited root proves
 \texttt{CriticalHolder}.
 \]
 
-The remaining semantic field in this layer is exactly
+## Current candidate endpoint
+
+`NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT`
+
+It formalizes
+
+\[
+\|q(x)\|\le
+\|\texttt{tripleProduct}(f,g,h)(x)\|
+\quad \text{a.e.}
+\Longrightarrow
+\|q\|_{L^1}
+\le
+\|\texttt{tripleProduct}(f,g,h)\|.
+\]
+
+The proof operates at the `eLpNorm` level and normalizes `pFinal = 1`; it performs no dependent transport of an indexed `Lp` object.
+
+Its root implication is
+
+\[
+\texttt{PointwiseLpData}
+\Longrightarrow
+\texttt{NSEPairingRealization}.
+\]
+
+Thus the independent norm-level field
 
 ```text
 NSEPairingRealization.pointwiseLift
 ```
 
-which lifts the concrete almost-everywhere pointwise domination to the corresponding \(L^1\)-norm inequality.
+is replaced by the concrete almost-everywhere field
+
+```text
+PointwiseLpData.pointwise
+```
+
+pending native compiler and theorem-audit evidence.
 
 ## Remaining principal targets
 
-1. discharge `NSEPairingRealization.pointwiseLift` from concrete periodic fields;
+1. discharge `PointwiseLpData.pointwise` from concrete periodic representatives and the A-tier pointwise pairing theorem;
 2. `PeriodicHhalfL3`;
 3. rough \(H^{1/2}\) local existence / continuation interface;
 4. final `H12_SIGMA_SMALL_GLOBAL_REGULARITY` root compiler.
