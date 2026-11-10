@@ -1,0 +1,67 @@
+NSE_NOH_CACHED_FIX21 — A_TIER_CANDIDATE
+Native compiler target: Lean 4.33.0 on Windows x86_64-w64, precompiled Mathlib cache.
+NO_LOCAL_LEAN — run.cmd is exclusively for the user's external native compiler.
+
+FROZEN UNCONDITIONAL ROOT (UNCHANGED)
+NSE_NOH.NSE_NOH := ∀ ν>0, ∀ a : L2Vector 3,
+  WeakDivergenceFree 3 a → WeakX1Invariant a → Nonempty (NOHSolution ν a).
+
+NATIVE EVIDENCE SUPPLIED FOR FIX20
+The user provided matching Windows native output with the declarations and the
+standard-only theorem-level axiom dependencies [propext, Classical.choice, Quot.sound]:
+ * mFourier_modeEmbedding2, mFourier_zeroFirst
+ * finiteFourier3_zeroFirst_factorization
+ * torusProjection2_update_first; finiteFourier3_zeroFirst_invariant
+ * complexL2Pullback_closedRange; complexL2Pullback_fourierMode
+ * complexL2_zeroFirstSpectral_factorization
+ and all previous FIX19 endpoint declarations.
+Conclusion: !! A_TIER for the exact independent FIX20 endpoints, NOT the root.
+
+NEW FIX21 INDEPENDENT PORTION — NATIVE PROOF EVIDENCE PENDING
+Module: NSE_NOH_FourierWeakTest.lean
+ * firstFourierMultiplier(k) := -2*pi*i*k₀ in complex numbers.
+ * firstFourierModeTest(a,k) := ∫_{T³} firstFourierMultiplier(k) •
+      (mFourier(-k)(x) • a(x)) dx, an ACTUAL Bochner integral.
+ * firstFourierModeTest_eq_multiplier:
+      firstFourierModeTest(a,k) = firstFourierMultiplier(k) • FourierCoeff(a,k).
+ * firstFourierMultiplier_ne_zero: k₀ ≠ 0 implies multiplier ≠ 0.
+ * firstFourierModeTest_zero_iff_zeroFirst:
+      [∀ k, test(a,k)=0] iff [∀k, k₀≠0 → FourierCoeff(a,k)=0].
+ * complexL2_firstFourierModeTest_factorization:
+      [∀k, test(a,k)=0] → ∃w∈L²(T²;C), P₂w=a.
+ * complexL2_threeComponentFirstFourierModeTest_factorization:
+      all three component Fourier-mode integral tests vanish → ∃
+      planar complex L² preimages w and v.
+
+MATHEMATICAL VERIFICATION
+The preceding statements follow by complex linearity of the Bochner
+integral, the no-zero-divisors property of C, and the native-verified
+FIX20 spectral factorization. They do NOT assert the original cubical
+WeakX1Invariant hypothesis already implies the new tests vanish.
+
+THE PRINCIPAL REMAINING INTERFACE
+Prove the bridge from the original REAL three-component, unit-cube,
+smooth-periodic-test definition of WeakX1Invariant to complex torus
+Fourier-mode test zero. This needs periodic coordinate differentiation,
+complexification of real vector L² classes, and unit-cube/Haar measure
+compatibility (including a.e. representatives).
+Also OPEN: planar weak divergence, global unforced 2D rough L² NSE,
+passive scalar smoothing, and the complete strong-trace energy lift.
+
+FIX21 STATUS
+SOURCE_SCAN=STATIC_PASS (script verification only)
+ZIP_INTEGRITY=PASS (script verification only)
+FOURIER_WEAK_TEST_BUILD=PENDING_EXTERNAL_WINDOWS_COMPILER
+NEW_THEOREM_AXES=A_TIER_CANDIDATE
+UNCONDITIONAL_NSE_NOH=OPEN
+A_TIER_ROOT=NOT_ESTABLISHED
+FORMAL_CLOSURE=NOT_ESTABLISHED
+
+EXPECTED NATIVE CHECKS
+SOURCE_SCAN=PASS
+FOURIER_SPECTRAL_BUILD=PASS
+FOURIER_WEAK_TEST_BUILD=PASS
+PROJECT_BUILD=PASS
+AXIOM_AUDIT_NO_SORRYAX=PASS
+And verify all new theorem-level #print axioms outputs use approved
+standard axioms only. A failed compiler result does not establish A_TIER.
