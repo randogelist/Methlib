@@ -1,0 +1,33 @@
+import H12_FOURIER_FOUNDATIONS
+import H12_SPECTRAL_ENERGY_BRIDGE
+import H12_CRITICAL_ABSORPTION
+import H12_CRITICAL_TRILINEAR_COMPILER
+import H12_HOLDER_LP_ADAPTER
+import NSE_POINTWISE_PAIRING_IDENTIFICATION
+import NSE_PAIRING_POINTWISE_LP_LIFT
+import NSE_PHYSICAL_LP_DATA_CONSTRUCTION
+import PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS
+import PERIODIC_HHALF_L3_COMPONENT_COMPILER
+
+set_option autoImplicit false
+
+/-!
+Native-passed import surface for `regularity-B-assembly/pkg1`.
+
+This file imports only modules with matching native Windows Lean 4.33.0
+compiler evidence and theorem-level `STANDARD_ONLY` axiom audits.
+
+It deliberately excludes the current unpassed frontier modules, including
+`SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER`.
+-/
+
+#check H12FourierFoundations.H12_FOURIER_FOUNDATIONS
+#check H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE
+#check H12CriticalAbsorption.H12_CRITICAL_ABSORPTION
+#check H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER
+#check H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER
+#check NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION
+#check NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT
+#check NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION
+#check PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS
+#check PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER
