@@ -1,0 +1,1299 @@
+NSE_DECOMP
+B_TIER MATHEMATICAL DERIVATION AND LEAN IDENTITY MAP
+Version: v0_2_0
+Date: 2026-11-10
+Mode: B_TIER_DERIVATION
+Status: ! B_TIER
+
+No Lean source is generated or compiled by this document.
+No external Lean kernel audit is claimed.
+No A_TIER, FORMAL_CLOSURE, or UNCONDITIONAL_CLOSURE claim is made.
+
+Canonical root name:
+  NSE_DECOMP
+
+Descriptive alias:
+  NSE_2D3C_ROUGH_TRACE_GLOBAL_SMOOTH_INTERIOR
+
+===============================================================================
+0. EXACT FROZEN SCOPE
+===============================================================================
+
+Let
+
+  T^d := (R/Z)^d
+
+be the unit d-dimensional torus with normalized Haar measure, and let nu > 0.
+
+Define the horizontal variable
+
+  x_h := (x_1,x_2) in T^2.
+
+For
+
+  v = (v_1,v_2) in L^2(T^2;R^2),
+  w in L^2(T^2),
+
+define the 2D3C lift J by
+
+  J(v,w)(x_h,x_3) := (v_1(x_h),v_2(x_h),w(x_h))
+
+as an equivalence class in L^2(T^3;R^3).
+
+This definition is to be interpreted through the measure-preserving horizontal
+projection pi_h : T^3 -> T^2, not through a chosen pointwise representative:
+
+  J(v,w) = (v_1 o pi_h, v_2 o pi_h, w o pi_h).
+
+Define
+
+  X_2D3C^{L2}
+    :=
+    { J(v_0,w_0) |
+        v_0 in L^2(T^2;R^2),
+        div_h v_0 = 0 in distributions,
+        w_0 in L^2(T^2) }.
+
+Equivalently, X_2D3C^{L2} is the subspace of divergence-free L^2 fields whose
+Fourier coefficients vanish whenever k_3 != 0.
+
+FROZEN ROOT THEOREM — NSE_DECOMP.
+
+For every nu > 0 and every u_0 in X_2D3C^{L2}, there exists a velocity u and a
+distributional pressure p such that
+
+  partial_t u + (u . grad)u + grad p = nu Delta u,
+  div u = 0,
+  u(0) = u_0 strongly in L^2,
+
+and
+
+  u in C([0,infinity);L^2_sigma(T^3)),
+  u in L^2_loc([0,infinity);H^1_sigma(T^3)),
+  u in C^infinity((0,infinity) x T^3).
+
+The velocity u is unique among ALL periodic three-dimensional Leray-Hopf
+solutions with datum u_0, including competitors not assumed a priori to be
+independent of x_3. The pressure is unique only modulo an additive function of
+time.
+
+The solution remains in X_2D3C^{L2} for all t >= 0 and satisfies the energy
+equality
+
+  (1/2)||u(t)||_2^2
+    + nu int_0^t ||grad u(s)||_2^2 ds
+  = (1/2)||u_0||_2^2.                                  (E_U)
+
+STRICT-EXCLUSION COROLLARY.
+
+If
+
+  u_0 in X_2D3C^{L2}
+       intersect (L^2_sigma(T^3) \ H^(1/2)_sigma(T^3)),
+
+then
+
+  u_0 notin H^(1/2)_sigma(T^3),
+
+while
+
+  u(t) in C^infinity(T^3) for every t > 0.
+
+This is the exact boundary-non-H^(1/2), interior-C^infinity theorem.
+
+The unrestricted statement
+
+  for all u_0 in L^2_sigma(T^3), u(t) is smooth for all t>0
+
+is NOT asserted.
+
+===============================================================================
+1. THE L2 2D3C LIFT
+===============================================================================
+
+Let pi_h : T^3 -> T^2 be the projection
+
+  pi_h(x_1,x_2,x_3) = (x_1,x_2).
+
+Because normalized Haar measure on the omitted T factor has total mass one,
+pi_h is measure preserving. Composition with pi_h therefore defines an
+isometric L^2 lift.
+
+For scalar f in L^2(T^2),
+
+  ||f o pi_h||_{L^2(T^3)} = ||f||_{L^2(T^2)}.
+
+For J(v,w),
+
+  ||J(v,w)||_{L^2(T^3)}^2
+    = ||v||_{L^2(T^2)}^2 + ||w||_{L^2(T^2)}^2.           (L2-SPLIT)
+
+The lift is injective. Thus
+
+  X_2D3C^{L2}
+    is isometrically isomorphic to
+  L^2_sigma(T^2;R^2) direct_sum L^2(T^2).
+
+At the Fourier level,
+
+  Fourier[J(v,w)](k_1,k_2,k_3) = 0 when k_3 != 0,
+
+and
+
+  Fourier[J(v,w)](k_1,k_2,0)
+    = (Fourier[v_1](k_h),Fourier[v_2](k_h),Fourier[w](k_h)).
+
+The three-dimensional solenoidal condition at k_3=0 is
+
+  k_1 Fourier[v_1](k_h) + k_2 Fourier[v_2](k_h) = 0,
+
+which is exactly div_h v = 0. No condition is imposed on Fourier[w](k_h).
+
+===============================================================================
+2. EXACT ALGEBRAIC REDUCTION
+===============================================================================
+
+First take smooth v,w. Put
+
+  U := J(v,w).
+
+Then
+
+  partial_3 U = 0,
+
+and
+
+  div U
+    = partial_1 v_1 + partial_2 v_2 + partial_3 w
+    = div_h v.
+
+Also,
+
+  Delta U
+    = J(Delta_h v, Delta_h w).
+
+For the nonlinear term,
+
+  U . grad
+    = v_1 partial_1 + v_2 partial_2 + w partial_3
+    = v . grad_h,
+
+because partial_3 U = 0. Therefore
+
+  (U . grad)U
+    = J((v . grad_h)v, (v . grad_h)w).                   (ALG)
+
+If p=p(x_h,t) is independent of x_3, the three-dimensional NSE is equivalent
+inside the 2D3C class to the triangular system
+
+  partial_t v + (v . grad_h)v + grad_h p
+    = nu Delta_h v,                                     (V)
+
+  div_h v = 0,
+
+  partial_t w + v . grad_h w
+    = nu Delta_h w.                                     (W)
+
+The coupling is one-way:
+
+  v -> w,
+  w -/-> v.
+
+This is the exact structural decomposition supporting NSE_DECOMP.
+
+===============================================================================
+3. GLOBAL TWO-DIMENSIONAL VELOCITY FROM L2 DATA
+===============================================================================
+
+Fix
+
+  v_0 in L^2_sigma(T^2;R^2).
+
+3.1 Galerkin existence.
+
+Let P_N be the divergence-free Fourier projection to |k_h| <= N. The finite
+system
+
+  partial_t v_N
+    + P_N((v_N . grad_h)v_N)
+    = nu Delta_h v_N,
+  v_N(0)=P_N v_0
+
+has a global solution because its energy satisfies
+
+  (1/2)d/dt ||v_N||_2^2 + nu||grad_h v_N||_2^2 = 0.
+
+Hence
+
+  sup_t ||v_N(t)||_2^2
+    + 2nu int_0^T ||grad_h v_N||_2^2 dt
+  <= ||v_0||_2^2.                                      (V-GAL)
+
+Compactness gives a global weak limit v satisfying
+
+  v in L^infinity_loc([0,infinity);L^2_sigma(T^2)),
+  v in L^2_loc([0,infinity);H^1_sigma(T^2)),
+  v in C_w([0,infinity);L^2_sigma(T^2)),
+
+and the two-dimensional NSE.
+
+The standard energy argument yields strong continuity at zero and, after
+identifying the unique solution below, energy equality:
+
+  (1/2)||v(t)||_2^2
+    + nu int_0^t ||grad_h v(s)||_2^2 ds
+  = (1/2)||v_0||_2^2.                                  (E_V)
+
+3.2 Uniqueness in the two-dimensional energy class.
+
+Let v^(1),v^(2) be two energy solutions with the same datum and set
+
+  d := v^(1)-v^(2).
+
+The difference equation and divergence cancellation give
+
+  (1/2)d/dt ||d||_2^2 + nu||grad_h d||_2^2
+    = -int_T2 (d . grad_h)v^(2) . d.
+
+The torus Ladyzhenskaya inequality is
+
+  ||f||_4^2
+    <= C_L (||f||_2||grad_h f||_2 + ||f||_2^2).          (LADY)
+
+Consequently,
+
+  |int (d . grad_h)v^(2) . d|
+    <= ||grad_h v^(2)||_2 ||d||_4^2
+
+    <= C_L ||grad_h v^(2)||_2 ||d||_2||grad_h d||_2
+       + C_L ||grad_h v^(2)||_2 ||d||_2^2
+
+    <= (nu/2)||grad_h d||_2^2
+       + [C_L||grad_h v^(2)||_2
+          + C_L^2/(2nu)||grad_h v^(2)||_2^2]||d||_2^2.
+
+The coefficient belongs to L^1(0,T) by (E_V). Gronwall and d(0)=0 give d=0.
+Thus the two-dimensional energy solution is unique.
+
+3.3 Positive-time regularity.
+
+For almost every s>0,
+
+  v(s) in H^1_sigma(T^2),
+
+because grad_h v belongs to L^2_loc in time.
+
+For an H^1 slice, define scalar vorticity
+
+  omega := partial_1 v_2 - partial_2 v_1.
+
+It satisfies
+
+  partial_t omega + v . grad_h omega = nu Delta_h omega.
+
+Testing by omega gives the enstrophy equality
+
+  (1/2)||omega(t)||_2^2
+    + nu int_s^t ||grad_h omega(r)||_2^2 dr
+  = (1/2)||omega(s)||_2^2.                              (ENS)
+
+There is no vortex-stretching term in dimension two. The bound (ENS), elliptic
+control on the torus, and parabolic bootstrapping give a global strong
+continuation from s that is C^infinity for every later time.
+
+For any fixed t_*>0, choose an H^1 time s in (0,t_*). Two-dimensional
+energy-class uniqueness identifies the original weak solution with the smooth
+continuation on [s,infinity). Therefore
+
+  v in C^infinity((0,infinity) x T^2).                   (SMOOTH-V)
+
+No smallness assumption is used.
+
+===============================================================================
+4. GLOBAL PASSIVE COMPONENT FROM L2 DATA
+===============================================================================
+
+Fix the velocity v from Section 3 and let
+
+  w_0 in L^2(T^2).
+
+Consider
+
+  partial_t w + v . grad_h w = nu Delta_h w,
+  w(0)=w_0.                                             (W)
+
+4.1 Existence and energy.
+
+Finite-dimensional approximation and the identity div_h v=0 give
+
+  int_T2 (v . grad_h w)w
+    = (1/2)int_T2 v . grad_h(w^2)
+    = 0.
+
+Therefore a global weak solution exists with
+
+  w in C([0,infinity);L^2(T^2)),
+  w in L^2_loc([0,infinity);H^1(T^2)),
+
+and
+
+  (1/2)||w(t)||_2^2
+    + nu int_0^t ||grad_h w(s)||_2^2 ds
+  = (1/2)||w_0||_2^2.                                  (E_W)
+
+4.2 Uniqueness.
+
+If q is the difference of two solutions with the same datum, then
+
+  partial_t q + v . grad_h q = nu Delta_h q,
+  q(0)=0.
+
+The same energy identity gives q=0.
+
+4.3 Positive-time smoothing.
+
+Fix t_*>0. By (SMOOTH-V), v is smooth on every closed strip
+
+  [delta,t_*] x T^2, delta>0.
+
+The equation for w is uniformly parabolic with smooth drift on such strips.
+Starting from the L^2 state at a time below t_*, standard linear parabolic
+regularization gives
+
+  w in C^infinity((0,infinity) x T^2).                   (SMOOTH-W)
+
+Equivalently, differentiated energy estimates on [delta,T] yield recursively
+
+  sup_[delta,T] ||w(t)||_{H^m}^2
+    + nu int_delta^T ||w(t)||_{H^(m+1)}^2 dt
+  < infinity
+
+for every m, followed by Sobolev and time-derivative bootstrapping.
+
+===============================================================================
+5. RECONSTRUCTION AS A 3D LERAY-HOPF SOLUTION
+===============================================================================
+
+Define
+
+  U(t) := J(v(t),w(t)),
+  P(x_h,x_3,t) := p_v(x_h,t).
+
+The algebraic identities in Section 2 imply that (U,P) solves the
+three-dimensional periodic NSE in distributions.
+
+The norm and gradient split:
+
+  ||U(t)||_{L^2(T^3)}^2
+    = ||v(t)||_{L^2(T^2)}^2 + ||w(t)||_{L^2(T^2)}^2,
+
+  ||grad U(t)||_{L^2(T^3)}^2
+    = ||grad_h v(t)||_{L^2(T^2)}^2
+      + ||grad_h w(t)||_{L^2(T^2)}^2.
+
+Adding (E_V) and (E_W) gives (E_U).
+
+Strong L^2 continuity of v and w gives
+
+  lim_(t downarrow 0)||U(t)-u_0||_2 = 0.
+
+Sections 3 and 4 give
+
+  U in C^infinity((0,infinity) x T^3).
+
+Thus a global positive-time smooth 2D3C Leray-Hopf solution exists.
+
+===============================================================================
+6. UNIQUENESS AGAINST EVERY 3D LERAY-HOPF COMPETITOR
+===============================================================================
+
+This section is the load-bearing strengthening. The competitor need not be
+2D3C.
+
+Let Y be any three-dimensional periodic Leray-Hopf solution satisfying
+
+  Y(0)=u_0 strongly in L^2,
+
+and let
+
+  Z := Y-U.
+
+6.1 Relative energy from a positive start time.
+
+Fix T>0. Let tau in (0,T) be a strong-energy starting time for Y. Such times
+have full measure and can be chosen in a sequence tau_n downarrow 0.
+
+Since U is smooth on [tau,T], the weak-strong comparison gives
+
+  (1/2)||Z(t)||_2^2
+    + nu int_tau^t ||grad Z(s)||_2^2 ds
+
+  <= (1/2)||Z(tau)||_2^2
+     + int_tau^t int_T3 |Z|^2 |grad_h U| dx ds            (RE)
+
+for t in [tau,T].
+
+Only grad_h U appears because partial_3 U=0.
+
+6.2 Vertical square function.
+
+For almost every time s define
+
+  G_s(x_h)
+    := (int_T |Z(x_h,x_3,s)|^2 dx_3)^(1/2).
+
+Fubini gives
+
+  ||G_s||_{L^2(T^2)} = ||Z(s)||_{L^2(T^3)}.               (G0)
+
+The Sobolev chain rule for the norm of an L^2(T)-valued map gives
+
+  G_s in H^1(T^2),
+
+and
+
+  |partial_i G_s(x_h)|
+    <= (int_T |partial_i Z(x_h,x_3,s)|^2 dx_3)^(1/2)
+
+for i=1,2. Therefore
+
+  ||grad_h G_s||_{L^2(T^2)}
+    <= ||grad_h Z(s)||_{L^2(T^3)}
+    <= ||grad Z(s)||_{L^2(T^3)}.                          (G1)
+
+6.3 Anisotropic convection estimate.
+
+Set
+
+  A(s) := ||grad_h U(s)||_{L^2(T^2)}.
+
+Then by Holder on T^2, (G0), (G1), and (LADY),
+
+  int_T3 |Z|^2 |grad_h U| dx
+    = int_T2 G_s^2 |grad_h U| dx_h
+
+    <= A(s)||G_s||_4^2
+
+    <= C_L A(s)
+       [||Z(s)||_2^2 + ||Z(s)||_2||grad Z(s)||_2]
+
+    <= (nu/2)||grad Z(s)||_2^2
+       + [C_L A(s) + C_L^2/(2nu) A(s)^2]||Z(s)||_2^2.     (ANISO)
+
+By (E_U),
+
+  int_0^T A(s)^2 ds < infinity.
+
+Hence A belongs to L^2(0,T), and therefore also to L^1(0,T). Thus
+
+  g(s) := 2C_L A(s) + C_L^2/nu A(s)^2
+
+belongs to L^1(0,T).
+
+6.4 Gronwall and the initial boundary.
+
+Insert (ANISO) into (RE), absorb the gradient term, and apply variable-coefficient
+integral Gronwall:
+
+  ||Z(t)||_2^2
+    <= ||Z(tau)||_2^2 exp(int_tau^t g(s) ds).             (GR)
+
+Choose strong-energy starting times tau_n downarrow 0. Both Y and U attain u_0
+strongly in L^2, so
+
+  ||Z(tau_n)||_2 -> 0.
+
+The exponential factors are uniformly bounded by
+
+  exp(int_0^T g(s) ds) < infinity.
+
+Letting n->infinity in (GR) gives
+
+  ||Z(t)||_2=0.
+
+Therefore
+
+  Y=U
+
+on [0,T]. Since T was arbitrary, uniqueness holds globally among all
+three-dimensional Leray-Hopf solutions.
+
+FORMALIZATION NOTE.
+
+A proof system whose Leray-Hopf structure stores only the energy inequality
+from time zero must add one of the following equivalent bridges:
+
+  (i) strong energy inequality from almost every positive starting time; or
+  (ii) a zero-start relative-energy theorem obtained by time-space
+       regularization of U.
+
+This is a formal interface issue, not an additional mathematical hypothesis.
+
+===============================================================================
+7. H^(1/2) SPLITTING
+===============================================================================
+
+Use the unit-torus Fourier norm
+
+  ||f||_{H^(1/2)(T^d)}^2
+    := sum_(k in Z^d) (1 + 4pi^2|k|^2)^(1/2)|f_hat(k)|^2.
+
+Since J(v,w) has support only at k_3=0,
+
+  ||J(v,w)||_{H^(1/2)(T^3)}^2
+    =
+  ||v||_{H^(1/2)(T^2)}^2
+    + ||w||_{H^(1/2)(T^2)}^2.                            (H12-SPLIT)
+
+Consequently,
+
+  J(v,w) notin H^(1/2)(T^3)
+
+if and only if at least one of v,w is not in H^(1/2)(T^2).
+
+Combining (H12-SPLIT) with Sections 3-6 proves the strict-exclusion
+corollary.
+
+===============================================================================
+8. EXPLICIT ROUGH SHEAR SUBFAMILIES
+===============================================================================
+
+8.1 Fourier-logarithmic shear.
+
+Let
+
+  F(x_2)
+    := sum_(k>=1) (1/k) cos(2pi k x_2)
+
+with convergence in L^2(T). Then
+
+  ||F||_2^2 asymp sum_(k>=1) 1/k^2 < infinity,
+
+while
+
+  ||F||_{dot H^(1/2)}^2
+    asymp sum_(k>=1) k*(1/k^2)
+    = sum_(k>=1) 1/k
+    = infinity.
+
+Define
+
+  u_0(x_1,x_2,x_3) := (F(x_2),0,0).
+
+Then
+
+  u_0 in L^2_sigma(T^3) \ H^(1/2)_sigma(T^3).
+
+The exact trajectory is
+
+  u(x,t)
+    =
+    ( sum_(k>=1) exp(-4pi^2 nu k^2 t)/k cos(2pi kx_2),
+      0,
+      0 ).
+
+The nonlinear term vanishes:
+
+  (u . grad)u = u_1 partial_1 u = 0.
+
+This is the first formal milestone.
+
+8.2 L2 but not L3 shear.
+
+Let d_T(x,0) be periodic distance to zero and set
+
+  F_*(x)
+    := d_T(x,0)^(-2/5) - mean_T[d_T(.,0)^(-2/5)].
+
+Then
+
+  F_* in L^p(T) exactly for p < 5/2.
+
+In particular,
+
+  F_* in L^1(T) intersect L^2(T),
+  F_* notin L^3(T).
+
+Let u_0=(F_*(x_2),0,0). Then
+
+  u_0 in L^1_sigma(T^3) intersect L^2_sigma(T^3),
+  u_0 notin L^3_sigma(T^3).
+
+Since
+
+  H^(1/2)(T^3) embeds into L^3(T^3),
+
+one has
+
+  u_0 notin H^(1/2)_sigma(T^3).
+
+Its exact heat-shear solution is again C^infinity for every positive time.
+
+===============================================================================
+9. B_TIER OBLIGATION REGISTER
+===============================================================================
+
+The exact theorem is reduced to the following named analytic edges:
+
+  B01. L2 lift from T^2 to T^3 and norm splitting.
+  B02. Fourier support characterization k_3=0.
+  B03. Smooth 2D3C algebraic reduction.
+  B04. Global periodic 2D L2 Navier-Stokes existence.
+  B05. Two-dimensional energy equality and uniqueness.
+  B06. Positive-time smoothness for the 2D velocity.
+  B07. Global L2 passive advection-diffusion existence.
+  B08. Passive scalar energy equality and uniqueness.
+  B09. Positive-time passive-scalar smoothing.
+  B10. Reconstruction as a 3D Leray-Hopf solution.
+  B11. Relative-energy comparison from positive times.
+  B12. Vertical square-function H1 estimate.
+  B13. Torus 2D Ladyzhenskaya inequality.
+  B14. Anisotropic convection estimate (ANISO).
+  B15. Variable-coefficient integral Gronwall.
+  B16. Passage tau downarrow 0 by strong L2 trace.
+  B17. H^(1/2) Fourier splitting.
+  B18. Explicit rough-shear Fourier witness.
+
+Sections 1-8 provide a complete derivation of the root theorem from these standard
+analytic ingredients, including the load-bearing uniqueness estimate B14.
+
+===============================================================================
+10. GITHUB / LEAN IDENTITY AUDIT
+===============================================================================
+
+The audit below distinguishes:
+
+  REUSABLE:
+    exact declaration with matching or adaptable mathematical content;
+
+  ADAPTER:
+    useful infrastructure, but not the theorem endpoint itself;
+
+  MISSING:
+    no matching declaration found in the inspected sources.
+
+-------------------------------------------------------------------------------
+10A. USER METHLIB — REUSABLE FOURIER AND POINTWISE INFRASTRUCTURE
+-------------------------------------------------------------------------------
+
+Repository:
+  randogelist/Methlib
+
+10A.1 Fourier carrier and heat multiplier.
+
+File:
+  regularity-B-assembly/pkg1/H12_FOURIER_FOUNDATIONS.lean
+
+Existing declarations include:
+
+  H12FourierFoundations.Mode3
+  H12FourierFoundations.RVec3
+  H12FourierFoundations.CVec3
+  H12FourierFoundations.modeReal
+  H12FourierFoundations.modeComplex
+  H12FourierFoundations.freq
+  H12FourierFoundations.freq_nonneg
+  H12FourierFoundations.freq_zero
+  H12FourierFoundations.freq_neg
+  H12FourierFoundations.freq_add_le
+  H12FourierFoundations.solenoidalSubmodule
+  H12FourierFoundations.SolenoidalAt
+  H12FourierFoundations.leray
+  H12FourierFoundations.leray_solenoidal
+  H12FourierFoundations.leray_norm_le
+  H12FourierFoundations.hhalfTerm
+  H12FourierFoundations.hthreeHalfTerm
+  H12FourierFoundations.H12Datum
+  H12FourierFoundations.heatFactor
+  H12FourierFoundations.heatFactor_pos
+  H12FourierFoundations.heatFactor_le_one
+  H12FourierFoundations.heatCoeff
+  H12FourierFoundations.heatCoeff_zero_time
+  H12FourierFoundations.heatCoeff_solenoidal
+  H12FourierFoundations.hhalfTerm_heat_le
+  H12FourierFoundations.heatDatum
+  H12FourierFoundations.derivSymbol
+  H12FourierFoundations.advectiveScalar
+  H12FourierFoundations.rawTransportCoeff
+  H12FourierFoundations.projectedTransportCoeff
+  H12FourierFoundations.torus_fourier_add
+
+Classification:
+
+  REUSABLE:
+    mode algebra, solenoidal projection, heat factor, derivative symbol,
+    convolution indexing;
+
+  NOT A ROOT CARRIER:
+    H12Datum includes H^(1/2) summability in its structure. It cannot represent
+    the strict L^2 \ H^(1/2) inputs of NSE_DECOMP.
+
+Required amendment:
+
+  define an L2FourierDatum carrier with square summability and real conjugation
+  symmetry, then reuse heatCoeff at that lower regularity.
+
+10A.2 Finite-support torus Parseval.
+
+File:
+  regularity-B-assembly/pkg2/CEA07E_TorusParseval.lean
+
+Existing declarations include:
+
+  CEATheta.TorusL2
+  CEATheta.torus_scalar_finite_parseval
+  CEATheta.Torus3ScalarL2
+  CEATheta.Torus3VectorL2
+  CEATheta.torus3_vector_finite_parseval
+  CEATheta.torus3_l2_dictionary_field
+
+Classification:
+
+  ADAPTER:
+    useful for finite Galerkin modes and explicit shear partial sums;
+
+  LIMIT:
+    finite Fourier support only; completion to arbitrary L2 requires the
+    Hilbert-basis/Parseval layer below.
+
+10A.3 Pointwise convection and Holder adapters.
+
+Files:
+
+  H12_POINTWISE_CONVECTION_SQUARE.lean
+  H12_HOLDER_LP_ADAPTER.lean
+  NSE_POINTWISE_PAIRING_IDENTIFICATION.lean
+  NSE_PAIRING_POINTWISE_LP_LIFT.lean
+  NSE_PHYSICAL_LP_DATA_CONSTRUCTION.lean
+  PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean
+
+Existing declarations include:
+
+  dot3
+  sqNorm3
+  frobeniusSq
+  convection
+  pairing
+  dot3_sq_le
+  convection_component_sq_le
+  convection_sqNorm_le
+  pairing_sq_le
+  tripleProduct
+  tripleProduct_norm_le
+  CriticalPairingRealization
+  pointwisePairing
+  advection_norm_le
+  abs_pointwisePairing_le
+  NSEPairingRealization
+  PhysicalLpData
+  PeriodicStrongSlice
+  periodicStrongSlice_has_rawPhysicalFields
+
+Classification:
+
+  REUSABLE ADAPTERS:
+    pointwise algebra, Holder packaging, and physical pairing domination;
+
+  MISSING:
+    the anisotropic mixed-norm estimate B12-B14 is not present.
+
+10A.4 Adjusted Fefferman-B package.
+
+Existing declarations include:
+
+  Fefferman.ConcreteReal.shiftSolution
+  Fefferman.ConcreteReal.shiftInitial
+  Fefferman.ConcreteReal.AdjustedB.SmallPeriodicSeed
+  Fefferman.ConcreteReal.AdjustedB.GlobalPositiveFlow
+  Fefferman.ConcreteReal.AdjustedB.PositiveTimeState
+  Fefferman.ConcreteReal.AdjustedB.shifted_global_solution
+  Fefferman.ConcreteReal.AdjustedB.FEF_B_POSITIVE_TIME
+  Fefferman.ConcreteReal.AdjustedB.FiniteHistory
+  Fefferman.ConcreteReal.AdjustedB.FinitePositiveTimeState
+  Fefferman.ConcreteReal.AdjustedB.SeedExtension
+
+Classification:
+
+  LATE ADAPTER ONLY.
+
+Its root implication time-shifts an already supplied global smooth flow. Its
+initial-data predicate requires a smooth datum. It does not provide:
+
+  rough L2 initial data,
+  Leray-Hopf existence,
+  2D3C decomposition,
+  positive-time smoothing from an L2 trace,
+  arbitrary-3D uniqueness.
+
+-------------------------------------------------------------------------------
+10B. UDA-LAB/LERAY-HOPF — MAJOR L2 FOUNDATION
+-------------------------------------------------------------------------------
+
+Repository:
+  uda-lab/leray-hopf
+
+Inspected source pin:
+  GitHub search snapshot: e704400f2fb2f26b2ee7f4372c3e1ecbbc82f3dc
+
+Repository toolchain:
+  Lean 4.31.0-rc2
+
+Pinned mathlib revision:
+  15a89b2468bc01f1a6230d6e49ef5efc5286e502
+
+This version does not match the user's current Lean 4.34.0-rc1 / 4.33
+environment. Reuse therefore requires either:
+
+  (a) a pinned 4.31 compatibility lane; or
+  (b) a controlled port to the target compiler.
+
+10B.1 Torus and L2 carriers.
+
+Files:
+
+  LerayHopf/Torus/Basic.lean
+  LerayHopf/Torus/Domain.lean
+  LerayHopf/Torus/FunctionSpaces.lean
+  LerayHopf/Torus/Leray.lean
+
+Existing declarations include:
+
+  LerayHopf.Time
+  LerayHopf.Torus3
+  LerayHopf.VelocityValue
+  LerayHopf.haarTorus3
+  LerayHopf.volume_torus3_eq_haarTorus3
+  LerayHopf.L2VF
+  LerayHopf.L2C
+  LerayHopf.torus3_mFourierBasis
+  LerayHopf.mFourierCoeff3
+  LerayHopf.L2C_norm_sq_eq_tsum_coeff_sq
+  LerayHopf.fourierCoeffCLM
+  LerayHopf.divSymbol
+  LerayHopf.fourierCoeffCLM_apply
+  LerayHopf.divSymbol_apply
+  LerayHopf.divFreeL2_iff_divSymbol
+  LerayHopf.L2Sigma
+  LerayHopf.mem_L2Sigma_iff
+  LerayHopf.isClosed_L2Sigma
+  LerayHopf.lerayProjection_idempotent
+  LerayHopf.lerayProjection_fixes_divFree
+  LerayHopf.lerayProjection_range
+  LerayHopf.lerayProjection_isSymmetric
+  LerayHopf.lerayProjection_norm_le
+
+Classification:
+
+  DIRECTLY REUSABLE FOUNDATION.
+
+This supplies the correct rough L2 carrier missing from H12Datum.
+
+10B.2 H1 and dissipation layer.
+
+File:
+  LerayHopf/Torus/H1Sigma.lean
+
+Existing declarations include:
+
+  LerayHopf.h1EnergySq
+  LerayHopf.h1EnergySq_nonneg
+  LerayHopf.memH1VF
+  LerayHopf.memH1Sigma
+  LerayHopf.viscousFormSq
+  LerayHopf.viscousFormSq_nonneg
+  LerayHopf.rellich_L2Sigma
+
+Classification:
+
+  DIRECTLY REUSABLE for the energy-class and compactness parts.
+
+10B.3 Weak-solution structures.
+
+Files:
+
+  LerayHopf/EvolutionTriple.lean
+  LerayHopf/Galerkin/SolutionBundles.lean
+  LerayHopf/Galerkin/GlobalContract.lean
+
+Existing declarations include:
+
+  LerayHopf.DissipativeEvolution
+  LerayHopf.WeakFormNS
+  LerayHopf.Galerkin.LerayHopfSolution
+  LerayHopf.Galerkin.CompactnessPackage
+  LerayHopf.Galerkin.exists_lerayHopf_from_package
+  LerayHopf.Galerkin.IsLerayHopfOn
+  LerayHopf.Galerkin.LerayHopfSolution.isLerayHopfOn
+  LerayHopf.Galerkin.LerayHopfSolution.ofIsOn
+  LerayHopf.Galerkin.GlobalLerayHopfSolution
+  LerayHopf.Galerkin.GlobalLerayHopfSolution.toSolution
+  LerayHopf.Galerkin.IsLerayHopfOn.mono
+  LerayHopf.Galerkin.IsLerayHopfOn.congr_Icc
+
+The proof-carrying solution structure includes:
+
+  weak equation,
+  energy inequality,
+  strong one-sided L2 initial trace,
+  a.e. H1 membership,
+  interval-integrable dissipation,
+  time measurability.
+
+Classification:
+
+  DIRECTLY REUSABLE as the weak-solution contract, subject to the semantic
+  bridge below.
+
+SEMANTIC LIMIT:
+
+  WeakFormNS uses separated-variable tests psi(t)w(x), with w restricted to
+  Galerkin tests. The repository explicitly does not prove equivalence to the
+  standard arbitrary space-time test formulation.
+
+NSE_DECOMP therefore requires either:
+
+  (a) use this separated-test contract as the formal Leray-Hopf definition; or
+  (b) prove the separated-test-to-standard-weak-form equivalence.
+
+10B.4 Finite and global torus existence.
+
+Files:
+
+  LerayHopf/Torus/GalerkinODECapstone.lean
+  LerayHopf/Torus/GlobalCapstone.lean
+
+Existing declarations include:
+
+  LerayHopf.exists_lerayHopf_torus3
+  LerayHopf.GlobalTorusCapstoneStatement
+  LerayHopf.exists_global_lerayHopf_torus3
+  LerayHopf.GlobalLerayHopfSolutionFull
+  LerayHopf.exists_globalLerayHopfSolutionFull_torus3
+  LerayHopf.globalTorusCapstone
+
+The global declaration has the correct single-curve quantifier order:
+
+  exists F, exists u, forall T>0, IsLerayHopfOn ... u.
+
+Classification:
+
+  MAJOR REUSABLE EXISTENCE ENDPOINT.
+
+Repository-reported status:
+
+  kernel-only release surface with no project axioms and no sorryAx.
+
+Promotion restriction:
+
+  this report is a source inspection, not a matching external compiler/audit
+  transcript in the user's target environment. It does not promote NSE_DECOMP.
+
+10B.5 Explicit repository limitation.
+
+The repository states that no Navier-Stokes regularity or uniqueness theorem is
+formalized. Thus it does NOT supply:
+
+  B04-B09 in their 2D/2D3C form,
+  B11-B16,
+  positive-time smoothness,
+  2D3C uniqueness,
+  NSE_DECOMP.
+
+-------------------------------------------------------------------------------
+10C. LEANPOOL — RELATIVE ENERGY AND VARIABLE GRONWALL BLUEPRINT
+-------------------------------------------------------------------------------
+
+Repository:
+  LeanPool/lean-pool
+
+Toolchain:
+  Lean 4.35.0
+
+Relevant files:
+
+  LeanPool/EscauriazaSereginSverak/PartV/SerrinGronwall.lean
+  LeanPool/EscauriazaSereginSverak/PartV/SerrinRelativeEnergy.lean
+  LeanPool/EscauriazaSereginSverak/PartV/SerrinUniqueness.lean
+  LeanPool/EscauriazaSereginSverak/PartV/SerrinLerayHopf.lean
+
+Existing declarations include:
+
+  ESS.serrin_integral_gronwall_zero
+  ESS.serrin_relative_slice_bound_ae
+  ESS.serrin_relative_energy_inequality
+  ESS.serrin_weak_strong_uniqueness
+  ESS.lerayHopf_energy_inequality_real
+  ESS.lerayHopf_serrin_uniqueness
+
+Classification:
+
+  B15 DIRECT BLUEPRINT:
+    serrin_integral_gronwall_zero is a proved integral Gronwall theorem with an
+    integrable time-dependent coefficient.
+
+  B11 BLUEPRINT:
+    relative-energy and Leray-Hopf weak-strong uniqueness machinery exists.
+
+  NOT A DIRECT ROOT SOLUTION:
+    the formalized domain is R^3, and the criterion is the isotropic
+    space-time L^5 Serrin condition. General L2 2D3C solutions need the custom
+    anisotropic estimate (ANISO), not the L^5 endpoint.
+
+Compatibility restriction:
+
+  Lean 4.35.0 does not match the target compiler. The proof architecture can
+  be ported or copied only after dependency and axiom-cone inspection.
+
+-------------------------------------------------------------------------------
+10D. MATHLIB IDENTITIES
+-------------------------------------------------------------------------------
+
+10D.1 Multivariate torus Fourier analysis.
+
+File:
+  Mathlib/Analysis/Fourier/AddCircleMulti.lean
+
+Relevant declarations include:
+
+  UnitAddTorus.mFourier
+  UnitAddTorus.mFourier_add
+  UnitAddTorus.mFourier_zero
+  UnitAddTorus.mFourierLp
+  UnitAddTorus.orthonormal_mFourier
+  UnitAddTorus.mFourierCoeff
+  UnitAddTorus.mFourierBasis
+  UnitAddTorus.hasSum_sq_mFourierCoeff
+
+Classification:
+
+  DIRECTLY REUSABLE for:
+    Fourier support k_3=0,
+    Parseval,
+    the H^(1/2) splitting,
+    the explicit 1/k shear.
+
+10D.2 Lp composition under measure-preserving maps.
+
+Files:
+
+  Mathlib/MeasureTheory/Function/AEEqFun.lean
+  Mathlib/MeasureTheory/Function/LpSpace/Basic.lean
+  Mathlib/MeasureTheory/Function/LpSpace/ContinuousCompMeasurePreserving.lean
+
+Relevant declarations include:
+
+  AEEqFun.compMeasurePreserving
+  MeasureTheory.Lp.compMeasurePreserving
+  eLpNorm_compMeasurePreserving
+
+Classification:
+
+  DIRECTLY REUSABLE for the rigorous L2 lift J.
+
+10D.3 Product measure and Fubini.
+
+Files:
+
+  Mathlib/MeasureTheory/Constructions/Pi.lean
+  Mathlib/MeasureTheory/Integral/Pi.lean
+
+Relevant declarations include:
+
+  measurePreserving_pi
+  measurePreserving_eval
+  integral_prod
+  lintegral_prod
+
+Classification:
+
+  REUSABLE for:
+    horizontal projection measure preservation,
+    norm splitting,
+    vertical square functions,
+    mixed integrals.
+
+10D.4 Sobolev and Gronwall.
+
+Existing:
+
+  Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean
+  Mathlib/Analysis/ODE/Gronwall.lean
+  interval-integral absolute-continuity infrastructure.
+
+Limit:
+
+  no ready theorem named Ladyzhenskaya for T^2 was found;
+  Mathlib's basic Gronwall file does not directly replace the integrable
+  variable-coefficient theorem required by B15.
+
+-------------------------------------------------------------------------------
+10E. EXACT FORMAL GAPS AFTER THE AUDIT
+-------------------------------------------------------------------------------
+
+No inspected source supplies the following exact declarations:
+
+  M01. Torus2 and its normalized Haar product measure.
+  M02. horizontalProjection : Torus3 -> Torus2.
+  M03. measurePreserving_horizontalProjection.
+  M04. lift2D3C : L2(T2;R2) x L2(T2) -> L2VF.
+  M05. lift2D3C_norm_sq.
+  M06. lift2D3C_fourier_support.
+  M07. lift2D3C_mem_L2Sigma_iff.
+  M08. X2D3C_L2 as a closed submodule or image carrier.
+
+  M09. twoD3C_divergence.
+  M10. twoD3C_laplacian.
+  M11. twoD3C_convection.
+  M12. twoD3C_reduced_equations.
+
+  M13. periodic_twoD_l2_global.
+  M14. periodic_twoD_energy_equality.
+  M15. periodic_twoD_energy_unique.
+  M16. periodic_twoD_positive_time_smooth.
+
+  M17. passive_scalar_l2_global.
+  M18. passive_scalar_energy_equality.
+  M19. passive_scalar_unique.
+  M20. passive_scalar_positive_time_smooth.
+
+  M21. twoD3C_reconstruct_isLerayHopfOn.
+  M22. twoD3C_energy_equality.
+
+  M23. strong_energy_inequality_from_ae_time,
+       or an equivalent zero-start relative-energy theorem.
+  M24. verticalSquareFunction.
+  M25. verticalSquareFunction_l2.
+  M26. verticalSquareFunction_grad_le.
+  M27. torus2_ladyzhenskaya.
+  M28. twoD3C_anisotropic_convection_bound.
+  M29. twoD3C_relative_energy.
+  M30. twoD3C_unique_against_lerayHopf.
+
+  M31. periodic_hhalf.
+  M32. lift2D3C_hhalf_norm_split.
+  M33. roughShearCoeff.
+  M34. roughShear_l2.
+  M35. roughShear_not_hhalf.
+  M36. roughShear_exact_solution.
+
+  M37. standard-space-time-test semantic bridge, if standard Leray-Hopf
+       terminology is required rather than the separated-test contract.
+
+===============================================================================
+11. RECOMMENDED FORMAL PROOF SPINE
+===============================================================================
+
+Stage P0 — Carrier layer.
+
+  NSE_DECOMP/Torus2.lean
+  NSE_DECOMP/Lift2D3C.lean
+  NSE_DECOMP/FourierSupport.lean
+
+Targets:
+  M01-M08.
+
+Stage P1 — Exact rough shear milestone.
+
+  NSE_DECOMP/RoughShear.lean
+  NSE_DECOMP/RoughShearHeat.lean
+
+Targets:
+  M31-M36.
+
+This stage gives an unconditional exact example before the full nonlinear class.
+
+Stage P2 — Smooth algebraic decomposition.
+
+  NSE_DECOMP/Algebra.lean
+  NSE_DECOMP/Reduction.lean
+
+Targets:
+  M09-M12.
+
+Stage P3 — Two-dimensional velocity and passive scalar.
+
+  NSE_DECOMP/TwoD/Energy.lean
+  NSE_DECOMP/TwoD/Uniqueness.lean
+  NSE_DECOMP/TwoD/PositiveTimeSmooth.lean
+  NSE_DECOMP/Passive/Energy.lean
+  NSE_DECOMP/Passive/PositiveTimeSmooth.lean
+
+Targets:
+  M13-M20.
+
+This is the largest analytic construction.
+
+Stage P4 — 3D reconstruction.
+
+  NSE_DECOMP/Reconstruction.lean
+
+Targets:
+  M21-M22.
+
+Stage P5 — Arbitrary-3D uniqueness.
+
+  NSE_DECOMP/VerticalSquare.lean
+  NSE_DECOMP/Ladyzhenskaya.lean
+  NSE_DECOMP/AnisotropicRelativeEnergy.lean
+  NSE_DECOMP/Uniqueness.lean
+
+Targets:
+  M23-M30.
+
+Use ESS.serrin_integral_gronwall_zero as the model for the final Gronwall edge.
+
+Stage P6 — Root and audit.
+
+  NSE_DECOMP.lean
+  AuditNSEDecomp.lean
+  run.cmd
+
+Root declaration:
+
+  theorem NSE_DECOMP
+      (nu : R) (hnu : 0 < nu)
+      (u0 : X2D3C_L2) :
+      ExistsUnique (GlobalPositiveSmoothLerayHopf nu u0) ...
+
+The exact final type must expose:
+
+  one global curve,
+  strong L2 initial trace,
+  all-horizon Leray-Hopf contract,
+  positive-time C^infinity,
+  uniqueness against arbitrary 3D Leray-Hopf competitors.
+
+===============================================================================
+12. STATUS AND PROMOTION BOUNDARY
+===============================================================================
+
+!  NSE_DECOMP mathematical implication: B_TIER.
+!  Arbitrary-3D uniqueness estimate: B_TIER.
+!  Strict L2 \ H^(1/2) corollary: B_TIER.
+!  Explicit rough-shear subfamily: B_TIER.
+!  GitHub/Mathlib identity map: completed at source-inspection level.
+
+Strongest reusable external endpoint found:
+
+  LerayHopf.exists_global_lerayHopf_torus3
+
+from uda-lab/leray-hopf.
+
+Principal unresolved formal endpoint:
+
+  the 2D energy-to-positive-time-smooth chain together with the anisotropic
+  relative-energy uniqueness bridge.
+
+A_TIER_CANDIDATE is not yet produced.
+A_TIER is not established.
+FORMAL_CLOSURE is not established.
+UNCONDITIONAL_CLOSURE is not established.
+
+Promotion to !!!! requires:
+
+  exact root theorem compiled by the matching external compiler,
+  theorem-level axiom audit,
+  no sorryAx,
+  no unapproved axioms,
+  complete discharge of M01-M37,
+  verified semantic correspondence to the stated Leray-Hopf notion.

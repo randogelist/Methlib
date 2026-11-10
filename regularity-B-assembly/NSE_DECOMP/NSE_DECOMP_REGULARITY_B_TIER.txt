@@ -1,0 +1,625 @@
+NSE_DECOMP_REGULARITY
+B_TIER REGULARITY DERIVATION
+Date: 2026-11-10
+Mode: B_TIER_DERIVATION
+Status: ! B_TIER
+
+Canonical root:
+  NSE_DECOMP
+
+Purpose:
+  isolate the exact regularity content of NSE_DECOMP in a kernel-facing form
+  suitable for later Lean formalization.
+
+No Lean source is compiled here.
+No A_TIER / FORMAL_CLOSURE / UNCONDITIONAL_CLOSURE claim is made.
+
+===============================================================================
+1. DATA CLASS
+===============================================================================
+
+Let
+
+  X_2D3C^{L2}
+    :=
+    L^2_sigma(T^2;R^2) direct_sum L^2(T^2).
+
+For a=(v0,w0), define
+
+  J(a)(x1,x2,x3)
+    :=
+    (v0_1(x1,x2), v0_2(x1,x2), w0(x1,x2)).
+
+Equivalently,
+
+  Fourier[J(a)](k1,k2,k3)=0 whenever k3 != 0.
+
+The root datum is
+
+  u0 := J(a) in L^2_sigma(T^3).
+
+===============================================================================
+2. GLOBAL LERAY-HOPF CONTRACT
+===============================================================================
+
+Define
+
+  GlobalLerayHopf_nu(u0,u)
+
+to mean:
+
+  u : [0,infinity) -> L^2_sigma(T^3),
+
+  u satisfies the periodic weak unforced NSE,
+
+  u in L^infinity_loc([0,infinity);L^2_sigma),
+
+  u in L^2_loc([0,infinity);H^1_sigma),
+
+  u(t) -> u0 strongly in L^2 as t downarrow 0,
+
+  u satisfies the global energy inequality.
+
+The exact final theorem will quantify over all curves satisfying this contract.
+
+===============================================================================
+3. MINIMAL KERNEL-FACING POSITIVE-TIME REGULARITY
+===============================================================================
+
+For m in N_0 define
+
+  PositiveHmLift(m,u)
+
+to mean:
+
+  there exists
+    U_m : (0,infinity) -> H^m_sigma(T^3)
+
+  such that
+
+    U_m is continuous in H^m_sigma,
+
+  and the canonical H^m -> L^2 injection satisfies
+
+    iota_m(U_m(t)) = u(t)
+
+  for every t>0.
+
+Define
+
+  PositiveHInf(u)
+    :<=> forall m in N_0, PositiveHmLift(m,u).
+
+This is the preferred primary formal regularity predicate.
+
+It avoids directly asking an L^2 equivalence class to be pointwise C^infinity.
+
+===============================================================================
+4. UNIVERSAL REGULARITY THEOREM
+===============================================================================
+
+THEOREM NSE_DECOMP_EVERY_LH_REGULAR.
+
+For every nu>0, every a in X_2D3C^{L2}, and every global Leray-Hopf curve y,
+
+  GlobalLerayHopf_nu(J(a),y)
+    =>
+  PositiveHInf(y).
+
+Equivalently,
+
+  every Leray-Hopf solution from a 2D3C L^2 datum
+  is smooth for every positive time.
+
+This theorem is stronger than merely constructing one regular trajectory.
+
+===============================================================================
+5. CONSTRUCTED REGULAR SOLUTION
+===============================================================================
+
+Write
+
+  a=(v0,w0).
+
+Construct v by the global two-dimensional Navier-Stokes equation
+
+  partial_t v + (v.grad_h)v + grad_h p
+    = nu Delta_h v,
+
+  div_h v=0,
+
+  v(0)=v0.
+
+Construct w by
+
+  partial_t w + v.grad_h w
+    = nu Delta_h w,
+
+  w(0)=w0.
+
+Then define
+
+  U(t) := J(v(t),w(t)).
+
+The component regularity is
+
+  v in C([0,infinity);L^2_sigma(T^2))
+       intersect C^infinity((0,infinity)xT^2),
+
+  w in C([0,infinity);L^2(T^2))
+       intersect C^infinity((0,infinity)xT^2).
+
+Therefore
+
+  U in C([0,infinity);L^2_sigma(T^3)),
+
+  PositiveHInf(U).
+
+===============================================================================
+6. ENERGY EQUALITY
+===============================================================================
+
+The exact split is
+
+  ||U(t)||_2^2
+    =
+  ||v(t)||_2^2 + ||w(t)||_2^2,
+
+and
+
+  ||grad U(t)||_2^2
+    =
+  ||grad_h v(t)||_2^2 + ||grad_h w(t)||_2^2.
+
+Hence
+
+  (1/2)||U(t)||_2^2
+    + nu int_0^t ||grad U(s)||_2^2 ds
+  =
+  (1/2)||J(a)||_2^2.
+
+Name:
+
+  NSE_DECOMP_ENERGY_EQUALITY.
+
+===============================================================================
+7. ARBITRARY-3D UNIQUENESS
+===============================================================================
+
+Let Y be any global periodic Leray-Hopf solution with datum J(a).
+
+No assumption
+
+  partial_3 Y = 0
+
+is imposed.
+
+Set
+
+  Z := Y-U.
+
+For admissible positive starting times tau,
+
+  (1/2)||Z(t)||_2^2
+    + nu int_tau^t ||grad Z||_2^2
+  <=
+  (1/2)||Z(tau)||_2^2
+    + int_tau^t int_T3 |Z|^2 |grad_h U|.
+
+Define
+
+  G_s(x_h)
+    :=
+    (int_T |Z(x_h,x3,s)|^2 dx3)^(1/2).
+
+Then
+
+  ||G_s||_2 = ||Z(s)||_2,
+
+  ||grad_h G_s||_2 <= ||grad Z(s)||_2.
+
+Using 2D Ladyzhenskaya,
+
+  ||G_s||_4^2
+    <=
+  C_L(
+    ||G_s||_2||grad_h G_s||_2
+    + ||G_s||_2^2).
+
+Let
+
+  A(s):=||grad_h U(s)||_{L^2(T^2)}.
+
+Then
+
+  int_T3 |Z|^2 |grad_h U|
+  <=
+  (nu/2)||grad Z||_2^2
+  +
+  [C_L A(s) + C_L^2/(2nu) A(s)^2] ||Z||_2^2.
+
+Because
+
+  A in L^2(0,T),
+
+the coefficient
+
+  A + A^2
+
+lies in L^1(0,T).
+
+Variable-coefficient Gronwall yields
+
+  ||Z(t)||_2^2
+  <=
+  ||Z(tau)||_2^2
+  exp(
+    int_tau^t
+    [2C_L A(s)+C_L^2/nu A(s)^2] ds
+  ).
+
+Choose admissible tau_n downarrow 0.
+
+Since both U and Y strongly attain J(a) in L^2,
+
+  ||Z(tau_n)||_2 -> 0.
+
+Hence
+
+  Z(t)=0
+
+for all t>=0.
+
+Name:
+
+  NSE_DECOMP_UNIQUENESS.
+
+Therefore every Leray-Hopf solution equals U.
+
+===============================================================================
+8. SYMMETRY RIGIDITY
+===============================================================================
+
+Because every Leray-Hopf solution equals the constructed U,
+
+  GlobalLerayHopf_nu(J(a),Y)
+    =>
+  partial_3 Y = 0
+
+in the Fourier/distributional sense.
+
+Thus the initial 2D3C symmetry is rigid across the complete Leray-Hopf solution class.
+
+Name:
+
+  NSE_DECOMP_SYMMETRY_RIGIDITY.
+
+===============================================================================
+9. POSITIVE-TIME SOBOLEV TOWER
+===============================================================================
+
+For every m in N_0 and every 0<tau<T,
+
+  sup_{t in [tau,T]} ||U(t)||_{H^m}^2
+  +
+  nu int_tau^T ||U(t)||_{H^(m+1)}^2 dt
+  < infinity.
+
+Name:
+
+  NSE_DECOMP_POSITIVE_SOBOLEV_TOWER.
+
+This is the main quantitative interior regularity theorem.
+
+===============================================================================
+10. TIME-DERIVATIVE TOWER
+===============================================================================
+
+From
+
+  partial_t U
+    =
+  nu Delta U
+  -
+  P_Leray((U.grad)U),
+
+the spatial Sobolev tower implies recursively
+
+  partial_t^r U
+    in
+  C_loc((0,infinity);H^m_sigma(T^3))
+
+for every r,m in N_0.
+
+Name:
+
+  NSE_DECOMP_TIME_DERIVATIVE_TOWER.
+
+===============================================================================
+11. CLASSICAL INTERIOR REPRESENTATIVE
+===============================================================================
+
+The coherent Sobolev lifts determine a unique smooth positive-time velocity representative
+
+  U_cl :
+    (0,infinity) x T^3 -> R^3.
+
+After fixing
+
+  mean_T3 P(t)=0,
+
+there exists a unique pressure representative P such that
+
+  U_cl, P in C^infinity((0,infinity)xT^3),
+
+  partial_t U_cl
+    + (U_cl.grad)U_cl
+    + grad P
+  =
+  nu Delta U_cl,
+
+  div U_cl = 0,
+
+  partial_3 U_cl = 0,
+
+  partial_3 P = 0.
+
+Name:
+
+  NSE_DECOMP_CLASSICAL_INTERIOR.
+
+This is C^infinity regularity.
+No real-analyticity theorem is included.
+
+===============================================================================
+12. H^s BOUNDARY BLOW-UP
+===============================================================================
+
+Let s>0.
+
+If
+
+  J(a) notin H^s_sigma(T^3),
+
+then
+
+  ||U(t)||_{H^s}
+    -> infinity
+
+as t downarrow 0.
+
+Proof:
+
+If a sequence t_n downarrow 0 had bounded H^s norm, then weak compactness in H^s
+and compact embedding
+
+  H^s(T^3) compactly embeds into L^2(T^3)
+
+would produce an L^2 limit in H^s. Strong L^2 trace identifies that limit with J(a),
+contradicting J(a) notin H^s.
+
+Name:
+
+  NSE_DECOMP_HS_BOUNDARY_BLOWUP.
+
+At s=1/2:
+
+  J(a) notin H^(1/2)
+    =>
+  ||U(t)||_{H^(1/2)} -> infinity.
+
+===============================================================================
+13. H^s TRACE CHARACTERIZATION
+===============================================================================
+
+After establishing H^s persistence for the decomposed system,
+
+  J(a) in H^s
+    <=>
+  U in C([0,infinity);H^s_sigma)
+    <=>
+  exists delta>0,
+    sup_{0<t<delta} ||U(t)||_{H^s}<infinity.
+
+At s=1/2:
+
+  J(a) in H^(1/2)
+    <=>
+  U is H^(1/2)-continuous through t=0
+    <=>
+  U has bounded H^(1/2) norm in some punctured initial interval.
+
+Name:
+
+  NSE_DECOMP_HS_TRACE_IFF.
+
+===============================================================================
+14. ROUGH-TRACE REGULARITY COROLLARY
+===============================================================================
+
+THEOREM NSE_DECOMP_STRICT_HHALF.
+
+If
+
+  a in X_2D3C^{L2},
+
+  J(a) in L^2_sigma(T^3) \ H^(1/2)_sigma(T^3),
+
+then the unique global Leray-Hopf solution U satisfies
+
+  U in C([0,infinity);L^2_sigma(T^3)),
+
+  U in C^infinity((0,infinity)xT^3),
+
+  ||U(t)||_{H^(1/2)} -> infinity as t downarrow 0.
+
+This is the exact formal rough-boundary / smooth-interior statement.
+
+===============================================================================
+15. EXPLICIT ROUGH SHEAR MILESTONE
+===============================================================================
+
+Let
+
+  F(x2)
+    :=
+  sum_{k>=1} (1/k) cos(2pi kx2),
+
+and
+
+  u0(x)
+    :=
+  (F(x2),0,0).
+
+Then
+
+  u0 in L^2_sigma(T^3),
+
+  u0 notin H^(1/2)_sigma(T^3).
+
+The exact solution is
+
+  U(x,t)
+    :=
+  (
+    sum_{k>=1}
+      exp(-4pi^2 nu k^2 t)/k
+      cos(2pi kx2),
+    0,
+    0
+  ).
+
+Its nonlinear term vanishes identically.
+
+The critical norm is
+
+  ||U(t)||_{dot H^(1/2)}^2
+    =
+  pi sum_{k>=1}
+    exp(-8pi^2 nu k^2 t)/k.
+
+As t downarrow 0,
+
+  ||U(t)||_{dot H^(1/2)}^2
+    =
+  (pi/2) log(1/t) + O_nu(1).
+
+Hence
+
+  ||U(t)||_{dot H^(1/2)}
+    ~
+  sqrt((pi/2)log(1/t)).
+
+Name:
+
+  NSE_DECOMP_ROUGH_SHEAR.
+
+Optional sharper endpoint:
+
+  NSE_DECOMP_ROUGH_SHEAR_HHALF_ASYMPTOTIC.
+
+===============================================================================
+16. FINAL ROOT STRUCTURE
+===============================================================================
+
+A suitable Lean-facing structure is:
+
+  structure NSEDecompSolution (nu : R) (a : X2D3CL2) where
+
+    velocity :
+      Time -> L2Sigma
+
+    globalLerayHopf :
+      GlobalLerayHopf nu (lift2D3C a) velocity
+
+    decomposition :
+      exists v w,
+        velocity = fun t => lift2D3C(v(t),w(t))
+        and TwoDNavierStokes nu a.horizontal v
+        and PassiveAdvectionDiffusion nu v a.vertical w
+
+    invariant :
+      TwoD3CInvariant velocity
+
+    positiveHInf :
+      PositiveHInf velocity
+
+    timeDerivativeTower :
+      PositiveTimeDerivativeTower velocity
+
+    energyEquality :
+      GlobalEnergyEquality nu (lift2D3C a) velocity
+
+    universalUniqueness :
+      forall y,
+        GlobalLerayHopf nu (lift2D3C a) y
+          ->
+        EqOn y velocity [0,infinity)
+
+Root theorem:
+
+  theorem NSE_DECOMP
+      (nu : R)
+      (hnu : 0 < nu)
+      (a : X2D3CL2) :
+      Nonempty (NSEDecompSolution nu a).
+
+===============================================================================
+17. FINAL REGULARITY HIERARCHY
+===============================================================================
+
+The intended theorem stack is:
+
+  NSE_DECOMP_EXISTENCE
+    ->
+  NSE_DECOMP_ENERGY_EQUALITY
+    ->
+  NSE_DECOMP_POSITIVE_SOBOLEV_TOWER
+    ->
+  NSE_DECOMP_TIME_DERIVATIVE_TOWER
+    ->
+  NSE_DECOMP_CLASSICAL_INTERIOR
+    ->
+  NSE_DECOMP_UNIQUENESS
+    ->
+  NSE_DECOMP_EVERY_LH_REGULAR
+    ->
+  NSE_DECOMP_SYMMETRY_RIGIDITY
+    ->
+  NSE_DECOMP_HS_BOUNDARY_BLOWUP
+    ->
+  NSE_DECOMP_HS_TRACE_IFF
+    ->
+  NSE_DECOMP.
+
+===============================================================================
+18. STATUS
+===============================================================================
+
+! NSE_DECOMP regularity chain: B_TIER.
+
+! Positive-time H^infinity regularity: B_TIER.
+
+! Universal regularity of every Leray-Hopf branch in the 2D3C class: B_TIER,
+  conditional only on the already derived arbitrary-3D uniqueness edge.
+
+! H^s boundary blow-up for rough traces: B_TIER.
+
+! Explicit rough shear and critical H^(1/2) boundary divergence: B_TIER.
+
+A_TIER_CANDIDATE not yet generated.
+A_TIER not established.
+FORMAL_CLOSURE not established.
+UNCONDITIONAL_CLOSURE not established.
+
+The next formal stage is Lean endpoint construction, beginning with:
+
+  1. X2D3CL2 and lift2D3C,
+  2. rough shear,
+  3. 2D3C algebra,
+  4. 2D velocity PDE layer,
+  5. passive scalar layer,
+  6. reconstruction,
+  7. arbitrary-3D uniqueness,
+  8. regularity root,
+  9. external compiler + theorem-level axiom audit.

@@ -1,0 +1,24 @@
+NSE_DECOMP v0_1_9_FIX2 — A_TIER_CANDIDATE
+DATE: 2026-11-10
+
+EXTERNAL EVIDENCE SUPPLIED:
+  v0_1_8: BUILD=PASS, AXIOM_AUDIT=STANDARD_ONLY, ROOT_STATUS=CONDITIONAL.
+  v0_1_9_FIX1: BUILD=FAIL, LEAN_BUILD_EXIT=1, COMPILER_ERROR_COUNT=1.
+  NSE_DECOMP.lean:1285:19, error: ht has type t ∈ Set.Ioi 0,
+  but le_of_lt expected a strict-order proposition.
+
+FIX2 ISOLATED SOURCE REVISION:
+  change (0 : Time) < t at ht
+  exact le_of_lt ht
+This elaborates membership of Set.Ioi into 0 < t, then applies le_of_lt.
+No mathematical claim, root premise, or theorem statement is changed.
+
+ROOT (CONDITIONAL):
+  E : AnalyticEndpoints -> NSE_DECOMP E ν hν a.
+B (UNPROVED): FourierCoefficientL2Bound, asserting
+  ∀ k j f g, ‖fieldCoeff f k j - fieldCoeff g k j‖ ≤ ‖f-g‖.
+The derived coefficient-trace and strict-rough-boundary claims remain
+conditional on E and B. No physical PDE equivalence has been discharged.
+
+VERIFICATION: FIX2 is not yet compiled or theorem-axiom-audited externally.
+NO_LOCAL_LEAN: no compiler was invoked in this packaging operation.

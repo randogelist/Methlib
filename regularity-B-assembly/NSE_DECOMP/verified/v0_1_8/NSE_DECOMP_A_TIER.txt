@@ -1,0 +1,34 @@
+NSE_DECOMP — A_TIER_CANDIDATE v0_1_8 FASTCACHE
+Date: 2026-11-10
+
+INPUT: v0_1_7 BUILD=PASS; AXIOM_AUDIT=STANDARD_ONLY as user-reported.
+This does NOT establish A_TIER for NSE_DECOMP, because its theorem still takes
+E : AnalyticEndpoints (and the physical PDE semantics endpoint is open).
+
+NEW PROOF CHAIN (uncompiled source, 7 new declarations):
+1. Non-H^(1/2) datum => every finite bound is exceeded by some finite Fourier window.
+2. Coefficientwise complex Fourier convergence => convergence of each Hhalf mode mass.
+3. Finite mode-mass convergence => convergence of every finite Fourier window.
+4. Finite-window escape + window convergence + Hhalf-smooth positive times
+   => Hhalf norm tends to +infinity as time decreases to zero.
+5. A new narrower unproved endpoint, FourierTraceEndpoint E, requires only
+   continuity at the strong L2 trace of each Fourier coefficient.
+6. The original BoundaryTraceEndpoint E is constructed FROM FourierTraceEndpoint E,
+   without an admission of blow-up itself.
+7. Exact strict-corollary and arbitrary-competitor strict-corollary reduce to
+   FourierTraceEndpoint E.
+
+THEOREM (conditional):
+  E : AnalyticEndpoints,
+  F : FourierTraceEndpoint E,
+  ν>0, a : X2D3CL2,
+  ¬MemHhalf (E.bridge.lift a)
+  => Exists globally unique 3D LH flow with interior Fourier-C∞ and
+     lim_{t ↓ 0} ||u(t)||_{H^(1/2)} = +∞.
+
+NOT YET PROVED IN LEAN: FourierTraceEndpoint from the L2 trace; planarGlobal;
+passiveGlobal; reconstruct; reconstructionInvariant; reconstructionSmooth;
+reconstructionEnergy; pressureRecovery; anisotropicUnique; physical PDE semantics.
+The exact root theorem and its AnalyticEndpoints signature are unchanged.
+No Kθ mathematical dependencies, no Lean executed in artifact generation.
+The external Lean 4.34.0-rc1 compiler and theorem-level audit are required.
