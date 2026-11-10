@@ -2,8 +2,6 @@
 
 Critical periodic \(H^{1/2}\) Navier–Stokes regularity assembly.
 
-This directory preserves the principal Lean source files from the GOODWORKFLOWFRONTIER small-\(H^{1/2}_\sigma\) chain.
-
 ## Certified spine
 
 \[
@@ -23,121 +21,101 @@ This directory preserves the principal Lean source files from the GOODWORKFLOWFR
 \to
 \texttt{NSE\_PHYSICAL\_LP\_DATA\_CONSTRUCTION}^{!!,!!!}
 \to
-\texttt{PERIODIC\_STRONG\_SLICE\_TO\_RAW\_PHYSICAL\_FIELDS}^{!!,!!!}.
+\texttt{PERIODIC\_STRONG\_SLICE\_TO\_RAW\_PHYSICAL\_FIELDS}^{!!,!!!}
+\to
+\texttt{PERIODIC\_HHALF\_L3\_COMPONENT\_COMPILER}^{!!,!!!}.
 \]
 
-Here:
-
-- `!!` = native A-tier: matching external Lean compiler and theorem-level axiom audit.
-- `!!!` = formal closure of the exact implication under explicitly named unresolved premises.
-
-## Current status
-
-| Module | Status |
-|---|---|
-| `H12_FOURIER_FOUNDATIONS.lean` | A_TIER |
-| `H12_SPECTRAL_ENERGY_BRIDGE.lean` | A_TIER |
-| `H12_CRITICAL_ABSORPTION.lean` | A_TIER |
-| `H12_CRITICAL_TRILINEAR_COMPILER.lean` | A_TIER; CONDITIONAL_FORMAL_CLOSURE |
-| `H12_HOLDER_LP_ADAPTER.lean` | A_TIER |
-| `NSE_POINTWISE_PAIRING_IDENTIFICATION.lean` | A_TIER |
-| `NSE_PAIRING_POINTWISE_LP_LIFT.lean` | A_TIER |
-| `NSE_PHYSICAL_LP_DATA_CONSTRUCTION.lean` | A_TIER |
-| `PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean` | A_TIER; derives pairing measurability and constructs `RawPhysicalFields` |
-| `H12_CRITICAL_PAIRING_INTEGRAL.lean` | A_TIER_CANDIDATE; current FIX3 source; external native pass pending |
+`!!` denotes native Lean A-tier. `!!!` denotes formal closure of the exact implication under explicitly named remaining premises.
 
 ## Latest certified endpoint
 
-`PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS`
-
-Native Lean 4.33.0 evidence:
+`PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER`
 
 ```text
 COMPILE=PASS
 SIGNATURE_CHECK=PASS
-THEOREM_AXIOM_AUDITS=8
+THEOREM_AXIOM_AUDITS=10
 THEOREM_AXIOM_AUDIT=STANDARD_ONLY
 RUN=PASS
 ROOT_AXIOMS=propext,Classical.choice,Quot.sound
-PAIRING_MEASURABILITY=DERIVED
-RAW_PHYSICAL_FIELDS=CONSTRUCTED
+COMMON_CONSTANT=C3_EQ_9_MUL_CSCALAR
+VECTOR_MATRIX_LIFT=DERIVED
 ```
 
-A periodic strong slice contains
+The data compiler
+
+```lean
+PeriodicHhalfL3ComponentCompiler.toPeriodicHhalfL3
+```
+
+maps a componentwise scalar endpoint certificate to the exact `PeriodicHhalfL3` structure. The theorem-level root proves existence of a witness with
 
 \[
-J,u,w\in L^3(\mathbb T^3).
+C_3=9C_{\rm scalar}.
 \]
 
-The certified theorem derives almost-everywhere strong measurability of
+Hence the vector/matrix part of the periodic critical Sobolev endpoint is certified:
 
 \[
-x\mapsto J(x)u(x)
+\|u\|_{L^3}\le C_3E,
+\qquad
+\|\nabla u\|_{L^3,\mathrm{op}}\le C_3D,
+\qquad
+\|\Lambda u\|_{L^3}\le C_3D.
 \]
 
-and
+## Current candidate endpoint
+
+`ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER`
+
+It reduces the scalar endpoint to a bounded periodic Riesz-half operator
 
 \[
-x\mapsto\langle J(x)u(x),w(x)\rangle,
+\Lambda^{-1/2}:L^2_0(\mathbb T^3)\to L^3(\mathbb T^3),
+\qquad
+\|\Lambda^{-1/2}g\|_3\le C_{\rm HLS}\|g\|_2.
 \]
 
-then constructs `RawPhysicalFields` canonically.
-
-Therefore the nonlinear semantic chain is now A-tier complete:
+Given the operator certificate and component reconstructions, the package constructs `PeriodicHhalfL3` with
 
 \[
-\texttt{PeriodicStrongSlice}
-\Longrightarrow
-\texttt{RawPhysicalFields}
-\Longrightarrow
-\texttt{PhysicalLpData}
-\Longrightarrow
-\texttt{NSEPairingRealization}
-\Longrightarrow
-\texttt{CriticalHolder}.
+C_3=9C_{\rm HLS},
 \]
 
-With the remaining analytic endpoint `PeriodicHhalfL3`, the certified compiler yields
+then reuses the certified nonlinear chain to obtain
 
 \[
-I_{\rm abs}\le C_3^3ED^2.
+I_{\rm abs}\le C_3^3ED^2,
 \]
 
-Inside the critical radius,
+and, inside the critical radius,
 
 \[
-E\le\frac{\nu}{4C_3^3}
-\Longrightarrow
 I_{\rm abs}\le\frac{\nu}{4}D^2.
 \]
 
-## Remaining principal targets
-
-1. formalize `PeriodicHhalfL3`;
-2. formalize the rough \(H^{1/2}\) local-existence / continuation interface `H12_LOCAL_CONTINUATION`;
-3. compile `H12_SIGMA_SMALL_GLOBAL_REGULARITY`.
-
-Thus the remaining independent seams are exactly
+## Remaining exact seams
 
 ```text
-PeriodicHhalfL3
+PERIODIC_RIESZ_HALF_L2_L3
 H12_LOCAL_CONTINUATION
 ```
 
-for the final small-\(H^{1/2}_\sigma\) global regularity theorem.
+These imply the final target
+
+```text
+H12_SIGMA_SMALL_GLOBAL_REGULARITY
+```
+
+with threshold \(\nu/(8C_3^3)\).
 
 ## Source-layout note
 
-These files preserve their original package imports, for example
-
-```lean
-import H12_FOURIER_FOUNDATIONS
-```
-
-Therefore this directory should be added to `LEAN_PATH`, or the files should be copied into the project source root, when reproducing the native package builds. The source texts are intentionally not namespace-path rewritten because doing so would alter audited source hashes.
+The files preserve their original bare imports. Add this directory to `LEAN_PATH`, or copy the files into the project source root, when replaying the native package builds.
 
 ## Native toolchain
 
-Primary certified runs in this assembly used Lean 4.33.0 on native Windows with cached Mathlib and prior A-tier package artifacts.
+Primary certified runs use native Windows Lean 4.33.0 and cached Mathlib/prior A-tier artifacts.
 
-No claim of unconditional three-dimensional Navier–Stokes global regularity is made by this directory.
+No unconditional three-dimensional Navier–Stokes global-regularity claim is made by this directory.
