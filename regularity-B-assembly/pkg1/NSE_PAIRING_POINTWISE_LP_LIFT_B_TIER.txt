@@ -1,0 +1,56 @@
+NSE_PAIRING_POINTWISE_LP_LIFT_B_TIER
+====================================
+
+MODE=B_TIER_DERIVATION
+DATE=2026-11-10
+THEOREM=NSE_PAIRING_POINTWISE_LP_LIFT
+MARKER=!
+
+Let q belong to L^1(mu), and let f,g,h belong to L^3(mu). Let
+
+  T := tripleProduct(f,g,h),
+
+where T belongs to L^(pFinal)(mu) and pFinal=1.
+
+Assume
+
+  |q(x)| <= |T(x)|
+
+for almost every x.
+
+By monotonicity of the L^1 norm,
+
+  ||q||_L1 <= ||T||_L1.
+
+Because pFinal=1, the right-hand side is precisely the norm of the existing
+Holder product:
+
+  ||T||_L1 = ||tripleProduct(f,g,h)||.
+
+Hence
+
+  ||q||_L1 <= ||tripleProduct(f,g,h)||.
+
+This proves the field
+
+  NSEPairingRealization.pointwiseLift
+
+from a pointwise almost-everywhere inequality.
+
+Consequently:
+
+  PointwiseLpData
+    -> NSEPairingRealization
+    -> CriticalHolder.
+
+Together with PeriodicHhalfL3:
+
+  Iabs <= C3^3 E D^2,
+
+and if E <= nu/(4 C3^3),
+
+  Iabs <= (nu/4)D^2.
+
+The remaining semantic obligation is no longer a norm inequality. It is only
+the pointwise representative identity/domination for the concrete periodic
+NSE fields.
