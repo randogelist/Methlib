@@ -37,19 +37,31 @@ A_TIER_CANDIDATE:
     EXTERNAL_NATIVE_PASS=PENDING
     SCOPE=FINITE_DIMENSIONAL_POINTWISE_NSE_PAIRING
 
+  NSE_POINTWISE_PAIRING_IDENTIFICATION
+    VERSION=v0_1_0_CMD_ONLY
+    SOURCE_SHA256=b70798977a06d6aad2b1e2e3929e459d80630d4fcd7d5f0ff36fe91003366870
+    EXTERNAL_NATIVE_PASS=PENDING
+    POINTWISE_PAIRING=UNCONDITIONAL_CANDIDATE
+    EXPLICIT_SEMANTIC_PREMISE=NSEPairingRealization.pointwiseLift
+    REMAINING_ANALYTIC_PREMISE=PeriodicHhalfL3
+
 B_TIER:
   H12_SIGMA_SMALL_GLOBAL_REGULARITY
     PREMISES=PeriodicHhalfL3,H12LocalContinuation
     THRESHOLD=nu/(8*C3^3)
     QUANTITATIVE_BOUND=E(t)^2+(3nu/2)integral_0^t D(s)^2 ds<=E(0)^2
 
-REMAINING:
-  pointwise square-to-absolute-value adapter
   NSE_POINTWISE_PAIRING_IDENTIFICATION
+    CONCLUSION=CriticalHolder
+    POINTWISE_BOUND=abs(inner(Ju,w))<=norm(u)*norm(J)*norm(w)
+    INTEGRAL_CHAIN=norm(integral(q))<=norm(q)<=norm(tripleProduct(f,g,h))
+
+REMAINING:
+  discharge NSEPairingRealization.pointwiseLift from concrete periodic fields
   PeriodicHhalfL3
   H12_LOCAL_CONTINUATION
   H12_SIGMA_SMALL_GLOBAL_REGULARITY root compiler
 
 INTERPRETATION:
-  structural Lean coverage approximately 70-78 percent;
-  difficulty-weighted closure approximately 42-52 percent.
+  structural Lean coverage approximately 72-80 percent;
+  difficulty-weighted closure approximately 45-55 percent.
