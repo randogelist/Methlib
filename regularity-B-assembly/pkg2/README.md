@@ -2,6 +2,22 @@
 
 Current CEA / BKQR periodic NSE regularity assembly checkpoint.
 
+## B-tier root theorem
+
+- `NSE_CEA_THETA_REGULARITY_CLASS_B_TIER.txt` — complete mathematical derivation of
+
+```text
+H^(1/2)_{sigma,0,small}(nu)
+  proper subset
+C_EA^theta(q,h,nu)
+  subset
+GlobalRegularData_nu.
+```
+
+The strict lower inclusion is witnessed by arbitrary-amplitude invariant shear data, for which the excess action vanishes identically. The upper inclusion is the excess-action weighted balance, BKQR critical spectral comparison, Galerkin compactness, critical interpolation, and periodic Prodi-Serrin chain.
+
+Status: `! B_TIER`. This is not a universal 3D NSE regularity theorem; the universal finiteness of the excess action remains open.
+
 ## Included spine
 
 Externally audited A_TIER modules:
