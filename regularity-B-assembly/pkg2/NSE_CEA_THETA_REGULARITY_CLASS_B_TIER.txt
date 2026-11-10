@@ -1,0 +1,711 @@
+NSE_CEA_THETA_REGULARITY_CLASS_B_TIER
+=======================================
+
+MODE: B_TIER_DERIVATION
+DATE: 2026-11-10
+STATUS: ! B_TIER
+ROOT: NSE_CEA_THETA_STRICT_REGULARITY_CLASS
+DOMAIN: unforced incompressible Navier-Stokes on the unit torus T^3=(R/Z)^3
+VISCOSITY: nu>0
+PARAMETERS: 0<q<1, a=q^(-1/2)>1, h>0, 0<theta<1
+LEAN STATUS: this TXT is a mathematical derivation, not a new A_TIER promotion.
+
+======================================================================
+0. ROOT THEOREM
+======================================================================
+
+Let H^(1/2)_{sigma,0}(T^3) be the mean-zero divergence-free critical
+Sobolev space. Let G_nu denote the set of data generating a unique global
+strong periodic Navier-Stokes solution, smooth for every positive time.
+
+Define the BKQR excess-action class C_EA^theta(q,h,nu) below.
+
+Then
+
+  H^(1/2)_{sigma,0,small}(nu)
+      proper subset
+  C_EA^theta(q,h,nu)
+      subset
+  G_nu.                                                     (ROOT)
+
+Here
+
+  H^(1/2)_{sigma,0,small}(nu)
+    :=
+  {u_0:
+     ||A^(1/4)u_0||_2 < nu/(2 C_B)},
+
+where C_B is any valid constant in the periodic critical bilinear estimate
+
+  ||A^(-1/4) B(u,v)||_2
+    <=
+  C_B ||A^(1/4)u||_2 ||A^(3/4)v||_2.                       (CB)
+
+The first inclusion is strict because C_EA^theta contains an
+infinite-dimensional class of arbitrarily large invariant shears.
+
+This theorem is a sufficient regularity criterion. It does not assert
+
+  C_EA^theta(q,h,nu)=H^(1/2)_{sigma,0},
+
+and therefore does not assert universal 3D Navier-Stokes regularity.
+
+======================================================================
+1. STANDARD PERIODIC INPUTS
+======================================================================
+
+The derivation uses the following established periodic results.
+
+L1. For every Galerkin cutoff m, the finite-dimensional solution u_m exists
+    globally and satisfies the exact L2 energy identity.
+
+L2. The finite Galerkin shell balance may be tested against every bounded
+    positive Fourier multiplier commuting with the Stokes operator.
+
+L3. Critical bilinear estimate (CB).
+
+L4. Uniform bounds
+
+      u_m bounded in L^infinity(0,T;H^(1/2))
+      and in L^2(0,T;H^(3/2))
+
+    together with the Navier-Stokes equation yield compactness to an actual
+    periodic weak solution and preserve the displayed bounds.
+
+L5. Hilbert-scale interpolation
+
+      ||u||_(H^1)^2
+        <=
+      ||u||_(H^(1/2)) ||u||_(H^(3/2)).
+
+L6. Periodic Sobolev embedding H^1(T^3) -> L^6(T^3).
+
+L7. Prodi-Serrin continuation at (p,r)=(4,6):
+
+      u in L^4(0,T;L^6)
+        =>
+      regularity through T.
+
+No nonstandard universal regularity statement is used.
+
+======================================================================
+2. BKQR POSITIVE SHELLS
+======================================================================
+
+Fix 0<q<1 and h>0. Put
+
+  a=q^(-1/2),               a^2 q=1.
+
+Define
+
+  (q;q)_k = product_{r=1}^k (1-q^r),
+
+  f_q(x) = product_{n=0}^infinity (1+q^n x)^(-1),
+
+  pi_k(x)
+    =
+  [q^(k(k-1)/2) x^k/(q;q)_k] f_q(x),       x>=0.
+
+The Euler q-binomial identity gives
+
+  pi_k(x)>=0,
+  sum_{k>=0} pi_k(x)=1.
+
+Functional calculus gives positive commuting operators
+
+  Pi_k(hA)=pi_k(hA).
+
+Define the exterior tails
+
+  S_j = sum_{k>j} Pi_k(hA),
+
+and critical weights
+
+  w_j=(a-1)a^j.
+
+For a finite Galerkin solution u_m define
+
+  F_{j,m} = <u_m,S_j u_m>,
+
+  G_{j,m}
+    =
+  ||A^(1/2) S_j^(1/2)u_m||_2^2,
+
+  Phi_{j,m}
+    =
+  -<B(u_m,u_m),S_j u_m>.
+
+Because S_j is a self-adjoint Fourier multiplier commuting with A and with
+the Galerkin projector,
+
+  (1/2) dF_{j,m}/dt + nu G_{j,m} = Phi_{j,m}.              (2.1)
+
+======================================================================
+3. ACTUAL BKQR HALF MOMENT
+======================================================================
+
+Define the actual half-moment multiplier by
+
+  m(x)
+    :=
+  f_q(x)/f_q(a x)
+    =
+  product_{n=0}^infinity
+    [(1+a q^n x)/(1+q^n x)].                               (3.1)
+
+For x>=0 write each factor as
+
+  (1+a q^n x)/(1+q^n x)
+    =
+  1 + delta_n(x),
+
+  delta_n(x)
+    =
+  [(a-1)x q^n]/[1+q^n x].
+
+Then
+
+  0 <= delta_n(x) <= (a-1)x q^n.
+
+Since sum q^n converges, the product (3.1) converges and is positive.
+
+For 0<=x<=y, factorwise cross multiplication gives
+
+  [(1+a q^n x)/(1+q^n x)]
+    <=
+  [(1+a q^n y)/(1+q^n y)],
+
+because the difference of cross products is
+
+  (a-1)q^n(y-x)>=0.
+
+Passing to the product limit gives
+
+  m(x)<=m(y).                                               (3.2)
+
+======================================================================
+4. EXACT HALF-SCALE COCYCLES
+======================================================================
+
+The product f_q satisfies
+
+  f_q(qz)=(1+z)f_q(z).                                     (4.1)
+
+Since a^2 q=1,
+
+  x/a = q(a x),
+  x   = q(a^2 x).
+
+Therefore
+
+  m(x/a)m(x)
+    =
+  [f_q(x/a)/f_q(x)] [f_q(x)/f_q(a x)]
+    =
+  f_q(q a x)/f_q(a x)
+    =
+  1+a x,                                                   (4.2)
+
+and
+
+  m(x)m(a x)
+    =
+  [f_q(x)/f_q(a x)] [f_q(a x)/f_q(a^2 x)]
+    =
+  f_q(q a^2 x)/f_q(a^2 x)
+    =
+  1+a^2 x.                                                 (4.3)
+
+By monotonicity,
+
+  m(x/a)<=m(x)<=m(a x).
+
+Combining this with (4.2)-(4.3),
+
+  1+a x <= m(x)^2 <= 1+a^2 x.                             (4.4)
+
+======================================================================
+5. COMPARISON WITH THE CRITICAL STOKES WEIGHT
+======================================================================
+
+For x>=0, (4.4) implies
+
+  1+sqrt(x) <= 2m(x),                                      (5.1)
+
+  m(x) <= a[1+sqrt(x)].                                    (5.2)
+
+Indeed,
+
+  1<=sqrt(1+a x),
+  sqrt(x)<=sqrt(1+a x),
+
+so
+
+  1+sqrt(x)<=2sqrt(1+a x)<=2m(x).
+
+Also
+
+  m(x)<=sqrt(1+a^2x)
+       <=1+a sqrt(x)
+       <=a[1+sqrt(x)].
+
+For a finite Stokes spectrum with eigenvalues lambda_k and modal energies
+E_k>=0, put x_k=h lambda_k. Summation gives
+
+  sum_k [1+sqrt(h lambda_k)]E_k
+    <=
+  2 sum_k m(h lambda_k)E_k,                                (5.3)
+
+  sum_k m(h lambda_k)E_k
+    <=
+  a sum_k [1+sqrt(h lambda_k)]E_k.                         (5.4)
+
+By Parseval and the Stokes spectral definition,
+
+  sum_k [1+sqrt(h lambda_k)]E_k
+    =
+  ||u||_2^2 + sqrt(h)||A^(1/4)u||_2^2.                    (5.5)
+
+Multiplying the modewise comparison by lambda_k gives
+
+  sum_k lambda_k[1+sqrt(h lambda_k)]E_k
+    =
+  ||A^(1/2)u||_2^2
+    + sqrt(h)||A^(3/4)u||_2^2.                             (5.6)
+
+======================================================================
+6. IDENTIFICATION WITH THE SHELL MOMENTS
+======================================================================
+
+For every spectral value x,
+
+  1 + sum_{j>=0} w_j sum_{k>j} pi_k(x)
+    =
+  sum_{k>=0} a^k pi_k(x).                                  (6.1)
+
+This follows from
+
+  sum_{j=0}^{k-1}(a-1)a^j=a^k-1.
+
+The q-binomial moment identity gives
+
+  sum_{k>=0}a^k pi_k(x)
+    =
+  f_q(x)/f_q(a x)
+    =
+  m(x).                                                     (6.2)
+
+Define
+
+  V_m(t)=sum_{j>=0}w_j F_{j,m}(t),
+
+  G_m^crit(t)=sum_{j>=0}w_j G_{j,m}(t),
+
+  M_m(t)=||u_m(t)||_2^2+V_m(t),
+
+  D_m(t)=||A^(1/2)u_m(t)||_2^2+G_m^crit(t).
+
+Then
+
+  M_m
+    =
+  sum_k m(h lambda_k)|u_hat_m(k)|^2,                       (6.3)
+
+  D_m
+    =
+  sum_k lambda_k m(h lambda_k)|u_hat_m(k)|^2.              (6.4)
+
+Hence, from (5.3)-(5.6),
+
+  (1/2)[||u_m||_2^2+sqrt(h)||A^(1/4)u_m||_2^2]
+    <=
+  M_m
+    <=
+  a[||u_m||_2^2+sqrt(h)||A^(1/4)u_m||_2^2],               (6.5)
+
+and
+
+  (1/2)[||A^(1/2)u_m||_2^2
+          +sqrt(h)||A^(3/4)u_m||_2^2]
+    <=
+  D_m
+    <=
+  a[||A^(1/2)u_m||_2^2
+          +sqrt(h)||A^(3/4)u_m||_2^2].                    (6.6)
+
+The constants are independent of the Galerkin cutoff m.
+
+======================================================================
+7. EXCESS-ACTION CLASS
+======================================================================
+
+Let
+
+  epsilon=(1-theta)nu>0.
+
+For G_{j,m}>0 define
+
+  R_{j,m}^theta
+    =
+  [Phi_{j,m}-theta nu G_{j,m}]_+^2/G_{j,m}.
+
+If G_{j,m}=0, define R_{j,m}^theta=0.
+
+This convention is consistent: on the mean-zero Stokes sector,
+G_{j,m}=0 implies S_j u_m=0, hence Phi_{j,m}=0.
+
+Define
+
+  R_{theta,m}(t)
+    =
+  sum_{j>=0} w_j R_{j,m}^theta(t).                         (7.1)
+
+Define
+
+  C_EA^theta(q,h,nu)
+    :=
+  {u_0 in H^(1/2)_{sigma,0}:
+     for every T<infinity,
+       sup_m integral_0^T R_{theta,m}(t)dt < infinity}.     (7.2)
+
+======================================================================
+8. WEIGHTED EXCESS-ACTION INEQUALITY
+======================================================================
+
+From (2.1),
+
+  (1/2)F'_{j,m}+epsilon G_{j,m}
+    <=
+  r_{j,m},
+
+where
+
+  r_{j,m}=[Phi_{j,m}-theta nu G_{j,m}]_+.
+
+Young's inequality gives
+
+  2r_{j,m}
+    <=
+  epsilon G_{j,m}
+    +
+  r_{j,m}^2/[epsilon G_{j,m}].
+
+Therefore
+
+  F'_{j,m}+epsilon G_{j,m}
+    <=
+  R_{j,m}^theta/epsilon.                                   (8.1)
+
+Multiply by w_j, sum, and integrate:
+
+  V_m(t)
+    +
+  epsilon integral_0^t G_m^crit(s)ds
+    <=
+  V_m(0)
+    +
+  epsilon^(-1) integral_0^t R_{theta,m}(s)ds.              (8.2)
+
+The exact Galerkin L2 identity is
+
+  ||u_m(t)||_2^2
+    +
+  2nu integral_0^t ||A^(1/2)u_m||_2^2 ds
+    =
+  ||P_m u_0||_2^2.                                         (8.3)
+
+Since epsilon<2nu, adding (8.2)-(8.3) and weakening the base dissipation
+coefficient gives
+
+  M_m(t)
+    +
+  epsilon integral_0^t D_m(s)ds
+    <=
+  M_m(0)
+    +
+  epsilon^(-1) integral_0^t R_{theta,m}(s)ds.              (8.4)
+
+======================================================================
+9. UNIFORM CRITICAL BOUNDS
+======================================================================
+
+Let u_0 in C_EA^theta and fix T<infinity. Set
+
+  A_T
+    =
+  sup_m integral_0^T R_{theta,m}(t)dt < infinity.
+
+By (6.5),
+
+  sup_m M_m(0)
+    <=
+  a[||u_0||_2^2+sqrt(h)||A^(1/4)u_0||_2^2]
+    =: M_0^* < infinity.                                   (9.1)
+
+From (8.4),
+
+  sup_m sup_{0<=t<=T} M_m(t)
+    <=
+  M_0^*+A_T/epsilon,                                       (9.2)
+
+  sup_m integral_0^T D_m(t)dt
+    <=
+  M_0^*/epsilon+A_T/epsilon^2.                             (9.3)
+
+Using the lower comparisons in (6.5)-(6.6),
+
+  sup_m ||u_m||_(L^infinity(0,T;H^(1/2))) < infinity,      (9.4)
+
+  sup_m ||u_m||_(L^2(0,T;H^(3/2))) < infinity.             (9.5)
+
+All constants may depend on u_0,nu,q,h,theta,T, but not on m.
+
+======================================================================
+10. GALERKIN LIMIT
+======================================================================
+
+The equation gives
+
+  partial_t u_m
+    =
+  -nu A u_m - P_m B(u_m,u_m).
+
+From (CB),
+
+  ||B(u_m,u_m)||_(H^(-1/2))
+    <=
+  C_B ||u_m||_(H^(1/2)) ||u_m||_(H^(3/2)).
+
+Thus (9.4)-(9.5) imply
+
+  partial_t u_m bounded in L^2(0,T;H^(-1/2)).              (10.1)
+
+Aubin-Lions compactness yields, after a subsequence,
+
+  u_m -> u strongly in L^2(0,T;H^1),
+
+and weakly/weak-star in the spaces of (9.4)-(9.5). The limit solves the
+periodic Navier-Stokes equations and satisfies
+
+  u in L^infinity(0,T;H^(1/2))
+        intersection
+       L^2(0,T;H^(3/2)).                                   (10.2)
+
+Since the argument applies to every finite T, the bound is global in the
+finite-horizon sense.
+
+======================================================================
+11. CRITICAL PAIR TO SERRIN
+======================================================================
+
+Hilbert-scale interpolation gives pointwise in time
+
+  ||u||_(H^1)^2
+    <=
+  ||u||_(H^(1/2)) ||u||_(H^(3/2)).
+
+Therefore
+
+  integral_0^T ||u||_(H^1)^4 dt
+    <=
+  [sup_{0<=t<=T}||u(t)||_(H^(1/2))^2]
+  integral_0^T ||u(t)||_(H^(3/2))^2 dt
+    <
+  infinity.                                                 (11.1)
+
+Hence
+
+  u in L^4(0,T;H^1).
+
+By H^1(T^3)->L^6(T^3),
+
+  u in L^4(0,T;L^6).                                       (11.2)
+
+The Serrin equality is
+
+  2/4+3/6=1,
+  6>3.
+
+The periodic Prodi-Serrin theorem gives regularity through T. Since T is
+arbitrary,
+
+  u_0 in C_EA^theta(q,h,nu)
+    =>
+  u_0 in G_nu.                                              (11.3)
+
+This proves the upper inclusion in ROOT.
+
+======================================================================
+12. SMALL H^(1/2) DATA ARE INCLUDED
+======================================================================
+
+Let
+
+  X_m=||A^(1/4)u_m||_2^2,
+  Y_m=||A^(3/4)u_m||_2^2.
+
+Testing the Galerkin equation at critical level gives
+
+  (1/2)X_m' + nu Y_m
+    <=
+  C_B sqrt(X_m) Y_m.                                       (12.1)
+
+Assume
+
+  sqrt(X_m(0))
+    <=
+  ||A^(1/4)u_0||_2
+    <
+  nu/(2C_B).                                                (12.2)
+
+A standard continuity barrier gives
+
+  X_m(t)<=X_m(0),                                           (12.3)
+
+  nu integral_0^infinity Y_m(t)dt
+    <=
+  X_m(0).                                                   (12.4)
+
+To estimate the excess action, note
+
+  [Phi_{j,m}-theta nu G_{j,m}]_+
+    <=
+  |Phi_{j,m}|.
+
+Cauchy-Schwarz gives
+
+  |Phi_{j,m}|^2/G_{j,m}
+    <=
+  ||A^(-1/2)S_j^(1/2)B(u_m,u_m)||_2^2.
+
+Summing in j,
+
+  R_{theta,m}
+    <=
+  <B(u_m,u_m),A^(-1)K_h(A)B(u_m,u_m)>,                    (12.5)
+
+where
+
+  K_h(A)=sum_j w_j S_j=m(hA)-I.
+
+Let lambda_1=4pi^2 be the first positive Stokes eigenvalue on the unit
+torus. From m(x)<=a(1+sqrt(x)),
+
+  [m(h lambda)-1]/lambda
+    <=
+  C_{q,h} lambda^(-1/2),                                   (12.6)
+
+with the explicit admissible constant
+
+  C_{q,h}
+    =
+  (a-1)/sqrt(lambda_1)+a sqrt(h).
+
+Hence
+
+  R_{theta,m}
+    <=
+  C_{q,h} ||A^(-1/4)B(u_m,u_m)||_2^2
+    <=
+  C_{q,h} C_B^2 X_m Y_m.                                  (12.7)
+
+Using (12.3)-(12.4),
+
+  integral_0^T R_{theta,m}dt
+    <=
+  [C_{q,h}C_B^2/nu] X_m(0)^2
+    <=
+  [C_{q,h}C_B^2/nu]
+  ||A^(1/4)u_0||_2^4.                                     (12.8)
+
+The bound is uniform in m and T. Therefore
+
+  H^(1/2)_{sigma,0,small}(nu)
+    subset
+  C_EA^theta(q,h,nu).                                      (12.9)
+
+======================================================================
+13. STRICT EXTENSION: ARBITRARILY LARGE SHEARS
+======================================================================
+
+Let F in H^(1/2)(T^2) be nonzero and mean-zero. For any amplitude L>0 set
+
+  u_0^L(x_1,x_2,x_3)
+    =
+  L(F(x_2,x_3),0,0).
+
+Then
+
+  div u_0^L=0,
+
+and the invariant Galerkin evolution has the form
+
+  u_m^L(t,x)
+    =
+  (e^(nu t Delta)P_m[L F](x_2,x_3),0,0).
+
+Since the field is independent of x_1,
+
+  (u_m^L . grad)u_m^L=0.
+
+Therefore
+
+  B(u_m^L,u_m^L)=0,
+
+  Phi_{j,m}=0,
+
+  R_{theta,m}=0                                             (13.1)
+
+for every j,m,t. Hence
+
+  u_0^L in C_EA^theta(q,h,nu)
+
+for every L>0.
+
+But
+
+  ||A^(1/4)u_0^L||_2
+    =
+  L ||A^(1/4)u_0^1||_2,
+
+which exceeds nu/(2C_B) for all sufficiently large L.
+
+Thus
+
+  H^(1/2)_{sigma,0,small}(nu)
+    proper subset
+  C_EA^theta(q,h,nu).                                      (13.2)
+
+The class therefore extends the critical small-data ball by an
+infinite-dimensional, arbitrary-amplitude regular family.
+
+======================================================================
+14. FINAL CLASSIFICATION
+======================================================================
+
+The exact derived chain is
+
+  H^(1/2)_{sigma,0,small}(nu)
+      proper subset
+  C_EA^theta(q,h,nu)
+      subset
+  G_nu.
+
+Classification:
+
+  ! B_TIER
+  NSE_CEA_THETA_STRICT_REGULARITY_CLASS.
+
+The theorem is unconditional as a mathematical regularity criterion once
+the standard periodic Galerkin, compactness, Sobolev, and Prodi-Serrin
+theorems listed in Section 1 are admitted as established literature.
+
+It is not universal 3D NSE regularity because the unproved universal
+statement remains
+
+  for every u_0 in H^(1/2)_{sigma,0}
+  and every T<infinity,
+
+    sup_m integral_0^T R_{theta,m}(t)dt < infinity.
+
+That universal excess-action estimate is the remaining frontier statement.
