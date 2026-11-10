@@ -40,6 +40,17 @@ A_TIER:
     REMAINING_ANALYTIC_PREMISE=PeriodicHhalfL3
 
 A_TIER_CANDIDATE:
+  NSE_PAIRING_POINTWISE_LP_LIFT
+    VERSION=v0_1_0_CMD_ONLY
+    SOURCE_SHA256=e90eaf44705a06eceb2b641f4de806d76a39361bd614d663aa6b9e4d5fb0196b
+    SIGNATURE_SHA256=8814fee563f8e3c21a6676c36f50a4c2b728efea1044f5f16d053b6a47fc3d14
+    AUDIT_SHA256=5096332800ee36689cf37418d1d69f3eeea526f463b6ae4a28db7d0b67644dfe
+    EXTERNAL_NATIVE_PASS=PENDING
+    ROOT_IMPLICATION=PointwiseLpData->NSEPairingRealization
+    REMOVED_NORM_PREMISE=NSEPairingRealization.pointwiseLift
+    EXPLICIT_SEMANTIC_PREMISE=PointwiseLpData.pointwise
+    REMAINING_ANALYTIC_PREMISE=PeriodicHhalfL3
+
   H12_CRITICAL_PAIRING_INTEGRAL
     VERSION=v0_1_3_CMD_ONLY_FIX3_MEMLP
     SOURCE_SHA256=c5482e727855239354ff3a4508cf09293ee4e5bda9f7f8ea3e9eff83748a673a
@@ -63,12 +74,18 @@ B_TIER:
     INTEGRAL_CHAIN=norm(integral(q))<=norm(q)<=norm(tripleProduct(f,g,h))
     LEAN_STATUS=A_TIER
 
+  NSE_PAIRING_POINTWISE_LP_LIFT
+    CONCLUSION=PointwiseLpData->NSEPairingRealization
+    POINTWISE_PREMISE=ae(norm(q(x))<=norm(tripleProduct(f,g,h)(x)))
+    NORM_CONCLUSION=norm(q)<=norm(tripleProduct(f,g,h))
+    LEAN_STATUS=A_TIER_CANDIDATE
+
 REMAINING:
-  discharge NSEPairingRealization.pointwiseLift from concrete periodic fields
+  discharge PointwiseLpData.pointwise from concrete periodic representatives
   PeriodicHhalfL3
   H12_LOCAL_CONTINUATION
   H12_SIGMA_SMALL_GLOBAL_REGULARITY root compiler
 
 INTERPRETATION:
-  structural Lean coverage approximately 75-82 percent;
-  difficulty-weighted closure approximately 48-58 percent.
+  structural Lean coverage approximately 78-85 percent;
+  difficulty-weighted closure approximately 50-60 percent.
