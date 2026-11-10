@@ -19,7 +19,9 @@ This directory preserves the principal Lean source files from the GOODWORKFLOWFR
 \to
 \texttt{NSE\_POINTWISE\_PAIRING\_IDENTIFICATION}^{!!,!!!}
 \to
-\texttt{NSE\_PAIRING\_POINTWISE\_LP\_LIFT}^{!!,!!!}.
+\texttt{NSE\_PAIRING\_POINTWISE\_LP\_LIFT}^{!!,!!!}
+\to
+\texttt{NSE\_PHYSICAL\_LP\_DATA\_CONSTRUCTION}^{!!,!!!}.
 \]
 
 Here:
@@ -36,90 +38,105 @@ Here:
 | `H12_CRITICAL_ABSORPTION.lean` | A_TIER |
 | `H12_CRITICAL_TRILINEAR_COMPILER.lean` | A_TIER; CONDITIONAL_FORMAL_CLOSURE |
 | `H12_HOLDER_LP_ADAPTER.lean` | A_TIER |
-| `NSE_POINTWISE_PAIRING_IDENTIFICATION.lean` | A_TIER; pointwise pairing unconditional; root conditional on explicit physical realization |
-| `NSE_PAIRING_POINTWISE_LP_LIFT.lean` | A_TIER; derives the norm-level `pointwiseLift` field from a.e. physical identifications |
-| `H12_CRITICAL_PAIRING_INTEGRAL.lean` | A_TIER_CANDIDATE; current FIX3 source; external native pass pending |
+| `NSE_POINTWISE_PAIRING_IDENTIFICATION.lean` | A_TIER |
+| `NSE_PAIRING_POINTWISE_LP_LIFT.lean` | A_TIER |
+| `NSE_PHYSICAL_LP_DATA_CONSTRUCTION.lean` | A_TIER; constructs all physical `Lp` representatives and proves the actual pairing is in `L¹` |
+| `PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean` | A_TIER_CANDIDATE |
 
 ## Latest certified endpoint
 
-`NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT`
+`NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION`
 
 Native Lean 4.33.0 evidence:
 
 ```text
 COMPILE=PASS
 SIGNATURE_CHECK=PASS
-THEOREM_AXIOM_AUDITS=8
+THEOREM_AXIOM_AUDITS=12
 THEOREM_AXIOM_AUDIT=STANDARD_ONLY
 RUN=PASS
 ROOT_AXIOMS=propext,Classical.choice,Quot.sound
-POINTWISE_LIFT=DERIVED
+PHYSICAL_LP_DATA=CONSTRUCTED
+PAIRING_MEMLP_ONE=DERIVED
 ```
 
-The package proves the generic norm lift
+The package starts from `RawPhysicalFields`:
 
 \[
-\|q(x)\|
-\le
-\|f(x)\|\,\|g(x)\|\,\|h(x)\|
-\quad\text{a.e.}
+J,u,w\in L^3,
+\qquad
+x\mapsto \langle J(x)u(x),w(x)\rangle
+\text{ measurable}.
+\]
+
+It derives
+
+\[
+|u|\,|J|\,|w|\in L^1,
+\qquad
+\langle Ju,w\rangle\in L^1,
+\]
+
+constructs canonical `MemLp.toLp` representatives, and proves
+
+\[
+\texttt{RawPhysicalFields}
 \Longrightarrow
-\|q\|_{L^1}
-\le
-\|\texttt{tripleProduct}(f,g,h)\|.
-\]
-
-For `PhysicalLpData`, the a.e. identities are
-
-\[
-\begin{aligned}
-f(x)&=\|u(x)\|,\\
-g(x)&=\|J(x)\|,\\
-h(x)&=\|w(x)\|,\\
-q(x)&=\langle J(x)u(x),w(x)\rangle.
-\end{aligned}
-\]
-
-The already certified pointwise theorem gives
-
-\[
-|\langle J(x)u(x),w(x)\rangle|
-\le
-\|u(x)\|\,\|J(x)\|\,\|w(x)\|,
-\]
-
-so Lean constructs
-
-\[
 \texttt{PhysicalLpData}
-\Longrightarrow
-\texttt{NSEPairingRealization}
 \Longrightarrow
 \texttt{CriticalHolder}.
 \]
 
-With the remaining periodic Sobolev endpoint:
+With `PeriodicHhalfL3`:
 
 \[
-\texttt{PeriodicHhalfL3}
-\Longrightarrow
-I_{\rm abs}\le C_3^3 E D^2.
+I_{\rm abs}\le C_3^3ED^2.
 \]
 
-Within the critical radius:
+Inside the critical radius:
 
 \[
-E\le \frac{\nu}{4C_3^3}
+E\le\frac{\nu}{4C_3^3}
 \Longrightarrow
-I_{\rm abs}\le \frac{\nu}{4}D^2.
+I_{\rm abs}\le\frac{\nu}{4}D^2.
 \]
+
+## Current candidate endpoint
+
+`PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS`
+
+A periodic strong slice supplies
+
+\[
+J,u,w\in L^3(\mathbb T^3).
+\]
+
+The candidate derives measurability of
+
+\[
+x\mapsto\langle J(x)u(x),w(x)\rangle
+\]
+
+from continuity of continuous-linear-map application and the real inner product, then constructs `RawPhysicalFields` canonically.
+
+After promotion, the nonlinear semantic chain is complete up to the sole independent analytic endpoint
+
+```text
+PeriodicHhalfL3
+```
+
+and the later global theorem additionally requires
+
+```text
+H12_LOCAL_CONTINUATION
+```
 
 ## Remaining principal targets
 
-1. construct `PhysicalLpData` from the actual periodic velocity, Jacobian, and \(\Lambda u\) fields;
-2. `PeriodicHhalfL3`;
-3. rough \(H^{1/2}\) local existence / continuation interface;
-4. final `H12_SIGMA_SMALL_GLOBAL_REGULARITY` root compiler.
+1. promote `PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS`;
+2. formalize `PeriodicHhalfL3`;
+3. formalize the rough \(H^{1/2}\) local-existence / continuation interface;
+4. compile `H12_SIGMA_SMALL_GLOBAL_REGULARITY`.
 
 ## Source-layout note
 
