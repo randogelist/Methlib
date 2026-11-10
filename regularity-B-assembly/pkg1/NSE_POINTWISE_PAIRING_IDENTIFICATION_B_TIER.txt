@@ -1,0 +1,267 @@
+NSE_POINTWISE_PAIRING_IDENTIFICATION_B_TIER
+============================================
+
+MODE=B_TIER_DERIVATION
+DATE=2026-11-10
+THEOREM=NSE_POINTWISE_PAIRING_IDENTIFICATION
+MARKER=!
+CURRENT_STATUS=B_TIER
+A_TIER_READINESS=READY_FOR_CONSTRUCTION
+NO_LOCAL_LEAN=HONORED
+
+======================================================================
+1. EXACT SCOPED THEOREM
+======================================================================
+
+Let T^3 = (R/Z)^3.
+
+Let u : T^3 -> R^3 be a sufficiently regular periodic divergence-free
+vector field. Let
+
+  J(x) := grad u(x),
+  w(x) := Lambda u(x),
+
+where Lambda = (-Delta)^(1/2), and define
+
+  B(u,u)(x) := (u(x) dot grad)u(x) = J(x)u(x).
+
+Let P be the periodic Leray projection and define
+
+  Iabs(u)
+    := abs (integral_T3 inner(P(B(u,u))(x),w(x)) dx).
+
+Assume the scalar magnitude functions
+
+  f(x)=|u(x)|,
+  g(x)=|J(x)|_F,
+  h(x)=|w(x)|
+
+belong to L^3(T^3).
+
+Then
+
+  Iabs(u) <= ||f||_L3 ||g||_L3 ||h||_L3.
+
+Equivalently, for the critical state
+
+  s.U3   = ||u||_L3,
+  s.G3   = ||grad u||_L3,F,
+  s.L3   = ||Lambda u||_L3,
+  s.Iabs = Iabs(u),
+
+one has
+
+  CriticalHolder(s):
+    s.Iabs <= s.U3*s.G3*s.L3.
+
+No periodic Sobolev embedding is used here. The theorem converts the actual
+NSE nonlinear pairing into the abstract Holder input.
+
+======================================================================
+2. MATRIX FORM AND POINTWISE ADVECTION BOUND
+======================================================================
+
+Write J_ij=partial_j u_i. Then
+
+  B_i = sum_j J_ij u_j,
+
+so B=Ju.
+
+For every i, finite-dimensional Cauchy-Schwarz gives
+
+  |B_i|^2
+    <= (sum_j |J_ij|^2)(sum_j |u_j|^2).
+
+Summing over i yields
+
+  |B|^2 <= |J|_F^2 |u|^2,
+
+and therefore
+
+  |B| <= |J|_F |u|.
+
+Coordinate-free form:
+
+  |Ju| <= ||J||_op |u| <= ||J||_F |u|.
+
+======================================================================
+3. POINTWISE PAIRING BOUND
+======================================================================
+
+Cauchy-Schwarz in R^3 gives
+
+  |inner(B,w)| <= |B||w|.
+
+Hence
+
+  |inner(B,w)| <= |u||J|_F|w|.
+
+With f=|u|, g=|J|_F and h=|w|,
+
+  |inner(B,w)| <= fgh.
+
+======================================================================
+4. LERAY AND PRESSURE CANCELLATION
+======================================================================
+
+Since u is divergence-free and Lambda is a scalar Fourier multiplier,
+
+  div(Lambda u)=Lambda(div u)=0.
+
+Thus w=Lambda u is divergence-free. The Leray projection is the L^2
+orthogonal projection onto divergence-free fields, so
+
+  inner_L2(PB,w)=inner_L2(B,w).
+
+Equivalently, the pressure contribution satisfies
+
+  integral_T3 inner(grad p,w)
+    = - integral_T3 p div(w)
+    = 0.
+
+Therefore
+
+  Iabs(u)=abs(integral_T3 inner(B,w)).
+
+======================================================================
+5. INTEGRAL DOMINATION AND HOLDER
+======================================================================
+
+The integral triangle inequality and the pointwise estimate give
+
+  Iabs(u)
+    <= integral_T3 |inner(B,w)|
+    <= integral_T3 fgh
+    = ||fgh||_L1.
+
+Holder with exponents (3,3,3) gives
+
+  ||fgh||_L1
+    <= ||f||_L3 ||g||_L3 ||h||_L3.
+
+Thus
+
+  Iabs(u)
+    <= ||u||_L3 ||grad u||_L3,F ||Lambda u||_L3.
+
+This is exactly CriticalHolder(s).
+
+======================================================================
+6. COMPOSITION WITH THE CURRENT A-TIER CHAIN
+======================================================================
+
+Assume PeriodicHhalfL3 with constant C3:
+
+  ||u||_L3 <= C3 E,
+  ||grad u||_L3,F <= C3 D,
+  ||Lambda u||_L3 <= C3 D.
+
+Then
+
+  Iabs(u) <= C3^3 E D^2.
+
+The audited critical absorption package gives
+
+  E <= nu/(4 C3^3)
+    -> Iabs(u) <= (nu/4)D^2.
+
+If the critical energy law supplies
+
+  L + nu D^2 <= Iabs(u),
+
+then
+
+  L + (3nu/4)D^2 <= 0.
+
+After the pairing bridge, the nonlinear estimate has only one independent
+analytic seam:
+
+  PeriodicHhalfL3.
+
+======================================================================
+7. LEAN REALIZATION
+======================================================================
+
+The A-tier candidate uses
+
+  RVec3 := EuclideanSpace R (Fin 3),
+  Jacobian3 := RVec3 ->L[R] RVec3.
+
+It proves unconditionally
+
+  ||Ju|| <= ||J||||u||,
+
+and
+
+  |inner(Ju,w)| <= ||u||||J||||w||.
+
+The exact integral realization is represented by
+
+  NSEPairingRealization,
+
+with
+
+  f,g,h : L^3,
+  q     : L^1,
+
+  s.U3   = ||f||,
+  s.G3   = ||g||,
+  s.L3   = ||h||,
+  s.Iabs = ||integral q||,
+
+and the explicit norm-level lift
+
+  ||q||_L1 <= ||tripleProduct(f,g,h)||.
+
+From Mathlib
+
+  ||integral q|| <= ||q||_L1,
+
+and from H12_HOLDER_LP_ADAPTER
+
+  ||tripleProduct(f,g,h)||
+    <= ||f||_L3 ||g||_L3 ||h||_L3.
+
+Therefore the candidate derives CriticalHolder and then composes with the
+existing critical trilinear and absorption theorems.
+
+======================================================================
+8. PREMISE ACCOUNTING
+======================================================================
+
+UNCONDITIONAL IN THE CANDIDATE:
+
+  * pointwise operator-norm advection bound;
+  * pointwise pairing bound;
+  * almost-everywhere export;
+  * integral norm <= L1 norm;
+  * conversion to CriticalPairingRealization;
+  * composition with the audited Holder and trilinear packages.
+
+EXPLICIT SEMANTIC PREMISE:
+
+  NSEPairingRealization.pointwiseLift:
+    ||q||_L1 <= ||tripleProduct(f,g,h)||.
+
+This is the exact Lp lift of the physical pointwise domination and is not
+hidden.
+
+REMAINING ANALYTIC PREMISE:
+
+  PeriodicHhalfL3.
+
+OUTSIDE THIS PACKAGE:
+
+  H12_LOCAL_CONTINUATION,
+  final H12_SIGMA_SMALL_GLOBAL_REGULARITY.
+
+======================================================================
+9. CLASSIFICATION
+======================================================================
+
+!
+
+NSE_POINTWISE_PAIRING_IDENTIFICATION is B_TIER.
+
+The prepared Lean package is A_TIER_CANDIDATE. A native Lean 4.33.0 compiler
+run and theorem-level axiom audit are required for promotion.
