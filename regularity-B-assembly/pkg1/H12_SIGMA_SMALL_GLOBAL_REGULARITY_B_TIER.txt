@@ -1,0 +1,708 @@
+H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER
+=========================================
+
+MODE=B_TIER_DERIVATION
+MARKER=!
+TARGET=H12_SIGMA_SMALL_GLOBAL_REGULARITY
+DOMAIN=T^3=(R/Z)^3
+EQUATION=3D incompressible unforced Navier-Stokes
+DATA_CLASS=mean-zero divergence-free homogeneous H^(1/2)
+DATE=2026-11-10
+
+======================================================================
+0. EXACT THEOREM
+======================================================================
+
+Let
+
+  Λ := (-Δ)^(1/2)
+
+on the unit three-torus, with Fourier symbol
+
+  λ_k := 2π |k|,
+  k ∈ Z^3.
+
+For a mean-zero divergence-free vector field u define
+
+  ||u||_(Ḣ^(1/2))^2
+    := Σ_{k≠0} λ_k |û(k)|^2,
+
+  ||u||_(Ḣ^(3/2))^2
+    := Σ_{k≠0} λ_k^3 |û(k)|^2.
+
+Fix a periodic critical Sobolev constant C3>0 satisfying, for every
+mean-zero smooth scalar/vector/matrix field f of the required finite
+component type,
+
+  ||f||_(L^3(T^3))
+    ≤ C3 ||Λ^(1/2) f||_(L^2(T^3)).                 (S3)
+
+The finite-dimensional component constants are absorbed into C3, so that
+the same C3 yields
+
+  ||u||_3       ≤ C3 ||u||_(Ḣ^(1/2)),
+  ||∇u||_3      ≤ C3 ||u||_(Ḣ^(3/2)),
+  ||Λu||_3      ≤ C3 ||u||_(Ḣ^(3/2)).              (S3-bundle)
+
+Define
+
+  c_* := 1 / (8 C3^3).
+
+THEOREM.
+For every viscosity ν>0 and every real-valued mean-zero divergence-free
+
+  u0 ∈ Ḣ^(1/2)(T^3;R^3)
+
+satisfying
+
+  ||u0||_(Ḣ^(1/2)) < c_* ν
+                   = ν/(8 C3^3),                   (SMALL)
+
+there exists a unique global solution u of
+
+  ∂_t u + (u·∇)u + ∇p = ν Δu,
+  div u = 0,
+  u(0)=u0,
+
+such that, for every T<∞,
+
+  u ∈ C([0,T]; Ḣ^(1/2)_σ)
+      ∩ L^2(0,T; Ḣ^(3/2)_σ),
+
+  ∂_t u ∈ L^2(0,T; Ḣ^(-1/2)_σ),
+
+and
+
+  u ∈ C^∞((0,∞)×T^3).
+
+Writing
+
+  E(t) := ||u(t)||_(Ḣ^(1/2)),
+  D(t) := ||u(t)||_(Ḣ^(3/2)),
+
+the solution obeys
+
+  E(t) ≤ E(0) < ν/(8 C3^3),                         (Q1)
+
+  E(t)^2 + (3ν/2) ∫_0^t D(s)^2 ds
+    ≤ E(0)^2,                                       (Q2)
+
+  E(t)^2
+    ≤ exp(-6π^2 ν t) E(0)^2,                        (Q3)
+
+and, for every periodic H^1→L^6 constant C6,
+
+  ∫_0^∞ ||u(t)||_6^4 dt
+    ≤ (2 C6^4/(3ν)) E(0)^4.                         (Q4)
+
+Therefore the open critical ball
+
+  R_(ν,C3)
+    :=
+  {u0 ∈ Ḣ^(1/2)_σ(T^3) :
+     ||u0||_(Ḣ^(1/2)) < ν/(8C3^3)}
+
+is a global regularity class.
+
+If u0 is smooth, the solution is global classical up to t=0.
+For general u0∈Ḣ^(1/2), the correct endpoint is global critical strong/mild
+regularity with instantaneous smoothness for t>0.
+
+======================================================================
+1. PERIODIC CRITICAL SOBOLEV ENDPOINT
+======================================================================
+
+For mean-zero f set
+
+  g := Λ^(1/2) f.
+
+Then
+
+  f = Λ^(-1/2) g.
+
+The periodic multiplier Λ^(-1/2) has convolution kernel K satisfying
+
+  K(x) = c |x|^(-5/2) + K_reg(x)
+
+in a fundamental cube, where K_reg is smooth.
+
+The singular term is a periodic Riesz potential of order α=1/2.
+The Hardy-Littlewood-Sobolev exponent relation is
+
+  1/q = 1/p - α/3.
+
+For p=2 and α=1/2,
+
+  1/q = 1/2 - 1/6 = 1/3,
+
+hence q=3.
+
+Therefore
+
+  ||Λ^(-1/2)g||_3 ≤ C3 ||g||_2,
+
+which gives
+
+  ||f||_3 ≤ C3 ||Λ^(1/2)f||_2.
+
+A direct torus reduction follows by decomposing K into a locally supported
+Euclidean Riesz kernel plus a smooth kernel:
+
+  local singular part:
+    Euclidean HLS L^2→L^3;
+
+  smooth part:
+    L^2→L^∞ by Cauchy-Schwarz,
+    then L^∞→L^3 because vol(T^3)<∞.
+
+Applying the scalar estimate componentwise and increasing C3 by one finite
+dimension factor gives the S3-bundle.
+
+STATUS:
+  mathematically discharged;
+  Lean target = PeriodicHhalfL3.
+
+======================================================================
+2. CRITICAL PRODUCT ESTIMATE IN H^(-1/2)
+======================================================================
+
+For divergence-free u and arbitrary v,w with
+
+  u,w ∈ Ḣ^(1/2),
+  v   ∈ Ḣ^(3/2),
+
+duality and the Leray contraction give
+
+  |⟨P((u·∇)v), w⟩|
+    ≤ ∫_(T^3) |u| |∇v| |w| dx
+    ≤ ||u||_3 ||∇v||_3 ||w||_3
+    ≤ C3^3
+       ||u||_(Ḣ^(1/2))
+       ||v||_(Ḣ^(3/2))
+       ||w||_(Ḣ^(1/2)).
+
+Taking the supremum over
+
+  ||w||_(Ḣ^(1/2)) = 1
+
+yields
+
+  ||P((u·∇)v)||_(Ḣ^(-1/2))
+    ≤ C3^3
+       ||u||_(Ḣ^(1/2))
+       ||v||_(Ḣ^(3/2)).                            (P)
+
+For v=u and w=Λu,
+
+  I(u)
+    :=
+  |⟨(u·∇)u, Λu⟩|
+
+satisfies
+
+  I(u)
+    ≤ ||u||_3 ||∇u||_3 ||Λu||_3
+    ≤ C3^3 E D^2.                                  (T)
+
+STATUS:
+  Holder factorization A_TIER;
+  actual periodic NSE pointwise pairing identification remains a Lean adapter.
+
+======================================================================
+3. FINITE FOURIER GALERKIN SYSTEM
+======================================================================
+
+Let P_N be the orthogonal projection onto divergence-free mean-zero Fourier
+modes with |k|≤N.
+
+Define
+
+  u_N(0) := P_N u0
+
+and solve the finite-dimensional ODE
+
+  ∂_t u_N
+    + νΛ^2 u_N
+    + P_N P((u_N·∇)u_N)
+    = 0.                                            (G_N)
+
+Because this is a smooth finite-dimensional polynomial vector field, a unique
+maximal ODE solution exists.
+
+Set
+
+  E_N(t) := ||u_N(t)||_(Ḣ^(1/2)),
+  D_N(t) := ||u_N(t)||_(Ḣ^(3/2)).
+
+Taking the L^2 pairing of (G_N) with Λu_N gives the exact identity
+
+  (1/2) d/dt E_N^2
+    + ν D_N^2
+    =
+  -⟨(u_N·∇)u_N, Λu_N⟩.                             (E_N)
+
+The pressure/Leray complement vanishes because
+
+  div(Λu_N)=Λ(div u_N)=0.
+
+By (T),
+
+  (1/2) d/dt E_N^2
+    + ν D_N^2
+    ≤ C3^3 E_N D_N^2.                              (CE_N)
+
+Also
+
+  E_N(0) ≤ E(0)
+
+because P_N is an orthogonal Fourier truncation.
+
+======================================================================
+4. SMALLNESS BOOTSTRAP
+======================================================================
+
+Set
+
+  C := C3^3,
+  R_crit := ν/(4C),
+  R_init := ν/(8C).
+
+The hypothesis gives
+
+  E_N(0) ≤ E(0) < R_init < R_crit.
+
+As long as
+
+  E_N(t) ≤ R_crit,
+
+one has
+
+  C E_N D_N^2
+    ≤ (ν/4) D_N^2.
+
+Hence (CE_N) implies
+
+  (1/2) d/dt E_N^2
+    + (3ν/4)D_N^2
+    ≤ 0.                                            (A_N)
+
+Therefore E_N is nonincreasing on every bootstrap interval.
+
+If a first exit time τ_N from the region E_N<R_crit existed, then
+
+  E_N(τ_N)
+    ≤ E_N(0)
+    < R_init
+    < R_crit,
+
+contradicting the definition of τ_N.
+
+Thus the bootstrap region is invariant for the complete maximal ODE interval.
+Consequently
+
+  E_N(t) ≤ E_N(0) ≤ E(0),                           (B1_N)
+
+and
+
+  E_N(t)^2
+    + (3ν/2)∫_0^t D_N(s)^2 ds
+    ≤ E_N(0)^2
+    ≤ E(0)^2.                                       (B2_N)
+
+The finite-dimensional ODE norm remains bounded, so no finite-time ODE
+blow-up occurs. Therefore every u_N exists globally.
+
+======================================================================
+5. EXPONENTIAL DECAY
+======================================================================
+
+Because u_N has zero mean, every active mode satisfies
+
+  λ_k ≥ 2π.
+
+Thus
+
+  D_N^2
+    = Σ λ_k^3 |û_N(k)|^2
+    ≥ (2π)^2 Σ λ_k |û_N(k)|^2
+    = (2π)^2 E_N^2.
+
+Insert this into (A_N):
+
+  (1/2) d/dt E_N^2
+    + (3ν/4)(2π)^2 E_N^2
+    ≤ 0.
+
+Therefore
+
+  d/dt E_N^2 + 6π^2ν E_N^2 ≤ 0,
+
+and
+
+  E_N(t)^2
+    ≤ exp(-6π^2νt) E_N(0)^2.                       (DECAY_N)
+
+======================================================================
+6. UNIFORM TIME-DERIVATIVE BOUND
+======================================================================
+
+From (G_N),
+
+  ∂_t u_N
+    =
+  -νΛ^2u_N
+  -P_NP((u_N·∇)u_N).
+
+In Ḣ^(-1/2),
+
+  ||νΛ^2u_N||_(Ḣ^(-1/2))
+    = νD_N.
+
+By (P),
+
+  ||P_NP((u_N·∇)u_N)||_(Ḣ^(-1/2))
+    ≤ C E_N D_N
+    ≤ C E(0) D_N.
+
+Hence
+
+  ||∂_t u_N||_(Ḣ^(-1/2))
+    ≤ (ν + C E(0))D_N.
+
+The right side belongs uniformly to L^2(0,T) for every finite T by (B2_N).
+
+Therefore, uniformly in N,
+
+  u_N bounded in
+    L^∞(0,T;Ḣ^(1/2))
+    ∩ L^2(0,T;Ḣ^(3/2)),
+
+  ∂_t u_N bounded in
+    L^2(0,T;Ḣ^(-1/2)).                              (UB)
+
+======================================================================
+7. COMPACTNESS AND LIMIT PASSAGE
+======================================================================
+
+Use the compact/continuous embeddings
+
+  Ḣ^(3/2)(T^3)
+    compactly embeds into
+  Ḣ^(1/2)(T^3)
+    continuously embeds into
+  Ḣ^(-1/2)(T^3).
+
+Aubin-Lions applied to (UB) yields, after taking a subsequence,
+
+  u_N → u strongly in L^2(0,T;Ḣ^(1/2)),
+
+  u_N ⇀ u weakly in L^2(0,T;Ḣ^(3/2)),
+
+  u_N ⇀* u weak-* in L^∞(0,T;Ḣ^(1/2)).
+
+The nonlinear estimate (P) gives continuity of
+
+  (u,v) ↦ P((u·∇)v)
+
+from
+
+  Ḣ^(1/2) × Ḣ^(3/2)
+  into
+  Ḣ^(-1/2).
+
+The strong/weak convergence is sufficient to pass to the Galerkin weak form.
+Thus u solves NSE globally in
+
+  L^∞_loc Ḣ^(1/2)
+  ∩ L^2_loc Ḣ^(3/2),
+
+with
+
+  ∂_t u ∈ L^2_loc Ḣ^(-1/2).
+
+Lions-Magenes applied to the Hilbert triple
+
+  Ḣ^(3/2) ⊂ Ḣ^(1/2) ⊂ Ḣ^(-1/2)
+
+gives
+
+  u ∈ C([0,T];Ḣ^(1/2))
+
+for every T<∞ and u(0)=u0.
+
+Weak lower semicontinuity passes (B2_N) and (DECAY_N) to the limit, giving
+(Q1), (Q2), and (Q3).
+
+======================================================================
+8. UNIQUENESS IN THE SMALL CRITICAL CLASS
+======================================================================
+
+Let u and v be two solutions in the obtained class with the same datum, and
+set
+
+  w := u-v.
+
+Then
+
+  ∂_t w - νΔw
+    + P((w·∇)u)
+    + P((v·∇)w)
+    = 0.
+
+Pair with Λw.
+
+For the first nonlinear term,
+
+  |⟨(w·∇)u, Λw⟩|
+    ≤ C ||w||_(Ḣ^(1/2))
+         ||u||_(Ḣ^(3/2))
+         ||w||_(Ḣ^(3/2))
+
+    ≤ (ν/4)||w||_(Ḣ^(3/2))^2
+      + (C^2/ν)||u||_(Ḣ^(3/2))^2
+        ||w||_(Ḣ^(1/2))^2.
+
+For the second term,
+
+  |⟨(v·∇)w, Λw⟩|
+    ≤ C ||v||_(Ḣ^(1/2))
+         ||w||_(Ḣ^(3/2))^2
+
+    ≤ (ν/8)||w||_(Ḣ^(3/2))^2
+
+because
+
+  ||v||_(Ḣ^(1/2))
+    ≤ E(0)
+    < ν/(8C).
+
+Therefore
+
+  d/dt ||w||_(Ḣ^(1/2))^2
+    ≤ (2C^2/ν)
+       ||u||_(Ḣ^(3/2))^2
+       ||w||_(Ḣ^(1/2))^2.
+
+The coefficient is integrable in time by (Q2). Since w(0)=0, Gronwall gives
+
+  w≡0.
+
+Thus the solution is unique in the critical class.
+
+======================================================================
+9. POSITIVE-TIME SMOOTHING
+======================================================================
+
+For every τ>0,
+
+  u ∈ L^2(τ/2,τ;Ḣ^(3/2)).
+
+Hence some t0∈(τ/2,τ) satisfies
+
+  u(t0)∈Ḣ^(3/2).
+
+The NSE local strong theory from Ḣ^(3/2) data and parabolic smoothing gives
+
+  u ∈ C^∞((t0,∞)×T^3).
+
+Uniqueness identifies this local smooth continuation with the global critical
+solution. Since τ>0 was arbitrary,
+
+  u ∈ C^∞((0,∞)×T^3).
+
+If u0 is smooth, the same regularity propagates from t=0.
+
+======================================================================
+10. SERRIN BOUND AND REGULARITY CLASS
+======================================================================
+
+The spectral interpolation identity is
+
+  ||Λu||_2^4
+    ≤
+  ||u||_(Ḣ^(1/2))^2
+  ||u||_(Ḣ^(3/2))^2
+    =
+  E^2 D^2.                                         (INT)
+
+Indeed,
+
+  Σ λ_k^2 |û(k)|^2
+    ≤
+  (Σ λ_k |û(k)|^2)^(1/2)
+  (Σ λ_k^3 |û(k)|^2)^(1/2).
+
+Using periodic H^1→L^6,
+
+  ||u||_6^4
+    ≤ C6^4 ||Λu||_2^4
+    ≤ C6^4 E^2D^2.
+
+Therefore, by (Q1)-(Q2),
+
+  ∫_0^∞ ||u||_6^4 dt
+    ≤ C6^4 E(0)^2 ∫_0^∞ D^2 dt
+    ≤ (2C6^4/(3ν))E(0)^4.
+
+Thus
+
+  u ∈ L^4(0,∞;L^6(T^3)),
+
+which is a Serrin-admissible pair because
+
+  2/4 + 3/6 = 1.
+
+This provides an independent continuation certificate.
+
+The resulting regularity class is exactly
+
+  R_(ν,C3)
+    =
+  {u0∈Ḣ^(1/2)_σ(T^3):
+   ||u0||_(Ḣ^(1/2))<ν/(8C3^3)}.
+
+CLASSIFICATION:
+
+  ! B_TIER.
+
+The theorem is mathematically complete.
+No Riemann-hypothesis, HVR, Borel-Laplace, M7, or finite-witness premise is
+required for this regularity class.
+
+======================================================================
+11. CORRESPONDENCE WITH regularity-B-assembly/pkg1
+======================================================================
+
+1. H12_FOURIER_FOUNDATIONS.lean
+   STATUS=!! A_TIER
+
+   Formalized:
+     Mode3;
+     frequency λ_k;
+     solenoidal fibers;
+     Leray contraction;
+     heat multiplier;
+     finite Fourier transport.
+
+2. H12_SPECTRAL_ENERGY_BRIDGE.lean
+   STATUS=!! A_TIER
+
+   Formalized:
+     critical energies;
+     finite interpolation;
+     total heat H^(1/2) contraction.
+
+3. H12_CRITICAL_ABSORPTION.lean
+   STATUS=!! A_TIER
+
+   Formalized:
+     ν/(8C) initial radius;
+     ν/(4C) bootstrap radius;
+     nonlinear absorption;
+     dissipative scalar energy closure.
+
+4. H12_CRITICAL_TRILINEAR_COMPILER.lean
+   STATUS=!! A_TIER
+   FORMAL_STATUS=!!! CONDITIONAL_FORMAL_CLOSURE
+
+   Formalized:
+     PeriodicHhalfL3 + CriticalHolder
+       -> C3^3 E D^2
+       -> viscosity absorption.
+
+5. H12_HOLDER_LP_ADAPTER.lean
+   STATUS=!! A_TIER
+
+   Formalized:
+     L^3 × L^3 × L^3 -> L^1 Holder product;
+     removal of CriticalHolder as an independent inequality premise,
+     conditional on a concrete pairing realization.
+
+6. H12_CRITICAL_PAIRING_INTEGRAL.lean
+   STATUS=A_TIER_CANDIDATE
+
+   Current target:
+     L^1 product -> actual integral pairing.
+
+======================================================================
+12. REMAINING A-TIER OBLIGATIONS
+======================================================================
+
+A. PERIODIC_HHALF_TO_L3
+
+   Lean theorem required:
+
+     ∃ C3>0, ∀ mean-zero f,
+       ||f||_3 ≤ C3 ||Λ^(1/2)f||_2.
+
+   Preferred formal route:
+     periodic Riesz kernel + HLS,
+     or Littlewood-Paley square-function Sobolev embedding.
+
+B. NSE_POINTWISE_PAIRING_IDENTIFICATION
+
+   Lean theorem required:
+
+     |∫ ((u·∇)u)·Λu|
+       ≤
+     ∫ |u||∇u||Λu|,
+
+   together with the identification of the three factors with the
+   L^3 objects used by H12_HOLDER_LP_ADAPTER.
+
+C. GALERKIN_COMPACTNESS
+
+   Lean endpoints required:
+
+     global finite Fourier ODE;
+     uniform H^(1/2)/H^(3/2) estimates;
+     Aubin-Lions compactness;
+     nonlinear limit passage;
+     Lions-Magenes time continuity.
+
+D. CRITICAL_UNIQUENESS_AND_SMOOTHING
+
+   Lean endpoints required:
+
+     difference estimate + Gronwall;
+     positive-time parabolic bootstrap.
+
+E. ROOT
+
+   H12_SIGMA_SMALL_GLOBAL_REGULARITY
+
+   Exact target:
+
+     ||u0||_(Ḣ^(1/2)) < ν/(8C3^3)
+       ->
+     unique global critical strong solution,
+     smooth for every t>0.
+
+======================================================================
+13. FINAL STATUS
+======================================================================
+
+MATHEMATICAL STATUS:
+
+  ! B_TIER
+  H12_SIGMA_SMALL_GLOBAL_REGULARITY.
+
+LEAN STATUS:
+
+  certified algebraic/functional spine:
+    approximately 70 percent structurally formalized;
+
+  difficulty-weighted closure:
+    approximately 45-55 percent;
+
+  dominant unresolved theorem:
+    PeriodicHhalfL3;
+
+  dominant unresolved semantic layer:
+    Galerkin compactness / actual NSE pairing identification.
+
+ROOT PROMOTION:
+
+  not yet A_TIER.
+
+END
