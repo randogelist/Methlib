@@ -2,6 +2,24 @@
 
 Critical periodic \(H^{1/2}\) Navier–Stokes regularity assembly.
 
+## Native-passed overlay
+
+The exact source texts corresponding to the successful native Windows Lean 4.33.0 runs are overlaid directly in this directory.
+
+Use:
+
+```lean
+import LEAN_PASSED_STACK
+```
+
+as the import surface for passed material only. The exact package versions, source hashes, theorem names, and evidence directories are recorded in:
+
+```text
+LEAN_PASSED_STACK.txt
+```
+
+The overlay currently contains ten native-passed modules. Prepared frontier modules are retained beside it but are not imported or promoted by `LEAN_PASSED_STACK.lean`.
+
 ## Certified spine
 
 \[
@@ -94,6 +112,8 @@ and, inside the critical radius,
 \[
 I_{\rm abs}\le\frac{\nu}{4}D^2.
 \]
+
+This HLS compiler remains an A-tier candidate until matching external compiler and theorem-audit evidence is supplied.
 
 ## Remaining exact seams
 
