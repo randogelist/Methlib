@@ -25,6 +25,20 @@ A_TIER:
     NATIVE_RUN=PASS
     AXIOMS=propext,Classical.choice,Quot.sound
 
+  NSE_POINTWISE_PAIRING_IDENTIFICATION
+    VERSION=v0_1_0_CMD_ONLY
+    SOURCE_SHA256=b70798977a06d6aad2b1e2e3929e459d80630d4fcd7d5f0ff36fe91003366870
+    SIGNATURE_SHA256=13b9b7dbcb9cd9ba77abbed415562d14aae86dfa24071b5119e491d456868d28
+    AUDIT_SHA256=31930d8885afdd8cd6008ce429a3fa49d0fae7aeb693dbc8edb0f98994327aba
+    NATIVE_RUN=PASS
+    THEOREM_AXIOM_AUDITS=9
+    AXIOMS=propext,Classical.choice,Quot.sound
+    POINTWISE_PAIRING=UNCONDITIONAL
+    ROOT_IMPLICATION=NSEPairingRealization->CriticalHolder
+    FORMAL_STATUS=CONDITIONAL_FORMAL_CLOSURE
+    EXPLICIT_SEMANTIC_PREMISE=NSEPairingRealization.pointwiseLift
+    REMAINING_ANALYTIC_PREMISE=PeriodicHhalfL3
+
 A_TIER_CANDIDATE:
   H12_CRITICAL_PAIRING_INTEGRAL
     VERSION=v0_1_3_CMD_ONLY_FIX3_MEMLP
@@ -37,14 +51,6 @@ A_TIER_CANDIDATE:
     EXTERNAL_NATIVE_PASS=PENDING
     SCOPE=FINITE_DIMENSIONAL_POINTWISE_NSE_PAIRING
 
-  NSE_POINTWISE_PAIRING_IDENTIFICATION
-    VERSION=v0_1_0_CMD_ONLY
-    SOURCE_SHA256=b70798977a06d6aad2b1e2e3929e459d80630d4fcd7d5f0ff36fe91003366870
-    EXTERNAL_NATIVE_PASS=PENDING
-    POINTWISE_PAIRING=UNCONDITIONAL_CANDIDATE
-    EXPLICIT_SEMANTIC_PREMISE=NSEPairingRealization.pointwiseLift
-    REMAINING_ANALYTIC_PREMISE=PeriodicHhalfL3
-
 B_TIER:
   H12_SIGMA_SMALL_GLOBAL_REGULARITY
     PREMISES=PeriodicHhalfL3,H12LocalContinuation
@@ -55,6 +61,7 @@ B_TIER:
     CONCLUSION=CriticalHolder
     POINTWISE_BOUND=abs(inner(Ju,w))<=norm(u)*norm(J)*norm(w)
     INTEGRAL_CHAIN=norm(integral(q))<=norm(q)<=norm(tripleProduct(f,g,h))
+    LEAN_STATUS=A_TIER
 
 REMAINING:
   discharge NSEPairingRealization.pointwiseLift from concrete periodic fields
@@ -63,5 +70,5 @@ REMAINING:
   H12_SIGMA_SMALL_GLOBAL_REGULARITY root compiler
 
 INTERPRETATION:
-  structural Lean coverage approximately 72-80 percent;
-  difficulty-weighted closure approximately 45-55 percent.
+  structural Lean coverage approximately 75-82 percent;
+  difficulty-weighted closure approximately 48-58 percent.
