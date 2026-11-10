@@ -1,0 +1,103 @@
+NSE_PAIRING_POINTWISE_LP_LIFT_A_TIER
+=====================================
+
+MODE=A_TIER_DERIVATION
+DATE=2026-11-10
+TARGET_TOOLCHAIN=Lean 4.33.0 native Windows
+CURRENT_CLASSIFICATION=A_TIER_CANDIDATE
+INTENDED_PROMOTION=CONDITIONAL_FORMAL_CLOSURE
+NO_LOCAL_LEAN=HONORED
+
+CACHED A_TIER BASE
+------------------
+NSE_POINTWISE_PAIRING_IDENTIFICATION
+  COMPILE=PASS
+  SIGNATURE_CHECK=PASS
+  THEOREM_AXIOM_AUDITS=9
+  THEOREM_AXIOM_AUDIT=STANDARD_ONLY
+  RUN=PASS
+
+ROOT
+----
+NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT
+
+EXACT NEW THEOREM
+-----------------
+For
+
+  q : L^1(mu),
+  f,g,h : L^3(mu),
+
+assume only
+
+  ||q(x)|| <= ||tripleProduct(f,g,h)(x)||
+
+for almost every x.
+
+Then
+
+  ||q||_L1 <= ||tripleProduct(f,g,h)||.
+
+The proof expands both Lp norms to eLpNorm, applies
+
+  eLpNorm_mono_ae,
+
+and normalizes
+
+  pFinal = ENNReal.ofReal 1 = 1.
+
+No dependent transport of an indexed Lp object is used.
+
+SEMANTIC COMPILER
+-----------------
+PointwiseLpData contains:
+
+  f,g,h : L^3,
+  q     : L^1,
+
+the exact state/norm identifications, and only the a.e. pointwise estimate.
+
+Lean constructs:
+
+  NSEPairingRealization,
+
+including the previously explicit field
+
+  NSEPairingRealization.pointwiseLift.
+
+Thus:
+
+  PointwiseLpData
+    -> NSEPairingRealization
+    -> CriticalHolder
+    -> critical trilinear estimate
+    -> absorbed critical trilinear estimate.
+
+PREMISE ACCOUNTING
+------------------
+The independent norm-level semantic premise
+
+  NSEPairingRealization.pointwiseLift
+
+is eliminated.
+
+The remaining concrete semantic obligation is now exactly the a.e. statement
+
+  ||q(x)|| <= ||tripleProduct(f,g,h)(x)||.
+
+For periodic NSE fields this will be supplied by:
+  * the already A-tier pointwise pairing estimate;
+  * a.e. identities for the selected Lp representatives;
+  * the a.e. coercion identity of the Holder product.
+
+The remaining analytic premise for the critical nonlinear estimate is:
+
+  PeriodicHhalfL3.
+
+PROMOTION CONTRACT
+------------------
+  COMPILE=PASS
+  SIGNATURE_CHECK=PASS
+  THEOREM_AXIOM_AUDITS=7
+  THEOREM_AXIOM_AUDIT=STANDARD_ONLY
+  RUN=PASS
