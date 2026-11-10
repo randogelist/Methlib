@@ -31,12 +31,25 @@ A_TIER_CANDIDATE:
     SOURCE_SHA256=c5482e727855239354ff3a4508cf09293ee4e5bda9f7f8ea3e9eff83748a673a
     EXTERNAL_NATIVE_PASS=PENDING
 
+  H12_POINTWISE_CONVECTION_SQUARE
+    VERSION=v0_1_0_CMD_ONLY
+    SOURCE_SHA256=44a6c8160746704327d9bfb1378ea3b108b235c1b5e5bd585ddf0b19d4997aba
+    EXTERNAL_NATIVE_PASS=PENDING
+    SCOPE=FINITE_DIMENSIONAL_POINTWISE_NSE_PAIRING
+
+B_TIER:
+  H12_SIGMA_SMALL_GLOBAL_REGULARITY
+    PREMISES=PeriodicHhalfL3,H12LocalContinuation
+    THRESHOLD=nu/(8*C3^3)
+    QUANTITATIVE_BOUND=E(t)^2+(3nu/2)integral_0^t D(s)^2 ds<=E(0)^2
+
 REMAINING:
+  pointwise square-to-absolute-value adapter
   NSE_POINTWISE_PAIRING_IDENTIFICATION
   PeriodicHhalfL3
   H12_LOCAL_CONTINUATION
-  H12_SIGMA_SMALL_GLOBAL_REGULARITY
+  H12_SIGMA_SMALL_GLOBAL_REGULARITY root compiler
 
 INTERPRETATION:
-  structural Lean coverage approximately 65-75 percent;
-  difficulty-weighted closure approximately 40-50 percent.
+  structural Lean coverage approximately 70-78 percent;
+  difficulty-weighted closure approximately 42-52 percent.
