@@ -1,0 +1,49 @@
+THEOREM=S_DIR_L2_SUPNORM_DYADIC_SCHUR
+MODE=B_TIER_DERIVATION
+STATUS=UNCONDITIONAL
+
+Let a be any nonzero integer vector in Z^3 and let
+  Lambda_a={k in Z^3:a.k=0}.
+Let R(k)=(k_1^2+k_2^2+k_3^2)^(1/2) and
+  Q(k)=max(|k_1|,|k_2|,|k_3|).
+For k != 0, Q(k) is a positive integer and Q(k)<=R(k).
+
+Define j(k)=floor(log_2 Q(k)), so
+  2^j(k) <= Q(k) < 2^(j(k)+1).
+Consequently, S_j={k in Lambda_a\{0}:j(k)=j} form a genuine
+pairwise-disjoint partition. Their finite intersections with any F
+form a disjoint finite partition of F, without an admission.
+
+The previously derived injective projection of Lambda_a onto two integer
+coordinates gives, in the cube |k_i|<2^(j+1),
+  #S_j <= (2^(j+2)-1)^2 <= 16*4^j.
+
+For a fixed r>0, set h_r(k)=1/[R(k)*(r^2+R(k)^2)].
+On S_j, R(k)>=Q(k)>=2^j, and the map s -> 1/[s(r^2+s^2)]
+is decreasing on s>0. Thus, for arbitrary finite F,
+
+  sum_{k in F cap S_j} h_r(k)
+     <= 16 * 4^j / [2^j*(r^2+4^j)]
+     = 16 * 2^j/(r^2+4^j).
+
+The already proved telescopic dyadic estimate is
+
+  sum_{j=0}^{N-1} 2^j/(r^2+4^j) <= 4/r.
+
+Using the actual disjoint shell partition of every finite subset
+F subset Lambda_a\{0}, one gets
+
+  sum_{k in F} h_r(k) <=64/r.
+
+Because h_r>=0 and all finite subsums have the same uniform bound,
+the series is summable and
+
+  sum_{k in Lambda_a\{0}} 1/[R(k)*(r^2+R(k)^2)] <=64/r.
+
+This is an unconditional constant, uniform in the nonzero direction a,
+without primitive-axis assumptions. The external Lean target encodes
+the series over all k in Z^3 with zero extension off Lambda_a\{0}.
+
+The physical Serrin estimate still requires Fourier-torus synthesis and
+the exact time-integrated heat kernel, and unrestricted Leray-Hopf
+uniqueness requires a separate weak-strong uniqueness theorem.

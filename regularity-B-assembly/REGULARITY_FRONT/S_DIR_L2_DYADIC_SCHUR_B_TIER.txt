@@ -1,0 +1,79 @@
+S_DIR_L2_DYADIC_SCHUR_B_TIER
+MODE=B_TIER_DERIVATION
+CANONICAL_ROOT=S_DIR_L2_GLOBAL_REGULARITY
+DATE=2026-11-10
+STATUS=UNCONDITIONAL_MATHEMATICAL_DERIVATION
+LEAN_STATUS=A_TIER_CANDIDATE_NEW_DYADIC_LEMMAS
+
+Definitions:
+  a in Z^3\{0}, Lambda_a={k in Z^3 : a.k=0}.
+  D_j={k in Lambda_a : 2^j <= |k| < 2^(j+1)}.
+
+1. Projection onto the two coordinates complementary to any index of a
+   having a nonzero coefficient is injective on Lambda_a.
+   The image of D_j lies in the open integer coordinate square
+   (-2^(j+1),2^(j+1))^2, whose cardinality is
+      (2^(j+2)-1)^2 <= 16 * 4^j.
+   This uses the PREVIOUSLY A_TIER theorem
+      S_DIR_L2_PLANE_PROJECTION_INJECTIVE
+   and requires no planar area theorem.
+
+2. For r>0, q>0 the algebraic inequality
+   (r+2q)(r+q) <= 4(r^2+q^2)
+   follows from
+      4(r^2+q^2)-(r+2q)(r+q)
+      =3(r-q/2)^2 + (5/4)q^2 >= 0.
+   Consequently,
+      q/(r^2+q^2)
+        <= (4/r)[2q/(r+2q)-q/(r+q)].
+
+   Set q=2^j and H_j=2^j/(r+2^j). For every N,
+      SUM_{j=0}^{N-1} 2^j/(r^2+4^j)
+      <=(4/r)(H_N-H_0) <=4/r.
+   Monotone convergence yields the infinite bound <=4/r.
+
+3. For k in Lambda_a\{0}, r=|k|>=1, and l in D_j,
+   |l|>=2^j, hence
+      1/[|l|(r^2+|l|^2)]
+      <= 1/[2^j(r^2+4^j)].
+   Using the cardinality bound and the prefix inequality:
+      SUM_{l in Lambda_a\{0}} 1/[|l|(r^2+|l|^2)]
+      <=16 * SUM_{j>=0} 2^j/(r^2+4^j)
+      <=64/r.
+   This is uniform in a, including nonprimitive axes.
+
+4. The PREVIOUSLY A_TIER finite heat-kernel Schur theorem, followed by
+   nonnegative monotone convergence, yields
+      SUM_{k,l !=0} |b_k||b_l|/(|k|^2+|l|^2)
+      <= 64 * SUM_{k!=0}|b_k|^2
+   for every l2 coefficient family b supported in Lambda_a.
+
+5. Fourier heat synthesis and the integrated heat correlation kernel:
+      INT_0^infinity ||exp(nu t Delta) u0||_infinity^2 dt
+      <= [1/(4*pi^2*nu)] * 64 * ||u0||_2^2
+      =16/(pi^2*nu) ||u0||_2^2.
+   Since pi>3 and 128<135<45*pi,
+      16/(pi^2*nu) <=45/(8*pi*nu).
+   Thus the FROZEN physical theorem's numerical bound is unchanged.
+
+6. With a heat orbit in L2_t LInfinity_x starting at t=0 and an energy
+   equality, standard relative-energy Gronwall yields uniqueness among
+   all periodic 3D Leray-Hopf solutions with the same initial datum.
+   The heat orbit is jointly C-infinity for every t>0 by Gaussian Fourier
+   summability, and has strong L2 initial trace.
+
+LEAN TASKS IN NEW MODULE:
+   A. Radius-to-strict-cube arithmetic.
+   B. Finite directional dyadic shell count.
+   C. Telescoping rational step.
+   D. Uniform dyadic prefix estimate.
+   E. Exact comparison with frozen Serrin constant.
+
+LEAN TASKS STILL OPEN:
+   F. Construct real finite dyadic shell partition on every plane.
+   G. Transfer finite dyadic row bounds to infinite rows.
+   H. Physical torus Fourier-synthesis adapter and global L2tLInfinity.
+   I. Unrestricted Leray-Hopf weak-strong uniqueness.
+
+A_TIER PROMOTION requires matching native Windows Lean 4.33.0 compiler
+and standard-only theorem-level axiom audit. No local Lean execution.

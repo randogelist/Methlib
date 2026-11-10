@@ -1,0 +1,49 @@
+RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_9_1_INFINITE_SERRIN_FIX1
+STATUS=A_TIER_CANDIDATE
+FIX1=Measurable.pow_const 2 at S_DIR_L2_SERRIN_INFINITE.lean:93
+PREVIOUS_EXTERNAL_63_AUDITS=PASS
+NEW_6_ROOT_AUDITS=AWAITING_NATIVE_RUN
+FULL_PHYSICAL_ROOT=NOT_PROVED
+
+S_DIR_L2_GLOBAL_REGULARITY — v0.9.0 INFINITE SERRIN
+MODE=A_TIER_DERIVATION
+COMPILER_TARGET=Lean 4.33.0 native Windows x86_64-w64-windows-gnu
+STATUS=A_TIER_CANDIDATE
+NO_LOCAL_LEAN=TRUE
+
+PREVIOUS_EVIDENCE=63 theorem-level audits PASS, standard-only
+PREVIOUS_SOURCE_FILES=12, byte-identical
+NEW_MODULE=S_DIR_L2_SERRIN_INFINITE.lean
+NEW_MODULE_SHA256=5fe53ab28cba85271ecd8bea9f115468bdae829d8c9e4203cea7485b8236f744
+NEW_THEOREM_COUNT=6
+EXPECTED_THEOREM_AXIOM_AUDITS=69
+
+EXACT PRIMARY THEOREM:
+  SDirL2.S_DIR_L2_INFINITE_SERRIN_HEAT
+
+For all a in Z^3 \ {0}, nu > 0, all monotone sequences F_n of finite
+subsets of the actual nonzero direction plane, and all square-summable
+complex coefficient profiles z:
+
+  integral_{t in (0,infinity)}^minus
+    sup_n ENNReal.ofReal((sum_{k in F_n} |z_k| exp(-4pi^2 nu |k|^2 t))^2)
+  <= ENNReal.ofReal((16/(pi^2 nu)) * sum_k |z_k|^2).
+
+SUPPORTING PROOFS:
+  finite nonnegativity, finite inclusion monotonicity,
+  finite squared amplitude integrability,
+  generic monotone convergence of nonnegative lintegrals,
+  stronger dyadic constant and frozen target-constant comparison.
+
+ABSOLUTELY NO ADDITIONAL ADMISSIONS FOR PRIMARY LEMMA:
+  Monotone F is a theorem parameter defining an arbitrary sequence,
+  not an unproved analytic premise. The conclusion holds for EVERY F.
+
+EXACT CURRENT BOUNDARY:
+  Identification of F_n as exhaustive of all modes remains open.
+  Pointwise full Fourier synthesis remains open.
+  Physical NSE C_infinity on (0,infinity) and Leray-Hopf uniqueness remain open.
+
+No theorem signature, assumption or axiom was changed in the 12 old modules.
+No new axioms or sorry are present in this new source.
+The exact user-frozen root name remains S_DIR_L2_GLOBAL_REGULARITY.

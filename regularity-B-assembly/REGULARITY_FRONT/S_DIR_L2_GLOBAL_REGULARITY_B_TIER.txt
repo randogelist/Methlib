@@ -1,0 +1,593 @@
+S_DIR_L2_GLOBAL_REGULARITY_B_TIER
+================================
+MODE=B_TIER_DERIVATION
+CANONICAL_ROOT=S_DIR_L2_GLOBAL_REGULARITY
+DATE=2026-11-10
+DOMAIN=T^3 = R^3 / Z^3, normalized Haar volume 1
+VISCOSITY=nu > 0
+FORCING=0
+STATUS=B_TIER -- unconditional mathematical derivation of the exact scoped theorem
+LEAN_ROOT_STATUS=NOT A_TIER; no matching unconditional physical-root compile/audit
+LEAN_COMPILER_EXECUTION=NONE (no local Lean execution)
+MARKER=!
+
+==========================================================================
+0. EXACT ROOT THEOREM (NO ADDITIONAL ADMISSIONS)
+==========================================================================
+
+Definition S_DIR_L2.
+
+  S_DIR_L2 := UNION over a in Z^3 \ {0} of
+    { u0 = a phi : phi is REAL in L^2_0(T^3),
+                   a . grad(phi) = 0 in distributions }.
+
+Here L^2_0 denotes zero spatial mean, a is a fixed NONZERO integer
+vector for each datum, and all spatial integrals use unit-torus measure.
+
+Theorem S_DIR_L2_GLOBAL_REGULARITY.
+
+  For every nu>0 and every u0 in S_DIR_L2, there exists a vector field U
+  such that:
+
+  (R1) U(0)=u0 strongly in L^2_sigma,0(T^3), and
+       U belongs to C([0,infinity); L^2_sigma,0(T^3));
+
+  (R2) U belongs to C^infinity((0,infinity) x T^3);
+
+  (R3) partial_t U + (U . grad) U + grad p = nu Delta U,
+       div U=0, with p=0 on (0,infinity) x T^3;
+
+  (R4) U(t)=exp(nu t Delta) u0 for every t>=0;
+
+  (R5) For every t>=0, the exact energy equality holds:
+       ||U(t)||_2^2 + 2 nu integral_0^t ||grad U(s)||_2^2 ds
+          = ||u0||_2^2;
+
+  (R6) The GLOBAL critical Serrin estimate holds:
+       integral_0^infinity ||U(t)||_infinity^2 dt
+          <= [45 / (8 pi nu)] ||u0||_2^2;
+
+  (R7) If V is ANY unforced periodic three-dimensional Leray--Hopf
+       solution with initial trace u0, then V=U.
+
+  Consequence: U is the unique Leray--Hopf solution of the same datum,
+  and every such solution is smooth at all strictly positive times.
+
+  There is NO smallness, H^(1/2), M7, GP, BKQR, certificate or other
+  analytic premise in this theorem. Its initial admissibility restriction
+  is exactly u0 in S_DIR_L2. The zero-mean requirement is essential for
+  the global-in-time Serrin integral (a nonzero constant flow would have
+  a nonintegrable infinite-time L^infinity norm).
+
+==========================================================================
+1. COORDINATE/FREQUENCY REPRESENTATION
+==========================================================================
+
+Fix nu>0. Take u0=a phi in S_DIR_L2 with
+  a=(a1,a2,a3) in Z^3 \ {0},
+  phi real-valued, mean zero, L^2(T^3),
+  a . grad phi = 0 in D'(T^3).
+
+Use Fourier characters e_k(x)=exp(2 pi i k.x), k in Z^3.
+Let c_k=hat(phi)(k), b_k=hat(u0)(k)=a c_k.
+
+Parseval and reality imply
+  c_0=0,
+  c_{-k}=conj(c_k),
+  sum_{k in Z^3}|c_k|^2=||phi||_2^2<infinity,
+  sum_k |b_k|^2=||u0||_2^2<infinity.
+
+The directional distributional identity has Fourier transform
+  2 pi i (a.k) c_k=0 for each k in Z^3.
+Since a.k is an integer, a.k != 0 implies c_k=0.
+
+Define
+  P_a={x in R^3: a.x=0},
+  Lambda_a=P_a intersection Z^3.
+
+Then c_k and b_k are supported in Lambda_a. Since a!=0, P_a is a
+Euclidean plane of dimension 2. Its integer lattice points have mutual
+Euclidean distance >=1, independently of the direction a.
+
+ALSO: a.b_k=|a|^2 c_k, whereas k.b_k=(k.a)c_k=0.
+This is the precise divergence-free Fourier condition.
+
+==========================================================================
+2. PHYSICAL FOURIER SYNTHESIS AND JOINT POSITIVE-TIME SMOOTHNESS
+==========================================================================
+
+For t>0 define
+
+  psi(t,x) = SUM_{k in Lambda_a} c_k
+                        exp(-4 pi^2 nu |k|^2 t) e_k(x),
+  U(t,x) = a psi(t,x).
+
+For t=0 define U(0)=u0 as an L^2-equivalence class.
+
+Let delta>0, and let r be any nonnegative integer. Cauchy--Schwarz gives
+
+  SUM_k |b_k| |k|^r exp(-4 pi^2 nu |k|^2 delta)
+   <= (SUM_k |b_k|^2)^(1/2)
+      (SUM_k |k|^(2r) exp(-8 pi^2 nu |k|^2 delta))^(1/2)
+   < infinity.
+
+The last sum converges even when taken over ALL Z^3, since Gaussian
+spatial decay dominates every polynomial.
+
+The Fourier coefficient of partial_t^q partial_x^beta U is
+  (-4 pi^2 nu |k|^2)^q (2 pi i k)^beta b_k
+  exp(-4 pi^2 nu |k|^2 t).
+
+Thus for every q>=0 and every spatial multi-index beta the differentiated
+Fourier series converges uniformly on [delta,T] x T^3 for every T>delta.
+By the Weierstrass test and termwise differentiation,
+
+  U in C^infinity((0,infinity) x T^3).
+
+The Gaussian multiplier is real and even, so U is real, and
+  hat(U(t))(-k)=conj(hat(U(t))(k)).
+The zero mode remains zero.
+
+Since k.b_k=0, distributional div U(t)=0, and since U(t) is smooth
+for t>0, div U(t,x)=0 pointwise.
+
+Since a.k c_k=0 at every frequency,
+  a.grad psi(t,x)=0 for t>0.
+
+Consequently
+  (U.grad)U
+   = (a psi . grad)(a psi)
+   = a psi (a.grad psi)
+   = 0.
+
+Termwise heat differentiation gives
+  partial_t U = nu Delta U
+on (0,infinity) x T^3.
+Hence with p=0,
+  partial_t U + (U.grad)U + grad p = nu Delta U,
+  div U=0.
+
+The directional structure and zero mean persist for every t>0:
+  U(t)=a psi(t),  a.grad psi(t)=0,  integral psi(t)=0.
+Thus S_DIR_L2 is invariant under the explicit NSE evolution.
+
+==========================================================================
+3. STRONG L^2 TRACE AND GLOBAL ENERGY EQUALITY
+==========================================================================
+
+By Parseval, for t>=0,
+
+  ||U(t)-u0||_2^2
+    = SUM_k |b_k|^2 |exp(-4 pi^2 nu |k|^2 t)-1|^2.
+
+Each summand tends to zero as t downarrow 0 and is bounded by
+4|b_k|^2, a summable majorant. Dominated convergence for series gives
+  lim_{t downarrow 0} ||U(t)-u0||_2 = 0.
+
+The same argument at arbitrary t0>=0 proves
+  U in C([0,infinity);L^2_sigma,0(T^3)).
+
+For t>0 Parseval gives
+  ||U(t)||_2^2
+    = SUM_{k != 0} |b_k|^2 exp(-8 pi^2 nu |k|^2 t),
+
+and
+  ||grad U(t)||_2^2
+    = SUM_{k != 0} 4 pi^2 |k|^2 |b_k|^2
+                    exp(-8 pi^2 nu |k|^2 t).
+
+Tonelli's theorem applies to the latter nonnegative series. For any T>0,
+
+  2 nu INT_0^T ||grad U(t)||_2^2 dt
+    = SUM_{k != 0} |b_k|^2
+                     [1-exp(-8 pi^2 nu |k|^2 T)].
+
+Adding the L^2 norm identity yields
+
+  ||U(T)||_2^2 + 2 nu INT_0^T ||grad U(t)||_2^2 dt
+    = SUM_{k != 0}|b_k|^2=||u0||_2^2.
+
+This proves the exact Leray--Hopf energy equality, hence the energy
+inequality, and the existence of an admissible global Leray--Hopf
+solution U of the unforced periodic three-dimensional equations.
+
+Letting T tend to infinity also gives
+
+  INT_0^infinity ||grad U(t)||_2^2 dt
+     = ||u0||_2^2 / (2 nu),
+
+since the mean-zero Fourier support has no k=0 term.
+
+==========================================================================
+4. GEOMETRIC LEMMA: UNIFORM ANNULAR LATTICE COUNT
+==========================================================================
+
+For integer j>=1 set
+
+  A_j(a)={ k in Lambda_a : j <= |k| < j+1 },
+  N_j(a)=#A_j(a).
+
+CLAIM (uniform in a != 0):
+
+  N_j(a) <= 30j+15 <=45j.
+
+PROOF.
+
+The points k in Lambda_a are distinct points of Z^3; hence the distance
+between any two distinct points is >=1. Consider, inside the two-
+dimensional Euclidean plane P_a, the open disks B_{P_a}(k,1/3).
+These disks are pairwise disjoint and have planar area pi/9.
+
+For k in A_j(a), any x in B_{P_a}(k,1/3) obeys
+
+  j-1/3 < |x| < j+4/3.
+
+Thus all N_j(a) disjoint disks lie in the planar annulus bounded by
+radii j-1/3 and j+4/3. Planar area comparison implies
+
+  N_j(a) pi/9
+   <= pi[(j+4/3)^2-(j-1/3)^2]
+   = pi[(10/3)j+(5/3)].
+
+Therefore N_j(a)<=30j+15<=45j for every j>=1. QED.
+
+The constants are independent of direction, primitiveness of a, angle
+of P_a or covolume of Lambda_a. No coordinate-choice-dependent lattice
+basis or number-theoretic bound is needed.
+
+==========================================================================
+5. GEOMETRIC LEMMA: UNIFORM WEIGHTED SCHUR ROW SUM
+==========================================================================
+
+For each k in Lambda_a \ {0}, put r=|k|>=1. Then
+
+  SUM_{l in Lambda_a \ {0}}
+    [1/(|l| (r^2+|l|^2))]
+
+  = SUM_{j>=1} SUM_{l in A_j(a)}
+      [1/(|l| (r^2+|l|^2))]
+
+  <= SUM_{j>=1} N_j(a) / [j(r^2+j^2)]
+
+  <= 45 SUM_{j>=1} 1/(r^2+j^2).
+
+Since x |-> 1/(r^2+x^2) is decreasing on [0,infinity),
+
+  SUM_{j>=1} 1/(r^2+j^2)
+   <= INT_0^infinity dx/(r^2+x^2)
+   = pi/(2r).
+
+Therefore
+
+  SUM_{l in Lambda_a \ {0}}
+     1/(|l| (|k|^2+|l|^2))
+  <= (45 pi)/(2|k|).
+
+Define for nonzero frequencies
+
+  K(k,l)=1/(|k|^2+|l|^2),
+  w(k)=1/|k|,
+  C_S=45 pi/2.
+
+Then K(k,l)=K(l,k)>=0 and
+
+  SUM_{l != 0} K(k,l)w(l) <= C_S w(k).
+
+This is the exact uniform Schur row hypothesis.
+
+==========================================================================
+6. FINITE AND INFINITE WEIGHTED SCHUR INEQUALITY
+==========================================================================
+
+Take any finite F subset Lambda_a \ {0} and any nonnegative b_k.
+For positive weights w(k), the elementary square inequality yields
+
+  2b_k b_l <= b_k^2 w(l)/w(k) + b_l^2 w(k)/w(l).
+
+Multiply by K(k,l), sum over k,l in F, use symmetry of K, and apply
+the row inequality from section 5:
+
+  SUM_{k,l in F} K(k,l)b_k b_l
+  <= SUM_{k in F} [b_k^2/w(k)]
+                     SUM_{l in F}K(k,l)w(l)
+  <= C_S SUM_{k in F}b_k^2.
+
+For infinite b in ell^2(Lambda_a \ {0}), take an increasing exhaustion
+by finite sets F_n. The terms are nonnegative, and monotone convergence
+implies
+
+  SUM_{k,l in Lambda_a \ {0}} K(k,l)b_k b_l
+     <= (45 pi/2) SUM_{k != 0} b_k^2.
+
+This completes the uniform rank-two Schur bound. Its infinite-sum
+passage depends only on positivity and monotone convergence, not on any
+assumed convergence of the unbounded double sum.
+
+==========================================================================
+7. GLOBAL CRITICAL SERRIN ESTIMATE FROM t=0
+==========================================================================
+
+Let b_k=|hat(u0)(k)|>=0. Parseval gives
+
+  SUM_{k in Lambda_a} b_k^2=||u0||_2^2.
+
+Since U(t) has absolutely convergent Fourier series for t>0,
+
+  ||U(t)||_{L^infinity(T^3)}
+    <= SUM_{k in Lambda_a \ {0}}
+         b_k exp(-4 pi^2 nu |k|^2 t).
+
+The right side is finite for every t>0 by the Gaussian Cauchy--Schwarz
+bound from section 2. Expand its square and use Tonelli (all terms
+nonnegative). Since |k|,|l|>=1,
+
+  INT_0^infinity [SUM_{k != 0} b_k exp(-4 pi^2 nu |k|^2 t)]^2 dt
+
+    = SUM_{k,l != 0} b_k b_l
+           INT_0^infinity
+             exp(-4 pi^2 nu (|k|^2+|l|^2)t) dt
+
+    = [1/(4 pi^2 nu)]
+      SUM_{k,l != 0}
+        b_k b_l/(|k|^2+|l|^2)
+
+    <= [1/(4 pi^2 nu)] [45 pi/2]
+            SUM_{k != 0}b_k^2
+
+    = [45/(8 pi nu)] ||u0||_2^2.
+
+Consequently,
+
+  INT_0^infinity ||U(t)||_infinity^2 dt
+     <= [45/(8 pi nu)] ||u0||_2^2 < infinity.
+
+This is the scale-critical three-dimensional Prodi--Serrin pair
+  (time exponent p, spatial exponent q)=(2,infinity),
+  2/p+3/q=1.
+
+The estimate is UNIFORM over all integer directions a!=0 and over
+arbitrary amplitudes ||u0||_2. No H^(1/2) smallness is assumed.
+
+Crucially, the integration is from the rough trace t=0, NOT just from
+positive times delta>0. Absolute Fourier summability was used only
+for t>0, while Tonelli controlled the improper integral down to t=0.
+
+==========================================================================
+8. UNRESTRICTED LERAY--HOPF UNIQUENESS
+==========================================================================
+
+Let V be an arbitrary periodic three-dimensional Leray--Hopf solution
+of the unforced NSE with the SAME datum u0, and define W=V-U.
+
+The Leray--Hopf bounds give
+  V in L^infinity_t L^2_x intersection L^2_t H^1_x;
+  U in L^infinity_t L^2_x intersection L^2_t H^1_x;
+  W in L^infinity_t L^2_x intersection L^2_t H^1_x.
+
+By section 7,
+  U in L^2(0,T;L^infinity_x) for every T<infinity.
+
+8.1. Cross-energy identity at the rough trace.
+
+The identity can be justified without assuming U(0) in H^1.
+Introduce the heat-shift tests
+  U_epsilon(t)=U(t+epsilon), epsilon>0.
+They are smooth on [0,T] x T^3, solenoidal, and solve the heat equation.
+
+Testing the weak equation for V against U_epsilon yields
+
+  (V(t),U_epsilon(t))-(u0,U_epsilon(0))
+     = INT_0^t INT_{T^3}
+           (V tensor V):grad U_epsilon dx ds
+       -2 nu INT_0^t
+           (grad V,grad U_epsilon) ds.
+
+For every finite T, as epsilon downarrow 0,
+  U_epsilon(0) -> u0 in L^2;
+  U_epsilon(t) -> U(t) in L^2 for each t>=0;
+  grad U_epsilon -> grad U in L^2(0,T;L^2).
+
+Moreover, for t>0, the heat L^infinity contraction gives
+  ||U(t+epsilon)||_infinity <= ||U(t)||_infinity,
+and U(t+epsilon)->U(t) uniformly in x.
+Dominated convergence therefore gives
+  U_epsilon -> U in L^2(0,T;L^infinity).
+
+For the convective integral, periodic integration by parts (div V=0)
+gives, for smooth tests G,
+  INT (V tensor V):grad G = -INT G . (V.grad)V.
+The difference between the epsilon term and its limit is bounded by
+  ||U_epsilon-U||_{L^2_t L^infinity_x}
+  ||V||_{L^infinity_t L^2_x}
+  ||grad V||_{L^2_t L^2_x},
+which tends to zero.
+
+Thus the cross-energy identity extends to U from initial time zero:
+
+  (V(t),U(t))-||u0||_2^2
+     = INT_0^t INT (V tensor V):grad U
+       -2 nu INT_0^t (grad V,grad U).
+
+8.2. Relative-energy inequality.
+
+Combine this identity with the energy equality of U and the energy
+inequality of V. The usual polarization gives
+
+  ||W(t)||_2^2 + 2 nu INT_0^t ||grad W||_2^2 ds
+    <= -2 INT_0^t INT (V.grad U).V dx ds.
+
+Since (U.grad)U=0, V=U+W, and div W=0,
+
+  INT (V.grad U).V
+      = INT (W.grad U).W.
+
+Indeed, the additional term INT(W.grad U).U equals
+  (1/2) INT W.grad |U|^2 = 0 by periodic integration by parts.
+
+Integrate the remaining term by parts using div W=0:
+
+  -INT (W.grad U).W
+      = INT U.(W.grad)W.
+
+Therefore
+
+  ||W(t)||_2^2 + 2 nu INT_0^t ||grad W||_2^2
+     <= 2 INT_0^t
+         ||U(s)||_infinity ||W(s)||_2 ||grad W(s)||_2 ds.
+
+Young's inequality gives
+
+  2 ||U||_infinity ||W||_2 ||grad W||_2
+     <= nu ||grad W||_2^2
+        + nu^(-1) ||U||_infinity^2 ||W||_2^2.
+
+Thus for almost every t (and then in the canonical Leray--Hopf
+representative sense),
+
+  ||W(t)||_2^2
+     <= nu^(-1) INT_0^t
+          ||U(s)||_infinity^2 ||W(s)||_2^2 ds.
+
+Since W(0)=0 in L^2 and ||U||_infinity^2 belongs to L^1(0,T),
+Volterra--Gronwall implies
+  ||W(t)||_2^2=0 for every t>=0.
+
+Hence V=U. No uniqueness-in-the-shear-sector restriction was imposed
+on V: it was any three-dimensional Leray--Hopf solution of the same
+datum. This proves (R7).
+
+==========================================================================
+9. STRICTLY ROUGH SUBCLASS IS NONEMPTY
+==========================================================================
+
+Take a=e1 and define
+  phi(x1,x2,x3) = 2 SUM_{n>=1} cos(2 pi n x2)/n,
+where convergence is in L^2(T^3).
+
+The nonzero Fourier coefficients are
+  hat(phi)(0,n,0)=1/n,
+  hat(phi)(0,-n,0)=1/n,  n>=1.
+
+Therefore
+  ||phi||_2^2 = 2 SUM_{n>=1} 1/n^2 < infinity,
+  phi has mean zero,
+  partial_{x1}phi=0 distributionally.
+
+However, using the homogeneous H^(1/2) Fourier norm,
+
+  ||phi||_{dot H^(1/2)}^2
+    = SUM_{k !=0} 2 pi |k| |hat(phi)(k)|^2
+    = 4 pi SUM_{n>=1} 1/n
+    = infinity.
+
+Thus
+  u0=e1 phi belongs to S_DIR_L2,
+  u0 is in L^2_sigma,0(T^3),
+  u0 is NOT in H^(1/2)_sigma,0(T^3).
+
+Nevertheless the full main theorem applies, including positive-time
+C^infinity regularity, global L^2_tL^infinity_x, energy equality, and
+unrestricted three-dimensional Leray--Hopf uniqueness.
+
+This proves
+  S_DIR_L2 \ H^(1/2)_sigma,0 is nonempty.
+
+No statement that ALL of S_DIR_L2 is outside H^(1/2) is made. The full
+class contains both smooth and strictly rough admissible data.
+
+==========================================================================
+10. OPTIONAL EXACT M7 FOURIER-FLUX ADAPTER -- SCOPE SEPARATION
+==========================================================================
+
+For any structure-preserving diagonal spatial Fourier truncation P_m,
+let U_m=P_m U. Then U_m=a psi_m, a.grad psi_m=0, and
+  (U_m.grad)U_m=0.
+
+Define the nonlinear Fourier flux at finite cutoff N by any
+functional Phi_N^{(m)} which depends linearly on the finite Fourier
+coefficients of P B(U_m,U_m), where
+  B(v,v)=P_Leray((v.grad)v).
+
+Then B(U_m,U_m)=0 and hence
+  Phi_N^{(m)}=0.
+
+For any nonnegative weighted M7-type functional assembled solely from
+these Phi_N^{(m)}, with a declared zero-denominator convention,
+  M7_FOURIER_FLUX(delta,T)=0.
+
+This is NOT an unconditional identification with the complete separate
+BKQR/GP/Gram/tail M7 construction unless an explicit semantic theorem
+has been supplied. The M7 observation is NOT a premise in sections 0-9,
+and the Serrin estimate was proved directly from the geometric Fourier
+bound, not inferred from an unspecified M7 theorem.
+
+==========================================================================
+11. DEPENDENCY/FORMALIZATION REGISTER
+==========================================================================
+
+PREVIOUSLY NATIVE-AUDITED IN THE USER'S PROJECT:
+
+  S_DIR_L2_SPECTRAL_REGULARITY
+    STATUS=A_TIER (spectral, not physical)
+    COMPILER=Lean 4.33.0 native Windows
+    EVIDENCE=r-20261110-151316-7726a700
+    AXIOMS=STANDARD_ONLY
+
+  S_DIR_L2_M7_FOURIER_FLUX_ZERO
+    STATUS=A_TIER for its exact finite spectral statement.
+
+  Fixed-axis strict nonemptiness
+    STATUS=A_TIER for its exact Fourier subtype theorem
+    EVIDENCE=r-20261110-140226-8211eeae.
+
+PREPARED BUT NOT YET NATIVE-CERTIFIED:
+
+  S_DIR_L2_SCHUR_FRONTIER
+    STATUS=A_TIER_CANDIDATE (finite plane injection/card/Schur).
+
+MATHEMATICAL CLOSURE ESTABLISHED IN THIS B_TIER FILE:
+
+  E1: S_DIR_L2 physical Fourier realization;
+  E2: joint positive-time C^infinity;
+  E3: strong initial L^2 trace;
+  E4: global exact energy equality;
+  E5: uniform 2D planar lattice annular count;
+  E6: infinite weighted Schur estimate;
+  E7: critical L^2_t L^infinity_x from t=0;
+  E8: relative-energy identity for arbitrary 3D Leray--Hopf competitor;
+  E9: unrestricted Leray--Hopf uniqueness;
+  E10: strict rough subclass nonemptiness.
+
+RECOMMENDED UNCONDITIONAL A_TIER PROOF SPINE:
+
+  S_DIR_L2_DIRECTIONAL_DATA_REALIZATION
+  -> S_DIR_L2_PHYSICAL_TORUS_SYNTHESIS
+  -> S_DIR_L2_PHYSICAL_NSE_AND_ENERGY
+  -> S_DIR_L2_UNIFORM_ANNULAR_LATTICE_COUNT
+  -> S_DIR_L2_INFINITE_WEIGHTED_SCHUR
+  -> S_DIR_L2_GLOBAL_SERRIN_2_INFINITY
+  -> S_DIR_L2_RELATIVE_ENERGY_FROM_ROUGH_TRACE
+  -> S_DIR_L2_UNIQUE_ALL_LERAY_HOPF
+  -> S_DIR_L2_GLOBAL_REGULARITY.
+
+The exact physical root MUST be a theorem with no additional analytic
+admissions, certificate premises, opaque unsupported endpoints, sorry,
+or unapproved axioms. A successful build and theorem-level axiom audit
+of only a conditional composition would NOT constitute root A_TIER.
+
+==========================================================================
+12. FINAL B_TIER STATUS
+==========================================================================
+
+THEOREM=S_DIR_L2_GLOBAL_REGULARITY
+MATHEMATICAL_DERIVATION=COMPLETE
+PREMISES=nu>0 AND u0 in S_DIR_L2, as defined in section 0
+EXTERNAL_ANALYTIC_ADMISSIONS=NONE
+CONCLUSION=R1+R2+R3+R4+R5+R6+R7
+STATUS=B_TIER
+MARKER=!
+LEAN_ROOT=A_TIER_NOT_YET
+FORMAL_CLOSURE=NOT_YET
+UNCONDITIONAL_CLOSURE=NOT_YET (requires external native Lean evidence)
+
+END_OF_B_TIER_DERIVATION

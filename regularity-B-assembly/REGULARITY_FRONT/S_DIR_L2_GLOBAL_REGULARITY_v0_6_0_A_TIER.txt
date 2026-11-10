@@ -1,0 +1,53 @@
+THEOREM=S_DIR_L2_GLOBAL_REGULARITY
+LAYER=S_DIR_L2_ACTUAL_SHELLS
+RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_6_0_ACTUAL_ROW_CANDIDATE
+DATE=2026-11-10
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE
+TARGET_COMPILER=Lean 4.33.0 native Windows
+NO_LOCAL_LEAN=TRUE
+
+CURRENT_PASS_EVIDENCE:
+  Source-pinned nine preceding modules from native run
+  r-20261110-164405-d0f7f78a
+  PROJECT_BUILD=PASS
+  THEOREM_AXIOM_AUDITS=31
+  AXIOMS=STANDARD_ONLY
+
+NEW_SOURCE_SHA256=c57f8d7574bd18d08fdc41211f0eb07946b583dd21da181d11dc4c49f29f0629
+NEW_MODULE=S_DIR_L2_ACTUAL_SHELLS.lean
+NEW_THEOREM_AXIOM_AUDITS=16
+TOTAL_EXPECTED_AUDITS=47
+
+NEW EXACT ROOT:
+  SDirL2.S_DIR_L2_ACTUAL_INFINITE_LATTICE_ROW
+
+  forall a : Mode3, a != 0, r > 0,
+    Summable (planeRadialRowTerm a r) /\
+    tsum (planeRadialRowTerm a r) <= 64/r.
+
+  planeRadialRowTerm is the exact nonnegative Euclidean radial heat
+  kernel row on {k : Z^3 | directionalDot a k = 0 and k != 0},
+  extended by 0 off the constrained Fourier plane.
+
+DEPENDENCY SPINE:
+  1. latticeSupNorm: maximum of three integer absolute coordinates
+  2. Nat.log2 gives each nonzero frequency a unique dyadic index
+  3. actualDyadicShell is a Finset filter, no shell existence premise
+  4. disjoint actual shell partition of each finite set
+  5. certified integer-plane projection -> actual shell card <= 16 * 4^j
+  6. supnorm <= Euclidean radius -> radial kernel pointwise bound
+  7. certified dyadic prefix <= 4/r -> actual finite plane row <= 64/r
+  8. certified nonnegative finite-to-infinite -> actual lattice tsum <=64/r
+
+No theorem premises or definitions in any preceding compiled module change.
+No new axioms, sorry, or analytic admissions occur in this new module.
+
+PROMOTION:
+  New module remains A_TIER_CANDIDATE before matching external build and
+  theorem-level axiom audit with only propext, Classical.choice, Quot.sound.
+
+FROZEN PHYSICAL ROOT STATUS:
+  S_DIR_L2_GLOBAL_REGULARITY is still B_TIER; complete physical
+  torus synthesis, physical Serrin estimate, and unrestricted
+  Leray-Hopf uniqueness are NOT established by this spectral row theorem.

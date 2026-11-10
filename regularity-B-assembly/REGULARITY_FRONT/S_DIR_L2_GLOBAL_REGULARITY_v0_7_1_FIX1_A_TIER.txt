@@ -1,0 +1,57 @@
+S_DIR_L2_GLOBAL_REGULARITY
+RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_7_1_INFINITE_SCHUR_FIX1
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE
+FIX1_CAUSE=Finset.sum_product expects an uncurried pair function, while f has two arguments.
+FIX1_CORRECTION=Use Finset.sum_product' for the curried expression, normalize product notation.
+FIX1_THEOREM_STATEMENTS=UNCHANGED
+FIX1_AXIOM_PREMISES=UNCHANGED
+FIX1_LOCAL_LEAN_EXECUTION=NONE
+FIX1_EXTERNAL_EVIDENCE_REQUIRED=54 theorem-level audits standard only; full native 4.33.0 PASS.
+
+TARGET_COMPILER=Lean 4.33.0 x86_64-w64-windows-gnu
+NO_LOCAL_LEAN=TRUE
+
+FROZEN ROOT
+  SDirL2.S_DIR_L2_GLOBAL_REGULARITY
+  Mathematical status: B_TIER. Exact physical theorem remains unproved in Lean.
+  Neither the root proposition nor its named analytic certificate premises are changed.
+
+SOURCE IDENTITIES
+  Previous ten Lean sources are byte-identical to native-PASS v0.6.0.
+  Previously audited axiom reports: 47, standard-only.
+  New theorem-level axiom audits targeted: 7.
+  Expected total: 54.
+
+NEW EXACT THEOREMS (NEW MODULE: S_DIR_L2_INFINITE_SCHUR.lean)
+  1. S_DIR_L2_ACTIVE_RADIUS_POS
+  2. S_DIR_L2_ACTIVE_HEAT_KERNEL_ROW_EQ
+  3. S_DIR_L2_ACTIVE_FINITE_HEAT_ROW
+  4. S_DIR_L2_ACTIVE_FINITE_HEAT_SCHUR
+  5. S_DIR_L2_GENERIC_INFINITE_SCHUR_FROM_FINITE_SQUARES
+  6. S_DIR_L2_INFINITE_NONNEG_WEIGHTED_SCHUR
+  7. S_DIR_L2_INFINITE_WEIGHTED_SCHUR
+
+THEOREM SCOPE
+  For every nonzero direction a : Z^3 and every complex coefficient
+  function z on the nonzero plane {k:a.k=0, k!=0} with
+  sum_k |z_k|^2 < infinity:
+
+  Sum over pairs (k,l) of
+    |z_k| |z_l| / (|k|^2+|l|^2)
+  is absolutely summable and bounded above by
+    64 * sum_k |z_k|^2.
+
+  This is a coefficient-space infinite Schur theorem; it does not
+  assert physical C-infinity regularity, the physical L2_t L-infinity_x
+  norm estimate, or uniqueness of Leray-Hopf solutions.
+
+OPEN PHYSICAL BRIDGES
+  P1: PHYSICAL_TORUS_SYNTHESIS_ADAPTER
+  P2-physical: HEAT_KERNEL_SERRIN_REALIZATION_ADAPTER
+  P3: UNRESTRICTED_LERAY_HOPF_UNIQUENESS_ADAPTER
+
+PROMOTION
+  Exactly matching Windows 4.33.0 compiler+source SHA256 and
+  54 theorem-level axioms (standard only) required for new A_TIER.
+  Prepared sources are A_TIER_CANDIDATE, never already A_TIER.

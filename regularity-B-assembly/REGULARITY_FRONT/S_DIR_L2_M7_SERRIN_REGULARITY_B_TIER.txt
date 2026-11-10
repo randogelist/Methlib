@@ -1,0 +1,406 @@
+S_DIR_L2_M7_SERRIN_REGULARITY_B_TIER
+====================================
+MODE=B_TIER_DERIVATION
+STATUS=UNCONDITIONAL_MATHEMATICAL_B_TIER
+MARKER=!
+LEAN_STATUS=NOT_A_TIER_FOR_THIS_ROOT
+DATE=2026-11-10
+DOMAIN=T^3=R^3/Z^3 (unit-volume torus)
+VISCOSITY=nu>0
+FORCING=0
+NO_LOCAL_LEAN=TRUE
+
+0. EXACT THEOREM AND SCOPE
+------------------------
+Fix any nu>0. Define the previously frozen directional shear class
+
+  S_DIR_L2 = union over a in Z^3\{0} of
+    { u0=a*phi : phi in L2_0(T^3;R),
+                 a dot grad phi=0 in distributions }.
+
+Let u0 be any member. Then there exists a canonical trajectory
+
+  u(t) = exp(nu*t*Delta) u0,  t>=0,
+
+with all properties:
+
+  (T1) u in C([0,infinity);L2_{sigma,0}(T^3)); u(0)=u0 strongly.
+  (T2) u in C^infinity((0,infinity) x T^3).
+  (T3) div u=0 and dt u+(u dot grad)u=nu*Delta u, with p=0.
+  (T4) u(t) in S_DIR_L2 for all t>=0 (same direction a).
+  (T5) ||u(t)||_2^2+2*nu*int_0^t||grad u(s)||_2^2 ds=||u0||_2^2.
+  (T6) int_0^infinity ||u(t)||_{L^infinity(T^3)}^2 dt
+         <= [45/(8*pi*nu)] ||u0||_2^2.
+  (T7) u is the unique periodic three-dimensional Leray--Hopf solution
+       with initial datum u0 (not merely uniqueness within the shear sector).
+  (T8) Under the separately specified Fourier-nonlinearity M7 realization
+       in Section 7, M7(delta,T)=0 for every 0<=delta<T<infinity.
+  (T9) S_DIR_L2 has nonempty intersection with
+       L2_{sigma,0}(T^3)\H^{1/2}_{sigma,0}(T^3).
+
+NOTE: T1--T9 are mathematically derived, not compiled as one physical Lean
+root.  The fixed-axis spectral engine and its strict-rough witness passed
+native Lean 4.33.0 audits in separate previous packages.  Those passes do
+not promote this new arbitrary-direction physical theorem to A_TIER.
+
+IMPORTANT LOGICAL DIRECTION:
+
+  S_DIR_L2 -> (B(u,u)=0 AND Fourier-M7=0 AND Serrin-2-infinity)
+           -> (regularity AND Leray--Hopf uniqueness).
+
+The implication "Fourier-M7=0 -> Serrin for arbitrary 3D NSE data" is NOT
+asserted.  In the present proof the Serrin estimate uses, in addition,
+heat evolution, mean-zero data, and rank-two Fourier support.
+
+1. EXACT FOURIER SUPPORT OF THE INITIAL DATA
+-------------------------------------------
+Take a nonzero a in Z^3 and phi in L2_0(T^3;R) with a dot grad phi=0
+in D'(T^3).  Write
+
+  u0=a*phi,
+  phi(x)=sum_{k in Z^3} c_k exp(2*pi*i*k dot x)
+
+in the L2 Fourier sense.  Mean zero gives c_0=0.  Testing the directional
+constraint against the k-th Fourier character gives
+
+  (2*pi*i)(a dot k)c_k=0.
+
+Hence c_k=0 whenever a dot k != 0.  Define the lattice
+
+  Lambda_a = {k in Z^3 : a dot k=0},
+  Lambda_a^* = Lambda_a\{0}.
+
+Since a is a nonzero integer vector, Lambda_a is a rank-two lattice in the
+Euclidean plane P_a={x in R^3:a dot x=0}.  Its distinct points have mutual
+Euclidean separation at least 1.  No primitivity assumption on a is needed.
+
+The vector coefficients b_k=a*c_k satisfy
+
+  support(b) subset Lambda_a^*,
+  sum_{k in Lambda_a^*}|b_k|^2=||u0||_2^2
+
+by Parseval, using the unit-volume torus convention.
+
+2. HEAT CONSTRUCTION AND NONLINEAR CANCELLATION
+-----------------------------------------------
+Define, for t>=0,
+
+  theta(t,x)=sum_{k in Lambda_a^*}
+    exp(-4*pi^2*nu*|k|^2*t) c_k exp(2*pi*i*k dot x),
+  u(t,x)=a*theta(t,x).
+
+At t=0, convergence is in L2; for every t>0 it is C^infinity.  The
+Fourier multipliers preserve the support condition a dot k=0, hence
+
+  a dot grad theta(t)=0,
+  div u(t)=a dot grad theta(t)=0,
+  (u dot grad)u=theta*(a dot grad theta)*a=0.
+
+The heat coefficients satisfy
+
+  dt b_k(t)=-4*pi^2*nu*|k|^2*b_k(t).
+
+Therefore
+
+  dt u+(u dot grad)u=nu*Delta u, p=0,
+
+in the distributional sense at t=0 and classically for t>0.  The same
+structural constraint remains valid for each t>=0 in distributions, so
+u(t) belongs to S_DIR_L2.
+
+3. STRONG L2 TRACE, SMOOTHNESS, ENERGY EQUALITY
+-----------------------------------------------
+Dominated convergence gives
+
+  ||u(t)-u0||_2^2
+  =sum_k |b_k|^2 |exp(-4*pi^2*nu*|k|^2*t)-1|^2 ->0
+
+as t decreases to zero.  Continuity at any nonnegative time follows by
+the same argument.
+
+For any delta>0 and integers j>=0 and multiindices alpha, the formal
+space-time derivative has Fourier coefficients of absolute value bounded by
+
+  C(j,alpha,nu) * |k|^{2*j+|alpha|}
+     * exp(-4*pi^2*nu*delta*|k|^2)|b_k|.
+
+The sum of these bounds is finite by Cauchy--Schwarz and Gaussian lattice
+summability.  Thus all mixed derivatives converge uniformly for t>=delta
+on compact time intervals.  As delta>0 is arbitrary,
+
+  u in C^infinity((0,infinity) x T^3).
+
+Tonelli on nonnegative Fourier energy densities yields
+
+  2*nu*int_0^t ||grad u(s)||_2^2 ds
+  =sum_{k!=0} |b_k|^2 (1-exp(-8*pi^2*nu*|k|^2*t)).
+
+Adding ||u(t)||_2^2=
+  sum_{k!=0}|b_k|^2 exp(-8*pi^2*nu*|k|^2*t)
+proves the exact energy equality T5.  Therefore u is a Leray--Hopf
+solution (in particular, L^infinity_t L2_x intersect L2_t H1_x).
+
+4. UNIFORM RANK-TWO LATTICE ANNULUS BOUND
+----------------------------------------
+Fix any a!=0 in Z^3.  For integer j>=1 set
+
+  A_j={k in Lambda_a : j<=|k|<j+1}.
+
+Every two distinct points of Lambda_a have distance >=1.  Therefore the
+open disks of radius 1/3 about the points in A_j, drawn within P_a, are
+pairwise disjoint.  These disks lie in the planar annulus
+
+  j-1/3 <= |x| < j+4/3.
+
+A comparison of two-dimensional Euclidean areas gives
+
+  #A_j * pi/9
+    <= pi*((j+4/3)^2-(j-1/3)^2)
+     = pi*(5/3)*(2*j+1),
+
+so
+
+  #A_j <= 15*(2*j+1) <= 45*j.                    (4.1)
+
+The estimate is uniform in the integer direction a.  In particular,
+this derivation does not require any bound on the lattice covolume.
+
+5. WEIGHTED SCHUR ESTIMATE AND SHARPLY SCOPED SERRIN ENDPOINT
+------------------------------------------------------------
+For k,l in Lambda_a^* let
+
+  K(k,l)=1/(|k|^2+|l|^2),       h(k)=1/|k|.
+
+For r=|k|>=1, partition the l sum into A_j.  By (4.1),
+
+  sum_{l in Lambda_a^*} K(k,l)*h(l)
+  <= sum_{j>=1} (#A_j)/[j*(r^2+j^2)]
+  <=45*sum_{j>=1}1/(r^2+j^2)
+  <=45*int_0^infinity dx/(r^2+x^2)
+   =45*pi/(2*r)
+   =(45*pi/2)*h(k).                              (5.1)
+
+Here the integral comparison applies because
+x |->1/(r^2+x^2) is positive and decreasing for x>=0.
+
+The kernel K is nonnegative and symmetric.  The weighted Schur test,
+first applied to finite subsets and then extended by monotone limits,
+therefore gives
+
+  sum_{k,l in Lambda_a^*} |b_k||b_l| K(k,l)
+   <=(45*pi/2)*sum_{k in Lambda_a^*}|b_k|^2.    (5.2)
+
+For every t>0 the heat Fourier series converges absolutely, yielding
+
+  ||u(t)||_infinity
+   <=sum_{k in Lambda_a^*}|b_k|exp(-4*pi^2*nu*|k|^2*t).
+
+Square and integrate.  Tonelli permits the exchange of nonnegative sums
+and the time integral, giving
+
+  int_0^infinity ||u(t)||_infinity^2 dt
+  <=sum_{k,l}|b_k||b_l|
+      *int_0^infinity exp(-4*pi^2*nu*(|k|^2+|l|^2)*t)dt
+  =[1/(4*pi^2*nu)]*sum_{k,l}|b_k||b_l| K(k,l)
+  <=[1/(4*pi^2*nu)]*(45*pi/2)*||u0||_2^2
+  =[45/(8*pi*nu)]*||u0||_2^2.                  (5.3)
+
+This proves the GLOBAL, direction-uniform estimate
+
+  ||u||_{L2((0,infinity);L-infinity(T^3))}^2
+    <=(45/(8*pi*nu))||u0||_2^2.
+
+The exponents satisfy the 3D Prodi--Serrin equality
+
+  2/2+3/infinity=1.
+
+Mean-zero is essential for this global-in-time bound: a nonzero constant
+mode would give a non-decaying contribution and infinite L2_t L-infinity
+norm over (0,infinity).
+
+The numerical constant above is explicit but not claimed optimal.
+
+6. UNRESTRICTED THREE-DIMENSIONAL LERAY--HOPF UNIQUENESS
+------------------------------------------------------
+Let v be any three-dimensional periodic Leray--Hopf solution with v(0)=u0.
+Let w=v-u.  The heat solution u satisfies the energy equality and is in
+L2_t H1_x intersect L2_t L-infinity_x, with strong L2 initial trace.
+Standard time-mollification and spatial approximation of u justify it as
+a comparison field in the weak relative-energy identity for v.
+
+The relative-energy inequality (using div u=div v=0) is
+
+  (1/2)||w(t)||_2^2+nu*int_0^t||grad w(s)||_2^2 ds
+    <=int_0^t |int_{T^3}(w dot grad)u dot w dx|ds.
+
+For almost every s, incompressibility of w permits integration by parts:
+
+  int (w dot grad)u dot w
+      =-int (w dot grad)w dot u.
+
+Holder's and Young's inequalities imply
+
+  |int (w dot grad)u dot w|
+      <=||u||_infinity ||w||_2 ||grad w||_2
+      <=(nu/2)||grad w||_2^2
+        +(1/(2*nu))||u||_infinity^2||w||_2^2.
+
+Therefore
+
+  ||w(t)||_2^2
+    <=(1/nu)*int_0^t||u(s)||_infinity^2||w(s)||_2^2 ds.
+
+The Gronwall coefficient belongs to L1(0,T) for every T by (5.3), and
+||w(0)||_2=0.  Integral Gronwall gives ||w(t)||_2=0 for every t>=0,
+interpreted first almost everywhere and then by weak continuity.
+Hence v=u and uniqueness holds among ALL 3D Leray--Hopf solutions with
+this datum, not only among shear representatives.
+
+This uniqueness conclusion is specific to the S_DIR_L2 data class; it
+does not assert uniqueness for arbitrary 3D L2 divergence-free data.
+
+7. EXACT FOURIER-NONLINEARITY M7 ZERO-CERTIFICATE
+------------------------------------------------
+Define B(f,g)=P((f dot grad)g), the Leray-projected NSE nonlinearity.
+For the established family,
+
+  B(u(t),u(t))=0 for all t>0.
+
+Let u^(m) be the Fourier/Galerkin projection of the heat orbit to a finite
+frequency set (or its heat evolution from a Fourier-truncated datum).
+A Fourier multiplier preserves both the fixed polarization a and the
+support constraint a dot k=0.  Thus
+
+  B(u^(m)(t),u^(m)(t))=0.                        (7.1)
+
+Consider the project-specific *Fourier-nonlinearity-flux* realization:
+
+  A=-Delta on the mean-zero solenoidal sector,
+  P_j=A^(1/2)*Pi_j^(1/2) u^(m),
+  Q_j=A^(-1/2)*Pi_j^(1/2) B(u^(m),u^(m)),
+  kappa_j=<Q_j,P_j>,
+  Phi_N^(m)=sum_{j<=N} kappa_j.
+
+Here Pi_j are the selected spectral projectors; the composite operators
+act on t>0, where all terms are smooth.  Equation (7.1) gives
+
+  Q_j=0, kappa_j=0, Phi_N^(m)=0 for every j,N,m,t>0.
+
+For q in (0,1), nonnegative capacity D_N^(m), and the frozen weights
+
+  w_N=(q^(-1/2)-1)*q^(-N/2) >= 0,
+
+consider the discrete Fourier-flux M7 action
+
+  M7_Fourier(delta,T)
+   =sup_{m,L} int_delta^T sum_{N=0}^L
+      w_N*[max(Phi_N^(m),0)]^2/D_N^(m) dt.
+
+Use the explicitly stated null-numerator convention 0/D=0 for D>=0,
+including 0/0=0.  Therefore every integrand is exactly zero, and
+
+  M7_Fourier(delta,T)=0,  for all 0<=delta<T<infinity. (7.2)
+
+SCOPE WARNING: The original BKQR/GP overlapping-tail or radial M7
+functional, if defined through a distinct energy current Psi or checker,
+needs an independent semantic transfer proving that its flux vanishes
+for the same shear-null state.  Equation (7.2) alone does not certify
+all alternative M7 encodings or the universal BKQR M7-to-frame transfer.
+
+In particular, "M7_Fourier=0 implies Serrin for arbitrary 3D NSE"
+is neither a premise nor a consequence of this proof.  The estimate
+(5.3) independently uses the heat identity and rank-two Fourier support.
+
+8. ADDITIONAL POSITIVE-TIME SERRIN-4/6 CERTIFICATE
+-------------------------------------------------
+For delta>0, define
+
+  M(t)=||(-Delta)^(1/4)u(t)||_2^2,
+  D(t)=||(-Delta)^(3/4)u(t)||_2^2.
+
+Since the NSE nonlinearity vanishes,
+
+  dM/dt+2*nu*D=0.
+
+The elementary scalar maximization
+
+  sup_{lambda>=0} sqrt(lambda)*exp(-2*nu*delta*lambda)
+   =1/[2*sqrt(e*nu*delta)]
+
+implies
+
+  M(delta) <= ||u0||_2^2/[2*sqrt(e*nu*delta)].
+
+Consequently
+
+  sup_{delta<=t<=T} M(t)+2*nu*int_delta^T D(t)dt <=M(delta).
+
+Using mean-zero periodic H1 -> L6 Sobolev embedding with constant C_S,
+and spectral interpolation,
+
+  ||u||_6^4
+   <= C_S^4 ||(-Delta)^(1/2)u||_2^4
+   <= C_S^4 M(t)D(t).
+
+Integrating,
+
+  int_delta^T ||u(t)||_6^4 dt
+   <= [C_S^4/(2*nu)] M(delta)^2
+   <= [C_S^4/(8*e*nu^2*delta)] ||u0||_2^4.
+
+Hence u belongs to L4(delta,T;L6(T^3)), and
+
+  2/4+3/6=1.
+
+This is another Prodi--Serrin certificate, but it starts at delta>0.
+The endpoint L2(0,infinity;L-infinity) established in Section 5 is
+strictly stronger concerning access to the initial time.
+
+9. STRICT-ROUGH NONEMPTY SUBFAMILY
+----------------------------------
+Take a=e1 and phi depending only on x2:
+
+  phi(x2)=sum_{n>=1}(1/n)*cos(2*pi*n*x2),
+  u0=e1*phi.
+
+The Fourier coefficients are 1/(2n) at both +n and -n axis modes.
+Thus
+
+  ||u0||_2^2=(1/2)*sum_{n>=1}1/n^2<infinity,
+
+while the critical homogeneous half-Sobolev sum is
+
+  sum_k (2*pi*|k|)*|u0_hat(k)|^2
+   =pi*sum_{n>=1}1/n=infinity.
+
+Therefore u0 in S_DIR_L2 \ H^{1/2}_{sigma,0}.  It satisfies every
+conclusion T1--T8 for each nu>0.  This is an explicit mathematical witness,
+not a formalized physical-space torus-synthesis theorem in Lean.
+
+10. FORMALIZATION BOUNDARY / PROMOTION
+--------------------------------------
+Mathematical proof status: unconditional B_TIER for exactly T1--T9.
+Lean proof status for this exact generalized directional physical root:
+NOT A_TIER.  No native compiler or theorem-level axiom audit was run for
+this new result.  Previously passed Lean fixed-axis spectral theorems do
+not automatically establish the full statement T1--T9 in Lean.
+
+Future A-tier modules, keeping this root fixed:
+
+  S_DIR_L2_FOURIER_PLANE_SUPPORT
+  S_DIR_L2_HEAT_PHYSICAL_SYNTHESIS
+  S_DIR_L2_UNIFORM_LATTICE_ANNULUS
+  S_DIR_L2_SCHUR_2_INFTY
+  S_DIR_L2_M7_FOURIER_ZERO
+  S_DIR_L2_WEAK_STRONG_UNIQUENESS
+  S_DIR_L2_M7_SERRIN_REGULARITY
+
+No assumptions equivalent to global NSE regularity have been inserted.
+The theorem is limited to directionally polarized, directionally
+invariant mean-zero L2 admissible data.
+
+External literature for the standard weak--strong uniqueness criterion:
+  https://doi.org/10.1016/S0022-0396(02)00108-0
+  https://escholarship.org/uc/item/1pm1q1gv
+
+END OF B_TIER DERIVATION.

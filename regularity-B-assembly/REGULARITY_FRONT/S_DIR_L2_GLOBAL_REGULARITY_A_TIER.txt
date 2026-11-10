@@ -1,0 +1,178 @@
+RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_5_1_INFINITE_DYADIC_FIX1
+STATUS=A_TIER_CANDIDATE
+CORRECTION=Remove redundant `ring` at S_DIR_L2_DYADIC_ROW.lean line 122.
+DIAGNOSTIC=Lean 4.33.0 'No goals to be solved' after `field_simp [hq0, hd0]`.
+PROOF_CHANGES=Single redundant tactic removed.
+THEOREM_SIGNATURES=UNCHANGED
+FROZEN_PHYSICAL_ROOT=UNCHANGED
+PREMISES=UNCHANGED
+PREVIOUSLY_CERTIFIED_MODULES=BYTE_IDENTICAL
+ROW_SOURCE_SHA256=a35ef09e2fd8ef63d59aeeafe3dfa346820646d9690b1645233b75a4efd4f6d8
+NATIVE_COMPILER_RUN_FOR_THIS_SOURCE=PENDING
+THEOREM_AXIOM_AUDIT_FOR_THIS_SOURCE=PENDING
+ROOT_UNCONDITIONAL_PHYSICAL_THEOREM=NOT_PROVED
+REMAINING=ACTUAL_PLANE_SHELL_PARTITION,ACTUAL_INFINITE_LATTICE_ROW,P1_PHYSICAL_SYNTHESIS,P2_SERRIN,P3_UNRESTRICTED_LERAY_HOPF_UNIQUENESS
+
+--- PRIOR HISTORICAL REGISTER (pre-existing entries below) ---
+RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_4_1_DYADIC_FIX1
+STATUS=A_TIER_CANDIDATE
+NATIVE_RUN_FIX1=UNTESTED
+FAILURE_PREVIOUS=v0_4_0 line 52-54; nlinarith cannot normalize unsplit square comparisons and Fin indices
+CORRECTION=Introduce scalar sign-case square lemma using nonnegative factor products; prove each Fin index by simpa
+THEOREM_SIGNATURES=UNCHANGED
+FROZEN_ROOT=UNCHANGED
+PREMISES=UNCHANGED
+OLD_SOURCES=HASH_IDENTICAL
+S_DIR_L2_GLOBAL_REGULARITY v0.4.0 — DYADIC SCHUR
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE_FOR_SEVEN_NEW_DYADIC_LEMMAS
+CANONICAL_ROOT=S_DIR_L2_GLOBAL_REGULARITY
+ROOT_UNCONDITIONAL_PHYSICAL_THEOREM=NOT_PROVED
+PREVIOUS_NATIVE_VERIFIED=RUN r-20261110-155912-21336db1; 16 STANDARD_ONLY AXIOM AUDITS
+NEW_DYADIC_SOURCE_SHA256=1749c1a07b6f46c4b78537cad850df968de2eb071674a56d86ed70d9518ce697
+NO_LOCAL_LEAN=TRUE
+INFINITE_ROW=OPEN_IN_LEAN
+P1_PHYSICAL_SYNTHESIS=OPEN
+P2_UNIFORM_ROW_SERRIN=OPEN
+P3_UNRESTRICTED_LERAY_HOPF_UNIQUENESS=OPEN
+
+New independent endpoint signatures:
+S_DIR_L2_RADIUS_TO_STRICT_CUBE
+S_DIR_L2_PLANE_STRICT_CUBE_CARD
+S_DIR_L2_DYADIC_PLANE_BALL_CARD
+S_DIR_L2_DYADIC_KERNEL_TELESCOPIC_STEP
+S_DIR_L2_DYADIC_KERNEL_STEP
+S_DIR_L2_DYADIC_KERNEL_PREFIX_BOUND
+S_DIR_L2_DYADIC_SERRIN_CONSTANT_LE_FROZEN
+
+No new premises or changes to frozen root. Existing source files retain
+identical hashes and audit status. New proofs are prepared but NOT
+A_TIER without matching compiler/audit evidence.
+
+--- Prior audited source register below ---
+FIX1_RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_3_1_ASSEMBLY_FIX1
+FIX1_NATIVE_STATUS=A_TIER_CANDIDATE
+FIX1_EXPECTED_SCHUR_CORRECTION=finite sum distributivity normalization
+FIX1_PREVIOUS_NATIVE_LOG=r-20261110-155227-9583586f
+FIX1_ROOT_TYPE_UNCHANGED=TRUE
+FIX1_ANALYTIC_PREMISES_UNCHANGED=TRUE
+
+S_DIR_L2_GLOBAL_REGULARITY_A_TIER
+MODE=A_TIER_DERIVATION
+STATUS=A_TIER_CANDIDATE
+CANONICAL_ROOT=S_DIR_L2_GLOBAL_REGULARITY
+ROOT_KIND=DEFINITION_WITH_PHYSICAL_SEMANTICS_PARAMETER
+ROOT_UNCONDITIONAL_PHYSICAL_PROOF=NOT_PROVED
+B_TIER_MATHEMATICAL_DERIVATION=COMPLETE
+TARGET_NATIVE_COMPILER=Lean 4.33.0 Windows x86_64-w64-windows-gnu
+NO_LOCAL_LEAN=TRUE
+
+============================================================
+I. EXACT ROOT PHYSICAL TARGET
+============================================================
+For each viscosity nu>0 and each directional L2 datum u0,
+construct the actual physical 3D torus heat orbit U that is a
+Leray--Hopf NSE solution with strong L2 initial trace, joint
+C-infinity positive-time regularity, exact energy equality,
+critical global Serrin bound
+
+  integral_0^infinity ||U(t)||_infinity^2 dt
+    <= 45/(8*pi*nu) * ||u0||_2^2,
+
+and uniqueness among all 3D periodic Leray--Hopf solutions.
+
+============================================================
+II. SOURCE HASHES FOR CACHE IDENTITY
+============================================================
+NSE_ROUGH_SHEAR_L2_FAMILY.lean=c8f2cf99f9c58353fb8168b1282363a9cbcb1cc6f34c4a266b6df4eefbcdd3d9
+NSE_ROUGH_SHEAR_STRICT_NONEMPTY.lean=7111e16ec95ad7dcb1d4e9945388ec4aa71c1aef88937a6c79c393dfd0df1c8d
+S_DIR_L2_SPECTRAL.lean=16019c44c9dadce3a0fa1cd987a6326038b188981a90d8fa66a4449d97f4d493
+S_DIR_L2_GLOBAL_REGULARITY.lean=a5fc5ea962521ef44e9cb347331353466e4b399c8f348dce54ca5c45668014f2
+S_DIR_L2_SCHUR_FRONTIER.lean=40da51df9f406207c6e6eee74a915d5a756a6baf63f0c932a33dca5f1cffa831
+S_DIR_L2_SCHUR_KERNEL.lean=4570aac5c32c8bf08e0162cf04f2ed4f928c5b2906b2a33ced86456c51bf7faf
+S_DIR_L2_PROOF_ASSEMBLY.lean=a33bf92d4ba8d210e43823643bd65b1d8d165cc651c82b6f8904032803df04cb
+
+============================================================
+III. PREVIOUSLY EXTERNALLY CERTIFIED PROOFS
+============================================================
+Fixed-axis spectral module native A_TIER PASS (earlier FIX5).
+Fixed-axis nonempty witness native A_TIER PASS (earlier FIX1).
+General directional spectral module native A_TIER PASS (earlier v0.1.0).
+Source hashes above pin their identity.
+
+============================================================
+IV. CURRENT UNVERIFIED SOURCES
+============================================================
+S_DIR_L2_SCHUR_FRONTIER.lean (projection/cube/finite generic Schur)
+S_DIR_L2_SCHUR_KERNEL.lean (new finite heat kernel and normalizing constant)
+S_DIR_L2_PROOF_ASSEMBLY.lean (conditional P1/P2/P3 deterministic chain)
+
+No matching compiler/audit logs yet for the entire combined package.
+
+============================================================
+V. EXACT OPEN ANALYTIC OBLIGATIONS
+============================================================
+P1=Physical torus heat synthesis, NSE, C^infinity, strong L2 trace,
+   real-valuedness, div-free, energy equality.
+P2=Plane disk-packing annular count, infinite uniform Schur row,
+   limiting finite Schur, and 0-to-infinity Serrin estimate.
+P3=Relative energy identity at t=0 with rough trace and
+   Leray--Hopf weak–strong uniqueness by Gronwall.
+
+M7=Finite Fourier nonlinear flux zero is included and A_TIER;
+   full GP/BKQR/Gram M7 semantics are not identified.
+
+P1, P2, P3 ARE NOT PROVED BY THE ASSEMBLY AND ARE NOT AXIOMS.
+Their types are independent, explicitly named premises.
+
+============================================================
+VI. EXTERNAL PROMOTION RULE
+============================================================
+Only a native Windows Lean 4.33.0 PROJECT_BUILD=PASS and exact
+16 theorem-level axiom audit matching these source hashes can
+promote newly compiled *finite and conditional theorems*.
+
+The complete unconditional physical root remains B_TIER and
+NOT A_TIER until P1,P2,P3 are proved for an actual physical
+NSE semantics with no unapproved axioms or sorryAx.
+
+
+==============================================================
+V0.5.0 NEW SOURCE / EXACT SCOPED RESULTS
+==============================================================
+
+STATUS=A_TIER_CANDIDATE
+RELEASE=S_DIR_L2_GLOBAL_REGULARITY_433_v0_5_0_INFINITE_DYADIC_CANDIDATE
+PREVIOUS_NATIVE_AUDIT=23 theorem-level audits, 2026-11-10, PASS STANDARD_ONLY
+PROPOSED_NATIVE_AUDIT=31 theorem-level audits (eight new named roots)
+
+THEOREM_1=S_DIR_L2_DYADIC_KERNEL_TERM_NONNEG
+THEOREM_2=S_DIR_L2_DYADIC_KERNEL_SUMMABLE
+THEOREM_3=S_DIR_L2_DYADIC_KERNEL_TSUM_BOUND
+THEOREM_4=S_DIR_L2_INFINITE_ROW_FROM_ALL_FINITE_BOUNDS
+THEOREM_5=S_DIR_L2_DYADIC_ROW_POINTWISE
+THEOREM_6=S_DIR_L2_DYADIC_FINITE_SHELL_BUDGET
+THEOREM_7=S_DIR_L2_DYADIC_PLANE_FINITE_SHELL_BUDGET
+THEOREM_8=S_DIR_L2_FINITE_ROW_OF_DYADIC_SHELL_PARTITION
+
+Exact new unconditional analytic series result:
+ forall r>0, Summable (dyadicKernelTerm r) and
+ tsum_j dyadicKernelTerm r j <= 4/r.
+
+Exact abstract bridge:
+ if every finite sum of a nonnegative row f is <= C, then
+ Summable f and tsum f <= C.
+
+The finite shell partition theorem has EXPLICIT premises:
+  a != 0, r>0, F is a disjoint union of finitely many shells,
+  directional plane condition, lower and upper shell radial bounds.
+Its conclusion is sum_{k in F} directionalRadialRowTerm r k <= 64/r.
+
+P2 NOT FULLY CLOSED:
+  proof that every finite subset of Lambda_a\{0} admits the
+  required complete dyadic shell partition remains OPEN;
+  the physical heat L2_tLinf bound remains OPEN in Lean.
+P1 physical torus synthesis remains OPEN.
+P3 unrestricted Leray-Hopf uniqueness remains OPEN.
+
+NO LOCAL LEAN. NO ROOT THEOREM PROMOTION WITHOUT MATCHING EXTERNAL AUDIT.
