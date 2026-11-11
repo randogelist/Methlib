@@ -1,0 +1,825 @@
+SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN_R1_B_TIER
+MODE = B_TIER_DERIVATION
+ROUND = 1
+DATE = 2026-11-12
+NEW_MATHEMATICAL_ROOT_STATUS = B_TIER
+MARKER = !
+NEW_LEAN_FILES = NOT_PREPARED
+NEW_LEAN_ENDPOINTS = NOT_COMPILED
+LOCAL_LEAN_EXECUTIONS = 0
+NEW_CI_RUNS = 0
+INHERITED_ROOT = EXTERNALLY_VERIFIED_UNCONDITIONAL_CLOSURE
+
+0. REPOSITORY CONTRACT
+
+REPOSITORY = randogelist/Methlib
+SOURCE_BRANCH = codex/h12-small-unconditional
+SOURCE_SHA = 09dfe94a1ef150e21d09df3013fbe09002ef139c
+SOURCE_PACKAGE = regularity-B-assembly/Singular-Axiomatic-closure
+TARGET_BRANCH = SINGULARITY_DISPROVEMENT
+NEW_PACKAGE_PATH = regularity-B-assembly/SINGULARITY_DISPROVEMENT
+NEW_NAMESPACE = SingularityDisprovement
+SOURCE_PACKAGE_MUTATIONS = NONE
+
+ROUND_1_DELIVERABLE = this mathematical derivation and endpoint plan.
+LEAN_IMPLEMENTATION = subsequent rounds.
+TARGET_BRANCH_NAME does not assert universal exclusion of NSE singularities.
+
+1. VERIFIED INHERITED ENDPOINT
+
+Exact import:
+  import SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+Exact theorem:
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+Premises:
+  (nu : Real), 0<nu,
+  (a : CriticalSobolev 1),
+  CriticalSigmaZero a,
+  criticalNonlinearConstant * norm(a) < nu.
+
+CriticalSigmaZero a:
+  SpectralReality (criticalCoeff 1 a),
+  SpectralSolenoidal (criticalCoeff 1 a),
+  SpectralMeanZero (criticalCoeff 1 a).
+
+Conclusion:
+  CriticalDatumAX6 nu a
+  and existence of one common U : CriticalRegularSolution nu a with:
+    actual CriticalLerayHopf membership;
+    U.lerayHopfUnique;
+    actual PositiveSmoothNSE;
+    global L2_t H^(3/2)_x and its quantitative budget;
+    global L2_t H^(-1/2)_x time derivative and its budget;
+    global L4_t L6_x;
+    for every T>0,
+      integral_0^T ||grad U(t)||_2^4 dt
+      <= [norm(a)^4-norm(U.critical T)^4]
+           / [4(nu-criticalNonlinearConstant*norm(a))].
+
+CriticalRegularSolution additionally supplies:
+  strong C([0,infinity);H^(1/2)) trace;
+  U.critical(0)=a;
+  norm(U.critical(t))<=norm(a), t>=0;
+  agreement between critical coefficients and the physical positive-time flow.
+
+VERIFIED_EVIDENCE:
+  run = 43059293572;
+  job = 130657144029;
+  source_sha = 09dfe94a1ef150e21d09df3013fbe09002ef139c;
+  workflow conclusion = success;
+  extension modules = 104/104 PASS;
+  required endpoint audits = 27/27 PASS;
+  compiler = Lean 4.33.0;
+  compiler commit = d8b18978322de05a8f3dba51ef03cf5461676c17;
+  Mathlib = db584cd6d46c92f209a44c0f1c829460d327499d;
+  exact type = PASS;
+  theorem axioms = [propext, Classical.choice, Quot.sound];
+  evidence artifact = 13873696533.
+
+Observed log:
+  EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  'SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL'
+    depends on axioms: [propext, Classical.choice, Quot.sound]
+  status: PASS; errors: [].
+
+Evidence:
+  https://github.com/randogelist/Methlib/actions/runs/43059293572
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/job/130657144029
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/artifacts/13873696533
+
+Source:
+  https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean
+
+Audit specification:
+  regularity-B-assembly/Singular-Axiomatic-closure/ci/critical_audits/SmallDataClosure.lean
+  regularity-B-assembly/Singular-Axiomatic-closure/ci/critical_audits/SmallDataClosure.json
+
+H12_SMALL_STATUS.json contains older pending fields.
+The matching successful HEAD run supersedes those pending fields.
+No source metadata is amended in this round.
+
+2. NATIVE MATHEMATICAL DICTIONARY
+
+T^3=(R/Z)^3; normalized spatial volume=1; nu>0; forcing=0.
+E=L2_{sigma,0}(T^3;R^3).
+D=H^(1/2)_{sigma,0}.
+Lambda=(-Delta)^(1/2).
+
+For zero-mean native data:
+  H(a)^2 := norm(a : CriticalSobolev 1)^2
+          = sum_{k!=0} 2*pi*|k|*|a_hat(k)|^2
+          = ||a||_{dot H^(1/2)}^2;
+  L(a)^2 := ||criticalInitialPhysicalL2 a||_2^2
+          = sum_{k!=0}|a_hat(k)|^2
+          = ||a||_2^2.
+
+Native weight:
+  omega(0)=1;
+  omega(k)=sqrt(laplacianFrequency k)=2*pi*|k|, k!=0.
+The zero coefficient vanishes under CriticalSigmaZero.
+
+  K(a)=L(a)^2/2;
+  P_0(a)=H(a)^2/2;
+  A_nu(a)=[H(a)^2-(5/2)L(a)^2]/(2nu^2).
+
+At t=0:
+  use criticalInitialPhysicalL2 a.
+  Do not require smoothFourierSynthesis or pointwise boundedness.
+
+Define C:=criticalNonlinearConstant.
+The native theorem proves C>0.
+C is obtained from FINITE_CRITICAL_NONLINEAR_BOUND.choose.
+A certified numerical value of C is not supplied by the inspected API.
+
+3. SHIFTED-ENERGY COERCIVITY
+
+Mean-zero Poincare:
+  H(a)^2>=2*pi*L(a)^2.
+
+Define
+  gamma:=1-5/(4*pi)>0.
+Indeed pi=4 integral_0^1(1+x^2)^(-1)dx>2, hence gamma>3/8.
+
+Therefore
+  2nu^2 A_nu(a)
+    =H(a)^2-(5/2)L(a)^2
+    >=gamma H(a)^2.                                  (3.1)
+
+The reverse elementary bound:
+  2nu^2 A_nu(a)<=H(a)^2.                              (3.2)
+
+Set
+  z_nu(a):=(Lambda-(5/2)I)^(1/2)a/(sqrt(2)*nu).
+
+The multiplier is well-defined on D because Lambda>=(2*pi)I.
+Its Fourier coefficients are
+  z_hat(k)=sqrt(2*pi*|k|-5/2)*a_hat(k)/(sqrt(2)*nu).
+Thus
+  ||z_nu(a)||_2^2=A_nu(a).                            (3.3)
+
+4. EXACT GP--BKQR CONSTANT MODEL
+
+  GP(b,s)=2/Gamma(s) integral_0^infinity
+                    t^(s-1)exp(-bt)/cosh(t)dt,
+  b>=0, s>0.
+
+At s=1, x=exp(-t):
+  GP(b,1)=4 integral_0^1 x^b/(1+x^2)dx.
+Consequently
+  GP(0,1)=4 arctan(1)=pi.
+
+Define H_pi=L2(0,1;R),
+  (Qf)(x)=((1-x^2)/2)f(x),
+  c(x)=sqrt(2).
+Then
+  0<=Q<=(1/2)I,
+  W(r)=<c,(I-rQ)^(-1)c>, |r|<2,
+  W(1)=4 integral_0^1(1+x^2)^(-1)dx=pi.
+
+No unbounded inverse or limiting resolvent is required at r=1.
+
+Moments:
+  m_n=<c,Q^n c>
+     =2^(1-n) integral_0^1(1-x^2)^n dx
+     =2^(n+1)(n!)^2/(2n+1)! in Q_{>0}.
+
+Proof of the last equality:
+  I_n=integral_0^1(1-x^2)^n dx;
+  I_0=1;
+  integral_0^1 d/dx[x(1-x^2)^n]dx=0 for n>=1;
+  (2n+1)I_n=2n I_{n-1};
+  induction gives the stated factorial formula.
+
+  m_0=2;
+  m_{n+1}/m_n=(n+1)/(2n+3)<1/2.
+
+  L_N=sum_{n=0}^N m_n;
+  L_N<pi<L_N+2m_{N+1};
+  L_N upward pi.
+
+Gram identities:
+  H_N=(m_{i+j})=<Q^i c,Q^j c>_{i,j=0}^N >=0;
+  H_N^+=(m_{i+j+1})>=0;
+  (1/2)H_N-H_N^+>=0.
+Each follows by integrating a squared polynomial times a nonnegative weight.
+
+5. JOINT OPERATOR AND CALIBRATED ADMISSION
+
+Uncalibrated operator:
+  B_nu(a)=[[W(1),z_nu(a)^*],[z_nu(a),I_E]].
+
+For alpha in R and h in E:
+  <(alpha,h),B_nu(a)(alpha,h)>
+    =||h+alpha z_nu(a)||_2^2+[pi-A_nu(a)]alpha^2.
+Therefore
+  B_nu(a)>=0 iff A_nu(a)<=pi.                         (5.1)
+
+Native-compatible cap:
+  kappa_C:=min{pi,gamma/(4C^2)}>0.
+
+From (3.1):
+  A_nu(a)<=kappa_C
+  ==> C^2 H(a)^2<=nu^2/2
+  ==> C H(a)<=nu/sqrt(2)<nu.                          (5.2)
+
+Thus the closed cap supplies the STRICT premise of the inherited root.
+There is no missing endpoint argument in (5.2).
+
+Calibrated vector and operator:
+  z_{nu,C}(a):=sqrt(pi/kappa_C)*z_nu(a);
+  A_{nu,C}(a):=||z_{nu,C}(a)||_2^2
+             =(pi/kappa_C)A_nu(a);
+  B_{nu,C}(a):=[[W(1),z_{nu,C}(a)^*],
+                [z_{nu,C}(a),I_E]].
+
+The same square completion yields
+  B_{nu,C}(a)>=0
+    iff A_{nu,C}(a)<=pi
+    iff A_nu(a)<=kappa_C
+    ==> C H(a)<nu.                                    (5.3)
+
+THEOREM CAPPED_BKQR_ADMISSION_REGULARITY:
+  forall nu>0, forall a in D,
+    B_{nu,C}(a)>=0
+    ==> the complete conclusion of the inherited
+        NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL theorem.
+
+Proof:
+  native dictionary;
+  (5.3);
+  apply the verified native theorem with exactly the same a and nu.
+
+Finite sufficient certificate:
+  A_{nu,C}(a)<=L_N
+  ==> A_nu(a)<kappa_C
+  ==> inherited regularity and Leray-Hopf uniqueness.  (5.4)
+
+kappa_C is an exact analytic constant, not an evaluated rational constant.
+The rational quantities are m_n and L_N.
+Finite arithmetic certification of arbitrary input data additionally requires
+a certified bound for its score, including its infinite Fourier tail.
+
+6. DYADIC COEFFICIENT DATA
+
+For j>=1 and 2^j<=n<2^(j+1):
+  d_n=1/(j2^j).
+
+  g(y)=sum_{n>=2}d_n cos(2*pi*n*y);
+  a_nu(x)=(nu/2)g(x_2)e_1.
+
+Coefficient specification:
+  a_hat(0,n,0)=a_hat(0,-n,0)=(nu/4)d_n e_1, n>=2;
+  all remaining coefficients vanish.
+
+Define
+  R=sum_{j>=1}1/(j^2 2^j),
+  S=sum_{j>=1}(3-2^(-j))/j^2.
+
+Finite block identities:
+  sum_{n=2^j}^{2^(j+1)-1}d_n^2=1/(j^2 2^j);
+  sum_{n=2^j}^{2^(j+1)-1}n d_n^2=(3-2^(-j))/(2j^2);
+  sum_{n=2^j}^{2^(j+1)-1}d_n=1/j.
+
+  0<R<1;
+  0<S<6.
+The second estimate follows from
+  sum_{j>=1}1/j^2<1+integral_1^infinity x^(-2)dx=2.
+
+Parseval and the native dictionary:
+  L(a_nu)^2=nu^2 R/8;
+  H(a_nu)^2=pi*nu^2 S/8;
+  K(a_nu)=nu^2 R/16;
+  P_0(a_nu)=pi*nu^2 S/16;
+  A_nu(a_nu)=pi*S/16-5R/32<3pi/8<3/2.
+
+The series converges in H^(1/2).
+Reality, solenoidality, and zero mean follow coefficientwise.
+
+7. PHYSICAL REPRESENTATIVE AND ESSENTIAL LOCAL UNBOUNDEDNESS
+
+d_n decreases to zero.
+For y notin Z, geometric sums and Abel summation give
+  |sum_{n>N}d_n cos(2*pi*n*y)|
+    <=d_{N+1}/|sin(pi*y)|.                           (7.1)
+This also proves uniform convergence on closed sets away from y=0.
+
+For 0<|y|<1/24, let
+  N=floor(1/(6|y|)),
+  j=floor(log_2(N+1)).
+
+Then:
+  cos(2*pi*n*y)>=1/2 for 2<=n<=N;
+  complete blocks 1,...,j-1 lie below N;
+  d_{N+1}<=2/[j(N+1)];
+  |sin(pi*y)|>=2|y|;
+  (N+1)|y|>1/6.
+
+Hence
+  g(y)>=(1/2)sum_{k=1}^{j-1}1/k-6/j
+       ->infinity as y->0, y!=0.                     (7.2)
+
+The physical L2 representative is identified with this cosine series:
+  finite synthesis agrees coefficientwise;
+  the H^(1/2) sequence converges in L2;
+  the native physical representation has the same Fourier coefficients;
+  native Fourier injectivity identifies the L2 classes.
+Away from y=0, the pointwise limit equals this class almost everywhere.
+
+Thus, for every open O containing a point of the shear plane,
+  ess sup_O |a_nu|^2/2=infinity.
+This is a positive-measure essential-unboundedness theorem.
+It is not inferred from divergence at one measure-zero point.
+
+8. CALIBRATION INTO THE VERIFIED NATIVE SMALL CLASS
+
+Let epsilon>0 and
+  B:=sqrt(3*pi/4).
+Then H(a_nu)<Bnu.
+
+Define the positive analytic scale
+  eta_*:=min{1/2,sqrt(kappa_C/3),epsilon/[2(1+Bnu)]}.
+
+Choose m>=1 with
+  eta_m:=2^(-m)<=eta_*.
+Existence follows from 2^(-m)->0.
+Define
+  a_{nu,m}:=eta_m a_nu.
+
+Then
+  H(a_{nu,m})<eta_m Bnu<epsilon/2;
+  A_nu(a_{nu,m})=eta_m^2 A_nu(a_nu)
+               <(3/2)eta_m^2
+               <=kappa_C/2;
+  A_nu(a_{nu,m})<3/8<2.
+
+Using (3.1):
+  C^2 H(a_{nu,m})^2
+    <nu^2 kappa_C/gamma
+    <=nu^2/4;
+  C H(a_{nu,m})<nu/2<nu.                             (8.1)
+
+For the CALIBRATED BKQR score:
+  A_{nu,C}(a_{nu,m})
+    =(pi/kappa_C) A_nu(a_{nu,m})
+    <pi/2<2=L_0.                                    (8.2)
+
+Thus the first rational BKQR stage certifies the calibrated mechanism itself.
+
+Coefficient effect:
+  a_hat_{nu,m}(0,+/-n,0)
+    =nu*d_n*e_1/(4*2^m).
+The coefficients divided by nu remain rational.
+
+The existence of m is proved.
+A concrete numerical m for the native chosen constant C is not computed
+or asserted in this round.
+
+9. IMPORTED REGULARITY AND ITS EXACT INSTANCE
+
+Apply NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL to:
+  nu;
+  native datum a_{nu,m};
+  its proved CriticalSigmaZero certificate;
+  the strict bound (8.1).
+
+Obtain one U with all conclusions in Section 1.
+
+Let rho_0=(1/2)|criticalInitialPhysicalL2 a_{nu,m}|^2.
+Positive scaling preserves (7.2), so:
+  rho_0 in L1 \ L^infinity;
+  ess sup_O rho_0=infinity for every neighborhood of the shear plane;
+  integral rho_0=eta_m^2 nu^2 R/16<infinity.
+
+This is an application of the actual native theorem.
+No abstract field containing the desired regularity is supplied as input.
+
+10. EXPLICIT SHEAR FLOW AND IDENTIFICATION WITH THE SAME U
+
+Define
+  V_{nu,m}(t,x)
+    =(eta_m nu/2)sum_{n>=2}
+       d_n exp(-4*pi^2*nu*n^2*t)cos(2*pi*n*x_2)e_1,
+  p=0.
+
+For every delta>0, all derivative series converge uniformly on
+[delta,infinity) x T^3 by Gaussian decay.
+
+Therefore, for t>0:
+  div V=0;
+  (V dot grad)V=0;
+  partial_t V=nu Delta V;
+  p=0 is periodic and mean zero;
+  V,p solve the actual unforced NSE.
+
+Dominated convergence in the weighted Fourier sum gives:
+  V(t)->a_{nu,m} strongly in H^(1/2) as t downarrow 0;
+  V in C([0,infinity);H^(1/2)).
+
+Exact energy identity:
+  K(V(T))+nu integral_0^T||grad V(t)||_2^2dt
+    =eta_m^2 nu^2 R/16.                               (10.1)
+
+Proof:
+  K(V(t))=eta_m^2 nu^2/16
+            sum_{n>=2}d_n^2 exp(-8*pi^2*nu*n^2*t);
+  ||grad V(t)||_2^2=eta_m^2 pi^2 nu^2/2
+            sum_{n>=2}n^2 d_n^2 exp(-8*pi^2*nu*n^2*t);
+  integrate nonnegative terms and add.
+
+The heat equation holds through the weak initial trace.
+div(V tensor V)=0 distributionally because V_1^2 is independent of x_1.
+Together with (10.1), this verifies actual CriticalLerayHopf membership,
+after transporting the explicit functions into the native L2 fields.
+
+Apply U.lerayHopfUnique to V:
+  U.lerayVelocity=V in the native almost-everywhere physical sense.
+Positive-time smoothness upgrades spatial a.e. equality to equality of
+the continuous periodic representatives at each positive time.
+
+This step must consume actual membership.
+No equality of the two flows is assumed as an adapter premise.
+
+Optional independent consistency estimate:
+  integral_0^infinity||grad V(t)||_infinity dt
+    <=eta_m/(4*pi) sum_{n>=2}d_n/n
+    <=eta_m/(4*pi) sum_{j>=1}1/(j2^j)
+    <infinity.
+The main planned Lean chain reuses the imported uniqueness endpoint.
+
+11. POSITIVE-TIME DENSITY PROFILE
+
+Let
+  F_nu(t)=sum_{n>=2}d_n exp(-4*pi^2*nu*n^2*t).
+
+Positive coefficients and evaluation at x_2=0 yield
+  ||V(t)||_infinity=(eta_m nu/2)F_nu(t);
+  ||rho_V(t)||_infinity=(eta_m^2 nu^2/8)F_nu(t)^2.
+
+For every delta>0:
+  sup_{t>=delta}||rho_V(t)||_infinity
+    =(eta_m^2 nu^2/8)F_nu(delta)^2<infinity.
+
+As t downarrow 0, monotone convergence gives
+  F_nu(t) upward sum_{n>=2}d_n
+    =sum_{j>=1}1/j=infinity.
+
+Hence
+  lim_{t downarrow 0}||rho_U(t)||_infinity=infinity;
+  for every T>0, ess sup_{(0,T) x T^3}rho_U=infinity;
+  for every delta>0, sup_{t>=delta}||rho_U(t)||_infinity<infinity.
+
+Integrated kinetic energy remains finite on every spatial subset and
+through every finite time:
+  integral_Omega rho_U(t)<=K(U(t))<=K(a_{nu,m}).
+
+12. EXACT ROUND-1 MATHEMATICAL ROOT
+
+THEOREM SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN_R1.
+
+(A) For every nu>0 and a in D:
+      B_{nu,C}(a)>=0
+      ==> all conclusions of the verified native small-data root.
+
+(B) For every nu>0 and epsilon>0 there exist m>=1 and one physical flow U:
+      a=a_{nu,m};
+      a in H^(1/2)_{sigma,0};
+      0<||a||_{dot H^(1/2)}<epsilon;
+      C||a||_{dot H^(1/2)}<nu/2;
+      A_{nu,C}(a)<2=L_0;
+      B_{nu,C}(a)>=0;
+      actual unique Leray-Hopf evolution U with datum a;
+      strong H^(1/2) initial trace;
+      actual positive-time smooth NSE and normalized pressure;
+      all native quantitative conclusions of Section 1;
+      rho_0 in L1 \ L^infinity, locally essentially unbounded at the shear plane;
+      U equals the explicit heat shear at every positive time;
+      lim_{t downarrow 0}||rho_U(t)||_infinity=infinity;
+      forall delta>0, sup_{t>=delta}||rho_U(t)||_infinity<infinity.
+
+Proof:
+  (A): Sections 2--5 and inherited verified theorem.
+  (B): Sections 6--11, with m from Section 8.
+All mathematical premises are discharged.
+The new Lean implementation remains unprepared.
+
+Logical consequence:
+  not [forall a, Reg_nu(a) -> rho_a in L^infinity].
+
+No logical consequence:
+  forall a in H^(1/2)_{sigma,0}, Reg_nu(a);
+  absence of every possible positive-time NSE singularity;
+  a counterexample with smooth initial datum;
+  smoothness through t=0 for the constructed rough datum.
+
+13. PROPOSED LEAN ENDPOINT REGISTER
+
+All new endpoint names and modules below are planned, not existing Lean declarations.
+Common namespace: SingularityDisprovement.
+Common module prefix: SingularityDisprovement.
+
+ID   MODULE                   PROPOSED ENDPOINT
+E01  NativeDictionary         NATIVE_ENERGY_DICTIONARY
+E02  ShiftedEnergy            SHIFTED_ENERGY_COERCIVITY
+E03  GPPiResolvent            GP_PI_BOUNDED_RESOLVENT
+E04  BKQRMoments              BKQR_RATIONAL_MOMENTS_AND_GRAM
+E05  JointAdmission           JOINT_BLOCK_ADMISSION_IFF
+E06  CalibratedAdmission      CALIBRATED_BKQR_IMPLIES_NATIVE_SMALL
+E07  CalibratedRegularity     CALIBRATED_BKQR_GLOBAL_REGULARITY
+E08  DyadicBlocks             DYADIC_BLOCK_IDENTITIES
+E09  DyadicCriticalDatum      DYADIC_CRITICAL_DATUM
+E10  DyadicPhysicalTrace      DYADIC_PHYSICAL_REPRESENTATIVE
+E11  DyadicUnboundedDensity   DYADIC_LOCAL_ESSENTIAL_UNBOUNDEDNESS
+E12  DyadicCalibration        EXISTS_DYADIC_NATIVE_SMALL_CERTIFICATE
+E13  DyadicRegularity         DYADIC_NATIVE_GLOBAL_REGULARITY
+E14  ShearHeatFlow            SHEAR_HEAT_ACTUAL_NSE
+E15  ShearLerayHopf           SHEAR_TRACE_ENERGY_LERAY_HOPF
+E16  ShearIdentification      NATIVE_FLOW_EQ_EXPLICIT_SHEAR
+E17  DensityProfile           INITIAL_DENSITY_UNBOUNDED_POSITIVE_SLAB_BOUNDED
+E18  Root                     SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN_R1
+
+Exact obligations and dependencies:
+
+E01: native H and physical L2 norm identities.
+     Inputs: actual CriticalSobolev 1 and CriticalSigmaZero.
+     Reuse native Fourier-norm and physical-coefficient theorems.
+
+E02: gamma>0, gamma H^2<=2nu^2 A<=H^2,
+     multiplier z in L2, norm(z)^2=A.
+     Depends E01.
+
+E03: actual GP integral at (0,1), actual multiplication contraction Q,
+     bounded inverse (I-Q)^(-1), W(1)=pi.
+     No opaque pi-decoder assumption.
+
+E04: rational factorial moments, recurrence, Gram/localizer PSD,
+     finite lower sums and exact remainder bound.
+     Depends E03.
+
+E05: actual rank-two block operator and square completion.
+     B_nu>=0 iff A<=pi.
+     Depends E02,E03.
+
+E06: positive kappa_C; calibrated block equivalence;
+     closed cap implies the strict native smallness premise.
+     Depends E01,E02,E05 and native C>0.
+
+E07: deterministic application of the audited root.
+     Exports the SAME physical solution and its actual native properties.
+     Depends E06 and the imported root.
+
+E08: dyadic index partition, finite block sums, R<1, S<6,
+     divergent harmonic mass.
+
+E09: weighted square summability, construction of CriticalSobolev 1,
+     reality, solenoidality, mean-zero, exact H and L sums.
+     Depends E01,E08.
+
+E10: native rough physical L2 class equals the a.e. cosine-series limit.
+     Depends E09 and native Fourier injectivity.
+
+E11: Abel tail estimate; explicit positive-measure lower bound (7.2);
+     local essential unboundedness of kinetic-energy density.
+     Depends E08,E10.
+
+E12: existence of m>=1; exact eta=2^(-m);
+     epsilon-small native norm; calibrated first-stage BKQR certificate;
+     full infinite-tail estimates, not truncated-data claims.
+     Depends E02,E04,E06,E09.
+
+E13: native root instantiated at the literal dyadic datum.
+     Depends E07,E09,E12.
+
+E14: actual heat series, all positive-time derivatives,
+     exact shear cancellation and zero pressure.
+     Depends E08,E09.
+
+E15: strong critical trace, exact energy equality,
+     actual native CriticalLerayHopf membership for the explicit shear.
+     Depends E09,E10,E14.
+
+E16: imported uniqueness + E15; a.e. and positive-time pointwise identification.
+     Depends E13,E15.
+
+E17: exact density supremum, initial-boundary divergence,
+     boundedness on positive-time slabs.
+     Depends E08,E14,E16.
+
+E18: deterministic conjunction/existential assembly.
+     Depends E07,E11,E12,E13,E16,E17.
+     The root must include actual physical density and actual PDE predicates.
+
+14. EXISTING MODULES TO REUSE
+
+CriticalSpaces:
+  criticalSobolevOfCoeff;
+  criticalSobolevOfCoeff_coeff;
+  criticalSobolev_norm_sq.
+
+CriticalSpacesEmbedding:
+  criticalSobolevLower;
+  criticalPhysicalL2_fourierCoeff.
+
+CriticalInitialPhysicalFourier:
+  criticalInitialPhysicalL2_fourierCoeff;
+  criticalInitialPhysicalL2_norm_sq;
+  criticalInitialPhysicalL2_injective_on_real_meanZero.
+
+SmallDataAX6Closure:
+  criticalNonlinearConstant;
+  criticalNonlinearConstant_pos;
+  SMALL_DATA_AX6.
+
+CriticalRegularityContracts:
+  CriticalSigmaZero;
+  CriticalRegularSolution;
+  CriticalGlobalRegularity.
+
+NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL:
+  NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.
+
+CriticalLerayHopf / CriticalStrongLerayHopf / CriticalUniqueness:
+  actual membership and comparison interfaces;
+  use their exact premises, not a substitute certificate containing the result.
+
+Exact physical-density API and L-infinity predicates are to be selected in
+Round 2 after inspecting the native Lp representative types.
+
+15. PROOF-SPINE SCHEDULE AND DEPENDENCY FREEZE
+
+Wave A: E01, E03, E08.
+Wave B: E02, E04, E09.
+Wave C: E05, E10, E14.
+Wave D: E06, E11, E15.
+Wave E: E07, E12.
+Wave F: E13.
+Wave G: E16.
+Wave H: E17.
+Wave I: E18.
+
+Independent edge theorems:
+  explicit complete signatures;
+  opaque theorem bodies;
+  native asynchronous elaboration when dependency-safe;
+  deterministic final theorem application.
+
+Signature availability alone is not proof evidence.
+No admitted edge, sorry, or new axiom may replace an unfinished body.
+Scheduling must preserve every premise, constant, and physical endpoint.
+
+16. SEPARATE FULL UNCALIBRATED CUTOFF TRACK
+
+Previously derived mathematical target:
+  A_nu(a)<=pi ==> Reg_nu(a).
+
+This is not obtained by replacing kappa_C with pi in Section 5.
+The inspected native theorem has the premise C H(a)<nu.
+
+The independent caloric/theta route has these later formalization targets:
+
+F01  FourierCaloricBudget:
+     Qcal(a)^2=integral_0^infinity
+       [sum_{k!=0}|a_hat(k)|exp(-4*pi^2|k|^2 t)]^2dt.
+
+F02  CaloricBilinear:
+     symmetrized Duhamel estimate in Y=L2_t ell1_Fourier:
+       ||B_nu(v,w)||_Y<=1/(2sqrt(2nu))*||v||_Y||w||_Y.
+
+F03  CaloricActualRegularity:
+     Qcal(a)<nu/sqrt(2)
+       ==> actual regularity, strong trace, actual Leray-Hopf uniqueness.
+
+F04  ThetaKineticDeficit:
+     nonzero a in D ==>
+       Qcal(a)^2<[P_0(a)-(5/2)K(a)]/(2pi).
+     Requires actual theta/lattice estimates and the weighted Schur transfer.
+
+F05  FullUncalibratedBKQRRoot:
+     B_nu(a)>=0 ==> A_nu(a)<=pi
+       ==> Qcal(a)<nu/sqrt(2) ==> Reg_nu(a),
+     with a=0 handled separately.
+
+Earlier B-tier source:
+  NSE_THETA_KINETIC_DEFICIT_CUTOFF_B_TIER.txt
+  https://chatgpt.com/library?file_id=libfile_806971a2fd808191973e8a7d0a35c3f7&account_id=personal
+
+F01--F05 are separate new Lean obligations.
+Their exact typed analytic bridge will be developed in a later round.
+No implication from a scalar GP identity to NSE regularity is assumed.
+
+17. NEW-BRANCH BUILD AND AUDIT PLAN
+
+Planned layout:
+  regularity-B-assembly/SINGULARITY_DISPROVEMENT/
+    lean-toolchain
+    lakefile.toml
+    lake-manifest.json
+    SingularityDisprovement.lean
+    SingularityDisprovement/<modules E01--E18>.lean
+    ci/exact_types/<endpoint>.lean
+    ci/axioms/<endpoint>.json
+    verification/<source_sha>/...
+    run.cmd
+    SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN_R1_B_TIER.txt
+
+New package dependency:
+  inherited sibling package at ../Singular-Axiomatic-closure;
+  import the verified root module directly;
+  retain the exact Lean 4.33.0 / Mathlib lock;
+  no modification to inherited theorem statements or source bodies.
+
+Future workflow:
+  .github/workflows/singularity-disprovement.yml;
+  branch trigger includes SINGULARITY_DISPROVEMENT;
+  paths target the new package and its workflow;
+  external cached GitHub Actions only.
+
+Current h12-small-closure.yml branch filter excludes the new branch.
+It must not be silently relied upon to test new declarations.
+
+Cache requirements:
+  restore compatible pinned Mathlib cached objects;
+  restore project cache only under verified toolchain/lock/source keys;
+  sibling-branch project-cache availability must be checked;
+  any cache miss or dependency build occurs externally, never locally;
+  retain cache hit/miss and exact compiler identity in evidence.
+
+No Lean compiler, lake build, lake env lean, or local proof execution
+is run during this planning round.
+
+Per-endpoint external evidence:
+  source commit;
+  exact toolchain;
+  Mathlib revision and dependency lock;
+  exact-type check;
+  compilation of the theorem body;
+  theorem-level axiom list;
+  permitted axioms only [propext, Classical.choice, Quot.sound];
+  no sorryAx or unapproved axioms;
+  source hash manifest;
+  run/job URLs.
+
+A successful inherited theorem audit does not promote a new endpoint.
+A successful unrelated aggregate build does not replace the exact-root audit.
+A failed workflow may contain usable individually audited declarations,
+but the declaration-level result and source identity must be explicit.
+
+18. ROUND PLAN
+
+ROUND 1 -- COMPLETED MATHEMATICS:
+  verify inherited root;
+  pin native norm convention;
+  derive calibrated BKQR cap;
+  prove explicit unbounded-density instantiation;
+  specify endpoints and exact scope.
+  Output: this TXT.
+
+ROUND 2 -- SIGNATURE AND REPRESENTATIVE FREEZE:
+  exact native types for density, local essential unboundedness, and same-flow identity;
+  exact coefficient constructors;
+  choose all import boundaries;
+  freeze root type and independent edge types.
+  Output: revised B-tier chain; no automatic A-tier promotion.
+
+ROUND 3 -- FINITE CERTIFICATES AND ANALYTIC EDGES:
+  settle rational/dyadic block lemmas and tail certificates;
+  finalize GP/resolvent equivalence implementation route;
+  minimize genuinely new analysis;
+  distinguish E01--E18 from F01--F05.
+
+ROUND 4 -- A-TIER CANDIDATE IMPLEMENTATION:
+  implement only frozen endpoints;
+  supply Lean source, endpoint report, and Windows run.cmd;
+  use cached external compilation and theorem-level audits.
+
+PROMOTION:
+  B_TIER = exact mathematical derivation recorded;
+  A_TIER_CANDIDATE = prepared Lean without matching complete external evidence;
+  A_TIER = exact compiled theorem plus matching approved-axiom audit;
+  FORMAL_CLOSURE = all explicit implications compiled;
+  UNCONDITIONAL_CLOSURE = every endpoint/certificate/analytic premise discharged.
+
+Response compression:
+  exploratory rounds: scoped root + endpoint deltas + unresolved obligations;
+  implementation-ready rounds: endpoint counts + changed signatures + file link;
+  verified rounds: exact root status + evidence + artifacts.
+
+19. ROOT SCOPE SUMMARY
+
+Calibrated BKQR positivity
+  -> strict native critical smallness
+  -> already-verified physical regularity and uniqueness
+  -> exact dyadic rough datum
+  -> locally unbounded initial kinetic-energy density
+  -> bounded positive-time density on every [delta,infinity).
+
+INITIAL_DENSITY_UNBOUNDED = TRUE.
+TOTAL_KINETIC_ENERGY_FINITE = TRUE.
+POSITIVE_TIME_REGULARITY = TRUE.
+STRONG_CRITICAL_INITIAL_TRACE = TRUE.
+SMOOTHNESS_THROUGH_T_ZERO = NOT_ASSERTED.
+UNIVERSAL_SINGULARITY_EXCLUSION = NOT_ASSERTED.
+NEW_LEAN_PROMOTION = NONE.
+
+END
