@@ -96,37 +96,58 @@ theorem torusSobolev_pressure_finite_sum_le (s : ℕ) (b : TorusSobolev s)
     _ ≤ ∑ ki ∈ (S.image Prod.fst).product (Finset.univ : Finset (Fin 3)),
         ‖sobolevWeightedCoeff s (pressureVectorCoeff b.val) ki‖ ^ 2 :=
       Finset.sum_le_sum_of_subset_of_nonneg hsub (fun ki _ _ => sq_nonneg _)
-    _ ≤ 3 * ∑ ki ∈ (S.image Prod.fst).product (Finset.univ : Finset (Fin 3)),
-        ‖sobolevWeightedCoeff s b.val ki‖ ^ 2 := by
-      rw [Finset.sum_product, Finset.sum_product, Finset.mul_sum]
-      exact Finset.sum_le_sum (fun k _ => torusSobolev_pressure_mode_sum_le s b.val k)
+    _ = ∑ k ∈ S.image Prod.fst, ∑ i : Fin 3,
+        ‖sobolevWeightedCoeff s (pressureVectorCoeff b.val) (k, i)‖ ^ 2 :=
+      Finset.sum_product (S.image Prod.fst) Finset.univ
+        (fun ki : FourierIndex => ‖sobolevWeightedCoeff s (pressureVectorCoeff b.val) ki‖ ^ 2)
+    _ ≤ ∑ k ∈ S.image Prod.fst, 3 * ∑ i : Fin 3,
+        ‖sobolevWeightedCoeff s b.val (k, i)‖ ^ 2 :=
+      Finset.sum_le_sum (fun k _ => torusSobolev_pressure_mode_sum_le s b.val k)
+    _ = 3 * ∑ k ∈ S.image Prod.fst, ∑ i : Fin 3,
+        ‖sobolevWeightedCoeff s b.val (k, i)‖ ^ 2 := (Finset.mul_sum ..).symm
+    _ = 3 * ∑ ki ∈ (S.image Prod.fst).product (Finset.univ : Finset (Fin 3)),
+        ‖sobolevWeightedCoeff s b.val ki‖ ^ 2 :=
+      congrArg (fun z : ℝ => 3 * z)
+        (Finset.sum_product (S.image Prod.fst) Finset.univ
+          (fun ki : FourierIndex => ‖sobolevWeightedCoeff s b.val ki‖ ^ 2)).symm
     _ ≤ 3 * ‖b‖ ^ 2 :=
       mul_le_mul_of_nonneg_left (torusSobolev_finite_weighted_sum_le s b _)
         (by norm_num)
 
-def torusSobolevPressureLinear (s : ℕ) : TorusSobolev s →ₗ[ℂ] TorusSobolev s where
-  toFun b := ⟨pressureVectorCoeff b.val, by
-    apply memℓp_gen' (C := 3 * ‖b‖ ^ 2)
-    intro S
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using
-      torusSobolev_pressure_finite_sum_le s b S⟩
-  map_add' b d := by
-    apply Subtype.ext
-    exact pressureVectorCoeff_add b.val d.val
-  map_smul' z b := by
-    apply Subtype.ext
-    exact pressureVectorCoeff_smul z b.val
+def pressureFourierLinear : FourierCoeff →ₗ[ℂ] FourierCoeff where
+  toFun := pressureVectorCoeff
+  map_add' := pressureVectorCoeff_add
+  map_smul' := pressureVectorCoeff_smul
+
+theorem torusSobolevPressure_mem (s : ℕ) (b : TorusSobolev s) :
+    Memℓp (sobolevWeightedCoeff s (pressureFourierLinear b.val)) 2 := by
+  change Memℓp (sobolevWeightedCoeff s (pressureVectorCoeff b.val)) 2
+  apply memℓp_gen' (C := 3 * ‖b‖ ^ 2)
+  intro S
+  simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using
+    torusSobolev_pressure_finite_sum_le s b S
+
+def torusSobolevPressureLinear (s : ℕ) : TorusSobolev s →ₗ[ℂ] TorusSobolev s :=
+  torusSobolevLiftLinear s s pressureFourierLinear (torusSobolevPressure_mem s)
+
+@[simp]
+theorem torusSobolevPressureLinear_coeff (s : ℕ) (b : TorusSobolev s) :
+    (torusSobolevPressureLinear s b).val = pressureVectorCoeff b.val :=
+  torusSobolevLiftLinear_coeff s s pressureFourierLinear (torusSobolevPressure_mem s) b
 
 theorem torusSobolevPressureLinear_norm_le (s : ℕ) (b : TorusSobolev s) :
     ‖torusSobolevPressureLinear s b‖ ≤ Real.sqrt 3 * ‖b‖ := by
-  change ‖torusSobolevReprLinear s (torusSobolevPressureLinear s b)‖ ≤ _
-  apply lp.norm_le_of_forall_sum_le (p := (2 : ℝ≥0∞)) (by norm_num) (by positivity)
-  intro S
-  change (∑ ki ∈ S, ‖sobolevWeightedCoeff s (pressureVectorCoeff b.val) ki‖ ^
-    (2 : ℝ≥0∞).toReal) ≤ (Real.sqrt 3 * ‖b‖) ^ (2 : ℝ≥0∞).toReal
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, mul_pow,
-    Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 3)] using
-    torusSobolev_pressure_finite_sum_le s b S
+  calc
+    _ = ‖torusSobolevRepr s (torusSobolevPressureLinear s b)‖ :=
+      ((torusSobolevRepr s).norm_map _).symm
+    _ ≤ Real.sqrt 3 * ‖b‖ := by
+      apply lp.norm_le_of_forall_sum_le (p := (2 : ℝ≥0∞)) (by norm_num)
+        (mul_nonneg (Real.sqrt_nonneg 3) (norm_nonneg b))
+      intro S
+      simp only [torusSobolevRepr_apply, torusSobolevPressureLinear_coeff]
+      simpa only [ENNReal.toReal_ofNat, Real.rpow_two, mul_pow, sobolevWeightedCoeff,
+        Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 3)] using
+        torusSobolev_pressure_finite_sum_le s b S
 
 /-- The pressure Fourier multiplier is an actual bounded linear Sobolev map. -/
 def torusSobolevPressure (s : ℕ) : TorusSobolev s →L[ℂ] TorusSobolev s :=
@@ -135,7 +156,11 @@ def torusSobolevPressure (s : ℕ) : TorusSobolev s →L[ℂ] TorusSobolev s :=
 
 @[simp]
 theorem torusSobolevPressure_coeff (s : ℕ) (b : TorusSobolev s) :
-    (torusSobolevPressure s b).val = pressureVectorCoeff b.val := rfl
+    (torusSobolevPressure s b).val = pressureVectorCoeff b.val := by
+  unfold torusSobolevPressure
+  exact (congrArg (fun v : TorusSobolev s => v.val)
+    ((torusSobolevPressureLinear s).mkContinuous_apply (Real.sqrt 3)
+      (torusSobolevPressureLinear_norm_le s) b)).trans (torusSobolevPressureLinear_coeff s b)
 
 theorem torusSobolevPressure_norm_sq_le (s : ℕ) (b : TorusSobolev s) :
     ‖torusSobolevPressure s b‖ ^ 2 ≤ 3 * ‖b‖ ^ 2 := by
@@ -171,7 +196,7 @@ theorem sobolevTransportPressureCurve_coeff
   have hlower : torusSobolevLower 0 (s + 2) (Nat.zero_le _) (U (s + 2) t) = U 0 t := by
     apply Subtype.ext
     simpa only [torusSobolevLower_coeff] using hcoeff (s + 2) t ht
-  change pressureVectorCoeff (sobolevDivergenceProductCoeff s (U (s + 2) t) (U (s + 2) t)) = _
+  rw [sobolevTransportPressureCurve, torusSobolevPressure_coeff, sobolevDivergenceProduct_coeff]
   apply congrArg pressureVectorCoeff
   funext k i
   unfold sobolevDivergenceProductCoeff fullTransportCoefficients

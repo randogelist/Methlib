@@ -39,9 +39,10 @@ theorem GalerkinSolution.coefficientTransport_eq_fullTransport
   simpa only [hc, fullTransportCoefficients] using h
 
 theorem fullTransportCoefficients_continuous (k : Frequency) (i : Fin 3) :
-    Continuous (fun c : TorusSobolev 0 => fullTransportCoefficients c k i) :=
-  (divergenceTransportCoefficient_continuous k i).comp
-    (continuous_id.prodMk continuous_id)
+    Continuous (fun c : TorusSobolev 0 => fullTransportCoefficients c k i) := by
+  change Continuous (fun c : TorusSobolev 0 => divergenceTransportCoefficient k i c c)
+  exact (divergenceTransportCoefficient k i).continuous.clm_apply
+    (continuous_id : Continuous (fun c : TorusSobolev 0 => c))
 
 /-- Compact-time uniform H0 convergence preserves every full transport mode. -/
 theorem fullTransportCoefficients_tendstoUniformlyOn

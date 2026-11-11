@@ -1,5 +1,5 @@
 GALERKIN_ENERGY_IDENTITY — A_TIER
-Completion marker: !=!
+Completion marker: !!
 
 EXACT SCOPE
 For every real viscosity nu, physical datum a, cutoff N, actual

@@ -1,5 +1,5 @@
 SIX_CHANNEL_ENSTROPHY_EQ — A_TIER
-Completion marker: !=!
+Completion marker: !!
 
 EXACT TYPE
 forall a : Field,

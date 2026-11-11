@@ -10,7 +10,7 @@ This is an active formalization. Definitions and auxiliary lemmas do not constit
 
 Lean executes only in external GitHub Actions, using Lean 4.33.0 and the pinned Mathlib object cache. Local Lean executions: zero. A successful CI audit verifies only its enumerated declarations at the tested commit. It does not complete a frozen endpoint unless its entire stated scope is covered.
 
-Completion marker: `!=!`, assigned only after matching compiler and theorem-level axiom-audit evidence.
+Completion marker: `!!`, assigned only after matching compiler and theorem-level axiom-audit evidence.
 
 ## Frozen endpoints
 
@@ -18,13 +18,13 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 
 | # | Endpoint | Status |
 |---:|---|---|
-| 1 | `SIX_CHANNEL_PROJECTIONS` | !=! A_TIER |
-| 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | !=! A_TIER |
-| 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !=! A_TIER |
-| 4 | `GALERKIN_ENERGY_IDENTITY` | !=! A_TIER |
-| 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | !=! A_TIER |
-| 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !=! A_TIER |
-| 7 | `AX6_UNIFORM_STRONG_BOUNDS` | !=! A_TIER |
+| 1 | `SIX_CHANNEL_PROJECTIONS` | !! A_TIER |
+| 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | !! A_TIER |
+| 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !! A_TIER |
+| 4 | `GALERKIN_ENERGY_IDENTITY` | !! A_TIER |
+| 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | !! A_TIER |
+| 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !! A_TIER |
+| 7 | `AX6_UNIFORM_STRONG_BOUNDS` | !! A_TIER |
 | 8 | `GALERKIN_GLOBAL_STRONG_LIMIT` | A_TIER_CANDIDATE |
 | 9 | `GLOBAL_STRONG_SMOOTH_BOOTSTRAP` | A_TIER_CANDIDATE |
 | 10 | `PERIODIC_PRESSURE_RECOVERY` | A_TIER_CANDIDATE |

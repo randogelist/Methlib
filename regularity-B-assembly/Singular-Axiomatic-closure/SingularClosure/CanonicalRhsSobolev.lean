@@ -102,7 +102,12 @@ local notation "R" => canonicalLimitRhsSobolev hAX6 ν hν a ha u φ hφ hconv
 
 theorem canonicalLimitRhsSobolev_coeff (s : ℕ) (t : ℝ) (ht : 0 ≤ t) :
     (R s t).val = fullFourierRhs ν (u t) := by
-  simp only [canonicalLimitRhsSobolev, dif_pos ht]
+  have heq : R s t = (⟨fullFourierRhs ν (u t),
+      canonical_fullFourierRhs_mem hAX6 ν hν a ha u φ hφ hconv s t ht⟩ :
+        TorusSobolev s) := by
+    unfold canonicalLimitRhsSobolev
+    exact dif_pos ht
+  exact congrArg (fun c : TorusSobolev s => c.val) heq
 
 theorem canonicalLimitRhsSobolev_inclusion (s : ℕ) (t : ℝ) (ht : 0 ≤ t) :
     torusSobolevInclusion s (R (s + 1) t) = R s t := by
@@ -126,7 +131,12 @@ theorem canonicalLimitRhsSobolev_uniform_bound (s : ℕ) (T : ℝ) (hT : 0 < T) 
     (fun n => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).rhsSobolev s t)
     (fullFourierRhs ν (u t)) (B + 1) hbound
     (canonical_rhsSobolev_coeff_tendsto ν hν a ha u φ hφ hconv s t ht.1)
-  simpa only [canonicalLimitRhsSobolev, dif_pos ht.1] using hn
+  have heq : R s t = (⟨fullFourierRhs ν (u t), hc⟩ : TorusSobolev s) := by
+    apply Subtype.ext
+    exact canonicalLimitRhsSobolev_coeff hAX6 ν hν a ha u φ hφ hconv s t ht.1
+  calc
+    ‖R s t‖ = ‖(⟨fullFourierRhs ν (u t), hc⟩ : TorusSobolev s)‖ := congrArg norm heq
+    _ ≤ B + 1 := hn
 
 theorem canonicalLimitRhsSobolev_continuousOn_Icc
     (hu : ContinuousOn u (Ici 0)) (s : ℕ) (T : ℝ) (hT : 0 < T) :
@@ -149,6 +159,7 @@ theorem canonicalLimitRhsSobolev_continuousOn_Icc
 theorem canonicalLimitRhsSobolev_continuousOn
     (hu : ContinuousOn u (Ici 0)) (s : ℕ) : ContinuousOn (R s) (Ici 0) := by
   intro t ht
+  change 0 ≤ t at ht
   have hc := canonicalLimitRhsSobolev_continuousOn_Icc
     hAX6 ν hν a ha u φ hφ hconv hu s (t + 1) (by linarith) t ⟨ht, by linarith⟩
   apply hc.mono_of_mem_nhdsWithin

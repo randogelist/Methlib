@@ -27,9 +27,12 @@ theorem torusSobolev_component_moment_sum_le (q s : ℕ) (hqs : q ≤ s)
   have hsum :
       (∑ ki ∈ S.product {i}, (torusSobolevWeight ki.1 ^ q * ‖c.val ki.1 ki.2‖) ^ 2) =
         ∑ k ∈ S, (torusSobolevWeight k ^ q * ‖c.val k i‖) ^ 2 := by
-    simpa only [Finset.sum_singleton] using
-      Finset.sum_product S {i}
-        (fun ki : FourierIndex => (torusSobolevWeight ki.1 ^ q * ‖c.val ki.1 ki.2‖) ^ 2)
+    calc
+      _ = ∑ k ∈ S, ∑ j ∈ ({i} : Finset (Fin 3)),
+          (torusSobolevWeight k ^ q * ‖c.val k j‖) ^ 2 :=
+        Finset.sum_product S {i}
+          (fun ki : FourierIndex => (torusSobolevWeight ki.1 ^ q * ‖c.val ki.1 ki.2‖) ^ 2)
+      _ = _ := by simp only [Finset.sum_singleton]
   exact hsum.symm.trans_le (h.trans (pow_le_pow_left₀ (norm_nonneg _)
     (torusSobolevLower_norm_le q s hqs c) 2))
 
@@ -171,8 +174,15 @@ theorem SOBOLEV_DIVERGENCE_PRODUCT_MEM_NORM_BOUND (r : ℕ) :
   intro S
   have hsquare : (Real.sqrt C * ‖c‖ * ‖d‖) ^ 2 = C * ‖c‖ ^ 2 * ‖d‖ ^ 2 := by
     rw [mul_pow, mul_pow, Real.sq_sqrt hC.le]
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_two, hsquare,
-    torusSobolevRepr_apply, sobolevWeightedCoeff] using hbound c d S
+  simp only [ENNReal.toReal_ofNat, Real.rpow_two, hsquare]
+  calc
+    _ = ∑ ki ∈ S, ‖sobolevWeightedCoeff r (sobolevDivergenceProductCoeff r c d) ki‖ ^ 2 := by
+      apply Finset.sum_congr rfl
+      intro ki _
+      exact congrArg (fun z : ℂ => ‖z‖ ^ 2)
+        (torusSobolevRepr_apply r
+          (⟨sobolevDivergenceProductCoeff r c d, hc⟩ : TorusSobolev r) ki)
+    _ ≤ _ := hbound c d S
 
 theorem sobolevDivergenceProductCoeff_mem (r : ℕ) (c d : TorusSobolev (r + 2)) :
     Memℓp (sobolevWeightedCoeff r (sobolevDivergenceProductCoeff r c d)) 2 := by

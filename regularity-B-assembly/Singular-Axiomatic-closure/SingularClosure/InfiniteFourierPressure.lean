@@ -29,7 +29,8 @@ theorem frequency_coord_abs_le_freqSq (k : Frequency) (i : Fin 3) :
         rw [abs_of_neg (lt_of_not_ge hp)]
         nlinarith
   have hsum : (k i) ^ 2 ≤ galerkinFreqSq k :=
-    Finset.single_le_sum (fun j _ => sq_nonneg _) (Finset.mem_univ i)
+    Finset.single_le_sum (s := Finset.univ) (f := fun j : Fin 3 => (k j) ^ 2)
+      (fun j _ => sq_nonneg (k j)) (Finset.mem_univ i)
   exact_mod_cast hcoord.trans hsum
 
 /-- The pressure multiplier is uniformly bounded on every nonzero integer
@@ -38,8 +39,10 @@ theorem pressureFromTransport_norm_le (k : Frequency) (b : Fin 3 → ℂ) :
     ‖pressureFromTransport k b‖ ≤ ∑ i : Fin 3, ‖b i‖ := by
   by_cases hk : k = 0
   · subst k
-    simp only [pressureFromTransport, if_pos rfl, norm_zero]
-    exact Finset.sum_nonneg (fun i _ => norm_nonneg _)
+    have hzero : pressureFromTransport (0 : Frequency) b = 0 := by
+      rw [pressureFromTransport, if_pos rfl]
+    rw [hzero, norm_zero]
+    exact Finset.sum_nonneg (fun i _ => norm_nonneg (b i))
   have hfreq : (1 : ℝ) ≤ (galerkinFreqSq k : ℝ) := by
     exact_mod_cast galerkinFreqSq_ge_one_of_ne_zero k hk
   have hsum : (∑ i : Fin 3, (k i : ℂ) ^ 2) = ((galerkinFreqSq k : ℝ) : ℂ) := by
@@ -60,14 +63,16 @@ theorem pressureFromTransport_norm_le (k : Frequency) (b : Fin 3 → ℂ) :
       _ = _ := (Finset.mul_sum ..).symm
   simp only [pressureFromTransport, hk, if_false, norm_div, norm_mul,
     Complex.norm_I, one_mul, hsum, Complex.norm_real, Real.norm_eq_abs,
-    abs_of_pos hpi, abs_of_nonneg (zero_le_one.trans hfreq)]
+    abs_of_pos hpi, abs_of_pos Real.pi_pos,
+    abs_of_pos (by norm_num : (0 : ℝ) < 2),
+    abs_of_nonneg (zero_le_one.trans hfreq)]
   apply (div_le_iff₀ hden).mpr
   calc
     _ ≤ (galerkinFreqSq k : ℝ) * ∑ i : Fin 3, ‖b i‖ := hnum
     _ ≤ ((2 * Real.pi) * (galerkinFreqSq k : ℝ)) * ∑ i : Fin 3, ‖b i‖ :=
       mul_le_mul_of_nonneg_right
         (le_mul_of_one_le_left (zero_le_one.trans hfreq) hpi1)
-        (Finset.sum_nonneg (fun i _ => norm_nonneg _))
+        (Finset.sum_nonneg (fun i _ => norm_nonneg (b i)))
     _ = _ := mul_comm _ _
 
 def infinitePressureCoefficient (b : FourierCoeff) (k : Frequency) : ℂ :=

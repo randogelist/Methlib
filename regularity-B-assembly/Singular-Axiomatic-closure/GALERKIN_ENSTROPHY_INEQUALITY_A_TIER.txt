@@ -1,5 +1,5 @@
 GALERKIN_ENSTROPHY_INEQUALITY — A_TIER
-Completion marker: !=!
+Completion marker: !!
 
 EXACT SCOPE
 Exists C > 0, for every nu > 0, physical datum a, cutoff N,

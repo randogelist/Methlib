@@ -1,5 +1,5 @@
 SIX_CHANNEL_PROJECTIONS — A_TIER
-Completion marker: !=!
+Completion marker: !!
 
 EXACT TYPE
 SingularClosure.SIX_CHANNEL_PROJECTIONS : PhysicalSixChannelProjectionLaws
