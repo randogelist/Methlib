@@ -30,3 +30,6 @@ import SingularClosure.CoordinateAverageCalculus
 import SingularClosure.PeriodicPoincare
 import SingularClosure.CoordinateAverageOrthogonal
 import SingularClosure.SmoothSixChannels
+import SingularClosure.SmoothSixProjectionAlgebra
+import SingularClosure.SmoothSixOrthogonal
+import SingularClosure.SmoothSixEnstrophy

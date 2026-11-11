@@ -26,11 +26,15 @@ theorem coordinateAverage_double_integrable (i j : Fin 3) (a : Field)
         (volume.restrict (Icc (0 : ℝ) 1))) := by
   have hreset : Continuous (fun st : ℝ × ℝ =>
       resetCoordinate i st.1 (resetCoordinate j st.2 x)) := by
-    apply (resetCoordinate_smooth i).continuous.comp
-    exact ((resetCoordinate_continuous_slice j x).comp continuous_snd).prodMk
-      continuous_fst
-  have hint := (ha.comp hreset).continuousOn.integrableOn_compact
-    ((isCompact_Icc : IsCompact (Icc (0 : ℝ) 1)).prod isCompact_Icc)
+    simpa only [Function.comp_def] using
+      (resetCoordinate_smooth i).continuous.comp
+        (((resetCoordinate_continuous_slice j x).comp continuous_snd).prodMk
+          continuous_fst)
+  have hint : IntegrableOn (fun st : ℝ × ℝ =>
+      a (resetCoordinate i st.1 (resetCoordinate j st.2 x)))
+      ((Icc (0 : ℝ) 1) ×ˢ (Icc (0 : ℝ) 1)) volume :=
+    (ha.comp hreset).continuousOn.integrableOn_compact
+      ((isCompact_Icc : IsCompact (Icc (0 : ℝ) 1)).prod isCompact_Icc)
   simpa only [IntegrableOn, Measure.volume_eq_prod, Measure.prod_restrict] using hint
 
 /-- The actual coordinate averages commute, without a Fourier representation premise. -/
@@ -57,6 +61,11 @@ def unitProductMeasure (n : ℕ) : Measure (Fin n → ℝ) :=
 instance unitIntervalMeasure_probability : IsProbabilityMeasure unitIntervalMeasure := by
   constructor
   simp [unitIntervalMeasure]
+
+instance unitProductMeasure_probability (n : ℕ) :
+    IsProbabilityMeasure (unitProductMeasure n) := by
+  unfold unitProductMeasure
+  infer_instance
 
 theorem unitPiCube_eq (n : ℕ) :
     Icc (0 : Fin n → ℝ) (fun _ => 1) =
@@ -94,8 +103,8 @@ theorem integral_unitCube_productMeasure (f : Vec → E) :
 
 theorem continuous_integrable_unitProduct (n : ℕ) (f : (Fin n → ℝ) → E)
     (hf : Continuous f) : Integrable f (unitProductMeasure n) := by
-  have hint := hf.continuousOn.integrableOn_compact
-    (isCompact_Icc : IsCompact (Icc (0 : Fin n → ℝ) (fun _ => 1)))
+  have hint : IntegrableOn f (Icc (0 : Fin n → ℝ) (fun _ => 1)) volume :=
+    hf.continuousOn.integrableOn_compact isCompact_Icc
   rw [unitPiCube_eq] at hint
   change Integrable f
     ((Measure.pi (fun _ : Fin n => (volume : Measure ℝ))).restrict
@@ -107,15 +116,15 @@ theorem continuous_integrable_unitProduct (n : ℕ) (f : (Fin n → ℝ) → E)
 theorem integral_unitCube_disintegrate (j : Fin 3) (f : Vec → E)
     (hf : Continuous f) :
     (∫ x in unitCube, f x) =
-      ∫ y : Fin 2 → ℝ, ∫ s in Icc (0 : ℝ) 1,
-        f (WithLp.toLp 2 (j.insertNth s y)) ∂unitProductMeasure 2 := by
+      ∫ y : Fin 2 → ℝ, (∫ s in Icc (0 : ℝ) 1,
+        f (WithLp.toLp 2 (j.insertNth s y))) ∂unitProductMeasure 2 := by
   let e : (ℝ × (Fin 2 → ℝ)) ≃ᵐ (Fin 3 → ℝ) :=
     (MeasurableEquiv.piFinSuccAbove (fun _ : Fin 3 => ℝ) j).symm
   have he : MeasurePreserving e
       (unitIntervalMeasure.prod (unitProductMeasure 2)) (unitProductMeasure 3) :=
     (measurePreserving_piFinSuccAbove (fun _ : Fin 3 => unitIntervalMeasure) j).symm
   have hc : Continuous (fun x : Fin 3 → ℝ => f (WithLp.toLp 2 x)) :=
-    hf.comp (PiLp.continuous_toLp (p := 2))
+    hf.comp (PiLp.continuous_toLp 2 (fun _ : Fin 3 => ℝ))
   have hint := continuous_integrable_unitProduct 3 _ hc
   have hp : Integrable (fun z => f (WithLp.toLp 2 (e z)))
       (unitIntervalMeasure.prod (unitProductMeasure 2)) :=

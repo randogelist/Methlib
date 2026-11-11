@@ -148,7 +148,8 @@ theorem integral_unitCube_divergence_eq_zero
       L.hasFDerivAt
     have he := congrArg
       (fun D : (Fin 3 → ℝ) →L[ℝ] ℂ => D (Pi.single i 1)) h.fderiv
-    simpa only [Function.comp_def, ContinuousLinearMap.comp_apply, hL] using he
+    simpa only [Function.comp_def, ContinuousLinearMap.comp_apply,
+      ContinuousLinearEquiv.coe_coe, hL] using he
   rw [integral_unitCube_eq_integral_piCube]
   change (∫ x in Icc (0 : Fin 3 → ℝ) (fun _ => 1),
     ∑ i : Fin 3, fderiv ℝ (f i) (L x) (unitVector i)) = 0
@@ -176,6 +177,7 @@ theorem datumFourierIntegrand_periodic {a : Field}
   intro x j
   simp only [datumFourierIntegrand, fourierCharacter_periodic k x j, ha x j]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem datumFourierIntegrand_coordinateDerivative {a : Field}
     (ha : Differentiable ℝ a) (k : Frequency) (i : Fin 3) (x : Vec) :
     fderiv ℝ (datumFourierIntegrand a k i) x (unitVector i) =
@@ -192,7 +194,7 @@ theorem datumFourierIntegrand_coordinateDerivative {a : Field}
       (fourierCharacter (-k) x •
         (Complex.ofRealCLM.comp ((EuclideanSpace.proj i).comp (fderiv ℝ a x))) +
         (a x i : ℂ) • (fourierCharacter (-k) x • fourierPhaseCLM (-k))) x := by
-    simpa only [Function.comp_def, Pi.mul_apply, Complex.ofRealCLM_apply,
+    simpa only [Function.comp_def, Pi.mul_def, Complex.ofRealCLM_apply,
       EuclideanSpace.coe_proj] using hp
   rw [he, hp'.fderiv]
   simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,

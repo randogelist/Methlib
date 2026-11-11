@@ -169,13 +169,23 @@ theorem invariantGalerkinRhs_inner (ν : ℝ) (N : ℕ) (z : InvariantGalerkinSt
   change inner (𝕜 := ℝ) z.val (invariantGalerkinRhs ν N z).val = _
   rw [invariantGalerkinRhs_coe, PiLp.inner_apply]
   simp only [Complex.inner, ← Complex.star_def, Fintype.sum_prod_type]
-  simp_rw [hilbertGalerkinRhs, WithLp.ofLp_toLp]
-  simp_rw [← hilbertCoeff_apply N z.val]
-  simp_rw [mul_comm _ (star _)]
-  exact Finset.sum_coe_sort (cutoffModes N)
-    (fun k => ∑ i : Fin 3,
-      (star (hilbertCoeff N z.val k i) *
-        galerkinRhs ν N (hilbertCoeff N z.val) k i).re)
+  change (∑ k : ↥(cutoffModes N), ∑ i : Fin 3,
+    (galerkinRhs ν N (hilbertCoeff N z.val) k.val i * star (z.val (k, i))).re) = _
+  calc
+    _ = ∑ k : ↥(cutoffModes N), ∑ i : Fin 3,
+        (star (hilbertCoeff N z.val k.val i) *
+          galerkinRhs ν N (hilbertCoeff N z.val) k.val i).re := by
+      apply Finset.sum_congr rfl
+      intro k hk
+      apply Finset.sum_congr rfl
+      intro i hi
+      rw [hilbertCoeff_apply]
+      congr 1
+      exact mul_comm _ _
+    _ = _ := Finset.sum_coe_sort (cutoffModes N)
+      (fun k => ∑ i : Fin 3,
+        (star (hilbertCoeff N z.val k i) *
+          galerkinRhs ν N (hilbertCoeff N z.val) k i).re)
 
 /-- Actual Navier--Stokes dissipation on the invariant finite Fourier space. -/
 theorem invariantGalerkinRhs_dissipative (ν : ℝ) (hν : 0 ≤ ν) (N : ℕ)
@@ -211,9 +221,17 @@ theorem invariantGalerkin_curve_coefficient_deriv
   have hambient := coe_hasDerivAt (invariantGalerkinSubspace N) z _ t hz
   have hcoord :=
     ((EuclideanSpace.proj (𝕜 := ℂ) ((⟨k, hk⟩ : ↥(cutoffModes N)), i)).restrictScalars ℝ).hasFDerivAt.comp_hasDerivAt t hambient
-  simpa only [Function.comp_def, ContinuousLinearMap.coe_restrictScalars,
-    PiLp.proj_apply, invariantGalerkinRhs_coe, hilbertGalerkinRhs,
-    WithLp.ofLp_toLp, hilbertCoeff, extendFiniteState, dif_pos hk] using hcoord
+  change HasDerivAt (fun s => (z s).val ((⟨k, hk⟩ : ↥(cutoffModes N)), i))
+    ((invariantGalerkinRhs ν N (z t)).val ((⟨k, hk⟩ : ↥(cutoffModes N)), i)) t at hcoord
+  rw [invariantGalerkinRhs_coe] at hcoord
+  change HasDerivAt (fun s => (z s).val ((⟨k, hk⟩ : ↥(cutoffModes N)), i))
+    (galerkinRhs ν N (hilbertCoeff N (z t).val) k i) t at hcoord
+  have hfun : (fun s => hilbertCoeff N (z s).val k i) =
+      (fun s => (z s).val ((⟨k, hk⟩ : ↥(cutoffModes N)), i)) := by
+    funext s
+    exact hilbertCoeff_apply N (z s).val ⟨k, hk⟩ i
+  rw [hfun]
+  exact hcoord
 
 /-- Global existence from the exact Fourier integrability, reality and
 solenoidality identities of a physical datum.  These initial Fourier

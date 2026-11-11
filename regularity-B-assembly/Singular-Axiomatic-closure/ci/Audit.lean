@@ -733,4 +733,16 @@ example : ∀ (N : ℕ) (c : FourierCoeff)
 #check @SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
 #print axioms SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
 
+
+open Metric
+
+example : ∀ (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a),
+    (∑ A : Fin 6, physicalEnstrophy (smoothSixChannel A a)) = physicalEnstrophy a :=
+  @SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ"
+#check @SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
+#print axioms SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
+
 end

@@ -54,7 +54,16 @@ theorem integral_real_character_product_zero (k l : Frequency)
         integral_congr_ae (Filter.Eventually.of_forall hid)
       _ = (∫ x in unitCube, fourierCharacter (k + l) x * (z * w)).re +
           (∫ x in unitCube, fourierCharacter (-k + l) x * (star z * w)).re := by
-        rw [integral_add hfirst.re hsecond.re, integral_re hfirst, integral_re hsecond]
+        have hr1 : IntegrableOn (fun x : Vec =>
+            (fourierCharacter (k + l) x * (z * w)).re) unitCube volume :=
+          Complex.reCLM.integrable_comp hfirst
+        have hr2 : IntegrableOn (fun x : Vec =>
+            (fourierCharacter (-k + l) x * (star z * w)).re) unitCube volume :=
+          Complex.reCLM.integrable_comp hsecond
+        rw [integral_add hr1 hr2]
+        exact congrArg₂ (fun r s : ℝ => r + s)
+          (Complex.reCLM.integral_comp_comm hfirst)
+          (Complex.reCLM.integral_comp_comm hsecond)
       _ = 0 := by
         rw [integral_mul_const, integral_mul_const,
           integral_fourierCharacter, integral_fourierCharacter]
@@ -98,11 +107,13 @@ theorem integral_unitCube_sum_mul_sum {ι κ : Type*} (s : Finset ι) (t : Finse
     (∫ x in unitCube, (∑ i ∈ s, f i x) * (∑ j ∈ t, g j x)) =
       ∑ i ∈ s, ∑ j ∈ t, ∫ x in unitCube, f i x * g j x := by
   simp_rw [Finset.sum_mul, Finset.mul_sum]
-  rw [integral_finsetSum s (fun i _ =>
+  rw [integral_finsetSum s (f := fun i x => ∑ j ∈ t, f i x * g j x)
+    (μ := volume.restrict unitCube) (fun i _ =>
     (continuous_finsetSum t (fun j _ => (hf i).mul (hg j))).continuousOn.integrableOn_compact isCompact_unitCube)]
   apply Finset.sum_congr rfl
   intro i _
-  exact integral_finsetSum t (fun j _ =>
+  exact integral_finsetSum t (f := fun j x => f i x * g j x)
+    (μ := volume.restrict unitCube) (fun j _ =>
     ((hf i).mul (hg j)).continuousOn.integrableOn_compact isCompact_unitCube)
 
 theorem PHYSICAL_CHANNEL_COMPONENT_ORTHOGONALITY (N : ℕ) (A B : Fin 6)
@@ -155,12 +166,16 @@ theorem integral_gradientSquareDensity {v : Field} (hv : ContDiff ℝ ∞ v) :
       ∑ i : Fin 3, ∑ j : Fin 3,
         ∫ x in unitCube, (coordinateDerivative v i x j) ^ 2 := by
   unfold gradientSquareDensity
-  rw [integral_finsetSum Finset.univ (fun i _ =>
+  rw [integral_finsetSum Finset.univ
+    (f := fun i x => ∑ j : Fin 3, (coordinateDerivative v i x j) ^ 2)
+    (μ := volume.restrict unitCube) (fun i _ =>
     (continuous_finsetSum Finset.univ (fun j _ =>
       (coordinateDerivative_component_continuous hv i j).pow 2)).continuousOn.integrableOn_compact isCompact_unitCube)]
   apply Finset.sum_congr rfl
   intro i _
-  exact integral_finsetSum Finset.univ (fun j _ =>
+  exact integral_finsetSum Finset.univ
+    (f := fun j x => (coordinateDerivative v i x j) ^ 2)
+    (μ := volume.restrict unitCube) (fun j _ =>
     ((coordinateDerivative_component_continuous hv i j).pow 2).continuousOn.integrableOn_compact isCompact_unitCube)
 
 theorem integral_coordinateDerivative_square_sum_channels (N : ℕ) (a : FourierCoeff)
