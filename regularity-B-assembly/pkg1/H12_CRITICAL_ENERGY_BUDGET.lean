@@ -202,8 +202,11 @@ theorem energy_bound_of_deriv_nonpos_below_barrier
     · simp only [zero_add]
       linarith
     · intro s
-      simpa using (hasDerivAt_const s H₀).add
-        (((hasDerivAt_id s).add_const 1).const_mul ε)
+      have hraw : HasDerivAt (fun x : ℝ => H₀ + ε * (x + 1))
+          (0 + ε * 1) s :=
+        (hasDerivAt_const s H₀).add
+          (((hasDerivAt_id s).add_const 1).const_mul ε)
+      simpa only [zero_add, mul_one] using hraw
     · intro s hs heq
       have hmul : ε * (s + 1) ≤ ε * (T + 1) :=
         mul_le_mul_of_nonneg_left (by linarith [hs.2]) hε.le

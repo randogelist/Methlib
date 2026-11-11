@@ -49,10 +49,8 @@ theorem tripleProductOne_norm_eq
     (f g h : Lp ℝ 3 μ) :
     ‖tripleProductOne μ f g h‖ =
       ‖tripleProduct μ f g h‖ := by
-  rw [Lp.norm_def, Lp.norm_def]
-  apply congrArg ENNReal.toReal
-  rw [eLpNorm_congr_ae
-    (MemLp.coeFn_toLp (tripleProduct_memLp_one μ f g h))]
+  unfold tripleProductOne
+  rw [Lp.norm_toLp, Lp.norm_def]
   simp [pFinal]
 
 /-- The direct `L^1` three-factor Hölder estimate. -/
@@ -173,3 +171,4 @@ theorem H12_CRITICAL_PAIRING_INTEGRAL :
   exact criticalHolder_of_integralRealization R
 
 end H12CriticalPairingIntegral
+

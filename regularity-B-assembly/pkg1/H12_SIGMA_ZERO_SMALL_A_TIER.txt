@@ -1,0 +1,232 @@
+GOODWORKFLOWFRONTIER::REGULARITY_B_ASSEMBLY::PKG1::H12_SIGMA_ZERO_SMALL
+
+MODE=A_TIER_DERIVATION
+NEW_TARGET_STATUS=A_TIER_CANDIDATE
+EXTERNAL_COMPILE=PENDING
+THEOREM_LEVEL_AXIOM_AUDIT=PENDING
+ACTUAL_PERIODIC_NSE_GLOBAL_ROOT=OPEN
+UNCONDITIONAL_PHYSICAL_NSE_CLOSURE=NOT_ESTABLISHED
+LOCAL_LEAN_EXECUTION=NONE
+
+1. EXACT FORMAL DOMAIN
+
+  Mode3 = Fin 3 -> Z; CVec3 = EuclideanSpace C (Fin 3).
+  lambda(k) = 2*pi*|k|.
+  Q(a) = sum'_k lambda(k)*|a(k)|^2; N(a) = sqrt(Q(a)).
+
+  RealH12Datum consists of a coefficient map a : Mode3 -> CVec3 with:
+    a(0) = 0;
+    a(k) in solenoidalSubmodule(k), for every k;
+    Summable (k |-> lambda(k)*|a(k)|^2);
+    a(-k)_i = conjugate(a(k)_i), for every k and i.
+
+  Real-valuedness is conjugation symmetry; individual coefficients need
+  not be real. This carrier is a concrete weighted Fourier sequence class.
+  Physical Fourier synthesis, physical Sobolev identification, and an NSE
+  evolution are not fields of RealH12Datum.
+
+  smallRadius(nu,C3) = nu/(8*C3^3).
+  Small(nu,C3,a) :=
+    0 < nu and 0 < C3 and Q(a) < smallRadius(nu,C3)^2.
+  SmallDatum(nu,C3) = {a : RealH12Datum // Small(nu,C3,a)}.
+
+  C3 is a numerical parameter here. Existence of a physical periodic
+  Sobolev certificate with constant C3 remains a separate theorem.
+
+2. CONCRETE CARRIER ENDPOINTS
+
+  H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS:
+    For nu,C3 > 0, SmallDatum(nu,C3) is nonempty.
+    Heat multiplication exp(-nu*lambda(k)^2*t), t >= 0, preserves Small.
+    Every finite cutoff S with (-k in S iff k in S) preserves Small.
+
+  Auxiliary conclusions:
+    Q(a) >= 0; N(a) >= 0; N(a)^2 = Q(a).
+    Small(nu,C3,a) implies N(a) < nu/(8*C3^3).
+    Q(heat(a)) <= Q(a); Q(cutoff_S(a)) <= Q(a).
+
+  H12SmallScaling.H12_SMALL_SCALING:
+    Q(r*a) = r^2*Q(a), for real r.
+    |r| <= 1 and Small(nu,C3,a) imply Small(nu,C3,r*a).
+    For nu,C3 > 0, a nonzero Small(nu,C3,a) exists.
+
+  H12SmallScaling.criticalNorm_scale:
+    N(r*a) = |r|*N(a).
+
+  H12SmallScaling.exists_small_positive_scale:
+    For every RealH12Datum a and nu,C3,epsilon > 0,
+    there exists r with 0 < r < epsilon and Small(nu,C3,r*a).
+
+  The explicit nonzero datum has support at +e_1 and -e_1 and equal
+  transverse real coefficients in the e_2 direction. Positive rescaling
+  supplies nonzero data inside every positive smallRadius.
+
+3. COEFFICIENT L2 EMBEDDING AND DEFINITENESS
+
+  H12L2CoefficientEmbedding.physical_frequency_gap:
+    k != 0 implies 2*pi <= lambda(k).
+
+  H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING:
+    For every a : RealH12Datum,
+      Summable (k |-> |a(k)|^2),
+      sum'_k |a(k)|^2 <= Q(a)/(2*pi),
+      Q(a) = 0 iff (forall k, a(k) = 0).
+
+  H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff:
+    N(a) = 0 iff (forall k, a(k) = 0).
+
+  Mean zero removes the zero-frequency obstruction. These conclusions
+  concern coefficient sums. Physical L2 synthesis, real-valuedness, weak
+  divergence zero, and norm identification remain separate endpoints.
+
+4. SCALAR CRITICAL ENERGY THEOREMS
+
+  H,D,E,d : R -> R; nu,C > 0; theta < 1; T,H0 >= 0.
+  kappa = 2*(1-theta)*nu > 0.
+
+  H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA:
+    H,D continuous on [0,T]; H,D >= 0 on [0,T];
+    H'(t) = d(t) for 0 <= t < T;
+    H(0) <= H0;
+    C*sqrt(H0) <= theta*nu;
+    d(t)+2*nu*D(t) <= 2*C*sqrt(H(t))*D(t), 0 <= t < T;
+    imply, for every 0 <= t <= T,
+      H(t)+kappa*integral_0^t D(s) ds <= H0.
+
+  Persistence H(t) <= H0 is derived by a barrier argument, not assumed.
+  Derivatives at t=0 are required; derivatives at t=T are not.
+
+  H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA:
+    Add E continuous on [0,T] and E(t)^2 <= H(t)*D(t). Then
+      integral_0^T E(t)^2 dt <= H0^2/[2*(1-theta)*nu].
+
+  H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA:
+    The preceding implication holds uniformly for any indexed family
+    (H_n,D_n,E_n,d_n) with common nu,C,theta,T,H0.
+
+  H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY:
+    An integrated energy inequality H+kappa*integral D <= H0,
+    nonnegative H,D, continuous D,E, and E^2 <= H*D imply
+      H(t) <= H0; integral_0^T D <= H0/kappa;
+      integral_0^T E^2 <= H0^2/kappa.
+
+  H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY:
+    The preceding square budget holds uniformly in an arbitrary index.
+
+5. CONCRETE ADMISSION TO THE SCALAR BUDGET
+
+  H12SmallClassBudget.small_critical_coefficient_le:
+    Small(nu,C3,a) implies C3^3*sqrt(Q(a)) <= nu/4.
+
+  H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY:
+    Given a : RealH12Datum with Small(nu,C3,a), put H0=Q(a), C=C3^3,
+    theta=1/4. For every indexed scalar family satisfying the continuity,
+    nonnegativity, derivative, initial comparison, differential law, and
+    interpolation premises of Section 4,
+      integral_0^T E_n(t)^2 dt
+        <= Q(a)^2/[2*(1-1/4)*nu] = 2*Q(a)^2/(3*nu), for every n.
+
+  H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET:
+    Under exactly these premises, there exists a nonnegative common M
+    bounding every integral_0^T E_n^2. The constructed witness is
+      M = Q(a)^2/[2*(1-1/4)*nu].
+
+  This bound is independent of the index n and terminal time T.
+  The hypotheses must hold on the interval under consideration.
+  Initial smallness follows from membership in Small. Persistence and
+  existence of the scalar budget are conclusions, not input premises.
+
+  Intended physical substitutions:
+    H_n(t) = ||u_n(t)||_{dot H^(1/2)}^2,
+    D_n(t) = ||u_n(t)||_{dot H^(3/2)}^2,
+    E_n(t) = ||grad u_n(t)||_2^2,
+    d_n(t) = d/dt H_n(t).
+
+  Sections 4-5 do not construct u_n or prove these substitutions.
+  Scalar conclusions alone supply neither a physical Galerkin estimate,
+  AX6 admission, nor continuum regularity.
+
+6. HISTORICAL AND CURRENT EVIDENCE
+
+  Historical import surface: LEAN_PASSED_STACK.lean.
+  Historical exact source/evidence ledger: LEAN_PASSED_STACK.txt.
+  Historical module count: 10.
+  Historical compiler: native Windows Lean 4.33.0.
+  Historical approved axioms: propext, Classical.choice, Quot.sound.
+
+  Historical certification remains scoped to the exact declarations and
+  premises recorded in that ledger. PERIODIC_HHALF_L3_COMPONENT_COMPILER
+  compiles a supplied scalar certificate with C3=9*Cscalar; it does not
+  prove that scalar certificate.
+
+  Aggregate: H12_SIGMA_ZERO_SMALL_PACKAGE.lean.
+  Every newly prepared target in Sections 2-5: A_TIER_CANDIDATE.
+  Additional frontier modules H12_CRITICAL_PAIRING_INTEGRAL,
+  H12_POINTWISE_CONVECTION_SQUARE, and
+  SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER: A_TIER_CANDIDATE until matched.
+  Preparation/import/scheduling alone establishes no A_TIER promotion.
+
+  Promotion criterion:
+    exact source hashes + matching external compiler PASS + exact theorem
+    signatures + theorem-level axiom audit without sorryAx or unapproved
+    axioms. Evidence from another source revision does not suffice.
+
+7. EXTERNAL CACHED REPLAY
+
+  Compiler: leanprover/lean4:v4.33.0.
+  Mathlib commit: db584cd6d46c92f209a44c0f1c829460d327499d.
+  Required: existing direct native lean.exe; clean pinned Mathlib
+  checkout; cached Mathlib and dependency artifacts.
+
+  Native Windows commands:
+    call run.cmd
+    call run.cmd -MathlibCache "C:\path\to\cached\mathlib4"
+    call run.cmd -MathlibCache "C:\path\to\cached\mathlib4" -LeanExe "C:\path\to\lean.exe"
+
+  Optional defaults: H12_MATHLIB_CACHE; H12_LEAN_EXE.
+  run.cmd delegates to support/run.ps1. Compiler/cache validation,
+  compilation, signatures, and theorem-level axiom audits are recorded in
+  a unique evidence/<run-id>/ directory. Dependency installation/download
+  is not a runner operation. No local Lean execution is authorized here.
+
+8. OPEN PHYSICAL ENDPOINTS
+
+  A. Fourier synthesis and norm identification:
+     RealH12Datum -> real, mean-zero, distributionally divergence-free
+     u0 on T^3; Q(a)=||u0||_{dot H^(1/2)}^2; physical L2 realization;
+     initial cutoff convergence in the critical norm.
+
+  B. PERIODIC_RIESZ_HALF_L2_L3:
+     construct and bound Lambda^(-1/2):L2_0(T^3)->L3(T^3);
+     prove the component reconstructions. The HLS compiler assumes these
+     certificates and compiles them to C3=9*CHLS.
+
+  C. Actual periodic NSE Galerkin linkage:
+     construct finite trajectories from the present critical data;
+     establish physical/spectral derivative and pairing identities;
+     derive H_n'+2*nu*D_n <= 2*C3^3*sqrt(H_n)*D_n;
+     establish E_n^2 <= H_n*D_n and H_n(0) <= Q(a).
+
+  D. Continuum passage and initial trace:
+     compactness with nonlinear convergence; distributional NSE and
+     pressure; strong H^(1/2) trace at t=0; global critical dissipation;
+     uniqueness in an explicitly specified physical solution class;
+     positive-time smoothing and continuation.
+
+  H12_LOCAL_CONTINUATION is an unresolved analytic endpoint label, not a
+  proved theorem supplied by this package. Finite Galerkin existence
+  elsewhere in the repository does not discharge A-D by itself.
+
+  Physical target, not established here:
+    nu>0; u0 real, mean-zero, divergence-free on T^3;
+    ||u0||_{dot H^(1/2)} < nu/(8*C3^3);
+    actual periodic Sobolev constant C3;
+    imply a unique global critical NSE evolution
+      u in C([0,infinity);H^(1/2)) intersect
+           L2((0,infinity);H^(3/2)),
+    smooth for t>0. Smooth initial data additionally permit regularity
+    through t=0 after the corresponding bootstrap is discharged.
+
+  Mathematical derivation: H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt.
+  The formal carrier and scalar edges do not promote that physical target
+  to A_TIER, FORMAL_CLOSURE, or UNCONDITIONAL_CLOSURE.

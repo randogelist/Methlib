@@ -1,6 +1,79 @@
 # regularity-B-assembly / pkg1
 
-Critical periodic \(H^{1/2}\) Navier–Stokes regularity assembly.
+Periodic critical \(H^{1/2}\) coefficient class and Navier–Stokes estimate assembly.
+
+| Scope | Status |
+|---|---|
+| Historical ten-module native-passed stack | `A_TIER`, exact ledger scope |
+| New carrier, scaling, coefficient embedding, scalar budget | `A_TIER_CANDIDATE`, external evidence pending |
+| Pairing/convection/HLS frontier | `A_TIER_CANDIDATE`, external evidence pending |
+| Actual physical small-data global NSE theorem | Open formal endpoint |
+
+Exact statement ledger: [H12_SIGMA_ZERO_SMALL_A_TIER.txt](H12_SIGMA_ZERO_SMALL_A_TIER.txt).
+
+## Concrete small coefficient class
+
+For \(k\in\mathbb Z^3\), set \(\lambda_k=2\pi|k|\). `RealH12Datum` contains a sequence \(a_k\in\mathbb C^3\) satisfying
+
+\[
+a_0=0,\quad k\cdot a_k=0,\quad a_{-k}=\overline{a_k},\quad
+Q(a):=\sum_k\lambda_k|a_k|^2<\infty.
+\]
+
+For \(\nu,C_3>0\),
+
+\[
+\operatorname{Small}(\nu,C_3,a)
+\iff Q(a)<\left(\frac{\nu}{8C_3^3}\right)^2,
+\qquad N(a)=\sqrt{Q(a)}.
+\]
+
+`C3` is a numerical parameter. Existence of a physical Sobolev certificate with this constant remains a separate theorem.
+
+| Candidate module | Exact conclusion |
+|---|---|
+| `H12_SIGMA_ZERO_SMALL_CLASS` | Nonempty class; heat and symmetric finite cutoffs preserve smallness |
+| `H12_SMALL_SCALING` | \(Q(ra)=r^2Q(a)\), \(N(ra)=|r|N(a)\); arbitrarily small positive scalings; nonzero small data |
+| `H12_L2_COEFFICIENT_EMBEDDING` | \(\lambda_k\ge2\pi\) for \(k\ne0\); \(\sum_k|a_k|^2\le Q(a)/(2\pi)\); \(Q(a)=0\iff a=0\) |
+| `H12_CRITICAL_ENERGY_BUDGET` | Scalar critical differential inequality and initial smallness imply an integrated bound and square-enstrophy budget |
+| `H12_SMALL_CLASS_BUDGET` | Concrete class membership supplies initial smallness for the uniform scalar budget |
+
+These coefficient conclusions do not yet construct physical Fourier synthesis or identify a physical Sobolev norm.
+
+## Exact scalar budget
+
+Let \(H,D,E\) be continuous on \([0,T]\), with \(H,D\ge0\), \(H'=d\) on \([0,T)\), and
+
+\[
+H(0)\le H_0,\quad C\sqrt{H_0}\le\theta\nu,\quad
+d+2\nu D\le2C\sqrt H\,D,\quad E^2\le HD,
+\]
+
+where \(\nu,C>0\), \(\theta<1\), and \(T,H_0\ge0\). The candidate theorems derive
+
+\[
+H(t)+2(1-\theta)\nu\int_0^tD(s)\,ds\le H_0,
+\qquad
+\int_0^TE(t)^2\,dt\le\frac{H_0^2}{2(1-\theta)\nu}.
+\]
+
+Persistence follows from a barrier argument. Existence of a budget is a conclusion. `Small ν C3 a` supplies \(C_3^3\sqrt{Q(a)}\le\nu/4\), so the indexed specialization \(H_0=Q(a)\), \(C=C_3^3\), \(\theta=1/4\) gives
+
+\[
+\forall n,\qquad\int_0^TE_n(t)^2\,dt\le\frac{2Q(a)^2}{3\nu}.
+\]
+
+The bound is independent of the index and terminal time. Continuity, nonnegativity, the derivative and critical differential law, the initial comparison, and interpolation remain explicit hypotheses on each interval.
+
+The intended physical identifications
+
+\[
+H_n=\|u_n\|_{\dot H^{1/2}}^2,\quad
+D_n=\|u_n\|_{\dot H^{3/2}}^2,\quad
+E_n=\|\nabla u_n\|_2^2
+\]
+
+remain Galerkin obligations. The scalar declarations construct no NSE trajectory.
 
 ## Native-passed overlay
 
@@ -115,27 +188,51 @@ I_{\rm abs}\le\frac{\nu}{4}D^2.
 
 This HLS compiler remains an A-tier candidate until matching external compiler and theorem-audit evidence is supplied.
 
-## Remaining exact seams
+## Remaining physical endpoints
 
-```text
-PERIODIC_RIESZ_HALF_L2_L3
-H12_LOCAL_CONTINUATION
-```
+1. **Fourier realization:** physical real, mean-zero, weakly divergence-free data; \(Q(a)=\|u_0\|_{\dot H^{1/2}}^2\); physical \(L^2\) realization and critical cutoff convergence.
+2. **Periodic Sobolev endpoint:** construct and bound \(\Lambda^{-1/2}:L^2_0(\mathbb T^3)\to L^3(\mathbb T^3)\), with the required reconstructions. The HLS compiler assumes these certificates.
+3. **Physical Galerkin linkage:** actual finite trajectories from critical data; critical differential law; spectral interpolation; pairing identities; initial comparison.
+4. **Continuum evolution:** compactness and nonlinear convergence; physical NSE and pressure equations; strong critical initial trace; global dissipation; uniqueness in an explicitly specified class; positive-time smoothing and continuation.
 
-These imply the final target
+`H12_LOCAL_CONTINUATION` is an unresolved analytic endpoint label. Finite Galerkin existence elsewhere does not itself discharge these obligations.
 
-```text
-H12_SIGMA_SMALL_GLOBAL_REGULARITY
-```
+The physical target is a unique global critical periodic NSE evolution for real, mean-zero, divergence-free data satisfying
 
-with threshold \(\nu/(8C_3^3)\).
+\[
+\|u_0\|_{\dot H^{1/2}}<\frac{\nu}{8C_3^3},\qquad
+u\in C([0,\infty);H^{1/2})\cap L^2((0,\infty);H^{3/2}),
+\]
+
+smooth for positive time. Its mathematical derivation is recorded in [H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt](H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt). The candidate carrier/scalar package does not promote that physical root to `A_TIER`, `FORMAL_CLOSURE`, or `UNCONDITIONAL_CLOSURE`.
 
 ## Source-layout note
 
 The files preserve their original bare imports. Add this directory to `LEAN_PATH`, or copy the files into the project source root, when replaying the native package builds.
 
-## Native toolchain
+## Aggregate and external cached replay
 
-Primary certified runs use native Windows Lean 4.33.0 and cached Mathlib/prior A-tier artifacts.
+```lean
+import H12_SIGMA_ZERO_SMALL_PACKAGE
+```
 
-No unconditional three-dimensional Navier–Stokes global-regularity claim is made by this directory.
+The aggregate includes historical and candidate declarations. Import inclusion is not promotion. `H12_CRITICAL_PAIRING_INTEGRAL`, `H12_POINTWISE_CONVECTION_SQUARE`, and `SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER` require matching external evidence alongside the new modules.
+
+| Dependency | Pin |
+|---|---|
+| Lean | `leanprover/lean4:v4.33.0` |
+| Mathlib | `db584cd6d46c92f209a44c0f1c829460d327499d` |
+| Approved theorem axioms | `propext`, `Classical.choice`, `Quot.sound` |
+
+Native Windows replay, using existing cached dependencies:
+
+```bat
+call run.cmd
+call run.cmd -MathlibCache "C:\path\to\cached\mathlib4"
+call run.cmd -MathlibCache "C:\path\to\cached\mathlib4" -LeanExe "C:\path\to\lean.exe"
+```
+
+Optional defaults: `H12_MATHLIB_CACHE`, `H12_LEAN_EXE`. `run.cmd` delegates to `support/run.ps1`; compiler/cache validation, compilation, signature checks, and theorem-level axiom audits are recorded in a unique `evidence/<run-id>/` directory. The runner requires a clean pinned cached Mathlib checkout and a direct native compiler; dependency installation/download is not performed.
+
+Promotion requires matching source hashes, external compiler success, exact signatures, and theorem-level audits without `sorryAx` or unapproved axioms. Prepared code remains `A_TIER_CANDIDATE` until that evidence exists. No local Lean execution is part of this preparation.
+

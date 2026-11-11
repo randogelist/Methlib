@@ -54,8 +54,18 @@ jobs:
       - name: Check proof admission policy and record source hashes
         run: |
           set -euo pipefail
+          python3 -m unittest discover -s ci -p 'test_*.py' -v 2>&1 | tee evidence/audit-checker-tests.log
           python3 ci/check_sources.py | tee evidence/source-policy.json
           sha256sum lake-manifest.json > evidence/lockfile-before.sha256
+
+      - name: Parse the native Windows runner
+        shell: pwsh
+        run: |
+          $parseTokens = $null
+          $parseErrors = $null
+          $null = [System.Management.Automation.Language.Parser]::ParseFile((Join-Path (Get-Location) 'support/run.ps1'), [ref]$parseTokens, [ref]$parseErrors)
+          if ($parseErrors.Count -ne 0) { $parseErrors | Format-List; exit 1 }
+          'POWERSHELL_PARSE=PASS' | Tee-Object -FilePath evidence/powershell-parse.txt
 
       - name: Reserve disk space for cached dependency objects
         run: |
@@ -131,6 +141,7 @@ jobs:
           set -euo pipefail
           lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
           python3 ci/check_axioms.py evidence/axioms.log ci/expected_axioms.json | tee evidence/audit.json
+          sha256sum --check evidence/sources.sha256 | tee evidence/source-recheck.log
 
       - name: Upload the tested source
         if: always()

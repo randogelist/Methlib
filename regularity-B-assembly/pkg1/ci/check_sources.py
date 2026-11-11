@@ -91,10 +91,7 @@ def main() -> int:
             name = match.group(1)
             record = {"path": relative.as_posix(), "name": name}
             custom_axioms.append(record)
-            if True:
-                errors.append(f"unapproved axiom declaration: {record}")
-    if len(custom_axioms) > 1:
-        errors.append("more than one custom axiom declaration")
+            errors.append(f"unapproved axiom declaration: {record}")
     evidence = root / "evidence"
     evidence.mkdir(exist_ok=True)
     (evidence / "sources.json").write_text(json.dumps(sources, indent=2) + "\n", encoding="utf-8")

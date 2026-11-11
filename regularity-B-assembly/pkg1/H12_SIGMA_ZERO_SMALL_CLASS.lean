@@ -86,7 +86,9 @@ def zeroDatum : RealH12Datum where
     intro k
     exact (solenoidalSubmodule k).zero_mem
   hhalfSummable := by
-    simp [hhalfTerm]
+    change Summable (fun k : Mode3 => hhalfTerm (0 : Mode3 → CVec3) k)
+    simpa [hhalfTerm] using
+      (summable_zero : Summable (fun _ : Mode3 => (0 : ℝ)))
   reality := by
     intro k i
     simp
@@ -112,8 +114,10 @@ theorem heatCoeff_reality (ν t : ℝ) (a : Mode3 → CVec3)
   change
     ((heatFactor ν t (-k) : ℝ) : ℂ) * a (-k) i =
       star (((heatFactor ν t k : ℝ) : ℂ) * a k i)
-  rw [ha k i]
-  simp [heatFactor, freq_neg, mul_comm]
+  have hf : heatFactor ν t (-k) = heatFactor ν t k := by
+    simp only [heatFactor, freq_neg]
+  rw [hf, ha k i]
+  simp only [Complex.star_def, map_mul, Complex.conj_ofReal]
 
 /-- Heat evolution in the concrete real Fourier carrier. -/
 def heatRealDatum (ν t : ℝ) (hν : 0 ≤ ν) (ht : 0 ≤ t)
