@@ -49,7 +49,7 @@ theorem intervalIntegral_sq_le_length_mul_integral_sq
   rw [hint] at hnonneg
   have hscaled : L * A ^ 2 ≤ L * (L * (∫ r in a..b, (f r) ^ 2)) := by
     nlinarith
-  exact (mul_le_mul_left hL).mp hscaled
+  exact le_of_mul_le_mul_left hscaled hL
 
 theorem intervalIntegral_norm_sq_le_length_mul_integral_norm_sq
     {f : ℝ → ℂ} {a b : ℝ} (hab : a ≤ b) (hf : ContinuousOn f (Icc a b)) :

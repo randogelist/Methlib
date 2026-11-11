@@ -1655,7 +1655,7 @@ example : ∀ {α : Type*} {l : Filter α} [l.NeBot]
     (hbound : ∀ n, ‖u n‖ ≤ B)
     (hcoeff : ∀ k i, Tendsto (fun n => (u n).val k i) l (𝓝 (c k i))),
     ∃ hc : Memℓp (sobolevWeightedCoeff s c) 2,
-      ‖(⟨c, hc⟩ : TorusSobolev s)‖ ≤ B :=
+      @norm (TorusSobolev s) inferInstance ⟨c, hc⟩ ≤ B :=
   @SingularClosure.torusSobolev_limit_mem_and_norm_le
 
 #eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolev_limit_mem_and_norm_le"

@@ -24,7 +24,7 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 | 4 | `GALERKIN_ENERGY_IDENTITY` | !=! A_TIER |
 | 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | !=! A_TIER |
 | 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !=! A_TIER |
-| 7 | `AX6_UNIFORM_STRONG_BOUNDS` | A_TIER_CANDIDATE |
+| 7 | `AX6_UNIFORM_STRONG_BOUNDS` | !=! A_TIER |
 | 8 | `GALERKIN_GLOBAL_STRONG_LIMIT` | A_TIER_CANDIDATE |
 | 9 | `GLOBAL_STRONG_SMOOTH_BOOTSTRAP` | A_TIER_CANDIDATE |
 | 10 | `PERIODIC_PRESSURE_RECOVERY` | A_TIER_CANDIDATE |
@@ -116,4 +116,10 @@ Current independently verified endpoint total: **6/11**, endpoints 1 through 6. 
 
 All eleven endpoint theorem bodies are now prepared. `GlobalStrongLimit.lean` constructs the actual compatible canonical subsequence, all-order Hilbert trajectories and derivatives, the initial trace, nonlinear convergence and physical convection coefficients. `GlobalSmoothBootstrap.lean` derives all temporal orders and literal joint spacetime smoothness. `PeriodicPressureRecovery.lean` constructs actual normalized smooth pressure and the literal pointwise equation, including its exact quadratic Fourier formula. `Root.lean` composes the endpoint theorems into precisely `AX6Statement -> Fefferman_B_0_adjust`.
 
-Prepared source does not establish A_TIER or formal closure. Six endpoints have matching external compiler and axiom-audit evidence; endpoints 7--11 remain candidates. AX6 itself remains explicitly unresolved.
+Prepared source does not establish A_TIER or formal closure. Seven endpoints have matching external compiler and axiom-audit evidence; endpoints 8--11 remain candidates. AX6 itself remains explicitly unresolved.
+
+## Verified actual strong bounds
+
+Commit `9fb42f2774aee5b966ba6fa884a1f59d7dff49dd`, run https://github.com/randogelist/Methlib/actions/runs/42954627771: endpoint 7 compiled and passed its exact-type and standard-only theorem axiom audit. The common cutoff-independent bound controls actual H1, H2 and H0 time-derivative norms, with actual Bochner memberships and the Hilbert derivative including time zero. The original AX6 statement is the only analytic admission. The inspected checkpoint source hashes match.
+
+Current verified total: **7/11**, endpoints 1 through 7. Endpoints 8--11 remain candidates. `run.cmd` supplies the native Windows cached Lean 4.33.0 build and exact-type axiom audit; no local Lean execution was performed during preparation.

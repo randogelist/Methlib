@@ -30,14 +30,14 @@ local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
 theorem fourierVectorSequence_summable_sq (c : FourierVectorSequence) :
     Summable (fun ki : FourierIndex => ‖c ki‖ ^ 2) := by
   have h := (lp.memℓp c).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal)
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using h
+  simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h
 
 /-- The component sequence is square summable by restriction to one product fiber. -/
 def fourierVectorComponent (c : FourierVectorSequence) (i : Fin 3) : FourierSequenceL2 :=
   ⟨fun k => c (k, i), by
     apply memℓp_gen
     have h := (fourierVectorSequence_summable_sq c).prod_symm.prod_factor i
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using h⟩
+    simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h⟩
 
 @[simp]
 theorem fourierVectorComponent_apply (c : FourierVectorSequence) (i : Fin 3)
@@ -60,7 +60,7 @@ theorem fourierVectorComponent_norm_sq (c : FourierVectorSequence) (i : Fin 3) :
     ‖fourierVectorComponent c i‖ ^ 2 = ∑' k : Frequency, ‖c (k, i)‖ ^ 2 := by
   have h := lp.norm_rpow_eq_tsum (p := (2 : ℝ≥0∞)) (by norm_num)
     (fourierVectorComponent c i)
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, fourierVectorComponent_apply] using h
+  simpa only [ENNReal.toReal_ofNat, Real.rpow_two, fourierVectorComponent_apply] using h
 
 theorem fourierVectorComponent_sum_norm_sq (c : FourierVectorSequence) :
     (∑ i : Fin 3, ‖fourierVectorComponent c i‖ ^ 2) = ‖c‖ ^ 2 := by
@@ -76,7 +76,7 @@ theorem fourierVectorComponent_sum_norm_sq (c : FourierVectorSequence) :
     _ = ∑' ki : FourierIndex, ‖c ki‖ ^ 2 := hs.tsum_prod.symm
     _ = ‖c‖ ^ 2 := by
       have h := lp.norm_rpow_eq_tsum (p := (2 : ℝ≥0∞)) (by norm_num) c
-      simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using h.symm
+      simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h.symm
 
 /-- Actual inverse Fourier synthesis into normalized physical torus L². -/
 def fourierVectorL2Synthesis (c : FourierVectorSequence) : TorusVectorL2 :=

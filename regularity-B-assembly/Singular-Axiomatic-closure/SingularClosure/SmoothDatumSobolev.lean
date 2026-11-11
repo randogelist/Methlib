@@ -144,7 +144,7 @@ def smoothDatumSobolev (s : ℕ) (a : Field)
 
 theorem smoothDatumSobolev_coeff (s : ℕ) (a : Field)
     (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) :
-    (smoothDatumSobolev s a ha hp : FourierCoeff) = datumFourierCoeff a := rfl
+    (smoothDatumSobolev s a ha hp).val = datumFourierCoeff a := rfl
 
 end
 

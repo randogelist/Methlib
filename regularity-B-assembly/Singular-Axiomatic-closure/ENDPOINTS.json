@@ -97,9 +97,17 @@
     {
       "number": 7,
       "name": "AX6_UNIFORM_STRONG_BOUNDS",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "9fb42f2774aee5b966ba6fa884a1f59d7dff49dd",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42954627771",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
+      "source_file": "SingularClosure/StrongSobolevRealization.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 8,
@@ -134,6 +142,6 @@
     "AX6"
   ],
   "root_completed": false,
-  "completed_endpoint_count": 6,
+  "completed_endpoint_count": 7,
   "prepared_endpoint_count": 11
 }

@@ -29,7 +29,8 @@ theorem torusSobolevCoeff_apply (s : ℕ) (k : Frequency) (i : Fin 3)
 
 theorem torusSobolevCoeff_continuous (s : ℕ) (k : Frequency) (i : Fin 3) :
     Continuous (fun c : TorusSobolev s => c.val k i) := by
-  simpa only [torusSobolevCoeff_apply] using (torusSobolevCoeff s k i).continuous
+  exact (torusSobolevCoeff s k i).continuous.congr
+    (fun c => torusSobolevCoeff_apply s k i c)
 
 theorem torusSobolev_weighted_coeff_tendsto
     {α : Type*} {l : Filter α} (s : ℕ) (u : α → TorusSobolev s) (c : FourierCoeff)
@@ -48,7 +49,7 @@ theorem torusSobolev_limit_mem_and_norm_le
     (hbound : ∀ n, ‖u n‖ ≤ B)
     (hcoeff : ∀ k i, Tendsto (fun n => (u n).val k i) l (𝓝 (c k i))) :
     ∃ hc : Memℓp (sobolevWeightedCoeff s c) 2,
-      ‖(⟨c, hc⟩ : TorusSobolev s)‖ ≤ B := by
+      @norm (TorusSobolev s) inferInstance ⟨c, hc⟩ ≤ B := by
   have hrepr : ∀ n, ‖torusSobolevRepr s (u n)‖ ≤ B := by
     intro n
     simpa only [(torusSobolevRepr s).norm_map] using hbound n

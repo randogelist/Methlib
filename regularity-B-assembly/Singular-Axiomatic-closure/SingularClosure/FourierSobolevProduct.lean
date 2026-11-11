@@ -45,7 +45,7 @@ theorem sobolevDivergenceProductCoeff_apply (r : ℕ)
 theorem sobolev_tensor_coefficient_summable (r : ℕ)
     (c d : TorusSobolev (r + 2)) (k : Frequency) (j i : Fin 3) :
     Summable (fun p : Frequency => c.val p j * d.val (k - p) i) := by
-  exact fourierTensorCoefficient_summable k j i
+  simpa only [torusSobolevLower_coeff] using fourierTensorCoefficient_summable k j i
     (torusSobolevLower 0 (r + 2) (Nat.zero_le _) c)
     (torusSobolevLower 0 (r + 2) (Nat.zero_le _) d)
 
@@ -151,14 +151,14 @@ theorem SOBOLEV_DIVERGENCE_PRODUCT_MEM_NORM_BOUND (r : ℕ) :
   have hc : Memℓp (sobolevWeightedCoeff r (sobolevDivergenceProductCoeff r c d)) 2 := by
     apply memℓp_gen' (C := C * ‖c‖ ^ 2 * ‖d‖ ^ 2)
     intro S
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using hbound c d S
+    simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using hbound c d S
   refine ⟨hc, ?_⟩
   change ‖torusSobolevRepr r (⟨sobolevDivergenceProductCoeff r c d, hc⟩ : TorusSobolev r)‖ ≤ _
   apply lp.norm_le_of_forall_sum_le (p := (2 : ℝ≥0∞)) (by norm_num) (by positivity)
   intro S
   have hsquare : (Real.sqrt C * ‖c‖ * ‖d‖) ^ 2 = C * ‖c‖ ^ 2 * ‖d‖ ^ 2 := by
     rw [mul_pow, mul_pow, Real.sq_sqrt hC.le]
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, hsquare,
+  simpa only [ENNReal.toReal_ofNat, Real.rpow_two, hsquare,
     torusSobolevRepr_apply, sobolevWeightedCoeff] using hbound c d S
 
 theorem sobolevDivergenceProductCoeff_mem (r : ℕ) (c d : TorusSobolev (r + 2)) :

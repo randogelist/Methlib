@@ -7,7 +7,7 @@ set_option autoImplicit false
 set_option Elab.async true
 
 open Set MeasureTheory
-open scoped BigOperators ContDiff
+open scoped BigOperators ContDiff ENNReal
 
 namespace SingularClosure
 
@@ -23,7 +23,7 @@ theorem sobolev_component_square_summable (s : ℕ) (c : FourierCoeff)
     Summable (fun k : Frequency => ‖sobolevWeightedCoeff s c (k, i)‖ ^ 2) := by
   have hs : Summable (fun ki : FourierIndex => ‖sobolevWeightedCoeff s c ki‖ ^ 2) := by
     have h := hc.summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal)
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast] using h
+    simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h
   exact hs.comp_injective (fun k l h => congrArg Prod.fst h)
 
 /-- Two additional actual Sobolev orders imply absolute coefficient moment summability. -/
@@ -117,10 +117,8 @@ theorem smoothFourierSynthesis_coordinateDerivative (c : FourierCoeff)
   ext i
   have hd := ((smoothFourierSynthesis_contDiff c hc).differentiable (by simp) x).hasFDerivAt
   have hp := (EuclideanSpace.proj i : Vec →L[ℝ] ℝ).hasFDerivAt.comp x hd
-  have hproj : HasFDerivAt (realFourierSeries (fun k => c k i))
-      ((EuclideanSpace.proj i).comp (fderiv ℝ (smoothFourierSynthesis c) x)) x := by
-    simpa only [Function.comp_def, EuclideanSpace.coe_proj] using hp
-  have he := congrArg (fun L : Vec →L[ℝ] ℝ => L (unitVector j)) hproj.fderiv
+  have hr := ((realFourierSeries_contDiff (hc i)).differentiable (by simp) x).hasFDerivAt
+  have he := congrArg (fun L : Vec →L[ℝ] ℝ => L (unitVector j)) (hp.unique hr)
   have hscalar := realFourierSeries_gradient_apply
     (hc i).summable_norm (hc i).summable_first x j
   change fderiv ℝ (realFourierSeries (fun k => c k i)) x (unitVector j) = _ at hscalar
@@ -128,7 +126,7 @@ theorem smoothFourierSynthesis_coordinateDerivative (c : FourierCoeff)
     coordinateDerivative (smoothFourierSynthesis c) j x i =
         fderiv ℝ (realFourierSeries (fun k => c k i)) x (unitVector j) := by
       simpa only [coordinateDerivative, ContinuousLinearMap.comp_apply,
-        EuclideanSpace.coe_proj] using he.symm
+        EuclideanSpace.coe_proj] using he
     _ = _ := hscalar
 
 theorem smoothFourierSynthesis_meanZero (c : FourierCoeff)

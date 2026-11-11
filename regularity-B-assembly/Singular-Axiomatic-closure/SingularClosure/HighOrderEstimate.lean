@@ -79,7 +79,9 @@ theorem derivativeSymbol_norm_le_weight (k : Frequency) (j : Fin 3) :
     simp [derivativeSymbol, Complex.normSq_apply, pow_two]
   have hs : (2 * Real.pi * (k j : ℝ)) ^ 2 ≤ laplacianFrequency k := by
     rw [← sum_derivativeScale_sq]
-    exact Finset.single_le_sum (fun i _ => sq_nonneg _) (Finset.mem_univ j)
+    exact Finset.single_le_sum
+      (s := Finset.univ) (f := fun i : Fin 3 => (2 * Real.pi * (k i : ℝ)) ^ 2)
+      (fun i _ => sq_nonneg (2 * Real.pi * (k i : ℝ))) (Finset.mem_univ j)
   apply (sq_le_sq₀ (norm_nonneg _) (torusSobolevWeight_pos k).le).mp
   rw [hn, torusSobolevWeight_sq]
   unfold laplacianFrequency at hs
@@ -142,9 +144,18 @@ theorem highOrderNonlinearPower_sq_le_tensor (m N : ℕ) (c : FourierCoeff)
     fun z => torusSobolevWeight z.1 ^ (2 * m) *
       (star (c z.1 z.2.1) *
         (derivativeSymbol z.2.2 z.1 * finiteTensorConvolution N c z.1 z.2.2 z.2.1)).re
+  have hsum (F : Frequency × (Fin 3 × Fin 3) → ℝ) :
+      (∑ z ∈ s, F z) = ∑ k ∈ cutoffModes N, ∑ i : Fin 3, ∑ j : Fin 3, F (k, (i, j)) := by
+    calc
+      _ = ∑ k ∈ cutoffModes N,
+          ∑ ij ∈ (Finset.univ : Finset (Fin 3)).product Finset.univ, F (k, ij) :=
+        Finset.sum_product (cutoffModes N) (Finset.univ.product Finset.univ) F
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro k _
+        exact Finset.sum_product Finset.univ Finset.univ (fun ij : Fin 3 × Fin 3 => F (k, ij))
   have hp : highOrderNonlinearPower m N c = ∑ z ∈ s, T z := by
-    simpa only [s, T, Finset.sum_product] using
-      highOrderNonlinearPower_eq_triple_sum m N c hc
+    exact (highOrderNonlinearPower_eq_triple_sum m N c hc).trans (hsum T).symm
   have hbound : abs (highOrderNonlinearPower m N c) ≤ ∑ z ∈ s, A z * B z := by
     rw [hp]
     apply (Finset.abs_sum_le_sum_abs T s).trans
@@ -167,12 +178,13 @@ theorem highOrderNonlinearPower_sq_le_tensor (m N : ℕ) (c : FourierCoeff)
     intro i _
     rw [mul_pow, ← pow_mul, Nat.mul_comm (m + 1) 2, Complex.normSq_eq_norm_sq]
   have ha : (∑ z ∈ s, A z ^ 2) = 3 * highOrderEnergy (m + 1) N c := by
-    simp only [s, A, Finset.sum_product, Finset.sum_const, Finset.card_univ,
+    rw [hsum (fun z => A z ^ 2)]
+    simp only [A, Finset.sum_const, Finset.card_univ,
       Fintype.card_fin, nsmul_eq_mul]
     simp_rw [← Finset.mul_sum]
     rw [he]
   have hb : (∑ z ∈ s, B z ^ 2) = highOrderTensorEnergy m N c := by
-    simp only [s, B, Finset.sum_product, highOrderTensorEnergy]
+    exact hsum (fun z => B z ^ 2)
   calc
     highOrderNonlinearPower m N c ^ 2 = abs (highOrderNonlinearPower m N c) ^ 2 :=
       (sq_abs _).symm

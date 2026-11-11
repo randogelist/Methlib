@@ -170,7 +170,7 @@ theorem sobolevTransportPressureCurve_coeff
       pressureVectorCoeff (fullTransportCoefficients (U 0 t)) := by
   have hlower : torusSobolevLower 0 (s + 2) (Nat.zero_le _) (U (s + 2) t) = U 0 t := by
     apply Subtype.ext
-    exact hcoeff (s + 2) t ht
+    simpa only [torusSobolevLower_coeff] using hcoeff (s + 2) t ht
   change pressureVectorCoeff (sobolevDivergenceProductCoeff s (U (s + 2) t) (U (s + 2) t)) = _
   apply congrArg pressureVectorCoeff
   funext k i

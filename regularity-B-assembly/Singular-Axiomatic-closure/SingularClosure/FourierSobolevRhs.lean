@@ -136,7 +136,8 @@ theorem fourierSobolevRhs_coefficient_eq_fullRhs (ν : ℝ) (r : ℕ)
     (torusSobolevLeray r (sobolevDivergenceProduct r c c)).val k i = _
   rw [torusSobolevViscous_coeff, torusSobolevLeray_coeff,
     sobolevDivergenceProduct_coeff]
-  rfl
+  simp only [fullFourierRhs, torusSobolevLower_coeff,
+    lerayFourierCoeff, sobolevDivergenceProductCoeff]
 
 end
 
