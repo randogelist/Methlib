@@ -1,0 +1,21 @@
+2026-11-11T02:24:08.0906025Z EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
+2026-11-11T02:24:08.0906675Z SIX_CHANNEL_ENSTROPHY_EQ : ∀ (a : SingularClosure.Field),
+2026-11-11T02:24:08.0907361Z   ContDiff ℝ ∞ a → SpatialPeriodic a → ∑ A, physicalEnstrophy (smoothSixChannel A a) = physicalEnstrophy a
+2026-11-11T02:24:08.0908142Z 'SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-11T02:24:08.1695719Z {
+2026-11-11T02:24:08.1696248Z   "declaration_count": 1,
+2026-11-11T02:24:08.1697056Z   "declarations": [
+2026-11-11T02:24:08.1697653Z     {
+2026-11-11T02:24:08.1698411Z       "axioms": [
+2026-11-11T02:24:08.1698846Z         "Classical.choice",
+2026-11-11T02:24:08.1699266Z         "Quot.sound",
+2026-11-11T02:24:08.1699541Z         "propext"
+2026-11-11T02:24:08.1699879Z       ],
+2026-11-11T02:24:08.1700505Z       "name": "SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ"
+2026-11-11T02:24:08.1701072Z     }
+2026-11-11T02:24:08.1701407Z   ],
+2026-11-11T02:24:08.1701774Z   "endpoint_completion_inferred": false,
+2026-11-11T02:24:08.1702432Z   "errors": [],
+2026-11-11T02:24:08.1702806Z   "schema_version": 1,
+2026-11-11T02:24:08.1703421Z   "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+2026-11-11T02:24:08.1704158Z   "status": "PASS"

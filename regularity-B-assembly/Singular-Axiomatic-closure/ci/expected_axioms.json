@@ -613,12 +613,6 @@
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS"
     },
     {
-      "name": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
-      "additional_allowed_axioms": [],
-      "required_axioms": [],
-      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
-    },
-    {
       "name": "SingularClosure.finiteSobolev_H1_norm_sq",
       "additional_allowed_axioms": [],
       "required_axioms": [],
@@ -707,6 +701,102 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.realFourierSeries_gradient_apply"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.sobolevState_memLp",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_memLp"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS"
+    },
+    {
+      "name": "SingularClosure.torusDatumComponent_mk",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusDatumComponent_mk"
+    },
+    {
+      "name": "SingularClosure.torusDatumL2_fourierBasis_repr",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusDatumL2_fourierBasis_repr"
+    },
+    {
+      "name": "SingularClosure.torusSobolevL2_fourierCoeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_fourierCoeff"
+    },
+    {
+      "name": "SingularClosure.torusSobolevL2_isometry",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_isometry"
+    },
+    {
+      "name": "SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.highOrderEnergy_balance",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.highOrderEnergy_balance"
+    },
+    {
+      "name": "SingularClosure.coefficientTransport_eq_product_divergence",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_product_divergence"
+    },
+    {
+      "name": "SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_H1_interpolation",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_interpolation"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_H1_time_difference_bound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_time_difference_bound"
     }
   ]
 }

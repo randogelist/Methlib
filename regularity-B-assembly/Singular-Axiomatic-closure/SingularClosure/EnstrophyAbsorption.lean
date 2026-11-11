@@ -22,8 +22,8 @@ noncomputable section
 
 theorem FINITE_PHYSICAL_NONLINEAR_REAL_BOUND :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
-      |∫ x in unitCube,
-        ⟪convection (finiteSynthesis N c) x, laplacian (finiteSynthesis N c) x⟫_ℝ| ≤
+      abs (∫ x in unitCube,
+        inner ℝ (convection (finiteSynthesis N c) x) (laplacian (finiteSynthesis N c) x)) ≤
           K * (coefficientDissipation N c) ^ (3 / 4 : ℝ) *
             (coefficientLaplacianSquare N c) ^ (3 / 4 : ℝ) := by
   obtain ⟨C, hC, hbound⟩ := FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
@@ -106,14 +106,14 @@ theorem GALERKIN_COEFFICIENT_ENSTROPHY_INEQUALITY :
         C / ν ^ 3 * (coefficientDissipation N (g.coeff t)) ^ 3 := by
     calc
       _ = 2 * (∫ x in unitCube,
-          ⟪convection (finiteSynthesis N (g.coeff t)) x,
-            laplacian (finiteSynthesis N (g.coeff t)) x⟫_ℝ) := by
+          inner ℝ (convection (finiteSynthesis N (g.coeff t)) x)
+            (laplacian (finiteSynthesis N (g.coeff t)) x)) := by
         rw [coefficientEnstrophyNonlinearPower_eq_physical N (g.coeff t)
           (g.mode_support t ht) (g.real_symmetry t ht) (g.solenoidal t ht)]
         ring
-      _ ≤ 2 * |∫ x in unitCube,
-          ⟪convection (finiteSynthesis N (g.coeff t)) x,
-            laplacian (finiteSynthesis N (g.coeff t)) x⟫_ℝ| := by
+      _ ≤ 2 * abs (∫ x in unitCube,
+          inner ℝ (convection (finiteSynthesis N (g.coeff t)) x)
+            (laplacian (finiteSynthesis N (g.coeff t)) x)) := by
         exact mul_le_mul_of_nonneg_left (le_abs_self _) (by norm_num)
       _ ≤ 2 * (K * (coefficientDissipation N (g.coeff t)) ^ (3 / 4 : ℝ) *
           (coefficientLaplacianSquare N (g.coeff t)) ^ (3 / 4 : ℝ)) :=

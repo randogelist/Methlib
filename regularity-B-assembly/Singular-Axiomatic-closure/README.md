@@ -19,7 +19,7 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 | # | Endpoint | Status |
 |---:|---|---|
 | 1 | `SIX_CHANNEL_PROJECTIONS` | Pending |
-| 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | Pending |
+| 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | !=! A_TIER |
 | 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !=! A_TIER |
 | 4 | `GALERKIN_ENERGY_IDENTITY` | !=! A_TIER |
 | 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | Pending |
@@ -93,3 +93,9 @@ The aggregate project build at that revision remained in repair for other module
 Commit `9ae282c28a7034e6f6c044a359205a7ae60380f1`, run https://github.com/randogelist/Methlib/actions/runs/42942665131: endpoint 4 compiled and passed its exact-type and theorem-level standard-only axiom audit. The equality uses actual physical cube integrals, actual initial Fourier cutoff, and proved finite-time dissipation integrability. No energy-cancellation assumption appears.
 
 Current independently verified endpoint total: **3/11**, endpoints 3, 4 and 6. The aggregate build remains in repair; no other endpoint is promoted.
+
+## Verified physical six-channel identity
+
+Commit `4d39e66229e0412a15f8fa9af8f38de4e2f566a6`, run https://github.com/randogelist/Methlib/actions/runs/42945570303: endpoint 2 compiled and passed its exact-type and standard-only theorem axiom audit. Its type quantifies over every actual smooth periodic field, with no solenoidality, mean-zero, finite-cutoff or orthogonality premise. The six channels are the literal coordinate-average fields; enstrophy is the actual physical derivative integral.
+
+Current independently verified endpoint total: **4/11**, endpoints 2, 3, 4 and 6. Other modules remain in compilation repair.

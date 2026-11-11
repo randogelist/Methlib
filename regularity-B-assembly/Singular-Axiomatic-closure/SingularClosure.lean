@@ -61,3 +61,12 @@ import SingularClosure.GalerkinCoefficientCompactness
 import SingularClosure.LatticeSobolevSummability
 import SingularClosure.HighOrderProduct
 import SingularClosure.FourierSeriesCalculus
+import SingularClosure.SobolevTrajectoryCalculus
+import SingularClosure.SobolevTimeModulus
+import SingularClosure.PeriodicFourierRealization
+import SingularClosure.SobolevL2Realization
+import SingularClosure.SmoothDatumSobolev
+import SingularClosure.HighOrderGalerkin
+import SingularClosure.LinearBudget
+import SingularClosure.SobolevArzelaAscoli
+import SingularClosure.SobolevInterpolation

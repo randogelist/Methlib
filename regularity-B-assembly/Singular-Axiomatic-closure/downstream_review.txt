@@ -203,3 +203,31 @@ STATUS
 No local Lean execution. No new axioms. No sorry. No frozen endpoint completed
 by this review. Completion of 11/11 is not evidenced by the existing sources;
 substantial concrete analytic proof bodies remain to be implemented and audited.
+
+
+CURRENT SOURCE CHECKPOINT — CI10 / 2026-11-11
+
+Verified frozen endpoints: 2,3,4,6 (4/11).
+CI10: 4d39e66229e0412a15f8fa9af8f38de4e2f566a6.
+https://github.com/randogelist/Methlib/actions/runs/42945570303
+
+The earlier gap inventory above records the initial inspected source state.
+Several listed foundations now have complete candidate source bodies; they
+remain unverified until their own dependency builds and audits pass:
+  TorusSobolev: actual weighted Hilbert spaces and compact embeddings.
+  TorusGalerkinSobolev: actual finite trajectory realization and physical norms.
+  SobolevTrajectoryCalculus: actual path continuity, derivative, Bochner membership.
+  StrongSobolevRealization: complete finite-trajectory strong-bound candidate7.
+  CanonicalGalerkin: canonical actual trajectories and AX6 equivalence.
+  SobolevTimeModulus / SobolevArzelaAscoli: finite-horizon actual H0 subsequence.
+  SobolevInterpolation: concrete H0/H2-to-H1 spacetime comparison.
+  PeriodicFourierRealization / SobolevL2Realization: actual physical/L2 Fourier bridges.
+  FourierDecay / SmoothDatumSobolev: actual smooth datum at every Sobolev order.
+  HighOrderProduct / HighOrderGalerkin / LinearBudget: high-order bootstrap foundations.
+  FourierSeriesCalculus: actual smooth Fourier-series calculus for pressure recovery.
+
+No frozen endpoint8,9,10 or11 is established by the presence of these sources.
+Global compatible strong limits, nonlinear equation passage, arbitrary-order
+regularity propagation, joint pressure regularity, and the final root still
+require their exact proof bodies and matching external kernel/audit evidence.
+The final root may retain only AX6Statement as its unresolved analytic premise.

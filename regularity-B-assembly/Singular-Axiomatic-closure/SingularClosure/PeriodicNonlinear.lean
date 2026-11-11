@@ -42,10 +42,11 @@ theorem finite_laplacian_eLpNorm_two (N : ℕ) (c : FourierCoeff)
     eLpNorm (laplacian (finiteSynthesis N c)) 2 (volume.restrict unitCube) =
       (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ) := by
   rw [finiteSynthesis_laplacian]
+  have hc : Continuous (fun x => ‖finiteSynthesis N (laplacianCoefficient c) x‖ ^ 2) :=
+    (finiteSynthesis_contDiff N (laplacianCoefficient c)).continuous.norm.pow 2
   have hi : IntegrableOn
       (fun x => ‖finiteSynthesis N (laplacianCoefficient c) x‖ ^ 2) unitCube volume :=
-    (((finiteSynthesis_contDiff N (laplacianCoefficient c)).continuous.norm.pow 2)
-      .continuousOn).integrableOn_compact isCompact_unitCube
+    hc.continuousOn.integrableOn_compact isCompact_unitCube
   rw [eLpNorm_two_eq_integral_norm_sq_rpow _ _ hi,
     ← physicalEnergy_eq_integral_norm_sq,
     FINITE_PHYSICAL_ENERGY_PARSEVAL N _ (laplacianCoefficient_reality c hreal),
@@ -80,8 +81,14 @@ theorem FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN :
     _ ≤ ∑ i : Fin 3,
         eLpNorm (fun x => ‖coordinateDerivative (finiteSynthesis N c) i x‖) 6
           (volume.restrict unitCube) := by
-      simpa only [Finset.sum_apply] using
-        eLpNorm_sum_le (s := Finset.univ) (fun i _ => hmeas i) (by norm_num : (1 : ℝ≥0∞) ≤ 6)
+      have hsum : (fun x => ∑ i : Fin 3,
+          ‖coordinateDerivative (finiteSynthesis N c) i x‖) =
+          ∑ i : Fin 3, (fun x => ‖coordinateDerivative (finiteSynthesis N c) i x‖) := by
+        funext x
+        simp only [Finset.sum_apply]
+      rw [hsum]
+      exact eLpNorm_sum_le (s := Finset.univ) (fun i _ => hmeas i)
+        (by norm_num : (1 : ℝ≥0∞) ≤ 6)
     _ = ∑ i : Fin 3,
         eLpNorm (coordinateDerivative (finiteSynthesis N c) i) 6
           (volume.restrict unitCube) := by simp only [eLpNorm_norm]
@@ -111,11 +118,23 @@ theorem cube_eLpNorm_three_le_interpolation (v : Vec → F) (hv : Continuous v) 
     (μ := volume.restrict unitCube) (p := 4) (q := 12) (r := 3)
     hc.aestronglyMeasurable hc.aestronglyMeasurable
     (fun a b : ℝ => a * b) 1
-    (Filter.Eventually.of_forall (fun x => by simp only [norm_mul, NNReal.coe_one, one_mul]))
+    (Filter.Eventually.of_forall (fun x => by
+      simp only [norm_mul, NNReal.coe_one, one_mul, le_refl]))
   rw [hprod, eLpNorm_norm,
     eLpNorm_norm_rpow v (by norm_num), eLpNorm_norm_rpow v (by norm_num)] at h
-  norm_num at h ⊢
-  exact h
+  have h4 : (4 : ℝ≥0∞) * ENNReal.ofReal (1 / 2 : ℝ) = 2 := by
+    calc
+      _ = ENNReal.ofReal ((4 : ℝ) * (1 / 2 : ℝ)) := by
+        rw [ENNReal.ofReal_mul (by norm_num)]
+        norm_num
+      _ = 2 := by norm_num
+  have h12 : (12 : ℝ≥0∞) * ENNReal.ofReal (1 / 2 : ℝ) = 6 := by
+    calc
+      _ = ENNReal.ofReal ((12 : ℝ) * (1 / 2 : ℝ)) := by
+        rw [ENNReal.ofReal_mul (by norm_num)]
+        norm_num
+      _ = 6 := by norm_num
+  simpa only [h4, h12, ENNReal.coe_one, one_mul] using h
 
 /-- Hölder for the actual derivative-evaluation definition of convection. -/
 theorem convection_eLpNorm_two_le (v : Field) (hv : ContDiff ℝ ∞ v) :
@@ -134,25 +153,28 @@ theorem convection_eLpNorm_two_le (v : Field) (hv : ContDiff ℝ ∞ v) :
     (Filter.Eventually.of_forall (fun x => by
       simpa only [NNReal.coe_one, one_mul, mul_comm] using
         (fderiv ℝ v x).le_opNorm (v x)))
-  simpa only [convection, ENNReal.coe_one, one_mul] using h
+  change eLpNorm (fun x => (fderiv ℝ v x) (v x)) 2 (volume.restrict unitCube) ≤ _
+  simpa only [ENNReal.coe_one, one_mul] using h
 
 theorem inner_integral_enorm_le_eLpNorm_two (v w : Field)
     (hv : Continuous v) (hw : Continuous w) :
-    ENNReal.ofReal |∫ x in unitCube, ⟪v x, w x⟫_ℝ| ≤
+    ENNReal.ofReal (abs (∫ x in unitCube, inner ℝ (v x) (w x))) ≤
       eLpNorm v 2 (volume.restrict unitCube) *
         eLpNorm w 2 (volume.restrict unitCube) := by
   have h := eLpNorm_le_eLpNorm_mul_eLpNorm'_of_norm
     (μ := volume.restrict unitCube) (p := 2) (q := 2) (r := 1)
     hv.aestronglyMeasurable hw.aestronglyMeasurable
-    (fun y z : Vec => ⟪y, z⟫_ℝ) 1
+    (fun y z : Vec => inner ℝ y z) 1
     (Filter.Eventually.of_forall (fun x => by
-      simpa only [NNReal.coe_one, one_mul] using norm_inner_le_norm (v x) (w x)))
+      simpa only [NNReal.coe_one, one_mul] using
+        norm_inner_le_norm (𝕜 := ℝ) (v x) (w x)))
   calc
-    _ = ‖∫ x in unitCube, ⟪v x, w x⟫_ℝ‖ₑ := by rw [← ofReal_norm, Real.norm_eq_abs]
-    _ ≤ ∫⁻ x, ‖⟪v x, w x⟫_ℝ‖ₑ ∂volume.restrict unitCube :=
+    _ = ‖(∫ x in unitCube, inner ℝ (v x) (w x))‖ₑ := by
+      rw [← ofReal_norm, Real.norm_eq_abs]
+    _ ≤ ∫⁻ x, ‖inner ℝ (v x) (w x)‖ₑ ∂volume.restrict unitCube :=
       enorm_integral_le_lintegral_enorm _
-    _ = eLpNorm (fun x => ⟪v x, w x⟫_ℝ) 1 (volume.restrict unitCube) :=
-      (eLpNorm_one_eq_lintegral_enorm (f := fun x => ⟪v x, w x⟫_ℝ)).symm
+    _ = eLpNorm (fun x => inner ℝ (v x) (w x)) 1 (volume.restrict unitCube) :=
+      (eLpNorm_one_eq_lintegral_enorm (f := fun x => inner ℝ (v x) (w x))).symm
     _ ≤ _ := by simpa only [ENNReal.coe_one, one_mul] using h
 
 theorem ennreal_three_quarter_product (A B E Z : ℝ≥0∞) :
@@ -178,8 +200,8 @@ theorem ennreal_three_quarter_product (A B E Z : ℝ≥0∞) :
 three-quarter-power estimate. The physical field and every derivative are literal. -/
 theorem FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND :
     ∃ C : ℝ≥0∞, C < ⊤ ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
-      ENNReal.ofReal |∫ x in unitCube,
-        ⟪convection (finiteSynthesis N c) x, laplacian (finiteSynthesis N c) x⟫_ℝ| ≤
+      ENNReal.ofReal (abs (∫ x in unitCube,
+        inner ℝ (convection (finiteSynthesis N c) x) (laplacian (finiteSynthesis N c) x))) ≤
           C * (ENNReal.ofReal (coefficientDissipation N c)) ^ (3 / 4 : ℝ) *
             (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (3 / 4 : ℝ) := by
   obtain ⟨A, hA, hSob⟩ := FINITE_PHYSICAL_L6_FROM_ENSTROPHY

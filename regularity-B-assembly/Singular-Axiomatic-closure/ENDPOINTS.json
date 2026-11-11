@@ -14,9 +14,17 @@
     {
       "number": 2,
       "name": "SIX_CHANNEL_ENSTROPHY_EQ",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "4d39e66229e0412a15f8fa9af8f38de4e2f566a6",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42945570303",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ",
+      "source_file": "SingularClosure/SmoothSixEnstrophy.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 3,
@@ -110,5 +118,5 @@
     "AX6"
   ],
   "root_completed": false,
-  "completed_endpoint_count": 3
+  "completed_endpoint_count": 4
 }

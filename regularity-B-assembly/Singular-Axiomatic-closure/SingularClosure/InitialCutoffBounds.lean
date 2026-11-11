@@ -48,7 +48,10 @@ theorem FINITE_PHYSICAL_BESSEL (N : ℕ) (a : Field) (ha : Continuous a)
   have hres : (∫ x in unitCube, ‖a x - u x‖ ^ 2) =
       physicalEnergy a - coefficientEnergy N (datumFourierCoeff a) := by
     simp_rw [norm_sub_sq_real]
-    rw [integral_add (ha2.sub (hi.const_mul 2)) hu2,
+    have hleft : IntegrableOn
+        (fun x : Vec => ‖a x‖ ^ 2 - 2 * inner ℝ (a x) (u x)) unitCube volume :=
+      ha2.sub (hi.const_mul 2)
+    rw [integral_add hleft hu2,
       integral_sub ha2 (hi.const_mul 2), integral_const_mul, hp, he,
       ← physicalEnergy_eq_integral_norm_sq]
     ring

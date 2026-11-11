@@ -60,13 +60,16 @@ set_option maxHeartbeats 1000000 in
 theorem datumFourierCoeff_smoothSixChannel (A : Fin 6) (a : Field)
     (ha : Continuous a) :
     datumFourierCoeff (smoothSixChannel A a) = spectralChannel A (datumFourierCoeff a) := by
+  have hsub (u v : Field) (hu : Continuous u) (hv : Continuous v) : Continuous (u - v) := by
+    change Continuous (fun x => u x - v x)
+    exact hu.sub hv
   fin_cases A <;> funext k i <;>
     by_cases h2 : k 2 = 0 <;> by_cases h0 : k 0 = 0 <;> by_cases hi : i = 2 <;>
-      simp [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
-        datumFourierCoeff_sub, datumFourierCoeff_coordinateAverage,
-        datumFourierCoeff_verticalComponent, spectralChannel, channelOf,
-        coordinateAverage_continuous, verticalComponent_continuous, Continuous.sub,
-        ha, h2, h0, hi]
+      simp (disch := solve_by_elim (maxDepth := 32)
+        [coordinateAverage_continuous, verticalComponent_continuous, hsub])
+        [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
+          datumFourierCoeff_sub, datumFourierCoeff_coordinateAverage,
+          datumFourierCoeff_verticalComponent, spectralChannel, channelOf, h2, h0, hi]
 
 end
 

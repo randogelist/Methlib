@@ -191,6 +191,7 @@ def torusSobolevInclusionLinear (s : ℕ) : TorusSobolev (s + 1) →ₗ[ℂ] Tor
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
+set_option maxHeartbeats 1000000 in
 theorem torusSobolevInclusion_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
     ‖torusSobolevInclusionLinear s c‖ ≤ ‖c‖ := by
   change ‖torusSobolevReprLinear s (torusSobolevInclusionLinear s c)‖ ≤
@@ -205,6 +206,7 @@ def torusSobolevInclusion (s : ℕ) : TorusSobolev (s + 1) →L[ℂ] TorusSobole
   (torusSobolevInclusionLinear s).mkContinuous 1
     (fun c => by simpa using torusSobolevInclusion_norm_le s c)
 
+set_option maxHeartbeats 1000000 in
 @[simp]
 theorem torusSobolevInclusion_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
     (torusSobolevInclusion s c).val = c.val := rfl
@@ -250,10 +252,15 @@ def torusSobolevCutoffLinear (s N : ℕ) : TorusSobolev s →ₗ[ℂ] TorusSobol
   map_add' c d := by
     apply Subtype.ext
     funext k i
+    change (if k ∈ sobolevCutoffModes N then c.val k i + d.val k i else 0) =
+      (if k ∈ sobolevCutoffModes N then c.val k i else 0) +
+        (if k ∈ sobolevCutoffModes N then d.val k i else 0)
     by_cases h : k ∈ sobolevCutoffModes N <;> simp [h]
   map_smul' z c := by
     apply Subtype.ext
     funext k i
+    change (if k ∈ sobolevCutoffModes N then z * c.val k i else 0) =
+      z * (if k ∈ sobolevCutoffModes N then c.val k i else 0)
     by_cases h : k ∈ sobolevCutoffModes N <;> simp [h]
 
 theorem torusSobolevCutoff_norm_le (s N : ℕ) (c : TorusSobolev s) :
@@ -262,10 +269,13 @@ theorem torusSobolevCutoff_norm_le (s N : ℕ) (c : TorusSobolev s) :
     ‖torusSobolevReprLinear s c‖
   apply lp.norm_mono (by norm_num)
   intro ki
-  change ‖sobolevWeightedCoeff s (torusSobolevCutoffLinear s N c).val ki‖ ≤
-    ‖sobolevWeightedCoeff s c.val ki‖
-  by_cases h : ki.1 ∈ sobolevCutoffModes N <;>
-    simp [torusSobolevCutoffLinear, sobolevWeightedCoeff, h] <;> positivity
+  change ‖(torusSobolevWeight ki.1 : ℂ) ^ s *
+      (if ki.1 ∈ sobolevCutoffModes N then c.val ki.1 ki.2 else 0)‖ ≤
+    ‖(torusSobolevWeight ki.1 : ℂ) ^ s * c.val ki.1 ki.2‖
+  by_cases h : ki.1 ∈ sobolevCutoffModes N
+  · rw [if_pos h]
+  · rw [if_neg h, mul_zero, norm_zero]
+    exact norm_nonneg _
 
 def torusSobolevCutoff (s N : ℕ) : TorusSobolev s →L[ℂ] TorusSobolev s :=
   (torusSobolevCutoffLinear s N).mkContinuous 1
@@ -297,28 +307,30 @@ theorem torusSobolevInclusion_tail (s N : ℕ) (hN : 0 < N)
     _ ≤ ‖(N : ℝ)⁻¹ • torusSobolevRepr (s + 1) c‖ := by
       apply lp.norm_mono (by norm_num)
       intro ki
-      change ‖sobolevWeightedCoeff s
-          (torusSobolevInclusion s c -
-            torusSobolevCutoff s N (torusSobolevInclusion s c)).val ki‖ ≤
-        ‖((N : ℝ)⁻¹ • torusSobolevRepr (s + 1) c) ki‖
+      change ‖(torusSobolevWeight ki.1 : ℂ) ^ s *
+          ((torusSobolevInclusion s c).val ki.1 ki.2 -
+            (torusSobolevCutoff s N (torusSobolevInclusion s c)).val ki.1 ki.2)‖ ≤
+        ‖(N : ℝ)⁻¹ • (torusSobolevRepr (s + 1) c ki)‖
+      rw [torusSobolevCutoff_coeff, torusSobolevInclusion_coeff]
       by_cases hk : ki.1 ∈ sobolevCutoffModes N
-      · simp [sobolevWeightedCoeff, hk] <;> positivity
+      · rw [if_pos hk, sub_self, mul_zero, norm_zero]
+        exact norm_nonneg _
       · have hw := torusSobolevWeight_ge_cutoff hk
-        have hw0 := torusSobolevWeight_pos ki.1
-        simp only [sobolevWeightedCoeff, Submodule.coe_sub, Pi.sub_apply,
-          torusSobolevInclusion_coeff, torusSobolevCutoff_coeff, if_neg hk,
-          sub_zero, lp.coeFn_smul, Pi.smul_apply, norm_smul,
-          Real.norm_eq_abs, abs_of_nonneg hNinv, torusSobolevRepr_apply,
-          norm_mul, norm_pow, Complex.norm_real, Real.norm_eq_abs,
-          abs_of_pos hw0]
+        rw [if_neg hk, sub_zero]
+        change ‖sobolevWeightedCoeff s c.val ki‖ ≤
+          ‖(N : ℝ)⁻¹ • sobolevWeightedCoeff (s + 1) c.val ki‖
+        rw [norm_smul, Real.norm_of_nonneg hNinv, sobolevWeightedCoeff_succ_norm]
         have hfactor : 1 ≤ (N : ℝ)⁻¹ * torusSobolevWeight ki.1 := by
           calc
             1 = (N : ℝ)⁻¹ * (N : ℝ) := (inv_mul_cancel₀ hNreal.ne').symm
             _ ≤ (N : ℝ)⁻¹ * torusSobolevWeight ki.1 :=
               mul_le_mul_of_nonneg_left hw hNinv
-        rw [pow_succ]
-        nlinarith [mul_le_mul_of_nonneg_right hfactor
-          (mul_nonneg (pow_nonneg hw0.le s) (norm_nonneg (c.val ki.1 ki.2)))]
+        calc
+          _ = 1 * ‖sobolevWeightedCoeff s c.val ki‖ := (one_mul _).symm
+          _ ≤ ((N : ℝ)⁻¹ * torusSobolevWeight ki.1) *
+              ‖sobolevWeightedCoeff s c.val ki‖ :=
+            mul_le_mul_of_nonneg_right hfactor (norm_nonneg _)
+          _ = _ := mul_assoc _ _ _
     _ = (N : ℝ)⁻¹ * ‖c‖ := by
       rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg hNinv,
         (torusSobolevRepr (s + 1)).norm_map]
@@ -337,13 +349,20 @@ def torusSobolevRankOne (s : ℕ) (ki : FourierIndex) :
 theorem torusSobolevRankOne_repr (s : ℕ) (ki : FourierIndex) (c : TorusSobolev s) :
     torusSobolevRepr s (torusSobolevRankOne s ki c) =
       lp.single 2 ki (torusSobolevRepr s c ki) := by
-  simp [torusSobolevRankOne, lp.evalCLM, lp.evalₗ]
+  change torusSobolevRepr s
+      ((torusSobolevRepr s).symm (lp.single 2 ki (torusSobolevRepr s c ki))) = _
+  exact (torusSobolevRepr s).apply_symm_apply _
 
 theorem torusSobolevRankOne_compact (s : ℕ) (ki : FourierIndex) :
     IsCompactOperator (torusSobolevRankOne s ki) := by
-  unfold torusSobolevRankOne
-  apply IsCompactOperator.comp_clm
-  exact isCompactOperator_of_locallyCompactSpace_rng _
+  let A : ℂ →L[ℂ] TorusSobolev s :=
+    ((torusSobolevRepr s).symm.toContinuousLinearEquiv.toContinuousLinearMap).comp
+      (lp.singleContinuousLinearMap ℂ (fun _ : FourierIndex => ℂ) 2 ki)
+  let B : TorusSobolev s →L[ℂ] ℂ :=
+    (lp.evalCLM ℂ (fun _ : FourierIndex => ℂ) 2 ki).comp
+      (torusSobolevRepr s).toContinuousLinearEquiv.toContinuousLinearMap
+  have hA : IsCompactOperator A := isCompactOperator_of_locallyCompactSpace_rng A
+  simpa only [torusSobolevRankOne, A, B, ContinuousLinearMap.coe_comp] using hA.comp_clm B
 
 theorem torusSobolevCutoff_eq_sum_rankOne (s N : ℕ) :
     torusSobolevCutoff s N = ∑ ki ∈ sobolevCutoffIndices N, torusSobolevRankOne s ki := by
@@ -371,11 +390,12 @@ theorem torusSobolevCutoff_compact (s N : ℕ) :
     rw [Finset.sum_insert hki]
     exact (torusSobolevRankOne_compact s ki).add ih
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Uniform convergence in operator norm of the finite cutoffs of the inclusion. -/
 theorem torusSobolevInclusion_cutoff_tendsto (s : ℕ) :
     Tendsto (fun n : ℕ => (torusSobolevCutoff s (n + 1)).comp (torusSobolevInclusion s))
       atTop (𝓝 (torusSobolevInclusion s)) := by
-  rw [Metric.tendsto_atTop]
+  apply Metric.tendsto_atTop.mpr
   intro ε hε
   obtain ⟨M, hM⟩ := exists_nat_gt ε⁻¹
   refine ⟨M, fun n hn => ?_⟩

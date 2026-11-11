@@ -8,6 +8,12 @@ open scoped BigOperators Interval ENNReal NNReal ContDiff
 
 noncomputable section
 
+local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance : Measure.IsAddHaarMeasure (volume : Measure UnitAddCircle) :=
+  inferInstanceAs (Measure.IsAddHaarMeasure AddCircle.haarAddCircle)
+local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
+  inferInstanceAs (IsProbabilityMeasure AddCircle.haarAddCircle)
+
 example : SmoothSigmaZero (0 : Field) := by
   exact SingularClosure.smoothSigmaZero_zero
 
@@ -1079,23 +1085,6 @@ example : ∀ (hAX6 : AX6Statement)
 #check @SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
 #print axioms SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
 
-example : ∀ (hAX6 : AX6Statement)
-    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
-    (T : ℝ) (hT : 0 < T),
-    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
-      (∀ t ∈ Icc (0 : ℝ) T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B) ∧
-      IntervalIntegrable (fun t => ‖g.sobolevState 2 t‖ ^ 2) volume 0 T ∧
-      (∫ t in (0 : ℝ)..T, ‖g.sobolevState 2 t‖ ^ 2) ≤ B ∧
-      IntervalIntegrable (fun t => ∫ x in unitCube,
-        ‖timeDerivative g.velocity t x‖ ^ 2) volume 0 T ∧
-      (∫ t in (0 : ℝ)..T, ∫ x in unitCube,
-        ‖timeDerivative g.velocity t x‖ ^ 2) ≤ B :=
-  @SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
-
-#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
-#check @SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
-#print axioms SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
-
 example : ∀ (N : ℕ) (c : FourierCoeff),
     ‖finiteSobolev 1 N c‖ ^ 2 = coefficientEnergy N c + coefficientDissipation N c :=
   @SingularClosure.finiteSobolev_H1_norm_sq
@@ -1256,5 +1245,200 @@ example : ∀ {b : Frequency → ℂ}
 #eval IO.println "EXACT_TYPE_PASS:SingularClosure.realFourierSeries_gradient_apply"
 #check @SingularClosure.realFourierSeries_gradient_apply
 #print axioms SingularClosure.realFourierSeries_gradient_apply
+
+
+open Metric
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (s : ℕ) (t : ℝ) (ht : 0 ≤ t),
+    HasDerivWithinAt (g.sobolevState s) (g.rhsSobolev s t) (Ici 0) t :=
+  @SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt"
+#check @SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt
+#print axioms SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (s : ℕ) (T : ℝ) (p : ℝ≥0∞),
+    MemLp (g.sobolevState s) p (volume.restrict (Icc (0 : ℝ) T)) :=
+  @SingularClosure.GalerkinSolution.sobolevState_memLp
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_memLp"
+#check @SingularClosure.GalerkinSolution.sobolevState_memLp
+#print axioms SingularClosure.GalerkinSolution.sobolevState_memLp
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (t : ℝ) (ht : 0 ≤ t),
+    ‖g.rhsSobolev 0 t‖ ^ 2 =
+      ∫ x in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2 :=
+  @SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq"
+#check @SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq
+#print axioms SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      ∀ s ∈ Icc (0 : ℝ) T, ∀ t ∈ Icc (0 : ℝ) T,
+        ‖g.sobolevState 0 t - g.sobolevState 0 s‖ ^ 2 ≤ B * |t - s| :=
+  @SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS"
+#check @SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS
+#print axioms SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS
+
+example : ∀ (a : Field) (hp : SpatialPeriodic a)
+    (i : Fin 3) (x : Vec),
+    torusDatumComponent a i (fun j => (x j : UnitAddCircle)) = (a x i : ℂ) :=
+  @SingularClosure.torusDatumComponent_mk
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusDatumComponent_mk"
+#check @SingularClosure.torusDatumComponent_mk
+#print axioms SingularClosure.torusDatumComponent_mk
+
+example : ∀ (a : Field) (ha : Continuous a)
+    (i : Fin 3) (k : Frequency),
+    UnitAddTorus.mFourierBasis.repr (torusDatumL2 a ha i) k = datumFourierCoeff a k i :=
+  @SingularClosure.torusDatumL2_fourierBasis_repr
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusDatumL2_fourierBasis_repr"
+#check @SingularClosure.torusDatumL2_fourierBasis_repr
+#print axioms SingularClosure.torusDatumL2_fourierBasis_repr
+
+example : ∀ (c : TorusSobolev 0),
+    torusVectorFourierCoeff (torusSobolevL2 c) = c.val :=
+  @SingularClosure.torusSobolevL2_fourierCoeff
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_fourierCoeff"
+#check @SingularClosure.torusSobolevL2_fourierCoeff
+#print axioms SingularClosure.torusSobolevL2_fourierCoeff
+
+example : Isometry torusSobolevL2 :=
+  @SingularClosure.torusSobolevL2_isometry
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_isometry"
+#check @SingularClosure.torusSobolevL2_isometry
+#print axioms SingularClosure.torusSobolevL2_isometry
+
+example : ∀ (s : ℕ) (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a),
+    Memℓp (sobolevWeightedCoeff s (datumFourierCoeff a)) 2 :=
+  @SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV"
+#check @SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV
+#print axioms SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (m : ℕ) {t : ℝ} (ht : 0 ≤ t),
+    HasDerivWithinAt (fun r => highOrderEnergy m N (g.coeff r))
+      ((-2 * ν) *
+          (highOrderEnergy (m + 1) N (g.coeff t) - highOrderEnergy m N (g.coeff t)) -
+        2 * highOrderNonlinearPower m N (g.coeff t)) (Ici 0) t :=
+  @SingularClosure.GalerkinSolution.highOrderEnergy_balance
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.highOrderEnergy_balance"
+#check @SingularClosure.GalerkinSolution.highOrderEnergy_balance
+#print axioms SingularClosure.GalerkinSolution.highOrderEnergy_balance
+
+example : ∀ (N : ℕ) (c : FourierCoeff) (hc : SpectralSolenoidal c)
+    (k : Frequency) (i : Fin 3),
+    coefficientTransport N c k i =
+      ∑ j : Fin 3, derivativeSymbol j k *
+        (∑ p ∈ cutoffModes N, c p j * c (k - p) i) :=
+  @SingularClosure.coefficientTransport_eq_product_divergence
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_product_divergence"
+#check @SingularClosure.coefficientTransport_eq_product_divergence
+#print axioms SingularClosure.coefficientTransport_eq_product_divergence
+
+example : ∀ {y z d a : ℝ → ℝ} {ν T M y₀ : ℝ}
+    (hν : 0 ≤ ν) (hT : 0 ≤ T)
+    (hy : ContinuousOn y (Icc 0 T))
+    (hz : ContinuousOn z (Icc 0 T))
+    (ha : ContinuousOn a (Icc 0 T))
+    (hy_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ y t)
+    (ha_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ a t)
+    (h_initial : y 0 ≤ y₀)
+    (hderiv : ∀ t ∈ Ioo 0 T, HasDerivAt y (d t) t)
+    (hlinear : ∀ t ∈ Ioo 0 T, d t + ν * (z t) ^ 2 ≤ a t * y t)
+    (hbudget : (∫ s in (0 : ℝ)..T, a s) ≤ M),
+    ∀ t ∈ Icc 0 T,
+      y t + ν * (∫ s in (0 : ℝ)..t, (z s) ^ 2) ≤ y₀ * Real.exp M :=
+  @SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET"
+#check @SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET
+#print axioms SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      ContinuousOn (g.sobolevState 1) (Ici 0) ∧
+      MemLp (g.sobolevState 1) ⊤ (volume.restrict (Icc (0 : ℝ) T)) ∧
+      MemLp (g.sobolevState 2) 2 (volume.restrict (Icc (0 : ℝ) T)) ∧
+      MemLp (g.rhsSobolev 0) 2 (volume.restrict (Icc (0 : ℝ) T)) ∧
+      (∀ t : ℝ, 0 ≤ t → HasDerivWithinAt (g.sobolevState 0)
+        (g.rhsSobolev 0 t) (Ici 0) t) ∧
+      (∀ t ∈ Icc (0 : ℝ) T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B) ∧
+      IntervalIntegrable (fun t => ‖g.sobolevState 2 t‖ ^ 2) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, ‖g.sobolevState 2 t‖ ^ 2) ≤ B ∧
+      IntervalIntegrable (fun t => ‖g.rhsSobolev 0 t‖ ^ 2) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, ‖g.rhsSobolev 0 t‖ ^ 2) ≤ B ∧
+      IntervalIntegrable (fun t => ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) ≤ B :=
+  @SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+#check @SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+#print axioms SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+
+
+open Metric
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ u : C(Icc (0 : ℝ) T, TorusSobolev 0), ∃ φ : ℕ → ℕ,
+      StrictMono φ ∧ TendstoUniformly
+        (fun n (t : Icc (0 : ℝ) T) =>
+          (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 t.val)
+        u atTop :=
+  @SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE"
+#check @SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
+#print axioms SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
+
+example : ∀ (c : TorusSobolev 2),
+    ‖torusSobolevInclusion 1 c‖ ^ 2 ≤
+      ‖torusSobolevInclusion 0 (torusSobolevInclusion 1 c)‖ * ‖c‖ :=
+  @SingularClosure.torusSobolev_H1_interpolation
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_interpolation"
+#check @SingularClosure.torusSobolev_H1_interpolation
+#print axioms SingularClosure.torusSobolev_H1_interpolation
+
+example : ∀ (v w : ℝ → TorusSobolev 2) (T ε M : ℝ) (hT : 0 ≤ T) (hε : 0 ≤ ε)
+    (hv : ContinuousOn v (Icc (0 : ℝ) T))
+    (hw : ContinuousOn w (Icc (0 : ℝ) T))
+    (h0 : ∀ t ∈ Icc (0 : ℝ) T,
+      ‖torusSobolevInclusion 0 (torusSobolevInclusion 1 (v t)) -
+        torusSobolevInclusion 0 (torusSobolevInclusion 1 (w t))‖ ≤ ε)
+    (hv2 : (∫ t in (0 : ℝ)..T, ‖v t‖ ^ 2) ≤ M)
+    (hw2 : (∫ t in (0 : ℝ)..T, ‖w t‖ ^ 2) ≤ M),
+    (∫ t in (0 : ℝ)..T,
+      ‖torusSobolevInclusion 1 (v t) - torusSobolevInclusion 1 (w t)‖ ^ 2) ^ 2 ≤
+        4 * ε ^ 2 * T * M :=
+  @SingularClosure.torusSobolev_H1_time_difference_bound
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_time_difference_bound"
+#check @SingularClosure.torusSobolev_H1_time_difference_bound
+#print axioms SingularClosure.torusSobolev_H1_time_difference_bound
 
 end
