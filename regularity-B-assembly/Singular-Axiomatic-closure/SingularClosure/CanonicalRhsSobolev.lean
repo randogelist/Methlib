@@ -214,8 +214,9 @@ theorem canonicalLimitRhsSobolev_coefficient_integral_order
   apply intervalIntegral.integral_congr
   intro z hz
   have hm : z ∈ Icc (0 : ℝ) t := by simpa only [uIcc_of_le ht] using hz
-  rw [canonicalLimitRhsSobolev_coeff hAX6 ν hν a ha u φ hφ hconv 0 z hm.1,
-    canonicalLimitRhsSobolev_coeff hAX6 ν hν a ha u φ hφ hconv s z hm.1]
+  exact congrArg (fun c : FourierCoeff => c k i)
+    ((canonicalLimitRhsSobolev_coeff hAX6 ν hν a ha u φ hφ hconv 0 z hm.1).trans
+      (canonicalLimitRhsSobolev_coeff hAX6 ν hν a ha u φ hφ hconv s z hm.1).symm)
 
 theorem canonicalLimitRhsSobolev_time_integral_order
     (hu : ContinuousOn u (Ici 0)) (s : ℕ) (v : ℝ → TorusSobolev s)

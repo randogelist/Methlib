@@ -43,7 +43,7 @@ theorem physicalTimeDerivative_of_H4_curve
       (smoothFourierSynthesis (r4 t).val x) (Ici 0) t := by
     apply h.congr_of_mem _ ht
     intro z hz
-    rw [hu z hz]
+    exact congrArg (fun c : FourierCoeff => smoothFourierSynthesis c x) (hu z hz).symm
   rw [hr t ht] at h'
   exact h'.derivWithin ((uniqueDiffOn_Ici 0) t ht)
 

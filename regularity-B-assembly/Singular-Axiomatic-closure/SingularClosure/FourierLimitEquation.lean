@@ -29,8 +29,8 @@ theorem fullFourierRhs_continuous (ν : ℝ) (k : Frequency) (i : Fin 3) :
       fun j : Fin 3 => divergenceTransportCoefficient k j c c) := by
     apply continuous_pi
     intro j
-    exact (divergenceTransportCoefficient_continuous k j).comp
-      (continuous_id.prodMk continuous_id)
+    exact (divergenceTransportCoefficient k j).continuous.clm_apply
+      (continuous_id : Continuous (fun c : TorusSobolev 0 => c))
   exact (continuous_const.mul (torusSobolevH0Coeff_continuous k i)).sub
     ((continuous_apply i).comp ((contDiff_coefficientLeray k).continuous.comp ht))
 
@@ -146,9 +146,10 @@ theorem galerkinLimit_coefficient_integral
         (((g n).sobolevState_continuousOn 0).mono (fun r hr => hr.1))
     have hint := TendstoUniformlyOn.tendsto_intervalIntegral_of_continuousOn
       (μ := (volume : Measure ℝ)) hcont hRsmall
-    have heq : ∀ᶠ n : ℕ in atTop,
-        (∫ r in (0 : ℝ)..t, fullFourierRhs ν ((g n).sobolevState 0 r) k i) =
-          ((g n).sobolevState 0 t).val k i - ((g n).sobolevState 0 0).val k i := by
+    have heq : (fun n : ℕ =>
+        ∫ r in (0 : ℝ)..t, fullFourierRhs ν ((g n).sobolevState 0 r) k i) =ᶠ[atTop]
+          (fun n => ((g n).sobolevState 0 t).val k i -
+            ((g n).sobolevState 0 0).val k i) := by
       filter_upwards [eventually_mem_cutoffModes_strictMono φ hφ k hk] with n hn
       exact (g n).coefficient_integral_fullFourierRhs hn i le_rfl ht.1
     have hid : (∫ r in (0 : ℝ)..t, fullFourierRhs ν (u r) k i) =

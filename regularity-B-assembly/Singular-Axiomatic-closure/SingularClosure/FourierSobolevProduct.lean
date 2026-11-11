@@ -23,10 +23,15 @@ theorem torusSobolev_component_moment_sum_le (q s : ℕ) (hqs : q ≤ s)
   classical
   have h := torusSobolev_finite_weighted_sum_le q (torusSobolevLower q s hqs c)
     (S.product {i})
-  simp only [Finset.sum_product, Finset.sum_singleton,
-    torusSobolev_weightedCoeff_norm, torusSobolevLower_coeff] at h
-  exact h.trans (pow_le_pow_left₀ (norm_nonneg _)
-    (torusSobolevLower_norm_le q s hqs c) 2)
+  simp only [torusSobolev_weightedCoeff_norm, torusSobolevLower_coeff] at h
+  have hsum :
+      (∑ ki ∈ S.product {i}, (torusSobolevWeight ki.1 ^ q * ‖c.val ki.1 ki.2‖) ^ 2) =
+        ∑ k ∈ S, (torusSobolevWeight k ^ q * ‖c.val k i‖) ^ 2 := by
+    simpa only [Finset.sum_singleton] using
+      Finset.sum_product S {i}
+        (fun ki : FourierIndex => (torusSobolevWeight ki.1 ^ q * ‖c.val ki.1 ki.2‖) ^ 2)
+  exact hsum.symm.trans_le (h.trans (pow_le_pow_left₀ (norm_nonneg _)
+    (torusSobolevLower_norm_le q s hqs c) 2))
 
 /-- The actual output-frequency derivative of the infinite tensor convolution. -/
 def sobolevDivergenceProductCoeff (r : ℕ) (c d : TorusSobolev (r + 2)) : FourierCoeff :=
@@ -126,13 +131,20 @@ theorem SOBOLEV_DIVERGENCE_PRODUCT_FINITE_BOUND (r : ℕ) :
     _ = 3 * ∑ i : Fin 3, ∑ j : Fin 3, ∑ k ∈ R,
         (torusSobolevWeight k ^ (r + 1) *
           ‖∑' p : Frequency, c.val p j * d.val (k - p) i‖) ^ 2 := by
-      rw [Finset.sum_product]
-      simp only [← Finset.mul_sum]
-      rw [Finset.sum_comm]
-      congr 1
-      apply Finset.sum_congr rfl
-      intro i _
-      rw [Finset.sum_comm]
+      calc
+        _ = ∑ k ∈ R, ∑ i : Fin 3, 3 * ∑ j : Fin 3,
+            (torusSobolevWeight k ^ (r + 1) *
+              ‖∑' p : Frequency, c.val p j * d.val (k - p) i‖) ^ 2 :=
+          Finset.sum_product R Finset.univ (fun ki : FourierIndex =>
+            3 * ∑ j : Fin 3, (torusSobolevWeight ki.1 ^ (r + 1) *
+              ‖∑' p : Frequency, c.val p j * d.val (ki.1 - p) ki.2‖) ^ 2)
+        _ = _ := by
+          simp only [← Finset.mul_sum]
+          rw [Finset.sum_comm]
+          congr 1
+          apply Finset.sum_congr rfl
+          intro i _
+          rw [Finset.sum_comm]
     _ ≤ 3 * ∑ i : Fin 3, ∑ j : Fin 3, C * ‖c‖ ^ 2 * ‖d‖ ^ 2 := by
       apply mul_le_mul_of_nonneg_left _ (by norm_num)
       exact Finset.sum_le_sum (fun i _ => Finset.sum_le_sum (fun j _ => hpair i j))
@@ -144,7 +156,8 @@ theorem SOBOLEV_DIVERGENCE_PRODUCT_FINITE_BOUND (r : ℕ) :
 theorem SOBOLEV_DIVERGENCE_PRODUCT_MEM_NORM_BOUND (r : ℕ) :
     ∃ C : ℝ, 0 < C ∧ ∀ c d : TorusSobolev (r + 2),
       ∃ hc : Memℓp (sobolevWeightedCoeff r (sobolevDivergenceProductCoeff r c d)) 2,
-        ‖(⟨sobolevDivergenceProductCoeff r c d, hc⟩ : TorusSobolev r)‖ ≤ C * ‖c‖ * ‖d‖ := by
+        @norm (TorusSobolev r) inferInstance ⟨sobolevDivergenceProductCoeff r c d, hc⟩ ≤
+          C * ‖c‖ * ‖d‖ := by
   obtain ⟨C, hC, hbound⟩ := SOBOLEV_DIVERGENCE_PRODUCT_FINITE_BOUND r
   refine ⟨Real.sqrt C, Real.sqrt_pos.mpr hC, ?_⟩
   intro c d

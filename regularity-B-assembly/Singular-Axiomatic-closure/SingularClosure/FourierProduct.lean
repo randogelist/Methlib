@@ -69,7 +69,10 @@ theorem scalarFourierSeries_product_coefficient
           apply integral_congr_ae
           apply Filter.Eventually.of_forall
           intro x
-          rw [← hchar]
+          change star (fourierCharacter k x) *
+            (fourierCharacter p x * b p * scalarFourierSeries d x) =
+              b p * (star (fourierCharacter (k - p) x) * scalarFourierSeries d x)
+          rw [← hchar x]
           ring
         _ = b p * (∫ x in unitCube,
             star (fourierCharacter (k - p) x) * scalarFourierSeries d x) :=
@@ -102,7 +105,7 @@ theorem physicalTensorColumn_coordinateDerivative (u v : Field)
       (u x j • fderiv ℝ v x +
         ((EuclideanSpace.proj j).comp (fderiv ℝ u x)).smulRight (v x)) x := by
     simpa only [physicalTensorColumn, Function.comp_def, Pi.smul_def',
-      EuclideanSpace.coe_proj] using hs
+      EuclideanSpace.coe_proj] using! hs
   change fderiv ℝ (physicalTensorColumn u v j) x (unitVector l) = _
   rw [hs'.fderiv]
   simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
