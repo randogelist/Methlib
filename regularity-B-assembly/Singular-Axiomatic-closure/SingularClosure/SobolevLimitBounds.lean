@@ -89,8 +89,8 @@ theorem torusSobolevInclusion_tendsto_of_coeff_tendsto
       (fun n => (torusSobolevInclusion s (u n)).val k i) :=
     hcluster.continuousAt_comp (torusSobolevCoeff_continuous s k i).continuousAt
   have hpoint : Tendsto
-      (fun n => (torusSobolevInclusion s (u n)).val k i) l (𝓝 (v.val k i)) :=
-    hcoeff k i
+      (fun n => (torusSobolevInclusion s (u n)).val k i) l (𝓝 (v.val k i)) := by
+    simpa only [torusSobolevInclusion_coeff] using hcoeff k i
   exact eq_of_nhds_neBot (heval.clusterPt.mono hpoint)
 
 /-- Membership, the inherited bound, and strong convergence are obtained
@@ -106,8 +106,10 @@ theorem torusSobolev_limit_of_bounded_higher_order
   obtain ⟨hc, hnorm⟩ := torusSobolev_limit_mem_and_norm_le (s + 1) u c B hbound hcoeff
   let v : TorusSobolev (s + 1) := ⟨c, hc⟩
   refine ⟨v, rfl, hnorm, ?_⟩
-  exact torusSobolevInclusion_tendsto_of_coeff_tendsto s u
-    (torusSobolevInclusion s v) B (Filter.Eventually.of_forall hbound) hcoeff
+  apply torusSobolevInclusion_tendsto_of_coeff_tendsto s u
+    (torusSobolevInclusion s v) B (Filter.Eventually.of_forall hbound)
+  intro k i
+  simpa only [torusSobolevInclusion_coeff] using hcoeff k i
 
 end
 

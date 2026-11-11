@@ -29,8 +29,9 @@ theorem intervalIntegral_sq_le_length_mul_integral_sq
   let L : ℝ := b - a
   let A : ℝ := ∫ r in a..b, f r
   have hL : 0 < L := sub_pos.mpr hlt
-  have hi := hf.intervalIntegrable_of_Icc hab
-  have hi2 := (hf.pow 2).intervalIntegrable_of_Icc hab
+  have hi : IntervalIntegrable f volume a b := hf.intervalIntegrable_of_Icc hab
+  have hi2 : IntervalIntegrable (fun r => f r ^ 2) volume a b :=
+    (hf.pow 2).intervalIntegrable_of_Icc hab
   have hnonneg : 0 ≤ ∫ r in a..b, (L * f r - A) ^ 2 :=
     intervalIntegral.integral_nonneg_of_forall hab (fun r => sq_nonneg _)
   have hpoly (r : ℝ) : (L * f r - A) ^ 2 =

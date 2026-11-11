@@ -40,7 +40,7 @@ theorem torusSobolevInclusion_continuousOn_of_coeff_continuousOn
     (torusSobolevInclusion s (u x)) B
   · exact Filter.eventually_of_mem self_mem_nhdsWithin (fun y hy => hbound y hy)
   · intro k i
-    exact hcoeff k i x hx
+    simpa only [torusSobolevInclusion_coeff] using hcoeff k i x hx
 
 theorem torusSobolevCoeff_intervalIntegral
     (s : ℕ) (r : ℝ → TorusSobolev s) (a b : ℝ)

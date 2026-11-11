@@ -130,7 +130,7 @@ theorem GalerkinSolution.sobolevState_inclusion {ν : ℝ} {a : Field} {N : ℕ}
     (g : GalerkinSolution ν a N) (s : ℕ) (t : ℝ) :
     torusSobolevInclusion s (g.sobolevState (s + 1) t) = g.sobolevState s t := by
   apply Subtype.ext
-  rfl
+  rw [torusSobolevInclusion_coeff] <;> rfl
 
 theorem GalerkinSolution.sobolevState_H1_physical_norm_sq
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)

@@ -22,8 +22,7 @@ theorem pressureFromTransport_add_arg (k : Frequency) (b d : Fin 3 → ℂ) :
   by_cases hk : k = 0
   · simp [pressureFromTransport, hk]
   · simp only [pressureFromTransport, if_neg hk, Pi.add_apply,
-      mul_add, Finset.sum_add_distrib, add_div]
-    ring
+      mul_add, Finset.sum_add_distrib, add_div] <;> ring
 
 theorem pressureFromTransport_smul_arg (k : Frequency) (z : ℂ) (b : Fin 3 → ℂ) :
     pressureFromTransport k (z • b) = z * pressureFromTransport k b := by

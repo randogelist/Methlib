@@ -193,7 +193,7 @@ def sobolevPhysicalEvaluation (n : ℕ) (x : Vec) : TorusSobolev (n + 4) →L[�
 theorem sobolevPhysicalEvaluation_apply (n : ℕ) (x : Vec) (c : TorusSobolev (n + 4)) :
     sobolevPhysicalEvaluation n x c = smoothFourierSynthesis c.val x := by
   ext j
-  simp [sobolevPhysicalEvaluation, ContinuousLinearMap.sum_apply,
+  fin_cases j <;> simp [sobolevPhysicalEvaluation, ContinuousLinearMap.sum_apply,
     ContinuousLinearMap.smulRight_apply, ContinuousLinearMap.comp_apply,
     sobolevScalarEvaluation_apply, smoothFourierSynthesis, unitVector,
     Fin.sum_univ_succ, Pi.single_apply]

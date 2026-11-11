@@ -132,7 +132,7 @@ theorem AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS (hAX6 : AX6Statement)
           rw [intervalIntegral.integral_add intervalIntegrable_const hZi,
             intervalIntegral.integral_const]
           simp
-        _ ≤ _ := add_le_add_left hZ _
+        _ ≤ _ := add_le_add (le_refl _) hZ
     dsimp [B]
     nlinarith
   · have hh := htime N hN g

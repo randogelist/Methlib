@@ -159,23 +159,33 @@ theorem torusSobolevInclusion_mem (s : ℕ) (c : TorusSobolev (s + 1)) :
   rw [sobolevWeightedCoeff_succ_norm]
   exact le_mul_of_one_le_left (norm_nonneg _) (torusSobolevWeight_one_le _)
 
+theorem exists_torusSobolevInclusionValue (s : ℕ) (c : TorusSobolev (s + 1)) :
+    ∃ v : TorusSobolev s, v.val = c.val :=
+  ⟨⟨c.val, torusSobolevInclusion_mem s c⟩, Eq.refl c.val⟩
+
 def torusSobolevInclusionValue (s : ℕ) (c : TorusSobolev (s + 1)) : TorusSobolev s :=
-  ⟨c.val, torusSobolevInclusion_mem s c⟩
+  (exists_torusSobolevInclusionValue s c).choose
 
 @[simp]
 theorem torusSobolevInclusionValue_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
-    (torusSobolevInclusionValue s c).val = c.val := rfl
+    (torusSobolevInclusionValue s c).val = c.val :=
+  (exists_torusSobolevInclusionValue s c).choose_spec
 
 theorem torusSobolevInclusionValue_add (s : ℕ) (c d : TorusSobolev (s + 1)) :
     torusSobolevInclusionValue s (c + d) =
       torusSobolevInclusionValue s c + torusSobolevInclusionValue s d := by
   apply Subtype.ext
-  rfl
+  change (torusSobolevInclusionValue s (c + d)).val =
+    (torusSobolevInclusionValue s c).val + (torusSobolevInclusionValue s d).val
+  rw [torusSobolevInclusionValue_coeff, torusSobolevInclusionValue_coeff,
+    torusSobolevInclusionValue_coeff] <;> rfl
 
 theorem torusSobolevInclusionValue_smul (s : ℕ) (z : ℂ) (c : TorusSobolev (s + 1)) :
     torusSobolevInclusionValue s (z • c) = z • torusSobolevInclusionValue s c := by
   apply Subtype.ext
-  rfl
+  change (torusSobolevInclusionValue s (z • c)).val =
+    z • (torusSobolevInclusionValue s c).val
+  rw [torusSobolevInclusionValue_coeff, torusSobolevInclusionValue_coeff] <;> rfl
 
 /-- Inclusion of the actual coefficient functions drops one Sobolev order. -/
 def torusSobolevInclusionLinear (s : ℕ) : TorusSobolev (s + 1) →ₗ[ℂ] TorusSobolev s where
