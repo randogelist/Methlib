@@ -101,7 +101,7 @@ theorem critical_positive_time_order_from_integrals
     Real.sq_sqrt (highOrderEnergy_nonneg _ _ _)
   have hvalue := hb t ⟨hrt, ht.2⟩
   simp only [hzsq] at hvalue
-  exact (add_le_add_left (mul_le_mul_of_nonneg_left hmon hν.le) (y t)).trans hvalue
+  exact (add_le_add (le_refl (y t)) (mul_le_mul_of_nonneg_left hmon hν.le)).trans hvalue
 
 /-- An integrated order-two bound on each positive-time interval forces
 uniform bounds at every integer order, for the original Galerkin equation. -/

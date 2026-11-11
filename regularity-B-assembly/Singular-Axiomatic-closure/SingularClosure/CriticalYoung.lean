@@ -10,8 +10,7 @@ theorem critical_young_square (ε x y : ℝ) (hε : 0 < ε) :
     x * y ≤ ε * y ^ 2 + x ^ 2 / (4 * ε) := by
   have heq : ε * y ^ 2 + x ^ 2 / (4 * ε) =
       (4 * ε ^ 2 * y ^ 2 + x ^ 2) / (4 * ε) := by
-    field_simp [hε.ne']
-    ring
+    field_simp [hε.ne'] <;> ring
   rw [heq]
   apply (le_div_iff₀ (mul_pos (by norm_num : (0 : ℝ) < 4) hε)).2
   nlinarith [sq_nonneg (2 * ε * y - x)]
@@ -30,8 +29,7 @@ theorem CRITICAL_TRANSPORT_YOUNG
     refine ⟨by positivity, ?_⟩
     nlinarith [Real.sqrt_nonneg D, Real.sqrt_nonneg W]
   have hsq : (A * U * Real.sqrt W * Real.sqrt D) ^ 2 = A ^ 2 * U ^ 2 * W * D := by
-    simp only [mul_pow, hsW, hsD]
-    ring
+    simp only [mul_pow, hsW, hsD] <;> ring
   have h1 := critical_young_square (ν / 8) (A * U * Real.sqrt W * Real.sqrt D) D
     (by positivity)
   rw [hsq] at h1
@@ -59,7 +57,7 @@ theorem CRITICAL_TRANSPORT_YOUNG
     _ ≤ ((ν / 8) * D ^ 2 +
         ((ν / 8) * D ^ 2 + 8 * A ^ 4 * U ^ 4 * W ^ 2 / ν ^ 3)) +
         ((ν / 4) * D ^ 2 + A ^ 2 * U ^ 2 * W ^ 2 / ν) := by
-      exact add_le_add (h1'.trans (add_le_add_left h2' _)) h3'
+      exact add_le_add (h1'.trans (add_le_add le_rfl h2')) h3'
     _ = _ := by ring
 
 end SingularClosure

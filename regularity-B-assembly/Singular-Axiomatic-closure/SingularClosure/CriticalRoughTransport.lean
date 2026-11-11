@@ -160,7 +160,10 @@ theorem CRITICAL_ROUGH_TRANSPORT_SKEW
     intro j _
     have ha : Tendsto (fun n => physicalFieldInner (coordinateDerivative (w n) j) (A j))
         atTop (𝓝 (physicalFieldInner (fun x => G x (unitVector j)) (A j))) := by
-      simpa only [Function.comp_def, ContinuousLinearMap.apply_apply, coordinateDerivative] using
+      change Tendsto (fun n => physicalFieldInner
+        (fun x => fderiv ℝ (w n) x (unitVector j)) (A j)) atTop
+        (𝓝 (physicalFieldInner (fun x => G x (unitVector j)) (A j)))
+      simpa only [Function.comp_def, ContinuousLinearMap.apply_apply] using
         critical_physicalFieldInner_compCLM_tendsto
           (ContinuousLinearMap.apply ℝ Vec (unitVector j))
           (fun n => fderiv ℝ (w n)) G (A j) hwDL2 hv.derivative_L2 (hA j) hderiv

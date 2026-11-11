@@ -36,7 +36,7 @@ theorem critical_smooth_integral_inner_gradient_eq_zero
     have hdf : fderiv ℝ (F j) x =
         v x j • fderiv ℝ f x + f x •
           ((EuclideanSpace.proj j : Vec →L[ℝ] ℝ).comp (fderiv ℝ v x)) := by
-      simpa only [F, Function.comp_def, EuclideanSpace.coe_proj] using hd.fderiv
+      simpa only [F, Function.comp_def, EuclideanSpace.coe_proj, Pi.mul_def] using hd.fderiv
     rw [hdf]
     simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
       ContinuousLinearMap.comp_apply, EuclideanSpace.coe_proj, smul_eq_mul,

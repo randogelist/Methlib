@@ -27,7 +27,7 @@ theorem critical_ennreal_liminf_add_le (f g : ℕ → ℝ≥0∞) :
   obtain ⟨b, hb, d, hd, hbd⟩ := ENNReal.exists_lt_add_of_lt_add hc hf hg
   filter_upwards [Filter.eventually_lt_of_lt_liminf hb,
     Filter.eventually_lt_of_lt_liminf hd] with n hn hm
-  exact hbd.trans (add_lt_add hn hm)
+  exact hbd.trans (ENNReal.add_lt_add hn hm)
 
 /-- Modal lower semicontinuity of the fourth power of a homogeneous norm. -/
 theorem criticalExtendedQuartic_le_liminf (q : ℤ)

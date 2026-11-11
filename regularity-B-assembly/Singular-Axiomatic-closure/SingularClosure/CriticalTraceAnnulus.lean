@@ -60,8 +60,9 @@ theorem criticalFiniteBandState_eq_tail (q : ℤ) (s : Finset FourierIndex) (N :
   apply WithLp.ext_iff.mpr
   funext ki
   have hk : ki.val.1 ∉ sobolevCutoffModes N := by
-    simpa only [sobolevCutoffIndices, Finset.mem_product, Finset.mem_univ, and_true] using
-      hs ki.val ki.property
+    intro hk
+    exact hs ki.val ki.property
+      ((criticalTrace_mem_cutoffIndices N ki.val.1 ki.val.2).mpr hk)
   change criticalWeightedCoeff q (criticalCoeff q u) ki.val =
     criticalWeightedCoeff q (criticalCoeff q (u - criticalSobolevCutoff q N u)) ki.val
   change _ = (criticalHalfWeight ki.val.1 : ℂ) ^ q *

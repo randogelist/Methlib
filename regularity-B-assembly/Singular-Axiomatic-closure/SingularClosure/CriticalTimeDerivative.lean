@@ -130,8 +130,8 @@ theorem CRITICAL_GALERKIN_TIME_DERIVATIVE_BUDGET
     have hnonneg := criticalEnergy_nonneg 1 N (g.coeff T)
     nlinarith
   have hRint : IntervalIntegrable (fun t => ‖g.criticalRhs (-1) t‖ ^ 2) volume 0 T :=
-    (((g.criticalRhs_continuousOn (-1)).mono (fun t ht => ht.1)).norm.pow 2).
-      intervalIntegrable_of_Icc hT
+    (((g.criticalRhs_continuousOn (-1)).mono
+      (fun _ (ht : _ ∈ Icc (0 : ℝ) T) => ht.1)).norm.pow 2).intervalIntegrable_of_Icc hT
   have hEint : IntervalIntegrable (fun t => criticalEnergy 3 N (g.coeff t)) volume 0 T :=
     ((g.criticalEnergy_continuousOn 3).mono (fun t ht => ht.1)).intervalIntegrable_of_Icc hT
   calc

@@ -58,6 +58,9 @@ theorem GalerkinSolution.critical_H1_time_tail
     apply intervalIntegral.integral_congr
     intro t ht
     have ht' : t ∈ Icc (0 : ℝ) T := by simpa only [uIcc_of_le hT] using ht
+    change ‖criticalToTorusH1 (g.criticalState 3 t) -
+        torusSobolevCutoff 1 K (criticalToTorusH1 (g.criticalState 3 t))‖ ^ 2 =
+      ‖g.sobolevState 1 t - torusSobolevCutoff 1 K (g.sobolevState 1 t)‖ ^ 2
     rw [g.criticalToTorusH1_state t ht'.1]
   rw [heq] at h
   exact h
@@ -96,8 +99,12 @@ theorem criticalGalerkin_H1_time_difference_bound
     (h.sobolevState_continuousOn 1).mono (fun t ht => ht.1)
   have hgp := (torusSobolevCutoff 1 K).continuous.comp_continuousOn hgcont
   have hhp := (torusSobolevCutoff 1 K).continuous.comp_continuousOn hhcont
-  have hgi := ((hgcont.sub hgp).norm.pow 2).intervalIntegrable_of_Icc hT
-  have hhi := ((hhcont.sub hhp).norm.pow 2).intervalIntegrable_of_Icc hT
+  have hgi : IntervalIntegrable (fun t =>
+      ‖g.sobolevState 1 t - torusSobolevCutoff 1 K (g.sobolevState 1 t)‖ ^ 2)
+      volume 0 T := ((hgcont.sub hgp).norm.pow 2).intervalIntegrable_of_Icc hT
+  have hhi : IntervalIntegrable (fun t =>
+      ‖h.sobolevState 1 t - torusSobolevCutoff 1 K (h.sobolevState 1 t)‖ ^ 2)
+      volume 0 T := ((hhcont.sub hhp).norm.pow 2).intervalIntegrable_of_Icc hT
   have hbound : (∫ t in (0 : ℝ)..T, ‖g.sobolevState 1 t - h.sobolevState 1 t‖ ^ 2) ≤
       ∫ t in (0 : ℝ)..T,
         3 * ‖g.sobolevState 1 t - torusSobolevCutoff 1 K (g.sobolevState 1 t)‖ ^ 2 +
@@ -121,6 +128,7 @@ theorem criticalGalerkin_H1_time_difference_bound
     intervalIntegral.integral_add (hgi.const_mul 3) intervalIntegrable_const,
     intervalIntegral.integral_const_mul, intervalIntegral.integral_const_mul,
     intervalIntegral.integral_const] at hbound
+  simp only [sub_zero, smul_eq_mul] at hbound
   have hgtail := g.critical_H1_time_tail T B hT hg K hK
   have hhtail := h.critical_H1_time_tail T B hT hh K hK
   change (∫ t in (0 : ℝ)..T, ‖g.sobolevState 1 t - h.sobolevState 1 t‖ ^ 2) ≤

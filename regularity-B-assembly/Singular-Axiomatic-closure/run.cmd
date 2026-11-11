@@ -29,6 +29,8 @@ set /p AX6_MATHLIB_REV=<evidence\mathlib-revision.txt
 if not "%AX6_MATHLIB_REV%"=="db584cd6d46c92f209a44c0f1c829460d327499d" goto fail
 call lake build > evidence\build.log 2>&1
 if errorlevel 1 goto fail
+python ci\build_critical.py
+if errorlevel 1 goto fail
 call lake env lean ci\Audit.lean > evidence\axioms.log 2>&1
 if errorlevel 1 goto fail
 python ci\check_axioms.py evidence\axioms.log ci\expected_axioms.json > evidence\audit.json 2>&1

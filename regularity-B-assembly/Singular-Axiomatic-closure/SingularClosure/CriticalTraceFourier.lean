@@ -45,7 +45,7 @@ theorem criticalBandSobolev_norm_sq (q : ℤ) (s : Finset FourierIndex) (c : Fou
     EuclideanSpace.norm_sq_eq]
   change ‖∑ ki ∈ s, lp.single 2 ki (criticalWeightedCoeff q c ki)‖ ^ 2 =
     ∑ ki : ↥s, ‖criticalWeightedCoeff q c ki.val‖ ^ 2
-  rw [Finset.sum_coe_sort]
+  rw [Finset.sum_coe_sort s (fun ki : FourierIndex => ‖criticalWeightedCoeff q c ki‖ ^ 2)]
   simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using
     lp.norm_sum_single (p := (2 : ℝ≥0∞)) (by norm_num)
       (criticalWeightedCoeff q c) s
@@ -62,7 +62,8 @@ theorem criticalFiniteBandState_norm_le (q : ℤ) (s : Finset FourierIndex)
   apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
   rw [EuclideanSpace.norm_sq_eq]
   change (∑ ki : ↥s, ‖criticalWeightedCoeff q (criticalCoeff q u) ki.val‖ ^ 2) ≤ _
-  rw [Finset.sum_coe_sort]
+  rw [Finset.sum_coe_sort s
+    (fun ki : FourierIndex => ‖criticalWeightedCoeff q (criticalCoeff q u) ki‖ ^ 2)]
   simpa only [ENNReal.toReal_ofNat, Real.rpow_two, criticalSobolevRepr_apply,
     (criticalSobolevRepr q).norm_map] using
     lp.sum_rpow_le_norm_rpow (p := (2 : ℝ≥0∞)) (by norm_num)
@@ -79,6 +80,16 @@ theorem criticalBandSobolev_continuousOn (q : ℤ) (s : Finset FourierIndex)
   exact (lp.singleContinuousLinearMap ℂ (fun _ : FourierIndex => ℂ) 2 ki).continuous.comp_continuousOn
     (continuousOn_const.mul (hc ki hki))
 
+/-- Membership in the product cutoff depends only on the Fourier frequency. -/
+theorem criticalTrace_mem_cutoffIndices (N : ℕ) (k : Frequency) (i : Fin 3) :
+    (k, i) ∈ sobolevCutoffIndices N ↔ k ∈ sobolevCutoffModes N := by
+  change (k, i) ∈ (sobolevCutoffModes N).product Finset.univ ↔ k ∈ sobolevCutoffModes N
+  constructor
+  · intro h
+    exact (Finset.mem_product.mp h).1
+  · intro h
+    exact Finset.mem_product.mpr ⟨h, Finset.mem_univ i⟩
+
 /-- For an actual Sobolev vector this is exactly its Fourier cutoff. -/
 theorem criticalBandSobolev_eq_cutoff (q : ℤ) (N : ℕ) (u : CriticalSobolev q) :
     criticalBandSobolev q (sobolevCutoffIndices N) (criticalCoeff q u) =
@@ -86,7 +97,7 @@ theorem criticalBandSobolev_eq_cutoff (q : ℤ) (N : ℕ) (u : CriticalSobolev q
   apply criticalCoeff_injective q
   funext k i
   simp only [criticalBandSobolev_coeff, criticalSobolevCutoff_coeff,
-    sobolevCutoffIndices, Finset.mem_product, Finset.mem_univ, and_true]
+    criticalTrace_mem_cutoffIndices]
 
 theorem criticalBandSobolev_initial_tendsto (q : ℤ) (a : CriticalSobolev q) :
     Tendsto (fun N => criticalBandSobolev q (sobolevCutoffIndices N) (criticalCoeff q a))

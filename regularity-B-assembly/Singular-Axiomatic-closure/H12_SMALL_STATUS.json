@@ -3,7 +3,7 @@
   "status": "A_TIER_CANDIDATE_IN_PROGRESS",
   "root_proved": false,
   "unconditional_closure": false,
-  "smallness": "Ccrit * norm_Hhalf(u0) <= nu / 2",
+  "smallness": "criticalNonlinearConstant * norm_Hhalf(a) < nu",
   "initial_trace": "strong Hhalf",
   "smoothness": "positive time; closed forward time for smooth initial data",
   "local_lean_executions": 0,
@@ -13,7 +13,7 @@
     {
       "number": 1,
       "name": "CriticalSpaces",
-      "status": "IN_PROGRESS"
+      "status": "COMPILED"
     },
     {
       "number": 2,
@@ -33,42 +33,89 @@
     {
       "number": 3,
       "name": "CriticalSobolev",
-      "status": "IN_PROGRESS"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "095c9ffc4328c6413347efe6dd0439a2753ced97",
+        "run_id": 43036693539,
+        "declarations": [
+          "FINITE_CRITICAL_HHALF_L3"
+        ],
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY"
+      }
     },
     {
       "number": 4,
       "name": "CriticalEnergy",
-      "status": "IN_PROGRESS"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "095c9ffc4328c6413347efe6dd0439a2753ced97",
+        "run_id": 43036693539,
+        "declarations": [
+          "GalerkinSolution.criticalEnergy_balance"
+        ],
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY"
+      }
     },
     {
       "number": 5,
       "name": "CriticalInvariant",
-      "status": "IN_PROGRESS"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "095c9ffc4328c6413347efe6dd0439a2753ced97",
+        "run_id": 43036693539,
+        "declarations": [
+          "CRITICAL_ENERGY_INVARIANT",
+          "CRITICAL_SQUARE_BUDGET_DIV"
+        ],
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY"
+      }
     },
     {
       "number": 6,
       "name": "SmallDataAX6",
-      "status": "IN_PROGRESS"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "1980780841305fd4c081ed67597d7f3c10fb723c",
+        "run_id": 43038738281,
+        "declarations": [
+          "SMALL_DATA_AX6",
+          "SMALL_DATA_SIX_CHANNEL_BUDGET"
+        ],
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY"
+      }
     },
     {
       "number": 7,
       "name": "CriticalLimit",
-      "status": "PENDING"
+      "status": "A_TIER_CANDIDATE"
     },
     {
       "number": 8,
       "name": "CriticalTrace",
-      "status": "IN_PROGRESS"
+      "status": "A_TIER_CANDIDATE"
     },
     {
       "number": 9,
       "name": "CriticalRegularity",
-      "status": "PENDING"
+      "status": "A_TIER_CANDIDATE"
     },
     {
       "number": 10,
       "name": "SmallDataRoot",
-      "status": "PENDING"
+      "status": "A_TIER_CANDIDATE"
     }
-  ]
+  ],
+  "root_theorem": "NSE_H12_SIGMA_ZERO_SMALL_REGULARITY",
+  "scope": {
+    "domain": "T^3",
+    "forcing": "zero",
+    "data": "actual real divergence-free mean-zero CriticalSobolev 1",
+    "regularity": "strong critical trace, positive-time smooth physical NSE",
+    "leray_hopf_uniqueness": "separate endpoint in progress"
+  },
+  "last_verified_components_run": 43038738281
 }

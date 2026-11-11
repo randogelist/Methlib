@@ -1,5 +1,6 @@
 import SingularClosure.CriticalWeakMomentum
 import SingularClosure.CriticalPeriodicIBP
+import SingularClosure.CriticalSobolevDual
 
 /-!
 Physical weak gradients obtained from actual smooth H1 approximation.
@@ -25,17 +26,6 @@ structure CriticalWeakGradient (v : Field) (G : Vec → (Vec →L[ℝ] Vec)) : P
     physicalFieldInner v (coordinateDerivative φ j) =
       -physicalFieldInner (fun x => G x (unitVector j)) φ
 
-theorem critical_continuous_memLp_cube {E : Type*} [NormedAddCommGroup E]
-    (f : Vec → E) (hf : Continuous f) (p : ℝ≥0∞) :
-    MemLp f p (volume.restrict unitCube) := by
-  haveI : IsFiniteMeasure (volume.restrict unitCube) :=
-    ⟨by simpa only [Measure.restrict_apply_univ] using
-      isCompact_unitCube.measure_lt_top (μ := volume)⟩
-  obtain ⟨C, hC⟩ := isCompact_unitCube.exists_bound_of_continuousOn hf.continuousOn
-  apply MemLp.of_bound hf.aestronglyMeasurable C
-  filter_upwards [ae_restrict_mem isCompact_unitCube.measurableSet] with x hx
-  exact hC x hx
-
 /-- Genuine L2 convergence of function representatives gives norm convergence
 of their physical L2 equivalence classes. -/
 theorem critical_toLp_tendsto_of_eLpNorm_sub
@@ -52,7 +42,7 @@ theorem critical_toLp_tendsto_of_eLpNorm_sub
     rw [dist_eq_norm, ← (hf n).toLp_sub hg, Lp.norm_toLp]
   simp_rw [hd]
   simpa only [Function.comp_def, ENNReal.toReal_zero] using
-    (ENNReal.tendsto_toReal (by simp : (0 : ℝ≥0∞) ≠ ∞)).comp hconv
+    (ENNReal.tendsto_toReal (by simp : (0 : ℝ≥0∞) ≠ (⊤ : ℝ≥0∞))).comp hconv
 
 theorem critical_physicalFieldInner_eq_L2_inner
     (v φ : Field) (hv : MemLp v 2 (volume.restrict unitCube))
@@ -142,7 +132,10 @@ theorem CRITICAL_WEAK_GRADIENT_OF_SMOOTH_APPROXIMATION
   have hright : Tendsto
       (fun n => physicalFieldInner (coordinateDerivative (w n) j) φ)
       atTop (𝓝 (physicalFieldInner (fun x => G x (unitVector j)) φ)) := by
-    simpa only [Function.comp_def, ContinuousLinearMap.apply_apply, coordinateDerivative] using
+    change Tendsto (fun n => physicalFieldInner
+      (fun x => fderiv ℝ (w n) x (unitVector j)) φ) atTop
+      (𝓝 (physicalFieldInner (fun x => G x (unitVector j)) φ))
+    simpa only [Function.comp_def, ContinuousLinearMap.apply_apply] using
       critical_physicalFieldInner_compCLM_tendsto
         (ContinuousLinearMap.apply ℝ Vec (unitVector j))
         (fun n => fderiv ℝ (w n)) G φ hwDL2 hG hφL2 hderivative

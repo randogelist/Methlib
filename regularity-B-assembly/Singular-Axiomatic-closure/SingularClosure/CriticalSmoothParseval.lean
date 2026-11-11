@@ -39,7 +39,7 @@ theorem critical_smoothFourierSynthesis_component_parseval
       (smoothFourierSynthesis c x i : ℂ) * (smoothFourierSynthesis c x i : ℂ)) =
       (fun x : Vec => (((smoothFourierSynthesis c x i) ^ 2 : ℝ) : ℂ)) := by
     funext x
-    simp only [Complex.ofReal_pow, pow_two]
+    simp only [Complex.ofReal_pow, pow_two, Complex.ofReal_mul]
   rw [hcast, integral_complex_ofReal] at h
   exact Complex.ofReal_injective h
 
@@ -56,7 +56,7 @@ theorem critical_weight_two_laplacian (c : FourierCoeff) (hzero : SpectralMeanZe
   by_cases hk : k = 0
   · subst k
     simp only [hzero i, Complex.normSq_zero, mul_zero]
-  · rw [zpow_natCast, criticalFrequencyWeight_sq_of_ne_zero k hk]
+  · simp only [zpow_ofNat, criticalFrequencyWeight_sq_of_ne_zero k hk]
 
 theorem critical_H1_laplacian_summable (w : CriticalSobolev 2)
     (hzero : SpectralMeanZero (criticalCoeff 2 w)) :
@@ -74,6 +74,7 @@ theorem critical_H1_laplacian_summable (w : CriticalSobolev 2)
       ← Complex.normSq_eq_norm_sq, critical_weight_two_laplacian _ hzero]
   simpa only [heq] using hs
 
+set_option maxHeartbeats 800000 in
 /-- Literal physical dissipation equals the actual homogeneous H1 Hilbert norm. -/
 theorem critical_smoothFourierSynthesis_dissipation_eq_norm_sq
     (c : FourierCoeff) (hc : ∀ i : Fin 3, RapidScalarFourier (fun k => c k i))
@@ -85,7 +86,8 @@ theorem critical_smoothFourierSynthesis_dissipation_eq_norm_sq
     simpa only [hw] using critical_H1_laplacian_summable w (by simpa only [hw] using hzero)
   have hcomponent (i : Fin 3) : Summable (fun k : Frequency =>
       laplacianFrequency k * Complex.normSq (c k i)) :=
-    hsum.comp_injective (fun k l h => congrArg Prod.fst h)
+    hsum.comp_injective (i := fun k : Frequency => (k, i))
+      (fun k l h => congrArg Prod.fst h)
   have hd (j i : Fin 3) : Summable (fun k : Frequency =>
       Complex.normSq (spectralMultiplier (derivativeSymbol j) c k i)) := by
     apply Summable.of_nonneg_of_le (fun k => Complex.normSq_nonneg _) _ (hcomponent i)

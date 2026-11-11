@@ -23,11 +23,26 @@ noncomputable section
 
 abbrev CriticalPhysicalL2 := Lp Vec 2 (volume.restrict unitCube)
 
+/-- The actual physical L2 equivalence class whenever the representative is
+square integrable.  The zero branch is irrelevant on every stated energy class. -/
+def criticalL2Representative {E : Type*} [NormedAddCommGroup E] (f : Vec → E) :
+    Lp E 2 (volume.restrict unitCube) :=
+  if hf : MemLp f 2 (volume.restrict unitCube) then hf.toLp f else 0
+
+theorem criticalL2Representative_eq {E : Type*} [NormedAddCommGroup E]
+    (f : Vec → E) (hf : MemLp f 2 (volume.restrict unitCube)) :
+    criticalL2Representative f = hf.toLp f := by
+  simp only [criticalL2Representative, dif_pos hf]
+
 structure CriticalLerayHopf
     (ν : ℝ) (a₀ : CriticalPhysicalL2) (v : Velocity)
     (G : ℝ → Vec → (Vec →L[ℝ] Vec)) : Prop where
   momentum : CriticalIntegratedWeakMomentum ν v
   velocity_L2 : ∀ t : ℝ, 0 ≤ t → MemLp (v t) 2 (volume.restrict unitCube)
+  velocity_energy_class : ∀ T : ℝ, 0 < T →
+    MemLp (fun t => criticalL2Representative (v t)) ∞ (volume.restrict (Ioc (0 : ℝ) T))
+  gradient_energy_class : ∀ T : ℝ, 0 < T →
+    MemLp (fun t => criticalL2Representative (G t)) 2 (volume.restrict (Ioc (0 : ℝ) T))
   initial : v 0 =ᵐ[volume.restrict unitCube] (a₀ : Vec → Vec)
   weak_continuity : ∀ φ : Field, MemLp φ 2 (volume.restrict unitCube) →
     ContinuousOn (fun t => physicalFieldInner (v t) φ) (Ici 0)

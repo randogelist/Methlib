@@ -183,8 +183,7 @@ theorem CRITICAL_HHALF_STRONG_TRACE
       (hwu.tendsto_at ht)
     have hevent : ∀ᶠ N in atTop, criticalCoeff 1 (F N t) k i = c t k i := by
       filter_upwards [eventually_mem_sobolevCutoffModes k] with N hN
-      simp only [F, criticalBandSobolev_coeff, sobolevCutoffIndices,
-        Finset.mem_product, Finset.mem_univ, and_true, if_pos hN]
+      simp only [F, criticalBandSobolev_coeff, criticalTrace_mem_cutoffIndices, if_pos hN]
     exact tendsto_nhds_unique hlim (tendsto_const_nhds.congr' hevent.symm)
   refine ⟨w, hwc, hw0, hwcoeff, ?_⟩
   filter_upwards [hc, ae_restrict_mem measurableSet_Icc] with t ht htI
