@@ -24,3 +24,6 @@ import SingularClosure.Ax6Bounds
 import SingularClosure.CoordinateAverage
 import SingularClosure.InitialFourier
 import SingularClosure.GalerkinGlobal
+import SingularClosure.FiniteParseval
+import SingularClosure.PhysicalEnergy
+import SingularClosure.CoordinateAverageCalculus

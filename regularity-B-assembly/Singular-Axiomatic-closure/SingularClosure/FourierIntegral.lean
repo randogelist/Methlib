@@ -65,7 +65,7 @@ theorem integral_fourierCharacter (k : Frequency) :
     (∫ x in unitCube, fourierCharacter k x) = if k = 0 then 1 else 0 := by
   classical
   simp_rw [fourierCharacter_eq_product]
-  rw [integral_unitCube_product]
+  rw [integral_unitCube_product (fun i t => fourier (k i) (t : UnitAddCircle))]
   simp_rw [integral_oneDimensional_character]
   by_cases hk : k = 0
   · simp [hk]

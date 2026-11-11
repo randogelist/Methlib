@@ -30,7 +30,7 @@ theorem ax6_physical_square_budget (hAX6 : AX6Statement)
   refine ⟨36 * M, ?_⟩
   intro N hN g
   have h := (PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET N g.coeff T).trans
-    (mul_le_mul_left' (hM N hN g) (36 : ℝ≥0∞))
+    (mul_le_mul' (le_refl (36 : ℝ≥0∞)) (hM N hN g))
   simpa only [GalerkinSolution.velocity, ENNReal.coe_mul, ENNReal.coe_ofNat] using h
 
 end

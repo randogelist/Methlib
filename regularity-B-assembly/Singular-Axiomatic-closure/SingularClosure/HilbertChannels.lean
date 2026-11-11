@@ -21,6 +21,12 @@ namespace SingularClosure
 
 noncomputable section
 
+local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance : Measure.IsAddHaarMeasure (volume : Measure UnitAddCircle) :=
+  inferInstanceAs (Measure.IsAddHaarMeasure AddCircle.haarAddCircle)
+local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
+  inferInstanceAs (IsProbabilityMeasure AddCircle.haarAddCircle)
+
 abbrev TorusScalarL2 :=
   MeasureTheory.Lp ℂ 2 (volume : Measure (UnitAddTorus (Fin 3)))
 
@@ -32,7 +38,7 @@ abbrev FourierSequenceL2 := lp (fun _ : Frequency => ℂ) 2
 def l2SequenceChannel (A : Fin 6) (i : Fin 3)
     (a : FourierSequenceL2) : FourierSequenceL2 :=
   ⟨fun k => if channelOf k i = A then a k else 0,
-    a.memℓp.mono' (by
+    (lp.memℓp a).mono' (by
       intro k
       by_cases h : channelOf k i = A <;> simp [h])⟩
 
@@ -45,7 +51,9 @@ theorem l2SequenceChannel_sum (i : Fin 3) (a : FourierSequenceL2) :
     (∑ A : Fin 6, l2SequenceChannel A i a) = a := by
   apply lp.ext
   funext k
-  simp [lp.coeFn_sum, eq_comm]
+  change (∑ A : Fin 6, l2SequenceChannel A i a) k = a k
+  simp only [lp.coeFn_sum, Finset.sum_apply, l2SequenceChannel_apply]
+  simp [eq_comm]
 
 theorem l2SequenceChannel_idempotent (A : Fin 6) (i : Fin 3)
     (a : FourierSequenceL2) :
@@ -81,7 +89,7 @@ theorem l2SequenceChannel_disjoint (A B : Fin 6) (hAB : A ≠ B) (i : Fin 3)
   funext k
   by_cases hA : channelOf k i = A
   · have hB : channelOf k i ≠ B := fun h => hAB (hA.symm.trans h)
-    simp [hA, hB]
+    simp [hA, hB, hAB]
   · simp [hA]
 
 theorem l2SequenceChannel_selfAdjoint (A : Fin 6) (i : Fin 3)
@@ -212,7 +220,10 @@ theorem TORUS_L2_SIX_CHANNEL_PYTHAGORAS (u : TorusVectorL2) :
         simp only [TORUS_L2_SIX_CHANNEL_RECONSTRUCTION]
       _ = ∑ A : Fin 6, ∑ B : Fin 6,
           inner ℂ (torusL2Channel A u) (torusL2Channel B u) := by
-        simp only [sum_inner, inner_sum]
+        rw [sum_inner]
+        apply Finset.sum_congr rfl
+        intro A _
+        rw [inner_sum]
       _ = _ := by
         apply Finset.sum_congr rfl
         intro A _
@@ -221,7 +232,9 @@ theorem TORUS_L2_SIX_CHANNEL_PYTHAGORAS (u : TorusVectorL2) :
           exact TORUS_L2_SIX_CHANNEL_ORTHOGONAL A B hBA.symm u u
         · simp
   have hr := congrArg Complex.re h
-  simpa only [Complex.re_sum, inner_self_eq_norm_sq] using hr
+  have hs (v : TorusVectorL2) : (inner ℂ v v).re = ‖v‖ ^ 2 :=
+    inner_self_eq_norm_sq (𝕜 := ℂ) v
+  simpa only [Complex.re_sum, hs] using hr
 
 /-- Actual L² Fourier coefficients, in the coefficient convention of SixChannels. -/
 def torusVectorFourierCoeff (u : TorusVectorL2) : FourierCoeff :=
@@ -249,7 +262,8 @@ theorem torusL2Channel_preserves_fourierMeanZero (A : Fin 6) (u : TorusVectorL2)
 
 theorem torusVectorFourierCoeff_zero (u : TorusVectorL2) (i : Fin 3) :
     torusVectorFourierCoeff u 0 i = ∫ x, u i x := by
-  simp [torusVectorFourierCoeff, UnitAddTorus.mFourierCoeff]
+  simp [torusVectorFourierCoeff, UnitAddTorus.mFourierCoeff,
+    UnitAddTorus.mFourier_zero]
 
 /-- Preservation of the literal physical mean on the probability torus. -/
 theorem torusL2Channel_preserves_mean (A : Fin 6) (u : TorusVectorL2)

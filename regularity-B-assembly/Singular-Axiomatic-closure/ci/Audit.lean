@@ -660,4 +660,55 @@ example : ∀ (ν : ℝ) (hν : 0 < ν)
 #check @SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
 #print axioms SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
 
+
+open Metric
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hreal : SpectralReality c),
+    physicalEnergy (finiteSynthesis N c) = coefficientEnergy N c :=
+  @SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL"
+#check @SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL
+#print axioms SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hreal : SpectralReality c),
+    physicalEnstrophy (finiteSynthesis N c) = ENNReal.ofReal (coefficientDissipation N c) :=
+  @SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL"
+#check @SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL
+#print axioms SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    {T : ℝ} (hT : 0 ≤ T),
+    IntervalIntegrable (fun t => physicalDissipation (g.velocity t)) volume 0 T ∧
+      physicalEnergy (g.velocity T) +
+        2 * ν * (∫ t in (0 : ℝ)..T, physicalDissipation (g.velocity t)) =
+          physicalEnergy (finiteSynthesis N (datumFourierCoeff a)) :=
+  @SingularClosure.GALERKIN_ENERGY_IDENTITY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENERGY_IDENTITY"
+#check @SingularClosure.GALERKIN_ENERGY_IDENTITY
+#print axioms SingularClosure.GALERKIN_ENERGY_IDENTITY
+
+example : ∀ (j : Fin 3) (a : Field)
+    (ha : ContDiff ℝ ∞ a),
+    ContDiff ℝ ∞ (coordinateAverage j a) :=
+  @SingularClosure.coordinateAverage_smooth
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_smooth"
+#check @SingularClosure.coordinateAverage_smooth
+#print axioms SingularClosure.coordinateAverage_smooth
+
+example : ∀ (i j : Fin 3) (a : Field) (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a),
+    coordinateDerivative (coordinateAverage j a) i =
+      coordinateAverage j (coordinateDerivative a i) :=
+  @SingularClosure.coordinateAverage_all_coordinateDerivative_commute
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_all_coordinateDerivative_commute"
+#check @SingularClosure.coordinateAverage_all_coordinateDerivative_commute
+#print axioms SingularClosure.coordinateAverage_all_coordinateDerivative_commute
+
 end

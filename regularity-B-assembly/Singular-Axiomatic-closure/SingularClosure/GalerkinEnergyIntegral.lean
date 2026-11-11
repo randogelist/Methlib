@@ -27,9 +27,9 @@ theorem GalerkinSolution.coefficientDissipation_continuousOn
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N) :
     ContinuousOn (fun t => coefficientDissipation N (g.coeff t)) (Ici 0) := by
   unfold coefficientDissipation
-  apply ContinuousOn.sum
+  apply continuousOn_finset_sum
   intro k hk
-  apply ContinuousOn.sum
+  apply continuousOn_finset_sum
   intro i hi
   simp_rw [Complex.normSq_eq_norm_sq]
   exact continuousOn_const.mul ((g.coefficient_continuous k i).norm.pow 2)

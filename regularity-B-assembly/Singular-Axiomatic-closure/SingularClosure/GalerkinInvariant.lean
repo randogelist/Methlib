@@ -1,8 +1,6 @@
 import SingularClosure.GalerkinReality
 import SingularClosure.LerayPressure
 import SingularClosure.DissipativeODE
-import SingularClosure.GalerkinExistence
-import SingularClosure.InitialFourier
 
 /-!
 # The actual invariant finite Fourier state space
@@ -268,29 +266,6 @@ theorem galerkinSolution_exists_of_fourier_invariants (ν : ℝ) (hν : 0 ≤ ν
   · intro t ht k hk i
     exact (invariantGalerkin_curve_coefficient_deriv ν N z t (hzd t ht) k hk i)
       .hasDerivWithinAt
-
-/-- Frozen endpoint 3: global existence of the actual Fourier--Galerkin
-trajectory from every smooth solenoidal datum, and uniqueness throughout
-the nonnegative time domain. -/
-theorem GALERKIN_GLOBAL_EXISTS_UNIQUE (ν : ℝ) (hν : 0 < ν)
-    (a : Field) (ha : SmoothSigmaZero a) (N : ℕ) :
-    ∃ g : GalerkinSolution ν a N,
-      ∀ h : GalerkinSolution ν a N, EqOn g.coeff h.coeff (Ici 0) := by
-  obtain ⟨g⟩ := galerkinSolution_exists_of_fourier_invariants ν hν.le a N
-    (smoothSigmaZero_fourier_integrable ha) (datumFourierCoeff_reality a)
-    (smoothSigmaZero_fourier_solenoidal ha)
-  exact ⟨g, fun h => g.coeff_unique_forward h⟩
-
-/-- The canonical actual Galerkin trajectory, selected only after existence
-and forward uniqueness have been proved. -/
-def canonicalGalerkinSolution (ν : ℝ) (hν : 0 < ν)
-    (a : Field) (ha : SmoothSigmaZero a) (N : ℕ) : GalerkinSolution ν a N :=
-  Classical.choose (GALERKIN_GLOBAL_EXISTS_UNIQUE ν hν a ha N)
-
-theorem canonicalGalerkinSolution_unique_forward (ν : ℝ) (hν : 0 < ν)
-    (a : Field) (ha : SmoothSigmaZero a) (N : ℕ) (g : GalerkinSolution ν a N) :
-    EqOn (canonicalGalerkinSolution ν hν a ha N).coeff g.coeff (Ici 0) :=
-  (canonicalGalerkinSolution ν hν a ha N).coeff_unique_forward g
 
 end
 
