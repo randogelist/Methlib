@@ -28,7 +28,7 @@ theorem critical_halfline_fourth_budget
       exact hn.1
     · intro ht
       obtain ⟨n, hn⟩ := exists_nat_gt t
-      exact mem_iUnion.mpr ⟨n, ht, by dsimp [s]; linarith⟩
+      exact mem_iUnion.mpr ⟨n, ht, by linarith⟩
   have hmono : Monotone s := by
     intro m n hmn
     apply Ioc_subset_Ioc_right
@@ -42,7 +42,7 @@ theorem critical_halfline_fourth_budget
       (Filter.Eventually.of_forall hf0)
     rw [← heq]
     exact ENNReal.ofReal_le_ofReal (hbudget _ hn)
-  have hi : IntegrableOn (fun t => f t ^ 4) (Ioi (0 : ℝ)) volume := by
+  have hi : Integrable (fun t => f t ^ 4) (volume.restrict (Ioi (0 : ℝ))) := by
     refine ⟨hf.pow 4, ?_⟩
     change (∫⁻ t in Ioi (0 : ℝ), ‖f t ^ 4‖ₑ) < ∞
     simpa only [Real.enorm_eq_ofReal (hf0 _)] using
