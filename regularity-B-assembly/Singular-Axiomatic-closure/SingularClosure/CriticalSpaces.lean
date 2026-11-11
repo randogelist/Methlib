@@ -257,7 +257,12 @@ theorem criticalSobolevCoeff_apply (q : ℤ) (c : CriticalSobolev q)
 
 theorem criticalCoeff_continuous (q : ℤ) (k : Frequency) (i : Fin 3) :
     Continuous (fun c : CriticalSobolev q => criticalCoeff q c k i) := by
-  simpa only [criticalSobolevCoeff_apply] using (criticalSobolevCoeff q k i).continuous
+  have hfun : (criticalSobolevCoeff q k i : CriticalSobolev q → ℂ) =
+      (fun c : CriticalSobolev q => criticalCoeff q c k i) := by
+    funext c
+    exact criticalSobolevCoeff_apply q c k i
+  rw [← hfun]
+  exact (criticalSobolevCoeff q k i).continuous
 
 end
 

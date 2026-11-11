@@ -93,7 +93,10 @@ theorem criticalComplex_componentDissipation_le (N : ℕ) (c : FourierCoeff)
   apply Finset.sum_le_sum
   intro k _
   have hk : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) := by
-    exact_mod_cast galerkinFreqSq_nonneg k
+    have hkZ : (0 : ℤ) ≤ galerkinFreqSq k := by
+      unfold galerkinFreqSq
+      exact Finset.sum_nonneg (fun i _ => sq_nonneg (k i))
+    exact_mod_cast hkZ
   exact Finset.single_le_sum (fun i _ =>
     mul_nonneg (mul_nonneg (sq_nonneg _) hk) (Complex.normSq_nonneg _))
       (Finset.mem_univ j)

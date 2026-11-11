@@ -32,8 +32,8 @@ theorem critical_hasDerivAt_cube_integral
     hF.comp (continuous_const.prodMk continuous_id)
   have hDc (w : ℂ) : Continuous (D w) :=
     hD.comp (continuous_const.prodMk continuous_id)
-  obtain ⟨C, hC⟩ := ((isCompact_closedBall z 1).prod isCompact_unitCube).
-    exists_bound_of_continuousOn hD.continuousOn
+  obtain ⟨C, hC⟩ := ((isCompact_closedBall z 1).prod isCompact_unitCube).exists_bound_of_continuousOn
+    hD.continuousOn
   have hbound : ∀ᵐ x ∂volume.restrict unitCube,
       ∀ w ∈ closedBall z 1, ‖D w x‖ ≤ C := by
     filter_upwards [ae_restrict_mem isCompact_unitCube.measurableSet] with x hx
@@ -97,7 +97,7 @@ theorem criticalComplexWeight_norm {w : ℝ} (hw : 0 < w) (z : ℂ) :
 theorem criticalComplexWeight_hasDerivAt (w : ℝ) (z : ℂ) :
     HasDerivAt (criticalComplexWeight w)
       (criticalComplexWeight w z * (Real.log w : ℂ)) z := by
-  simpa only [criticalComplexWeight, one_mul] using
+  simpa only [criticalComplexWeight, id_eq, one_mul] using!
     ((hasDerivAt_id z).mul_const (Real.log w : ℂ)).cexp
 
 @[simp]

@@ -43,8 +43,9 @@ theorem scalar_invariant_of_deriv_nonpos_below
     have hrb : r ≤ (b - a) / 2 := min_le_right _ _
     nlinarith
   have hfence : ∀ x ∈ Icc 0 T, A x ≤ a + η * x := by
-    apply image_le_of_deriv_right_lt_deriv_boundary
-      (f' := d) (B' := fun _ => η) hA
+    intro x hx
+    refine image_le_of_deriv_right_lt_deriv_boundary
+      (f' := d) (B := fun y => a + η * y) (B' := fun _ => η) hA ?_ ?_ ?_ ?_ hx
     · intro x hx
       exact (hderiv x hx).mono (fun y hy => hx.1.trans hy)
     · simpa only [mul_zero, add_zero] using hinit

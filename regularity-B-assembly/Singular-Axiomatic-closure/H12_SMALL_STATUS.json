@@ -10,15 +10,65 @@
   "compiler": "external cached Lean 4.33.0",
   "existing_frozen_root": "AX6Statement -> Fefferman_B_0_adjust",
   "stages": [
-    {"number": 1, "name": "CriticalSpaces", "status": "IN_PROGRESS"},
-    {"number": 2, "name": "CriticalGalerkin", "status": "CANDIDATE"},
-    {"number": 3, "name": "CriticalSobolev", "status": "IN_PROGRESS"},
-    {"number": 4, "name": "CriticalEnergy", "status": "IN_PROGRESS"},
-    {"number": 5, "name": "CriticalInvariant", "status": "IN_PROGRESS"},
-    {"number": 6, "name": "SmallDataAX6", "status": "IN_PROGRESS"},
-    {"number": 7, "name": "CriticalLimit", "status": "PENDING"},
-    {"number": 8, "name": "CriticalTrace", "status": "IN_PROGRESS"},
-    {"number": 9, "name": "CriticalRegularity", "status": "PENDING"},
-    {"number": 10, "name": "SmallDataRoot", "status": "PENDING"}
+    {
+      "number": 1,
+      "name": "CriticalSpaces",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "number": 2,
+      "name": "CriticalGalerkin",
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "989d18fb9f7a98cbc0c14c18e5527cfb23862ee7",
+        "run_id": 43030601598,
+        "exact_type": "PASS",
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    {
+      "number": 3,
+      "name": "CriticalSobolev",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "number": 4,
+      "name": "CriticalEnergy",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "number": 5,
+      "name": "CriticalInvariant",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "number": 6,
+      "name": "SmallDataAX6",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "number": 7,
+      "name": "CriticalLimit",
+      "status": "PENDING"
+    },
+    {
+      "number": 8,
+      "name": "CriticalTrace",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "number": 9,
+      "name": "CriticalRegularity",
+      "status": "PENDING"
+    },
+    {
+      "number": 10,
+      "name": "SmallDataRoot",
+      "status": "PENDING"
+    }
   ]
 }
