@@ -13,6 +13,10 @@ import PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS
 import SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER
 
 import H12_SIGMA_ZERO_SMALL_CLASS
+import H12_CRITICAL_ENERGY_BUDGET
+import H12_SMALL_CLASS_BUDGET
+import H12_SMALL_SCALING
+import H12_L2_COEFFICIENT_EMBEDDING
 
 /-! Aggregate of exact scoped H12 auxiliary declarations.
 The actual global periodic NSE root remains a separate obligation. -/

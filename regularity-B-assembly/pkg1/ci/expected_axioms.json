@@ -89,6 +89,96 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS"
+    },
+    {
+      "name": "H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY"
+    },
+    {
+      "name": "H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY"
+    },
+    {
+      "name": "H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier"
+    },
+    {
+      "name": "H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA"
+    },
+    {
+      "name": "H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA"
+    },
+    {
+      "name": "H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA"
+    },
+    {
+      "name": "H12SmallScaling.criticalNorm_scale",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SmallScaling.criticalNorm_scale"
+    },
+    {
+      "name": "H12SmallScaling.exists_small_positive_scale",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SmallScaling.exists_small_positive_scale"
+    },
+    {
+      "name": "H12SmallScaling.H12_SMALL_SCALING",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SmallScaling.H12_SMALL_SCALING"
+    },
+    {
+      "name": "H12L2CoefficientEmbedding.physical_frequency_gap",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12L2CoefficientEmbedding.physical_frequency_gap"
+    },
+    {
+      "name": "H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff"
+    },
+    {
+      "name": "H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING"
+    },
+    {
+      "name": "H12SmallClassBudget.small_critical_coefficient_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SmallClassBudget.small_critical_coefficient_le"
+    },
+    {
+      "name": "H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY"
+    },
+    {
+      "name": "H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET"
     }
   ]
 }

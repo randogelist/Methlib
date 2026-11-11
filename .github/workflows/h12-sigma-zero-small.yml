@@ -105,16 +105,26 @@ jobs:
           key: ${{ steps.deps-cache.outputs.cache-primary-key }}
 
       - name: Restore the project cache for the exact source revision
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        id: project-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: package/.lake/build
           key: h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake*', 'package/*.lean') }}
+          restore-keys: |
+            h12-small-build-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Build the actual source
         run: |
           set -euo pipefail
           lake build H12_SIGMA_ZERO_SMALL_PACKAGE 2>&1 | tee evidence/build.log
           test -s .lake/build/lib/lean/H12_SIGMA_ZERO_SMALL_PACKAGE.olean
+
+      - name: Preserve reusable project objects
+        if: always() && steps.project-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.project-cache.outputs.cache-primary-key }}
 
       - name: Run a fresh exact-type and theorem-level axiom audit
         run: |
