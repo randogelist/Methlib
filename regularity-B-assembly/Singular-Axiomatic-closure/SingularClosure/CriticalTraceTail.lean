@@ -21,7 +21,7 @@ theorem criticalTrace_integrable_norm_sq
     {α H : Type*} [MeasurableSpace α] [NormedAddCommGroup H]
     {μ : Measure α} {u : α → H} (hu : MemLp u 2 μ) :
     Integrable (fun t => ‖u t‖ ^ 2) μ := by
-  simpa only [pow_two, Pi.mul_apply] using hu.norm.integrable_mul hu.norm
+  exact hu.norm.integrable_sq
 
 /-- Every contraction approximating the identity has vanishing time-L2 tails. -/
 theorem criticalTrace_L2_projection_tail

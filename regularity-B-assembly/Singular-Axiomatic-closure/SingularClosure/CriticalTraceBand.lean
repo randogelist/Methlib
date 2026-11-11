@@ -47,9 +47,11 @@ theorem criticalFiniteBandState_dual_pairing (s : Finset FourierIndex)
       (criticalWeightedCoeff 1 r ki.val) =
     inner ℂ (criticalWeightedCoeff 3 c ki.val)
       (criticalWeightedCoeff (-1) r ki.val)
-  simp only [criticalWeightedCoeff, RCLike.inner_apply, map_mul, map_pow,
-    starRingEnd_apply, Complex.star_def, Complex.conj_ofReal,
-    zpow_one, zpow_neg_one, zpow_ofNat]
+  simp only [criticalWeightedCoeff, zpow_one, zpow_neg_one, zpow_ofNat]
+  rw [RCLike.inner_apply, RCLike.inner_apply]
+  have hw : (starRingEnd ℂ) (criticalHalfWeight ki.val.1 : ℂ) =
+      (criticalHalfWeight ki.val.1 : ℂ) := Complex.conj_ofReal _
+  simp only [map_mul, map_pow, hw]
   field_simp [criticalHalfWeight_complex_ne_zero ki.val.1]
   ring
 

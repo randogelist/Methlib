@@ -75,12 +75,9 @@ theorem criticalSobolevLower_tail (q : ℤ) (N : ℕ) (hN : 0 < N)
     _ ≤ ‖Real.sqrt ((N : ℝ)⁻¹) • criticalSobolevRepr (q + 1) c‖ := by
       apply lp.norm_mono (by norm_num)
       intro ki
-      simp only [criticalSobolevRepr_apply, criticalCoeff_sub,
+      simp only [lp.coeFn_smul, Pi.smul_apply, criticalSobolevRepr_apply,
+        criticalCoeff_sub, criticalWeightedCoeff, Pi.sub_apply,
         criticalSobolevCutoff_coeff]
-      change ‖criticalWeightedCoeff q
-          (fun k i => criticalCoeff q v k i -
-            if k ∈ sobolevCutoffModes N then criticalCoeff q v k i else 0) ki‖ ≤
-        ‖Real.sqrt ((N : ℝ)⁻¹) • criticalWeightedCoeff (q + 1) (criticalCoeff (q + 1) c) ki‖
       by_cases hk : ki.1 ∈ sobolevCutoffModes N
       · simp only [criticalWeightedCoeff, if_pos hk, sub_self, mul_zero, norm_zero]
         exact norm_nonneg _
@@ -124,8 +121,8 @@ theorem criticalToTorusH0_tail_sq (N : ℕ) (hN : 0 < N) (c : CriticalSobolev 1)
     change (criticalToTorusH0 1 (by norm_num) c).val k i -
       (torusSobolevCutoff 0 N (criticalToTorusH0 1 (by norm_num) c)).val k i = _
     rw [torusSobolevCutoff_coeff, criticalToTorusH0_coeff, criticalH0Equiv_coeff,
-      criticalCoeff_sub, criticalSobolevCutoff_coeff]
-    simp only [v, criticalSobolevLower_coeff, Pi.sub_apply]
+      criticalCoeff_sub]
+    simp only [Pi.sub_apply, criticalSobolevCutoff_coeff, v, criticalSobolevLower_coeff]
   rw [heq, criticalH0Equiv.norm_map]
   exact criticalSobolevLower_tail_sq 0 N hN c
 
@@ -138,18 +135,19 @@ theorem torusH1_norm_le_two_criticalH1
     _ ≤ ‖(2 : ℂ) • criticalSobolevRepr 2 v‖ := by
       apply lp.norm_mono (by norm_num)
       intro ki
-      simp only [torusSobolevRepr_apply, criticalSobolevRepr_apply, hcoeff]
+      simp only [lp.coeFn_smul, Pi.smul_apply, torusSobolevRepr_apply,
+        criticalSobolevRepr_apply, hcoeff, pow_one, smul_eq_mul]
       change ‖(torusSobolevWeight ki.1 : ℂ) * criticalCoeff 2 v ki.1 ki.2‖ ≤
         ‖(2 : ℂ) * criticalWeightedCoeff 2 (criticalCoeff 2 v) ki‖
       rw [norm_mul, norm_mul, criticalWeightedCoeff_norm]
-      simp only [norm_ofNat, Complex.norm_real, Real.norm_eq_abs,
+      simp only [Complex.norm_ofNat, Complex.norm_real, Real.norm_eq_abs,
         abs_of_pos (torusSobolevWeight_pos ki.1), zpow_ofNat,
         criticalHalfWeight_sq]
       have h := mul_le_mul_of_nonneg_right
         (torusSobolevWeight_le_two_criticalFrequencyWeight ki.1)
         (norm_nonneg (criticalCoeff 2 v ki.1 ki.2))
       simpa only [mul_assoc] using h
-    _ = _ := by rw [norm_smul, norm_ofNat, (criticalSobolevRepr 2).norm_map]
+    _ = _ := by rw [norm_smul, Complex.norm_ofNat, (criticalSobolevRepr 2).norm_map]
 
 /-- The actual inhomogeneous H1 tail gains N^(-1) from the H^(3/2) energy. -/
 theorem criticalToTorusH1_tail_sq (N : ℕ) (hN : 0 < N) (c : CriticalSobolev 3) :
@@ -161,9 +159,8 @@ theorem criticalToTorusH1_tail_sq (N : ℕ) (hN : 0 < N) (c : CriticalSobolev 3)
     funext k i
     change (criticalToTorusH1 c).val k i -
       (torusSobolevCutoff 1 N (criticalToTorusH1 c)).val k i = _
-    rw [torusSobolevCutoff_coeff, criticalToTorusH1_coeff,
-      criticalCoeff_sub, criticalSobolevCutoff_coeff]
-    simp only [v, criticalSobolevLower_coeff, Pi.sub_apply]
+    rw [torusSobolevCutoff_coeff, criticalToTorusH1_coeff, criticalCoeff_sub]
+    simp only [Pi.sub_apply, criticalSobolevCutoff_coeff, v, criticalSobolevLower_coeff]
   have hnorm := torusH1_norm_le_two_criticalH1 _ _ hcoeff
   have hsquare := pow_le_pow_left₀ (norm_nonneg _) hnorm 2
   have htail := criticalSobolevLower_tail_sq 2 N hN c

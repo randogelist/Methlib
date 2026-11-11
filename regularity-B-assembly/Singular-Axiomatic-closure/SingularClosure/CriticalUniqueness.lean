@@ -113,7 +113,7 @@ theorem CRITICAL_RELATIVE_ENERGY_GRONWALL
     have hq : IntervalIntegrable (fun r => a r * F r) volume s t :=
       (haF.mono (Icc_subset_Icc le_rfl ht.2)).intervalIntegrable_of_Icc ht.1
     change δ + (∫ r in s..t, a r * e r) ≤ δ + (∫ r in s..t, a r * F r)
-    apply add_le_add_left
+    apply add_le_add le_rfl
     apply intervalIntegral.integral_mono_on ht.1 hp hq
     intro r hr
     have hrT : r ∈ Icc s T := ⟨hr.1, hr.2.trans ht.2⟩

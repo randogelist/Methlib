@@ -22,7 +22,7 @@ theorem convection_eLpNorm_threeHalves_le (v : Field) (hv : ContDiff ℝ ∞ v) 
         eLpNorm (fderiv ℝ v) 2 (volume.restrict unitCube) := by
   letI : ENNReal.HolderTriple 6 2 (3 / 2) := by
     have h : Real.HolderTriple (6 : ℝ) 2 (3 / 2) := by constructor <;> norm_num
-    simpa using h.ennrealOfReal
+    simpa [ENNReal.ofReal_div_of_pos (by norm_num : (0 : ℝ) < 2)] using h.ennrealOfReal
   have hd : Continuous (fderiv ℝ v) :=
     (hv.fderiv_right (m := 0) (by norm_num)).continuous
   have h := eLpNorm_le_eLpNorm_mul_eLpNorm'_of_norm
@@ -43,7 +43,7 @@ theorem inner_integral_enorm_le_eLpNorm_three_threeHalves (v w : Field)
         eLpNorm w (3 / 2) (volume.restrict unitCube) := by
   letI : ENNReal.HolderTriple 3 (3 / 2) 1 := by
     have h : Real.HolderTriple (3 : ℝ) (3 / 2) 1 := by constructor <;> norm_num
-    simpa using h.ennrealOfReal
+    simpa [ENNReal.ofReal_div_of_pos (by norm_num : (0 : ℝ) < 2)] using h.ennrealOfReal
   have h := eLpNorm_le_eLpNorm_mul_eLpNorm'_of_norm
     (μ := volume.restrict unitCube) (p := 3) (q := 3 / 2) (r := 1)
     hv.aestronglyMeasurable hw.aestronglyMeasurable
@@ -124,7 +124,7 @@ theorem FINITE_CRITICAL_NEGATIVE_TRANSPORT_BOUND :
       _ = _ := ennreal_negative_holder_product S A _ _
   have hr := ENNReal.toReal_mono (by finiteness) hbound
   simp only [ENNReal.toReal_mul, ← ENNReal.toReal_rpow,
-    ENNReal.toReal_ofReal hE, ENNReal.toReal_ofReal hX, Real.rpow_one_half] at hr
+    ENNReal.toReal_ofReal hE, ENNReal.toReal_ofReal hX, ← Real.sqrt_eq_rpow] at hr
   let z : CriticalSobolev (-1) := criticalFiniteSobolev (-1) N b
   have hzsq : ‖z‖ ^ 2 = E := criticalFiniteSobolev_neg_one_norm_sq N b
   have hsqrt : Real.sqrt E = ‖z‖ := by rw [← hzsq, Real.sqrt_sq (norm_nonneg z)]

@@ -89,7 +89,7 @@ theorem FINITE_CRITICAL_NONLINEAR_BOUND :
   have hr := ENNReal.toReal_mono (by finiteness) hbound
   simp only [ENNReal.toReal_mul, ← ENNReal.toReal_rpow,
     ENNReal.toReal_ofReal (abs_nonneg _), ENNReal.toReal_ofReal hE2,
-    ENNReal.toReal_ofReal hE3, Real.rpow_one_half] at hr
+    ENNReal.toReal_ofReal hE3, ← Real.sqrt_eq_rpow] at hr
   have hinterp := mul_le_mul_of_nonneg_right (criticalEnergy_interpolation_sqrt N c)
     (Real.sqrt_nonneg (criticalEnergy 3 N c))
   have hproduct : criticalEnergy 2 N c * Real.sqrt (criticalEnergy 3 N c) ≤
