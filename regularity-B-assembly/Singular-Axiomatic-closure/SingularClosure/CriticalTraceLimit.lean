@@ -63,7 +63,7 @@ theorem CRITICAL_TRACE_EXISTS_OF_BAND_ENERGY
     simpa only [u, dif_pos ht] using hv ⟨t, ht⟩
   have hu := hC.tendstoUniformlyOn_of_tendsto hpoint
   refine ⟨u, ?_, hu, ?_⟩
-  · exact hu.continuousOn (Filter.Eventually.of_forall hF)
+  · exact hu.continuousOn (Filter.Eventually.of_forall hF).frequently
   · exact tendsto_nhds_unique (hpoint 0 ⟨le_rfl, hT⟩) hinit
 
 /-- The strong critical Sobolev trace uses the actual half-order Fourier space. -/

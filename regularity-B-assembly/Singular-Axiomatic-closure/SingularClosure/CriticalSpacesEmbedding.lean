@@ -41,7 +41,7 @@ def criticalSobolevLowerLinear (q r : ℤ) (hqr : q ≤ r) :
     simp only [criticalSobolevLowerValue_coeff, criticalCoeff_add]
   map_smul' z c := by
     apply criticalCoeff_injective q
-    simp only [criticalSobolevLowerValue_coeff, criticalCoeff_smul]
+    simp only [criticalSobolevLowerValue_coeff, criticalCoeff_smul, RingHom.id_apply]
 
 @[simp]
 theorem criticalSobolevLowerLinear_coeff (q r : ℤ) (hqr : q ≤ r) (c : CriticalSobolev r) :

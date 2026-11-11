@@ -76,8 +76,8 @@ theorem criticalBandSobolev_continuousOn (q : ℤ) (s : Finset FourierIndex)
   apply (criticalSobolevRepr q).symm.continuous.comp_continuousOn
   apply continuousOn_finset_sum
   intro ki hki
-  exact (lp.singleContinuousLinearMap ℂ (fun _ : FourierIndex => ℂ) 2 ki).continuous.
-    comp_continuousOn (continuousOn_const.mul (hc ki hki))
+  exact (lp.singleContinuousLinearMap ℂ (fun _ : FourierIndex => ℂ) 2 ki).continuous.comp_continuousOn
+    (continuousOn_const.mul (hc ki hki))
 
 /-- For an actual Sobolev vector this is exactly its Fourier cutoff. -/
 theorem criticalBandSobolev_eq_cutoff (q : ℤ) (N : ℕ) (u : CriticalSobolev q) :

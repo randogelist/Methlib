@@ -21,7 +21,7 @@ theorem criticalTrace_integrable_norm_sq
     {α H : Type*} [MeasurableSpace α] [NormedAddCommGroup H]
     {μ : Measure α} {u : α → H} (hu : MemLp u 2 μ) :
     Integrable (fun t => ‖u t‖ ^ 2) μ := by
-  simpa only [pow_two] using hu.norm.integrable_mul hu.norm
+  simpa only [pow_two, Pi.mul_apply] using hu.norm.integrable_mul hu.norm
 
 /-- Every contraction approximating the identity has vanishing time-L2 tails. -/
 theorem criticalTrace_L2_projection_tail
@@ -48,7 +48,8 @@ theorem criticalTrace_L2_projection_tail
   have hpoint : ∀ᵐ t ∂μ,
       Tendsto (fun N => ‖u t - P N (u t)‖ ^ 2) atTop (𝓝 (0 : ℝ)) := by
     exact Filter.Eventually.of_forall fun t => by
-      have ht := (tendsto_const_nhds.sub (hlim (u t))).norm.pow 2
+      have ht := ((tendsto_const_nhds : Tendsto (fun _ : ℕ => u t) atTop (𝓝 (u t))).sub
+        (hlim (u t))).norm.pow 2
       simpa using ht
   have h := tendsto_integral_of_dominated_convergence
     (μ := μ) (F := fun N t => ‖u t - P N (u t)‖ ^ 2)

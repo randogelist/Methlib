@@ -39,8 +39,15 @@ theorem criticalEnergy_le_norm_sq (q N : ℕ) (a : CriticalSobolev (q : ℤ)) :
     rw [criticalWeightedCoeff_norm, mul_pow, criticalHalfWeight_zpow_sq,
       zpow_natCast, Complex.normSq_eq_norm_sq]
   simp_rw [hterm] at h'
-  rw [Finset.sum_product] at h'
-  exact h'
+  calc
+    criticalEnergy q N (criticalCoeff (q : ℤ) a) =
+        ∑ ki ∈ (cutoffModes N).product (Finset.univ : Finset (Fin 3)),
+          criticalFrequencyWeight ki.1 ^ q *
+            Complex.normSq (criticalCoeff (q : ℤ) a ki.1 ki.2) :=
+      (Finset.sum_product (cutoffModes N) (Finset.univ : Finset (Fin 3))
+        (fun ki : FourierIndex => criticalFrequencyWeight ki.1 ^ q *
+          Complex.normSq (criticalCoeff (q : ℤ) a ki.1 ki.2))).symm
+    _ ≤ _ := h'
 
 /-- The existing finite ODE, initialized from the actual rough Fourier
 cutoff, inherits the datum's critical norm bound. -/

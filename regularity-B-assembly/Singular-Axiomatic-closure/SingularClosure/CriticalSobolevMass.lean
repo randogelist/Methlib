@@ -77,9 +77,8 @@ theorem critical_cubic_mass_cancel (u : Vec → ℂ) (hu : Continuous u)
     change I ^ (1 / 3 : ℝ) ≤ K
     apply (mul_le_mul_iff_left₀ hp).mp
     calc
-      I ^ (2 / 3 : ℝ) * I ^ (1 / 3 : ℝ) = I := by rw [mul_comm, heq]
+      I ^ (1 / 3 : ℝ) * I ^ (2 / 3 : ℝ) = I := heq
       _ ≤ K * I ^ (2 / 3 : ℝ) := hlim
-      _ = I ^ (2 / 3 : ℝ) * K := mul_comm _ _
 
 end
 end SingularClosure

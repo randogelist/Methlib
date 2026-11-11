@@ -47,8 +47,9 @@ theorem criticalFiniteBandState_dual_pairing (s : Finset FourierIndex)
       (criticalWeightedCoeff 1 r ki.val) =
     inner ℂ (criticalWeightedCoeff 3 c ki.val)
       (criticalWeightedCoeff (-1) r ki.val)
-  simp only [criticalWeightedCoeff, RCLike.inner_apply, map_mul, map_zpow,
-    Complex.conj_ofReal, zpow_one, zpow_neg_one, zpow_ofNat]
+  simp only [criticalWeightedCoeff, RCLike.inner_apply, map_mul, map_pow,
+    starRingEnd_apply, Complex.star_def, Complex.conj_ofReal,
+    zpow_one, zpow_neg_one, zpow_ofNat]
   field_simp [criticalHalfWeight_complex_ne_zero ki.val.1]
   ring
 
@@ -87,8 +88,15 @@ theorem criticalFiniteBandEnergy_hasDerivAt (s : Finset FourierIndex)
     HasDerivAt (fun τ => ‖criticalFiniteBandState 1 s (c τ)‖ ^ 2)
       (2 * (inner ℂ (criticalFiniteBandState 1 s (c t))
         (criticalFiniteBandState 1 s (r t))).re) t := by
-  simpa only [real_inner_eq_re_inner] using
-    (criticalFiniteBandState_hasDerivAt 1 s c r hc).norm_sq
+  have hinner : inner ℝ (criticalFiniteBandState 1 s (c t))
+      (criticalFiniteBandState 1 s (r t)) =
+      (inner ℂ (criticalFiniteBandState 1 s (c t))
+        (criticalFiniteBandState 1 s (r t))).re := by
+    rw [PiLp.inner_apply, PiLp.inner_apply, Complex.re_sum]
+    apply Finset.sum_congr rfl
+    intro ki _
+    exact real_inner_eq_re_inner ℂ _ _
+  simpa only [hinner] using (criticalFiniteBandState_hasDerivAt 1 s c r hc).norm_sq
 
 private theorem criticalTrace_ac_finset_sum {ι : Type*}
     (s : Finset ι) (f : ι → ℝ → ℝ) {a b : ℝ}

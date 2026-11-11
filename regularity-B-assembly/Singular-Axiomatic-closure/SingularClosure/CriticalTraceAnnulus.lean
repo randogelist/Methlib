@@ -57,7 +57,7 @@ theorem criticalFiniteBandState_eq_tail (q : ℤ) (s : Finset FourierIndex) (N :
     (hs : ∀ ki ∈ s, ki ∉ sobolevCutoffIndices N) (u : CriticalSobolev q) :
     criticalFiniteBandState q s (criticalCoeff q u) =
       criticalFiniteBandState q s (criticalCoeff q (u - criticalSobolevCutoff q N u)) := by
-  apply WithLp.ext
+  apply WithLp.ext_iff.mpr
   funext ki
   have hk : ki.val.1 ∉ sobolevCutoffModes N := by
     simpa only [sobolevCutoffIndices, Finset.mem_product, Finset.mem_univ, and_true] using

@@ -1,6 +1,7 @@
 import SingularClosure.CriticalSobolevAnalytic
 import SingularClosure.CriticalFourierInterpolation
 import SingularClosure.FiniteParseval
+import SingularClosure.FourierDecay
 
 /-! The literal finite Fourier analytic family interpolating the energy
 and dissipation endpoint estimates.  Both boundary energies are exactly
@@ -76,7 +77,9 @@ theorem criticalSpectralCoeff_midpoint (c : FourierCoeff) :
 @[simp]
 theorem criticalSpectralFamily_midpoint (N : ℕ) (c : FourierCoeff) (j : Fin 3) :
     criticalSpectralFamily N c j (1 / 2) = complexFiniteSynthesis N c j := by
-  simp only [criticalSpectralFamily, criticalSpectralCoeff_midpoint]
+  funext x
+  change complexFiniteSynthesis N (criticalSpectralCoeff (1 / 2) c) j x = _
+  rw [criticalSpectralCoeff_midpoint]
 
 theorem criticalSpectralCoeff_normSq (z : ℂ) (c : FourierCoeff)
     (k : Frequency) (i : Fin 3) :

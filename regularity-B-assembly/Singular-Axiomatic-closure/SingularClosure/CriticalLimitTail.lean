@@ -47,7 +47,7 @@ theorem criticalWeightedCoeff_add_one_norm (q : ℤ) (c : FourierCoeff) (ki : Fo
 
 theorem critical_tail_half_weight_factor (N : ℕ) (hN : 0 < N)
     {k : Frequency} (hk : k ∉ sobolevCutoffModes N) :
-    1 ≤ Real.sqrt (N : ℝ)⁻¹ * criticalHalfWeight k := by
+    1 ≤ Real.sqrt ((N : ℝ)⁻¹) * criticalHalfWeight k := by
   have hNreal : (0 : ℝ) < N := by exact_mod_cast hN
   have hinv : 0 ≤ (N : ℝ)⁻¹ := inv_nonneg.mpr hNreal.le
   have hw := criticalFrequencyWeight_ge_cutoff hk
@@ -55,10 +55,10 @@ theorem critical_tail_half_weight_factor (N : ℕ) (hN : 0 < N)
     calc
       1 = (N : ℝ)⁻¹ * (N : ℝ) := (inv_mul_cancel₀ hNreal.ne').symm
       _ ≤ _ := mul_le_mul_of_nonneg_left hw hinv
-  have hsquare : (Real.sqrt (N : ℝ)⁻¹ * criticalHalfWeight k) ^ 2 =
+  have hsquare : (Real.sqrt ((N : ℝ)⁻¹) * criticalHalfWeight k) ^ 2 =
       (N : ℝ)⁻¹ * criticalFrequencyWeight k := by
     rw [mul_pow, Real.sq_sqrt hinv, criticalHalfWeight_sq]
-  have hnonneg : 0 ≤ Real.sqrt (N : ℝ)⁻¹ * criticalHalfWeight k :=
+  have hnonneg : 0 ≤ Real.sqrt ((N : ℝ)⁻¹) * criticalHalfWeight k :=
     mul_nonneg (Real.sqrt_nonneg _) (criticalHalfWeight_pos k).le
   nlinarith
 
@@ -67,12 +67,12 @@ theorem criticalSobolevLower_tail (q : ℤ) (N : ℕ) (hN : 0 < N)
     (c : CriticalSobolev (q + 1)) :
     ‖criticalSobolevLower q (q + 1) (by omega) c -
       criticalSobolevCutoff q N (criticalSobolevLower q (q + 1) (by omega) c)‖ ≤
-      Real.sqrt (N : ℝ)⁻¹ * ‖c‖ := by
+      Real.sqrt ((N : ℝ)⁻¹) * ‖c‖ := by
   let v := criticalSobolevLower q (q + 1) (by omega) c
   calc
     _ = ‖criticalSobolevRepr q (v - criticalSobolevCutoff q N v)‖ :=
       ((criticalSobolevRepr q).norm_map _).symm
-    _ ≤ ‖Real.sqrt (N : ℝ)⁻¹ • criticalSobolevRepr (q + 1) c‖ := by
+    _ ≤ ‖Real.sqrt ((N : ℝ)⁻¹) • criticalSobolevRepr (q + 1) c‖ := by
       apply lp.norm_mono (by norm_num)
       intro ki
       simp only [criticalSobolevRepr_apply, criticalCoeff_sub,
@@ -80,7 +80,7 @@ theorem criticalSobolevLower_tail (q : ℤ) (N : ℕ) (hN : 0 < N)
       change ‖criticalWeightedCoeff q
           (fun k i => criticalCoeff q v k i -
             if k ∈ sobolevCutoffModes N then criticalCoeff q v k i else 0) ki‖ ≤
-        ‖Real.sqrt (N : ℝ)⁻¹ • criticalWeightedCoeff (q + 1) (criticalCoeff (q + 1) c) ki‖
+        ‖Real.sqrt ((N : ℝ)⁻¹) • criticalWeightedCoeff (q + 1) (criticalCoeff (q + 1) c) ki‖
       by_cases hk : ki.1 ∈ sobolevCutoffModes N
       · simp only [criticalWeightedCoeff, if_pos hk, sub_self, mul_zero, norm_zero]
         exact norm_nonneg _
@@ -88,13 +88,13 @@ theorem criticalSobolevLower_tail (q : ℤ) (N : ℕ) (hN : 0 < N)
           criticalSobolevLower_coeff q (q + 1) (by omega) c
         simp only [criticalWeightedCoeff, if_neg hk, sub_zero, hcoeff]
         change ‖criticalWeightedCoeff q (criticalCoeff (q + 1) c) ki‖ ≤
-          ‖Real.sqrt (N : ℝ)⁻¹ • criticalWeightedCoeff (q + 1) (criticalCoeff (q + 1) c) ki‖
+          ‖Real.sqrt ((N : ℝ)⁻¹) • criticalWeightedCoeff (q + 1) (criticalCoeff (q + 1) c) ki‖
         rw [norm_smul, Real.norm_of_nonneg (Real.sqrt_nonneg _),
           criticalWeightedCoeff_add_one_norm]
         have hfactor := critical_tail_half_weight_factor N hN hk
         calc
           _ = 1 * ‖criticalWeightedCoeff q (criticalCoeff (q + 1) c) ki‖ := (one_mul _).symm
-          _ ≤ (Real.sqrt (N : ℝ)⁻¹ * criticalHalfWeight ki.1) *
+          _ ≤ (Real.sqrt ((N : ℝ)⁻¹) * criticalHalfWeight ki.1) *
               ‖criticalWeightedCoeff q (criticalCoeff (q + 1) c) ki‖ :=
             mul_le_mul_of_nonneg_right hfactor (norm_nonneg _)
           _ = _ := mul_assoc _ _ _

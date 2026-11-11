@@ -137,8 +137,9 @@ theorem critical_analytic_family_regularized_bound
       (hG.comp (continuous_const.prodMk continuous_id)) hpq
     norm_num only [ENNReal.ofReal_ofNat] at hpair
     refine hpair.trans (mul_le_mul (hleft z hz) ?_ lpNorm_nonneg hA)
-    exact criticalDualFamily_lpNorm_le u hu hδ z 2 (by norm_num)
-      (by rw [hz]; norm_num)
+    simpa only [ENNReal.ofReal_ofNat] using
+      criticalDualFamily_lpNorm_le u hu hδ z 2 (by norm_num)
+        (by rw [hz]; norm_num)
   have hHR : ∀ z : ℂ, z.re = 1 → ‖H z‖ ≤ B * J ^ (5 / 6 : ℝ) := by
     intro z hz
     have hpq : (6 : ℝ).HolderConjugate (6 / 5) := by
