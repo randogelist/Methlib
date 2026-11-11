@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "H12CriticalAbsorption.H12_CRITICAL_ABSORPTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalAbsorption.H12_CRITICAL_ABSORPTION"
+    },
+    {
+      "name": "H12CriticalPairingIntegral.H12_CRITICAL_PAIRING_INTEGRAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalPairingIntegral.H12_CRITICAL_PAIRING_INTEGRAL"
+    },
+    {
+      "name": "H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER"
+    },
+    {
+      "name": "H12FourierFoundations.H12_FOURIER_FOUNDATIONS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12FourierFoundations.H12_FOURIER_FOUNDATIONS"
+    },
+    {
+      "name": "H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER"
+    },
+    {
+      "name": "H12PointwiseConvectionSquare.H12_POINTWISE_CONVECTION_SQUARE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12PointwiseConvectionSquare.H12_POINTWISE_CONVECTION_SQUARE"
+    },
+    {
+      "name": "H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE"
+    },
+    {
+      "name": "NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT"
+    },
+    {
+      "name": "NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION"
+    },
+    {
+      "name": "NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION"
+    },
+    {
+      "name": "PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER"
+    },
+    {
+      "name": "PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS"
+    },
+    {
+      "name": "ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER"
+    },
+    {
+      "name": "H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS"
+    }
+  ]
+}

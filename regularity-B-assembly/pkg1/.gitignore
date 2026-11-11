@@ -1,0 +1,4 @@
+.lake/
+evidence/
+__pycache__/
+*.pyc

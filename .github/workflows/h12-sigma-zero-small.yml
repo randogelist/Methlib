@@ -1,0 +1,141 @@
+name: H12 sigma-zero small package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'regularity-B-assembly/pkg1/**'
+      - '.github/workflows/h12-sigma-zero-small.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: h12-sigma-zero-small-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-audit:
+    name: Lean 4.33.0 / frozen endpoint audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: package
+        shell: bash
+    env:
+      PROJECT: regularity-B-assembly/pkg1
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - name: Checkout the exact main-branch revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          sparse-checkout: |
+            regularity-B-assembly/pkg1
+            .github/workflows/h12-sigma-zero-small.yml
+          persist-credentials: false
+
+      - name: Extract the standalone project at the tested revision
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir package
+          git -C repository archive "$GITHUB_SHA:$PROJECT" | tar -xf - -C package
+          cp -R package "$RUNNER_TEMP/h12-small-source"
+          mkdir package/evidence
+          echo "$GITHUB_SHA" > package/evidence/commit.txt
+          echo "$PROJECT" > package/evidence/project.txt
+          cp repository/.github/workflows/h12-sigma-zero-small.yml package/evidence/workflow.yml
+
+      - name: Check proof admission policy and record source hashes
+        run: |
+          set -euo pipefail
+          python3 ci/check_sources.py | tee evidence/source-policy.json
+          sha256sum lake-manifest.json > evidence/lockfile-before.sha256
+
+      - name: Reserve disk space for cached dependency objects
+        run: |
+          set -euo pipefail
+          available_kib=$(df -Pk . | awk 'NR == 2 { print $4 }')
+          if [ "$available_kib" -lt "$((20 * 1024 * 1024))" ]; then
+            sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          fi
+          df -h . | tee evidence/disk.txt
+
+      - name: Install the pinned Lean toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore exact pinned dependency checkout and object cache
+        id: deps-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: h12-small-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+          restore-keys: |
+            singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Fetch and verify Mathlib cached objects
+        run: |
+          set -euo pipefail
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          sha256sum --check evidence/lockfile-before.sha256
+
+      - name: Preserve verified dependency objects before project compilation
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: ${{ steps.deps-cache.outputs.cache-primary-key }}
+
+      - name: Restore the project cache for the exact source revision
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake*', 'package/*.lean') }}
+
+      - name: Build the actual source
+        run: |
+          set -euo pipefail
+          lake build H12_SIGMA_ZERO_SMALL_PACKAGE 2>&1 | tee evidence/build.log
+          test -s .lake/build/lib/lean/H12_SIGMA_ZERO_SMALL_PACKAGE.olean
+
+      - name: Run a fresh exact-type and theorem-level axiom audit
+        run: |
+          set -euo pipefail
+          lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
+          python3 ci/check_axioms.py evidence/axioms.log ci/expected_axioms.json | tee evidence/audit.json
+
+      - name: Upload the tested source
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: h12-small-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/h12-small-source
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Upload compiler and audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: h12-small-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
+          if-no-files-found: error
+

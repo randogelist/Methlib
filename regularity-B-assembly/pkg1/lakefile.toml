@@ -1,0 +1,14 @@
+name = "h12_sigma_zero_small"
+version = "0.1.0"
+fixedToolchain = true
+defaultTargets = ["H12_SIGMA_ZERO_SMALL_PACKAGE"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
+
+[[lean_lib]]
+name = "H12_SIGMA_ZERO_SMALL_PACKAGE"
+roots = ["H12_SIGMA_ZERO_SMALL_PACKAGE"]
