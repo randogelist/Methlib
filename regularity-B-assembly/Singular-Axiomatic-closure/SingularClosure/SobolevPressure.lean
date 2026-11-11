@@ -164,8 +164,13 @@ theorem torusSobolevPressure_coeff (s : ℕ) (b : TorusSobolev s) :
 
 theorem torusSobolevPressure_norm_sq_le (s : ℕ) (b : TorusSobolev s) :
     ‖torusSobolevPressure s b‖ ^ 2 ≤ 3 * ‖b‖ ^ 2 := by
+  have happ : torusSobolevPressure s b = torusSobolevPressureLinear s b := by
+    unfold torusSobolevPressure
+    exact (torusSobolevPressureLinear s).mkContinuous_apply (Real.sqrt 3)
+      (torusSobolevPressureLinear_norm_le s) b
+  rw [happ]
   have h := pow_le_pow_left₀ (norm_nonneg _) (torusSobolevPressureLinear_norm_le s b) 2
-  simpa only [mul_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 3)] using h
+  simpa only [mul_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 3)] using! h
 
 theorem smoothFourierSynthesis_pressureVector_first (b : FourierCoeff) (x : Vec) :
     smoothFourierSynthesis (pressureVectorCoeff b) x 0 = infiniteTransportPressure b x := by

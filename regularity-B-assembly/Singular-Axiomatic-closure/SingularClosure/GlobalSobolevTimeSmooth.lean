@@ -41,6 +41,8 @@ variable (hconv : ∀ T : ℝ, 0 < T → TendstoUniformlyOn
   (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 t)
   (U 0) atTop (Icc (0 : ℝ) T))
 
+include hAX6 ν hν a ha U φ hφ hinclusion hconv
+
 theorem canonicalLimitRhsSobolev_eq_fourierSobolevRhs
     (r : ℕ) (t : ℝ) (ht : 0 ≤ t) :
     canonicalLimitRhsSobolev hAX6 ν hν a ha (U 0) φ hφ hconv r t =

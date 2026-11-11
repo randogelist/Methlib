@@ -3,8 +3,8 @@ import SingularClosure
 set_option autoImplicit false
 set_option Elab.async false
 
-open Set MeasureTheory SingularClosure
-open scoped BigOperators Interval ENNReal NNReal ContDiff
+open Set Filter MeasureTheory SingularClosure
+open scoped Topology BigOperators Interval ENNReal NNReal ContDiff
 
 noncomputable section
 
@@ -1217,9 +1217,9 @@ example : ∀ {b : Frequency → ℂ}
 #check @SingularClosure.scalarFourierSeries_hasFDerivAt
 #print axioms SingularClosure.scalarFourierSeries_hasFDerivAt
 
-example : ∀ _nat (n : ℕ) (b : Frequency → ℂ)
+example : ∀ {b : Frequency → ℂ}
     (hb : RapidScalarFourier b),
-    ContDiff ℝ n (scalarFourierSeries b) :=
+    ContDiff ℝ ∞ (scalarFourierSeries b) :=
   @SingularClosure.scalarFourierSeries_contDiff
 
 #eval IO.println "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_contDiff"

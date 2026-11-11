@@ -7,5 +7,10 @@
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ax6_implies_fefferman_B_0_adjust"
     }
+  ],
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
   ]
 }
