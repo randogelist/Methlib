@@ -23,8 +23,14 @@ noncomputable section
 def frequencyReflection (k : Frequency) : Frequency ≃ Frequency where
   toFun p := k - p
   invFun p := k - p
-  left_inv p := by abel
-  right_inv p := by abel
+  left_inv p := by
+    funext j
+    change k j - (k j - p j) = p j
+    omega
+  right_inv p := by
+    funext j
+    change k j - (k j - p j) = p j
+    omega
 
 def reflectedFourierSequence (k : Frequency) (a : FourierSequenceL2) : FourierSequenceL2 :=
   ⟨fun p => a (k - p), by

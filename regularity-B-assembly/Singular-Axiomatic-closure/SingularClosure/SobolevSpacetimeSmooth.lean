@@ -36,7 +36,7 @@ theorem SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH
   apply contDiffOn_infty.mpr
   intro n
   have h := sobolevCurve_spacetime_contDiffOn_nat n (U (n + 4))
-    ((hU (n + 4)).of_le (by simp))
+    ((contDiffOn_infty.mp (hU (n + 4))) n)
   apply h.congr
   intro z hz
   exact congrArg (fun c : FourierCoeff => smoothFourierSynthesis c z.2)

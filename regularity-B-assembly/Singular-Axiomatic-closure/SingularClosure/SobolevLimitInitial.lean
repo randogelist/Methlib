@@ -75,8 +75,8 @@ theorem canonicalSobolevLimit_initial_coeff
     by_cases hk : k = 0
     · subst k
       exact Filter.Eventually.of_forall fun n => by
-        rw [(canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState_zero_mode
-          0 0 le_rfl i, smoothSigmaZero_fourier_meanZero ha i]
+        exact ((canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState_zero_mode
+          0 0 le_rfl i).trans (smoothSigmaZero_fourier_meanZero ha i).symm
     · filter_upwards [eventually_mem_cutoffModes_strictMono φ hφ k hk] with n hn
       rw [(canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState_coeff 0 le_rfl,
         (canonicalGalerkinSolution ν hν a ha (φ n + 1)).initial k i, if_pos hn]
