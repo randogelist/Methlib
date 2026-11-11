@@ -95,7 +95,8 @@ def torusSobolevSubmodule (s : ℕ) : Submodule ℂ FourierCoeff where
     exact hc.const_smul z
 
 /-- Sobolev coefficient functions of integral order `s`. -/
-def TorusSobolev (s : ℕ) : Type := ↥(torusSobolevSubmodule s)
+def TorusSobolev (s : ℕ) : Type :=
+  {c : FourierCoeff // Memℓp (sobolevWeightedCoeff s c) 2}
 
 instance torusSobolevAddCommGroup (s : ℕ) : AddCommGroup (TorusSobolev s) :=
   inferInstanceAs (AddCommGroup ↥(torusSobolevSubmodule s))

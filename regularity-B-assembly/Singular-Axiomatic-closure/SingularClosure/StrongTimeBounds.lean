@@ -35,8 +35,9 @@ theorem GalerkinSolution.timeDerivative_continuousOn_forward
     simp_rw [finiteSynthesis_eq_sum_unitVector]
     apply continuousOn_finset_sum
     intro i _
-    apply ContinuousOn.smul
-    · apply Complex.continuous_re.comp_continuousOn
+    have hsum : ContinuousOn (fun z : ℝ × Vec =>
+        ∑ k ∈ cutoffModes N, fourierCharacter k z.2 *
+          galerkinRhs ν N (g.coeff z.1) k i) forwardSpacetime := by
       apply continuousOn_finset_sum
       intro k hk
       have hchar : Continuous (fun z : ℝ × Vec => fourierCharacter k z.2) :=
@@ -44,10 +45,13 @@ theorem GalerkinSolution.timeDerivative_continuousOn_forward
       exact hchar.continuousOn.mul
         ((g.rhs_continuousOn hk i).comp continuous_fst.continuousOn
           (fun z hz => hz))
-    · exact continuousOn_const
+    have hre := Complex.continuous_re.comp_continuousOn hsum
+    have hvec : ContinuousOn (fun _ : ℝ × Vec => unitVector i) forwardSpacetime :=
+      continuousOn_const
+    simpa only [Function.comp_def, Pi.smul_apply] using! hre.smul hvec
   apply hc.congr
   intro z hz
-  rw [g.timeDerivative_eq_finiteSynthesis z.1 hz]
+  exact congrFun (g.timeDerivative_eq_finiteSynthesis z.1 hz) z.2
 
 theorem GalerkinSolution.timeDerivative_energy_eq
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
@@ -74,7 +78,7 @@ theorem GalerkinSolution.timeDerivative_energy_continuousOn
     exact (g.rhs_continuousOn hk i).norm.pow 2
   apply hc.congr
   intro t ht
-  rw [g.timeDerivative_energy_eq t ht]
+  exact g.timeDerivative_energy_eq t ht
 
 theorem GalerkinSolution.timeDerivative_energy_intervalIntegrable
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)

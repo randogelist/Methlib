@@ -84,7 +84,7 @@ theorem summable_torusSobolevWeight_inv_four :
     have hinv : (torusSobolevWeight k)⁻¹ ≤ ‖frequencyLatticePoint k‖⁻¹ := by
       simpa only [one_div] using
         one_div_le_one_div_of_le hnorm (frequencyLatticePoint_norm_le_weight k)
-    exact pow_le_pow_left₀ (by positivity) hinv 4
+    exact pow_le_pow_left₀ (inv_nonneg.mpr (torusSobolevWeight_pos k).le) hinv 4
 
 def latticeSobolevConstant : ℝ :=
   1 + ∑' k : Frequency, (torusSobolevWeight k)⁻¹ ^ 4
