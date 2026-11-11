@@ -37,8 +37,7 @@ theorem critical_modal_square_budget
           isCompact_Icc measurableSet_Icc).aemeasurable.ennreal_ofReal)
   have hmul : ENNReal.ofReal δ * atTop.liminf J ≤
       atTop.liminf (fun n => ENNReal.ofReal δ * J n) := by
-    simpa only [Filter.liminf_const, Pi.mul_apply] using
-      (ENNReal.le_liminf_mul (u := fun _ : ℕ => ENNReal.ofReal δ) (v := J) (f := atTop))
+    rw [ENNReal.liminf_const_mul_of_ne_top ENNReal.ofReal_ne_top]
   have htotal (n : ℕ) : ENNReal.ofReal (‖G n‖ ^ 2) + ENNReal.ofReal δ * J n ≤
       ENNReal.ofReal A := by
     have hi : Integrable (fun t => ‖F n t‖ ^ 2) μ :=

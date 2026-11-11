@@ -1,0 +1,80 @@
+THEOREM = SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY
+STATUS = UNCONDITIONAL_CLOSURE
+MARKER = !!!!
+
+EXACT_COMPILED_TYPE
+  forall (nu : Real), 0 < nu ->
+  forall (a : CriticalSobolev 1),
+    CriticalSigmaZero a ->
+    criticalNonlinearConstant * norm(a) < nu ->
+    CriticalDatumAX6 nu a /\ CriticalGlobalRegularity nu a.
+
+UNIVERSAL_CONSTANT_THEOREM
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT
+  exists c > 0, forall nu > 0, forall a : CriticalSobolev 1,
+    CriticalSigmaZero a -> norm(a) < c*nu ->
+    CriticalDatumAX6 nu a /\ CriticalGlobalRegularity nu a.
+  c = criticalNonlinearConstant^(-1).
+
+DATA
+  Domain = T^3 = R^3/Z^3.
+  Forcing = 0.
+  CriticalSobolev 1 = the concrete weighted-l2 Fourier H^(1/2) space.
+  CriticalSigmaZero a = spectral reality /\ solenoidality /\ zero mean.
+  For zero-mean a:
+    norm(a)^2 = sum_{k != 0} 2*pi*|k|*|a(k)|^2.
+
+CONCRETE_REGULARITY_CONCLUSION
+  exists U : CriticalRegularSolution nu a:
+    U.critical : Real -> CriticalSobolev 1;
+    ContinuousOn U.critical [0,infinity);
+    U.critical(0) = a;
+    forall t>=0, norm(U.critical(t)) <= norm(a);
+    U.flow is an actual compatible all-order periodic Sobolev NSE flow;
+    forall t>0, Fourier(U.flow.velocity(t)) = Fourier(U.critical(t));
+    U.flow.velocity and U.flow.pressure are C-infinity on (0,infinity) x T^3;
+    partial_t u + (u.grad)u = nu*Delta u - grad p, div u = 0, t>0;
+    exists B>=0, forall T>0, exists W in L^2([0,T];H^(3/2)):
+      Fourier(W(t)) = Fourier(U.critical(t)) for almost every t;
+      integral_[0,T] norm(W(t))^2 dt <= B.
+
+DATUMWISE_AX6_CONCLUSION
+  forall T>0, exists M : NNReal, forall N>=1,
+  forall g : GalerkinSolution nu (finiteSynthesis N (criticalCoeff 1 a)) N,
+    budget6 N g.coeff T <= M.
+
+PROOF_SPINE
+  concrete critical Fourier space
+  -> actual Galerkin trajectories
+  -> critical Sobolev/nonlinear estimates
+  -> critical energy invariance and uniform budgets
+  -> actual global compactness
+  -> strong H^(1/2) initial trace
+  -> actual positive-time smooth physical NSE.
+
+ADDITIONAL_ANALYTIC_PREMISES = []
+ADDITIONAL_CERTIFICATE_PREMISES = []
+ADDITIONAL_ADMISSION_PREMISES = []
+
+EXTERNAL_VERIFICATION
+  Compiler = Lean 4.33.0; cached external GitHub Actions.
+  Mathlib = db584cd6d46c92f209a44c0f1c829460d327499d.
+  Source commit = 18be009af57b9c6f2033f4409bbf1d8fdffcffd3.
+  Workflow run = 43050675251.
+  Job = 130626604086.
+  Exact-type audit = PASS.
+  Theorem-level axiom audit = PASS_STANDARD_ONLY.
+  Actual axioms = [propext, Classical.choice, Quot.sound].
+  Local Lean executions = 0.
+  URL = https://github.com/randogelist/Methlib/actions/runs/43050675251
+
+AUDITED_DECLARATIONS
+  SingularClosure.SMALL_DATA_CRITICAL_REGULARITY
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT
+
+SCOPE_BOUNDARY
+  This exact regularity root is verified.
+  The stronger quantitative/Leray-Hopf assembly has separate verification status.
+  The full workflow at this commit failed in CriticalQuantitative.lean;
+  the three exact declarations above compiled and passed their own axiom audit.

@@ -29,6 +29,14 @@ theorem critical_ennreal_liminf_add_le (f g : ℕ → ℝ≥0∞) :
     Filter.eventually_lt_of_lt_liminf hd] with n hn hm
   exact hbd.trans (ENNReal.add_lt_add hn hm)
 
+theorem critical_ennreal_liminf_mul_le (f g : ℕ → ℝ≥0∞) :
+    atTop.liminf f * atTop.liminf g ≤ atTop.liminf (fun n => f n * g n) := by
+  refine ENNReal.mul_le_of_forall_lt fun a ha b hb => (Filter.le_liminf_iff).2 ?_
+  intro c hc
+  filter_upwards [Filter.eventually_lt_of_lt_liminf ha,
+    Filter.eventually_lt_of_lt_liminf hb] with n hn hm
+  exact hc.trans (ENNReal.mul_lt_mul hn hm)
+
 /-- Modal lower semicontinuity of the fourth power of a homogeneous norm. -/
 theorem criticalExtendedQuartic_le_liminf (q : ℤ)
     (F : ℕ → CriticalSobolev q) (c : FourierCoeff)
@@ -39,10 +47,10 @@ theorem criticalExtendedQuartic_le_liminf (q : ℤ)
   calc
     _ ≤ (atTop.liminf (fun n => ENNReal.ofReal (‖F n‖ ^ 2))) ^ 2 := by gcongr
     _ ≤ atTop.liminf (fun n => ENNReal.ofReal (‖F n‖ ^ 2) ^ 2) := by
-      simpa only [pow_two, Pi.mul_apply] using
-        (ENNReal.le_liminf_mul
-          (u := fun n => ENNReal.ofReal (‖F n‖ ^ 2))
-          (v := fun n => ENNReal.ofReal (‖F n‖ ^ 2)) (f := atTop))
+      simpa only [pow_two] using
+        (critical_ennreal_liminf_mul_le
+          (fun n => ENNReal.ofReal (‖F n‖ ^ 2))
+          (fun n => ENNReal.ofReal (‖F n‖ ^ 2)))
     _ = _ := by
       congr 1
       funext n
@@ -77,8 +85,7 @@ theorem critical_modal_quartic_budget
           isCompact_Icc measurableSet_Icc).aemeasurable.ennreal_ofReal)
   have hmul : ENNReal.ofReal δ * atTop.liminf J ≤
       atTop.liminf (fun n => ENNReal.ofReal δ * J n) := by
-    simpa only [Filter.liminf_const, Pi.mul_apply] using
-      (ENNReal.le_liminf_mul (u := fun _ : ℕ => ENNReal.ofReal δ) (v := J) (f := atTop))
+    rw [ENNReal.liminf_const_mul_of_ne_top ENNReal.ofReal_ne_top]
   have htotal (n : ℕ) : ENNReal.ofReal (‖G n‖ ^ 4) + ENNReal.ofReal δ * J n ≤
       ENNReal.ofReal A := by
     have hi : Integrable (fun t => ‖F n t‖ ^ 4) μ :=
@@ -135,10 +142,21 @@ theorem SMALL_DATA_LIMIT_SHARP_QUARTIC
     have hp : 0 < 4 * (ν - criticalNonlinearConstant * ‖a‖) :=
       mul_pos (by norm_num) (sub_pos.mpr hsmall)
     have hmul := (le_div_iff₀ hp).mp h
-    have hfour (q : ℕ) (t : ℝ) : ‖(g n).criticalState (q : ℤ) t‖ ^ 4 =
-        criticalEnergy q (φ n + 1) ((g n).coeff t) ^ 2 := by
-      rw [show (4 : ℕ) = 2 * 2 from rfl, pow_mul, (g n).criticalState_norm_sq_nat q t]
-    simp_rw [hfour, criticalEnergy_two_eq_coefficientDissipation]
+    have hnorm1 : ‖(g n).criticalState 1 T‖ ^ 2 =
+        criticalEnergy 1 (φ n + 1) ((g n).coeff T) := by
+      rw [GalerkinSolution.criticalState, criticalFiniteSobolev_norm_sq]
+      simp only [criticalEnergy, zpow_one, pow_one]
+    have hnorm2 (t : ℝ) : ‖(g n).criticalState 2 t‖ ^ 2 =
+        criticalEnergy 2 (φ n + 1) ((g n).coeff t) := by
+      rw [GalerkinSolution.criticalState, criticalFiniteSobolev_norm_sq]
+      simp only [criticalEnergy, zpow_ofNat]
+    have hfour1 : ‖(g n).criticalState 1 T‖ ^ 4 =
+        criticalEnergy 1 (φ n + 1) ((g n).coeff T) ^ 2 := by
+      rw [show (4 : ℕ) = 2 * 2 from rfl, pow_mul, hnorm1]
+    have hfour2 (t : ℝ) : ‖(g n).criticalState 2 t‖ ^ 4 =
+        criticalEnergy 2 (φ n + 1) ((g n).coeff t) ^ 2 := by
+      rw [show (4 : ℕ) = 2 * 2 from rfl, pow_mul, hnorm2]
+    simp_rw [hfour1, hfour2, criticalEnergy_two_eq_coefficientDissipation]
     nlinarith
   have h := critical_modal_quartic_budget 2 1 T
     (4 * (ν - criticalNonlinearConstant * ‖a‖)) (‖a‖ ^ 4) hT

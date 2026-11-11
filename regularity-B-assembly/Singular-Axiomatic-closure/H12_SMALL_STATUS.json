@@ -91,22 +91,50 @@
     {
       "number": 7,
       "name": "CriticalLimit",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "18be009af57b9c6f2033f4409bbf1d8fdffcffd3",
+        "run_id": 43050675251,
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY",
+        "scope": "Base critical regularity root and its dependency chain"
+      }
     },
     {
       "number": 8,
       "name": "CriticalTrace",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "18be009af57b9c6f2033f4409bbf1d8fdffcffd3",
+        "run_id": 43050675251,
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY",
+        "scope": "Base critical regularity root and its dependency chain"
+      }
     },
     {
       "number": 9,
       "name": "CriticalRegularity",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "18be009af57b9c6f2033f4409bbf1d8fdffcffd3",
+        "run_id": 43050675251,
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY",
+        "scope": "Base critical regularity root and its dependency chain"
+      }
     },
     {
       "number": 10,
       "name": "SmallDataRoot",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER",
+      "evidence": {
+        "commit": "18be009af57b9c6f2033f4409bbf1d8fdffcffd3",
+        "run_id": 43050675251,
+        "exact_type": "PASS",
+        "axiom_audit": "PASS_STANDARD_ONLY",
+        "scope": "Base critical regularity root and its dependency chain"
+      }
     }
   ],
   "root_theorem": "NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL",
@@ -117,5 +145,14 @@
     "regularity": "strong critical trace, positive-time smooth physical NSE",
     "leray_hopf_uniqueness": "actual membership plus uniqueness; external verification pending"
   },
-  "last_verified_components_run": 43040552808
+  "last_verified_components_run": 43050675251,
+  "base_regularity": {
+    "status": "UNCONDITIONAL_CLOSURE",
+    "theorem": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY",
+    "commit": "18be009af57b9c6f2033f4409bbf1d8fdffcffd3",
+    "run_id": 43050675251,
+    "exact_type": "PASS",
+    "axiom_audit": "PASS_STANDARD_ONLY",
+    "additional_analytic_premises": []
+  }
 }
