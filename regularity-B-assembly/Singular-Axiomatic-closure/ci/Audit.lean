@@ -168,4 +168,240 @@ example {ν : ℝ} {a : Field} {N : ℕ}
 #check @SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
 #print axioms SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
 
+
+open Metric
+
+example : ∀ (N : ℕ) (a : FourierCoeff)
+    (j : Fin 3),
+    coordinateDerivative (finiteSynthesis N a) j =
+      finiteSynthesis N (spectralMultiplier (derivativeSymbol j) a) :=
+  @SingularClosure.finiteSynthesis_coordinateDerivative
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.finiteSynthesis_coordinateDerivative"
+#check @SingularClosure.finiteSynthesis_coordinateDerivative
+#print axioms SingularClosure.finiteSynthesis_coordinateDerivative
+
+example : ∀ (N : ℕ) (A : Fin 6)
+    (a : FourierCoeff) (j : Fin 3),
+    coordinateDerivative (physicalChannel N A a) j =
+      physicalChannel N A (spectralMultiplier (derivativeSymbol j) a) :=
+  @SingularClosure.physicalChannel_coordinateDerivative
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.physicalChannel_coordinateDerivative"
+#check @SingularClosure.physicalChannel_coordinateDerivative
+#print axioms SingularClosure.physicalChannel_coordinateDerivative
+
+example : ∀ (N : ℕ) (A : Fin 6) (a : FourierCoeff),
+    SpatialPeriodic (physicalChannel N A a) :=
+  @SingularClosure.physicalChannel_periodic
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.physicalChannel_periodic"
+#check @SingularClosure.physicalChannel_periodic
+#print axioms SingularClosure.physicalChannel_periodic
+
+example : ∀ (N : ℕ) (A : Fin 6)
+    (a : FourierCoeff) (ha : SpectralSolenoidal a) (x : Vec),
+    divergence (physicalChannel N A a) x = 0 :=
+  @SingularClosure.physicalChannel_divergence_free
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.physicalChannel_divergence_free"
+#check @SingularClosure.physicalChannel_divergence_free
+#print axioms SingularClosure.physicalChannel_divergence_free
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (t : ℝ) (ht : 0 ≤ t) (A : Fin 6) (x : Vec),
+    divergence (physicalChannel N A (g.coeff t)) x = 0 :=
+  @SingularClosure.GalerkinSolution.physicalChannel_divergence_free
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.physicalChannel_divergence_free"
+#check @SingularClosure.GalerkinSolution.physicalChannel_divergence_free
+#print axioms SingularClosure.GalerkinSolution.physicalChannel_divergence_free
+
+example : ∀ {v : Field} (hv : ContDiff ℝ ∞ v),
+    physicalEnstrophy v < ⊤ :=
+  @SingularClosure.physicalEnstrophy_lt_top
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.physicalEnstrophy_lt_top"
+#check @SingularClosure.physicalEnstrophy_lt_top
+#print axioms SingularClosure.physicalEnstrophy_lt_top
+
+example : ∀ (N : ℕ) (A B : Fin 6)
+    (hA : A = 0 ∨ A = 1) (hB : B = 2 ∨ B = 3)
+    (a b : FourierCoeff) (i j : Fin 3) (x : Vec),
+    coordinateDerivative (physicalChannel N A a) i x j *
+      coordinateDerivative (physicalChannel N B b) i x j = 0 :=
+  @SingularClosure.physicalChannel_v_w_gradient_product_zero
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.physicalChannel_v_w_gradient_product_zero"
+#check @SingularClosure.physicalChannel_v_w_gradient_product_zero
+#print axioms SingularClosure.physicalChannel_v_w_gradient_product_zero
+
+example : ∀ (N : ℕ) (A B : Fin 6)
+    (hA : A = 0 ∨ A = 1) (hB : B = 2 ∨ B = 3)
+    (a b : FourierCoeff),
+    physicalEnstrophy (physicalChannel N A a + physicalChannel N B b) =
+      physicalEnstrophy (physicalChannel N A a) +
+        physicalEnstrophy (physicalChannel N B b) :=
+  @SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ"
+#check @SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ
+#print axioms SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ
+
+example : ∀ (ν : ℝ) (N : ℕ)
+    (z₀ : FiniteGalerkinState N) (t₀ : ℝ),
+    ∃ z : ℝ → FiniteGalerkinState N, z t₀ = z₀ ∧
+      ∃ ε > (0 : ℝ), ∀ t ∈ Ioo (t₀ - ε) (t₀ + ε),
+        HasDerivAt z (finiteGalerkinRhs ν N (z t)) t :=
+  @SingularClosure.finiteGalerkinRhs_local_exists
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_local_exists"
+#check @SingularClosure.finiteGalerkinRhs_local_exists
+#print axioms SingularClosure.finiteGalerkinRhs_local_exists
+
+example : ∀ (ν : ℝ) (N : ℕ) (R : ℝ),
+    ∃ δ > (0 : ℝ),
+      ∀ z₀ ∈ closedBall (0 : FiniteGalerkinState N) R, ∀ t₀ : ℝ,
+        ∃ z : ℝ → FiniteGalerkinState N, z t₀ = z₀ ∧
+          ∀ t ∈ Ioo (t₀ - δ) (t₀ + δ),
+            HasDerivAt z (finiteGalerkinRhs ν N (z t)) t :=
+  @SingularClosure.finiteGalerkinRhs_uniform_local_time
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_uniform_local_time"
+#check @SingularClosure.finiteGalerkinRhs_uniform_local_time
+#print axioms SingularClosure.finiteGalerkinRhs_uniform_local_time
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ}
+    (g h : GalerkinSolution ν a N),
+    EqOn g.coeff h.coeff (Ici 0) :=
+  @SingularClosure.GalerkinSolution.coeff_unique_forward
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coeff_unique_forward"
+#check @SingularClosure.GalerkinSolution.coeff_unique_forward
+#print axioms SingularClosure.GalerkinSolution.coeff_unique_forward
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ}
+    (g h : GalerkinSolution ν a N),
+    EqOn g.velocity h.velocity (Ici 0) :=
+  @SingularClosure.GalerkinSolution.velocity_unique_forward
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_unique_forward"
+#check @SingularClosure.GalerkinSolution.velocity_unique_forward
+#print axioms SingularClosure.GalerkinSolution.velocity_unique_forward
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hsupp : ∀ k : Frequency, k ∉ cutoffModes N → ∀ i : Fin 3, c k i = 0)
+    (hreal : ∀ k : Frequency, ∀ i : Fin 3, c (-k) i = star (c k i))
+    (hsol : ∀ k : Frequency, (∑ i : Fin 3, (k i : ℂ) * c k i) = 0),
+    (∑ k ∈ cutoffModes N, ∑ i : Fin 3,
+      star (c k i) * coefficientTransport N c k i) = 0 :=
+  @SingularClosure.coefficientTransport_complex_energy_zero
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_complex_energy_zero"
+#check @SingularClosure.coefficientTransport_complex_energy_zero
+#print axioms SingularClosure.coefficientTransport_complex_energy_zero
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hsupp : ∀ k : Frequency, k ∉ cutoffModes N → ∀ i : Fin 3, c k i = 0)
+    (hreal : ∀ k : Frequency, ∀ i : Fin 3, c (-k) i = star (c k i))
+    (hsol : ∀ k : Frequency, (∑ i : Fin 3, (k i : ℂ) * c k i) = 0),
+    coefficientNonlinearPower N c = 0 :=
+  @SingularClosure.coefficientNonlinearPower_eq_zero
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientNonlinearPower_eq_zero"
+#check @SingularClosure.coefficientNonlinearPower_eq_zero
+#print axioms SingularClosure.coefficientNonlinearPower_eq_zero
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ}
+    (g : GalerkinSolution ν a N) {t : ℝ} (ht : 0 ≤ t),
+    HasDerivWithinAt (fun r => coefficientEnergy N (g.coeff r))
+      ((-2 * ν) * coefficientDissipation N (g.coeff t)) (Ici 0) t :=
+  @SingularClosure.GalerkinSolution.coefficientEnergy_identity
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_identity"
+#check @SingularClosure.GalerkinSolution.coefficientEnergy_identity
+#print axioms SingularClosure.GalerkinSolution.coefficientEnergy_identity
+
+example : ∀ {ν : ℝ} (hν : 0 ≤ ν) {a : Field} {N : ℕ}
+    (g : GalerkinSolution ν a N) {t : ℝ} (ht : 0 ≤ t),
+    coefficientEnergy N (g.coeff t) ≤ coefficientEnergy N (g.coeff 0) :=
+  @SingularClosure.GalerkinSolution.coefficientEnergy_le_initial
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_le_initial"
+#check @SingularClosure.GalerkinSolution.coefficientEnergy_le_initial
+#print axioms SingularClosure.GalerkinSolution.coefficientEnergy_le_initial
+
+example : ∀ {ι : Type*} {y z d : ι → ℝ → ℝ} {ν κ T M E₀ : ℝ}
+    (hν : 0 < ν) (hκ : 0 ≤ κ) (hT : 0 ≤ T) (hM : 0 ≤ M)
+    (hE₀ : 0 ≤ E₀)
+    (hy : ∀ n, ContinuousOn (y n) (Icc 0 T))
+    (hz : ∀ n, ContinuousOn (z n) (Icc 0 T))
+    (hd : ∀ n, ContinuousOn (d n) (Icc 0 T))
+    (hy_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ y n t)
+    (h_initial : ∀ n, y n 0 ≤ E₀)
+    (hderiv : ∀ n t, t ∈ Ioo 0 T → HasDerivAt (y n) (d n t) t)
+    (hcubic : ∀ n t, t ∈ Ioo 0 T →
+      d n t + ν * (z n t) ^ 2 ≤ κ * (y n t) ^ 3)
+    (hbudget : ∀ n, (∫ s in (0 : ℝ)..T, (y n s) ^ 2) ≤ M),
+    ∃ B : ℝ, 0 ≤ B ∧ B = E₀ * Real.exp (κ * M) ∧
+      ∀ n,
+        (∀ t ∈ Icc 0 T,
+          y n t + ν * (∫ s in (0 : ℝ)..t, (z n s) ^ 2) ≤ B) ∧
+        (∀ t ∈ Icc 0 T, y n t ≤ B) ∧
+        ν * (∫ s in (0 : ℝ)..T, (z n s) ^ 2) ≤ B :=
+  @SingularClosure.uniform_cubic_energy_of_square_budget
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.uniform_cubic_energy_of_square_budget"
+#check @SingularClosure.uniform_cubic_energy_of_square_budget
+#print axioms SingularClosure.uniform_cubic_energy_of_square_budget
+
+example : ∀ (k : Frequency) (v : Fin 3 → ℂ),
+    (∑ i : Fin 3, (k i : ℂ) * coefficientLeray k v i) = 0 :=
+  @SingularClosure.coefficientLeray_solenoidal
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientLeray_solenoidal"
+#check @SingularClosure.coefficientLeray_solenoidal
+#print axioms SingularClosure.coefficientLeray_solenoidal
+
+example : ∀ (ν : ℝ) (N : ℕ) (c : FourierCoeff)
+    (hc : SpectralSolenoidal c) (k : Frequency),
+    (∑ i : Fin 3, (k i : ℂ) * galerkinRhs ν N c k i) = 0 :=
+  @SingularClosure.galerkinRhs_solenoidal
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.galerkinRhs_solenoidal"
+#check @SingularClosure.galerkinRhs_solenoidal
+#print axioms SingularClosure.galerkinRhs_solenoidal
+
+example : ∀ (k : Frequency) (v : Fin 3 → ℂ)
+    (i : Fin 3),
+    v i + (((2 * Real.pi : ℝ) : ℂ) * Complex.I * (k i : ℂ)) *
+      pressureFromTransport k v = coefficientLeray k v i :=
+  @SingularClosure.pressureFromTransport_recovery
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.pressureFromTransport_recovery"
+#check @SingularClosure.pressureFromTransport_recovery
+#print axioms SingularClosure.pressureFromTransport_recovery
+
+
+open Metric
+
+example : ∀ (N : ℕ) (a : FourierCoeff),
+    physicalEnstrophy (finiteSynthesis N a) ≤ 6 * sixEnstrophy N a :=
+  @SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET"
+#check @SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET
+#print axioms SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET
+
+example : ∀ (N : ℕ)
+    (c : ℝ → FourierCoeff) (T : ℝ),
+    (∫⁻ t in Icc (0 : ℝ) T,
+      (physicalEnstrophy (finiteSynthesis N (c t))) ^ 2) ≤
+        36 * budget6 N c T :=
+  @SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET"
+#check @SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
+#print axioms SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
+
 end

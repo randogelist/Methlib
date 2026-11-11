@@ -6,3 +6,9 @@ import SingularClosure.Galerkin
 import SingularClosure.Admission
 import SingularClosure.PhysicalChannels
 import SingularClosure.GalerkinAlgebra
+import SingularClosure.PhysicalProjection
+import SingularClosure.PhysicalEnstrophy
+import SingularClosure.GalerkinExistence
+import SingularClosure.GalerkinEnergy
+import SingularClosure.UniformBounds
+import SingularClosure.LerayPressure

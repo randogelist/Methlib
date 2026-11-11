@@ -101,6 +101,138 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt"
+    },
+    {
+      "name": "SingularClosure.finiteSynthesis_coordinateDerivative",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteSynthesis_coordinateDerivative"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_coordinateDerivative",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_coordinateDerivative"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_periodic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_periodic"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_divergence_free",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_divergence_free"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.physicalChannel_divergence_free",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.physicalChannel_divergence_free"
+    },
+    {
+      "name": "SingularClosure.physicalEnstrophy_lt_top",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalEnstrophy_lt_top"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_v_w_gradient_product_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_v_w_gradient_product_zero"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.finiteGalerkinRhs_local_exists",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_local_exists"
+    },
+    {
+      "name": "SingularClosure.finiteGalerkinRhs_uniform_local_time",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_uniform_local_time"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coeff_unique_forward",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coeff_unique_forward"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.velocity_unique_forward",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_unique_forward"
+    },
+    {
+      "name": "SingularClosure.coefficientTransport_complex_energy_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_complex_energy_zero"
+    },
+    {
+      "name": "SingularClosure.coefficientNonlinearPower_eq_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientNonlinearPower_eq_zero"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_identity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_identity"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_le_initial",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_le_initial"
+    },
+    {
+      "name": "SingularClosure.uniform_cubic_energy_of_square_budget",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.uniform_cubic_energy_of_square_budget"
+    },
+    {
+      "name": "SingularClosure.coefficientLeray_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientLeray_solenoidal"
+    },
+    {
+      "name": "SingularClosure.galerkinRhs_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinRhs_solenoidal"
+    },
+    {
+      "name": "SingularClosure.pressureFromTransport_recovery",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.pressureFromTransport_recovery"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET"
     }
   ]
 }
