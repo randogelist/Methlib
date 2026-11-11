@@ -83,7 +83,7 @@ theorem spectralEnergy_channel_le (w : Frequency → ℝ≥0∞)
     (A : Fin 6) (a : FourierCoeff) :
     spectralEnergy w (spectralChannel A a) ≤ spectralEnergy w a := by
   rw [← SIX_CHANNEL_SPECTRAL_ENERGY_EQ w a]
-  exact Finset.single_le_sum (fun _ _ => zero_le _) (Finset.mem_univ A)
+  exact Finset.single_le_sum (fun _ _ => zero_le) (Finset.mem_univ A)
 
 theorem spectralEnergy_channel_finite (w : Frequency → ℝ≥0∞)
     (A : Fin 6) {a : FourierCoeff} (ha : spectralEnergy w a < ⊤) :

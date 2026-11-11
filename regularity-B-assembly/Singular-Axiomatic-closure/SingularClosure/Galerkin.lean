@@ -145,15 +145,21 @@ def zeroGalerkinSolution (ν : ℝ) (N : ℕ) : GalerkinSolution ν (0 : Field) 
     simp
   initial_integrable := by
     intro k i
-    simpa [datumFourierIntegrand] using
-      (integrableOn_zero : IntegrableOn (fun _ : Vec => (0 : ℂ)) unitCube volume)
+    have hz : datumFourierIntegrand (0 : Field) k i =
+        (fun _ : Vec => (0 : ℂ)) := by
+      funext x
+      simp [datumFourierIntegrand]
+    rw [hz]
+    exact integrableOn_zero
   initial := by
     intro k i
     simp [datumFourierCoeff, datumFourierIntegrand]
   equation := by
     intro t ht k hk i
-    simpa [galerkinRhs, coefficientTransport, coefficientLeray] using
-      (hasDerivAt_const t (0 : ℂ)).hasDerivWithinAt (s := Ici (0 : ℝ))
+    change HasDerivWithinAt (fun _ : ℝ => (0 : ℂ))
+      (galerkinRhs ν N (0 : FourierCoeff) k i) (Ici 0) t
+    rw [galerkinRhs_zero]
+    exact (hasDerivAt_const t (0 : ℂ)).hasDerivWithinAt
 
 theorem zeroGalerkinSolution_velocity (ν : ℝ) (N : ℕ) :
     (zeroGalerkinSolution ν N).velocity = (0 : Velocity) := by
