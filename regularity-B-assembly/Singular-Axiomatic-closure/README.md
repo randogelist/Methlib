@@ -15,13 +15,13 @@ SingularClosure.ax6_implies_fefferman_B_0_adjust :
 | Root exact type | PASS |
 | Root axioms | `propext`, `Classical.choice`, `Quot.sound` |
 | Complete source build | PASS |
-| Aggregate 171-declaration audit | Pending syntax-repair verification |
+| Aggregate 171-declaration audit | PASS: 171/171, standard axioms only |
 | Lean | 4.33.0, external cached GitHub Actions |
 | Mathlib | `db584cd6d46c92f209a44c0f1c829460d327499d` |
 | Local Lean executions | 0 |
 | Unconditional closure | Not established |
 
-Root evidence: [353038e0 / run 42960942482](https://github.com/randogelist/Methlib/actions/runs/42960942482).
+Root evidence: [2d899390 / run 42961722080](https://github.com/randogelist/Methlib/actions/runs/42961722080).
 
 ## Exact scope
 

@@ -1,0 +1,12 @@
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY
+GALERKIN_ENSTROPHY_INEQUALITY : ∃ C,
+  0 < C ∧
+    ∀ (ν : ℝ),
+      0 < ν →
+        ∀ (a : SingularClosure.Field) (N : ℕ) (g : GalerkinSolution ν a N) (t : ℝ),
+          0 ≤ t →
+            ∃ d,
+              HasDerivWithinAt (fun r => ∫ (x : Vec) in unitCube, gradientSquareDensity (g.velocity r) x) d (Ici 0) t ∧
+                d + ν * ∫ (x : Vec) in unitCube, ‖laplacian (g.velocity t) x‖ ^ 2 ≤
+                  C / ν ^ 3 * (∫ (x : Vec) in unitCube, gradientSquareDensity (g.velocity t) x) ^ 3
+'SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY' depends on axioms: [propext, Classical.choice, Quot.sound]

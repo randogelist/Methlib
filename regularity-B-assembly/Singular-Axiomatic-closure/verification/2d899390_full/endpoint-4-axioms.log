@@ -1,0 +1,13 @@
+ci/EndpointAudit4.lean:11:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENERGY_IDENTITY
+@GALERKIN_ENERGY_IDENTITY : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N) {T : ℝ},
+  0 ≤ T →
+    IntervalIntegrable (fun t => physicalDissipation (g.velocity t)) volume 0 T ∧
+      physicalEnergy (g.velocity T) + 2 * ν * ∫ (t : ℝ) in 0..T, physicalDissipation (g.velocity t) =
+        physicalEnergy (finiteSynthesis N (datumFourierCoeff a))
+'SingularClosure.GALERKIN_ENERGY_IDENTITY' depends on axioms: [propext, Classical.choice, Quot.sound]

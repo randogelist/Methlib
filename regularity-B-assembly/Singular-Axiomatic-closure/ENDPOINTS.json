@@ -17,7 +17,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 2,
@@ -32,7 +34,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 3,
@@ -47,7 +51,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 4,
@@ -62,7 +68,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 5,
@@ -77,7 +85,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 6,
@@ -92,7 +102,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 7,
@@ -107,7 +119,9 @@
         "propext",
         "Classical.choice",
         "Quot.sound"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 8,
@@ -122,7 +136,9 @@
         "Classical.choice",
         "Quot.sound",
         "propext"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 9,
@@ -137,7 +153,9 @@
         "Classical.choice",
         "Quot.sound",
         "propext"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 10,
@@ -152,7 +170,9 @@
         "Classical.choice",
         "Quot.sound",
         "propext"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     },
     {
       "number": 11,
@@ -167,7 +187,9 @@
         "Classical.choice",
         "Quot.sound",
         "propext"
-      ]
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
     }
   ],
   "root_completed": true,
@@ -181,7 +203,11 @@
   "conditional_formal_closure": true,
   "unconditional_closure": false,
   "root_theorem": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
-  "root_verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+  "root_verified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
   "aggregate_build": "PASS",
-  "aggregate_audit": "PENDING_SYNTAX_REPAIR_VERIFICATION"
+  "aggregate_audit": "PASS_STANDARD_ONLY",
+  "aggregate_audit_declaration_count": 171,
+  "aggregate_verified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+  "aggregate_evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080",
+  "aggregate_source_hashes_matched": 221
 }

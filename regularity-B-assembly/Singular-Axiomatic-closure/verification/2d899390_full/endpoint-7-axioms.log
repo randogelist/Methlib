@@ -1,0 +1,54 @@
+ci/EndpointAudit7.lean:5:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/EndpointAudit7.lean:6:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/EndpointAudit7.lean:6:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/EndpointAudit7.lean:7:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+AX6_UNIFORM_STRONG_BOUNDS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        ContinuousOn (g.sobolevState 1) (Ici 0) ∧
+                          MemLp (g.sobolevState 1) ∞ (volume.restrict (Icc 0 T)) ∧
+                            MemLp (g.sobolevState 2) 2 (volume.restrict (Icc 0 T)) ∧
+                              MemLp (g.rhsSobolev 0) 2 (volume.restrict (Icc 0 T)) ∧
+                                (∀ (t : ℝ), 0 ≤ t → HasDerivWithinAt (g.sobolevState 0) (g.rhsSobolev 0 t) (Ici 0) t) ∧
+                                  (∀ t ∈ Icc 0 T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B) ∧
+                                    IntervalIntegrable (fun t => ‖g.sobolevState 2 t‖ ^ 2) volume 0 T ∧
+                                      ∫ (t : ℝ) in 0..T, ‖g.sobolevState 2 t‖ ^ 2 ≤ B ∧
+                                        IntervalIntegrable (fun t => ‖g.rhsSobolev 0 t‖ ^ 2) volume 0 T ∧
+                                          ∫ (t : ℝ) in 0..T, ‖g.rhsSobolev 0 t‖ ^ 2 ≤ B ∧
+                                            IntervalIntegrable
+                                                (fun t => ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2)
+                                                volume 0 T ∧
+                                              ∫ (t : ℝ) in 0..T,
+                                                  ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2 ≤
+                                                B
+'SingularClosure.AX6_UNIFORM_STRONG_BOUNDS' depends on axioms: [propext, Classical.choice, Quot.sound]

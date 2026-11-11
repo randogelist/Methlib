@@ -1,0 +1,373 @@
+name: Singular axiomatic closure
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/**'
+      - '.github/workflows/singular-axiomatic-closure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: singular-axiomatic-closure-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-audit:
+    name: Lean 4.33.0 / frozen endpoint audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: package
+        shell: bash
+    env:
+      PROJECT: regularity-B-assembly/Singular-Axiomatic-closure
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - name: Checkout the exact main-branch revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          sparse-checkout: |
+            regularity-B-assembly/Singular-Axiomatic-closure
+            .github/workflows/singular-axiomatic-closure.yml
+          persist-credentials: false
+
+      - name: Extract the standalone project at the tested revision
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir package
+          git -C repository archive "$GITHUB_SHA:$PROJECT" | tar -xf - -C package
+          cp -R package "$RUNNER_TEMP/singular-closure-source"
+          mkdir package/evidence
+          echo "$GITHUB_SHA" > package/evidence/commit.txt
+          echo "$PROJECT" > package/evidence/project.txt
+          cp repository/.github/workflows/singular-axiomatic-closure.yml package/evidence/workflow.yml
+
+      - name: Check proof admission policy and record source hashes
+        run: |
+          set -euo pipefail
+          python3 ci/check_sources.py | tee evidence/source-policy.json
+          python3 ci/test_check_axioms.py 2>&1 | tee evidence/audit-checker-tests.log
+          sha256sum lake-manifest.json > evidence/lockfile-before.sha256
+
+      - name: Reserve disk space for cached dependency objects
+        run: |
+          set -euo pipefail
+          available_kib=$(df -Pk . | awk 'NR == 2 { print $4 }')
+          if [ "$available_kib" -lt "$((20 * 1024 * 1024))" ]; then
+            sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          fi
+          df -h . | tee evidence/disk.txt
+
+      - name: Install the pinned Lean toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore exact pinned dependency checkout and object cache
+        id: deps-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+
+      - name: Fetch and verify Mathlib cached objects
+        run: |
+          set -euo pipefail
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          sha256sum --check evidence/lockfile-before.sha256
+
+      - name: Preserve verified dependency objects before project compilation
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: ${{ steps.deps-cache.outputs.cache-primary-key }}
+
+      - name: Restore checked project objects for the pinned dependencies
+        id: build_cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/lakefile.toml', 'package/SingularClosure.lean', 'package/SingularClosure/**/*.lean') }}
+          restore-keys: |
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+
+      - name: Compile and audit frozen endpoint 3
+        id: endpoint_3
+        if: always() && steps.build_cache.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.GalerkinGlobal 2>&1 | tee evidence/endpoint-3-build.log
+          lake env lean ci/EndpointAudit3.lean 2>&1 | tee evidence/endpoint-3-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-3-axioms.log ci/expected_endpoint_3.json | tee evidence/endpoint-3-audit.json
+
+      - name: Upload endpoint 3 checkpoint
+        if: always() && steps.build_cache.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-3-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-3-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 4
+        id: endpoint_4
+        if: always() && steps.build_cache.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.PhysicalEnergy 2>&1 | tee evidence/endpoint-4-build.log
+          lake env lean ci/EndpointAudit4.lean 2>&1 | tee evidence/endpoint-4-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-4-axioms.log ci/expected_endpoint_4.json | tee evidence/endpoint-4-audit.json
+
+      - name: Upload endpoint 4 checkpoint
+        if: always() && steps.build_cache.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-4-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-4-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 2
+        id: endpoint_2
+        if: always() && steps.build_cache.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.SmoothSixEnstrophy 2>&1 | tee evidence/endpoint-2-build.log
+          lake env lean ci/EndpointAudit2.lean 2>&1 | tee evidence/endpoint-2-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-2-axioms.log ci/expected_endpoint_2.json | tee evidence/endpoint-2-audit.json
+
+      - name: Upload endpoint 2 checkpoint
+        if: always() && steps.build_cache.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-2-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-2-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 1
+        id: endpoint_1
+        if: always() && steps.build_cache.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.SixChannelProjections 2>&1 | tee evidence/endpoint-1-build.log
+          lake env lean ci/EndpointAudit1.lean 2>&1 | tee evidence/endpoint-1-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-1-axioms.log ci/expected_endpoint_1.json | tee evidence/endpoint-1-audit.json
+
+      - name: Upload endpoint 1 checkpoint
+        if: always() && steps.build_cache.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-1-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-1-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 5
+        id: endpoint_5
+        if: always() && steps.build_cache.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.EnstrophyAbsorption 2>&1 | tee evidence/endpoint-5-build.log
+          lake env lean ci/EndpointAudit5.lean 2>&1 | tee evidence/endpoint-5-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-5-axioms.log ci/expected_endpoint_5.json | tee evidence/endpoint-5-audit.json
+
+      - name: Upload endpoint 5 checkpoint
+        if: always() && steps.build_cache.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-5-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-5-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 7
+        id: endpoint_7
+        if: always() && steps.build_cache.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.StrongSobolevRealization 2>&1 | tee evidence/endpoint-7-build.log
+          lake env lean ci/EndpointAudit7.lean 2>&1 | tee evidence/endpoint-7-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-7-axioms.log ci/expected_endpoint_7.json | tee evidence/endpoint-7-audit.json
+
+      - name: Upload endpoint 7 checkpoint
+        if: always() && steps.build_cache.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-7-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-7-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 8
+        id: endpoint_8
+        if: always() && steps.endpoint_7.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.GlobalStrongLimit 2>&1 | tee evidence/endpoint-8-build.log
+          lake env lean ci/EndpointAudit8.lean 2>&1 | tee evidence/endpoint-8-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-8-axioms.log ci/expected_endpoint_8.json | tee evidence/endpoint-8-audit.json
+
+      - name: Upload endpoint 8 checkpoint
+        if: always() && steps.endpoint_8.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-8-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-8-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 9
+        id: endpoint_9
+        if: always() && steps.endpoint_8.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.GlobalSmoothBootstrap 2>&1 | tee evidence/endpoint-9-build.log
+          lake env lean ci/EndpointAudit9.lean 2>&1 | tee evidence/endpoint-9-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-9-axioms.log ci/expected_endpoint_9.json | tee evidence/endpoint-9-audit.json
+
+      - name: Upload endpoint 9 checkpoint
+        if: always() && steps.endpoint_9.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-9-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-9-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 10
+        id: endpoint_10
+        if: always() && steps.endpoint_9.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.PeriodicPressureRecovery 2>&1 | tee evidence/endpoint-10-build.log
+          lake env lean ci/EndpointAudit10.lean 2>&1 | tee evidence/endpoint-10-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-10-axioms.log ci/expected_endpoint_10.json | tee evidence/endpoint-10-audit.json
+
+      - name: Upload endpoint 10 checkpoint
+        if: always() && steps.endpoint_10.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-10-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-10-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 11
+        id: endpoint_11
+        if: always() && steps.endpoint_10.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.Root 2>&1 | tee evidence/endpoint-11-build.log
+          lake env lean ci/EndpointAudit11.lean 2>&1 | tee evidence/endpoint-11-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-11-axioms.log ci/expected_endpoint_11.json | tee evidence/endpoint-11-audit.json
+
+      - name: Upload endpoint 11 checkpoint
+        if: always() && steps.endpoint_11.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-11-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-11-*
+          if-no-files-found: error
+
+      - name: Build the actual source
+        id: aggregate_build
+        if: always()
+        run: |
+          set -euo pipefail
+          lake build SingularClosure 2>&1 | tee evidence/build.log
+          test -s .lake/build/lib/lean/SingularClosure.olean
+
+      - name: Run a fresh exact-type and theorem-level axiom audit
+        if: always() && steps.aggregate_build.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
+          python3 ci/check_axioms.py evidence/axioms.log ci/expected_axioms.json | tee evidence/audit.json
+
+      - name: Preserve independently checked project objects
+        if: always() && steps.build_cache.outcome == 'success' && steps.build_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.build_cache.outputs.cache-primary-key }}
+
+      - name: Upload the tested source
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-closure-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/singular-closure-source
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Upload compiler and audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-closure-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
+          if-no-files-found: error
+
