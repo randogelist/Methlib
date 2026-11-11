@@ -1,0 +1,2454 @@
+SINGULARITY_DISPROVEMENT_ENDPOINT_REUSE_R2_B_TIER
+MODE = B_TIER_DERIVATION; MARKER = !
+NEW_LEAN_THEOREMS = 0; LOCAL_LEAN_EXECUTIONS = 0; NEW_CI_RUNS = 0
+SCOPE = calibrated BKQR admission + regular evolutions with unbounded initial local energy density.
+ROOT_STATUS = COMPLETE_MATHEMATICAL_DERIVATION; NEW_FORMALIZATION = PLANNED.
+BASE_BRANCH = codex/h12-small-unconditional
+BASE_SHA = 09dfe94a1ef150e21d09df3013fbe09002ef139c
+TARGET_BRANCH = SINGULARITY_DISPROVEMENT
+PRIOR_TARGET_SHA = 62fb4f721410b71ea11132acc13c70a73c13cfe7
+WRITE_SCOPE = regularity-B-assembly/SINGULARITY_DISPROVEMENT; inherited source unchanged.
+REUSE_COUNTS = {"cross_selected_signatures": 43, "external_bkqr_audited_declarations": 25, "mathlib_selected": 8, "native_full_audit_index": 204, "native_selected": 82, "native_selected_direct_audit": 17}
+COUNTS: declarations, not independent regularity theorems; duplicates counted once.
+NATIVE_204: exact-type PASS + matching theorem-level standard-only axiom output.
+BKQR_25: compiled definitions/theorems + matching declaration-level axiom output in tested HVR environment.
+BKQR_25 does not assert 25 separate exact-type markers or 25 analytic bridges.
+R1_DISPLAY_CORRECTION: Section 8 middle bound is C^2 nu^2 kappa_C/gamma; the conclusion C H<nu/2 is unchanged.
+
+0. EVIDENCE AND REUSE POLICY
+DIRECT_NATIVE_AUDIT = matched declaration, pinned source, successful external run, exact type, standard axioms.
+EXTERNAL_BKQR_AUDIT = matched declaration in tested HVR commit, successful compiler, standard axioms.
+COMPILED_DEPENDENCY = inherited build dependency without separate declaration-level audit output.
+SOURCE_INSPECTED = actual proof/signature inspected; no new external audit assertion.
+REPORTED_NATIVE_PASS = repository status report; raw matching receipt not reverified.
+No source-only, status-only, or newly adapted declaration is promoted to A_TIER.
+Import reuse preserves original theorem premises, domain, constants, and representatives.
+New namespace: SingularityDisprovement; original namespace: SingularClosure.
+
+1. VERIFIED INHERITED ENDPOINT
+
+Exact import:
+  import SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+Exact theorem:
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+Premises:
+  (nu : Real), 0<nu,
+  (a : CriticalSobolev 1),
+  CriticalSigmaZero a,
+  criticalNonlinearConstant * norm(a) < nu.
+
+CriticalSigmaZero a:
+  SpectralReality (criticalCoeff 1 a),
+  SpectralSolenoidal (criticalCoeff 1 a),
+  SpectralMeanZero (criticalCoeff 1 a).
+
+Conclusion:
+  CriticalDatumAX6 nu a
+  and existence of one common U : CriticalRegularSolution nu a with:
+    actual CriticalLerayHopf membership;
+    U.lerayHopfUnique;
+    actual PositiveSmoothNSE;
+    global L2_t H^(3/2)_x and its quantitative budget;
+    global L2_t H^(-1/2)_x time derivative and its budget;
+    global L4_t L6_x;
+    for every T>0,
+      integral_0^T ||grad U(t)||_2^4 dt
+      <= [norm(a)^4-norm(U.critical T)^4]
+           / [4(nu-criticalNonlinearConstant*norm(a))].
+
+CriticalRegularSolution additionally supplies:
+  strong C([0,infinity);H^(1/2)) trace;
+  U.critical(0)=a;
+  norm(U.critical(t))<=norm(a), t>=0;
+  agreement between critical coefficients and the physical positive-time flow.
+
+VERIFIED_EVIDENCE:
+  run = 43059293572;
+  job = 130657144029;
+  source_sha = 09dfe94a1ef150e21d09df3013fbe09002ef139c;
+  workflow conclusion = success;
+  extension modules = 104/104 PASS;
+  required endpoint audits = 27/27 PASS;
+  compiler = Lean 4.33.0;
+  compiler commit = d8b18978322de05a8f3dba51ef03cf5461676c17;
+  Mathlib = db584cd6d46c92f209a44c0f1c829460d327499d;
+  exact type = PASS;
+  theorem axioms = [propext, Classical.choice, Quot.sound];
+  evidence artifact = 13873696533.
+
+Observed log:
+  EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  'SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL'
+    depends on axioms: [propext, Classical.choice, Quot.sound]
+  status: PASS; errors: [].
+
+Evidence:
+  https://github.com/randogelist/Methlib/actions/runs/43059293572
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/job/130657144029
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/artifacts/13873696533
+
+Source:
+  https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean
+
+Audit specification:
+  regularity-B-assembly/Singular-Axiomatic-closure/ci/critical_audits/SmallDataClosure.lean
+  regularity-B-assembly/Singular-Axiomatic-closure/ci/critical_audits/SmallDataClosure.json
+
+H12_SMALL_STATUS.json contains older pending fields.
+The matching successful HEAD run supersedes those pending fields.
+No source metadata is amended in this round.
+
+2. NATIVE MATHEMATICAL DICTIONARY
+
+T^3=(R/Z)^3; normalized spatial volume=1; nu>0; forcing=0.
+E=L2_{sigma,0}(T^3;R^3).
+D=H^(1/2)_{sigma,0}.
+Lambda=(-Delta)^(1/2).
+
+For zero-mean native data:
+  H(a)^2 := norm(a : CriticalSobolev 1)^2
+          = sum_{k!=0} 2*pi*|k|*|a_hat(k)|^2
+          = ||a||_{dot H^(1/2)}^2;
+  L(a)^2 := ||criticalInitialPhysicalL2 a||_2^2
+          = sum_{k!=0}|a_hat(k)|^2
+          = ||a||_2^2.
+
+Native weight:
+  omega(0)=1;
+  omega(k)=sqrt(laplacianFrequency k)=2*pi*|k|, k!=0.
+The zero coefficient vanishes under CriticalSigmaZero.
+
+  K(a)=L(a)^2/2;
+  P_0(a)=H(a)^2/2;
+  A_nu(a)=[H(a)^2-(5/2)L(a)^2]/(2nu^2).
+
+At t=0:
+  use criticalInitialPhysicalL2 a.
+  Do not require smoothFourierSynthesis or pointwise boundedness.
+
+Define C:=criticalNonlinearConstant.
+The native theorem proves C>0.
+C is obtained from FINITE_CRITICAL_NONLINEAR_BOUND.choose.
+A certified numerical value of C is not supplied by the inspected API.
+
+3. SHIFTED-ENERGY COERCIVITY
+
+Mean-zero Poincare:
+  H(a)^2>=2*pi*L(a)^2.
+
+Define
+  gamma:=1-5/(4*pi)>0.
+Indeed pi=4 integral_0^1(1+x^2)^(-1)dx>2, hence gamma>3/8.
+
+Therefore
+  2nu^2 A_nu(a)
+    =H(a)^2-(5/2)L(a)^2
+    >=gamma H(a)^2.                                  (3.1)
+
+The reverse elementary bound:
+  2nu^2 A_nu(a)<=H(a)^2.                              (3.2)
+
+Set
+  z_nu(a):=(Lambda-(5/2)I)^(1/2)a/(sqrt(2)*nu).
+
+The multiplier is well-defined on D because Lambda>=(2*pi)I.
+Its Fourier coefficients are
+  z_hat(k)=sqrt(2*pi*|k|-5/2)*a_hat(k)/(sqrt(2)*nu).
+Thus
+  ||z_nu(a)||_2^2=A_nu(a).                            (3.3)
+
+4. EXACT GP--BKQR CONSTANT MODEL
+
+  GP(b,s)=2/Gamma(s) integral_0^infinity
+                    t^(s-1)exp(-bt)/cosh(t)dt,
+  b>=0, s>0.
+
+At s=1, x=exp(-t):
+  GP(b,1)=4 integral_0^1 x^b/(1+x^2)dx.
+Consequently
+  GP(0,1)=4 arctan(1)=pi.
+
+Define H_pi=L2(0,1;R),
+  (Qf)(x)=((1-x^2)/2)f(x),
+  c(x)=sqrt(2).
+Then
+  0<=Q<=(1/2)I,
+  W(r)=<c,(I-rQ)^(-1)c>, |r|<2,
+  W(1)=4 integral_0^1(1+x^2)^(-1)dx=pi.
+
+No unbounded inverse or limiting resolvent is required at r=1.
+
+Moments:
+  m_n=<c,Q^n c>
+     =2^(1-n) integral_0^1(1-x^2)^n dx
+     =2^(n+1)(n!)^2/(2n+1)! in Q_{>0}.
+
+Proof of the last equality:
+  I_n=integral_0^1(1-x^2)^n dx;
+  I_0=1;
+  integral_0^1 d/dx[x(1-x^2)^n]dx=0 for n>=1;
+  (2n+1)I_n=2n I_{n-1};
+  induction gives the stated factorial formula.
+
+  m_0=2;
+  m_{n+1}/m_n=(n+1)/(2n+3)<1/2.
+
+  L_N=sum_{n=0}^N m_n;
+  L_N<pi<L_N+2m_{N+1};
+  L_N upward pi.
+
+Gram identities:
+  H_N=(m_{i+j})=<Q^i c,Q^j c>_{i,j=0}^N >=0;
+  H_N^+=(m_{i+j+1})>=0;
+  (1/2)H_N-H_N^+>=0.
+Each follows by integrating a squared polynomial times a nonnegative weight.
+
+5. JOINT OPERATOR AND CALIBRATED ADMISSION
+
+Uncalibrated operator:
+  B_nu(a)=[[W(1),z_nu(a)^*],[z_nu(a),I_E]].
+
+For alpha in R and h in E:
+  <(alpha,h),B_nu(a)(alpha,h)>
+    =||h+alpha z_nu(a)||_2^2+[pi-A_nu(a)]alpha^2.
+Therefore
+  B_nu(a)>=0 iff A_nu(a)<=pi.                         (5.1)
+
+Native-compatible cap:
+  kappa_C:=min{pi,gamma/(4C^2)}>0.
+
+From (3.1):
+  A_nu(a)<=kappa_C
+  ==> C^2 H(a)^2<=nu^2/2
+  ==> C H(a)<=nu/sqrt(2)<nu.                          (5.2)
+
+Thus the closed cap supplies the STRICT premise of the inherited root.
+There is no missing endpoint argument in (5.2).
+
+Calibrated vector and operator:
+  z_{nu,C}(a):=sqrt(pi/kappa_C)*z_nu(a);
+  A_{nu,C}(a):=||z_{nu,C}(a)||_2^2
+             =(pi/kappa_C)A_nu(a);
+  B_{nu,C}(a):=[[W(1),z_{nu,C}(a)^*],
+                [z_{nu,C}(a),I_E]].
+
+The same square completion yields
+  B_{nu,C}(a)>=0
+    iff A_{nu,C}(a)<=pi
+    iff A_nu(a)<=kappa_C
+    ==> C H(a)<nu.                                    (5.3)
+
+THEOREM CAPPED_BKQR_ADMISSION_REGULARITY:
+  forall nu>0, forall a in D,
+    B_{nu,C}(a)>=0
+    ==> the complete conclusion of the inherited
+        NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL theorem.
+
+Proof:
+  native dictionary;
+  (5.3);
+  apply the verified native theorem with exactly the same a and nu.
+
+Finite sufficient certificate:
+  A_{nu,C}(a)<=L_N
+  ==> A_nu(a)<kappa_C
+  ==> inherited regularity and Leray-Hopf uniqueness.  (5.4)
+
+kappa_C is an exact analytic constant, not an evaluated rational constant.
+The rational quantities are m_n and L_N.
+Finite arithmetic certification of arbitrary input data additionally requires
+a certified bound for its score, including its infinite Fourier tail.
+
+6. DYADIC COEFFICIENT DATA
+
+For j>=1 and 2^j<=n<2^(j+1):
+  d_n=1/(j2^j).
+
+  g(y)=sum_{n>=2}d_n cos(2*pi*n*y);
+  a_nu(x)=(nu/2)g(x_2)e_1.
+
+Coefficient specification:
+  a_hat(0,n,0)=a_hat(0,-n,0)=(nu/4)d_n e_1, n>=2;
+  all remaining coefficients vanish.
+
+Define
+  R=sum_{j>=1}1/(j^2 2^j),
+  S=sum_{j>=1}(3-2^(-j))/j^2.
+
+Finite block identities:
+  sum_{n=2^j}^{2^(j+1)-1}d_n^2=1/(j^2 2^j);
+  sum_{n=2^j}^{2^(j+1)-1}n d_n^2=(3-2^(-j))/(2j^2);
+  sum_{n=2^j}^{2^(j+1)-1}d_n=1/j.
+
+  0<R<1;
+  0<S<6.
+The second estimate follows from
+  sum_{j>=1}1/j^2<1+integral_1^infinity x^(-2)dx=2.
+
+Parseval and the native dictionary:
+  L(a_nu)^2=nu^2 R/8;
+  H(a_nu)^2=pi*nu^2 S/8;
+  K(a_nu)=nu^2 R/16;
+  P_0(a_nu)=pi*nu^2 S/16;
+  A_nu(a_nu)=pi*S/16-5R/32<3pi/8<3/2.
+
+The series converges in H^(1/2).
+Reality, solenoidality, and zero mean follow coefficientwise.
+
+7. PHYSICAL REPRESENTATIVE AND ESSENTIAL LOCAL UNBOUNDEDNESS
+
+d_n decreases to zero.
+For y notin Z, geometric sums and Abel summation give
+  |sum_{n>N}d_n cos(2*pi*n*y)|
+    <=d_{N+1}/|sin(pi*y)|.                           (7.1)
+This also proves uniform convergence on closed sets away from y=0.
+
+For 0<|y|<1/24, let
+  N=floor(1/(6|y|)),
+  j=floor(log_2(N+1)).
+
+Then:
+  cos(2*pi*n*y)>=1/2 for 2<=n<=N;
+  complete blocks 1,...,j-1 lie below N;
+  d_{N+1}<=2/[j(N+1)];
+  |sin(pi*y)|>=2|y|;
+  (N+1)|y|>1/6.
+
+Hence
+  g(y)>=(1/2)sum_{k=1}^{j-1}1/k-6/j
+       ->infinity as y->0, y!=0.                     (7.2)
+
+The physical L2 representative is identified with this cosine series:
+  finite synthesis agrees coefficientwise;
+  the H^(1/2) sequence converges in L2;
+  the native physical representation has the same Fourier coefficients;
+  native Fourier injectivity identifies the L2 classes.
+Away from y=0, the pointwise limit equals this class almost everywhere.
+
+Thus, for every open O containing a point of the shear plane,
+  ess sup_O |a_nu|^2/2=infinity.
+This is a positive-measure essential-unboundedness theorem.
+It is not inferred from divergence at one measure-zero point.
+
+8. CALIBRATION INTO THE VERIFIED NATIVE SMALL CLASS
+
+Let epsilon>0 and
+  B:=sqrt(3*pi/4).
+Then H(a_nu)<Bnu.
+
+Define the positive analytic scale
+  eta_*:=min{1/2,sqrt(kappa_C/3),epsilon/[2(1+Bnu)]}.
+
+Choose m>=1 with
+  eta_m:=2^(-m)<=eta_*.
+Existence follows from 2^(-m)->0.
+Define
+  a_{nu,m}:=eta_m a_nu.
+
+Then
+  H(a_{nu,m})<eta_m Bnu<epsilon/2;
+  A_nu(a_{nu,m})=eta_m^2 A_nu(a_nu)
+               <(3/2)eta_m^2
+               <=kappa_C/2;
+  A_nu(a_{nu,m})<3/8<2.
+
+Using (3.1):
+  C^2 H(a_{nu,m})^2
+    <C^2 nu^2 kappa_C/gamma
+    <=nu^2/4;
+  C H(a_{nu,m})<nu/2<nu.                             (8.1)
+
+For the CALIBRATED BKQR score:
+  A_{nu,C}(a_{nu,m})
+    =(pi/kappa_C) A_nu(a_{nu,m})
+    <pi/2<2=L_0.                                    (8.2)
+
+Thus the first rational BKQR stage certifies the calibrated mechanism itself.
+
+Coefficient effect:
+  a_hat_{nu,m}(0,+/-n,0)
+    =nu*d_n*e_1/(4*2^m).
+The coefficients divided by nu remain rational.
+
+The existence of m is proved.
+A concrete numerical m for the native chosen constant C is not computed
+or asserted in this round.
+
+9. IMPORTED REGULARITY AND ITS EXACT INSTANCE
+
+Apply NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL to:
+  nu;
+  native datum a_{nu,m};
+  its proved CriticalSigmaZero certificate;
+  the strict bound (8.1).
+
+Obtain one U with all conclusions in Section 1.
+
+Let rho_0=(1/2)|criticalInitialPhysicalL2 a_{nu,m}|^2.
+Positive scaling preserves (7.2), so:
+  rho_0 in L1 \ L^infinity;
+  ess sup_O rho_0=infinity for every neighborhood of the shear plane;
+  integral rho_0=eta_m^2 nu^2 R/16<infinity.
+
+This is an application of the actual native theorem.
+No abstract field containing the desired regularity is supplied as input.
+
+10. EXPLICIT SHEAR FLOW AND IDENTIFICATION WITH THE SAME U
+
+Define
+  V_{nu,m}(t,x)
+    =(eta_m nu/2)sum_{n>=2}
+       d_n exp(-4*pi^2*nu*n^2*t)cos(2*pi*n*x_2)e_1,
+  p=0.
+
+For every delta>0, all derivative series converge uniformly on
+[delta,infinity) x T^3 by Gaussian decay.
+
+Therefore, for t>0:
+  div V=0;
+  (V dot grad)V=0;
+  partial_t V=nu Delta V;
+  p=0 is periodic and mean zero;
+  V,p solve the actual unforced NSE.
+
+Dominated convergence in the weighted Fourier sum gives:
+  V(t)->a_{nu,m} strongly in H^(1/2) as t downarrow 0;
+  V in C([0,infinity);H^(1/2)).
+
+Exact energy identity:
+  K(V(T))+nu integral_0^T||grad V(t)||_2^2dt
+    =eta_m^2 nu^2 R/16.                               (10.1)
+
+Proof:
+  K(V(t))=eta_m^2 nu^2/16
+            sum_{n>=2}d_n^2 exp(-8*pi^2*nu*n^2*t);
+  ||grad V(t)||_2^2=eta_m^2 pi^2 nu^2/2
+            sum_{n>=2}n^2 d_n^2 exp(-8*pi^2*nu*n^2*t);
+  integrate nonnegative terms and add.
+
+The heat equation holds through the weak initial trace.
+div(V tensor V)=0 distributionally because V_1^2 is independent of x_1.
+Together with (10.1), this verifies actual CriticalLerayHopf membership,
+after transporting the explicit functions into the native L2 fields.
+
+Apply U.lerayHopfUnique to V:
+  for every t>0, U.flow.velocity(t)=V(t) spatially almost everywhere on unitCube.
+  At t=0, U.lerayVelocity(0)=criticalInitialPhysicalL2(a); no value of
+  U.flow.velocity(0) is used as the initial representative.
+Positive-time smoothness upgrades spatial a.e. equality to equality of
+the continuous periodic representatives at each positive time.
+
+This step must consume actual membership.
+No equality of the two flows is assumed as an adapter premise.
+
+Optional independent consistency estimate:
+  integral_0^infinity||grad V(t)||_infinity dt
+    <=eta_m/(4*pi) sum_{n>=2}d_n/n
+    <=eta_m/(4*pi) sum_{j>=1}1/(j2^j)
+    <infinity.
+The main planned Lean chain reuses the imported uniqueness endpoint.
+
+11. POSITIVE-TIME DENSITY PROFILE
+
+Let
+  F_nu(t)=sum_{n>=2}d_n exp(-4*pi^2*nu*n^2*t).
+
+Positive coefficients and evaluation at x_2=0 yield
+  ||V(t)||_infinity=(eta_m nu/2)F_nu(t);
+  ||rho_V(t)||_infinity=(eta_m^2 nu^2/8)F_nu(t)^2.
+
+For every delta>0:
+  sup_{t>=delta}||rho_V(t)||_infinity
+    =(eta_m^2 nu^2/8)F_nu(delta)^2<infinity.
+
+As t downarrow 0, monotone convergence gives
+  F_nu(t) upward sum_{n>=2}d_n
+    =sum_{j>=1}1/j=infinity.
+
+Hence
+  lim_{t downarrow 0}||rho_U(t)||_infinity=infinity;
+  for every T>0, ess sup_{(0,T) x T^3}rho_U=infinity;
+  for every delta>0, sup_{t>=delta}||rho_U(t)||_infinity<infinity.
+
+Integrated kinetic energy remains finite on every spatial subset and
+through every finite time:
+  integral_Omega rho_U(t)<=K(U(t))<=K(a_{nu,m}).
+
+12. EXACT ROUND-2 MATHEMATICAL ROOT
+
+THEOREM SINGULARITY_DISPROVEMENT_ENDPOINT_REUSE_R2.
+
+(A) For every nu>0 and a in D:
+      B_{nu,C}(a)>=0
+      ==> all conclusions of the verified native small-data root.
+
+(B) For every nu>0 and epsilon>0 there exist m>=1 and one physical flow U:
+      a=a_{nu,m};
+      a in H^(1/2)_{sigma,0};
+      0<||a||_{dot H^(1/2)}<epsilon;
+      C||a||_{dot H^(1/2)}<nu/2;
+      A_{nu,C}(a)<2=L_0;
+      B_{nu,C}(a)>=0;
+      actual unique Leray-Hopf evolution U with datum a;
+      strong H^(1/2) initial trace;
+      actual positive-time smooth NSE and normalized pressure;
+      all native quantitative conclusions of Section 1;
+      rho_0 in L1 \ L^infinity, locally essentially unbounded at the shear plane;
+      U equals the explicit heat shear at every positive time;
+      lim_{t downarrow 0}||rho_U(t)||_infinity=infinity;
+      forall delta>0, sup_{t>=delta}||rho_U(t)||_infinity<infinity.
+
+Proof:
+  (A): Sections 2--5 and inherited verified theorem.
+  (B): Sections 6--11, with m from Section 8.
+All mathematical premises of (A) and (B) are discharged by the displayed
+derivation and the imported native theorem. The uncalibrated A_nu<=pi
+implication is not included in this closure.
+The new Lean implementation remains unprepared.
+
+Logical consequence:
+  not [forall a, Reg_nu(a) -> rho_a in L^infinity].
+
+No logical consequence:
+  forall a in H^(1/2)_{sigma,0}, Reg_nu(a);
+  absence of every possible positive-time NSE singularity;
+  a counterexample with smooth initial datum;
+  smoothness through t=0 for the constructed rough datum.
+
+
+13. NATIVE SEMANTIC ADAPTER: EXACT OBLIGATIONS
+13.1 Energy convention:
+  physicalEnergy(v)=||v||_2^2=2K(v).
+  criticalInitialPhysicalL2(a): real L2 class at t=0.
+  U.lerayVelocity(0)=criticalInitialPhysicalL2(a).
+  t>0 ==> U.lerayVelocity(t)=U.flow.velocity(t).
+
+13.2 Explicit shear membership in CriticalLerayHopf:
+  (i) Periodicity and distributional div V=0 follow from the Fourier support.
+  (ii) Weighted dominated convergence gives C([0,T];Hhalf), hence strong
+       initial L2 trace and weak L2 continuity on every finite interval.
+  (iii) The energy identity gives L-infinity_t L2_x and L2_t H1_x.
+        Positive-time smooth periodic truncations and H1 convergence place
+        the gradient in the native CriticalPhysicalH1 closure.
+  (iv) For every smooth periodic scalar test, gradient annihilation follows
+       from div V=0 by periodic integration by parts.
+  (v) On 0<s<=t, actual heat NSE gives integrated weak momentum.
+      V tensor V is L1 on every finite time-space slab by L-infinity_t L2_x;
+      grad V is L2 and therefore L1 on finite slabs. Each native smooth-test
+      term is integrable on each such positive-time slab. Native tests need
+      only be smooth on t>0; no limit s downarrow 0 is asserted for arbitrary
+      such tests. Tests extending smoothly to t=0 admit the usual trace limit.
+  (vi) For every 0<=s<=t:
+       ||V(t)||_2^2+2nu integral_s^t||grad V||_2^2=||V(s)||_2^2.
+       Thus both initial and almost-every-start-time native inequalities hold.
+  These are membership proofs; no comparison or uniqueness is assumed.
+
+13.3 Same-solution identification:
+  Full native root gives U.lerayHopfUnique.
+  Explicit membership from 13.2 gives
+    forall t>0, V(t)=ae[volume.restrict unitCube] U.flow.velocity(t).
+  Continuity and periodicity give equality of the positive-time functions.
+  The main route requires no additional Serrin premise for the competitor V:
+  the imported U.lerayHopfUnique already contains the comparison conclusion.
+  Direct CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON is an optional alternate
+  route with its explicitly stated smooth-flow and Serrin hypotheses.
+  Velocity uniqueness does not itself assert equality of pressure functions.
+  The explicit solution uses the normalized pressure p=0.
+
+13.4 Positive-time domain:
+  CRITICAL_POSITIVE_* smoothness: Ioi(0).
+  SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH: Ici(0); do not apply to the rough datum.
+  Initial representative identification uses L2 convergence/injectivity.
+  Continuous-periodic injectivity is reserved for positive-time functions.
+  PositiveSmoothNSE + compactness gives bounds on [delta,T].
+  Uniform bounds on [delta,infinity) use the explicit Gaussian series and
+  monotonicity of F_nu, as proved in Section 11.
+
+14. ENDPOINT REUSE MAP AND MINIMAL NEW BURDEN
+E01 NativeDictionary:
+  REUSE criticalSobolev_norm_sq; criticalInitialPhysicalL2_norm[_sq].
+  NEW definitions P0=H^2/2, K=L^2/2 and exact homogeneous convention.
+E02 ShiftedEnergy:
+  REUSE native frequency weights, weighted constructors, L2 realization.
+  NEW sharp critical spectral gap, shifted multiplier membership, norm,
+      gamma coercivity. Integer inhomogeneous torusSobolevMultiplier is
+      not already the critical Hhalf->H0 statement.
+E03 GPPiResolvent:
+  REUSE pinned arctangent integral and Banach geometric inverse;
+        optional audited BKQR coefficient summability transfer.
+  NEW cosh-GP substitution, actual L2 multiplication operator, W(1)=pi.
+E04 BKQRMoments:
+  REUSE Matrix.posSemidef_gram and audited contractive-orbit defect algebra.
+  NEW beta integral recurrence, factorial m_n, weighted moment/localizer
+      identities, and exact rational tail enclosure.
+E05 JointAdmission:
+  NEW actual bounded block operator on R direct-sum E and square completion.
+E06 CalibratedAdmission:
+  NEW kappa_C positivity and strict-native-smallness consequence.
+E07 CalibratedRegularity:
+  REUSE NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL by direct application.
+  NEW wrapper only after E01-E06; no new compactness or existence proof.
+E08 DyadicBlocks:
+  NEW exact dyadic partition, block sums, R<1, S<6, harmonic divergence.
+  Existing directional dyadic Schur rows concern different coefficients.
+E09 DyadicCriticalDatum:
+  REUSE criticalSobolevOfCoeff, CriticalSigmaZero, weighted norm identities.
+  NEW chosen dyadic weighted summability, constraints, and exact sums.
+E10 DyadicPhysicalTrace:
+  REUSE criticalFiniteSobolev_tendsto -> physical continuity -> finite
+        physical identification; native L2 Fourier injectivity alternative.
+  NEW equality with the explicit cosine limit almost everywhere.
+E11 DyadicUnboundedDensity:
+  REUSE summation by parts and antitone Dirichlet convergence.
+  NEW quantitative tail, positive-measure lower bound, local ess-sup=infinity.
+E12 DyadicCalibration:
+  REUSE native normed scalar structure and linear physical realization.
+  NEW amplitude m, scaled score, norm bounds, rational coefficient statement.
+E13 DyadicRegularity:
+  REUSE full native root; new datum instance only.
+E14 ShearHeatFlow:
+  REUSE Fourier calculus, all-Sobolev realization, physical NSE bridge;
+        optional spectral L2 shear family after receipt/integration check.
+  NEW Gaussian instantiation, shear support, positive-time derivative identity.
+E15 ShearLerayHopf:
+  REUSE native L2/H1 structures, periodic IBP, trace and energy machinery.
+  NEW exact explicit-flow energy identity and actual LH membership (13.2).
+E16 ShearIdentification:
+  REUSE U.lerayHopfUnique, then continuous-periodic representative equality.
+  NEW adapter application; no new general weak-strong uniqueness theorem.
+E17 DensityProfile:
+  NEW exact supremum and monotone divergence at the initial boundary;
+      global positive-slab bound from Gaussian positivity/monotonicity.
+E18 Root:
+  Deterministic conjunction and existential assembly of the same datum/flow.
+
+Dependency levels:
+  L0: inherited native and pinned Mathlib interfaces.
+  L1: E01, E03, E08.
+  L2: E02(E01), E04(E03), E09(E01,E08).
+  L3: E05(E02,E03), E10(E09), E14(E09 + inherited calculus).
+  L4: E06(E02,E04,E05), E11(E08,E10), E15(E10,E14).
+  L5: E07(E06 + native root), E12(E02,E06,E08,E09).
+  L6: E13(E12 + native root).
+  L7: E16(E13,E15).
+  L8: E17(E11,E14,E16).
+  L9: E18(E07,E12,E13,E17).
+  Scheduling preserves all original premise and conclusion types.
+
+15. SELECTED NATIVE AND MATHLIB DECLARATIONS: SOURCE SIGNATURE LEDGER
+SOURCE URLs are pinned; role/boundary fields describe reuse, not stronger theorem statements.
+SIGNATURE_SOURCE_EXCERPT = verbatim declaration header with ambient namespace, section variables and typeclasses supplied by the pinned module; not standalone elaborated code.
+MATHLIB CONTEXT: hasSum_geom_series_inverse requires NormedRing R and HasSummableGeomSeries R.
+GRAM CONTEXT: RCLike scalar; SeminormedAddCommGroup E; InnerProductSpace; Finite index for posSemidef_gram and Fintype index for star_dotProduct_gram_mulVec.
+SUMMATION_BY_PARTS CONTEXT: Ring R; AddCommGroup M; Module R M; scalar sequence f and module-valued sequence g.
+DIRICHLET CONTEXT: real normed space; theorem concludes CauchySeq; convergence uses completeness, satisfied by the real/complex scalar applications.
+POLYNOMIAL_GEOMETRIC CONTEXT: NormedRing R; strict norm bound. These are library premises, not new analytic assumptions about the datum.
+
+R001 SingularClosure.criticalFrequencyWeight
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L21
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalFrequencyWeight (k : Frequency) : ℝ
+  REUSE: Use for native normalization and shifted square-root multiplier. No new Sobolev model or unspecified Fourier normalization.
+  PREMISES / REMAINING: The sharper bound w(k)≥2π at k≠0 remains a new adapter.
+
+R002 SingularClosure.criticalFrequencyWeight_pos
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L47
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalFrequencyWeight_pos (k : Frequency) : 0 < criticalFrequencyWeight k
+  REUSE: Use for native normalization and shifted square-root multiplier. No new Sobolev model or unspecified Fourier normalization.
+  PREMISES / REMAINING: The sharper bound w(k)≥2π at k≠0 remains a new adapter.
+
+R003 SingularClosure.criticalFrequencyWeight_sq_of_ne_zero
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L50
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalFrequencyWeight_sq_of_ne_zero (k : Frequency) (hk : k ≠ 0) :
+        criticalFrequencyWeight k ^ 2 = laplacianFrequency k
+  REUSE: Use for native normalization and shifted square-root multiplier. No new Sobolev model or unspecified Fourier normalization.
+  PREMISES / REMAINING: The sharper bound w(k)≥2π at k≠0 remains a new adapter.
+
+R004 SingularClosure.criticalHalfWeight_sq
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L65
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalHalfWeight_sq (k : Frequency) :
+        criticalHalfWeight k ^ 2 = criticalFrequencyWeight k
+  REUSE: Use for native normalization and shifted square-root multiplier. No new Sobolev model or unspecified Fourier normalization.
+  PREMISES / REMAINING: The sharper bound w(k)≥2π at k≠0 remains a new adapter.
+
+R005 SingularClosure.criticalWeightedCoeff_norm
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L95
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalWeightedCoeff_norm (q : ℤ) (c : FourierCoeff) (ki : FourierIndex) :
+        ‖criticalWeightedCoeff q c ki‖ =
+          criticalHalfWeight ki.1 ^ q * ‖c ki.1 ki.2‖
+  REUSE: Use for native normalization and shifted square-root multiplier. No new Sobolev model or unspecified Fourier normalization.
+  PREMISES / REMAINING: The sharper bound w(k)≥2π at k≠0 remains a new adapter.
+
+R006 SingularClosure.galerkinFreqSq_ge_one_of_ne_zero
+  MODULE: PeriodicPoincare.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicPoincare.lean#L27
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem galerkinFreqSq_ge_one_of_ne_zero (k : Frequency) (hk : k ≠ 0) :
+        (1 : ℤ) ≤ galerkinFreqSq k
+  REUSE: Cast to ℝ; combine with N01 to prove H²≥2πL². No new lattice minimum proof.
+  PREMISES / REMAINING: Existing FINITE_PHYSICAL_POINCARE is finite H1, not infinite Hhalf.
+
+R007 SingularClosure.CriticalSigmaZero
+  MODULE: CriticalRegularityContracts.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E09,E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalRegularityContracts.lean#L11
+  SIGNATURE_SOURCE_EXCERPT:
+    structure CriticalSigmaZero (a : CriticalSobolev 1) : Prop
+  REUSE: Construct from literal dyadic support; extract real and mean-zero hypotheses. No new abstract admissibility predicate.
+  PREMISES / REMAINING: Direct dyadic symmetry/support and real scaling proofs remain new.
+
+R008 SingularClosure.criticalSobolevOfCoeff
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L218
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalSobolevOfCoeff (q : ℤ) (c : FourierCoeff)
+        (hc : Memℓp (criticalWeightedCoeff q c) 2) : CriticalSobolev q
+  REUSE: Instantiate q=1 for datum, q=0 for shifted output. No opaque existence witness.
+  PREMISES / REMAINING: Full infinite weighted membership must be proved.
+
+R009 SingularClosure.criticalSobolevOfCoeff_coeff
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L223
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalSobolevOfCoeff_coeff (q : ℤ) (c : FourierCoeff)
+        (hc : Memℓp (criticalWeightedCoeff q c) 2) :
+        criticalCoeff q (criticalSobolevOfCoeff q c hc) = c
+  REUSE: Instantiate q=1 for datum, q=0 for shifted output. No opaque existence witness.
+  PREMISES / REMAINING: Full infinite weighted membership must be proved.
+
+R010 SingularClosure.criticalSobolev_norm_sq
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L228
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalSobolev_norm_sq (q : ℤ) (c : CriticalSobolev q) :
+        ‖c‖ ^ 2 = ∑' ki : FourierIndex,
+          criticalFrequencyWeight ki.1 ^ q * Complex.normSq (criticalCoeff q c ki.1 ki.2)
+  REUSE: q=1 computes H²; q=0 computes shifted output norm. No new weighted Parseval theorem.
+  PREMISES / REMAINING: Support decomposition and dyadic infinite sums remain new.
+
+R011 SingularClosure.criticalSobolevRepr
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L194
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalSobolevRepr (q : ℤ) : CriticalSobolev q ≃ₗᵢ[ℂ] FourierVectorSequence
+  REUSE: Transport shifted output to native Hilbert space; combine with fourierVectorSequence_summable_sq. No new Hilbert-space construction or completeness proof.
+  PREMISES / REMAINING: Does not alone prove shifted multiplier boundedness.
+
+R012 SingularClosure.criticalSobolevRepr_apply
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L200
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalSobolevRepr_apply (q : ℤ) (c : CriticalSobolev q) (ki : FourierIndex) :
+        criticalSobolevRepr q c ki = criticalWeightedCoeff q (criticalCoeff q c) ki
+  REUSE: Transport shifted output to native Hilbert space; combine with fourierVectorSequence_summable_sq. No new Hilbert-space construction or completeness proof.
+  PREMISES / REMAINING: Does not alone prove shifted multiplier boundedness.
+
+R013 SingularClosure.criticalCoeff_smul
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E09,E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L139
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalCoeff_smul (q : ℤ) (z : ℂ) (c : CriticalSobolev q) :
+        criticalCoeff q (z • c) = z • criticalCoeff q c
+  REUSE: Identify constructors, scaled datum, and finite cutoffs by their coefficients. No repetitive subtype equality arguments.
+  PREMISES / REMAINING: Real scalar restriction requires a short adapter.
+
+R014 SingularClosure.criticalCoeff_add
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E09,E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L135
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalCoeff_add (q : ℤ) (c d : CriticalSobolev q) :
+        criticalCoeff q (c + d) = criticalCoeff q c + criticalCoeff q d
+  REUSE: Identify constructors, scaled datum, and finite cutoffs by their coefficients. No repetitive subtype equality arguments.
+  PREMISES / REMAINING: Real scalar restriction requires a short adapter.
+
+R015 SingularClosure.criticalCoeff_injective
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E09,E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L145
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalCoeff_injective (q : ℤ) : Function.Injective (criticalCoeff q)
+  REUSE: Identify constructors, scaled datum, and finite cutoffs by their coefficients. No repetitive subtype equality arguments.
+  PREMISES / REMAINING: Real scalar restriction requires a short adapter.
+
+R016 SingularClosure.criticalSobolevNormedSpaceReal
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L206
+  SIGNATURE_SOURCE_EXCERPT:
+    instance criticalSobolevNormedSpaceReal (q : ℤ) : NormedSpace ℝ (CriticalSobolev q)
+  REUSE: Apply norm_smul to obtain ‖η•a‖=|η|‖a‖. No Fourier-sum proof of norm scaling.
+  PREMISES / REMAINING: These are native instances, not a dedicated dyadic scaling theorem.
+
+R017 SingularClosure.criticalSobolevRealScalarTower
+  MODULE: CriticalSpaces.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean#L209
+  SIGNATURE_SOURCE_EXCERPT:
+    instance criticalSobolevRealScalarTower (q : ℤ) : IsScalarTower ℝ ℂ (CriticalSobolev q)
+  REUSE: Apply norm_smul to obtain ‖η•a‖=|η|‖a‖. No Fourier-sum proof of norm scaling.
+  PREMISES / REMAINING: These are native instances, not a dedicated dyadic scaling theorem.
+
+R018 SingularClosure.criticalSobolevLower
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L68
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalSobolevLower (q r : ℤ) (hqr : q ≤ r) :
+        CriticalSobolev r →L[ℂ] CriticalSobolev q
+  REUSE: q=0,r=1 gives the native L2 class. No new lower-order membership/continuity proof.
+  PREMISES / REMAINING: The inherited bound is 1; E02 needs the sharper mean-zero constant.
+
+R019 SingularClosure.criticalSobolevLower_coeff
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L73
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalSobolevLower_coeff (q r : ℤ) (hqr : q ≤ r) (c : CriticalSobolev r) :
+        criticalCoeff q (criticalSobolevLower q r hqr c) = criticalCoeff r c
+  REUSE: q=0,r=1 gives the native L2 class. No new lower-order membership/continuity proof.
+  PREMISES / REMAINING: The inherited bound is 1; E02 needs the sharper mean-zero constant.
+
+R020 SingularClosure.criticalSobolevLower_norm_le
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L81
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalSobolevLower_norm_le (q r : ℤ) (hqr : q ≤ r) (c : CriticalSobolev r) :
+        ‖criticalSobolevLower q r hqr c‖ ≤ ‖c‖
+  REUSE: q=0,r=1 gives the native L2 class. No new lower-order membership/continuity proof.
+  PREMISES / REMAINING: The inherited bound is 1; E02 needs the sharper mean-zero constant.
+
+R021 SingularClosure.criticalPhysicalL2
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L215
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalPhysicalL2 (q : ℤ) (hq : 0 ≤ q) : CriticalSobolev q →L[ℂ] TorusVectorL2
+  REUSE: Use canonical complex torus class for Fourier comparison. No new physical Fourier synthesis.
+  PREMISES / REMAINING: Real cube realization requires N11–N12.
+
+R022 SingularClosure.criticalPhysicalL2_fourierCoeff
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L218
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalPhysicalL2_fourierCoeff (q : ℤ) (hq : 0 ≤ q) (c : CriticalSobolev q) :
+        torusVectorFourierCoeff (criticalPhysicalL2 q hq c) = criticalCoeff q c
+  REUSE: Use canonical complex torus class for Fourier comparison. No new physical Fourier synthesis.
+  PREMISES / REMAINING: Real cube realization requires N11–N12.
+
+R023 SingularClosure.criticalPhysicalL2_norm_le
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L223
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalPhysicalL2_norm_le (q : ℤ) (hq : 0 ≤ q) (c : CriticalSobolev q) :
+        ‖criticalPhysicalL2 q hq c‖ ≤ ‖c‖
+  REUSE: Use canonical complex torus class for Fourier comparison. No new physical Fourier synthesis.
+  PREMISES / REMAINING: Real cube realization requires N11–N12.
+
+R024 SingularClosure.torusToPhysicalCubeL2
+  MODULE: CriticalCubeL2.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E10,E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean#L63
+  SIGNATURE_SOURCE_EXCERPT:
+    def torusToPhysicalCubeL2 : TorusVectorL2 →L[ℝ] PhysicalCubeL2
+  REUSE: Two map_smul laws yield initial physical real scaling. No new initial physical realization.
+  PREMISES / REMAINING: Real-part map is not globally injective/isometric on arbitrary complex data.
+
+R025 SingularClosure.criticalInitialPhysicalL2
+  MODULE: CriticalCubeL2.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01,E10,E12
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean#L154
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalInitialPhysicalL2 (a : CriticalSobolev 1) : PhysicalCubeL2
+  REUSE: Two map_smul laws yield initial physical real scaling. No new initial physical realization.
+  PREMISES / REMAINING: Real-part map is not globally injective/isometric on arbitrary complex data.
+
+R026 SingularClosure.criticalInitialPhysicalL2_norm
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E01,E09,E12; E14/E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L128
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalInitialPhysicalL2_norm
+        (a : CriticalSobolev 1) (hreal : SpectralReality (criticalCoeff 1 a))
+        (hzero : SpectralMeanZero (criticalCoeff 1 a)) :
+        ‖criticalInitialPhysicalL2 a‖ = ‖criticalSobolevLower 0 1 (by norm_num) a‖
+  REUSE: Compute literal physical L²=ν²R/8. No new rough physical Parseval argument. | Native physical L2 norm equals lower critical H0 norm.
+  PREMISES / REMAINING: Reality/mean-zero remain explicit premises, provided by N03. | a : CriticalSobolev 1; reality; mean-zero
+
+R027 SingularClosure.criticalInitialPhysicalL2_norm_sq
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E01,E09,E12; E14/E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L157
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalInitialPhysicalL2_norm_sq
+        (a : CriticalSobolev 1) (hreal : SpectralReality (criticalCoeff 1 a))
+        (hzero : SpectralMeanZero (criticalCoeff 1 a)) :
+        ‖criticalInitialPhysicalL2 a‖ ^ 2 =
+          ∑' ki : FourierIndex, Complex.normSq (criticalCoeff 1 a ki.1 ki.2)
+  REUSE: Compute literal physical L²=ν²R/8. No new rough physical Parseval argument. | Squared physical L2 norm equals sum of squared Fourier magnitudes.
+  PREMISES / REMAINING: Reality/mean-zero remain explicit premises, provided by N03. | a : CriticalSobolev 1; reality; mean-zero
+
+R028 SingularClosure.criticalInitialPhysicalL2_fourierCoeff
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E01,E10; E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L95
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalInitialPhysicalL2_fourierCoeff
+        (a : CriticalSobolev 1) (hreal : SpectralReality (criticalCoeff 1 a))
+        (hzero : SpectralMeanZero (criticalCoeff 1 a)) :
+        datumFourierCoeff (criticalInitialPhysicalL2 a : Field) = criticalCoeff 1 a
+  REUSE: Identify literal coefficients of physical datum. No new rough coefficient-recovery proof. | Fourier coefficients of native physical L2 representative equal critical coefficients.
+  PREMISES / REMAINING: A physical equality still needs injection or limit uniqueness. | a : CriticalSobolev 1; reality; mean-zero
+
+R029 SingularClosure.criticalInitialPhysicalL2_injective_on_real_meanZero
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E10; E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L118
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalInitialPhysicalL2_injective_on_real_meanZero
+        (a b : CriticalSobolev 1)
+        (ha : SpectralReality (criticalCoeff 1 a)) (hb : SpectralReality (criticalCoeff 1 b))
+        (hza : SpectralMeanZero (criticalCoeff 1 a)) (hzb : SpectralMeanZero (criticalCoeff 1 b))
+        (h : criticalInitialPhysicalL2 a = criticalInitialPhysicalL2 b) : a = b
+  REUSE: Compare two native dyadic constructions if needed. No fresh admissible real realization injectivity proof. | a=b.
+  PREMISES / REMAINING: Does not identify arbitrary PhysicalCubeL2 classes by coefficients. | a,b critical H1/2; both real, mean-zero; native physical L2 equal
+
+R030 SingularClosure.criticalFiniteSobolev
+  MODULE: CriticalSpacesCutoff.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E08,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesCutoff.lean#L150
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalFiniteSobolev (q : ℤ) (N : ℕ) (c : FourierCoeff) : CriticalSobolev q
+  REUSE: Evaluate dyadic finite energies in native types. No separate finite Sobolev constructor or finite energy formula.
+  PREMISES / REMAINING: Block partition/counts/sums are new E08.
+
+R031 SingularClosure.criticalFiniteSobolev_coeff
+  MODULE: CriticalSpacesCutoff.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E08,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesCutoff.lean#L154
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalFiniteSobolev_coeff (q : ℤ) (N : ℕ) (c : FourierCoeff) :
+        criticalCoeff q (criticalFiniteSobolev q N c) = cutoffCoeff N c
+  REUSE: Evaluate dyadic finite energies in native types. No separate finite Sobolev constructor or finite energy formula.
+  PREMISES / REMAINING: Block partition/counts/sums are new E08.
+
+R032 SingularClosure.criticalFiniteSobolev_norm_sq
+  MODULE: CriticalSpacesCutoff.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E08,E09
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesCutoff.lean#L176
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalFiniteSobolev_norm_sq (q : ℤ) (N : ℕ) (c : FourierCoeff) :
+        ‖criticalFiniteSobolev q N c‖ ^ 2 =
+          ∑ k ∈ cutoffModes N, ∑ i : Fin 3,
+            criticalFrequencyWeight k ^ q * Complex.normSq (c k i)
+  REUSE: Evaluate dyadic finite energies in native types. No separate finite Sobolev constructor or finite energy formula.
+  PREMISES / REMAINING: Block partition/counts/sums are new E08.
+
+R033 SingularClosure.criticalFiniteSobolev_norm_le
+  MODULE: CriticalSpacesCutoff.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E09,E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesCutoff.lean#L164
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalFiniteSobolev_norm_le (q : ℤ) (N : ℕ) (c : CriticalSobolev q)
+        (hc : SpectralMeanZero (criticalCoeff q c)) :
+        ‖criticalFiniteSobolev q N (criticalCoeff q c)‖ ≤ ‖c‖
+  REUSE: q=1 gives Hhalf convergence; compose with initial map for L2 convergence. No new cutoff convergence theorem.
+  PREMISES / REMAINING: Need one-axis cutoff geometry to cosine index adapter.
+
+R034 SingularClosure.criticalFiniteSobolev_tendsto
+  MODULE: CriticalSpacesCutoff.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E09,E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesCutoff.lean#L170
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalFiniteSobolev_tendsto (q : ℤ) (c : CriticalSobolev q)
+        (hc : SpectralMeanZero (criticalCoeff q c)) :
+        Tendsto (fun N => criticalFiniteSobolev q N (criticalCoeff q c)) atTop (𝓝 c)
+  REUSE: q=1 gives Hhalf convergence; compose with initial map for L2 convergence. No new cutoff convergence theorem.
+  PREMISES / REMAINING: Need one-axis cutoff geometry to cosine index adapter.
+
+R035 SingularClosure.criticalInitialPhysicalL2_continuous
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L70
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalInitialPhysicalL2_continuous :
+        Continuous criticalInitialPhysicalL2
+  REUSE: Compose N16 with this endpoint. No new physical realization continuity estimate.
+  PREMISES / REMAINING: Explicit a.e. cosine convergence remains new.
+
+R036 SingularClosure.criticalInitialPhysicalL2_finite
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L75
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalInitialPhysicalL2_finite
+        (a : CriticalSobolev 1) (hreal : SpectralReality (criticalCoeff 1 a)) (N : ℕ) :
+        criticalInitialPhysicalL2 (criticalFiniteSobolev 1 N (criticalCoeff 1 a)) =
+          physicalFieldL2 (finiteSynthesis N (criticalCoeff 1 a))
+            (finiteSynthesis_contDiff N (criticalCoeff 1 a)).continuous
+  REUSE: Rewrite the approximating sequence as physical cosine polynomials. No new finite complex-to-real compatibility proof.
+  PREMISES / REMAINING: Explicit cosine polynomial identity remains new.
+
+R037 SingularClosure.criticalGalerkin_datumFourierCoeff_finiteSynthesis
+  MODULE: CriticalGalerkin.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E09,E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalGalerkin.lean#L42
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalGalerkin_datumFourierCoeff_finiteSynthesis
+        (N : ℕ) (c : FourierCoeff) (hreal : SpectralReality c) :
+        datumFourierCoeff (finiteSynthesis N c) = cutoffCoeff N c
+  REUSE: Reuse for dyadic polynomial Fourier/Galerkin compatibility. No repeated character-orthogonality integration.
+  PREMISES / REMAINING: No new Galerkin existence proof needed here.
+
+R038 SingularClosure.torusVectorFourierCoeff_injective
+  MODULE: HilbertChannels.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/HilbertChannels.lean#L280
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem torusVectorFourierCoeff_injective : Function.Injective torusVectorFourierCoeff
+  REUSE: Match explicit cosine L2 class and canonical synthesis by coefficients. No new Fourier basis completeness proof.
+  PREMISES / REMAINING: Construct actual L2 class and coefficients first; conclusion is class equality, not pointwise identity.
+
+R039 SingularClosure.torusSobolevL2_eq_of_fourierCoeff
+  MODULE: SobolevL2Realization.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SobolevL2Realization.lean#L162
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem torusSobolevL2_eq_of_fourierCoeff (c : TorusSobolev 0) (u : TorusVectorL2)
+        (hu : torusVectorFourierCoeff u = c.val) : torusSobolevL2 c = u
+  REUSE: Alternative Fourier route via criticalToTorusH0. No manual basis-injectivity proof after coefficient agreement.
+  PREMISES / REMAINING: Alternative to N16–N18; avoid duplicate proofs without need.
+
+R040 SingularClosure.criticalCube_datumFourierCoeff_congr_ae
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L55
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalCube_datumFourierCoeff_congr_ae
+        {v w : Field} (h : v =ᵐ[volume.restrict unitCube] w) :
+        datumFourierCoeff v = datumFourierCoeff w
+  REUSE: Transfer between explicit cosine function and Lp representative. No representative-dependent integral bookkeeping.
+  PREMISES / REMAINING: Keep a.e. semantics at t=0; singular plane value irrelevant.
+
+R041 SingularClosure.criticalCubeFourierFunctional
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L30
+  SIGNATURE_SOURCE_EXCERPT:
+    def criticalCubeFourierFunctional (k : Frequency) (i : Fin 3) :
+        PhysicalCubeL2 →L[ℝ] ℂ
+  REUSE: Pass actual Fourier integrals through L2 limits. No new coefficient-continuity estimate.
+  PREMISES / REMAINING: Not itself an arbitrary cube Fourier injectivity theorem.
+
+R042 SingularClosure.criticalCubeFourierFunctional_apply
+  MODULE: CriticalInitialPhysicalFourier.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInitialPhysicalFourier.lean#L35
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalCubeFourierFunctional_apply
+        (k : Frequency) (i : Fin 3) (v : PhysicalCubeL2) :
+        criticalCubeFourierFunctional k i v = datumFourierCoeff (v : Field) k i
+  REUSE: Pass actual Fourier integrals through L2 limits. No new coefficient-continuity estimate.
+  PREMISES / REMAINING: Not itself an arbitrary cube Fourier injectivity theorem.
+
+R043 SingularClosure.fourierMultiplierLinear
+  MODULE: FourierSobolevOperators.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSobolevOperators.lean#L140
+  SIGNATURE_SOURCE_EXCERPT:
+    def fourierMultiplierLinear (b : Frequency → ℂ) : FourierCoeff →ₗ[ℂ] FourierCoeff
+  REUSE: Reuse coefficient linear map and Memℓp.const_smul/mono' strategy with critical weights. No new multiplier coefficient-linearity proof.
+  PREMISES / REMAINING: Integer inhomogeneous s,t:ℕ is not the desired critical Hhalf→H0 theorem.
+
+R044 SingularClosure.torusSobolevMultiplier_mem
+  MODULE: FourierSobolevOperators.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSobolevOperators.lean#L149
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem torusSobolevMultiplier_mem (s t : ℕ) (b : Frequency → ℂ)
+        (B : ℝ) (hB : 0 ≤ B)
+        (hb : ∀ k, torusSobolevWeight k ^ s * ‖b k‖ ≤ B * torusSobolevWeight k ^ t)
+        (c : TorusSobolev t) :
+        Memℓp (sobolevWeightedCoeff s (fourierMultiplierLinear b c.val)) 2
+  REUSE: Reuse coefficient linear map and Memℓp.const_smul/mono' strategy with critical weights. No new multiplier coefficient-linearity proof.
+  PREMISES / REMAINING: Integer inhomogeneous s,t:ℕ is not the desired critical Hhalf→H0 theorem.
+
+R045 SingularClosure.torusSobolevMultiplierLinear_norm_le
+  MODULE: FourierSobolevOperators.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E02
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSobolevOperators.lean#L177
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem torusSobolevMultiplierLinear_norm_le (s t : ℕ) (b : Frequency → ℂ)
+        (B : ℝ) (hB : 0 ≤ B)
+        (hb : ∀ k, torusSobolevWeight k ^ s * ‖b k‖ ≤ B * torusSobolevWeight k ^ t)
+        (c : TorusSobolev t) :
+        ‖torusSobolevMultiplierLinear s t b B hB hb c‖ ≤ B * ‖c‖
+  REUSE: Reuse coefficient linear map and Memℓp.const_smul/mono' strategy with critical weights. No new multiplier coefficient-linearity proof.
+  PREMISES / REMAINING: Integer inhomogeneous s,t:ℕ is not the desired critical Hhalf→H0 theorem.
+
+R046 SingularClosure.physicalFieldL2_coe
+  MODULE: CriticalCubeL2.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean#L72
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem physicalFieldL2_coe (v : Field) (hv : Continuous v) :
+        physicalFieldL2 v hv =ᵐ[volume.restrict unitCube] v
+  REUSE: Connect literal finite polynomials to native PhysicalCubeL2. No new Lp embedding or norm measure conversion.
+  PREMISES / REMAINING: physicalEnergy is full ∫|v|²; Round1 K is half that.
+
+R047 SingularClosure.physicalFieldL2_norm_sq
+  MODULE: CriticalCubeL2.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean#L76
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem physicalFieldL2_norm_sq (v : Field) (hv : Continuous v) :
+        ‖physicalFieldL2 v hv‖ ^ 2 = physicalEnergy v
+  REUSE: Connect literal finite polynomials to native PhysicalCubeL2. No new Lp embedding or norm measure conversion.
+  PREMISES / REMAINING: physicalEnergy is full ∫|v|²; Round1 K is half that.
+
+R048 SingularClosure.fourierVectorSequence_summable_sq
+  MODULE: SobolevL2Realization.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01/E09/E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SobolevL2Realization.lean#L33
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem fourierVectorSequence_summable_sq (c : FourierVectorSequence) :
+        Summable (fun ki : FourierIndex => ‖c ki‖ ^ 2)
+  REUSE: Inherited weighted/Fourier construction.
+  PREMISES / REMAINING: Concrete dyadic instantiation.
+
+R049 SingularClosure.criticalToTorusH0_coeff
+  MODULE: CriticalSpacesEmbedding.lean
+  STATUS: INHERITED_SOURCE_INSPECTED; no individual audit entry located
+  ENDPOINTS: E01/E09/E10
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean#L104
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem criticalToTorusH0_coeff (q : ℤ) (hq : 0 ≤ q) (c : CriticalSobolev q) :
+        (criticalToTorusH0 q hq c).val = criticalCoeff q c
+  REUSE: Inherited weighted/Fourier construction.
+  PREMISES / REMAINING: Concrete dyadic instantiation.
+
+R050 SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  MODULE: SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E07/E13/E14/E15/E16/E17
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+        (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+        (hsmall : criticalNonlinearConstant * ‖a‖ < ν) :
+        CriticalDatumAX6 ν a ∧ ∃ U : CriticalRegularSolution ν a,
+          CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient ∧
+          U.lerayHopfUnique ∧
+          PositiveSmoothNSE ν U.flow.velocity U.flow.pressure ∧
+          (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+            (∫ t in Ioi (0 : ℝ), ‖U.flow.threeHalfState t‖ ^ 2) ≤ criticalDissipationBudget ν a) ∧
+          (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+            (∫ t in Ioi (0 : ℝ), ‖U.flow.negativeHalfDerivative t‖ ^ 2) ≤
+              criticalTimeDerivativeBudget ν a) ∧
+          MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+            (volume.restrict (Ioi (0 : ℝ))) ∧
+          (∀ T : ℝ, 0 < T →
+            IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+              (Icc (0 : ℝ) T) volume ∧
+            (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤
+              (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) /
+                (4 * (ν - criticalNonlinearConstant * ‖a‖)))
+  REUSE: Same U: native LH membership, every-positive-time spatial-a.e. uniqueness, positive smooth NSE, global L2H3/2 and L2 derivative budgets, global L4L6, terminal quartic bound.
+  PREMISES / REMAINING: ν>0; a∈critical H1/2; reality, solenoidal, mean-zero; C_NL||a||<ν
+
+R051 SingularClosure.SMALL_DATA_CRITICAL_REGULARITY
+  MODULE: SingularClosure.SmallDataRoot
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E07
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmallDataRoot.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem SMALL_DATA_CRITICAL_REGULARITY
+        (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+        (hsmall : criticalNonlinearConstant * ‖a‖ < ν) :
+        CriticalGlobalRegularity ν a
+  REUSE: Nonempty actual CriticalRegularSolution ν a.
+  PREMISES / REMAINING: same small-data premises
+
+R052 SingularClosure.CRITICAL_POSITIVE_PHYSICAL_NSE
+  MODULE: SingularClosure.CriticalPositiveFlow
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E13
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveFlow.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CRITICAL_POSITIVE_PHYSICAL_NSE
+        {ν : ℝ} (L : CriticalPositiveSobolevFlow ν) :
+        PositiveSmoothNSE ν L.velocity L.pressure
+  REUSE: PositiveSmoothNSE ν L.velocity L.pressure.
+  PREMISES / REMAINING: L : CriticalPositiveSobolevFlow ν
+
+R053 SingularClosure.CriticalRegularSolution.physicalNSE
+  MODULE: SingularClosure.CriticalRegularityContracts
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E13
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalRegularityContracts.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.physicalNSE
+        {ν : ℝ} {a : CriticalSobolev 1} (u : CriticalRegularSolution ν a) :
+        PositiveSmoothNSE ν u.flow.velocity u.flow.pressure
+  REUSE: PositiveSmoothNSE ν U.flow.velocity U.flow.pressure.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a
+
+R054 SingularClosure.CriticalPositiveSobolevFlow.velocity_spacetime_smooth
+  MODULE: SingularClosure.CriticalPositiveFlow
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E13
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveFlow.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalPositiveSobolevFlow.velocity_spacetime_smooth
+        {ν : ℝ} (L : CriticalPositiveSobolevFlow ν) :
+        ContDiffOn ℝ ∞ (fun z : ℝ × Vec => L.velocity z.1 z.2) positiveSpacetime
+  REUSE: Joint C∞ velocity on t>0.
+  PREMISES / REMAINING: L : CriticalPositiveSobolevFlow ν
+
+R055 SingularClosure.CriticalPositiveSobolevFlow.physical_equation
+  MODULE: SingularClosure.CriticalPositiveFlow
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E13
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveFlow.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalPositiveSobolevFlow.physical_equation
+        {ν : ℝ} (L : CriticalPositiveSobolevFlow ν) (t : ℝ) (ht : 0 < t) (x : Vec) :
+        timeDerivative L.velocity t x + convection (L.velocity t) x +
+          gradient (L.pressure t) x = ν • laplacian (L.velocity t) x
+  REUSE: Actual pointwise NSE at every t>0,x.
+  PREMISES / REMAINING: L : CriticalPositiveSobolevFlow ν
+
+R056 SingularClosure.CriticalRegularSolution.physicalL2_continuous
+  MODULE: SingularClosure.CriticalCubeL2
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.physicalL2_continuous
+        {ν : ℝ} {a : CriticalSobolev 1} (S : CriticalRegularSolution ν a) :
+        ContinuousOn S.physicalL2 (Ici 0)
+  REUSE: L2 physical representative continuous on [0,∞).
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a
+
+R057 SingularClosure.CriticalRegularSolution.physicalL2_eq_field
+  MODULE: SingularClosure.CriticalCubeL2
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.physicalL2_eq_field
+        {ν : ℝ} {a : CriticalSobolev 1} (S : CriticalRegularSolution ν a)
+        (t : ℝ) (ht : 0 < t) :
+        S.physicalL2 t = physicalFieldL2 (S.flow.velocity t)
+          (S.flow.velocity_smoothSigmaZero t ht).smooth.continuous
+  REUSE: Physical L2 state equals toLp smooth velocity.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a; t>0
+
+R058 SingularClosure.CriticalRegularSolution.physical_eLpNorm_initial_trace
+  MODULE: SingularClosure.CriticalCubeL2
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalCubeL2.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.physical_eLpNorm_initial_trace
+        {ν : ℝ} {a : CriticalSobolev 1} (S : CriticalRegularSolution ν a) :
+        Tendsto (fun t => eLpNorm
+          (S.flow.velocity t - (criticalInitialPhysicalL2 a : Field)) 2 (volume.restrict unitCube))
+          (𝓝[>] (0 : ℝ)) (𝓝 0)
+  REUSE: Strong spatial L2 trace of positive-time smooth velocity to native initial representative.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a
+
+R059 SingularClosure.CriticalRegularSolution.lerayVelocity_zero
+  MODULE: SingularClosure.CriticalStrongLerayHopfEnergy
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalStrongLerayHopfEnergy.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.lerayVelocity_zero
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a) :
+        U.lerayVelocity 0 = (criticalInitialPhysicalL2 a : Field)
+  REUSE: Literal t=0 field of lerayVelocity equals native initial L2 representative.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a
+
+R060 SingularClosure.CriticalRegularSolution.lerayVelocity_of_pos
+  MODULE: SingularClosure.CriticalStrongLerayHopfEnergy
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E13/E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalStrongLerayHopfEnergy.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.lerayVelocity_of_pos
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
+        {t : ℝ} (ht : 0 < t) : U.lerayVelocity t = U.flow.velocity t
+  REUSE: Literal equality lerayVelocity t = flow.velocity t.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a; t>0
+
+R061 SingularClosure.CriticalRegularSolution.leray_energy_initial_eq
+  MODULE: SingularClosure.CriticalStrongLerayHopfEnergy
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalStrongLerayHopfEnergy.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.leray_energy_initial_eq
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
+        (T : ℝ) (hT : 0 ≤ T)
+        (hQ : IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume) :
+        physicalEnergy (U.lerayVelocity T) +
+          2 * ν * (∫ t in (0 : ℝ)..T, criticalGradientEnergy (U.lerayGradient t)) =
+            ‖criticalInitialPhysicalL2 a‖ ^ 2
+  REUSE: Exact energy equality from zero to every T.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a; T≥0; physicalDissipation² integrable on [0,T]
+
+R062 SingularClosure.CriticalRegularSolution.leray_energy_interval_eq
+  MODULE: SingularClosure.CriticalStrongLerayHopfEnergy
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalStrongLerayHopfEnergy.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.leray_energy_interval_eq
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
+        (T : ℝ) (hT : 0 ≤ T)
+        (hQ : IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume)
+        (s t : ℝ) (hs : 0 ≤ s) (hst : s ≤ t) (htT : t ≤ T) :
+        physicalEnergy (U.lerayVelocity t) +
+          2 * ν * (∫ r in s..t, criticalGradientEnergy (U.lerayGradient r)) =
+            physicalEnergy (U.lerayVelocity s)
+  REUSE: Exact energy equality on every interval [s,t].
+  PREMISES / REMAINING: same U and quartic integrability; 0≤s≤t≤T
+
+R063 SingularClosure.CriticalRegularSolution.leray_gradient_energy_class
+  MODULE: SingularClosure.CriticalStrongLerayHopfGradient
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalStrongLerayHopfGradient.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.leray_gradient_energy_class
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
+        (T : ℝ) (hT : 0 ≤ T)
+        (hQ : IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume) :
+        MemLp (fun t => criticalL2Representative (U.lerayGradient t)) 2
+          (volume.restrict (Ioc (0 : ℝ) T))
+  REUSE: Native gradient belongs L2_tL2_x on (0,T].
+  PREMISES / REMAINING: U; T≥0; physicalDissipation² integrable on [0,T]
+
+R064 SingularClosure.CriticalRegularSolution.lerayHopf_of_quartic
+  MODULE: SingularClosure.CriticalStrongLerayHopf
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalStrongLerayHopf.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.lerayHopf_of_quartic
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
+        (hQ : ∀ T : ℝ, 0 < T →
+          IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+            (Icc (0 : ℝ) T) volume) :
+        CriticalLerayHopf ν (criticalInitialPhysicalL2 a)
+          U.lerayVelocity U.lerayGradient
+  REUSE: Native CriticalLerayHopf ν a0 U.lerayVelocity U.lerayGradient.
+  PREMISES / REMAINING: U : CriticalRegularSolution ν a; ∀T>0 physicalDissipation² integrable
+
+R065 SingularClosure.SMALL_DATA_CRITICAL_LERAY_HOPF_COMPARISON
+  MODULE: SingularClosure.SmallDataUniqueness
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E16
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmallDataUniqueness.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem SMALL_DATA_CRITICAL_LERAY_HOPF_COMPARISON
+        (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+        (hsmall : criticalNonlinearConstant * ‖a‖ < ν) :
+        CriticalDatumAX6 ν a ∧ ∃ U : CriticalRegularSolution ν a,
+          U.lerayHopfUnique ∧
+          (∀ T : ℝ, 0 < T →
+            MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+              (volume.restrict (Ioc (0 : ℝ) T)))
+  REUSE: AX6 and exists U with native LH uniqueness and local Serrin L4_tL6_x.
+  PREMISES / REMAINING: ν>0; a critical H1/2, real solenoidal mean-zero; C_NL||a||<ν
+
+R066 SingularClosure.CriticalRegularSolution.lerayHopfUnique_of_serrin
+  MODULE: SingularClosure.SmallDataUniqueness
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E16
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmallDataUniqueness.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.lerayHopfUnique_of_serrin
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a) (hν : 0 < ν)
+        (hSerrin : ∀ T : ℝ, 0 < T →
+          MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+            (volume.restrict (Ioc (0 : ℝ) T))) :
+        U.lerayHopfUnique
+  REUSE: U.lerayHopfUnique: every t>0, spatial a.e. equality for every native LH competitor.
+  PREMISES / REMAINING: U; ν>0; local L4_tL6_x at every T>0
+
+R067 SingularClosure.CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON
+  MODULE: SingularClosure.CriticalSerrinUniqueness
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E16/E17
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSerrinUniqueness.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON
+        (ν : ℝ) (hν : 0 < ν) (a₀ : CriticalPhysicalL2)
+        (v u : Velocity) (G : ℝ → Vec → (Vec →L[ℝ] Vec)) (p : Pressure)
+        (hv : CriticalLerayHopf ν a₀ v G)
+        (hu : CriticalPositiveSolenoidalTest u)
+        (hp : ∀ r : ℝ, 0 < r → ContDiff ℝ ∞ (p r))
+        (hpp : ∀ r : ℝ, 0 < r → SpatialPeriodic (p r))
+        (hNSE : ∀ r : ℝ, 0 < r → ∀ x : Vec,
+          timeDerivative u r x + convection (u r) x + gradient (p r) x =
+            ν • laplacian (u r) x)
+        (hu_trace : Tendsto
+          (fun t => eLpNorm (u t - (a₀ : Vec → Vec)) 2 (volume.restrict unitCube))
+          (𝓝[>] (0 : ℝ)) (𝓝 0))
+        (T : ℝ) (hT : 0 < T)
+        (hSerrin : MemLp (fun t => criticalSpatialNorm 6 (u t)) 4
+          (volume.restrict (Ioc (0 : ℝ) T))) :
+        ∀ t ∈ Ioc (0 : ℝ) T, v t =ᵐ[volume.restrict unitCube] u t
+  REUSE: Every t∈(0,T]: v t = u t spatial a.e.
+  PREMISES / REMAINING: ν>0; native LH v,G; positive smooth periodic solenoidal u; smooth periodic p; actual NSE; same strong L2 trace; T>0; u∈L4_tL6_x(0,T]
+
+R068 SingularClosure.SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS
+  MODULE: SingularClosure.CriticalGlobalEnergyClass
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalGlobalEnergyClass.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS
+        (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+        (hsmall : criticalNonlinearConstant * ‖a‖ < ν) :
+        ∃ U : CriticalRegularSolution ν a,
+          (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+            (∫ t in Ioi (0 : ℝ), ‖U.flow.threeHalfState t‖ ^ 2) ≤ criticalDissipationBudget ν a) ∧
+          (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+            (∫ t in Ioi (0 : ℝ), ‖U.flow.negativeHalfDerivative t‖ ^ 2) ≤
+              criticalTimeDerivativeBudget ν a) ∧
+          (∀ T : ℝ, 0 < T →
+            IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+              (Icc (0 : ℝ) T) volume ∧
+            (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤
+              (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) /
+                (4 * (ν - criticalNonlinearConstant * ‖a‖)))
+  REUSE: Same U global L2H3/2 and L2H−1/2 derivative with quantitative budgets and terminal quartic bound.
+  PREMISES / REMAINING: ν>0; a critical H1/2, real solenoidal mean-zero; C_NL||a||<ν
+
+R069 SingularClosure.CriticalRegularSolution.serrin_global_memLp_of_quartic_budget
+  MODULE: SingularClosure.CriticalGlobalSerrin
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E15/E16
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalGlobalSerrin.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalRegularSolution.serrin_global_memLp_of_quartic_budget
+        {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
+        (M : ℝ) (hM : 0 ≤ M)
+        (hquartic : ∀ T : ℝ, 0 < T →
+          IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+            (Icc (0 : ℝ) T) volume ∧
+          (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤ M) :
+        MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+          (volume.restrict (Ioi (0 : ℝ))) ∧
+          (∫ t in Ioi (0 : ℝ), criticalSpatialNorm 6 (U.flow.velocity t) ^ 4) ≤
+            criticalPhysicalL6FourthConstant * M
+  REUSE: Global L4_tL6_x and fourth-power integral≤criticalPhysicalL6FourthConstant*M.
+  PREMISES / REMAINING: U; M≥0; ∀T>0 integrable quartic dissipation with integral≤M
+
+R070 SingularClosure.CriticalLerayHopf.velocity_energy_le_initial
+  MODULE: SingularClosure.CriticalLerayHopf
+  STATUS: compiled_dependency_of_exact_audited_root; no individual audit emitted
+  ENDPOINTS: E15
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLerayHopf.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CriticalLerayHopf.velocity_energy_le_initial
+        {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
+        {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
+        (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν) {t : ℝ} (ht : 0 ≤ t) :
+        physicalEnergy (v t) ≤ ‖a₀‖ ^ 2
+  REUSE: physicalEnergy(v t)≤||a0||².
+  PREMISES / REMAINING: native LH ν a0 v G; ν≥0; t≥0
+
+R071 SingularClosure.scalarFourierSeries_hasFDerivAt
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem scalarFourierSeries_hasFDerivAt {b : Frequency → ℂ}
+        (hzero : Summable (fun k => ‖b k‖))
+        (hone : Summable (fun k => ‖b k‖ * ‖fourierPhaseCLM k‖)) (x : Vec) :
+        HasFDerivAt (scalarFourierSeries b)
+          (∑' k : Frequency, b k • (fourierCharacter k x • fourierPhaseCLM k)) x
+  REUSE: Spatial derivative of actual Fourier series
+  PREMISES / REMAINING: Summability of heat coefficients and coefficients times phase norm at each positive time.
+
+R072 SingularClosure.scalarFourierSeries_contDiff
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem scalarFourierSeries_contDiff {b : Frequency → ℂ}
+        (hb : RapidScalarFourier b) : ContDiff ℝ ∞ (scalarFourierSeries b)
+  REUSE: Spatial smoothness of actual synthesized coefficients
+  PREMISES / REMAINING: RapidScalarFourier for each heat coefficient component, obtained from Gaussian weighted summability.
+
+R073 SingularClosure.scalarFourierSeries_integral
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem scalarFourierSeries_integral {b : Frequency → ℂ}
+        (hb : Summable (fun k => ‖b k‖)) :
+        (∫ x in unitCube, scalarFourierSeries b x) = b 0
+  REUSE: Mean zero from vanishing zeroth Fourier coefficient
+  PREMISES / REMAINING: Absolute summability and zero mode; combined realization endpoint normally subsumes this.
+
+R074 SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SobolevSmoothRealization.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SobolevSmoothRealization.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION (c : FourierCoeff)
+        (hc : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s c) 2)
+        (hreal : SpectralReality c) (hzero : SpectralMeanZero c)
+        (hsol : SpectralSolenoidal c) :
+        SmoothSigmaZero (smoothFourierSynthesis c) ∧
+          datumFourierCoeff (smoothFourierSynthesis c) = c
+  REUSE: All integer Sobolev orders plus spectral invariants imply actual smooth sigma-zero field and exact Fourier recovery
+  PREMISES / REMAINING: Positive-time all-order membership; spectral reality, zero mode, and solenoidality of chosen shear.
+
+R075 SingularClosure.datumFourierCoeff_smoothFourierSynthesis
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SobolevSmoothRealization.lean
+  STATUS: pinned source proof inspected; no individual theorem-level line in cached external audit inventory
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SobolevSmoothRealization.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem datumFourierCoeff_smoothFourierSynthesis (c : FourierCoeff)
+        (hc : ∀ i : Fin 3, RapidScalarFourier (fun k => c k i))
+        (hreal : SpectralReality c) :
+        datumFourierCoeff (smoothFourierSynthesis c) = c
+  REUSE: Exact coefficient recovery for smooth synthesized series
+  PREMISES / REMAINING: Rapid coefficients and spectral reality; this is already a conjunct of audited ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION.
+
+R076 SingularClosure.smoothFourierSynthesis_convection_coeff
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierProduct.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierProduct.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem smoothFourierSynthesis_convection_coeff (c : TorusSobolev 0)
+        (hc : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s c.val) 2)
+        (hreal : SpectralReality c.val) (hsol : SpectralSolenoidal c.val) :
+        datumFourierCoeff (convection (smoothFourierSynthesis c.val)) =
+          fullTransportCoefficients c
+  REUSE: Physical convection coefficients equal native infinite transport convolution
+  PREMISES / REMAINING: Show native fullTransportCoefficients of axis-supported shear vanish.
+
+R077 SingularClosure.smoothFourierSynthesis_laplacian_coeff
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmoothFourierLaplacian.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmoothFourierLaplacian.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem smoothFourierSynthesis_laplacian_coeff (c : FourierCoeff)
+        (hc : ∀ i : Fin 3, RapidScalarFourier (fun k => c k i))
+        (hreal : SpectralReality c) :
+        datumFourierCoeff (laplacian (smoothFourierSynthesis c)) = laplacianCoefficient c
+  REUSE: Physical Laplacian has exact spectral multiplier coefficients
+  PREMISES / REMAINING: Heat derivative equals viscosity times Laplacian coefficient multiplier; rapidness and reality.
+
+R078 SingularClosure.datumFourierCoeff_injective_continuous_periodic
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierInjective.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierInjective.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem datumFourierCoeff_injective_continuous_periodic (a b : Field)
+        (ha : Continuous a) (hb : Continuous b)
+        (hpa : SpatialPeriodic a) (hpb : SpatialPeriodic b)
+        (hcoeff : datumFourierCoeff a = datumFourierCoeff b) : a = b
+  REUSE: Upgrade Fourier equality to equality of continuous periodic fields
+  PREMISES / REMAINING: Only positive-time representatives qualify; cannot identify rough initial datum directly using this theorem.
+
+R079 SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PhysicalNSEIdentity.lean
+  STATUS: DIRECT_NATIVE_AUDIT
+  AXIOMS: [propext, Classical.choice, Quot.sound]
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PhysicalNSEIdentity.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem PHYSICAL_NSE_OF_FULL_FOURIER_RHS (ν : ℝ) (c : TorusSobolev 0)
+        (hc : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s c.val) 2)
+        (hreal : SpectralReality c.val) (hsol : SpectralSolenoidal c.val)
+        (hr : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s (fullFourierRhs ν c)) 2) :
+        ∀ x : Vec,
+          smoothFourierSynthesis (fullFourierRhs ν c) x +
+            convection (smoothFourierSynthesis c.val) x +
+            gradient (fullTransportPressure c) x =
+              ν • laplacian (smoothFourierSynthesis c.val) x
+  REUSE: Actual physical NSE algebraic identity from Fourier RHS
+  PREMISES / REMAINING: Prove time derivative equals synthesis of fullFourierRhs; prove shear pressure equals zero and transport cancellation.
+
+R080 SingularClosure.CRITICAL_POSITIVE_SCALE_TIME_SMOOTH
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveTimeSmooth.lean
+  STATUS: pinned source proof inspected; no individual theorem-level line in cached external audit inventory
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveTimeSmooth.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CRITICAL_POSITIVE_SCALE_TIME_SMOOTH
+        (U : ∀ m : ℕ, ℝ → TorusSobolev m)
+        (F : ∀ m : ℕ, TorusSobolev (m + 2) → TorusSobolev m)
+        (hU : ∀ m : ℕ, ContinuousOn (U m) (Ioi (0 : ℝ)))
+        (hF : ∀ m : ℕ, ContDiff ℝ ∞ (F m))
+        (hderiv : ∀ (m : ℕ) (t : ℝ), t ∈ Ioi (0 : ℝ) →
+          HasDerivWithinAt (U m) (F m (U (m + 2) t)) (Ioi (0 : ℝ)) t) :
+        ∀ m : ℕ, ContDiffOn ℝ ∞ (U m) (Ioi (0 : ℝ))
+  REUSE: Bootstrap Sobolev-scale time smoothness on Ioi 0
+  PREMISES / REMAINING: Heat curves continuous at every integer Sobolev order; actual within derivative equation; bounded Laplacian RHS between levels m+2 and m.
+
+R081 SingularClosure.CRITICAL_POSITIVE_JOINT_SPACETIME_SMOOTH
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveSpacetime.lean
+  STATUS: pinned source proof inspected; no individual theorem-level line in cached external audit inventory
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveSpacetime.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem CRITICAL_POSITIVE_JOINT_SPACETIME_SMOOTH
+        (U : ∀ s : ℕ, ℝ → TorusSobolev s)
+        (hU : ∀ s : ℕ, ContDiffOn ℝ ∞ (U s) (Ioi (0 : ℝ)))
+        (hcoeff : ∀ (s : ℕ) (t : ℝ), 0 < t → (U s t).val = (U 0 t).val) :
+        ContDiffOn ℝ ∞
+          (fun z : ℝ × Vec => smoothFourierSynthesis (U 0 z.1).val z.2) positiveSpacetime
+  REUSE: Joint positive-time spacetime smoothness of actual physical synthesis
+  PREMISES / REMAINING: All Sobolev-level curves smooth on Ioi 0 and coefficient compatibility. Does not require smoothness at t=0.
+
+R082 SingularClosure.sobolevPhysicalEvaluation_contDiff
+  MODULE: regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmoothEvaluation.lean
+  STATUS: pinned source proof inspected; no individual theorem-level line in cached external audit inventory
+  ENDPOINTS: E14
+  SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/SmoothEvaluation.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem sobolevPhysicalEvaluation_contDiff (n : ℕ) :
+        ContDiff ℝ n (sobolevPhysicalEvaluation n)
+  REUSE: Smooth operator-valued spatial evaluation, underlying positive-time joint smoothness
+  PREMISES / REMAINING: Use indirectly through CRITICAL_POSITIVE_JOINT_SPACETIME_SMOOTH unless an explicit time derivative evaluation is required.
+
+R083 intervalIntegral.integral_one_div_one_add_sq
+  MODULE: Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E03
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem integral_one_div_one_add_sq :
+        (∫ x : ℝ in a..b, ↑1 / (↑1 + x ^ 2)) = arctan b - arctan a
+  REUSE: Evaluate integral of (1+x^2)^-1 by arctangent
+  PREMISES / REMAINING: Actual GP integral substitution x=exp(-t), domain/integrability and Gamma(1)=1; specialize interval 0..1.
+
+R084 Real.arctan_one
+  MODULE: Mathlib/Analysis/SpecialFunctions/Trigonometric/Arctan.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E03
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/Trigonometric/Arctan.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem arctan_one : arctan 1 = π / 4
+  REUSE: Exact arctan 1 = pi/4
+  PREMISES / REMAINING: Connect GP and actual operator resolvent to 4*integral_0^1(1+x^2)^-1.
+
+R085 hasSum_geom_series_inverse
+  MODULE: Mathlib/Analysis/SpecificLimits/Normed.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E03
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecificLimits/Normed.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem hasSum_geom_series_inverse (x : R) (h : ‖x‖ < 1) :
+        HasSum (fun i ↦ x ^ i) (1 - x)⁻¹ʳ
+  REUSE: Banach-algebra Neumann series equals Ring.inverse of 1-Q
+  PREMISES / REMAINING: Construct actual bounded multiplication operator Q, prove norm Q <=1/2, and identify inverse multiplier. Signature uses ring inverse, not a division-ring inverse.
+
+R086 Matrix.posSemidef_gram
+  MODULE: Mathlib/Analysis/InnerProductSpace/GramMatrix.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E04
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/GramMatrix.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem posSemidef_gram (v : n → E) :
+        PosSemidef (gram 𝕜 v)
+  REUSE: PSD of each finite actual Gram matrix
+  PREMISES / REMAINING: Identify Hankel matrix with Gram(Q^i c); shifted/localizer matrices with weighted vectors sqrt(q)Q^i c and sqrt(1/2-q)Q^i c; construct their actual L2 representatives.
+
+R087 Matrix.star_dotProduct_gram_mulVec
+  MODULE: Mathlib/Analysis/InnerProductSpace/GramMatrix.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E04
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/GramMatrix.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem star_dotProduct_gram_mulVec [Fintype n] (v : n → E) (x y : n → 𝕜) :
+        star x ⬝ᵥ (gram 𝕜 v) *ᵥ y = ⟪∑ i, x i • v i, ∑ i, y i • v i⟫_𝕜
+  REUSE: Quadratic form of finite Gram equals inner product of finite linear combinations
+  PREMISES / REMAINING: Prove moment integral/factorial identity; use this equality for explicit rational-matrix certificates.
+
+R088 Finset.sum_Ico_by_parts
+  MODULE: Mathlib/Algebra/BigOperators/Module.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E11
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/BigOperators/Module.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem sum_Ico_by_parts (hmn : m < n) :
+        ∑ i ∈ Ico m n, f i • g i =
+          f (n - 1) • G n - f m • G m - ∑ i ∈ Ico m (n - 1), (f (i + 1) - f i) • G (i + 1)
+  REUSE: Finite Abel summation identity on natural index interval
+  PREMISES / REMAINING: Quantitative geometric partial-sum bound, monotonicity of dyadic coefficients, and tail limit; statement's local G n abbreviates sum i in range n, g i.
+
+R089 Antitone.cauchySeq_series_mul_of_tendsto_zero_of_bounded
+  MODULE: Mathlib/Analysis/SpecificLimits/Normed.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E11
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecificLimits/Normed.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem Antitone.cauchySeq_series_mul_of_tendsto_zero_of_bounded (hfa : Antitone f)
+        (hf0 : Tendsto f atTop (𝓝 0)) (hzb : ∀ n, ‖∑ i ∈ range n, z i‖ ≤ b) :
+        CauchySeq fun n ↦ ∑ i ∈ range n, f i • z i
+  REUSE: Convergence by Dirichlet test for antitone coefficients tending to zero
+  PREMISES / REMAINING: Bound cosine partial sums for each y outside integers. This gives convergence only: explicit tail estimate, neighborhood lower bound and essential unboundedness remain new.
+
+R090 summable_norm_pow_mul_geometric_of_norm_lt_one
+  MODULE: Mathlib/Analysis/SpecificLimits/Normed.lean
+  STATUS: pinned Mathlib source proof inspected; no new theorem-level external audit in this task
+  ENDPOINTS: E14
+  SOURCE: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecificLimits/Normed.lean
+  SIGNATURE_SOURCE_EXCERPT:
+    theorem summable_norm_pow_mul_geometric_of_norm_lt_one (k : ℕ) {r : R}
+        (hr : ‖r‖ < 1) : Summable fun n : ℕ ↦ ‖((n : R) ^ k * r ^ n : R)‖
+  REUSE: Absolute summability of n^k*r^n for norm r<1
+  PREMISES / REMAINING: Majorize Gaussian terms uniformly for t>=delta>0 by polynomial times exp(-c*delta*n), then transfer to sparse Fourier frequency indexing.
+
+16. CROSS-PACKAGE LEDGER
+External generic BKQR declaration audits: https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/actions/runs/40712534224/job/122901815356
+TESTED_COMMIT = c6b95fd9e3d792270026da083bddddbc72bacb22
+INSPECTED_HVR_REF = 29249c8ff158e97b20475320323206a29626e3b5
+COMPILER = Lean4.33.0 x86_64-unknown-linux-gnu commit d8b18978322de05a8f3dba51ef03cf5461676c17
+MATHLIB = db584cd6d46c92f209a44c0f1c829460d327499d
+EVIDENCE = PASS|LEAN_FILES=118|AUDIT_TARGETS=641; GITHUB_CI_AXIOM_AUDIT=PASS|DECLARATIONS=641
+A_TIER for the audited generic BKQR declarations in their tested external environment. New L2 GP realization, new polynomial moments, new energy block and mixed-project adapter are not promoted. Byte-identical helper reuse does not automatically certify a changed dependency closure.
+No claim of exact-type-marker coverage for all 25 HVR declarations.
+No claim of new mixed-project compilation or GP/NSE realization.
+
+MODULE: regularity-B-assembly/REGULARITY_FRONT/NSE_ROUGH_SHEAR_L2_FAMILY.lean
+STATUS: REPORTED_NATIVE_PASS; raw matching theorem receipt not reverified
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/REGULARITY_FRONT/NSE_ROUGH_SHEAR_L2_FAMILY.lean
+BLOB: 731d4fefd1e60c2d4c1d9bace08deb74e91675f0
+ENDPOINTS: E14,E15
+REUSE: Use the universal spectral heat-flow construction after constructing L2ShearDatum from the new dyadic coefficients. Reuse positive-time weighted-square summability, L2 coefficient trace, divergence/convection zero, and heat-factor ODE. All coefficients use the unit-torus 2*pi normalization.
+REMAINING: Native CriticalSobolev/PhysicalL2 embeddings; physical Fourier synthesis; weighted H1/2 trace; actual NSE derivatives; energy equality; native actual LH membership. PositiveTimeSpectralFlow is not PositiveSmoothNSE or CriticalRegularSolution.
+  NSERoughShearL2Family.heatDatum [line 129]
+    def heatDatum
+        (ν t : ℝ) (hν : 0 ≤ ν) (ht : 0 ≤ t)
+        (u : L2ShearDatum) : L2ShearDatum where
+  NSERoughShearL2Family.pow_mul_exp_neg_le_factorial [line 158]
+    theorem pow_mul_exp_neg_le_factorial
+        (m : ℕ) {x : ℝ} (hx : 0 ≤ x) :
+        x ^ m * Real.exp (-x) ≤ (Nat.factorial m : ℝ)
+  NSERoughShearL2Family.freqSq_pow_heatFactor_sq_le [line 178]
+    theorem freqSq_pow_heatFactor_sq_le
+        {ν t : ℝ} (hν : 0 < ν) (ht : 0 < t)
+        (m : ℕ) (k : Mode2) :
+        freqSq k ^ m * heatFactor ν t k ^ 2
+          ≤ (Nat.factorial m : ℝ) / (2 * ν * t) ^ m
+  NSERoughShearL2Family.positive_time_smoothing [line 231]
+    theorem positive_time_smoothing
+        {ν t : ℝ} (hν : 0 < ν) (ht : 0 < t)
+        (m : ℕ) (u : L2ShearDatum) :
+        Summable (smoothTerm m (heatCoeff ν t u.coeff))
+  NSERoughShearL2Family.traceErrorSq_tendsto_zero [line 296]
+    theorem traceErrorSq_tendsto_zero
+        {ν : ℝ} (hν : 0 < ν) (u : L2ShearDatum) :
+        Tendsto (fun t : ℝ => traceErrorSq ν t u.coeff)
+          (𝓝[>] (0 : ℝ)) (𝓝 0)
+  NSERoughShearL2Family.divergenceCoeff_eq_zero [line 347]
+    @[simp] theorem divergenceCoeff_eq_zero
+        (ν t : ℝ) (u : L2ShearDatum) (k : Mode2) :
+        divergenceCoeff ν t u k = 0
+  NSERoughShearL2Family.advectiveScalar_eq_zero [line 359]
+    @[simp] theorem advectiveScalar_eq_zero
+        (ν t : ℝ) (u : L2ShearDatum)
+        (p q : Mode2) :
+        advectiveScalar ν t u p q = 0
+  NSERoughShearL2Family.rawConvectionCoeff_eq_zero [line 375]
+    @[simp] theorem rawConvectionCoeff_eq_zero
+        (S : Finset Mode2)
+        (ν t : ℝ) (u : L2ShearDatum)
+        (k : Mode2) (i : Fin 3) :
+        rawConvectionCoeff S ν t u k i = 0
+  NSERoughShearL2Family.heatFactor_hasDerivAt [line 383]
+    theorem heatFactor_hasDerivAt
+        (ν t : ℝ) (k : Mode2) :
+        HasDerivAt (fun s : ℝ => heatFactor ν s k)
+          (-(ν * freqSq k) * heatFactor ν t k) t
+  NSERoughShearL2Family.NSE_ROUGH_SHEAR_L2_FAMILY [line 422]
+    theorem NSE_ROUGH_SHEAR_L2_FAMILY
+        (ν : ℝ) (hν : 0 < ν) (u : L2ShearDatum) :
+        PositiveTimeSpectralFlow ν u
+  NSERoughShearL2Family.NSE_ROUGH_SHEAR_STRICT_SUBFAMILY [line 458]
+    theorem NSE_ROUGH_SHEAR_STRICT_SUBFAMILY
+        (ν : ℝ) (hν : 0 < ν) (u : RoughL2ShearDatum) :
+        PositiveTimeSpectralFlow ν u.1
+
+MODULE: regularity-B-assembly/REGULARITY_FRONT/NSE_ROUGH_SHEAR_STRICT_NONEMPTY.lean
+STATUS: REPORTED_NATIVE_PASS; raw matching theorem receipt not reverified
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/REGULARITY_FRONT/NSE_ROUGH_SHEAR_STRICT_NONEMPTY.lean
+BLOB: 6120eb251a9d276603e51d40dc20452ca0d6e35b
+ENDPOINTS: E08,E09,E10,E11
+REUSE: Proof-pattern reuse for axis-supported coefficients, integer summation, reality and mean zero. Strict rough family nonemptiness exists independently.
+REMAINING: The supplied harmonicCoeff=1/|n| is NOT the chosen dyadic H1/2 datum; harmonicDatum_not_hhalf proves it cannot be substituted into the native H1/2 small root. It proves no local essential unboundedness statement.
+  NSERoughShearL2Family.StrictNonemptyWitness.harmonicCoeff_l2Summable [line 61]
+    theorem harmonicCoeff_l2Summable :
+        Summable (l2Term harmonicCoeff)
+  NSERoughShearL2Family.StrictNonemptyWitness.harmonicDatum_not_hhalf [line 159]
+    theorem harmonicDatum_not_hhalf :
+        ¬ IsHhalf harmonicDatum
+  NSERoughShearL2Family.StrictNonemptyWitness.NSE_ROUGH_SHEAR_STRICT_SUBFAMILY_NONEMPTY [line 177]
+    theorem NSE_ROUGH_SHEAR_STRICT_SUBFAMILY_NONEMPTY :
+        Nonempty RoughL2ShearDatum
+  NSERoughShearL2Family.StrictNonemptyWitness.EXISTS_NSE_ROUGH_SHEAR_STRICT_POSITIVE_TIME_FLOW [line 185]
+    theorem EXISTS_NSE_ROUGH_SHEAR_STRICT_POSITIVE_TIME_FLOW
+        (ν : ℝ) (hν : 0 < ν) :
+        ∃ u : RoughL2ShearDatum,
+          PositiveTimeSpectralFlow ν u.1
+
+MODULE: regularity-B-assembly/REGULARITY_FRONT/S_DIR_L2_DYADIC_ROW.lean
+STATUS: REPORTED_NATIVE_PASS; raw matching theorem receipt not reverified
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/REGULARITY_FRONT/S_DIR_L2_DYADIC_ROW.lean
+BLOB: c6bbd682d78917e48887f010a7e0689d4101ff25
+ENDPOINTS: E08,E15
+REUSE: Generic nonnegative finite-sum-to-tsum adapter reusable; optional directional heat-kernel control reusable.
+REMAINING: Its dyadic sequence is 2^j/(r^2+4^j), not the new d_n=1/(j*2^j); does not discharge E08 dyadic block identities. Shell-partition theorem requires explicit geometric partition premises.
+  SDirL2.S_DIR_L2_DYADIC_KERNEL_SUMMABLE [line 31]
+    theorem S_DIR_L2_DYADIC_KERNEL_SUMMABLE
+        (r : ℝ) (hr : 0 < r) :
+        Summable (dyadicKernelTerm r)
+  SDirL2.S_DIR_L2_DYADIC_KERNEL_TSUM_BOUND [line 41]
+    theorem S_DIR_L2_DYADIC_KERNEL_TSUM_BOUND
+        (r : ℝ) (hr : 0 < r) :
+        (∑' j : ℕ, dyadicKernelTerm r j) ≤ 4 / r
+  SDirL2.S_DIR_L2_INFINITE_ROW_FROM_ALL_FINITE_BOUNDS [line 52]
+    theorem S_DIR_L2_INFINITE_ROW_FROM_ALL_FINITE_BOUNDS
+        {ι : Type*} (f : ι → ℝ) (C : ℝ)
+        (hf : ∀ i, 0 ≤ f i)
+        (hF : ∀ F : Finset ι, (∑ i ∈ F, f i) ≤ C) :
+        Summable f ∧ (∑' i, f i) ≤ C
+  SDirL2.S_DIR_L2_DYADIC_ROW_POINTWISE [line 67]
+    theorem S_DIR_L2_DYADIC_ROW_POINTWISE
+        (r : ℝ) (hr : 0 < r) (j : ℕ) (k : Mode3)
+        (hlower : (2 : ℝ) ^ j ≤ Real.sqrt (latticeRadiusSq k)) :
+        directionalRadialRowTerm r k ≤
+          1 / ((2 : ℝ) ^ j * (r ^ 2 + ((2 : ℝ) ^ j) ^ 2))
+  SDirL2.S_DIR_L2_DYADIC_FINITE_SHELL_BUDGET [line 93]
+    theorem S_DIR_L2_DYADIC_FINITE_SHELL_BUDGET
+        (r : ℝ) (hr : 0 < r) (j : ℕ)
+        (F : Finset Mode3)
+        (hcard : (F.card : ℝ) ≤ 16 * (((2 : ℝ) ^ j) ^ 2))
+        (hlower : ∀ k ∈ F,
+          (2 : ℝ) ^ j ≤ Real.sqrt (latticeRadiusSq k)) :
+        (∑ k ∈ F, directionalRadialRowTerm r k) ≤
+          16 * dyadicKernelTerm r j
+  SDirL2.S_DIR_L2_FINITE_ROW_OF_DYADIC_SHELL_PARTITION [line 146]
+    theorem S_DIR_L2_FINITE_ROW_OF_DYADIC_SHELL_PARTITION
+        (a : Mode3) (ha : a ≠ 0)
+        (r : ℝ) (hr : 0 < r)
+        (F : Finset Mode3) (N : ℕ)
+        (shell : ℕ → Finset Mode3)
+        (hpart : F = (Finset.range N).biUnion shell)
+        (hdisjoint : (↑(Finset.range N) : Set ℕ).PairwiseDisjoint shell)
+        (hplane : ∀ j ∈ Finset.range N,
+          ∀ k ∈ shell j, directionalDot a k = 0)
+        (hupper : ∀ j ∈ Finset.range N,
+          ∀ k ∈ shell j,
+            latticeRadiusSq k < (((2 : ℕ) ^ (j + 1) : ℕ) : ℝ) ^ 2)
+        (hlower : ∀ j ∈ Finset.range N,
+          ∀ k ∈ shell j,
+            (2 : ℝ) ^ j ≤ Real.sqrt (latticeRadiusSq k)) :
+        (∑ k ∈ F, directionalRadialRowTerm r k) ≤ 64 / r
+
+MODULE: regularity-B-assembly/REGULARITY_FRONT/S_DIR_L2_DYADIC_SCHUR.lean
+STATUS: REPORTED_NATIVE_PASS; raw matching theorem receipt not reverified
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/REGULARITY_FRONT/S_DIR_L2_DYADIC_SCHUR.lean
+BLOB: 3819c94610ec9687c0a4bf86a7ebeca095cb8fa4
+ENDPOINTS: E08,E15
+REUSE: Optional two-dimensional directional-plane heat analysis; exact rational dyadic telescoping estimate.
+REMAINING: No direct closure of new one-dimensional logarithmic block identities, GP identity, joint block positivity, or native LH admission.
+  SDirL2.S_DIR_L2_DYADIC_PLANE_BALL_CARD [line 102]
+    theorem S_DIR_L2_DYADIC_PLANE_BALL_CARD
+        (a : Mode3) (ha : a ≠ 0)
+        (F : Finset Mode3) (j : ℕ)
+        (hplane : ∀ k ∈ F, directionalDot a k = 0)
+        (hupper : ∀ k ∈ F,
+          latticeRadiusSq k < (((2 : ℕ) ^ (j + 1) : ℕ) : ℝ) ^ 2) :
+        F.card ≤ 16 * ((2 : ℕ) ^ j) ^ 2
+  SDirL2.S_DIR_L2_DYADIC_KERNEL_TELESCOPIC_STEP [line 139]
+    theorem S_DIR_L2_DYADIC_KERNEL_TELESCOPIC_STEP
+        (r q : ℝ) (hr : 0 < r) (hq : 0 < q) :
+        q / (r ^ 2 + q ^ 2) ≤
+          (4 / r) * ((2 * q) / (r + 2 * q) - q / (r + q))
+  SDirL2.S_DIR_L2_DYADIC_KERNEL_PREFIX_BOUND [line 176]
+    theorem S_DIR_L2_DYADIC_KERNEL_PREFIX_BOUND
+        (r : ℝ) (hr : 0 < r) (N : ℕ) :
+        (∑ j ∈ Finset.range N, dyadicKernelTerm r j) ≤ 4 / r
+  SDirL2.S_DIR_L2_DYADIC_SERRIN_CONSTANT_LE_FROZEN [line 212]
+    theorem S_DIR_L2_DYADIC_SERRIN_CONSTANT_LE_FROZEN
+        (ν : ℝ) (hν : 0 < ν) :
+        16 / (Real.pi ^ 2 * ν) ≤
+          45 / (8 * Real.pi * ν)
+
+MODULE: regularity-B-assembly/REGULARITY_FRONT/S_DIR_L2_SERRIN_FINITE.lean
+STATUS: REPORTED_NATIVE_PASS; raw matching theorem receipt not reverified
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/REGULARITY_FRONT/S_DIR_L2_SERRIN_FINITE.lean
+BLOB: 939c119b66cfa5a4f57b3b664908c5ae0d1993bb
+ENDPOINTS: E15
+REUSE: Exact positive exponential time-integral and heat multiplier algebra can support energy/dissipation integrations. Finite Serrin estimate is an optional control.
+REMAINING: Energy equality still needs the diagonal Fourier Parseval identity and infinite-mode integral exchange. Finite absolute-Fourier amplitude squared is not physical L2 energy.
+  SDirL2.S_DIR_L2_EXPONENTIAL_INTEGRABLE_ON_Ioi [line 25]
+    theorem S_DIR_L2_EXPONENTIAL_INTEGRABLE_ON_Ioi
+        (c : ℝ) (hc : 0 < c) :
+        IntegrableOn (fun t : ℝ => Real.exp (-(c * t))) (Set.Ioi (0 : ℝ))
+  SDirL2.S_DIR_L2_EXPONENTIAL_INTEGRAL_ON_Ioi [line 33]
+    theorem S_DIR_L2_EXPONENTIAL_INTEGRAL_ON_Ioi
+        (c : ℝ) (hc : 0 < c) :
+        (∫ t : ℝ in Set.Ioi (0 : ℝ), Real.exp (-(c * t))) = 1 / c
+  SDirL2.S_DIR_L2_TWO_HEAT_MULTIPLIERS [line 46]
+    theorem S_DIR_L2_TWO_HEAT_MULTIPLIERS
+        (κ x y t : ℝ) :
+        Real.exp (-(κ * x ^ 2 * t)) * Real.exp (-(κ * y ^ 2 * t)) =
+          Real.exp (-(κ * (x ^ 2 + y ^ 2) * t))
+  SDirL2.S_DIR_L2_HEAT_PAIR_TIME_INTEGRAL [line 56]
+    theorem S_DIR_L2_HEAT_PAIR_TIME_INTEGRAL
+        (κ x y : ℝ) (hκ : 0 < κ) (hx : 0 < x) (hy : 0 < y) :
+        (∫ t : ℝ in Set.Ioi (0 : ℝ),
+            Real.exp (-(κ * x ^ 2 * t)) * Real.exp (-(κ * y ^ 2 * t))) =
+          κ⁻¹ * (x ^ 2 + y ^ 2)⁻¹
+  SDirL2.S_DIR_L2_FINITE_HEAT_AMPLITUDE_SQUARE [line 88]
+    theorem S_DIR_L2_FINITE_HEAT_AMPLITUDE_SQUARE
+        {ι : Type*} (F : Finset ι) (r b : ι → ℝ)
+        (κ t : ℝ) :
+        (finiteHeatAmplitude F r b κ t) ^ 2 =
+          ∑ i ∈ F, ∑ j ∈ F,
+            (b i * b j) * Real.exp (-(κ * (r i ^ 2 + r j ^ 2) * t))
+  SDirL2.S_DIR_L2_FINITE_SERRIN_HEAT_ESTIMATE [line 215]
+    theorem S_DIR_L2_FINITE_SERRIN_HEAT_ESTIMATE
+        (a : Mode3) (ha : a ≠ 0) (ν : ℝ) (hν : 0 < ν)
+        (F : Finset (ActivePlaneMode a))
+        (z : ActivePlaneMode a → ℂ) :
+        (∫ t : ℝ in Set.Ioi (0 : ℝ),
+          (finiteHeatAmplitude F (activeRadius a) (fun k => ‖z k‖)
+              (4 * Real.pi ^ 2 * ν) t) ^ 2) ≤
+          (16 / (Real.pi ^ 2 * ν)) * ∑ k ∈ F, ‖z k‖ ^ 2
+
+MODULE: REEMANIANS/BanachExt/Derivations/BKQR/DefectGramSquare.lean
+STATUS: EXTERNAL_BKQR_AUDIT at tested HVR commit; Methlib blob matched
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/REEMANIANS/BanachExt/Derivations/BKQR/DefectGramSquare.lean
+BLOB: e06be2c0113e378c438f3dbb273eda7166662bdb
+ENDPOINTS: E04
+REUSE: Instantiate RealGramGeometry on real L2(0,1), T f=(1-x^2)f/2, u=sqrt(2), and mu(a,n)=m_n independent of a. Existing algebra then supplies nonnegative Hopf/Gram defects, coefficient bound and two-channel square.
+REMAINING: Must construct actual geometry, contraction, base/moment equalities. These results do not compute m_n, prove GP(0,1)=pi, prove finite Hankel/localizing Gram positivity, or prove [[pi,z*],[z,I]] positivity. The 2x2 determinant mu0^2-mun^2 is a different block from E05.
+  NativeSolobolo.Derivations.BKQR.ORBIT_DEPTH_ENERGY_LE_BASE [line 44]
+    theorem ORBIT_DEPTH_ENERGY_LE_BASE
+        (M : BKQRContractiveOrbit Q mu) (a : ℝ) (n : Nat) :
+        orbitDepthEnergy M a n ≤ orbitBaseEnergy M a
+  NativeSolobolo.Derivations.BKQR.HOPF_DEFECT_NONNEGATIVE [line 56]
+    theorem HOPF_DEFECT_NONNEGATIVE
+        (M : BKQRContractiveOrbit Q mu) (a : ℝ) (n : Nat) :
+        0 ≤ hopfDefect M a n
+  NativeSolobolo.Derivations.BKQR.GRAM_DEFECT_NONNEGATIVE [line 65]
+    theorem GRAM_DEFECT_NONNEGATIVE
+        (M : BKQRContractiveOrbit Q mu) (a : ℝ) (n : Nat) :
+        0 ≤ gramDefect M a n
+  NativeSolobolo.Derivations.BKQR.MOMENT_DEFECT_IS_BKQR_PAIR_SQUARE [line 77]
+    theorem MOMENT_DEFECT_IS_BKQR_PAIR_SQUARE
+        (M : BKQRContractiveOrbit Q mu) (a : ℝ) (n : Nat) :
+        (mu a 0) ^ 2 - (mu a n) ^ 2 = pairNormSq (defectGramVector M a n)
+  NativeSolobolo.Derivations.BKQR.MOMENT_DEFECT_NONNEGATIVE [line 93]
+    theorem MOMENT_DEFECT_NONNEGATIVE
+        (M : BKQRContractiveOrbit Q mu) (a : ℝ) (n : Nat) :
+        0 ≤ (mu a 0) ^ 2 - (mu a n) ^ 2
+  NativeSolobolo.Derivations.BKQR.MOMENT_SQ_LE_BASE_SQ [line 101]
+    theorem MOMENT_SQ_LE_BASE_SQ
+        (M : BKQRContractiveOrbit Q mu) (a : ℝ) (n : Nat) :
+        (mu a n) ^ 2 ≤ (mu a 0) ^ 2
+
+MODULE: REEMANIANS/BanachExt/Derivations/BKQR/HardyCoefficientTransfer.lean
+STATUS: EXTERNAL_BKQR_AUDIT at tested HVR commit; Methlib blob matched
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/REEMANIANS/BanachExt/Derivations/BKQR/HardyCoefficientTransfer.lean
+BLOB: b4852c06f9efd92c044563deec238096ebfc6e4f
+ENDPOINTS: E03,E04
+REUSE: Generic geometric-transfer theorem is directly reusable after proving |m_n|<=2*(1/2)^n: set R=2,C=2,r=1 to obtain Summable |m_n|. Abstract contractive-orbit-to-Cayley coefficient envelope is reusable if a Cayley parameterization is explicitly wanted.
+REMAINING: Cayley radius is sin(eta/2)^2 and eta<pi. This is not the resolvent parameter r in W(r), not endpoint r=1 from unit-contraction alone, and not an energy-admission inequality. Q<=I/2 supplies the extra decay for W(1). No GP integral or NSE endpoint identification.
+  NativeSolobolo.Derivations.BKQR.WEIGHTED_COEFF_BOUND_IMPLIES_SUMMABLE_AT_SMALLER_RADIUS [line 73]
+    theorem WEIGHTED_COEFF_BOUND_IMPLIES_SUMMABLE_AT_SMALLER_RADIUS
+        (u : Nat → ℝ)
+        {r R C : ℝ}
+        (hr0 : 0 ≤ r)
+        (hR0 : 0 < R)
+        (hrR : r < R)
+        (hC0 : 0 ≤ C)
+        (hBound : ∀ n : Nat, |u n| * R ^ n ≤ C) :
+        Summable (fun n : Nat => |u n| * r ^ n)
+  NativeSolobolo.Derivations.BKQR.DEEPER_WEIGHTED_COEFF_BOUND_IMPLIES_ABSOLUTE_CAYLEY_SERIES [line 111]
+    theorem DEEPER_WEIGHTED_COEFF_BOUND_IMPLIES_ABSOLUTE_CAYLEY_SERIES
+        {mu : ℝ → Nat → ℝ}
+        {eta xi : ℝ}
+        (heta : 0 ≤ eta)
+        (hEtaXi : eta < xi)
+        (hXiPi : xi < Real.pi)
+        (hBound : WeightedCayleyCoeffBoundAt mu xi) :
+        AbsoluteCayleySeriesRegularAt mu eta
+  NativeSolobolo.Derivations.BKQR.BKQR_PI_COEFF_IMPLIES_ALL_SUBPI_ABSOLUTE_CAYLEY_SERIES [line 135]
+    theorem BKQR_PI_COEFF_IMPLIES_ALL_SUBPI_ABSOLUTE_CAYLEY_SERIES
+        {mu : ℝ → Nat → ℝ}
+        (hPi : StrictBKQRPiCoeffFrontier mu) :
+        MetricPi (AbsoluteCayleySeriesRegularAt mu)
+  NativeSolobolo.Derivations.BKQR.CONTRACTIVE_ORBIT_GIVES_WEIGHTED_CAYLEY_COEFF_BOUND [line 148]
+    theorem CONTRACTIVE_ORBIT_GIVES_WEIGHTED_CAYLEY_COEFF_BOUND
+        {Vec : Type}
+        {Q : RealGramGeometry Vec}
+        {mu : ℝ → Nat → ℝ}
+        (M : BKQRContractiveOrbit Q mu)
+        {eta : ℝ}
+        (heta : 0 ≤ eta)
+        (hEtaPi : eta < Real.pi) :
+        WeightedCayleyCoeffBoundAt mu eta
+  NativeSolobolo.Derivations.BKQR.CONTRACTIVE_ORBIT_FRONTIER_IMPLIES_STRICT_BKQR_PI_COEFF [line 178]
+    theorem CONTRACTIVE_ORBIT_FRONTIER_IMPLIES_STRICT_BKQR_PI_COEFF
+        {mu : ℝ → Nat → ℝ}
+        (hOrbit : BKQRContractiveOrbitFrontier mu) :
+        StrictBKQRPiCoeffFrontier mu
+
+MODULE: REEMANIANS/BanachExt/Derivations/BKQR/ScalarProduct.lean
+STATUS: EXTERNAL_BKQR_AUDIT at tested HVR commit; Methlib blob matched
+SOURCE: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/REEMANIANS/BanachExt/Derivations/BKQR/ScalarProduct.lean
+BLOB: 03cc0db65077e66e6bcbc1d26b368f4bed93ce6d
+ENDPOINTS: E04
+REUSE: Minimal pre-existing signature for inner/norm-square geometry.
+REMAINING: Structure only; its laws are inputs, no real L2 realization or theorem asserting that a specified operator is contractive.
+  NativeSolobolo.Derivations.BKQR.ScalarProductGeometry [line 4]
+    structure ScalarProductGeometry (Scalar Vec : Type) where
+
+MATCHED CROSS-PACKAGE SOURCE BLOBS:
+{"hvr_path": "Derivations/BKQR/DefectGramSquare.lean", "methlib_path": "REEMANIANS/BanachExt/Derivations/BKQR/DefectGramSquare.lean", "sha": "e06be2c0113e378c438f3dbb273eda7166662bdb"}
+{"hvr_path": "Derivations/BKQR/HardyCoefficientTransfer.lean", "methlib_path": "REEMANIANS/BanachExt/Derivations/BKQR/HardyCoefficientTransfer.lean", "sha": "b4852c06f9efd92c044563deec238096ebfc6e4f"}
+{"hvr_path": "Derivations/BKQR/ScalarProduct.lean", "methlib_path": "REEMANIANS/BanachExt/Derivations/BKQR/ScalarProduct.lean", "sha": "03cc0db65077e66e6bcbc1d26b368f4bed93ce6d"}
+{"hvr_path": "Frontier/ContractiveOrbitFrontier.lean", "methlib_path": "REEMANIANS/BanachExt/Frontier/ContractiveOrbitFrontier.lean", "sha": "70ea1e56e5f022345caaf52c29c9a774011ff139"}
+{"hvr_path": "Frontier/BKQRHardyCoeffFrontier.lean", "methlib_path": "REEMANIANS/BanachExt/Frontier/BKQRHardyCoeffFrontier.lean", "sha": "6505505372523105e338e9858604fa502b61ae79"}
+
+GENERIC BKQR AUDIT INDEX:
+NativeSolobolo.Derivations.BKQR.ScalarProductGeometry | []
+NativeSolobolo.Derivations.BKQR.orbitVec | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.orbitBaseEnergy | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.orbitDepthEnergy | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.orbitCoefficient | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.hopfDefect | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.gramDefect | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.defectGramVector | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.pairNormSq | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.ORBIT_DEPTH_ENERGY_LE_BASE | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.HOPF_DEFECT_NONNEGATIVE | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.GRAM_DEFECT_NONNEGATIVE | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.MOMENT_DEFECT_IS_BKQR_PAIR_SQUARE | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.MOMENT_DEFECT_NONNEGATIVE | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.MOMENT_SQ_LE_BASE_SQ | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.WIDDER_DEFECT_IS_BKQR_PAIR_SQUARE | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.CAYLEY_RADIUS_AT_METRIC_DEPTH_NONNEG | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.CAYLEY_RADIUS_STRICT_MONO_SUBPI | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.CAYLEY_RADIUS_POS_OF_POS_SUBPI | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.CAYLEY_RADIUS_LE_ONE_SUBPI | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.WEIGHTED_COEFF_BOUND_IMPLIES_SUMMABLE_AT_SMALLER_RADIUS | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.DEEPER_WEIGHTED_COEFF_BOUND_IMPLIES_ABSOLUTE_CAYLEY_SERIES | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.BKQR_PI_COEFF_IMPLIES_ALL_SUBPI_ABSOLUTE_CAYLEY_SERIES | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.CONTRACTIVE_ORBIT_GIVES_WEIGHTED_CAYLEY_COEFF_BOUND | ['propext', 'Classical.choice', 'Quot.sound']
+NativeSolobolo.Derivations.BKQR.CONTRACTIVE_ORBIT_FRONTIER_IMPLIES_STRICT_BKQR_PI_COEFF | ['propext', 'Classical.choice', 'Quot.sound']
+Definitions in this index are not counted as separate proved implications.
+
+17. EXCLUDED IDENTIFICATIONS AND SEPARATE OBLIGATIONS
+(X1) RHFinal.GP.Literal in Riemann-Hypothesis-Final:
+  inspected ref ba58f416746517b865c06ebf64e75b283fbfe437;
+  GP/Literal.lean uses a Bose/Mellin density, not the cosh-GP of Section 4;
+  provenance/gp-literal-integration.json records native_compilation=NOT_RUN;
+  DensityLaw, MellinEvaluation, LogMomentDifferentiation,
+  NativeXiFactorization are OPEN proposition definitions.
+  No imported GP(0,1)=pi or actual NSE bridge follows.
+  Source: https://github.com/randogelist/Riemann-Hypothesis-Final/blob/ba58f416746517b865c06ebf64e75b283fbfe437/RHFinal/GP/Literal.lean
+(X2) Existing strict harmonic shear witness is L2 minus Hhalf.
+  It cannot instantiate the native Hhalf datum of this chain.
+(X3) PositiveTimeSpectralFlow is coefficient evolution, not automatically
+  physical NSE, native H1 membership, or native Leray-Hopf evolution.
+(X4) S_DIR_L2_GLOBAL_REGULARITY is a target definition, not an already proved
+  unconditional physical PDE theorem in the inspected REGULARITY_FRONT.
+(X5) Contractive BKQR orbit premises remain required. The generic defect
+  square does not construct the specific Q,c or the cross energy block.
+(X6) Native smallness C||a||<nu does not by itself prove the entire original
+  uncalibrated implication A_nu(a)<=pi ==> Reg_nu(a).
+  The closed calibrated cap kappa_C is the exact reuse interface proved here.
+(X7) Native C is selected noncomputably from the nonlinear estimate.
+  m_n,L_N and coefficients/nu are rational; kappa_C is not asserted rational.
+  Existence of dyadic m is proved; a numerical value is not certified.
+(X8) Local energy density unbounded at t=0 does not assert a singularity at
+  positive time. No universal large-data regularity conclusion is present.
+
+SEPARATE UNCALIBRATED TRACK (not discharged by the present reuse chain):
+  F01 actual caloric Fourier norm and heat extension identification;
+  F02 symmetric Duhamel bilinear bound on the frozen caloric space;
+  F03 actual global caloric regularity/trace/uniqueness endpoint;
+  F04 theta/kinetic-deficit estimate including constants and strict margin;
+  F05 A_nu<=pi / uncalibrated BKQR physical regularity root.
+  Existing native regularity may supply downstream comparison, but cannot
+  substitute for the missing admission estimate of this larger cutoff.
+
+18. FUTURE CACHED EXTERNAL FORMALIZATION CONTRACT
+PACKAGE_DEPENDENCY = singular_axiomatic_closure (inherited sibling package).
+LEAN_PIN = leanprover/lean4:v4.33.0
+LEAN_COMMIT = d8b18978322de05a8f3dba51ef03cf5461676c17
+MATHLIB_PIN = db584cd6d46c92f209a44c0f1c829460d327499d
+SOURCE_PIN = 09dfe94a1ef150e21d09df3013fbe09002ef139c
+NEW_PACKAGE_DIRECTORY = regularity-B-assembly/SINGULARITY_DISPROVEMENT
+NEW_NAMESPACE = SingularityDisprovement
+INHERITED_SOURCE_MUTATIONS = 0
+
+Cache admission:
+  exact compiler + source hash + dependency hashes + Mathlib pin;
+  cache hit ==> reuse verified artifacts;
+  cache miss ==> external CI/native compilation of necessary dependencies;
+  no local Lean/lake execution; no arbitrary cache deletion or version upgrade.
+  Equal source blobs alone do not establish equal transitive dependency closure.
+  Optional HVR import must preserve or explicitly audit its dependency closure.
+  Mathematical labels such as BKQR impose no requirement to import irrelevant
+  RH machinery when pinned Mathlib and short concrete adapters suffice.
+
+Per new endpoint:
+  frozen exact signature;
+  independent opaque edge with actual proof body;
+  external cached compiler PASS;
+  exact-type audit PASS;
+  theorem-level #print axioms subset of
+    {propext, Classical.choice, Quot.sound};
+  no sorryAx; no unapproved axioms; no desired conclusion in input records.
+
+Root assembly:
+  same nu, same datum, same initial physical class, same U;
+  no existential-witness swap;
+  all new declarations and root audited at the exact source SHA;
+  pending bodies or prepared signatures remain A_TIER_CANDIDATE at most.
+
+Development rounds:
+  R2 complete: proof scope + native/external reuse map + exact signatures.
+  R3 target: freeze concrete coefficient, physical trace, score and operator
+             types; finish E01/E02/E08/E09/E10/E11 adapter signatures.
+  R4 target: freeze E03-E06 and E14-E17 actual analytic/LH interfaces;
+             remove any remaining implicit conversions or ambiguous domains.
+  A-tier start: typed endpoint register complete; cached external build plan
+                fixed; new theorem bodies implemented in the new branch.
+
+19. COMPLETE MATCHED NATIVE AUDIT INDEX
+All following 204 declarations: EXACT_TYPE_PASS and printed axioms exactly
+[propext, Classical.choice, Quot.sound] in the pinned successful job.
+The index is evidence coverage; it does not claim all 204 are needed by R2.
+RUN: https://github.com/randogelist/Methlib/actions/runs/43059293572
+JOB: https://github.com/randogelist/Methlib/actions/runs/43059293572/job/130657144029
+ARTIFACT: https://github.com/randogelist/Methlib/actions/runs/43059293572/artifacts/13873696533
+001 SingularClosure.CRITICAL_PHYSICAL_H1_L6
+002 SingularClosure.CRITICAL_COMPLEX_FINITE_L2
+003 SingularClosure.CRITICAL_COMPLEX_FINITE_L6
+004 SingularClosure.CRITICAL_POSITIVE_PHYSICAL_NSE
+005 SingularClosure.CRITICAL_ENERGY_INVARIANT
+006 SingularClosure.CRITICAL_SQUARE_BUDGET_DIV
+007 SingularClosure.criticalEnergy_interpolation
+008 SingularClosure.GalerkinSolution.criticalEnergy_balance
+009 SingularClosure.CRITICAL_GALERKIN_GLOBAL_EXISTS_UNIQUE
+010 SingularClosure.FINITE_CRITICAL_HHALF_L3
+011 SingularClosure.FINITE_CRITICAL_NONLINEAR_BOUND
+012 SingularClosure.SMALL_DATA_SIX_CHANNEL_BUDGET
+013 SingularClosure.SMALL_DATA_AX6
+014 SingularClosure.CRITICAL_GALERKIN_TIME_DERIVATIVE_BUDGET
+015 SingularClosure.SMALL_DATA_GALERKIN_GLOBAL_COMPACTNESS
+016 SingularClosure.CRITICAL_HHALF_STRONG_TRACE_OF_INTEGRAL_EVOLUTION
+017 SingularClosure.SMALL_DATA_POSITIVE_TIME_ALL_ORDERS
+018 SingularClosure.SMALL_DATA_CRITICAL_QUANTITATIVE_REGULARITY
+019 SingularClosure.SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS
+020 SingularClosure.CRITICAL_TRANSPORT_YOUNG
+021 SingularClosure.CRITICAL_ROUGH_TRANSPORT_HOLDER
+022 SingularClosure.CRITICAL_ROUGH_TRANSPORT_INTERPOLATED
+023 SingularClosure.CRITICAL_ROUGH_TRANSPORT_ENERGY_BOUND
+024 SingularClosure.criticalInitialPhysicalL2_fourierCoeff
+025 SingularClosure.criticalInitialPhysicalL2_norm
+026 SingularClosure.CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON
+027 SingularClosure.CriticalRegularSolution.lerayHopf_of_quartic
+028 SingularClosure.SMALL_DATA_CRITICAL_SERRIN_REGULARITY
+029 SingularClosure.SMALL_DATA_CRITICAL_LERAY_HOPF_COMPARISON
+030 SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+031 SingularClosure.SMALL_DATA_CRITICAL_REGULARITY
+032 SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY
+033 SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT
+034 SingularClosure.ax6_implies_fefferman_B_0_adjust
+035 SingularClosure.smoothSigmaZero_zero
+036 SingularClosure.globalSmoothNSE_zero
+037 SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS
+038 SingularClosure.spectralChannel_preserves_solenoidal
+039 SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ
+040 SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ
+041 SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET
+042 SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL
+043 SingularClosure.zeroGalerkinSolution
+044 SingularClosure.zeroGalerkinSolution_velocity
+045 SingularClosure.gradientSquareDensity_nonneg
+046 SingularClosure.budget6_ne_top_of_bound
+047 SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION
+048 SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION
+049 SingularClosure.contDiff_finiteGalerkinRhs
+050 SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
+051 SingularClosure.finiteSynthesis_coordinateDerivative
+052 SingularClosure.physicalChannel_coordinateDerivative
+053 SingularClosure.physicalChannel_periodic
+054 SingularClosure.physicalChannel_divergence_free
+055 SingularClosure.GalerkinSolution.physicalChannel_divergence_free
+056 SingularClosure.physicalEnstrophy_lt_top
+057 SingularClosure.physicalChannel_v_w_gradient_product_zero
+058 SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ
+059 SingularClosure.finiteGalerkinRhs_local_exists
+060 SingularClosure.finiteGalerkinRhs_uniform_local_time
+061 SingularClosure.GalerkinSolution.coeff_unique_forward
+062 SingularClosure.GalerkinSolution.velocity_unique_forward
+063 SingularClosure.coefficientTransport_complex_energy_zero
+064 SingularClosure.coefficientNonlinearPower_eq_zero
+065 SingularClosure.GalerkinSolution.coefficientEnergy_identity
+066 SingularClosure.GalerkinSolution.coefficientEnergy_le_initial
+067 SingularClosure.uniform_cubic_energy_of_square_budget
+068 SingularClosure.coefficientLeray_solenoidal
+069 SingularClosure.galerkinRhs_solenoidal
+070 SingularClosure.pressureFromTransport_recovery
+071 SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET
+072 SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
+073 SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY
+074 SingularClosure.GalerkinSolution.coefficientEnstrophy_identity
+075 SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport
+076 SingularClosure.forwardGlobalSolution_exists
+077 SingularClosure.galerkinRhs_reality
+078 SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity
+079 SingularClosure.GalerkinSolution.coefficientDissipation_integral_le
+080 SingularClosure.invariantGalerkinRhs_global_exists
+081 SingularClosure.galerkinSolution_exists_of_fourier_invariants
+082 SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION
+083 SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL
+084 SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS
+085 SingularClosure.torusL2Channel_fourierCoeff
+086 SingularClosure.torusL2Channel_preserves_mean
+087 SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY
+088 SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ
+089 SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ
+090 SingularClosure.ax6_physical_square_budget
+091 SingularClosure.coordinateAverage_idempotent
+092 SingularClosure.coordinateAverage_periodic
+093 SingularClosure.coordinateAverage_own_coordinateDerivative_zero
+094 SingularClosure.smoothSigmaZero_fourier_integrable
+095 SingularClosure.datumFourierCoeff_reality
+096 SingularClosure.smoothSigmaZero_fourier_solenoidal
+097 SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
+098 SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL
+099 SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL
+100 SingularClosure.GALERKIN_ENERGY_IDENTITY
+101 SingularClosure.coordinateAverage_smooth
+102 SingularClosure.coordinateAverage_all_coordinateDerivative_commute
+103 SingularClosure.COEFFICIENT_POINCARE
+104 SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
+105 SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
+106 SingularClosure.SIX_CHANNEL_PROJECTIONS
+107 SingularClosure.smoothSixChannel_fourierCutoff
+108 SingularClosure.periodic_closedBall_three_integral_le
+109 SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY
+110 SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
+111 SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET
+112 SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET
+113 SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN
+114 SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
+115 SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL
+116 SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical
+117 SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY
+118 SingularClosure.galerkinPressure_recovery
+119 SingularClosure.finiteTransportPressure_meanZero
+120 SingularClosure.coefficientDissipation_initial_cutoff_le
+121 SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
+122 SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION
+123 SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION
+124 SingularClosure.coefficientLeray_energy_le
+125 SingularClosure.coefficientEnergy_leray_le
+126 SingularClosure.integral_norm_sq_leray_le
+127 SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt
+128 SingularClosure.GalerkinSolution.timeDerivative_L2_bound
+129 SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND
+130 SingularClosure.torusSobolevInclusion_tail
+131 SingularClosure.torusSobolevInclusion_compact
+132 SingularClosure.torusSobolev_H2_H1_compact_closedBall
+133 SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable
+134 SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND
+135 SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
+136 SingularClosure.finiteSobolev_H1_norm_sq
+137 SingularClosure.finiteSobolev_H2_norm_sq
+138 SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq
+139 SingularClosure.FOURIER_COORDINATE_DECAY
+140 SingularClosure.FOURIER_POLYNOMIAL_DECAY
+141 SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET
+142 SingularClosure.GalerkinSolution.coefficient_time_modulus
+143 SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS
+144 SingularClosure.summable_torusSobolevWeight_inv_four
+145 SingularClosure.FINITE_FOURIER_H2_L1_BOUND
+146 SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND
+147 SingularClosure.scalarFourierSeries_hasFDerivAt
+148 SingularClosure.scalarFourierSeries_contDiff
+149 SingularClosure.scalarFourierSeries_integral
+150 SingularClosure.realFourierSeries_gradient_apply
+151 SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt
+152 SingularClosure.GalerkinSolution.sobolevState_memLp
+153 SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq
+154 SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS
+155 SingularClosure.torusDatumComponent_mk
+156 SingularClosure.torusDatumL2_fourierBasis_repr
+157 SingularClosure.torusSobolevL2_fourierCoeff
+158 SingularClosure.torusSobolevL2_isometry
+159 SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV
+160 SingularClosure.GalerkinSolution.highOrderEnergy_balance
+161 SingularClosure.coefficientTransport_eq_product_divergence
+162 SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET
+163 SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+164 SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
+165 SingularClosure.torusSobolev_H1_interpolation
+166 SingularClosure.torusSobolev_H1_time_difference_bound
+167 SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION
+168 SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY
+169 SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE
+170 SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE
+171 SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS
+172 SingularClosure.canonicalSobolevLimit_initial_physical
+173 SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND
+174 SingularClosure.countable_precompact_family_subsequence
+175 SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS
+176 SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE
+177 SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE
+178 SingularClosure.fourierTensorCoefficient_summable_norm
+179 SingularClosure.fourierTensorCoefficient_norm_le
+180 SingularClosure.coefficientTransport_eq_divergenceTransport
+181 SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES
+182 SingularClosure.torusSobolev_limit_mem_and_norm_le
+183 SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto
+184 SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE
+185 SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION
+186 SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS
+187 SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS
+188 SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH
+189 SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND
+190 SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND
+191 SingularClosure.datumFourierCoeff_injective_continuous_periodic
+192 SingularClosure.smoothFourierSynthesis_convection_coeff
+193 SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY
+194 SingularClosure.smoothFourierSynthesis_laplacian_coeff
+195 SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH
+196 SingularClosure.canonicalLimit_physical_timeDerivative
+197 SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT
+198 SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+199 SingularClosure.PERIODIC_PRESSURE_RECOVERY
+200 SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
+201 SingularClosure.fourierSobolevRhs_contDiff
+202 SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH
+203 SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH
+204 SingularClosure.fullTransportPressure_fourierCoeff_quadratic
+
+20. FINAL STATUS
+! SINGULARITY_DISPROVEMENT_ENDPOINT_REUSE_R2_B_TIER = MATHEMATICAL_PASS
+INHERITED_NATIVE_ROOT = VERIFIED_EXTERNAL_A_TIER_WITH_DISCHARGED_PREMISES
+NEW_ROOT = NOT_YET_FORMALIZED; NO_A_TIER_PROMOTION
+FULL_UNCALIBRATED_CUTOFF = SEPARATE_FORMALIZATION_OBLIGATIONS
+UNIVERSAL_POSITIVE_TIME_SINGULARITY_EXCLUSION = NOT_ASSERTED
