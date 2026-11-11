@@ -71,7 +71,9 @@ theorem CRITICAL_SMOOTH_L6_FOURTH_BOUND :
     rw [show criticalSpatialNorm 2 v ^ 4 = (criticalSpatialNorm 2 v ^ 2) ^ 2 by ring, hW2]
   have hadd : (criticalSpatialNorm 2 (fderiv ℝ v) + criticalSpatialNorm 2 v) ^ 4 ≤
       8 * (criticalSpatialNorm 2 (fderiv ℝ v) ^ 4 + criticalSpatialNorm 2 v ^ 4) := by
-    simpa using add_pow_le hD0 hW0 4
+    have h := add_pow_le hD0 hW0 4
+    norm_num at h
+    exact h
   calc
     _ ≤ (L * (criticalSpatialNorm 2 (fderiv ℝ v) + criticalSpatialNorm 2 v)) ^ 4 :=
       pow_le_pow_left₀ (criticalSpatialNorm_nonneg 6 v) h6 4
@@ -105,6 +107,7 @@ theorem CriticalRegularSolution.serrin_time_memLp
   have hfour : Integrable (fun t => criticalSpatialNorm 6 (U.flow.velocity t) ^ 4) μ := by
     apply hdom.mono' (hmeas.pow 4)
     filter_upwards [ae_restrict_mem measurableSet_Ioc] with t ht
+    change ‖criticalSpatialNorm 6 (U.flow.velocity t) ^ 4‖ ≤ _
     rw [Real.norm_of_nonneg (pow_nonneg (criticalSpatialNorm_nonneg 6 _) 4)]
     have hE := U.physicalEnergy_le t ht.1
     have hE0 : 0 ≤ physicalEnergy (U.flow.velocity t) := by
@@ -116,9 +119,11 @@ theorem CriticalRegularSolution.serrin_time_memLp
       (U.flow.velocity_smoothSigmaZero t ht.1).periodic).trans
       (mul_le_mul_of_nonneg_left (add_le_add le_rfl hE2) hK.le)
   apply (integrable_norm_rpow_iff hmeas
-    (by norm_num : (4 : ℝ≥0∞) ≠ 0) (by norm_num : (4 : ℝ≥0∞) ≠ ∞)).mp
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, Real.norm_eq_abs,
-    show (4 : ℕ) = 2 * 2 from rfl, pow_mul, sq_abs] using hfour
+    (by norm_num : (4 : ℝ≥0∞) ≠ 0) (by norm_num : (4 : ℝ≥0∞) ≠ ⊤)).mp
+  have hnorm (t : ℝ) : ‖criticalSpatialNorm 6 (U.flow.velocity t)‖ =
+      criticalSpatialNorm 6 (U.flow.velocity t) :=
+    Real.norm_of_nonneg (criticalSpatialNorm_nonneg 6 _)
+  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, hnorm] using hfour
 
 end
 end SingularClosure

@@ -31,14 +31,31 @@ theorem critical_three_weight_le_torus_two (c : FourierCoeff) (ki : FourierIndex
       simp only [sobolevWeightedCoeff, norm_mul, norm_pow, Complex.norm_real,
         Real.norm_eq_abs, abs_of_pos (torusSobolevWeight_pos ki.1)]
 
+theorem criticalFromTorusTwo_mem (c : TorusSobolev 2) :
+    Memℓp (criticalWeightedCoeff 3 c.val) 2 :=
+  c.property.mono' (critical_three_weight_le_torus_two c.val)
+
+def criticalFromTorusTwoValue (c : TorusSobolev 2) : CriticalSobolev 3 :=
+  criticalSobolevOfCoeff 3 c.val (criticalFromTorusTwo_mem c)
+
+@[simp]
+theorem criticalFromTorusTwoValue_coeff (c : TorusSobolev 2) :
+    criticalCoeff 3 (criticalFromTorusTwoValue c) = c.val :=
+  criticalSobolevOfCoeff_coeff 3 c.val (criticalFromTorusTwo_mem c)
+
 def criticalFromTorusTwoLinear : TorusSobolev 2 →ₗ[ℂ] CriticalSobolev 3 where
-  toFun c := ⟨c.val, c.property.mono' (critical_three_weight_le_torus_two c.val)⟩
-  map_add' _ _ := rfl
-  map_smul' _ _ := rfl
+  toFun := criticalFromTorusTwoValue
+  map_add' c d := by
+    apply criticalCoeff_injective 3
+    simp only [criticalFromTorusTwoValue_coeff, criticalCoeff_add] <;> rfl
+  map_smul' z c := by
+    apply criticalCoeff_injective 3
+    simp only [criticalFromTorusTwoValue_coeff, criticalCoeff_smul, RingHom.id_apply] <;> rfl
 
 @[simp]
 theorem criticalFromTorusTwoLinear_coeff (c : TorusSobolev 2) :
-    criticalCoeff 3 (criticalFromTorusTwoLinear c) = c.val := rfl
+    criticalCoeff 3 (criticalFromTorusTwoLinear c) = c.val :=
+  criticalFromTorusTwoValue_coeff c
 
 theorem criticalFromTorusTwoLinear_norm_le (c : TorusSobolev 2) :
     ‖criticalFromTorusTwoLinear c‖ ≤ ‖c‖ := by
@@ -48,17 +65,25 @@ theorem criticalFromTorusTwoLinear_norm_le (c : TorusSobolev 2) :
     _ ≤ ‖torusSobolevRepr 2 c‖ := by
       apply lp.norm_mono (by norm_num)
       intro ki
-      change ‖criticalWeightedCoeff 3 c.val ki‖ ≤ ‖sobolevWeightedCoeff 2 c.val ki‖
+      simp only [criticalSobolevRepr_apply, criticalFromTorusTwoLinear_coeff,
+        torusSobolevRepr_apply]
       exact critical_three_weight_le_torus_two c.val ki
     _ = ‖c‖ := (torusSobolevRepr 2).norm_map c
 
+theorem criticalFromTorusTwo_bound (c : TorusSobolev 2) :
+    ‖criticalFromTorusTwoLinear c‖ ≤ 1 * ‖c‖ := by
+  simpa only [one_mul] using criticalFromTorusTwoLinear_norm_le c
+
 def criticalFromTorusTwo : TorusSobolev 2 →L[ℂ] CriticalSobolev 3 :=
-  criticalFromTorusTwoLinear.mkContinuous 1
-    (fun c => by simpa only [one_mul] using criticalFromTorusTwoLinear_norm_le c)
+  criticalFromTorusTwoLinear.mkContinuous 1 criticalFromTorusTwo_bound
 
 @[simp]
 theorem criticalFromTorusTwo_coeff (c : TorusSobolev 2) :
-    criticalCoeff 3 (criticalFromTorusTwo c) = c.val := rfl
+    criticalCoeff 3 (criticalFromTorusTwo c) = c.val := by
+  unfold criticalFromTorusTwo
+  exact (congrArg (criticalCoeff 3)
+    (criticalFromTorusTwoLinear.mkContinuous_apply 1 criticalFromTorusTwo_bound c)).trans
+    (criticalFromTorusTwoLinear_coeff c)
 
 def criticalNegativeFromTorusZero : TorusSobolev 0 →L[ℂ] CriticalSobolev (-1) :=
   (criticalSobolevLower (-1) 0 (by norm_num)).comp
@@ -109,7 +134,8 @@ theorem CriticalPositiveSobolevFlow.threeHalfState_continuousOn
     ContinuousOn L.threeHalfState (Ioi 0) := by
   apply (criticalFromTorusTwo.continuous.comp_continuousOn (L.continuous 2)).congr
   intro t ht
-  simp only [CriticalPositiveSobolevFlow.threeHalfState, if_pos ht]
+  change 0 < t at ht
+  simp only [CriticalPositiveSobolevFlow.threeHalfState, if_pos ht, Function.comp_apply]
 
 theorem CriticalPositiveSobolevFlow.negativeHalfDerivative_continuousOn
     {ν : ℝ} (L : CriticalPositiveSobolevFlow ν) :
@@ -117,7 +143,8 @@ theorem CriticalPositiveSobolevFlow.negativeHalfDerivative_continuousOn
   apply (criticalNegativeFromTorusZero.continuous.comp_continuousOn
     ((fourierSobolevRhs_contDiff ν 0).continuous.comp_continuousOn (L.continuous 2))).congr
   intro t ht
-  simp only [CriticalPositiveSobolevFlow.negativeHalfDerivative, if_pos ht]
+  change 0 < t at ht
+  simp only [CriticalPositiveSobolevFlow.negativeHalfDerivative, if_pos ht, Function.comp_apply]
 
 /-- Uniform quantitative local representatives determine canonical global
 Bochner fields with the same literal Fourier coefficients. -/
@@ -150,7 +177,8 @@ theorem CriticalRegularSolution.global_energy_class
     refine ⟨(memLp_congr_ae heq).mp hWmem, ?_⟩
     have hi : (∫ t in Icc (0 : ℝ) T, ‖W t‖ ^ 2) =
         ∫ t in Icc (0 : ℝ) T, ‖U.flow.threeHalfState t‖ ^ 2 :=
-      integral_congr_ae (heq.mono (fun _ h => by rw [h]))
+      integral_congr_ae (heq.mono
+        (fun _ h => congrArg (fun z : CriticalSobolev 3 => ‖z‖ ^ 2) h))
     exact hi ▸ hWbound
   · apply critical_global_L2_of_uniform_local U.flow.negativeHalfDerivative D hD
     intro T hT
@@ -163,7 +191,8 @@ theorem CriticalRegularSolution.global_energy_class
     refine ⟨(memLp_congr_ae heq).mp hVmem, ?_⟩
     have hi : (∫ t in Icc (0 : ℝ) T, ‖V t‖ ^ 2) =
         ∫ t in Icc (0 : ℝ) T, ‖U.flow.negativeHalfDerivative t‖ ^ 2 :=
-      integral_congr_ae (heq.mono (fun _ h => by rw [h]))
+      integral_congr_ae (heq.mono
+        (fun _ h => congrArg (fun z : CriticalSobolev (-1) => ‖z‖ ^ 2) h))
     exact hi ▸ hVbound
 
 theorem SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS
