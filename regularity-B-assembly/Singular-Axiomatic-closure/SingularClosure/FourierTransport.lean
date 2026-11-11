@@ -20,14 +20,19 @@ namespace SingularClosure
 
 noncomputable section
 
-def frequencyReflection (k : Frequency) : Frequency ≃ Frequency :=
-  Equiv.ofInvolutive (fun p => k - p) (fun p => by abel)
+def frequencyReflection (k : Frequency) : Frequency ≃ Frequency where
+  toFun p := k - p
+  invFun p := k - p
+  left_inv p := by abel
+  right_inv p := by abel
 
 def reflectedFourierSequence (k : Frequency) (a : FourierSequenceL2) : FourierSequenceL2 :=
   ⟨fun p => a (k - p), by
     apply memℓp_gen
-    exact ((lp.memℓp a).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal)).comp_injective
-      (frequencyReflection k).injective⟩
+    have h := (lp.memℓp a).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal)
+    simpa only [Function.comp_def] using!
+      (h.comp_injective (i := fun p : Frequency => k - p)
+        (frequencyReflection k).injective)⟩
 
 @[simp]
 theorem reflectedFourierSequence_apply (k p : Frequency) (a : FourierSequenceL2) :
@@ -39,7 +44,7 @@ theorem reflectedFourierSequence_norm (k : Frequency) (a : FourierSequenceL2) :
   have hleft := lp.norm_rpow_eq_tsum (p := (2 : ℝ≥0∞)) (by norm_num)
     (reflectedFourierSequence k a)
   have hright := lp.norm_rpow_eq_tsum (p := (2 : ℝ≥0∞)) (by norm_num) a
-  simp only [ENNReal.toReal_ofNat, Real.rpow_natCast, reflectedFourierSequence_apply]
+  simp only [ENNReal.toReal_ofNat, Real.rpow_two, reflectedFourierSequence_apply]
     at hleft hright
   rw [hleft, hright]
   exact (frequencyReflection k).tsum_eq (fun p => ‖a p‖ ^ 2)
@@ -156,7 +161,9 @@ def fourierTensorLinear (k : Frequency) (j i : Fin 3) :
 def fourierTensorBilinear (k : Frequency) (j i : Fin 3) :
     TorusSobolev 0 →L[ℂ] TorusSobolev 0 →L[ℂ] ℂ :=
   (fourierTensorLinear k j i).mkContinuous₂ 1
-    (fun c d => by simpa using fourierTensorCoefficient_norm_le k j i c d)
+    (fun c d => by
+      change ‖fourierTensorCoefficient k j i c d‖ ≤ 1 * ‖c‖ * ‖d‖
+      simpa only [one_mul] using fourierTensorCoefficient_norm_le k j i c d)
 
 @[simp]
 theorem fourierTensorBilinear_apply (k : Frequency) (j i : Fin 3)

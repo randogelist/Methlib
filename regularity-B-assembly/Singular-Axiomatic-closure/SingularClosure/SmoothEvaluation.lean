@@ -185,7 +185,11 @@ theorem sobolevScalarEvaluation_summable (n : ℕ) (x : Vec) (i : Fin 3) :
     hA (fun k => by
       change ‖fourierCharacter k x • torusSobolevCoeff (n + 4) k i‖ ≤
         ‖torusSobolevCoeff (n + 4) k i‖
-      rw [norm_smul, fourierCharacter_norm, one_mul])
+      calc
+        _ ≤ ‖fourierCharacter k x‖ * ‖torusSobolevCoeff (n + 4) k i‖ :=
+          ContinuousLinearMap.opNorm_smul_le (fourierCharacter k x)
+            (torusSobolevCoeff (n + 4) k i)
+        _ = _ := by rw [fourierCharacter_norm, one_mul])
 
 theorem sobolevScalarEvaluation_apply (n : ℕ) (x : Vec) (i : Fin 3)
     (c : TorusSobolev (n + 4)) :

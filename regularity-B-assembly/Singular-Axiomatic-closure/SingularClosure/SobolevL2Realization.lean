@@ -21,10 +21,13 @@ namespace SingularClosure
 
 noncomputable section
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
-local instance : Measure.IsAddHaarMeasure (volume : Measure UnitAddCircle) :=
+local instance sobolevRealizationMeasureSpace : MeasureSpace UnitAddCircle :=
+  ⟨AddCircle.haarAddCircle⟩
+local instance sobolevRealizationHaarMeasure :
+    Measure.IsAddHaarMeasure (volume : Measure UnitAddCircle) :=
   inferInstanceAs (Measure.IsAddHaarMeasure AddCircle.haarAddCircle)
-local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
+local instance sobolevRealizationProbabilityMeasure :
+    IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
   inferInstanceAs (IsProbabilityMeasure AddCircle.haarAddCircle)
 
 theorem fourierVectorSequence_summable_sq (c : FourierVectorSequence) :
