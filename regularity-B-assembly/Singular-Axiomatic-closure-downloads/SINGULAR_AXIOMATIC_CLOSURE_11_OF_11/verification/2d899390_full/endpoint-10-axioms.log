@@ -1,0 +1,13 @@
+EXACT_TYPE_PASS:SingularClosure.PERIODIC_PRESSURE_RECOVERY
+@PERIODIC_PRESSURE_RECOVERY : ∀ {ν : ℝ} {a : SingularClosure.Field} {ha : SmoothSigmaZero a}
+  (L : GlobalGalerkinStrongLimit ν a ha),
+  GlobalSmoothNSE ν a L.velocity L.pressure ∧
+    ∀ (t : ℝ),
+      0 ≤ t →
+        ∀ (k : Frequency),
+          ∫ (x : Vec) in unitCube, star (fourierCharacter k x) * ↑(L.pressure t x) =
+            if k = 0 then 0
+            else
+              (-∑ i, ∑ j, ↑(k i) * ↑(k j) * ∑' (p : Frequency), ↑(L.state 0 t) p i * ↑(L.state 0 t) (k - p) j) /
+                ∑ i, ↑(k i) ^ 2
+'SingularClosure.PERIODIC_PRESSURE_RECOVERY' depends on axioms: [propext, Classical.choice, Quot.sound]

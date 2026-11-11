@@ -1,0 +1,59 @@
+{
+  "endpoint": 2,
+  "theorem": "SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ",
+  "status": "A_TIER",
+  "commit": "4d39e66229e0412a15f8fa9af8f38de4e2f566a6",
+  "run_id": 42945570303,
+  "job_id": 130277415163,
+  "compiler": "Lean 4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "exact_type": "PASS",
+  "compiler_result": "PASS",
+  "theorem_audit": "PASS",
+  "aggregate_result": "FAIL",
+  "artifacts": [
+    {
+      "id": 13823390807,
+      "name": "singular-closure-source-42945570303-1",
+      "size_in_bytes": 190285,
+      "url": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13823390807",
+      "archive_download_url": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13823390807/zip",
+      "expired": false,
+      "created_at": "2026-11-11T02:29:37Z",
+      "expires_at": "2027-02-09T02:22:20Z",
+      "updated_at": "2026-11-11T02:29:37Z",
+      "digest": "sha256:039e044a1a4864f06fd2a432e961dca48d23e6dbe14de899b07dcf0b6cb4a5c5",
+      "workflow_run": {
+        "id": 42945570303,
+        "repository_id": 1444471869,
+        "head_repository_id": 1444471869,
+        "head_branch": "main",
+        "head_sha": "4d39e66229e0412a15f8fa9af8f38de4e2f566a6"
+      }
+    },
+    {
+      "id": 13822728125,
+      "name": "singular-closure-evidence-42945570303-1",
+      "size_in_bytes": 39248,
+      "url": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13822728125",
+      "archive_download_url": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13822728125/zip",
+      "expired": false,
+      "created_at": "2026-11-11T02:29:38Z",
+      "expires_at": "2027-02-09T02:22:20Z",
+      "updated_at": "2026-11-11T02:29:38Z",
+      "digest": "sha256:a8c7f40a2028cbaac1d87275c8b1853ad721869deed26a686caf2f0c5195daad",
+      "workflow_run": {
+        "id": 42945570303,
+        "repository_id": 1444471869,
+        "head_repository_id": 1444471869,
+        "head_branch": "main",
+        "head_sha": "4d39e66229e0412a15f8fa9af8f38de4e2f566a6"
+      }
+    }
+  ]
+}

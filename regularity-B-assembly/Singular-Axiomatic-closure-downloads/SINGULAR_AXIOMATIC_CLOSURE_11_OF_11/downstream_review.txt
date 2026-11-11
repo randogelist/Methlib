@@ -1,0 +1,233 @@
+DOWNSTREAM PROOF-BOUNDARY REVIEW
+Reference branch commit: 63ab35d1e4dc236c438cf5f9dce381d1211cecb2
+Scope: frozen endpoints 7--11; no endpoint promotion.
+
+CONTRACT REVIEW
+
+Contracts.lean states the actual unit-periodic, zero-force NSE using Mathlib
+derivatives, closed-half-space C-infinity regularity, the initial trace,
+divergence freedom, velocity mean zero, and normalized pressure. No arbitrary
+regularity predicate or unspecified solution operator was found in this contract.
+
+Admission.lean uses extended nonnegative integrals, so divergent enstrophy
+cannot become zero through Bochner-integral totalization. AX6Statement quantifies
+over global GalerkinSolution witnesses. Until endpoint 3 proves these witnesses
+exist for every admissible input and cutoff, an AX6 instance alone cannot select
+a trajectory. The separate existence obligation is essential, not additional
+axiomatic permission.
+
+GalerkinSolution.coeff is defined on all real times but constrained only for
+t >= 0. Uniqueness must therefore mean equality on nonnegative times (or use
+an explicitly fixed negative-time extension). An unrestricted unique-inhabitant
+claim for the structure itself would be false because negative-time values
+remain arbitrary. The physical forward-trajectory uniqueness target is unchanged.
+
+UNRESOLVED DOWNSTREAM EDGES
+
+7. AX6_UNIFORM_STRONG_BOUNDS
+Required actual identifications: sixEnstrophy equals physical enstrophy;
+the latter is finite and continuous for finite synthesis; conversion of the
+extended square budget to the real interval-integral budget; physical enstrophy
+and dissipation differential inequality, uniformly in N; initial H1 cutoff
+contraction. The scalar bound then follows from endpoint 6. An L2_t L2_x bound
+for the actual time derivative additionally needs the Leray-projection L2
+contraction and the periodic Sobolev/product estimate for the convection term.
+UniformBounds.lean proves the cutoff-independent scalar accumulation step only.
+It deliberately does not use the frozen endpoint-7 theorem name.
+
+8. GALERKIN_GLOBAL_STRONG_LIMIT
+Required: one subsequence/limit compatible on all finite horizons; weak and
+strong convergence in the necessary spaces; identification of the nonlinear
+limit with physical convection; recovery of the initial datum; inheritance of
+the H1/H2 bounds. Weak global Leray--Hopf existence by itself does not supply
+the strong-solution conclusion.
+
+ENDPOINT-8 DEFINITION AND LIBRARY GAP: 2026-11-11
+
+Existing concrete spaces:
+  SingularClosure.TorusScalarL2 = Lp(C, 2, normalized unit-three-torus measure).
+  SingularClosure.TorusVectorL2 = PiLp(2, Fin(3) -> TorusScalarL2).
+  UnitAddTorus.mFourierBasis.repr supplies the actual Fourier isometry.
+Source module: SingularClosure/HilbertChannels.lean.
+
+Required Sobolev scale, stated mathematically and not implemented:
+  lambda(k) = (2*pi)^2 * sum_i k_i^2;
+  ||v||_(H^s)^2 = sum_k sum_i (1 + lambda(k))^s |v_hat_i(k)|^2.
+The torus Sobolev spaces must be constructed from the actual Fourier isometry,
+with real-valuedness, zero mean, and distributional divergence conditions.
+Defining numerical Fourier weights alone supplies neither these spaces nor
+their norm, completeness, embedding, differential-operator, or physical-lift API.
+
+Concrete prospective input to endpoint 8:
+  For every T > 0, a finite bound C_T independent of cutoff N for
+    sup_(0 <= t <= T) ||u_N(t)||_(H^1)^2,
+    integral_0^T ||u_N(t)||_(H^2)^2 dt,
+    integral_0^T ||partial_t u_N(t)||_(L^2)^2 dt,
+  where u_N is the already-defined actual Fourier-Galerkin synthesis.
+  All norms, derivatives, and integrals require their explicit membership and
+  measurability proofs. Endpoint 7 must derive these bounds from AX6.
+
+Required output on one globally compatible curve:
+  For every finite T > 0,
+    u in C([0,T]; H^1) intersect L^2(0,T; H^2),
+    partial_t u in L^2(0,T; L^2),
+    partial_t u + P((u dot grad)u) = nu * Delta(u) almost everywhere,
+    u(0) = a in H^1,
+  together with real-valuedness, periodicity, zero mean, and divergence freedom.
+The projected equation must use the actual torus Leray projection and weak
+spatial derivatives. Applying totalized classical fderiv to an arbitrary Lp
+representative does not define this strong equation correctly. Identification
+with the literal pointwise equation in Contracts.lean follows only after the
+regularity and pressure-recovery arguments.
+
+Unimplemented proof bridges:
+  (a) Fourier realization of the finite trajectories in the actual torus
+      Sobolev spaces and identification of their time derivatives.
+  (b) Compact embedding H^2 -> H^1, with a quantitative high-frequency tail
+      bound, and a time compactness theorem from the displayed bounds.
+  (c) Extraction on every finite horizon and a single compatible diagonal
+      subsequence/curve; inheritance of the H^1/H^2/derivative bounds.
+  (d) Passage through the actual quadratic convection operator, including
+      Sobolev product estimates, Leray boundedness, and convergence of the
+      projected finite-cutoff equations to the infinite equation.
+  (e) Identification of the weak time derivative and C([0,T]; H^1) trace;
+      convergence of the projected smooth initial datum to a in H^1.
+
+Inspected available generic Mathlib ingredients at the pinned revision:
+  Mathlib/Topology/UniformSpace/Ascoli.lean;
+  Mathlib/Topology/ContinuousMap/Bounded/ArzelaAscoli.lean;
+  Mathlib/Analysis/Normed/Lp/lpSpace.lean.
+The first two supply general Arzela-Ascoli compactness. The third supplies
+coordinatewise-limit membership and lower semicontinuity of lp norms through
+lp.memℓp_of_tendsto and lp.norm_le_of_tendsto. These general ingredients do
+not establish any of bridges (a)--(e) merely by instantiation of the current
+package. They do not contain a torus NSE strong-limit theorem.
+
+Inspected upstream R3 compactness dependencies:
+  R3/SpacetimePrecompact.lean
+    -> R3/GalerkinTimeModulus.lean, R3/GalerkinCurveBounds.lean,
+       R3/SpatialCompactness.lean, Bochner/StepFunctionCompactness.lean;
+  R3/ArzelaAscoliTime.lean;
+  R3/AubinLionsLimitPassage.lean;
+  R3/GoodRepresentative.lean -> Bochner/WeakLimitToolkit.lean;
+  R3/LimitPassage.lean;
+  R3/GlobalCapstone.lean.
+The inspected R3 declarations have actual proof bodies despite historical
+comments referring to earlier axioms. Their conclusions and premises use
+R3NSForms, R3GalerkinScheme, R3 L2 spaces, ball restriction, and local Rellich
+compactness. The two named Bochner source files were absent from the local
+pinned-source snapshot and were not audited in this review. No transfer of
+their guarantees to the torus contract is asserted.
+
+Endpoint-8 status: unresolved. No StrongLimit.lean surrogate was introduced.
+Coefficientwise convergence, invariant preservation, or weak Leray-Hopf
+existence alone would be strictly insufficient for the frozen strong endpoint.
+
+9. GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+Required: actual spatial/time derivative regularity from H1/H2 strong bounds;
+arbitrarily high orders for smooth input; regularity through t=0 rather than
+only on positive-time compact subintervals. No concrete theorem with these
+conclusions was found among the inspected upstream files.
+
+Additional pinned-Mathlib inspection: the full recursive source tree at
+db584cd6d46c92f209a44c0f1c829460d327499d contains Sobolev distributions,
+Sobolev inequalities, Schwartz Fourier calculus, and differentiability of
+function series, but no heat/Stokes semigroup, Duhamel, parabolic smoothing,
+or Navier--Stokes strong-to-smooth theorem was identified. The R3 upstream
+Regularity module supplies H1 membership and viscous forms only.
+
+The required nonlinear implementation is still missing: construct the periodic
+Sobolev/derivative scale and the high-order tame product estimates; propagate
+those estimates for the actual strong NSE evolution from its H1/H2 bounds;
+obtain every finite spatial/time derivative; identify their limits and initial
+values at t=0 using the smooth datum. A linear heat-multiplier estimate alone
+would not discharge these nonlinear or initial-boundary obligations. No
+heat-only surrogate was added and no GLOBAL_STRONG_SMOOTH_BOOTSTRAP declaration
+was introduced with an assumed bootstrap argument.
+
+10. PERIODIC_PRESSURE_RECOVERY
+Required: construction of the mean-zero periodic inverse-Laplacian pressure,
+convergence and differentiation of its Fourier series, joint smoothness,
+and recovery of the literal momentum equation. A formal coefficient formula
+without these analytic properties does not discharge this endpoint.
+
+11. ax6_implies_fefferman_B_0_adjust
+The exact target type must contain only AX6Statement as the unresolved analytic
+premise. A theorem taking GlobalStrong, GlobalPositiveFlow, SeedExtension,
+compactness, continuation, pressure-recovery, or endpoint-record arguments
+does not meet this scope even if its axiom report lists standard axioms only.
+
+INSPECTED REPOSITORY REUSE
+
+NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B/FeffermanB.lean
+The available result is an equivalence/implication from the already-global
+predicate PeriodicZeroForceGlobalRegularity. It does not construct the flow.
+
+NSE_ABCD_UNCONDITIONAL_IMPLICATION/FEFFERMAN_ADJUSTED/FEFFERMAN_B_ADJUSTED/
+FEF_B_POSITIVE_TIME.lean
+FEF_B_POSITIVE_TIME restarts an already-exhibited GlobalPositiveFlow.
+regularity_of_seed_extension additionally assumes SeedExtension. These do not
+discharge endpoint 9 from the current H1/H2 data or preserve the single-AX6
+boundary if used as unproved assumptions.
+
+regularity-B-assembly/pkg1/PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean
+PeriodicStrongSlice packages one time-slice with three supplied L3 fields.
+It proves measurability and converts to physical Holder estimates. It does not
+construct a strong solution or derive smoothness from an evolution estimate.
+
+PINNED EXTERNAL SOURCE TREE REVIEW
+
+/workspace/scratch/6e1cb468bcf1/upstream_audit_pinned/LerayHopf/
+
+R3/GlobalCapstone.lean proves one global weak Leray--Hopf curve, explicitly
+excluding uniqueness and higher smoothness. This is useful compactness/gluing
+infrastructure, but not frozen endpoint 8 or 9 in the current physical torus
+contract.
+
+R3/AubinLionsLimitPassage.lean contains substantial actual weak nonlinear-limit
+proofs on R3. Applying it here requires a torus adaptation and the stronger
+uniform estimates; the domain/solution contracts are not definitionally equal.
+
+R3/Regularity.lean defines Sobolev H1 membership and viscous pairings. Its name
+does not denote a strong-to-smooth bootstrap theorem.
+
+Galerkin/DissipativeODE.lean is a reusable Mathlib-only finite-dimensional,
+C1, dissipative-vector-field global-existence argument. The stale residual
+FinDimGlobalODE discussion in R3/GalerkinODEExistence.lean is discharged by
+R3/GalerkinODESolve.lean through Galerkin/QuadraticField.lean. Instantiating the
+generic solver with the concrete Fourier ODE requires a finite real solenoidal
+state-space realization and proof of its dissipativity; these cannot be omitted.
+
+STATUS
+
+No local Lean execution. No new axioms. No sorry. No frozen endpoint completed
+by this review. Completion of 11/11 is not evidenced by the existing sources;
+substantial concrete analytic proof bodies remain to be implemented and audited.
+
+
+CURRENT SOURCE CHECKPOINT — CI10 / 2026-11-11
+
+Verified frozen endpoints: 2,3,4,6 (4/11).
+CI10: 4d39e66229e0412a15f8fa9af8f38de4e2f566a6.
+https://github.com/randogelist/Methlib/actions/runs/42945570303
+
+The earlier gap inventory above records the initial inspected source state.
+Several listed foundations now have complete candidate source bodies; they
+remain unverified until their own dependency builds and audits pass:
+  TorusSobolev: actual weighted Hilbert spaces and compact embeddings.
+  TorusGalerkinSobolev: actual finite trajectory realization and physical norms.
+  SobolevTrajectoryCalculus: actual path continuity, derivative, Bochner membership.
+  StrongSobolevRealization: complete finite-trajectory strong-bound candidate7.
+  CanonicalGalerkin: canonical actual trajectories and AX6 equivalence.
+  SobolevTimeModulus / SobolevArzelaAscoli: finite-horizon actual H0 subsequence.
+  SobolevInterpolation: concrete H0/H2-to-H1 spacetime comparison.
+  PeriodicFourierRealization / SobolevL2Realization: actual physical/L2 Fourier bridges.
+  FourierDecay / SmoothDatumSobolev: actual smooth datum at every Sobolev order.
+  HighOrderProduct / HighOrderGalerkin / LinearBudget: high-order bootstrap foundations.
+  FourierSeriesCalculus: actual smooth Fourier-series calculus for pressure recovery.
+
+No frozen endpoint8,9,10 or11 is established by the presence of these sources.
+Global compatible strong limits, nonlinear equation passage, arbitrary-order
+regularity propagation, joint pressure regularity, and the final root still
+require their exact proof bodies and matching external kernel/audit evidence.
+The final root may retain only AX6Statement as its unresolved analytic premise.

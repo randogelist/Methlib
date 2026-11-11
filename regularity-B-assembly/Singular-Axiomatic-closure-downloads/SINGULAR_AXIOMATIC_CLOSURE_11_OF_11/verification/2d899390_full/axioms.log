@@ -1,0 +1,2685 @@
+EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_zero
+smoothSigmaZero_zero : SmoothSigmaZero 0
+'SingularClosure.smoothSigmaZero_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.globalSmoothNSE_zero
+globalSmoothNSE_zero : ∀ (ν : ℝ), GlobalSmoothNSE ν 0 0 0
+'SingularClosure.globalSmoothNSE_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS
+SIX_CHANNEL_SPECTRAL_PROJECTIONS : (∀ (a : FourierCoeff), ∑ A, spectralChannel A a = a) ∧
+  (∀ (A : Fin 6) (a : FourierCoeff), spectralChannel A (spectralChannel A a) = spectralChannel A a) ∧
+    ∀ (A B : Fin 6), A ≠ B → ∀ (a : FourierCoeff), spectralChannel A (spectralChannel B a) = 0
+'SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.spectralChannel_preserves_solenoidal
+spectralChannel_preserves_solenoidal : ∀ (A : Fin 6) {a : FourierCoeff},
+  SpectralSolenoidal a → SpectralSolenoidal (spectralChannel A a)
+'SingularClosure.spectralChannel_preserves_solenoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ
+SIX_CHANNEL_SPECTRAL_ENERGY_EQ : ∀ (w : Frequency → ℝ≥0∞) (a : FourierCoeff),
+  ∑ A, spectralEnergy w (spectralChannel A a) = spectralEnergy w a
+'SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ
+SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ : ∀ (a : FourierCoeff),
+  ∑ A, spectralEnstrophy (spectralChannel A a) = spectralEnstrophy a
+'SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET
+@CUBIC_ENERGY_OF_SQUARE_BUDGET : ∀ {y z d : ℝ → ℝ} {ν κ T M y₀ : ℝ},
+  0 < ν →
+    0 ≤ κ →
+      0 ≤ T →
+        0 ≤ M →
+          ContinuousOn y (Icc 0 T) →
+            ContinuousOn z (Icc 0 T) →
+              ContinuousOn d (Icc 0 T) →
+                (∀ t ∈ Icc 0 T, 0 ≤ y t) →
+                  y 0 ≤ y₀ →
+                    (∀ t ∈ Ioo 0 T, HasDerivAt y (d t) t) →
+                      (∀ t ∈ Ioo 0 T, d t + ν * z t ^ 2 ≤ κ * y t ^ 3) →
+                        ∫ (s : ℝ) in 0..T, y s ^ 2 ≤ M →
+                          ∀ t ∈ Icc 0 T, y t + ν * ∫ (s : ℝ) in 0..t, z s ^ 2 ≤ y₀ * Real.exp (κ * M)
+'SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL
+@CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL : ∀ {y z d : ℝ → ℝ} {ν κ T M : ℝ},
+  0 < ν →
+    0 ≤ κ →
+      0 ≤ T →
+        0 ≤ M →
+          ContinuousOn y (Icc 0 T) →
+            ContinuousOn z (Icc 0 T) →
+              ContinuousOn d (Icc 0 T) →
+                (∀ t ∈ Icc 0 T, 0 ≤ y t) →
+                  (∀ t ∈ Ioo 0 T, HasDerivAt y (d t) t) →
+                    (∀ t ∈ Ioo 0 T, d t + ν * z t ^ 2 ≤ κ * y t ^ 3) →
+                      ∫ (s : ℝ) in 0..T, y s ^ 2 ≤ M →
+                        ∀ t ∈ Icc 0 T, y t + ν * ∫ (s : ℝ) in 0..t, z s ^ 2 ≤ y 0 * Real.exp (κ * M)
+'SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution
+zeroGalerkinSolution : (ν : ℝ) → (N : ℕ) → GalerkinSolution ν 0 N
+'SingularClosure.zeroGalerkinSolution' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution_velocity
+zeroGalerkinSolution_velocity : ∀ (ν : ℝ) (N : ℕ), (zeroGalerkinSolution ν N).velocity = 0
+'SingularClosure.zeroGalerkinSolution_velocity' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.gradientSquareDensity_nonneg
+gradientSquareDensity_nonneg : ∀ (v : SingularClosure.Field) (x : Vec), 0 ≤ gradientSquareDensity v x
+'SingularClosure.gradientSquareDensity_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.budget6_ne_top_of_bound
+@budget6_ne_top_of_bound : ∀ {N : ℕ} {c : ℝ → FourierCoeff} {T : ℝ} {M : ℝ≥0}, budget6 N c T ≤ ↑M → budget6 N c T ≠ ∞
+'SingularClosure.budget6_ne_top_of_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION
+SIX_CHANNEL_FINITE_RECONSTRUCTION : ∀ (N : ℕ) (a : FourierCoeff), ∑ A, physicalChannel N A a = finiteSynthesis N a
+'SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION
+SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION : ∀ (N : ℕ) (a : FourierCoeff) (j : Fin 3) (x : Vec),
+  coordinateDerivative (finiteSynthesis N a) j x = ∑ A, coordinateDerivative (physicalChannel N A a) j x
+'SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.contDiff_finiteGalerkinRhs
+contDiff_finiteGalerkinRhs : ∀ (ν : ℝ) (N : ℕ), ContDiff ℝ ∞ (finiteGalerkinRhs ν N)
+'SingularClosure.contDiff_finiteGalerkinRhs' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
+@GalerkinSolution.coefficientEnergy_hasDerivWithinAt : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {t : ℝ},
+  0 ≤ t →
+    HasDerivWithinAt (fun r => coefficientEnergy N (g.coeff r))
+      (∑ k ∈ cutoffModes N, ∑ i, 2 * (star (g.coeff t k i) * galerkinRhs ν N (g.coeff t) k i).re) (Ici 0) t
+'SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.finiteSynthesis_coordinateDerivative
+finiteSynthesis_coordinateDerivative : ∀ (N : ℕ) (a : FourierCoeff) (j : Fin 3),
+  coordinateDerivative (finiteSynthesis N a) j = finiteSynthesis N (spectralMultiplier (derivativeSymbol j) a)
+'SingularClosure.finiteSynthesis_coordinateDerivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.physicalChannel_coordinateDerivative
+physicalChannel_coordinateDerivative : ∀ (N : ℕ) (A : Fin 6) (a : FourierCoeff) (j : Fin 3),
+  coordinateDerivative (physicalChannel N A a) j = physicalChannel N A (spectralMultiplier (derivativeSymbol j) a)
+'SingularClosure.physicalChannel_coordinateDerivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.physicalChannel_periodic
+physicalChannel_periodic : ∀ (N : ℕ) (A : Fin 6) (a : FourierCoeff), SpatialPeriodic (physicalChannel N A a)
+'SingularClosure.physicalChannel_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:210:24: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.physicalChannel_divergence_free
+physicalChannel_divergence_free : ∀ (N : ℕ) (A : Fin 6) (a : FourierCoeff),
+  SpectralSolenoidal a → ∀ (x : Vec), divergence (physicalChannel N A a) x = 0
+'SingularClosure.physicalChannel_divergence_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:219:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.physicalChannel_divergence_free
+@GalerkinSolution.physicalChannel_divergence_free : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) (t : ℝ),
+  0 ≤ t → ∀ (A : Fin 6) (x : Vec), divergence (physicalChannel N A (g.coeff t)) x = 0
+'SingularClosure.GalerkinSolution.physicalChannel_divergence_free' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:227:25: warning: Variable name `hv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.physicalEnstrophy_lt_top
+@physicalEnstrophy_lt_top : ∀ {v : SingularClosure.Field}, ContDiff ℝ ∞ v → physicalEnstrophy v < ∞
+'SingularClosure.physicalEnstrophy_lt_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:236:5: warning: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:236:26: warning: Variable name `hB` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hB
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.physicalChannel_v_w_gradient_product_zero
+physicalChannel_v_w_gradient_product_zero : ∀ (N : ℕ) (A B : Fin 6),
+  A = 0 ∨ A = 1 →
+    B = 2 ∨ B = 3 →
+      ∀ (a b : FourierCoeff) (i j : Fin 3) (x : Vec),
+        (coordinateDerivative (physicalChannel N A a) i x).ofLp j *
+            (coordinateDerivative (physicalChannel N B b) i x).ofLp j =
+          0
+'SingularClosure.physicalChannel_v_w_gradient_product_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:247:5: warning: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:247:26: warning: Variable name `hB` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hB
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ
+PHYSICAL_V_W_ENSTROPHY_EQ : ∀ (N : ℕ) (A B : Fin 6),
+  A = 0 ∨ A = 1 →
+    B = 2 ∨ B = 3 →
+      ∀ (a b : FourierCoeff),
+        physicalEnstrophy (physicalChannel N A a + physicalChannel N B b) =
+          physicalEnstrophy (physicalChannel N A a) + physicalEnstrophy (physicalChannel N B b)
+'SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_local_exists
+finiteGalerkinRhs_local_exists : ∀ (ν : ℝ) (N : ℕ) (z₀ : FiniteGalerkinState N) (t₀ : ℝ),
+  ∃ z, z t₀ = z₀ ∧ ∃ ε > 0, ∀ t ∈ Ioo (t₀ - ε) (t₀ + ε), HasDerivAt z (finiteGalerkinRhs ν N (z t)) t
+'SingularClosure.finiteGalerkinRhs_local_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_uniform_local_time
+finiteGalerkinRhs_uniform_local_time : ∀ (ν : ℝ) (N : ℕ) (R : ℝ),
+  ∃ δ > 0,
+    ∀ z₀ ∈ closedBall 0 R,
+      ∀ (t₀ : ℝ), ∃ z, z t₀ = z₀ ∧ ∀ t ∈ Ioo (t₀ - δ) (t₀ + δ), HasDerivAt z (finiteGalerkinRhs ν N (z t)) t
+'SingularClosure.finiteGalerkinRhs_uniform_local_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coeff_unique_forward
+@GalerkinSolution.coeff_unique_forward : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g h : GalerkinSolution ν a N),
+  EqOn g.coeff h.coeff (Ici 0)
+'SingularClosure.GalerkinSolution.coeff_unique_forward' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_unique_forward
+@GalerkinSolution.velocity_unique_forward : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g h : GalerkinSolution ν a N), EqOn g.velocity h.velocity (Ici 0)
+'SingularClosure.GalerkinSolution.velocity_unique_forward' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:300:5: warning: Variable name `hsupp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsupp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:301:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:302:5: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientTransport_complex_energy_zero
+coefficientTransport_complex_energy_zero : ∀ (N : ℕ) (c : FourierCoeff),
+  (∀ k ∉ cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+    (∀ (k : Frequency) (i : Fin 3), c (-k) i = star (c k i)) →
+      (∀ (k : Frequency), ∑ i, ↑(k i) * c k i = 0) →
+        ∑ k ∈ cutoffModes N, ∑ i, star (c k i) * coefficientTransport N c k i = 0
+'SingularClosure.coefficientTransport_complex_energy_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:312:5: warning: Variable name `hsupp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsupp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:313:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:314:5: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientNonlinearPower_eq_zero
+coefficientNonlinearPower_eq_zero : ∀ (N : ℕ) (c : FourierCoeff),
+  (∀ k ∉ cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+    (∀ (k : Frequency) (i : Fin 3), c (-k) i = star (c k i)) →
+      (∀ (k : Frequency), ∑ i, ↑(k i) * c k i = 0) → coefficientNonlinearPower N c = 0
+'SingularClosure.coefficientNonlinearPower_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:323:42: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_identity
+@GalerkinSolution.coefficientEnergy_identity : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {t : ℝ},
+  0 ≤ t →
+    HasDerivWithinAt (fun r => coefficientEnergy N (g.coeff r)) (-2 * ν * coefficientDissipation N (g.coeff t)) (Ici 0)
+      t
+'SingularClosure.GalerkinSolution.coefficientEnergy_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:332:21: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:333:42: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_le_initial
+@GalerkinSolution.coefficientEnergy_le_initial : ∀ {ν : ℝ},
+  0 ≤ ν →
+    ∀ {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N) {t : ℝ},
+      0 ≤ t → coefficientEnergy N (g.coeff t) ≤ coefficientEnergy N (g.coeff 0)
+'SingularClosure.GalerkinSolution.coefficientEnergy_le_initial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:342:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:342:18: warning: Variable name `hκ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hκ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:342:31: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:342:44: warning: Variable name `hM` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hM
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:343:5: warning: Variable name `hE₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:344:5: warning: Variable name `hy` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hy
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:345:5: warning: Variable name `hz` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hz
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:346:5: warning: Variable name `hd` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:347:5: warning: Variable name `hy_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hy_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:348:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:349:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:350:5: warning: Variable name `hcubic` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcubic
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:352:5: warning: Variable name `hbudget` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hbudget
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.uniform_cubic_energy_of_square_budget
+@uniform_cubic_energy_of_square_budget : ∀ {ι : Type u_1} {y z d : ι → ℝ → ℝ} {ν κ T M E₀ : ℝ},
+  0 < ν →
+    0 ≤ κ →
+      0 ≤ T →
+        0 ≤ M →
+          0 ≤ E₀ →
+            (∀ (n : ι), ContinuousOn (y n) (Icc 0 T)) →
+              (∀ (n : ι), ContinuousOn (z n) (Icc 0 T)) →
+                (∀ (n : ι), ContinuousOn (d n) (Icc 0 T)) →
+                  (∀ (n : ι), ∀ t ∈ Icc 0 T, 0 ≤ y n t) →
+                    (∀ (n : ι), y n 0 ≤ E₀) →
+                      (∀ (n : ι), ∀ t ∈ Ioo 0 T, HasDerivAt (y n) (d n t) t) →
+                        (∀ (n : ι), ∀ t ∈ Ioo 0 T, d n t + ν * z n t ^ 2 ≤ κ * y n t ^ 3) →
+                          (∀ (n : ι), ∫ (s : ℝ) in 0..T, y n s ^ 2 ≤ M) →
+                            ∃ B,
+                              0 ≤ B ∧
+                                B = E₀ * Real.exp (κ * M) ∧
+                                  ∀ (n : ι),
+                                    (∀ t ∈ Icc 0 T, y n t + ν * ∫ (s : ℝ) in 0..t, z n s ^ 2 ≤ B) ∧
+                                      (∀ t ∈ Icc 0 T, y n t ≤ B) ∧ ν * ∫ (s : ℝ) in 0..T, z n s ^ 2 ≤ B
+'SingularClosure.uniform_cubic_energy_of_square_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.coefficientLeray_solenoidal
+coefficientLeray_solenoidal : ∀ (k : Frequency) (v : Fin 3 → ℂ), ∑ i, ↑(k i) * coefficientLeray k v i = 0
+'SingularClosure.coefficientLeray_solenoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:374:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.galerkinRhs_solenoidal
+galerkinRhs_solenoidal : ∀ (ν : ℝ) (N : ℕ) (c : FourierCoeff),
+  SpectralSolenoidal c → ∀ (k : Frequency), ∑ i, ↑(k i) * galerkinRhs ν N c k i = 0
+'SingularClosure.galerkinRhs_solenoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.pressureFromTransport_recovery
+pressureFromTransport_recovery : ∀ (k : Frequency) (v : Fin 3 → ℂ) (i : Fin 3),
+  v i + ↑(2 * Real.pi) * Complex.I * ↑(k i) * pressureFromTransport k v = coefficientLeray k v i
+'SingularClosure.pressureFromTransport_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET
+PHYSICAL_ENSTROPHY_LE_SIX_BUDGET : ∀ (N : ℕ) (a : FourierCoeff),
+  physicalEnstrophy (finiteSynthesis N a) ≤ 6 * sixEnstrophy N a
+'SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
+PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET : ∀ (N : ℕ) (c : ℝ → FourierCoeff) (T : ℝ),
+  ∫⁻ (t : ℝ) in Icc 0 T, physicalEnstrophy (finiteSynthesis N (c t)) ^ 2 ≤ 36 * budget6 N c T
+'SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY
+INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY : ∀ (k l : Frequency),
+  ∫ (x : Vec) in unitCube, star (fourierCharacter k x) * fourierCharacter l x = if k = l then 1 else 0
+'SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:430:42: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnstrophy_identity
+@GalerkinSolution.coefficientEnstrophy_identity : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {t : ℝ},
+  0 ≤ t →
+    HasDerivWithinAt (fun r => coefficientDissipation N (g.coeff r))
+      (-2 * ν * coefficientLaplacianSquare N (g.coeff t) - 2 * coefficientEnstrophyNonlinearPower N (g.coeff t)) (Ici 0)
+      t
+'SingularClosure.GalerkinSolution.coefficientEnstrophy_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:440:40: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport
+coefficientEnstrophyNonlinearPower_eq_transport : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralSolenoidal c →
+    coefficientEnstrophyNonlinearPower N c =
+      ∑ k ∈ cutoffModes N,
+        (2 * Real.pi) ^ 2 * ↑(galerkinFreqSq k) * (∑ i, star (c k i) * coefficientTransport N c k i).re
+'SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.forwardGlobalSolution_exists
+@forwardGlobalSolution_exists : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V]
+  [FiniteDimensional ℝ V] (g : V → V),
+  ContDiff ℝ 1 g →
+    (∀ (v : V), inner ℝ v (g v) ≤ 0) → ∀ (x₀ : V), ∃ c, c 0 = x₀ ∧ ∀ (t : ℝ), 0 ≤ t → HasDerivAt c (g (c t)) t
+'SingularClosure.forwardGlobalSolution_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:466:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.galerkinRhs_reality
+galerkinRhs_reality : ∀ (ν : ℝ) (N : ℕ) (c : FourierCoeff), SpectralReality c → SpectralReality (galerkinRhs ν N c)
+'SingularClosure.galerkinRhs_reality' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:475:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity
+@GalerkinSolution.coefficientEnergy_integral_identity : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {T : ℝ},
+  0 ≤ T →
+    coefficientEnergy N (g.coeff T) + 2 * ν * ∫ (t : ℝ) in 0..T, coefficientDissipation N (g.coeff t) =
+      coefficientEnergy N (g.coeff 0)
+'SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:485:21: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:486:42: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_integral_le
+@GalerkinSolution.coefficientDissipation_integral_le : ∀ {ν : ℝ},
+  0 < ν →
+    ∀ {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N) {T : ℝ},
+      0 ≤ T →
+        ∫ (t : ℝ) in 0..T, coefficientDissipation N (g.coeff t) ≤ coefficientEnergy N (datumFourierCoeff a) / (2 * ν)
+'SingularClosure.GalerkinSolution.coefficientDissipation_integral_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:495:21: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.invariantGalerkinRhs_global_exists
+invariantGalerkinRhs_global_exists : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (N : ℕ) (z₀ : ↥(InvariantGalerkinState N)),
+      ∃ z, z 0 = z₀ ∧ ∀ (t : ℝ), 0 ≤ t → HasDerivAt z (invariantGalerkinRhs ν N (z t)) t
+'SingularClosure.invariantGalerkinRhs_global_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:505:21: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:507:5: warning: Variable name `hint` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hint
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:509:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:510:5: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.galerkinSolution_exists_of_fourier_invariants
+galerkinSolution_exists_of_fourier_invariants : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (a : SingularClosure.Field) (N : ℕ),
+      (∀ (k : Frequency) (i : Fin 3), IntegrableOn (datumFourierIntegrand a k i) unitCube volume) →
+        SpectralReality (datumFourierCoeff a) →
+          SpectralSolenoidal (datumFourierCoeff a) → Nonempty (GalerkinSolution ν a N)
+'SingularClosure.galerkinSolution_exists_of_fourier_invariants' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION
+TORUS_L2_SIX_CHANNEL_RECONSTRUCTION : ∀ (u : TorusVectorL2), ∑ A, torusL2Channel A u = u
+'SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:526:27: warning: Variable name `hAB` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAB
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL
+TORUS_L2_SIX_CHANNEL_ORTHOGONAL : ∀ (A B : Fin 6),
+  A ≠ B → ∀ (u v : TorusVectorL2), inner ℂ (torusL2Channel A u) (torusL2Channel B v) = 0
+'SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS
+TORUS_L2_SIX_CHANNEL_PYTHAGORAS : ∀ (u : TorusVectorL2), ‖u‖ ^ 2 = ∑ A, ‖torusL2Channel A u‖ ^ 2
+'SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusL2Channel_fourierCoeff
+torusL2Channel_fourierCoeff : ∀ (A : Fin 6) (u : TorusVectorL2),
+  torusVectorFourierCoeff (torusL2Channel A u) = spectralChannel A (torusVectorFourierCoeff u)
+'SingularClosure.torusL2Channel_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:553:5: warning: Variable name `hu` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hu
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.torusL2Channel_preserves_mean
+torusL2Channel_preserves_mean : ∀ (A : Fin 6) (u : TorusVectorL2),
+  (∀ (i : Fin 3), ∫ (x : UnitAddTorus (Fin 3)), ↑↑(u.ofLp i) x = 0) →
+    ∀ (i : Fin 3), ∫ (x : UnitAddTorus (Fin 3)), ↑↑((torusL2Channel A u).ofLp i) x = 0
+'SingularClosure.torusL2Channel_preserves_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:562:5: warning: Variable name `hAB` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAB
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY
+PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY : ∀ (N : ℕ) (A B : Fin 6),
+  A ≠ B →
+    ∀ (a b : FourierCoeff) (i j : Fin 3),
+      ∫ (x : Vec) in unitCube,
+          (coordinateDerivative (physicalChannel N A a) i x).ofLp j *
+            (coordinateDerivative (physicalChannel N B b) i x).ofLp j =
+        0
+'SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ
+SIX_CHANNEL_FINITE_ENSTROPHY_EQ : ∀ (N : ℕ) (a : FourierCoeff),
+  sixEnstrophy N a = physicalEnstrophy (finiteSynthesis N a)
+'SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ
+SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ : ∀ (N : ℕ) (c : ℝ → FourierCoeff) (T : ℝ),
+  budget6 N c T = ∫⁻ (t : ℝ) in Icc 0 T, physicalEnstrophy (finiteSynthesis N (c t)) ^ 2
+'SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:590:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:591:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:591:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:592:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.ax6_physical_square_budget
+ax6_physical_square_budget : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ M,
+                ∀ (N : ℕ),
+                  1 ≤ N →
+                    ∀ (g : GalerkinSolution ν a N), ∫⁻ (t : ℝ) in Icc 0 T, physicalEnstrophy (g.velocity t) ^ 2 ≤ ↑M
+'SingularClosure.ax6_physical_square_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.coordinateAverage_idempotent
+coordinateAverage_idempotent : ∀ (j : Fin 3) (a : SingularClosure.Field),
+  coordinateAverage j (coordinateAverage j a) = coordinateAverage j a
+'SingularClosure.coordinateAverage_idempotent' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:614:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coordinateAverage_periodic
+coordinateAverage_periodic : ∀ (j : Fin 3) (a : SingularClosure.Field),
+  SpatialPeriodic a → SpatialPeriodic (coordinateAverage j a)
+'SingularClosure.coordinateAverage_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.coordinateAverage_own_coordinateDerivative_zero
+coordinateAverage_own_coordinateDerivative_zero : ∀ (j : Fin 3) (a : SingularClosure.Field) (x : Vec),
+  coordinateDerivative (coordinateAverage j a) j x = 0
+'SingularClosure.coordinateAverage_own_coordinateDerivative_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:635:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_integrable
+@smoothSigmaZero_fourier_integrable : ∀ {a : SingularClosure.Field},
+  SmoothSigmaZero a → ∀ (k : Frequency) (i : Fin 3), IntegrableOn (datumFourierIntegrand a k i) unitCube volume
+'SingularClosure.smoothSigmaZero_fourier_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_reality
+datumFourierCoeff_reality : ∀ (a : SingularClosure.Field), SpectralReality (datumFourierCoeff a)
+'SingularClosure.datumFourierCoeff_reality' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:652:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_solenoidal
+@smoothSigmaZero_fourier_solenoidal : ∀ {a : SingularClosure.Field},
+  SmoothSigmaZero a → SpectralSolenoidal (datumFourierCoeff a)
+'SingularClosure.smoothSigmaZero_fourier_solenoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:660:21: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:661:17: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
+GALERKIN_GLOBAL_EXISTS_UNIQUE : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : SingularClosure.Field),
+      SmoothSigmaZero a → ∀ (N : ℕ), ∃ g, ∀ (h : GalerkinSolution ν a N), EqOn g.coeff h.coeff (Ici 0)
+'SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:674:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL
+FINITE_PHYSICAL_ENERGY_PARSEVAL : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralReality c → physicalEnergy (finiteSynthesis N c) = coefficientEnergy N c
+'SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:683:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL
+FINITE_PHYSICAL_ENSTROPHY_PARSEVAL : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralReality c → physicalEnstrophy (finiteSynthesis N c) = ENNReal.ofReal (coefficientDissipation N c)
+'SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:692:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENERGY_IDENTITY
+@GALERKIN_ENERGY_IDENTITY : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N) {T : ℝ},
+  0 ≤ T →
+    IntervalIntegrable (fun t => physicalDissipation (g.velocity t)) volume 0 T ∧
+      physicalEnergy (g.velocity T) + 2 * ν * ∫ (t : ℝ) in 0..T, physicalDissipation (g.velocity t) =
+        physicalEnergy (finiteSynthesis N (datumFourierCoeff a))
+'SingularClosure.GALERKIN_ENERGY_IDENTITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:704:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coordinateAverage_smooth
+coordinateAverage_smooth : ∀ (j : Fin 3) (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a → ContDiff ℝ ∞ (coordinateAverage j a)
+'SingularClosure.coordinateAverage_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:712:39: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:712:61: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coordinateAverage_all_coordinateDerivative_commute
+coordinateAverage_all_coordinateDerivative_commute : ∀ (i j : Fin 3) (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a →
+    SpatialPeriodic a → coordinateDerivative (coordinateAverage j a) i = coordinateAverage j (coordinateDerivative a i)
+'SingularClosure.coordinateAverage_all_coordinateDerivative_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.COEFFICIENT_POINCARE
+COEFFICIENT_POINCARE : ∀ (N : ℕ) (c : FourierCoeff),
+  4 * Real.pi ^ 2 * coefficientEnergy N c ≤ coefficientDissipation N c
+'SingularClosure.COEFFICIENT_POINCARE' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:733:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
+FINITE_PHYSICAL_NORM_POINCARE : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralReality c →
+    4 * Real.pi ^ 2 * ∫ (x : Vec) in unitCube, ‖finiteSynthesis N c x‖ ^ 2 ≤
+      ∫ (x : Vec) in unitCube, ∑ i, ‖coordinateDerivative (finiteSynthesis N c) i x‖ ^ 2
+'SingularClosure.FINITE_PHYSICAL_NORM_POINCARE' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:747:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:747:27: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
+SIX_CHANNEL_ENSTROPHY_EQ : ∀ (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a → SpatialPeriodic a → ∑ A, physicalEnstrophy (smoothSixChannel A a) = physicalEnstrophy a
+'SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_PROJECTIONS
+SIX_CHANNEL_PROJECTIONS : PhysicalSixChannelProjectionLaws
+'SingularClosure.SIX_CHANNEL_PROJECTIONS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:767:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.smoothSixChannel_fourierCutoff
+smoothSixChannel_fourierCutoff : ∀ (A : Fin 6) (N : ℕ) (a : SingularClosure.Field),
+  Continuous a → smoothSixChannel A (physicalFourierCutoff N a) = physicalFourierCutoff N (smoothSixChannel A a)
+'SingularClosure.smoothSixChannel_fourierCutoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:777:5: warning: Variable name `hf` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hf
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:777:25: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:777:50: warning: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.periodic_closedBall_three_integral_le
+periodic_closedBall_three_integral_le : ∀ (f : Vec → ℝ),
+  Continuous f →
+    SpatialPeriodic f → (∀ (x : Vec), 0 ≤ f x) → ∫ (x : Vec) in closedBall 0 3, f x ≤ 343 * ∫ (x : Vec) in unitCube, f x
+'SingularClosure.periodic_closedBall_three_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY
+FINITE_PHYSICAL_L6_FROM_ENSTROPHY : ∃ C < ∞,
+  ∀ (N : ℕ) (c : FourierCoeff),
+    SpectralReality c →
+      eLpNorm (finiteSynthesis N c) 6 (volume.restrict unitCube) ≤
+        C * ENNReal.ofReal (coefficientDissipation N c) ^ (1 / 2)
+'SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:796:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
+FINITE_HESSIAN_LAPLACIAN_EQ : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralReality c →
+    ∑ i, ∫ (x : Vec) in unitCube, gradientSquareDensity (coordinateDerivative (finiteSynthesis N c) i) x =
+      ∫ (x : Vec) in unitCube, ‖laplacian (finiteSynthesis N c) x‖ ^ 2
+'SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:809:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:810:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:810:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:811:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET
+AX6_EXACT_REAL_SQUARE_BUDGET : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ M,
+                0 ≤ M ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        IntervalIntegrable (fun t => coefficientDissipation N (g.coeff t) ^ 2) volume 0 T ∧
+                          ∫ (t : ℝ) in 0..T, coefficientDissipation N (g.coeff t) ^ 2 ≤ M
+'SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:822:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:823:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:823:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:824:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET
+AX6_EXACT_PHYSICAL_SQUARE_BUDGET : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ M,
+                ∀ (N : ℕ),
+                  1 ≤ N →
+                    ∀ (g : GalerkinSolution ν a N), ∫⁻ (t : ℝ) in Icc 0 T, physicalEnstrophy (g.velocity t) ^ 2 ≤ ↑M
+'SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN
+FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN : ∃ C < ∞,
+  ∀ (N : ℕ) (c : FourierCoeff),
+    SpectralReality c →
+      eLpNorm (fderiv ℝ (finiteSynthesis N c)) 6 (volume.restrict unitCube) ≤
+        C * ENNReal.ofReal (coefficientLaplacianSquare N c) ^ (1 / 2)
+'SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
+FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND : ∃ C < ∞,
+  ∀ (N : ℕ) (c : FourierCoeff),
+    SpectralReality c →
+      ENNReal.ofReal
+          |∫ (x : Vec) in unitCube, inner ℝ (convection (finiteSynthesis N c) x) (laplacian (finiteSynthesis N c) x)| ≤
+        C * ENNReal.ofReal (coefficientDissipation N c) ^ (3 / 4) *
+          ENNReal.ofReal (coefficientLaplacianSquare N c) ^ (3 / 4)
+'SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:855:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:855:30: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL
+FINITE_PHYSICAL_BILINEAR_PARSEVAL : ∀ (N : ℕ) (a b : FourierCoeff),
+  SpectralReality a →
+    SpectralReality b →
+      ∫ (x : Vec) in unitCube, inner ℝ (finiteSynthesis N a x) (finiteSynthesis N b x) =
+        ∑ k ∈ cutoffModes N, ∑ j, (star (a k j) * b k j).re
+'SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:865:5: warning: Variable name `hsupp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsupp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:866:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:866:33: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical
+coefficientEnstrophyNonlinearPower_eq_physical : ∀ (N : ℕ) (c : FourierCoeff),
+  (∀ k ∉ cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+    SpectralReality c →
+      SpectralSolenoidal c →
+        coefficientEnstrophyNonlinearPower N c =
+          -∫ (x : Vec) in unitCube, inner ℝ (convection (finiteSynthesis N c) x) (laplacian (finiteSynthesis N c) x)
+'SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY
+GALERKIN_ENSTROPHY_INEQUALITY : ∃ C,
+  0 < C ∧
+    ∀ (ν : ℝ),
+      0 < ν →
+        ∀ (a : SingularClosure.Field) (N : ℕ) (g : GalerkinSolution ν a N) (t : ℝ),
+          0 ≤ t →
+            ∃ d,
+              HasDerivWithinAt (fun r => ∫ (x : Vec) in unitCube, gradientSquareDensity (g.velocity r) x) d (Ici 0) t ∧
+                d + ν * ∫ (x : Vec) in unitCube, ‖laplacian (g.velocity t) x‖ ^ 2 ≤
+                  C / ν ^ 3 * (∫ (x : Vec) in unitCube, gradientSquareDensity (g.velocity t) x) ^ 3
+'SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.galerkinPressure_recovery
+galerkinPressure_recovery : ∀ (N : ℕ) (c : FourierCoeff) (x : Vec),
+  finiteSynthesis N (coefficientTransport N c) x +
+      SingularClosure.gradient (finiteTransportPressure N (coefficientTransport N c)) x =
+    finiteSynthesis N (fun k => coefficientLeray k (coefficientTransport N c k)) x
+'SingularClosure.galerkinPressure_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.finiteTransportPressure_meanZero
+finiteTransportPressure_meanZero : ∀ (N : ℕ) (v : FourierCoeff), PressureMeanZero (finiteTransportPressure N v)
+'SingularClosure.finiteTransportPressure_meanZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:911:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:911:27: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientDissipation_initial_cutoff_le
+coefficientDissipation_initial_cutoff_le : ∀ (N : ℕ) (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a →
+    SpatialPeriodic a →
+      coefficientDissipation N (datumFourierCoeff a) ≤ ∫ (x : Vec) in unitCube, gradientSquareDensity a x
+'SingularClosure.coefficientDissipation_initial_cutoff_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:921:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
+@GalerkinSolution.coefficientDissipation_initial_le : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N),
+  SmoothSigmaZero a → coefficientDissipation N (g.coeff 0) ≤ ∫ (x : Vec) in unitCube, gradientSquareDensity a x
+'SingularClosure.GalerkinSolution.coefficientDissipation_initial_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:932:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:933:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:933:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:934:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION
+AX6_UNIFORM_ENSTROPHY_ACCUMULATION : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        ∀ t ∈ Icc 0 T,
+                          coefficientDissipation N (g.coeff t) +
+                              ν * ∫ (s : ℝ) in 0..t, coefficientLaplacianSquare N (g.coeff s) ≤
+                            B
+'SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:945:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:946:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:946:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:947:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION
+AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        ∀ t ∈ Icc 0 T,
+                          (∫ (x : Vec) in unitCube, gradientSquareDensity (g.velocity t) x) +
+                              ν * ∫ (s : ℝ) in 0..t, ∫ (x : Vec) in unitCube, ‖laplacian (g.velocity s) x‖ ^ 2 ≤
+                            B
+'SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.coefficientLeray_energy_le
+coefficientLeray_energy_le : ∀ (k : Frequency) (v : Fin 3 → ℂ),
+  ∑ i, Complex.normSq (coefficientLeray k v i) ≤ ∑ i, Complex.normSq (v i)
+'SingularClosure.coefficientLeray_energy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.coefficientEnergy_leray_le
+coefficientEnergy_leray_le : ∀ (N : ℕ) (c : FourierCoeff),
+  coefficientEnergy N (lerayFourierCoeff c) ≤ coefficientEnergy N c
+'SingularClosure.coefficientEnergy_leray_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:977:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.integral_norm_sq_leray_le
+integral_norm_sq_leray_le : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralReality c →
+    ∫ (x : Vec) in unitCube, ‖finiteSynthesis N (lerayFourierCoeff c) x‖ ^ 2 ≤
+      ∫ (x : Vec) in unitCube, ‖finiteSynthesis N c x‖ ^ 2
+'SingularClosure.integral_norm_sq_leray_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:987:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt
+@GalerkinSolution.velocity_hasDerivWithinAt : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N)
+  (t : ℝ),
+  0 ≤ t →
+    ∀ (x : Vec),
+      HasDerivWithinAt (fun s => g.velocity s x) (finiteSynthesis N (galerkinRhs ν N (g.coeff t)) x) (Ici 0) t
+'SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:997:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_L2_bound
+@GalerkinSolution.timeDerivative_L2_bound : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N)
+  (t : ℝ),
+  0 ≤ t →
+    ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2 ≤
+      2 * ν ^ 2 * coefficientLaplacianSquare N (g.coeff t) +
+        2 * ∫ (x : Vec) in unitCube, ‖convection (g.velocity t) x‖ ^ 2
+'SingularClosure.GalerkinSolution.timeDerivative_L2_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND
+FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND : ∃ C,
+  0 < C ∧
+    ∀ (N : ℕ) (c : FourierCoeff),
+      SpectralReality c →
+        ∫ (x : Vec) in unitCube, ‖convection (finiteSynthesis N c) x‖ ^ 2 ≤
+          C *
+            ((∫ (x : Vec) in unitCube, gradientSquareDensity (finiteSynthesis N c) x) ^ 3 +
+              ∫ (x : Vec) in unitCube, ‖laplacian (finiteSynthesis N c) x‖ ^ 2)
+'SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1017:23: warning: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tail
+torusSobolevInclusion_tail : ∀ (s N : ℕ),
+  0 < N →
+    ∀ (c : TorusSobolev (s + 1)),
+      ‖(torusSobolevInclusion s) c - (torusSobolevCutoff s N) ((torusSobolevInclusion s) c)‖ ≤ (↑N)⁻¹ * ‖c‖
+'SingularClosure.torusSobolevInclusion_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_compact
+torusSobolevInclusion_compact : ∀ (s : ℕ), IsCompactOperator ⇑(torusSobolevInclusion s)
+'SingularClosure.torusSobolevInclusion_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusSobolev_H2_H1_compact_closedBall
+torusSobolev_H2_H1_compact_closedBall : ∀ (R : ℝ), IsCompact (closure (⇑(torusSobolevInclusion 1) '' closedBall 0 R))
+'SingularClosure.torusSobolev_H2_H1_compact_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1048:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable
+@GalerkinSolution.timeDerivative_energy_intervalIntegrable : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {T : ℝ},
+  0 ≤ T → IntervalIntegrable (fun t => ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2) volume 0 T
+'SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1057:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1058:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1058:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1059:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND
+AX6_UNIFORM_TIME_DERIVATIVE_BOUND : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        ∫ (t : ℝ) in 0..T, ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2 ≤ B
+'SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1072:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1073:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1073:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1074:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
+AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        (∀ t ∈ Icc 0 T, physicalH1Square (g.velocity t) ≤ B) ∧
+                          IntervalIntegrable (fun t => physicalH2Square (g.velocity t)) volume 0 T ∧
+                            ∫ (t : ℝ) in 0..T, physicalH2Square (g.velocity t) ≤ B ∧
+                              IntervalIntegrable (fun t => ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2)
+                                  volume 0 T ∧
+                                ∫ (t : ℝ) in 0..T, ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2 ≤ B
+'SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H1_norm_sq
+finiteSobolev_H1_norm_sq : ∀ (N : ℕ) (c : FourierCoeff),
+  ‖finiteSobolev 1 N c‖ ^ 2 = coefficientEnergy N c + coefficientDissipation N c
+'SingularClosure.finiteSobolev_H1_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H2_norm_sq
+finiteSobolev_H2_norm_sq : ∀ (N : ℕ) (c : FourierCoeff),
+  ‖finiteSobolev 2 N c‖ ^ 2 = coefficientEnergy N c + 2 * coefficientDissipation N c + coefficientLaplacianSquare N c
+'SingularClosure.finiteSobolev_H2_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1107:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq
+@GalerkinSolution.sobolevState_H2_physical_norm_sq : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {t : ℝ},
+  0 ≤ t →
+    ‖g.sobolevState 2 t‖ ^ 2 =
+      ((∫ (x : Vec) in unitCube, ‖g.velocity t x‖ ^ 2) +
+          2 * ∫ (x : Vec) in unitCube, gradientSquareDensity (g.velocity t) x) +
+        ∫ (x : Vec) in unitCube, ‖laplacian (g.velocity t) x‖ ^ 2
+'SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1119:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1119:27: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1120:5: warning: Variable name `hk` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hk
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FOURIER_COORDINATE_DECAY
+FOURIER_COORDINATE_DECAY : ∀ (j : Fin 3) (m : ℕ) (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a →
+    SpatialPeriodic a →
+      ∀ (k : Frequency) (i : Fin 3),
+        k j ≠ 0 → ‖datumFourierCoeff a k i‖ ≤ coordinateDerivativeL1 j m a i / (2 * Real.pi * |↑(k j)|) ^ m
+'SingularClosure.FOURIER_COORDINATE_DECAY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1130:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1130:27: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.FOURIER_POLYNOMIAL_DECAY
+FOURIER_POLYNOMIAL_DECAY : ∀ (m : ℕ) (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a →
+    SpatialPeriodic a →
+      ∀ (k : Frequency) (i : Fin 3),
+        ‖datumFourierCoeff a k i‖ ≤ fourierDecayConstant m a / (1 + ∑ j, (2 * Real.pi * |↑(k j)|) ^ m)
+'SingularClosure.FOURIER_POLYNOMIAL_DECAY' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET
+AX6_IFF_CANONICAL_GALERKIN_BUDGET : AX6Statement ↔ CanonicalAX6Statement
+'SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1151:5: warning: Variable name `hs` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1151:18: warning: Variable name `hst` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hst
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1151:32: warning: Variable name `htT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _htT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficient_time_modulus
+@GalerkinSolution.coefficient_time_modulus : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N)
+  (k : Frequency) (i : Fin 3) {s t T : ℝ},
+  0 ≤ s →
+    s ≤ t →
+      t ≤ T →
+        ‖g.coeff t k i - g.coeff s k i‖ ^ 2 ≤
+          (t - s) * ∫ (r : ℝ) in 0..T, ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity r x‖ ^ 2
+'SingularClosure.GalerkinSolution.coefficient_time_modulus' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1161:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1162:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1162:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1163:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS
+AX6_UNIFORM_COEFFICIENT_TIME_MODULUS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N) (k : Frequency) (i : Fin 3) (s t : ℝ),
+                        0 ≤ s → s ≤ t → t ≤ T → ‖g.coeff t k i - g.coeff s k i‖ ^ 2 ≤ (t - s) * B
+'SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.summable_torusSobolevWeight_inv_four
+summable_torusSobolevWeight_inv_four : Summable fun k => (torusSobolevWeight k)⁻¹ ^ 4
+'SingularClosure.summable_torusSobolevWeight_inv_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_H2_L1_BOUND
+FINITE_FOURIER_H2_L1_BOUND : ∃ C,
+  0 < C ∧
+    ∀ (s : Finset Frequency) (a : Frequency → ℂ),
+      (∑ k ∈ s, ‖a k‖) ^ 2 ≤ C * ∑ k ∈ s, (torusSobolevWeight k ^ 2 * ‖a k‖) ^ 2
+'SingularClosure.FINITE_FOURIER_H2_L1_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND
+FINITE_FOURIER_TAME_PRODUCT_BOUND : ∀ (m : ℕ),
+  ∃ C,
+    0 < C ∧
+      ∀ (r s t : Finset Frequency) (a b : Frequency → ℂ),
+        (∀ k ∉ t, b k = 0) →
+          ∑ k ∈ r, (torusSobolevWeight k ^ m * ‖finiteScalarConvolution s a b k‖) ^ 2 ≤
+            C *
+              ((∑ q ∈ t, (torusSobolevWeight q ^ 2 * ‖b q‖) ^ 2) * ∑ p ∈ s, (torusSobolevWeight p ^ m * ‖a p‖) ^ 2 +
+                (∑ p ∈ s, (torusSobolevWeight p ^ 2 * ‖a p‖) ^ 2) * ∑ q ∈ t, (torusSobolevWeight q ^ m * ‖b q‖) ^ 2)
+'SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1210:5: warning: Variable name `hzero` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hzero
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1211:5: warning: Variable name `hone` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hone
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_hasFDerivAt
+@scalarFourierSeries_hasFDerivAt : ∀ {b : Frequency → ℂ},
+  (Summable fun k => ‖b k‖) →
+    (Summable fun k => ‖b k‖ * ‖fourierPhaseCLM k‖) →
+      ∀ (x : Vec),
+        HasFDerivAt (scalarFourierSeries b) (∑' (k : Frequency), b k • fourierCharacter k x • fourierPhaseCLM k) x
+'SingularClosure.scalarFourierSeries_hasFDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1221:5: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_contDiff
+@scalarFourierSeries_contDiff : ∀ {b : Frequency → ℂ}, RapidScalarFourier b → ContDiff ℝ ∞ (scalarFourierSeries b)
+'SingularClosure.scalarFourierSeries_contDiff' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1230:5: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_integral
+@scalarFourierSeries_integral : ∀ {b : Frequency → ℂ},
+  (Summable fun k => ‖b k‖) → ∫ (x : Vec) in unitCube, scalarFourierSeries b x = b 0
+'SingularClosure.scalarFourierSeries_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1239:5: warning: Variable name `hzero` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hzero
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1240:5: warning: Variable name `hone` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hone
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.realFourierSeries_gradient_apply
+@realFourierSeries_gradient_apply : ∀ {b : Frequency → ℂ},
+  (Summable fun k => ‖b k‖) →
+    (Summable fun k => ‖b k‖ * ‖fourierPhaseCLM k‖) →
+      ∀ (x : Vec) (i : Fin 3),
+        (SingularClosure.gradient (realFourierSeries b) x).ofLp i =
+          (∑' (k : Frequency), fourierCharacter k x * (derivativeSymbol i k * b k)).re
+'SingularClosure.realFourierSeries_gradient_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1254:21: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt
+@GalerkinSolution.sobolevState_hasDerivWithinAt : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) (s : ℕ) (t : ℝ), 0 ≤ t → HasDerivWithinAt (g.sobolevState s) (g.rhsSobolev s t) (Ici 0) t
+'SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_memLp
+@GalerkinSolution.sobolevState_memLp : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N)
+  (s : ℕ) (T : ℝ) (p : ℝ≥0∞), MemLp (g.sobolevState s) p (volume.restrict (Icc 0 T))
+'SingularClosure.GalerkinSolution.sobolevState_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1272:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq
+@GalerkinSolution.rhsSobolev_H0_physical_norm_sq : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) (t : ℝ),
+  0 ≤ t → ‖g.rhsSobolev 0 t‖ ^ 2 = ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2
+'SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1281:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1282:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1282:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1283:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS
+AX6_UNIFORM_H0_TIME_MODULUS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        ∀ s ∈ Icc 0 T, ∀ t ∈ Icc 0 T, ‖g.sobolevState 0 t - g.sobolevState 0 s‖ ^ 2 ≤ B * |t - s|
+'SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1293:25: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.torusDatumComponent_mk
+torusDatumComponent_mk : ∀ (a : SingularClosure.Field),
+  SpatialPeriodic a → ∀ (i : Fin 3) (x : Vec), (torusDatumComponent a i fun j => ↑(x.ofLp j)) = ↑((a x).ofLp i)
+'SingularClosure.torusDatumComponent_mk' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusDatumL2_fourierBasis_repr
+torusDatumL2_fourierBasis_repr : ∀ (a : SingularClosure.Field) (ha : Continuous a) (i : Fin 3) (k : Frequency),
+  ↑(UnitAddTorus.mFourierBasis.repr (torusDatumL2 a ha i)) k = datumFourierCoeff a k i
+'SingularClosure.torusDatumL2_fourierBasis_repr' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_fourierCoeff
+torusSobolevL2_fourierCoeff : ∀ (c : TorusSobolev 0), torusVectorFourierCoeff (torusSobolevL2 c) = ↑c
+'SingularClosure.torusSobolevL2_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_isometry
+torusSobolevL2_isometry : Isometry ⇑torusSobolevL2
+'SingularClosure.torusSobolevL2_isometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1327:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1327:27: warning: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV
+SMOOTH_DATUM_MEM_TORUS_SOBOLEV : ∀ (s : ℕ) (a : SingularClosure.Field),
+  ContDiff ℝ ∞ a → SpatialPeriodic a → Memℓp (sobolevWeightedCoeff s (datumFourierCoeff a)) 2
+'SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1336:21: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.highOrderEnergy_balance
+@GalerkinSolution.highOrderEnergy_balance : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N)
+  (m : ℕ) {t : ℝ},
+  0 ≤ t →
+    HasDerivWithinAt (fun r => highOrderEnergy m N (g.coeff r))
+      (-2 * ν * (highOrderEnergy (m + 1) N (g.coeff t) - highOrderEnergy m N (g.coeff t)) -
+        2 * highOrderNonlinearPower m N (g.coeff t))
+      (Ici 0) t
+'SingularClosure.GalerkinSolution.highOrderEnergy_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1347:40: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_product_divergence
+coefficientTransport_eq_product_divergence : ∀ (N : ℕ) (c : FourierCoeff),
+  SpectralSolenoidal c →
+    ∀ (k : Frequency) (i : Fin 3),
+      coefficientTransport N c k i = ∑ j, derivativeSymbol j k * ∑ p ∈ cutoffModes N, c p j * c (k - p) i
+'SingularClosure.coefficientTransport_eq_product_divergence' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1359:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1359:18: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1360:5: warning: Variable name `hy` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hy
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1361:5: warning: Variable name `hz` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hz
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1362:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1363:5: warning: Variable name `hy_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hy_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1364:5: warning: Variable name `ha_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1365:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1366:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1367:5: warning: Variable name `hlinear` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hlinear
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1368:5: warning: Variable name `hbudget` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hbudget
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET
+@LINEAR_ENERGY_OF_COEFFICIENT_BUDGET : ∀ {y z d a : ℝ → ℝ} {ν T M y₀ : ℝ},
+  0 ≤ ν →
+    0 ≤ T →
+      ContinuousOn y (Icc 0 T) →
+        ContinuousOn z (Icc 0 T) →
+          ContinuousOn a (Icc 0 T) →
+            (∀ t ∈ Icc 0 T, 0 ≤ y t) →
+              (∀ t ∈ Icc 0 T, 0 ≤ a t) →
+                y 0 ≤ y₀ →
+                  (∀ t ∈ Ioo 0 T, HasDerivAt y (d t) t) →
+                    (∀ t ∈ Ioo 0 T, d t + ν * z t ^ 2 ≤ a t * y t) →
+                      ∫ (s : ℝ) in 0..T, a s ≤ M → ∀ t ∈ Icc 0 T, y t + ν * ∫ (s : ℝ) in 0..t, z s ^ 2 ≤ y₀ * Real.exp M
+'SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1377:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1378:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1378:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1379:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+AX6_UNIFORM_STRONG_BOUNDS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∃ B,
+                0 ≤ B ∧
+                  ∀ (N : ℕ),
+                    1 ≤ N →
+                      ∀ (g : GalerkinSolution ν a N),
+                        ContinuousOn (g.sobolevState 1) (Ici 0) ∧
+                          MemLp (g.sobolevState 1) ∞ (volume.restrict (Icc 0 T)) ∧
+                            MemLp (g.sobolevState 2) 2 (volume.restrict (Icc 0 T)) ∧
+                              MemLp (g.rhsSobolev 0) 2 (volume.restrict (Icc 0 T)) ∧
+                                (∀ (t : ℝ), 0 ≤ t → HasDerivWithinAt (g.sobolevState 0) (g.rhsSobolev 0 t) (Ici 0) t) ∧
+                                  (∀ t ∈ Icc 0 T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B) ∧
+                                    IntervalIntegrable (fun t => ‖g.sobolevState 2 t‖ ^ 2) volume 0 T ∧
+                                      ∫ (t : ℝ) in 0..T, ‖g.sobolevState 2 t‖ ^ 2 ≤ B ∧
+                                        IntervalIntegrable (fun t => ‖g.rhsSobolev 0 t‖ ^ 2) volume 0 T ∧
+                                          ∫ (t : ℝ) in 0..T, ‖g.rhsSobolev 0 t‖ ^ 2 ≤ B ∧
+                                            IntervalIntegrable
+                                                (fun t => ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2)
+                                                volume 0 T ∧
+                                              ∫ (t : ℝ) in 0..T,
+                                                  ∫ (x : Vec) in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2 ≤
+                                                B
+'SingularClosure.AX6_UNIFORM_STRONG_BOUNDS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1405:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1407:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
+AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a) (T : ℝ),
+    0 < T →
+      ∃ u φ,
+        StrictMono φ ∧
+          TendstoUniformly (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 ↑t) (⇑u) atTop
+'SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_interpolation
+torusSobolev_H1_interpolation : ∀ (c : TorusSobolev 2),
+  ‖(torusSobolevInclusion 1) c‖ ^ 2 ≤ ‖(torusSobolevInclusion 0) ((torusSobolevInclusion 1) c)‖ * ‖c‖
+'SingularClosure.torusSobolev_H1_interpolation' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1428:52: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1428:65: warning: Variable name `hε` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hε
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1429:5: warning: Variable name `hv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1430:5: warning: Variable name `hw` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hw
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1431:5: warning: Variable name `h0` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h0
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1434:5: warning: Variable name `hv2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hv2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1435:5: warning: Variable name `hw2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hw2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_time_difference_bound
+torusSobolev_H1_time_difference_bound : ∀ (v w : ℝ → TorusSobolev 2) (T ε M : ℝ),
+  0 ≤ T →
+    0 ≤ ε →
+      ContinuousOn v (Icc 0 T) →
+        ContinuousOn w (Icc 0 T) →
+          (∀ t ∈ Icc 0 T,
+              ‖(torusSobolevInclusion 0) ((torusSobolevInclusion 1) (v t)) -
+                    (torusSobolevInclusion 0) ((torusSobolevInclusion 1) (w t))‖ ≤
+                ε) →
+            ∫ (t : ℝ) in 0..T, ‖v t‖ ^ 2 ≤ M →
+              ∫ (t : ℝ) in 0..T, ‖w t‖ ^ 2 ≤ M →
+                (∫ (t : ℝ) in 0..T, ‖(torusSobolevInclusion 1) (v t) - (torusSobolevInclusion 1) (w t)‖ ^ 2) ^ 2 ≤
+                  4 * ε ^ 2 * T * M
+'SingularClosure.torusSobolev_H1_time_difference_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1448:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1449:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1449:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1450:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION
+AX6_UNIFORM_HIGH_ORDER_ACCUMULATION : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∀ (m : ℕ),
+                ∃ B,
+                  0 ≤ B ∧
+                    ∀ (N : ℕ),
+                      1 ≤ N →
+                        ∀ (g : GalerkinSolution ν a N),
+                          ∀ t ∈ Icc 0 T,
+                            ‖g.sobolevState m t‖ ^ 2 + ν * ∫ (s : ℝ) in 0..t, ‖g.sobolevState (m + 1) s‖ ^ 2 ≤ B
+'SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY
+GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY : ∀ (m : ℕ),
+  ∃ C,
+    0 < C ∧
+      ∀ (ν : ℝ),
+        0 < ν →
+          ∀ (a : SingularClosure.Field) (N : ℕ) (g : GalerkinSolution ν a N) (t : ℝ),
+            0 ≤ t →
+              ∃ d,
+                HasDerivWithinAt (fun r => highOrderEnergy m N (g.coeff r)) d (Ici 0) t ∧
+                  d + ν * highOrderEnergy (m + 1) N (g.coeff t) ≤
+                    (2 * ν + C / ν * highOrderEnergy 2 N (g.coeff t)) * highOrderEnergy m N (g.coeff t)
+'SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1474:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1476:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE
+AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a) (T : ℝ),
+    0 < T →
+      ∃ u φ,
+        StrictMono φ ∧
+          TendstoUniformly (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 ↑t) (⇑u) atTop ∧
+            ∀ (t : ↑(Icc 0 T)), SpectralReality ↑(u t) ∧ SpectralSolenoidal ↑(u t) ∧ ∀ (i : Fin 3), ↑(u t) 0 i = 0
+'SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1491:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1493:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE
+AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a) (T : ℝ),
+    0 < T →
+      ∃ u0 u1 φ,
+        StrictMono φ ∧
+          TendstoUniformly (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 ↑t) (⇑u0) atTop ∧
+            Tendsto (fun n => canonicalSobolevTimeH1L2 ν hν a ha T (φ n)) atTop (𝓝 u1)
+'SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1507:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1509:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS
+AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a) (T : ℝ),
+    0 < T →
+      ∃ u0 u1 φ,
+        StrictMono φ ∧
+          TendstoUniformly (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 ↑t) (⇑u0) atTop ∧
+            Tendsto (fun n => canonicalSobolevTimeH1L2 ν hν a ha T (φ n)) atTop (𝓝 u1) ∧
+              ∀ᵐ (t : ℝ) ∂volume.restrict (Icc 0 T),
+                ∀ (ht : t ∈ Icc 0 T), (torusSobolevInclusion 0) (↑↑u1 t) = u0 ⟨t, ht⟩
+'SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1527:17: warning: Variable name `hφ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hφ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1528:5: warning: Variable name `hconv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hconv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.canonicalSobolevLimit_initial_physical
+canonicalSobolevLimit_initial_physical : ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a)
+  (T : ℝ) (hT : 0 ≤ T) (u : C(↑(Icc 0 T), TorusSobolev 0)) (φ : ℕ → ℕ),
+  StrictMono φ →
+    TendstoUniformly (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 ↑t) (⇑u) atTop →
+      torusSobolevL2 (u ⟨0, ⋯⟩) = torusPhysicalDatumL2 a ⋯
+'SingularClosure.canonicalSobolevLimit_initial_physical' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND
+GALERKIN_RHS_SOBOLEV_NORM_BOUND : ∀ (m : ℕ),
+  ∃ C,
+    0 < C ∧
+      ∀ (ν : ℝ) (a : SingularClosure.Field) (N : ℕ) (g : GalerkinSolution ν a N) (t : ℝ),
+        0 ≤ t →
+          ‖g.rhsSobolev m t‖ ^ 2 ≤
+            2 * ν ^ 2 * highOrderEnergy (m + 2) N (g.coeff t) +
+              C * highOrderEnergy 2 N (g.coeff t) * highOrderEnergy (m + 1) N (g.coeff t)
+'SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1557:5: warning: Variable name `hcompact` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcompact
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.countable_precompact_family_subsequence
+@countable_precompact_family_subsequence : ∀ {ι : Type u_1} [Countable ι] {E : ι → Type u_2}
+  [inst : (i : ι) → TopologicalSpace (E i)] [∀ (i : ι), FirstCountableTopology (E i)] (F : (i : ι) → ℕ → E i),
+  (∀ (i : ι), IsCompact (closure (range (F i)))) →
+    ∃ u φ, StrictMono φ ∧ ∀ (i : ι), Tendsto (fun n => F i (φ n)) atTop (𝓝 (u i))
+'SingularClosure.countable_precompact_family_subsequence' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1566:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1567:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1567:38: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1568:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS
+AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : SingularClosure.Field),
+        SmoothSigmaZero a →
+          ∀ (T : ℝ),
+            0 < T →
+              ∀ (m : ℕ),
+                ∃ B,
+                  0 ≤ B ∧
+                    ∀ (N : ℕ),
+                      1 ≤ N →
+                        ∀ (g : GalerkinSolution ν a N),
+                          ∀ s ∈ Icc 0 T, ∀ t ∈ Icc 0 T, ‖g.sobolevState m t - g.sobolevState m s‖ ^ 2 ≤ B * |t - s|
+'SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1578:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1580:13: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE
+AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a) (T : ℝ),
+    0 < T → ∀ (r : ℕ), IsCompact (closure (range (canonicalHighOrderCurveBounded ν hν a ha T r)))
+'SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1588:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE
+AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a),
+    ∃ u φ,
+      StrictMono φ ∧
+        (∀ (m r : ℕ),
+            TendstoUniformly (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState r ↑t) (⇑(u m r))
+              atTop) ∧
+          (∀ (m l r : ℕ) (t : ℝ) (hm : t ∈ Icc 0 (↑m + 1)) (hl : t ∈ Icc 0 (↑l + 1)),
+              (u m r) ⟨t, hm⟩ = (u l r) ⟨t, hl⟩) ∧
+            ∀ (m r : ℕ) (t : ↑(IntegerTimeHorizon m)), (torusSobolevInclusion r) ((u m (r + 1)) t) = (u m r) t
+'SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.fourierTensorCoefficient_summable_norm
+fourierTensorCoefficient_summable_norm : ∀ (k : Frequency) (j i : Fin 3) (c d : TorusSobolev 0),
+  Summable fun p => ‖↑c p j * ↑d (k - p) i‖
+'SingularClosure.fourierTensorCoefficient_summable_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.fourierTensorCoefficient_norm_le
+fourierTensorCoefficient_norm_le : ∀ (k : Frequency) (j i : Fin 3) (c d : TorusSobolev 0),
+  ‖fourierTensorCoefficient k j i c d‖ ≤ ‖c‖ * ‖d‖
+'SingularClosure.fourierTensorCoefficient_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1627:5: warning: Variable name `hsupp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsupp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1628:5: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_divergenceTransport
+coefficientTransport_eq_divergenceTransport : ∀ (N : ℕ) (c : TorusSobolev 0),
+  (∀ p ∉ cutoffModes N, ∀ (i : Fin 3), ↑c p i = 0) →
+    SpectralSolenoidal ↑c →
+      ∀ (k : Frequency) (i : Fin 3), coefficientTransport N (↑c) k i = ((divergenceTransportCoefficient k i) c) c
+'SingularClosure.coefficientTransport_eq_divergenceTransport' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1639:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES
+AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a),
+    ∃ U φ,
+      StrictMono φ ∧
+        (∀ (r : ℕ), ContinuousOn (U r) (Ici 0)) ∧
+          (∀ (r : ℕ) (t : ℝ), 0 ≤ t → (torusSobolevInclusion r) (U (r + 1) t) = U r t) ∧
+            ∀ (T : ℝ) (r : ℕ),
+              TendstoUniformlyOn (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState r t) (U r)
+                atTop (Icc 0 T)
+'SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1656:5: warning: Variable name `hbound` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hbound
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1657:5: warning: Variable name `hcoeff` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcoeff
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.torusSobolev_limit_mem_and_norm_le
+@torusSobolev_limit_mem_and_norm_le : ∀ {α : Type u_1} {l : Filter α} [l.NeBot] (s : ℕ) (u : α → TorusSobolev s)
+  (c : FourierCoeff) (B : ℝ),
+  (∀ (n : α), ‖u n‖ ≤ B) →
+    (∀ (k : Frequency) (i : Fin 3), Tendsto (fun n => ↑(u n) k i) l (𝓝 (c k i))) →
+      ∃ (hc : Memℓp (sobolevWeightedCoeff s c) 2), ‖⟨c, hc⟩‖ ≤ B
+'SingularClosure.torusSobolev_limit_mem_and_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1668:5: warning: Variable name `hbound` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hbound
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1669:5: warning: Variable name `hcoeff` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcoeff
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto
+@torusSobolevInclusion_tendsto_of_coeff_tendsto : ∀ {α : Type u_1} {l : Filter α} (s : ℕ) (u : α → TorusSobolev (s + 1))
+  (v : TorusSobolev s) (B : ℝ),
+  (∀ᶠ (n : α) in l, ‖u n‖ ≤ B) →
+    (∀ (k : Frequency) (i : Fin 3), Tendsto (fun n => ↑(u n) k i) l (𝓝 (↑v k i))) →
+      Tendsto (fun n => (torusSobolevInclusion s) (u n)) l (𝓝 v)
+'SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1680:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE
+AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a),
+    ∃ U φ,
+      StrictMono φ ∧
+        (∀ (r : ℕ), ContinuousOn (U r) (Ici 0)) ∧
+          (∀ (r : ℕ) (t : ℝ), 0 ≤ t → (torusSobolevInclusion r) (U (r + 1) t) = U r t) ∧
+            (∀ (T : ℝ) (r : ℕ),
+                TendstoUniformlyOn (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState r t) (U r)
+                  atTop (Icc 0 T)) ∧
+              (∀ (r : ℕ), U r 0 = smoothDatumSobolev r a ⋯ ⋯) ∧
+                ∀ (r : ℕ) (t : ℝ),
+                  0 ≤ t → SpectralReality ↑(U r t) ∧ SpectralSolenoidal ↑(U r t) ∧ SpectralMeanZero ↑(U r t)
+'SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1700:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1701:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1701:33: warning: Variable name `hzero` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hzero
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1702:5: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION
+ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION : ∀ (c : FourierCoeff),
+  (∀ (s : ℕ), Memℓp (sobolevWeightedCoeff s c) 2) →
+    SpectralReality c →
+      SpectralMeanZero c →
+        SpectralSolenoidal c →
+          SmoothSigmaZero (smoothFourierSynthesis c) ∧ datumFourierCoeff (smoothFourierSynthesis c) = c
+'SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1714:5: warning: Variable name `hu` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hu
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1714:35: warning: Variable name `hu2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hu2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1715:5: warning: Variable name `hv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1716:5: warning: Variable name `hinit` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinit
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1717:5: warning: Variable name `h2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1718:5: warning: Variable name `hint` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hint
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1720:5: warning: Variable name `heq` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _heq
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1722:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1723:5: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1724:5: warning: Variable name `hzero` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hzero
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS
+NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS : ∀ (ν : ℝ) (a : SingularClosure.Field) (ha : SmoothSigmaZero a)
+  (u : ℝ → TorusSobolev 1) (u2 : ℝ → TorusSobolev 2) (v : ℝ → TorusSobolev 0),
+  ContinuousOn u (Ici 0) →
+    ContinuousOn u2 (Ici 0) →
+      ContinuousOn v (Ici 0) →
+        u 0 = smoothDatumSobolev 1 a ⋯ ⋯ →
+          (∀ (t : ℝ), 0 ≤ t → (torusSobolevInclusion 1) (u2 t) = u t) →
+            (∀ (t : ℝ),
+                0 ≤ t → (torusSobolevInclusion 0) (u t) = (torusSobolevInclusion 0) (u 0) + ∫ (s : ℝ) in 0..t, v s) →
+              (∀ (t : ℝ),
+                  0 ≤ t →
+                    ∀ (k : Frequency) (i : Fin 3),
+                      ↑(v t) k i = fullFourierRhs ν ((torusSobolevInclusion 0) (u t)) k i) →
+                (∀ (t : ℝ), 0 ≤ t → SpectralReality ↑(u t)) →
+                  (∀ (t : ℝ), 0 ≤ t → SpectralSolenoidal ↑(u t)) →
+                    (∀ (t : ℝ), 0 ≤ t → SpectralMeanZero ↑(u t)) → Nonempty (GlobalStrongCoefficientNSE ν a ha)
+'SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1735:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1736:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS
+AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS : AX6Statement →
+  ∀ (ν : ℝ),
+    0 < ν → ∀ (a : SingularClosure.Field) (ha : SmoothSigmaZero a), Nonempty (GlobalStrongCoefficientNSE ν a ha)
+'SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1746:5: warning: Variable name `hU` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hU
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1747:5: warning: Variable name `hF` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hF
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1748:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH
+SOBOLEV_SCALE_TIME_SMOOTH : ∀ (U : (m : ℕ) → ℝ → TorusSobolev m) (F : (m : ℕ) → TorusSobolev (m + 2) → TorusSobolev m),
+  (∀ (m : ℕ), ContinuousOn (U m) (Ici 0)) →
+    (∀ (m : ℕ), ContDiff ℝ ∞ (F m)) →
+      (∀ (m : ℕ), ∀ t ∈ Ici 0, HasDerivWithinAt (U m) (F m (U (m + 2) t)) (Ici 0) t) →
+        ∀ (m : ℕ), ContDiffOn ℝ ∞ (U m) (Ici 0)
+'SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND
+SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND : ∀ (r : ℕ),
+  ∃ C, 0 < C ∧ ∀ (c d : TorusSobolev (r + 2)), ‖sobolevDivergenceProduct r c d‖ ≤ C * ‖c‖ * ‖d‖
+'SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND
+INFINITE_SCALAR_FOURIER_PRODUCT_BOUND : ∀ (m : ℕ),
+  ∃ C,
+    0 < C ∧
+      ∀ (a b : Frequency → ℂ) (A B : ℝ),
+        0 ≤ A →
+          0 ≤ B →
+            (∀ (s : Finset Frequency), ∑ k ∈ s, (torusSobolevWeight k ^ 2 * ‖a k‖) ^ 2 ≤ A) →
+              (∀ (s : Finset Frequency), ∑ k ∈ s, (torusSobolevWeight k ^ m * ‖a k‖) ^ 2 ≤ A) →
+                (∀ (s : Finset Frequency), ∑ k ∈ s, (torusSobolevWeight k ^ 2 * ‖b k‖) ^ 2 ≤ B) →
+                  (∀ (s : Finset Frequency), ∑ k ∈ s, (torusSobolevWeight k ^ m * ‖b k‖) ^ 2 ≤ B) →
+                    (∀ (k : Frequency), Summable fun p => a p * b (k - p)) →
+                      ∀ (r : Finset Frequency),
+                        ∑ k ∈ r, (torusSobolevWeight k ^ m * ‖∑' (p : Frequency), a p * b (k - p)‖) ^ 2 ≤ C * A * B
+'SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1793:5: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1793:25: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1794:5: warning: Variable name `hpa` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hpa
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1794:31: warning: Variable name `hpb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hpb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1795:5: warning: Variable name `hcoeff` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcoeff
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_injective_continuous_periodic
+datumFourierCoeff_injective_continuous_periodic : ∀ (a b : SingularClosure.Field),
+  Continuous a →
+    Continuous b → SpatialPeriodic a → SpatialPeriodic b → datumFourierCoeff a = datumFourierCoeff b → a = b
+'SingularClosure.datumFourierCoeff_injective_continuous_periodic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1804:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1805:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1805:37: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.smoothFourierSynthesis_convection_coeff
+smoothFourierSynthesis_convection_coeff : ∀ (c : TorusSobolev 0),
+  (∀ (s : ℕ), Memℓp (sobolevWeightedCoeff s ↑c) 2) →
+    SpectralReality ↑c →
+      SpectralSolenoidal ↑c → datumFourierCoeff (convection (smoothFourierSynthesis ↑c)) = fullTransportCoefficients c
+'SingularClosure.smoothFourierSynthesis_convection_coeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1815:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1816:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1816:37: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY
+INFINITE_TRANSPORT_PRESSURE_RECOVERY : ∀ (c : TorusSobolev 0),
+  (∀ (s : ℕ), Memℓp (sobolevWeightedCoeff s ↑c) 2) →
+    SpectralReality ↑c →
+      SpectralSolenoidal ↑c →
+        ContDiff ℝ ∞ (fullTransportPressure c) ∧
+          SpatialPeriodic (fullTransportPressure c) ∧
+            PressureMeanZero (fullTransportPressure c) ∧
+              ∀ (x : Vec),
+                smoothFourierSynthesis (fullTransportCoefficients c) x +
+                    SingularClosure.gradient (fullTransportPressure c) x =
+                  smoothFourierSynthesis (fun k => coefficientLeray k (fullTransportCoefficients c k)) x
+'SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1831:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1832:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.smoothFourierSynthesis_laplacian_coeff
+smoothFourierSynthesis_laplacian_coeff : ∀ (c : FourierCoeff),
+  (∀ (i : Fin 3), RapidScalarFourier fun k => c k i) →
+    SpectralReality c → datumFourierCoeff (laplacian (smoothFourierSynthesis c)) = laplacianCoefficient c
+'SingularClosure.smoothFourierSynthesis_laplacian_coeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1844:5: warning: Variable name `hU` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hU
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1845:5: warning: Variable name `hcoeff` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcoeff
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH
+SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH : ∀ (U : (s : ℕ) → ℝ → TorusSobolev s),
+  (∀ (s : ℕ), ContDiffOn ℝ ∞ (U s) (Ici 0)) →
+    (∀ (s : ℕ) (t : ℝ), 0 ≤ t → ↑(U s t) = ↑(U 0 t)) →
+      ContDiffOn ℝ ∞ (fun z => smoothFourierSynthesis (↑(U 0 z.1)) z.2) forwardSpacetime
+'SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1854:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1855:42: warning: Variable name `hφ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hφ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1856:5: warning: Variable name `hconv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hconv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1859:5: warning: Variable name `hu` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hu
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1860:5: warning: Variable name `hu4` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hu4
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1861:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.canonicalLimit_physical_timeDerivative
+canonicalLimit_physical_timeDerivative : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a) (u : ℝ → TorusSobolev 0) (φ : ℕ → ℕ),
+    StrictMono φ →
+      (∀ (T : ℝ),
+          0 < T →
+            TendstoUniformlyOn (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState 0 t) u atTop
+              (Icc 0 T)) →
+        ContinuousOn u (Ici 0) →
+          ∀ (u4 : ℝ → TorusSobolev 4),
+            (∀ (t : ℝ), 0 ≤ t → ↑(u4 t) = ↑(u t)) →
+              ∀ (t : ℝ),
+                0 ≤ t →
+                  timeDerivative (fun z => smoothFourierSynthesis ↑(u z)) t =
+                    smoothFourierSynthesis (fullFourierRhs ν (u t))
+'SingularClosure.canonicalLimit_physical_timeDerivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.ax6_implies_fefferman_B_0_adjust
+ax6_implies_fefferman_B_0_adjust : AX6Statement → Fefferman_B_0_adjust
+'SingularClosure.ax6_implies_fefferman_B_0_adjust' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1880:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1881:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT
+GALERKIN_GLOBAL_STRONG_LIMIT : AX6Statement →
+  ∀ (ν : ℝ), 0 < ν → ∀ (a : SingularClosure.Field) (ha : SmoothSigmaZero a), Nonempty (GlobalGalerkinStrongLimit ν a ha)
+'SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+@GLOBAL_STRONG_SMOOTH_BOOTSTRAP : ∀ {ν : ℝ} {a : SingularClosure.Field} {ha : SmoothSigmaZero a}
+  (L : GlobalGalerkinStrongLimit ν a ha), ContDiffOn ℝ ∞ (fun z => L.velocity z.1 z.2) forwardSpacetime
+'SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.PERIODIC_PRESSURE_RECOVERY
+@PERIODIC_PRESSURE_RECOVERY : ∀ {ν : ℝ} {a : SingularClosure.Field} {ha : SmoothSigmaZero a}
+  (L : GlobalGalerkinStrongLimit ν a ha),
+  GlobalSmoothNSE ν a L.velocity L.pressure ∧
+    ∀ (t : ℝ),
+      0 ≤ t →
+        ∀ (k : Frequency),
+          ∫ (x : Vec) in unitCube, star (fourierCharacter k x) * ↑(L.pressure t x) =
+            if k = 0 then 0
+            else
+              (-∑ i, ∑ j, ↑(k i) * ↑(k j) * ∑' (p : Frequency), ↑(L.state 0 t) p i * ↑(L.state 0 t) (k - p) j) /
+                ∑ i, ↑(k i) ^ 2
+'SingularClosure.PERIODIC_PRESSURE_RECOVERY' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1912:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1913:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1913:37: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1914:5: warning: Variable name `hr` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hr
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
+PHYSICAL_NSE_OF_FULL_FOURIER_RHS : ∀ (ν : ℝ) (c : TorusSobolev 0),
+  (∀ (s : ℕ), Memℓp (sobolevWeightedCoeff s ↑c) 2) →
+    SpectralReality ↑c →
+      SpectralSolenoidal ↑c →
+        (∀ (s : ℕ), Memℓp (sobolevWeightedCoeff s (fullFourierRhs ν c)) 2) →
+          ∀ (x : Vec),
+            smoothFourierSynthesis (fullFourierRhs ν c) x + convection (smoothFourierSynthesis ↑c) x +
+                SingularClosure.gradient (fullTransportPressure c) x =
+              ν • laplacian (smoothFourierSynthesis ↑c) x
+'SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.fourierSobolevRhs_contDiff
+fourierSobolevRhs_contDiff : ∀ (ν : ℝ) (r : ℕ), ContDiff ℝ ∞ (fourierSobolevRhs ν r)
+'SingularClosure.fourierSobolevRhs_contDiff' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1934:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH
+AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH : AX6Statement →
+  ∀ (ν : ℝ) (hν : 0 < ν) (a : SingularClosure.Field) (ha : SmoothSigmaZero a),
+    ∃ U φ,
+      StrictMono φ ∧
+        (∀ (r : ℕ), ContDiffOn ℝ ∞ (U r) (Ici 0)) ∧
+          (∀ (r : ℕ) (t : ℝ), 0 ≤ t → (torusSobolevInclusion r) (U (r + 1) t) = U r t) ∧
+            (∀ (T : ℝ) (r : ℕ),
+                TendstoUniformlyOn (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState r t) (U r)
+                  atTop (Icc 0 T)) ∧
+              (∀ (r : ℕ), U r 0 = smoothDatumSobolev r a ⋯ ⋯) ∧
+                (∀ (r : ℕ) (t : ℝ),
+                    0 ≤ t → SpectralReality ↑(U r t) ∧ SpectralSolenoidal ↑(U r t) ∧ SpectralMeanZero ↑(U r t)) ∧
+                  ∀ (r : ℕ) (t : ℝ), 0 ≤ t → HasDerivWithinAt (U r) (fourierSobolevRhs ν r (U (r + 2) t)) (Ici 0) t
+'SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:1956:5: warning: Variable name `hU` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hU
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1957:5: warning: Variable name `hcoeff` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcoeff
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH
+SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH : ∀ (U : (s : ℕ) → ℝ → TorusSobolev s),
+  (∀ (s : ℕ), ContDiffOn ℝ ∞ (U s) (Ici 0)) →
+    (∀ (s : ℕ) (t : ℝ), 0 ≤ t → ↑(U s t) = ↑(U 0 t)) →
+      ContDiffOn ℝ ∞ (fun z => fullTransportPressure (U 0 z.1) z.2) forwardSpacetime
+'SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:1967:5: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1968:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:1968:37: warning: Variable name `hsol` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsol
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.fullTransportPressure_fourierCoeff_quadratic
+fullTransportPressure_fourierCoeff_quadratic : ∀ (c : TorusSobolev 0),
+  (∀ (s : ℕ), Memℓp (sobolevWeightedCoeff s ↑c) 2) →
+    SpectralReality ↑c →
+      SpectralSolenoidal ↑c →
+        ∀ (k : Frequency),
+          ∫ (x : Vec) in unitCube, star (fourierCharacter k x) * ↑(fullTransportPressure c x) =
+            if k = 0 then 0
+            else (-∑ i, ∑ j, ↑(k i) * ↑(k j) * ∑' (p : Frequency), ↑c p i * ↑c (k - p) j) / ∑ i, ↑(k i) ^ 2
+'SingularClosure.fullTransportPressure_fourierCoeff_quadratic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
