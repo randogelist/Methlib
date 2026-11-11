@@ -93,7 +93,7 @@ theorem CRITICAL_LH_SMOOTH_RELATIVE_ENERGY_RAW
       (∫ r in s..t, criticalGradientEnergy (G r)) +
         (∫ r in s..t, physicalDissipation (u r)) +
           2 * (∫ r in s..t, physicalFieldInner (v r) (laplacian (u r))) := by
-    rw [intervalIntegral.integral_congr_ae hdiff]
+    rw [intervalIntegral.integral_congr_ae_restrict hdiff]
     rw [intervalIntegral.integral_add (hDv.add hclassical.1) (hLap.const_mul 2),
       intervalIntegral.integral_add hDv hclassical.1, intervalIntegral.integral_const_mul]
   refine ⟨hDI, hN, ?_⟩

@@ -110,7 +110,7 @@ theorem CriticalRegularSolution.serrin_time_memLp
       simpa only [← pow_mul] using pow_le_pow_left₀ hE0 hE 2
     exact (hbound _ (U.flow.velocity_smoothSigmaZero t ht.1).smooth
       (U.flow.velocity_smoothSigmaZero t ht.1).periodic).trans
-      (mul_le_mul_of_nonneg_left (add_le_add_left hE2 _) hK.le)
+      (mul_le_mul_of_nonneg_left (add_le_add le_rfl hE2) hK.le)
   apply (integrable_norm_rpow_iff hmeas
     (by norm_num : (4 : ℝ≥0∞) ≠ 0) (by norm_num : (4 : ℝ≥0∞) ≠ ∞)).mp
   simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, Real.norm_eq_abs,

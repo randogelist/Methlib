@@ -93,7 +93,9 @@ theorem critical_smoothFourierSynthesis_dissipation_eq_norm_sq
     apply Summable.of_nonneg_of_le (fun k => Complex.normSq_nonneg _) _ (hcomponent i)
     intro k
     rw [← critical_sum_derivative_normSq c k i]
-    exact Finset.single_le_sum (fun l _ => Complex.normSq_nonneg _)
+    exact Finset.single_le_sum
+      (f := fun l : Fin 3 => Complex.normSq (spectralMultiplier (derivativeSymbol l) c k i))
+      (fun l _ => Complex.normSq_nonneg (spectralMultiplier (derivativeSymbol l) c k i))
       (Finset.mem_univ j)
   have hrapid (j i : Fin 3) :
       RapidScalarFourier (fun k => spectralMultiplier (derivativeSymbol j) c k i) := by

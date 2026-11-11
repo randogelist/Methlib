@@ -125,14 +125,11 @@ theorem criticalGalerkin_H1_time_difference_bound
     nlinarith
   rw [intervalIntegral.integral_add ((hgi.const_mul 3).add intervalIntegrable_const)
       (hhi.const_mul 3),
-    intervalIntegral.integral_add (hgi.const_mul 3) intervalIntegrable_const,
-    intervalIntegral.integral_const_mul, intervalIntegral.integral_const_mul,
-    intervalIntegral.integral_const] at hbound
-  simp only [sub_zero, smul_eq_mul] at hbound
+    intervalIntegral.integral_add (hgi.const_mul 3) intervalIntegrable_const] at hbound
+  simp only [intervalIntegral.integral_const_mul, intervalIntegral.integral_const,
+    sub_zero, smul_eq_mul] at hbound
   have hgtail := g.critical_H1_time_tail T B hT hg K hK
   have hhtail := h.critical_H1_time_tail T B hT hh K hK
-  change (∫ t in (0 : ℝ)..T, ‖g.sobolevState 1 t - h.sobolevState 1 t‖ ^ 2) ≤
-    3 * _ + T * (3 * η ^ 2) + 3 * _ at hbound
   nlinarith
 
 def GalerkinSolution.criticalTimeH1L2 {ν : ℝ} {a : Field} {N : ℕ}

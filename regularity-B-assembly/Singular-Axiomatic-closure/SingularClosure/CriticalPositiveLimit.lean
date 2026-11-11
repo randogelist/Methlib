@@ -44,8 +44,8 @@ theorem CRITICAL_POSITIVE_FLOW_OF_GALERKIN_LIMIT
   let U : ∀ s : ℕ, ℝ → TorusSobolev s := fun s t =>
     if ht : 0 < t then ⟨(u t).val, hmem s t ht⟩ else 0
   have hUc (s : ℕ) (t : ℝ) (ht : 0 < t) : (U s t).val = (u t).val := by
-    dsimp only [U]
-    rw [dif_pos ht]
+    have heq : U s t = (⟨(u t).val, hmem s t ht⟩ : TorusSobolev s) := dif_pos ht
+    exact congrArg (fun z : TorusSobolev s => z.val) heq
   have hU0 (t : ℝ) (ht : 0 < t) : U 0 t = u t := Subtype.ext (hUc 0 t ht)
   have hUb (s : ℕ) (τ T : ℝ) (hτ : 0 < τ) (hτT : τ < T) :
       ∃ B : ℝ, 0 ≤ B ∧ ∀ t ∈ Icc τ T, ‖U s t‖ ≤ B := by
@@ -78,6 +78,7 @@ theorem CRITICAL_POSITIVE_FLOW_OF_GALERKIN_LIMIT
     exact (hinc s t (hτ.trans_le ht.1)).symm
   have hU : ∀ s : ℕ, ContinuousOn (U s) (Ioi 0) := by
     intro s t ht
+    change 0 < t at ht
     have h := hUcc s (t / 2) (t + 1) (by positivity) (by linarith)
       t ⟨by linarith, by linarith⟩
     exact (h.continuousAt (Icc_mem_nhds (by linarith) (by linarith))).continuousWithinAt

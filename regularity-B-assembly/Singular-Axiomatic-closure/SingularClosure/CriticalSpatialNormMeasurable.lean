@@ -45,5 +45,29 @@ theorem criticalPositive_spatialNorm_six_aestronglyMeasurable
       (volume.restrict (Ioc (0 : ℝ) T)) :=
   criticalPositive_spatialNorm_aestronglyMeasurable L 6 (by norm_num) (by norm_num) T
 
+theorem criticalPositive_spatialNorm_aestronglyMeasurable_Ioi
+    {ν : ℝ} (L : CriticalPositiveSobolevFlow ν)
+    (p : ℝ≥0∞) (hp0 : p ≠ 0) (hpTop : p ≠ ⊤) :
+    AEStronglyMeasurable (fun t => criticalSpatialNorm p (L.velocity t))
+      (volume.restrict (Ioi (0 : ℝ))) := by
+  have hs : Ioi (0 : ℝ) = ⋃ n : ℕ, Ioc (0 : ℝ) (n : ℝ) := by
+    ext t
+    constructor
+    · intro ht
+      obtain ⟨n, hn⟩ := exists_nat_gt t
+      exact mem_iUnion.mpr ⟨n, ht, hn.le⟩
+    · intro ht
+      obtain ⟨n, hn⟩ := mem_iUnion.mp ht
+      exact hn.1
+  rw [hs]
+  exact AEStronglyMeasurable.iUnion
+    (fun n : ℕ => criticalPositive_spatialNorm_aestronglyMeasurable L p hp0 hpTop n)
+
+theorem criticalPositive_spatialNorm_six_aestronglyMeasurable_Ioi
+    {ν : ℝ} (L : CriticalPositiveSobolevFlow ν) :
+    AEStronglyMeasurable (fun t => criticalSpatialNorm 6 (L.velocity t))
+      (volume.restrict (Ioi (0 : ℝ))) :=
+  criticalPositive_spatialNorm_aestronglyMeasurable_Ioi L 6 (by norm_num) (by norm_num)
+
 end
 end SingularClosure

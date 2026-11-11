@@ -58,7 +58,7 @@ theorem critical_modal_square_budget
     _ ≤ atTop.liminf (fun n => ENNReal.ofReal (‖G n‖ ^ 2)) +
         ENNReal.ofReal δ * atTop.liminf J := by gcongr
     _ ≤ atTop.liminf (fun n => ENNReal.ofReal (‖G n‖ ^ 2)) +
-        atTop.liminf (fun n => ENNReal.ofReal δ * J n) := add_le_add_left hmul _
+        atTop.liminf (fun n => ENNReal.ofReal δ * J n) := add_le_add le_rfl hmul
     _ ≤ atTop.liminf (fun n => ENNReal.ofReal (‖G n‖ ^ 2) + ENNReal.ofReal δ * J n) :=
       critical_ennreal_liminf_add_le _ _
     _ ≤ ENNReal.ofReal A :=

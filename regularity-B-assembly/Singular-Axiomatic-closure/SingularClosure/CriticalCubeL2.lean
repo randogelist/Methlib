@@ -26,12 +26,10 @@ def criticalCubeTorusMap (x : Vec) : UnitAddTorus (Fin 3) := fun i => (x i : Uni
 
 theorem criticalCubeTorusMap_measurePreserving :
     MeasurePreserving criticalCubeTorusMap (volume.restrict unitCube) volume := by
-  let S : Set (Fin 3 → ℝ) := Set.univ.pi (fun _ => Icc (0 : ℝ) 1)
+  let S : Set (Fin 3 → ℝ) := {x | ∀ i : Fin 3, x i ∈ Icc (0 : ℝ) 1}
   have hpre : (@WithLp.ofLp 2 (Fin 3 → ℝ)) ⁻¹' S = unitCube := by
     ext x
-    change (∀ i : Fin 3, i ∈ Set.univ → 0 ≤ x i ∧ x i ≤ 1) ↔
-      (∀ i : Fin 3, 0 ≤ x i ∧ x i ≤ 1)
-    simp only [Set.mem_univ, forall_true_left]
+    rfl
   have hof : MeasurePreserving (@WithLp.ofLp 2 (Fin 3 → ℝ))
       (volume.restrict unitCube) (unitProductMeasure 3) := by
     have h := (PiLp.volume_preserving_ofLp (Fin 3)).restrict_preimage
@@ -39,8 +37,10 @@ theorem criticalCubeTorusMap_measurePreserving :
     rw [hpre] at h
     change MeasurePreserving _ _
       ((Measure.pi (fun _ : Fin 3 => (volume : Measure ℝ))).restrict S) at h
-    dsimp only [S] at h
-    rw [Measure.restrict_pi_pi] at h
+    have hS : S = Set.univ.pi (fun _ : Fin 3 => Icc (0 : ℝ) 1) := by
+      ext x
+      simp only [S, Set.mem_setOf_eq, Set.mem_pi, Set.mem_univ, forall_true_left]
+    rw [hS, Measure.restrict_pi_pi] at h
     exact h
   have hinterval : (volume : Measure ℝ).restrict (Ioc (0 : ℝ) 1) = unitIntervalMeasure := by
     exact Measure.restrict_congr_set Ioc_ae_eq_Icc
@@ -49,7 +49,8 @@ theorem criticalCubeTorusMap_measurePreserving :
       (volume : Measure (UnitAddTorus (Fin 3))) := by
     have h := measurePreserving_pi _ _
       (fun _ : Fin 3 => AddCircle.measurePreserving_mk 1 0)
-    simpa only [zero_add, hinterval] using! h
+    simp only [zero_add, hinterval] at h
+    convert! h using 1 <;> simp [unitProductMeasure, volume, AddCircle.haarAddCircle]
   exact hpi.comp hof
 
 def criticalScalarCubePullback : TorusScalarL2 →L[ℝ] Lp ℂ 2 (volume.restrict unitCube) :=
@@ -100,7 +101,8 @@ theorem torusPhysicalFieldL2_fourierCoeff (v : Field) (hv : Continuous v) :
   exact torusDatumL2_fourierBasis_repr v hv i k
 
 theorem critical_Lp_sum_coe {ι : Type*} (s : Finset ι) (f : ι → PhysicalCubeL2) :
-    (∑ i ∈ s, f i) =ᵐ[volume.restrict unitCube] (fun x => ∑ i ∈ s, f i x) := by
+    ((∑ i ∈ s, f i : PhysicalCubeL2) : Field) =ᵐ[volume.restrict unitCube]
+      (fun x => ∑ i ∈ s, f i x) := by
   classical
   induction s using Finset.induction_on with
   | empty => simpa only [Finset.sum_empty] using (Lp.coeFn_zero Vec 2 (volume.restrict unitCube))
@@ -125,10 +127,13 @@ theorem torusToPhysicalCubeL2_physicalField
     filter_upwards [hc, hpull, hdatum] with x hx hp' hd
     change F i x = _
     simp only [Function.comp_apply] at hp'
+    change criticalScalarCubePullback (torusDatumL2 v hv i) x =
+      torusDatumL2 v hv i (criticalCubeTorusMap x) at hp'
     rw [hx, hp', hd]
     change (torusDatumComponent v i (criticalCubeTorusMap x)).re • unitVector i = _
     exact congrArg (fun z : ℂ => z.re • unitVector i) (torusDatumComponent_mk v hp i x)
-  have hsum : (∑ i : Fin 3, F i) =ᵐ[volume.restrict unitCube] v := by
+  have hsum : ((∑ i : Fin 3, F i : PhysicalCubeL2) : Field)
+      =ᵐ[volume.restrict unitCube] v := by
     apply (critical_Lp_sum_coe Finset.univ F).trans
     have hall : ∀ᵐ x ∂volume.restrict unitCube, ∀ i : Fin 3, F i x = v x i • unitVector i :=
       ae_all_iff.mpr hF
@@ -139,6 +144,7 @@ theorem torusToPhysicalCubeL2_physicalField
   have hdef : torusToPhysicalCubeL2 (torusPhysicalFieldL2 v hv) = ∑ i : Fin 3, F i := by
     simp only [torusToPhysicalCubeL2, ContinuousLinearMap.sum_apply,
       ContinuousLinearMap.comp_apply, F, torusPhysicalFieldL2]
+    rfl
   rw [hdef]
   exact hsum.trans (physicalFieldL2_coe v hv).symm
 
@@ -177,7 +183,7 @@ theorem CriticalRegularSolution.physicalL2_eq_field
 theorem CriticalRegularSolution.physicalL2_initial_trace
     {ν : ℝ} {a : CriticalSobolev 1} (S : CriticalRegularSolution ν a) :
     Tendsto S.physicalL2 (𝓝[>] (0 : ℝ)) (𝓝 (criticalInitialPhysicalL2 a)) := by
-  have h := (S.physicalL2_continuous 0 le_rfl).mono
+  have h := (S.physicalL2_continuous 0 (by change (0 : ℝ) ≤ 0; exact le_rfl)).mono
     (Ioi_subset_Ici_self : Ioi (0 : ℝ) ⊆ Ici 0)
   simpa only [CriticalRegularSolution.physicalL2, S.initial, criticalInitialPhysicalL2] using h
 

@@ -68,7 +68,7 @@ theorem CRITICAL_LH_SMOOTH_RELATIVE_ENERGY_TRANSPORT
       physicalFieldInner (v r) (convection (u r))) =
       -(∫ r in s..t, criticalRoughTransport (v r - u r)
         (G r - fderiv ℝ (u r)) (u r)) := by
-    rw [intervalIntegral.integral_congr_ae hnonlinear, intervalIntegral.integral_neg]
+    rw [intervalIntegral.integral_congr_ae_restrict hnonlinear, intervalIntegral.integral_neg]
   refine ⟨hDI, hRI, ?_⟩
   rw [hNint] at hrelative
   nlinarith only [hrelative]

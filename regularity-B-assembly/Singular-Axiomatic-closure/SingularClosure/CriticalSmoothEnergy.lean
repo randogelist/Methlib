@@ -43,8 +43,9 @@ theorem critical_hasDerivAt_real_cube_integral
   have hsubset : closedBall t (t / 2) ×ˢ unitCube ⊆ {z : ℝ × Vec | 0 < z.1} := by
     intro z hz
     exact critical_positive_of_mem_half_ball ht hz.1
-  obtain ⟨C, hC⟩ := ((isCompact_closedBall t (t / 2)).prod isCompact_unitCube).
-    exists_bound_of_continuousOn (hD.mono hsubset)
+  obtain ⟨C, hC⟩ :=
+    ((isCompact_closedBall t (t / 2)).prod isCompact_unitCube).exists_bound_of_continuousOn
+      (hD.mono hsubset)
   have hbound : ∀ᵐ x ∂volume.restrict unitCube,
       ∀ r ∈ closedBall t (t / 2), ‖D r x‖ ≤ C := by
     filter_upwards [ae_restrict_mem isCompact_unitCube.measurableSet] with x hx
@@ -74,8 +75,9 @@ theorem critical_real_cube_integral_continuousOn_Icc
   have hsubset : Icc s t ×ˢ unitCube ⊆ {z : ℝ × Vec | 0 < z.1} := by
     intro z hz
     exact hs.trans_le hz.1.1
-  obtain ⟨C, hC⟩ := (isCompact_Icc.prod isCompact_unitCube).
-    exists_bound_of_continuousOn (hF.mono hsubset)
+  obtain ⟨C, hC⟩ :=
+    ((isCompact_Icc : IsCompact (Icc s t)).prod isCompact_unitCube).exists_bound_of_continuousOn
+      (hF.mono hsubset)
   apply continuousOn_of_dominated (μ := volume.restrict unitCube) (bound := fun _ : Vec => C)
   · intro r hr
     have hc : Continuous (F r) :=
@@ -117,8 +119,8 @@ theorem CriticalPositiveSolenoidalTest.timeDerivative_eq
     timeDerivative u t x =
       fderiv ℝ (fun z : ℝ × Vec => u z.1 z.2) (t, x) (1, 0) := by
   have hj : DifferentiableAt ℝ (fun z : ℝ × Vec => u z.1 z.2) (t, x) :=
-    (hu.smooth.contDiffAt (critical_positive_spacetime_isOpen.mem_nhds ht)).
-      differentiableAt (by simp)
+    (hu.smooth.contDiffAt (critical_positive_spacetime_isOpen.mem_nhds
+      (show (t, x) ∈ {z : ℝ × Vec | 0 < z.1} from ht))).differentiableAt (by simp)
   have hpath : HasDerivAt (fun r : ℝ => (r, x)) (1, 0) t :=
     (hasDerivAt_id t).prodMk (hasDerivAt_const t x)
   have h : HasDerivAt (fun r => u r x)
@@ -132,8 +134,8 @@ theorem CriticalPositiveSolenoidalTest.time_hasDerivAt
     (t : ℝ) (ht : 0 < t) (x : Vec) :
     HasDerivAt (fun r => u r x) (timeDerivative u t x) t := by
   have hj : DifferentiableAt ℝ (fun z : ℝ × Vec => u z.1 z.2) (t, x) :=
-    (hu.smooth.contDiffAt (critical_positive_spacetime_isOpen.mem_nhds ht)).
-      differentiableAt (by simp)
+    (hu.smooth.contDiffAt (critical_positive_spacetime_isOpen.mem_nhds
+      (show (t, x) ∈ {z : ℝ × Vec | 0 < z.1} from ht))).differentiableAt (by simp)
   have hpath : HasDerivAt (fun r : ℝ => (r, x)) (1, 0) t :=
     (hasDerivAt_id t).prodMk (hasDerivAt_const t x)
   rw [hu.timeDerivative_eq t ht x]
@@ -184,12 +186,15 @@ theorem critical_smooth_energy_pairing (t : ℝ) (ht : 0 < t) :
   have hI₁ := physicalFieldInner_integrable (u t) (timeDerivative u t) hus.continuous hud
   have hI₂ := physicalFieldInner_integrable (u t) (convection (u t)) hus.continuous hconv
   have hI₃ := physicalFieldInner_integrable (u t) (gradient (p t)) hus.continuous hgrad
+  have hI₁₂ : IntegrableOn (fun x =>
+      inner ℝ (u t x) (timeDerivative u t x) + inner ℝ (u t x) (convection (u t) x))
+      unitCube volume := hI₁.add hI₂
   have heq : timeDerivative u t + convection (u t) + gradient (p t) = ν • laplacian (u t) :=
     funext (fun x => hNSE t ht x)
   have h := congrArg (physicalFieldInner (u t)) heq
   simp only [physicalFieldInner, Pi.add_apply, inner_add_right,
     Pi.smul_apply, inner_smul_right] at h
-  rw [integral_add (hI₁.add hI₂) hI₃, integral_add hI₁ hI₂, integral_const_mul] at h
+  rw [integral_add hI₁₂ hI₃, integral_add hI₁ hI₂, integral_const_mul] at h
   rw [critical_smooth_integral_inner_convection_eq_zero
       (u t) hus (hu.periodic t ht) (hu.solenoidal t ht),
     critical_smooth_integral_inner_gradient_eq_zero (u t) (p t) hus (hp t ht)

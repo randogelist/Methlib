@@ -29,7 +29,7 @@ theorem criticalCoordinateTest_memLp (v u : Field) (j : Fin 3)
     MemLp (criticalCoordinateTest v u j) 2 (volume.restrict unitCube) := by
   have hvj : MemLp (fun x => v x j) 2 (volume.restrict unitCube) :=
     (EuclideanSpace.proj j : Vec →L[ℝ] ℝ).comp_memLp' hv
-  exact MemLp.smul (p := 2) (q := ∞) hvj (critical_continuous_memLp_cube u hu ∞)
+  exact MemLp.smul (p := 2) (q := ∞) (critical_continuous_memLp_cube u hu ∞) hvj
 
 theorem critical_matrix_apply_eq_sum (G : Vec →L[ℝ] Vec) (v : Vec) :
     G v = ∑ j : Fin 3, v j • G (unitVector j) := by
@@ -101,8 +101,8 @@ theorem CRITICAL_ROUGH_TRANSPORT_SKEW
     criticalCoordinateTest_memLp v (coordinateDerivative u j) j hv.velocity_L2
       (coordinateDerivative_continuous hu j)
   have hzero (n : ℕ) :
-      (∑ j : Fin 3, physicalFieldInner (coordinateDerivative (w n) j) (A j) +
-        physicalFieldInner (w n) (B j)) = 0 := by
+      (∑ j : Fin 3, (physicalFieldInner (coordinateDerivative (w n) j) (A j) +
+        physicalFieldInner (w n) (B j))) = 0 := by
     let f : Vec → ℝ := fun x => inner ℝ (u x) (w n x)
     have hf : ContDiff ℝ ∞ f := hu.inner ℝ (hw n)
     have hfp : SpatialPeriodic f := by
@@ -148,14 +148,24 @@ theorem CRITICAL_ROUGH_TRANSPORT_SKEW
     have hz := hdiv f hf hfp
     unfold physicalFieldInner at hz
     simp_rw [hpoint] at hz
-    rw [integral_finsetSum Finset.univ (fun j _ => (hintA j).add (hintB j))] at hz
+    have hsumIntegral :
+        (∫ x in unitCube, ∑ j : Fin 3,
+          (inner ℝ (coordinateDerivative (w n) j x) (A j x) +
+            inner ℝ (w n x) (B j x))) =
+        ∑ j : Fin 3, (∫ x in unitCube,
+          inner ℝ (coordinateDerivative (w n) j x) (A j x) +
+            inner ℝ (w n x) (B j x)) := by
+      apply integral_finsetSum Finset.univ
+      intro j _
+      exact (hintA j).add (hintB j)
+    rw [hsumIntegral] at hz
     simp_rw [hsplit] at hz
     exact hz
   have hlimit : Tendsto (fun n =>
-      ∑ j : Fin 3, physicalFieldInner (coordinateDerivative (w n) j) (A j) +
-        physicalFieldInner (w n) (B j)) atTop
-      (𝓝 (∑ j : Fin 3, physicalFieldInner (fun x => G x (unitVector j)) (A j) +
-        physicalFieldInner v (B j))) := by
+      ∑ j : Fin 3, (physicalFieldInner (coordinateDerivative (w n) j) (A j) +
+        physicalFieldInner (w n) (B j))) atTop
+      (𝓝 (∑ j : Fin 3, (physicalFieldInner (fun x => G x (unitVector j)) (A j) +
+        physicalFieldInner v (B j)))) := by
     apply tendsto_finsetSum Finset.univ
     intro j _
     have ha : Tendsto (fun n => physicalFieldInner (coordinateDerivative (w n) j) (A j))
@@ -169,8 +179,8 @@ theorem CRITICAL_ROUGH_TRANSPORT_SKEW
           (fun n => fderiv ℝ (w n)) G (A j) hwDL2 hv.derivative_L2 (hA j) hderiv
     exact ha.add (critical_physicalFieldInner_tendsto w v (B j)
       hwL2 hv.velocity_L2 (hB j) hvel)
-  have hsum : (∑ j : Fin 3, physicalFieldInner (fun x => G x (unitVector j)) (A j) +
-      physicalFieldInner v (B j)) = 0 := by
+  have hsum : (∑ j : Fin 3, (physicalFieldInner (fun x => G x (unitVector j)) (A j) +
+      physicalFieldInner v (B j))) = 0 := by
     apply tendsto_nhds_unique hlimit
     simpa only [hzero] using (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (𝓝 0))
   rw [Finset.sum_add_distrib] at hsum

@@ -57,7 +57,8 @@ theorem criticalFiniteBandState_eq_tail (q : ℤ) (s : Finset FourierIndex) (N :
     (hs : ∀ ki ∈ s, ki ∉ sobolevCutoffIndices N) (u : CriticalSobolev q) :
     criticalFiniteBandState q s (criticalCoeff q u) =
       criticalFiniteBandState q s (criticalCoeff q (u - criticalSobolevCutoff q N u)) := by
-  apply WithLp.ext_iff.mpr
+  unfold criticalFiniteBandState
+  apply congrArg (WithLp.toLp 2)
   funext ki
   have hk : ki.val.1 ∉ sobolevCutoffModes N := by
     intro hk
@@ -90,7 +91,8 @@ theorem criticalFiniteBandState_norm_mono {q r : ℤ} (hqr : q ≤ r)
 theorem criticalFiniteBandState_continuous (q : ℤ) (s : Finset FourierIndex) :
     Continuous (fun u : CriticalSobolev q =>
       criticalFiniteBandState q s (criticalCoeff q u)) := by
-  apply PiLp.continuous_toLp.comp
+  unfold criticalFiniteBandState
+  apply (PiLp.continuous_toLp 2 (fun _ : ↥s => ℂ)).comp
   apply continuous_pi
   intro ki
   exact continuous_const.mul (criticalCoeff_continuous q ki.val.1 ki.val.2)

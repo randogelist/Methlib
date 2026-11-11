@@ -2,8 +2,7 @@ import SingularClosure.CriticalYoung
 
 set_option autoImplicit false
 set_option Elab.async false
-open Set MeasureTheory Filter
-open scoped BigOperators ContDiff Topology ENNReal Interval
+open scoped BigOperators
 namespace SingularClosure
 noncomputable section
 
