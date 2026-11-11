@@ -233,6 +233,30 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET"
+    },
+    {
+      "name": "SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnstrophy_identity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnstrophy_identity"
+    },
+    {
+      "name": "SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport"
+    },
+    {
+      "name": "SingularClosure.forwardGlobalSolution_exists",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.forwardGlobalSolution_exists"
     }
   ]
 }

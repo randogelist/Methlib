@@ -34,10 +34,14 @@ theorem isCompact_unitCube : IsCompact unitCube := by
   constructor
   · intro hx
     refine ⟨WithLp.ofLp x, ?_, ?_⟩
-    · simpa [unitCube, Set.mem_pi] using hx
+    · change ∀ i : Fin 3, i ∈ Set.univ →
+        0 ≤ WithLp.ofLp x i ∧ WithLp.ofLp x i ≤ 1
+      intro i _
+      exact hx i
     · simp
   · rintro ⟨y, hy, rfl⟩
-    simpa [unitCube, Set.mem_pi] using hy
+    intro i
+    exact hy i (Set.mem_univ i)
 
 theorem coordinateDerivative_continuous {v : Field}
     (hv : ContDiff ℝ ∞ v) (i : Fin 3) :
@@ -47,9 +51,9 @@ theorem coordinateDerivative_continuous {v : Field}
 theorem gradientSquareDensity_continuous {v : Field}
     (hv : ContDiff ℝ ∞ v) : Continuous (gradientSquareDensity v) := by
   unfold gradientSquareDensity
-  exact continuous_finset_sum _ (fun i _ =>
-    continuous_finset_sum _ (fun j _ =>
-      (((PiLp.continuous_apply j).comp
+  exact continuous_finsetSum _ (fun i _ =>
+    continuous_finsetSum _ (fun j _ =>
+      ((((EuclideanSpace.proj j : Vec →L[ℝ] ℝ).continuous).comp
         (coordinateDerivative_continuous hv i)).pow 2)))
 
 theorem gradientSquareDensity_integrableOn {v : Field}
@@ -77,11 +81,11 @@ theorem coordinateDerivative_component_zero {v : Field}
     (i : Fin 3) (x : Vec) : coordinateDerivative v i x j = 0 := by
   have hc : HasFDerivAt (fun y : Vec => v y j)
       ((EuclideanSpace.proj j).comp (fderiv ℝ v x)) x :=
-    (EuclideanSpace.proj j).hasFDerivAt.comp x (hv x).hasFDerivAt
+    (EuclideanSpace.proj j : Vec →L[ℝ] ℝ).hasFDerivAt.comp x (hv x).hasFDerivAt
   have he : (fun y : Vec => v y j) = (fun _ : Vec => (0 : ℝ)) :=
     funext hz
   rw [he] at hc
-  have hzero := hc.unique (hasFDerivAt_const x (0 : ℝ))
+  have hzero := hc.unique (hasFDerivAt_const (0 : ℝ) x)
   have happ := congrArg (fun L : Vec →L[ℝ] ℝ => L (unitVector i)) hzero
   simpa [coordinateDerivative] using happ
 
@@ -239,8 +243,8 @@ theorem PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET (N : ℕ)
         ((6 : ℝ≥0∞) * sixEnstrophy N (c t)) ^ 2 := by
       apply lintegral_mono
       intro t
-      gcongr
-      exact PHYSICAL_ENSTROPHY_LE_SIX_BUDGET N (c t)
+      have h := PHYSICAL_ENSTROPHY_LE_SIX_BUDGET N (c t)
+      simpa only [pow_two] using mul_le_mul' h h
     _ = ∫⁻ t in Icc (0 : ℝ) T,
         (36 : ℝ≥0∞) * (sixEnstrophy N (c t)) ^ 2 := by
       congr 1

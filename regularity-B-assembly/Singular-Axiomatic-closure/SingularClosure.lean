@@ -12,3 +12,6 @@ import SingularClosure.GalerkinExistence
 import SingularClosure.GalerkinEnergy
 import SingularClosure.UniformBounds
 import SingularClosure.LerayPressure
+import SingularClosure.FourierIntegral
+import SingularClosure.DissipativeODE
+import SingularClosure.EnstrophyInequality

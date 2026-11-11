@@ -41,13 +41,14 @@ theorem fourierPhaseCLM_apply (k : Frequency) (x : Vec) :
 
 theorem fourierPhaseCLM_unitVector (k : Frequency) (j : Fin 3) :
     fourierPhaseCLM k (unitVector j) = derivativeSymbol j k := by
-  simp [fourierPhaseCLM, unitVector, EuclideanSpace.single_apply, mul_ite]
+  simp [fourierPhaseCLM, unitVector, apply_ite, mul_ite]
 
 theorem fourierCharacter_hasFDerivAt (k : Frequency) (x : Vec) :
     HasFDerivAt (fourierCharacter k)
       (fourierCharacter k x • fourierPhaseCLM k) x := by
-  convert (fourierPhaseCLM k).hasFDerivAt.cexp using 1 <;>
-    simp only [fourierPhaseCLM_apply, fourierCharacter]
+  have hp : HasFDerivAt (fun y : Vec => fourierPhaseCLM k y)
+      (fourierPhaseCLM k) x := (fourierPhaseCLM k).hasFDerivAt
+  simpa only [fourierPhaseCLM_apply, fourierCharacter] using hp.cexp
 
 theorem fourierCharacter_eq_exp_phase (k : Frequency) (x : Vec) :
     fourierCharacter k x = Complex.exp (fourierPhaseCLM k x) := by
@@ -167,7 +168,8 @@ theorem finiteSynthesis_divergence_free (N : ℕ) (a : FourierCoeff)
     (ha : SpectralSolenoidal a) (x : Vec) :
     divergence (finiteSynthesis N a) x = 0 := by
   rw [finiteSynthesis_divergence_eq]
-  simp [ha]
+  have hs : ∀ k : Frequency, (∑ i : Fin 3, (k i : ℂ) * a k i) = 0 := ha
+  simp only [hs, mul_zero, Finset.sum_const_zero, Complex.zero_re]
 
 theorem physicalChannel_divergence_free (N : ℕ) (A : Fin 6)
     (a : FourierCoeff) (ha : SpectralSolenoidal a) (x : Vec) :

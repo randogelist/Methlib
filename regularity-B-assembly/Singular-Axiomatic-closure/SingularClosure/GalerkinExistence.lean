@@ -63,7 +63,8 @@ theorem finiteGalerkinRhs_uniform_local_time (ν : ℝ) (N : ℕ) (R : ℝ) :
     simp only [Finset.notMem_empty, iUnion_of_empty, iUnion_empty, subset_empty_iff] at hI
     exact absurd (hI ▸ hz₀) (Set.notMem_empty z₀)
   · refine ⟨I.inf' hIne ε, ?_, fun z₀ hz₀ t₀ => ?_⟩
-    · rw [Finset.lt_inf'_iff]
+    · change (0 : ℝ) < I.inf' hIne ε
+      rw [Finset.lt_inf'_iff]
       exact fun y _ => hε y
     · have hz₀' : z₀ ∈ ⋃ y ∈ I, ball y (r y) := hI hz₀
       rw [mem_iUnion₂] at hz₀'

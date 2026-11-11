@@ -168,6 +168,7 @@ theorem coefficientTransport_complex_energy_zero
       rw [Finset.mul_sum]
       apply Finset.sum_congr rfl
       intro j hj
+      simp only [Pi.sub_apply]
       push_cast
       ring
     rw [hfreq]
@@ -193,18 +194,18 @@ theorem coefficientNonlinearPower_eq_zero
   have h := congrArg Complex.re
     (coefficientTransport_complex_energy_zero N c hsupp hreal hsol)
   unfold coefficientNonlinearPower
-  simp only [Complex.sum_re, Complex.zero_re] at h
+  simp only [Complex.re_sum, Complex.zero_re] at h
   calc
     _ = ∑ k ∈ cutoffModes N,
         (∑ i : Fin 3, star (c k i) *
           coefficientLeray k (coefficientTransport N c k) i).re := by
-            simp only [Complex.sum_re]
+            simp only [Complex.re_sum]
     _ = ∑ k ∈ cutoffModes N,
         (∑ i : Fin 3, star (c k i) * coefficientTransport N c k i).re := by
           apply Finset.sum_congr rfl
           intro k hk
           rw [coefficientLeray_pairing k (c k) (coefficientTransport N c k) (hsol k)]
-    _ = 0 := by simpa only [Complex.sum_re] using h
+    _ = 0 := by simpa only [Complex.re_sum] using h
 
 /-- Exact finite-dimensional energy identity, with no nonlinear remainder. -/
 theorem GalerkinSolution.coefficientEnergy_identity

@@ -26,7 +26,7 @@ theorem frequency_complex_square_sum_ne_zero (k : Frequency) (hk : k ≠ 0) :
     (∑ i : Fin 3, (k i : ℂ) ^ 2) ≠ 0 := by
   have hr : (∑ i : Fin 3, (k i : ℝ) ^ 2) ≠ 0 := by
     intro heq
-    simp only [Fin.sum_univ_succ] at heq
+    simp [Fin.sum_univ_succ] at heq
     have h0 : (k 0 : ℝ) = 0 := by
       nlinarith [sq_nonneg (k 1 : ℝ), sq_nonneg (k 2 : ℝ)]
     have h1 : (k 1 : ℝ) = 0 := by
@@ -59,6 +59,7 @@ theorem coefficientLeray_solenoidal (k : Frequency) (v : Fin 3 → ℂ) :
     simp_rw [hterm]
     rw [← Finset.sum_div, ← Finset.sum_mul]
     field_simp
+    ring
 
 theorem coefficientLeray_eq_of_solenoidal (k : Frequency) (v : Fin 3 → ℂ)
     (hv : (∑ i : Fin 3, (k i : ℂ) * v i) = 0) :
@@ -100,8 +101,8 @@ theorem pressureFromTransport_recovery (k : Frequency) (v : Fin 3 → ℂ)
       exact_mod_cast (ne_of_gt (mul_pos (by norm_num) Real.pi_pos))
     simp only [pressureFromTransport, coefficientLeray, hk, if_false]
     field_simp
-    linear_combination (k i : ℂ) * (∑ j : Fin 3, (k j : ℂ) * v j) *
-      (show Complex.I ^ 2 = -1 from Complex.I_sq)
+    ring_nf
+    simp [Complex.I_sq]
 
 end
 

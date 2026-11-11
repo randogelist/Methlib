@@ -404,4 +404,52 @@ example : ∀ (N : ℕ)
 #check @SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
 #print axioms SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET
 
+
+open Metric
+
+example : ∀ (k l : Frequency),
+    (∫ x in unitCube, star (fourierCharacter k x) * fourierCharacter l x) =
+      if k = l then 1 else 0 :=
+  @SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY"
+#check @SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY
+#print axioms SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY
+
+
+open Metric
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ}
+    (g : GalerkinSolution ν a N) {t : ℝ} (ht : 0 ≤ t),
+    HasDerivWithinAt (fun r => coefficientDissipation N (g.coeff r))
+      ((-2 * ν) * coefficientLaplacianSquare N (g.coeff t) -
+        2 * coefficientEnstrophyNonlinearPower N (g.coeff t)) (Ici 0) t :=
+  @SingularClosure.GalerkinSolution.coefficientEnstrophy_identity
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnstrophy_identity"
+#check @SingularClosure.GalerkinSolution.coefficientEnstrophy_identity
+#print axioms SingularClosure.GalerkinSolution.coefficientEnstrophy_identity
+
+example : ∀ (N : ℕ) (c : FourierCoeff) (hc : SpectralSolenoidal c),
+    coefficientEnstrophyNonlinearPower N c =
+      ∑ k ∈ cutoffModes N,
+        ((2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ)) *
+          (∑ i : Fin 3, star (c k i) * coefficientTransport N c k i).re :=
+  @SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport"
+#check @SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport
+#print axioms SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport
+
+
+example {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
+    [FiniteDimensional ℝ V] (g : V → V) (hg : ContDiff ℝ 1 g)
+    (hdiss : ∀ v : V, inner (𝕜 := ℝ) v (g v) ≤ (0 : ℝ)) (x₀ : V) :
+    ∃ c : ℝ → V, c 0 = x₀ ∧ ∀ t, 0 ≤ t → HasDerivAt c (g (c t)) t :=
+  SingularClosure.forwardGlobalSolution_exists g hg hdiss x₀
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.forwardGlobalSolution_exists"
+#check @SingularClosure.forwardGlobalSolution_exists
+#print axioms SingularClosure.forwardGlobalSolution_exists
+
 end
