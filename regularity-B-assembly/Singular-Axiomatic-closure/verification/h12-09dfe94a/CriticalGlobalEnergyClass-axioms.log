@@ -1,0 +1,17 @@
+EXACT_TYPE_PASS:SingularClosure.SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS
+SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : CriticalSobolev 1),
+      CriticalSigmaZero a →
+        criticalNonlinearConstant * ‖a‖ < ν →
+          ∃ U,
+            (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi 0)) ∧
+                ∫ (t : ℝ) in Ioi 0, ‖U.flow.threeHalfState t‖ ^ 2 ≤ criticalDissipationBudget ν a) ∧
+              (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi 0)) ∧
+                  ∫ (t : ℝ) in Ioi 0, ‖U.flow.negativeHalfDerivative t‖ ^ 2 ≤ criticalTimeDerivativeBudget ν a) ∧
+                ∀ (T : ℝ),
+                  0 < T →
+                    IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2) (Icc 0 T) volume ∧
+                      ∫ (t : ℝ) in 0..T, physicalDissipation (U.flow.velocity t) ^ 2 ≤
+                        (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) / (4 * (ν - criticalNonlinearConstant * ‖a‖))
+'SingularClosure.SMALL_DATA_CRITICAL_GLOBAL_ENERGY_CLASS' depends on axioms: [propext, Classical.choice, Quot.sound]

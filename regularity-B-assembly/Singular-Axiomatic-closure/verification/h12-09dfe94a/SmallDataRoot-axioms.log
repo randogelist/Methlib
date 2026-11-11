@@ -1,0 +1,19 @@
+EXACT_TYPE_PASS:SingularClosure.SMALL_DATA_CRITICAL_REGULARITY
+SMALL_DATA_CRITICAL_REGULARITY : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : CriticalSobolev 1), CriticalSigmaZero a → criticalNonlinearConstant * ‖a‖ < ν → CriticalGlobalRegularity ν a
+'SingularClosure.SMALL_DATA_CRITICAL_REGULARITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY
+NSE_H12_SIGMA_ZERO_SMALL_REGULARITY : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : CriticalSobolev 1),
+      CriticalSigmaZero a → criticalNonlinearConstant * ‖a‖ < ν → CriticalDatumAX6 ν a ∧ CriticalGlobalRegularity ν a
+'SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT
+NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT : ∃ c,
+  0 < c ∧
+    ∀ (ν : ℝ),
+      0 < ν →
+        ∀ (a : CriticalSobolev 1),
+          CriticalSigmaZero a → ‖a‖ < c * ν → CriticalDatumAX6 ν a ∧ CriticalGlobalRegularity ν a
+'SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT' depends on axioms: [propext, Classical.choice, Quot.sound]

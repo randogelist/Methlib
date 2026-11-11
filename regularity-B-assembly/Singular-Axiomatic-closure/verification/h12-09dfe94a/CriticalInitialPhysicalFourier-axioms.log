@@ -1,0 +1,10 @@
+EXACT_TYPE_PASS:SingularClosure.criticalInitialPhysicalL2_fourierCoeff
+criticalInitialPhysicalL2_fourierCoeff : ∀ (a : CriticalSobolev 1),
+  SpectralReality (criticalCoeff 1 a) →
+    SpectralMeanZero (criticalCoeff 1 a) → datumFourierCoeff ↑↑(criticalInitialPhysicalL2 a) = criticalCoeff 1 a
+'SingularClosure.criticalInitialPhysicalL2_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.criticalInitialPhysicalL2_norm
+criticalInitialPhysicalL2_norm : ∀ (a : CriticalSobolev 1),
+  SpectralReality (criticalCoeff 1 a) →
+    SpectralMeanZero (criticalCoeff 1 a) → ‖criticalInitialPhysicalL2 a‖ = ‖(criticalSobolevLower 0 1 ⋯) a‖
+'SingularClosure.criticalInitialPhysicalL2_norm' depends on axioms: [propext, Classical.choice, Quot.sound]

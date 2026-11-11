@@ -1,0 +1,10 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_ROUGH_TRANSPORT_HOLDER
+CRITICAL_ROUGH_TRANSPORT_HOLDER : ∀ (u v : Field) (G : Vec → Vec →L[ℝ] Vec),
+  MemLp u 6 (volume.restrict unitCube) →
+    MemLp v 3 (volume.restrict unitCube) →
+      MemLp G 2 (volume.restrict unitCube) →
+        IntegrableOn (fun x => inner ℝ (u x) ((G x) (v x))) unitCube volume ∧
+          ENNReal.ofReal |criticalRoughTransport v G u| ≤
+            eLpNorm u 6 (volume.restrict unitCube) * eLpNorm v 3 (volume.restrict unitCube) *
+              eLpNorm G 2 (volume.restrict unitCube)
+'SingularClosure.CRITICAL_ROUGH_TRANSPORT_HOLDER' depends on axioms: [propext, Classical.choice, Quot.sound]

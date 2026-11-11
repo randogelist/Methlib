@@ -1,0 +1,11 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_ROUGH_TRANSPORT_INTERPOLATED
+CRITICAL_ROUGH_TRANSPORT_INTERPOLATED : ∃ A,
+  0 < A ∧
+    ∀ (u v : Field) (G : Vec → Vec →L[ℝ] Vec),
+      MemLp u 6 (volume.restrict unitCube) →
+        CriticalPhysicalH1 v G →
+          |criticalRoughTransport v G u| ≤
+            A * criticalSpatialNorm 6 u * √(criticalSpatialNorm 2 v) *
+                √(criticalSpatialNorm 2 G + criticalSpatialNorm 2 v) *
+              criticalSpatialNorm 2 G
+'SingularClosure.CRITICAL_ROUGH_TRANSPORT_INTERPOLATED' depends on axioms: [propext, Classical.choice, Quot.sound]

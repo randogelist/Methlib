@@ -1,49 +1,62 @@
 # Singular-Axiomatic-closure
 
-**11/11 — !! A_TIER. !!! CONDITIONAL_FORMAL_CLOSURE.**
+**H^(1/2)_{sigma,0,small}: !!!! UNCONDITIONAL_CLOSURE.**
+
+```lean
+SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+```
+
+$$
+\nu>0,\quad a\in\dot H^{1/2}_{\sigma,0}(\mathbb T^3),\quad
+C_*\|a\|_{\dot H^{1/2}}<\nu
+\quad\Longrightarrow\quad
+\mathrm{AX6}_\nu(a)\ \land\ \mathrm{GlobalRegular}_\nu(a).
+$$
+
+Domain: unit three-torus. Forcing: zero. Initial trace: strong Hhalf.
+Smoothness: positive time. Constants: C_*>0, c_*=C_*^(-1).
+Additional analytic, certificate, or admission premises: none.
+
+The same constructed solution satisfies global L2(H3half), global L2(HminusHalf)
+for its actual positive-time derivative, global L4(L6), the sharp quartic-gradient
+budget, actual physical Leray-Hopf membership, and uniqueness against every
+member of the explicitly defined physical Leray-Hopf class with the same datum.
+
+| Verification | Result |
+|---|---|
+| Exact full small-data root | PASS |
+| Extension modules | 104/104 |
+| Extension endpoint audits | 33/33 declarations; 27 audit modules |
+| Original endpoint audit | 171/171 |
+| Complete package build | PASS |
+| Root axioms | `propext`, `Classical.choice`, `Quot.sound` |
+| Lean | 4.33.0; external cached GitHub Actions |
+| Mathlib | `db584cd6d46c92f209a44c0f1c829460d327499d` |
+| Local Lean executions | 0 |
+
+Source commit: `09dfe94a1ef150e21d09df3013fbe09002ef139c`.
+External evidence: [43059293572](https://github.com/randogelist/Methlib/actions/runs/43059293572).
+
+- [Exact root](SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean)
+- [A-tier theorem and verification report](NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL_A_TIER.txt)
+- [Verification manifest](verification/h12-final-run.json)
+- [Stage ledger](H12_SMALL_STATUS.json)
+- [Native cached replay](run.cmd)
+
+## Frozen unrestricted-data root
+
+**11/11 — !! A_TIER; !!! CONDITIONAL_FORMAL_CLOSURE.**
 
 ```lean
 SingularClosure.ax6_implies_fefferman_B_0_adjust :
   AX6Statement → Fefferman_B_0_adjust
 ```
 
-`AX6Statement`: unresolved analytic premise. Custom axiom declarations: none.
+The universal `AX6Statement` remains an explicit unresolved premise of this
+unrestricted-data implication. The small-data theorem discharges datumwise AX6
+on its stated critical ball. It does not establish universal AX6.
 
-| Verification | Result |
-|---|---|
-| Root compiler | PASS |
-| Root exact type | PASS |
-| Root axioms | `propext`, `Classical.choice`, `Quot.sound` |
-| Complete source build | PASS |
-| Aggregate 171-declaration audit | PASS: 171/171, standard axioms only |
-| Lean | 4.33.0, external cached GitHub Actions |
-| Mathlib | `db584cd6d46c92f209a44c0f1c829460d327499d` |
-| Local Lean executions | 0 |
-| Unconditional closure | Not established |
-
-Root evidence: [2d899390 / run 42961722080](https://github.com/randogelist/Methlib/actions/runs/42961722080).
-
-## Exact scope
-
-$$
-\mathrm{AX6Statement}\Rightarrow\forall\nu>0\ \forall a\in C^\infty_{\sigma,0}(\mathbb T^3),
-\ \exists(u,p)\ \mathrm{GlobalSmoothNSE}_\nu(a,u,p).
-$$
-
-`GlobalSmoothNSE`: joint smoothness on closed forward spacetime; spatial periodicity; divergence-free velocity; actual pointwise unforced NSE; initial trace `u(0)=a`; zero velocity and pressure means. Time differentiation at zero: `derivWithin` on `[0,∞)`. Smallness premises: none.
-
-## Unresolved premise
-
-$$
-\forall\nu>0\ \forall a\in C^\infty_{\sigma,0}\ \forall T>0\ \exists M<\infty\ \forall N\ge1\ \forall g_N:
-\quad\int_0^T\left(\sum_{A=1}^{6}\|\nabla Q_Au_N(t)\|_2^2\right)^2dt\le M.
-$$
-
-`g_N : GalerkinSolution ν a N`; `M` is independent of `N` and `g_N`. Spatial and temporal budget integrals: nonnegative extended integrals.
-
-## Frozen endpoints
-
-| # | Endpoint | Status |
+| # | Frozen endpoint | Status |
 |---:|---|---|
 | 1 | `SIX_CHANNEL_PROJECTIONS` | !! A_TIER |
 | 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | !! A_TIER |
@@ -57,19 +70,15 @@ $$
 | 10 | `PERIODIC_PRESSURE_RECOVERY` | !! A_TIER |
 | 11 | `ax6_implies_fefferman_B_0_adjust` | !! A_TIER |
 
-## Artifacts
+[Original endpoint ledger](ENDPOINTS.json).
+Historical correction/review files record earlier source checkpoints; the
+verification manifest above specifies the current small-data source and audit.
 
-- [Root.lean](SingularClosure/Root.lean)
-- [Root A-tier report](ax6_implies_fefferman_B_0_adjust_A_TIER.txt)
-- [Complete closure report](Singular_Axiomatic_Closure_A_TIER.txt)
-- [run.cmd](run.cmd)
-- [Endpoint ledger](ENDPOINTS.json)
-- [Compiler, exact-type and axiom evidence](verification/)
-
-Native Windows replay, from the extracted project directory:
+## Native Windows replay
 
 ```cmd
 call run.cmd
 ```
 
-`run.cmd`: pinned toolchain, pinned Mathlib cached objects, full build, fresh 171-declaration audit.
+Pinned Lean and Mathlib; cached dependencies preserved; full source build;
+33 extension exact-type/axiom checks; original 171-declaration audit.

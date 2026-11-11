@@ -1,0 +1,17 @@
+EXACT_TYPE_PASS:SingularClosure.SMALL_DATA_GALERKIN_GLOBAL_COMPACTNESS
+SMALL_DATA_GALERKIN_GLOBAL_COMPACTNESS : ∀ (ν : ℝ) (hν : 0 ≤ ν) (a : CriticalSobolev 1)
+  (hreal : SpectralReality (criticalCoeff 1 a)) (hsol : SpectralSolenoidal (criticalCoeff 1 a)),
+  criticalNonlinearConstant * ‖a‖ < ν →
+    ∃ u φ,
+      StrictMono φ ∧
+        (∀ (t : ℝ), 0 ≤ t → ‖u t‖ ≤ ‖a‖) ∧
+          ContinuousOn (fun t => (criticalToTorusH0 1 ⋯) (u t)) (Ici 0) ∧
+            (∀ (T : ℝ),
+                TendstoUniformlyOn (fun n t => (criticalDatumGalerkinFamily ν hν a hreal hsol (φ n)).sobolevState 0 t)
+                  (fun t => (criticalToTorusH0 1 ⋯) (u t)) atTop (Icc 0 T)) ∧
+              ∀ (T : ℝ),
+                0 ≤ T →
+                  ∃ u1,
+                    Tendsto (fun n => (criticalDatumGalerkinFamily ν hν a hreal hsol (φ n)).criticalTimeH1L2 T) atTop
+                      (𝓝 u1)
+'SingularClosure.SMALL_DATA_GALERKIN_GLOBAL_COMPACTNESS' depends on axioms: [propext, Classical.choice, Quot.sound]

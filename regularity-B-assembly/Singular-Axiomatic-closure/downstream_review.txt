@@ -1,3 +1,6 @@
+HISTORICAL CHECKPOINT RECORD. Current verification: verification/h12-final-run.json.
+Current small-data closure: NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL_A_TIER.txt.
+
 DOWNSTREAM PROOF-BOUNDARY REVIEW
 Reference branch commit: 63ab35d1e4dc236c438cf5f9dce381d1211cecb2
 Scope: frozen endpoints 7--11; no endpoint promotion.

@@ -1,3 +1,6 @@
+HISTORICAL CHECKPOINT RECORD. Current verification: verification/h12-final-run.json.
+Current small-data closure: NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL_A_TIER.txt.
+
 # Corrections and verification
 
 ## Initial assembly

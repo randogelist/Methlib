@@ -1,0 +1,11 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_GALERKIN_TIME_DERIVATIVE_BUDGET
+@CRITICAL_GALERKIN_TIME_DERIVATIVE_BUDGET : ∀ {ν T : ℝ} {N : ℕ},
+  0 ≤ ν →
+    ∀ (a : CriticalSobolev 1),
+      SpectralReality (criticalCoeff 1 a) →
+        criticalNonlinearConstant * ‖a‖ < ν →
+          0 ≤ T →
+            ∀ (g : GalerkinSolution ν (finiteSynthesis N (criticalCoeff 1 a)) N),
+              ∫ (t : ℝ) in 0..T, ‖g.criticalRhs (-1) t‖ ^ 2 ≤
+                (ν + criticalTransportConstant * ‖a‖) ^ 2 * ‖a‖ ^ 2 / (2 * (ν - criticalNonlinearConstant * ‖a‖))
+'SingularClosure.CRITICAL_GALERKIN_TIME_DERIVATIVE_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]

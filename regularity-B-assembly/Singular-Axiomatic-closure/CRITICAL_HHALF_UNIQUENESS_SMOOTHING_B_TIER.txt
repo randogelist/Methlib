@@ -1,0 +1,297 @@
+CRITICAL_HHALF_UNIQUENESS_SMOOTHING
+B_TIER_DERIVATION
+
+THEOREM.
+Let ν>0. Let T³ be a fixed three-dimensional flat torus. All velocity fields
+below are real, periodic, divergence free, and have spatial mean zero. Let
+Λ=(-Δ)^(1/2) on the nonzero Fourier modes and write H^s_σ,0 for the associated
+Sobolev spaces. Homogeneous and inhomogeneous norms are equivalent on these
+mean-zero spaces.
+
+Let a∈H^(1/2)_σ,0. Suppose an actual distributional solution u of
+
+    ∂_t u + P div(u⊗u) = νΔu                         (1)
+
+has distributional initial trace a and, for EVERY finite T>0, satisfies
+
+    u ∈ L∞(0,T;H^(1/2)) ∩ L²(0,T;H^(3/2)),
+    ∂_t u ∈ L²(0,T;H^(-1/2)).                       (2)
+
+The intervals in (2) include integrability arbitrarily close to t=0.
+The stronger hypothesis sup_{t≥0} ‖u(t)‖H^(1/2)≤ε ν, with ε a prescribed
+small constant, is permitted but is unnecessary for the implication proved
+here. Its role in a small-data theorem is to establish the solution and (2).
+
+Then:
+(a) u has a representative in C([0,T];H^(1/2)) for every finite T and u(0)=a.
+(b) u satisfies the exact L² energy equality and is a Leray–Hopf solution.
+(c) Every Leray–Hopf solution with datum a equals u, including at every time
+    in the standard weakly continuous L² representatives.
+(d) For every 0<δ<T and every integer m≥0,
+
+    u ∈ C([δ,T];H^m) ∩ L²(δ,T;H^(m+1)).
+
+    The velocity and the mean-zero pressure are C∞ for t>0.
+(e) If a is smooth, all the preceding integer-order continuity statements
+    hold on [0,T]. Every spatial and right-time derivative extends
+    continuously to t=0. Thus velocity and normalized pressure are smooth
+    up to the initial-time boundary.
+
+This theorem assumes the actual solution (1) with (2); it does not assume
+critical-space global well-posedness, a Serrin regularity theorem, or the
+sought uniqueness/smoothing conclusion. The proof below derives those
+conclusions through energy estimates and local Sobolev constructions.
+
+PROOF.
+
+1. Strong initial trace and exact energy.
+
+Put z=Λ^(1/2)u. On every finite interval,
+
+    z∈L²H¹,                  z_t=Λ^(1/2)u_t∈L²H^(-1).
+
+The Hilbert-triple time-continuity lemma applied to
+H¹⊂L²⊂H^(-1) gives z∈C([0,T];L²). Consequently
+u∈C([0,T];H^(1/2)). Its value at zero equals a by the assumed distributional
+trace; equality in distributions identifies the H^(1/2) elements uniquely.
+
+Also u∈L²H¹ and u_t∈L²H^(-1). The same Hilbert-triple lemma gives the
+absolutely continuous L² norm identity
+
+    (1/2)d/dt ‖u‖₂² = ⟨u_t,u⟩H^(-1),H¹.
+
+For almost every t, u(t)∈H^(3/2)⊂H¹. Periodic integration by parts and
+incompressibility give b(u,u,u)=0, where
+
+    b(f,g,h)=∫T³ (f·∇)g·h.
+
+This cancellation extends from smooth fields by H¹ approximation: b is a
+continuous trilinear form on H¹×H¹×H¹, using the L⁶, L², L³ Hölder exponents.
+Pairing (1) with u therefore yields, for every 0≤s≤t≤T,
+
+    (1/2)‖u(t)‖₂² + ν∫_s^t ‖∇u(r)‖₂² dr = (1/2)‖u(s)‖₂².       (3)
+
+Thus u satisfies the Leray–Hopf conditions, with strong initial convergence.
+The argument also supplies energy equality starting at every positive time.
+
+2. The decisive integrable coefficient.
+
+Cauchy–Schwarz in Fourier variables gives the exact homogeneous interpolation
+inequality
+
+    ‖u(t)‖Ḣ¹² ≤ ‖u(t)‖Ḣ^(1/2) ‖u(t)‖Ḣ^(3/2).
+
+Hence
+
+    I_T := ∫_0^T ‖∇u(t)‖₂⁴ dt
+         ≤ ‖u‖L∞Ḣ^(1/2)² ‖u‖L²Ḣ^(3/2)² <∞.                  (4)
+
+The mean-zero Sobolev inequality ‖f‖₆≤C‖∇f‖₂ implies
+
+    u∈L⁴(0,T;L⁶),          ∫_0^T ‖u(t)‖₆⁴dt≤C I_T.           (5)
+
+The exponents satisfy 2/4+3/6=1. No regularity theorem is invoked from that
+identity; the needed conclusions are derived below.
+
+3. Uniqueness against every Leray–Hopf solution.
+
+Let v be any Leray–Hopf solution with datum a and put w=v−u. Conservation of
+the mean implies that w is mean zero. Combining the energy inequality for v,
+the energy equality (3) for u, and the cross-tested weak equations gives
+
+    (1/2)‖w(t)‖₂² + ν∫_0^t ‖∇w‖₂²
+       ≤ (1/2)‖w(0)‖₂² + ∫_0^t |b(w,w,u)|.                 (6)
+
+Here (6) is a legitimate relative-energy inequality, not a formal test by an
+unavailable smooth function. Indeed, the energy class of v implies
+v∈L⁴L³ by ‖v‖₃≤C‖v‖₂^(1/2)‖∇v‖₂^(1/2). Thus
+
+    ‖u‖L⁴L⁶ ‖v‖L⁴L³ ‖∇v‖L²L² <∞,
+
+which controls the nonlinear cross term after moving its derivative onto v.
+Moreover u_t∈L²H^(-1/2) pairs with v∈L²H^(1/2). Time smoothing and Fourier
+truncation of u converge in these norms and in L⁴L⁶, and therefore permit u
+as a limit of admissible tests in the v equation. The u equation is tested
+against similarly regularized v; its nonlinear and viscous terms converge
+by the same bounds. The endpoint products converge using strong L²
+continuity of u and weak L² continuity of v. These limits produce (6) first
+at the energy-inequality times, which suffice for the argument below.
+
+The integrand obeys
+
+    |b(w,w,u)|
+      ≤ ‖u‖₆ ‖w‖₃ ‖∇w‖₂
+      ≤ C ‖u‖₆ ‖w‖₂^(1/2) ‖∇w‖₂^(3/2)
+      ≤ (ν/2)‖∇w‖₂² + Cν^(-3)‖u‖₆⁴ ‖w‖₂².              (7)
+
+The final line is Young's inequality with conjugate exponents 4/3 and 4.
+Since w(0)=0, (5)–(7) and integral Grönwall give ‖w(t)‖₂²=0 for almost every
+t. Weak continuity then gives w(t)=0 for every t. The same proof applies on
+any translated interval where the two solutions have the same initial
+trace and the comparison field has the stated integrability.
+
+4. Local H¹ construction and its continuation criterion.
+
+The local result used here is subcritical and follows directly from finite
+Fourier Galerkin equations. For initial b∈H¹_σ,0, set
+
+    X=‖∇U‖₂²,               Y=‖ΔU‖₂².
+
+For the smooth Galerkin equations, the H¹ energy calculation yields
+
+    (1/2)X' + νY = −b(U,U,−ΔU).
+
+Sobolev embedding and interpolation give
+
+    |b(U,U,−ΔU)|
+      ≤ ‖U‖₆ ‖∇U‖₃ ‖ΔU‖₂
+      ≤ C X^(3/4)Y^(3/4)
+      ≤ (ν/2)Y + Cν^(-3)X³.
+
+After adjusting C,
+
+    X' + νY ≤ Cν^(-3)X³.                                (8)
+
+The scalar comparison inequality supplies X(t)≤2X(0) on a time interval
+of length cν³/X(0)² when X(0)>0. When X(0)=0, mean zero gives b=0 and the
+zero solution is global. Integrating (8) supplies a uniform L²H² bound.
+Also
+
+    ‖P(U·∇U)‖₂² ≤ C X^(3/2)Y^(1/2),
+
+so the time derivatives are bounded in L²L² on this local interval.
+Compactness of the Galerkin sequence gives strong L²H¹ convergence and
+passes the quadratic term in distributions. The limit has
+
+    U∈L∞H¹∩L²H²,                U_t∈L²L².
+
+The Hilbert-triple lemma, after applying Λ, gives U∈C H¹ and the prescribed
+H¹ initial trace. It satisfies (3). Step 3 gives uniqueness on the local
+interval, since an H¹ strong solution belongs to L⁴L⁶. This constructs the
+local H¹ solution without any global critical-space theorem.
+
+The local existence interval depends only on ν, the fixed torus, and the H¹
+norm of the starting datum. Therefore an H¹ solution can fail to continue
+at a finite maximal time only if its H¹ norm becomes unbounded. Equivalently,
+if X and ∫Y stay bounded up to that time, the above derivative estimate and
+Hilbert-triple continuity give a terminal H¹ trace; the local construction
+at that trace extends the solution. Local uniqueness glues the extensions.
+
+5. Exclusion of finite H¹ blowup for the given critical solution.
+
+Fix 0<δ<T. Since u∈L²H^(3/2), choose s∈(0,δ) with u(s)∈H¹. Construct the
+local H¹ solution U with initial datum u(s). Equation (3) makes the restriction
+of u to [s,T] Leray–Hopf with that datum. Step 3 identifies U=u on their
+common interval.
+
+On that interval (8) has the form
+
+    X' ≤ [Cν^(-3)X²]X.
+
+The bracket is integrable by (4), because U=u. Grönwall therefore gives
+
+    X(t) ≤ X(s) exp(Cν^(-3)∫_s^t X(r)²dr)
+         ≤ X(s) exp(Cν^(-3)I_T).                          (9)
+
+Integrating (8) and using the bound in (9) also bounds ∫Y up to any proposed
+finite maximal time ≤T. Step 4 then extends the H¹ solution past that time,
+a contradiction. Since T is arbitrary, U continues for all t≥s. In
+particular u∈C([δ,T];H¹)∩L²(δ,T;H²).
+
+The additional information (4) is essential: the cubic differential
+inequality X'≤CX³ alone permits finite-time blowup. The argument uses the
+integrable linear-growth coefficient X² furnished by the critical bounds.
+
+6. Spatial smoothing by integer-order continuation.
+
+For integer m≥2, H^m(T³) is a multiplication algebra. On mean-zero fields,
+its norm is equivalent to the homogeneous norm. Write
+
+    Z_m=‖U‖Ḣ^m²,              W_m=‖U‖Ḣ^(m+1)².
+
+The product bound
+
+    ‖(U·∇)U‖Ḣ^m ≤ C_m ‖U‖Ḣ^m ‖U‖Ḣ^(m+1)
+
+and the H^m energy identity imply
+
+    Z_m' + ν W_m ≤ C_m ν^(-1) Z_m².                       (10)
+
+The same Galerkin argument as in step 4 constructs a local H^m solution,
+with lifespan depending only on its H^m datum and ν. It lies in
+C H^m∩L²H^(m+1), with time derivative in L²H^(m−1), and it agrees with the
+H¹ solution by step 3.
+
+Start with the H¹ solution from step 5. Its L²H² bound allows a time
+s_2∈(s,δ) with u(s_2)∈H². For the local H² solution, the coefficient Z_2 in
+Z_2'≤C_2ν^(-1)Z_2 Z_2 is integrable on [s_2,T], by the existing L²H² bound.
+Thus Grönwall bounds Z_2 and then (10) bounds ∫W_2. The H² continuation
+criterion gives C H²∩L²H³ up to T.
+
+Inductively, suppose C H^(m−1)∩L²H^m has been obtained from a time
+s_(m−1)<δ. Choose s_m∈(s_(m−1),δ) with u(s_m)∈H^m. On the common interval,
+∫Z_m is already finite by the induction hypothesis. Equation (10) gives
+
+    Z_m(t) ≤ Z_m(s_m) exp(C_mν^(-1)∫_(s_m)^t Z_m(r)dr).
+
+The resulting bounded H^m norm and integrated H^(m+1) norm prevent any
+finite H^m endpoint. This proves C H^m∩L²H^(m+1) on [δ,T] for every m.
+Only finitely many induction steps are needed for each fixed m; the choices
+s_m<δ introduce no common-time obstruction. All representatives agree
+with the fixed C H^(1/2) representative.
+
+7. Time derivatives and pressure.
+
+For every integer q≥2, the conclusions of step 6 place the right side of
+
+    u_t = νΔu − P div(u⊗u)
+
+in C([δ,T];H^q), by using two additional spatial orders. The distributional
+identity therefore yields u∈C¹([δ,T];H^q). Differentiating the polynomial
+right side repeatedly and using arbitrarily high spatial orders gives
+u∈C^j([δ,T];H^q) for all j,q. Sobolev embedding then gives joint C∞
+regularity on (0,∞)×T³.
+
+Define the pressure by spatial mean zero and
+
+    −Δp = ∂_i∂_j(u_i u_j).
+
+The nonzero-mode Fourier multiplier defining p is bounded on every H^q.
+Thus p has the same positive-time joint smoothness. Its spatial mean-zero
+normalization removes the arbitrary function of time.
+
+8. Smooth initial datum.
+
+If a is smooth, step 4 starts at s=0. The uniqueness argument identifies
+this local H¹ solution with u immediately, and (4), (8), and (9) continue it
+globally. For every m≥2, a∈H^m, so the local H^m construction starts at zero
+instead of at a selected positive time. Induction using (10) and the
+preceding order's L²H^m estimate gives C([0,T];H^m)∩L²(0,T;H^(m+1)).
+
+The equation now has a continuous H^q right side on [0,T] for every q.
+Its integral form gives the right derivative at zero, and differentiation
+of the polynomial equation inductively gives every right-time derivative
+there. The pressure formula behaves identically. This proves smoothness
+up to the time boundary in the precise one-sided sense claimed in (e).
+For merely H^(1/2) datum, no smoothness of u at t=0 is asserted; the strong
+H^(1/2) trace in (a) is the applicable conclusion.
+
+The proof of (a)–(e) is complete.
+
+SCOPE AND STATUS.
+The theorem is a mathematical consequence of the literal distributional
+NSE, its given initial trace, and the concrete bounds (2). No small-data
+existence theorem is used as a premise of the derivation. This file does
+not itself construct the global critical solution from a; that upstream
+construction is a separate obligation. No Lean compilation or theorem-level
+axiom audit is asserted by this B-tier artifact.
+
+REFERENCE CHECKS FOR STANDARD LOCAL TOOLS.
+The local Galerkin H¹ construction, higher Sobolev estimates, and smoothing
+framework can be checked in Emil Wiedemann, Lecture Notes: Navier–Stokes
+Equations, Chapter 4 (three-dimensional torus):
+https://www.math.fau.de/wp-content/uploads/2023/03/wiedemann-NSE-final.pdf
+The Hilbert-triple continuity framework is also developed in the Cambridge
+notes based on Edriss Titi's lectures, Section 5.1:
+https://www.dpmms.cam.ac.uk/~db875/notes/navier.pdf
+The estimates and continuation argument required here are displayed above.
