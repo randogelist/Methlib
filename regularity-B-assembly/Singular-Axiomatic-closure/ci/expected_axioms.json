@@ -527,6 +527,126 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_initial_le"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION"
+    },
+    {
+      "name": "SingularClosure.coefficientLeray_energy_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientLeray_energy_le"
+    },
+    {
+      "name": "SingularClosure.coefficientEnergy_leray_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientEnergy_leray_le"
+    },
+    {
+      "name": "SingularClosure.integral_norm_sq_leray_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.integral_norm_sq_leray_le"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.timeDerivative_L2_bound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_L2_bound"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND"
+    },
+    {
+      "name": "SingularClosure.torusSobolevInclusion_tail",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tail"
+    },
+    {
+      "name": "SingularClosure.torusSobolevInclusion_compact",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_compact"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_H2_H1_compact_closedBall",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H2_H1_compact_closedBall"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+    },
+    {
+      "name": "SingularClosure.finiteSobolev_H1_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H1_norm_sq"
+    },
+    {
+      "name": "SingularClosure.finiteSobolev_H2_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H2_norm_sq"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq"
+    },
+    {
+      "name": "SingularClosure.FOURIER_COORDINATE_DECAY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FOURIER_COORDINATE_DECAY"
+    },
+    {
+      "name": "SingularClosure.FOURIER_POLYNOMIAL_DECAY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FOURIER_POLYNOMIAL_DECAY"
     }
   ]
 }

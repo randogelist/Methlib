@@ -48,7 +48,7 @@ theorem unitCubeSobolevBump_derivative_bound :
     ∃ K : ℝ, 0 ≤ K ∧
       ∀ x : Vec, ‖fderiv ℝ (unitCubeSobolevBump : Vec → ℝ) x‖ ≤ K := by
   have hc : Continuous (fderiv ℝ (unitCubeSobolevBump : Vec → ℝ)) :=
-    (unitCubeSobolevBump.contDiff.fderiv_right (m := 0) (by norm_num)).continuous
+    ((unitCubeSobolevBump.contDiff (n := ∞)).fderiv_right (m := 0) (by norm_num)).continuous
   have hs : HasCompactSupport (fderiv ℝ (unitCubeSobolevBump : Vec → ℝ)) :=
     unitCubeSobolevBump.hasCompactSupport.fderiv ℝ
   obtain ⟨K, hK⟩ := hs.exists_bound_of_continuous hc
@@ -87,7 +87,7 @@ theorem unitCubeCutoff_fderiv_norm_le {v : Vec → F} (hv : ContDiff ℝ ∞ v)
     (x : Vec) :
     ‖fderiv ℝ (unitCubeCutoff v) x‖ ≤ ‖fderiv ℝ v x‖ + K * ‖v x‖ := by
   have hχ : DifferentiableAt ℝ (unitCubeSobolevBump : Vec → ℝ) x :=
-    unitCubeSobolevBump.contDiff.differentiable (by norm_num) x
+    (unitCubeSobolevBump.contDiff (n := ∞)).differentiable (by norm_num) x
   have hvx : DifferentiableAt ℝ v x := hv.differentiable (by norm_num) x
   have hχnorm : ‖unitCubeSobolevBump x‖ ≤ 1 := by
     rw [Real.norm_eq_abs, abs_of_nonneg unitCubeSobolevBump.nonneg]
@@ -233,7 +233,7 @@ theorem PERIODIC_SOBOLEV_H1_L6 [FiniteDimensional ℝ F] :
 theorem sum_coordinate_unitVector (x : Vec) :
     (∑ i : Fin 3, x i • unitVector i) = x := by
   ext j
-  simp [unitVector, EuclideanSpace.single_apply]
+  fin_cases j <;> simp [unitVector, Fin.sum_univ_succ, Pi.single_apply]
 
 theorem opNorm_le_sum_coordinate_norm (L : Vec →L[ℝ] F) :
     ‖L‖ ≤ ∑ i : Fin 3, ‖L (unitVector i)‖ := by

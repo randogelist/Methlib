@@ -196,6 +196,7 @@ theorem meanZero_sub {a b : Field} (ha : MeanZero a) (hb : MeanZero b) :
     MeanZero (a - b) := by
   refine ⟨ha.1.sub hb.1, ?_⟩
   unfold spatialMean
+  simp only [Pi.sub_apply]
   rw [integral_sub ha.1 hb.1]
   change spatialMean a - spatialMean b = 0
   rw [ha.2, hb.2, sub_self]

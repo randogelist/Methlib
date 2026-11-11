@@ -46,3 +46,13 @@ import SingularClosure.PhysicalBilinear
 import SingularClosure.EnstrophyAbsorption
 import SingularClosure.FourierPressure
 import SingularClosure.InitialCutoffBounds
+import SingularClosure.StrongAccumulation
+import SingularClosure.LerayL2Contraction
+import SingularClosure.GalerkinTimeDerivative
+import SingularClosure.ConvectionBound
+import SingularClosure.TorusSobolev
+import SingularClosure.StrongTimeBounds
+import SingularClosure.UniformStrongBounds
+import SingularClosure.StrongSobolevRealization
+import SingularClosure.TorusGalerkinSobolev
+import SingularClosure.FourierDecay

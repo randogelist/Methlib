@@ -1,0 +1,34 @@
+GALERKIN_ENERGY_IDENTITY — A_TIER
+Completion marker: !=!
+
+EXACT SCOPE
+For every real viscosity nu, physical datum a, cutoff N, actual
+GalerkinSolution g : GalerkinSolution nu a N, and T >= 0:
+  IntervalIntegrable (t -> physicalDissipation (g.velocity t)) volume 0 T
+and
+  physicalEnergy (g.velocity T)
+    + 2*nu*integral_0^T physicalDissipation (g.velocity t) dt
+  = physicalEnergy (finiteSynthesis N (datumFourierCoeff a)).
+
+physicalEnergy v = integral_unitCube ||v(x)||^2 dx.
+physicalDissipation v = integral_unitCube gradientSquareDensity v dx.
+Both are actual physical integrals. The initial coefficients are actual
+Fourier integrals of a. The actual nonlinear energy cancellation and finite
+Parseval identities are proved dependencies, not assumptions.
+
+EXTERNAL EVIDENCE
+Commit: 9ae282c28a7034e6f6c044a359205a7ae60380f1
+Run: https://github.com/randogelist/Methlib/actions/runs/42942665131
+Job: 130267945247
+Compiler: Lean 4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Independent module compilation: PASS
+Exact-type check: PASS
+Theorem-level axiom audit: PASS
+Axioms: propext, Classical.choice, Quot.sound
+
+AGGREGATE STATUS
+Other candidate modules failed in the same run. This report promotes only
+the exact independently audited endpoint 4. It does not assert endpoint 5,
+7, 8, 9, 10 or 11, or unconditional global PDE regularity.
+Local Lean execution: zero.

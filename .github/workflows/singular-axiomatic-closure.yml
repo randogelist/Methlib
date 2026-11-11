@@ -103,18 +103,21 @@ jobs:
           path: package/.lake/packages
           key: ${{ steps.deps-cache.outputs.cache-primary-key }}
 
-      - name: Restore the project cache for the exact source revision
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+      - name: Restore checked project objects for the pinned dependencies
+        id: build_cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: package/.lake/build
-          key: singular-ax6-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake*', 'package/SingularClosure.lean', 'package/SingularClosure/**/*.lean') }}
+          key: singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/lakefile.toml', 'package/SingularClosure.lean', 'package/SingularClosure/**/*.lean') }}
+          restore-keys: |
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
 
       - name: Compile and audit frozen endpoints independently
         id: independent_endpoints
         run: |
           set -uo pipefail
           endpoint_status=0
-          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy 2:SmoothSixEnstrophy 1:SixChannelProjections 5:EnstrophyAbsorption; do
+          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy 2:SmoothSixEnstrophy 1:SixChannelProjections 5:EnstrophyAbsorption 7:StrongSobolevRealization; do
             endpoint_number="${endpoint_spec%%:*}"
             endpoint_module="${endpoint_spec#*:}"
             if lake build "SingularClosure.${endpoint_module}" 2>&1 | tee "evidence/endpoint-${endpoint_number}-build.log"; then
@@ -146,6 +149,13 @@ jobs:
           set -euo pipefail
           lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
           python3 ci/check_axioms.py evidence/axioms.log ci/expected_axioms.json | tee evidence/audit.json
+
+      - name: Preserve independently checked project objects
+        if: always() && steps.build_cache.outcome == 'success' && steps.build_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.build_cache.outputs.cache-primary-key }}
 
       - name: Upload the tested source
         if: always()

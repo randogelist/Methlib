@@ -34,7 +34,9 @@ theorem FINITE_PHYSICAL_BESSEL (N : ℕ) (a : Field) (ha : Continuous a)
     exact FINITE_PHYSICAL_ENERGY_PARSEVAL N _ hreal
   have hp : (∫ x in unitCube, inner ℝ (a x) (u x)) =
       coefficientEnergy N (datumFourierCoeff a) := by
-    simp_rw [real_inner_comm (a _) (u _)]
+    have hswap (x : Vec) : inner ℝ (a x) (u x) = inner ℝ (u x) (a x) :=
+      real_inner_comm _ _
+    simp_rw [hswap]
     rw [integral_finiteSynthesis_pairing N (datumFourierCoeff a) a ha]
     unfold coefficientEnergy
     apply Finset.sum_congr rfl

@@ -60,7 +60,7 @@ theorem finiteScalarSynthesis_of_reality (N : ℕ) (b : Frequency → ℂ)
   · intro k hk
     simp
   · intro k hk
-    simp only [fourierCharacter_neg, hb, star_mul, star_star]
+    simp only [fourierCharacter_neg, hb, star_mul, star_star, mul_comm]
 
 /-- The real integral is finite and vanishes on the physical fundamental cube. -/
 theorem finiteScalarSynthesis_meanZero (N : ℕ) (b : Frequency → ℂ) :
@@ -78,8 +78,6 @@ theorem finiteScalarSynthesis_meanZero (N : ℕ) (b : Frequency → ℂ) :
     isCompact_unitCube, ?_⟩
   change (∫ x in unitCube,
     (∑ k ∈ cutoffModes N, fourierCharacter k x * b k).re) = 0
-  rw [Complex.reCLM.integral_comp_comm hsum,
-    integral_finsetSum (cutoffModes N) (fun k _ => hterm k)]
   have hz : (∑ k ∈ cutoffModes N,
       ∫ x in unitCube, fourierCharacter k x * b k) = 0 := by
     apply Finset.sum_eq_zero
@@ -87,8 +85,14 @@ theorem finiteScalarSynthesis_meanZero (N : ℕ) (b : Frequency → ℂ) :
     rw [integral_mul_const, integral_fourierCharacter]
     have hk0 : k ≠ 0 := fun h => cutoffModes_zero_not_mem N (h ▸ hk)
     simp [hk0]
-  rw [hz]
-  rfl
+  calc
+    _ = (∫ x in unitCube,
+        ∑ k ∈ cutoffModes N, fourierCharacter k x * b k).re :=
+      Complex.reCLM.integral_comp_comm hsum
+    _ = 0 := by
+      rw [integral_finsetSum (cutoffModes N)
+        (f := fun k x => fourierCharacter k x * b k) (fun k _ => hterm k), hz]
+      rfl
 
 /-- The scalar physical gradient is the actual Fourier derivative multiplier. -/
 theorem finiteScalarSynthesis_gradient (N : ℕ) (b : Frequency → ℂ) :

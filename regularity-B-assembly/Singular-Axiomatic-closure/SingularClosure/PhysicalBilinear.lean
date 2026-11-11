@@ -49,7 +49,6 @@ theorem FINITE_PHYSICAL_COMPONENT_BILINEAR_PARSEVAL (N : ℕ) (a b : FourierCoef
         (star (complexFiniteSynthesis N a j x) * complexFiniteSynthesis N b j x).re := by
       apply integral_congr_ae
       filter_upwards with x
-      dsimp only
       rw [complexFiniteSynthesis_eq_ofReal N a ha, complexFiniteSynthesis_eq_ofReal N b hb]
       simp
     _ = (∫ x in unitCube,
@@ -79,7 +78,7 @@ theorem convection_eq_sum_coordinateDerivative (v : Field) (x : Vec) :
     convection v x = ∑ j : Fin 3, v x j • coordinateDerivative v j x := by
   have hx : (∑ j : Fin 3, v x j • unitVector j) = v x := by
     ext i
-    simp [unitVector, EuclideanSpace.single_apply]
+    fin_cases i <;> simp [unitVector, Fin.sum_univ_succ, Pi.single_apply]
   have h := congrArg (fderiv ℝ v x) hx
   simpa only [map_sum, map_smul, convection, coordinateDerivative] using h.symm
 
@@ -87,7 +86,7 @@ theorem convection_component_eq_sum (v : Field) (x : Vec) (i : Fin 3) :
     convection v x i = ∑ j : Fin 3, v x j * coordinateDerivative v j x i := by
   have h := congrArg (EuclideanSpace.proj i : Vec →L[ℝ] ℝ)
     (convection_eq_sum_coordinateDerivative v x)
-  simpa only [map_sum, map_smul, smul_eq_mul] using h
+  simpa only [map_sum, map_smul, smul_eq_mul, EuclideanSpace.coe_proj] using h
 
 theorem integral_character_triple (k p q : Frequency) (z w : ℂ) :
     (∫ x in unitCube, (star (fourierCharacter k x) *
@@ -99,7 +98,6 @@ theorem integral_character_triple (k p q : Frequency) (z w : ℂ) :
         (star (fourierCharacter k x) * fourierCharacter (p + q) x) := by
       apply integral_congr_ae
       filter_upwards with x
-      dsimp only
       rw [← fourierCharacter_mul]
       ring
     _ = (z * w) * (if k = p + q then 1 else 0) := by
@@ -168,8 +166,7 @@ theorem datumFourierCoeff_convection_finiteSynthesis
     rw [finiteSynthesis_coordinateDerivative,
       complexFiniteSynthesis_eq_ofReal N c hreal,
       complexFiniteSynthesis_eq_ofReal N _ (derivativeMultiplier_reality c hreal j)]
-    push_cast
-    rfl
+    all_goals rfl
   unfold datumFourierCoeff datumFourierIntegrand
   simp_rw [hpoint, Finset.mul_sum]
   rw [integral_finsetSum Finset.univ
@@ -185,7 +182,9 @@ theorem datumFourierCoeff_convection_finiteSynthesis
       spectralMultiplier (derivativeSymbol j) c k i = 0 := by
     intro k hk i
     simp [spectralMultiplier, hsupp k hk i]
-  simp_rw [integral_complexFiniteSynthesis_product_coefficient N c _ (hmul _)]
+  have hterm (j : Fin 3) := integral_complexFiniteSynthesis_product_coefficient N c
+    (spectralMultiplier (derivativeSymbol j) c) (hmul j) k j i
+  simp_rw [hterm]
   rw [Finset.sum_comm]
   unfold coefficientTransport
   apply Finset.sum_congr rfl
@@ -218,7 +217,9 @@ theorem integral_finiteSynthesis_component_pairing (N : ℕ) (c : FourierCoeff)
         ring
       _ = (∫ x in unitCube, star (c k i) * datumFourierIntegrand a k i x).re :=
         Complex.reCLM.integral_comp_comm hi
-      _ = _ := by rw [integral_const_mul]; rfl
+      _ = _ := by
+        rw [integral_const_mul]
+        all_goals rfl
   change (∫ x in unitCube,
     (∑ k ∈ cutoffModes N, fourierCharacter k x * c k i).re * a x i) = _
   simp_rw [physical_complex_re_sum, Finset.sum_mul]
@@ -260,7 +261,15 @@ theorem coefficientEnstrophyNonlinearPower_eq_physical
       -(∫ x in unitCube, inner ℝ (convection (finiteSynthesis N c) x)
         (laplacian (finiteSynthesis N c) x)) := by
   rw [finiteSynthesis_laplacian]
-  simp_rw [real_inner_comm (convection (finiteSynthesis N c) _)]
+  have hswap :
+      (∫ x in unitCube, inner ℝ (convection (finiteSynthesis N c) x)
+        (finiteSynthesis N (laplacianCoefficient c) x)) =
+      ∫ x in unitCube, inner ℝ (finiteSynthesis N (laplacianCoefficient c) x)
+        (convection (finiteSynthesis N c) x) := by
+    apply integral_congr_ae
+    filter_upwards with x
+    exact real_inner_comm _ _
+  rw [hswap]
   rw [integral_finiteSynthesis_pairing N (laplacianCoefficient c) _
     (convection_continuous (finiteSynthesis_contDiff N c)),
     datumFourierCoeff_convection_finiteSynthesis N c hsupp hreal,
@@ -271,8 +280,7 @@ theorem coefficientEnstrophyNonlinearPower_eq_physical
   rw [physical_complex_re_sum, Finset.mul_sum, ← Finset.sum_neg_distrib]
   apply Finset.sum_congr rfl
   intro i _
-  simp [laplacianCoefficient, laplacianFrequency, Complex.star_def, Complex.mul_re]
-  ring
+  simp [laplacianCoefficient, laplacianFrequency, Complex.star_def, Complex.mul_re] <;> ring
 
 end
 

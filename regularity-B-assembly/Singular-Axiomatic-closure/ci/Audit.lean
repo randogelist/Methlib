@@ -919,4 +919,231 @@ example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
 #check @SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
 #print axioms SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
 
+
+open Metric
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      ∀ t ∈ Icc (0 : ℝ) T,
+        coefficientDissipation N (g.coeff t) +
+          ν * (∫ s in (0 : ℝ)..t, coefficientLaplacianSquare N (g.coeff s)) ≤ B :=
+  @SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION"
+#check @SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION
+#print axioms SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      ∀ t ∈ Icc (0 : ℝ) T,
+        (∫ x in unitCube, gradientSquareDensity (g.velocity t) x) +
+          ν * (∫ s in (0 : ℝ)..t,
+            ∫ x in unitCube, ‖laplacian (g.velocity s) x‖ ^ 2) ≤ B :=
+  @SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION"
+#check @SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION
+#print axioms SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION
+
+example : ∀ (k : Frequency) (v : Fin 3 → ℂ),
+    (∑ i : Fin 3, Complex.normSq (coefficientLeray k v i)) ≤
+      ∑ i : Fin 3, Complex.normSq (v i) :=
+  @SingularClosure.coefficientLeray_energy_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientLeray_energy_le"
+#check @SingularClosure.coefficientLeray_energy_le
+#print axioms SingularClosure.coefficientLeray_energy_le
+
+example : ∀ (N : ℕ) (c : FourierCoeff),
+    coefficientEnergy N (lerayFourierCoeff c) ≤ coefficientEnergy N c :=
+  @SingularClosure.coefficientEnergy_leray_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientEnergy_leray_le"
+#check @SingularClosure.coefficientEnergy_leray_le
+#print axioms SingularClosure.coefficientEnergy_leray_le
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hc : SpectralReality c),
+    (∫ x in unitCube, ‖finiteSynthesis N (lerayFourierCoeff c) x‖ ^ 2) ≤
+      ∫ x in unitCube, ‖finiteSynthesis N c x‖ ^ 2 :=
+  @SingularClosure.integral_norm_sq_leray_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.integral_norm_sq_leray_le"
+#check @SingularClosure.integral_norm_sq_leray_le
+#print axioms SingularClosure.integral_norm_sq_leray_le
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (t : ℝ) (ht : 0 ≤ t) (x : Vec),
+    HasDerivWithinAt (fun s : ℝ => g.velocity s x)
+      (finiteSynthesis N (galerkinRhs ν N (g.coeff t)) x) (Ici 0) t :=
+  @SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt"
+#check @SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt
+#print axioms SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (t : ℝ) (ht : 0 ≤ t),
+    (∫ x in unitCube, ‖timeDerivative g.velocity t x‖ ^ 2) ≤
+      2 * ν ^ 2 * coefficientLaplacianSquare N (g.coeff t) +
+        2 * (∫ x in unitCube, ‖convection (g.velocity t) x‖ ^ 2) :=
+  @SingularClosure.GalerkinSolution.timeDerivative_L2_bound
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_L2_bound"
+#check @SingularClosure.GalerkinSolution.timeDerivative_L2_bound
+#print axioms SingularClosure.GalerkinSolution.timeDerivative_L2_bound
+
+example : ∃ C : ℝ, 0 < C ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
+      (∫ x in unitCube, ‖convection (finiteSynthesis N c) x‖ ^ 2) ≤
+        C * ((∫ x in unitCube, gradientSquareDensity (finiteSynthesis N c) x) ^ 3 +
+          ∫ x in unitCube, ‖laplacian (finiteSynthesis N c) x‖ ^ 2) :=
+  @SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND"
+#check @SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND
+#print axioms SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND
+
+example : ∀ (s N : ℕ) (hN : 0 < N)
+    (c : TorusSobolev (s + 1)),
+    ‖torusSobolevInclusion s c - torusSobolevCutoff s N (torusSobolevInclusion s c)‖ ≤
+      (N : ℝ)⁻¹ * ‖c‖ :=
+  @SingularClosure.torusSobolevInclusion_tail
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tail"
+#check @SingularClosure.torusSobolevInclusion_tail
+#print axioms SingularClosure.torusSobolevInclusion_tail
+
+example : ∀ (s : ℕ),
+    IsCompactOperator (torusSobolevInclusion s) :=
+  @SingularClosure.torusSobolevInclusion_compact
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_compact"
+#check @SingularClosure.torusSobolevInclusion_compact
+#print axioms SingularClosure.torusSobolevInclusion_compact
+
+example : ∀ (R : ℝ),
+    IsCompact (closure ((torusSobolevInclusion 1) ''
+      Metric.closedBall (0 : TorusSobolev 2) R)) :=
+  @SingularClosure.torusSobolev_H2_H1_compact_closedBall
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H2_H1_compact_closedBall"
+#check @SingularClosure.torusSobolev_H2_H1_compact_closedBall
+#print axioms SingularClosure.torusSobolev_H2_H1_compact_closedBall
+
+
+open Metric
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    {T : ℝ} (hT : 0 ≤ T),
+    IntervalIntegrable (fun t : ℝ => ∫ x in unitCube,
+      ‖timeDerivative g.velocity t x‖ ^ 2) volume 0 T :=
+  @SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable"
+#check @SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable
+#print axioms SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      (∫ t in (0 : ℝ)..T, ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) ≤ B :=
+  @SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND"
+#check @SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND
+#print axioms SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND
+
+
+open Metric
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      (∀ t ∈ Icc (0 : ℝ) T, physicalH1Square (g.velocity t) ≤ B) ∧
+      IntervalIntegrable (fun t => physicalH2Square (g.velocity t)) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, physicalH2Square (g.velocity t)) ≤ B ∧
+      IntervalIntegrable (fun t => ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) ≤ B :=
+  @SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS"
+#check @SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
+#print axioms SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      (∀ t ∈ Icc (0 : ℝ) T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B) ∧
+      IntervalIntegrable (fun t => ‖g.sobolevState 2 t‖ ^ 2) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, ‖g.sobolevState 2 t‖ ^ 2) ≤ B ∧
+      IntervalIntegrable (fun t => ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, ∫ x in unitCube,
+        ‖timeDerivative g.velocity t x‖ ^ 2) ≤ B :=
+  @SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+#check @SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+#print axioms SingularClosure.AX6_UNIFORM_STRONG_BOUNDS
+
+example : ∀ (N : ℕ) (c : FourierCoeff),
+    ‖finiteSobolev 1 N c‖ ^ 2 = coefficientEnergy N c + coefficientDissipation N c :=
+  @SingularClosure.finiteSobolev_H1_norm_sq
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H1_norm_sq"
+#check @SingularClosure.finiteSobolev_H1_norm_sq
+#print axioms SingularClosure.finiteSobolev_H1_norm_sq
+
+example : ∀ (N : ℕ) (c : FourierCoeff),
+    ‖finiteSobolev 2 N c‖ ^ 2 = coefficientEnergy N c +
+      2 * coefficientDissipation N c + coefficientLaplacianSquare N c :=
+  @SingularClosure.finiteSobolev_H2_norm_sq
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H2_norm_sq"
+#check @SingularClosure.finiteSobolev_H2_norm_sq
+#print axioms SingularClosure.finiteSobolev_H2_norm_sq
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    {t : ℝ} (ht : 0 ≤ t),
+    ‖g.sobolevState 2 t‖ ^ 2 =
+      (∫ x in unitCube, ‖g.velocity t x‖ ^ 2) +
+        2 * (∫ x in unitCube, gradientSquareDensity (g.velocity t) x) +
+        ∫ x in unitCube, ‖laplacian (g.velocity t) x‖ ^ 2 :=
+  @SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq"
+#check @SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq
+#print axioms SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq
+
+example : ∀ (j : Fin 3) (m : ℕ) (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) (k : Frequency) (i : Fin 3)
+    (hk : k j ≠ 0),
+    ‖datumFourierCoeff a k i‖ ≤
+      coordinateDerivativeL1 j m a i / (((2 * Real.pi) * |(k j : ℝ)|) ^ m) :=
+  @SingularClosure.FOURIER_COORDINATE_DECAY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FOURIER_COORDINATE_DECAY"
+#check @SingularClosure.FOURIER_COORDINATE_DECAY
+#print axioms SingularClosure.FOURIER_COORDINATE_DECAY
+
+example : ∀ (m : ℕ) (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) (k : Frequency) (i : Fin 3),
+    ‖datumFourierCoeff a k i‖ ≤ fourierDecayConstant m a /
+      (1 + ∑ j : Fin 3, ((2 * Real.pi) * |(k j : ℝ)|) ^ m) :=
+  @SingularClosure.FOURIER_POLYNOMIAL_DECAY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FOURIER_POLYNOMIAL_DECAY"
+#check @SingularClosure.FOURIER_POLYNOMIAL_DECAY
+#print axioms SingularClosure.FOURIER_POLYNOMIAL_DECAY
+
 end

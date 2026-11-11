@@ -33,9 +33,11 @@ theorem complexCoordinateAverage_selfAdjoint_mul (j : Fin 3) (f g : Vec → ℂ)
     (hf : Continuous f) (hg : Continuous g) :
     (∫ x in unitCube, complexCoordinateAverage j f x * g x) =
       ∫ x in unitCube, f x * complexCoordinateAverage j g x := by
-  rw [integral_unitCube_disintegrate j _
+  rw [integral_unitCube_disintegrate j
+      (fun x => complexCoordinateAverage j f x * g x)
       ((complexCoordinateAverage_continuous j f hf).mul hg),
-    integral_unitCube_disintegrate j _
+    integral_unitCube_disintegrate j
+      (fun x => f x * complexCoordinateAverage j g x)
       (hf.mul (complexCoordinateAverage_continuous j g hg))]
   apply integral_congr_ae
   filter_upwards with y
@@ -58,16 +60,36 @@ theorem complexCoordinateAverage_selfAdjoint_mul (j : Fin 3) (f g : Vec → ℂ)
 theorem complexCoordinateAverage_fourierCharacter (j : Fin 3) (k : Frequency) :
     complexCoordinateAverage j (fourierCharacter k) =
       fun x => if k j = 0 then fourierCharacter k x else 0 := by
+  have hprod (y : Vec) : fourierCharacter k y =
+      fourier (k 0) (y 0 : UnitAddCircle) *
+        fourier (k 1) (y 1 : UnitAddCircle) * fourier (k 2) (y 2 : UnitAddCircle) := by
+    rw [fourierCharacter_eq_product, Fin.prod_univ_three]
   funext x
-  by_cases hk : k j = 0
-  · fin_cases j <;>
-      simp [complexCoordinateAverage, fourierCharacter_eq_product,
-        Fin.prod_univ_succ, resetCoordinate, integral_const_mul, integral_mul_const,
-        integral_oneDimensional_character, hk, mul_assoc]
-  · fin_cases j <;>
-      simp [complexCoordinateAverage, fourierCharacter_eq_product,
-        Fin.prod_univ_succ, resetCoordinate, integral_const_mul, integral_mul_const,
-        integral_oneDimensional_character, hk, mul_assoc]
+  fin_cases j
+  · change (∫ s in Icc (0 : ℝ) 1, fourierCharacter k (resetCoordinate 0 s x)) =
+      if k 0 = 0 then fourierCharacter k x else 0
+    simp_rw [hprod]
+    change (∫ s in Icc (0 : ℝ) 1,
+      fourier (k 0) (s : UnitAddCircle) * fourier (k 1) (x 1 : UnitAddCircle) *
+        fourier (k 2) (x 2 : UnitAddCircle)) = _
+    rw [integral_mul_const, integral_mul_const, integral_oneDimensional_character]
+    by_cases hk : k 0 = 0 <;> simp [hk]
+  · change (∫ s in Icc (0 : ℝ) 1, fourierCharacter k (resetCoordinate 1 s x)) =
+      if k 1 = 0 then fourierCharacter k x else 0
+    simp_rw [hprod]
+    change (∫ s in Icc (0 : ℝ) 1,
+      fourier (k 0) (x 0 : UnitAddCircle) * fourier (k 1) (s : UnitAddCircle) *
+        fourier (k 2) (x 2 : UnitAddCircle)) = _
+    rw [integral_mul_const, integral_const_mul, integral_oneDimensional_character]
+    by_cases hk : k 1 = 0 <;> simp [hk]
+  · change (∫ s in Icc (0 : ℝ) 1, fourierCharacter k (resetCoordinate 2 s x)) =
+      if k 2 = 0 then fourierCharacter k x else 0
+    simp_rw [hprod]
+    change (∫ s in Icc (0 : ℝ) 1,
+      fourier (k 0) (x 0 : UnitAddCircle) * fourier (k 1) (x 1 : UnitAddCircle) *
+        fourier (k 2) (s : UnitAddCircle)) = _
+    rw [integral_const_mul, integral_oneDimensional_character]
+    by_cases hk : k 2 = 0 <;> simp [hk]
 
 theorem complexCoordinateAverage_star_character (j : Fin 3) (k : Frequency) :
     complexCoordinateAverage j (fun x => star (fourierCharacter k x)) =

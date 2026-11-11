@@ -7,14 +7,14 @@
     {
       "number": 1,
       "name": "SIX_CHANNEL_PROJECTIONS",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
     {
       "number": 2,
       "name": "SIX_CHANNEL_ENSTROPHY_EQ",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
@@ -36,14 +36,22 @@
     {
       "number": 4,
       "name": "GALERKIN_ENERGY_IDENTITY",
-      "status": "pending",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "9ae282c28a7034e6f6c044a359205a7ae60380f1",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42942665131",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.GALERKIN_ENERGY_IDENTITY",
+      "source_file": "SingularClosure/PhysicalEnergy.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 5,
       "name": "GALERKIN_ENSTROPHY_INEQUALITY",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
@@ -65,7 +73,7 @@
     {
       "number": 7,
       "name": "AX6_UNIFORM_STRONG_BOUNDS",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
@@ -102,5 +110,5 @@
     "AX6"
   ],
   "root_completed": false,
-  "completed_endpoint_count": 2
+  "completed_endpoint_count": 3
 }

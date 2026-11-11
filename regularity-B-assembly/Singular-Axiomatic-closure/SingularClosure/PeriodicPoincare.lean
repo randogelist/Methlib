@@ -73,13 +73,13 @@ theorem COEFFICIENT_GRADIENT_POINCARE (N : ℕ) (c : FourierCoeff) :
   apply Finset.sum_le_sum
   intro i hi
   have hgap := fourierLaplacianSymbol_ge_four_pi_sq hk
-  have hλ : 0 ≤ (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) := by
+  have hfreqNonneg : 0 ≤ (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) := by
     exact (mul_nonneg (by norm_num) (sq_nonneg Real.pi)).trans hgap
   have hnorm : 0 ≤ Complex.normSq (c k i) := by
     rw [Complex.normSq_eq_norm_sq]
     exact sq_nonneg _
   have hmul := mul_le_mul_of_nonneg_right
-    (mul_le_mul_of_nonneg_right hgap hλ) hnorm
+    (mul_le_mul_of_nonneg_right hgap hfreqNonneg) hnorm
   nlinarith only [hmul]
 
 /-- Literal physical Poincare inequality for finite real Fourier synthesis. -/

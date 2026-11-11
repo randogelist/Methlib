@@ -21,7 +21,7 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 | 1 | `SIX_CHANNEL_PROJECTIONS` | Pending |
 | 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | Pending |
 | 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !=! A_TIER |
-| 4 | `GALERKIN_ENERGY_IDENTITY` | Pending |
+| 4 | `GALERKIN_ENERGY_IDENTITY` | !=! A_TIER |
 | 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | Pending |
 | 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !=! A_TIER |
 | 7 | `AX6_UNIFORM_STRONG_BOUNDS` | Pending |
@@ -87,3 +87,9 @@ Commit `c1af57143f708d3587a03425dbd9493db0e6f5f0`: frozen endpoint 3 passed the 
 Evidence: https://github.com/randogelist/Methlib/actions/runs/42940507715
 
 The aggregate project build at that revision remained in repair for other modules. This checkpoint promotes only the independently audited endpoint 3. Frozen endpoint total at this checkpoint: 2/11 (3 and 6). No global PDE closure is inferred.
+
+## Verified physical energy endpoint
+
+Commit `9ae282c28a7034e6f6c044a359205a7ae60380f1`, run https://github.com/randogelist/Methlib/actions/runs/42942665131: endpoint 4 compiled and passed its exact-type and theorem-level standard-only axiom audit. The equality uses actual physical cube integrals, actual initial Fourier cutoff, and proved finite-time dissipation integrability. No energy-cancellation assumption appears.
+
+Current independently verified endpoint total: **3/11**, endpoints 3, 4 and 6. The aggregate build remains in repair; no other endpoint is promoted.
