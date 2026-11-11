@@ -257,6 +257,132 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.forwardGlobalSolution_exists"
+    },
+    {
+      "name": "SingularClosure.galerkinRhs_reality",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinRhs_reality"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientDissipation_integral_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_integral_le"
+    },
+    {
+      "name": "SingularClosure.invariantGalerkinRhs_global_exists",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.invariantGalerkinRhs_global_exists"
+    },
+    {
+      "name": "SingularClosure.galerkinSolution_exists_of_fourier_invariants",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinSolution_exists_of_fourier_invariants"
+    },
+    {
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION"
+    },
+    {
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL"
+    },
+    {
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS"
+    },
+    {
+      "name": "SingularClosure.torusL2Channel_fourierCoeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusL2Channel_fourierCoeff"
+    },
+    {
+      "name": "SingularClosure.torusL2Channel_preserves_mean",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusL2Channel_preserves_mean"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ"
+    },
+    {
+      "name": "SingularClosure.ax6_physical_square_budget",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ax6_physical_square_budget"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_idempotent",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_idempotent"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_periodic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_periodic"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_own_coordinateDerivative_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_own_coordinateDerivative_zero"
+    },
+    {
+      "name": "SingularClosure.smoothSigmaZero_fourier_integrable",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_integrable"
+    },
+    {
+      "name": "SingularClosure.datumFourierCoeff_reality",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_reality"
+    },
+    {
+      "name": "SingularClosure.smoothSigmaZero_fourier_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_solenoidal"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE"
     }
   ]
 }

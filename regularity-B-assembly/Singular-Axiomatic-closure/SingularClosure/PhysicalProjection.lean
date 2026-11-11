@@ -48,7 +48,13 @@ theorem fourierCharacter_hasFDerivAt (k : Frequency) (x : Vec) :
       (fourierCharacter k x • fourierPhaseCLM k) x := by
   have hp : HasFDerivAt (fun y : Vec => fourierPhaseCLM k y)
       (fourierPhaseCLM k) x := (fourierPhaseCLM k).hasFDerivAt
-  simpa only [fourierPhaseCLM_apply, fourierCharacter] using hp.cexp
+  have hf : fourierCharacter k =
+      (fun y : Vec => Complex.exp (fourierPhaseCLM k y)) := by
+    funext y
+    rw [fourierPhaseCLM_apply]
+    rfl
+  rw [hf]
+  exact hp.cexp
 
 theorem fourierCharacter_eq_exp_phase (k : Frequency) (x : Vec) :
     fourierCharacter k x = Complex.exp (fourierPhaseCLM k x) := by

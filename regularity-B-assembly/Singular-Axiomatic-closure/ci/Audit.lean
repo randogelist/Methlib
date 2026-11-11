@@ -452,4 +452,212 @@ example {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
 #check @SingularClosure.forwardGlobalSolution_exists
 #print axioms SingularClosure.forwardGlobalSolution_exists
 
+
+open Metric
+
+example : ∀ (ν : ℝ) (N : ℕ) (c : FourierCoeff)
+    (hc : SpectralReality c),
+    SpectralReality (galerkinRhs ν N c) :=
+  @SingularClosure.galerkinRhs_reality
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.galerkinRhs_reality"
+#check @SingularClosure.galerkinRhs_reality
+#print axioms SingularClosure.galerkinRhs_reality
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    {T : ℝ} (hT : 0 ≤ T),
+    coefficientEnergy N (g.coeff T) +
+      2 * ν * (∫ t in (0 : ℝ)..T, coefficientDissipation N (g.coeff t)) =
+        coefficientEnergy N (g.coeff 0) :=
+  @SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity"
+#check @SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity
+#print axioms SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity
+
+example : ∀ {ν : ℝ} (hν : 0 < ν) {a : Field} {N : ℕ}
+    (g : GalerkinSolution ν a N) {T : ℝ} (hT : 0 ≤ T),
+    (∫ t in (0 : ℝ)..T, coefficientDissipation N (g.coeff t)) ≤
+      coefficientEnergy N (datumFourierCoeff a) / (2 * ν) :=
+  @SingularClosure.GalerkinSolution.coefficientDissipation_integral_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_integral_le"
+#check @SingularClosure.GalerkinSolution.coefficientDissipation_integral_le
+#print axioms SingularClosure.GalerkinSolution.coefficientDissipation_integral_le
+
+example : ∀ (ν : ℝ) (hν : 0 ≤ ν) (N : ℕ)
+    (z₀ : InvariantGalerkinState N),
+    ∃ z : ℝ → InvariantGalerkinState N, z 0 = z₀ ∧
+      ∀ t : ℝ, 0 ≤ t → HasDerivAt z (invariantGalerkinRhs ν N (z t)) t :=
+  @SingularClosure.invariantGalerkinRhs_global_exists
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.invariantGalerkinRhs_global_exists"
+#check @SingularClosure.invariantGalerkinRhs_global_exists
+#print axioms SingularClosure.invariantGalerkinRhs_global_exists
+
+example : ∀ (ν : ℝ) (hν : 0 ≤ ν)
+    (a : Field) (N : ℕ)
+    (hint : ∀ k : Frequency, ∀ i : Fin 3,
+      MeasureTheory.IntegrableOn (datumFourierIntegrand a k i) unitCube MeasureTheory.volume)
+    (hreal : SpectralReality (datumFourierCoeff a))
+    (hsol : SpectralSolenoidal (datumFourierCoeff a)),
+    Nonempty (GalerkinSolution ν a N) :=
+  @SingularClosure.galerkinSolution_exists_of_fourier_invariants
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.galerkinSolution_exists_of_fourier_invariants"
+#check @SingularClosure.galerkinSolution_exists_of_fourier_invariants
+#print axioms SingularClosure.galerkinSolution_exists_of_fourier_invariants
+
+example : ∀ (u : TorusVectorL2),
+    (∑ A : Fin 6, torusL2Channel A u) = u :=
+  @SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION"
+#check @SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION
+#print axioms SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION
+
+example : ∀ (A B : Fin 6) (hAB : A ≠ B)
+    (u v : TorusVectorL2),
+    inner ℂ (torusL2Channel A u) (torusL2Channel B v) = 0 :=
+  @SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL"
+#check @SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL
+#print axioms SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL
+
+example : ∀ (u : TorusVectorL2),
+    ‖u‖ ^ 2 = ∑ A : Fin 6, ‖torusL2Channel A u‖ ^ 2 :=
+  @SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS"
+#check @SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS
+#print axioms SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS
+
+example : ∀ (A : Fin 6) (u : TorusVectorL2),
+    torusVectorFourierCoeff (torusL2Channel A u) =
+      spectralChannel A (torusVectorFourierCoeff u) :=
+  @SingularClosure.torusL2Channel_fourierCoeff
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusL2Channel_fourierCoeff"
+#check @SingularClosure.torusL2Channel_fourierCoeff
+#print axioms SingularClosure.torusL2Channel_fourierCoeff
+
+example : ∀ (A : Fin 6) (u : TorusVectorL2)
+    (hu : ∀ i : Fin 3, (∫ x, u i x) = 0),
+    ∀ i : Fin 3, (∫ x, torusL2Channel A u i x) = 0 :=
+  @SingularClosure.torusL2Channel_preserves_mean
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.torusL2Channel_preserves_mean"
+#check @SingularClosure.torusL2Channel_preserves_mean
+#print axioms SingularClosure.torusL2Channel_preserves_mean
+
+example : ∀ (N : ℕ) (A B : Fin 6)
+    (hAB : A ≠ B) (a b : FourierCoeff) (i j : Fin 3),
+    (∫ x in unitCube,
+      coordinateDerivative (physicalChannel N A a) i x j *
+      coordinateDerivative (physicalChannel N B b) i x j) = 0 :=
+  @SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY"
+#check @SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY
+#print axioms SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY
+
+example : ∀ (N : ℕ) (a : FourierCoeff),
+    sixEnstrophy N a = physicalEnstrophy (finiteSynthesis N a) :=
+  @SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ"
+#check @SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ
+#print axioms SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ
+
+example : ∀ (N : ℕ)
+    (c : ℝ → FourierCoeff) (T : ℝ),
+    budget6 N c T = ∫⁻ t in Icc (0 : ℝ) T,
+      (physicalEnstrophy (finiteSynthesis N (c t))) ^ 2 :=
+  @SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ"
+#check @SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ
+#print axioms SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ M : ℝ≥0, ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      (∫⁻ t in Icc (0 : ℝ) T, (physicalEnstrophy (g.velocity t)) ^ 2) ≤
+        (M : ℝ≥0∞) :=
+  @SingularClosure.ax6_physical_square_budget
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.ax6_physical_square_budget"
+#check @SingularClosure.ax6_physical_square_budget
+#print axioms SingularClosure.ax6_physical_square_budget
+
+
+open Metric
+
+example : ∀ (j : Fin 3) (a : Field),
+    coordinateAverage j (coordinateAverage j a) = coordinateAverage j a :=
+  @SingularClosure.coordinateAverage_idempotent
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_idempotent"
+#check @SingularClosure.coordinateAverage_idempotent
+#print axioms SingularClosure.coordinateAverage_idempotent
+
+example : ∀ (j : Fin 3) (a : Field)
+    (ha : SpatialPeriodic a),
+    SpatialPeriodic (coordinateAverage j a) :=
+  @SingularClosure.coordinateAverage_periodic
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_periodic"
+#check @SingularClosure.coordinateAverage_periodic
+#print axioms SingularClosure.coordinateAverage_periodic
+
+example : ∀ (j : Fin 3) (a : Field)
+    (x : Vec),
+    coordinateDerivative (coordinateAverage j a) j x = 0 :=
+  @SingularClosure.coordinateAverage_own_coordinateDerivative_zero
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_own_coordinateDerivative_zero"
+#check @SingularClosure.coordinateAverage_own_coordinateDerivative_zero
+#print axioms SingularClosure.coordinateAverage_own_coordinateDerivative_zero
+
+
+open Metric
+
+example : ∀ {a : Field}
+    (ha : SmoothSigmaZero a) (k : Frequency) (i : Fin 3),
+    IntegrableOn (datumFourierIntegrand a k i) unitCube volume :=
+  @SingularClosure.smoothSigmaZero_fourier_integrable
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_integrable"
+#check @SingularClosure.smoothSigmaZero_fourier_integrable
+#print axioms SingularClosure.smoothSigmaZero_fourier_integrable
+
+example : ∀ (a : Field),
+    SpectralReality (datumFourierCoeff a) :=
+  @SingularClosure.datumFourierCoeff_reality
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_reality"
+#check @SingularClosure.datumFourierCoeff_reality
+#print axioms SingularClosure.datumFourierCoeff_reality
+
+example : ∀ {a : Field}
+    (ha : SmoothSigmaZero a),
+    SpectralSolenoidal (datumFourierCoeff a) :=
+  @SingularClosure.smoothSigmaZero_fourier_solenoidal
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_solenoidal"
+#check @SingularClosure.smoothSigmaZero_fourier_solenoidal
+#print axioms SingularClosure.smoothSigmaZero_fourier_solenoidal
+
+example : ∀ (ν : ℝ) (hν : 0 < ν)
+    (a : Field) (ha : SmoothSigmaZero a) (N : ℕ),
+    ∃ g : GalerkinSolution ν a N, ∀ h : GalerkinSolution ν a N,
+      EqOn g.coeff h.coeff (Ici 0) :=
+  @SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE"
+#check @SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
+#print axioms SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
+
 end

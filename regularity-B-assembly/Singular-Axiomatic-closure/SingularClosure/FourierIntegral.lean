@@ -27,7 +27,9 @@ theorem integral_unitCube_product (f : Fin 3 → ℝ → ℂ) :
   have hpre : (@WithLp.toLp 2 (Fin 3 → ℝ)) ⁻¹' unitCube =
       Set.univ.pi (fun _ : Fin 3 => Icc (0 : ℝ) 1) := by
     ext x
-    simp [unitCube, Set.mem_pi]
+    change (∀ i : Fin 3, 0 ≤ x i ∧ x i ≤ 1) ↔
+      (∀ i : Fin 3, i ∈ Set.univ → 0 ≤ x i ∧ x i ≤ 1)
+    exact ⟨fun h i _ => h i, fun h i => h i (Set.mem_univ i)⟩
   rw [hpre] at hchange
   rw [← hchange]
   change (∫ x : Fin 3 → ℝ, ∏ i : Fin 3, f i (x i)
@@ -38,19 +40,19 @@ theorem integral_unitCube_product (f : Fin 3 → ℝ → ℂ) :
 
 theorem integral_oneDimensional_character (n : ℤ) :
     (∫ t in Icc (0 : ℝ) 1,
-      AddCircle.fourier n (t : UnitAddCircle)) = if n = 0 then 1 else 0 := by
-  have h := congrFun (AddCircle.fourierCoeff_fourier (T := (1 : ℝ)) n) 0
-  rw [AddCircle.fourierCoeff_eq_intervalIntegral _ 0 0] at h
+      fourier n (t : UnitAddCircle)) = if n = 0 then 1 else 0 := by
+  have h := congrFun (fourierCoeff_fourier (T := (1 : ℝ)) n) 0
+  rw [fourierCoeff_eq_intervalIntegral _ 0 0] at h
   simp only [one_div_one, one_smul, neg_zero, zero_add,
-    AddCircle.fourier_zero, one_smul] at h
+    fourier_zero, one_smul] at h
   rw [intervalIntegral.integral_of_le (by norm_num : (0 : ℝ) ≤ 1)] at h
   rw [integral_Icc_eq_integral_Ioc]
   simpa [Pi.single_apply, eq_comm] using h
 
 theorem fourierCharacter_eq_product (k : Frequency) (x : Vec) :
     fourierCharacter k x =
-      ∏ i : Fin 3, AddCircle.fourier (k i) (x i : UnitAddCircle) := by
-  simp only [AddCircle.fourier_coe_apply, div_one, ← Complex.exp_sum]
+      ∏ i : Fin 3, fourier (k i) (x i : UnitAddCircle) := by
+  simp only [fourier_coe_apply, div_one, ← Complex.exp_sum]
   unfold fourierCharacter
   congr 1
   push_cast
@@ -78,11 +80,11 @@ theorem fourierCharacter_mul (k l : Frequency) (x : Vec) :
   simp only [fourierCharacter_eq_product, ← Finset.prod_mul_distrib]
   apply Finset.prod_congr rfl
   intro i _
-  exact (AddCircle.fourier_add (m := k i) (n := l i)).symm
+  exact (fourier_add (m := k i) (n := l i)).symm
 
 theorem fourierCharacter_neg (k : Frequency) (x : Vec) :
     fourierCharacter (-k) x = star (fourierCharacter k x) := by
-  simp only [fourierCharacter_eq_product, Pi.neg_apply, AddCircle.fourier_neg,
+  simp only [fourierCharacter_eq_product, Pi.neg_apply, fourier_neg,
     map_prod, Complex.star_def]
 
 theorem INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY (k l : Frequency) :
@@ -91,13 +93,14 @@ theorem INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY (k l : Frequency) :
   classical
   simp_rw [← fourierCharacter_neg, fourierCharacter_mul]
   rw [integral_fourierCharacter]
-  congr 1
-  constructor
-  · intro h
-    have hlk : l - k = 0 := by simpa [sub_eq_add_neg, add_comm] using h
-    exact (sub_eq_zero.mp hlk).symm
-  · intro h
-    simp [h]
+  have heq : (-k + l = 0) ↔ k = l := by
+    constructor
+    · intro h
+      have hlk : l - k = 0 := by simpa [sub_eq_add_neg, add_comm] using h
+      exact (sub_eq_zero.mp hlk).symm
+    · intro h
+      simp [h]
+  simp only [heq]
 
 end
 

@@ -15,3 +15,12 @@ import SingularClosure.LerayPressure
 import SingularClosure.FourierIntegral
 import SingularClosure.DissipativeODE
 import SingularClosure.EnstrophyInequality
+import SingularClosure.GalerkinReality
+import SingularClosure.GalerkinEnergyIntegral
+import SingularClosure.GalerkinInvariant
+import SingularClosure.HilbertChannels
+import SingularClosure.PhysicalParseval
+import SingularClosure.Ax6Bounds
+import SingularClosure.CoordinateAverage
+import SingularClosure.InitialFourier
+import SingularClosure.GalerkinGlobal

@@ -103,6 +103,7 @@ theorem pressureFromTransport_recovery (k : Frequency) (v : Fin 3 → ℂ)
     field_simp
     ring_nf
     simp [Complex.I_sq]
+    ring
 
 end
 

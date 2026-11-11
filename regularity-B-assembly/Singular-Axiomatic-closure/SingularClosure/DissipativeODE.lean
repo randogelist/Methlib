@@ -99,7 +99,8 @@ theorem uniform_local_time (g : V → V) (hg : ContDiff ℝ 1 g) (R : ℝ) :
     exact absurd (hI ▸ hx₀) (Set.notMem_empty x₀)
   · refine ⟨I.inf' hIne ε, ?_, fun x₀ hx₀ t₀ => ?_⟩
     · change (0 : ℝ) < I.inf' hIne ε
-      exact Finset.lt_inf'_iff.mpr (fun y _ => hε y)
+      rw [Finset.lt_inf'_iff]
+      exact fun y _ => hε y
     · set δ := I.inf' hIne ε with hδ
       have hx₀' : x₀ ∈ ⋃ y ∈ I, ball y (r y) := hI hx₀
       rw [mem_iUnion₂] at hx₀'
