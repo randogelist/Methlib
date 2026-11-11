@@ -1,1 +1,9 @@
 SingularClosure.CriticalGalerkin
+SingularClosure.CriticalInvariant
+SingularClosure.CriticalSpaces
+SingularClosure.CriticalComplexSobolev
+SingularClosure.CriticalSobolevAnalytic
+SingularClosure.CriticalFourierInterpolation
+SingularClosure.CriticalEnergy
+SingularClosure.CriticalTrace
+SingularClosure.CriticalTraceLimit
