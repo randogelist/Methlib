@@ -112,37 +112,76 @@
     {
       "number": 8,
       "name": "GALERKIN_GLOBAL_STRONG_LIMIT",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT",
+      "source_file": "SingularClosure/GlobalStrongLimit.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     {
       "number": 9,
       "name": "GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
+      "source_file": "SingularClosure/GlobalSmoothBootstrap.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     {
       "number": 10,
       "name": "PERIODIC_PRESSURE_RECOVERY",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.PERIODIC_PRESSURE_RECOVERY",
+      "source_file": "SingularClosure/PeriodicPressureRecovery.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     {
       "number": 11,
       "name": "ax6_implies_fefferman_B_0_adjust",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
+      "source_file": "SingularClosure/Root.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     }
   ],
-  "root_completed": false,
-  "completed_endpoint_count": 7,
+  "root_completed": true,
+  "completed_endpoint_count": 11,
   "prepared_endpoint_count": 11,
   "unresolved_root_premises": [
     "AX6Statement"
   ],
-  "custom_axiom_declarations": []
+  "custom_axiom_declarations": [],
+  "formal_closure": true,
+  "conditional_formal_closure": true,
+  "unconditional_closure": false,
+  "root_theorem": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
+  "root_verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+  "aggregate_build": "PASS",
+  "aggregate_audit": "PENDING_SYNTAX_REPAIR_VERIFICATION"
 }

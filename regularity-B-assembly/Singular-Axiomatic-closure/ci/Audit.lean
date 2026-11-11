@@ -841,8 +841,8 @@ example : ∃ C : ℝ≥0∞, C < ⊤ ∧ ∀ N : ℕ, ∀ c : FourierCoeff, Spe
 #print axioms SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN
 
 example : ∃ C : ℝ≥0∞, C < ⊤ ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
-      ENNReal.ofReal |∫ x in unitCube,
-        ⟪convection (finiteSynthesis N c) x, laplacian (finiteSynthesis N c) x⟫_ℝ| ≤
+      ENNReal.ofReal (abs (∫ x in unitCube,
+        inner ℝ (convection (finiteSynthesis N c) x) (laplacian (finiteSynthesis N c) x))) ≤
           C * (ENNReal.ofReal (coefficientDissipation N c)) ^ (3 / 4 : ℝ) *
             (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (3 / 4 : ℝ) :=
   @SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
@@ -888,7 +888,7 @@ example : ∃ C : ℝ, 0 < C ∧ ∀ ν : ℝ, 0 < ν → ∀ a : Field, ∀ N :
 
 example : ∀ (N : ℕ) (c : FourierCoeff) (x : Vec),
     finiteSynthesis N (coefficientTransport N c) x +
-      gradient (finiteTransportPressure N (coefficientTransport N c)) x =
+      SingularClosure.gradient (finiteTransportPressure N (coefficientTransport N c)) x =
       finiteSynthesis N (fun k => coefficientLeray k (coefficientTransport N c k)) x :=
   @SingularClosure.galerkinPressure_recovery
 
@@ -1239,7 +1239,7 @@ example : ∀ {b : Frequency → ℂ}
     (hzero : Summable (fun k => ‖b k‖))
     (hone : Summable (fun k => ‖b k‖ * ‖fourierPhaseCLM k‖))
     (x : Vec) (i : Fin 3),
-    gradient (realFourierSeries b) x i =
+    SingularClosure.gradient (realFourierSeries b) x i =
       (∑' k : Frequency, fourierCharacter k x * (derivativeSymbol i k * b k)).re :=
   @SingularClosure.realFourierSeries_gradient_apply
 
@@ -1818,7 +1818,7 @@ example : ∀ (c : TorusSobolev 0)
       SpatialPeriodic (fullTransportPressure c) ∧
       PressureMeanZero (fullTransportPressure c) ∧
       ∀ x : Vec, smoothFourierSynthesis (fullTransportCoefficients c) x +
-        gradient (fullTransportPressure c) x =
+        SingularClosure.gradient (fullTransportPressure c) x =
         smoothFourierSynthesis
           (fun k => coefficientLeray k (fullTransportCoefficients c k)) x :=
   @SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY
@@ -1915,7 +1915,7 @@ example : ∀ (ν : ℝ) (c : TorusSobolev 0)
     ∀ x : Vec,
       smoothFourierSynthesis (fullFourierRhs ν c) x +
         convection (smoothFourierSynthesis c.val) x +
-        gradient (fullTransportPressure c) x =
+        SingularClosure.gradient (fullTransportPressure c) x =
           ν • laplacian (smoothFourierSynthesis c.val) x :=
   @SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
 
