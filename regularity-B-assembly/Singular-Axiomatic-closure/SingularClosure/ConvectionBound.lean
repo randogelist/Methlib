@@ -85,7 +85,7 @@ theorem FINITE_CONVECTION_SQUARE_SHARP_BOUND :
   have h := hbound N c hreal
   rw [eLpNorm_two_eq_integral_norm_sq_rpow _ _ hi] at h
   have hr := ENNReal.toReal_mono (by finiteness) h
-  simp only [ENNReal.toReal_mul, ENNReal.toReal_rpow,
+  simp only [ENNReal.toReal_mul, ← ENNReal.toReal_rpow,
     ENNReal.toReal_ofReal hI, ENNReal.toReal_ofReal hE,
     ENNReal.toReal_ofReal hZ] at hr
   have hs := pow_le_pow_left₀ (Real.rpow_nonneg hI (1 / 2 : ℝ)) hr 2

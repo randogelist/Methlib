@@ -18,7 +18,7 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 
 | # | Endpoint | Status |
 |---:|---|---|
-| 1 | `SIX_CHANNEL_PROJECTIONS` | Pending |
+| 1 | `SIX_CHANNEL_PROJECTIONS` | !=! A_TIER |
 | 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | !=! A_TIER |
 | 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !=! A_TIER |
 | 4 | `GALERKIN_ENERGY_IDENTITY` | !=! A_TIER |
@@ -99,3 +99,9 @@ Current independently verified endpoint total: **3/11**, endpoints 3, 4 and 6. T
 Commit `4d39e66229e0412a15f8fa9af8f38de4e2f566a6`, run https://github.com/randogelist/Methlib/actions/runs/42945570303: endpoint 2 compiled and passed its exact-type and standard-only theorem axiom audit. Its type quantifies over every actual smooth periodic field, with no solenoidality, mean-zero, finite-cutoff or orthogonality premise. The six channels are the literal coordinate-average fields; enstrophy is the actual physical derivative integral.
 
 Current independently verified endpoint total: **4/11**, endpoints 2, 3, 4 and 6. Other modules remain in compilation repair.
+
+## Verified literal physical projections
+
+Commit `0b2438438847d4f1ddc7075c04ee8153c88e4e0f`, run https://github.com/randogelist/Methlib/actions/runs/42947128383: endpoint 1 compiled and passed exact-type and standard-only theorem axiom audits. Literal coordinate-average maps satisfy reconstruction, linearity, idempotence, disjointness, physical self-adjointness and orthogonality, smooth solenoidal mean-zero preservation, and commutation with actual derivatives and physical Fourier cutoffs. No projection-law certificate is assumed.
+
+Current independently verified endpoint total: **5/11**, endpoints 1, 2, 3, 4 and 6. Endpoints 5 and 7 remain in compilation repair; the infinite-dimensional physical limit, joint smoothness, pressure and root remain pending. New coefficient-limit and all-order compactness source is candidate only.

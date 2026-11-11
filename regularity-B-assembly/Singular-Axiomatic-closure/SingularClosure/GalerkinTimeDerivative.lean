@@ -23,7 +23,7 @@ theorem finiteSynthesis_eq_sum_unitVector (N : ℕ) (c : FourierCoeff) (x : Vec)
     finiteSynthesis N c x = ∑ i : Fin 3,
       (∑ k ∈ cutoffModes N, fourierCharacter k x * c k i).re • unitVector i := by
   ext j
-  simp [finiteSynthesis, unitVector, EuclideanSpace.single_apply]
+  simp [finiteSynthesis, unitVector, Pi.single_apply, mul_ite]
 
 /-- Differentiation of the actual finite physical velocity, including the boundary. -/
 theorem GalerkinSolution.velocity_hasDerivWithinAt
@@ -104,9 +104,10 @@ theorem coefficientEnergy_galerkinRhs_le (ν : ℝ) (N : ℕ) (c : FourierCoeff)
       _ = _ := by
         simp only [coefficientLaplacianSquare, coefficientEnergy, lerayFourierCoeff,
           Finset.sum_add_distrib, Finset.mul_sum, mul_assoc]
-  exact hproj.trans (add_le_add_left
+  exact hproj.trans (add_le_add le_rfl
     (mul_le_mul_of_nonneg_left
-      (coefficientEnergy_leray_le N (coefficientTransport N c)) (by norm_num)) _)
+      (coefficientEnergy_leray_le N (coefficientTransport N c))
+        (by norm_num : (0 : ℝ) ≤ 2)))
 
 theorem coefficientEnergy_transport_le_convection (N : ℕ) (c : FourierCoeff)
     (hsupp : ∀ k : Frequency, k ∉ cutoffModes N → ∀ i : Fin 3, c k i = 0)
@@ -132,8 +133,8 @@ theorem GalerkinSolution.timeDerivative_L2_bound
   rw [g.timeDerivative_eq_finiteSynthesis t ht,
     ← physicalEnergy_eq_integral_norm_sq,
     FINITE_PHYSICAL_ENERGY_PARSEVAL N _ (galerkinRhs_reality ν N (g.coeff t) hreal)]
-  have h := hrhs.trans (add_le_add_left
-    (mul_le_mul_of_nonneg_left htrans (by norm_num : (0 : ℝ) ≤ 2)) _)
+  have h := hrhs.trans (add_le_add le_rfl
+    (mul_le_mul_of_nonneg_left htrans (by norm_num : (0 : ℝ) ≤ 2)))
   simpa only [physicalEnergy_eq_integral_norm_sq, GalerkinSolution.velocity] using h
 
 end

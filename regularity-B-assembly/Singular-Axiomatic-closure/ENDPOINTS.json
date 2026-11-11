@@ -7,9 +7,17 @@
     {
       "number": 1,
       "name": "SIX_CHANNEL_PROJECTIONS",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "0b2438438847d4f1ddc7075c04ee8153c88e4e0f",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42947128383",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.SIX_CHANNEL_PROJECTIONS",
+      "source_file": "SingularClosure/SixChannelProjections.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 2,
@@ -118,5 +126,5 @@
     "AX6"
   ],
   "root_completed": false,
-  "completed_endpoint_count": 4
+  "completed_endpoint_count": 5
 }

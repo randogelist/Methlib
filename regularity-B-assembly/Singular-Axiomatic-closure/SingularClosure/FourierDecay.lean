@@ -150,11 +150,13 @@ theorem FOURIER_POLYNOMIAL_WEIGHT_BOUND (m : ℕ) (a : Field)
         (Finset.sum_le_sum (fun j _ => FOURIER_COORDINATE_POWER_BOUND j m a ha hp k i))
     _ ≤ fourierDecayConstant m a := by
       unfold fourierDecayConstant
-      apply Finset.single_le_sum
-      · intro l _
-        exact add_nonneg (integral_nonneg (fun x => norm_nonneg _))
-          (Finset.sum_nonneg (fun j _ => coordinateDerivativeL1_nonneg j m a l))
-      · exact Finset.mem_univ i
+      exact Finset.single_le_sum
+        (s := Finset.univ)
+        (f := fun l : Fin 3 => (∫ x in unitCube, ‖a x l‖) +
+          ∑ j : Fin 3, coordinateDerivativeL1 j m a l)
+        (fun l _ => add_nonneg (integral_nonneg (fun x => norm_nonneg _))
+          (Finset.sum_nonneg (fun j _ => coordinateDerivativeL1_nonneg j m a l)))
+        (Finset.mem_univ i)
 
 /-- Arbitrary polynomial order, including the zero mode, without any Fourier-series premise. -/
 theorem FOURIER_POLYNOMIAL_DECAY (m : ℕ) (a : Field)

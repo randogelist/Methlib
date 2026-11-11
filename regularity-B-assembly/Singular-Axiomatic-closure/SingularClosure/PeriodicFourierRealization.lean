@@ -32,7 +32,7 @@ def torusDatumRepresentative (θ : UnitAddTorus (Fin 3)) : Vec :=
   WithLp.toLp 2 ((UnitAddTorus.measurableEquivPiIoc (0 : Fin 3 → ℝ) θ).val)
 
 theorem torusDatumRepresentative_measurable : Measurable torusDatumRepresentative :=
-  (PiLp.continuous_toLp (p := 2)).measurable.comp
+  (PiLp.continuous_toLp 2 (fun _ : Fin 3 => ℝ)).measurable.comp
     (measurable_subtype_coe.comp
       (UnitAddTorus.measurableEquivPiIoc (0 : Fin 3 → ℝ)).measurable)
 
@@ -72,7 +72,7 @@ theorem torusDatumRepresentative_periodic (a : Field) (hp : SpatialPeriodic a) (
       change (torusDatumRepresentative (fun i => (x i : UnitAddCircle)) i : UnitAddCircle) -
         (x i : UnitAddCircle) = 0
       rw [torusDatumRepresentative_coe, sub_self]
-    obtain ⟨n, hn⟩ := AddCircle.coe_eq_zero_iff.mp hz
+    obtain ⟨n, hn⟩ := (AddCircle.coe_eq_zero_iff (p := (1 : ℝ))).mp hz
     exact ⟨n, by simpa only [zsmul_eq_mul, mul_one] using hn⟩
   choose z hz using hcoord
   have hr : r = x + integerShift z := by
@@ -118,15 +118,9 @@ theorem torusDatumL2_coe (a : Field) (ha : Continuous a) (i : Fin 3) :
 theorem integral_unitCube_eq_piIoc (f : Vec → ℂ) :
     (∫ x in unitCube, f x) =
       ∫ x : Fin 3 → ℝ in {x | ∀ i, x i ∈ Ioc (0 : ℝ) 1}, f (WithLp.toLp 2 x) := by
-  have hzero : ∀ᵐ x : ℝ ∂volume, x ≠ 0 := by
-    simp [ae_iff]
   have hinterval : (volume : Measure ℝ).restrict (Ioc (0 : ℝ) 1) =
-      (volume : Measure ℝ).restrict (Icc (0 : ℝ) 1) := by
-    apply Measure.restrict_congr_set
-    filter_upwards [hzero] with x hx
-    simp only [mem_Ioc, mem_Icc]
-    exact ⟨fun h => ⟨h.1.le, h.2⟩,
-      fun h => ⟨lt_of_le_of_ne h.1 (Ne.symm hx), h.2⟩⟩
+      (volume : Measure ℝ).restrict (Icc (0 : ℝ) 1) :=
+    Measure.restrict_congr_set Ioc_ae_eq_Icc
   have hset : {x : Fin 3 → ℝ | ∀ i, x i ∈ Ioc (0 : ℝ) 1} =
       Set.univ.pi (fun _ : Fin 3 => Ioc (0 : ℝ) 1) := by
     ext x

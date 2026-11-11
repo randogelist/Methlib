@@ -191,25 +191,37 @@ def torusSobolevInclusionLinear (s : ℕ) : TorusSobolev (s + 1) →ₗ[ℂ] Tor
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-set_option maxHeartbeats 1000000 in
-theorem torusSobolevInclusion_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
-    ‖torusSobolevInclusionLinear s c‖ ≤ ‖c‖ := by
-  change ‖torusSobolevReprLinear s (torusSobolevInclusionLinear s c)‖ ≤
-    ‖torusSobolevReprLinear (s + 1) c‖
+@[simp]
+theorem torusSobolevInclusionLinear_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
+    (torusSobolevInclusionLinear s c).val = c.val := rfl
+
+theorem torusSobolevInclusion_repr_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
+    ‖torusSobolevRepr s (torusSobolevInclusionLinear s c)‖ ≤
+      ‖torusSobolevRepr (s + 1) c‖ := by
   apply lp.norm_mono (by norm_num)
   intro ki
+  simp only [torusSobolevRepr_apply, torusSobolevInclusionLinear_coeff]
   change ‖sobolevWeightedCoeff s c.val ki‖ ≤ ‖sobolevWeightedCoeff (s + 1) c.val ki‖
   rw [sobolevWeightedCoeff_succ_norm]
   exact le_mul_of_one_le_left (norm_nonneg _) (torusSobolevWeight_one_le _)
+
+theorem torusSobolevInclusion_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
+    ‖torusSobolevInclusionLinear s c‖ ≤ ‖c‖ := by
+  calc
+    _ = ‖torusSobolevRepr s (torusSobolevInclusionLinear s c)‖ :=
+      ((torusSobolevRepr s).norm_map _).symm
+    _ ≤ ‖torusSobolevRepr (s + 1) c‖ := torusSobolevInclusion_repr_norm_le s c
+    _ = ‖c‖ := (torusSobolevRepr (s + 1)).norm_map c
 
 def torusSobolevInclusion (s : ℕ) : TorusSobolev (s + 1) →L[ℂ] TorusSobolev s :=
   (torusSobolevInclusionLinear s).mkContinuous 1
     (fun c => by simpa using torusSobolevInclusion_norm_le s c)
 
-set_option maxHeartbeats 1000000 in
 @[simp]
 theorem torusSobolevInclusion_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
-    (torusSobolevInclusion s c).val = c.val := rfl
+    (torusSobolevInclusion s c).val = c.val := by
+  simp only [torusSobolevInclusion, LinearMap.mkContinuous_apply,
+    torusSobolevInclusionLinear_coeff]
 
 /-- Zero mode plus exactly the existing nonzero Galerkin cutoff. -/
 def sobolevCutoffModes (N : ℕ) : Finset Frequency := insert 0 (cutoffModes N)
@@ -390,33 +402,38 @@ theorem torusSobolevCutoff_compact (s N : ℕ) :
     rw [Finset.sum_insert hki]
     exact (torusSobolevRankOne_compact s ki).add ih
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Uniform convergence in operator norm of the finite cutoffs of the inclusion. -/
 theorem torusSobolevInclusion_cutoff_tendsto (s : ℕ) :
     Tendsto (fun n : ℕ => (torusSobolevCutoff s (n + 1)).comp (torusSobolevInclusion s))
       atTop (𝓝 (torusSobolevInclusion s)) := by
-  apply Metric.tendsto_atTop.mpr
-  intro ε hε
-  obtain ⟨M, hM⟩ := exists_nat_gt ε⁻¹
-  refine ⟨M, fun n hn => ?_⟩
-  rw [dist_eq_norm]
+  apply tendsto_sub_nhds_zero_iff.mp
+  have hballs : (𝓝 (0 : TorusSobolev s)).HasBasis (fun ε : ℝ => 0 < ε)
+      (fun ε => Metric.ball (0 : TorusSobolev s) ε) := Metric.nhds_basis_ball
+  apply (ContinuousLinearMap.hasBasis_nhds_zero_of_basis hballs).tendsto_right_iff.mpr
+  rintro ⟨S, ε⟩ ⟨hS, hε⟩
+  obtain ⟨R, hR⟩ := (NormedSpace.isVonNBounded_iff' ℂ).mp hS
+  let B : ℝ := max R 0 + 1
+  have hRB : R ≤ B := le_trans (le_max_left R 0) (by dsimp [B]; linarith)
+  obtain ⟨M, hM⟩ := exists_nat_gt (B / ε)
+  filter_upwards [eventually_ge_atTop M] with n hn
+  intro c hc
+  change dist (((torusSobolevCutoff s (n + 1)).comp (torusSobolevInclusion s) -
+    torusSobolevInclusion s) c) 0 < ε
+  rw [dist_zero_right, ContinuousLinearMap.sub_apply,
+    ContinuousLinearMap.comp_apply, norm_sub_rev]
   have hN : (0 : ℝ) < ((n + 1 : ℕ) : ℝ) := by positivity
-  have hbound :
-      ‖(torusSobolevCutoff s (n + 1)).comp (torusSobolevInclusion s) -
-        torusSobolevInclusion s‖ ≤ (((n + 1 : ℕ) : ℝ))⁻¹ := by
-    apply ContinuousLinearMap.opNorm_le_bound (by positivity)
-    intro c
-    rw [ContinuousLinearMap.sub_apply, ContinuousLinearMap.comp_apply, norm_sub_rev]
-    exact torusSobolevInclusion_tail s (n + 1) (Nat.succ_pos n) c
-  apply lt_of_le_of_lt hbound
-  have hlarge : ε⁻¹ < ((n + 1 : ℕ) : ℝ) := by
+  have hlarge : B / ε < ((n + 1 : ℕ) : ℝ) := by
     have hmn : (M : ℝ) ≤ n := by exact_mod_cast hn
     push_cast
     linarith
-  have hprod : 1 < ε * ((n + 1 : ℕ) : ℝ) := by
-    have h := mul_lt_mul_of_pos_left hlarge hε
-    rwa [mul_inv_cancel₀ hε.ne'] at h
-  exact (inv_lt_iff₀ hN).mpr (by simpa [mul_comm] using hprod)
+  have hprod : B < ((n + 1 : ℕ) : ℝ) * ε := (div_lt_iff₀ hε).mp hlarge
+  calc
+    _ ≤ (((n + 1 : ℕ) : ℝ))⁻¹ * ‖c‖ :=
+      torusSobolevInclusion_tail s (n + 1) (Nat.succ_pos n) c
+    _ ≤ (((n + 1 : ℕ) : ℝ))⁻¹ * B :=
+      mul_le_mul_of_nonneg_left ((hR c hc).trans hRB) (inv_nonneg.mpr hN.le)
+    _ = B / ((n + 1 : ℕ) : ℝ) := by rw [div_eq_mul_inv, mul_comm]
+    _ < ε := (div_lt_iff₀ hN).mpr (by simpa only [mul_comm] using hprod)
 
 /-- Compact inclusion of the actual Fourier Sobolev spaces, in every integral order. -/
 theorem torusSobolevInclusion_compact (s : ℕ) :

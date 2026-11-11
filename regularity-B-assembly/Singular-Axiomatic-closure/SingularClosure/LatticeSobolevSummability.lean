@@ -45,8 +45,8 @@ theorem summable_frequencyLatticePoint_inv_four :
 
 theorem frequencyLatticePoint_norm_le_weight (k : Frequency) :
     ‖frequencyLatticePoint k‖ ≤ torusSobolevWeight k := by
-  have hfreq : 0 ≤ (galerkinFreqSq k : ℝ) :=
-    Int.cast_nonneg.mpr (galerkinFreqSq_nonneg k)
+  have hfreq : 0 ≤ (galerkinFreqSq k : ℝ) := by
+    exact_mod_cast galerkinFreqSq_nonneg k
   have hpi : 1 ≤ (2 * Real.pi) ^ 2 := by nlinarith [Real.pi_gt_three]
   have hcoordinate (i : Fin 3) : |(k i : ℝ)| ≤ torusSobolevWeight k := by
     have hi : (k i : ℝ) ^ 2 ≤ (galerkinFreqSq k : ℝ) := by

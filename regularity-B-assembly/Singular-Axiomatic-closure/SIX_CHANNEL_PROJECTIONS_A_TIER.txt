@@ -1,0 +1,37 @@
+SIX_CHANNEL_PROJECTIONS — A_TIER
+Completion marker: !=!
+
+EXACT TYPE
+SingularClosure.SIX_CHANNEL_PROJECTIONS : PhysicalSixChannelProjectionLaws
+
+ACTUAL OPERATORS
+The six smoothSixChannel maps are the literal coordinate-average projections
+at zero-based axes 2 and 0. Physical inner products are Lebesgue integrals
+over unitCube. Derivatives are actual Frechet coordinate derivatives.
+physicalFourierCutoff uses the actual input's cube Fourier coefficients.
+
+PROVED CLAUSES
+Reconstruction; additivity for continuous fields; real homogeneity;
+idempotence and disjointness for continuous fields; physical self-adjointness
+and orthogonality for smooth fields; preservation of SmoothSigmaZero;
+commutation with coordinate derivatives for smooth periodic fields;
+commutation with physical Fourier cutoffs for continuous fields.
+
+No projection-law, orthogonality, derivative or Fourier-agreement certificate
+is an input premise of the endpoint theorem.
+
+EXTERNAL EVIDENCE
+Commit: 0b2438438847d4f1ddc7075c04ee8153c88e4e0f
+Run: https://github.com/randogelist/Methlib/actions/runs/42947128383
+Job: 130282494455
+Compiler: Lean 4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Independent module compilation: PASS
+Exact-type check: PASS
+Theorem-level axiom audit: PASS
+Axioms: propext, Classical.choice, Quot.sound
+
+AGGREGATE STATUS
+Other candidate modules failed in this run. This report promotes only the
+exact independently audited endpoint 1. No global PDE closure is asserted.
+Local Lean execution: zero.

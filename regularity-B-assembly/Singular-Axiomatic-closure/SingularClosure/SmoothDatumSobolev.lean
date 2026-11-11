@@ -35,8 +35,8 @@ theorem torusSobolevWeight_pow_le_polynomial (n : ℕ) (k : Frequency) :
       1 + ∑ j : Fin 3, ((2 * Real.pi) * |(k j : ℝ)|) ^ 2 := by
     rw [hscale]
     unfold torusSobolevWeight laplacianFrequency
-    have hf : 0 ≤ (galerkinFreqSq k : ℝ) :=
-      Int.cast_nonneg.mpr (galerkinFreqSq_nonneg k)
+    have hf : 0 ≤ (galerkinFreqSq k : ℝ) := by
+      exact_mod_cast galerkinFreqSq_nonneg k
     exact Real.sq_sqrt (by positivity)
   let f : Fin 4 → ℝ := ![1, ((2 * Real.pi) * |(k 0 : ℝ)|) ^ 2,
     ((2 * Real.pi) * |(k 1 : ℝ)|) ^ 2, ((2 * Real.pi) * |(k 2 : ℝ)|) ^ 2]

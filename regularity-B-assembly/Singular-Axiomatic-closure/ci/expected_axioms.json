@@ -797,6 +797,186 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_time_difference_bound"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS"
+    },
+    {
+      "name": "SingularClosure.canonicalSobolevLimit_initial_physical",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.canonicalSobolevLimit_initial_physical"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND"
+    },
+    {
+      "name": "SingularClosure.countable_precompact_family_subsequence",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.countable_precompact_family_subsequence"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.fourierTensorCoefficient_summable_norm",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fourierTensorCoefficient_summable_norm"
+    },
+    {
+      "name": "SingularClosure.fourierTensorCoefficient_norm_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fourierTensorCoefficient_norm_le"
+    },
+    {
+      "name": "SingularClosure.coefficientTransport_eq_divergenceTransport",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_divergenceTransport"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_limit_mem_and_norm_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_limit_mem_and_norm_le"
+    },
+    {
+      "name": "SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE"
+    },
+    {
+      "name": "SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION"
+    },
+    {
+      "name": "SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS"
+    },
+    {
+      "name": "SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND"
+    },
+    {
+      "name": "SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND"
+    },
+    {
+      "name": "SingularClosure.datumFourierCoeff_injective_continuous_periodic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_injective_continuous_periodic"
+    },
+    {
+      "name": "SingularClosure.smoothFourierSynthesis_convection_coeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothFourierSynthesis_convection_coeff"
+    },
+    {
+      "name": "SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY"
+    },
+    {
+      "name": "SingularClosure.smoothFourierSynthesis_laplacian_coeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothFourierSynthesis_laplacian_coeff"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.canonicalLimit_physical_timeDerivative",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.canonicalLimit_physical_timeDerivative"
     }
   ]
 }

@@ -139,15 +139,15 @@ theorem AX6_UNIFORM_TIME_DERIVATIVE_BOUND (hAX6 : AX6Statement)
       intro t ht
       exact (htime a N g t ht.1).trans
         (mul_le_mul_of_nonneg_left
-          (add_le_add_right (pow_le_pow_left₀
-            (coefficientDissipation_nonneg N (g.coeff t)) (hEn t ht) 3) _) hC.le)
+          (add_le_add (pow_le_pow_left₀
+            (coefficientDissipation_nonneg N (g.coeff t)) (hEn t ht) 3) le_rfl) hC.le)
     _ = C * (T * S ^ 3 +
         ∫ t in (0 : ℝ)..T, coefficientLaplacianSquare N (g.coeff t)) := by
       rw [intervalIntegral.integral_const_mul,
         intervalIntegral.integral_add intervalIntegrable_const hZint,
         intervalIntegral.integral_const]
       simp
-    _ ≤ _ := mul_le_mul_of_nonneg_left (add_le_add_left hZ _) hC.le
+    _ ≤ _ := mul_le_mul_of_nonneg_left (add_le_add le_rfl hZ) hC.le
 
 end
 

@@ -30,7 +30,7 @@ theorem FINITE_PHYSICAL_NONLINEAR_REAL_BOUND :
   refine ⟨C.toReal, ENNReal.toReal_nonneg, ?_⟩
   intro N c hreal
   have h := ENNReal.toReal_mono (by finiteness) (hbound N c hreal)
-  simpa only [ENNReal.toReal_mul, ENNReal.toReal_rpow,
+  simpa only [ENNReal.toReal_mul, ← ENNReal.toReal_rpow,
     ENNReal.toReal_ofReal (abs_nonneg _),
     ENNReal.toReal_ofReal (coefficientDissipation_nonneg N c),
     ENNReal.toReal_ofReal (coefficientLaplacianSquare_nonneg N c)] using h
@@ -49,7 +49,7 @@ theorem quartic_absorption {x z d ν : ℝ} (hx : 0 ≤ x) (hz : 0 ≤ z)
   have hcube : (ν * z) ^ 3 ≤ x ^ 3 := pow_le_pow_left₀ hnz hnx.le 3
   have hcontr : d * z ^ 3 < x ^ 4 := by
     calc
-      _ = (ν * z) ^ 3 * (d / ν ^ 3) := by field_simp [ne_of_gt hν]; ring
+      _ = (ν * z) ^ 3 * (d / ν ^ 3) := by field_simp [ne_of_gt hν] <;> ring
       _ ≤ x ^ 3 * (d / ν ^ 3) := mul_le_mul_of_nonneg_right hcube hdz
       _ < x ^ 3 * x := mul_lt_mul_of_pos_left hdx (pow_pos hxp _)
       _ = _ := by ring
@@ -123,7 +123,7 @@ theorem GALERKIN_COEFFICIENT_ENSTROPHY_INEQUALITY :
       _ ≤ ν * coefficientLaplacianSquare N (g.coeff t) +
           (2 * K) ^ 4 / ν ^ 3 * (coefficientDissipation N (g.coeff t)) ^ 3 := ha
       _ ≤ _ := by
-        apply add_le_add_left
+        apply add_le_add (le_refl _)
         apply mul_le_mul_of_nonneg_right _ (pow_nonneg hE _)
         apply div_le_div_of_nonneg_right _ (pow_nonneg hν.le _)
         dsimp [C]
