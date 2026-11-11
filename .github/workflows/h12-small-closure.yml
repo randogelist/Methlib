@@ -118,6 +118,15 @@ jobs:
           lake env lean ci/EndpointAudit11.lean 2>&1 | tee evidence/frozen-root-axioms.log
           python3 ci/check_axioms.py evidence/frozen-root-axioms.log ci/expected_endpoint_11.json | tee evidence/frozen-root-audit.json
 
+      - name: Recheck all original package endpoints
+        if: always() && steps.extension.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure 2>&1 | tee evidence/full-package-build.log
+          python3 ci/test_check_axioms.py 2>&1 | tee evidence/audit-checker-tests.log
+          lake env lean ci/Audit.lean 2>&1 | tee evidence/full-package-axioms.log
+          python3 ci/check_axioms.py evidence/full-package-axioms.log ci/expected_axioms.json | tee evidence/full-package-audit.json
+
       - name: Preserve checked compiler objects
         if: always() && steps.project.outcome == 'success' && steps.project.outputs.cache-hit != 'true'
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830

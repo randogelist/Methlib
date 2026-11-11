@@ -11,6 +11,7 @@ SingularClosure.CriticalGlobalEnergyClass
 SingularClosure.CriticalGlobalLp
 SingularClosure.CriticalGlobalSerrin
 SingularClosure.CriticalGradientEnergyBound
+SingularClosure.CriticalGradientL2Measurable
 SingularClosure.CriticalH1Algebra
 SingularClosure.CriticalHolder
 SingularClosure.CriticalHomogeneousL6
@@ -71,7 +72,9 @@ SingularClosure.CriticalSpaces
 SingularClosure.CriticalSpacesCutoff
 SingularClosure.CriticalSpacesEmbedding
 SingularClosure.CriticalSpatialNormMeasurable
+SingularClosure.CriticalStrongLerayHopf
 SingularClosure.CriticalStrongLerayHopfEnergy
+SingularClosure.CriticalStrongLerayHopfGradient
 SingularClosure.CriticalTerminalDissipation
 SingularClosure.CriticalTimeDerivative
 SingularClosure.CriticalTrace
@@ -91,6 +94,7 @@ SingularClosure.CriticalWeakMomentum
 SingularClosure.CriticalYoung
 SingularClosure.SmallDataAX6
 SingularClosure.SmallDataAX6Closure
+SingularClosure.SmallDataClosure
 SingularClosure.SmallDataQuantitative
 SingularClosure.SmallDataRoot
 SingularClosure.SmallDataSerrin

@@ -113,3 +113,5 @@ import SingularClosure.PhysicalNSEIdentity
 import SingularClosure.GlobalSmoothBootstrap
 import SingularClosure.PeriodicPressureRecovery
 import SingularClosure.Root
+import SingularClosure.SmallDataRoot
+import SingularClosure.SmallDataClosure

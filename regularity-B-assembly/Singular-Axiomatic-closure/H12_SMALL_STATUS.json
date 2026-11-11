@@ -5,7 +5,7 @@
   "unconditional_closure": false,
   "smallness": "criticalNonlinearConstant * norm_Hhalf(a) < nu",
   "initial_trace": "strong Hhalf",
-  "smoothness": "positive time; closed forward time for smooth initial data",
+  "smoothness": "positive time; strong Hhalf initial trace",
   "local_lean_executions": 0,
   "compiler": "external cached Lean 4.33.0",
   "existing_frozen_root": "AX6Statement -> Fefferman_B_0_adjust",
@@ -109,13 +109,13 @@
       "status": "A_TIER_CANDIDATE"
     }
   ],
-  "root_theorem": "NSE_H12_SIGMA_ZERO_SMALL_REGULARITY",
+  "root_theorem": "NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL",
   "scope": {
     "domain": "T^3",
     "forcing": "zero",
     "data": "actual real divergence-free mean-zero CriticalSobolev 1",
     "regularity": "strong critical trace, positive-time smooth physical NSE",
-    "leray_hopf_uniqueness": "separate endpoint in progress"
+    "leray_hopf_uniqueness": "actual membership plus uniqueness; external verification pending"
   },
-  "last_verified_components_run": 43038738281
+  "last_verified_components_run": 43040552808
 }
