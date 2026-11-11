@@ -745,4 +745,55 @@ example : ∀ (a : Field)
 #check @SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
 #print axioms SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ
 
+
+example : PhysicalSixChannelProjectionLaws :=
+  SingularClosure.SIX_CHANNEL_PROJECTIONS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_PROJECTIONS"
+#check @SingularClosure.SIX_CHANNEL_PROJECTIONS
+#print axioms SingularClosure.SIX_CHANNEL_PROJECTIONS
+
+
+open Metric
+
+example : ∀ (A : Fin 6) (N : ℕ) (a : Field)
+    (ha : Continuous a),
+    smoothSixChannel A (physicalFourierCutoff N a) =
+      physicalFourierCutoff N (smoothSixChannel A a) :=
+  @SingularClosure.smoothSixChannel_fourierCutoff
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.smoothSixChannel_fourierCutoff"
+#check @SingularClosure.smoothSixChannel_fourierCutoff
+#print axioms SingularClosure.smoothSixChannel_fourierCutoff
+
+example : ∀ (f : Vec → ℝ)
+    (hf : Continuous f) (hp : SpatialPeriodic f) (hn : ∀ x, 0 ≤ f x),
+    (∫ x in closedBall (0 : Vec) 3, f x) ≤
+      343 * ∫ x in unitCube, f x :=
+  @SingularClosure.periodic_closedBall_three_integral_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.periodic_closedBall_three_integral_le"
+#check @SingularClosure.periodic_closedBall_three_integral_le
+#print axioms SingularClosure.periodic_closedBall_three_integral_le
+
+example : ∃ C : ℝ≥0∞, C < ⊤ ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
+      eLpNorm (finiteSynthesis N c) 6 (volume.restrict unitCube) ≤
+        C * (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ) :=
+  @SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY"
+#check @SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY
+#print axioms SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hreal : SpectralReality c),
+    (∑ i : Fin 3, ∫ x in unitCube,
+      gradientSquareDensity (coordinateDerivative (finiteSynthesis N c) i) x) =
+        ∫ x in unitCube, ‖laplacian (finiteSynthesis N c) x‖ ^ 2 :=
+  @SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ"
+#check @SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
+#print axioms SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
+
 end

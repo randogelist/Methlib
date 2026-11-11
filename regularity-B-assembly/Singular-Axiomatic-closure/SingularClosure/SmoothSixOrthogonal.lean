@@ -65,7 +65,7 @@ theorem baseChannelW_selfAdjoint (a b : Field)
     (verticalComponent_smooth hb).continuous]
   change physicalFieldInner a (coordinateAverage 2 (verticalComponent b)) = _
   rw [coordinateAverage_verticalComponent 2 b hb.continuous]
-  rfl
+  all_goals rfl
 
 theorem baseChannelV_selfAdjoint (a b : Field)
     (ha : ContDiff ℝ ∞ a) (hb : ContDiff ℝ ∞ b) :

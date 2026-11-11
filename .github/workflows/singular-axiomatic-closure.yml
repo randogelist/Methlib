@@ -114,7 +114,7 @@ jobs:
         run: |
           set -uo pipefail
           endpoint_status=0
-          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy 2:SmoothSixEnstrophy; do
+          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy 2:SmoothSixEnstrophy 1:SixChannelProjections; do
             endpoint_number="${endpoint_spec%%:*}"
             endpoint_module="${endpoint_spec#*:}"
             if lake build "SingularClosure.${endpoint_module}" 2>&1 | tee "evidence/endpoint-${endpoint_number}-build.log"; then

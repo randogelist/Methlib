@@ -129,7 +129,7 @@ theorem integral_complexFiniteSynthesis_normSq (N : ℕ) (c : FourierCoeff) (j :
       rfl
     _ = (∫ x in unitCube,
         star (complexFiniteSynthesis N c j x) * complexFiniteSynthesis N c j x).re :=
-      integral_re hi
+      Complex.reCLM.integral_comp_comm hi
     _ = _ := by
       rw [integral_complexFiniteSynthesis_inner, physical_complex_re_sum]
       simp

@@ -42,11 +42,108 @@ limit with physical convection; recovery of the initial datum; inheritance of
 the H1/H2 bounds. Weak global Leray--Hopf existence by itself does not supply
 the strong-solution conclusion.
 
+ENDPOINT-8 DEFINITION AND LIBRARY GAP: 2026-11-11
+
+Existing concrete spaces:
+  SingularClosure.TorusScalarL2 = Lp(C, 2, normalized unit-three-torus measure).
+  SingularClosure.TorusVectorL2 = PiLp(2, Fin(3) -> TorusScalarL2).
+  UnitAddTorus.mFourierBasis.repr supplies the actual Fourier isometry.
+Source module: SingularClosure/HilbertChannels.lean.
+
+Required Sobolev scale, stated mathematically and not implemented:
+  lambda(k) = (2*pi)^2 * sum_i k_i^2;
+  ||v||_(H^s)^2 = sum_k sum_i (1 + lambda(k))^s |v_hat_i(k)|^2.
+The torus Sobolev spaces must be constructed from the actual Fourier isometry,
+with real-valuedness, zero mean, and distributional divergence conditions.
+Defining numerical Fourier weights alone supplies neither these spaces nor
+their norm, completeness, embedding, differential-operator, or physical-lift API.
+
+Concrete prospective input to endpoint 8:
+  For every T > 0, a finite bound C_T independent of cutoff N for
+    sup_(0 <= t <= T) ||u_N(t)||_(H^1)^2,
+    integral_0^T ||u_N(t)||_(H^2)^2 dt,
+    integral_0^T ||partial_t u_N(t)||_(L^2)^2 dt,
+  where u_N is the already-defined actual Fourier-Galerkin synthesis.
+  All norms, derivatives, and integrals require their explicit membership and
+  measurability proofs. Endpoint 7 must derive these bounds from AX6.
+
+Required output on one globally compatible curve:
+  For every finite T > 0,
+    u in C([0,T]; H^1) intersect L^2(0,T; H^2),
+    partial_t u in L^2(0,T; L^2),
+    partial_t u + P((u dot grad)u) = nu * Delta(u) almost everywhere,
+    u(0) = a in H^1,
+  together with real-valuedness, periodicity, zero mean, and divergence freedom.
+The projected equation must use the actual torus Leray projection and weak
+spatial derivatives. Applying totalized classical fderiv to an arbitrary Lp
+representative does not define this strong equation correctly. Identification
+with the literal pointwise equation in Contracts.lean follows only after the
+regularity and pressure-recovery arguments.
+
+Unimplemented proof bridges:
+  (a) Fourier realization of the finite trajectories in the actual torus
+      Sobolev spaces and identification of their time derivatives.
+  (b) Compact embedding H^2 -> H^1, with a quantitative high-frequency tail
+      bound, and a time compactness theorem from the displayed bounds.
+  (c) Extraction on every finite horizon and a single compatible diagonal
+      subsequence/curve; inheritance of the H^1/H^2/derivative bounds.
+  (d) Passage through the actual quadratic convection operator, including
+      Sobolev product estimates, Leray boundedness, and convergence of the
+      projected finite-cutoff equations to the infinite equation.
+  (e) Identification of the weak time derivative and C([0,T]; H^1) trace;
+      convergence of the projected smooth initial datum to a in H^1.
+
+Inspected available generic Mathlib ingredients at the pinned revision:
+  Mathlib/Topology/UniformSpace/Ascoli.lean;
+  Mathlib/Topology/ContinuousMap/Bounded/ArzelaAscoli.lean;
+  Mathlib/Analysis/Normed/Lp/lpSpace.lean.
+The first two supply general Arzela-Ascoli compactness. The third supplies
+coordinatewise-limit membership and lower semicontinuity of lp norms through
+lp.memℓp_of_tendsto and lp.norm_le_of_tendsto. These general ingredients do
+not establish any of bridges (a)--(e) merely by instantiation of the current
+package. They do not contain a torus NSE strong-limit theorem.
+
+Inspected upstream R3 compactness dependencies:
+  R3/SpacetimePrecompact.lean
+    -> R3/GalerkinTimeModulus.lean, R3/GalerkinCurveBounds.lean,
+       R3/SpatialCompactness.lean, Bochner/StepFunctionCompactness.lean;
+  R3/ArzelaAscoliTime.lean;
+  R3/AubinLionsLimitPassage.lean;
+  R3/GoodRepresentative.lean -> Bochner/WeakLimitToolkit.lean;
+  R3/LimitPassage.lean;
+  R3/GlobalCapstone.lean.
+The inspected R3 declarations have actual proof bodies despite historical
+comments referring to earlier axioms. Their conclusions and premises use
+R3NSForms, R3GalerkinScheme, R3 L2 spaces, ball restriction, and local Rellich
+compactness. The two named Bochner source files were absent from the local
+pinned-source snapshot and were not audited in this review. No transfer of
+their guarantees to the torus contract is asserted.
+
+Endpoint-8 status: unresolved. No StrongLimit.lean surrogate was introduced.
+Coefficientwise convergence, invariant preservation, or weak Leray-Hopf
+existence alone would be strictly insufficient for the frozen strong endpoint.
+
 9. GLOBAL_STRONG_SMOOTH_BOOTSTRAP
 Required: actual spatial/time derivative regularity from H1/H2 strong bounds;
 arbitrarily high orders for smooth input; regularity through t=0 rather than
 only on positive-time compact subintervals. No concrete theorem with these
 conclusions was found among the inspected upstream files.
+
+Additional pinned-Mathlib inspection: the full recursive source tree at
+db584cd6d46c92f209a44c0f1c829460d327499d contains Sobolev distributions,
+Sobolev inequalities, Schwartz Fourier calculus, and differentiability of
+function series, but no heat/Stokes semigroup, Duhamel, parabolic smoothing,
+or Navier--Stokes strong-to-smooth theorem was identified. The R3 upstream
+Regularity module supplies H1 membership and viscous forms only.
+
+The required nonlinear implementation is still missing: construct the periodic
+Sobolev/derivative scale and the high-order tame product estimates; propagate
+those estimates for the actual strong NSE evolution from its H1/H2 bounds;
+obtain every finite spatial/time derivative; identify their limits and initial
+values at t=0 using the smooth datum. A linear heat-multiplier estimate alone
+would not discharge these nonlinear or initial-boundary obligations. No
+heat-only surrogate was added and no GLOBAL_STRONG_SMOOTH_BOOTSTRAP declaration
+was introduced with an assumed bootstrap argument.
 
 10. PERIODIC_PRESSURE_RECOVERY
 Required: construction of the mean-zero periodic inverse-Laplacian pressure,

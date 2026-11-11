@@ -20,7 +20,7 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 |---:|---|---|
 | 1 | `SIX_CHANNEL_PROJECTIONS` | Pending |
 | 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | Pending |
-| 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | Pending |
+| 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !=! A_TIER |
 | 4 | `GALERKIN_ENERGY_IDENTITY` | Pending |
 | 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | Pending |
 | 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !=! A_TIER |
@@ -79,3 +79,11 @@ Evidence: https://github.com/randogelist/Methlib/actions/runs/42935149091
 Frozen endpoints completed: **1/11**, namely endpoint 6. Spectral identities and finite physical reconstruction are verified auxiliary results; the complete physical projection/enstrophy endpoints remain pending. The general-data Galerkin existence, energy estimates, strong limit, smooth bootstrap, pressure recovery, and root implication remain open.
 
 The preserved audit transcript and source hashes are in `verification/`. Exact scope for endpoint 6 is recorded in `CUBIC_ENERGY_OF_SQUARE_BUDGET_A_TIER.txt`. Full endpoint status is in `ENDPOINTS.json` and `Singular_Axiomatic_Closure_A_TIER.txt`; implementation corrections are in `CORRECTIONS.md`.
+
+## Verified global Galerkin endpoint
+
+Commit `c1af57143f708d3587a03425dbd9493db0e6f5f0`: frozen endpoint 3 passed the independent compiler, exact-type and theorem-level standard-only axiom audit. The trajectory exists for every positive viscosity, every concrete smooth solenoidal mean-zero input and every cutoff. Uniqueness is equality on nonnegative time, the actual trajectory domain.
+
+Evidence: https://github.com/randogelist/Methlib/actions/runs/42940507715
+
+The aggregate project build at that revision remained in repair for other modules. This checkpoint promotes only the independently audited endpoint 3. Frozen endpoint total at this checkpoint: 2/11 (3 and 6). No global PDE closure is inferred.

@@ -124,6 +124,7 @@ theorem smoothSixChannel_smul (A : Fin 6) (r : ℝ) (a : Field) :
     simp [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
       coordinateAverage_smul, verticalComponent_smul, ← smul_sub]
 
+set_option maxHeartbeats 1000000 in
 /-- Orthogonal-mask composition, obtained solely from actual average algebra. -/
 theorem smoothSixChannel_comp (A B : Fin 6) (a : Field) (ha : Continuous a) :
     smoothSixChannel A (smoothSixChannel B a) =

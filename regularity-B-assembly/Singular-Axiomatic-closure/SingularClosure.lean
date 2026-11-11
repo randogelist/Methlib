@@ -33,3 +33,10 @@ import SingularClosure.SmoothSixChannels
 import SingularClosure.SmoothSixProjectionAlgebra
 import SingularClosure.SmoothSixOrthogonal
 import SingularClosure.SmoothSixEnstrophy
+import SingularClosure.ComplexCoordinateAverage
+import SingularClosure.SmoothSixFourier
+import SingularClosure.SmoothSixSynthesis
+import SingularClosure.SixChannelProjections
+import SingularClosure.PeriodicCover
+import SingularClosure.PeriodicSobolev
+import SingularClosure.FiniteHessian

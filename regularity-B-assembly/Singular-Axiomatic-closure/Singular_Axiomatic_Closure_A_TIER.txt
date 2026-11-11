@@ -8,20 +8,28 @@ CURRENT_NONSTANDARD_AXIOM_DECLARATIONS=NONE
 LOCAL_LEAN_EXECUTIONS=0
 COMPILER=EXTERNAL_GITHUB_ACTIONS_LEAN_4.33.0
 MATHLIB_REV=db584cd6d46c92f209a44c0f1c829460d327499d
-VERIFIED_COMMIT=bb7c4f569a7b305935006dfc333b17f1528ae34c
-CI=https://github.com/randogelist/Methlib/actions/runs/42935149091
-BUILD=PASS
-EXACT_TYPE_AUDIT=PASS
-AXIOM_AUDIT=PASS_STANDARD_ONLY
-AUDITED_DECLARATIONS=16
-COMPLETED_FROZEN_ENDPOINTS=1/11
+COMPLETED_FROZEN_ENDPOINTS=2/11
+
+!=! 3 GALERKIN_GLOBAL_EXISTS_UNIQUE -- A_TIER
+VERIFIED_COMMIT=c1af57143f708d3587a03425dbd9493db0e6f5f0
+CI=https://github.com/randogelist/Methlib/actions/runs/42940507715
+ENDPOINT_COMPILER=PASS
+ENDPOINT_EXACT_TYPE_AUDIT=PASS
+ENDPOINT_AXIOM_AUDIT=PASS_STANDARD_ONLY
+AGGREGATE_BUILD_AT_THIS_COMMIT=FAILED_OTHER_PENDING_MODULES
+REPORT=GALERKIN_GLOBAL_EXISTS_UNIQUE_A_TIER.txt
 
 !=! 6 CUBIC_ENERGY_OF_SQUARE_BUDGET -- A_TIER
+VERIFIED_COMMIT=bb7c4f569a7b305935006dfc333b17f1528ae34c
+CI=https://github.com/randogelist/Methlib/actions/runs/42935149091
+ENDPOINT_COMPILER=PASS
+ENDPOINT_EXACT_TYPE_AUDIT=PASS
+ENDPOINT_AXIOM_AUDIT=PASS_STANDARD_ONLY
+REPORT=CUBIC_ENERGY_OF_SQUARE_BUDGET_A_TIER.txt
 
-1 SIX_CHANNEL_PROJECTIONS -- PENDING_FULL_PHYSICAL_SCOPE
-2 SIX_CHANNEL_ENSTROPHY_EQ -- PENDING_PHYSICAL_PARSEVAL
-3 GALERKIN_GLOBAL_EXISTS_UNIQUE -- OPEN
-4 GALERKIN_ENERGY_IDENTITY -- OPEN
+1 SIX_CHANNEL_PROJECTIONS -- A_TIER_CANDIDATE
+2 SIX_CHANNEL_ENSTROPHY_EQ -- A_TIER_CANDIDATE
+4 GALERKIN_ENERGY_IDENTITY -- A_TIER_CANDIDATE
 5 GALERKIN_ENSTROPHY_INEQUALITY -- OPEN
 7 AX6_UNIFORM_STRONG_BOUNDS -- OPEN
 8 GALERKIN_GLOBAL_STRONG_LIMIT -- OPEN
@@ -33,10 +41,10 @@ FORMAL_CLOSURE=NOT_ESTABLISHED
 CONDITIONAL_FORMAL_CLOSURE=NOT_ESTABLISHED
 UNCONDITIONAL_CLOSURE=NOT_ESTABLISHED
 
-The verified scalar endpoint has all analytic hypotheses explicit.
-The sixteen audited declarations are enumerated in ci/expected_axioms.json.
-The exact compiler transcript is preserved in verification/bb7c4f56_axioms.log.
-Source hashes and external artifact identities are in verification/bb7c4f56.json.
-Spectral and finite-synthesis subendpoints do not complete the full physical endpoints.
-Zero-data witnesses do not establish arbitrary-data Galerkin or NSE existence.
-No unresolved analytic bridge has been installed as an axiom or hidden root premise.
+Each verified endpoint is tied to its exact source commit and individual
+compiler/type/axiom evidence. The current audit manifest may schedule
+additional declarations; scheduling does not establish their promotion.
+No unresolved analytic bridge has been installed as an axiom or hidden
+root premise. Endpoint 3 covers all admissible smooth data, not only zero.
+The remaining infinite-dimensional NSE limit and smooth bootstrap are
+not supplied by global finite-dimensional Galerkin existence.

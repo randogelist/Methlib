@@ -431,6 +431,36 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_PROJECTIONS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_PROJECTIONS"
+    },
+    {
+      "name": "SingularClosure.smoothSixChannel_fourierCutoff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSixChannel_fourierCutoff"
+    },
+    {
+      "name": "SingularClosure.periodic_closedBall_three_integral_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.periodic_closedBall_three_integral_le"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY"
+    },
+    {
+      "name": "SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ"
     }
   ]
 }

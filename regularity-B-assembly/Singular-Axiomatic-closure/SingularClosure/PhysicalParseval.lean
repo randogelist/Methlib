@@ -161,16 +161,23 @@ theorem coordinateDerivative_component_continuous {v : Field}
   (EuclideanSpace.proj j : Vec →L[ℝ] ℝ).continuous.comp
     (coordinateDerivative_continuous hv i)
 
+set_option maxHeartbeats 1000000 in
 theorem integral_gradientSquareDensity {v : Field} (hv : ContDiff ℝ ∞ v) :
     (∫ x in unitCube, gradientSquareDensity v x) =
       ∑ i : Fin 3, ∑ j : Fin 3,
         ∫ x in unitCube, (coordinateDerivative v i x j) ^ 2 := by
+  have hcont (i : Fin 3) : Continuous (fun x : Vec =>
+      ∑ j : Fin 3, (coordinateDerivative v i x j) ^ 2) :=
+    continuous_finsetSum Finset.univ
+      (f := fun j x => (coordinateDerivative v i x j) ^ 2)
+      (fun j _ => (coordinateDerivative_component_continuous hv i j).pow 2)
+  have hint (i : Fin 3) : IntegrableOn (fun x : Vec =>
+      ∑ j : Fin 3, (coordinateDerivative v i x j) ^ 2) unitCube volume :=
+    (hcont i).continuousOn.integrableOn_compact isCompact_unitCube
   unfold gradientSquareDensity
   rw [integral_finsetSum Finset.univ
     (f := fun i x => ∑ j : Fin 3, (coordinateDerivative v i x j) ^ 2)
-    (μ := volume.restrict unitCube) (fun i _ =>
-    (continuous_finsetSum Finset.univ (fun j _ =>
-      (coordinateDerivative_component_continuous hv i j).pow 2)).continuousOn.integrableOn_compact isCompact_unitCube)]
+    (μ := volume.restrict unitCube) (fun i _ => hint i)]
   apply Finset.sum_congr rfl
   intro i _
   exact integral_finsetSum Finset.univ

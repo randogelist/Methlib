@@ -21,9 +21,17 @@
     {
       "number": 3,
       "name": "GALERKIN_GLOBAL_EXISTS_UNIQUE",
-      "status": "pending",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "c1af57143f708d3587a03425dbd9493db0e6f5f0",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42940507715",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE",
+      "source_file": "SingularClosure/GalerkinGlobal.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 4,
@@ -94,5 +102,5 @@
     "AX6"
   ],
   "root_completed": false,
-  "completed_endpoint_count": 1
+  "completed_endpoint_count": 2
 }

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "commit": "c1af57143f708d3587a03425dbd9493db0e6f5f0",
+  "run_id": 42940507715,
+  "job_id": 130260911652,
+  "endpoint_number": 3,
+  "theorem": "SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE",
+  "compiler": "Lean 4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "compiler_result": "PASS",
+  "exact_type_result": "PASS",
+  "axiom_audit_result": "PASS_STANDARD_ONLY",
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "aggregate_build_result": "FAIL_OTHER_PENDING_MODULES",
+  "local_lean_executions": 0
+}

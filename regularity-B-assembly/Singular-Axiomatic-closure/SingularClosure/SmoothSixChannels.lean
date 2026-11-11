@@ -64,11 +64,15 @@ theorem verticalComponent_coordinateDerivative {a : Field}
     coordinateDerivative (verticalComponent a) i =
       verticalComponent (coordinateDerivative a i) := by
   funext x
-  have h := verticalComponentCLM.hasFDerivAt.comp x
-    ((ha.differentiable (by simp)) x).hasFDerivAt
-  unfold coordinateDerivative verticalComponent
+  have h : HasFDerivAt (verticalComponent a)
+      (verticalComponentCLM.comp (fderiv ℝ a x)) x := by
+    simpa only [verticalComponent, Function.comp_def] using!
+      verticalComponentCLM.hasFDerivAt.comp x
+        ((ha.differentiable (by simp)) x).hasFDerivAt
+  change fderiv ℝ (verticalComponent a) x (unitVector i) =
+    verticalComponentCLM (fderiv ℝ a x (unitVector i))
   rw [h.fderiv]
-  rfl
+  all_goals rfl
 
 theorem coordinateDerivative_sub_smooth {a b : Field}
     (ha : ContDiff ℝ ∞ a) (hb : ContDiff ℝ ∞ b) (i : Fin 3) :
@@ -76,7 +80,7 @@ theorem coordinateDerivative_sub_smooth {a b : Field}
   funext x
   unfold coordinateDerivative
   rw [fderiv_sub ((ha.differentiable (by simp)) x) ((hb.differentiable (by simp)) x)]
-  rfl
+  all_goals rfl
 
 theorem divergence_sub_smooth {a b : Field}
     (ha : ContDiff ℝ ∞ a) (hb : ContDiff ℝ ∞ b) (x : Vec) :
@@ -143,7 +147,7 @@ theorem baseChannelW_divergence_zero (a : Field) (ha : ContDiff ℝ ∞ a) (x : 
     divergence (baseChannelW a) x = 0 := by
   rw [baseChannelW, verticalComponent_divergence (coordinateAverage_smooth 2 a ha),
     coordinateAverage_own_coordinateDerivative_zero]
-  rfl
+  all_goals rfl
 
 theorem baseChannelV_divergence_zero (a : Field)
     (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a)
@@ -242,7 +246,7 @@ theorem baseChannelV_coordinateDerivative (i : Fin 3) (a : Field)
   rw [coordinateDerivative_sub_smooth (coordinateAverage_smooth 2 a ha)
     (baseChannelW_smooth ha), coordinateAverage_all_coordinateDerivative_commute i 2 a ha hp,
     baseChannelW_coordinateDerivative i a ha hp]
-  rfl
+  all_goals rfl
 
 theorem baseChannelR_coordinateDerivative (i : Fin 3) (a : Field)
     (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) :
@@ -265,30 +269,30 @@ theorem smoothSixChannel_coordinateDerivative (A : Fin 6) (i : Fin 3) (a : Field
   · change coordinateDerivative (coordinateAverage 0 (baseChannelV a)) i = _
     rw [coordinateAverage_all_coordinateDerivative_commute i 0 _ hv hvp,
       baseChannelV_coordinateDerivative i a ha hp]
-    rfl
+    all_goals rfl
   · change coordinateDerivative (baseChannelV a - coordinateAverage 0 (baseChannelV a)) i = _
     rw [coordinateDerivative_sub_smooth hv (coordinateAverage_smooth 0 _ hv),
       coordinateAverage_all_coordinateDerivative_commute i 0 _ hv hvp,
       baseChannelV_coordinateDerivative i a ha hp]
-    rfl
+    all_goals rfl
   · change coordinateDerivative (coordinateAverage 0 (baseChannelW a)) i = _
     rw [coordinateAverage_all_coordinateDerivative_commute i 0 _ hw hwp,
       baseChannelW_coordinateDerivative i a ha hp]
-    rfl
+    all_goals rfl
   · change coordinateDerivative (baseChannelW a - coordinateAverage 0 (baseChannelW a)) i = _
     rw [coordinateDerivative_sub_smooth hw (coordinateAverage_smooth 0 _ hw),
       coordinateAverage_all_coordinateDerivative_commute i 0 _ hw hwp,
       baseChannelW_coordinateDerivative i a ha hp]
-    rfl
+    all_goals rfl
   · change coordinateDerivative (coordinateAverage 0 (baseChannelR a)) i = _
     rw [coordinateAverage_all_coordinateDerivative_commute i 0 _ hr hrp,
       baseChannelR_coordinateDerivative i a ha hp]
-    rfl
+    all_goals rfl
   · change coordinateDerivative (baseChannelR a - coordinateAverage 0 (baseChannelR a)) i = _
     rw [coordinateDerivative_sub_smooth hr (coordinateAverage_smooth 0 _ hr),
       coordinateAverage_all_coordinateDerivative_commute i 0 _ hr hrp,
       baseChannelR_coordinateDerivative i a ha hp]
-    rfl
+    all_goals rfl
 
 end
 
