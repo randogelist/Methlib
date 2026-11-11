@@ -198,9 +198,9 @@ private theorem critical_leray_flow_test {ν : ℝ} (L : CriticalPositiveSobolev
 private theorem critical_leray_flow_pressure_smooth {ν : ℝ}
     (L : CriticalPositiveSobolevFlow ν) (t : ℝ) (ht : 0 < t) :
     ContDiff ℝ ∞ (L.pressure t) := by
-  rw [← contDiffOn_univ]
-  exact L.pressure_spacetime_smooth.comp
-    (contDiff_const.prodMk contDiff_id).contDiffOn (fun x _ => ht)
+  change ContDiff ℝ ∞ (fullTransportPressure (L.state 0 t))
+  exact fullTransportPressure_contDiff (L.state 0 t) (L.state_all_mem t ht)
+    (L.reality t ht) (L.solenoidal t ht)
 
 theorem CriticalRegularSolution.lerayEnergy_hasDerivAt
     {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)

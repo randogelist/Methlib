@@ -28,10 +28,9 @@ theorem CriticalRegularSolution.lerayHopfUnique_of_serrin
     periodic := fun r hr => (U.flow.velocity_smoothSigmaZero r hr).periodic
     solenoidal := fun r hr => (U.flow.velocity_smoothSigmaZero r hr).divergence_free
   }
-  have hp (r : ℝ) (hr : 0 < r) : ContDiff ℝ ∞ (U.flow.pressure r) := by
-    rw [← contDiffOn_univ]
-    exact U.flow.pressure_spacetime_smooth.comp
-      (contDiff_const.prodMk contDiff_id).contDiffOn (fun x _ => hr)
+  have hp (r : ℝ) (hr : 0 < r) : ContDiff ℝ ∞ (U.flow.pressure r) :=
+    fullTransportPressure_contDiff (U.flow.state 0 r) (U.flow.state_all_mem r hr)
+      (U.flow.reality r hr) (U.flow.solenoidal r hr)
   exact CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON ν hν (criticalInitialPhysicalL2 a)
     v U.flow.velocity G U.flow.pressure hv hu hp
     (fun r _ => fullTransportPressure_periodic (U.flow.state 0 r))

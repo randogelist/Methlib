@@ -29,10 +29,9 @@ theorem CriticalRegularSolution.lerayHopf_of_quartic
     periodic := fun t ht => (U.flow.velocity_smoothSigmaZero t ht).periodic
     solenoidal := fun t ht => (U.flow.velocity_smoothSigmaZero t ht).divergence_free
   }
-  have hp (t : ℝ) (ht : 0 < t) : ContDiff ℝ ∞ (U.flow.pressure t) := by
-    rw [← contDiffOn_univ]
-    exact U.flow.pressure_spacetime_smooth.comp
-      (contDiff_const.prodMk contDiff_id).contDiffOn (fun x _ => ht)
+  have hp (t : ℝ) (ht : 0 < t) : ContDiff ℝ ∞ (U.flow.pressure t) :=
+    fullTransportPressure_contDiff (U.flow.state 0 t) (U.flow.state_all_mem t ht)
+      (U.flow.reality t ht) (U.flow.solenoidal t ht)
   have hm : CriticalIntegratedWeakMomentum ν U.lerayVelocity :=
     (CRITICAL_CLASSICAL_NSE_INTEGRATED_WEAK_MOMENTUM ν U.flow.velocity U.flow.pressure
       hu hp (fun t _ => fullTransportPressure_periodic (U.flow.state 0 t))

@@ -72,6 +72,8 @@ theorem CriticalRegularSolution.serrin_fourth_integral_le
   have h6 := U.serrin_time_memLp T hquartic
   have h6int : IntegrableOn (fun t => criticalSpatialNorm 6 (U.flow.velocity t) ^ 4)
       (Ioc (0 : ℝ) T) volume := by
+    change Integrable (fun t => criticalSpatialNorm 6 (U.flow.velocity t) ^ 4)
+      (volume.restrict (Ioc (0 : ℝ) T))
     have h := h6.integrable_norm_pow (by norm_num : (4 : ℕ) ≠ 0)
     have hnorm (t : ℝ) : ‖criticalSpatialNorm 6 (U.flow.velocity t)‖ =
         criticalSpatialNorm 6 (U.flow.velocity t) :=

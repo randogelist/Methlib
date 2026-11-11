@@ -81,6 +81,8 @@ theorem CriticalRegularSolution.serrin_global_memLp_of_quartic_budget
     (mul_nonneg criticalPhysicalL6FourthConstant_pos.le hM)
     (criticalPositive_spatialNorm_six_aestronglyMeasurable_Ioi U.flow)
   · intro T hT
+    change Integrable (fun t => criticalSpatialNorm 6 (U.flow.velocity t) ^ 4)
+      (volume.restrict (Ioc (0 : ℝ) T))
     have h := (U.serrin_time_memLp T (hquartic T hT).1).integrable_norm_pow
       (by norm_num : (4 : ℕ) ≠ 0)
     have hnorm (t : ℝ) : ‖criticalSpatialNorm 6 (U.flow.velocity t)‖ =
