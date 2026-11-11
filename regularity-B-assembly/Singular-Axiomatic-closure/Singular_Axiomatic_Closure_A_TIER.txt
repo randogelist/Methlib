@@ -1,15 +1,42 @@
 SINGULAR_AXIOMATIC_CLOSURE
-SOURCE_STATUS=A_TIER_CANDIDATE
+ASSEMBLY_STATUS=PARTIALLY_VERIFIED
 ROOT_STATUS=NOT_ESTABLISHED
 ROOT=SingularClosure.Fefferman_B_0_adjust
+INTENDED_IMPLICATION=AX6Statement -> Fefferman_B_0_adjust
 INTENDED_NONSTANDARD_AXIOMS=AX6
 CURRENT_NONSTANDARD_AXIOM_DECLARATIONS=NONE
 LOCAL_LEAN_EXECUTIONS=0
-COMPILER_TARGET=EXTERNAL_GITHUB_ACTIONS_LEAN_4.33.0
+COMPILER=EXTERNAL_GITHUB_ACTIONS_LEAN_4.33.0
 MATHLIB_REV=db584cd6d46c92f209a44c0f1c829460d327499d
-COMPLETION_MARKER=!=!
+VERIFIED_COMMIT=bb7c4f569a7b305935006dfc333b17f1528ae34c
+CI=https://github.com/randogelist/Methlib/actions/runs/42935149091
+BUILD=PASS
+EXACT_TYPE_AUDIT=PASS
+AXIOM_AUDIT=PASS_STANDARD_ONLY
+AUDITED_DECLARATIONS=16
+COMPLETED_FROZEN_ENDPOINTS=1/11
 
-Prepared source is not compiler or theorem-audit evidence.
-Only exact endpoint scopes verified at a matching commit may receive !=!.
-The foundation's explicit zero solution does not establish any arbitrary-data root.
-No analytic bridge may be replaced by an unapproved axiom, sorry, or hidden root premise.
+!=! 6 CUBIC_ENERGY_OF_SQUARE_BUDGET -- A_TIER
+
+1 SIX_CHANNEL_PROJECTIONS -- PENDING_FULL_PHYSICAL_SCOPE
+2 SIX_CHANNEL_ENSTROPHY_EQ -- PENDING_PHYSICAL_PARSEVAL
+3 GALERKIN_GLOBAL_EXISTS_UNIQUE -- OPEN
+4 GALERKIN_ENERGY_IDENTITY -- OPEN
+5 GALERKIN_ENSTROPHY_INEQUALITY -- OPEN
+7 AX6_UNIFORM_STRONG_BOUNDS -- OPEN
+8 GALERKIN_GLOBAL_STRONG_LIMIT -- OPEN
+9 GLOBAL_STRONG_SMOOTH_BOOTSTRAP -- OPEN
+10 PERIODIC_PRESSURE_RECOVERY -- OPEN
+11 ax6_implies_fefferman_B_0_adjust -- OPEN
+
+FORMAL_CLOSURE=NOT_ESTABLISHED
+CONDITIONAL_FORMAL_CLOSURE=NOT_ESTABLISHED
+UNCONDITIONAL_CLOSURE=NOT_ESTABLISHED
+
+The verified scalar endpoint has all analytic hypotheses explicit.
+The sixteen audited declarations are enumerated in ci/expected_axioms.json.
+The exact compiler transcript is preserved in verification/bb7c4f56_axioms.log.
+Source hashes and external artifact identities are in verification/bb7c4f56.json.
+Spectral and finite-synthesis subendpoints do not complete the full physical endpoints.
+Zero-data witnesses do not establish arbitrary-data Galerkin or NSE existence.
+No unresolved analytic bridge has been installed as an axiom or hidden root premise.

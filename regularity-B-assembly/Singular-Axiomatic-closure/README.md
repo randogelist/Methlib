@@ -23,7 +23,7 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 | 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | Pending |
 | 4 | `GALERKIN_ENERGY_IDENTITY` | Pending |
 | 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | Pending |
-| 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | Pending |
+| 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !=! A_TIER |
 | 7 | `AX6_UNIFORM_STRONG_BOUNDS` | Pending |
 | 8 | `GALERKIN_GLOBAL_STRONG_LIMIT` | Pending |
 | 9 | `GLOBAL_STRONG_SMOOTH_BOOTSTRAP` | Pending |
@@ -70,4 +70,12 @@ AX6
 
 The existing periodic-B and positive-time packages inspected during assembly do not supply endpoints 8--10: their global conclusions require a global flow or an extension premise. Compactness, nonlinear convergence, trace, pressure recovery, and smooth bootstrap therefore remain proof obligations here.
 
-Full endpoint status and exact evidence will be maintained in `ENDPOINTS.json` and `Singular_Axiomatic_Closure_A_TIER.txt`. Significant implementation corrections are recorded separately in `CORRECTIONS.md`.
+## Verified checkpoint
+
+Commit `bb7c4f569a7b305935006dfc333b17f1528ae34c`: all eight modules and their aggregate compiled; sixteen exact-type and theorem-level axiom audits passed with standard axioms only.
+
+Evidence: https://github.com/randogelist/Methlib/actions/runs/42935149091
+
+Frozen endpoints completed: **1/11**, namely endpoint 6. Spectral identities and finite physical reconstruction are verified auxiliary results; the complete physical projection/enstrophy endpoints remain pending. The general-data Galerkin existence, energy estimates, strong limit, smooth bootstrap, pressure recovery, and root implication remain open.
+
+The preserved audit transcript and source hashes are in `verification/`. Exact scope for endpoint 6 is recorded in `CUBIC_ENERGY_OF_SQUARE_BUDGET_A_TIER.txt`. Full endpoint status is in `ENDPOINTS.json` and `Singular_Axiomatic_Closure_A_TIER.txt`; implementation corrections are in `CORRECTIONS.md`.

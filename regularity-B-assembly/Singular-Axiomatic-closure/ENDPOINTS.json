@@ -42,9 +42,17 @@
     {
       "number": 6,
       "name": "CUBIC_ENERGY_OF_SQUARE_BUDGET",
-      "status": "pending",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "bb7c4f569a7b305935006dfc333b17f1528ae34c",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42935149091",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET",
+      "source_file": "SingularClosure/CubicBudget.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 7,
@@ -85,5 +93,6 @@
   "nonstandard_axiom_target": [
     "AX6"
   ],
-  "root_completed": false
+  "root_completed": false,
+  "completed_endpoint_count": 1
 }

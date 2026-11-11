@@ -1,0 +1,48 @@
+CUBIC_ENERGY_OF_SQUARE_BUDGET
+STATUS=A_TIER
+MARKER=!!
+FROZEN_LIST_MARKER=!=!
+FROZEN_ENDPOINT=6
+THEOREM=SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET
+SOURCE=SingularClosure/CubicBudget.lean
+
+EXACT_SCOPE
+y,z,d : Real -> Real; nu,kappa,T,M,y0 : Real.
+nu > 0; kappa >= 0; T >= 0; M >= 0.
+y,z,d are continuous on [0,T].
+For all t in [0,T], y(t) >= 0.
+y(0) <= y0.
+For all t in (0,T), HasDerivAt y (d(t)) t.
+For all t in (0,T), d(t) + nu*z(t)^2 <= kappa*y(t)^3.
+Integral from 0 to T of y(s)^2 ds <= M.
+
+CONCLUSION
+For every t in [0,T],
+  y(t) + nu*Integral from 0 to t of z(s)^2 ds
+    <= y0*exp(kappa*M).
+
+VERIFICATION
+COMMIT=bb7c4f569a7b305935006dfc333b17f1528ae34c
+CI=https://github.com/randogelist/Methlib/actions/runs/42935149091
+JOB=130243260923
+COMPILER=Lean 4.33.0, x86_64-unknown-linux-gnu
+COMPILER_REV=d8b18978322de05a8f3dba51ef03cf5461676c17
+MATHLIB_REV=db584cd6d46c92f209a44c0f1c829460d327499d
+BUILD=PASS
+EXACT_TYPE_CHECK=PASS
+AXIOMS=[propext, Classical.choice, Quot.sound]
+NONSTANDARD_AXIOMS=NONE
+SORRY_AX=ABSENT
+LOCAL_LEAN_EXECUTIONS=0
+AUDIT_TRANSCRIPT=verification/bb7c4f56_axioms.log
+
+EXACT_INITIAL_VARIANT
+SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL:
+the same implication with y0=y(0), omitting the separate initial upper-bound premise.
+External exact-type check and standard-only axiom audit: PASS.
+
+NSE_SUBSTITUTION
+y=||grad u_N||_2^2; z=||Delta u_N||_2; kappa=C/nu^3.
+The Galerkin differential inequality, initial estimate, and uniform square budget
+must be supplied by their separate endpoints. Their derivation is not asserted here.
+This scalar theorem does not establish the root NSE regularity implication.

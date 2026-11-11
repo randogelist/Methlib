@@ -25,4 +25,14 @@ Run: https://github.com/randogelist/Methlib/actions/runs/42933115745
 - Expanded exact-type audits to the corresponding auxiliary declarations.
 - Persist dependency caches before proof compilation; skip disk cleanup when at least 20 GiB is available.
 
-Verification status: candidate repairs pending CI.
+## Verified checkpoint
+
+Commit `bb7c4f569a7b305935006dfc333b17f1528ae34c`, run https://github.com/randogelist/Methlib/actions/runs/42935149091:
+
+- All eight source modules and the aggregate compiled.
+- Sixteen exact-type checks and theorem-level axiom reports passed.
+- The only reported axioms were `propext`, `Classical.choice`, and `Quot.sound`.
+- Endpoint 6 received `!=!`; every other numbered endpoint remains incomplete.
+- The exact root implication remains open; no single-axiom closure is claimed.
+
+Verification status: partial A_TIER assembly, 1/11 frozen endpoints complete.
