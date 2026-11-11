@@ -149,13 +149,13 @@ theorem SMALL_DATA_LIMIT_PHYSICAL_SHARP_QUARTIC
     apply AEMeasurable.tsum
     intro ki
     have hcoeff : ContinuousOn (fun t => criticalCoeff 1 (u t) ki.1 ki.2) (Icc (0 : ℝ) T) := by
-      simpa only [criticalToTorusH0_coeff] using
+      simpa only [Function.comp_def, criticalToTorusH0_coeff] using
         (torusSobolevH0Coeff_continuous ki.1 ki.2).comp_continuousOn hu
     have hm := (hcoeff.const_mul ((criticalHalfWeight ki.1 : ℂ) ^ (2 : ℤ))).norm.pow 2
     exact (hm.aestronglyMeasurable_of_isCompact
       isCompact_Icc measurableSet_Icc).aemeasurable.ennreal_ofReal
   have hmeas : AEStronglyMeasurable (fun t => physicalDissipation (L.velocity t) ^ 2) μ := by
-    apply (hE.pow 2).ennreal_toReal.aestronglyMeasurable.congr
+    apply (hE.pow_const (2 : ℕ)).ennreal_toReal.aestronglyMeasurable.congr
     filter_upwards [heq] with t ht
     rw [ht, ENNReal.toReal_ofReal (sq_nonneg _)]
   have hi : Integrable (fun t => physicalDissipation (L.velocity t) ^ 2) μ := by
