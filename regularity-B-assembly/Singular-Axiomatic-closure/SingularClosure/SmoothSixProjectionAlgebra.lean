@@ -98,11 +98,36 @@ theorem baseChannelR_coordinateAverage (j : Fin 3) (a : Field)
   rw [coordinateAverage_sub j _ _ ha (coordinateAverage_continuous 2 a ha),
     coordinateAverage_commute 2 j a ha]
 
+private theorem channel_continuous_sub (a b : Field)
+    (ha : Continuous a) (hb : Continuous b) : Continuous (a - b) := by
+  change Continuous (fun x => a x - b x)
+  exact ha.sub hb
+
+private theorem channel_continuous_add (a b : Field)
+    (ha : Continuous a) (hb : Continuous b) : Continuous (a + b) := by
+  change Continuous (fun x => a x + b x)
+  exact ha.add hb
+
+private theorem channel_continuous_neg (a : Field)
+    (ha : Continuous a) : Continuous (-a) := by
+  change Continuous (fun x => -a x)
+  exact ha.neg
+
+private theorem channel_continuous_zero : Continuous (0 : Field) := continuous_const
+
 theorem smoothSixChannel_continuous (A : Fin 6) (a : Field) (ha : Continuous a) :
     Continuous (smoothSixChannel A a) := by
-  fin_cases A <;>
-    simp [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
-      coordinateAverage_continuous, verticalComponent_continuous, Continuous.sub, ha]
+  have hp := coordinateAverage_continuous 2 a ha
+  have hw := verticalComponent_continuous _ hp
+  have hv := channel_continuous_sub _ _ hp hw
+  have hr := channel_continuous_sub _ _ ha hp
+  fin_cases A
+  · exact coordinateAverage_continuous 0 _ hv
+  · exact channel_continuous_sub _ _ hv (coordinateAverage_continuous 0 _ hv)
+  · exact coordinateAverage_continuous 0 _ hw
+  · exact channel_continuous_sub _ _ hw (coordinateAverage_continuous 0 _ hw)
+  · exact coordinateAverage_continuous 0 _ hr
+  · exact channel_continuous_sub _ _ hr (coordinateAverage_continuous 0 _ hr)
 
 theorem smoothSixChannel_zero (A : Fin 6) : smoothSixChannel A (0 : Field) = 0 := by
   fin_cases A <;>
@@ -113,10 +138,13 @@ theorem smoothSixChannel_add (A : Fin 6) (a b : Field)
     (ha : Continuous a) (hb : Continuous b) :
     smoothSixChannel A (a + b) = smoothSixChannel A a + smoothSixChannel A b := by
   fin_cases A <;>
-    simp [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
-      coordinateAverage_sub, coordinateAverage_add, verticalComponent_sub,
-      verticalComponent_add, coordinateAverage_continuous, verticalComponent_continuous,
-      Continuous.sub, Continuous.add, ha, hb] <;> abel
+    simp (disch := solve_by_elim (maxDepth := 32)
+      [coordinateAverage_continuous, verticalComponent_continuous,
+        channel_continuous_sub, channel_continuous_add, channel_continuous_neg,
+        channel_continuous_zero])
+      [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
+        coordinateAverage_sub, coordinateAverage_add, verticalComponent_sub,
+        verticalComponent_add] <;> abel
 
 theorem smoothSixChannel_smul (A : Fin 6) (r : ℝ) (a : Field) :
     smoothSixChannel A (r • a) = r • smoothSixChannel A a := by
@@ -130,13 +158,16 @@ theorem smoothSixChannel_comp (A B : Fin 6) (a : Field) (ha : Continuous a) :
     smoothSixChannel A (smoothSixChannel B a) =
       if A = B then smoothSixChannel A a else 0 := by
   fin_cases A <;> fin_cases B <;>
-    simp [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
-      coordinateAverage_sub, coordinateAverage_neg, coordinateAverage_zero,
-      coordinateAverage_verticalComponent, coordinateAverage_two_zero,
-      coordinateAverage_idempotent, verticalComponent_sub, verticalComponent_neg,
-      verticalComponent_idempotent, verticalComponent_zero,
-      coordinateAverage_continuous, verticalComponent_continuous, Continuous.sub,
-      Continuous.neg, continuous_const, ha] <;> abel
+    simp (disch := solve_by_elim (maxDepth := 32)
+      [coordinateAverage_continuous, verticalComponent_continuous,
+        channel_continuous_sub, channel_continuous_add, channel_continuous_neg,
+        channel_continuous_zero])
+      [smoothSixChannel, baseChannelV, baseChannelW, baseChannelR,
+        coordinateAverage_sub, coordinateAverage_add, coordinateAverage_neg,
+        coordinateAverage_zero, coordinateAverage_verticalComponent,
+        coordinateAverage_two_zero, coordinateAverage_idempotent,
+        verticalComponent_sub, verticalComponent_add, verticalComponent_neg,
+        verticalComponent_idempotent, verticalComponent_zero] <;> abel
 
 theorem smoothSixChannel_idempotent (A : Fin 6) (a : Field) (ha : Continuous a) :
     smoothSixChannel A (smoothSixChannel A a) = smoothSixChannel A a := by

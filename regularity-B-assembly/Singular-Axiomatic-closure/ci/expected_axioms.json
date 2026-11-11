@@ -647,6 +647,66 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FOURIER_POLYNOMIAL_DECAY"
+    },
+    {
+      "name": "SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficient_time_modulus",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficient_time_modulus"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS"
+    },
+    {
+      "name": "SingularClosure.summable_torusSobolevWeight_inv_four",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.summable_torusSobolevWeight_inv_four"
+    },
+    {
+      "name": "SingularClosure.FINITE_FOURIER_H2_L1_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_H2_L1_BOUND"
+    },
+    {
+      "name": "SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND"
+    },
+    {
+      "name": "SingularClosure.scalarFourierSeries_hasFDerivAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_hasFDerivAt"
+    },
+    {
+      "name": "SingularClosure.scalarFourierSeries_contDiff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_contDiff"
+    },
+    {
+      "name": "SingularClosure.scalarFourierSeries_integral",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_integral"
+    },
+    {
+      "name": "SingularClosure.realFourierSeries_gradient_apply",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.realFourierSeries_gradient_apply"
     }
   ]
 }

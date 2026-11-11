@@ -77,6 +77,7 @@ theorem AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS (hAX6 : AX6Statement)
   obtain ⟨D, hD, htime⟩ := AX6_UNIFORM_TIME_DERIVATIVE_BOUND hAX6 ν hν a ha T hT
   let J : ℝ := physicalEnergy a
   have hJ : 0 ≤ J := by
+    change 0 ≤ physicalEnergy a
     rw [physicalEnergy_eq_integral_norm_sq]
     exact integral_nonneg (fun x => sq_nonneg _)
   let B : ℝ := (J + 2 * S) * (T + 1) + S / ν + D

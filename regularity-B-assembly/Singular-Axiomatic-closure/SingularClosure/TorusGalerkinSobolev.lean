@@ -25,8 +25,8 @@ theorem torusSobolevWeight_sq (k : Frequency) :
       1 + (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) := by
   unfold torusSobolevWeight
   apply Real.sq_sqrt
-  have hk : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) :=
-    Int.cast_nonneg.mpr (galerkinFreqSq_nonneg k)
+  have hk : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) := by
+    exact_mod_cast galerkinFreqSq_nonneg k
   positivity
 
 /-- Every original Galerkin cutoff belongs to every Sobolev sequence space. -/

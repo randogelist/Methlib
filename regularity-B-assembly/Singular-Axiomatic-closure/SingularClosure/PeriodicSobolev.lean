@@ -36,8 +36,9 @@ theorem unitCube_subset_closedBall_two :
     nlinarith [mul_nonneg hi.1 (sub_nonneg.mpr hi.2)]
   have hnorm : ‖x‖ ^ 2 ≤ 3 := by
     rw [EuclideanSpace.real_norm_sq_eq]
-    simp only [Fin.sum_univ_succ]
-    nlinarith [hsq 0, hsq 1, hsq 2]
+    calc
+      _ ≤ ∑ _i : Fin 3, (1 : ℝ) := Finset.sum_le_sum (fun i _ => hsq i)
+      _ = 3 := by norm_num
   nlinarith [norm_nonneg x]
 
 theorem unitCubeSobolevBump_eq_one {x : Vec} (hx : x ∈ unitCube) :
@@ -48,7 +49,7 @@ theorem unitCubeSobolevBump_derivative_bound :
     ∃ K : ℝ, 0 ≤ K ∧
       ∀ x : Vec, ‖fderiv ℝ (unitCubeSobolevBump : Vec → ℝ) x‖ ≤ K := by
   have hc : Continuous (fderiv ℝ (unitCubeSobolevBump : Vec → ℝ)) :=
-    ((unitCubeSobolevBump.contDiff (n := ∞)).fderiv_right (m := 0) (by norm_num)).continuous
+    (unitCubeSobolevBump.contDiff (n := 1)).continuous_fderiv (by norm_num)
   have hs : HasCompactSupport (fderiv ℝ (unitCubeSobolevBump : Vec → ℝ)) :=
     unitCubeSobolevBump.hasCompactSupport.fderiv ℝ
   obtain ⟨K, hK⟩ := hs.exists_bound_of_continuous hc
@@ -87,12 +88,13 @@ theorem unitCubeCutoff_fderiv_norm_le {v : Vec → F} (hv : ContDiff ℝ ∞ v)
     (x : Vec) :
     ‖fderiv ℝ (unitCubeCutoff v) x‖ ≤ ‖fderiv ℝ v x‖ + K * ‖v x‖ := by
   have hχ : DifferentiableAt ℝ (unitCubeSobolevBump : Vec → ℝ) x :=
-    (unitCubeSobolevBump.contDiff (n := ∞)).differentiable (by norm_num) x
+    (unitCubeSobolevBump.contDiff (n := 1)).differentiable (by norm_num) x
   have hvx : DifferentiableAt ℝ v x := hv.differentiable (by norm_num) x
   have hχnorm : ‖unitCubeSobolevBump x‖ ≤ 1 := by
     rw [Real.norm_eq_abs, abs_of_nonneg unitCubeSobolevBump.nonneg]
     exact unitCubeSobolevBump.le_one
-  rw [unitCubeCutoff, fderiv_fun_smul hχ hvx]
+  change ‖fderiv ℝ (fun y => unitCubeSobolevBump y • v y) x‖ ≤ _
+  rw [fderiv_fun_smul hχ hvx]
   calc
     _ ≤ ‖unitCubeSobolevBump x • fderiv ℝ v x‖ +
         ‖(fderiv ℝ (unitCubeSobolevBump : Vec → ℝ) x).smulRight (v x)‖ :=
@@ -114,7 +116,11 @@ theorem unitCubeCutoff_fderiv_eLpNorm_le {v : Vec → F} (hv : ContDiff ℝ ∞ 
   let μ : Measure Vec := volume.restrict (closedBall (0 : Vec) 3)
   have hd : Continuous (fderiv ℝ v) :=
     (hv.fderiv_right (m := 0) (by norm_num)).continuous
-  rw [← eLpNorm_restrict_eq_of_support_subset (unitCubeCutoff_fderiv_support_subset v)]
+  have hrestrict : eLpNorm (fderiv ℝ (unitCubeCutoff v)) 2 μ =
+      eLpNorm (fderiv ℝ (unitCubeCutoff v)) 2 volume :=
+    eLpNorm_restrict_eq_of_support_subset (f := fderiv ℝ (unitCubeCutoff v))
+      (p := 2) (μ := volume) (unitCubeCutoff_fderiv_support_subset v)
+  rw [← hrestrict]
   calc
     eLpNorm (fderiv ℝ (unitCubeCutoff v)) 2 μ ≤
         eLpNorm (fun x => ‖fderiv ℝ v x‖ + K * ‖v x‖) 2 μ :=
@@ -153,8 +159,8 @@ theorem UNIT_CUBE_SOBOLEV_CUTOFF_TRANSFER [FiniteDimensional ℝ F] :
     _ = eLpNorm (unitCubeCutoff v) 6 (volume.restrict unitCube) := eLpNorm_congr_ae heq
     _ ≤ eLpNorm (unitCubeCutoff v) 6 volume :=
       eLpNorm_mono_measure _ Measure.restrict_le_self
-    _ ≤ _ := hGNS.trans (mul_le_mul_left'
-      (unitCubeCutoff_fderiv_eLpNorm_le hv hK0 hK) _)
+    _ ≤ _ := hGNS.trans (mul_le_mul_of_nonneg_left
+      (unitCubeCutoff_fderiv_eLpNorm_le hv hK0 hK) bot_le)
 
 theorem spatialPeriodic_fderiv {v : Vec → F} (hp : SpatialPeriodic v) :
     SpatialPeriodic (fderiv ℝ v) := by
@@ -176,7 +182,7 @@ theorem eLpNorm_two_eq_integral_norm_sq_rpow
   congr 1
   apply lintegral_congr
   intro x
-  rw [ENNReal.rpow_natCast, ← ofReal_norm, ENNReal.ofReal_pow (norm_nonneg _) 2]
+  simp only [ENNReal.rpow_two, ← ofReal_norm, ENNReal.ofReal_pow (norm_nonneg _) 2]
 
 /-- The finite cover gives one L2 constant for every continuous periodic map. -/
 theorem periodic_closedBall_three_eLpNorm_two_le (v : Vec → F)
@@ -186,6 +192,7 @@ theorem periodic_closedBall_three_eLpNorm_two_le (v : Vec → F)
   have hcont : Continuous (fun x : Vec => ‖v x‖ ^ 2) := hv.norm.pow 2
   have hperiod : SpatialPeriodic (fun x : Vec => ‖v x‖ ^ 2) := by
     intro x i
+    change ‖v (x + unitVector i)‖ ^ 2 = ‖v x‖ ^ 2
     rw [hp x i]
   have hbound := periodic_closedBall_three_integral_le
     (fun x : Vec => ‖v x‖ ^ 2) hcont hperiod (fun x => sq_nonneg _)
@@ -227,7 +234,8 @@ theorem PERIODIC_SOBOLEV_H1_L6 [FiniteDimensional ℝ F] :
         ((343 : ℝ≥0∞) ^ (1 / 2 : ℝ) * eLpNorm (fderiv ℝ v) 2 (volume.restrict unitCube) +
           ENNReal.ofReal K * ((343 : ℝ≥0∞) ^ (1 / 2 : ℝ) *
             eLpNorm v 2 (volume.restrict unitCube))) :=
-      mul_le_mul_left' (add_le_add hD (mul_le_mul_left' hV _)) _
+      mul_le_mul_of_nonneg_left
+        (add_le_add hD (mul_le_mul_of_nonneg_left hV bot_le)) bot_le
     _ = _ := by ring
 
 theorem sum_coordinate_unitVector (x : Vec) :
@@ -309,8 +317,8 @@ theorem finite_eLpNorm_two_le_enstrophy (N : ℕ) (c : FourierCoeff)
     eLpNorm (finiteSynthesis N c) 2 (volume.restrict unitCube) ≤
       (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ) := by
   have hi : IntegrableOn (fun x => ‖finiteSynthesis N c x‖ ^ 2) unitCube volume :=
-    ((finiteSynthesis_contDiff N c).continuous.norm.pow 2).continuousOn
-      .integrableOn_compact isCompact_unitCube
+    (((finiteSynthesis_contDiff N c).continuous.norm.pow 2).continuousOn).integrableOn_compact
+      isCompact_unitCube
   rw [eLpNorm_two_eq_integral_norm_sq_rpow _ _ hi]
   rw [← physicalEnergy_eq_integral_norm_sq, FINITE_PHYSICAL_ENERGY_PARSEVAL N c hreal]
   exact ENNReal.rpow_le_rpow
@@ -343,7 +351,8 @@ theorem FINITE_PHYSICAL_L6_FROM_ENSTROPHY :
           (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ) +
           ENNReal.ofReal K *
             (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ)) :=
-      mul_le_mul_left' (add_le_add hD (mul_le_mul_left' hV _)) _
+      mul_le_mul_of_nonneg_left
+        (add_le_add hD (mul_le_mul_of_nonneg_left hV bot_le)) bot_le
     _ = _ := by dsimp [C]; ring
 
 end

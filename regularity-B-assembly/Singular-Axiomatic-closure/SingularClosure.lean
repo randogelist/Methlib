@@ -56,3 +56,8 @@ import SingularClosure.UniformStrongBounds
 import SingularClosure.StrongSobolevRealization
 import SingularClosure.TorusGalerkinSobolev
 import SingularClosure.FourierDecay
+import SingularClosure.CanonicalGalerkin
+import SingularClosure.GalerkinCoefficientCompactness
+import SingularClosure.LatticeSobolevSummability
+import SingularClosure.HighOrderProduct
+import SingularClosure.FourierSeriesCalculus

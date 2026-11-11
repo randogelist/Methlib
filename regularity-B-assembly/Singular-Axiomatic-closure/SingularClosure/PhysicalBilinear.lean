@@ -280,7 +280,10 @@ theorem coefficientEnstrophyNonlinearPower_eq_physical
   rw [physical_complex_re_sum, Finset.mul_sum, ← Finset.sum_neg_distrib]
   apply Finset.sum_congr rfl
   intro i _
-  simp [laplacianCoefficient, laplacianFrequency, Complex.star_def, Complex.mul_re] <;> ring
+  have hscalar (r : ℝ) (z w : ℂ) :
+      r * (star z * w).re = -(star (-(r : ℂ) * z) * w).re := by
+    simp [Complex.star_def, Complex.mul_re, Complex.mul_im] <;> ring
+  exact hscalar (laplacianFrequency k) (c k i) (coefficientTransport N c k i)
 
 end
 

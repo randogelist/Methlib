@@ -44,8 +44,8 @@ theorem finite_laplacian_eLpNorm_two (N : ℕ) (c : FourierCoeff)
   rw [finiteSynthesis_laplacian]
   have hi : IntegrableOn
       (fun x => ‖finiteSynthesis N (laplacianCoefficient c) x‖ ^ 2) unitCube volume :=
-    ((finiteSynthesis_contDiff N (laplacianCoefficient c)).continuous.norm.pow 2)
-      .continuousOn.integrableOn_compact isCompact_unitCube
+    (((finiteSynthesis_contDiff N (laplacianCoefficient c)).continuous.norm.pow 2)
+      .continuousOn).integrableOn_compact isCompact_unitCube
   rw [eLpNorm_two_eq_integral_norm_sq_rpow _ _ hi,
     ← physicalEnergy_eq_integral_norm_sq,
     FINITE_PHYSICAL_ENERGY_PARSEVAL N _ (laplacianCoefficient_reality c hreal),
@@ -65,9 +65,9 @@ theorem FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN :
         C * (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ) := by
     rw [finiteSynthesis_coordinateDerivative]
     exact (hSob N _ (derivativeMultiplier_reality c hreal i)).trans
-      (mul_le_mul_left' (ENNReal.rpow_le_rpow
+      (mul_le_mul_of_nonneg_left (ENNReal.rpow_le_rpow
         (ENNReal.ofReal_le_ofReal (coefficientDissipation_derivative_le_laplacian N c i))
-        (by norm_num)) C)
+        (by norm_num)) bot_le)
   have hmeas (i : Fin 3) : AEStronglyMeasurable
       (fun x => ‖coordinateDerivative (finiteSynthesis N c) i x‖)
       (volume.restrict unitCube) := by
@@ -207,18 +207,18 @@ theorem FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND :
         eLpNorm (fderiv ℝ (finiteSynthesis N c)) 3 (volume.restrict unitCube)) *
         (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ) := by
       rw [finite_laplacian_eLpNorm_two N c hreal]
-      exact mul_le_mul_right' (convection_eLpNorm_two_le _ hv) _
+      exact mul_le_mul_of_nonneg_right (convection_eLpNorm_two_le _ hv) bot_le
     _ ≤ ((A * (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ)) *
         (((3 : ℝ≥0∞) ^ (1 / 2 : ℝ) *
             (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ)) ^ (1 / 2 : ℝ) *
           (B * (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ)) ^
             (1 / 2 : ℝ))) *
         (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ) := by
-      apply mul_le_mul_right'
-      apply mul_le_mul' hV6
-      exact hD3.trans (mul_le_mul'
+      apply mul_le_mul_of_nonneg_right _ bot_le
+      refine mul_le_mul hV6 ?_ bot_le bot_le
+      exact hD3.trans (mul_le_mul
         (ENNReal.rpow_le_rpow hD2 (by norm_num))
-        (ENNReal.rpow_le_rpow hD6 (by norm_num)))
+        (ENNReal.rpow_le_rpow hD6 (by norm_num)) bot_le bot_le)
     _ = _ := ennreal_three_quarter_product _ _ _ _
 
 end

@@ -60,10 +60,10 @@ theorem FINITE_CONVECTION_L2_BOUND :
             (ENNReal.ofReal (coefficientDissipation N c)) ^ (1 / 2 : ℝ)) ^ (1 / 2 : ℝ) *
           (B * (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ)) ^
             (1 / 2 : ℝ)) := by
-      apply mul_le_mul' hV6
-      exact hD3.trans (mul_le_mul'
+      refine mul_le_mul hV6 ?_ bot_le bot_le
+      exact hD3.trans (mul_le_mul
         (ENNReal.rpow_le_rpow hD2 (by norm_num))
-        (ENNReal.rpow_le_rpow hD6 (by norm_num)))
+        (ENNReal.rpow_le_rpow hD6 (by norm_num)) bot_le bot_le)
     _ = _ := ennreal_convection_product _ _ _ _
 
 theorem FINITE_CONVECTION_SQUARE_SHARP_BOUND :

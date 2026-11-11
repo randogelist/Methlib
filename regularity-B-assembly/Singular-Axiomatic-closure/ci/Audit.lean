@@ -1146,4 +1146,115 @@ example : ∀ (m : ℕ) (a : Field)
 #check @SingularClosure.FOURIER_POLYNOMIAL_DECAY
 #print axioms SingularClosure.FOURIER_POLYNOMIAL_DECAY
 
+
+open Metric
+
+example : AX6Statement ↔ CanonicalAX6Statement :=
+  @SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET"
+#check @SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET
+#print axioms SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (k : Frequency) (i : Fin 3) {s t T : ℝ}
+    (hs : 0 ≤ s) (hst : s ≤ t) (htT : t ≤ T),
+    ‖g.coeff t k i - g.coeff s k i‖ ^ 2 ≤
+      (t - s) * (∫ r in (0 : ℝ)..T,
+        ∫ x in unitCube, ‖timeDerivative g.velocity r x‖ ^ 2) :=
+  @SingularClosure.GalerkinSolution.coefficient_time_modulus
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficient_time_modulus"
+#check @SingularClosure.GalerkinSolution.coefficient_time_modulus
+#print axioms SingularClosure.GalerkinSolution.coefficient_time_modulus
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      ∀ k : Frequency, ∀ i : Fin 3, ∀ s t : ℝ,
+        0 ≤ s → s ≤ t → t ≤ T →
+        ‖g.coeff t k i - g.coeff s k i‖ ^ 2 ≤ (t - s) * B :=
+  @SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS"
+#check @SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS
+#print axioms SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS
+
+
+open Metric
+
+example : Summable (fun k : Frequency => (torusSobolevWeight k)⁻¹ ^ 4) :=
+  @SingularClosure.summable_torusSobolevWeight_inv_four
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.summable_torusSobolevWeight_inv_four"
+#check @SingularClosure.summable_torusSobolevWeight_inv_four
+#print axioms SingularClosure.summable_torusSobolevWeight_inv_four
+
+example : ∃ C : ℝ, 0 < C ∧
+    ∀ (s : Finset Frequency) (a : Frequency → ℂ),
+      (∑ k ∈ s, ‖a k‖) ^ 2 ≤ C *
+        (∑ k ∈ s, (torusSobolevWeight k ^ 2 * ‖a k‖) ^ 2) :=
+  @SingularClosure.FINITE_FOURIER_H2_L1_BOUND
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_H2_L1_BOUND"
+#check @SingularClosure.FINITE_FOURIER_H2_L1_BOUND
+#print axioms SingularClosure.FINITE_FOURIER_H2_L1_BOUND
+
+example : ∀ (m : ℕ),
+    ∃ C : ℝ, 0 < C ∧ ∀ r s t : Finset Frequency, ∀ a b : Frequency → ℂ,
+      (∀ k, k ∉ t → b k = 0) →
+      (∑ k ∈ r, (torusSobolevWeight k ^ m * ‖finiteScalarConvolution s a b k‖) ^ 2) ≤
+        C *
+          ((∑ q ∈ t, (torusSobolevWeight q ^ 2 * ‖b q‖) ^ 2) *
+              (∑ p ∈ s, (torusSobolevWeight p ^ m * ‖a p‖) ^ 2) +
+            (∑ p ∈ s, (torusSobolevWeight p ^ 2 * ‖a p‖) ^ 2) *
+              (∑ q ∈ t, (torusSobolevWeight q ^ m * ‖b q‖) ^ 2)) :=
+  @SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND"
+#check @SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND
+#print axioms SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND
+
+example : ∀ {b : Frequency → ℂ}
+    (hzero : Summable (fun k => ‖b k‖))
+    (hone : Summable (fun k => ‖b k‖ * ‖fourierPhaseCLM k‖)) (x : Vec),
+    HasFDerivAt (scalarFourierSeries b)
+      (∑' k : Frequency, b k • (fourierCharacter k x • fourierPhaseCLM k)) x :=
+  @SingularClosure.scalarFourierSeries_hasFDerivAt
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_hasFDerivAt"
+#check @SingularClosure.scalarFourierSeries_hasFDerivAt
+#print axioms SingularClosure.scalarFourierSeries_hasFDerivAt
+
+example : ∀ _nat (n : ℕ) (b : Frequency → ℂ)
+    (hb : RapidScalarFourier b),
+    ContDiff ℝ n (scalarFourierSeries b) :=
+  @SingularClosure.scalarFourierSeries_contDiff
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_contDiff"
+#check @SingularClosure.scalarFourierSeries_contDiff
+#print axioms SingularClosure.scalarFourierSeries_contDiff
+
+example : ∀ {b : Frequency → ℂ}
+    (hb : Summable (fun k => ‖b k‖)),
+    (∫ x in unitCube, scalarFourierSeries b x) = b 0 :=
+  @SingularClosure.scalarFourierSeries_integral
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_integral"
+#check @SingularClosure.scalarFourierSeries_integral
+#print axioms SingularClosure.scalarFourierSeries_integral
+
+example : ∀ {b : Frequency → ℂ}
+    (hzero : Summable (fun k => ‖b k‖))
+    (hone : Summable (fun k => ‖b k‖ * ‖fourierPhaseCLM k‖))
+    (x : Vec) (i : Fin 3),
+    gradient (realFourierSeries b) x i =
+      (∑' k : Frequency, fourierCharacter k x * (derivativeSymbol i k * b k)).re :=
+  @SingularClosure.realFourierSeries_gradient_apply
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.realFourierSeries_gradient_apply"
+#check @SingularClosure.realFourierSeries_gradient_apply
+#print axioms SingularClosure.realFourierSeries_gradient_apply
+
 end

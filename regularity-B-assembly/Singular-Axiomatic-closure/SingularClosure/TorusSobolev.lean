@@ -20,7 +20,7 @@ assert a spacetime subsequence, nonlinear limit passage, or endpoint 8.
 set_option autoImplicit false
 
 open Set Filter
-open scoped BigOperators Topology
+open scoped BigOperators Topology ENNReal
 
 namespace SingularClosure
 
@@ -34,8 +34,8 @@ def torusSobolevWeight (k : Frequency) : ℝ :=
   Real.sqrt (1 + (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ))
 
 theorem torusSobolevWeight_one_le (k : Frequency) : 1 ≤ torusSobolevWeight k := by
-  have hk : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) :=
-    Int.cast_nonneg.mpr (galerkinFreqSq_nonneg k)
+  have hk : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) := by
+    exact_mod_cast galerkinFreqSq_nonneg k
   apply (Real.le_sqrt (by norm_num) (by positivity)).mpr
   nlinarith [mul_nonneg (sq_nonneg (2 * Real.pi)) hk]
 
@@ -49,6 +49,21 @@ theorem torusSobolevWeight_ne_zero (k : Frequency) :
 /-- The actual weighted Fourier coordinates. -/
 def sobolevWeightedCoeff (s : ℕ) (c : FourierCoeff) (ki : FourierIndex) : ℂ :=
   (torusSobolevWeight ki.1 : ℂ) ^ s * c ki.1 ki.2
+
+theorem sobolevWeightedCoeff_zero (s : ℕ) :
+    sobolevWeightedCoeff s 0 = 0 := by
+  funext ki
+  simp [sobolevWeightedCoeff]
+
+theorem sobolevWeightedCoeff_add (s : ℕ) (c d : FourierCoeff) :
+    sobolevWeightedCoeff s (c + d) = sobolevWeightedCoeff s c + sobolevWeightedCoeff s d := by
+  funext ki
+  exact mul_add _ _ _
+
+theorem sobolevWeightedCoeff_smul (s : ℕ) (z : ℂ) (c : FourierCoeff) :
+    sobolevWeightedCoeff s (z • c) = z • sobolevWeightedCoeff s c := by
+  funext ki
+  exact mul_left_comm _ _ _
 
 theorem sobolevWeightedCoeff_succ_norm (s : ℕ) (c : FourierCoeff) (ki : FourierIndex) :
     ‖sobolevWeightedCoeff (s + 1) c ki‖ =
@@ -64,28 +79,45 @@ theorem sobolevWeightedCoeff_succ_norm (s : ℕ) (c : FourierCoeff) (ki : Fourie
 
 def torusSobolevSubmodule (s : ℕ) : Submodule ℂ FourierCoeff where
   carrier := {c | Memℓp (sobolevWeightedCoeff s c) 2}
-  zero_mem' := by simpa [sobolevWeightedCoeff] using
-    (zero_memℓp : Memℓp (0 : FourierIndex → ℂ) 2)
+  zero_mem' := by
+    change Memℓp (sobolevWeightedCoeff s 0) 2
+    rw [sobolevWeightedCoeff_zero]
+    exact zero_memℓp
   add_mem' := by
     intro c d hc hd
-    simpa [sobolevWeightedCoeff, mul_add] using hc.add hd
+    change Memℓp (sobolevWeightedCoeff s (c + d)) 2
+    rw [sobolevWeightedCoeff_add]
+    exact hc.add hd
   smul_mem' := by
     intro z c hc
-    simpa [sobolevWeightedCoeff, mul_left_comm, mul_assoc] using hc.const_smul z
+    change Memℓp (sobolevWeightedCoeff s (z • c)) 2
+    rw [sobolevWeightedCoeff_smul]
+    exact hc.const_smul z
 
 /-- Sobolev coefficient functions of integral order `s`. -/
-abbrev TorusSobolev (s : ℕ) := torusSobolevSubmodule s
+def TorusSobolev (s : ℕ) : Type := ↥(torusSobolevSubmodule s)
+
+instance torusSobolevAddCommGroup (s : ℕ) : AddCommGroup (TorusSobolev s) :=
+  inferInstanceAs (AddCommGroup ↥(torusSobolevSubmodule s))
+
+instance torusSobolevModule (s : ℕ) : Module ℂ (TorusSobolev s) :=
+  inferInstanceAs (Module ℂ ↥(torusSobolevSubmodule s))
 
 def torusSobolevReprLinear (s : ℕ) : TorusSobolev s →ₗ[ℂ] FourierVectorSequence where
   toFun c := ⟨sobolevWeightedCoeff s c.val, c.property⟩
   map_add' c d := by
     apply lp.ext
     funext ki
-    simp [sobolevWeightedCoeff, mul_add]
+    change (torusSobolevWeight ki.1 : ℂ) ^ s * (c.val ki.1 ki.2 + d.val ki.1 ki.2) =
+      (torusSobolevWeight ki.1 : ℂ) ^ s * c.val ki.1 ki.2 +
+        (torusSobolevWeight ki.1 : ℂ) ^ s * d.val ki.1 ki.2
+    exact mul_add _ _ _
   map_smul' z c := by
     apply lp.ext
     funext ki
-    simp [sobolevWeightedCoeff, mul_left_comm, mul_assoc]
+    change (torusSobolevWeight ki.1 : ℂ) ^ s * (z * c.val ki.1 ki.2) =
+      z * ((torusSobolevWeight ki.1 : ℂ) ^ s * c.val ki.1 ki.2)
+    exact mul_left_comm _ _ _
 
 @[simp]
 theorem torusSobolevReprLinear_apply (s : ℕ) (c : TorusSobolev s)
@@ -108,7 +140,9 @@ theorem torusSobolevReprLinear_surjective (s : ℕ) :
   have hc : sobolevWeightedCoeff s c = (z : FourierIndex → ℂ) := by
     funext ki
     dsimp [sobolevWeightedCoeff, c]
-    field_simp [torusSobolevWeight_ne_zero]
+    have hw : (torusSobolevWeight ki.1 : ℂ) ^ s ≠ 0 :=
+      pow_ne_zero s (torusSobolevWeight_ne_zero ki.1)
+    rw [div_eq_mul_inv, mul_left_comm, mul_inv_cancel₀ hw, mul_one]
   refine ⟨⟨c, ?_⟩, ?_⟩
   · change Memℓp (sobolevWeightedCoeff s c) 2
     rw [hc]
@@ -159,6 +193,8 @@ def torusSobolevInclusionLinear (s : ℕ) : TorusSobolev (s + 1) →ₗ[ℂ] Tor
 
 theorem torusSobolevInclusion_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
     ‖torusSobolevInclusionLinear s c‖ ≤ ‖c‖ := by
+  change ‖torusSobolevReprLinear s (torusSobolevInclusionLinear s c)‖ ≤
+    ‖torusSobolevReprLinear (s + 1) c‖
   apply lp.norm_mono (by norm_num)
   intro ki
   change ‖sobolevWeightedCoeff s c.val ki‖ ≤ ‖sobolevWeightedCoeff (s + 1) c.val ki‖
@@ -197,8 +233,8 @@ theorem freqSq_gt_of_not_mem_sobolevCutoff {N : ℕ} {k : Frequency}
 
 theorem torusSobolevWeight_ge_cutoff {N : ℕ} {k : Frequency}
     (hk : k ∉ sobolevCutoffModes N) : (N : ℝ) ≤ torusSobolevWeight k := by
-  have hfreq : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) :=
-    Int.cast_nonneg.mpr (galerkinFreqSq_nonneg k)
+  have hfreq : (0 : ℝ) ≤ (galerkinFreqSq k : ℝ) := by
+    exact_mod_cast galerkinFreqSq_nonneg k
   have hsq : (N : ℝ) ^ 2 < (galerkinFreqSq k : ℝ) := by
     exact_mod_cast freqSq_gt_of_not_mem_sobolevCutoff hk
   have hpi : 1 ≤ (2 * Real.pi) ^ 2 := by nlinarith [Real.pi_gt_three]
@@ -209,7 +245,8 @@ def torusSobolevCutoffLinear (s N : ℕ) : TorusSobolev s →ₗ[ℂ] TorusSobol
   toFun c := ⟨fun k i => if k ∈ sobolevCutoffModes N then c.val k i else 0, by
     apply c.property.mono'
     intro ki
-    by_cases h : ki.1 ∈ sobolevCutoffModes N <;> simp [sobolevWeightedCoeff, h]⟩
+    by_cases h : ki.1 ∈ sobolevCutoffModes N <;>
+      simp [sobolevWeightedCoeff, h] <;> positivity⟩
   map_add' c d := by
     apply Subtype.ext
     funext k i
@@ -221,12 +258,14 @@ def torusSobolevCutoffLinear (s N : ℕ) : TorusSobolev s →ₗ[ℂ] TorusSobol
 
 theorem torusSobolevCutoff_norm_le (s N : ℕ) (c : TorusSobolev s) :
     ‖torusSobolevCutoffLinear s N c‖ ≤ ‖c‖ := by
+  change ‖torusSobolevReprLinear s (torusSobolevCutoffLinear s N c)‖ ≤
+    ‖torusSobolevReprLinear s c‖
   apply lp.norm_mono (by norm_num)
   intro ki
   change ‖sobolevWeightedCoeff s (torusSobolevCutoffLinear s N c).val ki‖ ≤
     ‖sobolevWeightedCoeff s c.val ki‖
   by_cases h : ki.1 ∈ sobolevCutoffModes N <;>
-    simp [torusSobolevCutoffLinear, sobolevWeightedCoeff, h]
+    simp [torusSobolevCutoffLinear, sobolevWeightedCoeff, h] <;> positivity
 
 def torusSobolevCutoff (s N : ℕ) : TorusSobolev s →L[ℂ] TorusSobolev s :=
   (torusSobolevCutoffLinear s N).mkContinuous 1
@@ -263,7 +302,7 @@ theorem torusSobolevInclusion_tail (s N : ℕ) (hN : 0 < N)
             torusSobolevCutoff s N (torusSobolevInclusion s c)).val ki‖ ≤
         ‖((N : ℝ)⁻¹ • torusSobolevRepr (s + 1) c) ki‖
       by_cases hk : ki.1 ∈ sobolevCutoffModes N
-      · simp [sobolevWeightedCoeff, hk]
+      · simp [sobolevWeightedCoeff, hk] <;> positivity
       · have hw := torusSobolevWeight_ge_cutoff hk
         have hw0 := torusSobolevWeight_pos ki.1
         simp only [sobolevWeightedCoeff, Submodule.coe_sub, Pi.sub_apply,
@@ -302,6 +341,7 @@ theorem torusSobolevRankOne_repr (s : ℕ) (ki : FourierIndex) (c : TorusSobolev
 
 theorem torusSobolevRankOne_compact (s : ℕ) (ki : FourierIndex) :
     IsCompactOperator (torusSobolevRankOne s ki) := by
+  unfold torusSobolevRankOne
   apply IsCompactOperator.comp_clm
   exact isCompactOperator_of_locallyCompactSpace_rng _
 
