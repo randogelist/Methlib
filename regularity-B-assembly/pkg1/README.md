@@ -11,6 +11,9 @@ Periodic critical \(H^{1/2}\) coefficient class and Navier–Stokes estimate ass
 
 Exact statement ledger: [H12_SIGMA_ZERO_SMALL_A_TIER.txt](H12_SIGMA_ZERO_SMALL_A_TIER.txt).
 
+Physical closure route and evidence-gated completion checklist: [TODO.md](TODO.md).
+The certified base is checked; the eleven physical stages and optional AX6 export remain open.
+
 Current certification: **29 exact declarations**, external Linux Lean 4.33.0, compilation and exact-type checks `PASS`, theorem-level axiom audits `STANDARD_ONLY`. Evidence: [run 42941911087](https://github.com/randogelist/Methlib/actions/runs/42941911087), tested commit [`6929a9f4850940f24d7ea5b7770816e7882c6636`](https://github.com/randogelist/Methlib/commit/6929a9f4850940f24d7ea5b7770816e7882c6636), [exact audit manifest](verification/ci_42941911087/audit.json), [evidence directory](verification/ci_42941911087/).
 
 The manifest defines the promotion scope. Compilation of imported modules does not assign individual theorem-level audit status to every auxiliary declaration.
