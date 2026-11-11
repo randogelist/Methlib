@@ -37,6 +37,15 @@ theorem critical_ennreal_liminf_mul_le (f g : ℕ → ℝ≥0∞) :
     Filter.eventually_lt_of_lt_liminf hb] with n hn hm
   exact hc.trans (ENNReal.mul_lt_mul hn hm)
 
+theorem critical_ennreal_liminf_sq_le (f : ℕ → ℝ≥0∞) :
+    atTop.liminf f ^ 2 ≤ atTop.liminf (fun n => f n ^ 2) := by
+  simpa only [pow_two] using critical_ennreal_liminf_mul_le f f
+
+theorem critical_ofReal_square_square (x : ℝ) :
+    ENNReal.ofReal (x ^ 2) ^ 2 = ENNReal.ofReal (x ^ 4) := by
+  rw [← ENNReal.ofReal_pow (sq_nonneg x) 2, ← pow_mul]
+
+set_option maxHeartbeats 800000 in
 /-- Modal lower semicontinuity of the fourth power of a homogeneous norm. -/
 theorem criticalExtendedQuartic_le_liminf (q : ℤ)
     (F : ℕ → CriticalSobolev q) (c : FourierCoeff)
@@ -47,14 +56,11 @@ theorem criticalExtendedQuartic_le_liminf (q : ℤ)
   calc
     _ ≤ (atTop.liminf (fun n => ENNReal.ofReal (‖F n‖ ^ 2))) ^ 2 := by gcongr
     _ ≤ atTop.liminf (fun n => ENNReal.ofReal (‖F n‖ ^ 2) ^ 2) := by
-      simpa only [pow_two] using
-        (critical_ennreal_liminf_mul_le
-          (fun n => ENNReal.ofReal (‖F n‖ ^ 2))
-          (fun n => ENNReal.ofReal (‖F n‖ ^ 2)))
+      exact critical_ennreal_liminf_sq_le (fun n => ENNReal.ofReal (‖F n‖ ^ 2))
     _ = _ := by
       congr 1
       funext n
-      rw [← ENNReal.ofReal_pow (sq_nonneg _) 2, ← pow_mul]
+      exact critical_ofReal_square_square (‖F n‖)
 
 /-- Joint terminal-energy and integrated-energy Fatou inequality. Its right
 side is the actual common finite-dimensional budget, not a limit premise. -/
