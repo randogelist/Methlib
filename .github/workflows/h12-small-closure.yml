@@ -101,6 +101,7 @@ jobs:
       - name: Compile each extension module
         id: extension
         run: |
+          python3 ci/test_build_critical.py
           python3 ci/build_critical.py
 
       - name: Audit extension theorem dependencies

@@ -21,6 +21,8 @@ python ci\check_sources.py > evidence\source-policy.json 2>&1
 if errorlevel 1 goto fail
 python ci\test_check_axioms.py > evidence\audit-checker-tests.log 2>&1
 if errorlevel 1 goto fail
+python ci\test_build_critical.py > evidence\scheduler-tests.log 2>&1
+if errorlevel 1 goto fail
 call lake exe cache get > evidence\cache.log 2>&1
 if errorlevel 1 goto fail
 git -C .lake\packages\mathlib rev-parse HEAD > evidence\mathlib-revision.txt

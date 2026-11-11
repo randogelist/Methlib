@@ -77,12 +77,12 @@ theorem criticalRoughTransport_eLpNorm_one_le
   have hprod := eLpNorm_le_eLpNorm_mul_eLpNorm'_of_norm
     (μ := volume.restrict unitCube) (p := 6) (q := 3) (r := 2)
     hu.norm hv.norm (fun x y : ℝ => x * y) 1
-    (Filter.Eventually.of_forall (fun x => by simp only [norm_mul, NNReal.coe_one, one_mul]))
+    (Filter.Eventually.of_forall (fun x => by simp only [norm_mul, NNReal.coe_one, one_mul, le_refl]))
   simp only [ENNReal.coe_one, one_mul, eLpNorm_norm] at hprod
   have htriple := eLpNorm_le_eLpNorm_mul_eLpNorm'_of_norm
     (μ := volume.restrict unitCube) (p := 2) (q := 2) (r := 1)
     (hu.norm.mul hv.norm) hG.norm (fun x y : ℝ => x * y) 1
-    (Filter.Eventually.of_forall (fun x => by simp only [norm_mul, NNReal.coe_one, one_mul]))
+    (Filter.Eventually.of_forall (fun x => by simp only [norm_mul, NNReal.coe_one, one_mul, le_refl]))
   simp only [ENNReal.coe_one, one_mul, eLpNorm_norm] at htriple
   calc
     _ ≤ eLpNorm (fun x => (‖u x‖ * ‖v x‖) * ‖G x‖) 1
@@ -112,7 +112,7 @@ theorem CRITICAL_ROUGH_TRANSPORT_HOLDER
     refine ⟨criticalRoughTransport_aestronglyMeasurable u v G hu.1 hv.1 hG.1,
       hbound.trans_lt ?_⟩
     finiteness [hu.2, hv.2, hG.2]
-  refine ⟨hmem.integrable (by norm_num), ?_⟩
+  refine ⟨memLp_one_iff_integrable.mp hmem, ?_⟩
   calc
     _ = ‖(∫ x in unitCube, inner ℝ (u x) (G x (v x)))‖ₑ := by
       rw [← ofReal_norm, Real.norm_eq_abs]

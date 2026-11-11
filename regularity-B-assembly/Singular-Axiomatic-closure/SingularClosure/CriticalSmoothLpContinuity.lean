@@ -36,7 +36,7 @@ theorem CriticalPositiveSolenoidalTest.eLpNorm_six_toReal_continuousAt
       (Icc_mem_nhds (by linarith) (by linarith))
   have hp : ContinuousAt
       (fun r => (∫ x in unitCube, ‖u r x‖ ^ 6) ^ (1 / 6 : ℝ)) t :=
-    (Real.continuous_rpow_const (by norm_num : (0 : ℝ) ≤ 1 / 6)).continuousAt.comp t hJ
+    (Real.continuous_rpow_const (by norm_num : (0 : ℝ) ≤ 1 / 6)).continuousAt.comp hJ
   apply hp.congr_of_eventuallyEq
   filter_upwards [Ioi_mem_nhds ht] with r hr
   exact critical_eLpNorm_six_toReal_eq_rpow_integral (u r) (hu.spatial_smooth hr).continuous

@@ -31,8 +31,8 @@ theorem critical_smoothFourierSynthesis_energy_eq_norm_sq
       unfold physicalEnergy
       exact integral_finsetSum Finset.univ (fun i _ =>
         (((EuclideanSpace.proj i : Vec →L[ℝ] ℝ).continuous.comp
-          (smoothFourierSynthesis_contDiff c hc).continuous).pow 2).
-            continuousOn.integrableOn_compact isCompact_unitCube)
+          (smoothFourierSynthesis_contDiff c hc).continuous).pow 2).continuousOn.integrableOn_compact
+            isCompact_unitCube)
     _ = ∑ i : Fin 3, ∑' k : Frequency, Complex.normSq (c k i) := by
       exact Finset.sum_congr rfl (fun i _ =>
         critical_smoothFourierSynthesis_component_parseval c hc hreal i)

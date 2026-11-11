@@ -37,7 +37,13 @@ theorem critical_positive_coordinateDerivative_smooth
   have hj : DifferentiableAt ℝ (fun q : ℝ × Vec => u q.1 q.2) z :=
     (hu.contDiffAt (criticalClassical_positive_isOpen.mem_nhds
       (show z ∈ {q : ℝ × Vec | 0 < q.1} from hz))).differentiableAt (by simp)
-  have h := hj.hasFDerivAt.comp z.2 (hasFDerivAt_prodMk_right z.1 z.2)
+  have hpath : HasFDerivAt (fun x : Vec => (z.1, x))
+      (ContinuousLinearMap.inr ℝ ℝ Vec) z.2 :=
+    hasFDerivAt_prodMk_right (𝕜 := ℝ) z.1 z.2
+  have h : HasFDerivAt (fun x : Vec => u z.1 x)
+      ((fderiv ℝ (fun q : ℝ × Vec => u q.1 q.2) z).comp
+        (ContinuousLinearMap.inr ℝ ℝ Vec)) z.2 := by
+    simpa only [Function.comp_def] using hj.hasFDerivAt.comp z.2 hpath
   have he := congrArg (fun L : Vec →L[ℝ] Vec => L (unitVector j)) h.fderiv
   simpa only [coordinateDerivative, Function.comp_def, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.inr_apply] using he
@@ -80,16 +86,18 @@ theorem criticalPhysicalH1_smooth (u : Field) (hu : ContDiff ℝ ∞ u)
   refine ⟨critical_continuous_memLp_cube u hu.continuous 2,
     critical_continuous_memLp_cube _ (hu.continuous_fderiv (by simp)) 2,
     fun _ : ℕ => u, fun _ => hu, fun _ => hup, ?_, ?_⟩
-  · simpa only [sub_self, eLpNorm_zero] using
+  · simpa only [sub_self, eLpNorm_zero, eLpNorm_zero'] using
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
-  · simpa only [sub_self, eLpNorm_zero] using
+  · change Tendsto (fun _ : ℕ =>
+      eLpNorm (fderiv ℝ u - fderiv ℝ u) 2 (volume.restrict unitCube)) atTop (𝓝 0)
+    simpa only [sub_self, eLpNorm_zero, eLpNorm_zero'] using
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
 
 theorem critical_physicalFieldInner_comm (u v : Field) :
     physicalFieldInner u v = physicalFieldInner v u := by
   unfold physicalFieldInner
   apply integral_congr_ae
-  exact Eventually.of_forall fun x => real_inner_comm (u x) (v x)
+  exact Eventually.of_forall fun x => (real_inner_comm (u x) (v x)).symm
 
 theorem critical_smooth_laplacian_pairing_symm
     (u v : Field) (hu : ContDiff ℝ ∞ u) (hv : ContDiff ℝ ∞ v)

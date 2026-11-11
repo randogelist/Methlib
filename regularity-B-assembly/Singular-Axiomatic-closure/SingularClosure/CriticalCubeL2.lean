@@ -105,7 +105,10 @@ theorem critical_Lp_sum_coe {ι : Type*} (s : Finset ι) (f : ι → PhysicalCub
       (fun x => ∑ i ∈ s, f i x) := by
   classical
   induction s using Finset.induction_on with
-  | empty => simpa only [Finset.sum_empty] using (Lp.coeFn_zero Vec 2 (volume.restrict unitCube))
+  | empty =>
+      simp only [Finset.sum_empty]
+      filter_upwards [Lp.coeFn_zero Vec 2 (volume.restrict unitCube)] with x hx
+      exact hx
   | @insert i s hi ih =>
       simp only [Finset.sum_insert hi]
       exact (Lp.coeFn_add _ _).trans (Filter.EventuallyEq.add Filter.EventuallyEq.rfl ih)
@@ -185,7 +188,13 @@ theorem CriticalRegularSolution.physicalL2_initial_trace
     Tendsto S.physicalL2 (𝓝[>] (0 : ℝ)) (𝓝 (criticalInitialPhysicalL2 a)) := by
   have h := (S.physicalL2_continuous 0 (by change (0 : ℝ) ≤ 0; exact le_rfl)).mono
     (Ioi_subset_Ici_self : Ioi (0 : ℝ) ⊆ Ici 0)
-  simpa only [CriticalRegularSolution.physicalL2, S.initial, criticalInitialPhysicalL2] using h
+  change Tendsto S.physicalL2 (𝓝[>] (0 : ℝ)) (𝓝 (S.physicalL2 0)) at h
+  have hzero : S.physicalL2 0 = criticalInitialPhysicalL2 a := by
+    change torusToPhysicalCubeL2 (criticalPhysicalL2 1 (by norm_num) (S.critical 0)) =
+      torusToPhysicalCubeL2 (criticalPhysicalL2 1 (by norm_num) a)
+    rw [S.initial]
+  rw [hzero] at h
+  exact h
 
 /-- Literal strong L2 trace of the real physical velocity against the
 canonical real cube representative of the critical datum. -/

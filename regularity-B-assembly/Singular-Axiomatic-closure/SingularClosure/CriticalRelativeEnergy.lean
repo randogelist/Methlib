@@ -86,15 +86,18 @@ theorem CRITICAL_LH_SMOOTH_RELATIVE_ENERGY_RAW
     change physicalFieldInner (v r) (laplacian (u r)) =
       -criticalGradientPairing (G r) (fderiv ℝ (u r)) at hpairs
     linarith
+  have hDvDu : IntervalIntegrable
+      (fun r => criticalGradientEnergy (G r) + physicalDissipation (u r)) volume s t :=
+    hDv.add hclassical.1
   have hDI : IntervalIntegrable
       (fun r => criticalGradientEnergy (G r - fderiv ℝ (u r))) volume s t :=
-    ((hDv.add hclassical.1).add (hLap.const_mul 2)).congr_ae hdiff.symm
+    (hDvDu.add (hLap.const_mul 2)).congr_ae hdiff.symm
   have hDint : (∫ r in s..t, criticalGradientEnergy (G r - fderiv ℝ (u r))) =
       (∫ r in s..t, criticalGradientEnergy (G r)) +
         (∫ r in s..t, physicalDissipation (u r)) +
           2 * (∫ r in s..t, physicalFieldInner (v r) (laplacian (u r))) := by
     rw [intervalIntegral.integral_congr_ae_restrict hdiff]
-    rw [intervalIntegral.integral_add (hDv.add hclassical.1) (hLap.const_mul 2),
+    rw [intervalIntegral.integral_add hDvDu (hLap.const_mul 2),
       intervalIntegral.integral_add hDv hclassical.1, intervalIntegral.integral_const_mul]
   refine ⟨hDI, hN, ?_⟩
   rw [critical_physicalEnergy_sub (v t) (u t) (hv.velocity_L2 t ht.le)

@@ -16,6 +16,7 @@ SingularClosure.CriticalH1Algebra
 SingularClosure.CriticalHolder
 SingularClosure.CriticalHomogeneousL6
 SingularClosure.CriticalInitialEnergy
+SingularClosure.CriticalInitialPhysicalFourier
 SingularClosure.CriticalInvariant
 SingularClosure.CriticalLerayHopf
 SingularClosure.CriticalLimit
@@ -92,6 +93,7 @@ SingularClosure.CriticalUniqueness
 SingularClosure.CriticalWeakGradient
 SingularClosure.CriticalWeakMomentum
 SingularClosure.CriticalYoung
+SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
 SingularClosure.SmallDataAX6
 SingularClosure.SmallDataAX6Closure
 SingularClosure.SmallDataClosure

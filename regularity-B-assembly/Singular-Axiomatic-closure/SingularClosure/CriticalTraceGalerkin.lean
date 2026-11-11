@@ -50,8 +50,11 @@ theorem criticalGalerkinLimit_criticalRhs_coeff_tendsto
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℂ)) atTop (𝓝 0))
   · have h := (fullFourierRhs_continuous ν k i).continuousAt.tendsto.comp
       (hconv.tendsto_at ht)
+    simp only [Function.comp_def] at h
     apply h.congr'
     filter_upwards [eventually_mem_cutoffModes_strictMono φ hφ k hk] with n hn
+    change fullFourierRhs ν ((g n).sobolevState 0 t) k i =
+      criticalCoeff q ((g n).criticalRhs q t) k i
     rw [(g n).criticalRhs_coeff q t ht.1 hn i, (g n).fullFourierRhs_eq t ht.1 k i]
 
 /-- The actual rough cutoff initial data converge to the prescribed initial vector. -/
@@ -70,6 +73,7 @@ theorem criticalGalerkinGlobalLimit_initial
   funext k i
   have hlim := (torusSobolevH0Coeff_continuous k i).continuousAt.tendsto.comp
     (hconv.tendsto_at (by norm_num : (0 : ℝ) ∈ Icc (0 : ℝ) 1))
+  simp only [Function.comp_def] at hlim
   have hevent : ∀ᶠ n in atTop, ((g n).sobolevState 0 0).val k i = criticalCoeff 1 a k i := by
     by_cases hk : k = 0
     · subst k
@@ -81,7 +85,7 @@ theorem criticalGalerkinGlobalLimit_initial
       exact if_pos hn
   have h := tendsto_nhds_unique hlim
     ((tendsto_const_nhds : Tendsto (fun _ : ℕ => criticalCoeff 1 a k i) atTop
-      (𝓝 (criticalCoeff 1 a k i))).congr' hevent.symm)
+      (𝓝 (criticalCoeff 1 a k i))).congr' (hevent.mono fun n hn => hn.symm))
   simpa only [criticalToTorusH0_coeff] using h
 
 /-- Modal integral evolution starts from the actual prescribed rough coefficient array. -/

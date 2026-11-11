@@ -84,7 +84,7 @@ theorem criticalTracePrimitive_ae_hasDerivAt
   have hR := (htR ht' 0 left_mem_uIcc).const_add (criticalCoeff 1 a k i).re
   have hIm := (htI ht' 0 left_mem_uIcc).const_add (criticalCoeff 1 a k i).im
   simpa only [criticalTracePrimitiveCoeff, Complex.re_add_im] using
-    hR.ofReal_comp.add (hIm.ofReal_comp.mul_const Complex.I)
+    hR.ofReal_comp.fun_add (hIm.ofReal_comp.mul_const Complex.I)
 
 /-- Integral coefficient evolution and the two Bochner L2 bounds imply the strong trace.
 

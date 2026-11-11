@@ -30,7 +30,7 @@ theorem criticalTrace_band_integral_tail_ae
   have hm : MemLp (fun t => criticalFiniteBandState q s (c t)) 2
       (volume.restrict (Icc (0 : ℝ) T)) :=
     (criticalFiniteBandState_memLp q s u hu).ae_eq
-      (hc.mono fun t ht => by rw [ht])
+      (hc.mono fun t ht => congrArg (criticalFiniteBandState q s) ht.symm)
   apply intervalIntegral.integral_mono_ae_restrict hT
   · exact (intervalIntegrable_iff_integrableOn_Icc_of_le hT).mpr
       (criticalTrace_integrable_norm_sq hm)
@@ -68,11 +68,11 @@ theorem criticalTrace_band_pointwise_tail_bound
   have hhi : MemLp (fun t => criticalFiniteBandState 3 s (c t)) 2
       (volume.restrict (Icc (0 : ℝ) T)) :=
     (criticalFiniteBandState_memLp 3 s u hu).ae_eq
-      (hc.mono fun t ht => by rw [ht])
+      (hc.mono fun t ht => congrArg (criticalFiniteBandState 3 s) ht.symm)
   have hlo : MemLp (fun t => criticalFiniteBandState (-1) s (r t)) 2
       (volume.restrict (Icc (0 : ℝ) T)) :=
     (criticalFiniteBandState_memLp (-1) s v hv).ae_eq
-      (hr.mono fun t ht => by rw [ht])
+      (hr.mono fun t ht => congrArg (criticalFiniteBandState (-1) s) ht.symm)
   have hA := criticalFiniteBandEnergy_absolutelyContinuous s c hre him
   have hAc : ContinuousOn (fun t => ‖criticalFiniteBandState 1 s (c t)‖ ^ 2)
       (Icc (0 : ℝ) T) := by
@@ -136,7 +136,7 @@ theorem CRITICAL_HHALF_STRONG_TRACE
     have h := (hU.div_const T).add
       (((Real.continuous_sqrt.tendsto 0).comp hV).const_mul 2 |>.mul
         ((Real.continuous_sqrt.tendsto 0).comp hU))
-    simpa only [d, Real.sqrt_zero, zero_div, mul_zero, add_zero] using h
+    simpa only [d, Function.comp_def, Real.sqrt_zero, zero_div, mul_zero, add_zero] using h
   have hcont : ∀ k i, ContinuousOn (fun t => c t k i) (Icc (0 : ℝ) T) := by
     intro k i
     have hR : ContinuousOn (fun t => (c t k i).re) (Icc (0 : ℝ) T) := by
@@ -181,10 +181,12 @@ theorem CRITICAL_HHALF_STRONG_TRACE
     funext k i
     have hlim := (criticalCoeff_continuous 1 k i).continuousAt.tendsto.comp
       (hwu.tendsto_at ht)
+    simp only [Function.comp_def] at hlim
     have hevent : ∀ᶠ N in atTop, criticalCoeff 1 (F N t) k i = c t k i := by
       filter_upwards [eventually_mem_sobolevCutoffModes k] with N hN
       simp only [F, criticalBandSobolev_coeff, criticalTrace_mem_cutoffIndices, if_pos hN]
-    exact tendsto_nhds_unique hlim (tendsto_const_nhds.congr' hevent.symm)
+    exact tendsto_nhds_unique hlim
+      (tendsto_const_nhds.congr' (hevent.mono fun N hN => hN.symm))
   refine ⟨w, hwc, hw0, hwcoeff, ?_⟩
   filter_upwards [hc, ae_restrict_mem measurableSet_Icc] with t ht htI
   apply criticalCoeff_injective 1

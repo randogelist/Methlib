@@ -30,8 +30,11 @@ theorem critical_physicalEnergy_sub (v w : Field)
   have hv2 : IntegrableOn (fun x => ‖v x‖ ^ 2) unitCube volume := hv.norm.integrable_sq
   have hw2 : IntegrableOn (fun x => ‖w x‖ ^ 2) unitCube volume := hw.norm.integrable_sq
   have hpair := critical_L2_inner_integrable v w hv hw
+  have hvdiff : IntegrableOn
+      (fun x => ‖v x‖ ^ 2 - 2 * inner ℝ (v x) (w x)) unitCube volume :=
+    hv2.sub (hpair.const_mul 2)
   simp_rw [physicalEnergy_eq_integral_norm_sq, Pi.sub_apply, norm_sub_sq_real]
-  rw [integral_add (hv2.sub (hpair.const_mul 2)) hw2,
+  rw [integral_add hvdiff hw2,
     integral_sub hv2 (hpair.const_mul 2), integral_const_mul]
   unfold physicalFieldInner
   ring

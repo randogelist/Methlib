@@ -32,7 +32,7 @@ theorem CRITICAL_GALERKIN_INTEGER_HORIZON_DIAGONAL
     (htime : ∀ n T, 0 ≤ T → (∫ t in (0 : ℝ)..T, ‖(g n).criticalRhs (-1) t‖ ^ 2) ≤ D) :
     ∃ c : ∀ m : ℕ, FourierIndex → C(Icc (0 : ℝ) ((m : ℝ) + 1), ℂ),
       ∃ φ : ℕ → ℕ, StrictMono φ ∧
-        (∀ m k i, TendstoUniformly
+        (∀ (m : ℕ) (k : Frequency) (i : Fin 3), TendstoUniformly
           (fun n (t : Icc (0 : ℝ) ((m : ℝ) + 1)) => (g (φ n)).coeff t.val k i)
           (c m (k, i)) atTop) ∧
         ∀ (m l : ℕ) (ki : FourierIndex) (t : ℝ)
