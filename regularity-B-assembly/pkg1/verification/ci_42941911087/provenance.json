@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "A_TIER",
+  "tested_git_commit": "6929a9f4850940f24d7ea5b7770816e7882c6636",
+  "workflow_run": 42941911087,
+  "job_id": 130265475044,
+  "run_url": "https://github.com/randogelist/Methlib/actions/runs/42941911087",
+  "evidence_artifact_id": 13820967099,
+  "evidence_zip_sha256": "591b33f55a24b3b58326fe590de0a778ebf4b097ddad8a5e14bb2d604029a50a",
+  "source_artifact_id": 13820019542,
+  "source_zip_sha256": "f6c0797e3667dde70ad7db8ae5f1688bba82d181b1d9c76a2204ce9b7752fe28",
+  "compiler": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+  "mathlib_commit": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "audited_declaration_count": 29,
+  "approved_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "exact_proof_source_files": [
+    {
+      "path": "H12_CRITICAL_ABSORPTION.lean",
+      "sha256": "99ee3a18a658a43b76025a07721dd0f208fdf752626476a6b85060a2a91cb05a",
+      "bytes": 3753
+    },
+    {
+      "path": "H12_CRITICAL_ENERGY_BUDGET.lean",
+      "sha256": "7469bf143f58c3155c6377941ff39eda4c430706bdc27afd0d74b27fea0e03bd",
+      "bytes": 14757
+    },
+    {
+      "path": "H12_CRITICAL_PAIRING_INTEGRAL.lean",
+      "sha256": "ab606533c93504eb2903d9f4ebdedb1bae76f40b4b32e086fe10c79da1947a69",
+      "bytes": 5171
+    },
+    {
+      "path": "H12_CRITICAL_TRILINEAR_COMPILER.lean",
+      "sha256": "4913d23eb13a4e0a1f3c1474235bd48a1e8a8aa1ef8f0cc8c80b36fb2621e206",
+      "bytes": 5517
+    },
+    {
+      "path": "H12_FOURIER_FOUNDATIONS.lean",
+      "sha256": "d04afa9b093655921572a17828a71798131e1394b3950d88bf4411881f1b1438",
+      "bytes": 9888
+    },
+    {
+      "path": "H12_HOLDER_LP_ADAPTER.lean",
+      "sha256": "85320626fb4f35e8ca3dc076c4bcb98313ccfd56256dac530e2f0052bf11eb41",
+      "bytes": 5772
+    },
+    {
+      "path": "H12_L2_COEFFICIENT_EMBEDDING.lean",
+      "sha256": "99d430a7afbf837420e03e91229ecbe28e56360dbc72991c7ba6e2e3255e33ea",
+      "bytes": 5759
+    },
+    {
+      "path": "H12_POINTWISE_CONVECTION_SQUARE.lean",
+      "sha256": "70377364af366885fb1202cade26535abca4c064e0d95524f5bfc18c98de1b4e",
+      "bytes": 3253
+    },
+    {
+      "path": "H12_SIGMA_ZERO_SMALL_CLASS.lean",
+      "sha256": "98cecd39117f37a3a992d65b982d56f0ba19460b26835d83eb4b83f2f44ba18f",
+      "bytes": 8581
+    },
+    {
+      "path": "H12_SIGMA_ZERO_SMALL_PACKAGE.lean",
+      "sha256": "19cf965e32966ae831a1c3c6f1440f7d35f178e6beda350804c3f8f50dd57917",
+      "bytes": 792
+    },
+    {
+      "path": "H12_SMALL_CLASS_BUDGET.lean",
+      "sha256": "eb91d787e2e8c9e9b6a7c17ded1afe89fc1e0debeede2131bfd9f647d9e0b1a7",
+      "bytes": 3746
+    },
+    {
+      "path": "H12_SMALL_SCALING.lean",
+      "sha256": "bf77f0de5296c1c477b510fadb7948a63a176fdb9aaf63ae049190732ecc510f",
+      "bytes": 8699
+    },
+    {
+      "path": "H12_SPECTRAL_ENERGY_BRIDGE.lean",
+      "sha256": "f7d36176dd377f17cfe5a5766ca4332061d464c811abdd4696ef7fb025b62a61",
+      "bytes": 3682
+    },
+    {
+      "path": "LEAN_PASSED_STACK.lean",
+      "sha256": "fa17caee1b980bedd79c46c9ebacba1f176c638e6ac6e67a08740db55434f49c",
+      "bytes": 1400
+    },
+    {
+      "path": "NSE_PAIRING_POINTWISE_LP_LIFT.lean",
+      "sha256": "665338772361956f936a7e5cc001e33471bbcdd3b715b1965070d2ad56bf1026",
+      "bytes": 6283
+    },
+    {
+      "path": "NSE_PHYSICAL_LP_DATA_CONSTRUCTION.lean",
+      "sha256": "f020029e53f75c3fbd2f11957122617e7756f22eacfe3f7cec0163607615003d",
+      "bytes": 8254
+    },
+    {
+      "path": "NSE_POINTWISE_PAIRING_IDENTIFICATION.lean",
+      "sha256": "b70798977a06d6aad2b1e2e3929e459d80630d4fcd7d5f0ff36fe91003366870",
+      "bytes": 5374
+    },
+    {
+      "path": "PERIODIC_HHALF_L3_COMPONENT_COMPILER.lean",
+      "sha256": "83f76d6e9524e5b28958ae67b8a71a1f829290af7c5b433da699cf19104edc41",
+      "bytes": 6160
+    },
+    {
+      "path": "PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS.lean",
+      "sha256": "6674831d0560dcf5f7790196b8f99eaae880376ce953e43af830a5c2242227b0",
+      "bytes": 4822
+    },
+    {
+      "path": "SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER.lean",
+      "sha256": "d356fb80c77401bfb4fc6d63332784c809133e69fa526286afe2d38b0f3169cb",
+      "bytes": 7837
+    },
+    {
+      "path": "ci/Audit.lean",
+      "sha256": "649fd7f036e0cb3910281d20adc4a6eb003c10bf46ccb8cf76ee0f408cf91922",
+      "bytes": 18651
+    },
+    {
+      "path": "ci/expected_axioms.json",
+      "sha256": "e0d3449985569a836108c6a5690a347ca8471946f1bc0f65b1a91c071a00768e",
+      "bytes": 7587
+    },
+    {
+      "path": "lake-manifest.json",
+      "sha256": "59513b588c4c32075e34fff9ef5ed7a524a9632a2d83cce808cf02546d1ef891",
+      "bytes": 3569
+    },
+    {
+      "path": "lakefile.toml",
+      "sha256": "dab3dc24c4b9e3e868abf50ad655d1ebf29696c91ed08c77163b177a8817c266",
+      "bytes": 991
+    },
+    {
+      "path": "lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+      "bytes": 25
+    }
+  ],
+  "actual_physical_global_NSE_root": "OPEN",
+  "windows_runner_execution": "NOT_PERFORMED",
+  "windows_runner_syntax_parse": "PASS",
+  "local_lean_execution": false,
+  "scope": "EXACT_AUDITED_DECLARATIONS"
+}

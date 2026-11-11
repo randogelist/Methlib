@@ -5,11 +5,15 @@ Periodic critical \(H^{1/2}\) coefficient class and Navier–Stokes estimate ass
 | Scope | Status |
 |---|---|
 | Historical ten-module native-passed stack | `A_TIER`, exact ledger scope |
-| New carrier, scaling, coefficient embedding, scalar budget | `A_TIER_CANDIDATE`, external evidence pending |
-| Pairing/convection/HLS frontier | `A_TIER_CANDIDATE`, external evidence pending |
+| Carrier, scaling, coefficient embedding, scalar budget | `A_TIER`, exact audited declarations |
+| Pairing/convection/HLS compiler roots | `A_TIER`, exact stated premises retained |
 | Actual physical small-data global NSE theorem | Open formal endpoint |
 
 Exact statement ledger: [H12_SIGMA_ZERO_SMALL_A_TIER.txt](H12_SIGMA_ZERO_SMALL_A_TIER.txt).
+
+Current certification: **29 exact declarations**, external Linux Lean 4.33.0, compilation and exact-type checks `PASS`, theorem-level axiom audits `STANDARD_ONLY`. Evidence: [run 42941911087](https://github.com/randogelist/Methlib/actions/runs/42941911087), tested commit [`6929a9f4850940f24d7ea5b7770816e7882c6636`](https://github.com/randogelist/Methlib/commit/6929a9f4850940f24d7ea5b7770816e7882c6636), [exact audit manifest](verification/ci_42941911087/audit.json), [evidence directory](verification/ci_42941911087/).
+
+The manifest defines the promotion scope. Compilation of imported modules does not assign individual theorem-level audit status to every auxiliary declaration.
 
 ## Concrete small coefficient class
 
@@ -30,7 +34,7 @@ For \(\nu,C_3>0\),
 
 `C3` is a numerical parameter. Existence of a physical Sobolev certificate with this constant remains a separate theorem.
 
-| Candidate module | Exact conclusion |
+| Module containing audited endpoints | Exact conclusion |
 |---|---|
 | `H12_SIGMA_ZERO_SMALL_CLASS` | Nonempty class; heat and symmetric finite cutoffs preserve smallness |
 | `H12_SMALL_SCALING` | \(Q(ra)=r^2Q(a)\), \(N(ra)=|r|N(a)\); arbitrarily small positive scalings; nonzero small data |
@@ -49,7 +53,7 @@ H(0)\le H_0,\quad C\sqrt{H_0}\le\theta\nu,\quad
 d+2\nu D\le2C\sqrt H\,D,\quad E^2\le HD,
 \]
 
-where \(\nu,C>0\), \(\theta<1\), and \(T,H_0\ge0\). The candidate theorems derive
+where \(\nu,C>0\), \(\theta<1\), and \(T,H_0\ge0\). The audited theorems derive
 
 \[
 H(t)+2(1-\theta)\nu\int_0^tD(s)\,ds\le H_0,
@@ -75,9 +79,9 @@ E_n=\|\nabla u_n\|_2^2
 
 remain Galerkin obligations. The scalar declarations construct no NSE trajectory.
 
-## Native-passed overlay
+## Historical native-passed overlay
 
-The exact source texts corresponding to the successful native Windows Lean 4.33.0 runs are overlaid directly in this directory.
+The historical native Windows Lean 4.33.0 evidence is retained separately from the current Linux certification.
 
 Use:
 
@@ -91,9 +95,9 @@ as the import surface for passed material only. The exact package versions, sour
 LEAN_PASSED_STACK.txt
 ```
 
-The overlay currently contains ten native-passed modules. Prepared frontier modules are retained beside it but are not imported or promoted by `LEAN_PASSED_STACK.lean`.
+The historical import surface contains ten native-passed modules. Its exact source hashes and certification scope remain those of `LEAN_PASSED_STACK.txt`. The new aggregate and current 29-declaration certification have their own source manifest.
 
-## Certified spine
+## Historical certified spine
 
 \[
 \texttt{H12\_FOURIER\_FOUNDATIONS}^{!!}
@@ -117,9 +121,9 @@ The overlay currently contains ten native-passed modules. Prepared frontier modu
 \texttt{PERIODIC\_HHALF\_L3\_COMPONENT\_COMPILER}^{!!,!!!}.
 \]
 
-`!!` denotes native Lean A-tier. `!!!` denotes formal closure of the exact implication under explicitly named remaining premises.
+`!!` denotes `A_TIER`. `!!!` denotes formal closure of the exact implication under explicitly named remaining premises.
 
-## Latest certified endpoint
+## Historical component endpoint
 
 `PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER`
 
@@ -156,7 +160,7 @@ Hence the vector/matrix part of the periodic critical Sobolev endpoint is certif
 \|\Lambda u\|_{L^3}\le C_3D.
 \]
 
-## Current candidate endpoint
+## Audited HLS compiler endpoint
 
 `ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER`
 
@@ -186,7 +190,7 @@ and, inside the critical radius,
 I_{\rm abs}\le\frac{\nu}{4}D^2.
 \]
 
-This HLS compiler remains an A-tier candidate until matching external compiler and theorem-audit evidence is supplied.
+This exact HLS compiler root is `A_TIER` in the current 29-declaration audit. The bounded physical operator and reconstructions remain explicit premises.
 
 ## Remaining physical endpoints
 
@@ -204,7 +208,7 @@ The physical target is a unique global critical periodic NSE evolution for real,
 u\in C([0,\infty);H^{1/2})\cap L^2((0,\infty);H^{3/2}),
 \]
 
-smooth for positive time. Its mathematical derivation is recorded in [H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt](H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt). The candidate carrier/scalar package does not promote that physical root to `A_TIER`, `FORMAL_CLOSURE`, or `UNCONDITIONAL_CLOSURE`.
+smooth for positive time. Its mathematical derivation is recorded in [H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt](H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt). Certification of the exact carrier/scalar declarations does not promote that physical root to `A_TIER`, `FORMAL_CLOSURE`, or `UNCONDITIONAL_CLOSURE`.
 
 ## Source-layout note
 
@@ -216,7 +220,7 @@ The files preserve their original bare imports. Add this directory to `LEAN_PATH
 import H12_SIGMA_ZERO_SMALL_PACKAGE
 ```
 
-The aggregate includes historical and candidate declarations. Import inclusion is not promotion. `H12_CRITICAL_PAIRING_INTEGRAL`, `H12_POINTWISE_CONVECTION_SQUARE`, and `SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER` require matching external evidence alongside the new modules.
+The aggregate includes the current audited roots and their dependencies. The exact 29 declarations are listed in [audit.json](verification/ci_42941911087/audit.json), with raw theorem axioms in [axioms.log](verification/ci_42941911087/axioms.log) and tested source hashes in [sources.sha256](verification/ci_42941911087/sources.sha256).
 
 | Dependency | Pin |
 |---|---|
@@ -232,7 +236,9 @@ call run.cmd -MathlibCache "C:\path\to\cached\mathlib4"
 call run.cmd -MathlibCache "C:\path\to\cached\mathlib4" -LeanExe "C:\path\to\lean.exe"
 ```
 
-Optional defaults: `H12_MATHLIB_CACHE`, `H12_LEAN_EXE`. `run.cmd` delegates to `support/run.ps1`; compiler/cache validation, compilation, signature checks, and theorem-level axiom audits are recorded in a unique `evidence/<run-id>/` directory. The runner requires a clean pinned cached Mathlib checkout and a direct native compiler; dependency installation/download is not performed.
+Optional defaults: `H12_MATHLIB_CACHE`, `H12_LEAN_EXE`. `run.cmd` delegates to `support/run.ps1`; on execution, compiler/cache validation, compilation, signature checks, and theorem-level axiom audits are recorded in a unique `evidence/<run-id>/` directory. The runner requires a clean pinned cached Mathlib checkout and a direct native compiler; dependency installation/download is not performed.
 
-Promotion requires matching source hashes, external compiler success, exact signatures, and theorem-level audits without `sorryAx` or unapproved axioms. Prepared code remains `A_TIER_CANDIDATE` until that evidence exists. No local Lean execution is part of this preparation.
+The current successful compiler run was external Linux. The Windows runner received a remote PowerShell syntax parse; current Windows end-to-end execution is not claimed. No local Lean execution occurred.
+
+The canonical evidence artifact has SHA256 `591b33f55a24b3b58326fe590de0a778ebf4b097ddad8a5e14bb2d604029a50a`. Promotion is restricted to the exact checked declarations and matching tested sources; `sorryAx` and unapproved axioms are absent.
 

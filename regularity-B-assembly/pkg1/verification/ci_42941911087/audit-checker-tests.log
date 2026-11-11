@@ -1,0 +1,26 @@
+test_additional_allowance_rejected (test_check_axioms.AuditPolicyTests.test_additional_allowance_rejected) ... ok
+test_axiom_names_are_case_sensitive (test_check_axioms.AuditPolicyTests.test_axiom_names_are_case_sensitive) ... ok
+test_bare_declaration_names (test_check_axioms.AuditPolicyTests.test_bare_declaration_names) ... ok
+test_changed_standard_axiom_policy (test_check_axioms.AuditPolicyTests.test_changed_standard_axiom_policy) ... ok
+test_compiler_error (test_check_axioms.AuditPolicyTests.test_compiler_error) ... ok
+test_custom_axiom (test_check_axioms.AuditPolicyTests.test_custom_axiom) ... ok
+test_duplicate_expected_declaration (test_check_axioms.AuditPolicyTests.test_duplicate_expected_declaration) ... ok
+test_duplicate_quoted_and_bare_marker (test_check_axioms.AuditPolicyTests.test_duplicate_quoted_and_bare_marker) ... ok
+test_duplicate_report (test_check_axioms.AuditPolicyTests.test_duplicate_report) ... ok
+test_embedded_report_text_is_not_a_report (test_check_axioms.AuditPolicyTests.test_embedded_report_text_is_not_a_report) ... ok
+test_malformed_report (test_check_axioms.AuditPolicyTests.test_malformed_report) ... ok
+test_malformed_specifications_fail_closed (test_check_axioms.AuditPolicyTests.test_malformed_specifications_fail_closed) ... ok
+test_marker_must_identify_its_declaration (test_check_axioms.AuditPolicyTests.test_marker_must_identify_its_declaration) ... ok
+test_missing_exact_type_marker (test_check_axioms.AuditPolicyTests.test_missing_exact_type_marker) ... ok
+test_missing_report (test_check_axioms.AuditPolicyTests.test_missing_report) ... ok
+test_missing_required_axiom (test_check_axioms.AuditPolicyTests.test_missing_required_axiom) ... ok
+test_quoted_and_bare_markers_with_multiline_axioms (test_check_axioms.AuditPolicyTests.test_quoted_and_bare_markers_with_multiline_axioms) ... ok
+test_sorry_axiom (test_check_axioms.AuditPolicyTests.test_sorry_axiom) ... ok
+test_sorry_warning (test_check_axioms.AuditPolicyTests.test_sorry_warning) ... ok
+test_unexpected_report (test_check_axioms.AuditPolicyTests.test_unexpected_report) ... ok
+test_unmatched_marker_quote (test_check_axioms.AuditPolicyTests.test_unmatched_marker_quote) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.003s
+
+OK

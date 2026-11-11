@@ -1,0 +1,242 @@
+{
+  "declaration_count": 29,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalAbsorption.H12_CRITICAL_ABSORPTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalPairingIntegral.H12_CRITICAL_PAIRING_INTEGRAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12FourierFoundations.H12_FOURIER_FOUNDATIONS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12PointwiseConvectionSquare.H12_POINTWISE_CONVECTION_SQUARE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SmallScaling.criticalNorm_scale"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SmallScaling.exists_small_positive_scale"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SmallScaling.H12_SMALL_SCALING"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12L2CoefficientEmbedding.physical_frequency_gap"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SmallClassBudget.small_critical_coefficient_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}

@@ -1,0 +1,664 @@
+"EXACT_TYPE_PASS:H12CriticalAbsorption.H12_CRITICAL_ABSORPTION"
+'H12CriticalAbsorption.H12_CRITICAL_ABSORPTION' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12CriticalPairingIntegral.H12_CRITICAL_PAIRING_INTEGRAL"
+'H12CriticalPairingIntegral.H12_CRITICAL_PAIRING_INTEGRAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER"
+'H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:H12FourierFoundations.H12_FOURIER_FOUNDATIONS"
+'H12FourierFoundations.H12_FOURIER_FOUNDATIONS' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER"
+'H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12PointwiseConvectionSquare.H12_POINTWISE_CONVECTION_SQUARE"
+'H12PointwiseConvectionSquare.H12_POINTWISE_CONVECTION_SQUARE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE"
+'H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT"
+'NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION"
+'NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION"
+'NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER"
+'PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS"
+'PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:167:7: warning: Variable name `D` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _D
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER"
+'ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS"
+'H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:190:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:190:18: warning: Variable name `hθ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hθ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:190:31: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:190:44: warning: Variable name `hH₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:191:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:192:5: warning: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:193:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:194:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:195:5: warning: Variable name `henergy` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _henergy
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:197:5: warning: Variable name `hinterpolation` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinterpolation
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY"
+'H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:210:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:210:18: warning: Variable name `hθ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hθ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:210:31: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:210:44: warning: Variable name `hH₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:211:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:212:5: warning: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:213:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:214:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:215:5: warning: Variable name `henergy` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _henergy
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:217:5: warning: Variable name `hinterpolation` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinterpolation
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY"
+'H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:228:5: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:228:18: warning: Variable name `hH` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:229:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:230:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:230:28: warning: Variable name `hgap` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hgap
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:231:5: warning: Variable name `hbelow` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hbelow
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier"
+'H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:241:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:241:18: warning: Variable name `hC` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:241:31: warning: Variable name `hθ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hθ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:242:5: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:242:18: warning: Variable name `hH₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:243:5: warning: Variable name `hH` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:244:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:245:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:246:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:247:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:248:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:249:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:250:5: warning: Variable name `hcritical` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcritical
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA"
+'H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:262:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:262:18: warning: Variable name `hC` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:262:31: warning: Variable name `hθ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hθ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:263:5: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:263:18: warning: Variable name `hH₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:264:5: warning: Variable name `hH` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:265:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:266:5: warning: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:267:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:268:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:269:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:270:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:271:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:272:5: warning: Variable name `hcritical` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcritical
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:274:5: warning: Variable name `hinterpolation` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinterpolation
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA"
+'H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:284:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:284:18: warning: Variable name `hC` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:284:31: warning: Variable name `hθ` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hθ
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:285:5: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:285:18: warning: Variable name `hH₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:286:5: warning: Variable name `hH` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:287:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:288:5: warning: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:289:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:290:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:291:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:292:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:293:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:294:5: warning: Variable name `hcritical` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcritical
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:296:5: warning: Variable name `hinterpolation` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinterpolation
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA"
+'H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+"EXACT_TYPE_PASS:H12SmallScaling.criticalNorm_scale"
+'H12SmallScaling.criticalNorm_scale' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:318:5: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:318:18: warning: Variable name `hC3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:318:33: warning: Variable name `hε` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hε
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12SmallScaling.exists_small_positive_scale"
+'H12SmallScaling.exists_small_positive_scale' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12SmallScaling.H12_SMALL_SCALING"
+'H12SmallScaling.H12_SMALL_SCALING' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:343:19: warning: Variable name `hk` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hk
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12L2CoefficientEmbedding.physical_frequency_gap"
+'H12L2CoefficientEmbedding.physical_frequency_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff"
+'H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+"EXACT_TYPE_PASS:H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING"
+'H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:375:37: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12SmallClassBudget.small_critical_coefficient_le"
+'H12SmallClassBudget.small_critical_coefficient_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/Audit.lean:386:24: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:386:44: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:387:5: warning: Variable name `hH` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:388:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:389:5: warning: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:390:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:391:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:392:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:393:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:394:5: warning: Variable name `hcritical` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcritical
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:396:5: warning: Variable name `hinterpolation` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinterpolation
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY"
+'H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/Audit.lean:408:24: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:408:44: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:409:5: warning: Variable name `hH` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:410:5: warning: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:411:5: warning: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:412:5: warning: Variable name `hH_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hH_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:413:5: warning: Variable name `hD_nonneg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD_nonneg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:414:5: warning: Variable name `hderiv` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hderiv
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:415:5: warning: Variable name `h_initial` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_initial
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:416:5: warning: Variable name `hcritical` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hcritical
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/Audit.lean:418:5: warning: Variable name `hinterpolation` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hinterpolation
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+"EXACT_TYPE_PASS:H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET"
+'H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]

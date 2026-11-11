@@ -1,9 +1,16 @@
 GOODWORKFLOWFRONTIER::REGULARITY_B_ASSEMBLY::PKG1::H12_SIGMA_ZERO_SMALL
 
 MODE=A_TIER_DERIVATION
-NEW_TARGET_STATUS=A_TIER_CANDIDATE
-EXTERNAL_COMPILE=PENDING
-THEOREM_LEVEL_AXIOM_AUDIT=PENDING
+AUDITED_DECLARATION_STATUS=A_TIER
+AUDITED_DECLARATION_COUNT=29
+EXTERNAL_COMPILE=PASS
+EXACT_TYPE_CHECKS=PASS
+THEOREM_LEVEL_AXIOM_AUDIT=PASS_STANDARD_ONLY
+TESTED_COMMIT=6929a9f4850940f24d7ea5b7770816e7882c6636
+EXTERNAL_RUN=42941911087
+EXTERNAL_JOB=130265475044
+EXTERNAL_PLATFORM=LINUX
+EXTERNAL_COMPILER=LEAN_4.33.0
 ACTUAL_PERIODIC_NSE_GLOBAL_ROOT=OPEN
 UNCONDITIONAL_PHYSICAL_NSE_CLOSURE=NOT_ESTABLISHED
 LOCAL_LEAN_EXECUTION=NONE
@@ -93,7 +100,8 @@ LOCAL_LEAN_EXECUTION=NONE
     imply, for every 0 <= t <= T,
       H(t)+kappa*integral_0^t D(s) ds <= H0.
 
-  Persistence H(t) <= H0 is derived by a barrier argument, not assumed.
+  H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier
+  is separately audited. Persistence H(t) <= H0 is derived, not assumed.
   Derivatives at t=0 are required; derivatives at t=T are not.
 
   H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA:
@@ -159,12 +167,37 @@ LOCAL_LEAN_EXECUTION=NONE
   compiles a supplied scalar certificate with C3=9*Cscalar; it does not
   prove that scalar certificate.
 
-  Aggregate: H12_SIGMA_ZERO_SMALL_PACKAGE.lean.
-  Every newly prepared target in Sections 2-5: A_TIER_CANDIDATE.
-  Additional frontier modules H12_CRITICAL_PAIRING_INTEGRAL,
+  Current aggregate: H12_SIGMA_ZERO_SMALL_PACKAGE.lean.
+  Current exact declaration manifest:
+    verification/ci_42941911087/audit.json.
+  The 29 declarations in that manifest are A_TIER (!!).
+  Scope: the named endpoints in Sections 2-5, the separately named
+  barrier theorem, and the 13 prior assembly roots in the manifest.
+  This includes H12_CRITICAL_PAIRING_INTEGRAL,
   H12_POINTWISE_CONVECTION_SQUARE, and
-  SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER: A_TIER_CANDIDATE until matched.
-  Preparation/import/scheduling alone establishes no A_TIER promotion.
+  SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER under their exact stated premises.
+  No blanket theorem-level audit status is assigned to every auxiliary
+  declaration in the imported modules.
+
+  Run: https://github.com/randogelist/Methlib/actions/runs/42941911087
+  Job: https://github.com/randogelist/Methlib/actions/runs/42941911087/job/130265475044
+  Tested commit: 6929a9f4850940f24d7ea5b7770816e7882c6636.
+  External platform/compiler: Linux / Lean 4.33.0.
+  Mathlib commit: db584cd6d46c92f209a44c0f1c829460d327499d.
+  Canonical artifact SHA256:
+    591b33f55a24b3b58326fe590de0a778ebf4b097ddad8a5e14bb2d604029a50a.
+  Evidence directory: verification/ci_42941911087/.
+  Evidence: build.log; axioms.log; audit.json; sources.sha256;
+    source-recheck.log; lean-version.txt; mathlib-revision.txt.
+  All 29 exact-type checks and theorem-level axiom audits passed.
+  Axiom set: propext, Classical.choice, Quot.sound.
+  sorryAx: absent. Unapproved axioms: absent.
+  Tested Lean sources match the recorded source hashes.
+
+  The current evidence is an external Linux compiler run. The Windows
+  runner received a remote PowerShell syntax parse only; current Windows
+  end-to-end execution is not claimed. Historical Windows evidence above
+  remains separately scoped to its ten-module ledger.
 
   Promotion criterion:
     exact source hashes + matching external compiler PASS + exact theorem
@@ -186,8 +219,10 @@ LOCAL_LEAN_EXECUTION=NONE
   Optional defaults: H12_MATHLIB_CACHE; H12_LEAN_EXE.
   run.cmd delegates to support/run.ps1. Compiler/cache validation,
   compilation, signatures, and theorem-level axiom audits are recorded in
-  a unique evidence/<run-id>/ directory. Dependency installation/download
-  is not a runner operation. No local Lean execution is authorized here.
+  a unique evidence/<run-id>/ directory on execution. Dependency
+  installation/download is not a runner operation. This describes the
+  supplied Windows replay path, not an executed current Windows run.
+  No local Lean execution occurred.
 
 8. OPEN PHYSICAL ENDPOINTS
 

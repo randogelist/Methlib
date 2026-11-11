@@ -1,0 +1,83 @@
+⚠ [8708/8726] Replayed H12_CRITICAL_ABSORPTION
+warning: H12_CRITICAL_ABSORPTION.lean:46:5: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: H12_CRITICAL_ABSORPTION.lean:62:5: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: H12_CRITICAL_ABSORPTION.lean:63:5: Variable name `hE` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hE
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: H12_CRITICAL_ABSORPTION.lean:63:18: Variable name `hD` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hD
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8709/8726] Replayed H12_CRITICAL_ENERGY_BUDGET
+warning: H12_CRITICAL_ENERGY_BUDGET.lean:189:34: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: H12_CRITICAL_ENERGY_BUDGET.lean:189:34: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: H12_CRITICAL_ENERGY_BUDGET.lean:243:33: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: H12_CRITICAL_ENERGY_BUDGET.lean:243:33: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [8713/8726] Replayed H12_SIGMA_ZERO_SMALL_CLASS
+warning: H12_SIGMA_ZERO_SMALL_CLASS.lean:90:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8720/8726] Replayed SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER
+warning: SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER.lean:272:7: Variable name `D` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _D
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ℹ [8722/8726] Replayed LEAN_PASSED_STACK
+info: LEAN_PASSED_STACK.lean:24:0: H12FourierFoundations.H12_FOURIER_FOUNDATIONS : H12FourierFoundations.FoundationBundle
+info: LEAN_PASSED_STACK.lean:25:0: H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE : H12SpectralEnergyBridge.SpectralEnergyBundle
+info: LEAN_PASSED_STACK.lean:26:0: H12CriticalAbsorption.H12_CRITICAL_ABSORPTION : H12CriticalAbsorption.CriticalAbsorptionBundle
+info: LEAN_PASSED_STACK.lean:27:0: H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER :
+  H12CriticalTrilinearCompiler.CriticalTrilinearCompilerBundle
+info: LEAN_PASSED_STACK.lean:28:0: H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER.{u_1} {α : Type u_1} [MeasurableSpace α] {μ : MeasureTheory.Measure α}
+  {s : H12CriticalTrilinearCompiler.CriticalState} :
+  ∀ (a : H12HolderLpAdapter.CriticalPairingRealization μ s), H12CriticalTrilinearCompiler.CriticalHolder s
+info: LEAN_PASSED_STACK.lean:29:0: NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION.{u_1} {α : Type u_1} [MeasurableSpace α]
+  {μ : MeasureTheory.Measure α} {s : H12CriticalTrilinearCompiler.CriticalState} :
+  ∀ (a : NSEPointwisePairingIdentification.NSEPairingRealization μ s), H12CriticalTrilinearCompiler.CriticalHolder s
+info: LEAN_PASSED_STACK.lean:30:0: NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT.{u_1} {α : Type u_1} [MeasurableSpace α]
+  {μ : MeasureTheory.Measure α} {s : H12CriticalTrilinearCompiler.CriticalState} :
+  ∀ (a : NSEPairingPointwiseLpLift.PhysicalLpData μ s), H12CriticalTrilinearCompiler.CriticalHolder s
+info: LEAN_PASSED_STACK.lean:31:0: NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION.{u_1} {α : Type u_1} [MeasurableSpace α]
+  {μ : MeasureTheory.Measure α} (R : NSEPhysicalLpDataConstruction.RawPhysicalFields μ) (E D : ℝ) (hE : 0 ≤ E)
+  (hD : 0 ≤ D) : H12CriticalTrilinearCompiler.CriticalHolder (NSEPhysicalLpDataConstruction.physicalState R E D hE hD)
+info: LEAN_PASSED_STACK.lean:32:0: PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS
+  (S : PeriodicStrongSliceToRawPhysicalFields.PeriodicStrongSlice) : ∃ R, R.J = S.J ∧ R.u = S.u ∧ R.w = S.w
+info: LEAN_PASSED_STACK.lean:33:0: PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER {s : H12CriticalTrilinearCompiler.CriticalState}
+  (h : PeriodicHhalfL3ComponentCompiler.ScalarEndpointCertificate s) :
+  ∃ hS, hS.C3 = PeriodicHhalfL3ComponentCompiler.compiledConstant h
+✔ [8723/8726] Built H12_L2_COEFFICIENT_EMBEDDING (5.0s)
+⚠ [8724/8726] Built H12_SMALL_SCALING (5.4s)
+warning: H12_SMALL_SCALING.lean:23:8: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8725/8726] Built H12_SIGMA_ZERO_SMALL_PACKAGE (3.6s)
+Build completed successfully (8726 jobs).
