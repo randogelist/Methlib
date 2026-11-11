@@ -1,0 +1,15 @@
+SINGULAR_AXIOMATIC_CLOSURE
+SOURCE_STATUS=A_TIER_CANDIDATE
+ROOT_STATUS=NOT_ESTABLISHED
+ROOT=SingularClosure.Fefferman_B_0_adjust
+INTENDED_NONSTANDARD_AXIOMS=AX6
+CURRENT_NONSTANDARD_AXIOM_DECLARATIONS=NONE
+LOCAL_LEAN_EXECUTIONS=0
+COMPILER_TARGET=EXTERNAL_GITHUB_ACTIONS_LEAN_4.33.0
+MATHLIB_REV=db584cd6d46c92f209a44c0f1c829460d327499d
+COMPLETION_MARKER=!=!
+
+Prepared source is not compiler or theorem-audit evidence.
+Only exact endpoint scopes verified at a matching commit may receive !=!.
+The foundation's explicit zero solution does not establish any arbitrary-data root.
+No analytic bridge may be replaced by an unapproved axiom, sorry, or hidden root premise.

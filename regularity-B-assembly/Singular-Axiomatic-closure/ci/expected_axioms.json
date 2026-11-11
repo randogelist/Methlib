@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.smoothSigmaZero_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_zero"
+    },
+    {
+      "name": "SingularClosure.globalSmoothNSE_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.globalSmoothNSE_zero"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS"
+    },
+    {
+      "name": "SingularClosure.spectralChannel_preserves_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.spectralChannel_preserves_solenoidal"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET"
+    },
+    {
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL"
+    }
+  ]
+}

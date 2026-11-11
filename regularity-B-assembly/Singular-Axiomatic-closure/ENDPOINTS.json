@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "root": "SingularClosure.Fefferman_B_0_adjust",
+  "completion_marker": "!=!",
+  "foundation": "PERIODIC_NSE_CONTRACTS",
+  "endpoints": [
+    {
+      "number": 1,
+      "name": "SIX_CHANNEL_PROJECTIONS",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 2,
+      "name": "SIX_CHANNEL_ENSTROPHY_EQ",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 3,
+      "name": "GALERKIN_GLOBAL_EXISTS_UNIQUE",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 4,
+      "name": "GALERKIN_ENERGY_IDENTITY",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 5,
+      "name": "GALERKIN_ENSTROPHY_INEQUALITY",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 6,
+      "name": "CUBIC_ENERGY_OF_SQUARE_BUDGET",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 7,
+      "name": "AX6_UNIFORM_STRONG_BOUNDS",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 8,
+      "name": "GALERKIN_GLOBAL_STRONG_LIMIT",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 9,
+      "name": "GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 10,
+      "name": "PERIODIC_PRESSURE_RECOVERY",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    },
+    {
+      "number": 11,
+      "name": "ax6_implies_fefferman_B_0_adjust",
+      "status": "pending",
+      "verified_commit": null,
+      "evidence_url": null
+    }
+  ],
+  "nonstandard_axiom_target": [
+    "AX6"
+  ],
+  "root_completed": false
+}
