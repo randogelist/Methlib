@@ -70,7 +70,7 @@ theorem infinitePressureCoefficient_fullTransport_quadratic
           (∑ i : Fin 3, (k i : ℂ) ^ 2) := by
   by_cases hk : k = 0
   · subst k
-    simp only [infinitePressureCoefficient_zero, if_pos rfl]
+    simp only [infinitePressureCoefficient_zero, ite_true]
   · rw [if_neg hk]
     exact infinitePressureCoefficient_fullTransport_nonzero c k hk
 
@@ -97,7 +97,7 @@ theorem fullTransportPressure_fourierCoeff_zero
     (hc : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s c.val) 2)
     (hreal : SpectralReality c.val) (hsol : SpectralSolenoidal c.val) :
     (∫ x in unitCube, star (fourierCharacter 0 x) * (fullTransportPressure c x : ℂ)) = 0 := by
-  simpa only [if_pos rfl] using fullTransportPressure_fourierCoeff_quadratic c hc hreal hsol 0
+  simpa only [ite_true] using fullTransportPressure_fourierCoeff_quadratic c hc hreal hsol 0
 
 theorem fullTransportPressure_fourierCoeff_nonzero
     (c : TorusSobolev 0)

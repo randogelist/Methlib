@@ -135,7 +135,9 @@ theorem canonicalLimitRhsSobolev_uniform_bound (s : ℕ) (T : ℝ) (hT : 0 < T) 
     apply Subtype.ext
     exact canonicalLimitRhsSobolev_coeff hAX6 ν hν a ha u φ hφ hconv s t ht.1
   calc
-    ‖R s t‖ = ‖(⟨fullFourierRhs ν (u t), hc⟩ : TorusSobolev s)‖ := congrArg norm heq
+    ‖R s t‖ = @norm (TorusSobolev s) inferInstance
+        ⟨fullFourierRhs ν (u t), hc⟩ :=
+      congrArg (@norm (TorusSobolev s) inferInstance) heq
     _ ≤ B + 1 := hn
 
 theorem canonicalLimitRhsSobolev_continuousOn_Icc

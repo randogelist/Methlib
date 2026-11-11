@@ -109,9 +109,9 @@ theorem sobolevDivergenceProduct_diagonal_contDiff (r : ℕ) :
     ContDiff ℝ ∞ (fun c : TorusSobolev (r + 2) => sobolevDivergenceProduct r c c) := by
   have h : ContDiff ℂ ∞
       (fun c : TorusSobolev (r + 2) => sobolevDivergenceProductBilinear r c c) :=
-    (sobolevDivergenceProductBilinear r).isBoundedBilinearMap.contDiff.comp
-      (contDiff_id.prodMk contDiff_id)
-  exact h.restrict_scalars ℝ
+    (sobolevDivergenceProductBilinear r).contDiff.clm_apply
+      (contDiff_id : ContDiff ℂ ∞ (fun c : TorusSobolev (r + 2) => c))
+  simpa only [sobolevDivergenceProductBilinear_apply] using h.restrict_scalars ℝ
 
 /-- The literal infinite Fourier vector field, defined on every H(r+2) input. -/
 def fourierSobolevRhs (ν : ℝ) (r : ℕ) (c : TorusSobolev (r + 2)) : TorusSobolev r :=
@@ -134,10 +134,14 @@ theorem fourierSobolevRhs_coefficient_eq_fullRhs (ν : ℝ) (r : ℕ)
   funext k i
   change (torusSobolevViscous ν r c).val k i -
     (torusSobolevLeray r (sobolevDivergenceProduct r c c)).val k i = _
+  have htransport : sobolevDivergenceProductCoeff r c c k =
+      (fun j => divergenceTransportCoefficient k j
+        (torusSobolevLower 0 (r + 2) (Nat.zero_le _) c)
+        (torusSobolevLower 0 (r + 2) (Nat.zero_le _) c)) := rfl
   rw [torusSobolevViscous_coeff, torusSobolevLeray_coeff,
     sobolevDivergenceProduct_coeff]
-  simp only [fullFourierRhs, torusSobolevLower_coeff,
-    lerayFourierCoeff, sobolevDivergenceProductCoeff]
+  simp only [fullFourierRhs, torusSobolevLower_coeff, lerayFourierCoeff]
+  rw [htransport]
 
 end
 
