@@ -95,7 +95,7 @@ theorem SMALL_DATA_LIMIT_TERMINAL_DISSIPATION
         (∫ t in (0 : ℝ)..T, ‖(g n).criticalState 3 t‖ ^ 2) ≤ ‖a‖ ^ 2 := by
     have h1 : ‖(g n).criticalState 1 T‖ ^ 2 =
         criticalEnergy 1 (φ n + 1) ((g n).coeff T) := by
-      simpa only [Nat.cast_one] using (g n).criticalState_norm_sq_nat 1 T
+      simpa only [Nat.cast_ofNat] using (g n).criticalState_norm_sq_nat 1 T
     have h3 (t : ℝ) : ‖(g n).criticalState 3 t‖ ^ 2 =
         criticalEnergy 3 (φ n + 1) ((g n).coeff t) := by
       simpa only [Nat.cast_ofNat] using (g n).criticalState_norm_sq_nat 3 t

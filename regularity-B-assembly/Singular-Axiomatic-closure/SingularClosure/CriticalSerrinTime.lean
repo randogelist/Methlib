@@ -3,6 +3,7 @@ import SingularClosure.CriticalRegularityContracts
 import SingularClosure.CriticalSmoothEnergyNorm
 import SingularClosure.CriticalGradientEnergyBound
 import SingularClosure.CriticalSpatialNormMeasurable
+import SingularClosure.CriticalPhysicalLpZero
 
 /-! The actual spatial L6 norm belongs to time L4. The integrability follows
 from physical gradient energy and the inherited kinetic-energy bound. -/
@@ -26,14 +27,7 @@ theorem critical_smooth_physicalH1 (v : Field)
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
   · change Tendsto (fun _ : ℕ =>
       eLpNorm (fderiv ℝ v - fderiv ℝ v) 2 (volume.restrict unitCube)) atTop (𝓝 0)
-    have hz : (fderiv ℝ v - fderiv ℝ v) =
-        (fun _ : Vec => (0 : Vec →L[ℝ] Vec)) := by
-      funext x
-      exact sub_self _
-    have hnorm : eLpNorm (fun _ : Vec => (0 : Vec →L[ℝ] Vec)) 2
-        (volume.restrict unitCube) = 0 := eLpNorm_zero'
-    simpa only [hz, hnorm] using
-      (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
+    exact critical_physical_self_sub_tendsto_zero (fderiv ℝ v)
 
 /-- Uniform physical kinetic energy of an actual critical regular solution. -/
 theorem CriticalRegularSolution.physicalEnergy_le

@@ -55,7 +55,7 @@ theorem criticalL2Representative_continuousAt_of_joint
         (Icc_mem_nhds (by linarith) (by linarith))
   have hp : ContinuousAt
       (fun r => (∫ x in unitCube, ‖F r x - F t x‖ ^ 2) ^ (1 / 2 : ℝ)) t :=
-    (Real.continuous_rpow_const (by norm_num : (0 : ℝ) ≤ 1 / 2)).continuousAt.comp t hJ
+    (Real.continuous_rpow_const (by norm_num : (0 : ℝ) ≤ 1 / 2)).continuousAt.comp hJ
   have hlim : Tendsto
       (fun r => (∫ x in unitCube, ‖F r x - F t x‖ ^ 2) ^ (1 / 2 : ℝ))
       (𝓝 t) (𝓝 0) := by
@@ -108,9 +108,11 @@ theorem criticalPositive_gradientL2_continuousOn
 theorem criticalPositive_gradientL2_aestronglyMeasurable
     {ν : ℝ} (L : CriticalPositiveSobolevFlow ν) (T : ℝ) :
     AEStronglyMeasurable (fun t => criticalL2Representative (fderiv ℝ (L.velocity t)))
-      (volume.restrict (Ioc (0 : ℝ) T)) :=
-  ((criticalPositive_gradientL2_continuousOn L).mono (fun _ ht => ht.1)).
-    aestronglyMeasurable measurableSet_Ioc
+      (volume.restrict (Ioc (0 : ℝ) T)) := by
+  have h : ContinuousOn
+      (fun t => criticalL2Representative (fderiv ℝ (L.velocity t))) (Ioc (0 : ℝ) T) :=
+    (criticalPositive_gradientL2_continuousOn L).mono (fun _ ht => ht.1)
+  exact h.aestronglyMeasurable measurableSet_Ioc
 
 end
 

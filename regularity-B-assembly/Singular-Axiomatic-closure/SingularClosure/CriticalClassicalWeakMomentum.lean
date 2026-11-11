@@ -1,5 +1,6 @@
 import SingularClosure.CriticalSmoothEnergy
 import SingularClosure.CriticalRoughTransport
+import SingularClosure.CriticalPhysicalLpZero
 
 /-! The actual integrated weak momentum equation follows from positive-time
 classical NSE.  Spatial testing, all time integrability, and the fundamental
@@ -90,14 +91,7 @@ theorem criticalPhysicalH1_smooth (u : Field) (hu : ContDiff ℝ ∞ u)
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
   · change Tendsto (fun _ : ℕ =>
       eLpNorm (fderiv ℝ u - fderiv ℝ u) 2 (volume.restrict unitCube)) atTop (𝓝 0)
-    have hz : (fderiv ℝ u - fderiv ℝ u) =
-        (fun _ : Vec => (0 : Vec →L[ℝ] Vec)) := by
-      funext x
-      exact sub_self _
-    have hnorm : eLpNorm (fun _ : Vec => (0 : Vec →L[ℝ] Vec)) 2
-        (volume.restrict unitCube) = 0 := eLpNorm_zero'
-    simpa only [hz, hnorm] using
-      (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
+    exact critical_physical_self_sub_tendsto_zero (fderiv ℝ u)
 
 theorem critical_physicalFieldInner_comm (u v : Field) :
     physicalFieldInner u v = physicalFieldInner v u := by

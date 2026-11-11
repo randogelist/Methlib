@@ -29,7 +29,7 @@ theorem criticalGalerkin_state_norm_le
     {t : ℝ} (ht : 0 ≤ t) : ‖g.criticalState 1 t‖ ≤ ‖a‖ := by
   apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg a)).mp
   have hnorm : ‖g.criticalState 1 t‖ ^ 2 = criticalEnergy 1 N (g.coeff t) := by
-    simpa only [Nat.cast_one] using g.criticalState_norm_sq_nat 1 t
+    simpa only [Nat.cast_ofNat] using g.criticalState_norm_sq_nat 1 t
   rw [hnorm]
   exact criticalGalerkin_energy_invariant a hreal hsmall ht g t ⟨ht, le_rfl⟩
 
