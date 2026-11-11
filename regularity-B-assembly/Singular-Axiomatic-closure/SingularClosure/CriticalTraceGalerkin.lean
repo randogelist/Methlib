@@ -210,7 +210,8 @@ theorem CRITICAL_GLOBAL_STRONG_TRACE_OF_MODAL_EVOLUTION
       intro t ht
       apply criticalCoeff_injective 1
       exact (hprimitive t ht).symm.trans (hwc t ht).symm
-    exact ⟨hw.congr heq, (heq 0 ⟨le_rfl, hT.le⟩).trans hw0⟩
+    exact ⟨hw.congr heq,
+      (heq (show (0 : ℝ) ∈ Icc (0 : ℝ) T from ⟨le_rfl, hT.le⟩)).trans hw0⟩
   refine ⟨?_, (hlocal 1 (by norm_num)).2⟩
   intro t ht
   change 0 ≤ t at ht

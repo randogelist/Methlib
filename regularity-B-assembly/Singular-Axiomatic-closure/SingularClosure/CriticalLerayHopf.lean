@@ -26,8 +26,9 @@ abbrev CriticalPhysicalL2 := Lp Vec 2 (volume.restrict unitCube)
 /-- The actual physical L2 equivalence class whenever the representative is
 square integrable.  The zero branch is irrelevant on every stated energy class. -/
 def criticalL2Representative {E : Type*} [NormedAddCommGroup E] (f : Vec → E) :
-    Lp E 2 (volume.restrict unitCube) :=
-  if hf : MemLp f 2 (volume.restrict unitCube) then hf.toLp f else 0
+    Lp E 2 (volume.restrict unitCube) := by
+  classical
+  exact if hf : MemLp f 2 (volume.restrict unitCube) then hf.toLp f else 0
 
 theorem criticalL2Representative_eq {E : Type*} [NormedAddCommGroup E]
     (f : Vec → E) (hf : MemLp f 2 (volume.restrict unitCube)) :

@@ -21,8 +21,18 @@ theorem critical_smooth_physicalH1 (v : Field)
     CriticalPhysicalH1 v (fderiv ℝ v) := by
   refine ⟨critical_continuous_memLp_cube v hv.continuous 2,
     critical_continuous_memLp_cube _ (hv.continuous_fderiv (by simp)) 2, ?_⟩
-  refine ⟨fun _ : ℕ => v, fun _ => hv, fun _ => hp, ?_, ?_⟩ <;>
-    simpa only [sub_self, eLpNorm_zero] using
+  refine ⟨fun _ : ℕ => v, fun _ => hv, fun _ => hp, ?_, ?_⟩
+  · simpa only [sub_self, eLpNorm_zero, eLpNorm_zero'] using
+      (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
+  · change Tendsto (fun _ : ℕ =>
+      eLpNorm (fderiv ℝ v - fderiv ℝ v) 2 (volume.restrict unitCube)) atTop (𝓝 0)
+    have hz : (fderiv ℝ v - fderiv ℝ v) =
+        (fun _ : Vec => (0 : Vec →L[ℝ] Vec)) := by
+      funext x
+      exact sub_self _
+    have hnorm : eLpNorm (fun _ : Vec => (0 : Vec →L[ℝ] Vec)) 2
+        (volume.restrict unitCube) = 0 := eLpNorm_zero'
+    simpa only [hz, hnorm] using
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ≥0∞)) atTop (𝓝 0))
 
 /-- Uniform physical kinetic energy of an actual critical regular solution. -/

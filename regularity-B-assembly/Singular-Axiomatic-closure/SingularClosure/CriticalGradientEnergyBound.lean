@@ -21,7 +21,7 @@ theorem critical_eLpNorm_two_toReal_sq
     (eLpNorm f 2 μ).toReal ^ 2 = ∫ x, ‖f x‖ ^ 2 ∂μ := by
   have hnonneg : 0 ≤ ∫ x, ‖f x‖ ^ 2 ∂μ := integral_nonneg (fun x => sq_nonneg _)
   rw [eLpNorm_two_eq_integral_norm_sq_rpow f μ hf.norm.integrable_sq,
-    ENNReal.toReal_rpow, ENNReal.toReal_ofReal hnonneg,
+    ← ENNReal.toReal_rpow, ENNReal.toReal_ofReal hnonneg,
     ← Real.sqrt_eq_rpow, Real.sq_sqrt hnonneg]
 
 /-- The real L2 norm square is exactly the literal physical kinetic energy. -/

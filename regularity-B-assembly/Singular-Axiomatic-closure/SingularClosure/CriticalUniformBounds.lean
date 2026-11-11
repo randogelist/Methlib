@@ -28,7 +28,9 @@ theorem criticalGalerkin_state_norm_le
     (g : GalerkinSolution ν (finiteSynthesis N (criticalCoeff 1 a)) N)
     {t : ℝ} (ht : 0 ≤ t) : ‖g.criticalState 1 t‖ ≤ ‖a‖ := by
   apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg a)).mp
-  rw [g.criticalState_norm_sq_nat 1 t]
+  have hnorm : ‖g.criticalState 1 t‖ ^ 2 = criticalEnergy 1 N (g.coeff t) := by
+    simpa only [Nat.cast_one] using g.criticalState_norm_sq_nat 1 t
+  rw [hnorm]
   exact criticalGalerkin_energy_invariant a hreal hsmall ht g t ⟨ht, le_rfl⟩
 
 def criticalDissipationBudget (ν : ℝ) (a : CriticalSobolev 1) : ℝ :=
@@ -60,7 +62,12 @@ theorem criticalGalerkin_state_three_integral_bound
     (∫ t in (0 : ℝ)..T, ‖g.criticalState 3 t‖ ^ 2) ≤ criticalDissipationBudget ν a := by
   have h := criticalGalerkin_dissipation_budget a hreal hsmall hT g T ⟨hT, le_rfl⟩
   have hnonneg := criticalEnergy_nonneg 1 N (g.coeff T)
-  simp_rw [g.criticalState_norm_sq_nat 3]
+  have hnorm (t : ℝ) : ‖g.criticalState 3 t‖ ^ 2 =
+      criticalEnergy 3 N (g.coeff t) := by
+    simpa only [Nat.cast_ofNat] using g.criticalState_norm_sq_nat 3 t
+  simp_rw [hnorm]
+  change (∫ t in (0 : ℝ)..T, criticalEnergy 3 N (g.coeff t)) ≤
+    ‖a‖ ^ 2 / (2 * (ν - criticalNonlinearConstant * ‖a‖))
   apply (le_div_iff₀
     (mul_pos (by norm_num : (0 : ℝ) < 2) (sub_pos.mpr hsmall))).2
   nlinarith

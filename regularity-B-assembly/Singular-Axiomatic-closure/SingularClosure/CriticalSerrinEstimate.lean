@@ -39,8 +39,8 @@ theorem CRITICAL_PHYSICAL_H1_L6_REAL :
       ENNReal.ofReal K * eLpNorm v 2 (volume.restrict unitCube)) ≠ ⊤ := by
     finiteness
   have hr := ENNReal.toReal_mono hfinite hbound
-  rw [ENNReal.toReal_mul, ENNReal.toReal_add hG.ne hKV,
-    ENNReal.toReal_mul, ENNReal.toReal_ofReal hK0] at hr
+  rw [ENNReal.toReal_mul (a := C), ENNReal.toReal_add hG.ne hKV,
+    ENNReal.toReal_mul (a := ENNReal.ofReal K), ENNReal.toReal_ofReal hK0] at hr
   change criticalSpatialNorm 6 v ≤ C.toReal *
     (criticalSpatialNorm 2 G + K * criticalSpatialNorm 2 v) at hr
   have hD := criticalSpatialNorm_nonneg 2 G
@@ -81,7 +81,7 @@ theorem CRITICAL_ROUGH_TRANSPORT_INTERPOLATED :
       eLpNorm v 6 (volume.restrict unitCube) ^ (1 / 2 : ℝ) ≠ ⊤ := by
     finiteness [hW.2, hv6.2]
   have hiR := ENNReal.toReal_mono hiFin hi
-  simp only [ENNReal.toReal_mul, ENNReal.toReal_rpow, ← Real.sqrt_eq_rpow] at hiR
+  simp only [ENNReal.toReal_mul, ← ENNReal.toReal_rpow, ← Real.sqrt_eq_rpow] at hiR
   change criticalSpatialNorm 3 v ≤
     Real.sqrt (criticalSpatialNorm 2 v) * Real.sqrt (criticalSpatialNorm 6 v) at hiR
   have hs : Real.sqrt (criticalSpatialNorm 6 v) ≤

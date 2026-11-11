@@ -64,7 +64,7 @@ theorem criticalExtendedSquare_le_liminf (q : ℤ)
     have h := ((hcoeff ki.1 ki.2).const_mul ((criticalHalfWeight ki.1 : ℂ) ^ q)).norm.pow 2
     exact ENNReal.continuous_ofReal.continuousAt.tendsto.comp h
   rw [← hsum.liminf_eq]
-  apply Filter.liminf_le_liminf
+  refine Filter.liminf_le_liminf ?_ (by isBoundedDefault) (by isBoundedDefault)
   apply Filter.Eventually.of_forall
   intro n
   rw [← criticalExtendedSquare_eq_norm q (F n)]
@@ -107,8 +107,7 @@ theorem critical_memLp_realization_of_modal_limit
     apply AEMeasurable.tsum
     intro ki
     have hm := ((hc ki.1 ki.2).const_mul ((criticalHalfWeight ki.1 : ℂ) ^ q)).norm.pow 2
-    exact (hm.aestronglyMeasurable_of_isCompact isCompact_Icc measurableSet_Icc).
-      aemeasurable.ennreal_ofReal
+    exact (hm.aestronglyMeasurable_of_isCompact isCompact_Icc measurableSet_Icc).aemeasurable.ennreal_ofReal
   have hlin (n : ℕ) : (∫⁻ t, ENNReal.ofReal (‖F n t‖ ^ 2) ∂μ) ≤ ENNReal.ofReal B := by
     have hi : Integrable (fun t => ‖F n t‖ ^ 2) μ :=
       ((hF n).norm.pow 2).integrableOn_compact isCompact_Icc
@@ -130,7 +129,7 @@ theorem critical_memLp_realization_of_modal_limit
       _ ≤ ENNReal.ofReal B :=
         liminf_le_of_frequently_le' (Filter.Frequently.of_forall hlin)
   have hfinite : ∀ᵐ t ∂μ, criticalExtendedSquare q (c t) < ∞ :=
-    ae_lt_top' hEmeas (hEbound.trans_lt ENNReal.ofReal_lt_top)
+    ae_lt_top' hEmeas (hEbound.trans_lt ENNReal.ofReal_lt_top).ne
   let v : ℝ → CriticalSobolev q := fun t =>
     if hm : Memℓp (criticalWeightedCoeff q (c t)) 2 then criticalSobolevOfCoeff q (c t) hm else 0
   have hraw : ∀ᵐ t ∂μ, criticalCoeff q (v t) = c t := by
@@ -141,8 +140,8 @@ theorem critical_memLp_realization_of_modal_limit
     rw [dif_pos hm, criticalSobolevOfCoeff_coeff]
   have hprojection (K : ℕ) : AEStronglyMeasurable
       (fun t => criticalFiniteSobolev q K (c t)) μ :=
-    (criticalFiniteSobolev_curve_continuousOn q K c (Icc (0 : ℝ) T) hc).
-      aestronglyMeasurable_of_isCompact isCompact_Icc measurableSet_Icc
+    (criticalFiniteSobolev_curve_continuousOn q K c (Icc (0 : ℝ) T) hc).aestronglyMeasurable_of_isCompact
+      isCompact_Icc measurableSet_Icc
   have htendsto : ∀ᵐ t ∂μ, Tendsto (fun K => criticalFiniteSobolev q K (c t)) atTop (𝓝 (v t)) := by
     filter_upwards [hraw, ae_restrict_mem measurableSet_Icc] with t ht hmem
     have hmean : SpectralMeanZero (criticalCoeff q (v t)) := by

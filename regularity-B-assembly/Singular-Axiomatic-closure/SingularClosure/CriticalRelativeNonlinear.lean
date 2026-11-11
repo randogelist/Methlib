@@ -66,8 +66,8 @@ theorem CRITICAL_RELATIVE_NONLINEAR_IDENTITY
       (fun x => inner ℝ (u x) ((fderiv ℝ u x) (w x))) unitCube volume := by
     have hi := (criticalWeakFieldInner_integrable w (gradient f) hw
       (criticalWeak_gradient_continuous f hf)).const_mul (1 / 2 : ℝ)
-    convert hi using 1
-    funext x
+    apply hi.congr
+    filter_upwards with x
     rw [hpoint]
     ring
   have hzero : (∫ x in unitCube,
