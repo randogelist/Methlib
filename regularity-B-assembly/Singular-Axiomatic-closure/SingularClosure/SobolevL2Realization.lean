@@ -33,6 +33,7 @@ theorem fourierVectorSequence_summable_sq (c : FourierVectorSequence) :
   simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h
 
 /-- The component sequence is square summable by restriction to one product fiber. -/
+set_option backward.isDefEq.respectTransparency false in
 def fourierVectorComponent (c : FourierVectorSequence) (i : Fin 3) : FourierSequenceL2 :=
   ⟨fun k => c (k, i), by
     apply memℓp_gen

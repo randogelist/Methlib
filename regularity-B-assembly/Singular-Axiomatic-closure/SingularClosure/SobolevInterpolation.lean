@@ -36,15 +36,15 @@ theorem torusSobolev_H1_interpolation (c : TorusSobolev 2) :
       Complex.conj_ofReal]
     ring
   calc
-    _ = (inner ℂ (torusSobolevRepr 1 (torusSobolevInclusion 1 c))
-        (torusSobolevRepr 1 (torusSobolevInclusion 1 c))).re := by
+    _ = RCLike.re (inner ℂ (torusSobolevRepr 1 (torusSobolevInclusion 1 c))
+        (torusSobolevRepr 1 (torusSobolevInclusion 1 c))) := by
       rw [inner_self_eq_norm_sq, (torusSobolevRepr 1).norm_map]
-    _ = (inner ℂ (torusSobolevRepr 0
+    _ = RCLike.re (inner ℂ (torusSobolevRepr 0
         (torusSobolevInclusion 0 (torusSobolevInclusion 1 c)))
-        (torusSobolevRepr 2 c)).re := congrArg Complex.re hinner
+        (torusSobolevRepr 2 c)) := congrArg (RCLike.re : ℂ → ℝ) hinner
     _ ≤ ‖torusSobolevRepr 0
         (torusSobolevInclusion 0 (torusSobolevInclusion 1 c))‖ *
-        ‖torusSobolevRepr 2 c‖ := re_inner_le_norm _ _
+        ‖torusSobolevRepr 2 c‖ := re_inner_le_norm (𝕜 := ℂ) _ _
     _ = _ := by rw [(torusSobolevRepr 0).norm_map, (torusSobolevRepr 2).norm_map]
 
 theorem torusSobolev_H1_sub_interpolation (c d : TorusSobolev 2) :
@@ -117,15 +117,22 @@ theorem torusSobolev_H1_time_difference_bound
           (((continuousOn_const.mul (hv.norm.pow 2)).add
             (continuousOn_const.mul (hw.norm.pow 2))).intervalIntegrable_of_Icc hT)
         intro t ht
+        change ‖v t - w t‖ ^ 2 ≤ 2 * ‖v t‖ ^ 2 + 2 * ‖w t‖ ^ 2
         have hn := pow_le_pow_left₀ (norm_nonneg (v t - w t))
           (norm_sub_le (v t) (w t)) 2
         nlinarith [sq_nonneg (‖v t‖ - ‖w t‖)]
       _ = 2 * (∫ t in (0 : ℝ)..T, ‖v t‖ ^ 2) +
           2 * (∫ t in (0 : ℝ)..T, ‖w t‖ ^ 2) := by
-        rw [intervalIntegral.integral_add
-          (((hv.norm.pow 2).intervalIntegrable_of_Icc hT).const_mul 2)
-          (((hw.norm.pow 2).intervalIntegrable_of_Icc hT).const_mul 2),
-          intervalIntegral.integral_const_mul, intervalIntegral.integral_const_mul]
+        have hvi : IntervalIntegrable (fun t : ℝ => 2 * ‖v t‖ ^ 2) volume 0 T :=
+          ((hv.norm.pow 2).intervalIntegrable_of_Icc hT).const_mul 2
+        have hwi : IntervalIntegrable (fun t : ℝ => 2 * ‖w t‖ ^ 2) volume 0 T :=
+          ((hw.norm.pow 2).intervalIntegrable_of_Icc hT).const_mul 2
+        calc
+          _ = (∫ t in (0 : ℝ)..T, 2 * ‖v t‖ ^ 2) +
+              ∫ t in (0 : ℝ)..T, 2 * ‖w t‖ ^ 2 :=
+            intervalIntegral.integral_add hvi hwi
+          _ = _ := by rw [intervalIntegral.integral_const_mul,
+            intervalIntegral.integral_const_mul]
       _ ≤ _ := by linarith
   have h := torusSobolev_H1_time_interpolation_of_energy_bound
     (fun t => v t - w t) T ε (4 * M) hT hε hdiff

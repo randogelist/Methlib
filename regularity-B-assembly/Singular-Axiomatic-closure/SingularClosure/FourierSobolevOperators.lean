@@ -297,13 +297,16 @@ theorem torusSobolev_leray_finite_sum_le (s : ℕ) (c : TorusSobolev s)
         ‖sobolevWeightedCoeff s (lerayFourierCoeff c.val) ki‖ ^ 2 :=
       Finset.sum_le_sum_of_subset_of_nonneg hsub (fun ki _ _ => sq_nonneg _)
     _ = ∑ k ∈ S.image Prod.fst, ∑ i : Fin 3,
-        ‖sobolevWeightedCoeff s (lerayFourierCoeff c.val) (k, i)‖ ^ 2 := by
-      rw [Finset.sum_product]
+        ‖sobolevWeightedCoeff s (lerayFourierCoeff c.val) (k, i)‖ ^ 2 :=
+      Finset.sum_product (S.image Prod.fst) Finset.univ
+        (fun ki : FourierIndex => ‖sobolevWeightedCoeff s (lerayFourierCoeff c.val) ki‖ ^ 2)
     _ ≤ ∑ k ∈ S.image Prod.fst, ∑ i : Fin 3,
         ‖sobolevWeightedCoeff s c.val (k, i)‖ ^ 2 :=
       Finset.sum_le_sum (fun k hk => torusSobolev_leray_mode_sum_le s c.val k)
     _ = ∑ ki ∈ (S.image Prod.fst).product (Finset.univ : Finset (Fin 3)),
-        ‖sobolevWeightedCoeff s c.val ki‖ ^ 2 := by rw [Finset.sum_product]
+        ‖sobolevWeightedCoeff s c.val ki‖ ^ 2 :=
+      (Finset.sum_product (S.image Prod.fst) Finset.univ
+        (fun ki : FourierIndex => ‖sobolevWeightedCoeff s c.val ki‖ ^ 2)).symm
     _ ≤ ‖c‖ ^ 2 := torusSobolev_finite_weighted_sum_le s c _
 
 def fourierLerayLinear : FourierCoeff →ₗ[ℂ] FourierCoeff where
@@ -317,6 +320,7 @@ def fourierLerayLinear : FourierCoeff →ₗ[ℂ] FourierCoeff where
 
 theorem torusSobolevLeray_mem (s : ℕ) (c : TorusSobolev s) :
     Memℓp (sobolevWeightedCoeff s (fourierLerayLinear c.val)) 2 := by
+  change Memℓp (sobolevWeightedCoeff s (lerayFourierCoeff c.val)) 2
   apply memℓp_gen' (C := ‖c‖ ^ 2)
   intro S
   simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using

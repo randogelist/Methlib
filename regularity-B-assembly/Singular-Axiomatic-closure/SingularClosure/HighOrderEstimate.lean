@@ -182,7 +182,7 @@ theorem highOrderNonlinearPower_sq_le_tensor (m N : ℕ) (c : FourierCoeff)
     simp only [A, Finset.sum_const, Finset.card_univ,
       Fintype.card_fin, nsmul_eq_mul]
     simp_rw [← Finset.mul_sum]
-    rw [he]
+    rw [he] <;> norm_num
   have hb : (∑ z ∈ s, B z ^ 2) = highOrderTensorEnergy m N c := by
     exact hsum (fun z => B z ^ 2)
   calc

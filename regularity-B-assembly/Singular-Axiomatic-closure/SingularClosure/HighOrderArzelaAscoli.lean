@@ -16,7 +16,7 @@ set_option autoImplicit false
 set_option Elab.async true
 
 open Set MeasureTheory Filter Metric
-open scoped Topology Interval
+open scoped Topology Interval BoundedContinuousFunction
 
 namespace SingularClosure
 
@@ -29,9 +29,8 @@ def canonicalHighOrderCurve (ν : ℝ) (hν : 0 < ν) (a : Field)
     (ha : SmoothSigmaZero a) (T : ℝ) (r n : ℕ) : C(Icc (0 : ℝ) T, TorusSobolev r) where
   toFun t := (canonicalGalerkinSolution ν hν a ha (n + 1)).sobolevState r t.val
   continuous_toFun := by
-    apply continuousOn_iff_continuous_restrict.mp
-    exact ((canonicalGalerkinSolution ν hν a ha (n + 1)).sobolevState_continuousOn r).mono
-      (fun t ht => ht.1)
+    exact ((canonicalGalerkinSolution ν hν a ha (n + 1)).sobolevState_continuousOn r).comp_continuous
+      continuous_subtype_val (fun t => t.property.1)
 
 def canonicalHighOrderCurveBounded (ν : ℝ) (hν : 0 < ν) (a : Field)
     (ha : SmoothSigmaZero a) (T : ℝ) (r n : ℕ) : (Icc (0 : ℝ) T) →ᵇ TorusSobolev r :=

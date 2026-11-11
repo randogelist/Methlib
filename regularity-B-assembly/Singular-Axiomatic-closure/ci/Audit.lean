@@ -176,6 +176,7 @@ example {ν : ℝ} {a : Field} {N : ℕ}
 
 
 open Metric
+open scoped BoundedContinuousFunction
 
 example : ∀ (N : ℕ) (a : FourierCoeff)
     (j : Fin 3),

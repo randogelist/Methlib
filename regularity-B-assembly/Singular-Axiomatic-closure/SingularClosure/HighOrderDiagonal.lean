@@ -14,7 +14,7 @@ set_option autoImplicit false
 set_option Elab.async true
 
 open Set Filter
-open scoped Topology
+open scoped Topology BoundedContinuousFunction
 
 namespace SingularClosure
 

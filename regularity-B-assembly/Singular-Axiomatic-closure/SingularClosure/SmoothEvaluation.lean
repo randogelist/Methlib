@@ -9,7 +9,7 @@ set_option autoImplicit false
 set_option Elab.async true
 
 open Set
-open scoped BigOperators ContDiff
+open scoped BigOperators ContDiff ENNReal
 
 namespace SingularClosure
 
@@ -38,7 +38,8 @@ theorem banachFourierSeries_continuous (A : Frequency → F)
 theorem banachFourierSeries_derivative_bound (A : Frequency → F) (k : Frequency) (x : Vec) :
     ‖(fourierCharacter k x • fourierPhaseCLM k).smulRight (A k)‖ ≤
       ‖A k‖ * ‖fourierPhaseCLM k‖ := by
-  apply ContinuousLinearMap.opNorm_le_bound (by positivity)
+  apply ((fourierCharacter k x • fourierPhaseCLM k).smulRight (A k)).opNorm_le_bound
+    (mul_nonneg (norm_nonneg (A k)) (norm_nonneg (fourierPhaseCLM k)))
   intro y
   change ‖(fourierCharacter k x * fourierPhaseCLM k y) • A k‖ ≤ _
   rw [norm_smul, norm_mul, fourierCharacter_norm, one_mul]
@@ -117,8 +118,9 @@ end BanachSeries
 
 theorem torusSobolevCoeff_norm_le_inv_weight (s : ℕ) (k : Frequency) (i : Fin 3) :
     ‖torusSobolevCoeff s k i‖ ≤ (torusSobolevWeight k ^ s)⁻¹ := by
-  have hw : 0 ≤ (torusSobolevWeight k ^ s)⁻¹ := by positivity
-  apply ContinuousLinearMap.opNorm_le_bound hw
+  have hw : 0 ≤ (torusSobolevWeight k ^ s)⁻¹ :=
+    inv_nonneg.mpr (pow_nonneg (torusSobolevWeight_pos k).le s)
+  apply (torusSobolevCoeff s k i).opNorm_le_bound hw
   intro c
   calc
     ‖torusSobolevCoeff s k i c‖ =
@@ -133,14 +135,14 @@ theorem torusSobolevCoeff_norm_le_inv_weight (s : ℕ) (k : Frequency) (i : Fin 
           (torusSobolevRepr s c) (k, i)) hw
     _ = _ := by rw [(torusSobolevRepr s).norm_map]
 
-theorem sobolevEvaluation_moment_summable (n m : ℕ) (hm : m ≤ n) (i : Fin 3) :
-    Summable (fun k : Frequency =>
-      ‖torusSobolevCoeff (n + 4) k i‖ * ‖fourierPhaseCLM k‖ ^ m) := by
+theorem sobolevEvaluation_moment_le (n m : ℕ) (hm : m ≤ n)
+    (i : Fin 3) (k : Frequency) :
+    ‖torusSobolevCoeff (n + 4) k i‖ * ‖fourierPhaseCLM k‖ ^ m ≤
+      fourierPhaseWeightConstant ^ m * (torusSobolevWeight k)⁻¹ ^ 4 := by
   have hK := fourierPhaseWeightConstant_nonneg
-  apply Summable.of_nonneg_of_le
-    (fun k => mul_nonneg (norm_nonneg _) (pow_nonneg (norm_nonneg _) _)) _
-    (summable_torusSobolevWeight_inv_four.mul_left (fourierPhaseWeightConstant ^ m))
-  intro k
+  have hweight : 0 < torusSobolevWeight k := torusSobolevWeight_pos k
+  have hinv : 0 ≤ (torusSobolevWeight k ^ (n + 4))⁻¹ :=
+    inv_nonneg.mpr (pow_nonneg hweight.le _)
   have hw := (torusSobolevWeight_pos k).ne'
   have hpow : torusSobolevWeight k ^ m ≤ torusSobolevWeight k ^ n :=
     pow_le_pow_right₀ (torusSobolevWeight_one_le k) hm
@@ -149,13 +151,24 @@ theorem sobolevEvaluation_moment_summable (n m : ℕ) (hm : m ≤ n) (i : Fin 3)
         (fourierPhaseWeightConstant * torusSobolevWeight k) ^ m :=
       mul_le_mul (torusSobolevCoeff_norm_le_inv_weight (n + 4) k i)
         (pow_le_pow_left₀ (norm_nonneg _) (fourierPhaseCLM_norm_le_weight k) m)
-        (pow_nonneg (norm_nonneg _) _) (by positivity)
+        (pow_nonneg (norm_nonneg _) _) hinv
     _ = (fourierPhaseWeightConstant ^ m * (torusSobolevWeight k ^ (n + 4))⁻¹) *
         torusSobolevWeight k ^ m := by rw [mul_pow]; ring
     _ ≤ (fourierPhaseWeightConstant ^ m * (torusSobolevWeight k ^ (n + 4))⁻¹) *
         torusSobolevWeight k ^ n :=
-      mul_le_mul_of_nonneg_left hpow (by positivity)
+      mul_le_mul_of_nonneg_left hpow (mul_nonneg (pow_nonneg hK m) hinv)
     _ = _ := by rw [pow_add]; field_simp [hw] <;> ring
+
+theorem sobolevEvaluation_moment_summable (n m : ℕ) (hm : m ≤ n) (i : Fin 3) :
+    Summable (fun k : Frequency =>
+      ‖torusSobolevCoeff (n + 4) k i‖ * ‖fourierPhaseCLM k‖ ^ m) := by
+  exact Summable.of_nonneg_of_le
+    (f := fun k : Frequency => fourierPhaseWeightConstant ^ m * (torusSobolevWeight k)⁻¹ ^ 4)
+    (g := fun k : Frequency => ‖torusSobolevCoeff (n + 4) k i‖ * ‖fourierPhaseCLM k‖ ^ m)
+    (fun k => mul_nonneg (norm_nonneg (torusSobolevCoeff (n + 4) k i))
+      (pow_nonneg (norm_nonneg (fourierPhaseCLM k)) m))
+    (sobolevEvaluation_moment_le n m hm i)
+    (summable_torusSobolevWeight_inv_four.mul_left (fourierPhaseWeightConstant ^ m))
 
 /-- The complex scalar evaluation operator. Its parameter n reserves n spatial
 derivatives and four additional summability orders. -/
@@ -165,8 +178,9 @@ def sobolevScalarEvaluation (n : ℕ) (x : Vec) (i : Fin 3) :
 
 theorem sobolevScalarEvaluation_summable (n : ℕ) (x : Vec) (i : Fin 3) :
     Summable (fun k : Frequency => fourierCharacter k x • torusSobolevCoeff (n + 4) k i) := by
-  apply banachFourierSeries_summable
-  simpa only [pow_zero, mul_one] using sobolevEvaluation_moment_summable n 0 (Nat.zero_le n) i
+  have hA : Summable (fun k : Frequency => ‖torusSobolevCoeff (n + 4) k i‖) := by
+    simpa only [pow_zero, mul_one] using sobolevEvaluation_moment_summable n 0 (Nat.zero_le n) i
+  exact banachFourierSeries_summable (fun k => torusSobolevCoeff (n + 4) k i) hA x
 
 theorem sobolevScalarEvaluation_apply (n : ℕ) (x : Vec) (i : Fin 3)
     (c : TorusSobolev (n + 4)) :
@@ -174,16 +188,21 @@ theorem sobolevScalarEvaluation_apply (n : ℕ) (x : Vec) (i : Fin 3)
   have h := (ContinuousLinearMap.apply ℂ ℂ c).map_tsum
     (sobolevScalarEvaluation_summable n x i)
   simpa only [sobolevScalarEvaluation, banachFourierSeries, scalarFourierSeries,
-    ContinuousLinearMap.smul_apply, smul_eq_mul, torusSobolevCoeff_apply] using h
+    ContinuousLinearMap.apply_apply, ContinuousLinearMap.smul_apply,
+    smul_eq_mul, torusSobolevCoeff_apply] using h
 
 theorem sobolevScalarEvaluation_contDiff (n : ℕ) (i : Fin 3) :
     ContDiff ℝ n (fun x : Vec => sobolevScalarEvaluation n x i) :=
   banachFourierSeries_contDiff_nat n _ (fun m hm => sobolevEvaluation_moment_summable n m hm i)
 
 theorem sobolevScalarEvaluation_real_contDiff (n : ℕ) (i : Fin 3) :
-    ContDiff ℝ n (fun x : Vec => (sobolevScalarEvaluation n x i).restrictScalars ℝ) :=
-  (ContinuousLinearMap.restrictScalarsL ℂ (TorusSobolev (n + 4)) ℂ ℝ ℝ).contDiff.comp
-    (sobolevScalarEvaluation_contDiff n i)
+    ContDiff ℝ n (fun x : Vec => (sobolevScalarEvaluation n x i).restrictScalars ℝ) := by
+  let R : (TorusSobolev (n + 4) →L[ℂ] ℂ) →L[ℝ]
+      (TorusSobolev (n + 4) →L[ℝ] ℂ) :=
+    ContinuousLinearMap.restrictScalarsL ℂ (TorusSobolev (n + 4)) ℂ ℝ ℝ
+  have hR : ContDiff ℝ n R := ContinuousLinearMap.contDiff R
+  simpa only [R, ContinuousLinearMap.coe_restrict_scalarsL', Function.comp_def] using
+    hR.comp (sobolevScalarEvaluation_contDiff n i)
 
 /-- Real physical evaluation at a fixed point, in the actual vector codomain. -/
 def sobolevPhysicalEvaluation (n : ℕ) (x : Vec) : TorusSobolev (n + 4) →L[ℝ] Vec :=

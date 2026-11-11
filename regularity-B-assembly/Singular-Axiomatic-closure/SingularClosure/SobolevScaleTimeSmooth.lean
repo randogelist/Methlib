@@ -38,7 +38,7 @@ theorem sobolevScale_contDiffOn_nat
       apply (contDiffOn_succ_iff_derivWithin (uniqueDiffOn_Ici 0)).mpr
       refine ⟨fun t ht => (hderiv m t ht).differentiableWithinAt, by simp, ?_⟩
       have hcomp : ContDiffOn ℝ n (fun t => F m (U (m + 2) t)) (Ici (0 : ℝ)) :=
-        ((hF m).of_le (by simp)).fun_comp_contDiffOn (ih (m + 2))
+        ((contDiff_infty.mp (hF m)) n).fun_comp_contDiffOn (ih (m + 2))
       apply hcomp.congr
       intro t ht
       exact (hderiv m t ht).derivWithin ((uniqueDiffOn_Ici 0) t ht)

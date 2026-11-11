@@ -37,9 +37,8 @@ theorem laplacian_contDiff (a : Field) (ha : ContDiff ℝ ∞ a) :
     ContDiff ℝ ∞ (laplacian a) := by
   change ContDiff ℝ ∞ (fun x => ∑ j : Fin 3,
     coordinateDerivative (coordinateDerivative a j) j x)
-  apply contDiff_sum
-  intro j _
-  exact coordinateDerivative_smooth (coordinateDerivative_smooth ha j) j
+  exact ContDiff.sum (fun j _ =>
+    coordinateDerivative_smooth (coordinateDerivative_smooth ha j) j)
 
 theorem laplacian_spatialPeriodic (a : Field) (hp : SpatialPeriodic a) :
     SpatialPeriodic (laplacian a) := by
