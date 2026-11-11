@@ -182,7 +182,10 @@ theorem sobolevScalarEvaluation_summable (n : ℕ) (x : Vec) (i : Fin 3) :
     simpa only [pow_zero, mul_one] using sobolevEvaluation_moment_summable n 0 (Nat.zero_le n) i
   exact Summable.of_norm_bounded
     (f := fun k : Frequency => fourierCharacter k x • torusSobolevCoeff (n + 4) k i)
-    hA (fun k => by simp only [norm_smul, fourierCharacter_norm, one_mul, le_refl])
+    hA (fun k => by
+      change ‖fourierCharacter k x • torusSobolevCoeff (n + 4) k i‖ ≤
+        ‖torusSobolevCoeff (n + 4) k i‖
+      rw [norm_smul, fourierCharacter_norm, one_mul])
 
 theorem sobolevScalarEvaluation_apply (n : ℕ) (x : Vec) (i : Fin 3)
     (c : TorusSobolev (n + 4)) :

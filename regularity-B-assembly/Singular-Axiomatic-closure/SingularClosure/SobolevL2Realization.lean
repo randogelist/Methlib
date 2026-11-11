@@ -32,13 +32,14 @@ theorem fourierVectorSequence_summable_sq (c : FourierVectorSequence) :
   have h := (lp.memℓp c).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal)
   simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The component sequence is square summable by restriction to one product fiber. -/
 def fourierVectorComponent (c : FourierVectorSequence) (i : Fin 3) : FourierSequenceL2 :=
   ⟨fun k => c (k, i), by
     apply memℓp_gen
-    have h := (fourierVectorSequence_summable_sq c).prod_symm.prod_factor i
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using h⟩
+    have h := (lp.memℓp c).summable (by norm_num : 0 < (2 : ℝ≥0∞).toReal)
+    simpa only [Function.comp_def] using!
+      (h.comp_injective (i := fun k : Frequency => (k, i))
+        (fun k l hkl => congrArg Prod.fst hkl))⟩
 
 @[simp]
 theorem fourierVectorComponent_apply (c : FourierVectorSequence) (i : Fin 3)
