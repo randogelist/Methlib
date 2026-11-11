@@ -24,7 +24,7 @@ theorem criticalTrace_cutoffModes_mono {K L : ℕ} (hKL : K ≤ L) :
     apply mem_cutoffModes_of_freqSq_le hk0
     have hKL' : (K : ℤ) ≤ L := by exact_mod_cast hKL
     have hK : (0 : ℤ) ≤ K := Int.natCast_nonneg K
-    nlinarith
+    exact hkK.trans (pow_le_pow_left₀ hK hKL' 2)
 
 theorem criticalTrace_cutoffIndices_mono {K L : ℕ} (hKL : K ≤ L) :
     sobolevCutoffIndices K ⊆ sobolevCutoffIndices L := by

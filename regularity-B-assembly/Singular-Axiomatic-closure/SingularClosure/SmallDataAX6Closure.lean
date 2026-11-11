@@ -118,9 +118,9 @@ theorem SMALL_DATA_AX6
   have hM : 0 ≤ M :=
     div_nonneg (pow_nonneg (norm_nonneg a) 4)
       (mul_nonneg (by norm_num) (sub_pos.mpr hsmall).le)
-  refine ⟨⟨M, hM⟩, ?_⟩
+  refine ⟨Real.toNNReal M, ?_⟩
   intro N _ g
-  have h := SMALL_DATA_SIX_CHANNEL_BUDGET a hreal hsmall hT.le g
-  simpa only [M, ENNReal.ofReal_eq_coe_nnreal hM] using h
+  change budget6 N g.coeff T ≤ ENNReal.ofReal M
+  exact SMALL_DATA_SIX_CHANNEL_BUDGET a hreal hsmall hT.le g
 
 end SingularClosure

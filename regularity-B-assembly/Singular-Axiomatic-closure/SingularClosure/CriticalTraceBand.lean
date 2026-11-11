@@ -53,7 +53,6 @@ theorem criticalFiniteBandState_dual_pairing (s : Finset FourierIndex)
       (criticalHalfWeight ki.val.1 : ℂ) := Complex.conj_ofReal _
   simp only [map_mul, map_pow, hw]
   field_simp [criticalHalfWeight_complex_ne_zero ki.val.1]
-  ring
 
 theorem criticalFiniteBandState_dual_bound (s : Finset FourierIndex)
     (c r : FourierCoeff) :

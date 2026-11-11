@@ -23,7 +23,7 @@ theorem continuous_exists_point_le_integral_bound
   refine ⟨s, hs, (le_div_iff₀ hτ).2 ?_⟩
   have hmono : (∫ t in (0 : ℝ)..τ, f s) ≤ ∫ t in (0 : ℝ)..τ, f t :=
     intervalIntegral.integral_mono_on hτ.le intervalIntegrable_const
-      (hf.intervalIntegrable_of_Icc hτ.le) (fun t ht => hmin t ht)
+      (hf.intervalIntegrable_of_Icc hτ.le) (fun _ ht => hmin ht)
   rw [intervalIntegral.integral_const] at hmono
   simp only [sub_zero, smul_eq_mul] at hmono
   nlinarith
@@ -51,7 +51,7 @@ theorem CUBIC_POSITIVE_TIME_ACCUMULATION
   have hsT : s ≤ T := hs.2.trans hτT
   have hmap : MapsTo (fun r : ℝ => r + s) (Icc 0 (T - s)) (Icc 0 T) := by
     intro r hr
-    constructor <;> linarith
+    exact ⟨add_nonneg hr.1 hs.1, by dsimp; linarith [hr.2]⟩
   have hshift : ContinuousOn (fun r : ℝ => r + s) (Icc 0 (T - s)) := by fun_prop
   have hys : ContinuousOn (fun r => y (r + s)) (Icc 0 (T - s)) := hy.comp hshift hmap
   have hzs : ContinuousOn (fun r => z (r + s)) (Icc 0 (T - s)) := hz.comp hshift hmap
@@ -64,13 +64,14 @@ theorem CUBIC_POSITIVE_TIME_ACCUMULATION
   have hders : ∀ r ∈ Ioo 0 (T - s),
       HasDerivAt (fun x => y (x + s)) (d (r + s)) r := by
     intro r hr
-    have hr' : r + s ∈ Ioo 0 T := by constructor <;> linarith
+    have hr' : r + s ∈ Ioo 0 T :=
+      ⟨add_pos_of_pos_of_nonneg hr.1 hs.1, by linarith [hr.2]⟩
     simpa only [mul_one] using!
       (hderiv (r + s) hr').comp r ((hasDerivAt_id r).add_const s)
   have hcubics : ∀ r ∈ Ioo 0 (T - s),
       d (r + s) + ν * z (r + s) ^ 2 ≤ κ * y (r + s) ^ 3 := by
     intro r hr
-    exact hcubic (r + s) (by constructor <;> linarith)
+    exact hcubic (r + s) ⟨add_pos_of_pos_of_nonneg hr.1 hs.1, by linarith [hr.2]⟩
   have hbudgets : (∫ r in (0 : ℝ)..(T - s), y (r + s) ^ 2) ≤ M := by
     rw [intervalIntegral.integral_comp_add_right (fun r => y r ^ 2) s,
       zero_add, sub_add_cancel]
@@ -80,7 +81,8 @@ theorem CUBIC_POSITIVE_TIME_ACCUMULATION
     hys hzs hds hysnonneg hseed' hders hcubics hbudgets
   intro t ht
   have hst : s ≤ t := hs.2.trans ht.1
-  have htt : t - s ∈ Icc 0 (T - s) := by constructor <;> linarith
+  have htt : t - s ∈ Icc 0 (T - s) :=
+    ⟨sub_nonneg.mpr hst, sub_le_sub_right ht.2 s⟩
   have hacc' : y t + ν * (∫ r in s..t, z r ^ 2) ≤
       Real.sqrt (M / τ) * Real.exp (κ * M) := by
     have h := hacc (t - s) htt

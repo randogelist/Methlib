@@ -29,7 +29,7 @@ theorem criticalGalerkinLimit_criticalState_coeff_tendsto
   have heq (n : ℕ) : criticalCoeff q ((g n).criticalState q t) k i =
       ((g n).sobolevState 0 t).val k i := by
     rw [(g n).criticalState_coeff q ht.1, (g n).sobolevState_coeff 0 ht.1]
-  simpa only [heq] using h
+  simpa only [heq, Function.comp_def] using h
 
 /-- Actual finite time derivatives converge modewise to the full Fourier RHS. -/
 theorem criticalGalerkinLimit_criticalRhs_coeff_tendsto

@@ -47,6 +47,7 @@ theorem critical_integral_inner_coordinateDerivative
   have hprod : ContDiff ℝ ∞ (fun x => inner ℝ (u x) (v x)) := hu.inner ℝ hv
   have hperiod : SpatialPeriodic (fun x => inner ℝ (u x) (v x)) := by
     intro x i
+    change inner ℝ (u (x + unitVector i)) (v (x + unitVector i)) = inner ℝ (u x) (v x)
     rw [hup, hvp]
   have hD (x : Vec) :
       fderiv ℝ (fun y => inner ℝ (u y) (v y)) x (unitVector j) =

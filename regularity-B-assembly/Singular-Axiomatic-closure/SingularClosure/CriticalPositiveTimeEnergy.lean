@@ -17,8 +17,9 @@ theorem critical_exists_energy_le_average {y : ℝ → ℝ} {a b B : ℝ}
     ∃ r ∈ Icc a b, y r ≤ B / (b - a) := by
   obtain ⟨r, hr, hmin⟩ := isCompact_Icc.exists_isMinOn (nonempty_Icc.mpr hab.le) hy
   refine ⟨r, hr, (le_div_iff₀ (sub_pos.mpr hab)).mpr ?_⟩
-  have h := intervalIntegral.integral_mono_on hab.le intervalIntegrable_const
-    (hy.intervalIntegrable_of_Icc hab.le) (fun s hs => hmin hs)
+  have h : (∫ _s in a..b, y r) ≤ ∫ s in a..b, y s :=
+    intervalIntegral.integral_mono_on hab.le intervalIntegrable_const
+      (hy.intervalIntegrable_of_Icc hab.le) (fun s hs => hmin hs)
   have h' : y r * (b - a) ≤ ∫ s in a..b, y s := by
     simpa only [intervalIntegral.integral_const, smul_eq_mul, mul_comm] using h
   exact h'.trans hbudget
@@ -67,7 +68,12 @@ theorem critical_shifted_linear_energy_budget
   have ht' : t - r ∈ Icc 0 (T - r) := by
     constructor <;> linarith [ht.1, ht.2]
   have hv := h (t - r) ht'
-  simpa only [sub_add_cancel, intervalIntegral.integral_comp_add_right, zero_add] using hv
+  have hshift : (∫ s in (0 : ℝ)..(t - r), z (s + r) ^ 2) =
+      ∫ s in r..t, z s ^ 2 := by
+    simpa only [zero_add, sub_add_cancel] using
+      (intervalIntegral.integral_comp_add_right (fun s => z s ^ 2) r
+        (a := (0 : ℝ)) (b := t - r))
+  simpa only [sub_add_cancel, hshift] using hv
 
 end
 end SingularClosure

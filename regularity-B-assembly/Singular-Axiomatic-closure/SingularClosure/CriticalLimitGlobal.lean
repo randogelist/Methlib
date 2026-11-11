@@ -159,7 +159,7 @@ theorem CRITICAL_GALERKIN_GLOBAL_COMPACTNESS
     CRITICAL_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE ν a N g A D hA hD hstate htime
   have hex (t : ℝ) (ht : 0 ≤ t) : ∃ v : CriticalSobolev 1,
       criticalCoeff 1 v = c t ∧ ‖v‖ ≤ A := by
-    apply criticalSobolev_limit_mem_and_norm_le 1
+    apply criticalSobolev_limit_mem_and_norm_le (l := (atTop : Filter ℕ)) 1
       (fun n => (g (φ n)).criticalState 1 t) (c t) A
     · intro n
       exact hstate (φ n) t ht
@@ -212,8 +212,8 @@ theorem CRITICAL_GALERKIN_GLOBAL_COMPACTNESS
       (fun t => criticalToTorusH0 1 (by norm_num) (u t)) (Ici 0) := by
     intro t ht
     change 0 ≤ t at ht
-    have hi := (huniform (t + 1)).continuousOn (Filter.Eventually.of_forall
-      (fun n => ((g (φ n)).sobolevState_continuousOn 0).mono (fun z hz => hz.1)))
+    have hi := (huniform (t + 1)).continuousOn ((Filter.Eventually.of_forall
+      (fun n => ((g (φ n)).sobolevState_continuousOn 0).mono (fun z hz => hz.1))).frequently)
     have hc := hi t ⟨ht, by linarith⟩
     apply hc.mono_of_mem_nhdsWithin
     apply mem_of_superset (inter_mem self_mem_nhdsWithin

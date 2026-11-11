@@ -101,27 +101,7 @@ jobs:
       - name: Compile each extension module
         id: extension
         run: |
-          set -uo pipefail
-          failed=0
-          while IFS= read -r module; do
-            test -n "$module" || continue
-            log="evidence/${module##*.}-build.log"
-            if lake build "$module" 2>&1 | tee "$log"; then
-              audit="ci/critical_audits/${module##*.}"
-              if test -f "$audit.lean"; then
-                auditlog="evidence/${module##*.}-axioms.log"
-                if lake env lean "$audit.lean" 2>&1 | tee "$auditlog"; then
-                  python3 ci/check_axioms.py "$auditlog" "$audit.json" \
-                    | tee "evidence/${module##*.}-audit.json" || failed=1
-                else
-                  failed=1
-                fi
-              fi
-            else
-              failed=1
-            fi
-          done < ci/critical_modules.txt
-          exit "$failed"
+          python3 ci/build_critical.py
 
       - name: Audit extension theorem dependencies
         if: always() && steps.extension.outcome == 'success'

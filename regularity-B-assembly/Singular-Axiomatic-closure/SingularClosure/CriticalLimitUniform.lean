@@ -56,7 +56,7 @@ private theorem critical_tendstoUniformly_sum
   | @insert i S hi ih =>
     have hhead := h i (Finset.mem_insert_self _ _)
     have htail := ih (fun j hj => h j (Finset.mem_insert_of_mem hj))
-    simpa only [Finset.sum_insert hi, Pi.add_apply] using hhead.add htail
+    simpa only [Finset.sum_insert hi, Pi.add_def] using hhead.add htail
 
 /-- Uniform convergence of finitely many Fourier coefficients gives uniform
 convergence of the literal Hilbert-space cutoff. -/
@@ -157,7 +157,7 @@ theorem CRITICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
     CRITICAL_GALERKIN_FOURIER_COMPACTNESS ν a N g T A B hA hB hstate hbudget
   have hex (t : Icc (0 : ℝ) T) : ∃ v : CriticalSobolev 1,
       criticalCoeff 1 v = (fun k i => c (k, i) t) ∧ ‖v‖ ≤ A := by
-    apply criticalSobolev_limit_mem_and_norm_le 1
+    apply criticalSobolev_limit_mem_and_norm_le (l := (atTop : Filter ℕ)) 1
       (fun n => (g (φ n)).criticalState 1 t.val) (fun k i => c (k, i) t) A
     · intro n
       exact hstate (φ n) t.val t.property
@@ -195,9 +195,12 @@ theorem CRITICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE
     simpa only [hident] using hcrit
   refine ⟨u, φ, hφ, hubound, ?_, hfinal⟩
   apply hfinal.continuous
-  exact Filter.Eventually.of_forall fun n =>
-    ((g (φ n)).sobolevState_continuousOn 0).comp_continuous continuous_subtype_val
-      (fun t => t.property.1)
+  have hc : ∀ n : ℕ, Continuous (fun t : Icc (0 : ℝ) T =>
+      (g (φ n)).sobolevState 0 t.val) := by
+    intro n
+    exact ((g (φ n)).sobolevState_continuousOn 0).comp_continuous
+      continuous_subtype_val (fun t : Icc (0 : ℝ) T => t.property.1)
+  exact (Filter.Eventually.of_forall hc).frequently
 
 end
 
