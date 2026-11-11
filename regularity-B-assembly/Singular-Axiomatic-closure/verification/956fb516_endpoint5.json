@@ -1,0 +1,39 @@
+{
+  "endpoint": 5,
+  "theorem": "SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY",
+  "status": "A_TIER",
+  "commit": "956fb516a77e3832f7069fb916d7f68f6ca04f3d",
+  "run_id": 42950795091,
+  "job_id": 130294354395,
+  "compiler": "Lean 4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "exact_type": "PASS",
+  "compiler_result": "PASS",
+  "theorem_audit": "PASS",
+  "matching_source_hashes": "PASS",
+  "aggregate_result": "PENDING_AT_ENDPOINT_PROMOTION",
+  "checkpoint_artifact": {
+    "id": 13824224939,
+    "name": "singular-endpoint-5-42950795091-1",
+    "size_in_bytes": 10450,
+    "url": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13824224939",
+    "archive_download_url": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13824224939/zip",
+    "expired": false,
+    "created_at": "2026-11-11T03:11:17Z",
+    "expires_at": "2027-02-09T03:09:00Z",
+    "updated_at": "2026-11-11T03:11:17Z",
+    "digest": "sha256:d8ba2cc85cf8ed46a9552ae4cb2c6c0e1976d1828ca97af461c88ebe144f7c2b",
+    "workflow_run": {
+      "id": 42950795091,
+      "repository_id": 1444471869,
+      "head_repository_id": 1444471869,
+      "head_branch": "main",
+      "head_sha": "956fb516a77e3832f7069fb916d7f68f6ca04f3d"
+    }
+  }
+}

@@ -5,6 +5,7 @@ import SingularClosure.SmoothSixEnstrophy
 /-! Exact physical Fourier identities for smooth periodic Laplacians. -/
 
 set_option autoImplicit false
+set_option Elab.async true
 
 open Set MeasureTheory
 open scoped BigOperators ContDiff

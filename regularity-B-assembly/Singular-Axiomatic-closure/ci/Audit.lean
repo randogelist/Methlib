@@ -1866,4 +1866,114 @@ example : ∀ (hAX6 : AX6Statement) (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : 
 #check @SingularClosure.canonicalLimit_physical_timeDerivative
 #print axioms SingularClosure.canonicalLimit_physical_timeDerivative
 
+
+open Metric
+
+example : AX6Statement → Fefferman_B_0_adjust :=
+  @SingularClosure.ax6_implies_fefferman_B_0_adjust
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.ax6_implies_fefferman_B_0_adjust"
+#check @SingularClosure.ax6_implies_fefferman_B_0_adjust
+#print axioms SingularClosure.ax6_implies_fefferman_B_0_adjust
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a),
+    Nonempty (GlobalGalerkinStrongLimit ν a ha) :=
+  @SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT"
+#check @SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT
+#print axioms SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT
+
+example : ∀ {ν : ℝ} {a : Field} {ha : SmoothSigmaZero a} (L : GlobalGalerkinStrongLimit ν a ha),
+    ContDiffOn ℝ ∞ (fun z : ℝ × Vec => L.velocity z.1 z.2) forwardSpacetime :=
+  @SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP"
+#check @SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+#print axioms SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+
+example : ∀ {ν : ℝ} {a : Field} {ha : SmoothSigmaZero a} (L : GlobalGalerkinStrongLimit ν a ha),
+    GlobalSmoothNSE ν a L.velocity L.pressure ∧
+      ∀ t : ℝ, 0 ≤ t → ∀ k : Frequency,
+        (∫ x in unitCube, star (fourierCharacter k x) * (L.pressure t x : ℂ)) =
+          if k = 0 then 0 else
+            -(∑ i : Fin 3, ∑ j : Fin 3, (k i : ℂ) * (k j : ℂ) *
+              (∑' p : Frequency, (L.state 0 t).val p i * (L.state 0 t).val (k - p) j)) /
+                (∑ i : Fin 3, (k i : ℂ) ^ 2) :=
+  @SingularClosure.PERIODIC_PRESSURE_RECOVERY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.PERIODIC_PRESSURE_RECOVERY"
+#check @SingularClosure.PERIODIC_PRESSURE_RECOVERY
+#print axioms SingularClosure.PERIODIC_PRESSURE_RECOVERY
+
+example : ∀ (ν : ℝ) (c : TorusSobolev 0)
+    (hc : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s c.val) 2)
+    (hreal : SpectralReality c.val) (hsol : SpectralSolenoidal c.val)
+    (hr : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s (fullFourierRhs ν c)) 2),
+    ∀ x : Vec,
+      smoothFourierSynthesis (fullFourierRhs ν c) x +
+        convection (smoothFourierSynthesis c.val) x +
+        gradient (fullTransportPressure c) x =
+          ν • laplacian (smoothFourierSynthesis c.val) x :=
+  @SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS"
+#check @SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
+#print axioms SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS
+
+example : ∀ (ν : ℝ) (r : ℕ),
+    ContDiff ℝ ∞ (fourierSobolevRhs ν r) :=
+  @SingularClosure.fourierSobolevRhs_contDiff
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.fourierSobolevRhs_contDiff"
+#check @SingularClosure.fourierSobolevRhs_contDiff
+#print axioms SingularClosure.fourierSobolevRhs_contDiff
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a),
+    ∃ U : ∀ r : ℕ, ℝ → TorusSobolev r, ∃ φ : ℕ → ℕ, StrictMono φ ∧
+      (∀ r, ContDiffOn ℝ ∞ (U r) (Ici 0)) ∧
+      (∀ (r : ℕ) (t : ℝ), 0 ≤ t →
+        torusSobolevInclusion r (U (r + 1) t) = U r t) ∧
+      (∀ (T : ℝ) (r : ℕ), TendstoUniformlyOn
+        (fun n t => (canonicalGalerkinSolution ν hν a ha (φ n + 1)).sobolevState r t)
+        (U r) atTop (Icc (0 : ℝ) T)) ∧
+      (∀ r, U r 0 = smoothDatumSobolev r a ha.smooth ha.periodic) ∧
+      (∀ (r : ℕ) (t : ℝ), 0 ≤ t →
+        SpectralReality (U r t).val ∧ SpectralSolenoidal (U r t).val ∧
+          SpectralMeanZero (U r t).val) ∧
+      ∀ (r : ℕ) (t : ℝ), 0 ≤ t →
+        HasDerivWithinAt (U r) (fourierSobolevRhs ν r (U (r + 2) t)) (Ici 0) t :=
+  @SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH"
+#check @SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH
+#print axioms SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH
+
+example : ∀ (U : ∀ s : ℕ, ℝ → TorusSobolev s)
+    (hU : ∀ s : ℕ, ContDiffOn ℝ ∞ (U s) (Ici (0 : ℝ)))
+    (hcoeff : ∀ (s : ℕ) (t : ℝ), 0 ≤ t → (U s t).val = (U 0 t).val),
+    ContDiffOn ℝ ∞
+      (fun z : ℝ × Vec => fullTransportPressure (U 0 z.1) z.2) forwardSpacetime :=
+  @SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH"
+#check @SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH
+#print axioms SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH
+
+example : ∀ (c : TorusSobolev 0)
+    (hc : ∀ s : ℕ, Memℓp (sobolevWeightedCoeff s c.val) 2)
+    (hreal : SpectralReality c.val) (hsol : SpectralSolenoidal c.val) (k : Frequency),
+    (∫ x in unitCube, star (fourierCharacter k x) * (fullTransportPressure c x : ℂ)) =
+      if k = 0 then 0 else
+        -(∑ i : Fin 3, ∑ j : Fin 3, (k i : ℂ) * (k j : ℂ) *
+            (∑' p : Frequency, c.val p i * c.val (k - p) j)) /
+          (∑ i : Fin 3, (k i : ℂ) ^ 2) :=
+  @SingularClosure.fullTransportPressure_fourierCoeff_quadratic
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.fullTransportPressure_fourierCoeff_quadratic"
+#check @SingularClosure.fullTransportPressure_fourierCoeff_quadratic
+#print axioms SingularClosure.fullTransportPressure_fourierCoeff_quadratic
+
 end

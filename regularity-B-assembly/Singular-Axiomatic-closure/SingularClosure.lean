@@ -103,3 +103,13 @@ import SingularClosure.SmoothFourierLaplacian
 import SingularClosure.SmoothEvaluation
 import SingularClosure.SobolevSpacetimeSmooth
 import SingularClosure.PhysicalTimeDerivative
+import SingularClosure.FourierSobolevRhs
+import SingularClosure.GlobalSobolevTimeSmooth
+import SingularClosure.SobolevPressure
+import SingularClosure.PressureQuadraticCoefficient
+import SingularClosure.TransportLimit
+import SingularClosure.GlobalStrongLimit
+import SingularClosure.PhysicalNSEIdentity
+import SingularClosure.GlobalSmoothBootstrap
+import SingularClosure.PeriodicPressureRecovery
+import SingularClosure.Root

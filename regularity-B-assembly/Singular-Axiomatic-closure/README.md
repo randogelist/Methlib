@@ -22,13 +22,13 @@ Foundation outside the numbered list: `PERIODIC_NSE_CONTRACTS`.
 | 2 | `SIX_CHANNEL_ENSTROPHY_EQ` | !=! A_TIER |
 | 3 | `GALERKIN_GLOBAL_EXISTS_UNIQUE` | !=! A_TIER |
 | 4 | `GALERKIN_ENERGY_IDENTITY` | !=! A_TIER |
-| 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | Pending |
+| 5 | `GALERKIN_ENSTROPHY_INEQUALITY` | !=! A_TIER |
 | 6 | `CUBIC_ENERGY_OF_SQUARE_BUDGET` | !=! A_TIER |
-| 7 | `AX6_UNIFORM_STRONG_BOUNDS` | Pending |
-| 8 | `GALERKIN_GLOBAL_STRONG_LIMIT` | Pending |
-| 9 | `GLOBAL_STRONG_SMOOTH_BOOTSTRAP` | Pending |
-| 10 | `PERIODIC_PRESSURE_RECOVERY` | Pending |
-| 11 | `ax6_implies_fefferman_B_0_adjust` | Pending |
+| 7 | `AX6_UNIFORM_STRONG_BOUNDS` | A_TIER_CANDIDATE |
+| 8 | `GALERKIN_GLOBAL_STRONG_LIMIT` | A_TIER_CANDIDATE |
+| 9 | `GLOBAL_STRONG_SMOOTH_BOOTSTRAP` | A_TIER_CANDIDATE |
+| 10 | `PERIODIC_PRESSURE_RECOVERY` | A_TIER_CANDIDATE |
+| 11 | `ax6_implies_fefferman_B_0_adjust` | A_TIER_CANDIDATE |
 
 The six channels are the ordered refinement with `j = 3`, `i = 1`: split each of `(v,w,r)` by averaging in `x₁` and its complement. Spectral algebra and its physical Fourier realization are tracked separately; only the full endpoint earns its frozen completion marker.
 
@@ -105,3 +105,15 @@ Current independently verified endpoint total: **4/11**, endpoints 2, 3, 4 and 6
 Commit `0b2438438847d4f1ddc7075c04ee8153c88e4e0f`, run https://github.com/randogelist/Methlib/actions/runs/42947128383: endpoint 1 compiled and passed exact-type and standard-only theorem axiom audits. Literal coordinate-average maps satisfy reconstruction, linearity, idempotence, disjointness, physical self-adjointness and orthogonality, smooth solenoidal mean-zero preservation, and commutation with actual derivatives and physical Fourier cutoffs. No projection-law certificate is assumed.
 
 Current independently verified endpoint total: **5/11**, endpoints 1, 2, 3, 4 and 6. Endpoints 5 and 7 remain in compilation repair; the infinite-dimensional physical limit, joint smoothness, pressure and root remain pending. New coefficient-limit and all-order compactness source is candidate only.
+
+## Verified physical enstrophy inequality
+
+Commit `956fb516a77e3832f7069fb916d7f68f6ca04f3d`, run https://github.com/randogelist/Methlib/actions/runs/42950795091: endpoint 5 compiled and passed the exact-type and standard-only theorem axiom audit. The actual enstrophy derivative and actual physical Laplacian obey E′+nu Z <= C/nu^3 E^3, with C independent of viscosity, cutoff and input. The checkpoint source hashes match the audited theorem and exact-type files.
+
+Current independently verified endpoint total: **6/11**, endpoints 1 through 6. No promotion of endpoints 7 through 11 follows from this checkpoint.
+
+## Complete candidate source chain
+
+All eleven endpoint theorem bodies are now prepared. `GlobalStrongLimit.lean` constructs the actual compatible canonical subsequence, all-order Hilbert trajectories and derivatives, the initial trace, nonlinear convergence and physical convection coefficients. `GlobalSmoothBootstrap.lean` derives all temporal orders and literal joint spacetime smoothness. `PeriodicPressureRecovery.lean` constructs actual normalized smooth pressure and the literal pointwise equation, including its exact quadratic Fourier formula. `Root.lean` composes the endpoint theorems into precisely `AX6Statement -> Fefferman_B_0_adjust`.
+
+Prepared source does not establish A_TIER or formal closure. Six endpoints have matching external compiler and axiom-audit evidence; endpoints 7--11 remain candidates. AX6 itself remains explicitly unresolved.

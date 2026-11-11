@@ -977,6 +977,60 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.canonicalLimit_physical_timeDerivative"
+    },
+    {
+      "name": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ax6_implies_fefferman_B_0_adjust"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT"
+    },
+    {
+      "name": "SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP"
+    },
+    {
+      "name": "SingularClosure.PERIODIC_PRESSURE_RECOVERY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PERIODIC_PRESSURE_RECOVERY"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS"
+    },
+    {
+      "name": "SingularClosure.fourierSobolevRhs_contDiff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fourierSobolevRhs_contDiff"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.fullTransportPressure_fourierCoeff_quadratic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fullTransportPressure_fourierCoeff_quadratic"
     }
   ]
 }

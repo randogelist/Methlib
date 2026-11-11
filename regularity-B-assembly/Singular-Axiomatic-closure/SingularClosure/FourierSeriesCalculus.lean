@@ -213,6 +213,8 @@ theorem realFourierSeries_gradient_apply {b : Frequency → ℂ}
   congr 1
   apply tsum_congr
   intro k
+  change fourierCharacter k x * (fourierPhaseCLM k (unitVector i) * b k) =
+    fourierCharacter k x * (derivativeSymbol i k * b k)
   rw [fourierPhaseCLM_unitVector]
 
 end

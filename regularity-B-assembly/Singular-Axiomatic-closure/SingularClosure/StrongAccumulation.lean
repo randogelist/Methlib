@@ -35,8 +35,9 @@ theorem GalerkinSolution.rhs_continuousOn
   have hc := continuousOn_pi.1 (continuousOn_pi.1 h ⟨k, hk⟩) i
   apply hc.congr
   intro t ht
-  simp only [finiteGalerkinRhs, extend_restrictFiniteState,
-    g.cutoffCoeff_eq t ht]
+  change galerkinRhs ν N (g.coeff t) k i =
+    galerkinRhs ν N (extendFiniteState N (restrictFiniteState N (g.coeff t))) k i
+  rw [extend_restrictFiniteState, g.cutoffCoeff_eq t ht]
 
 theorem GalerkinSolution.coefficientEnstrophyRate_continuousOn
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N) :
@@ -121,6 +122,8 @@ theorem AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION (hAX6 : AX6Statement)
   intro N hN g t ht
   have he := FINITE_PHYSICAL_REAL_ENSTROPHY_PARSEVAL N (g.coeff t)
     (g.real_symmetry t ht.1)
+  change (∫ x in unitCube, gradientSquareDensity (g.velocity t) x) =
+    coefficientDissipation N (g.coeff t) at he
   have hZ : (∫ s in (0 : ℝ)..t,
       ∫ x in unitCube, ‖laplacian (g.velocity s) x‖ ^ 2) =
       ∫ s in (0 : ℝ)..t, coefficientLaplacianSquare N (g.coeff s) := by

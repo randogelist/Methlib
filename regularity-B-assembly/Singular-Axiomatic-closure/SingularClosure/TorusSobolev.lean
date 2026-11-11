@@ -150,6 +150,43 @@ theorem torusSobolevReprLinear_surjective (s : ℕ) :
   · apply lp.ext
     exact hc
 
+theorem torusSobolevInclusion_mem (s : ℕ) (c : TorusSobolev (s + 1)) :
+    Memℓp (sobolevWeightedCoeff s c.val) 2 := by
+  apply c.property.mono'
+  intro ki
+  change ‖sobolevWeightedCoeff s c.val ki‖ ≤ ‖sobolevWeightedCoeff (s + 1) c.val ki‖
+  rw [sobolevWeightedCoeff_succ_norm]
+  exact le_mul_of_one_le_left (norm_nonneg _) (torusSobolevWeight_one_le _)
+
+def torusSobolevInclusionValue (s : ℕ) (c : TorusSobolev (s + 1)) : TorusSobolev s :=
+  ⟨c.val, torusSobolevInclusion_mem s c⟩
+
+@[simp]
+theorem torusSobolevInclusionValue_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
+    (torusSobolevInclusionValue s c).val = c.val := rfl
+
+theorem torusSobolevInclusionValue_add (s : ℕ) (c d : TorusSobolev (s + 1)) :
+    torusSobolevInclusionValue s (c + d) =
+      torusSobolevInclusionValue s c + torusSobolevInclusionValue s d := by
+  apply Subtype.ext
+  rfl
+
+theorem torusSobolevInclusionValue_smul (s : ℕ) (z : ℂ) (c : TorusSobolev (s + 1)) :
+    torusSobolevInclusionValue s (z • c) = z • torusSobolevInclusionValue s c := by
+  apply Subtype.ext
+  rfl
+
+/-- Inclusion of the actual coefficient functions drops one Sobolev order. -/
+def torusSobolevInclusionLinear (s : ℕ) : TorusSobolev (s + 1) →ₗ[ℂ] TorusSobolev s where
+  toFun := torusSobolevInclusionValue s
+  map_add' := torusSobolevInclusionValue_add s
+  map_smul' := torusSobolevInclusionValue_smul s
+
+@[simp]
+theorem torusSobolevInclusionLinear_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
+    (torusSobolevInclusionLinear s c).val = c.val :=
+  torusSobolevInclusionValue_coeff s c
+
 instance torusSobolevNormedAddCommGroup (s : ℕ) : NormedAddCommGroup (TorusSobolev s) :=
   NormedAddCommGroup.induced _ _ (torusSobolevReprLinear s)
     (torusSobolevReprLinear_injective s)
@@ -180,21 +217,6 @@ theorem torusSobolev_norm_sq (s : ℕ) (c : TorusSobolev s) :
     Complex.norm_real, Real.norm_eq_abs,
     abs_of_pos (torusSobolevWeight_pos _), Real.rpow_natCast] using h
 
-/-- Inclusion of the actual coefficient functions drops one Sobolev order. -/
-def torusSobolevInclusionLinear (s : ℕ) : TorusSobolev (s + 1) →ₗ[ℂ] TorusSobolev s where
-  toFun c := ⟨c.val, by
-    apply c.property.mono'
-    intro ki
-    change ‖sobolevWeightedCoeff s c.val ki‖ ≤ ‖sobolevWeightedCoeff (s + 1) c.val ki‖
-    rw [sobolevWeightedCoeff_succ_norm]
-    exact le_mul_of_one_le_left (norm_nonneg _) (torusSobolevWeight_one_le _)⟩
-  map_add' _ _ := rfl
-  map_smul' _ _ := rfl
-
-@[simp]
-theorem torusSobolevInclusionLinear_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
-    (torusSobolevInclusionLinear s c).val = c.val := rfl
-
 theorem torusSobolevInclusion_repr_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
     ‖torusSobolevRepr s (torusSobolevInclusionLinear s c)‖ ≤
       ‖torusSobolevRepr (s + 1) c‖ := by
@@ -213,15 +235,20 @@ theorem torusSobolevInclusion_norm_le (s : ℕ) (c : TorusSobolev (s + 1)) :
     _ ≤ ‖torusSobolevRepr (s + 1) c‖ := torusSobolevInclusion_repr_norm_le s c
     _ = ‖c‖ := (torusSobolevRepr (s + 1)).norm_map c
 
+theorem torusSobolevInclusion_bound (s : ℕ) (c : TorusSobolev (s + 1)) :
+    ‖torusSobolevInclusionLinear s c‖ ≤ 1 * ‖c‖ := by
+  simpa only [one_mul] using torusSobolevInclusion_norm_le s c
+
 def torusSobolevInclusion (s : ℕ) : TorusSobolev (s + 1) →L[ℂ] TorusSobolev s :=
-  (torusSobolevInclusionLinear s).mkContinuous 1
-    (fun c => by simpa using torusSobolevInclusion_norm_le s c)
+  (torusSobolevInclusionLinear s).mkContinuous 1 (torusSobolevInclusion_bound s)
 
 @[simp]
 theorem torusSobolevInclusion_coeff (s : ℕ) (c : TorusSobolev (s + 1)) :
     (torusSobolevInclusion s c).val = c.val := by
-  simp only [torusSobolevInclusion, LinearMap.mkContinuous_apply,
-    torusSobolevInclusionLinear_coeff]
+  unfold torusSobolevInclusion
+  exact (congrArg (fun v : TorusSobolev s => v.val)
+    ((torusSobolevInclusionLinear s).mkContinuous_apply 1
+      (torusSobolevInclusion_bound s) c)).trans (torusSobolevInclusionLinear_coeff s c)
 
 /-- Zero mode plus exactly the existing nonzero Galerkin cutoff. -/
 def sobolevCutoffModes (N : ℕ) : Finset Frequency := insert 0 (cutoffModes N)

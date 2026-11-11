@@ -67,9 +67,17 @@
     {
       "number": 5,
       "name": "GALERKIN_ENSTROPHY_INEQUALITY",
-      "status": "A_TIER_CANDIDATE",
-      "verified_commit": null,
-      "evidence_url": null
+      "status": "A_TIER",
+      "verified_commit": "956fb516a77e3832f7069fb916d7f68f6ca04f3d",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42950795091",
+      "completion_marker": "!=!",
+      "theorem": "SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY",
+      "source_file": "SingularClosure/EnstrophyAbsorption.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
     },
     {
       "number": 6,
@@ -96,28 +104,28 @@
     {
       "number": 8,
       "name": "GALERKIN_GLOBAL_STRONG_LIMIT",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
     {
       "number": 9,
       "name": "GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
     {
       "number": 10,
       "name": "PERIODIC_PRESSURE_RECOVERY",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     },
     {
       "number": 11,
       "name": "ax6_implies_fefferman_B_0_adjust",
-      "status": "pending",
+      "status": "A_TIER_CANDIDATE",
       "verified_commit": null,
       "evidence_url": null
     }
@@ -126,5 +134,6 @@
     "AX6"
   ],
   "root_completed": false,
-  "completed_endpoint_count": 5
+  "completed_endpoint_count": 6,
+  "prepared_endpoint_count": 11
 }

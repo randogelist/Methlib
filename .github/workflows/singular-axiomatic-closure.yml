@@ -244,6 +244,94 @@ jobs:
             package/evidence/endpoint-7-*
           if-no-files-found: error
 
+      - name: Compile and audit frozen endpoint 8
+        id: endpoint_8
+        if: always() && steps.endpoint_7.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.GlobalStrongLimit 2>&1 | tee evidence/endpoint-8-build.log
+          lake env lean ci/EndpointAudit8.lean 2>&1 | tee evidence/endpoint-8-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-8-axioms.log ci/expected_endpoint_8.json | tee evidence/endpoint-8-audit.json
+
+      - name: Upload endpoint 8 checkpoint
+        if: always() && steps.endpoint_8.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-8-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-8-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 9
+        id: endpoint_9
+        if: always() && steps.endpoint_8.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.GlobalSmoothBootstrap 2>&1 | tee evidence/endpoint-9-build.log
+          lake env lean ci/EndpointAudit9.lean 2>&1 | tee evidence/endpoint-9-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-9-axioms.log ci/expected_endpoint_9.json | tee evidence/endpoint-9-audit.json
+
+      - name: Upload endpoint 9 checkpoint
+        if: always() && steps.endpoint_9.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-9-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-9-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 10
+        id: endpoint_10
+        if: always() && steps.endpoint_9.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.PeriodicPressureRecovery 2>&1 | tee evidence/endpoint-10-build.log
+          lake env lean ci/EndpointAudit10.lean 2>&1 | tee evidence/endpoint-10-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-10-axioms.log ci/expected_endpoint_10.json | tee evidence/endpoint-10-audit.json
+
+      - name: Upload endpoint 10 checkpoint
+        if: always() && steps.endpoint_10.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-10-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-10-*
+          if-no-files-found: error
+
+      - name: Compile and audit frozen endpoint 11
+        id: endpoint_11
+        if: always() && steps.endpoint_10.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.Root 2>&1 | tee evidence/endpoint-11-build.log
+          lake env lean ci/EndpointAudit11.lean 2>&1 | tee evidence/endpoint-11-axioms.log
+          python3 ci/check_axioms.py evidence/endpoint-11-axioms.log ci/expected_endpoint_11.json | tee evidence/endpoint-11-audit.json
+
+      - name: Upload endpoint 11 checkpoint
+        if: always() && steps.endpoint_11.outcome != 'skipped'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singular-endpoint-11-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            package/evidence/commit.txt
+            package/evidence/lean-version.txt
+            package/evidence/mathlib-revision.txt
+            package/evidence/sources.sha256
+            package/evidence/endpoint-11-*
+          if-no-files-found: error
+
       - name: Build the actual source
         id: aggregate_build
         if: always()
