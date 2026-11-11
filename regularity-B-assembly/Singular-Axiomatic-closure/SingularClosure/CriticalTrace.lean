@@ -32,6 +32,7 @@ theorem criticalTrace_le_average_add_variation
     apply intervalIntegral.integral_mono_on hT.le intervalIntegrable_const
       ((hA.add continuousOn_const).intervalIntegrable_of_Icc hT.le)
     intro s hs
+    change A t ≤ A s + D
     linarith [hvariation s hs t ht]
   rw [intervalIntegral.integral_const,
     intervalIntegral.integral_add (hA.intervalIntegrable_of_Icc hT.le)
@@ -65,13 +66,13 @@ theorem criticalTrace_abs_sub_le_integral_abs_deriv
     · rw [uIoc_of_ge hts] at hr
       exact ⟨lt_of_le_of_lt ht.1 hr.1, hr.2.trans hs.2⟩
   calc
-    _ = |∫ r in s..t, deriv A r| :=
+    _ = abs (∫ r in s..t, deriv A r) :=
       congrArg abs (hA.mono hclosed).integral_deriv_eq_sub.symm
-    _ ≤ |∫ r in s..t, |deriv A r|| := by
+    _ ≤ abs (∫ r in s..t, |deriv A r|) := by
       simpa only [Real.norm_eq_abs] using
         (intervalIntegral.norm_integral_le_abs_integral_norm
           (f := fun r => deriv A r) (a := s) (b := t) (μ := volume))
-    _ ≤ |∫ r in (0 : ℝ)..T, |deriv A r|| :=
+    _ ≤ abs (∫ r in (0 : ℝ)..T, |deriv A r|) :=
       intervalIntegral.abs_integral_mono_interval hopen
         (Filter.Eventually.of_forall (fun r => abs_nonneg _))
         hA.intervalIntegrable_deriv.abs

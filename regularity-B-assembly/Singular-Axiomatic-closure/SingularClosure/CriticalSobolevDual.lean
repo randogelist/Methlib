@@ -118,7 +118,7 @@ theorem criticalDualFamily_norm_rpow_le (u : Vec → ℂ) {δ : ℝ} (hδ : 0 < 
         mul_le_mul_of_nonneg_right (by dsimp [criticalDualBase]; linarith)
           (Real.rpow_nonneg hq.le _)
       _ = criticalDualBase u δ x ^ (1 + (z.re + 1 / 2)) := by
-        rw [Real.rpow_add hq, Real.rpow_one]
+        rw [Real.rpow_add hq 1 (z.re + 1 / 2), Real.rpow_one]
       _ = _ := by congr 1; ring
   calc
     _ ≤ (criticalDualBase u δ x ^ (z.re + 3 / 2)) ^ p :=
@@ -135,7 +135,7 @@ theorem criticalDualFamily_lpNorm_le (u : Vec → ℂ) (hu : Continuous u)
     (criticalDualFamily_continuous u hu hδ).comp (continuous_const.prodMk continuous_id)
   rw [lpNorm_eq_integral_norm_rpow_toReal
     (ENNReal.ofReal_ne_zero_iff.mpr hp) ENNReal.ofReal_ne_top hg.aestronglyMeasurable,
-    ENNReal.toReal_ofReal hp.le]
+    ENNReal.toReal_ofReal hp.le, one_div]
   apply Real.rpow_le_rpow
     (integral_nonneg (fun x => Real.rpow_nonneg (norm_nonneg _) _)) _ (by positivity)
   exact integral_mono

@@ -121,6 +121,7 @@ theorem criticalLambdaCoefficient_energy (N : ℕ) (c : FourierCoeff) :
   apply Finset.sum_congr rfl
   intro i _
   simp [criticalLambdaCoefficient, Complex.normSq_mul, Complex.normSq_apply, pow_two]
+  <;> ring
 
 /-- Exact L² norm of the actual Λu_N field. -/
 theorem FINITE_CRITICAL_LAMBDA_PARSEVAL (N : ℕ) (c : FourierCoeff)

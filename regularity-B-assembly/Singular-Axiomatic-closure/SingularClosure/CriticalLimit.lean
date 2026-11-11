@@ -121,6 +121,7 @@ theorem GalerkinSolution.critical_coefficient_time_modulus
         ((hrhs.norm.pow 2).intervalIntegrable_of_Icc hst)
         (((hDlocal.norm.pow 2).const_mul C).intervalIntegrable_of_Icc hst)
       intro r hr
+      change ‖galerkinRhs ν N (g.coeff r) k i‖ ^ 2 ≤ C * ‖D r‖ ^ 2
       rw [← hDcoeff r ⟨hs.trans hr.1, hr.2.trans htT⟩ k hk i]
       have hn := pow_le_pow_left₀ (norm_nonneg _)
         (criticalCoeff_norm_le (-1) (D r) k i) 2
@@ -166,7 +167,8 @@ theorem CRITICAL_GALERKIN_COEFFICIENT_SUBSEQUENCE
     change ‖(g n).coeff t.val ki.1 ki.2‖ ≤ ‖criticalSobolevCoeff 1 ki.1 ki.2‖ * A
     rw [← hUcoeff n t.val t.property.1]
     exact (criticalCoeff_norm_le 1 (U n t.val) ki.1 ki.2).trans
-      (mul_le_mul_of_nonneg_left (hstate n t.val t.property) (norm_nonneg _))
+      (mul_le_mul_of_nonneg_left (hstate n t.val t.property)
+        (norm_nonneg (criticalSobolevCoeff 1 ki.1 ki.2)))
   have hmod (ki : FourierIndex) (n : ℕ) (s t : Icc (0 : ℝ) T) :
       ‖F ki n t - F ki n s‖ ^ 2 ≤ M ki * |t.val - s.val| := by
     have hordered {x y : ℝ} (hx : 0 ≤ x) (hxy : x ≤ y) (hyT : y ≤ T) :

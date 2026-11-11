@@ -21,6 +21,9 @@ def criticalLpProjection (S : Finset FourierIndex) :
 theorem criticalLpProjection_eq_sum (S : Finset FourierIndex) (z : FourierVectorSequence) :
     criticalLpProjection S z = ∑ ki ∈ S, lp.single 2 ki (z ki) := by
   simp [criticalLpProjection]
+  apply Finset.sum_congr rfl
+  intro ki hki
+  rfl
 
 @[simp]
 theorem criticalLpProjection_apply (S : Finset FourierIndex)
@@ -59,12 +62,17 @@ theorem criticalSobolevCutoff_coeff (q : ℤ) (N : ℕ) (c : CriticalSobolev q)
   have h := congrArg (fun z : FourierVectorSequence => z (k, i))
     (criticalSobolevCutoff_repr q N c)
   simp only [criticalSobolevRepr_apply, criticalLpProjection_apply,
-    sobolevCutoffIndices, Finset.mem_product, Finset.mem_univ, and_true] at h
+    sobolevCutoffIndices] at h
   apply mul_left_cancel₀ (zpow_ne_zero q (criticalHalfWeight_complex_ne_zero k))
   change criticalWeightedCoeff q (criticalCoeff q (criticalSobolevCutoff q N c)) (k, i) = _
   rw [h]
-  by_cases hk : k ∈ sobolevCutoffModes N <;>
-    simp only [hk, if_true, if_false, criticalWeightedCoeff, mul_zero]
+  by_cases hk : k ∈ sobolevCutoffModes N
+  · have hki : (k, i) ∈ (sobolevCutoffModes N).product (Finset.univ : Finset (Fin 3)) :=
+      Finset.mem_product.mpr ⟨hk, Finset.mem_univ i⟩
+    rw [if_pos hki, if_pos hk] <;> rfl
+  · have hki : (k, i) ∉ (sobolevCutoffModes N).product (Finset.univ : Finset (Fin 3)) :=
+      fun hki => hk (Finset.mem_product.mp hki).1
+    rw [if_neg hki, if_neg hk, mul_zero]
 
 theorem criticalSobolevCutoff_norm_le (q : ℤ) (N : ℕ) (c : CriticalSobolev q) :
     ‖criticalSobolevCutoff q N c‖ ≤ ‖c‖ := by
@@ -82,7 +90,9 @@ theorem criticalSobolevCutoff_eq_cutoffCoeff (q : ℤ) (N : ℕ) (c : CriticalSo
   funext k i
   by_cases hk : k = 0
   · subst k
-    simp [criticalSobolevCutoff_coeff, cutoffCoeff, hc]
+    have hz : criticalCoeff q c 0 i = 0 := hc i
+    rw [criticalSobolevCutoff_coeff]
+    simp only [cutoffCoeff, hz, ite_self]
   · simp [criticalSobolevCutoff_coeff, cutoffCoeff, sobolevCutoffModes, hk]
 
 theorem eventually_mem_sobolevCutoffModes (k : Frequency) :

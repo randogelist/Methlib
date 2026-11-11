@@ -50,7 +50,7 @@ theorem scalar_invariant_of_deriv_nonpos_below
       exact (hderiv x hx).mono (fun y hy => hx.1.trans hy)
     · simpa only [mul_zero, add_zero] using hinit
     · intro x
-      simpa only [mul_one] using
+      simpa only [mul_one, id_eq] using!
         ((hasDerivAt_id x).const_mul η).const_add a
     · intro x hx heq
       have hxbound : A x ≤ b := by

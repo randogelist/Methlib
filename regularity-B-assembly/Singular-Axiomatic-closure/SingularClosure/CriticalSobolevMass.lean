@@ -32,11 +32,12 @@ theorem critical_cubic_mass_polynomial (u : Vec → ℂ) (hu : Continuous u) (δ
       apply integral_congr_ae
       exact Eventually.of_forall (fun x => by ring)
     _ = _ := by
-      rw [integral_add (h3.add (h2.const_mul (3 * δ)))
-        ((h1.const_mul (3 * δ ^ 2)).add (hc.const_mul (δ ^ 3))),
-        integral_add h3 (h2.const_mul (3 * δ)),
-        integral_add (h1.const_mul (3 * δ ^ 2)) (hc.const_mul (δ ^ 3)),
-        integral_const_mul, integral_const_mul, integral_const_mul]
+      have hout := integral_add (h3.add (h2.const_mul (3 * δ)))
+        ((h1.const_mul (3 * δ ^ 2)).add (hc.const_mul (δ ^ 3)))
+      have hleft := integral_add h3 (h2.const_mul (3 * δ))
+      have hright := integral_add (h1.const_mul (3 * δ ^ 2)) (hc.const_mul (δ ^ 3))
+      simp only [Pi.add_apply] at hout hleft hright
+      rw [hout, hleft, hright, integral_const_mul, integral_const_mul, integral_const_mul]
 
 theorem critical_cubic_mass_continuous (u : Vec → ℂ) (hu : Continuous u) :
     Continuous (fun δ : ℝ => ∫ x in unitCube, (‖u x‖ + δ) ^ 3) := by
@@ -64,7 +65,7 @@ theorem critical_cubic_mass_cancel (u : Vec → ℂ) (hu : Continuous u)
       I ≤ K * (∫ x in unitCube, (‖u x‖ + δ) ^ 3) ^ (2 / 3 : ℝ) := by
     filter_upwards [self_mem_nhdsWithin] with δ hδ
     exact hbound δ hδ
-  have hlim : I ≤ K * I ^ (2 / 3 : ℝ) := le_of_tendsto ht he
+  have hlim : I ≤ K * I ^ (2 / 3 : ℝ) := ge_of_tendsto ht he
   by_cases hz : I = 0
   · change I ^ (1 / 3 : ℝ) ≤ K
     simpa only [hz, Real.zero_rpow (by norm_num : (1 / 3 : ℝ) ≠ 0)] using hK
