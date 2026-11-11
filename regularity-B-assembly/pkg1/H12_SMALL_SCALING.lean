@@ -161,10 +161,16 @@ theorem twoModeCoeff_reality : ConjugateReality twoModeCoeff := by
         rw [h, neg_neg]
   by_cases hk : k = baseMode ∨ k = -baseMode
   · have hn := hsym.mpr hk
-    simpa [twoModeCoeff, hk, hn] using transverseVector_reality i
+    change (if -k = baseMode ∨ -k = -baseMode then transverseVector else 0) i =
+      star ((if k = baseMode ∨ k = -baseMode then transverseVector else 0) i)
+    rw [if_pos hn, if_pos hk]
+    exact transverseVector_reality i
   · have hn : ¬(-k = baseMode ∨ -k = -baseMode) := by
       exact fun h => hk (hsym.mp h)
-    simp [twoModeCoeff, hk, hn]
+    change (if -k = baseMode ∨ -k = -baseMode then transverseVector else 0) i =
+      star ((if k = baseMode ∨ k = -baseMode then transverseVector else 0) i)
+    rw [if_neg hn, if_neg hk]
+    simp
 
 def twoModeDatum : RealH12Datum where
   coeff := twoModeCoeff

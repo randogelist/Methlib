@@ -109,7 +109,7 @@ theorem coefficient_square_le_l2Sq (a : RealH12Datum) (k : Mode3) :
   classical
   have h := Summable.sum_le_tsum ({k} : Finset Mode3)
     (fun j _ => sq_nonneg ‖a.coeff j‖) (coefficient_l2_summable a)
-  simpa only [Finset.sum_singleton] using h
+  simpa only [Finset.sum_singleton, coefficientL2Sq] using h
 
 /-- The homogeneous critical quantity is definite on mean-zero coefficients. -/
 theorem criticalSq_eq_zero_iff (a : RealH12Datum) :
