@@ -40,3 +40,9 @@ import SingularClosure.SixChannelProjections
 import SingularClosure.PeriodicCover
 import SingularClosure.PeriodicSobolev
 import SingularClosure.FiniteHessian
+import SingularClosure.Ax6ExactBudget
+import SingularClosure.PeriodicNonlinear
+import SingularClosure.PhysicalBilinear
+import SingularClosure.EnstrophyAbsorption
+import SingularClosure.FourierPressure
+import SingularClosure.InitialCutoffBounds

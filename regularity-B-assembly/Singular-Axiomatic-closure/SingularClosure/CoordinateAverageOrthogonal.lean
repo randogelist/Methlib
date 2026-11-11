@@ -203,11 +203,15 @@ theorem coordinateAverage_selfAdjoint (j : Fin 3) (a b : Field)
         (innerSL ℝ (coordinateAverage j a x)).integral_comp_comm hbint'
     _ = inner ℝ (coordinateAverage j b x) (coordinateAverage j a x) :=
       real_inner_comm _ _
-    _ = _ := by
-      simp_rw [real_inner_comm _ (coordinateAverage j b x)]
+    _ = ∫ s in Icc (0 : ℝ) 1,
+        inner ℝ (coordinateAverage j b x) (a (WithLp.toLp 2 (j.insertNth s y))) := by
       symm
       simpa only [innerSL_apply_apply, haavg] using!
         (innerSL ℝ (coordinateAverage j b x)).integral_comp_comm haint'
+    _ = _ := by
+      apply integral_congr_ae
+      filter_upwards with s
+      exact real_inner_comm _ _
 
 end
 

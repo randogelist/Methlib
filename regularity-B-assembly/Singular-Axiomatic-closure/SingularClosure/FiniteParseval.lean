@@ -98,7 +98,9 @@ theorem integral_complexFiniteSynthesis_inner (N : ℕ) (c : FourierCoeff) (j : 
   classical
   unfold complexFiniteSynthesis
   simp_rw [complex_star_finset_sum]
-  rw [integral_unitCube_complex_sum_mul_sum _ _ _ _
+  rw [integral_unitCube_complex_sum_mul_sum (cutoffModes N) (cutoffModes N)
+    (fun k x => star (fourierCharacter k x * c k j))
+    (fun l x => fourierCharacter l x * c l j)
     (fun k => ((fourierCharacter_contDiff k).continuous.mul continuous_const).star)
     (fun l => (fourierCharacter_contDiff l).continuous.mul continuous_const)]
   simp_rw [integral_complex_character_pair]
@@ -125,8 +127,9 @@ theorem integral_complexFiniteSynthesis_normSq (N : ℕ) (c : FourierCoeff) (j :
       apply integral_congr_ae
       apply Filter.Eventually.of_forall
       intro x
-      rw [Complex.star_def, ← Complex.normSq_eq_conj_mul_self]
-      rfl
+      simpa only [Complex.ofReal_re, Complex.star_def] using
+        congrArg Complex.re (Complex.normSq_eq_conj_mul_self
+          (z := complexFiniteSynthesis N c j x))
     _ = (∫ x in unitCube,
         star (complexFiniteSynthesis N c j x) * complexFiniteSynthesis N c j x).re :=
       Complex.reCLM.integral_comp_comm hi

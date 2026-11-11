@@ -796,4 +796,127 @@ example : ∀ (N : ℕ) (c : FourierCoeff)
 #check @SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
 #print axioms SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ
 
+
+open Metric
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      IntervalIntegrable (fun t => (coefficientDissipation N (g.coeff t)) ^ 2)
+        volume 0 T ∧
+      (∫ t in (0 : ℝ)..T, (coefficientDissipation N (g.coeff t)) ^ 2) ≤ M :=
+  @SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET"
+#check @SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET
+#print axioms SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET
+
+example : ∀ (hAX6 : AX6Statement)
+    (ν : ℝ) (hν : 0 < ν) (a : Field) (ha : SmoothSigmaZero a)
+    (T : ℝ) (hT : 0 < T),
+    ∃ M : ℝ≥0, ∀ N : ℕ, 1 ≤ N → ∀ g : GalerkinSolution ν a N,
+      (∫⁻ t in Icc (0 : ℝ) T, (physicalEnstrophy (g.velocity t)) ^ 2) ≤
+        (M : ℝ≥0∞) :=
+  @SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET"
+#check @SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET
+#print axioms SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET
+
+example : ∃ C : ℝ≥0∞, C < ⊤ ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
+      eLpNorm (fderiv ℝ (finiteSynthesis N c)) 6 (volume.restrict unitCube) ≤
+        C * (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (1 / 2 : ℝ) :=
+  @SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN"
+#check @SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN
+#print axioms SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN
+
+example : ∃ C : ℝ≥0∞, C < ⊤ ∧ ∀ N : ℕ, ∀ c : FourierCoeff, SpectralReality c →
+      ENNReal.ofReal |∫ x in unitCube,
+        ⟪convection (finiteSynthesis N c) x, laplacian (finiteSynthesis N c) x⟫_ℝ| ≤
+          C * (ENNReal.ofReal (coefficientDissipation N c)) ^ (3 / 4 : ℝ) *
+            (ENNReal.ofReal (coefficientLaplacianSquare N c)) ^ (3 / 4 : ℝ) :=
+  @SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND"
+#check @SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
+#print axioms SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND
+
+example : ∀ (N : ℕ) (a b : FourierCoeff)
+    (ha : SpectralReality a) (hb : SpectralReality b),
+    (∫ x in unitCube, inner ℝ (finiteSynthesis N a x) (finiteSynthesis N b x)) =
+      ∑ k ∈ cutoffModes N, ∑ j : Fin 3, (star (a k j) * b k j).re :=
+  @SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL"
+#check @SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL
+#print axioms SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hsupp : ∀ k : Frequency, k ∉ cutoffModes N → ∀ i : Fin 3, c k i = 0)
+    (hreal : SpectralReality c) (hsol : SpectralSolenoidal c),
+    coefficientEnstrophyNonlinearPower N c =
+      -(∫ x in unitCube, inner ℝ (convection (finiteSynthesis N c) x)
+        (laplacian (finiteSynthesis N c) x)) :=
+  @SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical"
+#check @SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical
+#print axioms SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical
+
+example : ∃ C : ℝ, 0 < C ∧ ∀ ν : ℝ, 0 < ν → ∀ a : Field, ∀ N : ℕ,
+      ∀ g : GalerkinSolution ν a N, ∀ t : ℝ, 0 ≤ t → ∃ d : ℝ,
+        HasDerivWithinAt
+          (fun r => ∫ x in unitCube, gradientSquareDensity (g.velocity r) x)
+          d (Ici 0) t ∧
+        d + ν * (∫ x in unitCube, ‖laplacian (g.velocity t) x‖ ^ 2) ≤
+          C / ν ^ 3 * (∫ x in unitCube, gradientSquareDensity (g.velocity t) x) ^ 3 :=
+  @SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY"
+#check @SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY
+#print axioms SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY
+
+example : ∀ (N : ℕ) (c : FourierCoeff) (x : Vec),
+    finiteSynthesis N (coefficientTransport N c) x +
+      gradient (finiteTransportPressure N (coefficientTransport N c)) x =
+      finiteSynthesis N (fun k => coefficientLeray k (coefficientTransport N c k)) x :=
+  @SingularClosure.galerkinPressure_recovery
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.galerkinPressure_recovery"
+#check @SingularClosure.galerkinPressure_recovery
+#print axioms SingularClosure.galerkinPressure_recovery
+
+example : ∀ (N : ℕ) (v : FourierCoeff),
+    PressureMeanZero (finiteTransportPressure N v) :=
+  @SingularClosure.finiteTransportPressure_meanZero
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.finiteTransportPressure_meanZero"
+#check @SingularClosure.finiteTransportPressure_meanZero
+#print axioms SingularClosure.finiteTransportPressure_meanZero
+
+
+open Metric
+
+example : ∀ (N : ℕ) (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a),
+    coefficientDissipation N (datumFourierCoeff a) ≤
+      ∫ x in unitCube, gradientSquareDensity a x :=
+  @SingularClosure.coefficientDissipation_initial_cutoff_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.coefficientDissipation_initial_cutoff_le"
+#check @SingularClosure.coefficientDissipation_initial_cutoff_le
+#print axioms SingularClosure.coefficientDissipation_initial_cutoff_le
+
+example : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
+    (ha : SmoothSigmaZero a),
+    coefficientDissipation N (g.coeff 0) ≤ ∫ x in unitCube, gradientSquareDensity a x :=
+  @SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_initial_le"
+#check @SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
+#print axioms SingularClosure.GalerkinSolution.coefficientDissipation_initial_le
+
 end

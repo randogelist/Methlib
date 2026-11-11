@@ -461,6 +461,72 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ"
+    },
+    {
+      "name": "SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET"
+    },
+    {
+      "name": "SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL"
+    },
+    {
+      "name": "SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY"
+    },
+    {
+      "name": "SingularClosure.galerkinPressure_recovery",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinPressure_recovery"
+    },
+    {
+      "name": "SingularClosure.finiteTransportPressure_meanZero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteTransportPressure_meanZero"
+    },
+    {
+      "name": "SingularClosure.coefficientDissipation_initial_cutoff_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientDissipation_initial_cutoff_le"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientDissipation_initial_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_initial_le"
     }
   ]
 }

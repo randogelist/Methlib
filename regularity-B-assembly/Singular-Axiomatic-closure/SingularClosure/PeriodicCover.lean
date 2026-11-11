@@ -24,7 +24,8 @@ def integerShift (z : Fin 3 → ℤ) : Vec :=
 
 theorem integerShift_apply (z : Fin 3 → ℤ) (i : Fin 3) :
     integerShift z i = (z i : ℝ) := by
-  simp [integerShift, unitVector, Finset.sum_apply, apply_ite, zsmul_eq_mul]
+  simp [integerShift, unitVector, Finset.sum_apply, zsmul_eq_mul,
+    Pi.single_apply, mul_ite]
 
 theorem spatialPeriodic_integerShift {E : Type*} {f : Vec → E}
     (hp : SpatialPeriodic f) (z : Fin 3 → ℤ) :
@@ -60,9 +61,8 @@ theorem periodicCoverCell_integral {f : Vec → ℝ}
     (hp : SpatialPeriodic f) (k : PeriodicCoverIndex) :
     (∫ x in periodicCoverCell k, f x) = ∫ x in unitCube, f x := by
   unfold periodicCoverCell
-  rw [(measurePreserving_add_right (volume : Measure Vec) (periodicCoverShift k)).
-    setIntegral_image_emb
-      (Homeomorph.addRight (periodicCoverShift k)).measurableEmbedding]
+  rw [(measurePreserving_add_right (volume : Measure Vec) (periodicCoverShift k)).setIntegral_image_emb
+      (Homeomorph.addRight (periodicCoverShift k)).measurableEmbedding f unitCube]
   apply integral_congr_ae
   exact Filter.Eventually.of_forall
     (spatialPeriodic_integerShift hp (fun i => (k i : ℕ) - (3 : ℤ)))
@@ -76,7 +76,7 @@ theorem closedBall_three_mem_periodicCover (x : Vec)
     exact (show |x i| ≤ ‖x‖ by simpa only [Real.norm_eq_abs] using h).trans hnorm
   have hlo (i : Fin 3) : (-3 : ℤ) ≤ ⌊x i⌋ := by
     apply Int.le_floor.mpr
-    exact (abs_le.mp (habs i)).1
+    simpa using (abs_le.mp (habs i)).1
   have hhi (i : Fin 3) : ⌊x i⌋ ≤ (3 : ℤ) := by
     apply Int.floor_le_iff.mpr
     have h := (abs_le.mp (habs i)).2

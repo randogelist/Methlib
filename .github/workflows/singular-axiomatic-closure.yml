@@ -110,11 +110,11 @@ jobs:
           key: singular-ax6-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake*', 'package/SingularClosure.lean', 'package/SingularClosure/**/*.lean') }}
 
       - name: Compile and audit frozen endpoints independently
-        continue-on-error: true
+        id: independent_endpoints
         run: |
           set -uo pipefail
           endpoint_status=0
-          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy 2:SmoothSixEnstrophy 1:SixChannelProjections; do
+          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy 2:SmoothSixEnstrophy 1:SixChannelProjections 5:EnstrophyAbsorption; do
             endpoint_number="${endpoint_spec%%:*}"
             endpoint_module="${endpoint_spec#*:}"
             if lake build "SingularClosure.${endpoint_module}" 2>&1 | tee "evidence/endpoint-${endpoint_number}-build.log"; then
@@ -133,12 +133,15 @@ jobs:
           exit "$endpoint_status"
 
       - name: Build the actual source
+        id: aggregate_build
+        if: always()
         run: |
           set -euo pipefail
           lake build SingularClosure 2>&1 | tee evidence/build.log
           test -s .lake/build/lib/lean/SingularClosure.olean
 
       - name: Run a fresh exact-type and theorem-level axiom audit
+        if: always() && steps.aggregate_build.outcome == 'success'
         run: |
           set -euo pipefail
           lake env lean ci/Audit.lean 2>&1 | tee evidence/axioms.log
