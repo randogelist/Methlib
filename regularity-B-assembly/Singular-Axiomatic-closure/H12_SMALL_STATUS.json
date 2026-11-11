@@ -1,0 +1,24 @@
+{
+  "target": "H12_SIGMA_ZERO_SMALL_GLOBAL_REGULARITY",
+  "status": "A_TIER_CANDIDATE_IN_PROGRESS",
+  "root_proved": false,
+  "unconditional_closure": false,
+  "smallness": "Ccrit * norm_Hhalf(u0) <= nu / 2",
+  "initial_trace": "strong Hhalf",
+  "smoothness": "positive time; closed forward time for smooth initial data",
+  "local_lean_executions": 0,
+  "compiler": "external cached Lean 4.33.0",
+  "existing_frozen_root": "AX6Statement -> Fefferman_B_0_adjust",
+  "stages": [
+    {"number": 1, "name": "CriticalSpaces", "status": "IN_PROGRESS"},
+    {"number": 2, "name": "CriticalGalerkin", "status": "CANDIDATE"},
+    {"number": 3, "name": "CriticalSobolev", "status": "IN_PROGRESS"},
+    {"number": 4, "name": "CriticalEnergy", "status": "IN_PROGRESS"},
+    {"number": 5, "name": "CriticalInvariant", "status": "IN_PROGRESS"},
+    {"number": 6, "name": "SmallDataAX6", "status": "IN_PROGRESS"},
+    {"number": 7, "name": "CriticalLimit", "status": "PENDING"},
+    {"number": 8, "name": "CriticalTrace", "status": "IN_PROGRESS"},
+    {"number": 9, "name": "CriticalRegularity", "status": "PENDING"},
+    {"number": 10, "name": "SmallDataRoot", "status": "PENDING"}
+  ]
+}
