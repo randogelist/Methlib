@@ -4,7 +4,9 @@ set_option autoImplicit false
 set_option Elab.async false
 
 open Set MeasureTheory SingularClosure
-open scoped BigOperators Interval
+open scoped BigOperators Interval ENNReal ContDiff
+
+noncomputable section
 
 example : SmoothSigmaZero (0 : Field) := by
   exact SingularClosure.smoothSigmaZero_zero
@@ -95,3 +97,75 @@ example
 #eval IO.println "EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL"
 #check @SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL
 #print axioms SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL
+
+example (ν : ℝ) (N : ℕ) : GalerkinSolution ν (0 : Field) N := by
+  exact SingularClosure.zeroGalerkinSolution ν N
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution"
+#check @SingularClosure.zeroGalerkinSolution
+#print axioms SingularClosure.zeroGalerkinSolution
+
+example (ν : ℝ) (N : ℕ) :
+    (zeroGalerkinSolution ν N).velocity = (0 : Velocity) := by
+  exact SingularClosure.zeroGalerkinSolution_velocity ν N
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution_velocity"
+#check @SingularClosure.zeroGalerkinSolution_velocity
+#print axioms SingularClosure.zeroGalerkinSolution_velocity
+
+example (v : Field) (x : Vec) :
+    0 ≤ gradientSquareDensity v x := by
+  exact SingularClosure.gradientSquareDensity_nonneg v x
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.gradientSquareDensity_nonneg"
+#check @SingularClosure.gradientSquareDensity_nonneg
+#print axioms SingularClosure.gradientSquareDensity_nonneg
+
+example {N : ℕ} {c : ℝ → FourierCoeff} {T : ℝ} {M : ℝ≥0}
+    (h : budget6 N c T ≤ (M : ℝ≥0∞)) :
+    budget6 N c T ≠ ⊤ := by
+  exact SingularClosure.budget6_ne_top_of_bound h
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.budget6_ne_top_of_bound"
+#check @SingularClosure.budget6_ne_top_of_bound
+#print axioms SingularClosure.budget6_ne_top_of_bound
+
+example (N : ℕ) (a : FourierCoeff) :
+    (∑ A : Fin 6, physicalChannel N A a) = finiteSynthesis N a := by
+  exact SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION N a
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION"
+#check @SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION
+#print axioms SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION
+
+example (N : ℕ) (a : FourierCoeff)
+    (j : Fin 3) (x : Vec) :
+    coordinateDerivative (finiteSynthesis N a) j x =
+      ∑ A : Fin 6, coordinateDerivative (physicalChannel N A a) j x := by
+  exact SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION N a j x
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION"
+#check @SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION
+#print axioms SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION
+
+example (ν : ℝ) (N : ℕ) :
+    ContDiff ℝ ∞ (finiteGalerkinRhs ν N) := by
+  exact SingularClosure.contDiff_finiteGalerkinRhs ν N
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.contDiff_finiteGalerkinRhs"
+#check @SingularClosure.contDiff_finiteGalerkinRhs
+#print axioms SingularClosure.contDiff_finiteGalerkinRhs
+
+example {ν : ℝ} {a : Field} {N : ℕ}
+    (g : GalerkinSolution ν a N) {t : ℝ} (ht : 0 ≤ t) :
+    HasDerivWithinAt (fun r => coefficientEnergy N (g.coeff r))
+      (∑ k ∈ cutoffModes N, ∑ i : Fin 3,
+        2 * (star (g.coeff t k i) * galerkinRhs ν N (g.coeff t) k i).re)
+      (Ici 0) t := by
+  exact SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt g ht
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt"
+#check @SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
+#print axioms SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
+
+end

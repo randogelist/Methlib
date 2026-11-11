@@ -60,7 +60,11 @@ jobs:
 
       - name: Reserve disk space for cached dependency objects
         run: |
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          set -euo pipefail
+          available_kib=$(df -Pk . | awk 'NR == 2 { print $4 }')
+          if [ "$available_kib" -lt "$((20 * 1024 * 1024))" ]; then
+            sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          fi
           df -h . | tee evidence/disk.txt
 
       - name: Install the pinned Lean toolchain
@@ -75,7 +79,8 @@ jobs:
           use-github-cache: 'false'
 
       - name: Restore exact pinned dependency checkout and object cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        id: deps-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: package/.lake/packages
           key: singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
@@ -90,6 +95,13 @@ jobs:
           test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
           test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
           sha256sum --check evidence/lockfile-before.sha256
+
+      - name: Preserve verified dependency objects before project compilation
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: ${{ steps.deps-cache.outputs.cache-primary-key }}
 
       - name: Restore the project cache for the exact source revision
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830

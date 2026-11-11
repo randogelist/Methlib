@@ -11,7 +11,7 @@ The physical Parseval/derivative realization is not assumed in this file.
 set_option autoImplicit false
 set_option Elab.async true
 
-open scoped BigOperators
+open scoped BigOperators ENNReal
 
 noncomputable section
 

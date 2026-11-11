@@ -137,7 +137,16 @@ theorem globalSmoothNSE_zero (ν : ℝ) :
   · intro t ht x
     simp [divergence, coordinateDerivative]
   · intro t ht x
-    simp [timeDerivative, convection, gradient, laplacian, coordinateDerivative]
+    have hDerivative (i : Fin 3) : coordinateDerivative (0 : Field) i = 0 := by
+      funext y
+      simp [coordinateDerivative]
+    have hGradient : gradient (0 : Vec → ℝ) x = 0 := by
+      ext i
+      change (fderiv ℝ (0 : Vec → ℝ) x) (unitVector i) = 0
+      simp
+    change timeDerivative (0 : Velocity) t x + convection (0 : Field) x +
+      gradient (0 : Vec → ℝ) x = ν • laplacian (0 : Field) x
+    simp [timeDerivative, convection, hGradient, laplacian, hDerivative]
   · intro t ht
     exact ⟨integrableOn_zero, by simp [spatialMean]⟩
   · intro t ht

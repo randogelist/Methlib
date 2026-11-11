@@ -53,6 +53,54 @@
       "additional_allowed_axioms": [],
       "required_axioms": [],
       "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL"
+    },
+    {
+      "name": "SingularClosure.zeroGalerkinSolution",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution"
+    },
+    {
+      "name": "SingularClosure.zeroGalerkinSolution_velocity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution_velocity"
+    },
+    {
+      "name": "SingularClosure.gradientSquareDensity_nonneg",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.gradientSquareDensity_nonneg"
+    },
+    {
+      "name": "SingularClosure.budget6_ne_top_of_bound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.budget6_ne_top_of_bound"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION"
+    },
+    {
+      "name": "SingularClosure.contDiff_finiteGalerkinRhs",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.contDiff_finiteGalerkinRhs"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt"
     }
   ]
 }

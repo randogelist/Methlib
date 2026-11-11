@@ -60,4 +60,14 @@ AX6
 
 `Contracts.lean` defines actual periodic lifts, physical differential operators, and the unrestricted target. Its zero-datum lemmas are sanity checks only.
 
+`SixChannels.lean` and `SixEnergy.lean` give concrete coefficient projections and exact extended nonnegative spectral energy identities. Physical Fourier synthesis and the gradient integral identity remain separate obligations.
+
+`Galerkin.lean` defines the Euclidean frequency cutoff, actual Fourier coefficients of the initial datum, finite physical synthesis, and the projected NSE convolution ODE. Its zero-data trajectory proves nonvacuity only for that datum.
+
+`Admission.lean` defines `AX6Statement` using the actual synthesized fields and nonnegative extended space-time integrals. It quantifies over all trajectories of the concrete ODE; equivalence with a canonical trajectory requires endpoint 3. No `AX6` axiom is declared at this stage.
+
+`CubicBudget.lean` supplies the scalar integrating-factor argument for endpoint 6. Its analytic hypotheses are explicit; it does not supply the Galerkin energy estimate or the uniform budget.
+
+The existing periodic-B and positive-time packages inspected during assembly do not supply endpoints 8--10: their global conclusions require a global flow or an extension premise. Compactness, nonlinear convergence, trace, pressure recovery, and smooth bootstrap therefore remain proof obligations here.
+
 Full endpoint status and exact evidence will be maintained in `ENDPOINTS.json` and `Singular_Axiomatic_Closure_A_TIER.txt`. Significant implementation corrections are recorded separately in `CORRECTIONS.md`.

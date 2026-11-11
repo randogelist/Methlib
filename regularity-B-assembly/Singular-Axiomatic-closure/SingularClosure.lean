@@ -4,3 +4,5 @@ import SingularClosure.SixEnergy
 import SingularClosure.CubicBudget
 import SingularClosure.Galerkin
 import SingularClosure.Admission
+import SingularClosure.PhysicalChannels
+import SingularClosure.GalerkinAlgebra

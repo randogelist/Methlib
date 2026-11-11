@@ -66,7 +66,7 @@ theorem cubic_dissipation_integrating_factor_antitone
     change ContinuousOn
       (fun t => (y t + ν * Z t) * Real.exp ((-κ) * A t)) (Icc 0 T)
     exact (hy.add (continuousOn_const.mul hZc)).mul
-      ((continuousOn_const.mul hAc).exp)
+      (Real.continuous_exp.comp_continuousOn (continuousOn_const.mul hAc))
   have hFd : ∀ t ∈ Ioo 0 T,
       HasDerivAt F
         (((d t + ν * (z t) ^ 2) - κ * (y t) ^ 2 * Q t) *
@@ -78,8 +78,18 @@ theorem cubic_dissipation_integrating_factor_antitone
       primitive_hasDerivAt_Ioo (hz.pow 2) ht
     have hQd : HasDerivAt Q (d t + ν * (z t) ^ 2) t :=
       (hderiv t ht).add (hZd.const_mul ν)
-    dsimp [F]
-    convert hQd.mul ((hAd.const_mul (-κ)).exp) using 1 <;> ring
+    have hraw : HasDerivAt F
+        ((d t + ν * (z t) ^ 2) * Real.exp ((-κ) * A t) +
+          Q t * (Real.exp ((-κ) * A t) * ((-κ) * (y t) ^ 2))) t :=
+      hQd.mul ((hAd.const_mul (-κ)).exp)
+    have hcoefficient :
+        (d t + ν * (z t) ^ 2) * Real.exp ((-κ) * A t) +
+            Q t * (Real.exp ((-κ) * A t) * ((-κ) * (y t) ^ 2)) =
+          ((d t + ν * (z t) ^ 2) - κ * (y t) ^ 2 * Q t) *
+            Real.exp ((-κ) * A t) := by
+      ring
+    rw [hcoefficient] at hraw
+    exact hraw
   have hFd_nonpos : ∀ t ∈ Ioo 0 T,
       ((d t + ν * (z t) ^ 2) - κ * (y t) ^ 2 * Q t) *
           Real.exp ((-κ) * A t) ≤ 0 := by
