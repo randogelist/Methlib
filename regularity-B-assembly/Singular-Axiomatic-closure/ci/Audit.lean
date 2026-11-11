@@ -711,4 +711,26 @@ example : ∀ (i j : Fin 3) (a : Field) (ha : ContDiff ℝ ∞ a) (hp : SpatialP
 #check @SingularClosure.coordinateAverage_all_coordinateDerivative_commute
 #print axioms SingularClosure.coordinateAverage_all_coordinateDerivative_commute
 
+
+open Metric
+
+example : ∀ (N : ℕ) (c : FourierCoeff),
+    4 * Real.pi ^ 2 * coefficientEnergy N c ≤ coefficientDissipation N c :=
+  @SingularClosure.COEFFICIENT_POINCARE
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.COEFFICIENT_POINCARE"
+#check @SingularClosure.COEFFICIENT_POINCARE
+#print axioms SingularClosure.COEFFICIENT_POINCARE
+
+example : ∀ (N : ℕ) (c : FourierCoeff)
+    (hreal : SpectralReality c),
+    4 * Real.pi ^ 2 * (∫ x in unitCube, ‖finiteSynthesis N c x‖ ^ 2) ≤
+      ∫ x in unitCube,
+        ∑ i : Fin 3, ‖coordinateDerivative (finiteSynthesis N c) i x‖ ^ 2 :=
+  @SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
+
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NORM_POINCARE"
+#check @SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
+#print axioms SingularClosure.FINITE_PHYSICAL_NORM_POINCARE
+
 end

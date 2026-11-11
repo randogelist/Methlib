@@ -41,7 +41,7 @@ theorem smoothSigmaZero_fourier_integrable {a : Field}
 theorem datumFourierIntegrand_neg (a : Field) (k : Frequency) (i : Fin 3)
     (x : Vec) :
     datumFourierIntegrand a (-k) i x = star (datumFourierIntegrand a k i x) := by
-  simp [datumFourierIntegrand, fourierCharacter_neg, star_mul]
+  simp [datumFourierIntegrand, fourierCharacter_neg, star_mul, mul_comm]
 
 /-- Fourier reality follows for every real-valued physical field, without a
 spectral symmetry assumption. Integrability is independently proved above for
@@ -90,7 +90,8 @@ private theorem integral_unitCube_eq_integral_piCube (f : Vec → ℂ) :
   exact hchange.symm
 
 private theorem insertNth_one_eq_insertNth_zero_add (i : Fin 3) (x : Fin 2 → ℝ) :
-    i.insertNth 1 x = i.insertNth 0 x + Pi.single i 1 := by
+    i.insertNth (α := fun _ : Fin 3 => ℝ) 1 x =
+      i.insertNth (α := fun _ : Fin 3 => ℝ) 0 x + Pi.single i 1 := by
   funext j
   rcases Fin.eq_self_or_eq_succAbove i j with rfl | ⟨j, rfl⟩
   · simp
@@ -145,9 +146,12 @@ theorem integral_unitCube_divergence_eq_zero
         fderiv ℝ (f i) (L x) (unitVector i) := by
     have h := ((hf i).differentiable (by simp) (L x)).hasFDerivAt.comp x
       L.hasFDerivAt
-    rw [h.fderiv]
-    simp only [ContinuousLinearMap.comp_apply, hL]
+    have he := congrArg
+      (fun D : (Fin 3 → ℝ) →L[ℝ] ℂ => D (Pi.single i 1)) h.fderiv
+    simpa only [Function.comp_def, ContinuousLinearMap.comp_apply, hL] using he
   rw [integral_unitCube_eq_integral_piCube]
+  change (∫ x in Icc (0 : Fin 3 → ℝ) (fun _ => 1),
+    ∑ i : Fin 3, fderiv ℝ (f i) (L x) (unitVector i)) = 0
   have h := integral_piCube_divergence_eq_zero (fun i x => f i (L x))
     (fun i => (hf i).comp L.contDiff) (by
       intro i x
@@ -184,7 +188,13 @@ theorem datumFourierIntegrand_coordinateDerivative {a : Field}
   have ha' := Complex.ofRealCLM.hasFDerivAt.comp x
     ((EuclideanSpace.proj i : Vec →L[ℝ] ℝ).hasFDerivAt.comp x (ha x).hasFDerivAt)
   have hp := (fourierCharacter_hasFDerivAt (-k) x).mul ha'
-  rw [he, hp.fderiv]
+  have hp' : HasFDerivAt (fun y => fourierCharacter (-k) y * (a y i : ℂ))
+      (fourierCharacter (-k) x •
+        (Complex.ofRealCLM.comp ((EuclideanSpace.proj i).comp (fderiv ℝ a x))) +
+        (a x i : ℂ) • (fourierCharacter (-k) x • fourierPhaseCLM (-k))) x := by
+    simpa only [Function.comp_def, Pi.mul_apply, Complex.ofRealCLM_apply,
+      EuclideanSpace.coe_proj] using hp
+  rw [he, hp'.fderiv]
   simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
     ContinuousLinearMap.comp_apply, Complex.ofRealCLM_apply,
     EuclideanSpace.coe_proj, smul_eq_mul, fourierPhaseCLM_unitVector,

@@ -27,3 +27,6 @@ import SingularClosure.GalerkinGlobal
 import SingularClosure.FiniteParseval
 import SingularClosure.PhysicalEnergy
 import SingularClosure.CoordinateAverageCalculus
+import SingularClosure.PeriodicPoincare
+import SingularClosure.CoordinateAverageOrthogonal
+import SingularClosure.SmoothSixChannels

@@ -109,6 +109,29 @@ jobs:
           path: package/.lake/build
           key: singular-ax6-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake*', 'package/SingularClosure.lean', 'package/SingularClosure/**/*.lean') }}
 
+      - name: Compile and audit frozen endpoints independently
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          endpoint_status=0
+          for endpoint_spec in 3:GalerkinGlobal 4:PhysicalEnergy; do
+            endpoint_number="${endpoint_spec%%:*}"
+            endpoint_module="${endpoint_spec#*:}"
+            if lake build "SingularClosure.${endpoint_module}" 2>&1 | tee "evidence/endpoint-${endpoint_number}-build.log"; then
+              if lake env lean "ci/EndpointAudit${endpoint_number}.lean" 2>&1 | tee "evidence/endpoint-${endpoint_number}-axioms.log"; then
+                if ! python3 ci/check_axioms.py "evidence/endpoint-${endpoint_number}-axioms.log" "ci/expected_endpoint_${endpoint_number}.json" > "evidence/endpoint-${endpoint_number}-audit.json"; then
+                  endpoint_status=1
+                fi
+                cat "evidence/endpoint-${endpoint_number}-audit.json"
+              else
+                endpoint_status=1
+              fi
+            else
+              endpoint_status=1
+            fi
+          done
+          exit "$endpoint_status"
+
       - name: Build the actual source
         run: |
           set -euo pipefail
@@ -137,3 +160,4 @@ jobs:
           name: singular-closure-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: package/evidence
           if-no-files-found: error
+

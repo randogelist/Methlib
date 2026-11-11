@@ -40,7 +40,7 @@ theorem coordinateAverage_integrand_hasFDerivAt (j : Fin 3) (a : Field)
   have h := ((ha.differentiable (by simp))
     (coordinateResetLinear j x + s • unitVector j)).hasFDerivAt.comp x
       ((coordinateResetLinear j).hasFDerivAt.add_const (s • unitVector j))
-  simpa only [resetCoordinate_eq_linear] using h
+  simpa only [Function.comp_def, resetCoordinate_eq_linear] using! h
 
 theorem coordinateAverage_integrand_derivative_continuous (j : Fin 3) (a : Field)
     (ha : ContDiff ℝ ∞ a) :
@@ -146,9 +146,9 @@ theorem coordinateAverage_own_derivative_eq_zero (j : Fin 3) (a : Field)
         (unitVector j) s := by
       simpa using ((hasDerivAt_id s).smul_const (unitVector j)).const_add
         (coordinateResetLinear j x)
-    have hc := ((ha.differentiable (by simp)) (resetCoordinate j s x)).hasFDerivAt
-      .comp_hasDerivAt_of_eq s hl (resetCoordinate_eq_linear j s x)
-    simpa only [Function.comp_def, resetCoordinate_eq_linear, coordinateDerivative] using hc
+    have hd := ((ha.differentiable (by simp)) (resetCoordinate j s x)).hasFDerivAt
+    have hc := hd.comp_hasDerivAt_of_eq s hl (resetCoordinate_eq_linear j s x)
+    simpa only [Function.comp_def, resetCoordinate_eq_linear, coordinateDerivative] using! hc
   have hcont : Continuous (fun s : ℝ => coordinateDerivative a j (resetCoordinate j s x)) := by
     exact ((ha.continuous_fderiv (by simp)).comp
       (resetCoordinate_continuous_slice j x)).clm_apply continuous_const

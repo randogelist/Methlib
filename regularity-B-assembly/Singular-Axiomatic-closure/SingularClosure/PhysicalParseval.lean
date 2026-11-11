@@ -13,11 +13,15 @@ namespace SingularClosure
 
 noncomputable section
 
+theorem real_character_continuous (k : Frequency) (z : ℂ) :
+    Continuous (fun x : Vec => (fourierCharacter k x * z).re) :=
+  Complex.reCLM.continuous.comp
+    ((fourierCharacter_contDiff k).continuous.mul continuous_const)
+
 theorem real_character_product_continuous (k l : Frequency) (z w : ℂ) :
     Continuous (fun x : Vec =>
       (fourierCharacter k x * z).re * (fourierCharacter l x * w).re) :=
-  ((fourierCharacter_contDiff k).continuous.mul continuous_const).re.mul
-    ((fourierCharacter_contDiff l).continuous.mul continuous_const).re
+  (real_character_continuous k z).mul (real_character_continuous l w)
 
 theorem integral_real_character_product_zero (k l : Frequency)
     (hplus : k + l ≠ 0) (hminus : -k + l ≠ 0) (z w : ℂ) :
@@ -25,12 +29,10 @@ theorem integral_real_character_product_zero (k l : Frequency)
       (fourierCharacter k x * z).re * (fourierCharacter l x * w).re) = 0 := by
   have hfirst : IntegrableOn
       (fun x : Vec => fourierCharacter (k + l) x * (z * w)) unitCube volume :=
-    ((fourierCharacter_contDiff (k + l)).continuous.mul continuous_const).continuousOn
-      .integrableOn_compact isCompact_unitCube
+    ((fourierCharacter_contDiff (k + l)).continuous.mul continuous_const).continuousOn.integrableOn_compact isCompact_unitCube
   have hsecond : IntegrableOn
       (fun x : Vec => fourierCharacter (-k + l) x * (star z * w)) unitCube volume :=
-    ((fourierCharacter_contDiff (-k + l)).continuous.mul continuous_const).continuousOn
-      .integrableOn_compact isCompact_unitCube
+    ((fourierCharacter_contDiff (-k + l)).continuous.mul continuous_const).continuousOn.integrableOn_compact isCompact_unitCube
   have hid (x : Vec) :
       (2 : ℝ) * ((fourierCharacter k x * z).re * (fourierCharacter l x * w).re) =
         (fourierCharacter (k + l) x * (z * w)).re +
@@ -97,8 +99,7 @@ theorem integral_unitCube_sum_mul_sum {ι κ : Type*} (s : Finset ι) (t : Finse
       ∑ i ∈ s, ∑ j ∈ t, ∫ x in unitCube, f i x * g j x := by
   simp_rw [Finset.sum_mul, Finset.mul_sum]
   rw [integral_finsetSum s (fun i _ =>
-    (continuous_finsetSum t (fun j _ => (hf i).mul (hg j))).continuousOn
-      .integrableOn_compact isCompact_unitCube)]
+    (continuous_finsetSum t (fun j _ => (hf i).mul (hg j))).continuousOn.integrableOn_compact isCompact_unitCube)]
   apply Finset.sum_congr rfl
   intro i _
   exact integral_finsetSum t (fun j _ =>
@@ -112,8 +113,8 @@ theorem PHYSICAL_CHANNEL_COMPONENT_ORTHOGONALITY (N : ℕ) (A B : Fin 6)
     (∑ l ∈ cutoffModes N, fourierCharacter l x * spectralChannel B b l j).re) = 0
   simp_rw [physical_complex_re_sum]
   rw [integral_unitCube_sum_mul_sum _ _ _ _
-    (fun k => ((fourierCharacter_contDiff k).continuous.mul continuous_const).re)
-    (fun l => ((fourierCharacter_contDiff l).continuous.mul continuous_const).re)]
+    (fun k => real_character_continuous k (spectralChannel A a k j))
+    (fun l => real_character_continuous l (spectralChannel B b l j))]
   apply Finset.sum_eq_zero
   intro k _
   apply Finset.sum_eq_zero
@@ -156,13 +157,11 @@ theorem integral_gradientSquareDensity {v : Field} (hv : ContDiff ℝ ∞ v) :
   unfold gradientSquareDensity
   rw [integral_finsetSum Finset.univ (fun i _ =>
     (continuous_finsetSum Finset.univ (fun j _ =>
-      (coordinateDerivative_component_continuous hv i j).pow 2)).continuousOn
-        .integrableOn_compact isCompact_unitCube)]
+      (coordinateDerivative_component_continuous hv i j).pow 2)).continuousOn.integrableOn_compact isCompact_unitCube)]
   apply Finset.sum_congr rfl
   intro i _
   exact integral_finsetSum Finset.univ (fun j _ =>
-    ((coordinateDerivative_component_continuous hv i j).pow 2).continuousOn
-      .integrableOn_compact isCompact_unitCube)
+    ((coordinateDerivative_component_continuous hv i j).pow 2).continuousOn.integrableOn_compact isCompact_unitCube)
 
 theorem integral_coordinateDerivative_square_sum_channels (N : ℕ) (a : FourierCoeff)
     (i j : Fin 3) :

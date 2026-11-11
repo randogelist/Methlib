@@ -74,6 +74,7 @@ def invariantGalerkinSubspace (N : ℕ) : Submodule ℝ (GalerkinHilbertState N)
   carrier := {z | SpectralReality (hilbertCoeff N z) ∧
     SpectralSolenoidal (hilbertCoeff N z)}
   zero_mem' := by
+    change SpectralReality (hilbertCoeff N 0) ∧ SpectralSolenoidal (hilbertCoeff N 0)
     rw [hilbertCoeff_zero]
     constructor
     · intro k i
@@ -82,6 +83,8 @@ def invariantGalerkinSubspace (N : ℕ) : Submodule ℝ (GalerkinHilbertState N)
       simp
   add_mem' := by
     intro z w hz hw
+    change SpectralReality (hilbertCoeff N (z + w)) ∧
+      SpectralSolenoidal (hilbertCoeff N (z + w))
     rw [hilbertCoeff_add]
     constructor
     · intro k i
@@ -91,6 +94,8 @@ def invariantGalerkinSubspace (N : ℕ) : Submodule ℝ (GalerkinHilbertState N)
         add_zero] using (add_zero (0 : ℂ))
   smul_mem' := by
     intro r z hz
+    change SpectralReality (hilbertCoeff N (r • z)) ∧
+      SpectralSolenoidal (hilbertCoeff N (r • z))
     rw [hilbertCoeff_smul]
     constructor
     · intro k i
@@ -161,7 +166,8 @@ theorem invariantGalerkinRhs_inner (ν : ℝ) (N : ℕ) (z : InvariantGalerkinSt
       ∑ k ∈ cutoffModes N, ∑ i : Fin 3,
         (star (hilbertCoeff N z.val k i) *
           galerkinRhs ν N (hilbertCoeff N z.val) k i).re := by
-  rw [← Submodule.coe_inner, invariantGalerkinRhs_coe, PiLp.inner_apply]
+  change inner (𝕜 := ℝ) z.val (invariantGalerkinRhs ν N z).val = _
+  rw [invariantGalerkinRhs_coe, PiLp.inner_apply]
   simp only [Complex.inner, ← Complex.star_def, Fintype.sum_prod_type]
   simp_rw [hilbertGalerkinRhs, WithLp.ofLp_toLp]
   simp_rw [← hilbertCoeff_apply N z.val]
@@ -204,8 +210,7 @@ theorem invariantGalerkin_curve_coefficient_deriv
       (galerkinRhs ν N (hilbertCoeff N (z t).val) k i) t := by
   have hambient := coe_hasDerivAt (invariantGalerkinSubspace N) z _ t hz
   have hcoord :=
-    ((EuclideanSpace.proj (𝕜 := ℂ) ((⟨k, hk⟩ : ↥(cutoffModes N)), i)).restrictScalars ℝ)
-      .hasFDerivAt.comp_hasDerivAt t hambient
+    ((EuclideanSpace.proj (𝕜 := ℂ) ((⟨k, hk⟩ : ↥(cutoffModes N)), i)).restrictScalars ℝ).hasFDerivAt.comp_hasDerivAt t hambient
   simpa only [Function.comp_def, ContinuousLinearMap.coe_restrictScalars,
     PiLp.proj_apply, invariantGalerkinRhs_coe, hilbertGalerkinRhs,
     WithLp.ofLp_toLp, hilbertCoeff, extendFiniteState, dif_pos hk] using hcoord
@@ -245,8 +250,8 @@ theorem galerkinSolution_exists_of_fourier_invariants (ν : ℝ) (hν : 0 ≤ ν
   }⟩
   · intro k i t ht
     by_cases hk : k ∈ cutoffModes N
-    · exact (invariantGalerkin_curve_coefficient_deriv ν N z t (hzd t ht) k hk i)
-        .continuousAt.continuousWithinAt
+    · have hd := invariantGalerkin_curve_coefficient_deriv ν N z t (hzd t ht) k hk i
+      exact hd.continuousAt.continuousWithinAt
     · have hz : (fun s => hilbertCoeff N (z s).val k i) = fun _ => (0 : ℂ) := by
         funext s
         exact hilbertCoeff_support N (z s).val k hk i
@@ -264,8 +269,7 @@ theorem galerkinSolution_exists_of_fourier_invariants (ν : ℝ) (hν : 0 ≤ ν
     rw [hzraw]
     rfl
   · intro t ht k hk i
-    exact (invariantGalerkin_curve_coefficient_deriv ν N z t (hzd t ht) k hk i)
-      .hasDerivWithinAt
+    exact (invariantGalerkin_curve_coefficient_deriv ν N z t (hzd t ht) k hk i).hasDerivWithinAt
 
 end
 

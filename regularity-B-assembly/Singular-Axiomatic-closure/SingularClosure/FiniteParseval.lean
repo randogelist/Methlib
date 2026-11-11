@@ -66,8 +66,7 @@ theorem integral_unitCube_complex_sum_mul_sum {ι κ : Type*}
       ∑ i ∈ s, ∑ j ∈ t, ∫ x in unitCube, f i x * g j x := by
   simp_rw [Finset.sum_mul, Finset.mul_sum]
   rw [integral_finsetSum s (fun i _ =>
-    (continuous_finsetSum t (fun j _ => (hf i).mul (hg j))).continuousOn
-      .integrableOn_compact isCompact_unitCube)]
+    (continuous_finsetSum t (fun j _ => (hf i).mul (hg j))).continuousOn.integrableOn_compact isCompact_unitCube)]
   apply Finset.sum_congr rfl
   intro i _
   exact integral_finsetSum t (fun j _ =>
@@ -117,8 +116,7 @@ theorem integral_complexFiniteSynthesis_normSq (N : ℕ) (c : FourierCoeff) (j :
       star (complexFiniteSynthesis N c j x) * complexFiniteSynthesis N c j x)
       unitCube volume :=
     ((complexFiniteSynthesis_continuous N c j).star.mul
-      (complexFiniteSynthesis_continuous N c j)).continuousOn
-        .integrableOn_compact isCompact_unitCube
+      (complexFiniteSynthesis_continuous N c j)).continuousOn.integrableOn_compact isCompact_unitCube
   calc
     _ = ∫ x in unitCube,
         (star (complexFiniteSynthesis N c j x) * complexFiniteSynthesis N c j x).re := by
@@ -164,8 +162,7 @@ theorem FINITE_PHYSICAL_ENERGY_PARSEVAL (N : ℕ) (c : FourierCoeff)
   unfold physicalEnergy
   rw [integral_finsetSum Finset.univ (fun j _ =>
     (((EuclideanSpace.proj j : Vec →L[ℝ] ℝ).continuous.comp
-      (finiteSynthesis_contDiff N c).continuous).pow 2).continuousOn
-        .integrableOn_compact isCompact_unitCube)]
+      (finiteSynthesis_contDiff N c).continuous).pow 2).continuousOn.integrableOn_compact isCompact_unitCube)]
   simp_rw [FINITE_PHYSICAL_COMPONENT_PARSEVAL N c hreal]
   exact Finset.sum_comm
 
