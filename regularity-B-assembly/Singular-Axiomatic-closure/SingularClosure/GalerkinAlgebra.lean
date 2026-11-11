@@ -147,7 +147,7 @@ theorem contDiff_extendFiniteState_apply
   classical
   unfold extendFiniteState
   split_ifs with hk
-  · exact contDiff_apply_apply ℝ ℂ ⟨k, hk⟩ i
+  · exact contDiff_apply_apply ℝ ℂ (⟨k, hk⟩ : ↥(cutoffModes N)) i
   · exact contDiff_const
 
 /-- The fixed-frequency Leray map is smooth, including its unused zero branch. -/
@@ -155,8 +155,9 @@ theorem contDiff_coefficientLeray (k : Frequency) :
     ContDiff ℝ ∞ (coefficientLeray k) := by
   classical
   by_cases hk : k = 0
-  · simpa only [coefficientLeray, hk, if_true] using
-      (contDiff_id : ContDiff ℝ ∞ (fun v : Fin 3 → ℂ => v))
+  · subst k
+    change ContDiff ℝ ∞ (fun v : Fin 3 → ℂ => v)
+    exact contDiff_id
   · apply contDiff_pi.2
     intro i
     simp only [coefficientLeray, hk, if_false]
@@ -260,9 +261,9 @@ theorem coefficientLeray_pairing (k : Frequency) (c v : Fin 3 → ℂ)
     simp
 
 /-- Exact scalar viscous splitting, before any nonlinear cancellation. -/
-theorem complex_viscous_pairing (λ : ℝ) (z w : ℂ) :
-    (star z * (-(λ : ℂ) * z - w)).re =
-      -λ * Complex.normSq z - (star z * w).re := by
+theorem complex_viscous_pairing (lam : ℝ) (z w : ℂ) :
+    (star z * (-(lam : ℂ) * z - w)).re =
+      -lam * Complex.normSq z - (star z * w).re := by
   simp [Complex.star_def, Complex.mul_re, Complex.mul_im, Complex.normSq_apply]
   ring
 

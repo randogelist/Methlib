@@ -98,21 +98,26 @@ theorem physicalChannel_v_w_pointwise_orthogonal (N : ℕ) (A B : Fin 6)
     rw [physicalChannel_v_third_zero N A hA, zero_mul]
   · rw [physicalChannel_w_horizontal_zero N B hB b x i hi2, mul_zero]
 
-@[fun_prop]
 theorem fourierCharacter_contDiff (k : Frequency) :
     ContDiff ℝ ∞ (fourierCharacter k) := by
+  have hphase : ContDiff ℝ ∞
+      (fun x : Vec => 2 * Real.pi * (∑ i : Fin 3, (k i : ℝ) * x i)) := by
+    fun_prop
   unfold fourierCharacter
-  fun_prop
+  exact ((Complex.ofRealCLM.contDiff.comp hphase).mul
+    (show ContDiff ℝ ∞ (fun _ : Vec => Complex.I) from contDiff_const)).cexp
 
 /-- Finite synthesis is smooth without any summability assumption on the family. -/
-@[fun_prop]
 theorem finiteSynthesis_contDiff (N : ℕ) (a : FourierCoeff) :
     ContDiff ℝ ∞ (finiteSynthesis N a) := by
   apply (contDiff_piLp 2).2
   intro i
   change ContDiff ℝ ∞
     (fun x : Vec => (∑ k ∈ cutoffModes N, fourierCharacter k x * a k i).re)
-  fun_prop
+  have hsum : ContDiff ℝ ∞
+      (fun x : Vec => ∑ k ∈ cutoffModes N, fourierCharacter k x * a k i) :=
+    ContDiff.sum fun k _ => (fourierCharacter_contDiff k).mul contDiff_const
+  exact Complex.reCLM.contDiff.comp hsum
 
 theorem physicalChannel_contDiff (N : ℕ) (A : Fin 6) (a : FourierCoeff) :
     ContDiff ℝ ∞ (physicalChannel N A a) :=

@@ -4,7 +4,7 @@ set_option autoImplicit false
 set_option Elab.async false
 
 open Set MeasureTheory SingularClosure
-open scoped BigOperators Interval ENNReal ContDiff
+open scoped BigOperators Interval ENNReal NNReal ContDiff
 
 noncomputable section
 

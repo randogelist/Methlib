@@ -21,7 +21,7 @@ nonnegative real number and is independent of the cutoff N.
 set_option autoImplicit false
 
 open Set MeasureTheory
-open scoped BigOperators ENNReal
+open scoped BigOperators ENNReal NNReal
 
 namespace SingularClosure
 

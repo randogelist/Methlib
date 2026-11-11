@@ -82,8 +82,14 @@ theorem SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ (a : FourierCoeff) :
 theorem spectralEnergy_channel_le (w : Frequency → ℝ≥0∞)
     (A : Fin 6) (a : FourierCoeff) :
     spectralEnergy w (spectralChannel A a) ≤ spectralEnergy w a := by
-  rw [← SIX_CHANNEL_SPECTRAL_ENERGY_EQ w a]
-  exact Finset.single_le_sum (fun _ _ => zero_le) (Finset.mem_univ A)
+  calc
+    spectralEnergy w (spectralChannel A a) ≤
+        ∑ B : Fin 6, spectralEnergy w (spectralChannel B a) :=
+      Finset.single_le_sum
+        (fun B _ => (show (0 : ℝ≥0∞) ≤ spectralEnergy w (spectralChannel B a)
+          from zero_le))
+        (Finset.mem_univ A)
+    _ = spectralEnergy w a := SIX_CHANNEL_SPECTRAL_ENERGY_EQ w a
 
 theorem spectralEnergy_channel_finite (w : Frequency → ℝ≥0∞)
     (A : Fin 6) {a : FourierCoeff} (ha : spectralEnergy w a < ⊤) :
