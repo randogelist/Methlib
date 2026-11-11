@@ -123,7 +123,8 @@ theorem CriticalRegularSolution.serrin_time_memLp
   have hnorm (t : ℝ) : ‖criticalSpatialNorm 6 (U.flow.velocity t)‖ =
       criticalSpatialNorm 6 (U.flow.velocity t) :=
     Real.norm_of_nonneg (criticalSpatialNorm_nonneg 6 _)
-  simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, hnorm] using hfour
+  have hpow (x : ℝ) : x ^ (4 : ℝ) = x ^ (4 : ℕ) := Real.rpow_ofNat x 4
+  simpa only [ENNReal.toReal_ofNat, hnorm, hpow] using hfour
 
 end
 end SingularClosure

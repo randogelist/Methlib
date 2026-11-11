@@ -49,9 +49,14 @@ theorem critical_halfline_fourth_budget
       hlin.trans_lt ENNReal.ofReal_lt_top
   refine ⟨?_, ?_⟩
   · apply (integrable_norm_rpow_iff hf
-      (by norm_num : (4 : ℝ≥0∞) ≠ 0) (by norm_num : (4 : ℝ≥0∞) ≠ ∞)).mp
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_natCast, Real.norm_eq_abs,
-      show (4 : ℕ) = 2 * 2 from rfl, pow_mul, sq_abs] using hi
+      (by norm_num : (4 : ℝ≥0∞) ≠ 0) (by norm_num : (4 : ℝ≥0∞) ≠ ⊤)).mp
+    have hpow (x : ℝ) : ‖x‖ ^ (4 : ℝ) = x ^ (4 : ℕ) := by
+      rw [Real.rpow_ofNat, Real.norm_eq_abs]
+      calc
+        |x| ^ 4 = (|x| ^ 2) ^ 2 := by ring
+        _ = (x ^ 2) ^ 2 := by rw [sq_abs]
+        _ = x ^ 4 := by ring
+    simpa only [ENNReal.toReal_ofNat, hpow] using hi
   · have heq := ofReal_integral_eq_lintegral_ofReal hi
       (Filter.Eventually.of_forall hf0)
     rw [← heq] at hlin
@@ -78,7 +83,10 @@ theorem CriticalRegularSolution.serrin_global_memLp_of_quartic_budget
   · intro T hT
     have h := (U.serrin_time_memLp T (hquartic T hT).1).integrable_norm_pow
       (by norm_num : (4 : ℕ) ≠ 0)
-    simpa only [Real.norm_eq_abs, show (4 : ℕ) = 2 * 2 from rfl, pow_mul, sq_abs] using h
+    have hnorm (t : ℝ) : ‖criticalSpatialNorm 6 (U.flow.velocity t)‖ =
+        criticalSpatialNorm 6 (U.flow.velocity t) :=
+      Real.norm_of_nonneg (criticalSpatialNorm_nonneg 6 _)
+    simpa only [hnorm] using h
   · intro T hT
     have h := (U.serrin_fourth_integral_le T hT.le (hquartic T hT).1).trans
       (mul_le_mul_of_nonneg_left (hquartic T hT).2 criticalPhysicalL6FourthConstant_pos.le)

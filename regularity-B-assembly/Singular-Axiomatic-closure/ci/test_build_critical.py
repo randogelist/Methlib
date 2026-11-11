@@ -82,17 +82,25 @@ class SchedulerTests(unittest.TestCase):
         self.assertEqual(calls[2][:3], ['lake', 'env', 'lean'])
         self.assertEqual(calls[3][1], 'ci/check_axioms.py')
 
-    def test_bulk_failure_even_when_endpoint_audit_passes(self):
-        code, report, _ = self.execute([(1, 'Built SingularClosure.SmallDataClosure PASS\n')])
+    def test_bulk_failure_skips_audits_despite_success_text(self):
+        code, report, calls = self.execute([(1, 'Built SingularClosure.SmallDataClosure PASS\n')])
         self.assertEqual(code, 1)
-        self.assertEqual(report['audits'][self.root], 'PASS')
+        self.assertEqual(report['status'], 'FAIL')
+        self.assertEqual(report['builds'], {self.base: 'UNVERIFIED', self.root: 'UNVERIFIED'})
+        self.assertEqual(report['audits'], {self.root: 'NOT_RUN'})
+        self.assertEqual(report['audit_coverage'], 'NOT_RUN')
         self.assertEqual(report['bulk_build'], 'FAIL')
+        self.assertEqual(calls, [['lake', 'build', self.base, self.root]])
 
-    def test_diagnostic_error_only_blocks(self):
+    def test_bulk_failure_retains_diagnostic_status_and_skips_audits(self):
         code, report, calls = self.execute([(1, 'error: SingularClosure/Base.lean:1: broken\n')])
         self.assertEqual(code, 1)
-        self.assertEqual(report['audits'][self.root], 'BLOCKED')
-        self.assertEqual(len(calls), 1)
+        self.assertEqual(report['status'], 'FAIL')
+        self.assertEqual(report['bulk_build'], 'FAIL')
+        self.assertEqual(report['builds'], {self.base: 'FAIL', self.root: 'UNVERIFIED'})
+        self.assertEqual(report['audits'], {self.root: 'NOT_RUN'})
+        self.assertEqual(report['audit_coverage'], 'NOT_RUN')
+        self.assertEqual(calls, [['lake', 'build', self.base, self.root]])
 
     def test_endpoint_build_failure(self):
         code, report, calls = self.execute([(0, ''), (1, '')])

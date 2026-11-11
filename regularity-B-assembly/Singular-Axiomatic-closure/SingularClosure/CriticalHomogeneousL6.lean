@@ -73,7 +73,10 @@ theorem CriticalRegularSolution.serrin_fourth_integral_le
   have h6int : IntegrableOn (fun t => criticalSpatialNorm 6 (U.flow.velocity t) ^ 4)
       (Ioc (0 : ℝ) T) volume := by
     have h := h6.integrable_norm_pow (by norm_num : (4 : ℕ) ≠ 0)
-    simpa only [Real.norm_eq_abs, show (4 : ℕ) = 2 * 2 from rfl, pow_mul, sq_abs] using h
+    have hnorm (t : ℝ) : ‖criticalSpatialNorm 6 (U.flow.velocity t)‖ =
+        criticalSpatialNorm 6 (U.flow.velocity t) :=
+      Real.norm_of_nonneg (criticalSpatialNorm_nonneg 6 _)
+    simpa only [hnorm] using h
   have hDint : IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
       (Ioc (0 : ℝ) T) volume := hquartic.mono_set Ioc_subset_Icc_self
   rw [intervalIntegral.integral_of_le hT, intervalIntegral.integral_of_le hT,

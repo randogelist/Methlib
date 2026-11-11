@@ -110,6 +110,11 @@ def main():
                 module = source.replace('/', '.')
                 if module in status:
                     status[module] = 'FAIL'
+            audits.update({module: 'NOT_RUN' for module in required})
+            result['audit_coverage'] = 'NOT_RUN'
+            write_status(result)
+            print(json.dumps(result), flush=True)
+            return 1
 
         @cache
         def ancestors(module):

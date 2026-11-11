@@ -111,11 +111,11 @@ theorem CriticalRegularSolution.leray_strong_trace
 theorem CriticalRegularSolution.leray_velocity_energy_class
     {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a)
     (T : ℝ) :
-    MemLp (fun t => criticalL2Representative (U.lerayVelocity t)) ∞
+    MemLp (fun t => criticalL2Representative (U.lerayVelocity t)) ⊤
       (volume.restrict (Ioc (0 : ℝ) T)) := by
   have hc := U.lerayL2_continuous.mono (show Icc (0 : ℝ) T ⊆ Ici 0 from fun _ ht => ht.1)
   obtain ⟨C, hC⟩ := isCompact_Icc.exists_bound_of_continuousOn hc
-  have hmem : MemLp (fun t => criticalL2Representative (U.lerayVelocity t)) ∞
+  have hmem : MemLp (fun t => criticalL2Representative (U.lerayVelocity t)) ⊤
       (volume.restrict (Icc (0 : ℝ) T)) := by
     apply MemLp.of_bound
       (hc.aestronglyMeasurable_of_isCompact isCompact_Icc measurableSet_Icc) C
@@ -181,6 +181,7 @@ theorem CriticalRegularSolution.leray_gradient_energy_class_of_measurable
   apply (memLp_two_iff_integrable_sq_norm hm).mpr
   apply (hD.const_mul 3).mono' (hm.norm.pow 2)
   filter_upwards [ae_restrict_mem measurableSet_Ioc] with t ht
+  change ‖(‖criticalL2Representative (U.lerayGradient t)‖ ^ 2 : ℝ)‖ ≤ _
   rw [Real.norm_of_nonneg (sq_nonneg _)]
   have hg : MemLp (U.lerayGradient t) 2 (volume.restrict unitCube) := by
     rw [U.lerayGradient_of_pos ht.1]
