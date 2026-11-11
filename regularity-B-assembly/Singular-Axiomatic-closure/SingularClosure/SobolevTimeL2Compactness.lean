@@ -32,12 +32,14 @@ def canonicalSobolevTimeH1L2 (ν : ℝ) (hν : 0 < ν) (a : Field)
 theorem timeH1L2_norm_sq (T : ℝ) (f : TimeH1L2 T) :
     ‖f‖ ^ 2 = ∫ t in Icc (0 : ℝ) T, ‖f t‖ ^ 2 := by
   calc
-    _ = (inner ℂ f f).re := by simp [inner_self_eq_norm_sq]
+    _ = (inner ℂ f f).re := (inner_self_eq_norm_sq (𝕜 := ℂ) f).symm
     _ = (∫ t in Icc (0 : ℝ) T, inner ℂ (f t) (f t)).re := by
       rw [L2.inner_def]
     _ = ∫ t in Icc (0 : ℝ) T, (inner ℂ (f t) (f t)).re :=
       (Complex.reCLM.integral_comp_comm (L2.integrable_inner (𝕜 := ℂ) f f)).symm
-    _ = _ := by simp only [inner_self_eq_norm_sq, Complex.ofReal_re]
+    _ = _ := by
+      apply integral_congr_ae
+      exact Filter.Eventually.of_forall (fun t => inner_self_eq_norm_sq (𝕜 := ℂ) (f t))
 
 theorem canonicalSobolevTimeH1L2_sub_norm_sq (ν : ℝ) (hν : 0 < ν) (a : Field)
     (ha : SmoothSigmaZero a) (T : ℝ) (hT : 0 ≤ T) (m n : ℕ) :

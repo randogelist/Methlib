@@ -25,11 +25,13 @@ def torusSobolevH0Coeff (k : Frequency) (i : Fin 3) : TorusSobolev 0 →L[ℂ] �
 @[simp]
 theorem torusSobolevH0Coeff_apply (k : Frequency) (i : Fin 3) (c : TorusSobolev 0) :
     torusSobolevH0Coeff k i c = c.val k i := by
-  simp [torusSobolevH0Coeff, lp.evalCLM, lp.evalₗ]
+  change (torusSobolevWeight k : ℂ) ^ 0 * c.val k i = c.val k i
+  simp only [pow_zero, one_mul]
 
 theorem torusSobolevH0Coeff_continuous (k : Frequency) (i : Fin 3) :
     Continuous (fun c : TorusSobolev 0 => c.val k i) := by
-  simpa only [torusSobolevH0Coeff_apply] using (torusSobolevH0Coeff k i).continuous
+  exact (torusSobolevH0Coeff k i).continuous.congr
+    (fun c => torusSobolevH0Coeff_apply k i c)
 
 theorem torusSobolevH0_reality_of_tendsto
     {α : Type*} {l : Filter α} [l.NeBot] {v : α → TorusSobolev 0} {u : TorusSobolev 0}

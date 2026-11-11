@@ -180,7 +180,9 @@ theorem sobolevScalarEvaluation_summable (n : ℕ) (x : Vec) (i : Fin 3) :
     Summable (fun k : Frequency => fourierCharacter k x • torusSobolevCoeff (n + 4) k i) := by
   have hA : Summable (fun k : Frequency => ‖torusSobolevCoeff (n + 4) k i‖) := by
     simpa only [pow_zero, mul_one] using sobolevEvaluation_moment_summable n 0 (Nat.zero_le n) i
-  exact banachFourierSeries_summable (fun k => torusSobolevCoeff (n + 4) k i) hA x
+  exact Summable.of_norm_bounded
+    (f := fun k : Frequency => fourierCharacter k x • torusSobolevCoeff (n + 4) k i)
+    hA (fun k => by simp only [norm_smul, fourierCharacter_norm, one_mul, le_refl])
 
 theorem sobolevScalarEvaluation_apply (n : ℕ) (x : Vec) (i : Fin 3)
     (c : TorusSobolev (n + 4)) :
@@ -195,12 +197,15 @@ theorem sobolevScalarEvaluation_contDiff (n : ℕ) (i : Fin 3) :
     ContDiff ℝ n (fun x : Vec => sobolevScalarEvaluation n x i) :=
   banachFourierSeries_contDiff_nat n _ (fun m hm => sobolevEvaluation_moment_summable n m hm i)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem sobolevScalarEvaluation_real_contDiff (n : ℕ) (i : Fin 3) :
     ContDiff ℝ n (fun x : Vec => (sobolevScalarEvaluation n x i).restrictScalars ℝ) := by
   let R : (TorusSobolev (n + 4) →L[ℂ] ℂ) →L[ℝ]
       (TorusSobolev (n + 4) →L[ℝ] ℂ) :=
     ContinuousLinearMap.restrictScalarsL ℂ (TorusSobolev (n + 4)) ℂ ℝ ℝ
-  have hR : ContDiff ℝ n R := ContinuousLinearMap.contDiff R
+  have hR : ContDiff ℝ n R := ContinuousLinearMap.contDiff
+    (𝕜 := ℝ) (E := TorusSobolev (n + 4) →L[ℂ] ℂ)
+    (F := TorusSobolev (n + 4) →L[ℝ] ℂ) (n := (n : ℕ∞ω)) R
   simpa only [R, ContinuousLinearMap.coe_restrict_scalarsL', Function.comp_def] using
     hR.comp (sobolevScalarEvaluation_contDiff n i)
 

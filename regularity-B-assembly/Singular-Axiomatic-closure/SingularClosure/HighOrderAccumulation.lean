@@ -92,7 +92,7 @@ theorem AX6_UNIFORM_HIGH_ORDER_ACCUMULATION (hAX6 : AX6Statement)
   intro t ht
   have hzsq (s : ℝ) : (z s) ^ 2 = highOrderEnergy (m + 1) N (g.coeff s) :=
     Real.sq_sqrt (highOrderEnergy_nonneg _ _ _)
-  simpa only [hzsq, highOrderEnergy_eq_sobolev_norm_sq,
+  simpa only [y, E₀, hzsq, highOrderEnergy_eq_sobolev_norm_sq,
     GalerkinSolution.sobolevState] using hb t ht
 
 end
