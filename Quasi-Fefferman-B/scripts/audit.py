@@ -24,7 +24,7 @@ def check_log(text, names):
         axioms = {a.strip() for a in raw_names.split(",") if a.strip()}
         if not axioms <= ALLOWED:
             raise ValueError(f"Unapproved axioms for {name}: {sorted(axioms - ALLOWED)}")
-        begin, end = f"TYPE_BEGIN:{name}\n", f"TYPE_END:{name}"
+        begin, end = f"TYPE_BEGIN:{name}\n", f"TYPE_END:{name}\n"
         if text.count(begin) != 1 or text.count(end) != 1:
             raise ValueError(f"Missing/duplicate type marker for {name}")
         statement = text.split(begin)[1].split(end)[0].strip()
@@ -39,6 +39,8 @@ def self_test():
     assert check_log(good, [name])[name]["axioms"] == ["propext"]
     universe_good = good.replace("[propext]", "[propext, Classical.choice.{u}, Quot.sound.{u}]")
     assert set(check_log(universe_good, [name])[name]["axioms"]) == ALLOWED
+    prefix_other = good.replace(name, name + "_SCALED")
+    assert len(check_log(good + prefix_other, [name, name + "_SCALED"])) == 2
     for bad in [good.replace("[propext]", "[sorryAx]"), good + good,
                 good.replace("TYPE_END:", "MISSING:"), good + "error: failed\n",
                 good + "error(lean.synthInstanceFailed): failed\n",

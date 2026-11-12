@@ -111,7 +111,7 @@ theorem physicalH1_cutoff_bounds {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}
     intro n
     have hb := coefficientDissipation_initial_cutoff_le N (w n) (hw n) (hwp n)
     rw [integral_gradientSquareDensity_eq_sum_physicalEnergy _ (hw n)] at hb
-    dsimp only [coordinateDerivative] at hb
+    try dsimp only [coordinateDerivative] at hb
     exact hb
 
 theorem criticalEnergy_midpoint (N : ℕ) (c : FourierCoeff) :
@@ -166,12 +166,14 @@ theorem physicalHalfEnergy_cutoff (v : Field) (N : ℕ) :
   rw [hprod, sobolevCutoffModes, Finset.sum_insert (by
     intro h
     exact ((mem_cutoffModes_iff N 0).mp h).2.1 rfl)]
-  simp only [physicalHalfEnergyTerm, if_pos rfl, Finset.sum_const_zero, zero_add]
+  have hzero : (∑ i : Fin 3, physicalHalfEnergyTerm v (0, i)) = 0 := by
+    simp [physicalHalfEnergyTerm]
+  rw [hzero, zero_add]
   unfold criticalEnergy
   apply Finset.sum_congr rfl
   intro k hk
   have hk0 := ((mem_cutoffModes_iff N k).mp hk).2.1
-  simp only [if_neg hk0, pow_one]
+  simp only [physicalHalfEnergyTerm, if_neg hk0, pow_one]
 
 theorem physicalH1_halfEnergy_le {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}
     (hv : CriticalPhysicalH1 v G) :

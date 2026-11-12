@@ -35,8 +35,9 @@ theorem energy_H0_tail_sq (K : ℕ) (hK : 0 < K) (v : TorusSobolev 1) :
   have hKr : (0 : ℝ) < K := by exact_mod_cast hK
   have hKone : (1 : ℝ) ≤ K := by exact_mod_cast hK
   have hInv : 0 ≤ (K : ℝ)⁻¹ := inv_nonneg.mpr hKr.le
-  have hInvOne : (K : ℝ)⁻¹ ≤ 1 :=
-    (inv_le_iff₀ hKr).mpr (by simpa using hKone)
+  have hInvOne : (K : ℝ)⁻¹ ≤ 1 := by
+    rw [inv_eq_one_div]
+    exact (div_le_iff₀ hKr).mpr (by simpa using hKone)
   have hInvSq : ((K : ℝ)⁻¹) ^ 2 ≤ 4 * (K : ℝ)⁻¹ := by
     nlinarith
   have htail := pow_le_pow_left₀ (norm_nonneg _)
@@ -44,7 +45,7 @@ theorem energy_H0_tail_sq (K : ℕ) (hK : 0 < K) (v : TorusSobolev 1) :
   rw [mul_pow] at htail
   exact htail.trans (mul_le_mul_of_nonneg_right hInvSq (sq_nonneg ‖v‖))
 
-theorem GalerkinSolution.energy_H0_time_tail
+theorem _root_.SingularClosure.GalerkinSolution.energy_H0_time_tail
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)
     (T B : ℝ) (hT : 0 ≤ T)
     (hbudget : (∫ t in (0 : ℝ)..T, ‖g.sobolevState 1 t‖ ^ 2) ≤ B)
@@ -63,6 +64,8 @@ theorem GalerkinSolution.energy_H0_time_tail
         (((h0.sub hp).norm.pow 2).intervalIntegrable_of_Icc hT)
         (((h1.norm.pow 2).const_mul (4 * (K : ℝ)⁻¹)).intervalIntegrable_of_Icc hT)
       intro t ht
+      change ‖g.sobolevState 0 t - torusSobolevCutoff 0 K (g.sobolevState 0 t)‖ ^ 2 ≤
+        4 * (K : ℝ)⁻¹ * ‖g.sobolevState 1 t‖ ^ 2
       simpa only [GalerkinSolution.sobolevState_inclusion] using
         energy_H0_tail_sq K hK (g.sobolevState 1 t)
     _ = 4 * (K : ℝ)⁻¹ * (∫ t in (0 : ℝ)..T, ‖g.sobolevState 1 t‖ ^ 2) :=
@@ -84,7 +87,7 @@ private theorem energy_norm_sub_three_parts
   nlinarith [sq_nonneg (‖u - p‖ - ‖p - q‖), sq_nonneg (‖u - p‖ - ‖v - q‖),
     sq_nonneg (‖p - q‖ - ‖v - q‖)]
 
-/-- The high-frequency energy budget and the finite-band gap control the full time-H1 gap. -/
+/-- The high-frequency energy budget and the finite-band gap control the full time-H0 gap. -/
 theorem energyGalerkin_H0_time_difference_bound
     {ν : ℝ} {a b : Field} {N M : ℕ}
     (g : GalerkinSolution ν a N) (h : GalerkinSolution ν b M)
@@ -136,7 +139,7 @@ theorem energyGalerkin_H0_time_difference_bound
   have hhtail := h.energy_H0_time_tail T B hT hh K hK
   nlinarith
 
-def GalerkinSolution.energyTimeH0L2 {ν : ℝ} {a : Field} {N : ℕ}
+def _root_.SingularClosure.GalerkinSolution.energyTimeH0L2 {ν : ℝ} {a : Field} {N : ℕ}
     (g : GalerkinSolution ν a N) (T : ℝ) : EnergyTimeH0L2 T :=
   (g.sobolevState_memLp 0 T 2).toLp (g.sobolevState 0)
 

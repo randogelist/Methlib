@@ -49,27 +49,80 @@ not automatically resolve the larger Q/A endpoint.
 
 ## Verified exact declarations
 
-Evidence: [external run 43147241136](https://github.com/randogelist/Methlib/actions/runs/43147241136),
-commit `09def662a6ee3a7b8bb2c3b20c82eeaa5292b13d`.
+`!=!` = exact external compiler and standard-only theorem axiom audit.
 
-[Source-hash and axiom ledger](evidence/run-43147241136-reinspection.json).
-The initial workflow parser rejected standard axioms with printed universe
-arguments; direct cached-log reinspection verified the same three permitted
-axiom constants. The parser and rejection fixtures are corrected.
+Evidence: [run 43148814987](https://github.com/randogelist/Methlib/actions/runs/43148814987),
+commit `1f36ab126d72bf4b531a57ef062f5cb661358dce`.
+
+[Source, dependency and axiom ledger](evidence/run-43148814987-reinspection.json).
+The cached log verifies 59 exact declarations: 47 directly accepted by the
+workflow plus 12 whose exact type markers were validated after correcting
+a prefix-collision bug in the parser. No Lean source or proof was changed
+for this reinspection. The corrected parser is covered by rejection fixtures.
 
 | Marker | Exact declaration |
 |---|---|
-| `!=!` | `POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN` |
-| `!=!` | `TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN` |
-| `!=!` | `CONTINUOUS_QUADRATIC_BARRIER` |
-| `!=!` | `QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET` |
-| `!=!` | `QUADRATIC_BARRIER_ZERO_HEAT_BUDGET` |
-| `!=!` | `QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET` |
-| `!=!` | `QUADRATIC_BARRIER_SQUARE_BUDGET` |
-| `!=!` | `GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION` |
-| `!=!` | `GALERKIN_POSITIVE_FLOW_OF_H2_SEED` |
+| `!=!` | `QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION` |
+| `!=!` | `QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET` |
+| `!=!` | `QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT` |
+| `!=!` | `QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER` |
+| `!=!` | `QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY` |
+| `!=!` | `QuasiFeffermanB.CUTOFF_NONNEG` |
+| `!=!` | `QuasiFeffermanB.CUTOFF_POS` |
+| `!=!` | `QuasiFeffermanB.CUTOFF_ZERO` |
+| `!=!` | `QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE` |
+| `!=!` | `QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE` |
+| `!=!` | `QuasiFeffermanB.ENERGY_SLICE_CUTOFF` |
+| `!=!` | `QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0` |
+| `!=!` | `QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0` |
+| `!=!` | `QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0` |
+| `!=!` | `QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS` |
+| `!=!` | `QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL` |
+| `!=!` | `QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE` |
+| `!=!` | `QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND` |
+| `!=!` | `QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION` |
+| `!=!` | `QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED` |
+| `!=!` | `QuasiFeffermanB.LH_ENERGY_BOUNDS` |
+| `!=!` | `QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT` |
+| `!=!` | `QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN` |
+| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET` |
+| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET` |
+| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET` |
+| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET` |
+| `!=!` | `QuasiFeffermanB.SAFE_CUTOFF_GT` |
+| `!=!` | `QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT` |
+| `!=!` | `QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET` |
+| `!=!` | `QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER` |
+| `!=!` | `QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED` |
+| `!=!` | `QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE` |
+| `!=!` | `QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN` |
+| `!=!` | `QuasiFeffermanB.caloricBilinearConstant_pos` |
+| `!=!` | `QuasiFeffermanB.caloricBilinearConstant_sq` |
+| `!=!` | `QuasiFeffermanB.caloricHeatBudget_nonneg` |
+| `!=!` | `QuasiFeffermanB.caloricHeatBudget_sq` |
+| `!=!` | `QuasiFeffermanB.caloric_fourierCharacter_norm` |
+| `!=!` | `QuasiFeffermanB.complexTransverse_pythagoras` |
+| `!=!` | `QuasiFeffermanB.complexTransverse_symmetric` |
+| `!=!` | `QuasiFeffermanB.complexVecNorm_add_le` |
+| `!=!` | `QuasiFeffermanB.complexVecNorm_eq_norm` |
+| `!=!` | `QuasiFeffermanB.complexVecNorm_nonneg` |
+| `!=!` | `QuasiFeffermanB.complexVecNorm_smul` |
+| `!=!` | `QuasiFeffermanB.complexVecNorm_sq` |
+| `!=!` | `QuasiFeffermanB.energyModeRhsBound_nonneg` |
+| `!=!` | `QuasiFeffermanB.energyModeTransportBound_nonneg` |
+| `!=!` | `QuasiFeffermanB.energyModeTransport_norm_le` |
+| `!=!` | `QuasiFeffermanB.energy_coefficient_curve_precompact` |
+| `!=!` | `QuasiFeffermanB.finiteChi0_nonneg` |
+| `!=!` | `QuasiFeffermanB.fullFourierRhs_energy_bound` |
+| `!=!` | `QuasiFeffermanB.galerkin_H0_energy_bound` |
+| `!=!` | `QuasiFeffermanB.galerkin_H0_norm_sq` |
+| `!=!` | `QuasiFeffermanB.galerkin_energy_coefficient_modulus` |
+| `!=!` | `QuasiFeffermanB.globalEnergyCoefficient_continuousOn` |
+| `!=!` | `QuasiFeffermanB.globalEnergyCoefficient_eq_horizon` |
+| `!=!` | `QuasiFeffermanB.globalEnergyCoefficient_uniform_limit` |
+| `!=!` | `QuasiFeffermanB.norm_component_le_complexVecNorm` |
 
-These declarations retain their explicit quantitative/analytic premises.
+All displayed premises remain part of each exact theorem.
 `QFB_ROOT_UNCONDITIONAL_A_TIER = PENDING`.
 
 ## Frozen statement

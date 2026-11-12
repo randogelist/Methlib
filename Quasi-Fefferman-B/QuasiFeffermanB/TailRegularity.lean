@@ -32,7 +32,7 @@ theorem positive_timeDerivative_translate
     exact hdiff.hasDerivAt
   have hcomp : HasDerivAt (fun r : ℝ => v (r - s) x)
       (timeDerivative v (t - s) x) t := by
-    simpa only [Function.comp_def, one_smul] using
+    simpa only [Function.comp_def, id_eq, one_smul] using
       hD.scomp t ((hasDerivAt_id t).sub_const s)
   exact hcomp.hasDerivWithinAt.derivWithin ((uniqueDiffOn_Ici 0) t ht.le)
 

@@ -32,14 +32,14 @@ theorem HEAT_MULTIPLIER_SQUARE_INTEGRAL
 /-- Exact pairwise heat integral appearing in the finite caloric quadratic
 form. No Fourier lattice estimate is used. -/
 theorem HEAT_PAIR_INTEGRAL
-    (ν κ λ : ℝ) (hν : 0 < ν) (hfreq : 0 < κ ^ 2 + λ ^ 2) :
+    (ν κ η : ℝ) (hν : 0 < ν) (hfreq : 0 < κ ^ 2 + η ^ 2) :
     (∫ t : ℝ in Ioi 0,
-      Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * λ ^ 2 * t)) =
-      1 / (ν * (κ ^ 2 + λ ^ 2)) := by
-  have hdecay : -(ν * (κ ^ 2 + λ ^ 2)) < 0 := neg_lt_zero.mpr (mul_pos hν hfreq)
+      Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * η ^ 2 * t)) =
+      1 / (ν * (κ ^ 2 + η ^ 2)) := by
+  have hdecay : -(ν * (κ ^ 2 + η ^ 2)) < 0 := neg_lt_zero.mpr (mul_pos hν hfreq)
   have hfun :
-      (fun t : ℝ => Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * λ ^ 2 * t)) =
-      (fun t : ℝ => Real.exp ((-(ν * (κ ^ 2 + λ ^ 2))) * t)) := by
+      (fun t : ℝ => Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * η ^ 2 * t)) =
+      (fun t : ℝ => Real.exp ((-(ν * (κ ^ 2 + η ^ 2))) * t)) := by
     funext t
     rw [← Real.exp_add]
     congr 1
@@ -49,10 +49,10 @@ theorem HEAT_PAIR_INTEGRAL
 
 /-- The preceding pairwise heat integrand is integrable. -/
 theorem HEAT_PAIR_INTEGRABLE
-    (ν κ λ : ℝ) (hν : 0 < ν) (hfreq : 0 < κ ^ 2 + λ ^ 2) :
+    (ν κ η : ℝ) (hν : 0 < ν) (hfreq : 0 < κ ^ 2 + η ^ 2) :
     IntegrableOn (fun t : ℝ =>
-      Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * λ ^ 2 * t)) (Ioi 0) := by
-  have hdecay : -(ν * (κ ^ 2 + λ ^ 2)) < 0 := neg_lt_zero.mpr (mul_pos hν hfreq)
+      Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * η ^ 2 * t)) (Ioi 0) := by
+  have hdecay : -(ν * (κ ^ 2 + η ^ 2)) < 0 := neg_lt_zero.mpr (mul_pos hν hfreq)
   convert integrableOn_exp_mul_Ioi hdecay 0 using 1
   funext t
   rw [← Real.exp_add]
@@ -67,6 +67,29 @@ def finiteHeatSum {ι : Type*} (s : Finset ι) (κ a : ι → ℝ) (ν t : ℝ) 
 /-- Finite caloric quadratic form before taking an infinite Fourier limit. -/
 def finiteCaloricQuadratic {ι : Type*} (s : Finset ι) (κ a : ι → ℝ) : ℝ :=
   ∑ i ∈ s, ∑ j ∈ s, (a i * a j) / (κ i ^ 2 + κ j ^ 2)
+
+/-- Squared finite heat sums are integrable on the full positive time axis. -/
+theorem FINITE_HEAT_SQUARE_INTEGRABLE
+    {ι : Type*} (s : Finset ι) (κ a : ι → ℝ) (ν : ℝ) (hν : 0 < ν)
+    (hκ : ∀ i ∈ s, 0 < κ i) :
+    IntegrableOn (fun t : ℝ => finiteHeatSum s κ a ν t ^ 2) (Ioi 0) := by
+  have hF : ∀ i ∈ s, ∀ j ∈ s, IntegrableOn (fun t : ℝ =>
+      (a i * a j) * (Real.exp (-ν * κ i ^ 2 * t) * Real.exp (-ν * κ j ^ 2 * t)))
+      (Ioi 0) := by
+    intro i hi j hj
+    exact (HEAT_PAIR_INTEGRABLE ν (κ i) (κ j) hν
+      (add_pos (sq_pos_of_pos (hκ i hi)) (sq_pos_of_pos (hκ j hj)))).const_mul _
+  convert integrable_finsetSum s (fun i hi =>
+    integrable_finsetSum s (fun j hj => hF i hi j hj)) using 1
+  funext t
+  unfold finiteHeatSum
+  rw [pow_two, Finset.sum_mul]
+  apply Finset.sum_congr rfl
+  intro i hi
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro j hj
+  ring
 
 /-- Exact finite heat-orbit identity, with finite-sum integration justified
 by pairwise exponential integrability. -/

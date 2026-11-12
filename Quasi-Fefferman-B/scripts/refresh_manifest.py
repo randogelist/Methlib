@@ -15,7 +15,8 @@ for source in sorted((root / "QuasiFeffermanB").glob("*.lean")):
         "module": f"QuasiFeffermanB.{source.stem}",
         "source": source.relative_to(root).as_posix(),
         "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
-        "declarations": [f"QuasiFeffermanB.{name}" for name in names],
+        "declarations": [name.removeprefix("_root_.") if name.startswith("_root_.")
+                         else f"QuasiFeffermanB.{name}" for name in names],
         "scope": "exact source declaration; broader Q/A contracts remain pending",
     })
 sources = {

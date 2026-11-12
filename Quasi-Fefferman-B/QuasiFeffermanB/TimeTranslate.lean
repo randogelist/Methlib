@@ -160,7 +160,6 @@ theorem timeTranslate_integrated_momentum
     have hr' : r ∈ Icc a b := by simpa only [uIcc_of_le hab] using hr
     dsimp only [criticalWeakMomentumIntegrand, timeTranslate]
     rw [hd r hr'.1, heq r hr'.1]
-    rfl
 
 theorem timeTranslate_measurePreserving_Ioc (s T : ℝ) :
     MeasurePreserving (fun t : ℝ => t + s)

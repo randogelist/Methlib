@@ -46,13 +46,17 @@ theorem caloric_criticalEnergy_four_eq_laplacian (N : ℕ) (c : FourierCoeff) :
 
 theorem caloric_criticalEnergy_one_le_enstrophy (N : ℕ) (c : FourierCoeff) :
     criticalEnergy 1 N c ≤ coefficientDissipation N c := by
-  simpa only [criticalEnergy_two_eq_coefficientDissipation] using
+  have h : criticalEnergy 1 N c ≤ criticalEnergy 2 N c :=
     caloric_criticalEnergy_le_succ 1 N c
+  simpa only [criticalEnergy_two_eq_coefficientDissipation] using
+    h
 
 theorem caloric_criticalEnergy_three_le_laplacian (N : ℕ) (c : FourierCoeff) :
     criticalEnergy 3 N c ≤ coefficientLaplacianSquare N c := by
-  simpa only [caloric_criticalEnergy_four_eq_laplacian] using
+  have h : criticalEnergy 3 N c ≤ criticalEnergy 4 N c :=
     caloric_criticalEnergy_le_succ 3 N c
+  simpa only [caloric_criticalEnergy_four_eq_laplacian] using
+    h
 
 theorem GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND
     {ν : ℝ} (hν : 0 ≤ ν) {a : Field} {N : ℕ}

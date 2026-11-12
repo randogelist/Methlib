@@ -56,7 +56,31 @@ theorem positive_reference_shifted_serrin
       (volume.restrict (Ioc (0 : ℝ) T)) :=
   timeTranslate_memLp_Ioc hε (hSerrin (T + ε) (by linarith))
 
-theorem LH_UNIQUE_FUTURE_OF_POSITIVE_REFERENCE
+theorem positive_reference_strict_shift_serrin
+    {ν : ℝ} {v : Velocity} {p : Pressure}
+    (hv : PositiveSmoothNSE ν v p) {ε : ℝ} (hε : 0 < ε)
+    (T : ℝ) :
+    MemLp (fun t => criticalSpatialNorm 6 (timeTranslate ε v t)) 4
+      (volume.restrict (Ioc (0 : ℝ) T)) := by
+  have htest := positiveSmoothNSE_test hv
+  have hc : ContinuousOn (fun t => criticalSpatialNorm 6 (timeTranslate ε v t))
+      (Icc (0 : ℝ) T) := by
+    apply (htest.eLpNorm_six_toReal_continuousOn (T + ε)).comp
+      (continuous_id.add continuous_const).continuousOn
+    intro t ht
+    exact ⟨by linarith [ht.1], add_le_add_right ht.2 ε⟩
+  haveI : IsFiniteMeasure (volume.restrict (Icc (0 : ℝ) T)) :=
+    ⟨by simp only [Measure.restrict_apply_univ, Real.volume_Icc]; finiteness⟩
+  obtain ⟨C, hC⟩ := isCompact_Icc.exists_bound_of_continuousOn hc
+  have hmem : MemLp (fun t => criticalSpatialNorm 6 (timeTranslate ε v t)) 4
+      (volume.restrict (Icc (0 : ℝ) T)) := by
+    apply MemLp.of_bound
+      (hc.aestronglyMeasurable_of_isCompact isCompact_Icc measurableSet_Icc) C
+    filter_upwards [ae_restrict_mem measurableSet_Icc] with t ht
+    exact hC t ht
+  exact hmem.mono_measure (Measure.restrict_mono_set volume Ioc_subset_Icc_self)
+
+theorem LH_UNIQUE_FUTURE_OF_REFERENCE_SHIFT_SERRIN
     {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}
     (hν : 0 < ν) (hu : CriticalLerayHopf ν a u G)
     {v : Velocity} {p : Pressure} (hv : PositiveSmoothNSE ν v p)
@@ -64,7 +88,7 @@ theorem LH_UNIQUE_FUTURE_OF_POSITIVE_REFERENCE
     (heq : ∀ r : ℝ, s < r →
       u r =ᵐ[volume.restrict unitCube] v (r - s))
     (hSerrin : ∀ T : ℝ, 0 < T →
-      MemLp (fun t => criticalSpatialNorm 6 (v t)) 4
+      MemLp (fun t => criticalSpatialNorm 6 (timeTranslate (δ - s) v t)) 4
         (volume.restrict (Ioc (0 : ℝ) T))) :
     UniqueFuture ν u G δ := by
   have hδ0 : 0 ≤ δ := hs.trans hδ.le
@@ -96,11 +120,49 @@ theorem LH_UNIQUE_FUTURE_OF_POSITIVE_REFERENCE
       (timeTranslate ε p) hw (positiveSmoothNSE_test hshift)
       (fun r hr => positiveSmoothNSE_pressure_spatial_smooth hshift hr)
       hshift.pressure_periodic hshift.equation htrace t hpos
-      (positive_reference_shifted_serrin hε.le hSerrin t hpos)
+      (hSerrin t hpos)
     exact (hcomparison t ⟨hpos, le_rfl⟩).trans (hagree t hpos).symm
   · have htzero : t = 0 := le_antisymm (le_of_not_gt hpos) ht
     subst t
     exact hw.initial.trans hrestart.initial.symm
+
+theorem LH_UNIQUE_FUTURE_OF_POSITIVE_REFERENCE
+    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}
+    (hν : 0 < ν) (hu : CriticalLerayHopf ν a u G)
+    {v : Velocity} {p : Pressure} (hv : PositiveSmoothNSE ν v p)
+    {s δ : ℝ} (hs : 0 ≤ s) (hδ : s < δ)
+    (heq : ∀ r : ℝ, s < r →
+      u r =ᵐ[volume.restrict unitCube] v (r - s))
+    (hSerrin : ∀ T : ℝ, 0 < T →
+      MemLp (fun t => criticalSpatialNorm 6 (v t)) 4
+        (volume.restrict (Ioc (0 : ℝ) T))) :
+    UniqueFuture ν u G δ :=
+  LH_UNIQUE_FUTURE_OF_REFERENCE_SHIFT_SERRIN hν hu hv hs hδ heq
+    (fun T hT => positive_reference_shifted_serrin (sub_pos.mpr hδ).le hSerrin T hT)
+
+/-- Strictly positive reference time supplies the full finite-horizon Serrin
+condition by continuity and compactness; no integrability premise is needed. -/
+theorem LH_UNIQUE_FUTURE_OF_SMOOTH_REFERENCE
+    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}
+    (hν : 0 < ν) (hu : CriticalLerayHopf ν a u G)
+    {v : Velocity} {p : Pressure} (hv : PositiveSmoothNSE ν v p)
+    {s δ : ℝ} (hs : 0 ≤ s) (hδ : s < δ)
+    (heq : ∀ r : ℝ, s < r →
+      u r =ᵐ[volume.restrict unitCube] v (r - s)) :
+    UniqueFuture ν u G δ :=
+  LH_UNIQUE_FUTURE_OF_REFERENCE_SHIFT_SERRIN hν hu hv hs hδ heq
+    (fun T _ => positive_reference_strict_shift_serrin hv (sub_pos.mpr hδ) T)
+
+theorem LH_UNIQUE_FUTURE_OF_SMOOTH_FLOW
+    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}
+    (hν : 0 < ν) (hu : CriticalLerayHopf ν a u G)
+    (L : CriticalPositiveSobolevFlow ν)
+    {s δ : ℝ} (hs : 0 ≤ s) (hδ : s < δ)
+    (heq : ∀ r : ℝ, s < r →
+      u r =ᵐ[volume.restrict unitCube] L.velocity (r - s)) :
+    UniqueFuture ν u G δ :=
+  LH_UNIQUE_FUTURE_OF_SMOOTH_REFERENCE hν hu (CRITICAL_POSITIVE_PHYSICAL_NSE L)
+    hs hδ heq
 
 theorem LH_UNIQUE_FUTURE_OF_POSITIVE_FLOW
     {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}

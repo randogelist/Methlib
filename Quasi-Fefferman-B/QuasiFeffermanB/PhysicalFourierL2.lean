@@ -320,4 +320,81 @@ theorem physicalL2_cutoff_eLpNorm_tendsto (v : Field)
     rw [physicalFieldL2, ← MemLp.toLp_sub, Lp.enorm_toLp]
   simpa only [heq, sub_self, enorm_zero] using h
 
+def zeroSobolevPhysicalL2 (a : CriticalSobolev 0) : PhysicalCubeL2 :=
+  torusToPhysicalCubeL2 (torusSobolevL2 (criticalH0Equiv a))
+
+theorem zeroSobolevPhysicalL2_continuous : Continuous zeroSobolevPhysicalL2 :=
+  torusToPhysicalCubeL2.continuous.comp
+    (torusSobolevL2.continuous.comp criticalH0Equiv.continuous)
+
+theorem zeroSobolevPhysicalL2_finite (a : CriticalSobolev 0)
+    (hr : SpectralReality (criticalCoeff 0 a)) (N : ℕ) :
+    zeroSobolevPhysicalL2 (criticalFiniteSobolev 0 N (criticalCoeff 0 a)) =
+      physicalFieldL2 (finiteSynthesis N (criticalCoeff 0 a))
+        (finiteSynthesis_contDiff N _).continuous := by
+  have heq : torusSobolevL2 (criticalH0Equiv (criticalFiniteSobolev 0 N (criticalCoeff 0 a))) =
+      torusPhysicalFieldL2 (finiteSynthesis N (criticalCoeff 0 a))
+        (finiteSynthesis_contDiff N _).continuous := by
+    apply torusVectorFourierCoeff_injective
+    rw [torusSobolevL2_fourierCoeff, criticalH0Equiv_coeff, criticalFiniteSobolev_coeff,
+      torusPhysicalFieldL2_fourierCoeff,
+      criticalGalerkin_datumFourierCoeff_finiteSynthesis N _ hr]
+  unfold zeroSobolevPhysicalL2
+  rw [heq]
+  exact torusToPhysicalCubeL2_physicalField _ _ (finiteSynthesis_periodic N _)
+
+theorem zeroSobolevPhysicalL2_fourierCoeff (a : CriticalSobolev 0)
+    (hr : SpectralReality (criticalCoeff 0 a))
+    (hz : SpectralMeanZero (criticalCoeff 0 a)) :
+    datumFourierCoeff (zeroSobolevPhysicalL2 a : Field) = criticalCoeff 0 a := by
+  have hcut := criticalFiniteSobolev_tendsto 0 a hz
+  have hphysical := zeroSobolevPhysicalL2_continuous.continuousAt.tendsto.comp hcut
+  funext k i
+  have hleft := (criticalCubeFourierFunctional k i).continuous.continuousAt.tendsto.comp hphysical
+  have hright := (criticalCoeff_continuous 0 k i).continuousAt.tendsto.comp hcut
+  have heq (N : ℕ) : criticalCubeFourierFunctional k i
+      (zeroSobolevPhysicalL2 (criticalFiniteSobolev 0 N (criticalCoeff 0 a))) =
+      criticalCoeff 0 (criticalFiniteSobolev 0 N (criticalCoeff 0 a)) k i := by
+    rw [zeroSobolevPhysicalL2_finite a hr N, criticalCubeFourierFunctional_physicalField,
+      criticalGalerkin_datumFourierCoeff_finiteSynthesis N _ hr,
+      criticalFiniteSobolev_coeff]
+  have hleft' : Tendsto
+      (fun N => criticalCoeff 0 (criticalFiniteSobolev 0 N (criticalCoeff 0 a)) k i)
+      atTop (𝓝 (datumFourierCoeff (zeroSobolevPhysicalL2 a : Field) k i)) := by
+    simpa only [Function.comp_def, heq, criticalCubeFourierFunctional_apply] using hleft
+  exact tendsto_nhds_unique hleft' hright
+
+theorem zeroSobolevPhysicalL2_norm (a : CriticalSobolev 0)
+    (hr : SpectralReality (criticalCoeff 0 a))
+    (hz : SpectralMeanZero (criticalCoeff 0 a)) : ‖zeroSobolevPhysicalL2 a‖ = ‖a‖ := by
+  have hback : physicalL2SobolevDatum (zeroSobolevPhysicalL2 a : Field)
+      (Lp.memLp _) = a := by
+    apply criticalCoeff_injective 0
+    rw [physicalL2SobolevDatum_coeff, zeroSobolevPhysicalL2_fourierCoeff a hr hz]
+  have h := physicalL2SobolevDatum_norm (zeroSobolevPhysicalL2 a : Field) (Lp.memLp _)
+  rw [hback, Lp.toLp_coeFn] at h
+  exact h.symm
+
+theorem torusSobolevH0_physical_fourierCoeff (c : TorusSobolev 0)
+    (hr : SpectralReality c.val) (hz : SpectralMeanZero c.val) :
+    datumFourierCoeff (torusToPhysicalCubeL2 (torusSobolevL2 c) : Field) = c.val := by
+  let a : CriticalSobolev 0 := criticalH0Equiv.symm c
+  have hc : criticalCoeff 0 a = c.val := by
+    simpa only [a, criticalH0Equiv.apply_symm_apply] using (criticalH0Equiv_coeff a).symm
+  have har : SpectralReality (criticalCoeff 0 a) := by rw [hc]; exact hr
+  have haz : SpectralMeanZero (criticalCoeff 0 a) := by rw [hc]; exact hz
+  have h := zeroSobolevPhysicalL2_fourierCoeff a har haz
+  simpa only [zeroSobolevPhysicalL2, a, criticalH0Equiv.apply_symm_apply, hc] using h
+
+theorem torusSobolevH0_physical_norm (c : TorusSobolev 0)
+    (hr : SpectralReality c.val) (hz : SpectralMeanZero c.val) :
+    ‖torusToPhysicalCubeL2 (torusSobolevL2 c)‖ = ‖c‖ := by
+  let a : CriticalSobolev 0 := criticalH0Equiv.symm c
+  have hc : criticalCoeff 0 a = c.val := by
+    simpa only [a, criticalH0Equiv.apply_symm_apply] using (criticalH0Equiv_coeff a).symm
+  have har : SpectralReality (criticalCoeff 0 a) := by rw [hc]; exact hr
+  have haz : SpectralMeanZero (criticalCoeff 0 a) := by rw [hc]; exact hz
+  simpa only [zeroSobolevPhysicalL2, a, criticalH0Equiv.apply_symm_apply,
+    criticalH0Equiv.symm.norm_map] using zeroSobolevPhysicalL2_norm a har haz
+
 end QuasiFeffermanB

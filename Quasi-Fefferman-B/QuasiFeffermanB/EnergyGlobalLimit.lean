@@ -161,7 +161,9 @@ theorem energy_modal_limit_H1_representative
     have hEnonneg := coefficientEnergy_nonneg (N n) ((g n).coeff T)
     nlinarith
   · intro t ht k i
-    simpa only [(g _).criticalState_coeff 2 ht.1] using hc t ht.1 k i
+    have heq (n : ℕ) : criticalCoeff 2 ((g n).criticalState 2 t) = (g n).coeff t :=
+      (g n).criticalState_coeff 2 ht.1
+    simpa only [heq] using hc t ht.1 k i
 
 end
 end QuasiFeffermanB

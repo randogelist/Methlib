@@ -31,8 +31,12 @@ theorem constant_positive_solenoidal_test (c : Vec) :
 theorem constant_weak_momentum_integrand (ν : ℝ) (u : Velocity)
     (c : Vec) (t : ℝ) :
     criticalWeakMomentumIntegrand ν u (fun _ _ => c) t = 0 := by
+  have hcoord (i : Fin 3) :
+      coordinateDerivative (fun _ : Vec => c) i = fun _ => 0 := by
+    funext x
+    simp [coordinateDerivative]
   simp [criticalWeakMomentumIntegrand, physicalFieldInner, timeDerivative,
-    laplacian, coordinateDerivative, criticalWeakTransport]
+    laplacian, hcoord, criticalWeakTransport]
 
 theorem LH_CONSTANT_PAIRING_PRESERVED
     {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity}
