@@ -105,7 +105,7 @@ R11 and R12 discharge the concrete seed premises internally.
 
 [UNBOUNDEDNESS PROOF]
 K_N(x) = |sum_(0<=j<N) exp(2*pi*i*j*x_2)|^2/N.
-K_N >= 0; integral K_N = 1.
+For N >= 1: K_N >= 0; integral K_N = 1.
 Actual physical first-component pairing = Fejer coefficient average.
 Fejer averages at 2*N dominate one half of positive partial sums.
 sum d_n = +infinity.
