@@ -1,0 +1,86 @@
+⚠ [8712/8724] Replayed SingularClosure.FourierIntegral
+warning: SingularClosure/FourierIntegral.lean:55:32: This simp argument is unused:
+  div_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [fourier_coe_apply, ← Complex.exp_sum]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8713/8724] Replayed SingularClosure.PhysicalProjection
+warning: SingularClosure/PhysicalProjection.lean:34:48: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+warning: SingularClosure/PhysicalProjection.lean:35:4: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+warning: SingularClosure/PhysicalProjection.lean:44:48: This simp argument is unused:
+  mul_ite
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [fourierPhaseCLM, unitVector, apply_ite]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: SingularClosure/PhysicalProjection.lean:114:25: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+warning: SingularClosure/PhysicalProjection.lean:115:4: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+⚠ [8715/8724] Replayed SingularClosure.GalerkinAlgebra
+warning: SingularClosure/GalerkinAlgebra.lean:267:8: This simp argument is unused:
+  Complex.star_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Complex.mul_re, Complex.mul_im, Complex.normSq_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8717/8724] Replayed SingularClosure.FiniteParseval
+warning: SingularClosure/FiniteParseval.lean:178:26: This simp argument is unused:
+  Complex.star_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [derivativeSymbol]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8718/8724] Replayed SingularClosure.GalerkinEnergyIntegral
+warning: SingularClosure/GalerkinEnergyIntegral.lean:30:8: `continuousOn_finset_sum` has been deprecated: Use `continuousOn_finsetSum` instead
+warning: SingularClosure/GalerkinEnergyIntegral.lean:32:8: `continuousOn_finset_sum` has been deprecated: Use `continuousOn_finsetSum` instead
+⚠ [8721/8724] Replayed SingularClosure.PeriodicPoincare
+warning: SingularClosure/PeriodicPoincare.lean:32:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+⚠ [8723/8724] Replayed SingularClosure.PeriodicSobolev
+warning: SingularClosure/PeriodicSobolev.lean:173:0: automatically included section variable(s) unused in theorem `SingularClosure.eLpNorm_two_eq_integral_norm_sq_rpow`:
+  [NormedSpace ℝ F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedSpace ℝ F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: SingularClosure/PeriodicSobolev.lean:244:55: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [unitVector, Fin.sum_univ_succ]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8724/8724] Replayed SingularClosure.CriticalComplexSobolev
+warning: SingularClosure/CriticalComplexSobolev.lean:40:13: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+warning: SingularClosure/CriticalComplexSobolev.lean:40:44: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+warning: SingularClosure/CriticalComplexSobolev.lean:42:34: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [ContinuousLinearMap.sum_apply, ContinuousLinearMap.smul_apply, smul_eq_mul,
+    fourierPhaseCLM_unitVector, complexFiniteSynthesis, spectralMultiplier, mul_comm, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: SingularClosure/CriticalComplexSobolev.lean:126:25: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+Build completed successfully (8724 jobs).

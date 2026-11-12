@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "declarations": [
+    {
+      "name": "SingularClosure.criticalInitialPhysicalL2_fourierCoeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.criticalInitialPhysicalL2_fourierCoeff"
+    },
+    {
+      "name": "SingularClosure.criticalInitialPhysicalL2_norm",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.criticalInitialPhysicalL2_norm"
+    }
+  ],
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

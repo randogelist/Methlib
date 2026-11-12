@@ -1,0 +1,97 @@
+THEOREM = NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+MODE = A_TIER_DERIVATION
+STATUS = UNCONDITIONAL_CLOSURE
+MARKER = !!!!
+
+DOMAIN = T^3 = R^3 / Z^3
+FORCING = 0
+VISCOSITY = nu > 0
+DATA = H^(1/2)_{sigma,0}(T^3)
+
+H^(1/2)_{sigma,0}(T^3)
+  = {a : a(-k)=conj(a(k)), k.a(k)=0, a(0)=0,
+       sum_{k != 0} 2*pi*|k|*|a(k)|^2 < infinity}.
+
+C_* = SingularClosure.criticalNonlinearConstant > 0.
+D_* = SingularClosure.criticalTransportConstant.
+c_* = C_*^(-1).
+delta = nu - C_* ||a||_{H^(1/2)} > 0.
+
+PREMISES
+  nu > 0;
+  a in H^(1/2)_{sigma,0}(T^3);
+  C_* ||a||_{H^(1/2)} < nu.
+
+CONCLUSIONS
+  CriticalDatumAX6(nu,a).
+  Exists a single critical evolution u and pressure p with:
+    u in C([0,infinity); H^(1/2)_{sigma,0});
+    u(0)=a in the strong H^(1/2) topology;
+    sup_{t>=0} ||u(t)||_{H^(1/2)} <= ||a||_{H^(1/2)};
+    (u,p) smooth on (0,infinity) x T^3;
+    partial_t u + (u.grad)u = nu*Delta u - grad p;
+    div u = 0;
+    u in L^2((0,infinity); H^(3/2));
+    partial_t u in L^2((0,infinity); H^(-1/2));
+    u in L^4((0,infinity); L^6);
+    u belongs to the explicit physical Leray-Hopf class;
+    every member of that Leray-Hopf class with the same initial datum
+      equals u(t) spatially almost everywhere, for every t>0.
+
+QUANTITATIVE CONCLUSIONS
+  integral_0^infinity ||u(t)||_{H^(3/2)}^2 dt
+    <= ||a||_{H^(1/2)}^2 / (2*delta).
+
+  integral_0^infinity ||partial_t u(t)||_{H^(-1/2)}^2 dt
+    <= (nu + D_* ||a||_{H^(1/2)})^2
+       * ||a||_{H^(1/2)}^2 / (2*delta).
+
+  For every T>0:
+    integral_0^T ||grad u(t)||_2^4 dt
+      <= (||a||_{H^(1/2)}^4 - ||u(T)||_{H^(1/2)}^4) / (4*delta).
+
+  H^(-1/2) derivative identity:
+    Fourier(negativeHalfDerivative(t)) = Fourier(partial_t u(t)), t>0.
+
+DATUMWISE AX6
+  For every T>0, exists M>=0 such that, for every N>=1 and every
+  actual Galerkin trajectory g with initial datum P_N a:
+    budget6(N,g,T) <= M.
+
+PROOF SPINE
+  concrete weighted-l2 critical space
+    -> actual finite Galerkin existence
+    -> proved critical Sobolev and nonlinear bounds
+    -> critical energy invariance and dissipation
+    -> uniform six-channel budget
+    -> one global Galerkin subsequence
+    -> joint time/Fourier Fatou representatives
+    -> strong critical initial trace
+    -> positive-time all-order bounds and physical NSE
+    -> global Bochner and Serrin bounds
+    -> actual Leray-Hopf membership and weak-strong uniqueness.
+
+ADDITIONAL_ANALYTIC_PREMISES = []
+ADDITIONAL_CERTIFICATE_PREMISES = []
+ADDITIONAL_ADMISSION_PREMISES = []
+LOCAL_LEAN_EXECUTIONS = 0
+
+COMPILER = EXTERNAL CACHED Lean 4.33.0
+MATHLIB = db584cd6d46c92f209a44c0f1c829460d327499d
+ALLOWED_AXIOMS = [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_AUDIT = PASS
+THEOREM_AXIOM_AUDIT = PASS_STANDARD_ONLY
+SOURCE_COMMIT = 09dfe94a1ef150e21d09df3013fbe09002ef139c
+WORKFLOW_RUN = 43059293572
+WORKFLOW_JOB = 130657144029
+
+FROZEN_ORIGINAL_ROOT
+  SingularClosure.ax6_implies_fefferman_B_0_adjust
+    : AX6Statement -> Fefferman_B_0_adjust.
+  Universal unrestricted-data AX6 is not a conclusion of the small-data root.
+
+PACKAGE_BUILD = PASS
+EXTENSION_MODULES = 104/104
+EXTENSION_AUDITS = 33/33 declarations; 27/27 audit modules
+ORIGINAL_ENDPOINT_AUDIT = 171/171
+WORKFLOW_URL = https://github.com/randogelist/Methlib/actions/runs/43059293572

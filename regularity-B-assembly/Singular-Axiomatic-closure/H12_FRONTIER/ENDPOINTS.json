@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "root": "SingularClosure.Fefferman_B_0_adjust",
+  "completion_marker": "!!",
+  "foundation": "PERIODIC_NSE_CONTRACTS",
+  "endpoints": [
+    {
+      "number": 1,
+      "name": "SIX_CHANNEL_PROJECTIONS",
+      "status": "A_TIER",
+      "verified_commit": "0b2438438847d4f1ddc7075c04ee8153c88e4e0f",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42947128383",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.SIX_CHANNEL_PROJECTIONS",
+      "source_file": "SingularClosure/SixChannelProjections.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 2,
+      "name": "SIX_CHANNEL_ENSTROPHY_EQ",
+      "status": "A_TIER",
+      "verified_commit": "4d39e66229e0412a15f8fa9af8f38de4e2f566a6",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42945570303",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ",
+      "source_file": "SingularClosure/SmoothSixEnstrophy.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 3,
+      "name": "GALERKIN_GLOBAL_EXISTS_UNIQUE",
+      "status": "A_TIER",
+      "verified_commit": "c1af57143f708d3587a03425dbd9493db0e6f5f0",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42940507715",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE",
+      "source_file": "SingularClosure/GalerkinGlobal.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 4,
+      "name": "GALERKIN_ENERGY_IDENTITY",
+      "status": "A_TIER",
+      "verified_commit": "9ae282c28a7034e6f6c044a359205a7ae60380f1",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42942665131",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GALERKIN_ENERGY_IDENTITY",
+      "source_file": "SingularClosure/PhysicalEnergy.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 5,
+      "name": "GALERKIN_ENSTROPHY_INEQUALITY",
+      "status": "A_TIER",
+      "verified_commit": "956fb516a77e3832f7069fb916d7f68f6ca04f3d",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42950795091",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY",
+      "source_file": "SingularClosure/EnstrophyAbsorption.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 6,
+      "name": "CUBIC_ENERGY_OF_SQUARE_BUDGET",
+      "status": "A_TIER",
+      "verified_commit": "bb7c4f569a7b305935006dfc333b17f1528ae34c",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42935149091",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET",
+      "source_file": "SingularClosure/CubicBudget.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 7,
+      "name": "AX6_UNIFORM_STRONG_BOUNDS",
+      "status": "A_TIER",
+      "verified_commit": "9fb42f2774aee5b966ba6fa884a1f59d7dff49dd",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42954627771",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
+      "source_file": "SingularClosure/StrongSobolevRealization.lean",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 8,
+      "name": "GALERKIN_GLOBAL_STRONG_LIMIT",
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT",
+      "source_file": "SingularClosure/GlobalStrongLimit.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 9,
+      "name": "GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
+      "source_file": "SingularClosure/GlobalSmoothBootstrap.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 10,
+      "name": "PERIODIC_PRESSURE_RECOVERY",
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.PERIODIC_PRESSURE_RECOVERY",
+      "source_file": "SingularClosure/PeriodicPressureRecovery.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    },
+    {
+      "number": 11,
+      "name": "ax6_implies_fefferman_B_0_adjust",
+      "status": "A_TIER",
+      "verified_commit": "353038e056ca1b04a9907744ef0e06764f482ed7",
+      "evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42960942482",
+      "completion_marker": "!!",
+      "theorem": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
+      "source_file": "SingularClosure/Root.lean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "reverified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+      "reverification_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080"
+    }
+  ],
+  "root_completed": true,
+  "completed_endpoint_count": 11,
+  "prepared_endpoint_count": 11,
+  "unresolved_root_premises": [
+    "AX6Statement"
+  ],
+  "custom_axiom_declarations": [],
+  "formal_closure": true,
+  "conditional_formal_closure": true,
+  "unconditional_closure": false,
+  "root_theorem": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
+  "root_verified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+  "aggregate_build": "PASS",
+  "aggregate_audit": "PASS_STANDARD_ONLY",
+  "aggregate_audit_declaration_count": 171,
+  "aggregate_verified_commit": "2d899390d23db5134d38ebabd1bb5b8f03cf963e",
+  "aggregate_evidence_url": "https://github.com/randogelist/Methlib/actions/runs/42961722080",
+  "aggregate_source_hashes_matched": 221
+}

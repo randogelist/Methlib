@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "declarations": [
+    {
+      "name": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL"
+    }
+  ],
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

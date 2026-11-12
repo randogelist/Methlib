@@ -1,0 +1,10 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_COMPLEX_FINITE_L2
+CRITICAL_COMPLEX_FINITE_L2 : ∀ (N : ℕ) (c : FourierCoeff) (j : Fin 3),
+  eLpNorm (complexFiniteSynthesis N c j) 2 (volume.restrict unitCube) ≤ ENNReal.ofReal (coefficientEnergy N c) ^ (1 / 2)
+'SingularClosure.CRITICAL_COMPLEX_FINITE_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_COMPLEX_FINITE_L6
+CRITICAL_COMPLEX_FINITE_L6 : ∃ C < ∞,
+  ∀ (N : ℕ) (c : FourierCoeff) (j : Fin 3),
+    eLpNorm (complexFiniteSynthesis N c j) 6 (volume.restrict unitCube) ≤
+      C * ENNReal.ofReal (coefficientDissipation N c) ^ (1 / 2)
+'SingularClosure.CRITICAL_COMPLEX_FINITE_L6' depends on axioms: [propext, Classical.choice, Quot.sound]

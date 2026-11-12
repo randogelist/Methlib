@@ -1,0 +1,5 @@
+⚠ [8706/8707] Replayed SingularClosure.LinearBudget
+warning: SingularClosure/LinearBudget.lean:67:25: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Build completed successfully (8707 jobs).

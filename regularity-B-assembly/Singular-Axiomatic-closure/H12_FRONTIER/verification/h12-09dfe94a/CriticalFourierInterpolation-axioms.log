@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularClosure.criticalEnergy_interpolation
+criticalEnergy_interpolation : ∀ (N : ℕ) (c : FourierCoeff),
+  criticalEnergy 2 N c ^ 2 ≤ criticalEnergy 1 N c * criticalEnergy 3 N c
+'SingularClosure.criticalEnergy_interpolation' depends on axioms: [propext, Classical.choice, Quot.sound]

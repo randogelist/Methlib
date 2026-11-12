@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "declarations": [
+    {
+      "name": "SingularClosure.CRITICAL_ENERGY_INVARIANT",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CRITICAL_ENERGY_INVARIANT"
+    },
+    {
+      "name": "SingularClosure.CRITICAL_SQUARE_BUDGET_DIV",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CRITICAL_SQUARE_BUDGET_DIV"
+    }
+  ],
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

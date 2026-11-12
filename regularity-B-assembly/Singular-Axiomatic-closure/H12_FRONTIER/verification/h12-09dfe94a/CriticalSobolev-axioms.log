@@ -1,0 +1,5 @@
+EXACT_TYPE_PASS:SingularClosure.FINITE_CRITICAL_HHALF_L3
+FINITE_CRITICAL_HHALF_L3 : ∃ C < ∞,
+  ∀ (N : ℕ) (c : FourierCoeff),
+    eLpNorm (finiteSynthesis N c) 3 (volume.restrict unitCube) ≤ C * ENNReal.ofReal (criticalEnergy 1 N c) ^ (1 / 2)
+'SingularClosure.FINITE_CRITICAL_HHALF_L3' depends on axioms: [propext, Classical.choice, Quot.sound]

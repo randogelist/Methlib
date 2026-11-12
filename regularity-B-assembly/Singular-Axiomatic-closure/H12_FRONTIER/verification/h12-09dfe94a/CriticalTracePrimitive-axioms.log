@@ -1,0 +1,15 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_HHALF_STRONG_TRACE_OF_INTEGRAL_EVOLUTION
+CRITICAL_HHALF_STRONG_TRACE_OF_INTEGRAL_EVOLUTION : ∀ (a : CriticalSobolev 1) (u : ℝ → CriticalSobolev 3)
+  (v : ℝ → CriticalSobolev (-1)) {T : ℝ},
+  0 < T →
+    MemLp u 2 (volume.restrict (Icc 0 T)) →
+      MemLp v 2 (volume.restrict (Icc 0 T)) →
+        (∀ᵐ (t : ℝ) ∂volume.restrict (Icc 0 T), criticalTracePrimitiveCoeff a v t = criticalCoeff 3 (u t)) →
+          ∃ w,
+            ContinuousOn w (Icc 0 T) ∧
+              w 0 = a ∧
+                (∀ t ∈ Icc 0 T, criticalCoeff 1 (w t) = criticalTracePrimitiveCoeff a v t) ∧
+                  ∀ᵐ (t : ℝ) ∂volume.restrict (Icc 0 T), w t = (criticalSobolevLower 1 3 ⋯) (u t)
+'SingularClosure.CRITICAL_HHALF_STRONG_TRACE_OF_INTEGRAL_EVOLUTION' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

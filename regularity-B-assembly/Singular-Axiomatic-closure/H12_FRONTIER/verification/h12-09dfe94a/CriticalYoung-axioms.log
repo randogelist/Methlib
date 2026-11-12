@@ -1,0 +1,8 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_TRANSPORT_YOUNG
+CRITICAL_TRANSPORT_YOUNG : ∀ (ν A U W D : ℝ),
+  0 < ν →
+    0 ≤ A →
+      0 ≤ U →
+        0 ≤ W →
+          0 ≤ D → A * U * √W * √(D + W) * D ≤ ν / 2 * D ^ 2 + (8 * A ^ 4 * U ^ 4 / ν ^ 3 + A ^ 2 * U ^ 2 / ν) * W ^ 2
+'SingularClosure.CRITICAL_TRANSPORT_YOUNG' depends on axioms: [propext, Classical.choice, Quot.sound]

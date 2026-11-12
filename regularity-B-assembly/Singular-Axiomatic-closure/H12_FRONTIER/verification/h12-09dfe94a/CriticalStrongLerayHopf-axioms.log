@@ -1,0 +1,7 @@
+EXACT_TYPE_PASS:SingularClosure.CriticalRegularSolution.lerayHopf_of_quartic
+@CriticalRegularSolution.lerayHopf_of_quartic : ∀ {ν : ℝ} {a : CriticalSobolev 1} (U : CriticalRegularSolution ν a),
+  (∀ (T : ℝ), 0 < T → IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2) (Icc 0 T) volume) →
+    CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient
+'SingularClosure.CriticalRegularSolution.lerayHopf_of_quartic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

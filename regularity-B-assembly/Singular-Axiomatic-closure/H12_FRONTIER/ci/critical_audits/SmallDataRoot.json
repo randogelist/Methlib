@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "declarations": [
+    {
+      "name": "SingularClosure.SMALL_DATA_CRITICAL_REGULARITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SMALL_DATA_CRITICAL_REGULARITY"
+    },
+    {
+      "name": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY"
+    },
+    {
+      "name": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT"
+    }
+  ],
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

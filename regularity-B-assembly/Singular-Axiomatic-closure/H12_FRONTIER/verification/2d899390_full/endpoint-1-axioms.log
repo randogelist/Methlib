@@ -1,0 +1,3 @@
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_PROJECTIONS
+SIX_CHANNEL_PROJECTIONS : PhysicalSixChannelProjectionLaws
+'SingularClosure.SIX_CHANNEL_PROJECTIONS' depends on axioms: [propext, Classical.choice, Quot.sound]

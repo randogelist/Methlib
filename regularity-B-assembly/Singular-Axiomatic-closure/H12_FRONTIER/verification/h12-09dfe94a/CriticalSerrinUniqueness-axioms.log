@@ -1,0 +1,17 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON
+CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a₀ : ↥CriticalPhysicalL2) (v u : Velocity) (G : ℝ → Vec → Vec →L[ℝ] Vec) (p : Pressure),
+      CriticalLerayHopf ν a₀ v G →
+        CriticalPositiveSolenoidalTest u →
+          (∀ (r : ℝ), 0 < r → ContDiff ℝ ∞ (p r)) →
+            (∀ (r : ℝ), 0 < r → SpatialPeriodic (p r)) →
+              (∀ (r : ℝ),
+                  0 < r →
+                    ∀ (x : Vec), timeDerivative u r x + convection (u r) x + gradient (p r) x = ν • laplacian (u r) x) →
+                Tendsto (fun t => eLpNorm (u t - ↑↑a₀) 2 (volume.restrict unitCube)) (𝓝[>] 0) (𝓝 0) →
+                  ∀ (T : ℝ),
+                    0 < T →
+                      MemLp (fun t => criticalSpatialNorm 6 (u t)) 4 (volume.restrict (Ioc 0 T)) →
+                        ∀ t ∈ Ioc 0 T, v t =ᵐ[volume.restrict unitCube] u t
+'SingularClosure.CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON' depends on axioms: [propext, Classical.choice, Quot.sound]

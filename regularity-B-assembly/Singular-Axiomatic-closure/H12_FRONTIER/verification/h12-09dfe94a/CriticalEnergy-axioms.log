@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.criticalEnergy_balance
+@GalerkinSolution.criticalEnergy_balance : ∀ {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N) (q : ℕ) {t : ℝ},
+  0 ≤ t → HasDerivWithinAt (fun r => criticalEnergy q N (g.coeff r)) (criticalEnergyRate ν q N (g.coeff t)) (Ici 0) t
+'SingularClosure.GalerkinSolution.criticalEnergy_balance' depends on axioms: [propext, Classical.choice, Quot.sound]

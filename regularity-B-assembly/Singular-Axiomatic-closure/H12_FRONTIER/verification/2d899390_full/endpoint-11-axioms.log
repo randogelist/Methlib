@@ -1,0 +1,3 @@
+EXACT_TYPE_PASS:SingularClosure.ax6_implies_fefferman_B_0_adjust
+ax6_implies_fefferman_B_0_adjust : AX6Statement → Fefferman_B_0_adjust
+'SingularClosure.ax6_implies_fefferman_B_0_adjust' depends on axioms: [propext, Classical.choice, Quot.sound]

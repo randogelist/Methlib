@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "required_modules": [
+    "SingularClosure.CriticalGalerkin",
+    "SingularClosure.CriticalComplexSobolev",
+    "SingularClosure.CriticalFourierInterpolation",
+    "SingularClosure.CriticalInvariant",
+    "SingularClosure.CriticalEnergy",
+    "SingularClosure.CriticalSobolev",
+    "SingularClosure.CriticalNonlinear",
+    "SingularClosure.SmallDataAX6Closure",
+    "SingularClosure.CriticalTimeDerivative",
+    "SingularClosure.CriticalUniformBounds",
+    "SingularClosure.CriticalTracePrimitive",
+    "SingularClosure.CriticalPositiveTimeHighOrder",
+    "SingularClosure.CriticalPositiveFlow",
+    "SingularClosure.CriticalPhysicalH1",
+    "SingularClosure.CriticalRoughHolder",
+    "SingularClosure.CriticalYoung",
+    "SingularClosure.CriticalSerrinEstimate",
+    "SingularClosure.CriticalGradientEnergyBound",
+    "SingularClosure.SmallDataQuantitative",
+    "SingularClosure.SmallDataSerrin",
+    "SingularClosure.SmallDataUniqueness",
+    "SingularClosure.SmallDataClosure",
+    "SingularClosure.CriticalInitialPhysicalFourier",
+    "SingularClosure.CriticalStrongLerayHopf",
+    "SingularClosure.CriticalGlobalEnergyClass",
+    "SingularClosure.CriticalSerrinUniqueness",
+    "SingularClosure.SmallDataRoot"
+  ]
+}

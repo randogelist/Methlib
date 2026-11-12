@@ -1,0 +1,38 @@
+AX6_UNIFORM_STRONG_BOUNDS — A_TIER
+MARKER=!!
+FROZEN_ENDPOINT=7
+
+EXACT SCOPE
+AX6Statement -> forall nu>0, a with SmoothSigmaZero a, T>0,
+exists B>=0, independent of cutoff N>=1 and actual GalerkinSolution g:
+  g.sobolevState 1 is continuous on Ici 0;
+  g.sobolevState 1 belongs to L-infinity([0,T];H1);
+  g.sobolevState 2 belongs to L2([0,T];H2);
+  g.rhsSobolev 0 belongs to L2([0,T];H0);
+  the actual H0 curve has HasDerivWithinAt derivative g.rhsSobolev 0
+    at every t>=0 within Ici 0;
+  norm(g.sobolevState 1 t)^2 <= B for every t in [0,T];
+  integral_0^T norm(g.sobolevState 2 t)^2 <= B;
+  integral_0^T norm(g.rhsSobolev 0 t)^2 <= B;
+  integral_0^T integral_unitCube norm(timeDerivative g.velocity t x)^2 <= B;
+  all three displayed time integrands are interval-integrable.
+
+The Hilbert norms are the actual weighted Fourier norms with multiplier
+sqrt(1+4*pi^2*|k|^2). The physical derivative is the literal forward
+within-derivative. No compactness, nonlinear passage, smoothing,
+pressure, or root conclusion is asserted by this endpoint alone.
+
+EXTERNAL EVIDENCE
+Commit: 9fb42f2774aee5b966ba6fa884a1f59d7dff49dd
+Run: https://github.com/randogelist/Methlib/actions/runs/42954627771
+Job: 130306694018
+Checkpoint artifact: 13826642422
+Compiler: Lean 4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Module compilation: PASS
+Exact-type check: PASS
+Theorem-level axiom audit: PASS
+Matching theorem and exact-audit source hashes: PASS
+Axioms: propext, Classical.choice, Quot.sound
+Unresolved explicit hypothesis: AX6Statement
+Local Lean executions: zero.
