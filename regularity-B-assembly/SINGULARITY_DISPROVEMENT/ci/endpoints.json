@@ -2,8 +2,14 @@
   "schema_version": 1,
   "helper_modules": [
     "SingularityDisprovement.DyadicArithmetic",
+    "SingularityDisprovement.Admission",
+    "SingularityDisprovement.Dyadic",
     "SingularityDisprovement.Physical",
-    "SingularityDisprovement.Scaling"
+    "SingularityDisprovement.FejerCombinatorics",
+    "SingularityDisprovement.FejerKernel",
+    "SingularityDisprovement.Dirichlet",
+    "SingularityDisprovement.Scaling",
+    "SingularityDisprovement.RootAssembly"
   ],
   "endpoints": [
     {
@@ -51,7 +57,7 @@
     {
       "id": "R08",
       "module": "SingularityDisprovement.DyadicUnbounded",
-      "name": "SingularityDisprovement.DYADIC_ESSENTIAL_UNBOUNDEDNESS",
+      "name": "SingularityDisprovement.dyadicSeed_essUnbounded",
       "audit": "ci/endpoint_audits/R08.lean"
     },
     {

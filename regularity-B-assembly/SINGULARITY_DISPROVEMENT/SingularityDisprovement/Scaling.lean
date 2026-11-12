@@ -131,10 +131,12 @@ theorem POSITIVE_SCALING_LAWS (ν r : ℝ) (hr : 0 < r)
     calibratedScore ν (r • a) = r ^ 2 * calibratedScore ν a ∧
     (kineticDensity (r • a) =ᵐ[volume.restrict unitCube]
       fun x => r ^ 2 * kineticDensity a x) ∧
-    (EssUnbounded a → EssUnbounded (r • a)) := by
+    (EssUnbounded a → EssUnbounded (r • a)) ∧
+    (EssUnbounded a ↔ densityEssSup a = ⊤) := by
   exact ⟨sigma_real_smul r a ha, critical_norm_smul_pos r hr a,
     physical_norm_smul_pos r hr a, calibratedScore_smul_pos ν r hr a,
-    kineticDensity_smul_ae r hr a, fun h => h.smul r hr⟩
+    kineticDensity_smul_ae r hr a, (fun h => h.smul r hr),
+    essUnbounded_iff_densityEssSup_eq_top a⟩
 
 /-- The scale is dyadic; no computable numerical value for C is assumed. -/
 theorem SMALL_POSITIVE_DYADIC_SCALE_EXISTS (ν ε : ℝ) (hν : 0 < ν) (hε : 0 < ε)
@@ -157,7 +159,7 @@ theorem SMALL_POSITIVE_DYADIC_SCALE_EXISTS (ν ε : ℝ) (hν : 0 < ν) (hε : 0
     intro hmzero
     subst m
     have hδhalf : δ ≤ (1 / 2 : ℝ) := min_le_left _ _
-    norm_num at hm
+    have hmone : (1 : ℝ) < δ := by simpa only [pow_zero] using hm
     linarith
   let r : ℝ := (1 / 2 : ℝ) ^ m
   have hr : 0 < r := pow_pos (by norm_num) _

@@ -49,39 +49,41 @@ theorem dyadicAmplitude_on_block {j n : ℕ} (hj : 1 ≤ j)
   simp [dyadicAmplitude, hn, hlog]
 
 theorem dyadicBlock_card (j : ℕ) :
-    (Finset.Ico (2 ^ j) (2 ^ (j + 1))).card = 2 ^ j := by
+    (Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1))).card = 2 ^ j := by
   rw [Nat.card_Ico, pow_succ]
   omega
 
 theorem dyadicBlock_sum {j : ℕ} (hj : 1 ≤ j) :
-    (∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), dyadicAmplitude n) = 1 / (j : ℝ) := by
+    (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), dyadicAmplitude n) = 1 / (j : ℝ) := by
   classical
   have hj0 : (j : ℝ) ≠ 0 := by exact_mod_cast (by omega : j ≠ 0)
   have hp0 : (2 : ℝ) ^ j ≠ 0 := pow_ne_zero _ (by norm_num)
   calc
-    _ = ∑ _n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)),
+    _ = ∑ _n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)),
         1 / ((j : ℝ) * (2 : ℝ) ^ j) := by
       apply Finset.sum_congr rfl
       intro n hn
       exact dyadicAmplitude_on_block hj (Finset.mem_Ico.mp hn).1 (Finset.mem_Ico.mp hn).2
     _ = (2 : ℝ) ^ j * (1 / ((j : ℝ) * (2 : ℝ) ^ j)) := by
-      simp [dyadicBlock_card]
+      rw [Finset.sum_const, dyadicBlock_card]
+      simp only [nsmul_eq_mul, Nat.cast_pow, Nat.cast_ofNat]
     _ = 1 / (j : ℝ) := by field_simp
 
 theorem dyadicBlock_sum_sq {j : ℕ} (hj : 1 ≤ j) :
-    (∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), dyadicAmplitude n ^ 2) =
+    (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), dyadicAmplitude n ^ 2) =
       1 / ((j : ℝ) ^ 2 * (2 : ℝ) ^ j) := by
   classical
   have hj0 : (j : ℝ) ≠ 0 := by exact_mod_cast (by omega : j ≠ 0)
   have hp0 : (2 : ℝ) ^ j ≠ 0 := pow_ne_zero _ (by norm_num)
   calc
-    _ = ∑ _n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)),
+    _ = ∑ _n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)),
         (1 / ((j : ℝ) * (2 : ℝ) ^ j)) ^ 2 := by
       apply Finset.sum_congr rfl
       intro n hn
       rw [dyadicAmplitude_on_block hj (Finset.mem_Ico.mp hn).1 (Finset.mem_Ico.mp hn).2]
     _ = (2 : ℝ) ^ j * (1 / ((j : ℝ) * (2 : ℝ) ^ j)) ^ 2 := by
-      simp [dyadicBlock_card]
+      rw [Finset.sum_const, dyadicBlock_card]
+      simp only [nsmul_eq_mul, Nat.cast_pow, Nat.cast_ofNat]
     _ = _ := by field_simp
 
 private theorem sum_range_cast_real (N : ℕ) :
@@ -101,7 +103,7 @@ private theorem sum_Ico_cast_real {lo hi : ℕ} (h : lo ≤ hi) :
   linarith
 
 theorem dyadicBlock_sum_weighted_sq {j : ℕ} (hj : 1 ≤ j) :
-    (∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), (n : ℝ) * dyadicAmplitude n ^ 2) =
+    (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), (n : ℝ) * dyadicAmplitude n ^ 2) =
       (3 - (2 : ℝ) ^ (- (j : ℤ))) / (2 * (j : ℝ) ^ 2) := by
   classical
   have hj0 : (j : ℝ) ≠ 0 := by exact_mod_cast (by omega : j ≠ 0)
@@ -110,12 +112,12 @@ theorem dyadicBlock_sum_weighted_sq {j : ℕ} (hj : 1 ≤ j) :
     rw [pow_succ]
     omega
   calc
-    _ = ∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)),
+    _ = ∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)),
         (n : ℝ) * (1 / ((j : ℝ) * (2 : ℝ) ^ j)) ^ 2 := by
       apply Finset.sum_congr rfl
       intro n hn
       rw [dyadicAmplitude_on_block hj (Finset.mem_Ico.mp hn).1 (Finset.mem_Ico.mp hn).2]
-    _ = (∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), (n : ℝ)) *
+    _ = (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), (n : ℝ)) *
         (1 / ((j : ℝ) * (2 : ℝ) ^ j)) ^ 2 := by
       rw [Finset.sum_mul]
     _ = _ := by
@@ -137,7 +139,7 @@ theorem dyadicSquareMajorant_antitone : Antitone dyadicSquareMajorant := by
   intro m n hmn
   have hlog : Nat.log 2 m ≤ Nat.log 2 n := Nat.log_mono_right hmn
   unfold dyadicSquareMajorant
-  gcongr
+  gcongr <;> norm_num
 
 theorem dyadicSquareMajorant_condensed (j : ℕ) :
     (2 : ℝ) ^ j * dyadicSquareMajorant (2 ^ j) =
@@ -195,6 +197,150 @@ theorem dyadicAmplitude_sq_summable : Summable (fun n : ℕ => dyadicAmplitude n
   · have hnr : (1 : ℝ) ≤ (n : ℝ) := by exact_mod_cast (show 1 ≤ n by omega)
     nlinarith [sq_nonneg (dyadicAmplitude n)]
   · simp [dyadicAmplitude, hn]
+
+theorem dyadicAmplitude_antitone_from_two {m n : ℕ} (hm : 2 ≤ m) (hmn : m ≤ n) :
+    dyadicAmplitude n ≤ dyadicAmplitude m := by
+  have hn : 2 ≤ n := hm.trans hmn
+  have hlog : Nat.log 2 m ≤ Nat.log 2 n := Nat.log_mono_right hmn
+  have hmpos : (0 : ℝ) < (Nat.log 2 m : ℝ) := by
+    exact_mod_cast Nat.log_pos (by norm_num : 1 < (2 : ℕ)) hm
+  rw [dyadicAmplitude, if_pos hn, dyadicAmplitude, if_pos hm]
+  gcongr <;> norm_num
+
+theorem dyadicAmplitude_condensed (j : ℕ) :
+    (2 : ℝ) ^ j * dyadicAmplitude (2 ^ j) = 1 / (j : ℝ) := by
+  by_cases hj : j = 0
+  · subst j
+    simp
+  · have hj1 : 1 ≤ j := by omega
+    have hj0 : (j : ℝ) ≠ 0 := by exact_mod_cast hj
+    rw [dyadicAmplitude, if_pos (two_le_dyadic_pow hj1), Nat.log_pow (by norm_num)]
+    have hp0 : (2 : ℝ) ^ j ≠ 0 := pow_ne_zero _ (by norm_num)
+    field_simp
+
+theorem dyadicAmplitude_not_summable : ¬ Summable dyadicAmplitude := by
+  intro hd
+  have hm : ∀ᶠ n in atTop, dyadicAmplitude (n + 1) ≤ dyadicAmplitude n := by
+    filter_upwards [eventually_ge_atTop 2] with n hn
+    exact dyadicAmplitude_antitone_from_two hn (by omega)
+  have hc := (summable_condensed_iff_of_eventually_nonneg
+    (Filter.Eventually.of_forall dyadicAmplitude_nonneg) hm).mpr hd
+  simp_rw [dyadicAmplitude_condensed] at hc
+  exact Real.not_summable_one_div_natCast hc
+
+theorem dyadicAmplitude_partialSums_tendsto_atTop :
+    Tendsto (fun N : ℕ => ∑ n ∈ Finset.range N, dyadicAmplitude n) atTop atTop := by
+  exact (not_summable_iff_tendsto_nat_atTop_of_nonneg dyadicAmplitude_nonneg).mp
+    dyadicAmplitude_not_summable
+
+def dyadicR : ℝ := ∑' j : ℕ, 1 / (((j + 1 : ℕ) : ℝ) ^ 2 * (2 : ℝ) ^ (j + 1))
+
+def dyadicS : ℝ := ∑' j : ℕ,
+  (3 - 1 / (2 : ℝ) ^ (j + 1)) / ((j + 1 : ℕ) : ℝ) ^ 2
+
+private theorem positive_pseries_summable :
+    Summable (fun j : ℕ => 1 / ((j + 1 : ℕ) : ℝ) ^ 2) := by
+  exact (summable_nat_add_iff 1).mpr (Real.summable_one_div_nat_pow.mpr (by norm_num))
+
+private theorem positive_pseries_sum_le_two :
+    (∑' j : ℕ, 1 / ((j + 1 : ℕ) : ℝ) ^ 2) ≤ 2 := by
+  have hfinite (N : ℕ) :
+      (∑ j ∈ Finset.range N, 1 / ((j + 1 : ℕ) : ℝ) ^ 2) ≤
+        2 - 2 / ((N + 1 : ℕ) : ℝ) := by
+    induction N with
+    | zero => norm_num
+    | succ N ih =>
+      have hx : (0 : ℝ) < ((N + 1 : ℕ) : ℝ) := by positivity
+      have hy : (0 : ℝ) < ((N + 2 : ℕ) : ℝ) := by positivity
+      have hxy : ((N + 2 : ℕ) : ℝ) = ((N + 1 : ℕ) : ℝ) + 1 := by push_cast; ring
+      have hstep : 1 / ((N + 1 : ℕ) : ℝ) ^ 2 ≤
+          2 / ((N + 1 : ℕ) : ℝ) - 2 / ((N + 2 : ℕ) : ℝ) := by
+        calc
+          _ ≤ 2 / (((N + 1 : ℕ) : ℝ) * ((N + 2 : ℕ) : ℝ)) := by
+            apply (div_le_div_iff₀ (sq_pos_of_pos hx) (mul_pos hx hy)).mpr
+            have hN : (0 : ℝ) ≤ (N : ℝ) := Nat.cast_nonneg N
+            push_cast
+            nlinarith
+          _ = _ := by field_simp; push_cast; ring
+      rw [Finset.sum_range_succ]
+      have hidx : N.succ + 1 = N + 2 := by omega
+      rw [hidx]
+      linarith
+  apply positive_pseries_summable.tsum_le_of_sum_range_le
+  intro N
+  exact (hfinite N).trans (by positivity)
+
+private theorem dyadicGeometric_hasSum :
+    HasSum (fun j : ℕ => 1 / (2 : ℝ) ^ (j + 1)) 1 := by
+  have h := (hasSum_geometric_of_norm_lt_one (by norm_num : ‖(1 / 2 : ℝ)‖ < 1)).mul_left
+    (1 / 2 : ℝ)
+  convert h using 1
+  · ext j
+    rw [pow_succ, one_div_mul, one_div_pow]
+    ring
+  · norm_num
+
+private theorem dyadicR_term_nonneg (j : ℕ) :
+    0 ≤ 1 / (((j + 1 : ℕ) : ℝ) ^ 2 * (2 : ℝ) ^ (j + 1)) := by positivity
+
+private theorem dyadicR_term_le (j : ℕ) :
+    1 / (((j + 1 : ℕ) : ℝ) ^ 2 * (2 : ℝ) ^ (j + 1)) ≤
+      1 / (2 : ℝ) ^ (j + 1) := by
+  have hj : (1 : ℝ) ≤ ((j + 1 : ℕ) : ℝ) := by exact_mod_cast (by omega : 1 ≤ j + 1)
+  have hj2 : (1 : ℝ) ≤ ((j + 1 : ℕ) : ℝ) ^ 2 := by nlinarith
+  apply one_div_le_one_div_of_le (by positivity)
+  nlinarith [pow_pos (by norm_num : (0 : ℝ) < 2) (j + 1)]
+
+theorem dyadicR_bounds : 0 < dyadicR ∧ dyadicR < 1 := by
+  have hs := Summable.of_nonneg_of_le dyadicR_term_nonneg dyadicR_term_le
+    dyadicGeometric_hasSum.summable
+  constructor
+  · exact hs.tsum_pos dyadicR_term_nonneg 0 (by norm_num)
+  · have hlt := Summable.tsum_lt_tsum_of_nonneg dyadicR_term_nonneg dyadicR_term_le
+      (i := 1) (by norm_num) dyadicGeometric_hasSum.summable
+    simpa [dyadicR, dyadicGeometric_hasSum.tsum_eq] using hlt
+
+private theorem dyadicS_term_pos (j : ℕ) :
+    0 < (3 - 1 / (2 : ℝ) ^ (j + 1)) / ((j + 1 : ℕ) : ℝ) ^ 2 := by
+  have hp : (1 : ℝ) ≤ (2 : ℝ) ^ (j + 1) := one_le_pow₀ (by norm_num)
+  have hinv : 1 / (2 : ℝ) ^ (j + 1) ≤ 1 := (div_le_one (by positivity)).mpr hp
+  apply div_pos _ (by positivity)
+  linarith
+
+private theorem dyadicS_term_lt (j : ℕ) :
+    (3 - 1 / (2 : ℝ) ^ (j + 1)) / ((j + 1 : ℕ) : ℝ) ^ 2 <
+      3 * (1 / ((j + 1 : ℕ) : ℝ) ^ 2) := by
+  rw [mul_one_div]
+  apply (div_lt_div_iff_of_pos_right (by positivity)).mpr
+  have hp : (0 : ℝ) < 1 / (2 : ℝ) ^ (j + 1) := by positivity
+  linarith
+
+theorem dyadicS_bounds : 0 < dyadicS ∧ dyadicS < 6 := by
+  have hg := positive_pseries_summable.mul_left 3
+  have hs := Summable.of_nonneg_of_le (fun j => (dyadicS_term_pos j).le)
+    (fun j => (dyadicS_term_lt j).le) hg
+  constructor
+  · exact hs.tsum_pos (fun j => (dyadicS_term_pos j).le) 0 (dyadicS_term_pos 0)
+  · have hlt := Summable.tsum_lt_tsum_of_nonneg (fun j => (dyadicS_term_pos j).le)
+      (fun j => (dyadicS_term_lt j).le) (i := 0) (dyadicS_term_lt 0) hg
+    have hsum : (∑' j : ℕ, 3 * (1 / ((j + 1 : ℕ) : ℝ) ^ 2)) ≤ 6 := by
+      rw [tsum_mul_left]
+      linarith [positive_pseries_sum_le_two]
+    exact hlt.trans_le hsum
+
+/-- R05: the exact three block identities and the two convergent budget bounds. -/
+theorem DYADIC_BLOCK_IDENTITIES :
+    (∀ j : ℕ, 1 ≤ j →
+      (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), dyadicAmplitude n) = 1 / (j : ℝ)) ∧
+    (∀ j : ℕ, 1 ≤ j →
+      (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), dyadicAmplitude n ^ 2) =
+        1 / ((j : ℝ) ^ 2 * (2 : ℝ) ^ j)) ∧
+    (∀ j : ℕ, 1 ≤ j →
+      (∑ n ∈ Finset.Ico ((2 : ℕ) ^ j) (2 ^ (j + 1)), (n : ℝ) * dyadicAmplitude n ^ 2) =
+        (3 - (2 : ℝ) ^ (- (j : ℤ))) / (2 * (j : ℝ) ^ 2)) ∧
+    (0 < dyadicR ∧ dyadicR < 1) ∧ (0 < dyadicS ∧ dyadicS < 6) := by
+  exact ⟨fun _ hj => dyadicBlock_sum hj, fun _ hj => dyadicBlock_sum_sq hj,
+    fun _ hj => dyadicBlock_sum_weighted_sq hj, dyadicR_bounds, dyadicS_bounds⟩
 
 end
 end SingularityDisprovement

@@ -198,7 +198,8 @@ theorem FIRST_STAGE_IMPLIES_NATIVE_SMALL
         Real.pi * shiftedEnergy ν a := by
       field_simp [calibrationCap_pos.ne']
     rw [hcancel] at h
-    exact (mul_lt_mul_left hπ).mp h
+    have h' := mul_lt_mul_of_pos_left h (inv_pos.mpr hπ)
+    simpa only [← mul_assoc, inv_mul_cancel₀ hπ.ne', one_mul] using h'
   have hcoerce := (SHIFTED_ENERGY_COERCIVITY ν hν a ha).1
   have hcap : calibrationCap ≤ calibrationGamma / (4 * criticalNonlinearConstant ^ 2) :=
     min_le_right _ _
@@ -212,7 +213,9 @@ theorem FIRST_STAGE_IMPLIES_NATIVE_SMALL
   have hγmul : calibrationGamma * (4 * criticalNonlinearConstant ^ 2 * ‖a‖ ^ 2) <
       calibrationGamma * (2 * ν ^ 2) := by
     nlinarith only [hm, hmcap]
-  have hcancel := (mul_lt_mul_left hγ).mp hγmul
+  have hcancel : 4 * criticalNonlinearConstant ^ 2 * ‖a‖ ^ 2 < 2 * ν ^ 2 := by
+    have h' := mul_lt_mul_of_pos_left hγmul (inv_pos.mpr hγ)
+    simpa only [← mul_assoc, inv_mul_cancel₀ hγ.ne', one_mul] using h'
   have hsquare : (criticalNonlinearConstant * ‖a‖) ^ 2 < ν ^ 2 := by
     nlinarith only [hcancel, sq_nonneg (criticalNonlinearConstant * ‖a‖)]
   exact (sq_lt_sq₀ (mul_nonneg hC.le (norm_nonneg a)) hν.le).mp hsquare
