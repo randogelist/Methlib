@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Generate coefficient-parametric Lean replay from hash-locked base proofs.
-No compiler invocation. Generated sources retain the original hypotheses and
-conclusions, replacing only the nonlinear coefficient and dependent wrappers.
-The concrete FRONTIER_H12 coefficient remains a separate proof obligation.
+"""Hash-locked coefficient-parametric replay; no compiler invocation.
+Only the new namespace is generated. The fixed frontier coefficient is a
+separate concrete obligation, not inferred from the parametric proofs.
 """
 from __future__ import annotations
 import argparse
@@ -13,18 +12,15 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-SPEC = ROOT / "ci/frontier_replay_spec.json"
-OUT = ROOT / "SingularClosure/H12Frontier"
-AUDITS = ROOT / "ci/frontier_audits"
 
 
 def extract_declaration(text: str, name: str) -> str:
-    match = re.search(r"^((?:theorem|def) " + re.escape(name) + r")\b", text, re.M)
-    if match is None:
-        raise ValueError(f"missing pinned declaration: {name}")
-    tail = text[match.end():]
+    m = re.search(r"^((?:theorem|def) " + re.escape(name) + r")\b", text, re.M)
+    if m is None:
+        raise ValueError(f"missing declaration: {name}")
+    tail = text[m.end():]
     end = re.search(r"^((?:theorem|def|structure) |end(?: |$))", tail, re.M)
-    body = text[match.start():match.end() + (end.start() if end else len(tail))]
+    body = text[m.start():m.end() + (end.start() if end else len(tail))]
     while (doc := re.search(r"/--(?:(?!/--)[\s\S])*?-/\s*$", body)) is not None:
         body = body[:doc.start()].rstrip() + "\n"
     if ":=" not in body:
@@ -38,15 +34,15 @@ def transform(body: str, original: str, names: dict[str, str]) -> str:
     if not body.startswith(head):
         raise ValueError("unexpected declaration header")
     body = "@@HEAD@@" + body[len(head):]
-    body = body.replace("g.critical_differential_inequality", "(differentialInequality κ g)")
-    body = body.replace("criticalNonlinearConstant_bound", "κ.bound")
-    body = body.replace("criticalNonlinearConstant_pos", "κ.positive")
-    body = re.sub(r"\bcriticalNonlinearConstant\b", "κ.constant", body)
+    body = body.replace("g.critical_differential_inequality", "(differentialInequality cert g)")
+    body = body.replace("criticalNonlinearConstant_bound", "cert.bound")
+    body = body.replace("criticalNonlinearConstant_pos", "cert.positive")
+    body = re.sub(r"\bcriticalNonlinearConstant\b", "cert.constant", body)
     for old, new in sorted(names.items(), key=lambda pair: -len(pair[0])):
         if old.startswith("GalerkinSolution."):
             continue
-        body = re.sub(r"(?<![\w.])" + re.escape(old) + r"(?![\w])", f"({new} κ)", body)
-    return body.replace("@@HEAD@@", f"{kind} {names[original]} (κ : NonlinearCertificate)")
+        body = re.sub(r"(?<![\w.])" + re.escape(old) + r"(?![\w])", f"({new} cert)", body)
+    return body.replace("@@HEAD@@", f"{kind} {names[original]} (cert : NonlinearCertificate)")
 
 
 def exact_audit(module: str, text: str) -> tuple[str, list[str]]:
@@ -59,11 +55,9 @@ noncomputable section
 
 """
     declarations: list[str] = []
-    for match in re.finditer(r"^theorem ([\w.]+)([\s\S]*?)(?=\n(?:theorem|def|end)(?:\s|$)|\Z)", text, re.M):
-        name = match.group(1)
-        signature = match.group(2).split(":=", 1)[0].strip()
-        depth = 0
-        split = None
+    for m in re.finditer(r"^theorem ([\w.]+)([\s\S]*?)(?=\n(?:theorem|def|end)(?:\s|$)|\Z)", text, re.M):
+        name, signature = m.group(1), m.group(2).split(":=", 1)[0].strip()
+        depth, split = 0, None
         for i, char in enumerate(signature):
             if char in "({[":
                 depth += 1
@@ -88,19 +82,17 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check-existing", action="store_true")
     args = parser.parse_args()
-    spec = json.loads(SPEC.read_text(encoding="utf-8"))
+    spec = json.loads((ROOT / "ci/frontier_replay_spec.json").read_text(encoding="utf-8"))
     inputs: dict[str, str] = {}
     for relative, expected in spec["source_sha256"].items():
         source = ROOT / relative
-        actual = hashlib.sha256(source.read_bytes()).hexdigest()
-        if actual != expected:
+        if hashlib.sha256(source.read_bytes()).hexdigest() != expected:
             raise ValueError(f"base source mismatch: {relative}")
         inputs[relative] = source.read_text(encoding="utf-8")
-    names = {decl["source_declaration"]: decl["target_declaration"]
-             for module in spec["modules"] for decl in module["declarations"]}
+    names = {d["source_declaration"]: d["target_declaration"]
+             for module in spec["modules"] for d in module["declarations"]}
     outputs: dict[str, str] = {}
-    plan_path = ROOT / "ci/frontier_plan.json"
-    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    plan = json.loads((ROOT / "ci/frontier_plan.json").read_text(encoding="utf-8"))
     plan["entries"] = [e for e in plan["entries"] if not e["id"].startswith("S_REPLAY_")
                        and not e["id"].startswith("SUPPORT_")]
     for module in spec["modules"]:
@@ -123,17 +115,15 @@ noncomputable section
         outputs[f"SingularClosure/H12Frontier/{module['module']}.lean"] = code
         audit, declarations = exact_audit(module["module"], code)
         ident = "S_REPLAY_" + module["module"].removeprefix("Replay").upper()
-        audit_path = f"ci/frontier_audits/{ident}.lean"
-        json_path = f"ci/frontier_audits/{ident}.json"
+        audit_path, spec_path = f"ci/frontier_audits/{ident}.lean", f"ci/frontier_audits/{ident}.json"
         outputs[audit_path] = audit
-        outputs[json_path] = json.dumps({"schema_version": 1,
+        outputs[spec_path] = json.dumps({"schema_version": 1,
             "standard_axioms": ["propext", "Classical.choice", "Quot.sound"],
-            "declarations": [{"name": name, "additional_allowed_axioms": [],
-                 "required_axioms": [], "exact_type_marker": "EXACT_TYPE_PASS:" + name}
-                for name in declarations]}, indent=2) + "\n"
+            "declarations": [{"name": n, "additional_allowed_axioms": [], "required_axioms": [],
+                "exact_type_marker": "EXACT_TYPE_PASS:" + n} for n in declarations]}, indent=2) + "\n"
         plan["entries"].append({"id": ident,
             "module": "SingularClosure.H12Frontier." + module["module"],
-            "audit": audit_path, "spec": json_path,
+            "audit": audit_path, "spec": spec_path,
             "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
             "auxiliary_obligations": ["fixed frontier nonlinear certificate required for concrete specialization"]})
     outputs["ci/frontier_plan.json"] = json.dumps(plan, indent=2) + "\n"

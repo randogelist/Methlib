@@ -1,0 +1,18 @@
+{
+  "milestone": "E01",
+  "declaration": "SingularClosure.H12Frontier.FRONTIER_H12_NORM_BRIDGE",
+  "status": "UNCONDITIONAL_CLOSURE",
+  "marker": "!=!",
+  "source_commit": "e0d3bb412e67d33fdd3a4eb72fd3647f07bee5e2",
+  "workflow_run": 43301429357,
+  "artifact_id": 13980903797,
+  "artifact_sha256": "b453674b6c2087372e66f47a9f1585f6dd701901e597025153334656c0ec6ffa",
+  "compiler": "Lean 4.33.0; external cached GitHub Actions",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "exact_type": "PASS",
+  "axiom_audit": "PASS_STANDARD_ONLY",
+  "actual_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "auxiliary_obligations": [],
+  "base_regression": "PASS",
+  "local_lean_executions": 0
+}
