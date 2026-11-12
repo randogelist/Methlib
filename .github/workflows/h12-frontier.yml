@@ -7,10 +7,12 @@ on:
       - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/frontier*'
       - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/frontier_audits/**'
       - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/build_frontier.py'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/assemble_frontier_replay.py'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/publish_frontier_sources.py'
       - '.github/workflows/h12-frontier.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: h12-frontier-${{ github.ref }}
   cancel-in-progress: false
@@ -49,6 +51,9 @@ jobs:
           cp repository/.github/workflows/h12-frontier.yml package/evidence/workflow.yml
           cd package
           sha256sum lake-manifest.json > evidence/lockfile-before.sha256
+      - name: Assemble hash-locked coefficient replay
+        id: assemble
+        run: python3 ci/assemble_frontier_replay.py
       - name: Install pinned toolchain
         uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
         with:
@@ -101,6 +106,11 @@ jobs:
           lake build SingularClosure.SmallDataClosure 2>&1 | tee evidence/base-build.log
           lake env lean ci/critical_audits/SmallDataClosure.lean 2>&1 | tee evidence/base-axioms.log
           python3 ci/check_axioms.py evidence/base-axioms.log ci/critical_audits/SmallDataClosure.json | tee evidence/base-audit.json
+      - name: Store generated source blobs without changing refs
+        if: always() && steps.assemble.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 ci/publish_frontier_sources.py
       - name: Preserve compiler cache
         if: always() && steps.project.outcome == 'success' && steps.project.outputs.cache-hit != 'true'
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
