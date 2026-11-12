@@ -66,6 +66,7 @@ theorem dyadicAmplitude_weighted_sq_tsum :
         (n : ℝ) * dyadicAmplitude n ^ 2) =
       ∑' j : ℕ, ((3 - 1 / (2 : ℝ) ^ (j + 1)) / ((j + 1 : ℕ) : ℝ) ^ 2) / 2 from tsum_congr hb]
   rw [tsum_div_const]
+  rfl
 
 end
 end SingularityDisprovement

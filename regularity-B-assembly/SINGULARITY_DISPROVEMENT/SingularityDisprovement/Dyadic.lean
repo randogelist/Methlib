@@ -106,9 +106,8 @@ theorem dyadicCoeff_weighted_summable (ν : ℝ) :
       apply Summable.of_nat_of_neg
       · simpa using dyadicAmplitude_weighted_sq_summable
       · simpa using dyadicAmplitude_weighted_sq_summable
-    convert hz.mul_left (2 * Real.pi * (ν / 4) ^ 2) using 1
-    ext z
-    exact dyadicCoeff_weighted_axis_sq ν z
+    exact (hz.mul_left (2 * Real.pi * (ν / 4) ^ 2)).congr
+      (fun z => (dyadicCoeff_weighted_axis_sq ν z).symm)
   · intro ki hki
     have h : ¬ (ki.2 = 0 ∧ ki.1 0 = 0 ∧ ki.1 2 = 0) := by
       intro h

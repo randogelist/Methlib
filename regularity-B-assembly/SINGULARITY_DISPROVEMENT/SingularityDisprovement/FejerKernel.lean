@@ -191,6 +191,7 @@ theorem fejerKernel_weighted_integrable_real
     (a : Field) (ha : ∀ k : Frequency,
       IntegrableOn (datumFourierIntegrand a k 0) unitCube volume) (N : ℕ) :
     IntegrableOn (fun x => fejerKernel N x * a x 0) unitCube volume := by
+  change Integrable (fun x => fejerKernel N x * a x 0) (volume.restrict unitCube)
   have hi := (fejerKernel_weighted_integrable_complex a ha N).re
   change Integrable
     (fun x => ((fejerKernel N x : ℂ) * (a x 0 : ℂ)).re)

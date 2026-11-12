@@ -22,8 +22,12 @@ theorem dyadicAmplitude_tendsto_zero :
     Tendsto dyadicAmplitude atTop (𝓝 (0 : ℝ)) := by
   have hs := dyadicAmplitude_sq_summable.tendsto_atTop_zero
   have h := Real.continuous_sqrt.continuousAt.tendsto.comp hs
-  simpa only [Function.comp_def, Real.sqrt_sq (dyadicAmplitude_nonneg _),
-    Real.sqrt_zero] using h
+  have heq : (fun n : ℕ => Real.sqrt (dyadicAmplitude n ^ 2)) = dyadicAmplitude :=
+    funext (fun n => Real.sqrt_sq (dyadicAmplitude_nonneg n))
+  change Tendsto (fun n : ℕ => Real.sqrt (dyadicAmplitude n ^ 2))
+    atTop (𝓝 (Real.sqrt (0 : ℝ))) at h
+  rw [heq, Real.sqrt_zero] at h
+  exact h
 
 theorem dyadicAmplitude_shift_antitone :
     Antitone (fun n : ℕ => dyadicAmplitude (n + 2)) := by
@@ -37,7 +41,7 @@ theorem unit_geometric_partial_sum_bound (z : ℂ) (hz : ‖z‖ = 1)
   apply div_le_div_of_nonneg_right _ (norm_nonneg _)
   calc
     ‖z ^ N - 1‖ ≤ ‖z ^ N‖ + ‖(1 : ℂ)‖ := norm_sub_le _ _
-    _ = 2 := by simp [norm_pow, hz]
+    _ = 2 := by norm_num [norm_pow, hz]
 
 theorem unit_geometric_shift_partial_sum_bound (z : ℂ) (hz : ‖z‖ = 1)
     (hz1 : z ≠ 1) (N : ℕ) :
@@ -109,14 +113,16 @@ theorem dyadicCosine_exists_limit (y : ℝ)
 
 /-- The actual ordinary cosine-series limit, completed arbitrarily on the null
 set of integer arguments. -/
-def dyadicCosineValue (y : ℝ) : ℝ :=
-  if hy : ∀ k : ℤ, y ≠ (k : ℝ) then
+def dyadicCosineValue (y : ℝ) : ℝ := by
+  classical
+  exact if hy : ∀ k : ℤ, y ≠ (k : ℝ) then
     Classical.choose (dyadicCosine_exists_limit y hy)
   else 0
 
 theorem dyadicCosine_tendsto (y : ℝ) (hy : ∀ k : ℤ, y ≠ (k : ℝ)) :
     Tendsto (fun N : ℕ => dyadicCosinePartial N y)
       atTop (𝓝 (dyadicCosineValue y)) := by
+  classical
   rw [dyadicCosineValue, dif_pos hy]
   exact Classical.choose_spec (dyadicCosine_exists_limit y hy)
 
