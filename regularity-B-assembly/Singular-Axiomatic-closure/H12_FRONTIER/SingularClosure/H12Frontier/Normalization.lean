@@ -92,8 +92,8 @@ theorem nativeHthreeHalf_norm (a : CriticalSobolev 3)
       (2 * Real.pi) * Real.sqrt (2 * Real.pi) := by
     apply (sq_eq_sq₀ (Real.sqrt_nonneg _)
       (mul_nonneg (by positivity) (Real.sqrt_nonneg _))).mp
-    rw [Real.sq_sqrt (by positivity : 0 ≤ (2 * Real.pi) ^ 3),
-      mul_pow, Real.sq_sqrt (by positivity : 0 ≤ 2 * Real.pi)]
+    rw [Real.sq_sqrt (by positivity : 0 ≤ (2 * Real.pi) ^ 3)]
+    simp only [mul_pow, Real.sq_sqrt (by positivity : 0 ≤ 2 * Real.pi)]
     ring
   simpa only [hs] using nativeNorm_eq_paperNorm 3 a hz
 
