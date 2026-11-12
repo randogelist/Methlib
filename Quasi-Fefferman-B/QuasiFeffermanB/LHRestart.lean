@@ -94,37 +94,48 @@ theorem strong_tendsto_of_inner_and_norm_bound
   apply tendsto_iff_dist_tendsto_zero.mpr
   simpa only [dist_eq_norm] using hn
 
-theorem lh_energy_le_at_good_time
+theorem lh_energy_le_from_start
     {ν : ℝ} {v : Velocity} {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
-    (hν : 0 ≤ ν) {s t : ℝ} (hs : LHGoodEnergyTime ν v G s) (hst : s ≤ t) :
+    (hν : 0 ≤ ν) {s t : ℝ}
+    (hE : ∀ r : ℝ, s ≤ r → physicalEnergy (v r) +
+      2 * ν * (∫ q in s..r, criticalGradientEnergy (G q)) ≤ physicalEnergy (v s))
+    (hst : s ≤ t) :
     physicalEnergy (v t) ≤ physicalEnergy (v s) := by
   have hD : 0 ≤ ∫ r in s..t, criticalGradientEnergy (G r) :=
     intervalIntegral.integral_nonneg_of_forall hst
       (fun r => criticalGradientEnergy_nonneg (G r))
   have hprod : 0 ≤ 2 * ν * (∫ r in s..t, criticalGradientEnergy (G r)) :=
     mul_nonneg (mul_nonneg (by norm_num) hν) hD
-  linarith only [hs.2.2 t hst, hprod]
+  linarith only [hE t hst, hprod]
 
-theorem lh_strong_right_trace_at_good_time
+theorem lh_energy_le_at_good_time
+    {ν : ℝ} {v : Velocity} {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
+    (hν : 0 ≤ ν) {s t : ℝ} (hs : LHGoodEnergyTime ν v G s) (hst : s ≤ t) :
+    physicalEnergy (v t) ≤ physicalEnergy (v s) :=
+  lh_energy_le_from_start hν hs.2.2 hst
+
+theorem lh_strong_right_trace_of_energy_start
     {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
     {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
     (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν)
-    {s : ℝ} (hs : LHGoodEnergyTime ν v G s) :
+    {s : ℝ} (hs : 0 ≤ s)
+    (hE : ∀ r : ℝ, s ≤ r → physicalEnergy (v r) +
+      2 * ν * (∫ q in s..r, criticalGradientEnergy (G q)) ≤ physicalEnergy (v s)) :
     Tendsto (fun t => criticalL2Representative (v t))
       (𝓝[>] s) (𝓝 (criticalL2Representative (v s))) := by
-  have hvs := hv.velocity_L2 s hs.1.le
-  have hc := (hv.weak_continuity (v s) hvs) s hs.1.le
+  have hvs := hv.velocity_L2 s hs
+  have hc := (hv.weak_continuity (v s) hvs) s hs
   have hi : Tendsto (fun t => physicalFieldInner (v t) (v s))
       (𝓝[>] s) (𝓝 (physicalFieldInner (v s) (v s))) :=
     hc.tendsto.mono_left (nhdsWithin_mono _
-      (show Ioi s ⊆ Ici (0 : ℝ) from fun t ht => hs.1.le.trans ht.le))
+      (show Ioi s ⊆ Ici (0 : ℝ) from fun t ht => hs.trans ht.le))
   apply strong_tendsto_of_inner_and_norm_bound
   · have hpair : (fun t => inner ℝ (criticalL2Representative (v t))
         (criticalL2Representative (v s))) =ᶠ[𝓝[>] s]
         (fun t => physicalFieldInner (v t) (v s)) := by
       filter_upwards [self_mem_nhdsWithin] with t ht
       exact restart_representative_inner (v t) (v s)
-        (hv.velocity_L2 t (hs.1.le.trans ht.le)) hvs
+        (hv.velocity_L2 t (hs.trans ht.le)) hvs
     have hself : physicalFieldInner (v s) (v s) =
         ‖criticalL2Representative (v s)‖ ^ 2 := by
       rw [← restart_representative_inner (v s) (v s) hvs hvs,
@@ -133,9 +144,18 @@ theorem lh_strong_right_trace_at_good_time
     exact hi.congr' hpair.symm
   · filter_upwards [self_mem_nhdsWithin] with t ht
     rw [restart_representative_norm_sq (v t)
-      (hv.velocity_L2 t (hs.1.le.trans ht.le)),
+      (hv.velocity_L2 t (hs.trans ht.le)),
       restart_representative_norm_sq (v s) hvs]
-    exact lh_energy_le_at_good_time hν hs ht.le
+    exact lh_energy_le_from_start hν hE ht.le
+
+theorem lh_strong_right_trace_at_good_time
+    {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
+    {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
+    (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν)
+    {s : ℝ} (hs : LHGoodEnergyTime ν v G s) :
+    Tendsto (fun t => criticalL2Representative (v t))
+      (𝓝[>] s) (𝓝 (criticalL2Representative (v s))) :=
+  lh_strong_right_trace_of_energy_start hv hν hs.1.le hs.2.2
 
 theorem restart_representative_edist (f : Field)
     (hf : MemLp f 2 (volume.restrict unitCube)) (a : CriticalPhysicalL2) :
@@ -154,8 +174,30 @@ theorem timeTranslate_tendsto_nhdsWithin_right (s : ℝ) :
     simpa only [zero_add] using
       (hc.continuousAt (x := (0 : ℝ))).tendsto.mono_left nhdsWithin_le_nhds
   · filter_upwards [self_mem_nhdsWithin] with t ht
+    change (0 : ℝ) < t at ht
     change s < t + s
     linarith
+
+theorem lh_shifted_strong_trace_of_energy_start
+    {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
+    {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
+    (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν)
+    {s : ℝ} (hs : 0 ≤ s)
+    (hE : ∀ r : ℝ, s ≤ r → physicalEnergy (v r) +
+      2 * ν * (∫ q in s..r, criticalGradientEnergy (G q)) ≤ physicalEnergy (v s)) :
+    Tendsto (fun t => eLpNorm
+      (timeTranslate s v t - (criticalL2Representative (v s) : Field))
+      2 (volume.restrict unitCube)) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
+  have h := (lh_strong_right_trace_of_energy_start hv hν hs hE).comp
+    (timeTranslate_tendsto_nhdsWithin_right s)
+  have he : Tendsto (fun t => edist (criticalL2Representative (v (t + s)))
+      (criticalL2Representative (v s))) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
+    simpa only [Function.comp_def, edist_self] using h.edist tendsto_const_nhds
+  apply he.congr'
+  filter_upwards [self_mem_nhdsWithin] with t ht
+  change (0 : ℝ) < t at ht
+  exact restart_representative_edist (v (t + s))
+    (hv.velocity_L2 (t + s) (by linarith)) (criticalL2Representative (v s))
 
 theorem lh_shifted_strong_trace_at_good_time
     {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
@@ -164,25 +206,19 @@ theorem lh_shifted_strong_trace_at_good_time
     {s : ℝ} (hs : LHGoodEnergyTime ν v G s) :
     Tendsto (fun t => eLpNorm
       (timeTranslate s v t - (criticalL2Representative (v s) : Field))
-      2 (volume.restrict unitCube)) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
-  have h := (lh_strong_right_trace_at_good_time hv hν hs).comp
-    (timeTranslate_tendsto_nhdsWithin_right s)
-  have he : Tendsto (fun t => edist (criticalL2Representative (v (t + s)))
-      (criticalL2Representative (v s))) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
-    simpa only [Function.comp_def, edist_self] using h.edist tendsto_const_nhds
-  apply he.congr'
-  filter_upwards [self_mem_nhdsWithin] with t ht
-  exact restart_representative_edist (v (t + s))
-    (hv.velocity_L2 (t + s) (by linarith [hs.1])) (criticalL2Representative (v s))
+      2 (volume.restrict unitCube)) (𝓝[>] (0 : ℝ)) (𝓝 0) :=
+  lh_shifted_strong_trace_of_energy_start hv hν hs.1.le hs.2.2
 
-theorem LH_RESTART_AT_GOOD_TIME
+theorem LH_RESTART_FROM_ENERGY_START
     {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
     {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
     (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν)
-    {s : ℝ} (hs : LHGoodEnergyTime ν v G s) :
+    {s : ℝ} (hs : 0 ≤ s)
+    (hE : ∀ r : ℝ, s ≤ r → physicalEnergy (v r) +
+      2 * ν * (∫ q in s..r, criticalGradientEnergy (G q)) ≤ physicalEnergy (v s)) :
     CriticalLerayHopf ν (criticalL2Representative (v s))
       (timeTranslate s v) (timeTranslate s G) := by
-  have hs0 : 0 ≤ s := hs.1.le
+  have hs0 : 0 ≤ s := hs
   have hvs := hv.velocity_L2 s hs0
   refine {
     momentum := timeTranslate_integrated_momentum hv.momentum hs0
@@ -193,7 +229,7 @@ theorem LH_RESTART_AT_GOOD_TIME
       timeTranslate_memLp_Ioc hs0 (hv.gradient_energy_class (T + s) (by linarith))
     initial := ?_
     weak_continuity := ?_
-    strong_trace := lh_shifted_strong_trace_at_good_time hv hν hs
+    strong_trace := lh_shifted_strong_trace_of_energy_start hv hν hs hE
     spatial_H1 := ?_
     dissipation_integrable := ?_
     energy_initial := ?_
@@ -220,7 +256,7 @@ theorem LH_RESTART_AT_GOOD_TIME
       2 * ν * (∫ r in (0 : ℝ)..t, criticalGradientEnergy (G (r + s))) ≤ _
     rw [intervalIntegral.integral_comp_add_right, zero_add,
       restart_representative_norm_sq (v s) hvs]
-    exact hs.2.2 (t + s) (by linarith)
+    exact hE (t + s) (by linarith)
   · intro T hT
     have hE := timeTranslate_ae_Ioc hs0
       (hv.energy_intervals (T + s) (by linarith))
@@ -231,6 +267,15 @@ theorem LH_RESTART_AT_GOOD_TIME
         physicalEnergy (v (r + s))
     rw [intervalIntegral.integral_comp_add_right]
     exact hr (t + s) ⟨add_le_add_right ht.1 s, add_le_add_right ht.2 s⟩
+
+theorem LH_RESTART_AT_GOOD_TIME
+    {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}
+    {G : ℝ → Vec → (Vec →L[ℝ] Vec)}
+    (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν)
+    {s : ℝ} (hs : LHGoodEnergyTime ν v G s) :
+    CriticalLerayHopf ν (criticalL2Representative (v s))
+      (timeTranslate s v) (timeTranslate s G) :=
+  LH_RESTART_FROM_ENERGY_START hv hν hs.1.le hs.2.2
 
 theorem LH_RESTART_AE
     {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}

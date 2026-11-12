@@ -1,0 +1,107 @@
+{
+  "QuasiFeffermanB.CaloricAdmission": {
+    "run": 43147241136,
+    "job": 130947805745,
+    "source_commit": "09def662a6ee3a7b8bb2c3b20c82eeaa5292b13d",
+    "source_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+    "external_build": "PASS",
+    "cached_axiom_reinspection": "PASS",
+    "whole_contract_promotion": false,
+    "declarations": {
+      "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      },
+      "QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      }
+    }
+  },
+  "QuasiFeffermanB.CaloricBarrier": {
+    "run": 43147241136,
+    "job": 130947805745,
+    "source_commit": "09def662a6ee3a7b8bb2c3b20c82eeaa5292b13d",
+    "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+    "external_build": "PASS",
+    "cached_axiom_reinspection": "PASS",
+    "whole_contract_promotion": false,
+    "declarations": {
+      "QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      },
+      "QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      },
+      "QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      },
+      "QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      },
+      "QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      }
+    }
+  },
+  "QuasiFeffermanB.CaloricSmoothing": {
+    "run": 43147241136,
+    "job": 130947805745,
+    "source_commit": "09def662a6ee3a7b8bb2c3b20c82eeaa5292b13d",
+    "source_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+    "external_build": "PASS",
+    "cached_axiom_reinspection": "PASS",
+    "whole_contract_promotion": false,
+    "declarations": {
+      "QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      },
+      "QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED": {
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "!=! EXACT_DECLARATION_A_TIER"
+      }
+    }
+  }
+}

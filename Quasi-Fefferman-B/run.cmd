@@ -5,6 +5,7 @@ set "QFB_PROJECT=%~dp0"
 for %%I in ("%QFB_PROJECT%..") do set "QFB_REPOSITORY=%%~fI"
 set "QFB_NATIVE_PACKAGE=%TEMP%\qfb-native-%RANDOM%-%RANDOM%"
 set "MATHLIB_NO_CACHE_ON_UPDATE=1"
+set "PYTHONUTF8=1"
 git -C "%QFB_REPOSITORY%" cat-file -e 09dfe94a1ef150e21d09df3013fbe09002ef139c^{commit}
 if errorlevel 1 exit /b 1
 py -3 "%QFB_PROJECT%scripts\prepare.py" --repository "%QFB_REPOSITORY%" --output "%QFB_NATIVE_PACKAGE%"
@@ -21,7 +22,7 @@ findstr /x /c:"db584cd6d46c92f209a44c0f1c829460d327499d" evidence\mathlib-revisi
 if errorlevel 1 goto :fail
 py -3 qfb\scripts\audit.py --self-test
 if errorlevel 1 goto :fail
-call lake env python qfb\scripts\audit.py --package . > evidence\external-driver.log 2>&1
+call lake env py -3 qfb\scripts\audit.py --package . > evidence\external-driver.log 2>&1
 if errorlevel 1 goto :fail
 echo EXTERNAL_EXACT_DECLARATION_AUDIT_PASS
 echo Evidence: %QFB_NATIVE_PACKAGE%\evidence

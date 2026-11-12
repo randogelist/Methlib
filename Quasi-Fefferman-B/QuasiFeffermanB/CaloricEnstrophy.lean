@@ -53,7 +53,8 @@ theorem GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL
       coefficientEnstrophyNonlinearPower N (g.coeff t) ^ 2 ≤
         R N g t * coefficientDissipation N (g.coeff t) *
           coefficientLaplacianSquare N (g.coeff t))
-    (hinitial : ∀ N g, coefficientDissipation N (g.coeff 0) ≤ E₀)
+    (hinitial : ∀ (N : ℕ) (g : GalerkinSolution ν (a N) N),
+      coefficientDissipation N (g.coeff 0) ≤ E₀)
     (hbudget : ∀ N g T, 0 ≤ T → (∫ t in (0 : ℝ)..T, R N g t) ≤ S) :
     ∀ T : ℝ, 0 ≤ T → ∀ (N : ℕ) (g : GalerkinSolution ν (a N) N),
       ∀ t ∈ Icc (0 : ℝ) T,

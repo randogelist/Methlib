@@ -16,8 +16,7 @@ open SingularClosure
 noncomputable section
 
 theorem caloric_fourierCharacter_norm (k : Frequency) (x : Vec) :
-    ‖fourierCharacter k x‖ = 1 := by
-  simp [fourierCharacter, Complex.norm_exp]
+    ‖fourierCharacter k x‖ = 1 := fourierCharacter_norm k x
 
 /-- The modulus is the Euclidean complex coefficient modulus. -/
 theorem FINITE_SYNTHESIS_NORM_LE_CHI0
@@ -32,7 +31,6 @@ theorem FINITE_SYNTHESIS_NORM_LE_CHI0
       (EuclideanSpace.proj i : Vec →L[ℝ] ℝ) (∑ k ∈ cutoffModes N, F k)
     rw [map_sum]
     simp only [physical_complex_re_sum, F, EuclideanSpace.coe_proj]
-    rfl
   have hmode (k : Frequency) : ‖F k‖ ≤ complexVecNorm (c k) := by
     apply (sq_le_sq₀ (norm_nonneg _) (Real.sqrt_nonneg _)).mp
     rw [EuclideanSpace.real_norm_sq_eq]

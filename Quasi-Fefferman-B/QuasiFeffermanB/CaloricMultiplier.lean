@@ -60,7 +60,7 @@ theorem complexVecNorm_add_le (c d : Fin 3 → ℂ) :
     complexVecNorm (fun i => c i + d i) ≤ complexVecNorm c + complexVecNorm d := by
   rw [complexVecNorm_eq_norm, complexVecNorm_eq_norm, complexVecNorm_eq_norm]
   change ‖complexVec c + complexVec d‖ ≤ ‖complexVec c‖ + ‖complexVec d‖
-  exact norm_add _ _
+  exact norm_add_le _ _
 
 theorem complexVecNorm_smul (α : ℂ) (c : Fin 3 → ℂ) :
     complexVecNorm (fun i => α * c i) = ‖α‖ * complexVecNorm c := by
@@ -90,7 +90,8 @@ theorem complexTransverse_pythagoras
   have horth :
       inner ℂ ((inner ℂ e z) • e) (complexTransverse e z) = 0 := by
     simp only [complexTransverse, inner_smul_left, inner_sub_right,
-      inner_smul_right, hee, mul_one, sub_self, mul_zero]
+      inner_smul_right, hee, mul_one]
+    ring
   have hdecomp :
       (inner ℂ e z) • e + complexTransverse e z = z := by
     simp only [complexTransverse]
@@ -130,7 +131,7 @@ theorem SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED
       complexTransverse e ((inner ℂ e z) • w + (inner ℂ e w) • z)‖ ≤
       (κ / 2) * (‖z‖ * ‖w‖) := by
   have hnorm : ‖((κ / 2 : ℝ) : ℂ)‖ = κ / 2 := by
-    simp [abs_of_nonneg (div_nonneg hκ (by norm_num : (0 : ℝ) ≤ 2))]
+    simp [hκ]
   rw [norm_smul, hnorm]
   exact mul_le_mul_of_nonneg_left
     (SYMMETRIC_COMPLEX_LERAY_MULTIPLIER e z w he)

@@ -10,7 +10,7 @@ import sys
 
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 def check_log(text, names):
-    if re.search(r"\bsorryAx\b|\buses ['`]sorry['`]|\berror:", text):
+    if re.search(r"\bsorryAx\b|\buses ['`]sorry['`]|\berror(?:\([^\n)]*\))?:", text):
         raise ValueError("Lean error or sorry dependency")
     reports = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", text)
     reports += [(n, "") for n in re.findall(r"'([^']+)' does not depend on any axioms", text)]
@@ -19,7 +19,9 @@ def check_log(text, names):
         raise ValueError(f"Axiom declaration mismatch: {observed}")
     types = {}
     for name, raw in reports:
-        axioms = {a.strip() for a in raw.split(",") if a.strip()}
+        # pp.universes annotates constants; these are level arguments, not names.
+        raw_names = re.sub(r"\.\{[^{}]*\}", "", raw)
+        axioms = {a.strip() for a in raw_names.split(",") if a.strip()}
         if not axioms <= ALLOWED:
             raise ValueError(f"Unapproved axioms for {name}: {sorted(axioms - ALLOWED)}")
         begin, end = f"TYPE_BEGIN:{name}\n", f"TYPE_END:{name}"
@@ -35,9 +37,13 @@ def self_test():
     name = "Fixture.test"
     good = f"TYPE_BEGIN:{name}\nFixture.test : True\nTYPE_END:{name}\n'{name}' depends on axioms: [propext]\n"
     assert check_log(good, [name])[name]["axioms"] == ["propext"]
+    universe_good = good.replace("[propext]", "[propext, Classical.choice.{u}, Quot.sound.{u}]")
+    assert set(check_log(universe_good, [name])[name]["axioms"]) == ALLOWED
     for bad in [good.replace("[propext]", "[sorryAx]"), good + good,
                 good.replace("TYPE_END:", "MISSING:"), good + "error: failed\n",
-                good.replace("[propext]", "[Unapproved.assumption]")]:
+                good + "error(lean.synthInstanceFailed): failed\n",
+                good.replace("[propext]", "[Unapproved.assumption]"),
+                good.replace("[propext]", "[Unapproved.assumption.{u}]")]:
         try:
             check_log(bad, [name])
         except ValueError:
@@ -140,7 +146,7 @@ def main():
             status["modules"][module] = {"build": "PASS"}
             if module not in audit_specs: continue
             names = audit_specs[module]["declarations"]
-            audit_source = [f"import {module}", "set_option pp.universes true", "set_option pp.explicit true", ""]
+            audit_source = [f"import {module}", "set_option pp.universes false", "set_option pp.explicit false", ""]
             for name in names:
                 audit_source += [f'#eval IO.println "TYPE_BEGIN:{name}"', f"#check @{name}",
                                  f'#eval IO.println "TYPE_END:{name}"', f"#print axioms {name}", ""]
@@ -154,6 +160,8 @@ def main():
                 for name, details in declarations.items():
                     details.update({"source": audit_specs[module]["source"],
                                     "source_sha256": audit_specs[module]["sha256"],
+                                    "type_rendering": "readable compiler presentation; pinned source is normative",
+                                    "type_prettyprinter_elisions": "⋯" in details["type"] or "..." in details["type"],
                                     "status": "A_TIER_EXACT_DECLARATION", "contract_completion": False})
                     status["declarations"][name] = details
                     print(f"!=! DECLARATION {name}", flush=True)

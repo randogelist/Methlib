@@ -25,7 +25,7 @@ def energyModeLeray (k : Frequency) :
   cont := (contDiff_coefficientLeray k).continuous
 
 def energyModeTransportBound (k : Frequency) : ℝ :=
-  ∑ j : Fin 3, ‖divergenceTransportCoefficient k j‖
+  ∑ j : Fin 3, ‖derivativeSymbol j k‖
 
 theorem energyModeTransportBound_nonneg (k : Frequency) :
     0 ≤ energyModeTransportBound k :=
@@ -38,16 +38,21 @@ theorem energyModeTransport_norm_le (k : Frequency) (c : TorusSobolev 0) :
     (sq_nonneg ‖c‖))).mpr
   intro j
   calc
-    _ ≤ ‖divergenceTransportCoefficient k j c‖ * ‖c‖ :=
-      (divergenceTransportCoefficient k j c).le_opNorm c
-    _ ≤ (‖divergenceTransportCoefficient k j‖ * ‖c‖) * ‖c‖ :=
-      mul_le_mul_of_nonneg_right
-        ((divergenceTransportCoefficient k j).le_opNorm c) (norm_nonneg c)
-    _ = ‖divergenceTransportCoefficient k j‖ * ‖c‖ ^ 2 := by ring
-    _ ≤ energyModeTransportBound k * ‖c‖ ^ 2 := by
-      apply mul_le_mul_of_nonneg_right _ (sq_nonneg ‖c‖)
-      exact Finset.single_le_sum (fun i _ => norm_nonneg
-        (divergenceTransportCoefficient k i)) (Finset.mem_univ j)
+    _ = ‖∑ l : Fin 3, derivativeSymbol l k * fourierTensorCoefficient k l j c c‖ := by
+      rw [divergenceTransportCoefficient_apply]
+      rfl
+    _ ≤ ∑ l : Fin 3, ‖derivativeSymbol l k * fourierTensorCoefficient k l j c c‖ :=
+      norm_sum_le _ _
+    _ = ∑ l : Fin 3, ‖derivativeSymbol l k‖ * ‖fourierTensorCoefficient k l j c c‖ := by
+      simp only [norm_mul]
+    _ ≤ ∑ l : Fin 3, ‖derivativeSymbol l k‖ * (‖c‖ * ‖c‖) := by
+      apply Finset.sum_le_sum
+      intro l _
+      exact mul_le_mul_of_nonneg_left (fourierTensorCoefficient_norm_le k l j c c)
+        (norm_nonneg _)
+    _ = energyModeTransportBound k * ‖c‖ ^ 2 := by
+      rw [← Finset.sum_mul]
+      simp only [energyModeTransportBound, pow_two]
 
 def energyModeRhsBound (ν R : ℝ) (k : Frequency) (i : Fin 3) : ℝ :=
   |ν * (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ)| *
@@ -58,7 +63,8 @@ theorem energyModeRhsBound_nonneg (ν R : ℝ) (hR : 0 ≤ R)
     (k : Frequency) (i : Fin 3) : 0 ≤ energyModeRhsBound ν R k i := by
   unfold energyModeRhsBound
   exact add_nonneg
-    (mul_nonneg (mul_nonneg (abs_nonneg _) (norm_nonneg _)) hR)
+    (mul_nonneg (mul_nonneg (abs_nonneg _)
+      (ContinuousLinearMap.opNorm_nonneg (torusSobolevH0Coeff k i))) hR)
     (mul_nonneg (mul_nonneg (norm_nonneg _) (energyModeTransportBound_nonneg k))
       (sq_nonneg R))
 
@@ -69,7 +75,8 @@ theorem fullFourierRhs_energy_bound (ν R : ℝ) (hR : 0 ≤ R)
   have hcoeff : ‖c.val k i‖ ≤ ‖torusSobolevH0Coeff k i‖ * R := by
     rw [← torusSobolevH0Coeff_apply]
     exact ((torusSobolevH0Coeff k i).le_opNorm c).trans
-      (mul_le_mul_of_nonneg_left hc (norm_nonneg _))
+      (mul_le_mul_of_nonneg_left hc
+        (ContinuousLinearMap.opNorm_nonneg (torusSobolevH0Coeff k i)))
   have htransport :
       ‖coefficientLeray k (fun j => divergenceTransportCoefficient k j c c) i‖ ≤
         ‖energyModeLeray k‖ * energyModeTransportBound k * R ^ 2 := by
@@ -180,7 +187,8 @@ theorem ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE
     have hs := galerkin_H0_energy_bound hν (g n) R hR (hinit n) t.val t.property.1
     have hc := (torusSobolevH0Coeff ki.1 ki.2).le_opNorm ((g n).sobolevState 0 t.val)
     rw [torusSobolevH0Coeff_apply, (g n).sobolevState_coeff 0 t.property.1] at hc
-    exact hc.trans (mul_le_mul_of_nonneg_left hs (norm_nonneg _))
+    exact hc.trans (mul_le_mul_of_nonneg_left hs
+      (ContinuousLinearMap.opNorm_nonneg (torusSobolevH0Coeff ki.1 ki.2)))
   have hm (ki : FourierIndex) (n : ℕ) (s t : Icc (0 : ℝ) T) :
       ‖F ki n t - F ki n s‖ ^ 2 ≤ M ki * |t.val - s.val| := by
     change ‖(g n).coeff t.val ki.1 ki.2 - (g n).coeff s.val ki.1 ki.2‖ ^ 2 ≤ _

@@ -19,7 +19,7 @@ noncomputable section
 structure EnergySigmaZero (a : CriticalPhysicalL2) : Prop where
   gradient_annihilation : ∀ p : Vec → ℝ,
     ContDiff ℝ ∞ p → SpatialPeriodic p →
-      physicalFieldInner (a : Field) (gradient p) = 0
+      physicalFieldInner (a : Field) (SingularClosure.gradient p) = 0
   mean_zero : ∀ i : Fin 3,
     physicalFieldInner (a : Field) (fun _ => unitVector i) = 0
 

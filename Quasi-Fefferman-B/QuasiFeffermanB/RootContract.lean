@@ -22,7 +22,7 @@ structure ClassicalTail (ν δ : ℝ) (v : Velocity) (p : Pressure) : Prop where
   pressure_periodic : ∀ t : ℝ, δ ≤ t → SpatialPeriodic (p t)
   divergence_free : ∀ t : ℝ, δ ≤ t → ∀ x : Vec, divergence (v t) x = 0
   equation : ∀ t : ℝ, δ ≤ t → ∀ x : Vec,
-    timeDerivative v t x + convection (v t) x + gradient (p t) x =
+    timeDerivative v t x + convection (v t) x + SingularClosure.gradient (p t) x =
       ν • laplacian (v t) x
   velocity_mean_zero : ∀ t : ℝ, δ ≤ t → MeanZero (v t)
   pressure_mean_zero : ∀ t : ℝ, δ ≤ t → PressureMeanZero (p t)

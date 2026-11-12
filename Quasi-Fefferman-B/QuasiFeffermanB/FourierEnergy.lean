@@ -48,7 +48,9 @@ theorem physicalEnergy_compCLM_tendsto_of_L2
         ‖L.compLpL 2 (volume.restrict unitCube) (hw.toLp w)‖ ^ 2 := by
     rw [physicalEnergy_eq_toLp_norm_sq _ (L.comp_memLp' hw),
       critical_toLp_compCLM]
-  simpa only [← heq] using hL.norm.pow 2
+  have h := hL.norm.pow 2
+  dsimp only [Function.comp_def] at h
+  simpa only [← heq] using h
 
 theorem datumFourierCoeff_tendsto_of_L2
     (f : ℕ → Field) (v : Field)
@@ -64,6 +66,7 @@ theorem datumFourierCoeff_tendsto_of_L2
       criticalCubeFourierFunctional k i (hw.toLp w) = datumFourierCoeff w k i := by
     rw [criticalCubeFourierFunctional_apply,
       criticalCube_datumFourierCoeff_congr_ae hw.coeFn_toLp]
+  dsimp only [Function.comp_def] at h
   simpa only [heq] using h
 
 theorem physicalH1_cutoff_bounds {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}
@@ -106,9 +109,10 @@ theorem physicalH1_cutoff_bounds {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}
   · apply le_of_tendsto_of_tendsto hD hG
     apply Filter.Eventually.of_forall
     intro n
-    simpa only [integral_gradientSquareDensity_eq_sum_physicalEnergy _ (hw n),
-      criticalGradientEnergy, coordinateDerivative] using
-      coefficientDissipation_initial_cutoff_le N (w n) (hw n) (hwp n)
+    have hb := coefficientDissipation_initial_cutoff_le N (w n) (hw n) (hwp n)
+    rw [integral_gradientSquareDensity_eq_sum_physicalEnergy _ (hw n)] at hb
+    dsimp only [coordinateDerivative] at hb
+    exact hb
 
 theorem criticalEnergy_midpoint (N : ℕ) (c : FourierCoeff) :
     criticalEnergy 1 N c ^ 2 ≤ coefficientEnergy N c * coefficientDissipation N c := by
@@ -153,10 +157,15 @@ theorem physicalHalfEnergy_cutoff (v : Field) (N : ℕ) :
   classical
   rw [← ENNReal.ofReal_sum_of_nonneg (fun ki _ => physicalHalfEnergyTerm_nonneg v ki)]
   congr 1
-  rw [sobolevCutoffIndices, Finset.sum_product, sobolevCutoffModes,
-    Finset.sum_insert (by
-      intro h
-      exact ((mem_cutoffModes_iff N 0).mp h).2.1 rfl)]
+  rw [sobolevCutoffIndices]
+  have hprod :
+      (∑ ki ∈ (sobolevCutoffModes N).product (Finset.univ : Finset (Fin 3)),
+        physicalHalfEnergyTerm v ki) =
+      ∑ k ∈ sobolevCutoffModes N, ∑ i : Fin 3, physicalHalfEnergyTerm v (k, i) :=
+    Finset.sum_product (sobolevCutoffModes N) Finset.univ (physicalHalfEnergyTerm v)
+  rw [hprod, sobolevCutoffModes, Finset.sum_insert (by
+    intro h
+    exact ((mem_cutoffModes_iff N 0).mp h).2.1 rfl)]
   simp only [physicalHalfEnergyTerm, if_pos rfl, Finset.sum_const_zero, zero_add]
   unfold criticalEnergy
   apply Finset.sum_congr rfl
@@ -268,8 +277,8 @@ theorem physicalHalfEnergy_aemeasurable
     AEMeasurable (fun t => physicalHalfEnergy (v t)) m := by
   have hc (k : Frequency) (i : Fin 3) :
       AEMeasurable (fun t => datumFourierCoeff (v t) k i) m := by
-    have h := (criticalCubeFourierFunctional k i).continuous.measurable.comp_aemeasurable
-      hv.aemeasurable
+    have h := ((criticalCubeFourierFunctional k i).continuous.comp_aestronglyMeasurable
+      hv).aemeasurable
     apply h.congr
     filter_upwards [hL2] with t ht
     rw [criticalL2Representative_eq _ ht, criticalCubeFourierFunctional_apply,

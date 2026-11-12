@@ -47,6 +47,31 @@ not automatically resolve the larger Q/A endpoint.
 · [Candidate manifest](endpoint-manifest.json)
 · [Native Windows runner](run.cmd)
 
+## Verified exact declarations
+
+Evidence: [external run 43147241136](https://github.com/randogelist/Methlib/actions/runs/43147241136),
+commit `09def662a6ee3a7b8bb2c3b20c82eeaa5292b13d`.
+
+[Source-hash and axiom ledger](evidence/run-43147241136-reinspection.json).
+The initial workflow parser rejected standard axioms with printed universe
+arguments; direct cached-log reinspection verified the same three permitted
+axiom constants. The parser and rejection fixtures are corrected.
+
+| Marker | Exact declaration |
+|---|---|
+| `!=!` | `POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN` |
+| `!=!` | `TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN` |
+| `!=!` | `CONTINUOUS_QUADRATIC_BARRIER` |
+| `!=!` | `QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET` |
+| `!=!` | `QUADRATIC_BARRIER_ZERO_HEAT_BUDGET` |
+| `!=!` | `QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET` |
+| `!=!` | `QUADRATIC_BARRIER_SQUARE_BUDGET` |
+| `!=!` | `GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION` |
+| `!=!` | `GALERKIN_POSITIVE_FLOW_OF_H2_SEED` |
+
+These declarations retain their explicit quantitative/analytic premises.
+`QFB_ROOT_UNCONDITIONAL_A_TIER = PENDING`.
+
 ## Frozen statement
 
 $$

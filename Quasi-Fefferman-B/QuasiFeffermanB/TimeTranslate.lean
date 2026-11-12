@@ -50,6 +50,7 @@ theorem restartTimeClamp_hasDerivAt (s : ℝ) {c r : ℝ} (hc : 0 < c)
     (hr : 2 * c < r - s) : HasDerivAt (restartTimeClamp s c) 1 r := by
   have heq : restartTimeClamp s c =ᶠ[𝓝 r] (fun q : ℝ => q - s) := by
     filter_upwards [Ioi_mem_nhds (show s + 2 * c < r by linarith)] with q hq
+    change s + 2 * c < q at hq
     exact restartTimeClamp_eq s hc (by linarith)
   exact ((hasDerivAt_id r).sub_const s).congr_of_eventuallyEq heq
 
@@ -82,7 +83,7 @@ theorem restartTest_timeDerivative (s : ℝ) {c r : ℝ} (hc : 0 < c)
   funext x
   have hclamp := restartTimeClamp_hasDerivAt s hc hr
   have hcomp := (hφ.time_hasDerivAt (restartTimeClamp s c r)
-    (restartTimeClamp_pos s hc r) x).comp r hclamp
+    (restartTimeClamp_pos s hc r) x).scomp r hclamp
   have hcomp' : HasDerivAt (fun q => restartTest s c φ q x)
       (timeDerivative φ (r - s) x) r := by
     simpa only [Function.comp_def, restartTest, one_smul,
@@ -157,7 +158,7 @@ theorem timeTranslate_integrated_momentum
     apply intervalIntegral.integral_congr
     intro r hr
     have hr' : r ∈ Icc a b := by simpa only [uIcc_of_le hab] using hr
-    unfold criticalWeakMomentumIntegrand
+    dsimp only [criticalWeakMomentumIntegrand, timeTranslate]
     rw [hd r hr'.1, heq r hr'.1]
     rfl
 

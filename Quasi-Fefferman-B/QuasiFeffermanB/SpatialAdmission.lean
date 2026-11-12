@@ -67,7 +67,7 @@ theorem complex_derivative_imaginary_component (f : Vec → ℂ)
 theorem physical_complex_gradient_annihilation (v : Field)
     (hv : MemLp v 2 (volume.restrict unitCube))
     (hgrad : ∀ p : Vec → ℝ, ContDiff ℝ ∞ p → SpatialPeriodic p →
-      physicalFieldInner v (gradient p) = 0)
+      physicalFieldInner v (SingularClosure.gradient p) = 0)
     (f : Vec → ℂ) (hf : ContDiff ℝ ∞ f) (hfp : SpatialPeriodic f) :
     (∫ x in unitCube, ∑ i : Fin 3,
       (v x i : ℂ) * fderiv ℝ f x (unitVector i)) = 0 := by
@@ -82,13 +82,13 @@ theorem physical_complex_gradient_annihilation (v : Field)
     integrable_finsetSum Finset.univ (fun i _ => hterm i)
   have hR (x : Vec) :
       (∑ i : Fin 3, (v x i : ℂ) * fderiv ℝ f x (unitVector i)).re =
-        inner ℝ (v x) (gradient (fun y => (f y).re) x) := by
-    simp [gradient, PiLp.inner_apply, RCLike.inner_apply,
+        inner ℝ (v x) (SingularClosure.gradient (fun y => (f y).re) x) := by
+    simp [SingularClosure.gradient, PiLp.inner_apply, RCLike.inner_apply,
       complex_derivative_real_component f (hf.differentiable (by simp)), mul_comm]
   have hI (x : Vec) :
       (∑ i : Fin 3, (v x i : ℂ) * fderiv ℝ f x (unitVector i)).im =
-        inner ℝ (v x) (gradient (fun y => (f y).im) x) := by
-    simp [gradient, PiLp.inner_apply, RCLike.inner_apply,
+        inner ℝ (v x) (SingularClosure.gradient (fun y => (f y).im) x) := by
+    simp [SingularClosure.gradient, PiLp.inner_apply, RCLike.inner_apply,
       complex_derivative_imaginary_component f (hf.differentiable (by simp)), mul_comm]
   have hpR : SpatialPeriodic (fun x => (f x).re) := by
     intro x i
@@ -103,7 +103,7 @@ theorem physical_complex_gradient_annihilation (v : Field)
           ∫ x in unitCube, (∑ i : Fin 3,
             (v x i : ℂ) * fderiv ℝ f x (unitVector i)).re :=
         (Complex.reCLM.integral_comp_comm hint).symm
-      _ = physicalFieldInner v (gradient (fun x => (f x).re)) := by
+      _ = physicalFieldInner v (SingularClosure.gradient (fun x => (f x).re)) := by
         simp only [hR, physicalFieldInner]
       _ = 0 := hgrad _ (Complex.reCLM.contDiff.comp hf) hpR
   · calc
@@ -112,14 +112,14 @@ theorem physical_complex_gradient_annihilation (v : Field)
           ∫ x in unitCube, (∑ i : Fin 3,
             (v x i : ℂ) * fderiv ℝ f x (unitVector i)).im :=
         (Complex.imCLM.integral_comp_comm hint).symm
-      _ = physicalFieldInner v (gradient (fun x => (f x).im)) := by
+      _ = physicalFieldInner v (SingularClosure.gradient (fun x => (f x).im)) := by
         simp only [hI, physicalFieldInner]
       _ = 0 := hgrad _ (Complex.imCLM.contDiff.comp hf) hpI
 
 theorem physical_gradient_annihilation_fourier_solenoidal (v : Field)
     (hv : MemLp v 2 (volume.restrict unitCube))
     (hgrad : ∀ p : Vec → ℝ, ContDiff ℝ ∞ p → SpatialPeriodic p →
-      physicalFieldInner v (gradient p) = 0) :
+      physicalFieldInner v (SingularClosure.gradient p) = 0) :
     SpectralSolenoidal (datumFourierCoeff v) := by
   intro k
   have hz := physical_complex_gradient_annihilation v hv hgrad
@@ -174,7 +174,7 @@ theorem physicalH1HalfDatum_criticalSigmaZero
     {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}
     (hv : CriticalPhysicalH1 v G)
     (hgrad : ∀ p : Vec → ℝ, ContDiff ℝ ∞ p → SpatialPeriodic p →
-      physicalFieldInner v (gradient p) = 0)
+      physicalFieldInner v (SingularClosure.gradient p) = 0)
     (hmean : ∀ i : Fin 3, physicalFieldInner v (fun _ => unitVector i) = 0) :
     CriticalSigmaZero
       (physicalH1HalfDatum hv (physical_mean_pairings_fourier_zero v hmean)) := by
