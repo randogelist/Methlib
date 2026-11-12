@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "project": "H12_FRONTIER",
+  "repository": "randogelist/Methlib",
+  "branch": "H12_extension",
+  "package_path": "regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER",
+  "seed_commit": "ec62560d1e0f362f35cca2efb68635ed78b888c2",
+  "index_status": "COMPLETE_INITIAL_ASSEMBLY_INDEX",
+  "local_lean_executions": 0,
+  "base": {
+    "root_module": "SingularClosure.SmallDataClosure",
+    "root_declaration": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL",
+    "status": "UNCONDITIONAL_CLOSURE",
+    "marker": "!!!!",
+    "smallness": "criticalNonlinearConstant * norm(a) < nu",
+    "original_source_commit": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "original_workflow_run": 43059293572,
+    "original_workflow_job": 130657144029,
+    "exact_type_audit": "PASS",
+    "axiom_audit": "PASS_STANDARD_ONLY",
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "additional_analytic_premises": [],
+    "additional_certificate_premises": [],
+    "additional_admission_premises": [],
+    "verified_counts": {
+      "critical_modules": 104,
+      "required_audit_modules": 27,
+      "extension_declarations": 33,
+      "original_declarations": 171
+    }
+  },
+  "toolchain": {
+    "lean": "4.33.0",
+    "lean_toolchain": "leanprover/lean4:v4.33.0",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "cache_policy": "lake exe cache get",
+    "local_execution_forbidden": true
+  },
+  "constants": {
+    "repository": {
+      "symbol": "SingularClosure.criticalNonlinearConstant",
+      "source": "SingularClosure/SmallDataAX6Closure.lean",
+      "proved_positive": true,
+      "bound_source": "SingularClosure.FINITE_CRITICAL_NONLINEAR_BOUND"
+    },
+    "project_pkg1": {
+      "symbolic_value": "8 * C3^3",
+      "radius": "1 / (8 * C3^3)",
+      "source": "regularity-B-assembly/pkg1/H12_SIGMA_SMALL_GLOBAL_REGULARITY_B_TIER.txt"
+    },
+    "literal_literature": {
+      "symbol": "K2",
+      "radius": "1 / K2",
+      "lean_identification_status": "OPEN"
+    },
+    "frontier": {
+      "symbolic_value": "K2 / sqrt(2)",
+      "radius": "sqrt(2) / K2",
+      "b_tier_name": "FRONTIER_H12",
+      "lean_nonlinear_bound_status": "OPEN",
+      "comparison_to_repository_constant": "OPEN"
+    },
+    "unknown_relations": [
+      "criticalNonlinearConstant = K2",
+      "criticalNonlinearConstant = K2 / sqrt(2)",
+      "criticalNonlinearConstant = 8 * C3^3",
+      "K2 = 8 * C3^3",
+      "K2 / sqrt(2) < criticalNonlinearConstant",
+      "criticalNonlinearConstant <= K2 / sqrt(2)"
+    ]
+  },
+  "module_layers": [
+    {
+      "name": "critical_carrier",
+      "modules": [
+        "SingularClosure.CriticalSpaces",
+        "SingularClosure.CriticalSpacesCutoff",
+        "SingularClosure.CriticalSpacesEmbedding",
+        "SingularClosure.CriticalInitialPhysicalFourier"
+      ],
+      "frontier_action": "reuse"
+    },
+    {
+      "name": "finite_galerkin",
+      "modules": [
+        "SingularClosure.CriticalGalerkin",
+        "SingularClosure.CriticalGalerkinTrajectory"
+      ],
+      "frontier_action": "reuse"
+    },
+    {
+      "name": "critical_nonlinear",
+      "modules": [
+        "SingularClosure.CriticalSobolev",
+        "SingularClosure.CriticalEnergy",
+        "SingularClosure.CriticalNonlinear"
+      ],
+      "frontier_action": "reuse_geometry_add_new_frontier_bound"
+    },
+    {
+      "name": "invariant_and_budgets",
+      "modules": [
+        "SingularClosure.CriticalInvariant",
+        "SingularClosure.SmallDataAX6Closure",
+        "SingularClosure.CriticalTimeDerivative",
+        "SingularClosure.CriticalUniformBounds"
+      ],
+      "frontier_action": "reuse_parameterized_kernels_add_constant_specific_wrappers"
+    },
+    {
+      "name": "compactness_and_trace",
+      "modules": [
+        "SingularClosure.CriticalLimitGlobal",
+        "SingularClosure.CriticalTraceStrong"
+      ],
+      "frontier_action": "reuse"
+    },
+    {
+      "name": "positive_time_physical",
+      "modules": [
+        "SingularClosure.CriticalPositiveTimeHighOrder",
+        "SingularClosure.CriticalPositiveLimit",
+        "SingularClosure.CriticalPositiveFlow"
+      ],
+      "frontier_action": "reuse_kernels_add_frontier_wrappers"
+    },
+    {
+      "name": "global_physical_closure",
+      "modules": [
+        "SingularClosure.SmallDataQuantitative",
+        "SingularClosure.CriticalGlobalEnergyClass",
+        "SingularClosure.CriticalGlobalSerrin",
+        "SingularClosure.CriticalStrongLerayHopf",
+        "SingularClosure.SmallDataUniqueness",
+        "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL"
+      ],
+      "frontier_action": "reuse_physical_kernels_add_new_root_wrappers"
+    }
+  ],
+  "planned_frontier_modules": [
+    "SingularClosure.H12Frontier.Contracts",
+    "SingularClosure.H12Frontier.LiteratureConstants",
+    "SingularClosure.H12Frontier.Normalization",
+    "SingularClosure.H12Frontier.ConstantComparison",
+    "SingularClosure.H12Frontier.NonlinearBound",
+    "SingularClosure.H12Frontier.DifferentialInequality",
+    "SingularClosure.H12Frontier.Invariant",
+    "SingularClosure.H12Frontier.Budgets",
+    "SingularClosure.H12Frontier.TimeDerivative",
+    "SingularClosure.H12Frontier.Compactness",
+    "SingularClosure.H12Frontier.PositiveTime",
+    "SingularClosure.H12Frontier.Quantitative",
+    "SingularClosure.H12Frontier.LerayHopf",
+    "SingularClosure.H12Frontier.Root",
+    "SingularClosure.H12Frontier.Closure"
+  ],
+  "planned_ci": {
+    "modules_manifest": "ci/frontier_modules.txt",
+    "required_audits_manifest": "ci/frontier_required_audits.json",
+    "audit_directory": "ci/frontier_audits",
+    "scheduler": "ci/build_frontier.py",
+    "aggregate_audit": "ci/FrontierAudit.lean",
+    "runner": "run-frontier.cmd",
+    "root_module": "SingularClosure.H12Frontier.Closure",
+    "root_declaration": "SingularClosure.H12Frontier.NSE_H12_FRONTIER_UNCONDITIONAL",
+    "base_regression_required": true
+  },
+  "decision_gate": {
+    "current_mode": "GATE_D_PARALLEL_SAFE",
+    "alias_condition": "C_frontier = C_repo",
+    "base_adapter_condition": "C_repo <= C_frontier",
+    "strict_extension_condition": "C_frontier < C_repo plus frontier nonlinear bound",
+    "no_comparison_action": "prove parallel frontier root and state no inclusion relation"
+  },
+  "principal_blockers": [
+    "exact Lean identification of literature K2 in repository normalization",
+    "frontier finite critical nonlinear estimate",
+    "constant comparison required for strict inclusion"
+  ],
+  "next_tranche": [
+    "H12Frontier/Contracts.lean",
+    "H12Frontier/LiteratureConstants.lean",
+    "H12Frontier/Normalization.lean",
+    "H12Frontier/ConstantComparison.lean"
+  ]
+}
