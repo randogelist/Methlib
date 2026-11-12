@@ -28,5 +28,23 @@ example (r : ℝ) (hr : 0 < r) (f : Vec → Vec) (hf : Continuous f) :
   dilated_eLpNorm_two r hr f hf
 #eval IO.println "EXACT_TYPE_PASS:SingularClosure.H12Frontier.dilated_eLpNorm_two"
 #print axioms SingularClosure.H12Frontier.dilated_eLpNorm_two
+
+example (r : ℝ) (hr : 0 < r) (x : Vec) :
+    x ∈ dilatedCube r ↔ ∀ i : Fin 3, 0 ≤ x i ∧ x i ≤ r :=
+  mem_dilatedCube_iff r hr x
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.H12Frontier.mem_dilatedCube_iff"
+#print axioms SingularClosure.H12Frontier.mem_dilatedCube_iff
+
+example (k : Frequency) (x : Vec) :
+    fourierCharacter k (paperScale⁻¹ • x) = paperCharacter k x :=
+  fourierCharacter_dilated k x
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.H12Frontier.fourierCharacter_dilated"
+#print axioms SingularClosure.H12Frontier.fourierCharacter_dilated
+
+example (N : ℕ) (c : FourierCoeff) :
+    dilatedField paperScale (finiteSynthesis N c) = paperFiniteSynthesis N c :=
+  dilatedFiniteSynthesis_eq_paper N c
+#eval IO.println "EXACT_TYPE_PASS:SingularClosure.H12Frontier.dilatedFiniteSynthesis_eq_paper"
+#print axioms SingularClosure.H12Frontier.dilatedFiniteSynthesis_eq_paper
 end
 end SingularClosure.H12Frontier

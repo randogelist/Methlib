@@ -69,8 +69,10 @@ theorem FRONTIER_H12_ODI_NORMALIZATION
     have hm := mul_le_mul_of_nonneg_left h hp.le
     simpa only [heq, mul_zero] using hm
   · intro h
-    apply (mul_le_mul_left hp).mp
-    simpa only [heq, mul_zero] using h
+    by_contra hnot
+    have hpositive := mul_pos hp (lt_of_not_ge hnot)
+    rw [heq] at hpositive
+    exact (not_lt_of_ge h) hpositive
 
 theorem paperEnergy_hasDerivAt {A : ℝ → ℝ} {d t : ℝ}
     (h : HasDerivAt A d t) :
@@ -85,9 +87,9 @@ theorem FRONTIER_H12_CONSTANT_NORMALIZATION :
     (∀ a : CriticalSobolev 1, SpectralMeanZero (criticalCoeff 1 a) →
       frontierConstant * ‖a‖ = (literatureK2 / Real.sqrt 2) * paperNorm 1 a) ∧
     (∀ ν A B d : ℝ, 0 ≤ A →
-      (d / (4 * Real.pi) +
+      ((d / (4 * Real.pi) +
         (ν - literatureK2 * Real.sqrt (A / (4 * Real.pi))) * (B / (2 * Real.pi)) ≤ 0) ↔
-      (d + 2 * (ν - frontierConstant * Real.sqrt A) * B ≤ 0)) :=
+      (d + 2 * (ν - frontierConstant * Real.sqrt A) * B ≤ 0))) :=
   ⟨literatureK2_pos, frontierConstant_pos, rfl, rfl,
     coefficient_norm_identity, FRONTIER_H12_ODI_NORMALIZATION⟩
 
