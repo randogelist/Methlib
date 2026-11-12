@@ -1,0 +1,2399 @@
+SINGULARITY_DISPROVEMENT_ALL_BRANCH_REUSE_R3_B_TIER
+MODE = B_TIER_DERIVATION; MARKER = !; DATE = 2026-11-12 UTC
+SCOPE = calibrated GP/BKQR admission; native Hhalf regularity; unbounded initial local energy density.
+NEW_B_TIER_BRIDGE = coefficient-preserving pkg1/native critical-datum bijection.
+NEW_REUSE = 29 matched pkg1 exact-type/axiom audits.
+MATCHED_NATIVE_PLUS_PKG1_AUDITS = 204 + 29 = 233 distinct declarations.
+EXTERNAL_HVR_BKQR_AUDITS = 25 declarations; definitions included; separate tested environment.
+NEW_LEAN_SOURCES = 0; LOCAL_LEAN_EXECUTIONS = 0; MANUAL_CI_DISPATCHES = 0.
+BRANCH = SINGULARITY_DISPROVEMENT; PRE_WRITE_HEAD = 826b8b9e6d8edf50c0fe7516451d79ffe9288ebd
+BASE = codex/h12-small-unconditional@09dfe94a1ef150e21d09df3013fbe09002ef139c
+WRITE_SCOPE = new R3 TXT under regularity-B-assembly/SINGULARITY_DISPROVEMENT.
+BASE_SOURCE_MUTATIONS = 0; PREVIOUS_R1_R2_FILES = unchanged.
+R2_RECORD = https://github.com/randogelist/Methlib/blob/826b8b9e6d8edf50c0fe7516451d79ffe9288ebd/regularity-B-assembly/SINGULARITY_DISPROVEMENT/SINGULARITY_DISPROVEMENT_ENDPOINT_REUSE_R2_B_TIER.txt
+R2_SHA256 = 75f3ac61c40ea8852aa000312c757e56e21d091eab080c4344ede4fc545fdfe7
+
+0. COVERAGE AND STATUS SEMANTICS
+{
+  "branch_count": 14,
+  "tree_entries_total": 40280,
+  "unique_blobs": 2571,
+  "unique_lean_blobs": 1172,
+  "unique_novel_lean_blobs": 50,
+  "truncated_tree_count": 0
+}
+ALL_BRANCHES = all 14 currently returned remote heads of randogelist/Methlib at the listed SHAs.
+Every branch tree was recursively indexed without truncation and deduplicated by Git blob SHA.
+All 50 Lean blobs absent from the frozen base were inspected: 33 PNT + 17 arithmetic/RH-control blobs.
+Baseline source selection includes R2 native/HVR inventories, newly audited pkg1, and 32 further analytic blobs.
+Index coverage is not a claim that all 1172 distinct Lean files were independently audited in this round.
+Workflow coverage: all 715 retained runs returned by 8 API pages; exact-head queries for all 14 branches.
+Deleted branches/runs and unexposed local Windows receipts are outside this inventory.
+Submodule branches are not Methlib branches; prior HVR evidence remains pinned to its tested commit.
+A_TIER attribution requires the actual declaration, source identity, compiler result and matching axiom evidence.
+Complete mathematical bridges below remain B_TIER until matching external formalization passes.
+Source-only generic helpers remain secondary candidates; no namespace label substitutes for premises.
+R2 dispatch clarification: its documentation push triggered unrelated HVR/PNT workflow43123035538; no manual Lean validation was dispatched. That workflow is not evidence for the R2 root.
+
+1. VERIFIED INHERITED ENDPOINT
+
+Exact import:
+  import SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+Exact theorem:
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+Premises:
+  (nu : Real), 0<nu,
+  (a : CriticalSobolev 1),
+  CriticalSigmaZero a,
+  criticalNonlinearConstant * norm(a) < nu.
+
+CriticalSigmaZero a:
+  SpectralReality (criticalCoeff 1 a),
+  SpectralSolenoidal (criticalCoeff 1 a),
+  SpectralMeanZero (criticalCoeff 1 a).
+
+Conclusion:
+  CriticalDatumAX6 nu a
+  and existence of one common U : CriticalRegularSolution nu a with:
+    actual CriticalLerayHopf membership;
+    U.lerayHopfUnique;
+    actual PositiveSmoothNSE;
+    global L2_t H^(3/2)_x and its quantitative budget;
+    global L2_t H^(-1/2)_x time derivative and its budget;
+    global L4_t L6_x;
+    for every T>0,
+      integral_0^T ||grad U(t)||_2^4 dt
+      <= [norm(a)^4-norm(U.critical T)^4]
+           / [4(nu-criticalNonlinearConstant*norm(a))].
+
+CriticalRegularSolution additionally supplies:
+  strong C([0,infinity);H^(1/2)) trace;
+  U.critical(0)=a;
+  norm(U.critical(t))<=norm(a), t>=0;
+  agreement between critical coefficients and the physical positive-time flow.
+
+VERIFIED_EVIDENCE:
+  run = 43059293572;
+  job = 130657144029;
+  source_sha = 09dfe94a1ef150e21d09df3013fbe09002ef139c;
+  workflow conclusion = success;
+  extension modules = 104/104 PASS;
+  required endpoint audits = 27/27 PASS;
+  compiler = Lean 4.33.0;
+  compiler commit = d8b18978322de05a8f3dba51ef03cf5461676c17;
+  Mathlib = db584cd6d46c92f209a44c0f1c829460d327499d;
+  exact type = PASS;
+  theorem axioms = [propext, Classical.choice, Quot.sound];
+  evidence artifact = 13873696533.
+
+Observed log:
+  EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  'SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL'
+    depends on axioms: [propext, Classical.choice, Quot.sound]
+  status: PASS; errors: [].
+
+Evidence:
+  https://github.com/randogelist/Methlib/actions/runs/43059293572
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/job/130657144029
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/artifacts/13873696533
+
+Source:
+  https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean
+
+Audit specification:
+  regularity-B-assembly/Singular-Axiomatic-closure/ci/critical_audits/SmallDataClosure.lean
+  regularity-B-assembly/Singular-Axiomatic-closure/ci/critical_audits/SmallDataClosure.json
+
+The frozen source branch retains older status fields. Main now archives the
+matching receipts and corrected status for the identical source. No inherited
+source metadata is amended by R3.
+
+2. NATIVE MATHEMATICAL DICTIONARY
+
+T^3=(R/Z)^3; normalized spatial volume=1; nu>0; forcing=0.
+E=L2_{sigma,0}(T^3;R^3).
+D=H^(1/2)_{sigma,0}.
+Lambda=(-Delta)^(1/2).
+
+For zero-mean native data:
+  H(a)^2 := norm(a : CriticalSobolev 1)^2
+          = sum_{k!=0} 2*pi*|k|*|a_hat(k)|^2
+          = ||a||_{dot H^(1/2)}^2;
+  L(a)^2 := ||criticalInitialPhysicalL2 a||_2^2
+          = sum_{k!=0}|a_hat(k)|^2
+          = ||a||_2^2.
+
+Native weight:
+  omega(0)=1;
+  omega(k)=sqrt(laplacianFrequency k)=2*pi*|k|, k!=0.
+The zero coefficient vanishes under CriticalSigmaZero.
+
+  K(a)=L(a)^2/2;
+  P_0(a)=H(a)^2/2;
+  A_nu(a)=[H(a)^2-(5/2)L(a)^2]/(2nu^2).
+
+At t=0:
+  use criticalInitialPhysicalL2 a.
+  Do not require smoothFourierSynthesis or pointwise boundedness.
+
+Define C:=criticalNonlinearConstant.
+The native theorem proves C>0.
+C is obtained from FINITE_CRITICAL_NONLINEAR_BOUND.choose.
+A certified numerical value of C is not supplied by the inspected API.
+
+3. SHIFTED-ENERGY COERCIVITY
+
+Mean-zero Poincare:
+  H(a)^2>=2*pi*L(a)^2.
+
+Define
+  gamma:=1-5/(4*pi)>0.
+Indeed pi=4 integral_0^1(1+x^2)^(-1)dx>2, hence gamma>3/8.
+
+Therefore
+  2nu^2 A_nu(a)
+    =H(a)^2-(5/2)L(a)^2
+    >=gamma H(a)^2.                                  (3.1)
+
+The reverse elementary bound:
+  2nu^2 A_nu(a)<=H(a)^2.                              (3.2)
+
+Set
+  z_nu(a):=(Lambda-(5/2)I)^(1/2)a/(sqrt(2)*nu).
+
+The multiplier is well-defined on D because Lambda>=(2*pi)I.
+Its Fourier coefficients are
+  z_hat(k)=sqrt(2*pi*|k|-5/2)*a_hat(k)/(sqrt(2)*nu).
+Thus
+  ||z_nu(a)||_2^2=A_nu(a).                            (3.3)
+
+4. EXACT GP--BKQR CONSTANT MODEL
+
+  GP(b,s)=2/Gamma(s) integral_0^infinity
+                    t^(s-1)exp(-bt)/cosh(t)dt,
+  b>=0, s>0.
+
+At s=1, x=exp(-t):
+  GP(b,1)=4 integral_0^1 x^b/(1+x^2)dx.
+Consequently
+  GP(0,1)=4 arctan(1)=pi.
+
+Define H_pi=L2(0,1;R),
+  (Qf)(x)=((1-x^2)/2)f(x),
+  c(x)=sqrt(2).
+Then
+  0<=Q<=(1/2)I,
+  W(r)=<c,(I-rQ)^(-1)c>, |r|<2,
+  W(1)=4 integral_0^1(1+x^2)^(-1)dx=pi.
+
+No unbounded inverse or limiting resolvent is required at r=1.
+
+Moments:
+  m_n=<c,Q^n c>
+     =2^(1-n) integral_0^1(1-x^2)^n dx
+     =2^(n+1)(n!)^2/(2n+1)! in Q_{>0}.
+
+Proof of the last equality:
+  I_n=integral_0^1(1-x^2)^n dx;
+  I_0=1;
+  integral_0^1 d/dx[x(1-x^2)^n]dx=0 for n>=1;
+  (2n+1)I_n=2n I_{n-1};
+  induction gives the stated factorial formula.
+
+  m_0=2;
+  m_{n+1}/m_n=(n+1)/(2n+3)<1/2.
+
+  L_N=sum_{n=0}^N m_n;
+  L_N<pi<L_N+2m_{N+1};
+  L_N upward pi.
+
+Gram identities:
+  H_N=(m_{i+j})=<Q^i c,Q^j c>_{i,j=0}^N >=0;
+  H_N^+=(m_{i+j+1})>=0;
+  (1/2)H_N-H_N^+>=0.
+Each follows by integrating a squared polynomial times a nonnegative weight.
+
+5. JOINT OPERATOR AND CALIBRATED ADMISSION
+
+Uncalibrated operator:
+  B_nu(a)=[[W(1),z_nu(a)^*],[z_nu(a),I_E]].
+
+For alpha in R and h in E:
+  <(alpha,h),B_nu(a)(alpha,h)>
+    =||h+alpha z_nu(a)||_2^2+[pi-A_nu(a)]alpha^2.
+Therefore
+  B_nu(a)>=0 iff A_nu(a)<=pi.                         (5.1)
+
+Native-compatible cap:
+  kappa_C:=min{pi,gamma/(4C^2)}>0.
+
+From (3.1):
+  A_nu(a)<=kappa_C
+  ==> C^2 H(a)^2<=nu^2/2
+  ==> C H(a)<=nu/sqrt(2)<nu.                          (5.2)
+
+Thus the closed cap supplies the STRICT premise of the inherited root.
+There is no missing endpoint argument in (5.2).
+
+Calibrated vector and operator:
+  z_{nu,C}(a):=sqrt(pi/kappa_C)*z_nu(a);
+  A_{nu,C}(a):=||z_{nu,C}(a)||_2^2
+             =(pi/kappa_C)A_nu(a);
+  B_{nu,C}(a):=[[W(1),z_{nu,C}(a)^*],
+                [z_{nu,C}(a),I_E]].
+
+The same square completion yields
+  B_{nu,C}(a)>=0
+    iff A_{nu,C}(a)<=pi
+    iff A_nu(a)<=kappa_C
+    ==> C H(a)<nu.                                    (5.3)
+
+THEOREM CAPPED_BKQR_ADMISSION_REGULARITY:
+  forall nu>0, forall a in D,
+    B_{nu,C}(a)>=0
+    ==> the complete conclusion of the inherited
+        NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL theorem.
+
+Proof:
+  native dictionary;
+  (5.3);
+  apply the verified native theorem with exactly the same a and nu.
+
+Finite sufficient certificate:
+  A_{nu,C}(a)<=L_N
+  ==> A_nu(a)<kappa_C
+  ==> inherited regularity and Leray-Hopf uniqueness.  (5.4)
+
+kappa_C is an exact analytic constant, not an evaluated rational constant.
+The rational quantities are m_n and L_N.
+Finite arithmetic certification of arbitrary input data additionally requires
+a certified bound for its score, including its infinite Fourier tail.
+
+6. DYADIC COEFFICIENT DATA
+
+For j>=1 and 2^j<=n<2^(j+1):
+  d_n=1/(j2^j).
+
+  g(y)=sum_{n>=2}d_n cos(2*pi*n*y);
+  a_nu(x)=(nu/2)g(x_2)e_1.
+
+Coefficient specification:
+  a_hat(0,n,0)=a_hat(0,-n,0)=(nu/4)d_n e_1, n>=2;
+  all remaining coefficients vanish.
+
+Define
+  R=sum_{j>=1}1/(j^2 2^j),
+  S=sum_{j>=1}(3-2^(-j))/j^2.
+
+Finite block identities:
+  sum_{n=2^j}^{2^(j+1)-1}d_n^2=1/(j^2 2^j);
+  sum_{n=2^j}^{2^(j+1)-1}n d_n^2=(3-2^(-j))/(2j^2);
+  sum_{n=2^j}^{2^(j+1)-1}d_n=1/j.
+
+  0<R<1;
+  0<S<6.
+The second estimate follows from
+  sum_{j>=1}1/j^2<1+integral_1^infinity x^(-2)dx=2.
+
+Parseval and the native dictionary:
+  L(a_nu)^2=nu^2 R/8;
+  H(a_nu)^2=pi*nu^2 S/8;
+  K(a_nu)=nu^2 R/16;
+  P_0(a_nu)=pi*nu^2 S/16;
+  A_nu(a_nu)=pi*S/16-5R/32<3pi/8<3/2.
+
+The series converges in H^(1/2).
+Reality, solenoidality, and zero mean follow coefficientwise.
+
+7. PHYSICAL REPRESENTATIVE AND ESSENTIAL LOCAL UNBOUNDEDNESS
+
+d_n decreases to zero.
+For y notin Z, geometric sums and Abel summation give
+  |sum_{n>N}d_n cos(2*pi*n*y)|
+    <=d_{N+1}/|sin(pi*y)|.                           (7.1)
+This also proves uniform convergence on closed sets away from y=0.
+
+For 0<|y|<1/24, let
+  N=floor(1/(6|y|)),
+  j=floor(log_2(N+1)).
+
+Then:
+  cos(2*pi*n*y)>=1/2 for 2<=n<=N;
+  complete blocks 1,...,j-1 lie below N;
+  d_{N+1}<=2/[j(N+1)];
+  |sin(pi*y)|>=2|y|;
+  (N+1)|y|>1/6.
+
+Hence
+  g(y)>=(1/2)sum_{k=1}^{j-1}1/k-6/j
+       ->infinity as y->0, y!=0.                     (7.2)
+
+The physical L2 representative is identified with this cosine series:
+  finite synthesis agrees coefficientwise;
+  the H^(1/2) sequence converges in L2;
+  the native physical representation has the same Fourier coefficients;
+  native Fourier injectivity identifies the L2 classes.
+Away from y=0, the pointwise limit equals this class almost everywhere.
+
+Thus, for every open O containing a point of the shear plane,
+  ess sup_O |a_nu|^2/2=infinity.
+This is a positive-measure essential-unboundedness theorem.
+It is not inferred from divergence at one measure-zero point.
+
+8. CALIBRATION INTO THE VERIFIED NATIVE SMALL CLASS
+
+Let epsilon>0 and
+  B:=sqrt(3*pi/4).
+Then H(a_nu)<Bnu.
+
+Define the positive analytic scale
+  eta_*:=min{1/2,sqrt(kappa_C/3),epsilon/[2(1+Bnu)]}.
+
+Choose m>=1 with
+  eta_m:=2^(-m)<=eta_*.
+Existence follows from 2^(-m)->0.
+Define
+  a_{nu,m}:=eta_m a_nu.
+
+Then
+  H(a_{nu,m})<eta_m Bnu<epsilon/2;
+  A_nu(a_{nu,m})=eta_m^2 A_nu(a_nu)
+               <(3/2)eta_m^2
+               <=kappa_C/2;
+  A_nu(a_{nu,m})<3/8<2.
+
+Using (3.1):
+  C^2 H(a_{nu,m})^2
+    <C^2 nu^2 kappa_C/gamma
+    <=nu^2/4;
+  C H(a_{nu,m})<nu/2<nu.                             (8.1)
+
+For the CALIBRATED BKQR score:
+  A_{nu,C}(a_{nu,m})
+    =(pi/kappa_C) A_nu(a_{nu,m})
+    <pi/2<2=L_0.                                    (8.2)
+
+Thus the first rational BKQR stage certifies the calibrated mechanism itself.
+
+Coefficient effect:
+  a_hat_{nu,m}(0,+/-n,0)
+    =nu*d_n*e_1/(4*2^m).
+The coefficients divided by nu remain rational.
+
+The existence of m is proved.
+A concrete numerical m for the native chosen constant C is not computed
+or asserted in this round.
+
+9. IMPORTED REGULARITY AND ITS EXACT INSTANCE
+
+Apply NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL to:
+  nu;
+  native datum a_{nu,m};
+  its proved CriticalSigmaZero certificate;
+  the strict bound (8.1).
+
+Obtain one U with all conclusions in Section 1.
+
+Let rho_0=(1/2)|criticalInitialPhysicalL2 a_{nu,m}|^2.
+Positive scaling preserves (7.2), so:
+  rho_0 in L1 \ L^infinity;
+  ess sup_O rho_0=infinity for every neighborhood of the shear plane;
+  integral rho_0=eta_m^2 nu^2 R/16<infinity.
+
+This is an application of the actual native theorem.
+No abstract field containing the desired regularity is supplied as input.
+
+10. EXPLICIT SHEAR FLOW AND IDENTIFICATION WITH THE SAME U
+
+Define
+  V_{nu,m}(t,x)
+    =(eta_m nu/2)sum_{n>=2}
+       d_n exp(-4*pi^2*nu*n^2*t)cos(2*pi*n*x_2)e_1,
+  p=0.
+
+For every delta>0, all derivative series converge uniformly on
+[delta,infinity) x T^3 by Gaussian decay.
+
+Therefore, for t>0:
+  div V=0;
+  (V dot grad)V=0;
+  partial_t V=nu Delta V;
+  p=0 is periodic and mean zero;
+  V,p solve the actual unforced NSE.
+
+Dominated convergence in the weighted Fourier sum gives:
+  V(t)->a_{nu,m} strongly in H^(1/2) as t downarrow 0;
+  V in C([0,infinity);H^(1/2)).
+
+Exact energy identity:
+  K(V(T))+nu integral_0^T||grad V(t)||_2^2dt
+    =eta_m^2 nu^2 R/16.                               (10.1)
+
+Proof:
+  K(V(t))=eta_m^2 nu^2/16
+            sum_{n>=2}d_n^2 exp(-8*pi^2*nu*n^2*t);
+  ||grad V(t)||_2^2=eta_m^2 pi^2 nu^2/2
+            sum_{n>=2}n^2 d_n^2 exp(-8*pi^2*nu*n^2*t);
+  integrate nonnegative terms and add.
+
+The heat equation holds through the weak initial trace.
+div(V tensor V)=0 distributionally because V_1^2 is independent of x_1.
+Together with (10.1), this verifies actual CriticalLerayHopf membership,
+after transporting the explicit functions into the native L2 fields.
+
+Apply U.lerayHopfUnique to V:
+  for every t>0, U.flow.velocity(t)=V(t) spatially almost everywhere on unitCube.
+  At t=0, U.lerayVelocity(0)=criticalInitialPhysicalL2(a); no value of
+  U.flow.velocity(0) is used as the initial representative.
+Positive-time smoothness upgrades spatial a.e. equality to equality of
+the continuous periodic representatives at each positive time.
+
+This step must consume actual membership.
+No equality of the two flows is assumed as an adapter premise.
+
+Optional independent consistency estimate:
+  integral_0^infinity||grad V(t)||_infinity dt
+    <=eta_m/(4*pi) sum_{n>=2}d_n/n
+    <=eta_m/(4*pi) sum_{j>=1}1/(j2^j)
+    <infinity.
+The main planned Lean chain reuses the imported uniqueness endpoint.
+
+11. POSITIVE-TIME DENSITY PROFILE
+
+Let
+  F_nu(t)=sum_{n>=2}d_n exp(-4*pi^2*nu*n^2*t).
+
+Positive coefficients and evaluation at x_2=0 yield
+  ||V(t)||_infinity=(eta_m nu/2)F_nu(t);
+  ||rho_V(t)||_infinity=(eta_m^2 nu^2/8)F_nu(t)^2.
+
+For every delta>0:
+  sup_{t>=delta}||rho_V(t)||_infinity
+    =(eta_m^2 nu^2/8)F_nu(delta)^2<infinity.
+
+As t downarrow 0, monotone convergence gives
+  F_nu(t) upward sum_{n>=2}d_n
+    =sum_{j>=1}1/j=infinity.
+
+Hence
+  lim_{t downarrow 0}||rho_U(t)||_infinity=infinity;
+  for every T>0, ess sup_{(0,T) x T^3}rho_U=infinity;
+  for every delta>0, sup_{t>=delta}||rho_U(t)||_infinity<infinity.
+
+Integrated kinetic energy remains finite on every spatial subset and
+through every finite time:
+  integral_Omega rho_U(t)<=K(U(t))<=K(a_{nu,m}).
+
+12. INHERITED MATHEMATICAL ROOT, RETAINED IN R3
+
+THEOREM SINGULARITY_DISPROVEMENT_ALL_BRANCH_REUSE_R3.
+
+(A) For every nu>0 and a in D:
+      B_{nu,C}(a)>=0
+      ==> all conclusions of the verified native small-data root.
+
+(B) For every nu>0 and epsilon>0 there exist m>=1 and one physical flow U:
+      a=a_{nu,m};
+      a in H^(1/2)_{sigma,0};
+      0<||a||_{dot H^(1/2)}<epsilon;
+      C||a||_{dot H^(1/2)}<nu/2;
+      A_{nu,C}(a)<2=L_0;
+      B_{nu,C}(a)>=0;
+      actual unique Leray-Hopf evolution U with datum a;
+      strong H^(1/2) initial trace;
+      actual positive-time smooth NSE and normalized pressure;
+      all native quantitative conclusions of Section 1;
+      rho_0 in L1 \ L^infinity, locally essentially unbounded at the shear plane;
+      U equals the explicit heat shear at every positive time;
+      lim_{t downarrow 0}||rho_U(t)||_infinity=infinity;
+      forall delta>0, sup_{t>=delta}||rho_U(t)||_infinity<infinity.
+
+Proof:
+  (A): Sections 2--5 and inherited verified theorem.
+  (B): Sections 6--11, with m from Section 8.
+All mathematical premises of (A) and (B) are discharged by the displayed
+derivation and the imported native theorem. The uncalibrated A_nu<=pi
+implication is not included in this closure.
+The new Lean implementation remains unprepared.
+
+Logical consequence:
+  not [forall a, Reg_nu(a) -> rho_a in L^infinity].
+
+No logical consequence:
+  forall a in H^(1/2)_{sigma,0}, Reg_nu(a);
+  absence of every possible positive-time NSE singularity;
+  a counterexample with smooth initial datum;
+  smoothness through t=0 for the constructed rough datum.
+
+
+13. NATIVE SEMANTIC ADAPTER: EXACT OBLIGATIONS
+13.1 Energy convention:
+  physicalEnergy(v)=||v||_2^2=2K(v).
+  criticalInitialPhysicalL2(a): real L2 class at t=0.
+  U.lerayVelocity(0)=criticalInitialPhysicalL2(a).
+  t>0 ==> U.lerayVelocity(t)=U.flow.velocity(t).
+
+13.2 Explicit shear membership in CriticalLerayHopf:
+  (i) Periodicity and distributional div V=0 follow from the Fourier support.
+  (ii) Weighted dominated convergence gives C([0,T];Hhalf), hence strong
+       initial L2 trace and weak L2 continuity on every finite interval.
+  (iii) The energy identity gives L-infinity_t L2_x and L2_t H1_x.
+        Positive-time smooth periodic truncations and H1 convergence place
+        the gradient in the native CriticalPhysicalH1 closure.
+  (iv) For every smooth periodic scalar test, gradient annihilation follows
+       from div V=0 by periodic integration by parts.
+  (v) On 0<s<=t, actual heat NSE gives integrated weak momentum.
+      V tensor V is L1 on every finite time-space slab by L-infinity_t L2_x;
+      grad V is L2 and therefore L1 on finite slabs. Each native smooth-test
+      term is integrable on each such positive-time slab. Native tests need
+      only be smooth on t>0; no limit s downarrow 0 is asserted for arbitrary
+      such tests. Tests extending smoothly to t=0 admit the usual trace limit.
+  (vi) For every 0<=s<=t:
+       ||V(t)||_2^2+2nu integral_s^t||grad V||_2^2=||V(s)||_2^2.
+       Thus both initial and almost-every-start-time native inequalities hold.
+  These are membership proofs; no comparison or uniqueness is assumed.
+
+13.3 Same-solution identification:
+  Full native root gives U.lerayHopfUnique.
+  Explicit membership from 13.2 gives
+    forall t>0, V(t)=ae[volume.restrict unitCube] U.flow.velocity(t).
+  Continuity and periodicity give equality of the positive-time functions.
+  The main route requires no additional Serrin premise for the competitor V:
+  the imported U.lerayHopfUnique already contains the comparison conclusion.
+  Direct CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON is an optional alternate
+  route with its explicitly stated smooth-flow and Serrin hypotheses.
+  Velocity uniqueness does not itself assert equality of pressure functions.
+  The explicit solution uses the normalized pressure p=0.
+
+13.4 Positive-time domain:
+  CRITICAL_POSITIVE_* smoothness: Ioi(0).
+  SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH: Ici(0); do not apply to the rough datum.
+  Initial representative identification uses L2 convergence/injectivity.
+  Continuous-periodic injectivity is reserved for positive-time functions.
+  PositiveSmoothNSE + compactness gives bounds on [delta,T].
+  Uniform bounds on [delta,infinity) use the explicit Gaussian series and
+  monotonicity of F_nu, as proved in Section 11.
+
+
+14. NEW B-TIER DATUM IDENTIFICATION: PKG1 -> NATIVE
+THEOREM PKG1_NATIVE_CRITICAL_REALIZATION.
+
+Let D_pkg = H12SigmaZeroSmallClass.RealH12Datum.
+Let D_native = {a : SingularClosure.CriticalSobolev 1 // CriticalSigmaZero a}.
+There exists a coefficient-preserving bijection Phi : D_pkg -> D_native with
+  criticalCoeff 1 (Phi(c)).val k i = c.coeff(k)(i),
+  ||Phi(c).val||^2 = criticalSq(c),
+  ||Phi(c).val|| = criticalNorm(c),
+  ||criticalInitialPhysicalL2(Phi(c).val)||_2^2 = coefficientL2Sq(c),
+  Phi(scaleDatum r c).val = r * Phi(c).val, for every real r.
+
+The scalar multiplication on the final line is the native real scalar action.
+No pre-existing NormedSpace instance or LinearIsometryEquiv on D_pkg is assumed.
+
+PROOF.
+Mode3=Frequency=Z^3. For k!=0:
+  omega(k)=sqrt((2pi)^2 sum_i k_i^2)
+          =2pi ||modeReal(k)||=freq(k).
+At k=0: omega(0)=1, freq(0)=0, c.coeff(0)=0.
+Set raw(c)(k,i)=c.coeff(k)(i).
+The lp representation, not the raw Fourier coefficient, is
+  sqrt(omega(k))*raw(c)(k,i).
+Finite-dimensional Euclidean Parseval and nonnegative sum regrouping give
+  sum'_(k,i) omega(k)|raw(c)(k,i)|^2
+    =sum'_k freq(k)||c.coeff(k)||^2=criticalSq(c)<infinity.
+This proves the native Mem-lp condition and constructs
+  Phi(c).val=criticalSobolevOfCoeff 1 raw(c) hmem.
+Mean zero and conjugation reality transfer componentwise. Moreover,
+  inner_C(modeComplex(k),c.coeff(k))
+    =sum_i conjugate((k_i:C))*c.coeff(k)(i)
+    =sum_i (k_i:C)*c.coeff(k)(i),
+so pkg1 solenoidality is exactly native SpectralSolenoidal.
+Native criticalSobolev_norm_sq yields the squared norm identity.
+Nonnegative square roots yield the norm identity.
+Native criticalInitialPhysicalL2_norm_sq yields
+  ||PhysicalL2(Phi(c))||^2
+    =sum'_(k,i)|c.coeff(k)(i)|^2
+    =sum'_k||c.coeff(k)||^2=coefficientL2Sq(c).
+For the inverse, package the three raw native coefficients at each k as a
+EuclideanSpace C (Fin 3) vector. The same nonnegative sum identity proves
+critical summability; native Sigma constraints supply the other fields.
+Both compositions preserve every raw coefficient. Native coefficient
+injectivity, record extensionality and proof irrelevance prove inverse laws.
+Finally, the raw coefficient of Phi(scaleDatum r c) is r*c.coeff(k)(i).
+Native criticalCoeff_injective proves the scaling identity. QED.
+
+FORMAL_STATUS = B_TIER; new cross-package proof bodies remain to be written.
+No physical synthesis or NSE theorem is smuggled into the datum record.
+
+15. REUSE OF THE AUDITED FREQUENCY GAP AND SCALING ENDPOINTS
+15.1 SPECTRAL GAP.
+Apply H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING(c):
+  coefficientL2Sq(c)<=criticalSq(c)/(2pi).
+Transport by Phi:
+  L(a)^2<=H(a)^2/(2pi).
+Consequently
+  gamma H(a)^2<=H(a)^2-(5/2)L(a)^2<=H(a)^2,
+  gamma=1-5/(4pi)>0.
+Thus the lattice gap and coefficient L2 summability need not be reproved.
+The new work is the carrier/norm dictionary and scalar shifted-energy algebra.
+
+15.2 SAFE NUMERICAL CALIBRATION OF THE PKG1 SMALL CLASS.
+The exact pkg1 predicate is
+  Small(nu,C3,c)
+    iff nu>0 and C3>0 and criticalSq(c)<[nu/(8C3^3)]^2.
+It contains no HLS certificate and no regularity assumption.
+Set C=criticalNonlinearConstant>0 and M=max(1,C).
+Then M>0 and M^3>=M>=C. Hence
+  Small(nu,M,c)
+  ==> criticalNorm(c)<nu/(8M^3)
+  ==> C||Phi(c).val||<nu*C/(8M^3)<=nu/8<nu.
+The first implication follows by comparing nonnegative square roots.
+M is an algebraic admission parameter, not an asserted Sobolev constant.
+
+THEOREM PKG1_SMALL_IMPLIES_NATIVE_REGULARITY.
+  nu>0, c in D_pkg, Small(nu,max(1,C),c)
+  ==> the full native regularity conclusion for Phi(c).val.
+PROOF: previous strict estimate and the audited native root. QED.
+
+THEOREM EVERY_CRITICAL_DATUM_HAS_SMALL_POSITIVE_REGULAR_MULTIPLES.
+  forall nu>0, epsilon>0, c in D_pkg,
+  exists r with 0<r<epsilon and
+    C||Phi(scaleDatum r c).val||<nu/8
+    and the full native regularity conclusion.
+PROOF: audited H12SmallScaling.exists_small_positive_scale with parameters
+nu,M,epsilon gives such r and Small(nu,M,scaleDatum r c); apply the preceding
+theorem. No relation between an independently chosen C3 and C is assumed. QED.
+
+15.3 REFINED DYADIC ROOT.
+Package the dyadic seed a_nu from Section 6 as c_nu in D_pkg.
+Its membership follows from the exact S sum and its spectral constraints.
+Apply exists_small_positive_scale(nu,M,1,c_nu):
+  exists r, 0<r<1 and Small(nu,M,scaleDatum r c_nu).
+Choose m>=1 with
+  eta=2^(-m)<=min{r,1/2,sqrt(kappa_C/3),epsilon/[2(1+Bnu)]},
+  B=sqrt(3pi/4).
+Such m exists because the minimum is positive and 2^(-m)->0.
+The audited criticalNorm_scale gives
+  criticalNorm(scaleDatum eta c_nu)
+    =eta criticalNorm(c_nu)
+    <=r criticalNorm(c_nu)
+    =criticalNorm(scaleDatum r c_nu).
+Consequently, for a=Phi(scaleDatum eta c_nu).val,
+  C H(a)<nu/8,
+  0<H(a)<epsilon/2<epsilon,
+  A_nu(a)<(3/2)eta^2<=kappa_C/2,
+  A_{nu,C}(a)<pi/2<2=L_0,
+  a_hat(0,+/-n,0)/nu=d_n e_1/(4*2^m), rational.
+All hypotheses and conclusions of Sections 9-13 remain valid for this m.
+
+THEOREM R3_REFINED_DYADIC_ROOT.
+  The complete existential conclusion of Section 12(B) holds with
+  C||a||<nu/8 in place of C||a||<nu/2.
+PROOF: Sections 6-13 and 14-15 with the refined m above. QED.
+
+This strengthening concerns the certified smallness margin of the constructed
+family. It does not enlarge the admitted arbitrary-data cutoff A_nu<=kappa_C.
+
+16. FROZEN FORMALIZATION ENDPOINTS: REDUCED REPROOF
+E01: PKG1_NATIVE_CRITICAL_REALIZATION + native physical energy dictionary.
+  Existing constructors, coefficient injectivity and Parseval retained.
+E02a: SHIFTED_ENERGY_COERCIVITY.
+  Audited pkg1 embedding + E01 + scalar algebra; no new lattice-gap proof.
+E02b: SHIFTED_VECTOR_REALIZATION.
+  Set b_nu(k)=sqrt(omega(k)-5/2)/(sqrt(2)nu) for k!=0, and b_nu(0)=0.
+  Define z_hat(k)=b_nu(k)*a_hat(k). Then
+    |b_nu(k)|^2<=omega(k)/(2nu^2),
+    ||z_hat(k)||^2<=omega(k)||a_hat(k)||^2/(2nu^2).
+  E01/native constructors and the weighted sum bound give z in L2.
+  This proves z norm^2=A_nu without general unbounded functional calculus.
+E03: GP_PI_BOUNDED_RESOLVENT.
+  Actual cosh integral, bounded multiplication Q and c; pinned Mathlib reuse.
+E04: BKQR_RATIONAL_MOMENTS_AND_GRAM.
+  Actual moment formula, recurrence, Gram/localizer identities, rational tails.
+  Generic audited HVR defect algebra optional; actual realization still required.
+E05: JOINT_BLOCK_ADMISSION_IFF.
+  Actual Hilbert block plus square completion, using E02b/E03.
+E06a: CAPPED_ENERGY_IMPLIES_NATIVE_SMALL.
+  E02a + kappa_C algebra; independent of GP and operator realization.
+E06b: FINITE_MOMENT_CERTIFICATE_IMPLIES_NATIVE_SMALL.
+  E04 lower sum + normalized score + E06a.
+E06: CALIBRATED_BKQR_IMPLIES_NATIVE_SMALL.
+  E05 equivalence + E06a; all original scope retained.
+E07: CALIBRATED_BKQR_GLOBAL_REGULARITY.
+  Direct native root application; no new general existence proof.
+E08: DYADIC_BLOCK_IDENTITIES.
+  Exact arithmetic for the frozen d_n, not the unrelated directional Schur row.
+E09: DYADIC_CRITICAL_DATUM.
+  Build pkg1 datum from E08; E01 transports it to native carrier.
+E10: DYADIC_PHYSICAL_REPRESENTATIVE.
+  Native cutoff/physical L2 convergence plus cosine-series a.e. identification.
+E11: DYADIC_LOCAL_ESSENTIAL_UNBOUNDEDNESS.
+  Quantitative Abel tail and positive-measure lower bounds.
+E12: EXISTS_DYADIC_NATIVE_SMALL_CERTIFICATE.
+  Audited pkg1 scaling + M=max(1,C) + positive dyadic choice + cap bounds.
+E13: DYADIC_NATIVE_GLOBAL_REGULARITY.
+  Direct native root application to the identical transported datum.
+E14: SHEAR_HEAT_ACTUAL_NSE.
+  Retain inherited native Fourier calculus/physical NSE adapters.
+  Unverified planar-lift machinery is a secondary source option only.
+E15: SHEAR_TRACE_ENERGY_LERAY_HOPF.
+  Exact explicit-flow trace, energy and all actual native LH fields.
+E16: NATIVE_FLOW_EQ_EXPLICIT_SHEAR.
+  Apply U.lerayHopfUnique; positive-time continuous representatives agree.
+E17: INITIAL_DENSITY_UNBOUNDED_POSITIVE_SLAB_BOUNDED.
+  Explicit Gaussian supremum and initial-boundary monotone divergence.
+E18: SINGULARITY_DISPROVEMENT_ALL_BRANCH_REUSE_R3.
+  Deterministic same-datum/same-flow assembly; include refined margin as corollary.
+
+Independent elaboration waves:
+  L0: pinned native/pkg1/Mathlib imports and endpoint signatures.
+  L1: E01, E03, E08.
+  L2: E02a, E09.
+  L3: E02b, E04, E10, E14.
+  L4: E06a, E11, E15.
+  L5: E05, E12.
+  L6: E06, E06b, E13.
+  L7: E07, E16.
+  L8: E17.
+  L9: E18 and R3_REFINED_DYADIC_ROOT.
+Pending signatures are not proofs; independent proof bodies must pass externally.
+
+Separate uncalibrated track remains F01-F05 of R2. The new carrier/scaling
+reuse does not prove the entire original A_nu<=pi admission by itself.
+
+17. ALL-BRANCH SNAPSHOT AND SOURCE DEDUPLICATION
+SINGULARITY_DISPROVEMENT @ 826b8b9e6d8edf50c0fe7516451d79ffe9288ebd
+  tree entries=4463; Lean paths=2049; distinct Lean blobs=1122; novel Lean blobs=0; truncated=False
+  https://github.com/randogelist/Methlib/tree/826b8b9e6d8edf50c0fe7516451d79ffe9288ebd
+codex/h12-small-unconditional @ 09dfe94a1ef150e21d09df3013fbe09002ef139c
+  tree entries=4460; Lean paths=2049; distinct Lean blobs=1122; novel Lean blobs=0; truncated=False
+  https://github.com/randogelist/Methlib/tree/09dfe94a1ef150e21d09df3013fbe09002ef139c
+erdos/e0687-attempt-i-20261107 @ 6367ca3178995a1fdc7fc101353245e102d1ac95
+  tree entries=3565; Lean paths=1591; distinct Lean blobs=791; novel Lean blobs=2; truncated=False
+  https://github.com/randogelist/Methlib/tree/6367ca3178995a1fdc7fc101353245e102d1ac95
+erdos/e0687-attempt-j-20261107 @ 5add148ac01a86ca422f79bb12bbabb860525af2
+  tree entries=3574; Lean paths=1593; distinct Lean blobs=793; novel Lean blobs=4; truncated=False
+  https://github.com/randogelist/Methlib/tree/5add148ac01a86ca422f79bb12bbabb860525af2
+erdos/e0687/attempt-e @ 89f8940e42fa6ca149bb7633f21ae713d4ab99b9
+  tree entries=3565; Lean paths=1591; distinct Lean blobs=791; novel Lean blobs=2; truncated=False
+  https://github.com/randogelist/Methlib/tree/89f8940e42fa6ca149bb7633f21ae713d4ab99b9
+erdos-687-attempt-d @ f95c9de1777c506f77bde0402a358df9dfcc1fcb
+  tree entries=3566; Lean paths=1591; distinct Lean blobs=791; novel Lean blobs=0; truncated=False
+  https://github.com/randogelist/Methlib/tree/f95c9de1777c506f77bde0402a358df9dfcc1fcb
+erdos-687-attempt-f-bkqr-ci @ 3d88122383818aeaf18a907989336f8581b46d03
+  tree entries=3583; Lean paths=1596; distinct Lean blobs=796; novel Lean blobs=3; truncated=False
+  https://github.com/randogelist/Methlib/tree/3d88122383818aeaf18a907989336f8581b46d03
+main @ e9cf90726b8544a268469ebc8fa6634e9c713e07
+  tree entries=4568; Lean paths=2049; distinct Lean blobs=1122; novel Lean blobs=0; truncated=False
+  https://github.com/randogelist/Methlib/tree/e9cf90726b8544a268469ebc8fa6634e9c713e07
+pnt/exchange-001-primorial-pos @ 31825007f841b66d881886dd6bce760a8c0cbc5c
+  tree entries=1164; Lean paths=919; distinct Lean blobs=473; novel Lean blobs=12; truncated=False
+  https://github.com/randogelist/Methlib/tree/31825007f841b66d881886dd6bce760a8c0cbc5c
+pnt/mathlib-call-reduction-rc1 @ 93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d
+  tree entries=1165; Lean paths=920; distinct Lean blobs=485; novel Lean blobs=19; truncated=False
+  https://github.com/randogelist/Methlib/tree/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d
+pnt/regularized-zeta-hvr @ 00830803c53d22a4e31c3f4fcc9d68588cfbda5f
+  tree entries=1207; Lean paths=919; distinct Lean blobs=489; novel Lean blobs=0; truncated=False
+  https://github.com/randogelist/Methlib/tree/00830803c53d22a4e31c3f4fcc9d68588cfbda5f
+pnt/serial-exchanges-rc1 @ b2305de71cd846cd5afd1c82c373971137da7733
+  tree entries=1206; Lean paths=919; distinct Lean blobs=489; novel Lean blobs=2; truncated=False
+  https://github.com/randogelist/Methlib/tree/b2305de71cd846cd5afd1c82c373971137da7733
+setup/rh-full-witnessed-closure-ci @ f647f2ef8fb65dd2e5e36c23029715133b1fa9d0
+  tree entries=2089; Lean paths=1432; distinct Lean blobs=724; novel Lean blobs=3; truncated=False
+  https://github.com/randogelist/Methlib/tree/f647f2ef8fb65dd2e5e36c23029715133b1fa9d0
+work/rh-coordinate-testing-433 @ 036fbca80d84f37a3a45c08b451e7ab7fd26487a
+  tree entries=2105; Lean paths=1436; distinct Lean blobs=728; novel Lean blobs=7; truncated=False
+  https://github.com/randogelist/Methlib/tree/036fbca80d84f37a3a45c08b451e7ab7fd26487a
+Novel = blob SHA absent everywhere in the frozen base; duplicated paths count once.
+50 novel Lean blobs form the union, not the sum of the per-branch novel counts.
+Main contains zero new Lean blobs; its differences are evidence, documentation and release packaging.
+
+18. NEW VERIFIED PKG1 REGISTER
+package = "regularity-B-assembly/pkg1"
+tested_commit = "c01ebe76a103eea794f56f477a0b7270b31acaa6"
+package_tree_sha = "810cfaaf27b75c068002ccee2501263ae3a19800"
+identical_at = ["09dfe94a1ef150e21d09df3013fbe09002ef139c", "e9cf90726b8544a268469ebc8fa6634e9c713e07", "826b8b9e6d8edf50c0fe7516451d79ffe9288ebd"]
+run_url = "https://github.com/randogelist/Methlib/actions/runs/42944856804"
+job_url = "https://github.com/randogelist/Methlib/actions/runs/42944856804/job/130275083929"
+conclusion = "success"
+compiler = {"version": "4.33.0", "platform": "x86_64-unknown-linux-gnu", "commit": "d8b18978322de05a8f3dba51ef03cf5461676c17", "mathlib_rev": "db584cd6d46c92f209a44c0f1c829460d327499d"}
+cache = {"dependency_key": "h12-small-deps-Linux-X64-7794c6acd431b99ecba9f7601dd5d8ed44a0e15cf259fbe00d3f55273cb24a9b", "project_key": "h12-small-build-Linux-X64-d639da3390e8d6e842d327e580dffe281af90d362d90be5deb7de9735672b688", "both_restored": true, "mathlib_cached_objects_fetched_and_revision_verified": true}
+evidence_artifact_url = "https://github.com/randogelist/Methlib/actions/runs/42944856804/artifacts/13822805979"
+source_artifact_url = "https://github.com/randogelist/Methlib/actions/runs/42944856804/artifacts/13823095251"
+limitation = "Coefficient carriers and generalized analytic interfaces differ from native SingularClosure.CriticalSobolev; new adapter declarations are not audited by this receipt."
+All 29 following declarations have exact-type PASS and matching axioms [propext,Classical.choice,Quot.sound].
+01 H12CriticalAbsorption.H12_CRITICAL_ABSORPTION
+02 H12CriticalPairingIntegral.H12_CRITICAL_PAIRING_INTEGRAL
+03 H12CriticalTrilinearCompiler.H12_CRITICAL_TRILINEAR_COMPILER
+04 H12FourierFoundations.H12_FOURIER_FOUNDATIONS
+05 H12HolderLpAdapter.H12_HOLDER_LP_ADAPTER
+06 H12PointwiseConvectionSquare.H12_POINTWISE_CONVECTION_SQUARE
+07 H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE
+08 NSEPairingPointwiseLpLift.NSE_PAIRING_POINTWISE_LP_LIFT
+09 NSEPhysicalLpDataConstruction.NSE_PHYSICAL_LP_DATA_CONSTRUCTION
+10 NSEPointwisePairingIdentification.NSE_POINTWISE_PAIRING_IDENTIFICATION
+11 PeriodicHhalfL3ComponentCompiler.PERIODIC_HHALF_L3_COMPONENT_COMPILER
+12 PeriodicStrongSliceToRawPhysicalFields.PERIODIC_STRONG_SLICE_TO_RAW_PHYSICAL_FIELDS
+13 ScalarPeriodicHhalfL3HLSCompiler.SCALAR_PERIODIC_HHALF_L3_HLS_COMPILER
+14 H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS
+15 H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY
+16 H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY
+17 H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier
+18 H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA
+19 H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA
+20 H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA
+21 H12SmallScaling.criticalNorm_scale
+22 H12SmallScaling.exists_small_positive_scale
+23 H12SmallScaling.H12_SMALL_SCALING
+24 H12L2CoefficientEmbedding.physical_frequency_gap
+25 H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff
+26 H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING
+27 H12SmallClassBudget.small_critical_coefficient_le
+28 H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY
+29 H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET
+Every declaration retains all hypotheses shown by its original source; scalar-energy compilers do not construct NSE flows.
+Selected source signatures below inherit ambient namespace/section variables from the pinned module.
+
+MODULE regularity-B-assembly/pkg1/H12_SMALL_SCALING.lean; BLOB 3cef300ef46bfc9015802655ccf5b2770ce20a84
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_SMALL_SCALING.lean
+H12SmallScaling.criticalSq_scale [line 46]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem criticalSq_scale (r : ℝ) (a : RealH12Datum) :
+        criticalSq (scaleDatum r a) = r ^ 2 * criticalSq a
+H12SmallScaling.criticalNorm_scale [line 53]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem criticalNorm_scale (r : ℝ) (a : RealH12Datum) :
+        criticalNorm (scaleDatum r a) = |r| * criticalNorm a
+H12SmallScaling.scale_preserves_small [line 59]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem scale_preserves_small {ν C3 r : ℝ}
+        (a : RealH12Datum) (ha : Small ν C3 a) (hr : |r| ≤ 1) :
+        Small ν C3 (scaleDatum r a)
+H12SmallScaling.exists_small_positive_scale [line 88]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem exists_small_positive_scale (ν C3 ε : ℝ)
+        (hν : 0 < ν) (hC3 : 0 < C3) (hε : 0 < ε)
+        (a : RealH12Datum) :
+        ∃ r : ℝ, 0 < r ∧ r < ε ∧ Small ν C3 (scaleDatum r a)
+H12SmallScaling.scaleDatum_coeff_ne_zero [line 109]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem scaleDatum_coeff_ne_zero (r : ℝ) (hr : r ≠ 0)
+        (a : RealH12Datum) (ha : a.coeff ≠ 0) :
+        (scaleDatum r a).coeff ≠ 0
+H12SmallScaling.H12_SMALL_SCALING [line 218]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SMALL_SCALING :
+        (∀ (r : ℝ) (a : RealH12Datum),
+          criticalSq (scaleDatum r a) = r ^ 2 * criticalSq a) ∧
+        (∀ {ν C3 r : ℝ} (a : RealH12Datum),
+          Small ν C3 a → |r| ≤ 1 → Small ν C3 (scaleDatum r a)) ∧
+        (∀ (ν C3 : ℝ), 0 < ν → 0 < C3 →
+          ∃ a : SmallDatum ν C3, a.val.coeff ≠ 0)
+
+MODULE regularity-B-assembly/pkg1/H12_L2_COEFFICIENT_EMBEDDING.lean; BLOB e6555f1f822bf0de3a1a250288674a226bd5a321
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_L2_COEFFICIENT_EMBEDDING.lean
+H12L2CoefficientEmbedding.physical_frequency_gap [line 48]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem physical_frequency_gap {k : Mode3} (hk : k ≠ 0) :
+        2 * Real.pi ≤ freq k
+H12L2CoefficientEmbedding.coefficient_l2_summable [line 78]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem coefficient_l2_summable (a : RealH12Datum) :
+        Summable (fun k : Mode3 => ‖a.coeff k‖ ^ 2)
+H12L2CoefficientEmbedding.coefficientL2Sq_le_criticalSq [line 94]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem coefficientL2Sq_le_criticalSq (a : RealH12Datum) :
+        coefficientL2Sq a ≤ criticalSq a / (2 * Real.pi)
+H12L2CoefficientEmbedding.criticalNorm_eq_zero_iff [line 129]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem criticalNorm_eq_zero_iff (a : RealH12Datum) :
+        criticalNorm a = 0 ↔ ∀ k : Mode3, a.coeff k = 0
+H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING [line 142]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_L2_COEFFICIENT_EMBEDDING (a : RealH12Datum) :
+        Summable (fun k : Mode3 => ‖a.coeff k‖ ^ 2) ∧
+          coefficientL2Sq a ≤ criticalSq a / (2 * Real.pi) ∧
+          (criticalSq a = 0 ↔ ∀ k : Mode3, a.coeff k = 0)
+
+MODULE regularity-B-assembly/pkg1/H12_SPECTRAL_ENERGY_BRIDGE.lean; BLOB 8e38a00e398020cbb85f112d057c1902f88f23f5
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_SPECTRAL_ENERGY_BRIDGE.lean
+H12SpectralEnergyBridge.honeTerm_sq_eq_hhalf_mul_hthreeHalf [line 41]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem honeTerm_sq_eq_hhalf_mul_hthreeHalf
+        (u : Mode3 → CVec3) (k : Mode3) :
+        (honeTerm u k) ^ 2 =
+          hhalfTerm u k * hthreeHalfTerm u k
+H12SpectralEnergyBridge.finite_critical_interpolation [line 52]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem finite_critical_interpolation
+        (S : Finset Mode3) (u : Mode3 → CVec3) :
+        (honeFinset S u) ^ 2 ≤
+          hhalfFinset S u * hthreeHalfFinset S u
+H12SpectralEnergyBridge.heat_hhalfSq_le [line 79]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem heat_hhalfSq_le
+        {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t)
+        (u : H12Datum) :
+        hhalfSq (heatDatum ν t hν ht u).coeff ≤
+          hhalfSq u.coeff
+H12SpectralEnergyBridge.H12_SPECTRAL_ENERGY_BRIDGE [line 112]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SPECTRAL_ENERGY_BRIDGE : SpectralEnergyBundle
+
+MODULE regularity-B-assembly/pkg1/H12_CRITICAL_ABSORPTION.lean; BLOB 4c94fe9b19fc73422bccdee914bf5e8cd7042061
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_CRITICAL_ABSORPTION.lean
+H12CriticalAbsorption.critical_nonlinearity_absorbed [line 60]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem critical_nonlinearity_absorbed
+        {ν C E D : ℝ}
+        (hν : 0 < ν) (hC : 0 < C)
+        (hE : 0 ≤ E) (hD : 0 ≤ D)
+        (hsmall : E ≤ criticalRadius ν C) :
+        C * E * D ^ 2 ≤ (ν / 4) * D ^ 2
+H12CriticalAbsorption.absorbed_energy_inequality [line 77]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem absorbed_energy_inequality
+        {ν C E D L : ℝ}
+        (hν : 0 < ν) (hC : 0 < C)
+        (hE : 0 ≤ E) (hD : 0 ≤ D)
+        (hsmall : E ≤ criticalRadius ν C)
+        (henergy : L + ν * D ^ 2 ≤ C * E * D ^ 2) :
+        L + (3 * ν / 4) * D ^ 2 ≤ 0
+H12CriticalAbsorption.H12_CRITICAL_ABSORPTION [line 119]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_CRITICAL_ABSORPTION : CriticalAbsorptionBundle
+
+MODULE regularity-B-assembly/pkg1/H12_CRITICAL_ENERGY_BUDGET.lean; BLOB 27e17895056cc1d6970b53897f029c0f5bdebbea
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_CRITICAL_ENERGY_BUDGET.lean
+H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY [line 40]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY
+        {H D E : ℝ → ℝ} {ν θ T H₀ : ℝ}
+        (hν : 0 < ν) (hθ : θ < 1) (hT : 0 ≤ T) (hH₀ : 0 ≤ H₀)
+        (hD : ContinuousOn D (Icc 0 T))
+        (hE : ContinuousOn E (Icc 0 T))
+        (hH_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ H t)
+        (hD_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ D t)
+        (henergy : ∀ t ∈ Icc 0 T,
+          H t + dissipationCoefficient ν θ * (∫ s in (0 : ℝ)..t, D s) ≤ H₀)
+        (hinterpolation : ∀ t ∈ Icc 0 T, (E t) ^ 2 ≤ H t * D t) :
+        (∀ t ∈ Icc 0 T, H t ≤ H₀) ∧
+          (∫ s in (0 : ℝ)..T, D s) ≤ H₀ / dissipationCoefficient ν θ ∧
+          (∫ s in (0 : ℝ)..T, (E s) ^ 2) ≤
+            H₀ ^ 2 / dissipationCoefficient ν θ
+H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY [line 93]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_UNIFORM_SQUARE_ENSTROPHY_OF_CRITICAL_ENERGY
+        {ι : Type*} {H D E : ι → ℝ → ℝ} {ν θ T H₀ : ℝ}
+        (hν : 0 < ν) (hθ : θ < 1) (hT : 0 ≤ T) (hH₀ : 0 ≤ H₀)
+        (hD : ∀ n, ContinuousOn (D n) (Icc 0 T))
+        (hE : ∀ n, ContinuousOn (E n) (Icc 0 T))
+        (hH_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ H n t)
+        (hD_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ D n t)
+        (henergy : ∀ n t, t ∈ Icc 0 T →
+          H n t + dissipationCoefficient ν θ * (∫ s in (0 : ℝ)..t, D n s) ≤ H₀)
+        (hinterpolation : ∀ n t, t ∈ Icc 0 T → (E n t) ^ 2 ≤ H n t * D n t) :
+        ∀ n, (∫ s in (0 : ℝ)..T, (E n s) ^ 2) ≤
+          H₀ ^ 2 / (2 * (1 - θ) * ν)
+H12CriticalEnergyBudget.energy_bound_of_deriv_nonpos_below_barrier [line 168]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem energy_bound_of_deriv_nonpos_below_barrier
+        {H d : ℝ → ℝ} {T H₀ R : ℝ}
+        (hT : 0 ≤ T) (hH : ContinuousOn H (Icc 0 T))
+        (hderiv : ∀ t ∈ Ico 0 T, HasDerivAt H (d t) t)
+        (h_initial : H 0 ≤ H₀) (hgap : H₀ < R)
+        (hbelow : ∀ t ∈ Ico 0 T, H t ≤ R → d t ≤ 0) :
+        ∀ t ∈ Icc 0 T, H t ≤ H₀
+H12CriticalEnergyBudget.H12_CRITICAL_ENERGY_OF_SMALL_DATA [line 224]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_CRITICAL_ENERGY_OF_SMALL_DATA
+        {H D d : ℝ → ℝ} {ν C θ T H₀ : ℝ}
+        (hν : 0 < ν) (hC : 0 < C) (hθ : θ < 1)
+        (hT : 0 ≤ T) (hH₀ : 0 ≤ H₀)
+        (hH : ContinuousOn H (Icc 0 T))
+        (hD : ContinuousOn D (Icc 0 T))
+        (hH_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ H t)
+        (hD_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ D t)
+        (hderiv : ∀ t ∈ Ico 0 T, HasDerivAt H (d t) t)
+        (h_initial : H 0 ≤ H₀)
+        (hsmall : C * Real.sqrt H₀ ≤ θ * ν)
+        (hcritical : ∀ t ∈ Ico 0 T,
+          d t + 2 * ν * D t ≤ 2 * C * Real.sqrt (H t) * D t) :
+        ∀ t ∈ Icc 0 T,
+          H t + dissipationCoefficient ν θ * (∫ s in (0 : ℝ)..t, D s) ≤ H₀
+H12CriticalEnergyBudget.H12_SQUARE_ENSTROPHY_OF_SMALL_DATA [line 283]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SQUARE_ENSTROPHY_OF_SMALL_DATA
+        {H D E d : ℝ → ℝ} {ν C θ T H₀ : ℝ}
+        (hν : 0 < ν) (hC : 0 < C) (hθ : θ < 1)
+        (hT : 0 ≤ T) (hH₀ : 0 ≤ H₀)
+        (hH : ContinuousOn H (Icc 0 T))
+        (hD : ContinuousOn D (Icc 0 T))
+        (hE : ContinuousOn E (Icc 0 T))
+        (hH_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ H t)
+        (hD_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ D t)
+        (hderiv : ∀ t ∈ Ico 0 T, HasDerivAt H (d t) t)
+        (h_initial : H 0 ≤ H₀)
+        (hsmall : C * Real.sqrt H₀ ≤ θ * ν)
+        (hcritical : ∀ t ∈ Ico 0 T,
+          d t + 2 * ν * D t ≤ 2 * C * Real.sqrt (H t) * D t)
+        (hinterpolation : ∀ t ∈ Icc 0 T, (E t) ^ 2 ≤ H t * D t) :
+        (∫ s in (0 : ℝ)..T, (E s) ^ 2) ≤ H₀ ^ 2 / (2 * (1 - θ) * ν)
+H12CriticalEnergyBudget.H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA [line 308]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_UNIFORM_SQUARE_ENSTROPHY_OF_SMALL_DATA
+        {ι : Type*} {H D E d : ι → ℝ → ℝ} {ν C θ T H₀ : ℝ}
+        (hν : 0 < ν) (hC : 0 < C) (hθ : θ < 1)
+        (hT : 0 ≤ T) (hH₀ : 0 ≤ H₀)
+        (hH : ∀ n, ContinuousOn (H n) (Icc 0 T))
+        (hD : ∀ n, ContinuousOn (D n) (Icc 0 T))
+        (hE : ∀ n, ContinuousOn (E n) (Icc 0 T))
+        (hH_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ H n t)
+        (hD_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ D n t)
+        (hderiv : ∀ n t, t ∈ Ico 0 T → HasDerivAt (H n) (d n t) t)
+        (h_initial : ∀ n, H n 0 ≤ H₀)
+        (hsmall : C * Real.sqrt H₀ ≤ θ * ν)
+        (hcritical : ∀ n t, t ∈ Ico 0 T →
+          d n t + 2 * ν * D n t ≤ 2 * C * Real.sqrt (H n t) * D n t)
+        (hinterpolation : ∀ n t, t ∈ Icc 0 T → (E n t) ^ 2 ≤ H n t * D n t) :
+        ∀ n, (∫ s in (0 : ℝ)..T, (E n s) ^ 2) ≤
+          H₀ ^ 2 / (2 * (1 - θ) * ν)
+
+MODULE regularity-B-assembly/pkg1/H12_SMALL_CLASS_BUDGET.lean; BLOB a2d3c40443ace393e7c2b5cd2d58a21aabb3a3b1
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_SMALL_CLASS_BUDGET.lean
+H12SmallClassBudget.small_critical_coefficient_le [line 27]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem small_critical_coefficient_le
+        {ν C3 : ℝ} {a : RealH12Datum} (ha : Small ν C3 a) :
+        C3 ^ 3 * Real.sqrt (criticalSq a) ≤ (1 / 4 : ℝ) * ν
+H12SmallClassBudget.H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY [line 42]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY
+        {ι : Type*} {H D E d : ι → ℝ → ℝ} {ν C3 T : ℝ}
+        (a : RealH12Datum) (ha : Small ν C3 a) (hT : 0 ≤ T)
+        (hH : ∀ n, ContinuousOn (H n) (Icc 0 T))
+        (hD : ∀ n, ContinuousOn (D n) (Icc 0 T))
+        (hE : ∀ n, ContinuousOn (E n) (Icc 0 T))
+        (hH_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ H n t)
+        (hD_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ D n t)
+        (hderiv : ∀ n t, t ∈ Ico 0 T → HasDerivAt (H n) (d n t) t)
+        (h_initial : ∀ n, H n 0 ≤ criticalSq a)
+        (hcritical : ∀ n t, t ∈ Ico 0 T →
+          d n t + 2 * ν * D n t ≤ 2 * C3 ^ 3 * Real.sqrt (H n t) * D n t)
+        (hinterpolation : ∀ n t, t ∈ Icc 0 T → (E n t) ^ 2 ≤ H n t * D n t) :
+        ∀ n, (∫ s in (0 : ℝ)..T, (E n s) ^ 2) ≤
+          criticalSq a ^ 2 / (2 * (1 - (1 / 4 : ℝ)) * ν)
+H12SmallClassBudget.H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET [line 64]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SMALL_CLASS_EXISTS_UNIFORM_BUDGET
+        {ι : Type*} {H D E d : ι → ℝ → ℝ} {ν C3 T : ℝ}
+        (a : RealH12Datum) (ha : Small ν C3 a) (hT : 0 ≤ T)
+        (hH : ∀ n, ContinuousOn (H n) (Icc 0 T))
+        (hD : ∀ n, ContinuousOn (D n) (Icc 0 T))
+        (hE : ∀ n, ContinuousOn (E n) (Icc 0 T))
+        (hH_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ H n t)
+        (hD_nonneg : ∀ n t, t ∈ Icc 0 T → 0 ≤ D n t)
+        (hderiv : ∀ n t, t ∈ Ico 0 T → HasDerivAt (H n) (d n t) t)
+        (h_initial : ∀ n, H n 0 ≤ criticalSq a)
+        (hcritical : ∀ n t, t ∈ Ico 0 T →
+          d n t + 2 * ν * D n t ≤ 2 * C3 ^ 3 * Real.sqrt (H n t) * D n t)
+        (hinterpolation : ∀ n t, t ∈ Icc 0 T → (E n t) ^ 2 ≤ H n t * D n t) :
+        ∃ M : ℝ, 0 ≤ M ∧ ∀ n, (∫ s in (0 : ℝ)..T, (E n s) ^ 2) ≤ M
+
+MODULE regularity-B-assembly/pkg1/H12_FOURIER_FOUNDATIONS.lean; BLOB 1c2dd8057835f3a46d37183ee3d4502547444fba
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_FOURIER_FOUNDATIONS.lean
+H12FourierFoundations.H12_FOURIER_FOUNDATIONS [line 291]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_FOURIER_FOUNDATIONS : FoundationBundle
+
+MODULE regularity-B-assembly/pkg1/H12_SIGMA_ZERO_SMALL_CLASS.lean; BLOB 5453a46074f67e3e3e0e7a336dcc1ff1ea92d7a5
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/pkg1/H12_SIGMA_ZERO_SMALL_CLASS.lean
+H12SigmaZeroSmallClass.small_norm_lt [line 72]
+  EVIDENCE: Compiled helper; use audited bundle projection where available; not individually listed in29 exact audits
+  SOURCE_SIGNATURE:
+    theorem small_norm_lt {ν C3 : ℝ} {a : RealH12Datum}
+        (ha : Small ν C3 a) :
+        criticalNorm a < smallRadius ν C3
+H12SigmaZeroSmallClass.H12_SIGMA_ZERO_SMALL_CLASS [line 229]
+  EVIDENCE: A_TIER: exact type + named standard-only audit at matching source
+  SOURCE_SIGNATURE:
+    theorem H12_SIGMA_ZERO_SMALL_CLASS :
+        (∀ (ν C3 : ℝ), 0 < ν → 0 < C3 → Nonempty (SmallDatum ν C3)) ∧
+        (∀ {ν C3 t : ℝ} (a : RealH12Datum) (ha : Small ν C3 a)
+          (ht : 0 ≤ t), Small ν C3 (heatRealDatum ν t ha.1.le ht a)) ∧
+        (∀ {ν C3 : ℝ} (S : Finset Mode3) (hS : SymmetricCutoff S)
+          (a : RealH12Datum), Small ν C3 a →
+            Small ν C3 (cutoffRealDatum S hS a))
+
+SCALAR ENERGY SCOPE:
+{
+  "audited_roots": [
+    "H12_CRITICAL_ENERGY_OF_SMALL_DATA",
+    "H12_SQUARE_ENSTROPHY_OF_SMALL_DATA",
+    "H12_SMALL_CLASS_UNIFORM_SQUARE_ENSTROPHY"
+  ],
+  "actual_statement": "Scalar continuous families H,D,E with nonnegative H,D, derivative law, initial bound, critical differential inequality and interpolation E²<=HD imply energy and square-enstrophy integral budgets.",
+  "budget": "H0²/[2*(1-theta)*nu]; pkg1 Small uses C3³ and theta=1/4, hence budget=(2/(3nu))*criticalSq(c)².",
+  "required_realization": "To apply to actual NSE/Galerkin flows, supply every continuity, derivative, differential inequality and interpolation hypothesis. These audited scalar compilers do not themselves construct a flow or Reg_nu.",
+  "priority": "Retain existing native CriticalInvariant/CriticalUniformBounds/global root for regularity. Reuse pkg1 energy compilers only where their exact scalar hypotheses are already available; no reason to replace proved native mechanism."
+}
+
+PKG1 EXCLUSIONS:
+[
+  "pkg1 C3 is a numerical carrier parameter; no certified relation to native criticalNonlinearConstant follows by name.",
+  "M=max(1,C) is an algebraic radius choice only; no physical Sobolev claim about M.",
+  "exists_nonzero_small uses a smooth two-mode datum and cannot replace frozen rough/unbounded witness.",
+  "A coefficientL2Sq bound alone is not physical Fourier synthesis; E01 Phi plus existing native Parseval supplies that identification.",
+  "No package theorem states Reg_nu or full uncalibrated A_nu<=pi regularity."
+]
+
+19. MAIN-BRANCH ARCHIVE: NO ADDITIONAL THEOREM COUNT
+{
+  "commit": "e9cf90726b8544a268469ebc8fa6634e9c713e07",
+  "difference_counts": {
+    "changed_or_added_paths": 110,
+    "paths_whose_blob_is_absent_from_base": 102,
+    "distinct_novel_blob_shas": 100,
+    "new_or_changed_lean_paths": 0,
+    "changed_path_categories": {
+      "documentation": 6,
+      "verification": 102,
+      "releases": 2
+    }
+  },
+  "receipt_validation": {
+    "extension_audit_modules": 27,
+    "extension_audited_declarations": 33,
+    "original_audited_declarations": 171,
+    "unique_audited_declarations": 204,
+    "all204_have_exact_type_markers": true,
+    "all204_have_axiom_prints": true,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "all_audit_json_statuses": "PASS",
+    "source_commit_file": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "compiler": "Lean4.33.0 x86_64-unknown-linux-gnu d8b18978322de05a8f3dba51ef03cf5461676c17",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_policy": {
+      "status": "PASS",
+      "source_count": 420,
+      "custom_axioms": [],
+      "errors": []
+    },
+    "newly_added_direct_declarations_relative_to_R2": 0
+  },
+  "release": {
+    "path": "regularity-B-assembly/releases/NSE_H12_SIGMA_ZERO_SMALL_433.zip",
+    "source_url": "https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/releases/NSE_H12_SIGMA_ZERO_SMALL_433.zip",
+    "direct_download_url": "https://github.com/randogelist/Methlib/raw/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/releases/NSE_H12_SIGMA_ZERO_SMALL_433.zip",
+    "sha256": "b215f7ea01c5dbb18f90a2a30f99eeeb8cf18bfd5fb97a99145af9553ec6e179",
+    "checksum_url": "https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/releases/NSE_H12_SIGMA_ZERO_SMALL_433.zip.sha256",
+    "bytes": 988999,
+    "members": 524,
+    "lean_source_files": 259,
+    "checks": {
+      "archive_sha256_matches_published_checksum": true,
+      "archive_member_git_blob_mismatches": [],
+      "lean_sha256_mismatches_against_compiled_sources_manifest": [],
+      "compiled_inputs_checked_against_base_git_blob": 263,
+      "compiled_input_mismatches": []
+    },
+    "compiled_input_scope": "259 Lean files plus lakefile.toml,lake-manifest.json,lean-toolchain,run.cmd; all byte-identical to base09dfe94 Git blobs.",
+    "status": "VERIFIED_PACKAGING_OF_ALREADY_AUDITED_SOURCE; no new compilation"
+  },
+  "endpoint_impact": {
+    "E01_E02_E08_E09_E10_E12": "No proof-scope change; R2 native inventory retained.",
+    "E07_E13_E16": "Same already-audited full native root/uniqueness; durable receipt URLs added.",
+    "E03_E04_E05_E06": "No new GP/BKQR analytic adapter.",
+    "E14_E15_E17": "No new explicit dyadic shear heat/LH/density formalization."
+  }
+}
+The release is a verified package of already audited source, not a new proof or a new compiler run.
+
+20. PNT BRANCHES: GENERIC HELPERS AND COMPILER BOUNDARY
+33 novel Lean blobs inspected. No direct new GP/Gram/rough Fourier/NSE adapter was identified.
+
+HVRHigherCoefficientGeometric.complex_geometric_hasSum
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/HVR_HigherCoefficient_Geometric.lean
+  theorem complex_geometric_hasSum {q : ℂ} (hq : ‖q‖ < 1) :
+      HasSum (fun k : ℕ => q ^ k) (1 - q)⁻¹
+  DOMAIN: q:Complex, norm(q)<1
+  REUSE: Optional scalar GP geometric-series helper; duplicates pinned Mathlib.hasSum_geometric_of_norm_lt_one. Does not provide the operator-algebra resolvent required by E03.
+  EVIDENCE: SOURCE_CANDIDATE; exact module BLOCKED by HVR_HigherCoefficient_Reindex in run41919440166/job126887733460; audit skipped
+  REJECT_IMPORT: True
+
+HVRHigherCoefficientReindex.higher_lseries_eq_prime_power_tsum
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/HVR_HigherCoefficient_Reindex.lean
+  theorem higher_lseries_eq_prime_power_tsum (sigma t : ℝ) (hsigma : 1 < sigma) :
+      LSeries higherCoefficientC (zetaPoint sigma t) =
+        ∑' p : Nat.Primes, ∑' k : ℕ,
+          LSeries.term higherCoefficientC (zetaPoint sigma t) ((p : ℕ) ^ (k + 2))
+  DOMAIN: Specific higher von-Mangoldt coefficient L-series; prime-power reindexing; sigma>1
+  REUSE: No direct dyadic Fourier or BKQR instantiation. The general Equiv.tsum_eq/tsum_prod machinery should be reused from pinned Mathlib.
+  EVIDENCE: SOURCE_CANDIDATE; matching branch HEAD workflow failed
+  REJECT_IMPORT: True
+
+HVRPrimeDensityFubiniBridge.abel_smoothing_eq_frequency_integral
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/HVR_PrimeDensity_FubiniBridge.lean
+  theorem abel_smoothing_eq_frequency_integral (ψ : ℝ → ℂ) (a x : ℝ)
+      (hpair : Integrable (fun p : ℝ × ℝ => mixed ψ a x p.1 p.2)
+        ((volume.restrict (Set.Ioi (0 : ℝ))).prod volume)) :
+      (∫ u : ℝ in Set.Ioi 0, dampedError a u * kernel ψ (x - u)) =
+        ∫ t : ℝ, (ψ t * Complex.exp ((t : ℂ) * Complex.I * (x : ℂ))) *
+          primeDensityLaplace ((a : ℂ) + (t : ℂ) * Complex.I)
+  DOMAIN: Actual logPrimeDensity error, half-line Lebesgue measure, Fourier kernel; explicit product integrability
+  REUSE: No generic NSE/GP integral swap. Proof template uses MeasureTheory.integral_prod and integral_prod_symm.
+  EVIDENCE: SOURCE_CANDIDATE; matching branch HEAD workflow failed
+  REJECT_IMPORT: True
+
+HVRPrimeDensitySpatialAbel.spatial_abel_tendsto
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/HVR_PrimeDensity_SpatialAbel.lean
+  theorem spatial_abel_tendsto (K : ℝ → ℂ) (hK : Integrable K volume) (x : ℝ) :
+      Tendsto (fun n : ℕ => ∫ u : ℝ in Set.Ioi 0,
+        dampedError (boundaryEps n) u * K (x - u)) atTop (𝓝 (undamped K x))
+  DOMAIN: Fixed prime-count density and reciprocal Abel damping; arbitrary integrable complex kernel K
+  REUSE: Not the dyadic trigonometric Abel tail and not Gaussian heat trace. Its weighted-integral argument is a proof template only.
+  EVIDENCE: SOURCE_CANDIDATE; matching branch HEAD workflow failed
+  REJECT_IMPORT: True
+
+HVRPrimeBoundaryEventualAbelGlue.frequency_integral_tendsto_boundary_of_compact_support
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/HVR_PrimeBoundary_EventualAbelGlue.lean
+  theorem frequency_integral_tendsto_boundary_of_compact_support
+      (ψ : ℝ → ℂ) (x : ℝ) (K : Set ℝ) (hK : IsCompact K)
+      (hsupport : ∀ t : ℝ, ψ t ≠ 0 → t ∈ K)
+      (hψ : Integrable ψ volume)
+      (hmeas : ∀ n : ℕ, AEStronglyMeasurable
+        (frequencyIntegrand ψ x (boundaryEps n)) volume) :
+      Tendsto (fun n : ℕ => ∫ t : ℝ, frequencyIntegrand ψ x (boundaryEps n) t)
+        atTop (𝓝 (ordinaryBoundary ψ x))
+  DOMAIN: Prime-density Laplace transform on compact frequency support; integrable test and measurable integrands
+  REUSE: No generic dominated-convergence endpoint; retains prime-boundary definitions and hypotheses.
+  EVIDENCE: SOURCE_CANDIDATE; matching branch HEAD workflow failed
+  REJECT_IMPORT: True
+
+HVRNativeOneZetaSummability.summable_of_unit_bound
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+  theorem summable_of_unit_bound {f : ℕ → ℂ} {s : ℂ}
+      (hf : ∀ n ≠ 0, ‖f n‖ ≤ 1) (hs : 1 < s.re) :
+      LSeriesSummable f s
+  DOMAIN: Complex Dirichlet series f(n)/n^s, |f(n)|<=1, Re(s)>1
+  REUSE: A generic bounded Dirichlet coefficient theorem, but not an actual dyadic Hhalf summability theorem. Direct pinned p-series comparison is shorter.
+  EVIDENCE: MODULE_BUILD_AND_STANDARD_ONLY_AUDIT_PASS in failed overall workflow; pinned audit source names this theorem; no raw declaration axiom output reproduced in stdout
+  COMPILED_ON: Lean4.34.0-rc1 / Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41919440166
+  JOB: 126887733460
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41919440166/job/126887733460
+  REQUIRES_433_PORT: True
+  REJECT_IMPORT: True
+
+HVRNativeOneZetaSummability.convolution_sum
+https://github.com/randogelist/Methlib/blob/93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d/HILBERT-SUPERIORITY-PNT/NativeOneZetaSummability.lean
+  theorem convolution_sum {f g : ℕ → ℂ} {s : ℂ}
+      (hf : LSeriesSummable f s) (hg : LSeriesSummable g s) :
+      LSeries (LSeries.convolution f g) s = LSeries f s * LSeries g s
+  DOMAIN: Multiplicative natural-index L-series convolution; both LSeriesSummable
+  REUSE: Does not apply to additive Fourier convolution. General summable-product and fiberwise regrouping lemmas are the reusable machinery.
+  EVIDENCE: MODULE_BUILD_AND_STANDARD_ONLY_AUDIT_PASS in failed overall workflow; pinned audit source names this theorem; no raw declaration axiom output reproduced in stdout
+  COMPILED_ON: Lean4.34.0-rc1 / Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41919440166
+  JOB: 126887733460
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41919440166/job/126887733460
+  REQUIRES_433_PORT: True
+  REJECT_IMPORT: True
+
+HVRNativeSeriesInfrastructure.hasSum_scale
+https://github.com/randogelist/Methlib/blob/31825007f841b66d881886dd6bce760a8c0cbc5c/HILBERT-SUPERIORITY-PNT/NativeSeriesInfrastructure.lean
+  theorem hasSum_scale {f : ℕ → ℂ} {a : ℂ} (h : HasSum f a) (c : ℂ) :
+      HasSum (fun n => c * f n) (c * a)
+  AMBIENT_CONTEXT: none
+  DOMAIN: Complex series indexed by Nat; HasSum f a; scalar c
+  REUSE: E03/E14 scaled series; already inherited and redundant with standard Mathlib.
+  EVIDENCE: DIRECT_NAMED_EXTERNAL_STANDARD_ONLY_AUDIT
+  COMPILED_ON: Lean 4.34.0-rc1, commit3447a668783dbce1a8fdb97101dd067687b2b418; Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41920042902
+  JOB: 126889826917
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41920042902/job/126889826917
+  REQUIRES_433_PORT: True
+
+HVRNativeSeriesInfrastructure.hasSum_identifies_tsum
+https://github.com/randogelist/Methlib/blob/31825007f841b66d881886dd6bce760a8c0cbc5c/HILBERT-SUPERIORITY-PNT/NativeSeriesInfrastructure.lean
+  theorem hasSum_identifies_tsum {f : ℕ → ℂ} {a : ℂ} (h : HasSum f a) :
+      (∑' n, f n) = a
+  AMBIENT_CONTEXT: none
+  DOMAIN: Complex series indexed by Nat; HasSum f a
+  REUSE: E03/E14 convert witnessed sum into tsum identity; already inherited and redundant with HasSum.tsum_eq.
+  EVIDENCE: DIRECT_NAMED_EXTERNAL_STANDARD_ONLY_AUDIT
+  COMPILED_ON: Lean 4.34.0-rc1, commit3447a668783dbce1a8fdb97101dd067687b2b418; Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41920042902
+  JOB: 126889826917
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41920042902/job/126889826917
+  REQUIRES_433_PORT: True
+
+HVRNativeSeriesInfrastructure.complex_summable_of_majorant
+https://github.com/randogelist/Methlib/blob/31825007f841b66d881886dd6bce760a8c0cbc5c/HILBERT-SUPERIORITY-PNT/NativeSeriesInfrastructure.lean
+  theorem complex_summable_of_majorant {f : ℕ → ℂ} {g : ℕ → ℝ}
+      (hg : Summable g) (h : ∀ n, ‖f n‖ ≤ g n) : Summable f
+  AMBIENT_CONTEXT: none
+  DOMAIN: Complex series indexed by Nat dominated in norm by summable real series
+  REUSE: E03/E14 comparison; already inherited. Does not itself establish Gaussian/dyadic majorants.
+  EVIDENCE: DIRECT_NAMED_EXTERNAL_STANDARD_ONLY_AUDIT
+  COMPILED_ON: Lean 4.34.0-rc1, commit3447a668783dbce1a8fdb97101dd067687b2b418; Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41920042902
+  JOB: 126889826917
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41920042902/job/126889826917
+  REQUIRES_433_PORT: True
+
+HVRNativeDominatedLimit.integral_error_le_weighted
+https://github.com/randogelist/Methlib/blob/31825007f841b66d881886dd6bce760a8c0cbc5c/HILBERT-SUPERIORITY-PNT/NativeDominatedLimit.lean
+  theorem integral_error_le_weighted
+      {f g : α → ℂ} {weight : α → ℝ} (e : ℝ)
+      (hf : Integrable f μ) (hg : Integrable g μ)
+      (hw : Integrable weight μ)
+      (hbound : ∀ᵐ x ∂μ, ‖f x - g x‖ ≤ e * weight x) :
+      ‖(∫ x, f x ∂μ) - (∫ x, g x ∂μ)‖ ≤ e * ∫ x, weight x ∂μ
+  AMBIENT_CONTEXT: {α : Type*} [MeasurableSpace α] {μ : Measure α}
+  DOMAIN: Any measurable alpha and measure mu; complex integrable f,g; real integrable weight; AE norm error <=e*weight
+  REUSE: Quantitative error for E03/E04 integrations or positive-time heat approximants if weighted uniform error is established.
+  EVIDENCE: MODULE_BUILD_AND_STANDARD_ONLY_AUDIT_PASS; audit source names this theorem; raw declaration axiom output not reproduced in job stdout
+  COMPILED_ON: Lean 4.34.0-rc1, commit3447a668783dbce1a8fdb97101dd067687b2b418; Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41920042902
+  JOB: 126889827501
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41920042902/job/126889827501
+  REQUIRES_433_PORT: True
+
+HVRNativeDominatedLimit.integral_tendsto_of_weighted_uniform_error
+https://github.com/randogelist/Methlib/blob/31825007f841b66d881886dd6bce760a8c0cbc5c/HILBERT-SUPERIORITY-PNT/NativeDominatedLimit.lean
+  theorem integral_tendsto_of_weighted_uniform_error
+      {f : ℕ → α → ℂ} {g : α → ℂ} {weight : α → ℝ} {e : ℕ → ℝ}
+      (hf : ∀ n, Integrable (f n) μ) (hg : Integrable g μ)
+      (hw : Integrable weight μ) (he : Tendsto e atTop (𝓝 0))
+      (hbound : ∀ n, ∀ᵐ x ∂μ, ‖f n x - g x‖ ≤ e n * weight x) :
+      Tendsto (fun n => ∫ x, f n x ∂μ) atTop (𝓝 (∫ x, g x ∂μ))
+  AMBIENT_CONTEXT: {α : Type*} [MeasurableSpace α] {μ : Measure α}
+  DOMAIN: Same measurable domain; each f_n and g integrable; integrable weight; e_n->0; AE norm error <=e_n*weight
+  REUSE: Optional weighted-uniform integral convergence. Stronger hypotheses than DCT: not a substitute for arbitrary dominated heat trace.
+  EVIDENCE: MODULE_BUILD_AND_STANDARD_ONLY_AUDIT_PASS; audit source names this theorem; raw declaration axiom output not reproduced in job stdout
+  COMPILED_ON: Lean 4.34.0-rc1, commit3447a668783dbce1a8fdb97101dd067687b2b418; Mathlib fd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0
+  RUN: 41920042902
+  JOB: 126889827501
+  EVIDENCE_URL: https://github.com/randogelist/Methlib/actions/runs/41920042902/job/126889827501
+  REQUIRES_433_PORT: True
+PNT compiler: Lean4.34.0-rc1 commit3447a668783dbce1a8fdb97101dd067687b2b418; Mathlibfd9375dc1e3b113b2ddc599f4ebb59d11d4c60d0.
+Current chain compiler: Lean4.33.0. PNT passed source cannot be treated as a matching 4.33 cached object.
+Prefer the already-pinned Mathlib statements when they provide the same operation.
+[
+  "Prime-density spatial Abel convergence is not summation-by-parts for Fourier tails.",
+  "Prime-power reindexing is not a dyadic partition theorem.",
+  "Multiplicative L-series convolution is not additive Fourier convolution.",
+  "Weighted-uniform integral convergence is stronger than general dominated convergence.",
+  "Module audit success is distinguished from printed raw declaration-level axiom output.",
+  "Source byte identity does not imply compatible transitive dependencies across Lean4.34 and4.33.",
+  "Overall workflow failure does not invalidate component module passes; NativeOneZetaSummability passed its own build and audit in that failed workflow."
+]
+
+21. ARITHMETIC/RH BRANCHES: EXPLICIT SCOPE EXCLUSIONS
+7 branch trees; 17 distinct novel Lean blobs; 10 substantive and 7 audit/negative-control blobs.
+No novel direct E03-E06 endpoint in the seven delegated branch trees. Previously audited generic HVR BKQR helpers remain the strongest relevant algebraic reuse.
+[
+  {
+    "id": "E03",
+    "new_reuse": 0,
+    "reason": "No literal cosh-GP integral evaluation, pi resolvent identity, or Hilbert spectral realization."
+  },
+  {
+    "id": "E04",
+    "new_reuse": 0,
+    "reason": "Finite survivor Hankel nonzero/pair-count positivity is not positive semidefinite rational GP moment Gram matrices."
+  },
+  {
+    "id": "E05",
+    "new_reuse": 0,
+    "reason": "No Schur complement theorem for [[pi,z*],[z,I]] or its actual norm-energy admission."
+  },
+  {
+    "id": "E06",
+    "new_reuse": 0,
+    "reason": "No native CriticalSobolev smallness calibration from kappa or shift coercivity."
+  }
+]
+RH_ARCHITECTURE_UNRESOLVED_FIELDS:
+structure NativeAnalyticPremises (ν : ℝ) where
+  nu_pos : 0 < ν
+  cutoff : 0 < actualG2 ν (actualEtaStar ν)
+  derivativeIdentity : ActualDerivativeIdentity ν
+  propagate :
+    (0 < actualG2 ν (actualEtaStar ν)) →
+    ActualDerivativeIdentity ν →
+    ActualSeparation ν →
+    ActualPositivity ν
+  positivityToAllVariationOne :
+    ActualPositivity ν →
+    ∀ N : ℕ, RH_HilbertLimit.actualVariation N = 1
+structure CoordinateKernel (ν : ℝ) where
+  decodeBlob : ByteArray → Option RawCert
+  checkRaw : RawCert → Bool
+  checkRaw_sound :
+    ∀ w : RawCert,
+      checkRaw w = true →
+      ActualSeparation ν
+No checker-labelled acceptance is substituted for the energy bound or actual PDE conclusion.
+Negative controls are deliberately rejecting tests, not positive admission certificates.
+{
+  "ref": "6367ca3178995a1fdc7fc101353245e102d1ac95",
+  "path": "ERDOS_633/E0687/Attempt_I/Erdos687.lean",
+  "ns": "Erdos687",
+  "names": [
+    "hankel_ne_zero_iff_card_pos",
+    "check_iff_hankel_nonzero",
+    "verify_sound",
+    "verify_complete",
+    "erdos687_finite_witness_iff",
+    "uniformAcceptance_implies_erdos687"
+  ],
+  "scope": "Finite coprime-survivor sums on natural intervals; moment(P,b,T,k)=sum n^k, Hankel entries over Nat. Proves nonzero matrix iff positive survivor count. Uniform asymptotic acceptance remains an explicit premise.",
+  "exclusion": "Hankel nonzero is not positive semidefinite; natural primorial moments are not m_n=<c,Q^n c> on L2(0,1). No GP/cosh integral, contractive realization, block Schur complement, or viscosity calibration.",
+  "toolchain": "Source preparation comment targets Lean4.34.0-rc1; no matching build retrieved.",
+  "sha": "72351dd7f9be1ee3cb9001fb5591a0b76b7e7f8b",
+  "url": "https://github.com/randogelist/Methlib/blob/6367ca3178995a1fdc7fc101353245e102d1ac95/ERDOS_633/E0687/Attempt_I/Erdos687.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "5add148ac01a86ca422f79bb12bbabb860525af2",
+  "path": "ERDOS_633/E0687/Attempt_J/Erdos687AttemptJ.lean",
+  "ns": "MethlibErdos687.AttemptJ",
+  "names": [
+    "pairCount_pos_iff",
+    "pairCount_pos_iff_universal",
+    "noCover_insert_iff_gram",
+    "gram_of_jacobsthal",
+    "quadratic_uniform_gram"
+  ],
+  "scope": "pairCount counts ordered-by-size pairs of natural numbers in distinct residue classes. Gram terminology denotes finite residue dispersion and noncovering equivalence. Jacobsthal bounds imported from Bridge687.",
+  "exclusion": "No real Hilbert Gram matrix, determinant, GP measure, energy norm or NSE datum. No new E03-E06 implication.",
+  "toolchain": "Bridge687 external dependency; compatibility with pinned Lean4.33.0 not established by this scoped source inspection.",
+  "sha": "1e3a0098c5af58031ecb8b9a2cbfadff7520ab1f",
+  "url": "https://github.com/randogelist/Methlib/blob/5add148ac01a86ca422f79bb12bbabb860525af2/ERDOS_633/E0687/Attempt_J/Erdos687AttemptJ.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "89f8940e42fa6ca149bb7633f21ae713d4ab99b9",
+  "path": "ERDOS_633/E0687/Attempt_E/AttemptE.lean",
+  "ns": "Erdos687AttemptE",
+  "names": [
+    "exactDetector_sq_ite",
+    "momentCertificate_eq_coveredCount",
+    "momentCertificate_nonneg",
+    "finiteCheck_sound",
+    "quadratic_finite_certificate"
+  ],
+  "scope": "exactDetector(H,u)=product_{j<H}(1-u/(j+1)) over Q; for integer0<=u<=H its square detects u=0. momentCertificate sums these squares over residue survivor counts.",
+  "exclusion": "Finite polynomial indicator of zero coprime count is not GP rational moment formula or joint energy-block positivity. Generic proof pattern only; no frozen endpoint discharged.",
+  "toolchain": "ExternalRoot source explicitly pins upstream Lean4.34.1; source adapted to4.33 would need independent validation.",
+  "sha": "fc09e700efa719bc8f5c7a5a638a8dda950252cb",
+  "url": "https://github.com/randogelist/Methlib/blob/89f8940e42fa6ca149bb7633f21ae713d4ab99b9/ERDOS_633/E0687/Attempt_E/AttemptE.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "89f8940e42fa6ca149bb7633f21ae713d4ab99b9",
+  "path": "ERDOS_633/E0687/Attempt_E/ExternalRoot.lean",
+  "ns": "Erdos687AttemptE",
+  "names": [
+    "imported_jacobsthal_quadratic",
+    "imported_prime_cutoff_quadratic"
+  ],
+  "scope": "Discharges JacobsthalQuadratic from OAI.Erdos970.Erdos970Final.erdos_970_quadratic.",
+  "exclusion": "Number-theoretic input unrelated to frozen GP/BKQR/NSE premises.",
+  "toolchain": "Explicit source comment upstream OpenAI/math Lean4.34.1 commit4eaee87548250b2682affda7d05d947c05554bae.",
+  "sha": "576f4ba05a8d3076b2ed9b8cb7d90b1b110166ca",
+  "url": "https://github.com/randogelist/Methlib/blob/89f8940e42fa6ca149bb7633f21ae713d4ab99b9/ERDOS_633/E0687/Attempt_E/ExternalRoot.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "3d88122383818aeaf18a907989336f8581b46d03",
+  "path": "ERDOS_633/E0687/Attempt_F/FiniteCore.lean",
+  "ns": "MethlibErdos687.AttemptF",
+  "names": [
+    "moment_strict_forces_all_positive",
+    "moment_certificate_sound",
+    "checkDelta_iff",
+    "moment_certificate_accepted",
+    "certificate_excludes_cover"
+  ],
+  "scope": "Generic finite Nat-valued Cauchy criterion: (sum f)^2>(|s|-1)*sum f^2 implies every f_i>0. Specialization uses natural residue pair counts Delta; CRTDispersionBridge remains an explicit premise.",
+  "exclusion": "Generic lemma has possible future arithmetic use but no current E03-E06 carrier matches: real/rational GP moments and Hilbert energy-block PSD require different semantics. No direct reduction in remaining proof obligations.",
+  "toolchain": "FiniteCore imports Mathlib; no external compiler audit inspected because out of exact scope.",
+  "sha": "97a3c87938dc5e5924fdd0301e07f079bc7a8641",
+  "url": "https://github.com/randogelist/Methlib/blob/3d88122383818aeaf18a907989336f8581b46d03/ERDOS_633/E0687/Attempt_F/FiniteCore.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "3d88122383818aeaf18a907989336f8581b46d03",
+  "path": "ERDOS_633/E0687/Attempt_F/ExternalRoot.lean",
+  "ns": "MethlibErdos687.AttemptF",
+  "names": [
+    "external_two_blocks",
+    "external_plus_certificate"
+  ],
+  "scope": "External Jacobsthal asymptotic theorem plus finite residue certificate; root retains hCRT and hCert.",
+  "exclusion": "Neither premise is the frozen GP/block admission; no NSE endpoint.",
+  "toolchain": "Bridge687 dependency; scoped inspection establishes no4.33 compatibility.",
+  "sha": "f5a423c2f917acfb4811c1ee72eabf9fde7b7cdd",
+  "url": "https://github.com/randogelist/Methlib/blob/3d88122383818aeaf18a907989336f8581b46d03/ERDOS_633/E0687/Attempt_F/ExternalRoot.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "f647f2ef8fb65dd2e5e36c23029715133b1fa9d0",
+  "path": "RH_FULL_WITNESSED_CLOSURE/Architecture.lean",
+  "ns": "RHFullWitnessedClosure",
+  "names": [
+    "verifyBlob_sound",
+    "verified_blob_implies_nativeRH",
+    "exists_verified_blob_implies_nativeRH"
+  ],
+  "scope": "Conditional actual-xi certificate architecture. CoordinateKernel contains checkRaw_sound; ClosedSystem contains NativeAnalyticPremises and kernel. actualEnergy uses RH_HilbertLimit.actualVariation increments, not NSE datum energy.",
+  "exclusion": "Soundness, endpoint sign, derivative identity, propagation and positivity-to-all-variation-one are structure fields supplied by caller. No concrete sound analytic checker, no accepted witness and no NSE/GP realization are constructed.",
+  "toolchain": "No matching build retrieved: semantic exclusion is independent of compilation.",
+  "sha": "324c87d1cb804c21fb3d9ca1a6b5cce2430586b6",
+  "url": "https://github.com/randogelist/Methlib/blob/f647f2ef8fb65dd2e5e36c23029715133b1fa9d0/RH_FULL_WITNESSED_CLOSURE/Architecture.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "036fbca80d84f37a3a45c08b451e7ab7fd26487a",
+  "path": "RH_FULL_WITNESSED_CLOSURE/Architecture.lean",
+  "ns": "RHFullWitnessedClosure",
+  "names": [
+    "verifyBlob_sound",
+    "verified_blob_implies_nativeRH",
+    "exists_verified_blob_implies_nativeRH"
+  ],
+  "scope": "Same conditional architecture; RawCert data moved to CoordinateData import. Source blob differs but theorem premises/conclusions remain the same.",
+  "exclusion": "Relocation into data module does not discharge any analytic soundness/positivity premise.",
+  "toolchain": "No matching build retrieved: semantic exclusion is independent of compilation.",
+  "sha": "471f801dff305a8b994a30eba3346fe8dec2fcb9",
+  "url": "https://github.com/randogelist/Methlib/blob/036fbca80d84f37a3a45c08b451e7ab7fd26487a/RH_FULL_WITNESSED_CLOSURE/Architecture.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "036fbca80d84f37a3a45c08b451e7ab7fd26487a",
+  "path": "RH_FULL_WITNESSED_CLOSURE/CoordinateData.lean",
+  "ns": "RHFullWitnessedClosure",
+  "names": [
+    "ExactRat",
+    "CellCert",
+    "NearCert",
+    "TailCert",
+    "RawCert"
+  ],
+  "scope": "Data-only finite integer/rational labels and opaque proofData:List Nat.",
+  "exclusion": "No rational-to-real value semantics, GP moments, analytic bound checker or theorem beyond data structures.",
+  "toolchain": "Imports Std; no matching build retrieved.",
+  "sha": "e4d3b1a4b8c643c209a76e5935475df250ae7d3f",
+  "url": "https://github.com/randogelist/Methlib/blob/036fbca80d84f37a3a45c08b451e7ab7fd26487a/RH_FULL_WITNESSED_CLOSURE/CoordinateData.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+{
+  "ref": "036fbca80d84f37a3a45c08b451e7ab7fd26487a",
+  "path": "RH_FULL_WITNESSED_CLOSURE/CoordinateTesting.lean",
+  "ns": "RHFullWitnessedClosure.CoordinateTesting",
+  "names": [
+    "coordinateCheck_iff",
+    "coordinateCheck_sound",
+    "admitted_coordinate",
+    "accepted_singleCell",
+    "exampleFinitePass_accepted"
+  ],
+  "scope": "Concrete decidable finite syntactic conditions: positive denominators, cutoff agreement, one-cell coverage and ordering/signs of rational labels. Accepted subtype is exactly CoordinateWellFormed.",
+  "exclusion": "g2/g3 labels are not proved bounds on actualG2/actualG3; proofData payload ignored analytically. Accepted example does not instantiate CoordinateKernel.checkRaw_sound, ClosedSystem or any GP/NSE certificate.",
+  "toolchain": "Source header A_TIER_CANDIDATE; no matching external evidence retrieved, no promotion.",
+  "sha": "956ca06f425387581747c69f069fcdd7bc972989",
+  "url": "https://github.com/randogelist/Methlib/blob/036fbca80d84f37a3a45c08b451e7ab7fd26487a/RH_FULL_WITNESSED_CLOSURE/CoordinateTesting.lean",
+  "direct_reuse": false,
+  "grade": "SCOPE_EXCLUDED",
+  "compile_evidence": "NOT_RETRIEVED_FOR_SCOPE_EXCLUDED_CANDIDATE; audit source commands are not execution evidence"
+}
+
+22. ADDITIONAL ANALYTIC SOURCE CANDIDATES: NOT NEW A-TIER
+32 distinct source blobs inspected;43 declarations selected;0 new matching external audits for this group.
+
+CondFeffB.cellIntegral_continuousOn_Icc
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicCellTime.lean#L24
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem cellIntegral_continuousOn_Icc {K : Set Space3} {a b : ℝ} {F : Space3 × ℝ → ℝ}
+        (hK : IsCompact K) (hF : ContinuousOn F (K ×ˢ Icc a b)) :
+        ContinuousOn (fun t => ∫ x in K, F (x,t)) (Icc a b)
+  REUSE: Actual compact spatial-cylinder integration, continuity and differentiation; instantiate on positive-time slabs [delta,T].
+  REMAINING: Compact spatial set; continuous integrand and derivative on the cylinder; pointwise HasDerivAt. The dyadic initial profile is unbounded, so do not use pointwise-continuous closed-time variants at t=0. L2 trace and t=0 energy limit remain separate.
+
+CondFeffB.cellIntegral_hasDerivAt_Icc
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicCellTime.lean#L40
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem cellIntegral_hasDerivAt_Icc {K : Set Space3} {a t b : ℝ} {F G : Space3 × ℝ → ℝ}
+        (hK : IsCompact K) (hat : a < t) (htb : t < b)
+        (hF : ContinuousOn F (K ×ˢ Icc a b)) (hG : ContinuousOn G (K ×ˢ Icc a b))
+        (hd : ∀ x ∈ K, ∀ s ∈ Icc a b, HasDerivAt (fun q => F (x,q)) (G (x,s)) s) :
+        HasDerivAt (fun q => ∫ x in K, F (x,q)) (∫ x in K, G (x,t)) t
+  REUSE: Actual compact spatial-cylinder integration, continuity and differentiation; instantiate on positive-time slabs [delta,T].
+  REMAINING: Compact spatial set; continuous integrand and derivative on the cylinder; pointwise HasDerivAt. The dyadic initial profile is unbounded, so do not use pointwise-continuous closed-time variants at t=0. L2 trace and t=0 energy limit remain separate.
+
+CondFeffB.integral_periodic_fluxDivergence
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFlux.lean#L43
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem integral_periodic_fluxDivergence (F : RSpace → RVector)
+        (hC : ∀ j, ContDiff ℝ 1 (fun x => F x j))
+        (hper : ∀ x j, F (unitShift realAnalysis x j) j = F x j) :
+        (∫ x in Icc (fun _ : Fin 3 => -(1 / 2 : ℝ)) (fun _ : Fin 3 => (1 / 2 : ℝ)),
+          fluxDivergence F x) = 0
+  REUSE: Exact periodic boundary-flux cancellation, pointwise shear difference-energy algebra, and production estimate.
+  REMAINING: C1 flux and opposite-face periodicity for integral; divergence-zero and explicit difference momentum identities for local balance; a certified |slope| bound for production. No existence or LH membership supplied.
+
+CondFeffB.localEnergyBalance
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFlux.lean#L78
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem localEnergyBalance (ν g P : ℝ) (U W dt dP : RVector)
+        (dU dW d2W : Fin 3 → RVector)
+        (hU : (∑ j : Fin 3, dU j j) = 0) (hW : (∑ j : Fin 3, dW j j) = 0)
+        (heq : ∀ i : Fin 3, dt i + (∑ j, U j * dW j i) +
+            (if i = 0 then W 1 * g else 0) = ν * (∑ j, d2W j i) - dP i) :
+        (∑ i, 2 * W i * dt i) =
+          (∑ j, fluxDerivativeTerm ν U W P dU dW d2W dP j) -
+          2 * ν * (∑ j, ∑ i, (dW j i) ^ 2) - 2 * g * W 0 * W 1
+  REUSE: Exact periodic boundary-flux cancellation, pointwise shear difference-energy algebra, and production estimate.
+  REMAINING: C1 flux and opposite-face periodicity for integral; divergence-zero and explicit difference momentum identities for local balance; a certified |slope| bound for production. No existence or LH membership supplied.
+
+CondFeffB.shearProduction_le
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFlux.lean#L102
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem shearProduction_le (g L : ℝ) (W : RVector) (hg : |g| ≤ L) :
+        -(2 * g * W 0 * W 1) ≤ L * ∑ i, (W i)^2
+  REUSE: Exact periodic boundary-flux cancellation, pointwise shear difference-energy algebra, and production estimate.
+  REMAINING: C1 flux and opposite-face periodicity for integral; divergence-zero and explicit difference momentum identities for local balance; a certified |slope| bound for production. No existence or LH membership supplied.
+
+CondFeffB.spatialDerivative_differenceFlux
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearLocalBalance.lean#L38
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem spatialDerivative_differenceFlux (ν : ℝ) (U W : RSpace → RVector)
+        (P : RSpace → ℝ) (x : RSpace) (j : Fin 3)
+        (hU : DifferentiableAt ℝ (fun y => U y j) x)
+        (hW : ∀ i, DifferentiableAt ℝ (fun y => W y i) x)
+        (hDW : ∀ i, DifferentiableAt ℝ (spatialDerivative j (fun y => W y i)) x)
+        (hP : DifferentiableAt ℝ P x) :
+        spatialDerivative j (fun y => differenceFlux ν U W P y j) x =
+          fluxDerivativeTerm ν (U x) (W x) (P x)
+            (fun k i => spatialDerivative k (fun y => U y i) x)
+            (fun k i => spatialDerivative k (fun y => W y i) x)
+            (fun k i => spatialDerivative k (spatialDerivative k (fun y => W y i)) x)
+            (fun k => spatialDerivative k P x) j
+  REUSE: Product-rule identification of actual spatial flux derivatives on smooth positive-time slices.
+  REMAINING: Differentiability of U,W, pressure and the first derivatives of W. Native Vec/derivative/cell dictionary must be identified. Rough t=0 is excluded.
+
+CondFeffB.fluxDivergence_differenceFlux
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearLocalBalance.lean#L92
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem fluxDivergence_differenceFlux (ν : ℝ) (U W : RSpace → RVector)
+        (P : RSpace → ℝ) (x : RSpace)
+        (hU : ∀ j, DifferentiableAt ℝ (fun y => U y j) x)
+        (hW : ∀ i, DifferentiableAt ℝ (fun y => W y i) x)
+        (hDW : ∀ j i, DifferentiableAt ℝ (spatialDerivative j (fun y => W y i)) x)
+        (hP : DifferentiableAt ℝ P x) :
+        fluxDivergence (differenceFlux ν U W P) x =
+          ∑ j, fluxDerivativeTerm ν (U x) (W x) (P x)
+            (fun k i => spatialDerivative k (fun y => U y i) x)
+            (fun k i => spatialDerivative k (fun y => W y i) x)
+            (fun k i => spatialDerivative k (spatialDerivative k (fun y => W y i)) x)
+            (fun k => spatialDerivative k P x) j
+  REUSE: Product-rule identification of actual spatial flux derivatives on smooth positive-time slices.
+  REMAINING: Differentiability of U,W, pressure and the first derivatives of W. Native Vec/derivative/cell dictionary must be identified. Rough t=0 is excluded.
+
+CondFeffB.spatialDerivative_contDiff_one
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFluxRegularity.lean#L25
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem spatialDerivative_contDiff_one {f : RSpace → ℝ} (hf : ContDiff ℝ 2 f) (j : Fin 3) :
+        ContDiff ℝ 1 (spatialDerivative j f)
+  REUSE: C1 regularity and periodicity of the energy flux, feeding the periodic divergence theorem.
+  REMAINING: C1 U and pressure, C2 W; explicit unit-periodicity. These generic declarations avoid candidate wrappers which assume globalSolution.
+
+CondFeffB.differenceFlux_contDiff_one
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFluxRegularity.lean#L29
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem differenceFlux_contDiff_one (ν : ℝ) (U W : RSpace → RVector) (P : RSpace → ℝ)
+        (hU : ∀ j, ContDiff ℝ 1 (fun x => U x j)) (hW : ∀ i, ContDiff ℝ 2 (fun x => W x i))
+        (hP : ContDiff ℝ 1 P) (j : Fin 3) : ContDiff ℝ 1 (fun x => differenceFlux ν U W P x j)
+  REUSE: C1 regularity and periodicity of the energy flux, feeding the periodic divergence theorem.
+  REMAINING: C1 U and pressure, C2 W; explicit unit-periodicity. These generic declarations avoid candidate wrappers which assume globalSolution.
+
+CondFeffB.spatialDerivative_periodic
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFluxRegularity.lean#L48
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem spatialDerivative_periodic {f : RSpace → ℝ}
+        (h : ∀ x k, f (unitShift realAnalysis x k) = f x) (x : RSpace) (j k : Fin 3) :
+        spatialDerivative j f (unitShift realAnalysis x k) = spatialDerivative j f x
+  REUSE: C1 regularity and periodicity of the energy flux, feeding the periodic divergence theorem.
+  REMAINING: C1 U and pressure, C2 W; explicit unit-periodicity. These generic declarations avoid candidate wrappers which assume globalSolution.
+
+CondFeffB.differenceFlux_periodic
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearFluxRegularity.lean#L57
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14,E15
+  SOURCE_SIGNATURE:
+    theorem differenceFlux_periodic (ν : ℝ) (U W : RSpace → RVector) (P : RSpace → ℝ)
+        (hU : ∀ x k, U (unitShift realAnalysis x k) = U x)
+        (hW : ∀ x k, W (unitShift realAnalysis x k) = W x)
+        (hP : ∀ x k, P (unitShift realAnalysis x k) = P x) (x : RSpace) (j k : Fin 3) :
+        differenceFlux ν U W P (unitShift realAnalysis x k) j = differenceFlux ν U W P x j
+  REUSE: C1 regularity and periodicity of the energy flux, feeding the periodic divergence theorem.
+  REMAINING: C1 U and pressure, C2 W; explicit unit-periodicity. These generic declarations avoid candidate wrappers which assume globalSolution.
+
+CondFeffB.cellEnergy_zero_of_differential_ineq
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct/PeriodicShearUniqueness.lean#L105
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E15,E16
+  SOURCE_SIGNATURE:
+    theorem cellEnergy_zero_of_differential_ineq {u v : RVelocity} {T K : ℝ}
+        (hcont : ContinuousOn (cellEnergy u v) (Icc 0 T))
+        (hinitial : cellEnergy u v 0 = 0)
+        (hlocal : ∀ t ∈ Ioo 0 T, ∃ d : ℝ,
+          HasDerivAt (cellEnergy u v) d t ∧ d ≤ K * cellEnergy u v t) :
+        ∀ t ∈ Icc 0 T, cellEnergy u v t = 0
+  REUSE: Generic scalar cell-energy Gronwall closure with only scalar continuity at t=0 and derivatives on (0,T).
+  REMAINING: Continuous cellEnergy on [0,T], zero initial energy, and dE/dt<=K E with one finite constant K throughout (0,T). A rough dyadic flow need not have a uniform initial slope bound; this does not replace native LH weak-strong uniqueness. Time-dependent integrable coefficient needs a distinct adapter.
+
+NSE_NOH.ClassicalNSE_lift_of_planar
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Classical.lean#L123
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem ClassicalNSE_lift_of_planar
+        (ν : ℝ)
+        (w : ℝ → RSpace 2 → ℝ)
+        (v : ℝ → RSpace 2 → Vector 2)
+        (q : ℝ → RSpace 2 → ℝ)
+        (hPlanar : ClassicalNSE 2 ν v q)
+        (hPassive : ClassicalPassiveScalar ν v w)
+        (hw : ∀ t : ℝ, 0 < t → PlanarC2 (w t))
+        (hv : ∀ t : ℝ, 0 < t → ∀ i : Fin 2,
+          PlanarC2 (fun y : RSpace 2 => v t y i))
+        (hq : ∀ t : ℝ, 0 < t → ∀ y : RSpace 2,
+          DifferentiableAt ℝ (q t) y) :
+        ClassicalNSE 3 ν (liftedVelocity w v) (liftedPressure q)
+  REUSE: Actual 2D3C pointwise NSE lift: with planar v=0, q=0, a scalar heat equation gives the 3D shear equation.
+  REMAINING: ClassicalNSE 2 for v,q; ClassicalPassiveScalar for w; PlanarC2 w and v at every positive time; differentiable pressure. Requires new zero-planar instantiation, one-dimensional-to-two-dimensional scalar lift, native PositiveSmoothNSE dictionary, and separate smoothness/trace/LH proofs.
+
+NSE_NOH.advectionJet_lift_scalar
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Jet.lean#L41
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem advectionJet_lift_scalar
+        (w : ℝ) (v gradW : Vector 2) (gradV : Fin 2 → Vector 2) :
+        advectionJet 3 (jetLiftVelocity w v) (jetLiftSpatialGrad gradW gradV) 0 =
+          v 0 * gradW 0 + v 1 * gradW 1
+  REUSE: Generic algebraic shear cancellation and 2D3C momentum assembly, useful as independent edge lemmas.
+  REMAINING: Actual derivative-to-jet equalities must be supplied. NSEJet_lift assumes planar NSEJet and passive scalar equation; does not create either equation or a flow.
+
+NSE_NOH.advectionJet_lift_planar_zero
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Jet.lean#L49
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem advectionJet_lift_planar_zero
+        (w : ℝ) (v gradW : Vector 2) (gradV : Fin 2 → Vector 2) :
+        advectionJet 3 (jetLiftVelocity w v) (jetLiftSpatialGrad gradW gradV) 1 =
+          v 0 * gradV 0 0 + v 1 * gradV 1 0
+  REUSE: Generic algebraic shear cancellation and 2D3C momentum assembly, useful as independent edge lemmas.
+  REMAINING: Actual derivative-to-jet equalities must be supplied. NSEJet_lift assumes planar NSEJet and passive scalar equation; does not create either equation or a flow.
+
+NSE_NOH.advectionJet_lift_planar_one
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Jet.lean#L56
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem advectionJet_lift_planar_one
+        (w : ℝ) (v gradW : Vector 2) (gradV : Fin 2 → Vector 2) :
+        advectionJet 3 (jetLiftVelocity w v) (jetLiftSpatialGrad gradW gradV) 2 =
+          v 0 * gradV 0 1 + v 1 * gradV 1 1
+  REUSE: Generic algebraic shear cancellation and 2D3C momentum assembly, useful as independent edge lemmas.
+  REMAINING: Actual derivative-to-jet equalities must be supplied. NSEJet_lift assumes planar NSEJet and passive scalar equation; does not create either equation or a flow.
+
+NSE_NOH.divergenceJet_lift
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Jet.lean#L64
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem divergenceJet_lift (gradW : Vector 2) (gradV : Fin 2 → Vector 2) :
+        divergenceJet 3 (jetLiftSpatialGrad gradW gradV) =
+          divergenceJet 2 gradV
+  REUSE: Generic algebraic shear cancellation and 2D3C momentum assembly, useful as independent edge lemmas.
+  REMAINING: Actual derivative-to-jet equalities must be supplied. NSEJet_lift assumes planar NSEJet and passive scalar equation; does not create either equation or a flow.
+
+NSE_NOH.NSEJet_lift
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Jet.lean#L79
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem NSEJet_lift
+        (ν w dtW lapW : ℝ)
+        (v dtV lapV gradPressure gradW : Vector 2)
+        (gradV : Fin 2 → Vector 2)
+        (hPlanar : NSEJet 2 ν v dtV gradV lapV gradPressure)
+        (hPassive : dtW + v 0 * gradW 0 + v 1 * gradW 1 = ν * lapW) :
+        NSEJet 3 ν (jetLiftVelocity w v) (jetLiftVelocity dtW dtV)
+          (jetLiftSpatialGrad gradW gradV)
+          (jetLiftVelocity lapW lapV) (jetLiftVelocity 0 gradPressure)
+  REUSE: Generic algebraic shear cancellation and 2D3C momentum assembly, useful as independent edge lemmas.
+  REMAINING: Actual derivative-to-jet equalities must be supplied. NSEJet_lift assumes planar NSEJet and passive scalar equation; does not create either equation or a flow.
+
+NSE_NOH.fderiv_liftScalar
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Derivative.lean#L35
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem fderiv_liftScalar
+        (f : RSpace 2 → ℝ) (x : RSpace 3)
+        (hf : DifferentiableAt ℝ f (realProjection2 x)) :
+        fderiv ℝ (fun y : RSpace 3 => f (realProjection2 y)) x =
+          (fderiv ℝ f (realProjection2 x)).comp realProjection2CLM
+  REUSE: Actual spatial derivative of scalar pullback through the projection omitting x1.
+  REMAINING: DifferentiableAt scalar profile at the projected point; actual one-dimensional dyadic heat profile smoothness remains to be instantiated.
+
+NSE_NOH.coordinateDerivative_liftScalar_zero
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Derivative.lean#L51
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem coordinateDerivative_liftScalar_zero
+        (f : RSpace 2 → ℝ) (x : RSpace 3)
+        (hf : DifferentiableAt ℝ f (realProjection2 x)) :
+        coordinateDerivative 3 0 (fun y => f (realProjection2 y)) x = 0
+  REUSE: Actual spatial derivative of scalar pullback through the projection omitting x1.
+  REMAINING: DifferentiableAt scalar profile at the projected point; actual one-dimensional dyadic heat profile smoothness remains to be instantiated.
+
+NSE_NOH.coordinateDerivative_liftScalar_one
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Derivative.lean#L65
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem coordinateDerivative_liftScalar_one
+        (f : RSpace 2 → ℝ) (x : RSpace 3)
+        (hf : DifferentiableAt ℝ f (realProjection2 x)) :
+        coordinateDerivative 3 1 (fun y => f (realProjection2 y)) x =
+          coordinateDerivative 2 0 f (realProjection2 x)
+  REUSE: Actual spatial derivative of scalar pullback through the projection omitting x1.
+  REMAINING: DifferentiableAt scalar profile at the projected point; actual one-dimensional dyadic heat profile smoothness remains to be instantiated.
+
+NSE_NOH.coordinateDerivative_liftScalar_two
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Derivative.lean#L80
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem coordinateDerivative_liftScalar_two
+        (f : RSpace 2 → ℝ) (x : RSpace 3)
+        (hf : DifferentiableAt ℝ f (realProjection2 x)) :
+        coordinateDerivative 3 2 (fun y => f (realProjection2 y)) x =
+          coordinateDerivative 2 1 f (realProjection2 x)
+  REUSE: Actual spatial derivative of scalar pullback through the projection omitting x1.
+  REMAINING: DifferentiableAt scalar profile at the projected point; actual one-dimensional dyadic heat profile smoothness remains to be instantiated.
+
+NSE_NOH.spatialLaplacian_liftScalar
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Laplacian.lean#L73
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E14
+  SOURCE_SIGNATURE:
+    theorem spatialLaplacian_liftScalar
+        (f : RSpace 2 → ℝ) (x : RSpace 3) (hf : PlanarC2 f) :
+        spatialLaplacian 3 (fun z : RSpace 3 => f (realProjection2 z)) x =
+          spatialLaplacian 2 f (realProjection2 x)
+  REUSE: Actual Laplacian commutes with the planar scalar lift.
+  REMAINING: PlanarC2 profile; no series-differentiation or heat identity supplied.
+
+NSE_NOH.squareMassDensity_liftedVelocity
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Energy.lean#L32
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E15
+  SOURCE_SIGNATURE:
+    theorem squareMassDensity_liftedVelocity
+        (w : ℝ → RSpace 2 → ℝ) (v : ℝ → RSpace 2 → Vector 2)
+        (t : ℝ) (x : RSpace 3) :
+        squareMassDensity 3 (liftedVelocity w v t x) =
+          (w t (realProjection2 x)) ^ (2 : ℕ) +
+            squareMassDensity 2 (v t (realProjection2 x))
+  REUSE: Euclidean component-square energy and gradient-density identities for the 2D3C lift.
+  REMAINING: Pointwise differentiability for gradient identities. Mass and dissipation are explicit sums of squares; the default Pi norm on Vector n is not automatically the native Euclidean vector norm.
+
+NSE_NOH.vectorGradDensity_liftedVelocity
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Energy.lean#L65
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E15
+  SOURCE_SIGNATURE:
+    theorem vectorGradDensity_liftedVelocity
+        (w : ℝ → RSpace 2 → ℝ) (v : ℝ → RSpace 2 → Vector 2)
+        (t : ℝ) (x : RSpace 3)
+        (hw : DifferentiableAt ℝ (w t) (realProjection2 x))
+        (hv : ∀ i : Fin 2,
+          DifferentiableAt ℝ (fun y : RSpace 2 => v t y i) (realProjection2 x)) :
+        vectorGradDensity 3 (liftedVelocity w v t) x =
+          scalarGradDensity 2 (w t) (realProjection2 x) +
+            vectorGradDensity 2 (v t) (realProjection2 x)
+  REUSE: Euclidean component-square energy and gradient-density identities for the 2D3C lift.
+  REMAINING: Pointwise differentiability for gradient identities. Mass and dissipation are explicit sums of squares; the default Pi norm on Vector n is not automatically the native Euclidean vector norm.
+
+NSE_NOH.pointwiseEnergyDissipation_liftedVelocity
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_Energy.lean#L89
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E15
+  SOURCE_SIGNATURE:
+    theorem pointwiseEnergyDissipation_liftedVelocity
+        (ν : ℝ) (w : ℝ → RSpace 2 → ℝ)
+        (v : ℝ → RSpace 2 → Vector 2)
+        (t : ℝ) (x : RSpace 3)
+        (hw : DifferentiableAt ℝ (w t) (realProjection2 x))
+        (hv : ∀ i : Fin 2,
+          DifferentiableAt ℝ (fun y : RSpace 2 => v t y i) (realProjection2 x)) :
+        squareMassDensity 3 (liftedVelocity w v t x) +
+            2 * ν * vectorGradDensity 3 (liftedVelocity w v t) x =
+          ((w t (realProjection2 x)) ^ (2 : ℕ) +
+              2 * ν * scalarGradDensity 2 (w t) (realProjection2 x)) +
+          (squareMassDensity 2 (v t (realProjection2 x)) +
+              2 * ν * vectorGradDensity 2 (v t) (realProjection2 x))
+  REUSE: Euclidean component-square energy and gradient-density identities for the 2D3C lift.
+  REMAINING: Pointwise differentiability for gradient identities. Mass and dissipation are explicit sums of squares; the default Pi norm on Vector n is not automatically the native Euclidean vector norm.
+
+NSE_NOH.torusProjection2_measurePreserving
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_TorusMass.lean#L32
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem torusProjection2_measurePreserving :
+        MeasurePreserving torusProjection2
+          (volume : Measure (Torus 3))
+          (volume : Measure (Torus 2))
+  REUSE: Actual normalized unit-torus projection, spatial integration and kinetic-mass decomposition.
+  REMAINING: AEStronglyMeasurable scalar integrand or integrable squared components; identify native torus/measure and scalar dyadic representative. One-dimensional-to-two-dimensional lift still new.
+
+NSE_NOH.integral_torusProjection2
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_TorusMass.lean#L71
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem integral_torusProjection2 (f : Torus 2 → ℝ)
+        (hf : AEStronglyMeasurable f (volume : Measure (Torus 2))) :
+        (∫ x : Torus 3, f (torusProjection2 x)) =
+          ∫ y : Torus 2, f y
+  REUSE: Actual normalized unit-torus projection, spatial integration and kinetic-mass decomposition.
+  REMAINING: AEStronglyMeasurable scalar integrand or integrable squared components; identify native torus/measure and scalar dyadic representative. One-dimensional-to-two-dimensional lift still new.
+
+NSE_NOH.integral_squareMassDensity_torusLiftedVector
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_TorusMass.lean#L115
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem integral_squareMassDensity_torusLiftedVector
+        (w : Torus 2 → ℝ) (v : Torus 2 → Vector 2)
+        (hw : Integrable (fun y : Torus 2 => (w y) ^ (2 : ℕ)))
+        (hv : Integrable (fun y : Torus 2 => squareMassDensity 2 (v y))) :
+        (∫ x : Torus 3, squareMassDensity 3 (torusLiftedVector w v x)) =
+          (∫ y : Torus 2, (w y) ^ (2 : ℕ)) +
+            (∫ y : Torus 2, squareMassDensity 2 (v y))
+  REUSE: Actual normalized unit-torus projection, spatial integration and kinetic-mass decomposition.
+  REMAINING: AEStronglyMeasurable scalar integrand or integrable squared components; identify native torus/measure and scalar dyadic representative. One-dimensional-to-two-dimensional lift still new.
+
+NSE_NOH.scalarL2Pullback_ae
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_L2Pullback.lean#L48
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem scalarL2Pullback_ae (w : L2Scalar2) :
+        (scalarL2Pullback w : Torus 3 → ℝ) =ᵐ[(volume : Measure (Torus 3))]
+          (fun x => w (torusProjection2 x))
+  REUSE: Isometric scalar L2 lift, almost-everywhere representative, strong L2 trace transfer and exact mass.
+  REMAINING: Actual L2Scalar2 input; for strongTrace a continuous NNReal path with its specified initial value. Does not produce the scalar heat path or its trace. For native vector L2 use an explicit component embedding.
+
+NSE_NOH.scalarL2Pullback_norm
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_L2Pullback.lean#L59
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem scalarL2Pullback_norm (w : L2Scalar2) :
+        ‖scalarL2Pullback w‖ = ‖w‖
+  REUSE: Isometric scalar L2 lift, almost-everywhere representative, strong L2 trace transfer and exact mass.
+  REMAINING: Actual L2Scalar2 input; for strongTrace a continuous NNReal path with its specified initial value. Does not produce the scalar heat path or its trace. For native vector L2 use an explicit component embedding.
+
+NSE_NOH.scalarL2Pullback_strongTrace
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_L2Pullback.lean#L84
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem scalarL2Pullback_strongTrace
+        (w : NNReal → L2Scalar2) (w₀ : L2Scalar2)
+        (hw : Continuous w) (hw₀ : w 0 = w₀) :
+        Continuous (fun t : NNReal => scalarL2Pullback (w t)) ∧
+          scalarL2Pullback (w 0) = scalarL2Pullback w₀
+  REUSE: Isometric scalar L2 lift, almost-everywhere representative, strong L2 trace transfer and exact mass.
+  REMAINING: Actual L2Scalar2 input; for strongTrace a continuous NNReal path with its specified initial value. Does not produce the scalar heat path or its trace. For native vector L2 use an explicit component embedding.
+
+NSE_NOH.scalarL2Pullback_mass
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_L2Pullback.lean#L102
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10,E15
+  SOURCE_SIGNATURE:
+    theorem scalarL2Pullback_mass (w : L2Scalar2) :
+        (∫ x : Torus 3, ((scalarL2Pullback w) x) ^ (2 : ℕ)) =
+          scalarMass w
+  REUSE: Isometric scalar L2 lift, almost-everywhere representative, strong L2 trace transfer and exact mass.
+  REMAINING: Actual L2Scalar2 input; for strongTrace a continuous NNReal path with its specified initial value. Does not produce the scalar heat path or its trace. For native vector L2 use an explicit component embedding.
+
+NSE_NOH.scalarL2Pullback_closedRange
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_L2Closure.lean#L36
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10
+  SOURCE_SIGNATURE:
+    theorem scalarL2Pullback_closedRange :
+        IsClosed (Set.range scalarL2Pullback)
+  REUSE: Closed isometric pullback range and strong-limit factorization for rough scalar data.
+  REMAINING: Convergence of lifted scalar approximants to the specified L2 class; optional alternative to native R2 coefficient/trace route, not an independent smoothing theorem.
+
+NSE_NOH.scalarL2Pullback_limitFactorization
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_L2Closure.lean#L110
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E10
+  SOURCE_SIGNATURE:
+    theorem scalarL2Pullback_limitFactorization
+        (w : ℕ → L2Scalar2) (a : ScalarL2Three)
+        (h : Tendsto (fun n => scalarL2Pullback (w n)) atTop (𝓝 a)) :
+        ∃ w₀ : L2Scalar2,
+          scalarL2Pullback w₀ = a ∧ Tendsto w atTop (𝓝 w₀)
+  REUSE: Closed isometric pullback range and strong-limit factorization for rough scalar data.
+  REMAINING: Convergence of lifted scalar approximants to the specified L2 class; optional alternative to native R2 coefficient/trace route, not an independent smoothing theorem.
+
+NSE_NOH.mFourier_modeEmbedding2
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_FourierSpectral.lean#L39
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E09,E10
+  SOURCE_SIGNATURE:
+    theorem mFourier_modeEmbedding2 (k : Fin 2 → ℤ) (x : Torus 3) :
+        UnitAddTorus.mFourier (modeEmbedding2 k) x =
+          UnitAddTorus.mFourier k (torusProjection2 x)
+  REUSE: Actual Fourier support in k0=0 implies planar scalar L2 factorization.
+  REMAINING: UnitAddTorus Fourier-coefficient dictionary and vanishing of coefficients with k0!=0. This is rank-two factorization only; dyadic rank-one profile and reality/component embeddings remain new.
+
+NSE_NOH.finiteFourier3_zeroFirst_factorization
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_FourierSpectral.lean#L69
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E09,E10
+  SOURCE_SIGNATURE:
+    theorem finiteFourier3_zeroFirst_factorization
+        (s : Finset (Fin 3 → ℤ)) (c : (Fin 3 → ℤ) → ℂ)
+        (hs : ∀ k ∈ s, k 0 = 0) (x : Torus 3) :
+        finiteFourier3 s c x =
+          ∑ k ∈ s, c k *
+            UnitAddTorus.mFourier (modeProjection2 k) (torusProjection2 x)
+  REUSE: Actual Fourier support in k0=0 implies planar scalar L2 factorization.
+  REMAINING: UnitAddTorus Fourier-coefficient dictionary and vanishing of coefficients with k0!=0. This is rank-two factorization only; dyadic rank-one profile and reality/component embeddings remain new.
+
+NSE_NOH.complexL2_zeroFirstSpectral_factorization
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/NSE_NOH/NSE_NOH_FourierSpectral.lean#L145
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E09,E10
+  SOURCE_SIGNATURE:
+    theorem complexL2_zeroFirstSpectral_factorization
+        (a : ComplexL2Three)
+        (hzero : ∀ k : Fin 3 → ℤ, k 0 ≠ 0 →
+          UnitAddTorus.mFourierCoeff a k = 0) :
+        ∃ w : ComplexL2Two, complexL2Pullback w = a
+  REUSE: Actual Fourier support in k0=0 implies planar scalar L2 factorization.
+  REMAINING: UnitAddTorus Fourier-coefficient dictionary and vanishing of coefficients with k0!=0. This is rank-two factorization only; dyadic rank-one profile and reality/component embeddings remain new.
+
+RH_HilbertLimit.TwoRoutes.MeasureResolvent.exists_local_lower_bound
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/REEMANIANS/BanachExt/RH_HilbertLimit/TwoRoutes/ResolventAnalytic.lean#L55
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E03,E04
+  SOURCE_SIGNATURE:
+    theorem exists_local_lower_bound {k : ℝ} (hk : 0 < k) {z₀ : ℂ}
+        (hz₀ : z₀ ∈ domain k) :
+        ∃ c > 0, ∃ ε > 0, ∀ z ∈ Metric.ball z₀ ε, ∀ q : UnitInterval,
+          c ≤ ‖denominator k z q‖
+  REUSE: Actual finite-positive-measure resolvent analyticity/differentiation, with no RH premise in this module.
+  REMAINING: Finite measure sigma on Icc[0,1], k>0 and nonvanishing 1+k*z*q on support. New adapter: sigma is pushforward of normalized dx on [0,1] under x↦1-x^2; W(r)=2*transform(1,sigma,0,-r/2). Prove measure dictionary and domain |r|<2. Neither GP(0,1)=pi nor rational moments/Gram Schur block follows automatically.
+
+RH_HilbertLimit.TwoRoutes.MeasureResolvent.integrable_kernel
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/REEMANIANS/BanachExt/RH_HilbertLimit/TwoRoutes/ResolventAnalytic.lean#L122
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E03,E04
+  SOURCE_SIGNATURE:
+    theorem integrable_kernel (hz : z ∈ domain k) (n : ℕ) :
+        Integrable (kernel k n z) σ
+  AMBIENT: variable {k : ℝ} {σ : Measure UnitInterval} [IsFiniteMeasure σ] {z : ℂ}
+  REUSE: Actual finite-positive-measure resolvent analyticity/differentiation, with no RH premise in this module.
+  REMAINING: Finite measure sigma on Icc[0,1], k>0 and nonvanishing 1+k*z*q on support. New adapter: sigma is pushforward of normalized dx on [0,1] under x↦1-x^2; W(r)=2*transform(1,sigma,0,-r/2). Prove measure dictionary and domain |r|<2. Neither GP(0,1)=pi nor rational moments/Gram Schur block follows automatically.
+
+RH_HilbertLimit.TwoRoutes.MeasureResolvent.hasDerivAt_transform
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/REEMANIANS/BanachExt/RH_HilbertLimit/TwoRoutes/ResolventAnalytic.lean#L129
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E03,E04
+  SOURCE_SIGNATURE:
+    theorem hasDerivAt_transform (hk : 0 < k) (hz : z ∈ domain k) (n : ℕ) :
+        HasDerivAt (transform k σ n)
+          (-((n + 1 : ℕ) : ℂ) * (k : ℂ) * transform k σ (n + 1) z) z
+  AMBIENT: variable {k : ℝ} {σ : Measure UnitInterval} [IsFiniteMeasure σ] {z : ℂ}
+  REUSE: Actual finite-positive-measure resolvent analyticity/differentiation, with no RH premise in this module.
+  REMAINING: Finite measure sigma on Icc[0,1], k>0 and nonvanishing 1+k*z*q on support. New adapter: sigma is pushforward of normalized dx on [0,1] under x↦1-x^2; W(r)=2*transform(1,sigma,0,-r/2). Prove measure dictionary and domain |r|<2. Neither GP(0,1)=pi nor rational moments/Gram Schur block follows automatically.
+
+RH_HilbertLimit.TwoRoutes.MeasureResolvent.analyticAt_transform
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/REEMANIANS/BanachExt/RH_HilbertLimit/TwoRoutes/ResolventAnalytic.lean#L164
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E03,E04
+  SOURCE_SIGNATURE:
+    theorem analyticAt_transform (hk : 0 < k) (hz : z ∈ domain k) (n : ℕ) :
+        AnalyticAt ℂ (transform k σ n) z
+  AMBIENT: variable {k : ℝ} {σ : Measure UnitInterval} [IsFiniteMeasure σ] {z : ℂ}
+  REUSE: Actual finite-positive-measure resolvent analyticity/differentiation, with no RH premise in this module.
+  REMAINING: Finite measure sigma on Icc[0,1], k>0 and nonvanishing 1+k*z*q on support. New adapter: sigma is pushforward of normalized dx on [0,1] under x↦1-x^2; W(r)=2*transform(1,sigma,0,-r/2). Prove measure dictionary and domain |r|<2. Neither GP(0,1)=pi nor rational moments/Gram Schur block follows automatically.
+
+RH_HilbertLimit.TwoRoutes.MeasureResolvent.analyticOnNhd_transform
+https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/REEMANIANS/BanachExt/RH_HilbertLimit/TwoRoutes/ResolventAnalytic.lean#L170
+  EVIDENCE: SOURCE_INSPECTED; external compiler/theorem-level axiom receipt not located
+  ENDPOINTS: E03,E04
+  SOURCE_SIGNATURE:
+    theorem analyticOnNhd_transform (hk : 0 < k) (n : ℕ) :
+        AnalyticOnNhd ℂ (transform k σ n) (domain k)
+  AMBIENT: variable {k : ℝ} {σ : Measure UnitInterval} [IsFiniteMeasure σ] {z : ℂ}
+  REUSE: Actual finite-positive-measure resolvent analyticity/differentiation, with no RH premise in this module.
+  REMAINING: Finite measure sigma on Icc[0,1], k>0 and nonvanishing 1+k*z*q on support. New adapter: sigma is pushforward of normalized dx on [0,1] under x↦1-x^2; W(r)=2*transform(1,sigma,0,-r/2). Prove measure dictionary and domain |r|<2. Neither GP(0,1)=pi nor rational moments/Gram Schur block follows automatically.
+[
+  {
+    "package": "PeriodicShearProfile/Heat/Trace/Growth",
+    "reason": "Hard-coded modes exp(-(k+1))*exp(-4*pi^2*nu*(k+1)^2*t)*cos(2*pi*(k+1)*y), with all initial spatial weighted sums finite. This smooth initial datum is not the rough dyadic chosen datum; source theorem names must not be applied with replaced coefficients."
+  },
+  {
+    "package": "PeriodicShearComparison / candidate_* wrappers",
+    "reason": "Explicit hs: globalSolution realAnalysis .periodic nu a (zeroForce realAnalysis) s. They compare an already-assumed global classical solution to the hard-coded shear. They prove neither existence nor unrestricted/native Leray-Hopf uniqueness. The final comparison only concludes equality at the origin."
+  },
+  {
+    "package": "NSE_NOH.from_analytic_ports / from_geometry_ports",
+    "reason": "Conditional composition requiring actual global planar NSE, passive scalar evolution and reconstruction ports. NSE_NOH.NSE_NOH is the proposition being targeted, not a theorem. Do not recycle unresolved flow inputs as a proof."
+  },
+  {
+    "package": "NSE_NOH.L2Vector conventions",
+    "reason": "Vector n=Fin n→Real uses the default Pi norm. Energy mass is deliberately an explicit sum of component squares. Scalar isometry and componentwise identities may be reused, but native Euclidean-vector L2 type/norm identification needs an explicit adapter."
+  },
+  {
+    "package": "MeasureResolvent.nativeRH_* / ActualResolventContinuation",
+    "reason": "RH/log-derivative/germ bridges are unrelated to the NSE GP model. Only finite-measure analytic transform lemmas selected; no assumption of RH or actual normalized xi moments is imported."
+  },
+  {
+    "package": "BKQR DefectGramSquare / HardyCoefficientTransfer",
+    "reason": "Same blobs as R2; no new independent endpoint or Schur admission theorem. R2 counts are not incremented for duplicate files/branches."
+  },
+  {
+    "package": "HOPF_GRAM packages",
+    "reason": "No separate HopfGram-named Lean package exists in the provided complete 14-branch trees. Existing BKQR defect module already covered in R2. This is a tree-search result, not a claim about repositories outside Methlib."
+  },
+  {
+    "package": "PositiveMomentBridge / BernsteinMomentLimit",
+    "reason": "Generic Bernstein machinery inspected, but it requires the relevant positivity/moment inputs and does not evaluate the concrete GP or admission block; not selected as a shorter route than the direct rational model."
+  }
+]
+The already-audited native Fourier/LH route remains canonical. Secondary source availability does not require replacing it.
+
+23. WORKFLOW EVIDENCE COVERAGE
+{
+  "count": 715,
+  "reported_total": 715,
+  "pages": 8,
+  "first_created_at": "2026-11-03T15:38:38Z",
+  "last_created_at": "2026-11-11T23:51:55Z",
+  "note": "Complete retained GitHub Actions repository inventory at query time. Does not cover deleted/expired runs, uncommitted native Windows receipts, or external repos."
+}
+SINGULARITY_DISPROVEMENT @ 826b8b9e6d8edf50c0fe7516451d79ffe9288ebd | exact-head runs=1
+  43123035538 | HVR full PNT composition (Linux) | None | https://github.com/randogelist/Methlib/actions/runs/43123035538
+codex/h12-small-unconditional @ 09dfe94a1ef150e21d09df3013fbe09002ef139c | exact-head runs=3
+  43121162765 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/43121162765
+  43059293572 | Critical Hhalf small-data closure | success | https://github.com/randogelist/Methlib/actions/runs/43059293572
+  43059293542 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/43059293542
+erdos/e0687-attempt-i-20261107 @ 6367ca3178995a1fdc7fc101353245e102d1ac95 | exact-head runs=5
+  42373370809 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373370809
+  42373263892 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373263892
+  42373263907 | Erdős 687 Attempt_I Lean proof and axiom audit | cancelled | https://github.com/randogelist/Methlib/actions/runs/42373263907
+  42373260178 | Erdős 687 Attempt_I Lean proof and axiom audit | cancelled | https://github.com/randogelist/Methlib/actions/runs/42373260178
+  42373260149 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373260149
+erdos/e0687-attempt-j-20261107 @ 5add148ac01a86ca422f79bb12bbabb860525af2 | exact-head runs=5
+  42373745271 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373745271
+  42373745280 | Erdos 687 Attempt_J Gram + external Jacobsthal | failure | https://github.com/randogelist/Methlib/actions/runs/42373745280
+  42373745261 | Erdős 687 Attempt_I Lean proof and axiom audit | failure | https://github.com/randogelist/Methlib/actions/runs/42373745261
+  42373663999 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373663999
+  42373664034 | Erdos 687 Attempt_J Gram + external Jacobsthal | failure | https://github.com/randogelist/Methlib/actions/runs/42373664034
+erdos/e0687/attempt-e @ 89f8940e42fa6ca149bb7633f21ae713d4ab99b9 | exact-head runs=4
+  42373810216 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373810216
+  42373810293 | Erdős 687 Attempt_E — finite certificate and imported Jacobsthal | failure | https://github.com/randogelist/Methlib/actions/runs/42373810293
+  42373791714 | Erdős 687 Attempt_E — finite certificate and imported Jacobsthal | failure | https://github.com/randogelist/Methlib/actions/runs/42373791714
+  42373791468 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373791468
+erdos-687-attempt-d @ f95c9de1777c506f77bde0402a358df9dfcc1fcb | exact-head runs=4
+  42373384845 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373384845
+  42373384876 | Erdos 687 Attempt_D | cached Lean 4.34.1 | cancelled | https://github.com/randogelist/Methlib/actions/runs/42373384876
+  42373370142 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373370142
+  42373370276 | Erdos 687 Attempt_D | cached Lean 4.34.1 | failure | https://github.com/randogelist/Methlib/actions/runs/42373370276
+erdos-687-attempt-f-bkqr-ci @ 3d88122383818aeaf18a907989336f8581b46d03 | exact-head runs=4
+  42373822265 | Erdos 687 Attempt_F BKQR Jacobsthal CI | failure | https://github.com/randogelist/Methlib/actions/runs/42373822265
+  42373822314 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373822314
+  42373805338 | Erdos 687 Attempt_F BKQR Jacobsthal CI | failure | https://github.com/randogelist/Methlib/actions/runs/42373805338
+  42373805424 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42373805424
+main @ e9cf90726b8544a268469ebc8fa6634e9c713e07 | exact-head runs=3
+  43060730571 | Singular axiomatic closure | success | https://github.com/randogelist/Methlib/actions/runs/43060730571
+  43060730744 | Critical Hhalf small-data closure | success | https://github.com/randogelist/Methlib/actions/runs/43060730744
+  43060730606 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/43060730606
+pnt/exchange-001-primorial-pos @ 31825007f841b66d881886dd6bce760a8c0cbc5c | exact-head runs=2
+  41920063997 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/41920063997
+  41920042902 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/41920042902
+pnt/mathlib-call-reduction-rc1 @ 93df81b92d2ffcb8c03eab41bba1d8e189a6ea1d | exact-head runs=1
+  41919440166 | HVR full PNT composition (Linux) | failure | https://github.com/randogelist/Methlib/actions/runs/41919440166
+pnt/regularized-zeta-hvr @ 00830803c53d22a4e31c3f4fcc9d68588cfbda5f | exact-head runs=3
+  41930484796 | PNT serial source exchanges | success | https://github.com/randogelist/Methlib/actions/runs/41930484796
+  41930484720 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/41930484720
+  41930459406 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/41930459406
+pnt/serial-exchanges-rc1 @ b2305de71cd846cd5afd1c82c373971137da7733 | exact-head runs=4
+  41925657258 | PNT serial source exchanges | success | https://github.com/randogelist/Methlib/actions/runs/41925657258
+  41925657316 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/41925657316
+  41925650994 | PNT serial source exchanges | success | https://github.com/randogelist/Methlib/actions/runs/41925650994
+  41925651295 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/41925651295
+setup/rh-full-witnessed-closure-ci @ f647f2ef8fb65dd2e5e36c23029715133b1fa9d0 | exact-head runs=4
+  42337112790 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42337112790
+  42337112776 | RH full witnessed closure admission scaffold | failure | https://github.com/randogelist/Methlib/actions/runs/42337112776
+  42337098110 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42337098110
+  42337098238 | RH full witnessed closure admission scaffold | failure | https://github.com/randogelist/Methlib/actions/runs/42337098238
+work/rh-coordinate-testing-433 @ 036fbca80d84f37a3a45c08b451e7ab7fd26487a | exact-head runs=3
+  42342831199 | RH coordinates - finite tests only | success | https://github.com/randogelist/Methlib/actions/runs/42342831199
+  42342831168 | RH full witnessed closure admission scaffold | success | https://github.com/randogelist/Methlib/actions/runs/42342831168
+  42342831135 | HVR full PNT composition (Linux) | success | https://github.com/randogelist/Methlib/actions/runs/42342831135
+Exact-head workflow status is metadata; it does not certify every file on that branch.
+Additional archived Fefferman_A/B/C/D package audit:103 distinct standard-only declarations.
+Their proved scope is physical-port equivalences and conditional implications; not sibling rough-shear or HopfGram regularity.
+https://github.com/randogelist/Methlib/actions/runs/41973157353
+"Physical-port equivalences and conditional implications. This workflow does not build or audit sibling Fefferman_B_D_ostruct PeriodicShear/HopfGram modules."
+[
+  {
+    "package": "regularity-B-assembly/REGULARITY_FRONT",
+    "classification": "Reported previous native passes; no matching retained GitHub CI compiler+theorem audit receipt located. README: prior12 modules/63 audits reported; latest infinite Serrin candidate; full physical root still definition."
+  },
+  {
+    "package": "regularity-B-assembly/NSE_NOH",
+    "classification": "Source and audit declarations present; no matching retained GitHub CI receipt located."
+  },
+  {
+    "package": "NSE_ABCD_UNCONDITIONAL_IMPLICATION/v0_25_0/Fefferman_B_D_ostruct",
+    "classification": "Source and audit declarations present; seven successful NSE_ABCD runs only actual unified/split Fefferman port packages; no inheritance of their PASS."
+  },
+  {
+    "package": "REEMANIANS/{BanachExt,HolExt}/RH_HilbertLimit",
+    "classification": "No named matching workflow in complete retained inventory. External/native receipt not inspected."
+  },
+  {
+    "package": "GP/HVR",
+    "classification": "Prior parent verification of25 selected HVR roots not repeated. No additional GP/pi endpoint promoted by this audit."
+  }
+]
+Rechecked main Singular closure receipt:171 names, all contained in R2 native204; no count inflation.
+HVR generic BKQR25 remains supported by https://github.com/randogelist/Hilber-Vector-Resolvent-Theory/actions/runs/40712534224/job/122901815356
+
+24. CACHED EXTERNAL FORMALIZATION CONTRACT
+Frozen dependencies:
+  native package source09dfe94; pkg1 tree810cfaaf27b75c068002ccee2501263ae3a19800;
+  Lean4.33.0 commitd8b18978322de05a8f3dba51ef03cf5461676c17;
+  Mathlibdb584cd6d46c92f209a44c0f1c829460d327499d.
+New Lean implementation stays under the SINGULARITY_DISPROVEMENT branch and
+new sibling directory. Inherited modules and theorem statements remain unchanged.
+Restore matching cached dependency/project artifacts; verify exact source,
+compiler, dependency and imported-module identities before reuse.
+No local Lean/lake execution. Cache misses are handled only by external CI or
+the user's native Windows compiler with the selected4.33.0 toolchain.
+Each new endpoint requires: body compile PASS; exact-type PASS; theorem-level
+axiom audit subset{propext,Classical.choice,Quot.sound}; no sorryAx.
+Root audit uses the exact final source SHA and the same datum/physical trace/U.
+Definition records may contain coefficient constraints and membership proofs;
+they may not assume the regularity conclusion to be proved.
+The literal GP, moments, block and dyadic tail remain actual constructions.
+Scheduling may change; statements, premises, constants and conclusions may not.
+
+Next mathematical freeze:
+  Phi/inverse signatures and native norm equalities;
+  E02a/E02b split;
+  dyadic physical representative and local essential-supremum signatures;
+  actual GP/operator and native LH membership interfaces.
+New formalization starts only after this typed register is fixed.
+
+FINAL_STATUS:
+  ! mathematical carrier bridge and complete scoped regularity chain;
+  233 distinct native/pkg1 exact-type+axiom matches inherited;
+  25 generic HVR BKQR declaration audits retained separately;
+  no new Lean theorem or cross-package adapter promoted;
+  no universal large-data regularity or positive-time singularity exclusion.
+
