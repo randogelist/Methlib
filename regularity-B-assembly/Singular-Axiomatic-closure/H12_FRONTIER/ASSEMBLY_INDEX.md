@@ -1,45 +1,63 @@
-# H12_FRONTIER Assembly Index
-
-Canonical index root:
+# H12_FRONTIER: canonical assembly organization
 
 ```text
-index/README.md
+BRANCH=H12_extension
+ORGANIZATION_VERSION=2
+CORE_MILESTONES=14
+REPLAY_MILESTONES=9
+OPTIONAL_COMPARISON_MILESTONES=1
+IMPLEMENTATION_STATUS=PLANNED
+LOCAL_LEAN_EXECUTIONS=0
+NEW_THEOREM_PROMOTIONS=0
 ```
 
-Machine-readable register:
+Authoritative assembly specification: [index/ENDPOINTS.md](index/ENDPOINTS.md).
+Machine-readable dependency register: [index/INDEX.json](index/INDEX.json).
+Historical indexing rounds and provenance: [index/README.md](index/README.md).
+
+## Scope
+
+Preserve the centered periodic, unforced, mean-zero, divergence-free H^(1/2)
+criterion. This assembly is the FRONTIER_H12 constant adapter, not the separate
+BMO/Beltrami/a_dagger perturbation program.
 
 ```text
-index/INDEX.json
+E01-E02  norm and constant normalization
+E03      explicit frontier nonlinear estimate
+E04-E12  nine constant-dependent replay endpoints
+E13      native quantitative physical root
+E14      literature-normalized FRONTIER_H12
+E15      optional comparison with the compiled repository constant
 ```
 
-Current assembly mode:
+Fourteen is the selected number of top-level core milestones. It is not a
+claim that fourteen Lean declarations suffice. Helper proofs, concrete
+Sobolev-constant certificates, compactness/trace adapters, and exact-type/axiom
+audits remain explicit work in the dependency register.
 
-```text
-GATE_D_PARALLEL_SAFE
-```
-
-Meaning:
-
-```text
-1. preserve the copied unconditional H^(1/2) small-data root;
-2. formalize the literature/frontier constant independently;
-3. prove no inclusion relation until constants are compared;
-4. if the frontier coefficient is genuinely smaller, construct a parallel
-   invariant-and-budget spine and reuse the existing physical closure kernels.
-```
-
-Primary blocker:
-
-```text
-FRONTIER_FINITE_CRITICAL_NONLINEAR_BOUND
-```
-
-The copied base remains:
+## Immutable base
 
 ```lean
 SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
 ```
 
-with original status `!!!! UNCONDITIONAL_CLOSURE`.
+Premise: `criticalNonlinearConstant * norm(a) < nu`.
+Original externally audited source: `09dfe94a1ef150e21d09df3013fbe09002ef139c`.
+Recorded original status: `!!!! UNCONDITIONAL_CLOSURE`.
+The original package and the copied base Lean sources remain unchanged.
+Historical evidence is not a fresh compilation at the copied path.
 
-No Lean execution or status promotion is represented by the indexing commits.
+## Assembly rule
+
+```text
+NORM_LOCK -> CONSTANT_LOCK -> NONLINEAR_CERTIFICATE
+  -> INVARIANT + DISSIPATION + QUARTIC + TIME_DERIVATIVE
+  -> COMPACTNESS + REPRESENTATIVES + STRONG_TRACE
+  -> POSITIVE_TIME_FLOW + PHYSICAL_QUANTITATIVE_TRANSFER
+  -> NATIVE_ROOT -> FRONTIER_H12
+```
+
+E15 is independent of root completion. No strict enlargement of the compiled
+base ball is asserted without its constant comparison and an explicit
+admissible strict-inclusion witness. Definitions and source preparation alone
+do not establish A_TIER.
