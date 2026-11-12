@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "helper_modules": [
+    "SingularityDisprovement.DyadicArithmetic",
+    "SingularityDisprovement.Physical",
+    "SingularityDisprovement.Scaling"
+  ],
+  "endpoints": [
+    {
+      "id": "R01",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.NATIVE_ENERGY_REALIZATION",
+      "audit": "ci/endpoint_audits/R01.lean"
+    },
+    {
+      "id": "R02",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.SHIFTED_ENERGY_COERCIVITY",
+      "audit": "ci/endpoint_audits/R02.lean"
+    },
+    {
+      "id": "R03",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL",
+      "audit": "ci/endpoint_audits/R03.lean"
+    },
+    {
+      "id": "R04",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.ADMISSION_IMPLIES_REGULARITY",
+      "audit": "ci/endpoint_audits/R04.lean"
+    },
+    {
+      "id": "R05",
+      "module": "SingularityDisprovement.DyadicArithmetic",
+      "name": "SingularityDisprovement.DYADIC_BLOCK_IDENTITIES",
+      "audit": "ci/endpoint_audits/R05.lean"
+    },
+    {
+      "id": "R06",
+      "module": "SingularityDisprovement.Dyadic",
+      "name": "SingularityDisprovement.DYADIC_CRITICAL_DATUM",
+      "audit": "ci/endpoint_audits/R06.lean"
+    },
+    {
+      "id": "R07",
+      "module": "SingularityDisprovement.DyadicPhysical",
+      "name": "SingularityDisprovement.DYADIC_PHYSICAL_IDENTIFICATION",
+      "audit": "ci/endpoint_audits/R07.lean"
+    },
+    {
+      "id": "R08",
+      "module": "SingularityDisprovement.DyadicUnbounded",
+      "name": "SingularityDisprovement.DYADIC_ESSENTIAL_UNBOUNDEDNESS",
+      "audit": "ci/endpoint_audits/R08.lean"
+    },
+    {
+      "id": "R09",
+      "module": "SingularityDisprovement.Scaling",
+      "name": "SingularityDisprovement.POSITIVE_SCALING_LAWS",
+      "audit": "ci/endpoint_audits/R09.lean"
+    },
+    {
+      "id": "R10",
+      "module": "SingularityDisprovement.Scaling",
+      "name": "SingularityDisprovement.SMALL_POSITIVE_DYADIC_SCALE_EXISTS",
+      "audit": "ci/endpoint_audits/R10.lean"
+    },
+    {
+      "id": "R11",
+      "module": "SingularityDisprovement.Root",
+      "name": "SingularityDisprovement.ADMISSION_NONEMPTY",
+      "audit": "ci/endpoint_audits/R11.lean"
+    },
+    {
+      "id": "R12",
+      "module": "SingularityDisprovement.Root",
+      "name": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
+      "audit": "ci/endpoint_audits/R12.lean"
+    }
+  ]
+}
