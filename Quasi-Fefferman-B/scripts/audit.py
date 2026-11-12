@@ -9,6 +9,33 @@ import subprocess
 import sys
 
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
+
+def source_fingerprints(manifest, modules, source_hashes):
+    """Bind cached objects to their entire candidate import closure and native pins."""
+    result, visiting = {}, set()
+    native = {k: manifest[k] for k in ("foundation_sha", "lean", "mathlib")}
+    def fingerprint(module):
+        if module in result:
+            return result[module]
+        if module in visiting:
+            raise ValueError("Cyclic candidate imports")
+        visiting.add(module)
+        spec = modules[module]
+        payload = {"native": native, "module": module,
+                   "source": source_hashes[spec["source"]],
+                   "imports": {name: fingerprint(name) if name in modules else native
+                               for name in sorted(spec["imports"])}}
+        result[module] = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+        visiting.remove(module)
+        return result[module]
+    for module in sorted(modules):
+        fingerprint(module)
+    return result
+
+def cached_object_matches(record, fingerprint, object_path):
+    return (record.get("fingerprint") == fingerprint and object_path.is_file()
+            and record.get("olean_sha256") == hashlib.sha256(object_path.read_bytes()).hexdigest())
+
 def check_log(text, names):
     if re.search(r"\bsorryAx\b|\buses ['`]sorry['`]|\berror(?:\([^\n)]*\))?:", text):
         raise ValueError("Lean error or sorry dependency")
@@ -53,6 +80,21 @@ def self_test():
         raise AssertionError("Audit accepted a deliberately invalid fixture")
     print("AUDIT_POLICY_TESTS_PASS")
 
+def cache_self_test():
+    m = {"foundation_sha": "f", "lean": "l", "mathlib": "m"}
+    modules = {"A": {"source": "A.lean", "imports": ["Mathlib"]},
+               "B": {"source": "B.lean", "imports": ["A"]},
+               "C": {"source": "C.lean", "imports": []}}
+    sources = {"A.lean": "a", "B.lean": "b", "C.lean": "c"}
+    first = source_fingerprints(m, modules, sources)
+    changed = source_fingerprints(m, modules, {**sources, "A.lean": "changed"})
+    assert first["A"] != changed["A"] and first["B"] != changed["B"]
+    assert first["C"] == changed["C"]
+    pinned = source_fingerprints({**m, "mathlib": "changed"}, modules, sources)
+    assert all(first[k] != pinned[k] for k in first)
+    assert not cached_object_matches({}, first["A"], Path("nonexistent-object-fixture"))
+    print("CACHE_DEPENDENCY_POLICY_TESTS_PASS")
+
 def stripped_code(text):
     # Lean nested block comments and line comments are removed before token checks.
     out, i, depth = [], 0, 0
@@ -72,7 +114,7 @@ def main():
     p.add_argument("--package", default=".")
     args = p.parse_args()
     if args.self_test:
-        self_test(); return 0
+        self_test(); cache_self_test(); return 0
     base = Path(args.package).resolve()
     root = base / "qfb"
     evidence = base / "evidence" / "qfb"
@@ -108,6 +150,12 @@ def main():
     (evidence / "lean-version.txt").write_text(version)
     build_dir = root / ".lake" / "build" / "lib" / "lean"
     build_dir.mkdir(parents=True, exist_ok=True)
+    fingerprints = source_fingerprints(manifest, modules, actual_sources)
+    cache_manifest_path = build_dir / "qfb-verified-object-cache.json"
+    try:
+        object_cache = json.loads(cache_manifest_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        object_cache = {}
     env = os.environ.copy()
     inherited = [str(Path(p).resolve()) for p in env.get("LEAN_PATH", "").split(os.pathsep) if p]
     env["LEAN_PATH"] = os.pathsep.join([str(build_dir), str(base / ".lake/build/lib/lean"), *inherited])
@@ -141,11 +189,30 @@ def main():
                 status["modules"][module] = {"build": "BLOCKED_BY_DEPENDENCY"}; continue
             out = build_dir / (module.replace(".", "/") + ".olean")
             out.parent.mkdir(parents=True, exist_ok=True)
-            code = command(["lean", "-o", str(out), modules[module]["source"]], root,
-                           evidence / f"{stem}-build.log", env)
+            cache_hit = cached_object_matches(object_cache.get(module, {}), fingerprints[module], out)
+            if cache_hit:
+                code = 0
+                (evidence / f"{stem}-build.log").write_text(
+                    "CACHED_VERIFIED_OBJECT: exact source/import-closure/compiler fingerprint and object digest matched.\n",
+                    encoding="utf-8")
+                print(f"CACHED_VERIFIED_OBJECT {module}", flush=True)
+            else:
+                object_cache.pop(module, None)
+                code = command(["lean", "-o", str(out), modules[module]["source"]], root,
+                               evidence / f"{stem}-build.log", env)
             if code:
                 status["modules"][module] = {"build": "FAIL"}; continue
-            status["modules"][module] = {"build": "PASS"}
+            if not cache_hit:
+                object_cache[module] = {"fingerprint": fingerprints[module],
+                    "olean_sha256": hashlib.sha256(out.read_bytes()).hexdigest(),
+                    "producer_run_id": os.environ.get("GITHUB_RUN_ID"),
+                    "producer_commit": os.environ.get("GITHUB_SHA"),
+                    "compiler_version": version.strip()}
+            cache_manifest_path.write_text(json.dumps(object_cache, indent=2) + "\n", encoding="utf-8")
+            status["modules"][module] = {"build": "PASS",
+                "build_origin": "CACHED_VERIFIED_OBJECT" if cache_hit else "EXTERNAL_COMPILER",
+                "dependency_fingerprint": fingerprints[module],
+                "object_provenance": object_cache[module]}
             if module not in audit_specs: continue
             names = audit_specs[module]["declarations"]
             audit_source = [f"import {module}", "set_option pp.universes false", "set_option pp.explicit false", ""]

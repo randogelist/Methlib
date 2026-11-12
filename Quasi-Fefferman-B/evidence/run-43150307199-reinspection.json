@@ -1,0 +1,1960 @@
+{
+  "schema": 1,
+  "repository": "randogelist/Methlib",
+  "branch": "QUASI-FEFFERMAN-B",
+  "source_commit": "7da82ecbe5c90a68bb85781190acbeca4e2d2489",
+  "run_id": 43150307199,
+  "job_id": 130957639899,
+  "run_url": "https://github.com/randogelist/Methlib/actions/runs/43150307199",
+  "overall_run_conclusion": "failure",
+  "foundation_commit": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+  "native_source_mutations": 0,
+  "lean": "4.33.0",
+  "platform": "Linux X64",
+  "mathlib_revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "artifact": {
+    "id": 13914460402,
+    "download": "https://api.github.com/repos/randogelist/Methlib/actions/artifacts/13914460402/zip",
+    "sha256": "2ba165354f6e61d8c9b6dab6788a75bfcdb8963297af92f2125ed924aca6d32f"
+  },
+  "job_log_sha256": "24a0f94daa233a0ee749c7906c1ab159899eb09d521dbc61341fb57d6c6f72fe",
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "automatic_pass_count": 120,
+  "exact_pass_count": 120,
+  "audit_parser_failures": 0,
+  "root_status": "PENDING",
+  "whole_contract_promotion": false,
+  "inspection": "Cached external log replay through the immutable stage03 Python audit policy; no local Lean execution. Full types are hashed, not duplicated. Pinned source and external artifact are normative.",
+  "modules": {
+    "QuasiFeffermanB.CaloricAdmission": {
+      "source": "QuasiFeffermanB/CaloricAdmission.lean",
+      "source_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "transitive_source_fingerprint_sha256": "2f684a7ac148410a28bc7ba56ebecf13193112a806ca626efdbd77981f2d927e",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricAdmission.lean": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 2
+    },
+    "QuasiFeffermanB.CaloricBarrier": {
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "transitive_source_fingerprint_sha256": "477b0f3c17b622676401b8218d09e1a376c150a4b85cc5c455dee68d0a70fc3e",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricBarrier.lean": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 5
+    },
+    "QuasiFeffermanB.CaloricCompactness": {
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "transitive_source_fingerprint_sha256": "d8b369beb9f54760be57e40481b7b5868ee51fedf4c0465c6040d4218d6fe906",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricCompactness.lean": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+          "QuasiFeffermanB/CaloricEnstrophy.lean": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+          "QuasiFeffermanB/CaloricH2.lean": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+          "QuasiFeffermanB/CaloricMultiplier.lean": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+          "QuasiFeffermanB/CaloricPhysicalControl.lean": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+          "QuasiFeffermanB/CaloricSmoothing.lean": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 6
+    },
+    "QuasiFeffermanB.CaloricConstants": {
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "transitive_source_fingerprint_sha256": "8c419ef91ffa07944e599427a2d142e0f1b37138413c347e1fd23e08612731dd",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricBarrier.lean": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+          "QuasiFeffermanB/CaloricConstants.lean": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 6
+    },
+    "QuasiFeffermanB.CaloricEnstrophy": {
+      "source": "QuasiFeffermanB/CaloricEnstrophy.lean",
+      "source_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "transitive_source_fingerprint_sha256": "188c1ebca55cc7c59689cbc92dbc27f61c7d61dcf26d5237ff9603581e0bc082",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricEnstrophy.lean": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 2
+    },
+    "QuasiFeffermanB.CaloricFourierBridge": {
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "source_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "transitive_source_fingerprint_sha256": "2146d8b9b58472012e097b03c8d53308b722107e4fe67a68399f0a05795947ef",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricFourierBridge.lean": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+          "QuasiFeffermanB/CaloricMultiplier.lean": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 5
+    },
+    "QuasiFeffermanB.CaloricH2": {
+      "source": "QuasiFeffermanB/CaloricH2.lean",
+      "source_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "transitive_source_fingerprint_sha256": "f5a21a376134ea512b146ff581ded6dfbd23d63d4cbdf496a1a98e1f8a4173e2",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricEnstrophy.lean": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+          "QuasiFeffermanB/CaloricH2.lean": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+          "QuasiFeffermanB/CaloricMultiplier.lean": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+          "QuasiFeffermanB/CaloricPhysicalControl.lean": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+          "QuasiFeffermanB/CaloricSmoothing.lean": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 2
+    },
+    "QuasiFeffermanB.CaloricMultiplier": {
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "transitive_source_fingerprint_sha256": "7f409578a737e7b1618a64709fe6dec9869fc55cb8f1f214304f1294bf1b2164",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricMultiplier.lean": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 12
+    },
+    "QuasiFeffermanB.CaloricPhysicalControl": {
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "transitive_source_fingerprint_sha256": "e839c0be8f42cbeeeece8a1b3e5db5237ebb773aad3472b5d571340ac43f4663",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricEnstrophy.lean": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+          "QuasiFeffermanB/CaloricMultiplier.lean": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+          "QuasiFeffermanB/CaloricPhysicalControl.lean": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 9
+    },
+    "QuasiFeffermanB.CaloricSmoothing": {
+      "source": "QuasiFeffermanB/CaloricSmoothing.lean",
+      "source_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "transitive_source_fingerprint_sha256": "c0e0475048c9a3312cfbcfa26de1893c19614b8574c7952bb7d15b58517d71a8",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CaloricSmoothing.lean": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 2
+    },
+    "QuasiFeffermanB.CriticalTimeBudget": {
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "transitive_source_fingerprint_sha256": "edad9c5ef2d4745991154ba83e8eeb5848e0bc943561e14255e673b2fe08cf0f",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/CriticalTimeBudget.lean": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+          "QuasiFeffermanB/FourierEnergy.lean": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+          "QuasiFeffermanB/LHEnergy.lean": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+          "QuasiFeffermanB/Semantics.lean": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 6
+    },
+    "QuasiFeffermanB.Cutoff": {
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "source_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "transitive_source_fingerprint_sha256": "8a3083795a67bfc7753c017022cb2f1c6f0876e2789e114b31fb52d9391eccbb",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/Cutoff.lean": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+          "QuasiFeffermanB/Semantics.lean": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 5
+    },
+    "QuasiFeffermanB.EnergyGalerkinCompactness": {
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "transitive_source_fingerprint_sha256": "8add80dda8768c9c9b86ee47818345f3fa8fb0081672ac651bb109f21b515d9a",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/EnergyGalerkinCompactness.lean": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 8
+    },
+    "QuasiFeffermanB.EnergyGlobalCoefficient": {
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "source_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "transitive_source_fingerprint_sha256": "258ec9caef7516254be56a09445c91834f630d05440994a53764d8490811cb45",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/EnergyGalerkinCompactness.lean": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+          "QuasiFeffermanB/EnergyGlobalCoefficient.lean": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 5
+    },
+    "QuasiFeffermanB.EnergyTimeCompactness": {
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "transitive_source_fingerprint_sha256": "c22e4089086ad567e55e74b9ddc344ecc29498c25a25f3e8990bc4a4ea72f3ab",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/EnergyGalerkinCompactness.lean": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+          "QuasiFeffermanB/EnergyTimeCompactness.lean": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 6
+    },
+    "QuasiFeffermanB.FourierEnergy": {
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "transitive_source_fingerprint_sha256": "5575c12d57ea2820169ed1333dad0cfd4c0855ba8318f39545c1124f7d7e909c",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/FourierEnergy.lean": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 18
+    },
+    "QuasiFeffermanB.LHEnergy": {
+      "source": "QuasiFeffermanB/LHEnergy.lean",
+      "source_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "transitive_source_fingerprint_sha256": "8f82e46989490feaf4a35372fdb38ddde49c083ec173d63c7b5d233f8ef7aca1",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/LHEnergy.lean": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+          "QuasiFeffermanB/Semantics.lean": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 1
+    },
+    "QuasiFeffermanB.MeanPreservation": {
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "transitive_source_fingerprint_sha256": "8251ce9a8b81a7ae96c6f10eba28f8abd9f8b70d37ab5ac983e18e41f7a36fad",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/MeanPreservation.lean": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+          "QuasiFeffermanB/Semantics.lean": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 5
+    },
+    "QuasiFeffermanB.TailRegularity": {
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "transitive_source_fingerprint_sha256": "e43c41e108416c63a06c5a9fb29c6b3dce98a1fbeab4e9687b9423cabddca9be",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/RootContract.lean": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+          "QuasiFeffermanB/Semantics.lean": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+          "QuasiFeffermanB/TailRegularity.lean": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 4
+    },
+    "QuasiFeffermanB.TimeTranslate": {
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "transitive_source_fingerprint_sha256": "fcd80b141fe0000710fb461648adac7c3eaaf22200c7de490b8013ba2ac9fbc1",
+      "fingerprint_inputs": {
+        "foundation_tree": "693c9a21bd8a3ac45bdf7fb4253bbdbce6eff405",
+        "lean": "4.33.0",
+        "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+        "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+        "candidate_sources": {
+          "QuasiFeffermanB/TimeTranslate.lean": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3"
+        }
+      },
+      "compiler": "PASS",
+      "theorem_axiom_audit": "PASS",
+      "declaration_count": 11
+    }
+  },
+  "declarations": [
+    {
+      "name": "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN",
+      "module": "QuasiFeffermanB.CaloricAdmission",
+      "source_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b1d96d19f5e29da0838360cedca5e156d656d627974d67b8a48c8d454e23ee3c",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN",
+      "module": "QuasiFeffermanB.CaloricAdmission",
+      "source_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f1776b6d0974a9d130b3c476d7cd73f2611cc5e63f611d506ea2a79dbaa7733d",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER",
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "e5b149118db74e57dd3736316be84900cb94677dcf106ec4eb76783c4ac5ec52",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET",
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "77567957d6a5c06ebad0b97b703be839fd10932e627da1d5258058f36248d395",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET",
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "d4b5a1785e56c0064644a236b28027a35076a34884b18f8e613906c2f3bae437",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET",
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "50e02aa67a1641bce52b2046cc15dcc3c155c68bd9efb5e1e6313034692c792a",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET",
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "36077cd93bd1d3146cd55cd1052effab169954f2f9d98a7a626c08d42f6526da",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloric_criticalEnergy_le_succ",
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a6cb90036a9ea648bd9e8801400729236325be1c40830da0d627cf74e289fbc0",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian",
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8e338b5fbb55df7b61a3ee2dd50ef061fe16c68fc029c712b79bc0d1cf44fcf6",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy",
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "1ca1fc2a2a794bbdb6693467c177a3989edba3e0bed3143846aa0b1272cc4d56",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian",
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "781ef140a8fccf4b1440d9abb723037a80621997d44cf61776ebede1ea2a37ae",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND",
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "7d549f09cc5e5a19326c6cebd9fad4eace1450407df02ec33d7dfd8a3e620809",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY",
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ba796c7483ce052abc325fa0a0b7a5293a3970446ad62b31b1672b117100f27d",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloricBilinearConstant_pos",
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f9760fac39337d44c11a51ad70b809b64d17eb10fe483b402e475732ec40cb81",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloricBilinearConstant_sq",
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "682e75522278ba212227df1fe0a7ce3c42cd592faefebe3c84cc83819043af74",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloricHeatBudget_nonneg",
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "95878400f20e1cb0b48781308f2d02469b6eff660ddccd390e2652500ebb568c",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloricHeatBudget_sq",
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b0c9abbdee004ea838abbd79da04ee85db09640e45fcf99d45331db4ad841db5",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT",
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "92e44003e07647cc883e98e92436032628f0ea787ba51cbabdf6390130be3c38",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET",
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "4d9b8d553e42e927fa263e88ece9956871015a4e3fab3a96848f1bd06c631031",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE",
+      "module": "QuasiFeffermanB.CaloricEnstrophy",
+      "source_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3f83d9fd9b1405e6f9ff29922a8ca79bdc03618a0a529c5688c4582726d4dda0",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL",
+      "module": "QuasiFeffermanB.CaloricEnstrophy",
+      "source_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b0ef02e4314e0b145bc5aeface7a7046630fd6556d081ad80158895703c183ed",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexVecNorm_finset_sum_le",
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8a4f478bf3a69d1c2889cb42085577aade6ddb287d759b12976a062bda921ab6",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.coefficientTransport_frequencyDot",
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "e91a5309aaecd8d1db659240679bd75f8defe20ef3ae907447d27aa24cadfecb",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.finite_convolution_swap",
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "275c830b818a596ca84990f2ec9bcc4271bb6621f307bc1017a850ad3016d142",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.coefficientTransport_symmetric",
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "d7722010eea59f143f5e568af3f326a5a005a7bc75b6bb799fab66b211af085d",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.coefficientLeray_transport_symmetric",
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "9e460837aca0ed4b3562ab2f61291c58301992fb09e8af8ee912f355e89d23c4",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET",
+      "module": "QuasiFeffermanB.CaloricH2",
+      "source_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "2626182c5633beef725d43f8a233607e6693c6775f38832f3106e7c08cd32c06",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT",
+      "module": "QuasiFeffermanB.CaloricH2",
+      "source_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8087ea58ebbf74035e43a9a3a60039cf9d0e21ef788565e85023f921f0ec1a97",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexVecNorm_nonneg",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f5b928db7ee9f2ae5aab38767028a5ea604f3495965abd25ac1e333bce153461",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexVecNorm_sq",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a64bca08b4bbf6d2d3af0683ce456ecc12167ee820cafbad98d63271d9905e2f",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.norm_component_le_complexVecNorm",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "812c7d7eb3051f30f118023d47e97e946b51c93c6fee6a505029326cd96debf5",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.finiteChi0_nonneg",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "185a94c65c76f5b67049bd56ac94aeb5464787325c87c86518d3d59f0666d475",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ecf2145819aa7ef885217b8171000f19a35135b5448ddce8de3924b94fd3d938",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexVecNorm_eq_norm",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a85bb726f38d090b3140572b0ad5e16cc3e820288fd7d8ad75a3d468d7c2cd61",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexVecNorm_add_le",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "695b4835156699ef99eb3db58cf2417bd3fed351b9cced676c702f92a40900e4",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexVecNorm_smul",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "6b5fce0fb21f085c643d13db585033e51f3da1d416c4ac1db7544932e65a72fc",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexTransverse_symmetric",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "af320d9cb7d870bfa481e409e3098385f01769f962137443fc054f9019c615a8",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.complexTransverse_pythagoras",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "86a23af25f331bf801ac1a49e99fc57ca7eb2cbca076f10362437ff10d484933",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3cc8dcff8febb5accc101554418e1b83e4365fd54dd17b5435293ea9d473e7de",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED",
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "4fa3b203ea48b085d6b1324435473b697831d3659de64de44c715f785bc9b1a1",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.caloric_fourierCharacter_norm",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "1c29396bb015be92869c561e2558602eae73a5f2edd40df9d6c3dcda134eb292",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "951dd773466864ded2310ae525e913cd15b2cf3c597cd1e560662b4df2c926c9",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "bec77ce75f7a283e89ac282e80aa27f4c3031385f688eb6da7d149298ef5d190",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "1b1697fe7d5c3de37d72757f37d4237e59cdce9930badbce89ad28c2a1f95e02",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3299a005063aa50279b97aebac7d092968efe228e35687cfe34eef4dd1700f96",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "9ddbae9d67fe52d736e42485862a10c464f41f6f648f16f55c75e7d90d0b454f",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3f4f4fd7820568ba4a4294cdf8af98022be4a906a83c961eb074d9a09d69ab53",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "012db3ac69955c88300676024689046525a77dcef9df31c31dff22f0c9c6219f",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION",
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a2f6d3a191ac330acec9c31520d170018db9dd79812c34b02176974c2dab199e",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION",
+      "module": "QuasiFeffermanB.CaloricSmoothing",
+      "source_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "09a420f109b05afbdf75932510e6f614cf186c04c2ac0c7f6d9757287cb6488a",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED",
+      "module": "QuasiFeffermanB.CaloricSmoothing",
+      "source_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "86496f00a31801cf61ea270c79218501bc0f1bc89c608321f67c4d082e2fad46",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.criticalFourthPower_integrable",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "7d065c920a61a5e4df025803692ad56e0c72b3288a50e26f12275a85d8d990e1",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.criticalFourthPower_budget",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "1a30c78ab681dd2820e066a7db986ebc3cd25c03d5e897b6052a0e4b1cef087c",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyCutoff_nonneg",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b3eb7bd287b5209b9a8e733501bf5161e20c595aa5ca784e5db94e327b3061b6",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.LH_HALF_ENERGY_AE_FINITE",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "2349a6dcf656cea9290425a0967b5c813b4cd1fa8ca1956bb1852a4e34c0b398",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.LH_HALF_ENERGY_AEMEASURABLE",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "6ccf48e1e529a41e2d8b23b7ab2507da92f2c9c56ffcae3a82df6681941dc273",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.LH_FOURTH_POWER_BUDGET",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ca461be8a23d234eea15e5d12c077a447f40242d62d888af09d945236df9f3fc",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CUTOFF_NONNEG",
+      "module": "QuasiFeffermanB.Cutoff",
+      "source_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "e22678edd24175e4e4fd954c1b86a211f65fbc5fd17af29d7dc5a158505b9626",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CUTOFF_ZERO",
+      "module": "QuasiFeffermanB.Cutoff",
+      "source_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3404262c15bb6aa996e3b0ab561c1f19db6d6be06a49640b445d16c1496b65cd",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CUTOFF_POS",
+      "module": "QuasiFeffermanB.Cutoff",
+      "source_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b52bb00d4162c882736ad0acb369985fb0e4dfd743c0d7487a632d664f914b5a",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.SAFE_CUTOFF_GT",
+      "module": "QuasiFeffermanB.Cutoff",
+      "source_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a50822eeb40459e7f272eccfbb1909e96e8252587f20a473c514a662701d5797",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.ENERGY_SLICE_CUTOFF",
+      "module": "QuasiFeffermanB.Cutoff",
+      "source_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "82f791b91285d9c7d60ac590deec49f093e61557ef7027d5dbe6aec306dad3c7",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyModeTransportBound_nonneg",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "6cbf641c803f7bab09c3f383addbf8c006c14298e3ccef9957be1495dc83d6a5",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyModeTransport_norm_le",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "7749b17de894e65698a61c157b35f41f78273bbb3ff3cf0d6fd1591fa2ad558b",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyModeRhsBound_nonneg",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8051c4fada497be8fea75027377c7b923ce786f0ec142caabdb22b8e46490e7c",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.fullFourierRhs_energy_bound",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b1014f0fbb5678f619d733c649b65c970ba9b31376556e7e09657f90a394f508",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.galerkin_H0_norm_sq",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "54a72eec87541ebc3d00c999ef81340fce08539390536abfdffec2a5caadd8ed",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.galerkin_H0_energy_bound",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "65c4aa4a37698e3cb5bff624a8fa0af6e3cbad79b6d164185478e11471e64265",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.galerkin_energy_coefficient_modulus",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "65349928d4328020c4fbb4f183d5ecda894abe7322d92e9186dd8bb6e63e2a1a",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE",
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "d69a9a3822c4a1491cb0f376e6ccd2a8385dc148ac6bf1fbc4d885bbcfef1343",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energy_coefficient_curve_precompact",
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "d3e29e81d77aa43c2986ef0d997927ec87514e4e3bc32be817afbc35432fc496",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE",
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "009e5023a978a6b0a1241e3596bf0d890eefb1733072d8e1dc89f62892eb3d46",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.globalEnergyCoefficient_eq_horizon",
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ebbada4167eac9f31f8b48601c77869c6df2443fc0c657c40c843ad82c53d37e",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.globalEnergyCoefficient_continuousOn",
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "c4aa4d8e3bccde2ada29259533b5db846cdbbd2beebe4e162ce0ca819ebc59b3",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.globalEnergyCoefficient_uniform_limit",
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "cdea72ae3ea33068e748f31cf69f3c5aed0301f128c0ee5a92fe2d167b80ebe1",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyTimeH0L2_norm_sq",
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ded7f5cbf0307324b7c73f3896c2918b82710481cb33ea9755c451ff49de6de6",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energy_H0_tail_sq",
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8b13783b10ad83f45499c3420767425c2be8f7913030f9d1765c22e28c32a1ab",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.energy_H0_time_tail",
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "fb41a5a58c5f4c077fb81fd943e4500c60102f2c174174a94fecc4b4427988b7",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyGalerkin_H0_time_difference_bound",
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8be1b84e9b24612d6abdc794033083039853a3b68093f1e9173bd0d4a39a2c89",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.energyTimeH0L2_sub_norm_sq",
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a657a524210abccfe68d4e456d8d1e89372705d3d7d960f4fa8a8cf8b547cb30",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM",
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "cd10f882c3f3969f48588ece8dbf7b28f28a02564d078ef54c84755b4dd9512d",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "5363608ce5e2c1adef648bee0af65bc4442bf7885008511d720394c8113f8818",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalEnergy_tendsto_of_L2",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "51ac43ea9bd1cd76f811f5b3ba66a0ebcb5ed74376855eb164893be2acaabb08",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "26fe76c850ccf37d53dccec015377a0b074826566878b4ad96244ff068a6d0f3",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ae889763405ae8d85a69237031574ab74cf1cc88ddb88ea914f4408b55606cc9",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_cutoff_bounds",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "95339299e9ec4e9fc3cf6d4323e46d278622ce1aae8760dfbd9b5eb42fcc203e",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.criticalEnergy_midpoint",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "72812526901764504e2d32742b3c171a7ed5b2778d370f006a4bb83ffafc4dfc",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_cutoff_midpoint",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "565a91a278d232f9a6d1a8ea5e6de751a73caaa66ede5acd03400f73f42d7ab9",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalHalfEnergyTerm_nonneg",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f97c33374da6d3886a946c28c1ff69d49ba1791a6ecb268ab3234e50abc538dc",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalHalfEnergy_cutoff",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b3fc9d528499faaa86d4ec7ab852b6f9b906835c0939ed918efa0ac93a5983a6",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_halfEnergy_le",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f313f9b89edff6a58d8a47271f8dbc8e3a54cb9fd7c00e9feddbe089ec49ce2f",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_halfEnergy_ne_top",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "c75a5b202781b71fabdfe1466308b5654f57f9f2de0f1c2729cbfb6ed7cffb75",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_halfEnergy_midpoint",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "24aae099358fb85f3b247a94cf29ef3fab34b036a8cd5e6250e197ab62fea415",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "7096f7cd0620b0c0b22617e59aabf98405e0478ffbbfb2c43882a051b3be12c3",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_halfEnergy_summable",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "d81f044eb0ecf29d7bdfae5477eb80f555eec9f12a9b66898ed93a711a3608d8",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f97b79e4dd01c40506d3647b227c0130b9d3d462e237f6e09b400524e0b85844",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_mem_halfSobolev",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "fc3244b93162e8fed0d370f16566e8317fd7215c48ad4806c13d38b4b8769254",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1HalfDatum_norm_sq",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "33d9ba0067a94d5668e4a59b629f7c8ea1d9d046b51eb376c4d9d7a6f2df8967",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physicalHalfEnergy_aemeasurable",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "c83a5bdf2a433d1533404f6b20e4700f11b9734fae94dd9cd6c62cdb46e3c07a",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.LH_ENERGY_BOUNDS",
+      "module": "QuasiFeffermanB.LHEnergy",
+      "source_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "d16dec3c991e20dbf516bbcf9b65f040315096a96d798e98b39a23ab36224501",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.physical_inner_congr_left_ae",
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3dde86df5b820423a0b95f8f4bd97a5506cd5d39ae45f49d5582e5805db7e66b",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.constant_positive_solenoidal_test",
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "331a318774120e886dc300b943f02d3fb9603b21b2d7bd2cf3104f3655a4dad2",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.constant_weak_momentum_integrand",
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "2871d39f73dc5397f96b9299f47c5ac21732ab33430d33190d7d09ce025934e9",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.LH_CONSTANT_PAIRING_PRESERVED",
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "a99070fbc5e85f3c654220e8eee082cae340247b050bc6563de484a1540be0c7",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO",
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "515bddf560a0d4f0b40b614504faed2335e112e09e37c8007625e93b7b769781",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.positive_timeDerivative_translate",
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f559c324c7a0b9f1a2ac3bd1f497332846686d78e443b55bc45d8d6f4edb7ad4",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE",
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "7e885ad2608f81f007390c0f0402d0fc93fba1bdf38b53a42a6fdb236fde37f6",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE",
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f2b6d6023f0a23a1da6a334e15c9205b8372d40a7e97f03cd9f034f17e2509ed",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW",
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "86728ce8f2459a9e5a705332b25371b2b783950d1a0f7df34d63346a8f007de2",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTimeClamp_pos",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "b4fbd0db7e9737bb1192d5030f6c3d322fa7d8a50284cbe20c619a4dbe9b135f",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTimeClamp_contDiff",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "19d372fc58633b100848e7bed878abe7399cf2f42892f1f6d16a45840d24b7ce",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTimeClamp_eq",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "8e2df975f70d717a9609c24386cfe6e29622a73d0ed35b0485a465e77c419895",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTimeClamp_hasDerivAt",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "e3430289c048f33f2d418449c3f4a2f08a645f087cad452481c226e8bc81fb5c",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTest_is_test",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "f911e1c47069f20096277bc53290b65f14b03eedd218323c946b2449a5d61069",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTest_eq",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "3c48c9cb8ba72df461ddb976ad99285c287a4c934b5ba2d9d61a3266ac4a78dd",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.restartTest_timeDerivative",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "1136958a174b57302d3e1d0d6a99e9c66a1750b3ff1897b4fe19ce85b81a35ce",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.timeTranslate_integrated_momentum",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "ba82a2b874a4d2797bc86f357e8c2e8bf9609c2a2453247d2541589019659ac8",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.timeTranslate_measurePreserving_Ioc",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "7bc045d42018fe77ee83c91a0487c10a8cf1366ec36549a98abe62bfc416efbc",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.timeTranslate_memLp_Ioc",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "40132efa6b3df52387793df7edc15e68d9677a55ee073cb9c5aed28e225126c3",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    },
+    {
+      "name": "QuasiFeffermanB.timeTranslate_ae_Ioc",
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "compiler_type_sha256": "26b25c8518ae7a0f37edbf2fbd00dde0ed0936e0b0793430a3882a5af0f856cc",
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion_inferred": false
+    }
+  ]
+}

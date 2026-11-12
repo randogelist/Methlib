@@ -63,6 +63,8 @@ theorem FINITE_CALORIC_SCHUR_SCALAR (N : ℕ) (a : Frequency → ℝ) :
       intro l hl
       dsimp [M, w]
       rw [hκ k hk, hκ l hl, hrsq]
+      rw [show 4 * Real.pi ^ 2 * b k + 4 * Real.pi ^ 2 * b l =
+        4 * Real.pi ^ 2 * (b k + b l) by ring]
       field_simp [Real.pi_ne_zero, ne_of_gt (hb l hl), ne_of_gt (add_pos (hb k hk) (hb l hl))]
       <;> ring
     calc

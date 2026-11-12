@@ -178,7 +178,7 @@ theorem LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE
   have hDint : (∫ r in δ..t, criticalGradientEnergy (G r)) =
       ∫ r in (δ - s)..(t - s), physicalDissipation (v r) := by
     rw [intervalIntegral.integral_congr_ae_restrict hD,
-      intervalIntegral.integral_comp_sub_right]
+      intervalIntegral.integral_comp_sub_right (fun r => physicalDissipation (v r)) s]
   rw [tail_physicalEnergy_congr_ae (heq t (hδ.trans_le ht)),
     tail_physicalEnergy_congr_ae (heq δ hδ), hDint]
   exact hclassical.2

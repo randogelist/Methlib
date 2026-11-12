@@ -29,7 +29,7 @@ theorem REAL_SCALAR_DUHAMEL
       HasDerivAt D (Real.exp (α * t) • f t) t := by
     have h := (((hasDerivAt_id t).const_mul α).exp).smul (hdu t ht)
     convert h using 1
-    simp only [smul_sub, smul_smul]
+    simp only [smul_sub, smul_smul, mul_one]
     rw [mul_comm (Real.exp (α * t)) α]
     abel
   have hFi : IntervalIntegrable (fun t => Real.exp (α * t) • f t) volume 0 T :=

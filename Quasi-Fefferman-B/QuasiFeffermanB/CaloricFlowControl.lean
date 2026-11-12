@@ -50,9 +50,14 @@ theorem POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE
     torusToPhysicalCubeL2.continuous.comp_continuousOn
       ((criticalPhysicalL2 1 (by norm_num)).continuous.comp_continuousOn hu)
   have ht : Tendsto U (𝓝[>] (0 : ℝ)) (𝓝 (criticalInitialPhysicalL2 a)) := by
-    have h := (hc 0 (by exact le_rfl)).mono
+    have h := (hc 0 (by change (0 : ℝ) ≤ 0; exact le_rfl)).mono
       (Ioi_subset_Ici_self : Ioi (0 : ℝ) ⊆ Ici 0)
-    simpa only [U, hzero] using h
+    change Tendsto U (𝓝[>] (0 : ℝ)) (𝓝 (U 0)) at h
+    have hU0 : U 0 = criticalInitialPhysicalL2 a := by
+      change criticalInitialPhysicalL2 (u 0) = criticalInitialPhysicalL2 a
+      rw [hzero]
+    rw [hU0] at h
+    exact h
   have h := (ht.sub_const (criticalInitialPhysicalL2 a)).enorm
   have h0 : Tendsto (fun t => ‖U t - criticalInitialPhysicalL2 a‖ₑ)
       (𝓝[>] (0 : ℝ)) (𝓝 0) := by simpa only [sub_self, enorm_zero] using h
@@ -132,6 +137,7 @@ theorem POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS
   have hfour : Integrable (fun t => criticalSpatialNorm 6 (L.velocity t) ^ 4) μ := by
     apply hi.mono' (hm.pow 4)
     filter_upwards [ae_restrict_mem measurableSet_Ioc] with t ht
+    change ‖criticalSpatialNorm 6 (L.velocity t) ^ 4‖ ≤ K * (9 * D ^ 2 + E ^ 2)
     rw [Real.norm_of_nonneg (pow_nonneg (criticalSpatialNorm_nonneg 6 _) 4)]
     have hE0 : 0 ≤ physicalEnergy (L.velocity t) := by
       rw [physicalEnergy_eq_integral_norm_sq]

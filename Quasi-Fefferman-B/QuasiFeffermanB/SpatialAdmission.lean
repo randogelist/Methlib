@@ -45,23 +45,27 @@ theorem physical_datumFourierIntegrand_integrable (v : Field)
   have hc := critical_continuous_memLp_cube (fourierCharacter (-k))
     (fourierCharacter_contDiff (-k)).continuous 2
   have h := hc.integrable_mul (q := 2) (physical_complex_coordinate_memLp v hv i)
-  simpa only [Pi.mul_apply, datumFourierIntegrand, fourierCharacter_neg] using h
+  change Integrable
+    (fun x => fourierCharacter (-k) x * (v x i : ℂ)) (volume.restrict unitCube) at h
+  change Integrable
+    (fun x => star (fourierCharacter k x) * (v x i : ℂ)) (volume.restrict unitCube)
+  simpa only [fourierCharacter_neg] using h
 
 theorem complex_derivative_real_component (f : Vec → ℂ)
     (hf : Differentiable ℝ f) (x : Vec) (i : Fin 3) :
     fderiv ℝ (fun y => (f y).re) x (unitVector i) =
       (fderiv ℝ f x (unitVector i)).re := by
   have h := Complex.reCLM.hasFDerivAt.comp x (hf x).hasFDerivAt
-  rw [h.fderiv]
-  rfl
+  have he := congrArg (fun L : Vec →L[ℝ] ℝ => L (unitVector i)) h.fderiv
+  simpa only [Function.comp_def, ContinuousLinearMap.comp_apply, Complex.reCLM_apply] using he
 
 theorem complex_derivative_imaginary_component (f : Vec → ℂ)
     (hf : Differentiable ℝ f) (x : Vec) (i : Fin 3) :
     fderiv ℝ (fun y => (f y).im) x (unitVector i) =
       (fderiv ℝ f x (unitVector i)).im := by
   have h := Complex.imCLM.hasFDerivAt.comp x (hf x).hasFDerivAt
-  rw [h.fderiv]
-  rfl
+  have he := congrArg (fun L : Vec →L[ℝ] ℝ => L (unitVector i)) h.fderiv
+  simpa only [Function.comp_def, ContinuousLinearMap.comp_apply, Complex.imCLM_apply] using he
 
 /-- Two real scalar tests give the actual complex gradient test identity. -/
 theorem physical_complex_gradient_annihilation (v : Field)
@@ -92,10 +96,10 @@ theorem physical_complex_gradient_annihilation (v : Field)
       complex_derivative_imaginary_component f (hf.differentiable (by simp)), mul_comm]
   have hpR : SpatialPeriodic (fun x => (f x).re) := by
     intro x i
-    rw [hfp x i]
+    exact congrArg Complex.re (hfp x i)
   have hpI : SpatialPeriodic (fun x => (f x).im) := by
     intro x i
-    rw [hfp x i]
+    exact congrArg Complex.im (hfp x i)
   apply Complex.ext
   · calc
       (∫ x in unitCube, ∑ i : Fin 3,

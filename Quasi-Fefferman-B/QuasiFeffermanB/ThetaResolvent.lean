@@ -62,8 +62,7 @@ theorem FINITE_LATTICE_HEAT_RESOLVENT
     <;> ring
   have hpowEq : (∫ s : ℝ in Ioi t, s ^ (-3 / 2 : ℝ)) = 2 * t ^ (-1 / 2 : ℝ) := by
     rw [integral_Ioi_rpow_of_lt (by norm_num : (-3 / 2 : ℝ) < -1) ht]
-    norm_num
-    ring
+    norm_num <;> ring
   rw [hsumEq, hpowEq] at hmono
   have hmul := mul_le_mul_of_nonneg_left hmono Real.pi_pos.le
   have hcancel : Real.pi * ((1 / Real.pi) *
@@ -125,7 +124,7 @@ theorem FINITE_LATTICE_RESOLVENT_BOUND (N : ℕ) (r : ℝ) (hr : 0 < r) :
         apply Finset.sum_congr rfl
         intro k hk
         dsimp [G]
-        rw [mul_div_assoc, ← Real.exp_add]
+        rw [← mul_div_assoc, ← Real.exp_add]
         congr 2 <;> ring
       rw [heq]
       have hm := mul_le_mul_of_nonneg_left hheat (Real.exp_pos (-(Real.pi * r ^ 2 * t))).le

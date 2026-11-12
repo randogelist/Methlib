@@ -27,8 +27,10 @@ theorem energy_lp_inner_projection (z w : FourierVectorSequence)
 theorem energy_lp_projection_tendsto (w : FourierVectorSequence) :
     Tendsto (fun S : Finset FourierIndex => criticalLpProjection S w)
       atTop (𝓝 w) := by
-  simpa only [criticalLpProjection_eq_sum] using
-    (lp.hasSum_single (by norm_num : (2 : ℝ≥0∞) ≠ ∞) w)
+  have hsum : Tendsto
+      (fun S : Finset FourierIndex => ∑ ki ∈ S, lp.single 2 ki (w ki))
+      atTop (𝓝 w) := lp.hasSum_single (by norm_num : (2 : ℝ≥0∞) ≠ ∞) w
+  simpa only [criticalLpProjection_eq_sum] using hsum
 
 theorem ENERGY_LP_WEAK_CONTINUITY
     (U : ℝ → FourierVectorSequence) (I : Set ℝ) (R : ℝ) (hR : 0 ≤ R)
@@ -105,6 +107,8 @@ theorem energy_complex_strong_tendsto_of_inner_and_norm_bound
       ?_ hupper
     filter_upwards [hbound] with i hi
     rw [norm_sub_sq (𝕜 := ℂ)]
+    change ‖f i‖ ^ 2 - 2 * Complex.re (inner ℂ (f i) a) + ‖a‖ ^ 2 ≤
+      2 * ‖a‖ ^ 2 - 2 * Complex.re (inner ℂ (f i) a)
     linarith
   have hsqrt := Real.continuous_sqrt.continuousAt.tendsto.comp hsquare
   have hn : Tendsto (fun i => ‖f i - a‖) l (𝓝 (0 : ℝ)) := by
@@ -123,7 +127,9 @@ theorem ENERGY_H0_STRONG_INITIAL_TRACE
   have hi : Tendsto (fun t => Complex.re (inner ℂ (U t) (U 0)))
       (𝓝[Ici 0] 0) (𝓝 (‖U 0‖ ^ 2)) := by
     have h := Complex.continuous_re.continuousAt.tendsto.comp (hw 0 (by simp))
-    simpa only [Function.comp_def, inner_self_eq_norm_sq] using h
+    have hself : Complex.re (inner ℂ (U 0) (U 0)) = ‖U 0‖ ^ 2 :=
+      inner_self_eq_norm_sq (𝕜 := ℂ) (U 0)
+    simpa only [Function.comp_def, hself] using h
   apply energy_complex_strong_tendsto_of_inner_and_norm_bound hi
   filter_upwards [self_mem_nhdsWithin] with t ht
   exact pow_le_pow_left₀ (norm_nonneg _) (hbound t ht) 2

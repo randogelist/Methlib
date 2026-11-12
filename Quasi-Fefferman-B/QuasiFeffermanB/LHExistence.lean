@@ -21,7 +21,8 @@ theorem galerkin_H1_time_energy_bound
       T * R ^ 2 + R ^ 2 / (2 * ν) := by
   have hEc : ContinuousOn (fun t => coefficientEnergy N (g.coeff t)) (Icc (0 : ℝ) T) :=
     g.coefficientEnergy_continuousOn.mono (fun t ht => ht.1)
-  have hEi := hEc.intervalIntegrable_of_Icc hT
+  have hEi : IntervalIntegrable (fun t => coefficientEnergy N (g.coeff t)) volume 0 T :=
+    hEc.intervalIntegrable_of_Icc hT
   have hDi := g.coefficientDissipation_intervalIntegrable hT
   have hE : (∫ t in (0 : ℝ)..T, coefficientEnergy N (g.coeff t)) ≤ T * R ^ 2 := by
     calc

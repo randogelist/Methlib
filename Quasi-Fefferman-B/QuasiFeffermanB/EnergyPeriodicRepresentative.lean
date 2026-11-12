@@ -81,6 +81,39 @@ theorem energyPeriodicVelocity_L2 (U : ℝ → TorusSobolev 0) (t : ℝ) :
   apply Lp.ext
   exact (energyPeriodicVelocity_memLp U t).coeFn_toLp.trans (energyPeriodicVelocity_ae U t).symm
 
+theorem energyPeriodicField_fourierCoeff (c : TorusSobolev 0)
+    (hr : SpectralReality c.val) (hz : SpectralMeanZero c.val) :
+    datumFourierCoeff (energyPeriodicField c) = c.val := by
+  rw [← criticalCube_datumFourierCoeff_congr_ae (energyPeriodicField_coe c)]
+  exact torusSobolevH0_physical_fourierCoeff c hr hz
+
+theorem energyPeriodicField_gradient_annihilation (c : TorusSobolev 0)
+    (hr : SpectralReality c.val) (hs : SpectralSolenoidal c.val)
+    (hz : SpectralMeanZero c.val) (p : Vec → ℝ)
+    (hp : ContDiff ℝ ∞ p) (hpp : SpatialPeriodic p) :
+    physicalFieldInner (energyPeriodicField c) (gradient p) = 0 := by
+  have hv : MemLp (energyPeriodicField c) 2 (volume.restrict unitCube) :=
+    (Lp.memLp (torusToPhysicalCubeL2 (torusSobolevL2 c))).congr
+      (energyPeriodicField_coe c)
+  have hc := energyPeriodicField_fourierCoeff c hr hz
+  have hcut := physicalL2_cutoff_eLpNorm_tendsto (energyPeriodicField c) hv
+    (by rw [hc]; exact hz)
+  have hconv : Tendsto
+      (fun N => physicalFieldInner (finiteSynthesis N c.val) (gradient p))
+      atTop (𝓝 (physicalFieldInner (energyPeriodicField c) (gradient p))) := by
+    apply critical_physicalFieldInner_tendsto
+      (fun N => finiteSynthesis N c.val) (energyPeriodicField c) (gradient p)
+      (fun N => critical_continuous_memLp_cube _ (finiteSynthesis_contDiff N _).continuous 2)
+      hv (critical_continuous_memLp_cube _ (criticalWeak_gradient_continuous p hp) 2)
+    simpa only [hc] using hcut
+  have hzero (N : ℕ) : physicalFieldInner (finiteSynthesis N c.val) (gradient p) = 0 :=
+    critical_smooth_integral_inner_gradient_eq_zero _ p (finiteSynthesis_contDiff N _)
+      hp (finiteSynthesis_periodic N _) hpp (finiteSynthesis_divergence_free N _ hs)
+  have hzeroLim : Tendsto
+      (fun N => physicalFieldInner (finiteSynthesis N c.val) (gradient p)) atTop (𝓝 0) := by
+    simpa only [hzero] using (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (𝓝 0))
+  exact tendsto_nhds_unique hconv hzeroLim
+
 theorem energy_physicalH1_congr_velocity {v w : Field} {G : Vec → (Vec →L[ℝ] Vec)}
     (h : CriticalPhysicalH1 v G) (heq : v =ᵐ[volume.restrict unitCube] w) :
     CriticalPhysicalH1 w G := by

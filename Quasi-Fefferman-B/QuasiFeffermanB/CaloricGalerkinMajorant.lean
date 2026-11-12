@@ -199,7 +199,7 @@ theorem GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC
       (fun k => complexVecNorm (g.coeff 0 k)) ν T hν hT
       (fun k _ => criticalFrequencyWeight_pos k)).trans
     have h := Real.sqrt_le_sqrt (div_le_div_of_nonneg_right hQ hν.le)
-    simpa only [Real.sqrt_div, caloricHeatBudget] using h
+    simpa only [Real.sqrt_div hB ν, caloricHeatBudget] using h
   intro T hT
   have h := GALERKIN_CHI0_BUDGET_OF_SHARP_MULTIPLIER_AND_HEAT g hν
     (caloricHeatBudget ν (Real.sqrt B)) (caloricHeatBudget_nonneg _ _ (Real.sqrt_nonneg B))

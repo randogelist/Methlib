@@ -65,7 +65,7 @@ theorem caloricVolterra_hasDerivAt
   have hexp : Real.exp (-ν * κ ^ 2 * t) * Real.exp (ν * κ ^ 2 * t) = 1 := by
     rw [← Real.exp_add]
     convert Real.exp_zero using 1 <;> ring
-  convert he.mul hp using 1 <;> dsimp only [caloricVolterra]
+  convert he.mul hp using 1 <;> simp only [caloricVolterra, id_eq, mul_one]
   linear_combination -(κ * f t) * hexp
 
 theorem caloricVolterra_nonneg_le_primitive
@@ -119,7 +119,7 @@ theorem CALORIC_VOLTERRA_L2_SQUARE_BOUND
     have hFd := caloric_primitive_hasDerivAt hf ht
     have hZd := caloric_primitive_hasDerivAt (hy.pow 2) ht
     convert ((hyd.pow 2).add (hZd.const_mul (2 * ν * κ ^ 2))).sub
-      ((hFd.pow 2).const_mul (κ ^ 2)) using 1 <;> dsimp only [E, y, F, Z] <;> ring
+      ((hFd.pow 2).const_mul (κ ^ 2)) using 1 <;> simp only [E, y, F, Z] <;> ring
   have ha : AntitoneOn E (Icc 0 T) := by
     apply antitoneOn_of_deriv_nonpos (convex_Icc 0 T) hE
     · intro t ht
@@ -137,9 +137,11 @@ theorem CALORIC_VOLTERRA_L2_SQUARE_BOUND
   rw [he0] at hend
   have hκ2 : 0 < κ ^ 2 := sq_pos_of_pos hκ
   apply (le_div_iff₀ (mul_pos (by norm_num) hν)).2
-  apply (mul_le_mul_left hκ2).mp
-  dsimp only [E, Z, F] at hend
-  nlinarith [sq_nonneg (y T)]
+  have hscaled : κ ^ 2 * ((∫ t in (0 : ℝ)..T, caloricVolterra ν κ f t ^ 2) * (2 * ν)) ≤
+      κ ^ 2 * (∫ t in (0 : ℝ)..T, f t) ^ 2 := by
+    dsimp only [E, Z, F, y] at hend
+    nlinarith [sq_nonneg (caloricVolterra ν κ f T)]
+  exact le_of_mul_le_mul_left hscaled hκ2
 
 end
 end QuasiFeffermanB

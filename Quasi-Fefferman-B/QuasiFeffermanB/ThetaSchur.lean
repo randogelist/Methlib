@@ -172,7 +172,7 @@ theorem STRICT_H12_TO_CALORIC_SQUARE
   have hstrict : (4 * Real.pi) * Q ^ 2 <
       (4 * Real.pi) * (ν ^ 2 / 2) := by
     nlinarith
-  exact (mul_lt_mul_iff_left₀ hden).mp hstrict
+  exact (mul_lt_mul_iff_left₀ hden).mp (by simpa only [mul_comm] using hstrict)
 
 end
 end QuasiFeffermanB

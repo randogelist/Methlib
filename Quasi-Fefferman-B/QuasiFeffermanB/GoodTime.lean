@@ -44,7 +44,10 @@ theorem fourthPower_budget_lt_threshold
   have hscaled : M ^ 2 < T * (8 * Real.pi ^ 2 * μ ^ 5) :=
     (div_lt_iff₀ hden).mp hcut
   apply (div_lt_iff₀ (show 0 < 2 * μ by positivity)).2
-  convert hscaled using 1 <;> ring
+  have heq : (2 * Real.pi * μ ^ 2) ^ 2 * T * (2 * μ) =
+      T * (8 * Real.pi ^ 2 * μ ^ 5) := by ring
+  rw [heq]
+  exact hscaled
 
 /-- Strict good-time selection for the squared H^(1/2) readout.
 M=||a||₂² yields T > ||a||₂⁴/(8π² μ⁵).

@@ -192,7 +192,10 @@ theorem lh_shifted_strong_trace_of_energy_start
     (timeTranslate_tendsto_nhdsWithin_right s)
   have he : Tendsto (fun t => edist (criticalL2Representative (v (t + s)))
       (criticalL2Representative (v s))) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
-    simpa only [Function.comp_def, edist_self] using h.edist tendsto_const_nhds
+    simpa only [Function.comp_def, edist_self] using h.edist
+      (tendsto_const_nhds : Tendsto
+        (fun _ : ℝ => criticalL2Representative (v s))
+        (𝓝[>] (0 : ℝ)) (𝓝 (criticalL2Representative (v s))))
   apply he.congr'
   filter_upwards [self_mem_nhdsWithin] with t ht
   change (0 : ℝ) < t at ht
@@ -254,7 +257,8 @@ theorem LH_RESTART_FROM_ENERGY_START
   · intro t ht
     change physicalEnergy (v (t + s)) +
       2 * ν * (∫ r in (0 : ℝ)..t, criticalGradientEnergy (G (r + s))) ≤ _
-    rw [intervalIntegral.integral_comp_add_right, zero_add,
+    rw [intervalIntegral.integral_comp_add_right
+        (fun r => criticalGradientEnergy (G r)) s, zero_add,
       restart_representative_norm_sq (v s) hvs]
     exact hE (t + s) (by linarith)
   · intro T hT
@@ -265,7 +269,8 @@ theorem LH_RESTART_FROM_ENERGY_START
     change physicalEnergy (v (t + s)) +
       2 * ν * (∫ q in r..t, criticalGradientEnergy (G (q + s))) ≤
         physicalEnergy (v (r + s))
-    rw [intervalIntegral.integral_comp_add_right]
+    rw [intervalIntegral.integral_comp_add_right
+      (fun q => criticalGradientEnergy (G q)) s]
     exact hr (t + s) ⟨add_le_add_right ht.1 s, add_le_add_right ht.2 s⟩
 
 theorem LH_RESTART_AT_GOOD_TIME

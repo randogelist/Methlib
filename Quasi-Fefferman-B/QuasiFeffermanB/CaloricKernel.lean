@@ -68,6 +68,16 @@ def finiteHeatSum {ι : Type*} (s : Finset ι) (κ a : ι → ℝ) (ν t : ℝ) 
 def finiteCaloricQuadratic {ι : Type*} (s : Finset ι) (κ a : ι → ℝ) : ℝ :=
   ∑ i ∈ s, ∑ j ∈ s, (a i * a j) / (κ i ^ 2 + κ j ^ 2)
 
+theorem finiteCaloricQuadratic_nonneg
+    {ι : Type*} (s : Finset ι) (κ a : ι → ℝ)
+    (ha : ∀ i ∈ s, 0 ≤ a i) : 0 ≤ finiteCaloricQuadratic s κ a := by
+  apply Finset.sum_nonneg
+  intro i hi
+  apply Finset.sum_nonneg
+  intro j hj
+  exact div_nonneg (mul_nonneg (ha i hi) (ha j hj))
+    (add_nonneg (sq_nonneg _) (sq_nonneg _))
+
 /-- Squared finite heat sums are integrable on the full positive time axis. -/
 theorem FINITE_HEAT_SQUARE_INTEGRABLE
     {ι : Type*} (s : Finset ι) (κ a : ι → ℝ) (ν : ℝ) (hν : 0 < ν)
@@ -79,17 +89,21 @@ theorem FINITE_HEAT_SQUARE_INTEGRABLE
     intro i hi j hj
     exact (HEAT_PAIR_INTEGRABLE ν (κ i) (κ j) hν
       (add_pos (sq_pos_of_pos (hκ i hi)) (sq_pos_of_pos (hκ j hj)))).const_mul _
-  convert integrable_finsetSum s (fun i hi =>
-    integrable_finsetSum s (fun j hj => hF i hi j hj)) using 1
-  funext t
-  unfold finiteHeatSum
-  rw [pow_two, Finset.sum_mul]
-  apply Finset.sum_congr rfl
-  intro i hi
-  rw [Finset.mul_sum]
-  apply Finset.sum_congr rfl
-  intro j hj
-  ring
+  have heq : (fun t : ℝ => finiteHeatSum s κ a ν t ^ 2) =
+      (fun t : ℝ => ∑ i ∈ s, ∑ j ∈ s,
+        (a i * a j) * (Real.exp (-ν * κ i ^ 2 * t) * Real.exp (-ν * κ j ^ 2 * t))) := by
+    funext t
+    unfold finiteHeatSum
+    rw [pow_two, Finset.sum_mul]
+    apply Finset.sum_congr rfl
+    intro i hi
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j hj
+    ring
+  rw [heq]
+  exact integrable_finsetSum s (fun i hi =>
+    integrable_finsetSum s (fun j hj => hF i hi j hj))
 
 /-- Exact finite heat-orbit identity, with finite-sum integration justified
 by pairwise exponential integrability. -/

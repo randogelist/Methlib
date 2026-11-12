@@ -163,11 +163,11 @@ theorem GAUSSIAN_THETA_CUBE_ENVELOPE (t : ℝ) (ht : 0 < t) :
     rw [hexp]
     congr 1
     rw [show (-3 / 2 : ℝ) = -(3 / 2) by ring, Real.rpow_neg ht.le]
-    rfl
+    exact one_div _
   have hprod : t ^ (-3 / 2 : ℝ) * (1 / t) ^ (-3 / 2 : ℝ) = 1 := by
     rw [← Real.mul_rpow ht.le (one_div_nonneg.mpr ht.le), mul_one_div_cancel ht.ne',
       Real.one_rpow]
-  have hmul := mul_le_mul_of_nonneg_left hlarge (Real.rpow_nonneg ht.le _)
+  have hmul := mul_le_mul_of_nonneg_left hlarge (Real.rpow_nonneg ht.le (-3 / 2 : ℝ))
   rw [mul_sub, mul_one, hprod, ← hreflect] at hmul
   linarith
 
