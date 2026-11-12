@@ -9,9 +9,43 @@
 | Branch | `QUASI-FEFFERMAN-B` |
 | Repository directory | `/Quasi-Fefferman-B/` |
 | New Lean root | `PENDING` |
+| Implementation | External cached compilation in progress |
+| Endpoint resolution marker | `!=!` only after matching external compiler and axiom audit |
 | Local Lean executions | `0` |
 
 [QUASI_FEFFERMAN_B_CHAIN_R1_B_TIER.txt](QUASI_FEFFERMAN_B_CHAIN_R1_B_TIER.txt)
+
+## External endpoint status
+
+`LOCAL_LEAN_EXECUTIONS = 0`.
+
+`!=!` = the exact named endpoint passed the external compiler and its
+matching theorem-level axiom audit; permitted axioms:
+`propext`, `Classical.choice`, `Quot.sound`.
+
+`endpoint-manifest.json` pins candidate source hashes and audited names.
+The external evidence artifact records compiler-emitted types and axiom lists.
+Passing intermediate implications retain every displayed premise; they do
+not automatically resolve the larger Q/A endpoint.
+
+| Endpoints | Initial implementation status |
+|---|---|
+| Q00 | Concrete physical carrier and exact root contract defined |
+| Q01 | Energy-level Fourier compactness candidates; actual LH limit pending |
+| Q02 | Native LH energy theorem candidate |
+| Q03–Q04 | Physical midpoint interpolation and trajectory-budget candidates |
+| Q05 | Native full LH restart candidate |
+| Q06 | Exact numerical caloric admission pending |
+| Q07 | Native strict good-time theorem candidate |
+| Q08–Q10 | Actual comparison, smoothing, and pressure adapters in progress |
+| Q11–Q12 | Tail energy and unique future assembly pending |
+| Q13 | Scalar cutoff and zero-LH smooth-representative candidates |
+| Q14 | Concrete root contract fixed; root proof pending |
+| A01–A11 | Independent caloric lemmas in progress; full admission pending |
+
+[External compiler workflow](../.github/workflows/quasi-fefferman-b.yml)
+· [Candidate manifest](endpoint-manifest.json)
+· [Native Windows runner](run.cmd)
 
 ## Frozen statement
 
