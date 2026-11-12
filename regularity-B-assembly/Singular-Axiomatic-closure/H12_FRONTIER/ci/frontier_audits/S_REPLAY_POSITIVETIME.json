@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.Replay.positiveEnstrophy",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.positiveEnstrophy"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.positiveH2",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.positiveH2"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.positiveAllOrders",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.positiveAllOrders"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.positiveFlow",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.positiveFlow"
+    }
+  ]
+}
