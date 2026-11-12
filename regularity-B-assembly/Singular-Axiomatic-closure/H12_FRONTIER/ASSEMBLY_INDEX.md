@@ -6,7 +6,7 @@ ORGANIZATION_VERSION=2
 CORE_MILESTONES=14
 REPLAY_MILESTONES=9
 OPTIONAL_COMPARISON_MILESTONES=1
-IMPLEMENTATION_STATUS=BASE_IDENTITIES_MAPPED_NOT_BUILT
+IMPLEMENTATION_STATUS=BASE_AND_MATHLIB_IDENTITIES_MAPPED_NOT_BUILT
 MILESTONE_COMPLETION_MARKER=!=!
 COMPLETED_FRONTIER_MILESTONES=0/14
 LOCAL_LEAN_EXECUTIONS=0
@@ -17,6 +17,8 @@ Authoritative assembly specification: [index/ENDPOINTS.md](index/ENDPOINTS.md).
 Machine-readable dependency register: [index/INDEX.json](index/INDEX.json).
 Per-endpoint reusable identities: [index/BASE_IDENTITIES.md](index/BASE_IDENTITIES.md).
 Machine-readable identity map and completion policy: [index/BASE_IDENTITIES.json](index/BASE_IDENTITIES.json).
+Pinned Mathlib source map: [index/MATHLIB_IDENTITIES.md](index/MATHLIB_IDENTITIES.md).
+Mathlib declarations, source hashes and endpoint incidence: [index/MATHLIB_IDENTITIES.json](index/MATHLIB_IDENTITIES.json).
 Historical indexing rounds and provenance: [index/README.md](index/README.md).
 
 ## Scope
@@ -47,7 +49,7 @@ discharge of every auxiliary analytic/certificate/witness/checker/admission
 obligation. The registered datum hypotheses are unchanged. Source discovery,
 prepared signatures, generic conditional adapters and copied base evidence
 do not complete a new frontier milestone. No milestone receives this marker
-in the identity-indexing pass.
+in either identity-indexing pass.
 
 ## Immutable base
 
@@ -75,6 +77,12 @@ The identity map locates a combined compactness-and-strong-trace endpoint;
 using it may shorten the support graph without changing any premise or goal.
 All primary dependencies are already native in the copied package. The
 inspected pkg1/pkg2 alternatives are optional candidates, not new imports.
+
+The Mathlib companion inspects 17 source families at the exact pinned commit
+`db584cd6d46c92f209a44c0f1c829460d327499d` and maps support for E01-E14.
+It distinguishes direct kernels, existing native wrappers and required
+quantitative/domain adapters. It is not a full-library audit, an E03 proof,
+or a change to the pinned compiler or dependency cache.
 
 E15 is independent of root completion. No strict enlargement of the compiled
 base ball is asserted without its constant comparison and an explicit
