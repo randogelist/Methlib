@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "entries": [{"id": "E01", "module": "SingularClosure.H12Frontier.Normalization", "audit": "ci/frontier_audits/E01.lean", "spec": "ci/frontier_audits/E01.json", "auxiliary_obligations": []}]
+}
