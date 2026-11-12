@@ -1,90 +1,33 @@
-# H12_FRONTIER: canonical assembly organization
+# H12_FRONTIER: executed assembly
 
 ```text
 BRANCH=H12_extension
-ORGANIZATION_VERSION=2
-CORE_MILESTONES=14
-REPLAY_MILESTONES=9
-OPTIONAL_COMPARISON_MILESTONES=1
-IMPLEMENTATION_STATUS=BASE_AND_MATHLIB_IDENTITIES_MAPPED_NOT_BUILT
-MILESTONE_COMPLETION_MARKER=!=!
-COMPLETED_FRONTIER_MILESTONES=0/14
+CORE_MILESTONES_CLOSED=14/14
+MILESTONE_MARKER=!=!
+STATUS=UNCONDITIONAL_CLOSURE_CONCRETE_ADMISSIBLE_INSTANCE
+COMPILED_SOURCE=d8b5e510411c224fd7b284b0a65eb2f9b08b3d83
+EXTERNAL_CACHED_RUN=43317474994
+BASE_REGRESSION=PASS
 LOCAL_LEAN_EXECUTIONS=0
-NEW_THEOREM_PROMOTIONS=0
+OPTIONAL_E15=OPEN
 ```
 
-Authoritative assembly specification: [index/ENDPOINTS.md](index/ENDPOINTS.md).
-Machine-readable dependency register: [index/INDEX.json](index/INDEX.json).
-Per-endpoint reusable identities: [index/BASE_IDENTITIES.md](index/BASE_IDENTITIES.md).
-Machine-readable identity map and completion policy: [index/BASE_IDENTITIES.json](index/BASE_IDENTITIES.json).
-Pinned Mathlib source map: [index/MATHLIB_IDENTITIES.md](index/MATHLIB_IDENTITIES.md).
-Mathlib declarations, source hashes and endpoint incidence: [index/MATHLIB_IDENTITIES.json](index/MATHLIB_IDENTITIES.json).
-Historical indexing rounds and provenance: [index/README.md](index/README.md).
+## Authoritative execution record
 
-## Scope
+[Execution manifest](verification/frontier/EXECUTION.json) · [Core status](verification/frontier/CORE_STATUS.json) · [A-tier report](FRONTIER_H12_A_TIER.txt) · [Synchronized summary](FRONTIER_H12_ASSEMBLY_SUMMARY.txt).
 
-Preserve the centered periodic, unforced, mean-zero, divergence-free H^(1/2)
-criterion. This assembly is the FRONTIER_H12 constant adapter, not the separate
-BMO/Beltrami/a_dagger perturbation program.
+All fourteen exact registered concrete endpoints compiled and passed their theorem-level axiom audits. The constructed conservative Sobolev constant instance is explicit in the source and in the execution report; no auxiliary nonlinear certificate remains assumed by either root. Only `propext`, `Classical.choice`, and `Quot.sound` occur.
 
-```text
-E01-E02  norm and constant normalization
-E03      explicit frontier nonlinear estimate
-E04-E12  nine constant-dependent replay endpoints
-E13      native quantitative physical root
-E14      literature-normalized FRONTIER_H12
-E15      optional comparison with the compiled repository constant
-```
+The native root is `SingularClosure.H12Frontier.FRONTIER_H12_NATIVE`; the coefficient-normalized public root is `SingularClosure.H12Frontier.FRONTIER_H12`.
 
-Fourteen is the selected number of top-level core milestones. It is not a
-claim that fourteen Lean declarations suffice. Helper proofs, concrete
-Sobolev-constant certificates, compactness/trace adapters, and exact-type/axiom
-audits remain explicit work in the dependency register.
+## Dependency specifications and historical indexing
 
-## Milestone completion
+[index/ENDPOINTS.md](index/ENDPOINTS.md) retains the registered mathematical scopes. [index/INDEX.json](index/INDEX.json), the ten indexing rounds, and the native/Mathlib identity maps retain their source-pinned planning context. Their earlier `PLANNED` or `0/14` fields are historical, not the current completion ledger. Current execution status is exclusively the manifest above.
 
-`!=!` marks an exact core milestone only after a matching external cached
-compiler PASS, exact-type audit, standard-only theorem-level axiom audit, and
-discharge of every auxiliary analytic/certificate/witness/checker/admission
-obligation. The registered datum hypotheses are unchanged. Source discovery,
-prepared signatures, generic conditional adapters and copied base evidence
-do not complete a new frontier milestone. No milestone receives this marker
-in either identity-indexing pass.
+[Native identities](index/BASE_IDENTITIES.md) · [Pinned Mathlib identities](index/MATHLIB_IDENTITIES.md).
 
-## Immutable base
+## Scope boundary
 
-```lean
-SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
-```
+E15 remains open: no proof of `frontierConstant < criticalNonlinearConstant` is asserted. Consequently the completed concrete root is not claimed to strictly enlarge the original compiled Methlib ball. No optimal numerical or arbitrary prescribed literature constant is substituted for the actual proved instance.
 
-Premise: `criticalNonlinearConstant * norm(a) < nu`.
-Original externally audited source: `09dfe94a1ef150e21d09df3013fbe09002ef139c`.
-Recorded original status: `!!!! UNCONDITIONAL_CLOSURE`.
-The original package and the copied base Lean sources remain unchanged.
-Historical evidence is not a fresh compilation at the copied path.
-
-## Assembly rule
-
-```text
-NORM_LOCK -> CONSTANT_LOCK -> NONLINEAR_CERTIFICATE
-  -> INVARIANT + DISSIPATION + QUARTIC + TIME_DERIVATIVE
-  -> COMPACTNESS + REPRESENTATIVES + STRONG_TRACE
-  -> POSITIVE_TIME_FLOW + PHYSICAL_QUANTITATIVE_TRANSFER
-  -> NATIVE_ROOT -> FRONTIER_H12
-```
-
-The identity map locates a combined compactness-and-strong-trace endpoint;
-using it may shorten the support graph without changing any premise or goal.
-All primary dependencies are already native in the copied package. The
-inspected pkg1/pkg2 alternatives are optional candidates, not new imports.
-
-The Mathlib companion inspects 17 source families at the exact pinned commit
-`db584cd6d46c92f209a44c0f1c829460d327499d` and maps support for E01-E14.
-It distinguishes direct kernels, existing native wrappers and required
-quantitative/domain adapters. It is not a full-library audit, an E03 proof,
-or a change to the pinned compiler or dependency cache.
-
-E15 is independent of root completion. No strict enlargement of the compiled
-base ball is asserted without its constant comparison and an explicit
-admissible strict-inclusion witness. Definitions and source preparation alone
-do not establish A_TIER.
+The original base Lean sources remain unchanged; all 259 original base Lean hashes agree with the original manifest. The fresh external run also passes the base root's exact-type and standard-only axiom regression.
