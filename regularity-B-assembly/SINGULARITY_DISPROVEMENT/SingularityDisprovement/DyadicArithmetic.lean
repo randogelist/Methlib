@@ -280,7 +280,7 @@ private theorem dyadicGeometric_hasSum :
   rw [hnum] at h1
   apply h1.congr
   intro j
-  simp [pow_succ, one_div_mul, one_div_pow, mul_comm]
+  simp [pow_succ, one_div, mul_inv_rev, mul_comm]
 
 private theorem dyadicR_term_nonneg (j : ℕ) :
     0 ≤ 1 / (((j + 1 : ℕ) : ℝ) ^ 2 * (2 : ℝ) ^ (j + 1)) := by positivity

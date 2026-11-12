@@ -12,7 +12,8 @@
     "SingularityDisprovement.Dirichlet",
     "SingularityDisprovement.DyadicPhysical",
     "SingularityDisprovement.Scaling",
-    "SingularityDisprovement.RootAssembly"
+    "SingularityDisprovement.RootAssembly",
+    "SingularityDisprovement.DyadicScale"
   ],
   "endpoints": [
     {
@@ -71,8 +72,8 @@
     },
     {
       "id": "R10",
-      "module": "SingularityDisprovement.Scaling",
-      "name": "SingularityDisprovement.SMALL_POSITIVE_DYADIC_SCALE_EXISTS",
+      "module": "SingularityDisprovement.DyadicScale",
+      "name": "SingularityDisprovement.DYADIC_ADMITTED_SCALE",
       "audit": "ci/endpoint_audits/R10.lean"
     },
     {

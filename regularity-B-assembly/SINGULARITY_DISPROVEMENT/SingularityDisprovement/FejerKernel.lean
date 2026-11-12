@@ -63,7 +63,9 @@ theorem fejerSum_star_mul_integral (N : ℕ) :
     (fun j => (fourierCharacter_contDiff _).continuous.star)
     (fun k => (fourierCharacter_contDiff _).continuous)]
   simp_rw [INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY, fejerAxis_inj]
-  simp
+  have hfilter : (Finset.range N).filter (fun x => x < N) = Finset.range N :=
+    Finset.filter_eq_self.mpr (fun x hx => Finset.mem_range.mp hx)
+  simp [hfilter]
 
 theorem fejerSum_normSq_integral (N : ℕ) :
     (∫ x in unitCube, Complex.normSq (fejerSum N x)) = (N : ℝ) := by
@@ -181,6 +183,7 @@ theorem fejerKernel_weighted_integrable_complex
   apply hi.congr
   apply Filter.Eventually.of_forall
   intro x
+  dsimp only
   rw [fejerKernel_complex_expansion, div_mul_eq_mul_div]
   simp only [datumFourierIntegrand, Finset.sum_mul]
 
@@ -188,8 +191,12 @@ theorem fejerKernel_weighted_integrable_real
     (a : Field) (ha : ∀ k : Frequency,
       IntegrableOn (datumFourierIntegrand a k 0) unitCube volume) (N : ℕ) :
     IntegrableOn (fun x => fejerKernel N x * a x 0) unitCube volume := by
+  have hi := (fejerKernel_weighted_integrable_complex a ha N).re
+  change Integrable
+    (fun x => ((fejerKernel N x : ℂ) * (a x 0 : ℂ)).re)
+    (volume.restrict unitCube) at hi
   simpa only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
-    mul_zero, sub_zero] using (fejerKernel_weighted_integrable_complex a ha N).re
+    mul_zero, sub_zero] using hi
 
 theorem fejerKernel_weighted_integral_real
     (a : Field) (ha : ∀ k : Frequency,

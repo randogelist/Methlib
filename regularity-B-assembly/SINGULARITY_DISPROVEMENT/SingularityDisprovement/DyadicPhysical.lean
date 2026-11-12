@@ -145,10 +145,14 @@ theorem dyadic_finite_synthesis_tendsto_ae (ν : ℝ) :
     · simpa only [hi, if_true] using tendsto_const_nhds.mul hs
     · simpa only [hi, if_false] using tendsto_const_nhds
   have h := (PiLp.continuous_toLp 2 (fun _ : Fin 3 => ℝ)).continuousAt.tendsto.comp hcoords
-  convert h using 1
-  · ext N i
+  have heq : (fun N : ℕ => finiteSynthesis N (dyadicCoeff ν) x) =
+      (fun N : ℕ => WithLp.toLp 2 (fun i : Fin 3 =>
+        if i = 0 then (ν / 2) * dyadicCosinePartial (N + 1) (x 1) else 0)) := by
+    funext N
+    ext i
     exact dyadic_finite_synthesis_component ν N x i
-  · rfl
+  rw [heq]
+  exact h
 
 theorem DYADIC_PHYSICAL_IDENTIFICATION (ν : ℝ) :
     (physicalL2 (dyadicSeed ν) : Field) =ᵐ[volume.restrict unitCube]
