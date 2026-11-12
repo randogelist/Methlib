@@ -24,6 +24,9 @@ def run(args: list[str], path: Path) -> int:
         return p.wait()
 
 def main() -> int:
+    concrete = ROOT / "ci/assemble_frontier_concrete.py"
+    if concrete.is_file():
+        subprocess.run([sys.executable, str(concrete)], cwd=ROOT, check=True)
     plan = json.loads((ROOT / "ci/frontier_plan.json").read_text(encoding="utf-8"))
     sources = sorted((ROOT / "SingularClosure/H12Frontier").rglob("*.lean"))
     for source in sources:

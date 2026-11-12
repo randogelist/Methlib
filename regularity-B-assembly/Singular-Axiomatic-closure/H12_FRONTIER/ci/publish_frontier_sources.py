@@ -24,8 +24,8 @@ def main() -> None:
     result = []
     for item in source["generated"]:
         relative = item["path"]
-        if not (relative.startswith("SingularClosure/H12Frontier/Replay")
-                or relative.startswith("ci/frontier_audits/S_REPLAY_")
+        if not (relative.startswith("SingularClosure/H12Frontier/")
+                or relative.startswith("ci/frontier_audits/")
                 or relative == "ci/frontier_plan.json") or ".." in Path(relative).parts:
             raise RuntimeError("generated path outside allowlist")
         content = (ROOT / relative).read_bytes()

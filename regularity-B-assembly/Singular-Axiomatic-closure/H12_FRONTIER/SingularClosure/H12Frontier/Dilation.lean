@@ -34,8 +34,8 @@ theorem map_dilatedCube (r : ℝ) (hr : 0 < r) :
   have hm : (volume : Measure Vec).map e = ENNReal.ofReal (r ^ 3) • volume := by
     change Measure.map (fun x : Vec => r⁻¹ • x) volume = _
     rw [Measure.map_addHaar_smul volume (inv_ne_zero hr.ne')]
-    simp only [Vec, Module.finrank_euclideanSpace, Fintype.card_fin, inv_pow, inv_inv,
-      abs_of_pos (pow_pos hr 3)]
+    have hd : Module.finrank ℝ Vec = 3 := by simp [Vec]
+    simp only [hd, inv_pow, inv_inv, abs_of_pos (pow_pos hr 3)]
   have h := e.restrict_map (volume : Measure Vec) unitCube
   rw [hp, hm, Measure.restrict_smul] at h
   exact h.symm
@@ -100,9 +100,58 @@ theorem dilated_eLpNorm_two {E : Type*} [NormedAddCommGroup E]
   have hpow : (ENNReal.ofReal (r ^ 3)) ^ (1 / (2 : ℝ≥0∞)).toReal =
       ENNReal.ofReal (r * Real.sqrt r) := by
     norm_num only [ENNReal.toReal_div, ENNReal.toReal_one, ENNReal.toReal_ofNat]
-    rw [← ENNReal.ofReal_rpow_of_nonneg (pow_nonneg hr.le 3) (by norm_num),
+    rw [ENNReal.ofReal_rpow_of_nonneg (pow_nonneg hr.le 3) (by norm_num),
       ← Real.sqrt_eq_rpow, hroot]
   rw [hpow]
+
+/-- Literal coordinate description of the dilated fundamental cube. -/
+theorem mem_dilatedCube_iff (r : ℝ) (hr : 0 < r) (x : Vec) :
+    x ∈ dilatedCube r ↔ ∀ i : Fin 3, 0 ≤ x i ∧ x i ≤ r := by
+  constructor
+  · rintro ⟨y, hy, rfl⟩
+    intro i
+    change 0 ≤ r * y i ∧ r * y i ≤ r
+    exact ⟨mul_nonneg hr.le (hy i).1,
+      (mul_le_mul_of_nonneg_left (hy i).2 hr.le).trans_eq (mul_one r)⟩
+  · intro hx
+    refine ⟨r⁻¹ • x, ?_, ?_⟩
+    · intro i
+      change 0 ≤ r⁻¹ * x i ∧ r⁻¹ * x i ≤ 1
+      refine ⟨mul_nonneg (inv_nonneg.mpr hr.le) (hx i).1, ?_⟩
+      have h := mul_le_mul_of_nonneg_left (hx i).2 (inv_nonneg.mpr hr.le)
+      simpa only [inv_mul_cancel₀ hr.ne'] using h
+    · simp only [smul_smul, mul_inv_cancel₀ hr.ne', one_smul]
+
+def paperCharacter (k : Frequency) (x : Vec) : ℂ :=
+  Complex.exp (((∑ i : Fin 3, (k i : ℝ) * x i : ℝ) : ℂ) * Complex.I)
+
+theorem fourierCharacter_dilated (k : Frequency) (x : Vec) :
+    fourierCharacter k (paperScale⁻¹ • x) = paperCharacter k x := by
+  have hsum : (∑ i : Fin 3, (k i : ℝ) * (paperScale⁻¹ • x) i) =
+      paperScale⁻¹ * ∑ i : Fin 3, (k i : ℝ) * x i := by
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    change (k i : ℝ) * (paperScale⁻¹ * x i) = paperScale⁻¹ * ((k i : ℝ) * x i)
+    ring
+  unfold fourierCharacter paperCharacter
+  rw [hsum]
+  change Complex.exp (((paperScale * (paperScale⁻¹ *
+    ∑ i : Fin 3, (k i : ℝ) * x i) : ℝ) : ℂ) * Complex.I) = _
+  rw [← mul_assoc, mul_inv_cancel₀ paperScale_pos.ne', one_mul]
+
+def paperFiniteSynthesis (N : ℕ) (c : FourierCoeff) : Field :=
+  fun x => WithLp.toLp 2 (fun i : Fin 3 =>
+    (∑ k ∈ cutoffModes N, paperCharacter k x * c k i).re)
+
+theorem dilatedFiniteSynthesis_eq_paper (N : ℕ) (c : FourierCoeff) :
+    dilatedField paperScale (finiteSynthesis N c) = paperFiniteSynthesis N c := by
+  funext x
+  ext i
+  change (∑ k ∈ cutoffModes N,
+    fourierCharacter k (paperScale⁻¹ • x) * c k i).re = _
+  simp only [fourierCharacter_dilated]
+  rfl
 
 end
 end SingularClosure.H12Frontier
