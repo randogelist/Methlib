@@ -1,1 +1,243 @@
-{"schema_version":1,"entries":[{"id":"E01","module":"SingularClosure.H12Frontier.Normalization","audit":"ci/frontier_audits/E01.lean","spec":"ci/frontier_audits/E01.json","auxiliary_obligations":[]},{"id":"S_PRODUCT","module":"SingularClosure.H12Frontier.ExplicitNonlinear","audit":"ci/frontier_audits/S_PRODUCT.lean","spec":"ci/frontier_audits/S_PRODUCT.json","role":"ACTUAL_PRODUCT_BOUND_NOT_LITERATURE_IDENTIFICATION","auxiliary_obligations":[]},{"id":"S_DILATION","module":"SingularClosure.H12Frontier.Dilation","audit":"ci/frontier_audits/S_DILATION.lean","spec":"ci/frontier_audits/S_DILATION.json","role":"LITERAL_LEBESGUE_DILATION_SUPPORT","auxiliary_obligations":[]}]}
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "E01",
+      "module": "SingularClosure.H12Frontier.Normalization",
+      "audit": "ci/frontier_audits/E01.lean",
+      "spec": "ci/frontier_audits/E01.json",
+      "auxiliary_obligations": []
+    },
+    {
+      "id": "S_PRODUCT",
+      "module": "SingularClosure.H12Frontier.ExplicitNonlinear",
+      "audit": "ci/frontier_audits/S_PRODUCT.lean",
+      "spec": "ci/frontier_audits/S_PRODUCT.json",
+      "role": "ACTUAL_PRODUCT_BOUND_NOT_LITERATURE_IDENTIFICATION",
+      "auxiliary_obligations": []
+    },
+    {
+      "id": "S_DILATION",
+      "module": "SingularClosure.H12Frontier.Dilation",
+      "audit": "ci/frontier_audits/S_DILATION.lean",
+      "spec": "ci/frontier_audits/S_DILATION.json",
+      "role": "LITERAL_LEBESGUE_DILATION_SUPPORT",
+      "auxiliary_obligations": []
+    },
+    {
+      "id": "S_REPLAY_ENERGY",
+      "module": "SingularClosure.H12Frontier.ReplayEnergy",
+      "audit": "ci/frontier_audits/S_REPLAY_ENERGY.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_ENERGY.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_DERIVATIVE",
+      "module": "SingularClosure.H12Frontier.ReplayDerivative",
+      "audit": "ci/frontier_audits/S_REPLAY_DERIVATIVE.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_DERIVATIVE.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_COMPACTNESS",
+      "module": "SingularClosure.H12Frontier.ReplayCompactness",
+      "audit": "ci/frontier_audits/S_REPLAY_COMPACTNESS.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_COMPACTNESS.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_POSITIVETIME",
+      "module": "SingularClosure.H12Frontier.ReplayPositiveTime",
+      "audit": "ci/frontier_audits/S_REPLAY_POSITIVETIME.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_POSITIVETIME.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_LIMIT",
+      "module": "SingularClosure.H12Frontier.ReplayLimit",
+      "audit": "ci/frontier_audits/S_REPLAY_LIMIT.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_LIMIT.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_PHYSICAL",
+      "module": "SingularClosure.H12Frontier.ReplayPhysical",
+      "audit": "ci/frontier_audits/S_REPLAY_PHYSICAL.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_PHYSICAL.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_QUANTITATIVE",
+      "module": "SingularClosure.H12Frontier.ReplayQuantitative",
+      "audit": "ci/frontier_audits/S_REPLAY_QUANTITATIVE.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_QUANTITATIVE.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "S_REPLAY_CLOSURE",
+      "module": "SingularClosure.H12Frontier.ReplayClosure",
+      "audit": "ci/frontier_audits/S_REPLAY_CLOSURE.lean",
+      "spec": "ci/frontier_audits/S_REPLAY_CLOSURE.json",
+      "role": "CERTIFICATE_PARAMETRIC_SUPPORT_NOT_CONCRETE_MILESTONE",
+      "auxiliary_obligations": [
+        "fixed frontier nonlinear certificate required for concrete specialization"
+      ]
+    },
+    {
+      "id": "E02",
+      "module": "SingularClosure.H12Frontier.ConstantNormalization",
+      "audit": "ci/frontier_audits/E02.lean",
+      "spec": "ci/frontier_audits/E02.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E03",
+      "module": "SingularClosure.H12Frontier.NonlinearBound",
+      "audit": "ci/frontier_audits/E03.lean",
+      "spec": "ci/frontier_audits/E03.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E04",
+      "module": "SingularClosure.H12Frontier.FiniteMilestones",
+      "audit": "ci/frontier_audits/E04.lean",
+      "spec": "ci/frontier_audits/E04.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E05",
+      "module": "SingularClosure.H12Frontier.FiniteMilestones",
+      "audit": "ci/frontier_audits/E05.lean",
+      "spec": "ci/frontier_audits/E05.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E06",
+      "module": "SingularClosure.H12Frontier.FiniteMilestones",
+      "audit": "ci/frontier_audits/E06.lean",
+      "spec": "ci/frontier_audits/E06.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E07",
+      "module": "SingularClosure.H12Frontier.DerivativeMilestone",
+      "audit": "ci/frontier_audits/E07.lean",
+      "spec": "ci/frontier_audits/E07.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E08",
+      "module": "SingularClosure.H12Frontier.PositiveMilestones",
+      "audit": "ci/frontier_audits/E08.lean",
+      "spec": "ci/frontier_audits/E08.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E09",
+      "module": "SingularClosure.H12Frontier.PositiveMilestones",
+      "audit": "ci/frontier_audits/E09.lean",
+      "spec": "ci/frontier_audits/E09.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E10",
+      "module": "SingularClosure.H12Frontier.PositiveMilestones",
+      "audit": "ci/frontier_audits/E10.lean",
+      "spec": "ci/frontier_audits/E10.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E11",
+      "module": "SingularClosure.H12Frontier.LimitMilestones",
+      "audit": "ci/frontier_audits/E11.lean",
+      "spec": "ci/frontier_audits/E11.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E12",
+      "module": "SingularClosure.H12Frontier.LimitMilestones",
+      "audit": "ci/frontier_audits/E12.lean",
+      "spec": "ci/frontier_audits/E12.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E13",
+      "module": "SingularClosure.H12Frontier.Root",
+      "audit": "ci/frontier_audits/E13.lean",
+      "spec": "ci/frontier_audits/E13.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "E14",
+      "module": "SingularClosure.H12Frontier.Root",
+      "audit": "ci/frontier_audits/E14.lean",
+      "spec": "ci/frontier_audits/E14.json",
+      "role": "CONCRETE_MILESTONE",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "S_BUNDLE",
+      "module": "SingularClosure.H12Frontier.LiteratureConstants",
+      "audit": "ci/frontier_audits/S_BUNDLE.lean",
+      "spec": "ci/frontier_audits/S_BUNDLE.json",
+      "role": "CONCRETE_ANALYTIC_SUPPORT",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    },
+    {
+      "id": "S_RADIUS",
+      "module": "SingularClosure.H12Frontier.ConstantNormalization",
+      "audit": "ci/frontier_audits/S_RADIUS.lean",
+      "spec": "ci/frontier_audits/S_RADIUS.json",
+      "role": "CONCRETE_ANALYTIC_SUPPORT",
+      "auxiliary_obligations": [],
+      "scope_review_required": true
+    }
+  ]
+}
