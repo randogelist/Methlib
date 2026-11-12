@@ -50,7 +50,7 @@ theorem dyadicSeed_essUnbounded (ν : ℝ) (hν : 0 < ν) :
   by_contra hpos
   have hzero : (volume.restrict unitCube)
       {x | M < kineticDensity (dyadicSeed ν) x} = 0 :=
-    le_antisymm (le_of_not_gt hpos) (zero_le _)
+    le_antisymm (le_of_not_gt hpos) bot_le
   have hle : ∀ᵐ x ∂volume.restrict unitCube,
       kineticDensity (dyadicSeed ν) x ≤ M := by
     apply ae_iff.mpr

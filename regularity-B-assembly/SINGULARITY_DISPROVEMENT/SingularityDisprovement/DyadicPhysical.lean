@@ -51,11 +51,13 @@ theorem dyadic_finite_synthesis_reindex (ν : ℝ) (N : ℕ) (x : Vec) (i : Fin 
       apply (mem_cutoffModes_iff N _).mpr
       refine ⟨?_, shearFrequency_ne_zero hz0, ?_⟩
       · intro j
-        fin_cases j <;> simp only [shearFrequency_apply_zero,
-          shearFrequency_apply_one, shearFrequency_apply_two]
-        · constructor <;> omega
-        · exact hbounds
-        · constructor <;> omega
+        fin_cases j
+        · change -(N : ℤ) ≤ 0 ∧ (0 : ℤ) ≤ N
+          constructor <;> omega
+        · change -(N : ℤ) ≤ z ∧ z ≤ N
+          exact hbounds
+        · change -(N : ℤ) ≤ 0 ∧ (0 : ℤ) ≤ N
+          constructor <;> omega
       · have hprod : 0 ≤ ((N : ℤ) - z) * ((N : ℤ) + z) :=
           mul_nonneg (by omega) (by omega)
         have hs : galerkinFreqSq (shearFrequency z) = z ^ 2 := by

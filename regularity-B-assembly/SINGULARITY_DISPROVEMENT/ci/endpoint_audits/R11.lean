@@ -1,4 +1,4 @@
-import SingularityDisprovement.Root
+import SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN
 
 open SingularClosure SingularityDisprovement
 

@@ -46,7 +46,10 @@ theorem dyadicSeed_physical_norm_sq (ν : ℝ) :
     (f := fun ki : FourierIndex => Complex.normSq (dyadicCoeff ν ki.1 ki.2)) (by
       intro ki hki
       by_contra hnot
-      exact hki (by rw [dyadicCoeff_off_axis ν ki hnot]; simp))
+      exact hki (by
+        change Complex.normSq (dyadicCoeff ν ki.1 ki.2) = 0
+        rw [dyadicCoeff_off_axis ν ki hnot]
+        simp))
   rw [← hindex]
   simp only [shearFourierIndex, dyadicCoeff_axis, Complex.normSq_eq_norm_sq,
     Complex.norm_real, Real.norm_eq_abs, sq_abs, mul_pow]

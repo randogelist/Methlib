@@ -8,13 +8,14 @@
     "R03",
     "R04",
     "R05",
-    "R09"
+    "R09",
+    "R10"
   ],
   "additional_generic_scaling_helper": "SingularityDisprovement.SMALL_POSITIVE_DYADIC_SCALE_EXISTS",
-  "R10_actual_seed_instance": "PENDING",
-  "external_run": 43132910828,
-  "external_job": 130901166688,
-  "compiled_source": "2bc6cad33c85e6f49f35b516ae994797840132ed",
+  "R10_actual_seed_instance": "!=!",
+  "external_run": 43133687153,
+  "external_job": 130903756365,
+  "compiled_source": "dd7db574b608c1cb1a3559c38917372dce36d200",
   "allowed_axioms": [
     "propext",
     "Classical.choice",

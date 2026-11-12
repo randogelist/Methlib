@@ -78,13 +78,13 @@
     },
     {
       "id": "R11",
-      "module": "SingularityDisprovement.Root",
+      "module": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
       "name": "SingularityDisprovement.ADMISSION_NONEMPTY",
       "audit": "ci/endpoint_audits/R11.lean"
     },
     {
       "id": "R12",
-      "module": "SingularityDisprovement.Root",
+      "module": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
       "name": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
       "audit": "ci/endpoint_audits/R12.lean"
     }
