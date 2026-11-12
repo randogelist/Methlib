@@ -268,17 +268,19 @@ private theorem positive_pseries_sum_le_two :
       linarith
   apply positive_pseries_summable.tsum_le_of_sum_range_le
   intro N
-  exact (hfinite N).trans (by positivity)
+  exact (hfinite N).trans (sub_le_self _ (by positivity))
 
 private theorem dyadicGeometric_hasSum :
     HasSum (fun j : ℕ => 1 / (2 : ℝ) ^ (j + 1)) 1 := by
-  have h := (hasSum_geometric_of_norm_lt_one (by norm_num : ‖(1 / 2 : ℝ)‖ < 1)).mul_left
-    (1 / 2 : ℝ)
-  convert h using 1
-  · ext j
-    rw [pow_succ, one_div_mul, one_div_pow]
-    ring
-  · norm_num
+  have h0 : HasSum (fun j : ℕ => (1 / 2 : ℝ) ^ j) (1 - (1 / 2 : ℝ))⁻¹ :=
+    hasSum_geometric_of_norm_lt_one (by norm_num)
+  have h1 : HasSum (fun j : ℕ => (1 / 2 : ℝ) * (1 / 2 : ℝ) ^ j)
+      ((1 / 2 : ℝ) * (1 - (1 / 2 : ℝ))⁻¹) := h0.mul_left (1 / 2 : ℝ)
+  have hnum : (1 / 2 : ℝ) * (1 - (1 / 2 : ℝ))⁻¹ = 1 := by norm_num
+  rw [hnum] at h1
+  apply h1.congr
+  intro j
+  simp [pow_succ, one_div_mul, one_div_pow, mul_comm]
 
 private theorem dyadicR_term_nonneg (j : ℕ) :
     0 ≤ 1 / (((j + 1 : ℕ) : ℝ) ^ 2 * (2 : ℝ) ^ (j + 1)) := by positivity
@@ -298,7 +300,8 @@ theorem dyadicR_bounds : 0 < dyadicR ∧ dyadicR < 1 := by
   · exact hs.tsum_pos dyadicR_term_nonneg 0 (by norm_num)
   · have hlt := Summable.tsum_lt_tsum_of_nonneg dyadicR_term_nonneg dyadicR_term_le
       (i := 1) (by norm_num) dyadicGeometric_hasSum.summable
-    simpa [dyadicR, dyadicGeometric_hasSum.tsum_eq] using hlt
+    rw [dyadicGeometric_hasSum.tsum_eq] at hlt
+    exact hlt
 
 private theorem dyadicS_term_pos (j : ℕ) :
     0 < (3 - 1 / (2 : ℝ) ^ (j + 1)) / ((j + 1 : ℕ) : ℝ) ^ 2 := by
@@ -341,6 +344,16 @@ theorem DYADIC_BLOCK_IDENTITIES :
     (0 < dyadicR ∧ dyadicR < 1) ∧ (0 < dyadicS ∧ dyadicS < 6) := by
   exact ⟨fun _ hj => dyadicBlock_sum hj, fun _ hj => dyadicBlock_sum_sq hj,
     fun _ hj => dyadicBlock_sum_weighted_sq hj, dyadicR_bounds, dyadicS_bounds⟩
+
+theorem dyadicR_summable :
+    Summable (fun j : ℕ => 1 / (((j + 1 : ℕ) : ℝ) ^ 2 * (2 : ℝ) ^ (j + 1))) :=
+  Summable.of_nonneg_of_le dyadicR_term_nonneg dyadicR_term_le dyadicGeometric_hasSum.summable
+
+theorem dyadicS_summable :
+    Summable (fun j : ℕ =>
+      (3 - 1 / (2 : ℝ) ^ (j + 1)) / ((j + 1 : ℕ) : ℝ) ^ 2) :=
+  Summable.of_nonneg_of_le (fun j => (dyadicS_term_pos j).le)
+    (fun j => (dyadicS_term_lt j).le) (positive_pseries_summable.mul_left 3)
 
 end
 end SingularityDisprovement

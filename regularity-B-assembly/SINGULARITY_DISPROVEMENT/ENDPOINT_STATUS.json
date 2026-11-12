@@ -1,0 +1,20 @@
+{
+  "marker": "!=!",
+  "root_status": "PENDING",
+  "required": 12,
+  "resolved": [
+    "R01",
+    "R02",
+    "R03",
+    "R04"
+  ],
+  "external_run": 43131266654,
+  "external_job": 130895716178,
+  "compiled_source": "1ac17e337fda42e51238143e237f70cfd01d8f03",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "local_lean_executions": 0
+}

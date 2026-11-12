@@ -4,10 +4,13 @@
     "SingularityDisprovement.DyadicArithmetic",
     "SingularityDisprovement.Admission",
     "SingularityDisprovement.Dyadic",
+    "SingularityDisprovement.DyadicSums",
+    "SingularityDisprovement.DyadicNorms",
     "SingularityDisprovement.Physical",
     "SingularityDisprovement.FejerCombinatorics",
     "SingularityDisprovement.FejerKernel",
     "SingularityDisprovement.Dirichlet",
+    "SingularityDisprovement.DyadicPhysical",
     "SingularityDisprovement.Scaling",
     "SingularityDisprovement.RootAssembly"
   ],
@@ -44,7 +47,7 @@
     },
     {
       "id": "R06",
-      "module": "SingularityDisprovement.Dyadic",
+      "module": "SingularityDisprovement.DyadicNorms",
       "name": "SingularityDisprovement.DYADIC_CRITICAL_DATUM",
       "audit": "ci/endpoint_audits/R06.lean"
     },

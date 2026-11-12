@@ -76,12 +76,12 @@ theorem criticalFrequencyWeight_shear {z : ℤ} (hz : z ≠ 0) :
   have hsq := criticalFrequencyWeight_sq_of_ne_zero (shearFrequency z)
     (shearFrequency_ne_zero hz)
   have habs : ((z.natAbs : ℕ) : ℝ) ^ 2 = (z : ℝ) ^ 2 := by
-    norm_cast
-    exact_mod_cast Int.natAbs_sq z
+    simp [Nat.cast_natAbs, Int.cast_abs, sq_abs]
   have hs : laplacianFrequency (shearFrequency z) =
       (2 * Real.pi) ^ 2 * (z : ℝ) ^ 2 := by
     simp [laplacianFrequency, galerkinFreqSq, Fin.sum_univ_succ, shearFrequency]
   rw [hs] at hsq
+  rw [← habs] at hsq
   have hp := criticalFrequencyWeight_pos (shearFrequency z)
   have hq : 0 ≤ 2 * Real.pi * (z.natAbs : ℝ) := by positivity
   nlinarith

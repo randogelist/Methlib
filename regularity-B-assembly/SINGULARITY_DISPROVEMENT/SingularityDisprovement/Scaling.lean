@@ -98,6 +98,8 @@ theorem essUnbounded_iff_densityEssSup_eq_top (a : CriticalSobolev 1) :
     apply le_antisymm le_top
     apply le_sInf
     intro b hb
+    change (volume.restrict unitCube)
+      {x | b < ENNReal.ofReal (kineticDensity a x)} = 0 at hb
     by_cases hbtop : b = ⊤
     · simp [hbtop]
     · have hp := ha b.toReal ENNReal.toReal_nonneg
@@ -171,7 +173,9 @@ theorem SMALL_POSITIVE_DYADIC_SCALE_EXISTS (ν ε : ℝ) (hν : 0 < ν) (hε : 0
   have hnormlt : r * ‖b‖ < ε := by nlinarith [norm_nonneg b]
   have hscoremul := (le_div_iff₀ hroot).mp hrscore
   have hmulnonneg : 0 ≤ r * Real.sqrt (1 + s) := mul_nonneg hr.le hroot.le
-  have hsq : (r * Real.sqrt (1 + s)) ^ 2 ≤ 1 := by nlinarith
+  have hsq : (r * Real.sqrt (1 + s)) ^ 2 ≤ 1 := by
+    simpa only [one_pow] using
+      (sq_le_sq₀ hmulnonneg (by norm_num : (0 : ℝ) ≤ 1)).mpr hscoremul
   rw [mul_pow, Real.sq_sqrt hs1.le] at hsq
   have hscorelt : r ^ 2 * s < 1 := by nlinarith [sq_pos_of_pos hr]
   refine ⟨m, hmpos, ?_, ?_, ?_⟩

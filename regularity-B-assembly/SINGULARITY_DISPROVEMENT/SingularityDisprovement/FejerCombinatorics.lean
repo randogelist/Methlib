@@ -36,7 +36,8 @@ theorem positive_toeplitz_row_lower_bound
       push_cast
       ring
     · intro a ha b hb hab
-      omega
+      change j + a = j + b at hab
+      exact Nat.add_left_cancel hab
   rw [← hsum]
   exact Finset.sum_le_sum_of_subset_of_nonneg hsub (fun _ _ _ => hc _)
 
@@ -65,7 +66,10 @@ theorem positive_fejerAverage_lower_bound
   unfold fejerCoefficientAverage
   push_cast
   apply (le_div_iff₀ (by positivity : (0 : ℝ) < 2 * (N : ℝ))).mpr
-  convert positive_toeplitz_double_lower_bound c hc N using 1 <;> ring
+  have heq : ((∑ n ∈ Finset.range N, c (n : ℤ)) / 2) * (2 * (N : ℝ)) =
+      (N : ℝ) * (∑ n ∈ Finset.range N, c (n : ℤ)) := by ring
+  rw [heq]
+  exact positive_toeplitz_double_lower_bound c hc N
 
 /-- Uniform boundedness of these positive Fejer averages forces absolute
 summability of the nonnegative positive-index coefficients. -/
@@ -74,7 +78,7 @@ theorem summable_of_positive_fejerAverage_bounded
     (B : ℝ) (hB : 0 ≤ B)
     (hbound : ∀ N : ℕ, 0 < N → fejerCoefficientAverage c N ≤ B) :
     Summable (fun n : ℕ => c (n : ℤ)) := by
-  apply summable_of_sum_range_le (fun n => hc n)
+  apply summable_of_sum_range_le (c := 2 * B) (fun n => hc n)
   intro N
   by_cases hN : N = 0
   · simpa [hN] using (show (0 : ℝ) ≤ 2 * B by positivity)
