@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "name": "SingularityDisprovement.DYADIC_BLOCK_IDENTITIES",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "exact_type_marker": "EXACT_TYPE_PASS:SingularityDisprovement.DYADIC_BLOCK_IDENTITIES",
+  "errors": []
+}

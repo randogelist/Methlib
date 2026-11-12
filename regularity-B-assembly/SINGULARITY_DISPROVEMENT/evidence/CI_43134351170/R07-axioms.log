@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularityDisprovement.DYADIC_PHYSICAL_IDENTIFICATION
+DYADIC_PHYSICAL_IDENTIFICATION : ∀ (ν : ℝ),
+  ↑↑(physicalL2 (dyadicSeed ν)) =ᵐ[volume.restrict unitCube] dyadicPhysicalRepresentative ν
+'SingularityDisprovement.DYADIC_PHYSICAL_IDENTIFICATION' depends on axioms: [propext, Classical.choice, Quot.sound]

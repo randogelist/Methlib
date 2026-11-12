@@ -1,0 +1,3 @@
+EXACT_TYPE_PASS:SingularityDisprovement.ADMISSION_NONEMPTY
+ADMISSION_NONEMPTY : ∀ (ν ε : ℝ), 0 < ν → 0 < ε → ∃ a, Premise ν ε a
+'SingularityDisprovement.ADMISSION_NONEMPTY' depends on axioms: [propext, Classical.choice, Quot.sound]

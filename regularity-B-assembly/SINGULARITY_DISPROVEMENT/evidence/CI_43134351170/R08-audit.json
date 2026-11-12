@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "name": "SingularityDisprovement.dyadicSeed_essUnbounded",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "exact_type_marker": "EXACT_TYPE_PASS:SingularityDisprovement.dyadicSeed_essUnbounded",
+  "errors": []
+}

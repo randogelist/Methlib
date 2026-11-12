@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularityDisprovement.ADMISSION_IMPLIES_REGULARITY
+ADMISSION_IMPLIES_REGULARITY : ∀ (ν : ℝ),
+  0 < ν → ∀ (a : CriticalSobolev 1), CriticalSigmaZero a → calibratedScore ν a < 2 → Reg ν a
+'SingularityDisprovement.ADMISSION_IMPLIES_REGULARITY' depends on axioms: [propext, Classical.choice, Quot.sound]

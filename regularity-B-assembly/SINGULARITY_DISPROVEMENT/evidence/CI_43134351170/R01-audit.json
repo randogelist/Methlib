@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "name": "SingularityDisprovement.NATIVE_ENERGY_REALIZATION",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "exact_type_marker": "EXACT_TYPE_PASS:SingularityDisprovement.NATIVE_ENERGY_REALIZATION",
+  "errors": []
+}

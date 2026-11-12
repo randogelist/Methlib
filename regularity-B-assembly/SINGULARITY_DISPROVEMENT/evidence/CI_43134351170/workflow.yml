@@ -1,0 +1,123 @@
+name: Singularity disprovement exact endpoint chain
+
+on:
+  push:
+    branches: [SINGULARITY_DISPROVEMENT]
+    paths:
+      - 'regularity-B-assembly/SINGULARITY_DISPROVEMENT/**'
+      - '.github/workflows/singularity-disprovement.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: singularity-disprovement-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-endpoints:
+    name: Lean 4.33.0 / R01-R12 / standard axioms
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: package
+        shell: bash
+    env:
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      SINGULARITY_EXTERNAL_COMPILER: '1'
+    steps:
+      - name: Checkout exact source revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          sparse-checkout: |
+            regularity-B-assembly/Singular-Axiomatic-closure
+            regularity-B-assembly/SINGULARITY_DISPROVEMENT
+            .github/workflows/singularity-disprovement.yml
+          persist-credentials: false
+
+      - name: Prepare isolated inherited-package overlay
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 repository/regularity-B-assembly/SINGULARITY_DISPROVEMENT/ci/prepare_package.py \
+            --native repository/regularity-B-assembly/Singular-Axiomatic-closure \
+            --extension repository/regularity-B-assembly/SINGULARITY_DISPROVEMENT \
+            --output package
+          echo "$GITHUB_SHA" > package/evidence/commit.txt
+          cp repository/.github/workflows/singularity-disprovement.yml package/evidence/workflow.yml
+          git -C repository diff --exit-code -- regularity-B-assembly/Singular-Axiomatic-closure
+
+      - name: Install pinned compiler without building
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore exact inherited dependency cache
+        id: deps
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+
+      - name: Fetch verified Mathlib cache and check pins
+        id: pins
+        run: |
+          set -euo pipefail
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          sha256sum --check evidence/lockfile-before.sha256
+
+      - name: Preserve inherited dependency cache
+        if: steps.deps.outputs.cache-hit != 'true' && steps.pins.outcome == 'success'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: ${{ steps.deps.outputs.cache-primary-key }}
+
+      - name: Restore endpoint or inherited compiler objects
+        id: project
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: singularity-disprovement-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/SingularClosure/**/*.lean', 'package/SingularityDisprovement/**/*.lean', 'package/SingularityDisprovement.lean') }}
+          restore-keys: |
+            singularity-disprovement-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+
+      - name: Test audit rejection policy
+        run: python3 ci_singularity/test_endpoint_audit.py
+
+      - name: Compile and audit each supplied endpoint independently
+        id: endpoints
+        run: python3 ci_singularity/build_endpoints.py
+
+      - name: Preserve reusable objects after partial or complete build
+        if: always() && steps.pins.outcome == 'success' && steps.project.outcome == 'success' && steps.project.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.project.outputs.cache-primary-key }}
+
+      - name: Upload exact compiler and theorem audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: singularity-disprovement-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
+          if-no-files-found: error

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "name": "SingularityDisprovement.ADMISSION_NONEMPTY",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "exact_type_marker": "EXACT_TYPE_PASS:SingularityDisprovement.ADMISSION_NONEMPTY",
+  "errors": []
+}

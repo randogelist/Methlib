@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "name": "SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "exact_type_marker": "EXACT_TYPE_PASS:SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL",
+  "errors": []
+}

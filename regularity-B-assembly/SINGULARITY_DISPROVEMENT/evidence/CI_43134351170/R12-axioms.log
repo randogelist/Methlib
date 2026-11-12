@@ -1,0 +1,10 @@
+EXACT_TYPE_PASS:SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN
+SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN : ∀ (ν ε : ℝ),
+  0 < ν →
+    0 < ε →
+      (∀ (a : CriticalSobolev 1), Premise ν ε a → Reg ν a) ∧
+        (∃ a, Premise ν ε a) ∧
+          ∃ a, CriticalSigmaZero a ∧ 0 < ‖a‖ ∧ ‖a‖ < ε ∧ calibratedScore ν a < 2 ∧ densityEssSup a = ∞ ∧ Reg ν a
+'SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

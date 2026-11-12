@@ -1,0 +1,176 @@
+{
+  "status": "PASS",
+  "sources": [
+    {
+      "path": "SingularityDisprovement/Admission.lean",
+      "sha256": "e00f06b1104e92cfaf3b49c707196e81ae84af12c43dab6e5a7b09ce0e1fae99",
+      "bytes": 10617
+    },
+    {
+      "path": "SingularityDisprovement/Dirichlet.lean",
+      "sha256": "adf18f22ceabed053b83d0f693794b3e21eb8a119cc0c860e03ab97ca1a7cc79",
+      "bytes": 5366
+    },
+    {
+      "path": "SingularityDisprovement/Dyadic.lean",
+      "sha256": "802f09fdda027d7f66a2eabe62b2eab5a536660218d7a83d83d278d8a14a0f3a",
+      "bytes": 5648
+    },
+    {
+      "path": "SingularityDisprovement/DyadicArithmetic.lean",
+      "sha256": "1a90383f444c4202adbf3c37e7c35ed7995c05e3359f73117afaf7c89d057291",
+      "bytes": 15732
+    },
+    {
+      "path": "SingularityDisprovement/DyadicNorms.lean",
+      "sha256": "027684aa6c0b84d1b13f7b4f7afdbaee16eca084ef72e087ca29896cb603bc19",
+      "bytes": 3589
+    },
+    {
+      "path": "SingularityDisprovement/DyadicPhysical.lean",
+      "sha256": "30998459a36ae50a82206f1cf0fe877892bb93ee8ae0356c0a87f8ef6b4a4e10",
+      "bytes": 7081
+    },
+    {
+      "path": "SingularityDisprovement/DyadicScale.lean",
+      "sha256": "681a6fafd80383fbbe1271bd4f9c3960f89e695d0d7c0a01cf47c7fc990fad27",
+      "bytes": 813
+    },
+    {
+      "path": "SingularityDisprovement/DyadicSums.lean",
+      "sha256": "060c94c40e6b39c93373d6674feea49b0758b0a8ac6c7355911f6050293afa89",
+      "bytes": 3264
+    },
+    {
+      "path": "SingularityDisprovement/DyadicUnbounded.lean",
+      "sha256": "03867d617f7b8d6e4eddec9203be5ccfe18323a2c19a1fc5efadb9217b64d565",
+      "bytes": 3470
+    },
+    {
+      "path": "SingularityDisprovement/FejerCombinatorics.lean",
+      "sha256": "1a0c663a5d4d764709ad9a4b7203ddc3b856fbf6894a9aa3ffdd5f23fc6d189f",
+      "bytes": 3885
+    },
+    {
+      "path": "SingularityDisprovement/FejerKernel.lean",
+      "sha256": "796d821bbcc19514651e6b7e2c9c855a60f44bdb982b7a52161b61070f619507",
+      "bytes": 10624
+    },
+    {
+      "path": "SingularityDisprovement/Physical.lean",
+      "sha256": "1fa09fdf93fe7539b7405643465c4181b1443aaa1a4c2bf2f040de7fb0304e2a",
+      "bytes": 5086
+    },
+    {
+      "path": "SingularityDisprovement/RootAssembly.lean",
+      "sha256": "c50e783f7794d6b726de684aceafa027ffde6720d9a15b434b86171883b77c99",
+      "bytes": 2239
+    },
+    {
+      "path": "SingularityDisprovement/SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN.lean",
+      "sha256": "25cc4fbed0a9d8a2551b961231ba90026f1ec3dc62977a64b3e835dfbf1cf554",
+      "bytes": 1341
+    },
+    {
+      "path": "SingularityDisprovement/Scaling.lean",
+      "sha256": "ac633a9901b0f4f468780504bcd6c9c20eda05daee175c35ea90d40612d1724d",
+      "bytes": 7798
+    },
+    {
+      "path": "SingularityDisprovement.lean",
+      "sha256": "09ed0858dc2624f4c7c3efc0b07256d7ba72d5be9479be81c69708424ed38d9e",
+      "bytes": 68
+    },
+    {
+      "path": "ci_singularity/build_endpoints.py",
+      "sha256": "0288365231318d4258f89e486019f5acda1332decc2427f65737d276921bfa25",
+      "bytes": 8450
+    },
+    {
+      "path": "ci_singularity/check_endpoint_audit.py",
+      "sha256": "c0b85469cec0e0421dd7fdb4944965d6690f34ffdffdba11188c07decac5d503",
+      "bytes": 1862
+    },
+    {
+      "path": "ci_singularity/check_extension_sources.py",
+      "sha256": "6b58ec9540bf8a71fad59839f74be214591da203f2eb0e00ce3830c57f163d0b",
+      "bytes": 3228
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R01.lean",
+      "sha256": "a3672cdc298d5b8eb5b1f9b74dd12025cd358843023cd8280e7ffe062ed3b028",
+      "bytes": 724
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R02.lean",
+      "sha256": "389bb17dcc01820a31ccd7a23261373e9b6bac427d573d6101833980d94cd30b",
+      "bytes": 579
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R03.lean",
+      "sha256": "08ff1a8e37b5bbf3a463ac057b76ccbab435d92bfdd568d78a69f9decbb52704",
+      "bytes": 716
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R04.lean",
+      "sha256": "cbc440484620ea3744ef14048f585fc01baf658f7e8c8b5cbb781927817a773b",
+      "bytes": 520
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R05.lean",
+      "sha256": "c9771904bb9dbc76ce8cd48a34d79a6a29b372a37be4439cad493216e2c6e5ea",
+      "bytes": 898
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R06.lean",
+      "sha256": "ef4c4adacd0cf566b43f7295255283d911a05177ebf999f4eb2dc7e9f73d2fd9",
+      "bytes": 559
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R07.lean",
+      "sha256": "71ddbe48c33aa21a43783ef440aeebb0f03bcae973a687f4c52d31164dfb3826",
+      "bytes": 500
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R08.lean",
+      "sha256": "8fa02bdf449a0affadd0af013fa80c4e69e71cb96103e9506c513149437840df",
+      "bytes": 397
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R09.lean",
+      "sha256": "71c5812428d247d010d265983935ecdbd82e4cd44888afb5f760b70e2e5f36fa",
+      "bytes": 855
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R10.lean",
+      "sha256": "169206a2116444e57aebe5816bf925705986b6b26ad4a2087c94662ebb61c066",
+      "bytes": 597
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R11.lean",
+      "sha256": "8d1467ed42f71840bcea38d47f7e2f6dcb8e236fc671a4555ea2874b638d0870",
+      "bytes": 447
+    },
+    {
+      "path": "ci_singularity/endpoint_audits/R12.lean",
+      "sha256": "84c6f639c866659ae9a5c981313b73e19b6717d91072d2d109bf9e4cb8f0061b",
+      "bytes": 797
+    },
+    {
+      "path": "ci_singularity/endpoints.json",
+      "sha256": "06cf3d671b807456809f9c55fd5cd1b10578473ad42a48ce99d751aedb646c1c",
+      "bytes": 3087
+    },
+    {
+      "path": "ci_singularity/prepare_package.py",
+      "sha256": "09458d147d5c08bb0cfeabde26de6fc03fb360f2bfcc248180b1c1ffb4c00239",
+      "bytes": 4607
+    },
+    {
+      "path": "ci_singularity/test_endpoint_audit.py",
+      "sha256": "31db170d94ab3072ed54ae478962175dd2f5bd8e3d753444140788357deb21ab",
+      "bytes": 1711
+    }
+  ],
+  "errors": []
+}

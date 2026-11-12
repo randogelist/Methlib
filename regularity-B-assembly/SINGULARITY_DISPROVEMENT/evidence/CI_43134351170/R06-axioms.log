@@ -1,0 +1,7 @@
+EXACT_TYPE_PASS:SingularityDisprovement.DYADIC_CRITICAL_DATUM
+DYADIC_CRITICAL_DATUM : ∀ (ν : ℝ),
+  0 < ν →
+    CriticalSigmaZero (dyadicSeed ν) ∧
+      0 < ‖dyadicSeed ν‖ ∧
+        ‖physicalL2 (dyadicSeed ν)‖ ^ 2 = ν ^ 2 * dyadicR / 8 ∧ ‖dyadicSeed ν‖ ^ 2 = Real.pi * ν ^ 2 * dyadicS / 8
+'SingularityDisprovement.DYADIC_CRITICAL_DATUM' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,7 @@
+EXACT_TYPE_PASS:SingularityDisprovement.DYADIC_BLOCK_IDENTITIES
+DYADIC_BLOCK_IDENTITIES : (∀ (j : ℕ), 1 ≤ j → ∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), dyadicAmplitude n = 1 / ↑j) ∧
+  (∀ (j : ℕ), 1 ≤ j → ∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), dyadicAmplitude n ^ 2 = 1 / (↑j ^ 2 * 2 ^ j)) ∧
+    (∀ (j : ℕ),
+        1 ≤ j → ∑ n ∈ Finset.Ico (2 ^ j) (2 ^ (j + 1)), ↑n * dyadicAmplitude n ^ 2 = (3 - 2 ^ (-↑j)) / (2 * ↑j ^ 2)) ∧
+      (0 < dyadicR ∧ dyadicR < 1) ∧ 0 < dyadicS ∧ dyadicS < 6
+'SingularityDisprovement.DYADIC_BLOCK_IDENTITIES' depends on axioms: [propext, Classical.choice, Quot.sound]

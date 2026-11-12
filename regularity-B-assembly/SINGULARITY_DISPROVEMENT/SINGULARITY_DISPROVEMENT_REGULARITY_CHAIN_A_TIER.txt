@@ -1,0 +1,170 @@
+SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN_A_TIER
+
+MODE = A_TIER_DERIVATION
+ROOT_STATUS = UNCONDITIONAL_CLOSURE
+RESOLVED = 12 / 12
+PENDING = {}
+MARKER = !=!
+BRANCH = SINGULARITY_DISPROVEMENT
+
+[EXACT MATHEMATICAL SCOPE]
+Domain = T^3 = (R/Z)^3; unit-period normalization.
+H(a) = ||a||_{dot H^(1/2)}.
+L(a) = ||a||_{L^2}.
+C = SingularClosure.criticalNonlinearConstant > 0.
+gamma = 1 - 5/(4*pi) > 0.
+kappa = min(pi, gamma/(4*C^2)) > 0.
+A_nu(a) = (H(a)^2 - (5/2)*L(a)^2)/(2*nu^2).
+mathfrak_A_nu(a) = (pi/kappa)*A_nu(a).
+L_0 = 2 < pi.
+rho_a(x) = |a(x)|^2/2.
+mu = volume restricted to [0,1]^3.
+
+P_(nu,epsilon)(a) :=
+  a in H^(1/2)_(sigma,0)
+  AND 0 < H(a) < epsilon
+  AND mathfrak_A_nu(a) < 2
+  AND esssup_mu rho_a = +infinity.
+
+!=! forall nu > 0, forall epsilon > 0:
+  [forall a, P_(nu,epsilon)(a) -> Reg_nu(a)]
+  AND [exists a, P_(nu,epsilon)(a)]
+  AND [exists a, P_(nu,epsilon)(a) AND Reg_nu(a)].
+
+Reg_nu = SingularityDisprovement.Reg.
+Reg_nu includes the complete conclusion of
+SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL:
+  CriticalDatumAX6;
+  existence of an actual CriticalRegularSolution;
+  CriticalLerayHopf membership and Leray-Hopf uniqueness;
+  PositiveSmoothNSE on t > 0;
+  critical dissipation and negative-half time-derivative budgets;
+  L^4_t L^6_x integrability;
+  finite-time quartic dissipation estimate.
+
+Initial density: esssup_x rho_a(x) = +infinity.
+Regularity interval: t > 0.
+Universal large-data assertion: NOT_A_CONCLUSION.
+Uncalibrated A_nu <= pi assertion: NOT_A_CONCLUSION.
+
+[EXACT COMPILED ROOT SIGNATURE]
+theorem SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN
+    (ν ε : ℝ) (hν : 0 < ν) (hε : 0 < ε) :
+    (∀ a : CriticalSobolev 1, Premise ν ε a → Reg ν a) ∧
+    (∃ a : CriticalSobolev 1, Premise ν ε a) ∧
+    (∃ a : CriticalSobolev 1,
+      CriticalSigmaZero a ∧ 0 < ‖a‖ ∧ ‖a‖ < ε ∧
+      calibratedScore ν a < 2 ∧ densityEssSup a = ⊤ ∧ Reg ν a)
+
+Premise uses EssUnbounded a.
+essUnbounded_iff_densityEssSup_eq_top:
+  EssUnbounded a <-> densityEssSup a = top.
+EssUnbounded a :=
+  forall M : R, 0 <= M -> mu({x | M < rho_a(x)}) > 0.
+densityEssSup a := essSup_mu (ENNReal.ofReal o rho_a).
+
+[ENDPOINT REGISTER]
+!=! R01 | SingularityDisprovement.NATIVE_ENERGY_REALIZATION | external build PASS | exact type PASS | axiom audit PASS
+!=! R02 | SingularityDisprovement.SHIFTED_ENERGY_COERCIVITY | external build PASS | exact type PASS | axiom audit PASS
+!=! R03 | SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL | external build PASS | exact type PASS | axiom audit PASS
+!=! R04 | SingularityDisprovement.ADMISSION_IMPLIES_REGULARITY | external build PASS | exact type PASS | axiom audit PASS
+!=! R05 | SingularityDisprovement.DYADIC_BLOCK_IDENTITIES | external build PASS | exact type PASS | axiom audit PASS
+!=! R06 | SingularityDisprovement.DYADIC_CRITICAL_DATUM | external build PASS | exact type PASS | axiom audit PASS
+!=! R07 | SingularityDisprovement.DYADIC_PHYSICAL_IDENTIFICATION | external build PASS | exact type PASS | axiom audit PASS
+!=! R08 | SingularityDisprovement.dyadicSeed_essUnbounded | external build PASS | exact type PASS | axiom audit PASS
+!=! R09 | SingularityDisprovement.POSITIVE_SCALING_LAWS | external build PASS | exact type PASS | axiom audit PASS
+!=! R10 | SingularityDisprovement.DYADIC_ADMITTED_SCALE | external build PASS | exact type PASS | axiom audit PASS
+!=! R11 | SingularityDisprovement.ADMISSION_NONEMPTY | external build PASS | exact type PASS | axiom audit PASS
+!=! R12 | SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN | external build PASS | exact type PASS | axiom audit PASS
+
+[DEPENDENCY CHAIN]
+R01 -> R02 -> R03 -> R04.
+R05 -> R06 -> R07.
+R05 + R06 + actual physical Fourier pairing -> R08.
+R09 + R06 -> R10.
+R06 + R08 + R09 + actual positive dyadic scaling -> R11.
+R04 + R11 + essential-supremum equivalence -> R12.
+R07 is an independently audited physical identification endpoint.
+R08 uses actual physical Fourier coefficients and Fejer kernels;
+its proof does not require the ordered pointwise-series endpoint R07.
+
+[CONCRETE WITNESS]
+d_n = 0                         (n < 2).
+d_n = 1/(j*2^j), j=floor(log2 n) (n >= 2).
+(dyadicSeed nu)^hat((0,+n,0)) = (nu*d_n/4,0,0).
+(dyadicSeed nu)^hat((0,-n,0)) = (nu*d_n/4,0,0).
+Remaining coefficients = 0.
+a = 2^(-m) * dyadicSeed nu, for a proved admissible m in N.
+R = sum_(j>=1) 1/(j^2*2^j).
+S = sum_(j>=1) (3-2^(-j))/j^2.
+L(dyadicSeed nu)^2 = nu^2*R/8.
+H(dyadicSeed nu)^2 = pi*nu^2*S/8.
+Positive scaling preserves essential unboundedness.
+R10 supplies an actual dyadic-seed instance, not an abstract seed premise.
+R11 and R12 discharge the concrete seed premises internally.
+
+[UNBOUNDEDNESS PROOF]
+K_N(x) = |sum_(0<=j<N) exp(2*pi*i*j*x_2)|^2/N.
+K_N >= 0; integral K_N = 1.
+Actual physical first-component pairing = Fejer coefficient average.
+Fejer averages at 2*N dominate one half of positive partial sums.
+sum d_n = +infinity.
+An almost-everywhere finite density bound would bound all averages.
+Contradiction -> every finite density superlevel has positive measure.
+
+[EXTERNAL COMPILER AND AUDIT]
+Repository = https://github.com/randogelist/Methlib
+Source SHA = 2b991b3c49202d3f1f6d34c2420006a4577758fa
+Run = https://github.com/randogelist/Methlib/actions/runs/43134351170
+Job = https://github.com/randogelist/Methlib/actions/runs/43134351170/job/130905947172
+Run conclusion = success.
+Compiler = Lean 4.33.0, x86_64-unknown-linux-gnu.
+Compiler commit = d8b18978322de05a8f3dba51ef03cf5461676c17.
+Mathlib SHA = db584cd6d46c92f209a44c0f1c829460d327499d.
+Exact-signature audits = 12/12 PASS.
+Theorem-level axiom audits = 12/12 PASS.
+Axioms(each root endpoint) = {propext, Classical.choice, Quot.sound}.
+sorryAx = absent.
+Unapproved axioms = absent.
+Undischarged certificate/witness/semantic/analytic premises = {}.
+Independent helper builds = 13/13 PASS.
+Audit-parser tests = 9/9 PASS.
+Local Lean executions = 0.
+Windows script execution = NOT_RUN.
+
+Artifact ID = 13907530157.
+Artifact name = singularity-disprovement-evidence-43134351170-1.
+Artifact SHA256 = 4fceaf7ec65c75de4136c919521ffb0cf2d55c9c6940260a23c25e7bd6a8a372.
+Original artifact files = 48.
+Permanent selected evidence = evidence/CI_43134351170/.
+Full original evidence = external-audit.zip in distribution.
+
+[SOURCE IDENTITY]
+Base branch = codex/h12-small-unconditional.
+Base SHA = 09dfe94a1ef150e21d09df3013fbe09002ef139c.
+Base directory = regularity-B-assembly/Singular-Axiomatic-closure.
+New directory = regularity-B-assembly/SINGULARITY_DISPROVEMENT.
+Changed inherited source files = 0.
+Retained native-source subset = 223/223 exact SHA256 matches.
+Retained native Lean files = 220/220 exact matches.
+Extension inputs = 33/33 exact SHA256 matches.
+Generated aggregate stub = 1/1 exact SHA256 match.
+Other inherited manifest entries = 197 omitted non-required files.
+Theorem sources correspond to the compiled SHA above.
+Subsequent status/evidence-only commits do not alter compiled source.
+
+[EXTERNAL WINDOWS REPLAY]
+Prerequisites = Windows; Python 3 launcher py; Git; elan/lake.
+Toolchain = leanprover/lean4:v4.33.0 (pinned native package).
+Distribution layout preserves both sibling package directories.
+Command = run.cmd (distribution root).
+Cache policy = reuse native/package build caches; lake exe cache get.
+Replay stages = isolated overlay -> dependency cache -> parser tests
+                -> independent builds -> exact-type and axiom audits.
+Expected output = .work/package/evidence/endpoint-status.json.
+Required replay status = PASS; resolved_count = 12; pending_ids = [].
+
+[STATUS]
+!=! R01; !=! R02; !=! R03; !=! R04; !=! R05; !=! R06;
+!=! R07; !=! R08; !=! R09; !=! R10; !=! R11; !=! R12.
+ROOT = UNCONDITIONAL_CLOSURE, exact calibrated scope above.

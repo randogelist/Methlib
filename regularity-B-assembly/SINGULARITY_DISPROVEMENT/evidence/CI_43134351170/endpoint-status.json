@@ -1,0 +1,234 @@
+{
+  "endpoints": {
+    "R01": {
+      "audit": "ci/endpoint_audits/R01.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R01",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.NATIVE_ENERGY_REALIZATION",
+      "status": "A_TIER"
+    },
+    "R02": {
+      "audit": "ci/endpoint_audits/R02.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R02",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.SHIFTED_ENERGY_COERCIVITY",
+      "status": "A_TIER"
+    },
+    "R03": {
+      "audit": "ci/endpoint_audits/R03.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R03",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL",
+      "status": "A_TIER"
+    },
+    "R04": {
+      "audit": "ci/endpoint_audits/R04.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R04",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.Admission",
+      "name": "SingularityDisprovement.ADMISSION_IMPLIES_REGULARITY",
+      "status": "A_TIER"
+    },
+    "R05": {
+      "audit": "ci/endpoint_audits/R05.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R05",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.DyadicArithmetic",
+      "name": "SingularityDisprovement.DYADIC_BLOCK_IDENTITIES",
+      "status": "A_TIER"
+    },
+    "R06": {
+      "audit": "ci/endpoint_audits/R06.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R06",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.DyadicNorms",
+      "name": "SingularityDisprovement.DYADIC_CRITICAL_DATUM",
+      "status": "A_TIER"
+    },
+    "R07": {
+      "audit": "ci/endpoint_audits/R07.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R07",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.DyadicPhysical",
+      "name": "SingularityDisprovement.DYADIC_PHYSICAL_IDENTIFICATION",
+      "status": "A_TIER"
+    },
+    "R08": {
+      "audit": "ci/endpoint_audits/R08.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R08",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.DyadicUnbounded",
+      "name": "SingularityDisprovement.dyadicSeed_essUnbounded",
+      "status": "A_TIER"
+    },
+    "R09": {
+      "audit": "ci/endpoint_audits/R09.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R09",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.Scaling",
+      "name": "SingularityDisprovement.POSITIVE_SCALING_LAWS",
+      "status": "A_TIER"
+    },
+    "R10": {
+      "audit": "ci/endpoint_audits/R10.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R10",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.DyadicScale",
+      "name": "SingularityDisprovement.DYADIC_ADMITTED_SCALE",
+      "status": "A_TIER"
+    },
+    "R11": {
+      "audit": "ci/endpoint_audits/R11.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R11",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
+      "name": "SingularityDisprovement.ADMISSION_NONEMPTY",
+      "status": "A_TIER"
+    },
+    "R12": {
+      "audit": "ci/endpoint_audits/R12.lean",
+      "audit_result": "PASS",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "build": "PASS",
+      "id": "R12",
+      "marker": "!=!",
+      "module": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
+      "name": "SingularityDisprovement.SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN",
+      "status": "A_TIER"
+    }
+  },
+  "errors": [],
+  "helper_builds": {
+    "SingularityDisprovement.Admission": "PASS",
+    "SingularityDisprovement.Dirichlet": "PASS",
+    "SingularityDisprovement.Dyadic": "PASS",
+    "SingularityDisprovement.DyadicArithmetic": "PASS",
+    "SingularityDisprovement.DyadicNorms": "PASS",
+    "SingularityDisprovement.DyadicPhysical": "PASS",
+    "SingularityDisprovement.DyadicScale": "PASS",
+    "SingularityDisprovement.DyadicSums": "PASS",
+    "SingularityDisprovement.FejerCombinatorics": "PASS",
+    "SingularityDisprovement.FejerKernel": "PASS",
+    "SingularityDisprovement.Physical": "PASS",
+    "SingularityDisprovement.RootAssembly": "PASS",
+    "SingularityDisprovement.Scaling": "PASS"
+  },
+  "marker": "!=!",
+  "pending_ids": [],
+  "required_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12"
+  ],
+  "resolved_count": 12,
+  "resolved_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12"
+  ],
+  "schema_version": 1,
+  "source_sha": "2b991b3c49202d3f1f6d34c2420006a4577758fa",
+  "status": "PASS"
+}

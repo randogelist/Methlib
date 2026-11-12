@@ -1,0 +1,7 @@
+EXACT_TYPE_PASS:SingularityDisprovement.NATIVE_ENERGY_REALIZATION
+NATIVE_ENERGY_REALIZATION : ∀ (a : CriticalSobolev 1),
+  CriticalSigmaZero a →
+    ‖a‖ ^ 2 = ∑' (ki : FourierIndex), criticalFrequencyWeight ki.1 * Complex.normSq (criticalCoeff 1 a ki.1 ki.2) ∧
+      ‖physicalL2 a‖ ^ 2 = ∑' (ki : FourierIndex), Complex.normSq (criticalCoeff 1 a ki.1 ki.2) ∧
+        datumFourierCoeff ↑↑(physicalL2 a) = criticalCoeff 1 a
+'SingularityDisprovement.NATIVE_ENERGY_REALIZATION' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,7 @@
+EXACT_TYPE_PASS:SingularityDisprovement.SHIFTED_ENERGY_COERCIVITY
+SHIFTED_ENERGY_COERCIVITY : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : CriticalSobolev 1),
+      CriticalSigmaZero a →
+        calibrationGamma * ‖a‖ ^ 2 ≤ 2 * ν ^ 2 * shiftedEnergy ν a ∧ 2 * ν ^ 2 * shiftedEnergy ν a ≤ ‖a‖ ^ 2
+'SingularityDisprovement.SHIFTED_ENERGY_COERCIVITY' depends on axioms: [propext, Classical.choice, Quot.sound]

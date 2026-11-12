@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL
+FIRST_STAGE_IMPLIES_NATIVE_SMALL : ∀ (ν : ℝ),
+  0 < ν → ∀ (a : CriticalSobolev 1), CriticalSigmaZero a → calibratedScore ν a < 2 → criticalNonlinearConstant * ‖a‖ < ν
+'SingularityDisprovement.FIRST_STAGE_IMPLIES_NATIVE_SMALL' depends on axioms: [propext, Classical.choice, Quot.sound]

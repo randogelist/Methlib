@@ -1,0 +1,12 @@
+EXACT_TYPE_PASS:SingularityDisprovement.POSITIVE_SCALING_LAWS
+POSITIVE_SCALING_LAWS : ∀ (ν r : ℝ),
+  0 < r →
+    ∀ (a : CriticalSobolev 1),
+      CriticalSigmaZero a →
+        CriticalSigmaZero (r • a) ∧
+          ‖r • a‖ = r * ‖a‖ ∧
+            ‖physicalL2 (r • a)‖ = r * ‖physicalL2 a‖ ∧
+              calibratedScore ν (r • a) = r ^ 2 * calibratedScore ν a ∧
+                (kineticDensity (r • a) =ᵐ[volume.restrict unitCube] fun x => r ^ 2 * kineticDensity a x) ∧
+                  (EssUnbounded a → EssUnbounded (r • a)) ∧ (EssUnbounded a ↔ densityEssSup a = ∞)
+'SingularityDisprovement.POSITIVE_SCALING_LAWS' depends on axioms: [propext, Classical.choice, Quot.sound]

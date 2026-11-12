@@ -1,0 +1,3 @@
+EXACT_TYPE_PASS:SingularityDisprovement.dyadicSeed_essUnbounded
+dyadicSeed_essUnbounded : ∀ (ν : ℝ), 0 < ν → EssUnbounded (dyadicSeed ν)
+'SingularityDisprovement.dyadicSeed_essUnbounded' depends on axioms: [propext, Classical.choice, Quot.sound]
