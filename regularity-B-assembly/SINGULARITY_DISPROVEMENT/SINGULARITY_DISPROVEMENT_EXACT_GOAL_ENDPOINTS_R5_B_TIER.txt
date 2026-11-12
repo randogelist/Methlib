@@ -1,0 +1,518 @@
+SINGULARITY_DISPROVEMENT_EXACT_GOAL_ENDPOINTS_R5_B_TIER
+MODE = B_TIER_DERIVATION
+MARKER = !
+DATE = 2026-11-12
+REQUIRED_NAMED_CONTRACTS = 12
+NEW_A_TIER_CONTRACTS = 0
+LOCAL_LEAN_EXECUTIONS = 0
+MANUAL_CI_DISPATCHES = 0
+TARGET_BRANCH = SINGULARITY_DISPROVEMENT
+BASE_BRANCH = codex/h12-small-unconditional
+BASE_SHA = 09dfe94a1ef150e21d09df3013fbe09002ef139c
+PRE_WRITE_TARGET_SHA = 5fc7c2dfb4d33a171e77c95780d21eff55547d0b
+SCOPE = exact implication + nonempty antecedent; initial essential supremum.
+PREVIOUS_REGISTER = R4:22; REVISED_EXACT_ROOT_REGISTER = R5:12.
+COUNTING_UNIT = named proof contract; definitions, private lemmas and imported
+declarations excluded. The count is an implementation decomposition.
+
+0. FROZEN DEFINITIONS AND EXACT ROOT
+
+Domain:
+  T3 = (R/Z)^3; normalized Haar measure mu(T3)=1.
+  nu>0; forcing=0.
+  D = H^(1/2)_{sigma,0}(T3;R3).
+  a : D denotes the native CriticalSobolev 1 carrier together with the actual
+      spectral reality, solenoidality and mean-zero certificates.
+
+Norms:
+  H(a) = ||a||_{dot H^(1/2)};
+  L(a) = ||a||_{L2};
+  rho_a(x) = (1/2)|a_phys(x)|^2.
+
+a_phys denotes a measurable representative of criticalInitialPhysicalL2(a).
+rho_a is defined up to mu-a.e. equality; every essential-supremum assertion
+below is independent of the representative.
+
+Native constant:
+  C = SingularClosure.criticalNonlinearConstant > 0.
+  gamma = 1 - 5/(4*pi) > 0.
+  kappa = min{pi, gamma/(4*C^2)} > 0.
+
+Uncalibrated score:
+  A_nu(a) = [H(a)^2 - (5/2)L(a)^2]/(2*nu^2).
+
+FROZEN CALIBRATED SCORE:
+  mathfrak_A_nu(a) = (pi/kappa) A_nu(a).
+
+Stage zero:
+  m_0 = 2 integral_0^1 1 dx = 2;
+  L_0 = sum_{n=0}^0 m_n = m_0 = 2 < pi.
+
+Essential unboundedness:
+  EssUnbounded(a)
+    :<=> forall M>=0, mu{x : rho_a(x)>M}>0
+    <=> esssup_{x in T3} rho_a(x)=+infinity
+    <=> a notin L-infinity(T3).
+
+Admission predicate:
+  P(nu,epsilon,a) :<=>
+    a in D
+    and 0<H(a)<epsilon
+    and mathfrak_A_nu(a)<2
+    and EssUnbounded(a).
+
+The inequalities 2=L_0<pi are the universal stage-zero identity, not additional
+datum-dependent certificates.
+
+Regularity:
+  Reg_nu(a) = the actual regularity conclusion inherited from
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL, for the same a,nu:
+  actual global solution, strong H^(1/2) initial trace, actual Leray-Hopf
+  membership and its uniqueness, and positive-time smooth NSE.
+  The full audited native conclusion may be retained by the implementation.
+  No smoothness at t=0 is imposed on the rough initial representative.
+
+IMPLICATION_ROOT:
+  forall nu>0, forall epsilon>0, forall a in D,
+    P(nu,epsilon,a) ==> Reg_nu(a).
+
+NONVACUITY_ROOT:
+  forall nu>0, forall epsilon>0, exists a in D,
+    P(nu,epsilon,a).
+
+COMBINED_ROOT = IMPLICATION_ROOT and NONVACUITY_ROOT.
+
+EXISTENTIAL_COROLLARY:
+  forall nu>0, forall epsilon>0, exists a in D,
+    0<H(a)<epsilon
+    and mathfrak_A_nu(a)<2=L_0<pi
+    and esssup rho_a=+infinity
+    and Reg_nu(a).
+
+The implication is universally quantified over admitted data.
+The nonvacuity theorem constructs a specific admitted family.
+Neither quantifier is substituted for the other.
+
+1. EXACT REQUIRED ENDPOINT REGISTER
+
+R01 NATIVE_ENERGY_REALIZATION
+  Coefficient realization and physical L2 dictionary for the same datum:
+    H(a)^2 = sum_{k!=0} 2*pi*|k| |a_hat(k)|^2;
+    L(a)^2 = sum_{k!=0} |a_hat(k)|^2.
+  Forward pkg1-to-native coefficient transport, spectral certificates,
+  norm identities and scalar compatibility are sufficient.
+  A full inverse carrier bijection is not required.
+  Dependencies: audited native constructors/Parseval; audited pkg1 framework.
+  New obligation: actual carrier/physical-meaning adapter.
+
+R02 SHIFTED_ENERGY_COERCIVITY
+  forall a in D,
+    gamma H(a)^2 <= 2*nu^2 A_nu(a) <= H(a)^2.
+  In particular A_nu(a)>=0 and mathfrak_A_nu(a)>=0.
+  Dependency: R01 and the audited coefficient frequency gap
+    L(a)^2 <= H(a)^2/(2*pi).
+  New obligation: transport of the gap and scalar shifted-energy algebra.
+
+R03 FIRST_STAGE_IMPLIES_NATIVE_SMALL
+  0<kappa; L_0=m_0=2<pi;
+  forall a in D,
+    mathfrak_A_nu(a)<2 ==> C H(a)<nu.
+  Quantitative consequence:
+    C H(a)<nu/sqrt(2).
+  Dependencies: R02, C>0, elementary pi bounds and scalar algebra.
+  No generic Gram matrix or resolvent is needed to identify m_0.
+
+R04 ADMISSION_IMPLIES_REGULARITY
+  forall a in D,
+    mathfrak_A_nu(a)<2 ==> Reg_nu(a).
+  Hence forall epsilon>0,
+    P(nu,epsilon,a) ==> Reg_nu(a).
+  Dependencies: R03 and the audited native regularity theorem.
+  The epsilon bound and essential-unboundedness condition are not consumed
+  by the regularity application.
+
+R05 DYADIC_BLOCK_IDENTITIES
+  For j>=1 and 2^j<=n<2^(j+1), set d_n=1/(j*2^j).
+  Prove:
+    sum_{n=2^j}^{2^(j+1)-1} d_n       = 1/j;
+    sum_{n=2^j}^{2^(j+1)-1} d_n^2     = 1/(j^2*2^j);
+    sum_{n=2^j}^{2^(j+1)-1} n*d_n^2   = (3-2^(-j))/(2*j^2).
+  With
+    R = sum_{j>=1} 1/(j^2*2^j),
+    S = sum_{j>=1} (3-2^(-j))/j^2,
+  prove 0<R<1 and 0<S<6.
+  Dependencies: finite arithmetic and ordinary convergent series.
+
+R06 DYADIC_CRITICAL_DATUM
+  Construct b_nu in D with
+    b_hat(0,+/-n,0) = (nu/4)d_n e_1, n>=2,
+    all other coefficients zero.
+  Prove:
+    L(b_nu)^2 = nu^2 R/8;
+    H(b_nu)^2 = pi*nu^2 S/8;
+    0<H(b_nu)<infinity.
+  Dependencies: R01, R05.
+  Reality, zero mean and solenoidality are actual coefficient identities.
+  Nonzero n=2 coefficient proves strict positivity.
+
+R07 DYADIC_PHYSICAL_IDENTIFICATION
+  Define, for y notin Z,
+    g(y)=sum_{n>=2} d_n cos(2*pi*n*y).
+  Give g any finite value on y in Z.
+  Prove:
+    b_nu,phys(x)=(nu/2)g(x_2)e_1, mu-a.e.
+  Dependencies: R06; actual L2 Fourier synthesis/injectivity;
+  Dirichlet/Abel convergence away from y=0.
+  Pointwise series identification and native L2 identification must agree.
+
+R08 DYADIC_ESSENTIAL_UNBOUNDEDNESS
+  Prove:
+    forall M>=0,
+      mu{x : (1/2)|b_nu,phys(x)|^2>M}>0;
+    hence esssup rho_{b_nu}=+infinity.
+  Stronger available statement:
+    every open neighborhood of a point of {x_2=0} has infinite local
+    essential supremum of the same density.
+  Dependencies: R05, R07, Abel tail bound, divergence of harmonic sums.
+  Divergence at one point alone is insufficient.
+
+R09 POSITIVE_SCALING_LAWS
+  forall a in D, forall r>0:
+    r*a in D;
+    H(r*a)=r H(a);
+    L(r*a)=r L(a);
+    mathfrak_A_nu(r*a)=r^2 mathfrak_A_nu(a);
+    rho_{r*a}=r^2 rho_a, mu-a.e.;
+    EssUnbounded(a) ==> EssUnbounded(r*a).
+  Dependencies: R01, actual physical scalar compatibility.
+  Essential unboundedness follows from positive-measure superlevel sets.
+
+R10 DYADIC_ADMITTED_SCALE
+  forall nu>0, epsilon>0, exists m>=1:
+    r=2^(-m)>0;
+    0<H(r*b_nu)<epsilon;
+    mathfrak_A_nu(r*b_nu)<1<2.
+  Dependencies: R02, R06, R09, convergence 2^(-m)->0.
+  No numerical evaluation of C is asserted.
+
+R11 ADMISSION_NONEMPTY
+  forall nu>0, epsilon>0, exists a in D:
+    P(nu,epsilon,a).
+  Witness: a=2^(-m)b_nu, with m supplied by R10.
+  Dependencies: R06, R08, R09, R10.
+
+R12 SINGULARITY_DISPROVEMENT_REGULARITY_CHAIN
+  Prove COMBINED_ROOT and its EXISTENTIAL_COROLLARY.
+  Dependencies: R04, R11.
+  The witness supplied by R11 is passed unchanged to R04.
+  The datum, viscosity, initial physical representative and regular solution
+  remain consistently identified.
+
+REGISTER_STATUS:
+  R01-R12 = B_TIER_DERIVED; NEW_LEAN_BODIES_PENDING.
+  Existing component evidence is reused; it does not promote new adapters.
+
+2. COMPLETE SCOPED DERIVATION: IMPLICATION HALF
+
+2.1 Native dictionary and frequency gap.
+For each nonzero lattice mode, |k|>=1, hence the critical weight is at least
+2*pi. The audited coefficient embedding yields
+  L(a)^2 <= H(a)^2/(2*pi).
+R01 transports its coefficient sums to the native datum and physical L2 class.
+The zero coefficient is zero; the native convention omega(0)=1 contributes 0.
+
+2.2 Coercivity.
+Since L(a)^2>=0,
+  H(a)^2-(5/2)L(a)^2 <= H(a)^2.
+The frequency gap gives
+  H(a)^2-(5/2)L(a)^2
+    >= [1-5/(4*pi)]H(a)^2
+    = gamma H(a)^2.
+Thus R02 holds.
+
+2.3 Stage zero and positivity.
+The elementary pi bound pi>2 implies gamma>3/8>0.
+C>0 gives gamma/(4*C^2)>0, so kappa>0.
+The actual constant moment m_0=2 integral_0^1 1=2 gives L_0=2<pi.
+
+2.4 Strict native smallness.
+If mathfrak_A_nu(a)<2, then
+  A_nu(a) < 2*kappa/pi < kappa.
+Consequently,
+  gamma H(a)^2 <= 2*nu^2 A_nu(a) < 2*nu^2*kappa,
+  C^2 H(a)^2 < 2*nu^2*C^2*kappa/gamma <= nu^2/2.
+All divided constants are strictly positive.
+Taking nonnegative square roots yields
+  C H(a)<nu/sqrt(2)<nu.
+This proves R03, including strictness.
+
+2.5 Native application.
+Apply the exact audited theorem to nu, a, the actual CriticalSigmaZero
+certificate and C H(a)<nu. Its conclusion is Reg_nu(a).
+This proves R04 and IMPLICATION_ROOT.
+The esssup premise is compatible with the conclusion and is not an analytic
+input needed by the inherited small-data theorem.
+
+3. COMPLETE SCOPED DERIVATION: NONVACUITY HALF
+
+3.1 Finite blocks.
+The j-th block contains 2^j terms and each coefficient is 1/(j*2^j).
+The first two sums in R05 follow immediately.
+For the weighted sum, the arithmetic progression has sum
+  2^j(3*2^j-1)/2.
+Multiplication by 1/(j^2*2^(2*j)) gives the third identity.
+
+Positivity of R and S follows from their positive first terms.
+Since 1/j^2<=1, with strict inequality at j=2,
+  R < sum_{j>=1} 2^(-j)=1.
+Also
+  S < 3 sum_{j>=1} 1/j^2 < 6.
+For the latter strict bound, use monotonicity of x^(-2):
+  sum_{j>=2} 1/j^2 < integral_1^infinity x^(-2)dx=1.
+
+3.2 Native critical datum.
+Insert the stated coefficients at k=(0,+/-n,0).
+They are real and equal on opposite modes; their first-component direction
+is orthogonal to k; k=0 is absent.
+The block sums imply finite weighted square sum, so the native constructor
+produces b_nu in D. Parseval gives
+  L(b_nu)^2 = 2*(nu/4)^2 sum_{n>=2} d_n^2 = nu^2 R/8;
+  H(b_nu)^2 = 2*(nu/4)^2*(2*pi) sum_{n>=2} n*d_n^2
+             = pi*nu^2 S/8.
+Since nu>0 and S>0, H(b_nu)>0.
+
+3.3 Pointwise cosine-series representative.
+The sequence d_n is nonincreasing and tends to zero.
+For y notin Z and integers N>=2, geometric sums and Abel summation give
+  |sum_{n>N}d_n cos(2*pi*n*y)|
+    <= d_{N+1}/|sin(pi*y)|.
+The series therefore converges uniformly on compact sets away from y=0.
+Fourier truncations converge in the native Hhalf norm and hence in physical L2.
+An L2-convergent subsequence converges a.e.; its pointwise limit away from
+the null plane is the cosine series. Thus the native physical L2 class equals
+(nu/2)g(x_2)e_1 a.e. This proves R07.
+
+3.4 Positive-measure divergence.
+For 0<|y|<1/24, set
+  N=floor(1/(6|y|)), j=floor(log_2(N+1)).
+For 2<=n<=N,
+  cos(2*pi*n*y)>=1/2.
+Complete dyadic blocks 1,...,j-1 lie below N. Moreover,
+  d_{N+1}<=2/[j(N+1)];
+  |sin(pi*y)|>=2|y|;
+  (N+1)|y|>1/6.
+Therefore
+  g(y)>=(1/2)sum_{k=1}^{j-1}1/k - 6/j.
+As y->0 through nonzero values, j->infinity, so g(y)->+infinity.
+
+Fix M>=0. Choose 0<delta<1/24 such that
+  0<y<delta ==> g(y)>1+(2/nu)*sqrt(2*M).
+On the strip {x:0<x_2<delta}, outside the null exceptional set from R07,
+  rho_{b_nu}(x)=nu^2 g(x_2)^2/8 > M.
+The strip has measure delta>0. Thus
+  mu{x:rho_{b_nu}(x)>M}>0.
+This proves R08 and the infinite essential supremum.
+For the stronger local version, intersect the strip with a sufficiently
+small product neighborhood contained in the specified open neighborhood.
+
+3.5 Scaling identities.
+Physical and Fourier scalar compatibility give H(ra)=rH(a), L(ra)=rL(a)
+for r>0. Both score terms are quadratic, hence
+  mathfrak_A_nu(ra)=r^2 mathfrak_A_nu(a).
+The physical density satisfies rho_{ra}=r^2 rho_a a.e.
+For each finite M>=0,
+  mu{rho_{ra}>M}=mu{rho_a>M/r^2}>0
+whenever EssUnbounded(a). This proves R09.
+
+3.6 Dyadic scale selection.
+Put
+  h=H(b_nu)>0,
+  s=mathfrak_A_nu(b_nu)>=0,
+  delta_* = min{1/2, epsilon/[2(1+h)], 1/sqrt(1+s)} > 0.
+Choose m>=1 with r=2^(-m)<=delta_*.
+Then
+  0<H(r*b_nu)=r*h
+    <= epsilon*h/[2(1+h)] < epsilon/2 < epsilon;
+  mathfrak_A_nu(r*b_nu)=r^2*s
+    <= s/(1+s) < 1 < 2.
+This proves R10. It strengthens the required strict score bound.
+The choice is existential; no executable numerical value of m is claimed.
+
+The normalized coefficients remain rational:
+  (r*b_nu)_hat(0,+/-n,0)/nu = d_n e_1/(4*2^m).
+
+3.7 Nonvacuity and root.
+Set a=r*b_nu. R06 and R09 give a in D.
+R10 gives the positive norm and strict admission bounds.
+R08 and R09 give esssup rho_a=+infinity.
+Therefore P(nu,epsilon,a); this is R11.
+R04 gives Reg_nu(a) for this identical a; this is R12.
+QED.
+
+4. MEASURE-THEORETIC ENDPOINT TYPE
+
+Recommended internal predicate:
+  EssUnbounded(a) :=
+    forall M : Real, 0<=M ->
+      0 < mu {x | M < (1/2)*||a_phys(x)||^2}.
+
+The measure comparison is in the native extended nonnegative measure type.
+An equivalent endpoint may state
+  eLpNorm rho_a infinity mu = infinity,
+provided rho_a is proved measurable and nonnegative.
+The final exported mathematical statement remains
+  esssup rho_a=+infinity.
+
+Auxiliary equivalences:
+  finite L-infinity norm of a
+    <=> finite L-infinity norm of rho_a;
+  rho_a in L1, since integral rho_a=(1/2)L(a)^2<infinity.
+Hence the constructed density belongs to L1 \ L-infinity.
+Modification on a null set does not change any endpoint.
+
+Finite integrated local energy and unbounded density are distinct:
+  forall measurable E subset T3,
+    integral_E rho_a <= (1/2)L(a)^2 < infinity.
+No infinite integrated-energy conclusion is asserted.
+
+5. REUSE REGISTER: NO REPROOF OF PASSED ANALYTIC ENGINES
+
+Native engine:
+  SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.
+  source: 09dfe94a1ef150e21d09df3013fbe09002ef139c.
+  cached external run: 43059293572.
+  job: 130657144029.
+  compiler: Lean 4.33.0.
+  compiler commit: d8b18978322de05a8f3dba51ef03cf5461676c17.
+  Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d.
+  recorded exact-type result: PASS.
+  recorded theorem axioms: [propext, Classical.choice, Quot.sound].
+  imported by R04.
+
+Native representation infrastructure retained:
+  criticalSobolevOfCoeff;
+  criticalSobolev_norm_sq;
+  criticalInitialPhysicalL2_norm_sq;
+  criticalCoeff_injective;
+  physical Fourier synthesis and L2 convergence/injectivity.
+  Required specialization/transport: R01, R06, R07, R09.
+
+Pkg1:
+  H12L2CoefficientEmbedding.H12_L2_COEFFICIENT_EMBEDDING;
+  H12SmallScaling.exists_small_positive_scale;
+  criticalNorm_scale;
+  H12_SMALL_SCALING.
+  cached external run: 42944856804.
+  job: 130275083929.
+  tested source: c01ebe76a103eea794f56f477a0b7270b31acaa6.
+  package tree: 810cfaaf27b75c068002ccee2501263ae3a19800.
+  same compiler/Mathlib pins as the native engine.
+  Embedding transport supplies R02.
+  Existing scale laws may supply R09.
+  Existing positive-scale selection is an alternative to the elementary
+  dyadic selection in R10; it need not introduce a new numerical constant.
+
+Previously audited inventory:
+  native/package declaration matches: 233=204+29.
+  cross-repository indexed scope: 28 repositories, 172 branch heads.
+  These inventory counts are inherited R4 evidence, not 233 new root proofs.
+  The present round does not rerun the cross-repository audit or Lean.
+
+Evidence links:
+  https://github.com/randogelist/Methlib/actions/runs/43059293572
+  https://github.com/randogelist/Methlib/actions/runs/43059293572/job/130657144029
+  https://github.com/randogelist/Methlib/actions/runs/42944856804
+  https://github.com/randogelist/Methlib/actions/runs/42944856804/job/130275083929
+
+Frozen source:
+  https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean
+
+R4 source/evidence register:
+  https://github.com/randogelist/Methlib/blob/5fc7c2dfb4d33a171e77c95780d21eff55547d0b/regularity-B-assembly/SINGULARITY_DISPROVEMENT/SINGULARITY_DISPROVEMENT_REPOSITORY_REUSE_R4_B_TIER.txt
+
+6. DEPENDENCY SCHEDULE
+
+Imports:
+  pinned native/pkg1 carrier, norm and cached regularity engines.
+
+Wave 1:
+  R01; R05.
+
+Wave 2:
+  R02 from R01;
+  R06 from R01,R05;
+  R09 from R01 and the score definition.
+
+Wave 3:
+  R03 from R02;
+  R07 from R06;
+  R10 from R02,R06,R09.
+
+Wave 4:
+  R04 from R03 and imported regularity;
+  R08 from R05,R07.
+
+Wave 5:
+  R11 from R06,R08,R09,R10.
+
+Wave 6:
+  R12 from R04,R11.
+
+Native asynchronous elaboration is compatible with independent proof bodies.
+Pending theorem signatures are not proofs.
+Only matching external compilation plus theorem-level standard-axiom audit
+may promote R01-R12 to A_TIER.
+Cached imported proofs retain their exact signatures and dependency pins.
+No new Lean implementation or run.cmd is included in this B_TIER round.
+
+7. R4 -> R5 SCOPE MAP
+
+R4 E01 -> R5 R01; full inverse bijection omitted from the required contract.
+R4 E02a -> R5 R02.
+R4 E06a/E06b at N=0 -> R5 R03.
+R4 E07/E13 -> R5 R04 and its application in R12.
+R4 E08 -> R5 R05.
+R4 E09 -> R5 R06.
+R4 E10 -> R5 R07.
+R4 E11 -> R5 R08.
+R4 E12 -> R5 R09/R10/R11, with explicit separate scaling laws.
+R4 E18/C01 -> R5 R12 restricted to the selected exact goal.
+
+Optional GP/BKQR representation work:
+  actual cosh GP(0,1)=pi;
+  actual bounded multiplication resolvent W(1)=pi;
+  all rational moments, tails, Hankel and localizer positivity;
+  shifted-vector realization;
+  joint Hilbert-block positivity and the general-N admission interface.
+These remain available in R4 with passed helper references.
+Only the exact stage-zero identity L_0=m_0=2 is required by the selected root.
+
+Optional stronger flow work:
+  R4 E14 SHEAR_HEAT_ACTUAL_NSE;
+  R4 E15 SHEAR_TRACE_ENERGY_LERAY_HOPF;
+  R4 E16 NATIVE_FLOW_EQ_EXPLICIT_SHEAR;
+  R4 E17 INITIAL_DENSITY_UNBOUNDED_POSITIVE_SLAB_BOUNDED.
+The selected root obtains Reg from the audited native engine; it does not
+require explicit reconstruction and identification of the evolved shear.
+
+The stronger margin C H(a)<nu/8 is also optional.
+R10 already suffices for the selected goal.
+
+8. FROZEN LIMITS OF THE CONCLUSION
+
+CALIBRATED_SCORE = mathfrak_A_nu = (pi/kappa) A_nu.
+UNCALIBRATED_A_nu<2_IMPLIES_REGULARITY = not derived by this register.
+FULL_UNCALIBRATED_A_nu<=pi_IMPLIES_REGULARITY = separate unresolved track.
+ARBITRARY_INFINITE_INPUT_ARITHMETIC_CHECKER = not asserted.
+UNIVERSAL_LARGE_DATA_REGULARITY = not asserted.
+INITIAL_ESS_SUP = +infinity.
+POSITIVE_TIME_REGULARITY = Reg_nu(a).
+SMOOTHNESS_THROUGH_t=0 = not asserted.
+
+FINAL_STATUS:
+  REQUIRED_ENDPOINTS = 12.
+  ROOT_MATHEMATICAL_DERIVATION = B_TIER_COMPLETE (!).
+  NEW_EXTERNAL_COMPILER_AUDITS = 0.
+  ROOT_A_TIER = PENDING.
+  ORIGINAL_BASE_SOURCE = unchanged.
+
