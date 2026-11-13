@@ -13,10 +13,12 @@ import QFA.Endpoints.Representation.EnergyProfile
 import QFA.Endpoints.Restart.EnergyShift
 import QFA.Endpoints.Restart.HilbertTrace
 import QFA.Endpoints.Restart.TimeTranslate
+import QFA.Assembly
 
 /-!
-QFA endpoint extraction v0.2.0; all declarations remain A_TIER_CANDIDATE.
-71 theorem bodies and two proof-carrying linear-isometry constructions.
-Three analytic proposition targets have no supplied proof inhabitants.
-The exact physical QFA root remains the frozen B-tier target.
+QFA endpoint package v0.3.0: 91 theorem candidates and two proof-carrying
+linear-isometry constructions. Four analytic proposition targets retain no
+supplied proof inhabitants. Import QFA.Assembly for the four reusable assembly
+interfaces. The frozen physical QFA root remains a separate B-tier target.
+External cached Windows Lean 4.33.0 compilation and exact axiom audits pending.
 -/

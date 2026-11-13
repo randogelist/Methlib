@@ -1,5 +1,5 @@
 QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER
-VERSION = 0.2.0
+VERSION = 0.3.0
 STATUS = A_TIER_CANDIDATE
 MATHEMATICAL_DERIVATION = B_TIER
 EXACT_PHYSICAL_QFA_ROOT = FROZEN; LEAN_IMPLEMENTATION_PENDING
@@ -10,40 +10,42 @@ LOCAL_LEAN_EXECUTIONS = 0
 PACKAGE
   Quasi-Fefferman-A/LeanEndpoints
   Aggregator: QFA.lean
-  Candidate endpoint modules: 15
-  Public theorem declarations: 71
+  Candidate endpoint/assembly proof modules: 19
+  Public theorem declarations: 91
   Proof-carrying linear-isometry definitions: 2
-  Exact audit roots: LE001-LE073
-  Analytic Prop definitions: LC001-LC003; no proof inhabitants supplied
+  Exact audit roots: LE001-LE093
+  Analytic Prop definitions: LC001-LC004; no proof inhabitants supplied
 
 PINNED EXTERNAL BASELINE
   Native Windows Lean 4.33.0
   Toolchain: leanprover/lean4:v4.33.0
   Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
   Transitive dependencies: lake-manifest.json
-  Integration parent: bf028db80b675a09c6144135e289c5c48572075a
+  Integration parent: 0ebdf99322b661016d5537e7902b274fd13e72c9
 
 EXACT STATEMENT REGISTER
   endpoint-manifest.json binds each declaration name to its kind, source
   path, exact prepared signature, derivation locations and source SHA256.
-  Audit.lean emits the compiler type and #print axioms for all 73 roots.
+  Audit.lean emits the compiler type and #print axioms for all 93 roots.
   LE031 complexifyVectorLI and LE041 complexifyL2LI contain linearity and
   norm-preservation proofs; both are separately audited as constructions.
   Private helpers remain in the transitive dependency closure.
 
 SOURCE STATUS
-  All 71 theorem declarations have proposed proof bodies.
+  All 91 theorem declarations have proposed proof bodies.
   Both linear-isometry constructions have proposed proof-bearing bodies.
   No sorry, admit, arbitrary axiom declaration or native_decide proof occurs
   in the inspected candidate source.
   This is source inspection, not successful Lean elaboration or axiom evidence.
-  The three analytic Prop definitions supply signatures only.
+  The four analytic Prop definitions supply signatures only.
 
 MATHEMATICAL DERIVATIONS
   QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt: LE001-LE030.
   QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt: LE031-LE073.
+  QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt: LE074-LE093.
+  assembly-manifest.json: exact interfaces and future physical dependencies.
   ../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt: exact frozen root,
-    133 pinned source declarations, 45 derivation locations, 171 source
+    139 pinned source declarations, 45 derivation locations, 180 source
     applications, complete inline and reverse indices.
 
 EXECUTION
@@ -93,12 +95,26 @@ EXTRACTED REPRESENTATION/RESTART BOUNDARY
     data imply strict good time and both strong traces.
   No physical weak momentum equation or LH membership is concluded by LE073.
 
+ASSEMBLY STATUS
+  Import QFA.Assembly.
+  LE074-LE077: supplied compact-test derivative/Laplacian data transport;
+    compact-to-Schwartz/spectral composition retains LC004 and LC001.
+  LE078-LE084: complete shifted EnergyProfile and RestartData at selected time.
+  LE085-LE089: actual field norm estimates to exact nonlinear absorption.
+  LE090-LE092: a.e. comparison starts and common traces to all-time equality.
+  LE093: singleton only after nonnegative-time restriction, with reference membership.
+  Existing LE001-LE073 signatures and endpoint source bodies remain unchanged.
+  The new four assembly files have independent proof bodies and explicit final
+    compositions; they do not add analytic axiom declarations.
+
 PHYSICAL REMAINDERS
   Whole-space LH construction, actual gradient identification and profile realization;
   initial-trace identification of a and physical full-measure restart predicate;
-  AD01 physical derivative identification and Laplacian assembly;
+  AD01 physical derivative witness identification; supplied Laplacian sums
+    are transported by LE075;
   AD02 physical weak-equation restart at D05.05;
-  AD08 compact/complex/Schwartz extension, AD03 inverse representative and LC targets;
+  AD08 LC004 compact-to-Schwartz extension, LC001 spectral realization,
+    AD03 inverse representative and LC002/LC003 analytic targets;
   local strong existence, actual energy/enstrophy and continuation;
   comparison coefficient/product integrability and physical cross-testing;
   pressure realization, full NSE residual elimination and exact root assembly.

@@ -110,9 +110,10 @@ $$
 | Artifact | Status |
 |---|---|
 | [QUASI_FEFFERMAN_A_B_TIER.txt](QUASI_FEFFERMAN_A_B_TIER.txt) | Complete composed classical derivation |
-| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.3: 133 pinned source declarations at 45 derivation locations; 171 source applications; LE001–LE073 and three analytic targets indexed at their points of use |
+| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.4: 139 pinned source declarations at 45 derivation locations; 180 source applications; LE001–LE093 and four analytic targets indexed at their points of use |
 | [QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt) | Complete scalar derivations, LE001–LE030 |
 | [QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt) | Complete representation, field-profile, time-translation and strong-trace derivations, LE031–LE073 |
+| [QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt) | Complete reusable representation/restart/analytic/comparison assemblies, LE074–LE093 |
 
 Selected source baseline: Lean `4.33.0`, Mathlib
 `db584cd6d46c92f209a44c0f1c829460d327499d`.
@@ -122,13 +123,13 @@ theorem-level axiom-audit evidence.
 
 ## Folderwise Lean endpoint extraction
 
-[LeanEndpoints](LeanEndpoints/README.md), version `0.2.0`:
+[LeanEndpoints](LeanEndpoints/README.md), version `0.3.0`:
 `Energy`, `GoodTime`, `Agmon`, `Comparison`, `Representation`, `Restart`,
 `Composition` under `LeanEndpoints/QFA/Endpoints/`.
 
-Status: `A_TIER_CANDIDATE`; 71 theorem bodies and two proof-carrying
-linear-isometry constructions in 15 endpoint modules. Three analytic
-Prop targets retain no supplied proof inhabitants. All 73 proof-bearing
+Status: `A_TIER_CANDIDATE`; 91 theorem bodies and two proof-carrying
+linear-isometry constructions in 19 proof modules. Four analytic
+Prop targets retain no supplied proof inhabitants. All 93 proof-bearing
 declarations have exact external audit entries.
 
 LE073 composes the concrete full-volume L2 energy profile, weak pairing
@@ -141,3 +142,16 @@ and its strict regularity cutoff remain frozen.
 [run.cmd](LeanEndpoints/run.cmd): cached external native Windows Lean
 4.33.0 execution and exact declaration-level axiom auditing. Local Lean
 executions: zero.
+
+## Reusable assembly import
+
+```lean
+import QFA.Assembly
+```
+
+[Assembly](LeanEndpoints/QFA/Assembly/README.md): four interfaces under
+`LeanEndpoints/QFA/Assembly/`, with 20 additional theorem candidates.
+The assembly constructs shifted energy data, composes supplied analytic
+estimates, constructs comparison sequences, and restricts singleton equality
+to nonnegative time. [assembly-manifest.json](LeanEndpoints/assembly-manifest.json)
+records the subsequent physical stages and named unresolved analytic inputs.

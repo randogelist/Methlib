@@ -1,5 +1,5 @@
 QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER
-VERSION = 0.1.1
+VERSION = 0.1.2
 SCOPE = SCALAR_EXTRACTION_LE001_LE030
 MODE = B_TIER_DERIVATION
 MATHEMATICAL_MARKER = !=B_TIER
@@ -37,9 +37,10 @@ Established mathematical scope of this extraction:
 Physical whole-space realization remains a separate Lean obligation.
 No scalar endpoint is identified with a whole-space NSE theorem by naming.
 The complete root B-tier derivation remains
-  QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt, v1.3.
+  QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt, v1.4.
 Continuation: QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt;
 LE031-LE073 are registered there and in the complete indexed derivation.
+Further assembly: QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt, LE074-LE093.
 
 [01] EXACT COMPOSED SCALAR THEOREM
 

@@ -2,16 +2,44 @@
 
 | Field | Value |
 |---|---|
-| Branch / package version | `QFA` / `0.2.0` |
+| Branch / package version | `QFA` / `0.3.0` |
 | Mathematical derivation | `!=B_TIER` |
 | Prepared Lean source | `A_TIER_CANDIDATE` |
-| Public theorem candidates | 71 |
+| Public theorem candidates | 91 |
 | Proof-carrying linear-isometry constructions | 2 |
-| Exact external axiom-audit roots | 73 |
-| Analytic proposition targets without supplied proofs | 3 |
-| Endpoint modules | 15 |
+| Exact external axiom-audit roots | 93 |
+| Analytic proposition targets without supplied proofs | 4 |
+| Endpoint / assembly proof modules | 19 |
 | External compiler and exact declaration axiom audit | `PENDING` |
 | Local Lean executions | 0 |
+
+## Reusable assembly
+
+```lean
+import QFA.Assembly
+```
+
+| Interface | New indices | Output | Explicit remaining inputs |
+|---|---|---|---|
+| [Representation](QFA/Assembly/Representation.lean) | LE074–LE077 | Transported first/diagonal-second derivatives and Laplacian sum; conditional spectral realization | Actual derivative data; LC004 extension; LC001 spectral realization |
+| [Restart](QFA/Assembly/Restart.lean) | LE078–LE084 | Selected subcritical time and complete `RestartData` | EnergyProfile, weak pairing continuity, a.e. energy starts; physical PDE membership remains separate |
+| [AnalyticInputs](QFA/Assembly/AnalyticInputs.lean) | LE085–LE089 | Actual norm estimates to exact nonlinear coefficient and positive absorption margin | LC002/LC003, derivative witnesses, convection and enstrophy inequalities |
+| [Comparison](QFA/Assembly/Comparison.lean) | LE090–LE093 | Equality on positive/closed/all nonnegative horizons; restricted singleton | Common traces, coefficient/product integrability, actual relative energy; reference membership for singleton |
+
+`RestartData` contains exactly the shifted `EnergyProfile`, weak pairing
+continuity and strong initial trace. The comparison assembly constructs the
+admissible sequence and sets its scalar budget to the actual coefficient
+integral. Equality at time zero additionally requires the stated initial
+values. Singleton equality concerns restrictions to nonnegative time.
+
+The selected energy profile does not supply an H2 field or a Laplacian
+witness. Later strong-solution realization supplies the inputs for the
+analytic assembly. A pointwise positive margin does not itself establish
+the temporal invariant or the continuation theorem.
+
+[assembly-manifest.json](assembly-manifest.json) records the four interfaces,
+their exact local indices, the four analytic targets, and subsequent physical
+stages. [Assembly README](QFA/Assembly/README.md) records the input/output map.
 
 ## Folder decomposition
 
@@ -101,8 +129,9 @@ energies exactly. A supplied real compact-test weak derivative is
 transported after both test products have been proved integrable.
 
 The AD08 extension to complex/Schwartz tests and tempered derivatives,
-physical derivative identification, and actual Laplacian assembly remain
-separate formalization obligations. The generic Restart modules do not
+and actual physical derivative identification remain separate obligations.
+The assembly transports supplied diagonal second derivatives and their
+actual L2 Laplacian sum through complexification. The generic Restart modules do not
 contain the physical weak-equation restart proof at D05.05.
 
 [Contracts.lean](QFA/Endpoints/Agmon/Contracts.lean) fixes the full-volume
@@ -114,16 +143,19 @@ complex carrier, native Fourier normalization and actual analytic targets.
 | LC002 | `WholeSpaceInterpolationEndpoint` | Spectral identities and Cauchy–Schwarz |
 | LC003 | `WholeSpaceAgmonEndpoint` | Exact radial integral, weighted Cauchy–Schwarz and AD03 |
 
-No proof inhabitant of these three proposition targets is supplied.
+LC004, `CompactToSchwartzEndpoint`, is the additional exact extension
+target in `QFA.Assembly.Representation`. No proof inhabitant of any of the
+four analytic proposition targets is supplied.
 
 ## Derivations and verification inputs
 
 - [QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt](QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt): complete scalar derivations, LE001–LE030.
 - [QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt](QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt): complete representation/profile/restart derivations, LE031–LE073.
-- [Indexed root derivation](../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt): v1.3; 133 pinned source declarations, 45 derivation locations, 171 source applications, and all local indices at their points of use.
+- [Indexed root derivation](../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt): v1.4; 139 pinned source declarations, 45 derivation locations, 180 source applications, and all local indices at their points of use.
+- [QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt](QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt): complete derivations of LE074–LE093 and the exact later interfaces.
 - [QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt](QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt): candidate status and external evidence requirements.
 - [endpoint-manifest.json](endpoint-manifest.json): exact declaration names, kinds, signatures, source hashes, and dependency pins.
-- [Audit.lean](Audit.lean): compiler types and transitive axiom reports for all 73 exact declarations.
+- [Audit.lean](Audit.lean): compiler types and transitive axiom reports for all 93 exact declarations.
 - [run.cmd](run.cmd): cached external native Windows execution.
 
 ## External execution
@@ -137,7 +169,7 @@ Mathlib: `db584cd6d46c92f209a44c0f1c829460d327499d`.
 Native Windows Python 3, Git, Lean and Lake are required.
 
 The runner retrieves native Mathlib objects with `lake exe cache get`,
-preserves incremental Lake outputs, builds `QFA`, and audits the 71 theorem
+preserves incremental Lake outputs, builds `QFA`, and audits the 91 theorem
 declarations and two proof-carrying constructions. Source and dependency
 identities and audit evidence are recorded under `evidence/`. Allowed
 foundational axioms: `propext`, `Classical.choice`, `Quot.sound`.

@@ -1,11 +1,11 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "mathematical_status": "B_TIER",
   "lean_status": "A_TIER_CANDIDATE",
   "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
   "lean": "4.33.0",
   "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
-  "source_parent_commit": "bf028db80b675a09c6144135e289c5c48572075a",
+  "source_parent_commit": "0ebdf99322b661016d5537e7902b274fd13e72c9",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -24,7 +24,12 @@
   },
   "sources": {
     ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
-    "Audit.lean": "4888e7abec10936beac9a154a25109dea3adc223f478aec59386bc3fb3e167bc",
+    "Audit.lean": "d05f6a9739e62e46e5b994ebd78448048d6745213f28dbfd08d8218596ea6baf",
+    "QFA/Assembly/AnalyticInputs.lean": "a5c53dafbc179bd35f810a6b3051e561ce5ebd507d9b6923b04e54265dec7451",
+    "QFA/Assembly/Comparison.lean": "fd138e6f4bd91f9e55e6624f9cf99b5d6c0a6ba344770fda5ba421d9b6c1ef92",
+    "QFA/Assembly/Representation.lean": "83ad5c89c278f5ed43686a6aa2e0294fb6494875a08f55acecffb03f0eaae3e3",
+    "QFA/Assembly/Restart.lean": "d82d1b1c19395755184363843ea2433232a131e38c8c27d6b339bf2dd44878a4",
+    "QFA/Assembly.lean": "b6c49effd5f14aa951ee78e39cfd81f4c596892d4e9b2481de148402658404c9",
     "QFA/Endpoints/Agmon/Contracts.lean": "a8094d33071c0cc9da07fea80bd9b481eb5e1a87b08d8109835007cbc5c03ec0",
     "QFA/Endpoints/Agmon/Scalar.lean": "d8b0dd43cfabda0510d4c01c358cdc959d6d7fc266f097c8470df361babfc034",
     "QFA/Endpoints/Comparison/AdmissibleTimes.lean": "ced4416fb261e3a08a45b321ea13d1c4051641e06f5b7d7ef2b49d4ab556f3a9",
@@ -40,9 +45,10 @@
     "QFA/Endpoints/Restart/EnergyShift.lean": "a8f561949ae04161498ad2bce280ea72a2f622798a4b3576a4a61b96506b1a72",
     "QFA/Endpoints/Restart/HilbertTrace.lean": "22005e1af6599c0563dd61f735f6bfd33bdbe9843865ecd188b44707e15e68f6",
     "QFA/Endpoints/Restart/TimeTranslate.lean": "b10e9246b4c9791a3ce36e6fc5195f1e1f333b3bebe6def69e1d3126f7a78a0a",
-    "QFA.lean": "e4db50fb57b252805315ef338120ffaa70f7ad1f0181b70005b425858b76e9b1",
+    "QFA.lean": "2dae30bc12a7c0c1fa94bf1461689eb3ce1d3eaff4c4d66cded5d973a21ec721",
+    "assembly-manifest.json": "744903bc91543a811b59ce230240405d9c1f3aba203400b67cb1aa9309c7701d",
     "lake-manifest.json": "d6d1cf29b10a13526b356cfb5bdfcccc8aaf33c39b6c68a2990b533a015b41a8",
-    "lakefile.lean": "9ad19e6e4f85c8a26815640e318315b85ce6106325aed991cb89d4f76bacee7f",
+    "lakefile.lean": "082fa0336d2b38e238f6444e163513b4590e0f003f9a951293827d31c04a5012",
     "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
     "run.cmd": "25fdf43a23b45a6d28e89e808fe9174f3c5ac69219de3c1653787ddbce274f07",
     "scripts/audit.py": "8b5fd4945a300c458a3bf1487a60448b4ed29eabf041277b2b16eaf31a52529f"
@@ -465,6 +471,7 @@
       "status": "A_TIER_CANDIDATE",
       "kind": "theorem",
       "application_steps": [
+        "D09.03",
         "D09.04"
       ]
     },
@@ -661,7 +668,8 @@
       "step": "D02.02",
       "status": "A_TIER_CANDIDATE",
       "application_steps": [
-        "D02.02"
+        "D02.02",
+        "D06.08"
       ]
     },
     {
@@ -689,7 +697,8 @@
       "step": "D02.02",
       "status": "A_TIER_CANDIDATE",
       "application_steps": [
-        "D02.02"
+        "D02.02",
+        "D06.08"
       ]
     },
     {
@@ -1056,7 +1065,8 @@
       "step": "D05.03",
       "status": "A_TIER_CANDIDATE",
       "application_steps": [
-        "D05.03"
+        "D05.03",
+        "D05.04"
       ]
     },
     {
@@ -1071,7 +1081,291 @@
       "status": "A_TIER_CANDIDATE",
       "application_steps": [
         "D05.02",
-        "D05.03"
+        "D05.03",
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Representation.complexifyL2_sum",
+      "source": "QFA/Assembly/Representation.lean",
+      "module": "QFA.Assembly.Representation",
+      "line": 53,
+      "signature": "theorem complexifyL2_sum (H : Fin 3 → RealL2) :\n    complexifyL2 (∑ j : Fin 3, H j) = ∑ j : Fin 3, complexifyL2 (H j)",
+      "kind": "theorem",
+      "id": "LE074",
+      "step": "D02.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.03"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Representation.complexify_compactDerivativeData",
+      "source": "QFA/Assembly/Representation.lean",
+      "module": "QFA.Assembly.Representation",
+      "line": 62,
+      "signature": "theorem complexify_compactDerivativeData\n    {v L : RealL2} {G H : Fin 3 → RealL2}\n    (h : CompactDerivativeData v G H L) :\n    CompactDerivativeData (complexifyL2 v)\n      (fun j => complexifyL2 (G j)) (fun j => complexifyL2 (H j))\n      (complexifyL2 L)",
+      "kind": "theorem",
+      "id": "LE075",
+      "step": "D02.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.03",
+        "D06.02"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Representation.schwartzWitnesses_of_compactData",
+      "source": "QFA/Assembly/Representation.lean",
+      "module": "QFA.Assembly.Representation",
+      "line": 87,
+      "signature": "theorem schwartzWitnesses_of_compactData\n    (hExtension : CompactToSchwartzEndpoint)\n    {v L : RealL2} {G H : Fin 3 → RealL2}\n    (h : CompactDerivativeData v G H L) :\n    SchwartzDerivativeWitnesses (complexifyL2 v)\n      (fun j => complexifyL2 (G j)) (complexifyL2 L)",
+      "kind": "theorem",
+      "id": "LE076",
+      "step": "D06.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D06.02"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Representation.spectralRealization_of_compactData",
+      "source": "QFA/Assembly/Representation.lean",
+      "module": "QFA.Assembly.Representation",
+      "line": 100,
+      "signature": "theorem spectralRealization_of_compactData\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    {v L : RealL2} {G H : Fin 3 → RealL2}\n    (h : CompactDerivativeData v G H L) :\n    NativeSpectralRealization (complexifyL2 v)\n      (fun j => complexifyL2 (G j)) (complexifyL2 L)",
+      "kind": "theorem",
+      "id": "LE077",
+      "step": "D06.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D06.02"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioc",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 68,
+      "signature": "theorem timeTranslate_aestronglyMeasurable_Ioc\n    {E : Type*} [TopologicalSpace E] {f : ℝ → E} {s T : ℝ}\n    (hs : 0 ≤ s)\n    (hf : AEStronglyMeasurable f (volume.restrict (Ioc (0 : ℝ) (T + s)))) :\n    AEStronglyMeasurable (timeTranslate s f)\n      (volume.restrict (Ioc (0 : ℝ) T))",
+      "kind": "theorem",
+      "id": "LE078",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioo",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 85,
+      "signature": "theorem timeTranslate_aestronglyMeasurable_Ioo\n    {E : Type*} [TopologicalSpace E] {f : ℝ → E} {s T : ℝ}\n    (hs : 0 ≤ s)\n    (hf : AEStronglyMeasurable f (volume.restrict (Ioo (0 : ℝ) (T + s)))) :\n    AEStronglyMeasurable (timeTranslate s f)\n      (volume.restrict (Ioo (0 : ℝ) T))",
+      "kind": "theorem",
+      "id": "LE079",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.timeTranslate_memLp_Ioo",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 95,
+      "signature": "theorem timeTranslate_memLp_Ioo\n    {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {p : ℝ≥0∞} {s T : ℝ}\n    (hs : 0 ≤ s)\n    (hf : MemLp f p (volume.restrict (Ioo (0 : ℝ) (T + s)))) :\n    MemLp (timeTranslate s f) p (volume.restrict (Ioo (0 : ℝ) T))",
+      "kind": "theorem",
+      "id": "LE080",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.timeTranslate_weakPairingContinuousOn",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 105,
+      "signature": "theorem timeTranslate_weakPairingContinuousOn\n    {u : ℝ → RealSpatialL2} {s : ℝ} (hs : 0 ≤ s)\n    (hweak : ∀ b : RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ))) :\n    ∀ b : RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (timeTranslate s u t) b) (Ici (0 : ℝ))",
+      "kind": "theorem",
+      "id": "LE081",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.energyProfile_timeTranslate",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 123,
+      "signature": "theorem energyProfile_timeTranslate\n    {ν s : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) (hs : 0 ≤ s)\n    (hstart : EnergyStart ν u G s) :\n    EnergyProfile ν (u s) (timeTranslate s u) (gradientTranslate s G)",
+      "kind": "theorem",
+      "id": "LE082",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.restartData_of_energyStart",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 147,
+      "signature": "theorem restartData_of_energyStart\n    {ν s : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) (hν : 0 ≤ ν) (hs : 0 ≤ s)\n    (hweak : ∀ b : RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))\n    (hstart : EnergyStart ν u G s) :\n    RestartData ν u G s",
+      "kind": "theorem",
+      "id": "LE083",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Restart.exists_restartData_before",
+      "source": "QFA/Assembly/Restart.lean",
+      "module": "QFA.Assembly.Restart",
+      "line": 167,
+      "signature": "theorem exists_restartData_before\n    {ν δ : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    {Good : ℝ → Prop}\n    (h : EnergyProfile ν a u G) (hν : 0 < ν)\n    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hweak : ∀ b : RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))\n    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),\n      Good s ∧ EnergyStart ν u G s) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧\n      velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 ∧\n      EnergyStart ν u G s ∧ RestartData ν u G s",
+      "kind": "theorem",
+      "id": "LE084",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.AnalyticInputs.scalarProfile_of_field_estimates",
+      "source": "QFA/Assembly/AnalyticInputs.lean",
+      "module": "QFA.Assembly.AnalyticInputs",
+      "line": 44,
+      "signature": "theorem scalarProfile_of_field_estimates\n    {v L : ComplexL2} {G : Fin 3 → ComplexL2}\n    {V : Space →ᵇ ComplexVector} {N : ℝ}\n    (hN : 0 ≤ N)\n    (hInterpolation : gradientEnergy G ^ 2 ≤ velocityEnergy v * laplacianEnergy L)\n    (hAgmon : ‖V‖ ^ 2 ≤\n      Real.sqrt (gradientEnergy G * laplacianEnergy L) / (2 * Real.pi))\n    (hConvection : N ≤ ‖V‖ * Real.sqrt (gradientEnergy G) *\n      Real.sqrt (laplacianEnergy L)) :\n    ScalarProfile (velocityEnergy v) (gradientEnergy G) (laplacianEnergy L) ‖V‖ N",
+      "kind": "theorem",
+      "id": "LE085",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D06.08"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.AnalyticInputs.scalarProfile_of_complexified_field_estimates",
+      "source": "QFA/Assembly/AnalyticInputs.lean",
+      "module": "QFA.Assembly.AnalyticInputs",
+      "line": 74,
+      "signature": "theorem scalarProfile_of_complexified_field_estimates\n    {v L : RealL2} {G : Fin 3 → RealL2}\n    {V : Space →ᵇ ComplexVector} {N : ℝ}\n    (hN : 0 ≤ N)\n    (hInterpolation : (∑ j : Fin 3, ‖G j‖ ^ 2) ^ 2 ≤ ‖v‖ ^ 2 * ‖L‖ ^ 2)\n    (hAgmon : ‖V‖ ^ 2 ≤\n      Real.sqrt ((∑ j : Fin 3, ‖G j‖ ^ 2) * ‖L‖ ^ 2) / (2 * Real.pi))\n    (hConvection : N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) *\n      Real.sqrt (‖L‖ ^ 2)) :\n    ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N",
+      "kind": "theorem",
+      "id": "LE086",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D06.08"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.AnalyticInputs.exists_scalarProfile_of_analytic_endpoints",
+      "source": "QFA/Assembly/AnalyticInputs.lean",
+      "module": "QFA.Assembly.AnalyticInputs",
+      "line": 106,
+      "signature": "theorem exists_scalarProfile_of_analytic_endpoints\n    (hInterpolation : WholeSpaceInterpolationEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : ComplexL2} {G : Fin 3 → ComplexL2} {N : ℝ}\n    (hDerivatives : SchwartzDerivativeWitnesses v G L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => v x) →\n        N ≤ ‖V‖ * Real.sqrt (gradientEnergy G) * Real.sqrt (laplacianEnergy L)) :\n    ∃ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => v x) ∧\n        ScalarProfile (velocityEnergy v) (gradientEnergy G) (laplacianEnergy L) ‖V‖ N",
+      "kind": "theorem",
+      "id": "LE087",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D06.08",
+        "D07.01"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.AnalyticInputs.nonlinear_estimates_of_analytic_endpoints",
+      "source": "QFA/Assembly/AnalyticInputs.lean",
+      "module": "QFA.Assembly.AnalyticInputs",
+      "line": 125,
+      "signature": "theorem nonlinear_estimates_of_analytic_endpoints\n    (hInterpolation : WholeSpaceInterpolationEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : ComplexL2} {G : Fin 3 → ComplexL2} {N : ℝ}\n    (hDerivatives : SchwartzDerivativeWitnesses v G L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => v x) →\n        N ≤ ‖V‖ * Real.sqrt (gradientEnergy G) * Real.sqrt (laplacianEnergy L)) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤\n        (velocityEnergy v * gradientEnergy G) * laplacianEnergy L ^ 4 ∧\n      N ≤ nonlinearCoefficient (velocityEnergy v) (gradientEnergy G) * laplacianEnergy L",
+      "kind": "theorem",
+      "id": "LE088",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D06.08"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.AnalyticInputs.exists_positive_margin_of_analytic_endpoints",
+      "source": "QFA/Assembly/AnalyticInputs.lean",
+      "module": "QFA.Assembly.AnalyticInputs",
+      "line": 147,
+      "signature": "theorem exists_positive_margin_of_analytic_endpoints\n    (hInterpolation : WholeSpaceInterpolationEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : ComplexL2} {G : Fin 3 → ComplexL2} {N d ν : ℝ}\n    (hDerivatives : SchwartzDerivativeWitnesses v G L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => v x) →\n        N ≤ ‖V‖ * Real.sqrt (gradientEnergy G) * Real.sqrt (laplacianEnergy L))\n    (hν : 0 < ν)\n    (hSmall : velocityEnergy v * gradientEnergy G < 4 * Real.pi ^ 2 * ν ^ 4)\n    (hEnstrophy : d / 2 + ν * laplacianEnergy L ≤ N) :\n    ∃ η : ℝ,\n      η = ν - nonlinearCoefficient (velocityEnergy v) (gradientEnergy G) ∧\n      0 < η ∧\n      N ≤ (ν - η) * laplacianEnergy L ∧\n      d + 2 * η * laplacianEnergy L ≤ 0",
+      "kind": "theorem",
+      "id": "LE089",
+      "step": "D07.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D07.01"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Comparison.eq_on_Ioc_of_ae_relative_energy",
+      "source": "QFA/Assembly/Comparison.lean",
+      "module": "QFA.Assembly.Comparison",
+      "line": 40,
+      "signature": "theorem eq_on_Ioc_of_ae_relative_energy\n    {V : Type*} [NormedAddCommGroup V]\n    {u v : ℝ → V} {g : ℝ → ℝ} {a₀ : V} {T : ℝ} {Good : ℝ → Prop}\n    (hT : 0 < T)\n    (hg : ContinuousOn g (Ioc (0 : ℝ) T))\n    (hg_nonneg : ∀ t ∈ Ioc (0 : ℝ) T, 0 ≤ g t)\n    (hg_integrable : IntervalIntegrable g volume (0 : ℝ) T)\n    (hprod : IntervalIntegrable\n      (fun r => g r * ‖u r - v r‖ ^ 2) volume (0 : ℝ) T)\n    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) T), Good s)\n    (hu_trace : Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a₀))\n    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 a₀))\n    (hrelative : ∀ s ∈ Ioo (0 : ℝ) T, Good s →\n      ∀ t ∈ Icc s T,\n        ‖u t - v t‖ ^ 2 ≤ ‖u s - v s‖ ^ 2 +\n          ∫ r in s..t, g r * ‖u r - v r‖ ^ 2) :\n    ∀ t ∈ Ioc (0 : ℝ) T, u t = v t",
+      "kind": "theorem",
+      "id": "LE090",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D09.03",
+        "D09.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy",
+      "source": "QFA/Assembly/Comparison.lean",
+      "module": "QFA.Assembly.Comparison",
+      "line": 85,
+      "signature": "theorem eq_on_Icc_of_ae_relative_energy\n    {V : Type*} [NormedAddCommGroup V]\n    {u v : ℝ → V} {g : ℝ → ℝ} {a₀ : V} {T : ℝ} {Good : ℝ → Prop}\n    (hT : 0 < T)\n    (hg : ContinuousOn g (Ioc (0 : ℝ) T))\n    (hg_nonneg : ∀ t ∈ Ioc (0 : ℝ) T, 0 ≤ g t)\n    (hg_integrable : IntervalIntegrable g volume (0 : ℝ) T)\n    (hprod : IntervalIntegrable\n      (fun r => g r * ‖u r - v r‖ ^ 2) volume (0 : ℝ) T)\n    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) T), Good s)\n    (hu_trace : Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a₀))\n    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 a₀))\n    (hu_zero : u 0 = a₀) (hv_zero : v 0 = a₀)\n    (hrelative : ∀ s ∈ Ioo (0 : ℝ) T, Good s →\n      ∀ t ∈ Icc s T,\n        ‖u t - v t‖ ^ 2 ≤ ‖u s - v s‖ ^ 2 +\n          ∫ r in s..t, g r * ‖u r - v r‖ ^ 2) :\n    ∀ t ∈ Icc (0 : ℝ) T, u t = v t",
+      "kind": "theorem",
+      "id": "LE091",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D09.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Comparison.eq_on_nonnegative_of_ae_relative_energy",
+      "source": "QFA/Assembly/Comparison.lean",
+      "module": "QFA.Assembly.Comparison",
+      "line": 114,
+      "signature": "theorem eq_on_nonnegative_of_ae_relative_energy\n    {V : Type*} [NormedAddCommGroup V]\n    {u v : ℝ → V} {g : ℝ → ℝ} {a₀ : V} {Good : ℝ → Prop}\n    (hg : ContinuousOn g (Ioi (0 : ℝ)))\n    (hg_nonneg : ∀ t : ℝ, 0 < t → 0 ≤ g t)\n    (hg_integrable : ∀ T : ℝ, 0 < T →\n      IntervalIntegrable g volume (0 : ℝ) T)\n    (hprod : ∀ T : ℝ, 0 < T →\n      IntervalIntegrable (fun r => g r * ‖u r - v r‖ ^ 2) volume (0 : ℝ) T)\n    (hgood : ∀ T : ℝ, 0 < T →\n      ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) T), Good s)\n    (hu_trace : Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a₀))\n    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 a₀))\n    (hu_zero : u 0 = a₀) (hv_zero : v 0 = a₀)\n    (hrelative : ∀ s : ℝ, 0 < s → Good s → ∀ t : ℝ, s ≤ t →\n      ‖u t - v t‖ ^ 2 ≤ ‖u s - v s‖ ^ 2 +\n        ∫ r in s..t, g r * ‖u r - v r‖ ^ 2) :\n    ∀ t : ℝ, 0 ≤ t → u t = v t",
+      "kind": "theorem",
+      "id": "LE092",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D09.04"
+      ]
+    },
+    {
+      "name": "QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative",
+      "source": "QFA/Assembly/Comparison.lean",
+      "module": "QFA.Assembly.Comparison",
+      "line": 148,
+      "signature": "theorem restricted_class_eq_singleton_of_eq_on_nonnegative\n    {V : Type*} {C : Set (ℝ → V)} {v : ℝ → V}\n    (hv : v ∈ C)\n    (hEq : ∀ u ∈ C, ∀ t : ℝ, 0 ≤ t → u t = v t) :\n    (fun u : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => u t.1) '' C =\n      {fun t : {t : ℝ // 0 ≤ t} => v t.1}",
+      "kind": "theorem",
+      "id": "LE093",
+      "step": "D10.07",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D10.07"
       ]
     }
   ],
@@ -1096,11 +1390,19 @@
       "step": "D06.06",
       "source": "QFA/Endpoints/Agmon/Contracts.lean",
       "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    },
+    {
+      "id": "LC004",
+      "name": "QFA.Assembly.Representation.CompactToSchwartzEndpoint",
+      "step": "D06.02",
+      "source": "QFA/Assembly/Representation.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
     }
   ],
   "declaration_counts": {
-    "theorems": 71,
+    "theorems": 91,
     "proof_carrying_definitions": 2,
-    "audit_roots": 73
-  }
+    "audit_roots": 93
+  },
+  "assembly_manifest": "assembly-manifest.json"
 }

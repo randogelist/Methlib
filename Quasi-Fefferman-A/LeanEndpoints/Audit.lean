@@ -369,3 +369,103 @@ set_option pp.width 200
 #check @QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace
 #eval IO.println "TYPE_END:QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace"
 #print axioms QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Representation.complexifyL2_sum"
+#check @QFA.Assembly.Representation.complexifyL2_sum
+#eval IO.println "TYPE_END:QFA.Assembly.Representation.complexifyL2_sum"
+#print axioms QFA.Assembly.Representation.complexifyL2_sum
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Representation.complexify_compactDerivativeData"
+#check @QFA.Assembly.Representation.complexify_compactDerivativeData
+#eval IO.println "TYPE_END:QFA.Assembly.Representation.complexify_compactDerivativeData"
+#print axioms QFA.Assembly.Representation.complexify_compactDerivativeData
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Representation.schwartzWitnesses_of_compactData"
+#check @QFA.Assembly.Representation.schwartzWitnesses_of_compactData
+#eval IO.println "TYPE_END:QFA.Assembly.Representation.schwartzWitnesses_of_compactData"
+#print axioms QFA.Assembly.Representation.schwartzWitnesses_of_compactData
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Representation.spectralRealization_of_compactData"
+#check @QFA.Assembly.Representation.spectralRealization_of_compactData
+#eval IO.println "TYPE_END:QFA.Assembly.Representation.spectralRealization_of_compactData"
+#print axioms QFA.Assembly.Representation.spectralRealization_of_compactData
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioc"
+#check @QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioc
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioc"
+#print axioms QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioc
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioo"
+#check @QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioo
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioo"
+#print axioms QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioo
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.timeTranslate_memLp_Ioo"
+#check @QFA.Assembly.Restart.timeTranslate_memLp_Ioo
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.timeTranslate_memLp_Ioo"
+#print axioms QFA.Assembly.Restart.timeTranslate_memLp_Ioo
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.timeTranslate_weakPairingContinuousOn"
+#check @QFA.Assembly.Restart.timeTranslate_weakPairingContinuousOn
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.timeTranslate_weakPairingContinuousOn"
+#print axioms QFA.Assembly.Restart.timeTranslate_weakPairingContinuousOn
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.energyProfile_timeTranslate"
+#check @QFA.Assembly.Restart.energyProfile_timeTranslate
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.energyProfile_timeTranslate"
+#print axioms QFA.Assembly.Restart.energyProfile_timeTranslate
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.restartData_of_energyStart"
+#check @QFA.Assembly.Restart.restartData_of_energyStart
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.restartData_of_energyStart"
+#print axioms QFA.Assembly.Restart.restartData_of_energyStart
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Restart.exists_restartData_before"
+#check @QFA.Assembly.Restart.exists_restartData_before
+#eval IO.println "TYPE_END:QFA.Assembly.Restart.exists_restartData_before"
+#print axioms QFA.Assembly.Restart.exists_restartData_before
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticInputs.scalarProfile_of_field_estimates"
+#check @QFA.Assembly.AnalyticInputs.scalarProfile_of_field_estimates
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticInputs.scalarProfile_of_field_estimates"
+#print axioms QFA.Assembly.AnalyticInputs.scalarProfile_of_field_estimates
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticInputs.scalarProfile_of_complexified_field_estimates"
+#check @QFA.Assembly.AnalyticInputs.scalarProfile_of_complexified_field_estimates
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticInputs.scalarProfile_of_complexified_field_estimates"
+#print axioms QFA.Assembly.AnalyticInputs.scalarProfile_of_complexified_field_estimates
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticInputs.exists_scalarProfile_of_analytic_endpoints"
+#check @QFA.Assembly.AnalyticInputs.exists_scalarProfile_of_analytic_endpoints
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticInputs.exists_scalarProfile_of_analytic_endpoints"
+#print axioms QFA.Assembly.AnalyticInputs.exists_scalarProfile_of_analytic_endpoints
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticInputs.nonlinear_estimates_of_analytic_endpoints"
+#check @QFA.Assembly.AnalyticInputs.nonlinear_estimates_of_analytic_endpoints
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticInputs.nonlinear_estimates_of_analytic_endpoints"
+#print axioms QFA.Assembly.AnalyticInputs.nonlinear_estimates_of_analytic_endpoints
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticInputs.exists_positive_margin_of_analytic_endpoints"
+#check @QFA.Assembly.AnalyticInputs.exists_positive_margin_of_analytic_endpoints
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticInputs.exists_positive_margin_of_analytic_endpoints"
+#print axioms QFA.Assembly.AnalyticInputs.exists_positive_margin_of_analytic_endpoints
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Comparison.eq_on_Ioc_of_ae_relative_energy"
+#check @QFA.Assembly.Comparison.eq_on_Ioc_of_ae_relative_energy
+#eval IO.println "TYPE_END:QFA.Assembly.Comparison.eq_on_Ioc_of_ae_relative_energy"
+#print axioms QFA.Assembly.Comparison.eq_on_Ioc_of_ae_relative_energy
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy"
+#check @QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy
+#eval IO.println "TYPE_END:QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy"
+#print axioms QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Comparison.eq_on_nonnegative_of_ae_relative_energy"
+#check @QFA.Assembly.Comparison.eq_on_nonnegative_of_ae_relative_energy
+#eval IO.println "TYPE_END:QFA.Assembly.Comparison.eq_on_nonnegative_of_ae_relative_energy"
+#print axioms QFA.Assembly.Comparison.eq_on_nonnegative_of_ae_relative_energy
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative"
+#check @QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative
+#eval IO.println "TYPE_END:QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative"
+#print axioms QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative

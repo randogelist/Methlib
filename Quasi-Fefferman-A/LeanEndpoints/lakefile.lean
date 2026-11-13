@@ -2,7 +2,7 @@ import Lake
 open Lake DSL
 
 package qfa_endpoints where
-  version := v!"0.2.0"
+  version := v!"0.3.0"
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4" @
