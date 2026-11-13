@@ -160,6 +160,21 @@ four analytic proposition targets is supplied.
 
 ## External execution
 
+### GitHub Actions
+
+Workflow: [qfa-endpoints.yml](../../.github/workflows/qfa-endpoints.yml).
+Trigger: package/workflow changes on branch `QFA`, or `workflow_dispatch`.
+Runner: `windows-2022`; native Lean `4.33.0`; exact locked dependencies.
+Cache layers: native toolchain, pinned dependency objects, incremental QFA objects.
+Evidence: compiler version, tested commit, source manifest, dependency identities,
+compiler types, and all 93 exact axiom reports. Evidence and tested-source
+artifacts are uploaded on every completed attempt, including failures.
+
+CI status remains `A_TIER_CANDIDATE` until the exact compiler and axiom audit pass.
+Successful endpoint verification leaves the physical QFA root pending.
+
+### Native Windows command
+
 ```cmd
 run.cmd
 ```

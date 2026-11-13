@@ -49,6 +49,11 @@ MATHEMATICAL DERIVATIONS
     applications, complete inline and reverse indices.
 
 EXECUTION
+  GitHub Actions: .github/workflows/qfa-endpoints.yml
+  Branch trigger: QFA; package or workflow changes
+  Hosted runner: windows-2022; native Windows Lean 4.33.0
+  Cache layers: native toolchain, pinned dependencies, incremental endpoints
+  CI evidence binding: tested commit, workflow identity, run ID and attempt
   User's external native Windows environment: run.cmd
   Mathlib objects: lake exe cache get
   Candidate objects: incremental lake build QFA

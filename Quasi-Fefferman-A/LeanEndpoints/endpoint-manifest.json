@@ -51,7 +51,7 @@
     "lakefile.lean": "082fa0336d2b38e238f6444e163513b4590e0f003f9a951293827d31c04a5012",
     "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
     "run.cmd": "25fdf43a23b45a6d28e89e808fe9174f3c5ac69219de3c1653787ddbce274f07",
-    "scripts/audit.py": "8b5fd4945a300c458a3bf1487a60448b4ed29eabf041277b2b16eaf31a52529f"
+    "scripts/audit.py": "14c3c7457cd1819dde0503506748a8d2b425472d4096fcf8243a3721142518e9"
   },
   "declarations": [
     {
@@ -1404,5 +1404,13 @@
     "proof_carrying_definitions": 2,
     "audit_roots": 93
   },
-  "assembly_manifest": "assembly-manifest.json"
+  "assembly_manifest": "assembly-manifest.json",
+  "ci": {
+    "workflow": ".github/workflows/qfa-endpoints.yml",
+    "runner": "windows-2022",
+    "branch": "QFA",
+    "compiler": "native Windows Lean 4.33.0",
+    "audit_roots": 93,
+    "status": "PENDING"
+  }
 }

@@ -1,0 +1,129 @@
+name: QFA endpoints / native Windows Lean audit
+
+on:
+  push:
+    branches: [QFA]
+    paths:
+      - 'Quasi-Fefferman-A/LeanEndpoints/**'
+      - '.github/workflows/qfa-endpoints.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qfa-endpoints-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  endpoint-audit:
+    name: Lean 4.33.0 / LE001-LE093
+    runs-on: windows-2022
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: Quasi-Fefferman-A/LeanEndpoints
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      LEAN_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            Quasi-Fefferman-A
+            .github/workflows/qfa-endpoints.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Verify the exact source inventory
+        run: |
+          git config --global core.longpaths true
+          git config --global core.autocrlf false
+          python scripts/audit.py --static
+
+      - name: Restore the native toolchain cache
+        id: toolchain-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: qfa-elan-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LeanEndpoints/lean-toolchain') }}
+
+      - name: Restore pinned dependency objects
+        id: dependency-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LeanEndpoints/.lake/packages
+          key: qfa-dependencies-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LeanEndpoints/lean-toolchain', 'Quasi-Fefferman-A/LeanEndpoints/lake-manifest.json') }}
+
+      - name: Restore incremental endpoint objects
+        id: endpoint-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LeanEndpoints/.lake/build
+          key: qfa-endpoints-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LeanEndpoints/lean-toolchain', 'Quasi-Fefferman-A/LeanEndpoints/lake-manifest.json') }}-${{ github.sha }}
+          restore-keys: |
+            qfa-endpoints-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LeanEndpoints/lean-toolchain', 'Quasi-Fefferman-A/LeanEndpoints/lake-manifest.json') }}-
+
+      - name: Install the pinned native toolchain
+        id: toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: Quasi-Fefferman-A/LeanEndpoints
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Build all endpoints and audit every exact declaration
+        id: audit
+        shell: cmd
+        run: run.cmd
+
+      - name: Preserve the native toolchain cache
+        if: ${{ !cancelled() && steps.toolchain.outcome == 'success' && steps.toolchain-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: ${{ steps.toolchain-cache.outputs.cache-primary-key }}
+
+      - name: Preserve verified dependency objects
+        if: ${{ !cancelled() && hashFiles('Quasi-Fefferman-A/LeanEndpoints/evidence/cache-ready.json') != '' && steps.dependency-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LeanEndpoints/.lake/packages
+          key: ${{ steps.dependency-cache.outputs.cache-primary-key }}
+
+      - name: Preserve incremental endpoint objects
+        if: ${{ !cancelled() && hashFiles('Quasi-Fefferman-A/LeanEndpoints/evidence/cache-ready.json') != '' && steps.endpoint-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LeanEndpoints/.lake/build
+          key: ${{ steps.endpoint-cache.outputs.cache-primary-key }}
+
+      - name: Upload exact compiler and axiom evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qfa-endpoints-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: Quasi-Fefferman-A/LeanEndpoints/evidence
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload the tested source package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qfa-endpoints-source-${{ github.sha }}
+          path: |
+            Quasi-Fefferman-A
+            !Quasi-Fefferman-A/LeanEndpoints/.lake
+            !Quasi-Fefferman-A/LeanEndpoints/evidence
+            !Quasi-Fefferman-A/LeanEndpoints/**/__pycache__
+            .github/workflows/qfa-endpoints.yml
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30

@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import platform
 import re
 import subprocess
 import sys
@@ -134,14 +135,21 @@ def parser_self_test() -> None:
 
 
 def command(base: Path, args: list[str], log: Path) -> str:
-    result = subprocess.run(args, cwd=base, stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT, text=True, encoding="utf-8",
-                            errors="replace", check=False)
-    log.write_text(result.stdout, encoding="utf-8")
-    print(result.stdout, end="", flush=True)
-    if result.returncode:
-        raise RuntimeError(f"COMMAND_FAILED:{args!r}:EXIT={result.returncode}")
-    return result.stdout
+    chunks = []
+    with log.open("w", encoding="utf-8", newline="\n") as output:
+        process = subprocess.Popen(args, cwd=base, stdout=subprocess.PIPE,
+                                   stderr=subprocess.STDOUT, text=True,
+                                   encoding="utf-8", errors="replace")
+        assert process.stdout is not None
+        for line in process.stdout:
+            chunks.append(line)
+            output.write(line)
+            output.flush()
+            print(line, end="", flush=True)
+        code = process.wait()
+    if code:
+        raise RuntimeError(f"COMMAND_FAILED:{args!r}:EXIT={code}")
+    return "".join(chunks)
 
 
 def external_audit(base: Path, manifest: dict) -> None:
@@ -155,7 +163,11 @@ def external_audit(base: Path, manifest: dict) -> None:
     initial_manifest_sha = hashlib.sha256(manifest_bytes).hexdigest()
     status = {"root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
               "endpoint_status": "PENDING", "cache_policy": "MATHLIB_CACHE_AND_INCREMENTAL_LAKE",
-              "source_manifest_sha256": initial_manifest_sha}
+              "source_manifest_sha256": initial_manifest_sha,
+              "platform": platform.platform(),
+              "physical_QFA_root_inferred": False,
+              "execution": "GITHUB_ACTIONS" if os.getenv("GITHUB_ACTIONS") == "true"
+                           else "EXTERNAL_NATIVE_WINDOWS"}
 
     def unchanged_source_snapshot() -> None:
         if digest(base / "endpoint-manifest.json") != initial_manifest_sha:
@@ -176,6 +188,15 @@ def external_audit(base: Path, manifest: dict) -> None:
                 raise ValueError(f"MODIFIED_DEPENDENCY_SOURCE:{package}")
 
     try:
+        if os.getenv("GITHUB_ACTIONS") == "true":
+            commit = command(base, ["git", "rev-parse", "HEAD"], evidence / "commit.txt").strip()
+            if commit != os.environ["GITHUB_SHA"]:
+                raise ValueError("GITHUB_CHECKOUT_COMMIT_MISMATCH")
+            status["github"] = {
+                key: os.environ.get(f"GITHUB_{key.upper()}", "")
+                for key in ["repository", "sha", "ref", "workflow", "workflow_ref",
+                            "workflow_sha", "run_id", "run_attempt"]
+            }
         version = command(base, ["lake", "env", "lean", "--version"], evidence / "lean-version.txt")
         if not re.search(r"version 4\.33\.0,", version):
             raise ValueError("EXTERNAL_COMPILER_VERSION_MISMATCH")
@@ -184,6 +205,10 @@ def external_audit(base: Path, manifest: dict) -> None:
         command(base, ["lake", "exe", "cache", "get"], evidence / "mathlib-cache.log")
         dependency_snapshot("before")
         unchanged_source_snapshot()
+        (evidence / "cache-ready.json").write_text(
+            json.dumps({"dependency_revisions": manifest["dependency_revisions"],
+                        "source_manifest_sha256": initial_manifest_sha}, indent=2) + "\n",
+            encoding="utf-8")
         command(base, ["lake", "build", "QFA"], evidence / "build.log")
         unchanged_source_snapshot()
         log = command(base, ["lake", "env", "lean", "Audit.lean"], evidence / "axioms.log")
