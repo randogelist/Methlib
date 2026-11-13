@@ -57,8 +57,11 @@ theorem torusDatumRepresentative_measurePreserving :
   have heq : MeasurePreserving (UnitAddTorus.measurableEquivPiIoc (0 : Fin 3 → ℝ))
       volume (Measure.comap (Subtype.val : S → (Fin 3 → ℝ)) volume) := by
     exact UnitAddTorus.measurePreserving_equivPiIoc (0 : Fin 3 → ℝ)
-  simpa only [Function.comp_def, torusDatumRepresentative] using
-    htoLp.comp (hsub.comp heq)
+  change MeasurePreserving
+    (fun θ : UnitAddTorus (Fin 3) =>
+      WithLp.toLp 2 ((UnitAddTorus.measurableEquivPiIoc (0 : Fin 3 → ℝ) θ).val))
+    volume (volume.restrict unitCube)
+  exact htoLp.comp (hsub.comp heq)
 
 theorem rough_torusDatumComponent_memLp (v : Field)
     (hv : MemLp v 2 (volume.restrict unitCube)) (i : Fin 3) :

@@ -1,0 +1,286 @@
+{
+  "schema": "qfb_r8_q01_source_normalization_v1",
+  "status": "A_TIER_CANDIDATE",
+  "scope": [
+    "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+    "QuasiFeffermanB.Endpoints.TestProjection"
+  ],
+  "source_pins": {
+    "baseline_qfb": "17641ba02784ae108af0da5874073786d7df46ec",
+    "foundation": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d"
+  },
+  "cached_evidence": {
+    "run_id": 43523716429,
+    "url": "https://github.com/randogelist/Methlib/actions/runs/43523716429",
+    "log": "/workspace/scratch/1438cdc16dd5/qfb_external_run_43523716429.log",
+    "baseline_module_status": {
+      "FiniteTimeTest.lean": "FAIL",
+      "TestProjection.lean": "FAIL"
+    },
+    "candidate_compiler_evidence": false,
+    "candidate_theorem_axiom_audit_evidence": false,
+    "promotion": false
+  },
+  "derivation": "/workspace/scratch/1438cdc16dd5/qfb_r7_q01_derivation.txt",
+  "changes": [
+    {
+      "id": "FTT_SCALAR_SMUL",
+      "cached_location": "FiniteTimeTest.lean:45",
+      "declaration": "energy_finiteSynthesis_joint_continuousOn",
+      "normal_form": "ContinuousOn scalar : (Real x Vec -> Real); ContinuousOn constant unitVector : (Real x Vec -> Vec); apply ContinuousOn.smul to these fixed operands; simplify Pi.smul_apply.",
+      "mathematical_change": false,
+      "primary_api_refs": [
+        "M_SMUL",
+        "F_FINITE_SYNTHESIS"
+      ]
+    },
+    {
+      "id": "FTT_POSITIVE_DOMAIN",
+      "cached_locations": [
+        "FiniteTimeTest.lean:88",
+        "FiniteTimeTest.lean:97"
+      ],
+      "declarations": [
+        "energyGalerkin_velocity_continuousOn",
+        "energyGalerkin_timeDerivative_continuousOn"
+      ],
+      "normal_form": "hsub : Ioi (0 : Real) subset Ici (0 : Real) := Ioi_subset_Ici_self; coefficient_continuous.mono hsub.",
+      "mathematical_change": false,
+      "primary_api_refs": [
+        "M_IOI_ICI"
+      ]
+    },
+    {
+      "id": "FTT_PAIRING_OPAQUE",
+      "cached_locations": [
+        "FiniteTimeTest.lean:114",
+        "FiniteTimeTest.lean:252"
+      ],
+      "declaration": "ENERGY_GALERKIN_PAIRING_HASDERIV",
+      "added_private_lemma": "energy_physical_pairing_hasDerivAt_of_joint",
+      "normal_form": {
+        "F": "F r x = inner Real (u r x) (v r x)",
+        "D": "D r x = inner Real (u r x) (dv r x) + inner Real (du r x) (v r x)",
+        "hF": "ContinuousOn (fun z : Real x Vec => F z.1 z.2) {z | 0 < z.1}",
+        "hD": "ContinuousOn (fun z : Real x Vec => D z.1 z.2) {z | 0 < z.1}",
+        "hd": "forall r, 0 < r -> forall x, HasDerivAt (fun q => F q x) (D r x) r",
+        "integral": "critical_hasDerivAt_real_cube_integral F D hF hD hd t ht",
+        "split": "integral_add with separately typed IntegrableOn witnesses"
+      },
+      "specialization": {
+        "u": "g.velocity",
+        "du": "timeDerivative g.velocity",
+        "v": "phi",
+        "dv": "timeDerivative phi",
+        "derivative_inputs": [
+          "energyGalerkin_velocity_hasDerivAt g",
+          "CriticalPositiveSolenoidalTest.time_hasDerivAt"
+        ],
+        "continuity_inputs": [
+          "energyGalerkin_velocity_continuousOn g",
+          "energyGalerkin_timeDerivative_continuousOn g",
+          "hphi.smooth.continuousOn",
+          "CriticalPositiveSolenoidalTest.timeDerivative_continuousOn"
+        ]
+      },
+      "all_helper_premises_discharged_in_public_theorem": true,
+      "reason": "The generic opaque theorem separates the scalar integral product rule from reduction of the Galerkin representation. Explicit intermediate types constrain unification.",
+      "resource_policy": "No heartbeat option changed. No guarantee of external elaboration success is asserted.",
+      "mathematical_change": false,
+      "primary_api_refs": [
+        "F_CUBE_DERIVATIVE",
+        "F_TEST_DERIVATIVE",
+        "F_GALERKIN_DERIVATIVE",
+        "F_EXISTING_PAIRING",
+        "M_DERIV_INNER",
+        "M_INTEGRAL_ADD"
+      ]
+    },
+    {
+      "id": "FTT_SCALAR_CONGRUENCE",
+      "cached_location": "FiniteTimeTest.lean:246",
+      "declaration": "ENERGY_GALERKIN_TIME_TEST_INTEGRABLE",
+      "normal_form": "Expose B(r)=A(r)-nu*L(r) with change; rewrite A(r)=nu*L(r)+B(r); ring. Function subtraction is reduced before scalar arithmetic.",
+      "sign_and_order_preserved": true,
+      "mathematical_change": false,
+      "primary_api_refs": [
+        "Q_FINITE_WEAK_PAIRING",
+        "Q_PROJECTED_PAIRING"
+      ]
+    },
+    {
+      "id": "TEST_ZERO_MODE",
+      "cached_location": "TestProjection.lean:193",
+      "declaration": "energyTest_derivative_entries_uniform",
+      "normal_form": "Delete only the final rfl after rw [hzero, zero_add], because the cached compiler reports that the rewrite has closed the equality.",
+      "zero_mode": "derivativeSymbol j 0 = 0",
+      "mathematical_change": false,
+      "primary_api_refs": [
+        "Q_ZERO_MODE_REWRITE",
+        "F_ZERO_MODE_CUTOFF"
+      ]
+    }
+  ],
+  "primary_api_sources": {
+    "M_SMUL": {
+      "declaration": "ContinuousOn.smul",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/MulAction.lean#L132",
+      "blob_sha": "ce466c4e934f2ebcf48a415a71ca1918dafbb196",
+      "signature": "ContinuousOn f s -> ContinuousOn g s -> ContinuousOn (f • g) s"
+    },
+    "M_IOI_ICI": {
+      "declaration": "Set.Ioi_subset_Ici_self",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Order/Interval/Set/Basic.lean#L255-L256",
+      "blob_sha": "5af8734f820976c4595d179c01e4ff1d03b345c0",
+      "source_generation": "@[to_dual] theorem Iio_subset_Iic_self : Iio a subset Iic a"
+    },
+    "M_DERIV_INNER": {
+      "declaration": "HasDerivAt.inner",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/Calculus.lean#L109-L113",
+      "blob_sha": "0cb732b074509d4aa9fccd3c3f83d30f9021eb90",
+      "derivative_order": "inner (f x) g_prime + inner f_prime (g x)"
+    },
+    "M_INTEGRAL_ADD": {
+      "declaration": "MeasureTheory.integral_add",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L237-L240",
+      "signature": "Integrable f mu -> Integrable g mu -> integral (fun a => f a + g a) mu = integral f mu + integral g mu"
+    },
+    "F_FINITE_SYNTHESIS": {
+      "declaration": "SingularClosure.finiteSynthesis_eq_sum_unitVector",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/GalerkinTimeDerivative.lean#L22-L27"
+    },
+    "F_GALERKIN_DERIVATIVE": {
+      "declarations": [
+        "GalerkinSolution.velocity_hasDerivWithinAt",
+        "GalerkinSolution.timeDerivative_eq_finiteSynthesis"
+      ],
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/GalerkinTimeDerivative.lean#L29-L70"
+    },
+    "F_CUBE_DERIVATIVE": {
+      "declaration": "SingularClosure.critical_hasDerivAt_real_cube_integral",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSmoothEnergy.lean#L31-L40",
+      "blob_sha": "0c4a9ca63cace30e34e87b87f78676694779f729"
+    },
+    "F_TEST_DERIVATIVE": {
+      "declarations": [
+        "CriticalPositiveSolenoidalTest.time_hasDerivAt",
+        "CriticalPositiveSolenoidalTest.timeDerivative_continuousOn"
+      ],
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSmoothEnergy.lean#L132-L155",
+      "blob_sha": "0c4a9ca63cace30e34e87b87f78676694779f729"
+    },
+    "F_EXISTING_PAIRING": {
+      "declaration": "SingularClosure.critical_positive_pairing_hasDerivAt",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalClassicalWeakMomentum.lean#L115-L138",
+      "use": "Verified existing cube-integral and physicalFieldInner_integrable composition; the candidate generic lemma requires C1 inputs, not smoothness of the Galerkin trajectory."
+    },
+    "F_ZERO_MODE_CUTOFF": {
+      "declaration": "SingularClosure.cutoffModes_zero_not_mem",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/Galerkin.lean#L106"
+    },
+    "Q_FINITE_WEAK_PAIRING": {
+      "declaration": "QuasiFeffermanB.energyGalerkin_finite_test_pairing",
+      "url": "https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/EnergyFiniteWeakPairing.lean#L73",
+      "cached_status": "A_TIER exact from run 43523716429"
+    },
+    "Q_PROJECTED_PAIRING": {
+      "declaration": "QuasiFeffermanB.energyGalerkin_projected_test_pairing",
+      "url": "https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/FiniteTimeTest.lean#L185",
+      "cached_module_status": "FAIL; this entry identifies the existing source equation, not an audited export"
+    },
+    "Q_ZERO_MODE_REWRITE": {
+      "declaration": "QuasiFeffermanB.energyTest_derivative_entries_uniform",
+      "url": "https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/TestProjection.lean#L185-L193",
+      "cached_diagnostic": "No goals to be solved at trailing rfl"
+    }
+  },
+  "files": [
+    {
+      "path": "/workspace/scratch/1438cdc16dd5/qfb_r8_stage/Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "baseline_path": "/workspace/scratch/1438cdc16dd5/qfb_r6_stage/Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "baseline_sha256": "41bcd4240fe9048d7782e9522e5ac9dd5235c3ef0b3e26a973b972fa91fa2ab9",
+      "candidate_sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "candidate_bytes": 16466,
+      "candidate_lines": 332,
+      "existing_public_theorems": 12,
+      "existing_private_theorems": 0,
+      "all_existing_statement_text_preserved": true,
+      "existing_statement_sha256": {
+        "energy_finiteSynthesis_joint_continuousOn": "e4793d603381e40ec50ce8924a71cfb1c92929498720a9263c6b687103f947ce",
+        "energy_galerkinRhs_coordinate_continuousOn": "8fa09f23c9236a7e9e23f7101fb9a1805e34cefccb7399db11c6ac6a4ab4e3cb",
+        "energyGalerkin_velocity_continuousOn": "abbd20e03b271cc59d243f577e2adc3f22130e0c5b4efc4101aa81a5315bd2b8",
+        "energyGalerkin_timeDerivative_continuousOn": "aba0b5a6015f0dae97e2045422b9e53475a10d7c0beaaf5bb4b1f7b6bc0c67d6",
+        "energyGalerkin_velocity_hasDerivAt": "c113e36a9d78de6daed6acd03bf87fed209a7dd3d8e9600ebc49d22cb695020d",
+        "ENERGY_GALERKIN_PAIRING_HASDERIV": "96f253c82ae52681720b321b50e4469efb0df183f76f442d48d374454401aff8",
+        "energy_finite_projection_pairing": "aaa9854763d9f2e7c5b87bdf6e1bfcfedb2d01ac0c9c144ff480181819078251",
+        "energy_test_projection_laplacian": "762ffaac35ca5c24887a36ba9fe8bd3d186b0a2442fb6d2bc6cff2bbdc047125",
+        "energyTest_fourier_solenoidal": "e2106ba284ce3ef853e3876cf9c9eb7b4d1a54247b7279e11aea2a4c794c8d3d",
+        "energyGalerkin_projected_test_pairing": "c1553b71dfeee89b47fd1fbc86662e7cc550c329bed20b563c79682e1cddb66d",
+        "ENERGY_GALERKIN_TIME_TEST_INTEGRABLE": "128311ffbb734a07d4a503c820f1c65dd73faaaebc360c93478a0000920403be",
+        "ENERGY_GALERKIN_TIME_TEST_IDENTITY": "9bbdc6ecdf200598361b14092ead5ad23b36a702eedbb06253b24886e62b2dac"
+      },
+      "added_private_theorems": [
+        "energy_physical_pairing_hasDerivAt_of_joint"
+      ],
+      "added_public_theorems": [],
+      "imports_unchanged": true,
+      "admission_or_unsafe_tokens_outside_comments": [],
+      "maxHeartbeats_overrides": []
+    },
+    {
+      "path": "/workspace/scratch/1438cdc16dd5/qfb_r8_stage/Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "baseline_path": "/workspace/scratch/1438cdc16dd5/qfb_r6_stage/Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "baseline_sha256": "ee3960d6d2ee051052810c5b7b8477483273a7e2ad0701bde806466231a02fed",
+      "candidate_sha256": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+      "candidate_bytes": 12577,
+      "candidate_lines": 272,
+      "existing_public_theorems": 9,
+      "existing_private_theorems": 1,
+      "all_existing_statement_text_preserved": true,
+      "existing_statement_sha256": {
+        "energy_sobolevCutoffModes_tendsto": "66063894f52585b78926be705ad70a7767a3fc27bba9755bc111720e8bb4a0d9",
+        "energy_smooth_datumFourier_reconstruction": "7619d7de59b08897da80a7e1655480758571c7dc5d205ed111660c1c5e65f2b1",
+        "energy_smooth_derivative_fourierSeries": "cab04b02ece7b02d1f950487ab699900a2cdfeed02f99dcac343416b58861408",
+        "energy_finite_derivative_fourierSum": "dd05adfa23f1a121be4a7540ac090512ff819d59e8017aedb7cfd0f52fcf319c",
+        "energy_sum_coordinates": "9fa9a28eb88f57e051ff9a10be389ff5f8bb4c1e83773dd11bab0283ecddda78",
+        "energy_vector_norm_le_three": "70851dd1d97f4af711c9a668347db7d775b451a01c1f6049a6f534eb4550f7ee",
+        "energy_operator_norm_le_nine": "0b0e695a024aaa3b985142968f040a2cde0b3e707bdd0152c6d97eeb601dcfaf",
+        "energyTest_derivative_entries_uniform": "20526d8d0c8c918333e889819516ede99ef6e2d27fbbefae8c0f75363b7c3d2d",
+        "ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM": "c1e6953b89340bd62610bbd1527974845b76e5da50d67a93f3bb33abab8aaeaf",
+        "ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND": "984b6a686a68ba0cb0cc050b022d147131fb522cfa2ca78b2ed537e751b84a51"
+      },
+      "added_private_theorems": [],
+      "added_public_theorems": [],
+      "imports_unchanged": true,
+      "admission_or_unsafe_tokens_outside_comments": [],
+      "maxHeartbeats_overrides": []
+    }
+  ],
+  "static_verification": {
+    "existing_public_statements_preserved": 21,
+    "existing_private_statements_preserved": 1,
+    "added_private_lemmas": 1,
+    "added_public_statements": 0,
+    "changed_public_premises": 0,
+    "changed_constants_or_quantifier_order": 0,
+    "new_analytic_premises": 0,
+    "new_imports": 0,
+    "admission_or_unsafe_tokens_outside_comments": 0,
+    "heartbeat_overrides_added": 0,
+    "method": "Textual declaration extraction, source comparison, exact API-source review, and file hashes; no Lean parser or compiler was run."
+  },
+  "executions": {
+    "local_lean": 0,
+    "local_lake": 0,
+    "external_compiler_runs_started": 0,
+    "ci_actions": 0,
+    "github_mutations": 0
+  },
+  "remaining_obligations": [
+    "Matching external Lean 4.33.0 elaboration of both changed modules.",
+    "Matching theorem-level axiom audit with no sorryAx or unapproved axioms.",
+    "External confirmation that the opaque derivative factorization resolves the observed heartbeat frontier."
+  ],
+  "conclusion": "Candidate normalization only; no A_TIER promotion follows from textual verification."
+}

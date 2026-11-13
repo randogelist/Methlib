@@ -1,0 +1,629 @@
+[
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Data/Finset/Prod.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Data/Finset/Prod.lean",
+    "endpoints": [
+      "Finset.product_eq_sprod"
+    ],
+    "purpose": "finite Cartesian product normalization",
+    "git_blob_sha": "097e44badb751d9fa93f7825f251365fb388008e",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Data/Finset/Prod.lean",
+    "sha256": "ea0f132dc48b81a7a1f4683dd04459d81bc1a04b664d0281d6dc42f08599d1d8",
+    "bytes": 13857,
+    "lines": 381,
+    "import_module": "Mathlib.Data.Finset.Prod"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Algebra/BigOperators/Group/Finset/Sigma.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Algebra/BigOperators/Group/Finset/Sigma.lean",
+    "endpoints": [
+      "Finset.sum_product"
+    ],
+    "purpose": "finite lattice factorization",
+    "git_blob_sha": "6ff55ea7c0fcfb22636bfc67882d5500f788ab0d",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/BigOperators/Group/Finset/Sigma.lean",
+    "sha256": "795e36343a20dfc70b670f0b03c4c4e92a119e04d2d33904dd4438f78a30c764",
+    "bytes": 6475,
+    "lines": 138,
+    "import_module": "Mathlib.Algebra.BigOperators.Group.Finset.Sigma"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+    "endpoints": [
+      "Finset.sum_mul_sum"
+    ],
+    "purpose": "Gaussian product expansion",
+    "git_blob_sha": "cdd6f7f559520a37ac4bb25734ca70c2a8bddf8c",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+    "sha256": "472cd5000412d8ec35c8b9ee919b2aeedbf0a830033a55009aad436595923809",
+    "bytes": 16305,
+    "lines": 386,
+    "import_module": "Mathlib.Algebra.BigOperators.Ring.Finset"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+    "endpoints": [
+      "HasDerivAt.congr_deriv"
+    ],
+    "purpose": "typed derivative normalization",
+    "git_blob_sha": "99b298181811591362a2467cfd825017ac9d0fef",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+    "sha256": "da1d29570f45bd14f5a37aa5b024d46b3076a47f04e9315bf72cd65f6505d55b",
+    "bytes": 40271,
+    "lines": 948,
+    "import_module": "Mathlib.Analysis.Calculus.Deriv.Basic"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Analysis/Calculus/Deriv/Mul.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Calculus/Deriv/Mul.lean",
+    "endpoints": [
+      "HasDerivAt.smul"
+    ],
+    "purpose": "Duhamel derivative",
+    "git_blob_sha": "f688112f3812e3f50cdf169956d6c1323d32c19a",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Mul.lean",
+    "sha256": "9eaf8d222c347ea647939daa68fac11edeb7c2572719246ce03d43cb04c94b44",
+    "bytes": 29294,
+    "lines": 656,
+    "import_module": "Mathlib.Analysis.Calculus.Deriv.Mul"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Analysis/InnerProductSpace/Calculus.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/InnerProductSpace/Calculus.lean",
+    "endpoints": [
+      "HasDerivAt.inner"
+    ],
+    "purpose": "finite time pairing",
+    "git_blob_sha": "0cb732b074509d4aa9fccd3c3f83d30f9021eb90",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/Calculus.lean",
+    "sha256": "902f118cce8ed2a8d385b11e29d95a20424361ca8e47d9bf94fbf954057a7f05",
+    "bytes": 17372,
+    "lines": 397,
+    "import_module": "Mathlib.Analysis.InnerProductSpace.Calculus"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Analysis/Normed/Lp/PiLp.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Normed/Lp/PiLp.lean",
+    "endpoints": [
+      "PiLp.ext"
+    ],
+    "purpose": "Euclidean coefficient equality",
+    "git_blob_sha": "6961e020117a12f4c823a0cd1d6ebe77931ccacc",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Normed/Lp/PiLp.lean",
+    "sha256": "660f3ad7077490c9a8eae924e18731c400282b8dccf80bfec1c6b02fe11ee25f",
+    "bytes": 56259,
+    "lines": 1309,
+    "import_module": "Mathlib.Analysis.Normed.Lp.PiLp"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Topology/Algebra/Monoid.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/Monoid.lean",
+    "endpoints": [
+      "continuousOn_finsetSum"
+    ],
+    "purpose": "finite-sum continuity",
+    "git_blob_sha": "0dac831950493b3a8af9373f5f9c6cd99b6f4538",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/Monoid.lean",
+    "sha256": "cf858f52c0f84ad0f0f950ddc0c76128c4893ced7620d0c7a4cef1c9c3ddab56",
+    "bytes": 49233,
+    "lines": 1088,
+    "import_module": "Mathlib.Topology.Algebra.Monoid"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Topology/Algebra/MulAction.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/MulAction.lean",
+    "endpoints": [
+      "ContinuousOn.smul"
+    ],
+    "purpose": "scalar/vector continuity",
+    "git_blob_sha": "ce466c4e934f2ebcf48a415a71ca1918dafbb196",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/MulAction.lean",
+    "sha256": "20898c3a1fa125977a2a5382530785f15a7658fe4944c3699d029dfc1178b165",
+    "bytes": 16113,
+    "lines": 398,
+    "import_module": "Mathlib.Topology.Algebra.MulAction"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+    "endpoints": [
+      "ContinuousOn.intervalIntegrable_of_Icc",
+      "intervalIntegrable_iff_integrableOn_Ioo_of_le"
+    ],
+    "purpose": "explicit volume and interval carriers",
+    "git_blob_sha": "4092210205f534fd53ca3139589e2aa26f88a00d",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+    "sha256": "93908eb0c771ba8edcb47537dfe1a40e98a1545be9d427c1eb9823d44decdcd5",
+    "bytes": 71676,
+    "lines": 1472,
+    "import_module": "Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean",
+    "endpoints": [
+      "intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le"
+    ],
+    "purpose": "finite momentum and Duhamel integration",
+    "git_blob_sha": "82d269a5e9269d791f5581f5f0da29cfc125541a",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean",
+    "sha256": "5fd64054d9ae8bfce585ff809933a756bcf2d224ef144ae24c8fe8870c68050c",
+    "bytes": 75344,
+    "lines": 1276,
+    "import_module": "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+    "endpoints": [
+      "MeasureTheory.tendstoInMeasure_of_tendsto_Lp",
+      "MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae"
+    ],
+    "purpose": "one fixed global limit and local subsequences",
+    "git_blob_sha": "f606c2867f46c5b2e61ce731eb1f100c1548a194",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+    "sha256": "c6e28eb4336201821ce7d9e987d50052797d54f1fb8f8b415104583d61051ee6",
+    "bytes": 25174,
+    "lines": 483,
+    "import_module": "Mathlib.MeasureTheory.Function.ConvergenceInMeasure"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Measure/Restrict.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Measure/Restrict.lean",
+    "endpoints": [
+      "MeasureTheory.ae_restrict_iff'",
+      "MeasureTheory.ae_restrict_of_ae_restrict_of_subset"
+    ],
+    "purpose": "one conull start set",
+    "git_blob_sha": "1c0d3412b2148bc91c4f4c0b2de56abcc502f975",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Measure/Restrict.lean",
+    "sha256": "2ec6fbe3a70ebf57a895a47779b63994f97edb0dc0b709faf9ff400f59c92511",
+    "bytes": 56674,
+    "lines": 1158,
+    "import_module": "Mathlib.MeasureTheory.Measure.Restrict"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+    "endpoints": [
+      "MeasureTheory.ae_all_iff"
+    ],
+    "purpose": "countable common conull sets",
+    "git_blob_sha": "91d5ba1b16877bb6f7fc78e78dcb6733ed884137",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+    "sha256": "e0d76f9471d6189f17b518316b62d3c8c0c4b637bb5e8eec8a6aaac153700e11",
+    "bytes": 11583,
+    "lines": 286,
+    "import_module": "Mathlib.MeasureTheory.OuterMeasure.AE"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Integral/DominatedConvergence.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/DominatedConvergence.lean",
+    "endpoints": [
+      "MeasureTheory.tendsto_integral_of_dominated_convergence"
+    ],
+    "purpose": "physical momentum limit",
+    "git_blob_sha": "e01402b504d1b8f96ed88bdd18266da7def493aa",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/DominatedConvergence.lean",
+    "sha256": "18b709ea5c9ef9136e3e75ded82a6135641e6e19688e0ca3abcb0af45648ab84",
+    "bytes": 39563,
+    "lines": 705,
+    "import_module": "Mathlib.MeasureTheory.Integral.DominatedConvergence"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean",
+    "endpoints": [
+      "MeasureTheory.memLp_congr_ae"
+    ],
+    "purpose": "representative transport",
+    "git_blob_sha": "4d153c2f0274921c63b04eccd3899bb5ebd7e71a",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean",
+    "sha256": "a9cbdad8fae393b320ba20cf025bbac20722fc85f76b7b44ea8968134f9b0bfb",
+    "bytes": 45225,
+    "lines": 973,
+    "import_module": "Mathlib.MeasureTheory.Function.LpSeminorm.Basic"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+    "endpoints": [
+      "MeasureTheory.MemLp.coeFn_toLp",
+      "MeasureTheory.Lp.toLp_coeFn",
+      "MeasureTheory.Lp.coeFn_sub"
+    ],
+    "purpose": "fixed Hilbert representatives",
+    "git_blob_sha": "f771df1cab54c03c2feb5ea2a42a4578104d5feb",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+    "sha256": "c333a6caa56906c6203cad3e3214be2114a65728fcfdf95ae639992abefb373f",
+    "bytes": 44484,
+    "lines": 1031,
+    "import_module": "Mathlib.MeasureTheory.Function.LpSpace.Basic"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Analysis/Real/Sqrt.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Real/Sqrt.lean",
+    "endpoints": [
+      "Real.sqrt_nonneg",
+      "Real.sq_sqrt",
+      "Real.sqrt_lt_sqrt",
+      "Real.sqrt_pos"
+    ],
+    "purpose": "R7 buffered strict threshold",
+    "git_blob_sha": "e111a1394cab20b87caedeef62f5bd0f7f072141",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Real/Sqrt.lean",
+    "sha256": "d6055b85eb3279133dd76eead0e1306032314c2c42c99b431b07e6aad654da86",
+    "bytes": 18602,
+    "lines": 510,
+    "import_module": "Mathlib.Analysis.Real.Sqrt"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Topology/Algebra/InfiniteSum/Order.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/InfiniteSum/Order.lean",
+    "endpoints": [
+      "tsum_le_of_sum_le'"
+    ],
+    "purpose": "physical H1 norm from finite Fourier bounds",
+    "git_blob_sha": "b4f1deac691bc893b3056879276aee865a530b6c",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/InfiniteSum/Order.lean",
+    "sha256": "583aaab8ae056a12bdab8456522713c3571ec9e6a0639654bee362c3f16bf69b",
+    "bytes": 16534,
+    "lines": 409,
+    "import_module": "Mathlib.Topology.Algebra.InfiniteSum.Order"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+    "endpoints": [
+      "MeasureTheory.integral_add",
+      "MeasureTheory.integral_const_mul"
+    ],
+    "purpose": "joint restart witness budget",
+    "git_blob_sha": "5aab70490dd61ebcfaf9c50ef26dcb612c25091b",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+    "sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+    "bytes": 70432,
+    "lines": 1379,
+    "import_module": "Mathlib.MeasureTheory.Integral.Bochner.Basic"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+    "endpoints": [
+      "UnitAddTorus.measurePreserving_equivPiIoc"
+    ],
+    "purpose": "actual torus representative map",
+    "git_blob_sha": "08ab569e1977c455fdde0a67df2131ea1fc864c5",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+    "sha256": "df2f4f41671a438e0f65765466ec025bf9cf3e77de898047c808a3657a907721",
+    "bytes": 15694,
+    "lines": 336,
+    "import_module": "Mathlib.Analysis.Fourier.AddCircleMulti"
+  },
+  {
+    "kind": "mathlib",
+    "repository": "leanprover-community/mathlib4",
+    "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "source_path": "LICENSE",
+    "snapshot_path": "SourcePreload/R8/Sources/mathlib/LICENSE",
+    "endpoints": [],
+    "purpose": "upstream source license",
+    "git_blob_sha": "8dada3edaf50dbc082c9a125058f25def75e625a",
+    "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/LICENSE",
+    "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "bytes": 11357,
+    "lines": 201
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/Contracts.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/Contracts.lean",
+    "endpoints": [
+      "SingularClosure.coordinateDerivative",
+      "SingularClosure.gradient"
+    ],
+    "purpose": "exact physical derivative definitions",
+    "git_blob_sha": "7d64a61a47bedb2bd7a2801641c5959178837f04",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/Contracts.lean",
+    "sha256": "4c59cbf26fd4196529a4865ac09404d18015228c737055c2674cbcc4a5fd18f7",
+    "bytes": 6043,
+    "lines": 157,
+    "import_module": "SingularClosure.Contracts"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalSpaces.lean",
+    "endpoints": [
+      "SingularClosure.criticalSobolev_norm_sq",
+      "SingularClosure.criticalSobolevOfCoeff_coeff"
+    ],
+    "purpose": "weighted physical Sobolev norms",
+    "git_blob_sha": "80cc6cf7b45829279cb61a6a393583a29180212b",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpaces.lean",
+    "sha256": "2d223e52a0c7c24e4d507f463cc220e69813f248ea24fce6705fe324a7473347",
+    "bytes": 11523,
+    "lines": 269,
+    "import_module": "SingularClosure.CriticalSpaces"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalSpacesEmbedding.lean",
+    "endpoints": [
+      "SingularClosure.criticalH0Equiv_coeff",
+      "SingularClosure.criticalSobolevLower_coeff"
+    ],
+    "purpose": "coefficient-preserving transports",
+    "git_blob_sha": "f0f75684f205962c852a68e59bff59dad75c6b26",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSpacesEmbedding.lean",
+    "sha256": "70d99181f27813d3a6b45e84467b727358eb5d92984ba7f73f31bf89af8521be",
+    "bytes": 11047,
+    "lines": 231,
+    "import_module": "SingularClosure.CriticalSpacesEmbedding"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalWeakGradient.lean",
+    "endpoints": [
+      "SingularClosure.critical_physicalFieldInner_compCLM_tendsto",
+      "SingularClosure.CRITICAL_WEAK_GRADIENT_OF_SMOOTH_APPROXIMATION"
+    ],
+    "purpose": "original gradient identification",
+    "git_blob_sha": "560f34d6cdf1bc9b17690f1533fec582f86e6c9b",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+    "sha256": "9a7e65f085c5f34382d035f52265edb05b141c9ff08af242a7c3da883f201be5",
+    "bytes": 8736,
+    "lines": 174,
+    "import_module": "SingularClosure.CriticalWeakGradient"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSmoothEnergy.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalSmoothEnergy.lean",
+    "endpoints": [
+      "SingularClosure.critical_hasDerivAt_real_cube_integral",
+      "SingularClosure.CRITICAL_SMOOTH_NSE_ENERGY_IDENTITY"
+    ],
+    "purpose": "typed integral derivative and tail energy",
+    "git_blob_sha": "0c4a9ca63cace30e34e87b87f78676694779f729",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSmoothEnergy.lean",
+    "sha256": "f015d8b3792c786ed2ef9c14626e5466916ae913e864f955c04feb6585431634",
+    "bytes": 12861,
+    "lines": 254,
+    "import_module": "SingularClosure.CriticalSmoothEnergy"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalClassicalWeakMomentum.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalClassicalWeakMomentum.lean",
+    "endpoints": [
+      "SingularClosure.critical_positive_pairing_hasDerivAt"
+    ],
+    "purpose": "pairing derivative reference proof",
+    "git_blob_sha": "ab5f953e6eb4974b0a66fcd7a3093d6fd3eb7549",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalClassicalWeakMomentum.lean",
+    "sha256": "e160e87c789f85ce11b6dcc68cfbb0090c3fbfa8e1bcdc0f695c73aabf7944f4",
+    "bytes": 14050,
+    "lines": 283,
+    "import_module": "SingularClosure.CriticalClassicalWeakMomentum"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLerayHopf.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalLerayHopf.lean",
+    "endpoints": [
+      "SingularClosure.CriticalLerayHopf"
+    ],
+    "purpose": "all eleven original trajectory fields",
+    "git_blob_sha": "d64e5ae5824c771bed9f6dcad8750a0fa53408c6",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLerayHopf.lean",
+    "sha256": "7c075141a7c5f2719eb1aad516f5ddcd13c2bb43f64f818ba780df79103f5f87",
+    "bytes": 3691,
+    "lines": 79,
+    "import_module": "SingularClosure.CriticalLerayHopf"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/GalerkinTimeDerivative.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/GalerkinTimeDerivative.lean",
+    "endpoints": [
+      "SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt",
+      "SingularClosure.GalerkinSolution.timeDerivative_eq_finiteSynthesis"
+    ],
+    "purpose": "actual finite coefficient ODE",
+    "git_blob_sha": "1397ab6ec55b1553e6b7336fca1e16713dcc3363",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/GalerkinTimeDerivative.lean",
+    "sha256": "1d08840f4397529d5bb5b2f414b823e09339c3934f281436b9f4a97b6b60f22c",
+    "bytes": 6758,
+    "lines": 142,
+    "import_module": "SingularClosure.GalerkinTimeDerivative"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierRealization.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/PeriodicFourierRealization.lean",
+    "endpoints": [
+      "SingularClosure.torusDatumRepresentative"
+    ],
+    "purpose": "named representative and actual composed map",
+    "git_blob_sha": "cb8f865f3531fe9d4239c2bcc074f06d148d9d60",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierRealization.lean",
+    "sha256": "f4118fd9507488f5bf8cd3df2c1f174f245a32928b118eeb967017865edd2871",
+    "bytes": 7948,
+    "lines": 166,
+    "import_module": "SingularClosure.PeriodicFourierRealization"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniformBounds.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalUniformBounds.lean",
+    "endpoints": [
+      "SingularClosure.GalerkinSolution.criticalState_norm_sq_nat"
+    ],
+    "purpose": "literal natural/integer Sobolev order",
+    "git_blob_sha": "b8fb5aaf4c91185cc845666c64b8aa5b0c432e7e",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniformBounds.lean",
+    "sha256": "292e20ff02ee26d769a46e87521966acae8de79d1e028eb8b82cc268b7c782f0",
+    "bytes": 5432,
+    "lines": 113,
+    "import_module": "SingularClosure.CriticalUniformBounds"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalFourierInterpolation.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalFourierInterpolation.lean",
+    "endpoints": [
+      "SingularClosure.criticalEnergy_two_eq_coefficientDissipation"
+    ],
+    "purpose": "exact dissipation normalization",
+    "git_blob_sha": "4a1fc993f231930a3c6bf71b6e9a38b3e9e9fc4b",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalFourierInterpolation.lean",
+    "sha256": "bb95bb011bf9d6039d304ee93530ed6ff0db7dcf7a81c3426dd4e2d2f5b2d204",
+    "bytes": 5649,
+    "lines": 129,
+    "import_module": "SingularClosure.CriticalFourierInterpolation"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSerrinUniqueness.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalSerrinUniqueness.lean",
+    "endpoints": [
+      "SingularClosure.CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON"
+    ],
+    "purpose": "all-path finite-horizon comparison",
+    "git_blob_sha": "e3de222dc4c43fa6cfbf62a1dfd10cde70d5e4f9",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSerrinUniqueness.lean",
+    "sha256": "341ec5bad1d787e77ae5e15d42eb88f60b4b5b9bd427c2135a90e66cd0ac416e",
+    "bytes": 9451,
+    "lines": 177,
+    "import_module": "SingularClosure.CriticalSerrinUniqueness"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveFlow.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalPositiveFlow.lean",
+    "endpoints": [
+      "SingularClosure.CriticalPositiveSobolevFlow",
+      "SingularClosure.CRITICAL_POSITIVE_PHYSICAL_NSE"
+    ],
+    "purpose": "actual positive-time smooth solution",
+    "git_blob_sha": "86610a36f504f0deb9aead60bfe36eb635bf6766",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalPositiveFlow.lean",
+    "sha256": "1428bab566ae638723937ce9e1ca8cf57b534ab001314944638ec2400665e702",
+    "bytes": 6540,
+    "lines": 127,
+    "import_module": "SingularClosure.CriticalPositiveFlow"
+  },
+  {
+    "kind": "foundation",
+    "repository": "randogelist/Methlib",
+    "revision": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "source_path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalH1Algebra.lean",
+    "snapshot_path": "SourcePreload/R8/Sources/foundation/CriticalH1Algebra.lean",
+    "endpoints": [
+      "SingularClosure.criticalGradientEnergy",
+      "SingularClosure.criticalGradientEnergy_fderiv",
+      "SingularClosure.criticalGradientEnergy_nonneg"
+    ],
+    "purpose": "original-gradient energy",
+    "git_blob_sha": "61f5144deaa634da88c7c7d6dde6213fc2e5eecf",
+    "source_url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalH1Algebra.lean",
+    "sha256": "255d04fcc82535677b2790b9e0f6cad56924f53f64c62f8d38aa4bc9d0c620c3",
+    "bytes": 5824,
+    "lines": 128,
+    "import_module": "SingularClosure.CriticalH1Algebra"
+  }
+]

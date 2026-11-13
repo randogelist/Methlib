@@ -1,0 +1,2822 @@
+{
+  "schema": "qfb.r8.invariant_review.v1",
+  "verdict": "STATIC_INVARIANTS_PASS",
+  "source_comparison": {
+    "baseline": "/workspace/scratch/1438cdc16dd5/qfb_r6_stage/Quasi-Fefferman-B",
+    "candidate": "/workspace/scratch/1438cdc16dd5/qfb_r8_stage/Quasi-Fefferman-B",
+    "baseline_commit": "17641ba02784ae108af0da5874073786d7df46ec",
+    "cached_run": "43523716429"
+  },
+  "review_scope": "Read-only static source and cached-evidence comparison; all seven changed Lean modules checked after caloric owner completion.",
+  "action_constraints": {
+    "source_edits": false,
+    "manifest_or_document_edits": false,
+    "only_file_written": "/workspace/scratch/1438cdc16dd5/qfb_r8_invariant_review.json",
+    "local_lean_or_lake_execution": false,
+    "compiler_version_command": false,
+    "ci_actions": false,
+    "remote_mutations": false
+  },
+  "invariant_checks": {
+    "existing_project_lean_inventory_preserved": true,
+    "exactly_seven_r6_failed_project_modules_changed": true,
+    "all_existing_public_headers_preserved": true,
+    "all_existing_named_headers_preserved": true,
+    "no_new_public_declarations": true,
+    "imports_and_context_directives_preserved": true,
+    "all_caloric_files_match_owner_final_hashes": true,
+    "all_42_pass_modules_byte_identical": true,
+    "all_227_audited_declaration_source_hashes_preserved": true,
+    "frozen_root_contract_semantics_and_cutoff_files_identical": true,
+    "frozen_cutoff_literals_preserved": true,
+    "no_admission_code_tokens": true,
+    "no_new_raw_admission_token_lines_in_changed_project_sources": true,
+    "cached_evidence_consistent": true
+  },
+  "summary": {
+    "changed_project_lean_modules": 7,
+    "existing_public_headers_preserved": 80,
+    "existing_named_headers_preserved": 86,
+    "new_private_helpers": [
+      {
+        "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+        "name": "energy_physical_pairing_hasDerivAt_of_joint"
+      }
+    ],
+    "r6_pass_modules_preserved": 42,
+    "audited_declaration_source_hashes_preserved": 227,
+    "preloaded_source_snapshots_reviewed": 35,
+    "code_admission_tokens": 0,
+    "root_formal_status": "A_TIER_CANDIDATE; cached root status remains PENDING",
+    "new_source_compilation_or_axiom_audit": "NONE; static review is not compiler or theorem-audit evidence",
+    "issues": []
+  },
+  "evidence": {
+    "audit_file": "/workspace/scratch/1438cdc16dd5/qfb_external_run_43523716429_audit.json",
+    "status_file": "/workspace/scratch/1438cdc16dd5/qfb_external_run_43523716429_evidence/qfb/status.json",
+    "manifest_file": "/workspace/scratch/1438cdc16dd5/qfb_external_run_43523716429_evidence/qfb/manifest.json",
+    "r6_endpoint_manifest_equals_evidence_manifest": true,
+    "r6_manifest_source_mismatches": [],
+    "manifest_sources": 79,
+    "audit_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+    "status_sha256": "e17d40611b1bd38044fe81f3d8acdedff1ddb69ab531fdb9c4421a2db761b991",
+    "manifest_sha256": "c39f88da0d8d5b07dbb2ca03dacf25a6c8c6b9bc8ce9bd13d6851a081fd83683",
+    "audit_status_json_data_identical": true
+  },
+  "project_inventory": {
+    "r6_lean_files": 81,
+    "r8_project_lean_files": 81,
+    "added_project_lean_files": [],
+    "removed_project_lean_files": [],
+    "changed_project_lean_files": [
+      "QuasiFeffermanB/CaloricFiniteNorm.lean",
+      "QuasiFeffermanB/CaloricGalerkinBudget.lean",
+      "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "QuasiFeffermanB/PhysicalFourierL2.lean",
+      "QuasiFeffermanB/TailEnergy.lean",
+      "QuasiFeffermanB/ThetaLattice.lean"
+    ],
+    "changed_set_equals_r6_fail_modules": true,
+    "unchanged_project_lean_files": 74,
+    "preloaded_primary_source_snapshot_count": 35,
+    "preloaded_snapshots": [
+      "SourcePreload/R8/Sources/foundation/Contracts.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalClassicalWeakMomentum.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalFourierInterpolation.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalH1Algebra.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalLerayHopf.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalPositiveFlow.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalSerrinUniqueness.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalSmoothEnergy.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalSpaces.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalSpacesEmbedding.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalUniformBounds.lean",
+      "SourcePreload/R8/Sources/foundation/CriticalWeakGradient.lean",
+      "SourcePreload/R8/Sources/foundation/GalerkinTimeDerivative.lean",
+      "SourcePreload/R8/Sources/foundation/PeriodicFourierRealization.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Algebra/BigOperators/Group/Finset/Sigma.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Calculus/Deriv/Mul.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/InnerProductSpace/Calculus.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Normed/Lp/PiLp.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Real/Sqrt.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Data/Finset/Prod.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/DominatedConvergence.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Measure/Restrict.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/InfiniteSum/Order.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/Monoid.lean",
+      "SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/MulAction.lean"
+    ]
+  },
+  "public_header_review": [
+    {
+      "source": "QuasiFeffermanB/CaloricFiniteNorm.lean",
+      "r6_sha256": "0ae5cb06ba9d99540025c6540b7d0a19f1b1d15252b80b28b8c62bee367e540e",
+      "r8_sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "existing_public_declarations": 11,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 11,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "finiteTimeL2",
+        "finiteTimeL2_nonneg",
+        "finiteTimeL2_sq",
+        "caloric_continuous_memLp_two",
+        "finiteTimeL2_cauchy",
+        "finiteTimeL2_mono",
+        "finiteTimeL2_add_le",
+        "finiteTimeL2_const_mul",
+        "finiteTimeL2_sum_le",
+        "CALORIC_VOLTERRA_L2_BOUND",
+        "FINITE_NONNEGATIVE_CONVOLUTION_L1"
+      ]
+    },
+    {
+      "source": "QuasiFeffermanB/CaloricGalerkinBudget.lean",
+      "r6_sha256": "396e7dc7c077910f213dd55ca73d37ece2516d8efc9e06ccbeb3dfb41da19fcc",
+      "r8_sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "existing_public_declarations": 7,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 7,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "REAL_SCALAR_DUHAMEL",
+        "complexUnit",
+        "complexVec_sum_units",
+        "GALERKIN_COMPLEX_MODE_CONTINUOUS",
+        "GALERKIN_COMPLEX_MODE_HAS_DERIV",
+        "GALERKIN_COMPLEX_FORCING_CONTINUOUS",
+        "GALERKIN_MODE_DUHAMEL"
+      ]
+    },
+    {
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "r6_sha256": "41bcd4240fe9048d7782e9522e5ac9dd5235c3ef0b3e26a973b972fa91fa2ab9",
+      "r8_sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "existing_public_declarations": 12,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 12,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [
+        "energy_physical_pairing_hasDerivAt_of_joint"
+      ],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "energy_finiteSynthesis_joint_continuousOn",
+        "energy_galerkinRhs_coordinate_continuousOn",
+        "energyGalerkin_velocity_continuousOn",
+        "energyGalerkin_timeDerivative_continuousOn",
+        "energyGalerkin_velocity_hasDerivAt",
+        "ENERGY_GALERKIN_PAIRING_HASDERIV",
+        "energy_finite_projection_pairing",
+        "energy_test_projection_laplacian",
+        "energyTest_fourier_solenoidal",
+        "energyGalerkin_projected_test_pairing",
+        "ENERGY_GALERKIN_TIME_TEST_INTEGRABLE",
+        "ENERGY_GALERKIN_TIME_TEST_IDENTITY"
+      ]
+    },
+    {
+      "source": "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "r6_sha256": "ee3960d6d2ee051052810c5b7b8477483273a7e2ad0701bde806466231a02fed",
+      "r8_sha256": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+      "existing_public_declarations": 9,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 10,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "energy_sobolevCutoffModes_tendsto",
+        "energy_smooth_datumFourier_reconstruction",
+        "energy_smooth_derivative_fourierSeries",
+        "energy_finite_derivative_fourierSum",
+        "energy_vector_norm_le_three",
+        "energy_operator_norm_le_nine",
+        "energyTest_derivative_entries_uniform",
+        "ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM",
+        "ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND"
+      ]
+    },
+    {
+      "source": "QuasiFeffermanB/PhysicalFourierL2.lean",
+      "r6_sha256": "ded4d0767f82ea59635f91b1972bcf892c4c253971dcd65d6a8edda81cadc97e",
+      "r8_sha256": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
+      "existing_public_declarations": 28,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 28,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "torusDatumRepresentative_measurePreserving",
+        "rough_torusDatumComponent_memLp",
+        "physicalTorusComponentL2",
+        "physicalTorusComponentL2_coeff",
+        "physicalTorusComponentL2_norm_sq",
+        "physicalTorusComponentL2_sum_norm_sq",
+        "physicalL2_coefficientEnergy_le",
+        "physicalL2_fourier_mem",
+        "physicalFourierSequence",
+        "physicalFourierSequence_component",
+        "physicalFourierSequence_norm_sq",
+        "physical_datumFourierCoeff_sub",
+        "physicalL2_fourier_injective",
+        "physicalH1HalfDatum_physicalL2",
+        "physicalL2SobolevDatum",
+        "physicalL2SobolevDatum_coeff",
+        "physicalL2SobolevDatum_norm",
+        "physicalL2SobolevDatum_sub",
+        "physicalL2SobolevDatum_finite",
+        "physicalL2_cutoff_tendsto",
+        "physicalL2_cutoff_eLpNorm_tendsto",
+        "zeroSobolevPhysicalL2",
+        "zeroSobolevPhysicalL2_continuous",
+        "zeroSobolevPhysicalL2_finite",
+        "zeroSobolevPhysicalL2_fourierCoeff",
+        "zeroSobolevPhysicalL2_norm",
+        "torusSobolevH0_physical_fourierCoeff",
+        "torusSobolevH0_physical_norm"
+      ]
+    },
+    {
+      "source": "QuasiFeffermanB/TailEnergy.lean",
+      "r6_sha256": "b592255a5d048a8bb3ecaf6b51156173d38449d9ef04f4ce2a560196e8c92440",
+      "r8_sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "existing_public_declarations": 12,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 12,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "tail_physicalEnergy_congr_ae",
+        "tail_physicalFieldInner_zero_of_ae_zero",
+        "physicalH1_gradient_column_zero_of_ae_zero",
+        "physicalH1_gradient_zero_of_ae_zero",
+        "physicalH1_gradient_eq_smooth",
+        "tail_criticalGradientEnergy_congr_ae",
+        "physicalH1_gradientEnergy_eq_smooth",
+        "positiveSmoothNSE_test",
+        "positiveSmoothNSE_pressure_spatial_smooth",
+        "LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE",
+        "LH_TAIL_ENERGY_OF_POSITIVE_FLOW",
+        "LH_RESTART_OF_TAIL_ENERGY"
+      ]
+    },
+    {
+      "source": "QuasiFeffermanB/ThetaLattice.lean",
+      "r6_sha256": "b9d639544c6f79dd1e95501784f79ca84c20affb697567c7a1ebdb8bf21fed4b",
+      "r8_sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "existing_public_declarations": 1,
+      "public_headers_preserved": true,
+      "changed_public_headers": [],
+      "all_existing_named_declarations": 6,
+      "all_existing_named_headers_preserved": true,
+      "changed_named_headers": [],
+      "new_public_declarations": [],
+      "new_private_declarations": [],
+      "imports_preserved": true,
+      "context_directives_preserved": true,
+      "public_names": [
+        "FINITE_LATTICE_GAUSSIAN_ENVELOPE"
+      ]
+    }
+  ],
+  "caloric_completion_verified": [
+    {
+      "source": "QuasiFeffermanB/CaloricFiniteNorm.lean",
+      "owner_final_sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "review_sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "stable": true
+    },
+    {
+      "source": "QuasiFeffermanB/CaloricGalerkinBudget.lean",
+      "owner_final_sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "review_sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "stable": true
+    },
+    {
+      "source": "QuasiFeffermanB/ThetaLattice.lean",
+      "owner_final_sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "review_sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "stable": true
+    }
+  ],
+  "r6_pass_module_source_review": [
+    {
+      "module": "QuasiFeffermanB.CaloricAdmission",
+      "source": "QuasiFeffermanB/CaloricAdmission.lean",
+      "expected_manifest_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "r6_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "r8_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "expected_manifest_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r6_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r8_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricConvolution",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_manifest_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r6_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricEnstrophy",
+      "source": "QuasiFeffermanB/CaloricEnstrophy.lean",
+      "expected_manifest_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "r6_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "r8_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricKernel",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_manifest_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r6_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_manifest_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r6_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricSmoothing",
+      "source": "QuasiFeffermanB/CaloricSmoothing.lean",
+      "expected_manifest_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "r6_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "r8_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyFiniteWeakPairing",
+      "source": "QuasiFeffermanB/EnergyFiniteWeakPairing.lean",
+      "expected_manifest_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "r6_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "r8_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_manifest_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r6_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyTestDecay",
+      "source": "QuasiFeffermanB/EnergyTestDecay.lean",
+      "expected_manifest_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "r6_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "r8_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyWeakContinuity",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_manifest_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r6_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_manifest_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r6_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.Semantics",
+      "source": "QuasiFeffermanB/Semantics.lean",
+      "expected_manifest_sha256": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+      "r6_sha256": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+      "r8_sha256": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.ThetaGaussian",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_manifest_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r6_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.ThetaSchur",
+      "source": "QuasiFeffermanB/ThetaSchur.lean",
+      "expected_manifest_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "r6_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "r8_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_manifest_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r6_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_manifest_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r6_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "expected_manifest_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r6_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r8_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_manifest_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r6_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.Cutoff",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "expected_manifest_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r6_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "expected_manifest_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r6_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r8_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_manifest_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r6_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.LHEnergy",
+      "source": "QuasiFeffermanB/LHEnergy.lean",
+      "expected_manifest_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "r6_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "r8_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.LHRestart",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_manifest_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r6_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "expected_manifest_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r6_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r8_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.RegularReference",
+      "source": "QuasiFeffermanB/RegularReference.lean",
+      "expected_manifest_sha256": "da49c63001e8a3a2320cc0e2dc6db801113087bb3f9047d6064b8ed379a9cdb7",
+      "r6_sha256": "da49c63001e8a3a2320cc0e2dc6db801113087bb3f9047d6064b8ed379a9cdb7",
+      "r8_sha256": "da49c63001e8a3a2320cc0e2dc6db801113087bb3f9047d6064b8ed379a9cdb7",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.RootContract",
+      "source": "QuasiFeffermanB/RootContract.lean",
+      "expected_manifest_sha256": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+      "r6_sha256": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+      "r8_sha256": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFrequencyGeometry",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_manifest_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r6_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricH2",
+      "source": "QuasiFeffermanB/CaloricH2.lean",
+      "expected_manifest_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "r6_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "r8_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_manifest_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r6_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.LHExistence",
+      "source": "QuasiFeffermanB/LHExistence.lean",
+      "expected_manifest_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "r6_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "r8_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.SpatialAdmission",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_manifest_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r6_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "expected_manifest_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "r6_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "r8_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.ZeroData",
+      "source": "QuasiFeffermanB/ZeroData.lean",
+      "expected_manifest_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "r6_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "r8_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_manifest_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r6_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFourierEstimate",
+      "source": "QuasiFeffermanB/CaloricFourierEstimate.lean",
+      "expected_manifest_sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "r6_sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "r8_sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyLimitCompatibility",
+      "source": "QuasiFeffermanB/EnergyLimitCompatibility.lean",
+      "expected_manifest_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "r6_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "r8_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.GoodTime",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "expected_manifest_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "r6_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "r8_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.SafeCutoff",
+      "source": "QuasiFeffermanB/SafeCutoff.lean",
+      "expected_manifest_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "r6_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "r8_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFlowControl",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "expected_manifest_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r6_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r8_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGlobalLimit",
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "expected_manifest_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "r6_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "r8_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricH1Regularity",
+      "source": "QuasiFeffermanB/CaloricH1Regularity.lean",
+      "expected_manifest_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "r6_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "r8_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "unchanged_from_r6": true,
+      "matches_evidence_manifest": true
+    }
+  ],
+  "audited_declaration_source_review": [
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN",
+      "source": "QuasiFeffermanB/CaloricAdmission.lean",
+      "expected_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "r8_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN",
+      "source": "QuasiFeffermanB/CaloricAdmission.lean",
+      "expected_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "r8_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "expected_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r8_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "expected_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r8_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "expected_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r8_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "expected_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r8_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "expected_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "r8_sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_primitive_continuousOn",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_primitive_hasDerivAt",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricVolterra_kernel",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricVolterra_continuousOn",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricVolterra_hasDerivAt",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricVolterra_nonneg_le_primitive",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "expected_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "r8_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE",
+      "source": "QuasiFeffermanB/CaloricEnstrophy.lean",
+      "expected_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "r8_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL",
+      "source": "QuasiFeffermanB/CaloricEnstrophy.lean",
+      "expected_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "r8_sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.HEAT_MULTIPLIER_SQUARE_INTEGRAL",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.HEAT_PAIR_INTEGRAL",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.HEAT_PAIR_INTEGRABLE",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.finiteCaloricQuadratic_nonneg",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRABLE",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRAL",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "expected_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "r8_sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexVecNorm_nonneg",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexVecNorm_sq",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.norm_component_le_complexVecNorm",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.finiteChi0_nonneg",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexVecNorm_eq_norm",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexVecNorm_add_le",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexVecNorm_smul",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexTransverse_symmetric",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexTransverse_pythagoras",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "expected_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "r8_sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION",
+      "source": "QuasiFeffermanB/CaloricSmoothing.lean",
+      "expected_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "r8_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED",
+      "source": "QuasiFeffermanB/CaloricSmoothing.lean",
+      "expected_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "r8_sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_galerkin_mode_pairing",
+      "source": "QuasiFeffermanB/EnergyFiniteWeakPairing.lean",
+      "expected_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "r8_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING",
+      "source": "QuasiFeffermanB/EnergyFiniteWeakPairing.lean",
+      "expected_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "r8_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyGalerkin_finite_test_pairing",
+      "source": "QuasiFeffermanB/EnergyFiniteWeakPairing.lean",
+      "expected_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "r8_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyModeTransportBound_nonneg",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyModeTransport_norm_le",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyModeRhsBound_nonneg",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.fullFourierRhs_energy_bound",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.galerkin_H0_norm_sq",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.galerkin_H0_energy_bound",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.galerkin_energy_coefficient_modulus",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "expected_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "r8_sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_positive_iteratedDerivative_smooth",
+      "source": "QuasiFeffermanB/EnergyTestDecay.lean",
+      "expected_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "r8_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn",
+      "source": "QuasiFeffermanB/EnergyTestDecay.lean",
+      "expected_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "r8_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY",
+      "source": "QuasiFeffermanB/EnergyTestDecay.lean",
+      "expected_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "r8_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT",
+      "source": "QuasiFeffermanB/EnergyTestDecay.lean",
+      "expected_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "r8_sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_lp_inner_projection",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_lp_projection_tendsto",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_LP_WEAK_CONTINUITY",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_H0_WEAK_CONTINUITY",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_complex_strong_tendsto_of_inner_and_norm_bound",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_H0_STRONG_INITIAL_TRACE",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "expected_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "r8_sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalEnergy_tendsto_of_L2",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_cutoff_bounds",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.criticalEnergy_midpoint",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_cutoff_midpoint",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalHalfEnergyTerm_nonneg",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalHalfEnergy_cutoff",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_halfEnergy_le",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_halfEnergy_ne_top",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_halfEnergy_midpoint",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_halfEnergy_summable",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_mem_halfSobolev",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1HalfDatum_norm_sq",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalHalfEnergy_aemeasurable",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "expected_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "r8_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.gaussianThetaOne_nonneg",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.gaussianThetaOne_summable",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.gaussianThetaOne_jacobi",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GAUSSIAN_THETA_ONE_TRANSFORM",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GAUSSIAN_THETA_ONE_GEOMETRIC_TAIL",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SIXTEEN_LT_EXP_PI",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.EXP_NEG_PI_LT_ONE_SIXTEENTH",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GAUSSIAN_THETA_ONE_CUBE_AT_ONE_LT_TWO",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GAUSSIAN_EXP_TAIL_LE_POWER",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GAUSSIAN_THETA_CUBE_LARGE",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GAUSSIAN_THETA_CUBE_ENVELOPE",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "expected_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "r8_sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.WEIGHTED_SCHUR_PAIR",
+      "source": "QuasiFeffermanB/ThetaSchur.lean",
+      "expected_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "r8_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_WEIGHTED_SCHUR",
+      "source": "QuasiFeffermanB/ThetaSchur.lean",
+      "expected_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "r8_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_WEIGHTED_SCHUR_DIAGONAL",
+      "source": "QuasiFeffermanB/ThetaSchur.lean",
+      "expected_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "r8_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.STRICT_H12_TO_CALORIC_SQUARE",
+      "source": "QuasiFeffermanB/ThetaSchur.lean",
+      "expected_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "r8_sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTimeClamp_pos",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTimeClamp_contDiff",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTimeClamp_eq",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTimeClamp_hasDerivAt",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTest_is_test",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTest_eq",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restartTest_timeDerivative",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.timeTranslate_integrated_momentum",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.timeTranslate_measurePreserving_Ioc",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.timeTranslate_memLp_Ioc",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.timeTranslate_ae_Ioc",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "expected_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "r8_sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricBilinearConstant_pos",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricBilinearConstant_sq",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricHeatBudget_nonneg",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloricHeatBudget_sq",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "expected_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "r8_sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexVecNorm_finset_sum_le",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "expected_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r8_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.coefficientTransport_frequencyDot",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "expected_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r8_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.finite_convolution_swap",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "expected_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r8_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.coefficientTransport_symmetric",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "expected_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r8_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.coefficientLeray_transport_symmetric",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "expected_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "r8_sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_fourierCharacter_norm",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "expected_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "r8_sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CUTOFF_NONNEG",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "expected_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CUTOFF_ZERO",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "expected_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CUTOFF_POS",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "expected_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SAFE_CUTOFF_GT",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "expected_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_SLICE_CUTOFF",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "expected_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_coefficient_curve_precompact",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "expected_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r8_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "expected_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r8_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.globalEnergyCoefficient_eq_horizon",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "expected_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r8_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.globalEnergyCoefficient_continuousOn",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "expected_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r8_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.globalEnergyCoefficient_uniform_limit",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "expected_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "r8_sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyTimeH0L2_norm_sq",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_H0_tail_sq",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "SingularClosure.GalerkinSolution.energy_H0_time_tail",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyGalerkin_H0_time_difference_bound",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyTimeH0L2_sub_norm_sq",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "expected_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "r8_sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_ENERGY_BOUNDS",
+      "source": "QuasiFeffermanB/LHEnergy.lean",
+      "expected_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "r8_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_ae_good_energy_time",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restart_representative_norm_sq",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restart_representative_inner",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_energy_le_from_start",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_energy_le_at_good_time",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_strong_right_trace_of_energy_start",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_strong_right_trace_at_good_time",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.restart_representative_edist",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_shifted_strong_trace_at_good_time",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_AE",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_AE_Ioc",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_AE_Ioo",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "expected_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "r8_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_inner_congr_left_ae",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "expected_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r8_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.constant_positive_solenoidal_test",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "expected_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r8_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.constant_weak_momentum_integrand",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "expected_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r8_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_CONSTANT_PAIRING_PRESERVED",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "expected_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r8_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "expected_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "r8_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.frequencyRadius_pos",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.frequencyRadius_sq",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexFrequency_norm_sq",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexFrequency_norm",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.normalizedComplexFrequency_norm",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexFrequency_inner",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.normalizedComplexFrequency_inner",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.coefficientLeray_eq_complexTransverse",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complexTransverse_smul",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.symmetricFrequencyTensor_normalized",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "expected_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "r8_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET",
+      "source": "QuasiFeffermanB/CaloricH2.lean",
+      "expected_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "r8_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT",
+      "source": "QuasiFeffermanB/CaloricH2.lean",
+      "expected_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "r8_sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.criticalFourthPower_integrable",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.criticalFourthPower_budget",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyCutoff_nonneg",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_HALF_ENERGY_AE_FINITE",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_HALF_ENERGY_AEMEASURABLE",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_FOURTH_POWER_BUDGET",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "expected_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "r8_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.galerkin_H1_time_energy_bound",
+      "source": "QuasiFeffermanB/LHExistence.lean",
+      "expected_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "r8_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.galerkin_critical_zero_norm_sq",
+      "source": "QuasiFeffermanB/LHExistence.lean",
+      "expected_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "r8_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_H0_COEFFICIENT_LIMIT",
+      "source": "QuasiFeffermanB/LHExistence.lean",
+      "expected_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "r8_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_L2H0_SUBSEQUENCE",
+      "source": "QuasiFeffermanB/LHExistence.lean",
+      "expected_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "r8_sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_constant_pairing_coordinate",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_mean_pairings_fourier_zero",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_complex_coordinate_memLp",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_datumFourierIntegrand_integrable",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complex_derivative_real_component",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.complex_derivative_imaginary_component",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_complex_gradient_annihilation",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.EnergySigmaZero.fourier_constraints",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "expected_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "r8_sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.positive_timeDerivative_translate",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "expected_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "r8_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "expected_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "r8_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "expected_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "r8_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "expected_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "r8_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ZERO_LH_VELOCITY",
+      "source": "QuasiFeffermanB/ZeroData.lean",
+      "expected_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "r8_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE",
+      "source": "QuasiFeffermanB/ZeroData.lean",
+      "expected_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "r8_sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_criticalEnergy_le_succ",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "expected_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "r8_sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN",
+      "source": "QuasiFeffermanB/CaloricFourierEstimate.lean",
+      "expected_sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "r8_sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energyGalerkinTimeLimits_compatible",
+      "source": "QuasiFeffermanB/EnergyLimitCompatibility.lean",
+      "expected_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "r8_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE",
+      "source": "QuasiFeffermanB/EnergyLimitCompatibility.lean",
+      "expected_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "r8_sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.exists_good_time_of_integral_lt",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "expected_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "r8_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.fourthPower_budget_lt_threshold",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "expected_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "r8_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.exists_subcritical_good_time",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "expected_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "r8_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_GOOD_SUBCRITICAL_TIME",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "expected_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "r8_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CLASSICAL_TAIL_OF_GLOBAL_SMOOTH_NSE",
+      "source": "QuasiFeffermanB/SafeCutoff.lean",
+      "expected_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "r8_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ZERO_LH_HAS_SMOOTH_TAIL",
+      "source": "QuasiFeffermanB/SafeCutoff.lean",
+      "expected_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "r8_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SAFE_CUTOFF_TAIL",
+      "source": "QuasiFeffermanB/SafeCutoff.lean",
+      "expected_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "r8_sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "expected_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r8_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "expected_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r8_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "expected_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r8_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "expected_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r8_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "expected_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "r8_sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT",
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "expected_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "r8_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_modal_limit_constraints",
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "expected_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "r8_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.energy_modal_limit_H1_representative",
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "expected_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "r8_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    },
+    {
+      "declaration": "QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET",
+      "source": "QuasiFeffermanB/CaloricH1Regularity.lean",
+      "expected_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "r8_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "hash_preserved": true,
+      "source_manifest_consistent": true,
+      "cached_status": "A_TIER_EXACT_DECLARATION"
+    }
+  ],
+  "frozen_source_review": [
+    {
+      "source": "QuasiFeffermanB/RootContract.lean",
+      "r6_sha256": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+      "r8_sha256": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+      "byte_identical": true
+    },
+    {
+      "source": "QuasiFeffermanB/Semantics.lean",
+      "r6_sha256": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+      "r8_sha256": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+      "byte_identical": true
+    },
+    {
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "r6_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "r8_sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "byte_identical": true
+    },
+    {
+      "source": "QuasiFeffermanB/RootAssembly.lean",
+      "r6_sha256": "ab58317402d12d1f7bae744b750b97fe87209e69be76f6b8c6bef19d3e1d3f4d",
+      "r8_sha256": "ab58317402d12d1f7bae744b750b97fe87209e69be76f6b8c6bef19d3e1d3f4d",
+      "byte_identical": true
+    },
+    {
+      "source": "QuasiFeffermanB/TailChain.lean",
+      "r6_sha256": "edb75daa799194c41c9bd7a6b4ff6ef0282f03791a647380d32e6c2f4c5fd1ea",
+      "r8_sha256": "edb75daa799194c41c9bd7a6b4ff6ef0282f03791a647380d32e6c2f4c5fd1ea",
+      "byte_identical": true
+    },
+    {
+      "source": "QuasiFeffermanB/Endpoints/Root.lean",
+      "r6_sha256": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+      "r8_sha256": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+      "byte_identical": true
+    }
+  ],
+  "frozen_cutoff_literal_preserved": true,
+  "safe_cutoff_literal_preserved": true,
+  "admission_scan": {
+    "method": "Lexical source inspection with nested block comments, line comments, and string literals excluded; raw newly added admission-token lines also compared in the seven project files",
+    "project_and_preloaded_code_hits": [],
+    "new_raw_admission_token_lines_in_changed_project_files": [],
+    "comment_only_axiom_occurrences_are_not_declarations": true
+  },
+  "cached_build_counts": {
+    "PASS": 42,
+    "FAIL": 7,
+    "BLOCKED_BY_DEPENDENCY": 25
+  },
+  "cached_root_status": "PENDING"
+}
+

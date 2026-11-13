@@ -1,0 +1,179 @@
+{
+  "task": "R8_Q06_CALORIC_SOURCE_PRELOAD",
+  "status": "A_TIER_CANDIDATE",
+  "stable": true,
+  "source_baseline_commit": "17641ba02784ae108af0da5874073786d7df46ec",
+  "foundation_pin": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "mathlib_pin": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "diagnostic_evidence": {
+    "run_id": 43523716429,
+    "path": "/workspace/scratch/1438cdc16dd5/qfb_external_run_43523716429.log",
+    "scope": "Cached diagnostics only; no matching external compilation for the edited source."
+  },
+  "derivation": "/workspace/scratch/1438cdc16dd5/qfb_r7_caloric_derivation.txt",
+  "files": [
+    {
+      "path": "QuasiFeffermanB/CaloricFiniteNorm.lean",
+      "before_sha256": "0ae5cb06ba9d99540025c6540b7d0a19f1b1d15252b80b28b8c62bee367e540e",
+      "after_sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "edited_declarations": [
+        "QuasiFeffermanB.finiteTimeL2_add_le",
+        "QuasiFeffermanB.finiteTimeL2_sum_le"
+      ],
+      "changes": [
+        "Typed all three square/product interval-integrability witnesses with volume 0 T.",
+        "Supplied the explicit finite set to continuousOn_finsetSum."
+      ],
+      "cached_diagnostic_lines": [
+        60,
+        94
+      ],
+      "preserved_declaration_interfaces": 11
+    },
+    {
+      "path": "QuasiFeffermanB/CaloricGalerkinBudget.lean",
+      "before_sha256": "396e7dc7c077910f213dd55ca73d37ece2516d8efc9e06ccbeb3dfb41da19fcc",
+      "after_sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "edited_declarations": [
+        "QuasiFeffermanB.REAL_SCALAR_DUHAMEL",
+        "QuasiFeffermanB.GALERKIN_COMPLEX_MODE_CONTINUOUS",
+        "QuasiFeffermanB.GALERKIN_COMPLEX_FORCING_CONTINUOUS",
+        "QuasiFeffermanB.GALERKIN_MODE_DUHAMEL"
+      ],
+      "changes": [
+        "Used HasDerivAt.congr_deriv with the exact real-module product-rule equality.",
+        "Beta-reduced the kernel integrand before scalar-action and exponential rewrites.",
+        "Specified Finset.univ for the two finite continuity sums.",
+        "Used congr_deriv then PiLp.ext for the actual Galerkin mode derivative; normalized -alpha*c-P = -P-alpha*c."
+      ],
+      "cached_diagnostic_lines": [
+        32,
+        49,
+        119,
+        120,
+        121,
+        122
+      ],
+      "preserved_declaration_interfaces": 7
+    },
+    {
+      "path": "QuasiFeffermanB/ThetaLattice.lean",
+      "before_sha256": "b9d639544c6f79dd1e95501784f79ca84c20affb697567c7a1ebdb8bf21fed4b",
+      "after_sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "edited_declarations": [
+        "QuasiFeffermanB.latticeBox_gaussian_sum (private source declaration)"
+      ],
+      "changes": [
+        "Normalized both finite-product goals with Finset.product_eq_sprod before Finset.sum_product."
+      ],
+      "cached_diagnostic_lines": [
+        60,
+        71
+      ],
+      "preserved_declaration_interfaces": 6
+    }
+  ],
+  "invariants": {
+    "declaration_headers_equal_to_r6": true,
+    "checked_declaration_interfaces": 24,
+    "imports_unchanged": true,
+    "premises_unchanged": true,
+    "constants_unchanged": true,
+    "cutoffs_unchanged": true,
+    "added_declarations": 0,
+    "removed_declarations": 0,
+    "forbidden_admission_tokens": 0,
+    "manifests_edited": false,
+    "documentation_edited": false
+  },
+  "exact_pinned_api_sources": [
+    {
+      "name": "ContinuousOn.intervalIntegrable_of_Icc",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "source_blob_sha": "4092210205f534fd53ca3139589e2aa26f88a00d",
+      "line": 506,
+      "signature": "{μ : Measure ℝ} [IsLocallyFiniteMeasure μ] (hab : a ≤ b) (hu : ContinuousOn u (Icc a b)) : IntervalIntegrable u μ a b",
+      "use": "Explicit IntervalIntegrable ... volume 0 T types fix μ before typeclass inference."
+    },
+    {
+      "name": "continuousOn_finsetSum",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/Monoid.lean",
+      "source_blob_sha": "0dac831950493b3a8af9373f5f9c6cd99b6f4538",
+      "line": 960,
+      "signature": "{f : ι → X → M} (s : Finset ι) {t : Set X} : (∀ i ∈ s, ContinuousOn (f i) t) → ContinuousOn (fun a => ∑ i ∈ s, f i a) t",
+      "use": "Generated additive theorem; s is an explicit first argument."
+    },
+    {
+      "name": "HasDerivAt.congr_deriv",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "source_blob_sha": "99b298181811591362a2467cfd825017ac9d0fef",
+      "line": 602,
+      "signature": "(h : HasDerivAt f f' x) (h' : f' = g') : HasDerivAt f g' x",
+      "use": "Restrict normalization to derivative values, preserving the function and differentiation point."
+    },
+    {
+      "name": "HasDerivAt.smul",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Mul.lean",
+      "source_blob_sha": "f688112f3812e3f50cdf169956d6c1323d32c19a",
+      "line": 109,
+      "signature": "(hc : HasDerivAt c c' x) (hf : HasDerivAt f f' x) : HasDerivAt (c • f) (c x • f' + c' • f x) x",
+      "use": "The explicit derivative equality follows this exact summand order."
+    },
+    {
+      "name": "intervalIntegral.integral_smul",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "source_blob_sha": "4092210205f534fd53ca3139589e2aa26f88a00d",
+      "line": 799,
+      "signature": "(r : 𝕜) (f : ℝ → E) : (∫ x in a..b, r • f x ∂μ) = r • ∫ x in a..b, f x ∂μ",
+      "use": "Beta-reduce the applied pointwise lambdas before smul_smul and Real.exp_add."
+    },
+    {
+      "name": "PiLp.ext",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Normed/Lp/PiLp.lean",
+      "source_blob_sha": "6961e020117a12f4c823a0cd1d6ebe77931ccacc",
+      "line": 99,
+      "signature": "{x y : PiLp p α} (h : ∀ i, x i = y i) : x = y",
+      "use": "Applied only after congr_deriv reduces the goal to equality of Euclidean vectors; i : Fin 3."
+    },
+    {
+      "name": "Finset.product_eq_sprod",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Data/Finset/Prod.lean",
+      "source_blob_sha": "097e44badb751d9fa93f7825f251365fb388008e",
+      "line": 53,
+      "signature": "{s : Finset α} {t : Finset β} : Finset.product s t = s ×ˢ t",
+      "use": "Literal product head normalization; proof is rfl at the pinned source."
+    },
+    {
+      "name": "Finset.sum_product",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/BigOperators/Group/Finset/Sigma.lean",
+      "source_blob_sha": "6ff55ea7c0fcfb22636bfc67882d5500f788ab0d",
+      "line": 80,
+      "signature": "(s : Finset γ) (t : Finset α) (f : γ × α → β) : (∑ x ∈ s ×ˢ t, f x) = ∑ x ∈ s, ∑ y ∈ t, f (x, y)",
+      "use": "Generated additive theorem used after product_eq_sprod."
+    },
+    {
+      "name": "Finset.sum_mul_sum",
+      "source_url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/BigOperators/Ring/Finset.lean",
+      "source_blob_sha": "cdd6f7f559520a37ac4bb25734ca70c2a8bddf8c",
+      "line": 62,
+      "signature": "(s : Finset ι) (t : Finset κ) (f : ι → R) (g : κ → R) : (∑ i ∈ s, f i) * ∑ j ∈ t, g j = ∑ i ∈ s, ∑ j ∈ t, f i * g j",
+      "use": "Exact square and cube product expansion."
+    }
+  ],
+  "static_review": {
+    "method": "Python text comparison of all top-level declaration headers, import statements and forbidden admission tokens; manual proof-goal normalization review against pinned APIs and cached diagnostics.",
+    "result": "PASS",
+    "proof_elaboration_verified": false,
+    "kernel_verified": false
+  },
+  "constraints": {
+    "local_lean_executions": 0,
+    "local_lake_executions": 0,
+    "version_probes": 0,
+    "remote_runs": 0,
+    "ci_actions": 0,
+    "github_writes": 0
+  },
+  "remaining_gate": "Matching external compiler and theorem-level axiom audit for these exact source hashes; further downstream diagnostics remain possible.",
+  "promotion": "NONE"
+}

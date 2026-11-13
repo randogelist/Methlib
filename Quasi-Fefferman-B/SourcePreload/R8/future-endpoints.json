@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "revision": "R8",
+  "mathematical_derivation_revision": "R7",
+  "lean_declarations_status": "NOT_IMPLEMENTED_UNDER_THE_R7_LABELS",
+  "root_type": "QuasiFeffermanB.QuasiFeffermanBStatement",
+  "root_change": false,
+  "symbols": {
+    "nu": "nu > 0",
+    "a": "CriticalPhysicalL2 datum with EnergySigmaZero a",
+    "u_G": "arbitrary original pair satisfying CriticalLerayHopf nu a u G",
+    "E0": "norm(a)^2",
+    "tau": "norm(a)^4 / (8*pi^2*nu^5)",
+    "delta": "delta > tau",
+    "Delta": "delta - tau",
+    "C": "2*pi*nu^2",
+    "T": "(delta + tau)/2",
+    "q": "(delta + 3*tau)/(2*(delta + tau))",
+    "H_u(t)": "(physicalHalfEnergy (u t)).toReal; finite at every selected H1 witness",
+    "D_G(t)": "criticalGradientEnergy (G t)",
+    "Good(s)": "CriticalPhysicalH1 (u s) (G s) and the original shifted Leray-Hopf pair at s"
+  },
+  "contracts": [
+    {
+      "label": "R7_BUFFERED_SUBCRITICAL_RESTART",
+      "status": "B_TIER",
+      "lean_declaration": null,
+      "premises": [
+        "nu > 0",
+        "EnergySigmaZero a",
+        "CriticalLerayHopf nu a u G",
+        "delta > tau"
+      ],
+      "conclusion": "exists s, 0 < s < T and Good(s) and H_u(s) < C*sqrt(q) < C and delta-s > Delta/2",
+      "entrypoints": [
+        "QuasiFeffermanB.LH_FOURTH_POWER_BUDGET",
+        "QuasiFeffermanB.LH_RESTART_AE_Ioo",
+        "QuasiFeffermanB.exists_good_time_of_integral_lt",
+        "QuasiFeffermanB.physicalH1_halfEnergy_ne_top",
+        "Real.sqrt_nonneg",
+        "Real.sq_sqrt",
+        "Real.sqrt_lt_sqrt",
+        "Real.sqrt_pos"
+      ],
+      "derivation": "Derivation/qfb_r7_root_refinement.txt",
+      "section": "R7.ROOT.2"
+    },
+    {
+      "label": "R7_BUFFERED_H1_RESTART_BOUND",
+      "status": "B_TIER",
+      "lean_declaration": null,
+      "premises": [
+        "nu > 0",
+        "EnergySigmaZero a",
+        "CriticalLerayHopf nu a u G",
+        "delta > tau",
+        "a != 0"
+      ],
+      "definitions": {
+        "J": "T - tau/q = Delta/(4*q) > 0",
+        "K": "E0/(nu*J) = 4*q*E0/(nu*Delta) > 0",
+        "F(r)": "H_u(r)^2/(C^2*q) + D_G(r)/K"
+      },
+      "conclusion": "exists ONE s, 0 < s < T and Good(s) and H_u(s) < C*sqrt(q) and D_G(s) < K and delta-s > Delta/2",
+      "selection": "integral_(0,T) F <= tau/q + J/2 < T; select one witness with F(s) < 1",
+      "entrypoints": [
+        "QuasiFeffermanB.LH_ENERGY_BOUNDS",
+        "QuasiFeffermanB.LH_FOURTH_POWER_BUDGET",
+        "QuasiFeffermanB.LH_RESTART_AE_Ioo",
+        "QuasiFeffermanB.exists_good_time_of_integral_lt",
+        "SingularClosure.criticalGradientEnergy_nonneg"
+      ],
+      "derivation": "Derivation/qfb_r7_root_refinement.txt",
+      "section": "R7.ROOT.2A"
+    },
+    {
+      "label": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION",
+      "status": "B_TIER",
+      "lean_declaration": null,
+      "premises": [
+        "nu > 0",
+        "EnergySigmaZero a",
+        "CriticalLerayHopf nu a u G",
+        "delta > tau"
+      ],
+      "conclusion": "exists classical tail representative (v,p), forall t >= delta, u(t) = v(t) a.e. in space and physicalDissipation(v(t)) <= 4*exp(2)*norm(a)^2/(nu*(delta-tau))",
+      "original_gradient_conclusion": "criticalGradientEnergy(G(t)) has the same bound for a.e. t >= delta",
+      "zero_datum_case": "a = 0: the smooth zero representative; no division by E0 or K",
+      "entrypoints": [
+        "QuasiFeffermanB.physicalH1SobolevDatum_coeff",
+        "QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq",
+        "QuasiFeffermanB.physicalH1SobolevDatum_physicalL2",
+        "QuasiFeffermanB.physicalH1_weighted_finite_bound",
+        "SingularClosure.criticalSobolev_norm_sq",
+        "QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT",
+        "QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET",
+        "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN",
+        "QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW"
+      ],
+      "derivation": "Derivation/qfb_r7_root_refinement.txt",
+      "section": "R7.ROOT.3-R7.ROOT.4"
+    },
+    {
+      "label": "R7_GLOBAL_CONULL_ENERGY_STARTS",
+      "status": "B_TIER",
+      "lean_declaration": null,
+      "premises": [
+        "one fixed original pair satisfying CriticalLerayHopf nu a u G"
+      ],
+      "conclusion": "for a.e. s in (0,infinity), forall t >= s, physicalEnergy(u(t)) + 2*nu*integral_s^t criticalGradientEnergy(G(r)) dr <= physicalEnergy(u(s))",
+      "quantifier_order": "one countable intersection over horizons m+1, then every terminal t; fixed u, G and primary subsequence throughout",
+      "existing_audited_reuse": "QuasiFeffermanB.lh_ae_good_energy_time already proves the Leray-Hopf form; its application to the constructed Q01 limit awaits the candidate existence chain",
+      "entrypoints": [
+        "QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY",
+        "QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE",
+        "QuasiFeffermanB.lh_ae_good_energy_time",
+        "MeasureTheory.ae_restrict_iff'",
+        "MeasureTheory.ae_all_iff"
+      ],
+      "derivation": "Derivation/qfb_r7_q01_derivation.txt",
+      "section": "7. CONULL STARTS BEFORE ALL TERMINAL TIMES"
+    }
+  ],
+  "promotion": {
+    "R8_new_external_runs": 0,
+    "R8_new_A_tier_promotions": 0,
+    "local_Lean_executions": 0,
+    "candidate_source_requires": "matching external native compiler and exact theorem-level axiom audit"
+  }
+}

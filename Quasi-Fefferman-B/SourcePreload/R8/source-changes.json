@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "parent_commit": "17641ba02784ae108af0da5874073786d7df46ec",
+  "source_revision": "R8",
+  "files": [
+    {
+      "source": "QuasiFeffermanB/CaloricFiniteNorm.lean",
+      "module": "QuasiFeffermanB.CaloricFiniteNorm",
+      "baseline_sha256": "0ae5cb06ba9d99540025c6540b7d0a19f1b1d15252b80b28b8c62bee367e540e",
+      "candidate_sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Explicit volume and finite-set arguments"
+    },
+    {
+      "source": "QuasiFeffermanB/CaloricGalerkinBudget.lean",
+      "module": "QuasiFeffermanB.CaloricGalerkinBudget",
+      "baseline_sha256": "396e7dc7c077910f213dd55ca73d37ece2516d8efc9e06ccbeb3dfb41da19fcc",
+      "candidate_sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Derivative-value congruence, scalar algebra, PiLp.ext"
+    },
+    {
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+      "baseline_sha256": "41bcd4240fe9048d7782e9522e5ac9dd5235c3ef0b3e26a973b972fa91fa2ab9",
+      "candidate_sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Typed continuity, interval inclusion, factored pairing derivative"
+    },
+    {
+      "source": "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "module": "QuasiFeffermanB.Endpoints.TestProjection",
+      "baseline_sha256": "ee3960d6d2ee051052810c5b7b8477483273a7e2ad0701bde806466231a02fed",
+      "candidate_sha256": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Removal of the terminal tactic after goal closure"
+    },
+    {
+      "source": "QuasiFeffermanB/PhysicalFourierL2.lean",
+      "module": "QuasiFeffermanB.PhysicalFourierL2",
+      "baseline_sha256": "ded4d0767f82ea59635f91b1972bcf892c4c253971dcd65d6a8edda81cadc97e",
+      "candidate_sha256": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Explicit torus-representative composition"
+    },
+    {
+      "source": "QuasiFeffermanB/TailEnergy.lean",
+      "module": "QuasiFeffermanB.TailEnergy",
+      "baseline_sha256": "b592255a5d048a8bb3ecaf6b51156173d38449d9ef04f4ce2a560196e8c92440",
+      "candidate_sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Explicit derivative columns and original-gradient translation"
+    },
+    {
+      "source": "QuasiFeffermanB/ThetaLattice.lean",
+      "module": "QuasiFeffermanB.ThetaLattice",
+      "baseline_sha256": "b9d639544c6f79dd1e95501784f79ca84c20affb697567c7a1ebdb8bf21fed4b",
+      "candidate_sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "status": "A_TIER_CANDIDATE",
+      "normalization": "Finset.product_eq_sprod before Cartesian summation"
+    }
+  ],
+  "public_statement_changes": 0,
+  "new_public_theorems": 0,
+  "new_private_helpers": 1,
+  "new_analytic_premises": 0,
+  "new_compiler_evidence": false
+}

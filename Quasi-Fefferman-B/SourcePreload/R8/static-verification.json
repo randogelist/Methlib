@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "revision": "R8",
+  "verdict": "STATIC_SOURCE_PRELOAD_VERIFIED",
+  "source_parent": "17641ba02784ae108af0da5874073786d7df46ec",
+  "root_status": "A_TIER_CANDIDATE",
+  "native_pins": {
+    "foundation_sha": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "lean": "4.33.0",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d"
+  },
+  "static_invariants": {
+    "existing_project_lean_inventory_preserved": true,
+    "exactly_seven_r6_failed_project_modules_changed": true,
+    "all_existing_public_headers_preserved": true,
+    "all_existing_named_headers_preserved": true,
+    "no_new_public_declarations": true,
+    "imports_and_context_directives_preserved": true,
+    "all_caloric_files_match_owner_final_hashes": true,
+    "all_42_pass_modules_byte_identical": true,
+    "all_227_audited_declaration_source_hashes_preserved": true,
+    "frozen_root_contract_semantics_and_cutoff_files_identical": true,
+    "frozen_cutoff_literals_preserved": true,
+    "no_admission_code_tokens": true,
+    "no_new_raw_admission_token_lines_in_changed_project_sources": true,
+    "cached_evidence_consistent": true
+  },
+  "invariant_summary": {
+    "changed_project_lean_modules": 7,
+    "existing_public_headers_preserved": 80,
+    "existing_named_headers_preserved": 86,
+    "new_private_helpers": [
+      {
+        "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+        "name": "energy_physical_pairing_hasDerivAt_of_joint"
+      }
+    ],
+    "r6_pass_modules_preserved": 42,
+    "audited_declaration_source_hashes_preserved": 227,
+    "preloaded_source_snapshots_reviewed": 35,
+    "code_admission_tokens": 0,
+    "root_formal_status": "A_TIER_CANDIDATE; cached root status remains PENDING",
+    "new_source_compilation_or_axiom_audit": "NONE; static review is not compiler or theorem-audit evidence",
+    "issues": []
+  },
+  "source_graph": {
+    "files": 79,
+    "theorem_modules": 76,
+    "public_theorems": 423,
+    "root_modules": 74,
+    "root_audit_modules": 71,
+    "root_registered_declarations": 409
+  },
+  "preloaded": {
+    "upstream_source_files": 36,
+    "upstream_Lean_files": 35,
+    "license_files": 1,
+    "upstream_source_bytes": 863074,
+    "upstream_endpoints": 53,
+    "QFB_endpoints": 28,
+    "QFB_exact_cached_entries": 12,
+    "QFB_candidate_entries": 16,
+    "source_probes": {
+      "Mathlib.lean": 30,
+      "Methlib.lean": 23,
+      "QFB.lean": 28
+    },
+    "future_contracts": 4,
+    "derivation_components": 4
+  },
+  "cached_run": {
+    "id": "43523716429",
+    "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+    "result": "FAIL",
+    "PASS": 42,
+    "FAIL": 7,
+    "BLOCKED": 25,
+    "exact_audited_declarations": 227,
+    "observed_object_cache_hits": 34,
+    "R8_pass_fingerprints_preserved": 42,
+    "R8_audited_source_hashes_preserved": 227
+  },
+  "verification_scope": "Python-only source identity, signature, import graph, registry references, previous exact evidence, and unexecuted probe completeness",
+  "new_external_runs": 0,
+  "local_Lean_or_Lake_or_version_commands": 0,
+  "new_formal_promotions": 0,
+  "independent_review": "Reports/qfb_r8_invariant_review.json",
+  "audit_policy_self_test": "PASS; compiler-free",
+  "cache_policy_self_test": "PASS; compiler-free",
+  "target_scope_policy_self_test": "PASS; compiler-free",
+  "remote_commit": "recorded separately after commit creation"
+}

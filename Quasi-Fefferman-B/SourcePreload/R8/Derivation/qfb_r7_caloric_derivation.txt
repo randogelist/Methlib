@@ -1,0 +1,414 @@
+QFB_R7_Q06_CALORIC_NUMERICAL_ADMISSION_B_TIER
+MODE=B_TIER_DERIVATION. SCOPE=Q06. LEAN_EXECUTIONS=0. SOURCE_EDITS=0.
+QFB_SNAPSHOT=17641ba02784ae108af0da5874073786d7df46ec.
+FOUNDATION=09dfe94a1ef150e21d09df3013fbe09002ef139c.
+MATHLIB=db584cd6d46c92f209a44c0f1c829460d327499d.
+CACHED_RUN=43523716429. PRIOR_CACHE_PRODUCER=43151440082.
+Q=https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/
+F=https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/
+M=https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/
+SOURCE_NOTATION: Q(file), F(file), M(file) denote these exact prefixes.
+
+R00. EXACT SCOPED IMPLICATIONS
+
+Fix nu>0 and b:CriticalSobolev 2. Retain all three premises
+  SpectralReality(criticalCoeff 2 b), SpectralSolenoidal(criticalCoeff 2 b),
+  SpectralMeanZero(criticalCoeff 2 b).
+Define a=criticalSobolevLower 1 2 (1<=2) b and H=||a||^2.
+Assume H<2*pi*nu^2. Define S=H/(pi*nu), D=||b||^2*exp(H/(pi*nu^2)).
+Then the exact finite quantitative conclusion is
+  forall N:Nat, forall g:GalerkinSolution nu
+    (finiteSynthesis N(criticalCoeff 2 b)) N, forall T:Real, 0<=T ->
+      integral_0^T finiteChi0(cutoffModes N)(g.coeff t)^2 dt <= S.       [BUDGET]
+The corresponding positive-time conclusion is
+  exists L:CriticalPositiveSobolevFlow nu,
+    PositiveSmoothNSE nu L.velocity L.pressure;
+    eLpNorm(L.velocity t-(criticalInitialPhysicalL2 a:Field)) 2 mu_Q ->0
+      as t->0 through t>0;
+    forall T>0, MemLp(t|->criticalSpatialNorm 6(L.velocity t)) 4
+      (volume.restrict(Ioc 0 T));
+    forall t>0, physicalDissipation(L.velocity t)<=D;
+    forall v,G, CriticalLerayHopf nu(criticalInitialPhysicalL2 a)v G ->
+      forall t>0, v t =ae[mu_Q] L.velocity t.                        [REFERENCE]
+Here mu_Q=volume.restrict unitCube. Neither a trace nor a Serrin bound is
+an additional premise of [BUDGET] or [REFERENCE].
+For v:Field, G:Vec->(Vec->L[Real]Vec), assume CriticalPhysicalH1 v G,
+EnergySigmaZero(criticalL2Representative v), and
+physicalHalfEnergy v < ENNReal.ofReal(2*pi*nu^2). Then, with
+H=(physicalHalfEnergy v).toReal and J=criticalGradientEnergy G,
+  exists R:RegularReference nu(criticalL2Representative v),
+    PositiveSmoothNSE nu R.flow.velocity R.flow.pressure /
+    forall t>0, physicalDissipation(R.flow.velocity t)
+      <= J*exp(H/(pi*nu^2)).                                      [PHYSICAL]
+In particular ExactH1Admission nu. Statements [BUDGET]--[PHYSICAL] are
+derived below; the current aggregate Q06 compiler status remains pending.
+
+R01. FREQUENCY, MEASURE, AND NORM CONVENTIONS
+
+K_N=cutoffModes N is finite and excludes zero. For k in K_N set
+  b_k=(galerkinFreqSq k:Real)>=1, r_k=sqrt(b_k)>0, kappa_k=2*pi*r_k>0.
+Thus kappa_k^2=4*pi^2*b_k=laplacianFrequency k.
+The physical domain has period 1 in each coordinate and cube measure 1;
+the Fourier derivative symbol is 2*pi*i*k_j. No arbitrary-period scaling
+or alternate Fourier convention is substituted.
+CriticalSobolev q means order q/2; its squared norm is
+  sum'_(k,i) criticalFrequencyWeight(k)^q*Complex.normSq(c_k_i).
+The weight at zero is 1; the retained mean-zero premise removes that term.
+Hence H is a squared homogeneous H^(1/2) norm, and ||b||^2 is H^1 energy.
+The coefficient magnitude is |c_k|_2=sqrt(sum_i ||c_k_i||^2), represented
+by complexVecNorm and the Hermitian EuclideanSpace norm; no Pi sup norm.
+physicalEnergy(v)=integral_Q |v|^2; physicalDissipation(v)=integral_Q
+sum_j |partial_j v|^2; criticalGradientEnergy(G)=sum_j integral_Q|G e_j|^2.
+These conventions contain no kinetic-energy factor 1/2 and no gradient
+operator-norm replacement. The factor 9 used later is a separate bound.
+ENTRY: F(CriticalSpaces.lean):criticalSobolev_norm_sq; Q(CaloricMultiplier.lean):
+complexVecNorm_eq_norm; F(CriticalH1Algebra.lean):criticalGradientEnergy.
+
+R02. SCALAR THETA TO THE ACTUAL FINITE THREE-DIMENSIONAL LATTICE
+
+For theta(t)=sum'_(n:Int)exp(-pi*t*n^2), t>0, the exact scalar inputs are
+  gaussianThetaOne_summable; GAUSSIAN_THETA_ONE_TRANSFORM;
+  GAUSSIAN_THETA_CUBE_ENVELOPE: theta(t)^3-1<=t^(-3/2).
+ENTRY: Q(ThetaGaussian.lean). The selected pinned transformation is
+M(Analysis/SpecialFunctions/Gaussian/PoissonSummation.lean):123,
+  Real.tsum_exp_neg_mul_int_sq {a:Real}(ha:0<a):
+    sum' n:Int,exp(-pi*a*n^2)=(1/a^(1/2))*sum' n:Int,exp(-pi/a*n^2).
+For s_N=Finset.Icc(-N)N, the injective map ((i,j),l)|->![i,j,l] gives
+  sum_(k in latticeBox N)exp(-pi*t*b_k)
+   =sum_(i,j,l in s_N) exp(-pi*t*i^2)exp(-pi*t*j^2)exp(-pi*t*l^2)
+   =(sum_(n in s_N)exp(-pi*t*n^2))^3.
+The identity b_[i,j,l]=i^2+j^2+l^2 uses Fin.sum_univ_three and casts;
+Real.exp_add twice supplies the factors; injectivity prevents multiplicity.
+ENTRY: M(Algebra/BigOperators/Group/Finset/Sigma.lean):80,
+  Finset.sum_product(s)(t)(f): sum_(p in s x t)f p=sum_(i in s)sum_(j in t)f(i,j).
+ENTRY: M(Algebra/BigOperators/Ring/Finset.lean):62,
+  Finset.sum_mul_sum(s)(t)(f)(g): (sum_s f)*(sum_t g)=sum_s sum_t(f i*g j).
+Summability and positive terms give finite sum<=theta; monotonicity of
+the cube applies to nonnegative inputs. Since insert 0 K_N subset latticeBox N,
+  sum_(k in K_N)exp(-pi*t*b_k)<=theta(t)^3-1<=t^(-3/2).              [GAUSS]
+ENTRY: Q(ThetaLattice.lean):FINITE_LATTICE_GAUSSIAN_ENVELOPE.
+No infinite three-dimensional product interchange or differentiation occurs.
+
+R03. TWO LAPLACE INTEGRATIONS; ALL IMPROPER-INTEGRAL GATES
+
+For t>0, integrate [GAUSS] over s in Ioi t. For every k in K_N,
+  integral_t^infty exp(-pi*b_k*s) ds=exp(-pi*b_k*t)/(pi*b_k).
+The exponent coefficient -pi*b_k is strictly negative. The upper majorant
+s^(-3/2) is integrable on Ioi t because -3/2<-1 and t>0, with integral
+2*t^(-1/2). Consequently
+  sum_(k in K_N)exp(-pi*b_k*t)/b_k<=2*pi*t^(-1/2).                 [HEATROW]
+ENTRIES: M(Analysis/SpecialFunctions/ImproperIntegrals.lean):77,102,130,172,
+  integrableOn_exp_mul_Ioi {c:Real}(hc:c<0)(t): IntegrableOn(exp(c*·))(Ioi t);
+  integral_exp_mul_Ioi hc t: integral_(Ioi t)exp(c*s)=-exp(c*t)/c;
+  integrableOn_Ioi_rpow_of_lt {p t}(hp:p< -1)(ht:0<t);
+  integral_Ioi_rpow_of_lt hp ht: integral_(Ioi t)s^p=-t^(p+1)/(p+1).
+At every finite-sum exchange use MeasureTheory.integral_finsetSum with
+Integrable for each summand under volume.restrict(Ioi t).
+ENTRY: M(MeasureTheory/Integral/Bochner/Basic.lean):246.
+At each comparison use setIntegral_mono_on with BOTH IntegrableOn proofs,
+measurableSet_Ioi, and the pointwise comparison on that set.
+ENTRY: M(MeasureTheory/Integral/Bochner/Set.lean):752--766.
+
+For r>0, the independently evaluated half-Gamma integral is
+  integral_0^infty t^(-1/2)*exp(-pi*r^2*t)dt=1/r.                   [GAMMA]
+ENTRIES: M(Analysis/SpecialFunctions/Gamma/Basic.lean):465,
+  Real.integral_rpow_mul_exp_neg_mul_Ioi {a q}(ha:0<a)(hq:0<q):
+    integral_(Ioi 0)t^(a-1)*exp(-(q*t))=(1/q)^a*Real.Gamma a;
+  M(Analysis/SpecialFunctions/Gaussian/GaussianIntegral.lean):307,
+    Real.Gamma_one_half_eq: Real.Gamma(1/2)=sqrt(pi).
+Instantiate a=1/2,q=pi*r^2>0; sqrt(pi*r^2)=sqrt(pi)*r since r>0.
+Integrability follows, as in Q(ThetaResolvent.lean), from [GAMMA] and
+Integrable.of_integral_ne_zero (Bochner/Basic.lean:206), because 1/r!=0.
+This use of a separately proved nonzero integral is noncircular.
+Multiply [HEATROW] by exp(-pi*r^2*t)>=0 and integrate on Ioi 0:
+  integral exp(-pi*(r^2+b_k)*t)/b_k=1/(pi*b_k*(r^2+b_k));
+  sum_(k in K_N)1/(b_k*(r^2+b_k))<=2*pi^2/r.                     [ROW]
+All exponential factors are integrable since r^2+b_k>0; [GAMMA] supplies
+the majorant. The singular t^(-3/2) majorant is never integrated at zero.
+ENTRY: Q(ThetaResolvent.lean):FINITE_LATTICE_HEAT_RESOLVENT,
+NORMALIZED_GAUSSIAN_HALF_INTEGRAL, FINITE_LATTICE_RESOLVENT_BOUND.
+
+R04. WEIGHTED SCHUR AND THE VISCOSITY-FREE QUADRATIC FORM
+
+Define M_kl=1/(kappa_k^2+kappa_l^2), w_k=1/b_k>0, d_k=r_k/2.
+M is symmetric and nonnegative. At r=r_k, [ROW] gives
+  sum_l M_kl*w_l=(1/(4*pi^2))*sum_l1/(b_l*(r_k^2+b_l))
+    <=1/(2*r_k)=d_k*w_k.
+For real x,y and u,v>0, (x*v-y*u)^2>=0 gives
+2*x*y<=x^2*v/u+y^2*u/v. Sum with M_kl, exchange the finite indices,
+and use symmetry and the row inequality. Therefore
+  sum_k sum_l M_kl*x_k*x_l<=sum_k d_k*x_k^2
+    =(sum_k kappa_k*x_k^2)/(4*pi).                                [SCHUR]
+ENTRY: Q(ThetaSchur.lean):FINITE_WEIGHTED_SCHUR_DIAGONAL; its exact
+hypotheses are M>=0, M symmetric, w>0 and sum_j M_ij*w_j<=d_i*w_i.
+No sign hypothesis on x is needed. For x_k=|c_k|_2,
+  Q_N^2:=finiteCaloricQuadratic K_N kappa |c|_2
+    <=criticalEnergy 1 N c/(4*pi).
+ENTRY: Q(FiniteCaloricSchur.lean):FINITE_CALORIC_SCHUR; complexVecNorm_sq.
+Q_N^2 contains no viscosity. Its notation denotes this nonnegative scalar,
+not a separately presumed square root or an infinite Fourier quadratic form.
+
+R05. ACTUAL SOLENOIDAL MULTIPLIER; EXACT FACTOR 1/2
+
+For k!=0, e=k/r_k is a real unit normal in Hermitian EuclideanSpace C(Fin 3).
+Pi_e(z)=z-<e,z>e; |z|^2=|<e,z>|^2+|Pi_e z|^2. The scalar inequality
+  (a*y+b*x)^2<=(a^2+x^2)*(b^2+y^2)
+implies |Pi_e(<e,z>w+<e,w>z)|<=|z|*|w|.
+ENTRY: Q(CaloricMultiplier.lean):SYMMETRIC_COMPLEX_LERAY_MULTIPLIER.
+M(Analysis/InnerProductSpace/Basic.lean):inner_smul_left gives
+<r_k^(-1)k,z>=conj(r_k^(-1))*<k,z>=r_k^(-1)*frequencyDot(k,z).
+Thus coefficientLeray is Pi_e and the symmetric frequency tensor has
+one factor r_k. Finite support permits p<->k-p reindexing; solenoidality
+replaces (k-p).c_p by k.c_p. Consequently actual projected transport is
+pi*i times the symmetric sum and
+  |coefficientLeray k(coefficientTransport N c k)|_2
+    <=(kappa_k/2)*sum_(p in K_N)|c_p|_2*|c_(k-p)|_2.              [SHARP]
+ENTRIES: Q(CaloricFourierBridge.lean):coefficientLeray_transport_symmetric;
+Q(CaloricFrequencyGeometry.lean):coefficientLeray_eq_complexTransverse;
+Q(CaloricFourierEstimate.lean):COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN.
+The last endpoint is now exactly externally compiled and axiom-audited.
+
+R06. DIFFERENTIATED HEAT MODE AND VOLTERRA ENERGY
+
+For nu,kappa>0 and continuous f>=0 on [0,T], T>=0, define
+  y(t)=exp(-nu*kappa^2*t)*integral_0^t kappa*exp(nu*kappa^2*s)*f(s)ds,
+  F(t)=integral_0^t f, Z(t)=integral_0^t y^2.
+The kernel identity gives 0<=y(t)<=kappa*F(t), since exp(-nu*kappa^2*(t-s))<=1.
+Interior differentiation gives y'=kappa*f-nu*kappa^2*y; all primitives
+and y are continuous on [0,T]. For
+  E(t)=y(t)^2+2*nu*kappa^2*Z(t)-kappa^2*F(t)^2,
+  E'=2*kappa*f*(y-kappa*F)<=0, E(0)=0.
+Discard y(T)^2>=0 and divide by kappa^2>0 and 2*nu>0:
+  integral_0^T y^2<=(integral_0^T f)^2/(2*nu),
+  finiteTimeL2 T y<=(integral_0^T f)/sqrt(2*nu).                  [VOLTERRA]
+ENTRY: Q(CaloricConvolution.lean):CALORIC_VOLTERRA_L2_SQUARE_BOUND,
+now exactly externally compiled and axiom-audited; square-root conversion
+is Q(CaloricFiniteNorm.lean):CALORIC_VOLTERRA_L2_BOUND.
+FTC1 requires IntervalIntegrable f volume 0 t, StronglyMeasurableAtFilter
+f (nhds t) volume, and ContinuousAt f t. Interior continuity supplies these.
+ENTRY: M(MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean):725.
+HasDerivAt.mul/exp/pow plus congr_deriv normalize the displayed derivative;
+antitoneOn_of_deriv_nonpos retains continuity on the closed convex interval
+and differentiability/nonpositive derivative on its interior.
+
+R07. ACTUAL GALERKIN DUHAMEL; FINITE L2 COMPOSITION
+
+For an actual g and k in K_N, the literal coefficient equation is
+  c'_k=-nu*kappa_k^2*c_k-P_k T_N(c)_k.
+Set alpha=nu*kappa_k^2 and f_k^vec=-complexVec(P_k T_N(c)_k).
+For D_k(t)=exp(alpha*t)c_k(t),
+  D'_k=exp(alpha*t)(f_k^vec-alpha*c_k)+exp(alpha*t)*alpha*c_k
+      =exp(alpha*t)f_k^vec.
+FTC2 yields c_k(T)=exp(-alpha*T)c_k(0)+integral_0^T exp(-alpha*(T-s))f_k^vec(s)ds.
+ENTRY: Q(CaloricGalerkinBudget.lean):REAL_SCALAR_DUHAMEL,GALERKIN_MODE_DUHAMEL.
+FTC2 exact inputs are T>=0, D_k continuous on Icc 0 T, HasDerivAt on Ioo 0 T,
+and IntervalIntegrable of exp(alpha*·)f_k^vec under volume; completeness
+of the finite-dimensional Euclidean target supplies the Bochner integral.
+ENTRY: M(MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean):1140.
+Set A(t)=sum_K |c_k(t)|_2, F_k(t)=sum_(p in K)|c_p(t)|_2|c_(k-p)(t)|_2,
+and h(t)=sum_K |c_k(0)|_2*exp(-nu*kappa_k^2*t). All are continuous/nonnegative.
+Support and finite counting give sum_k F_k(t)<=A(t)^2. Duhamel and [SHARP] give
+  A(t)<=h(t)+(1/2)*sum_k caloricVolterra nu kappa_k F_k(t).
+ENTRIES: Q(CaloricGalerkinMajorant.lean):GALERKIN_MODE_CALORIC_MAJORANT,
+FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE; Q(CaloricFiniteNorm.lean):
+FINITE_NONNEGATIVE_CONVOLUTION_L1,finiteTimeL2_add_le,finiteTimeL2_sum_le.
+The finite L2 triangle follows by expanding (f+g)^2, integrating each of
+f^2,fg,g^2 (continuous on Icc), and Cauchy-Schwarz; induction gives finite sums.
+Every integral here has an explicit finite-horizon integrability witness.
+
+R08. HEAT NORMALIZATION AND STRICT QUADRATIC BARRIER
+
+Pairwise integration gives integral_0^infty exp(-nu*kappa_i^2*t)
+exp(-nu*kappa_j^2*t)dt=1/(nu*(kappa_i^2+kappa_j^2)).
+Each pair is integrable because nu*(kappa_i^2+kappa_j^2)>0; finite expansion
+and integral_finsetSum give integral_0^infty h(t)^2dt=Q_N^2/nu.
+ENTRIES: Q(CaloricKernel.lean):HEAT_PAIR_INTEGRABLE,HEAT_PAIR_INTEGRAL,
+FINITE_HEAT_SQUARE_INTEGRABLE,FINITE_HEAT_SQUARE_INTEGRAL.
+Restriction Ioc 0 T subset Ioi 0 and nonnegativity give ||h||_(L2[0,T])<=sqrt(B/nu)
+whenever Q_N^2<=B, B>=0. Let A_heat=sqrt(B/nu), c=1/(2*sqrt(2*nu)).
+[VOLTERRA], the finite triangle and sum_k F_k<=A^2 yield
+  X(T)<=A_heat+c*X(T)^2, X(T)=sqrt(integral_0^T A(t)^2dt).          [QUAD]
+X is nonnegative, continuous in T>=0, and X(0)=0. If 4*c*A_heat<1,
+the level 2*A_heat contradicts [QUAD]; the intermediate-value theorem
+therefore gives X<=2*A_heat. If A_heat=0, use level 1/(2*c), then [QUAD]
+and 0<=X force X=0. No division by the datum norm occurs.
+ENTRIES: Q(CaloricBootstrap.lean):FINITE_CALORIC_QUADRATIC_ESTIMATE,
+FINITE_CALORIC_UNIFORM_BUDGET; Q(CaloricBarrier.lean):QUADRATIC_BARRIER_SQUARE_BUDGET.
+For B=H/(4*pi),
+  (4*c*A_heat)^2=2*B/nu^2=H/(2*pi*nu^2)<1,
+  4*A_heat^2=4*B/nu=H/(pi*nu).                                  [CONSTANTS]
+The strict endpoint H=2*pi*nu^2 is not covered. nu>0 and pi>0 justify
+all divisions/square roots. Theta parameter t equals 4*pi*nu*tau for
+physical heat time tau; interchanging those parameters would lose a factor.
+
+R09. EXPLICIT BUDGET WITHOUT EXISTENTIAL-WITNESS INFERENCE
+
+For every literal g in [BUDGET], criticalGalerkin_initial_coeff gives
+g.coeff 0=cutoffCoeff N(criticalCoeff 2 b). Lowering preserves coefficients;
+criticalEnergy_cutoffCoeff and criticalEnergy_le_norm_sq 1 N a give
+criticalEnergy 1 N(g.coeff 0)<=H. Apply [SCHUR], then [CONSTANTS] to obtain
+[BUDGET], with its original forall N, forall actual g, forall T>=0 quantifiers.
+ENTRY: Q(Endpoints/CaloricBudget.lean):17,SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT.
+The identity 4*(H/(4*pi))/nu=H/(pi*nu) uses pi!=0,nu!=0.
+Q(CaloricNumericalAdmission.lean):SPECTRAL_H1_CALORIC_BUDGET follows by
+choosing S=H/(pi*nu). An arbitrary witness extracted from its existential
+statement has no specified numerical value. The explicit export fixes S
+before applying CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET.
+No uniform pointwise initial chi0 norm or infinite nonlinear sum is assumed.
+
+R10. BUDGET TO ENSTROPHY, COMPACTNESS, AND POSITIVE-TIME SMOOTHING
+
+Write y_N=coefficientDissipation, z_N=coefficientLaplacianSquare,
+P_N=coefficientEnstrophyNonlinearPower. Literal finite synthesis gives
+|v_N(x)|<=A_N, |convection(v_N)|^2<=|v_N|^2*gradientSquareDensity(v_N).
+Physical Cauchy-Schwarz and exact finite Parseval imply P_N^2<=A_N^2*y_N*z_N.
+The actual identity y'_N=-2*nu*z_N-2*P_N and scalar Young give
+  y'_N+nu*z_N<=(A_N^2/nu)*y_N.
+For W_N=y_N+nu*integral_0^t z_N, W'_N<=(A_N^2/nu)*W_N and W_N>=0.
+The integrating factor exp(-integral_0^t A_N^2/nu) therefore yields
+  y_N(t)+nu*integral_0^t z_N<=||b||^2*exp(S/nu)=D.               [ENSTROPHY]
+ENTRIES: Q(CaloricPhysicalControl.lean):FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0,
+GALERKIN_H1_INITIAL_ENSTROPHY_BOUND,CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION;
+F(LinearBudget.lean):89,LINEAR_ENERGY_OF_COEFFICIENT_BUDGET.
+Its hypotheses are continuous y,sqrt(z),A_N^2/nu on Icc; nonnegative y and
+coefficient; interior derivative; y(0)<=||b||^2; integral coefficient<=S/nu.
+All follow from the actual trajectory and [BUDGET]. Thus y_N<=D and integral z_N<=D/nu.
+Also E_1<=y_N, E_3<=z_N, and
+  ||criticalRhs(-1)||^2<=(nu+criticalTransportConstant*(D+1))^2*E_3.
+ENTRY: Q(CaloricCompactness.lean):GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY.
+F(CriticalTraceClosure.lean):CRITICAL_GALERKIN_GLOBAL_COMPACTNESS_WITH_STRONG_TRACE
+then constructs u:[0,infty)->CriticalSobolev 1, continuous, u(0)=a,
+||u(t)||<=D+1, and one strict subsequence converging uniformly in H0 on each Icc 0 T.
+For 0<sigma<=T, highOrderEnergy 2<=3*y_N+z_N gives the seed
+integral_sigma^T highOrderEnergy 2<=3*D*(T-sigma)+D/nu.
+ENTRY: Q(CaloricH2.lean):CALORIC_H1_GALERKIN_H2_BUDGET.
+F(CriticalPositiveTimeHighOrder.lean):GALERKIN_POSITIVE_TIME_ALL_ORDERS
+iterates averaged earlier-time bounds and the actual high-order energy ODE.
+F(CriticalPositiveLimit.lean):CRITICAL_POSITIVE_FLOW_OF_GALERKIN_LIMIT
+uses the resulting all-order bounds and the actual modal integral equation
+to construct L, with L.state 0 t=criticalToTorusH0 1 u(t) for t>0.
+ENTRY: Q(CaloricSmoothing.lean):GALERKIN_POSITIVE_FLOW_OF_H2_SEED.
+No AX6Statement, criticalNonlinearConstant smallness, preassigned smooth
+flow, or arbitrary individual-time H1 premise is used in this selection.
+
+R11. ACTUAL PHYSICAL TRACE, SERRIN CONTROL, AND COMPARISON
+
+Define U(t)=criticalInitialPhysicalL2(u(t)). This is continuous on Ici 0
+as a composition of continuous linear maps; U(0)=criticalInitialPhysicalL2 a.
+For t>0, exact Fourier coefficients and torusVectorFourierCoeff_injective give
+  U(t)=physicalFieldL2(L.velocity t)(its actual continuity proof).
+Its L2 representative equals L.velocity t mu_Q-a.e. Therefore
+  eLpNorm(L.velocity t-(criticalInitialPhysicalL2 a:Field)) 2 mu_Q
+    =||U(t)-U(0)||_extended ->0 as t->0 through Ioi 0.
+ENTRIES: Q(CaloricFlowControl.lean):POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS,
+POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE; F(CriticalCubeL2.lean).
+M(MeasureTheory/Function/LpSpace/Basic.lean):201,237 supplies respectively
+  Lp.coeFn_sub(f,g): coe(f-g)=ae coe(f)-coe(g);
+  Lp.enorm_def(f): ||f||_extended=eLpNorm(coe f) p mu.
+eLpNorm_congr_ae transfers the representative identity; the limit is the
+right-hand nhdsWithin Ioi 0 limit, not an assigned value of L at zero.
+Coefficient lower semicontinuity plus exact smooth Parseval give
+physicalDissipation(L.velocity t)<=D for EVERY t>0. Physical energy is
+bounded by E=(D+1)^2 through the critical-to-H0 norm contraction.
+ENTRIES: Q(CaloricFlowControl.lean):POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND,
+POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND.
+F(CriticalSerrinTime.lean):49,CRITICAL_SMOOTH_L6_FOURTH_BOUND supplies K>0:
+  ||L(t)||_6^4<=K*(9*D^2+E^2).
+Positive-time smoothness supplies AEStronglyMeasurable spatial L6 norm;
+Ioc 0 T has finite measure, so this constant dominates an integrable fourth power.
+M(MeasureTheory/Function/L1Space/Integrable.lean):225,
+  integrable_norm_rpow_iff(hf:AEStronglyMeasurable f mu)(hp:p!=0)(ht:p!=top):
+    Integrable(||f||^p.toReal) mu <-> MemLp f p mu,
+at p=4 proves the required Serrin membership. ENTRY:
+Q(CaloricFlowControl.lean):POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS.
+Only after trace and Serrin are proved is
+Q(CaloricAdmission.lean):POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN applied.
+This proves [REFERENCE]; comparison does not construct its own hypotheses.
+
+R12. IDENTICAL PHYSICAL DATUM AND THE REFINED PHYSICAL BOUND
+
+For the physical premises in R00, v is L2 and its canonical representative
+equals v mu_Q-a.e. EnergySigmaZero.fourier_constraints and
+criticalCube_datumFourierCoeff_congr_ae give reality, solenoidality, mean zero
+for the literal datumFourierCoeff v. Define b=physicalH1SobolevDatum hv hzero.
+Its membership follows from smooth periodic H1 approximation and, for every
+finite FourierIndex set A, sum_A|criticalWeightedCoeff 2(datumFourierCoeff v)|^2<=J.
+ENTRY: Q(PhysicalH1Admission.lean):physicalH1_weighted_finite_bound,
+physicalH1_mem_sobolevTwo,physicalH1SobolevDatum_coeff.
+The squared-norm identity and the finite bound give ||b||^2<=J. One exact
+Mathlib route is tsum_le_of_sum_le' (J>=0) (the finite bound), generated in
+M(Topology/Algebra/InfiniteSum/Order.lean):149; weighted l2 membership was
+already established, so no totalized divergent series is interpreted as a norm.
+physicalH1SobolevDatum_half_norm_sq gives ||lower b||^2=H.
+physicalH1_halfEnergy_ne_top establishes finiteness before ENNReal.toReal_lt_toReal
+converts the original strict inequality to H<2*pi*nu^2.
+Apply [BUDGET] and [REFERENCE]. The exact identity
+  criticalInitialPhysicalL2(lower b)=criticalL2Representative v
+is physicalH1SobolevDatum_physicalL2; it preserves the original physical datum.
+The trace may additionally be written against v itself by eLpNorm_congr_ae.
+Finally ||b||^2<=J and exp(H/(pi*nu^2))>0 give [PHYSICAL].
+ENTRY: Q(ExactAdmission.lean):EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET;
+Q(CaloricNumericalAdmission.lean):EXACT_H1_ADMISSION_UNCONDITIONAL.
+The uniform dissipation statement concerns L. For an arbitrary LH competitor
+with weak gradient G(t), gradient identification and corresponding bounds
+are only a.e. in time unless a separate individual-time premise is proved.
+
+R13. EXACT R6 COMPILER GATES; SOURCE-NORMAL-FORM REFINEMENT
+
+G1 ThetaLattice:60,71. The logged rewrite seeks s x^s t whereas the goal
+contains Finset.product s t. M(Data/Finset/Prod.lean):53 proves exactly
+  Finset.product_eq_sprod {s}{t}: Finset.product s t=s x^s t := rfl.
+Normalize this head before Finset.sum_product, or bind the fully instantiated
+sum_product equality directly at the desired type. Then sum_mul_sum gives
+the square and cube. This gate adds no summability or analytic premise.
+G2 CaloricFiniteNorm:60. Each local integral witness must fix the measure:
+  hiF:IntervalIntegrable(fun t=>f t^2) volume 0 T;
+  hiG:IntervalIntegrable(fun t=>g t^2) volume 0 T;
+  hiFG:IntervalIntegrable(fun t=>f t*g t) volume 0 T.
+M(MeasureTheory/Integral/IntervalIntegral/Basic.lean):506 has
+  ContinuousOn.intervalIntegrable_of_Icc {mu}[IsLocallyFiniteMeasure mu]
+    (hab:a<=b)(hu:ContinuousOn u(Icc a b)):IntervalIntegrable u mu a b.
+Use mu=volume; an unconstrained measure metavariable caused the cached error.
+G3 CaloricFiniteNorm:94. M(Topology/Algebra/Monoid.lean):960 generates
+  continuousOn_finsetSum {f}(s:Finset i){t:Set X}:
+    (forall i in s,ContinuousOn(f i)t)->ContinuousOn(fun x=>sum_i in s,f i x)t.
+The finite set s is an explicit first argument; supply it before the proof.
+G4 CaloricGalerkinBudget:32. HasDerivAt.smul has derivative
+  c(t) smul f' + c' smul f(t), in that order. Use
+  HasDerivAt.congr_deriv(h:HasDerivAt F d t)(e:d=d'):HasDerivAt F d' t
+to reduce directly to the module identity displayed in R07.
+Sources: M(Analysis/Calculus/Deriv/Mul.lean):109 and Deriv/Basic.lean:602.
+G5 CaloricGalerkinBudget:49. Beta-reduce both applied lambdas, then use
+  exp(-alpha*T) smul (exp(alpha*s) smul f s)
+   =(exp(-alpha*T)*exp(alpha*s)) smul f s
+   =exp(-alpha*(T-s)) smul f s.
+ENTRY: smul_smul, Real.exp_add; scalar exponent identity by ring.
+G6 CaloricGalerkinBudget:119--122. Preserve the function in HasDerivAt,
+apply congr_deriv to the actual mode derivative, then PiLp.ext to the
+Euclidean-vector equality. Extending the unreduced derivative proposition
+produced i:EuclideanSpace C(Fin 3), not i:Fin 3, in the cached failure.
+M(Analysis/Normed/Lp/PiLp.lean):99: PiLp.ext(h:forall i,x i=y i):x=y.
+The remaining coordinate identity is -alpha*c-P=-P-alpha*c.
+All G1--G6 are candidate elaboration repairs, mathematically discharged
+here; no modified Lean source or successful compiler run is asserted.
+
+R14. EVIDENCE AND CLOSURE CLASSIFICATION
+
+CACHED_MATCH: run43523716429,commit17641ba02784ae108af0da5874073786d7df46ec;
+42 modules PASS,7 FAIL,25 BLOCKED;227 exact audited declarations;
+34 verified object-cache hits;49 new audited declarations over the prior178.
+Q06-relevant newly audited edges include CaloricConvolution's seven exports,
+CaloricFrequencyGeometry's thirteen exports and COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN.
+Retained audited constructions include the generic caloric H1 regularity,
+compactness, smoothing, physical trace, physical control, theta scalar,
+weighted-Schur, heat-integral and strict-barrier edges.
+Q06 direct failures: ThetaLattice,CaloricFiniteNorm,CaloricGalerkinBudget;
+the physical-datum branch also retains PhysicalFourierL2:60 as a compiler gate.
+Dependency-blocked: ThetaResolvent,FiniteCaloricSchur,CaloricBootstrap,
+CaloricGalerkinMajorant,PhysicalH1Admission,ExactAdmission,
+CaloricNumericalAdmission,Endpoints.CaloricBudget.
+NO_NEW_ANALYTIC_PREMISE. NO_CIRCULAR_TRACE_OR_SERRIN_PREMISE_IDENTIFIED.
+Q06_MATHEMATICAL_DERIVATION=COMPLETE_FOR_R00_PREMISES.
+Q06_FORMAL_STATUS=A_TIER_CANDIDATE. ROOT_PROMOTION=NONE.
+R7_NEW_DERIVED_QUANTITATIVE_EXPORTS=[BUDGET],[REFERENCE] with explicit D,[PHYSICAL].
+FINAL_MARKER: !=B_TIER. No !!! or !!!! conclusion follows from this dossier.

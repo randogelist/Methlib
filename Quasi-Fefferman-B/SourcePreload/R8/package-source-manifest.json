@@ -1,0 +1,624 @@
+{
+  "schema": 1,
+  "revision": "R8",
+  "parent_commit": "17641ba02784ae108af0da5874073786d7df46ec",
+  "scope": "All staged project and workflow files except this manifest; no compiler-generated files",
+  "files": {
+    ".github/workflows/quasi-fefferman-b.yml": {
+      "sha256": "3b63bfdf7bcf3322632997f54c7bedb858038305122f54ec390e9dafc23cd05c",
+      "bytes": 6178
+    },
+    "Quasi-Fefferman-B/QUASI_FEFFERMAN_B_A_TIER.txt": {
+      "sha256": "e202cf6950bfff397b9e31161eb9a6bfe5b4ae81b8c377e77766968945bca890",
+      "bytes": 7559
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricAdmission.lean": {
+      "sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "bytes": 3140
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricBarrier.lean": {
+      "sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "bytes": 4269
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricBootstrap.lean": {
+      "sha256": "0dd9a312d4402cf6aba80fd9e299a110483f513d226f4f8d4a5df1ff1cb7e98a",
+      "bytes": 4836
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricCompactness.lean": {
+      "sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "bytes": 7764
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricConstants.lean": {
+      "sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "bytes": 3124
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricConvolution.lean": {
+      "sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "bytes": 7807
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricEnstrophy.lean": {
+      "sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "bytes": 4782
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricFiniteNorm.lean": {
+      "sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "bytes": 6268
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricFlowControl.lean": {
+      "sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "bytes": 8145
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricFourierBridge.lean": {
+      "sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "bytes": 5307
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricFourierEstimate.lean": {
+      "sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "bytes": 2304
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricFrequencyGeometry.lean": {
+      "sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "bytes": 5991
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricGalerkinBudget.lean": {
+      "sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "bytes": 5874
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricGalerkinMajorant.lean": {
+      "sha256": "aff803feeea382deb1810c5fc443afd1bcc34017f0a69d47241123079db384ab",
+      "bytes": 10986
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricH1Regularity.lean": {
+      "sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "bytes": 5611
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricH2.lean": {
+      "sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "bytes": 3440
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricKernel.lean": {
+      "sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "bytes": 6320
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricMultiplier.lean": {
+      "sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "bytes": 5974
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricNumericalAdmission.lean": {
+      "sha256": "6cd3f193ad856a75931bf0f47e7718fbebc9922fecc4dbbf8405d9b6f78a017f",
+      "bytes": 2596
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricPhysicalControl.lean": {
+      "sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "bytes": 8510
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CaloricSmoothing.lean": {
+      "sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "bytes": 5354
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/CriticalTimeBudget.lean": {
+      "sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "bytes": 6507
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Cutoff.lean": {
+      "sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "bytes": 1071
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EndpointEnergy.lean": {
+      "sha256": "7169438351c4e92a206bff99ee92eb1a882e39d6bc78cd8e974992443d47cbd2",
+      "bytes": 992
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EndpointRestart.lean": {
+      "sha256": "2c2e8ebb8ce4c14b220ee9786929b09f9dbbbfe2b02eb4667be3f3da30c9c0d7",
+      "bytes": 1465
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/CaloricBudget.lean": {
+      "sha256": "cc5b78965699e80c612756aed478b5b36359a471b6f2cfc30686fcaeabd44461",
+      "bytes": 2366
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/FiniteTimeTest.lean": {
+      "sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "bytes": 16466
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/InitialCoefficients.lean": {
+      "sha256": "243327d3daa81a5b16e559cecb4df96bdc6cae14d42440ad4e8a372b36c27d1e",
+      "bytes": 1535
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/LerayHopfExistence.lean": {
+      "sha256": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
+      "bytes": 7264
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/LimitEnergy.lean": {
+      "sha256": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
+      "bytes": 9913
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/PhysicalMomentum.lean": {
+      "sha256": "d2e122aab16d773a42629464eb99cb86b2a5ddb7bac571a4d0585534929faf19",
+      "bytes": 26487
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/README.md": {
+      "sha256": "df401b6b371fda44f07d641d3b09b241265eb641b230d8ce81af8b57cfa1133b",
+      "bytes": 3024
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/Root.lean": {
+      "sha256": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+      "bytes": 588
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/TestProjection.lean": {
+      "sha256": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+      "bytes": 12577
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/WeakH0Limit.lean": {
+      "sha256": "63f6e60497dd916991b09b0eddfd314fd087f0e69ea64fe3e8ac0c7b0c2adfa4",
+      "bytes": 9522
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/endpoint-index.json": {
+      "sha256": "0677a374ee8ab2b01dbd30cee2d145c70de7579e72de746c31791313bd1d44bd",
+      "bytes": 30775
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Endpoints/preload-plan.json": {
+      "sha256": "37d35010f4fef395532dc8f35d9017c7a49b0531f12aa5cf622b94afde1116be",
+      "bytes": 15089
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyDatumApproximation.lean": {
+      "sha256": "4c46173671ae878a59fd59d969764520206ab3e20513474b31f3ca01a2fc4279",
+      "bytes": 3396
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyDatumGlobal.lean": {
+      "sha256": "cc34d31ca5814e1cff727c28aa54ad6d1e7a1155319848604bdb05702ff7355d",
+      "bytes": 3638
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyFiniteWeakPairing.lean": {
+      "sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "bytes": 4635
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyGalerkinCompactness.lean": {
+      "sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "bytes": 10496
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyGlobalCoefficient.lean": {
+      "sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "bytes": 8101
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyGlobalLimit.lean": {
+      "sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "bytes": 8252
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyGlobalPhysical.lean": {
+      "sha256": "49e137be886e3b078989bd7b19788f62f5aa9f1a5613601d5745ea8dbdf48fe6",
+      "bytes": 5217
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyH1Realization.lean": {
+      "sha256": "559ef4c95ab497bb6c2a22d5f91adc914125da6093c133126e018c0d54543700",
+      "bytes": 14108
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyLimitCompatibility.lean": {
+      "sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "bytes": 3034
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyLimitEnergy.lean": {
+      "sha256": "3c20f7fcb2c578c92a7f3fb5d9d3ee845993a5792e43232534ab23b353e2f4dc",
+      "bytes": 8862
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyModalEquation.lean": {
+      "sha256": "3ff6b9a5921e4040813265fcbc0d6eda407d99253269e88cead4faca0cd43202",
+      "bytes": 5416
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyPeriodicRepresentative.lean": {
+      "sha256": "abfb3d2d2aa523a21513f29d1a07c14224e17739890df161b7257604cff95fb9",
+      "bytes": 7032
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyPhysicalContinuity.lean": {
+      "sha256": "34e854c8f313dcb7812a84491b2d1ea8f67d3c02617133444341f085c192c340",
+      "bytes": 2626
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyPhysicalTrace.lean": {
+      "sha256": "5b19d01a6c4a527ae55ef6a73a47bba788d1e5b31b481527ae5d1589597c327c",
+      "bytes": 3191
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyTestDecay.lean": {
+      "sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "bytes": 4537
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyTimeCompactness.lean": {
+      "sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "bytes": 11835
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyTransportContinuity.lean": {
+      "sha256": "0d3799e6499abfddae34fa3ff35d7717424a5f23d960e59e1fa3b4c361358db5",
+      "bytes": 3901
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/EnergyWeakContinuity.lean": {
+      "sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "bytes": 6459
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/ExactAdmission.lean": {
+      "sha256": "03588fe871c87d52c663af96a3f88c2f37b136a6472086a97f82aa5eb605c704",
+      "bytes": 2769
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/FiniteCaloricSchur.lean": {
+      "sha256": "6437914490b9b7f99656e8ce8c95cf90cb3af1395dcda84bdf810c429d2c82ee",
+      "bytes": 5613
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/FourierEnergy.lean": {
+      "sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "bytes": 14986
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/GoodTime.lean": {
+      "sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "bytes": 5011
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/LHEnergy.lean": {
+      "sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "bytes": 1160
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/LHExistence.lean": {
+      "sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "bytes": 6128
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean": {
+      "sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "bytes": 14773
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/MeanPreservation.lean": {
+      "sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "bytes": 3864
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/PhysicalFourierL2.lean": {
+      "sha256": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
+      "bytes": 21076
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/PhysicalH1Admission.lean": {
+      "sha256": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+      "bytes": 4812
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/PressureUniqueness.lean": {
+      "sha256": "1986794e95b477cafa3f6918681d1a1eea6ea8b1469a211f272e757b4924f5c5",
+      "bytes": 5794
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/RegularReference.lean": {
+      "sha256": "da49c63001e8a3a2320cc0e2dc6db801113087bb3f9047d6064b8ed379a9cdb7",
+      "bytes": 1202
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/RootAssembly.lean": {
+      "sha256": "ab58317402d12d1f7bae744b750b97fe87209e69be76f6b8c6bef19d3e1d3f4d",
+      "bytes": 3453
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/RootContract.lean": {
+      "sha256": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+      "bytes": 2891
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/SafeCutoff.lean": {
+      "sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "bytes": 2145
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/Semantics.lean": {
+      "sha256": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+      "bytes": 1840
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/SpatialAdmission.lean": {
+      "sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "bytes": 10310
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/TailChain.lean": {
+      "sha256": "edb75daa799194c41c9bd7a6b4ff6ef0282f03791a647380d32e6c2f4c5fd1ea",
+      "bytes": 2216
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/TailEnergy.lean": {
+      "sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "bytes": 10148
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/TailRegularity.lean": {
+      "sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "bytes": 3878
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/TailUniqueness.lean": {
+      "sha256": "60ea0a60cf64feb09f3f6331dcd2cf2eb2df046912783908c9cc9bd6e3953843",
+      "bytes": 8531
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/ThetaGaussian.lean": {
+      "sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "bytes": 7155
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/ThetaLattice.lean": {
+      "sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "bytes": 4574
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/ThetaResolvent.lean": {
+      "sha256": "7fc98cecdc2468b44c0a09dd0b583aa5c8f70529bf7b8a121d7444a632a71c2a",
+      "bytes": 7153
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/ThetaSchur.lean": {
+      "sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "bytes": 6469
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean": {
+      "sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "bytes": 9028
+    },
+    "Quasi-Fefferman-B/QuasiFeffermanB/ZeroData.lean": {
+      "sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "bytes": 1732
+    },
+    "Quasi-Fefferman-B/README.md": {
+      "sha256": "dba7556530a73e3b94806de6b9b3a9bb1825ef1f961dae59ae77a98cc09ef54e",
+      "bytes": 23375
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Derivation/qfb_r7_caloric_derivation.txt": {
+      "sha256": "7c07d2398fb096fe34f776b313659ef7219bc272bd0a50ee8eec5a6cabc0454e",
+      "bytes": 25278
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Derivation/qfb_r7_q01_derivation.txt": {
+      "sha256": "1b44257426c0f519654a05210427865f0e501c0b816cc21168dba922768c9d1a",
+      "bytes": 24904
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Derivation/qfb_r7_root_refinement.txt": {
+      "sha256": "e53a9fe80e7ff1dd21143aaa51ed49269f2b42bfa165d247c470d0432248f646",
+      "bytes": 19230
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Derivation/qfb_r7_tail_derivation.txt": {
+      "sha256": "fd343c7201a1281590d9ec43c371d79d2e8a66781f08aba68972ecbf17bdcdb5",
+      "bytes": 25253
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Evidence/r6-evidence-verification.json": {
+      "sha256": "95b95ab66941a5f733793d267596040a1ee9797e854044cf081d207b7a7a03ea",
+      "bytes": 3900
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Probes/Mathlib.lean": {
+      "sha256": "0b86f97da5dc67976253c278c90ac52ed326ea0ba9dde1dadd0e794c12dbed10",
+      "bytes": 5234
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Probes/Methlib.lean": {
+      "sha256": "6689d5710e9d7ac7a2995e0ebb94938418cbec7ce1f75b3dfca87d2e8e1444a4",
+      "bytes": 5365
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Probes/QFB.lean": {
+      "sha256": "8497f03c28657101f64b08d7d7720fce25218db55622d3adef64bf14cac2c3a8",
+      "bytes": 3505
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/README.md": {
+      "sha256": "6b0bbf39e4ee2dee367df1bdf2176f5f400dc770abc4a39ceec5775a22eb78b7",
+      "bytes": 4905
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Reports/qfb_r8_caloric_source_report.json": {
+      "sha256": "47f67c6693f9a4eb7512d7460f6a32344b1d1c3cdbc3aa573d44a0b7ba4f251e",
+      "bytes": 8708
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Reports/qfb_r8_invariant_review.json": {
+      "sha256": "fceaa3a34345877993675c1fc0641779b8af17f1aa89de42771db4c9811b417a",
+      "bytes": 138447
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Reports/qfb_r8_q01_source_report.json": {
+      "sha256": "201830044d3e57a21980041774c938a2a40571eed2c7fcadf9d845ad47fb458d",
+      "bytes": 15388
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Reports/qfb_r8_tail_source_report.json": {
+      "sha256": "de27f0e5bc3628f1e1b3267f46f3d0198e32164386bbdab6ab6becb6ac0dd856",
+      "bytes": 12645
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/Contracts.lean": {
+      "sha256": "4c59cbf26fd4196529a4865ac09404d18015228c737055c2674cbcc4a5fd18f7",
+      "bytes": 6043
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalClassicalWeakMomentum.lean": {
+      "sha256": "e160e87c789f85ce11b6dcc68cfbb0090c3fbfa8e1bcdc0f695c73aabf7944f4",
+      "bytes": 14050
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalFourierInterpolation.lean": {
+      "sha256": "bb95bb011bf9d6039d304ee93530ed6ff0db7dcf7a81c3426dd4e2d2f5b2d204",
+      "bytes": 5649
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalH1Algebra.lean": {
+      "sha256": "255d04fcc82535677b2790b9e0f6cad56924f53f64c62f8d38aa4bc9d0c620c3",
+      "bytes": 5824
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalLerayHopf.lean": {
+      "sha256": "7c075141a7c5f2719eb1aad516f5ddcd13c2bb43f64f818ba780df79103f5f87",
+      "bytes": 3691
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalPositiveFlow.lean": {
+      "sha256": "1428bab566ae638723937ce9e1ca8cf57b534ab001314944638ec2400665e702",
+      "bytes": 6540
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalSerrinUniqueness.lean": {
+      "sha256": "341ec5bad1d787e77ae5e15d42eb88f60b4b5b9bd427c2135a90e66cd0ac416e",
+      "bytes": 9451
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalSmoothEnergy.lean": {
+      "sha256": "f015d8b3792c786ed2ef9c14626e5466916ae913e864f955c04feb6585431634",
+      "bytes": 12861
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalSpaces.lean": {
+      "sha256": "2d223e52a0c7c24e4d507f463cc220e69813f248ea24fce6705fe324a7473347",
+      "bytes": 11523
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalSpacesEmbedding.lean": {
+      "sha256": "70d99181f27813d3a6b45e84467b727358eb5d92984ba7f73f31bf89af8521be",
+      "bytes": 11047
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalUniformBounds.lean": {
+      "sha256": "292e20ff02ee26d769a46e87521966acae8de79d1e028eb8b82cc268b7c782f0",
+      "bytes": 5432
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/CriticalWeakGradient.lean": {
+      "sha256": "9a7e65f085c5f34382d035f52265edb05b141c9ff08af242a7c3da883f201be5",
+      "bytes": 8736
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/GalerkinTimeDerivative.lean": {
+      "sha256": "1d08840f4397529d5bb5b2f414b823e09339c3934f281436b9f4a97b6b60f22c",
+      "bytes": 6758
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/foundation/PeriodicFourierRealization.lean": {
+      "sha256": "f4118fd9507488f5bf8cd3df2c1f174f245a32928b118eeb967017865edd2871",
+      "bytes": 7948
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/LICENSE": {
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "bytes": 11357
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Algebra/BigOperators/Group/Finset/Sigma.lean": {
+      "sha256": "795e36343a20dfc70b670f0b03c4c4e92a119e04d2d33904dd4438f78a30c764",
+      "bytes": 6475
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Algebra/BigOperators/Ring/Finset.lean": {
+      "sha256": "472cd5000412d8ec35c8b9ee919b2aeedbf0a830033a55009aad436595923809",
+      "bytes": 16305
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean": {
+      "sha256": "da1d29570f45bd14f5a37aa5b024d46b3076a47f04e9315bf72cd65f6505d55b",
+      "bytes": 40271
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Calculus/Deriv/Mul.lean": {
+      "sha256": "9eaf8d222c347ea647939daa68fac11edeb7c2572719246ce03d43cb04c94b44",
+      "bytes": 29294
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Fourier/AddCircleMulti.lean": {
+      "sha256": "df2f4f41671a438e0f65765466ec025bf9cf3e77de898047c808a3657a907721",
+      "bytes": 15694
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/InnerProductSpace/Calculus.lean": {
+      "sha256": "902f118cce8ed2a8d385b11e29d95a20424361ca8e47d9bf94fbf954057a7f05",
+      "bytes": 17372
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Normed/Lp/PiLp.lean": {
+      "sha256": "660f3ad7077490c9a8eae924e18731c400282b8dccf80bfec1c6b02fe11ee25f",
+      "bytes": 56259
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Analysis/Real/Sqrt.lean": {
+      "sha256": "d6055b85eb3279133dd76eead0e1306032314c2c42c99b431b07e6aad654da86",
+      "bytes": 18602
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Data/Finset/Prod.lean": {
+      "sha256": "ea0f132dc48b81a7a1f4683dd04459d81bc1a04b664d0281d6dc42f08599d1d8",
+      "bytes": 13857
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean": {
+      "sha256": "c6e28eb4336201821ce7d9e987d50052797d54f1fb8f8b415104583d61051ee6",
+      "bytes": 25174
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean": {
+      "sha256": "a9cbdad8fae393b320ba20cf025bbac20722fc85f76b7b44ea8968134f9b0bfb",
+      "bytes": 45225
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean": {
+      "sha256": "c333a6caa56906c6203cad3e3214be2114a65728fcfdf95ae639992abefb373f",
+      "bytes": 44484
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean": {
+      "sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+      "bytes": 70432
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/DominatedConvergence.lean": {
+      "sha256": "18b709ea5c9ef9136e3e75ded82a6135641e6e19688e0ca3abcb0af45648ab84",
+      "bytes": 39563
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean": {
+      "sha256": "93908eb0c771ba8edcb47537dfe1a40e98a1545be9d427c1eb9823d44decdcd5",
+      "bytes": 71676
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean": {
+      "sha256": "5fd64054d9ae8bfce585ff809933a756bcf2d224ef144ae24c8fe8870c68050c",
+      "bytes": 75344
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/Measure/Restrict.lean": {
+      "sha256": "2ec6fbe3a70ebf57a895a47779b63994f97edb0dc0b709faf9ff400f59c92511",
+      "bytes": 56674
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/MeasureTheory/OuterMeasure/AE.lean": {
+      "sha256": "e0d76f9471d6189f17b518316b62d3c8c0c4b637bb5e8eec8a6aaac153700e11",
+      "bytes": 11583
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/InfiniteSum/Order.lean": {
+      "sha256": "583aaab8ae056a12bdab8456522713c3571ec9e6a0639654bee362c3f16bf69b",
+      "bytes": 16534
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/Monoid.lean": {
+      "sha256": "cf858f52c0f84ad0f0f950ddc0c76128c4893ced7620d0c7a4cef1c9c3ddab56",
+      "bytes": 49233
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/Sources/mathlib/Mathlib/Topology/Algebra/MulAction.lean": {
+      "sha256": "20898c3a1fa125977a2a5382530785f15a7658fe4944c3699d029dfc1178b165",
+      "bytes": 16113
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/derivation-index.json": {
+      "sha256": "dcb436ea792ffff7bdd4a56ad3bfbee94aefe6d4ab750fb513f3395501ea43a7",
+      "bytes": 1315
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/future-endpoints.json": {
+      "sha256": "3101d4fc87b46ccfdfeacb3973e53ac754a5829afb2afcbe372c94543271b191",
+      "bytes": 5376
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/qfb-api-index.json": {
+      "sha256": "6f377b586b830c6f92fd77a93b1a6f6af5e27f9563e7f78fe8e6c9188fcfd7f7",
+      "bytes": 64599
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/source-changes.json": {
+      "sha256": "ef731a9f01d6d16fce699de628b56a59cd73c8d872726c23ecf54a70a099d318",
+      "bytes": 3260
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/static-verification.json": {
+      "sha256": "b0331df3aa332b94d2124701a98928bae41730cc12599b38672bfd443e4fa325",
+      "bytes": 3370
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/upstream-api-index.json": {
+      "sha256": "fa22893019dac769e47b201249bfb441fbd009eeab4fee20408c361fbb7d706b",
+      "bytes": 96725
+    },
+    "Quasi-Fefferman-B/SourcePreload/R8/upstream-sources.json": {
+      "sha256": "97b5c88db195b747c6dc9b6b91c558f2362ebcebd06a8842cfa87dad9a70a1ac",
+      "bytes": 31864
+    },
+    "Quasi-Fefferman-B/endpoint-manifest.json": {
+      "sha256": "96d98d58de64806be37613de392750b44ec94a09e52c5b985c033f96e55729e8",
+      "bytes": 59185
+    },
+    "Quasi-Fefferman-B/evidence/preload-r6-source-validation.json": {
+      "sha256": "1118b1e8b1ba011e65b670722e1d1a0c9d1b0c85f49e9279c801dcebd7b9ee6f",
+      "bytes": 501
+    },
+    "Quasi-Fefferman-B/evidence/run-43147241136-reinspection.json": {
+      "sha256": "e5fb162965b6b503e94d6d56608f7dc58363bd2f64e3d5d086e03a5c9a1462f0",
+      "bytes": 3209
+    },
+    "Quasi-Fefferman-B/evidence/run-43148814987-reinspection.json": {
+      "sha256": "78762aec67920c1ddcb431e42a5955afe3b6e6a1657d16cb80f6ab9ef96993b1",
+      "bytes": 46495
+    },
+    "Quasi-Fefferman-B/evidence/run-43150307199-reinspection.json": {
+      "sha256": "46ba66abbd7cb8432e6fe0ce8feed67da4dd4a607534c0191dd3c643abebd647",
+      "bytes": 80834
+    },
+    "Quasi-Fefferman-B/lakefile.lean": {
+      "sha256": "2de7445e68e41656a5b56e95c6dba5694155c8f6b765d78007c6cfdc702e3178",
+      "bytes": 271
+    },
+    "Quasi-Fefferman-B/lean-toolchain": {
+      "sha256": "5e4c8774c0dcace41dac99ae5ed34ebfa5f419739c84578f6ba21fc47854bfdb",
+      "bytes": 26
+    },
+    "Quasi-Fefferman-B/preload.cmd": {
+      "sha256": "3d74ae371a21b8309b75003a55c297c72e8e9db19da1d79a956a974248bd8c23",
+      "bytes": 197
+    },
+    "Quasi-Fefferman-B/preload.lean": {
+      "sha256": "b9349311bce3ba1b24e38cc4e1261aeff4e682434dd80635f1c738dcbe5eeb75",
+      "bytes": 1352
+    },
+    "Quasi-Fefferman-B/run.cmd": {
+      "sha256": "57c58869c876118e3b54d26cc10a2959681c9fdb6d88cda9f26c3c7060244307",
+      "bytes": 1836
+    },
+    "Quasi-Fefferman-B/scripts/audit.py": {
+      "sha256": "ca9a13243ac89c3d01dd13c60d55dbc2c7585e46f88b0838975f9c52591612c0",
+      "bytes": 20200
+    },
+    "Quasi-Fefferman-B/scripts/prepare.py": {
+      "sha256": "614d6c4f67f398b779909c766702054e9de0a2a087b6541ceab83b2659a30b19",
+      "bytes": 2246
+    },
+    "Quasi-Fefferman-B/scripts/refresh_manifest.py": {
+      "sha256": "f11e0410d7362f2e20ba0ea82b3840d26581b455450a27569c4ff688b4e80652",
+      "bytes": 1885
+    }
+  }
+}

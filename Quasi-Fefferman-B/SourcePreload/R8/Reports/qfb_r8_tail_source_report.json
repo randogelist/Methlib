@@ -1,0 +1,231 @@
+{
+  "schema": "qfb.r8.tail_source_report.v1",
+  "status": "A_TIER_CANDIDATE",
+  "scope": "Three R7 normal-form repairs in two R8 source files; proof bodies only",
+  "baseline_source_commit": "17641ba02784ae108af0da5874073786d7df46ec",
+  "foundation_pin": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "mathlib_pin": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "agent_action_scope": {
+    "source_files_written": [
+      "/workspace/scratch/1438cdc16dd5/qfb_r8_stage/Quasi-Fefferman-B/QuasiFeffermanB/PhysicalFourierL2.lean",
+      "/workspace/scratch/1438cdc16dd5/qfb_r8_stage/Quasi-Fefferman-B/QuasiFeffermanB/TailEnergy.lean"
+    ],
+    "report_written": "/workspace/scratch/1438cdc16dd5/qfb_r8_tail_source_report.json",
+    "other_files_written": false,
+    "local_lean_or_lake_executed": false,
+    "compiler_version_command_executed": false,
+    "ci_actions": false,
+    "github_mutations": false
+  },
+  "frozen_invariants": {
+    "all_public_signatures_identical": true,
+    "spatial_domains_and_measures_preserved": true,
+    "original_velocity_and_weak_gradient_preserved": true,
+    "root_cutoff": "norm(a)^4 / (8 * pi^2 * nu^5)",
+    "new_analytic_premises": false,
+    "new_axioms_or_admissions": false
+  },
+  "files": [
+    {
+      "file": "qfb_r8_stage/Quasi-Fefferman-B/QuasiFeffermanB/PhysicalFourierL2.lean",
+      "before_sha256": "ded4d0767f82ea59635f91b1972bcf892c4c253971dcd65d6a8edda81cadc97e",
+      "after_sha256": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
+      "public_signatures_identical": true,
+      "public_declaration_count": 28,
+      "admission_token_scan": "No sorry, admit, or axiom token"
+    },
+    {
+      "file": "qfb_r8_stage/Quasi-Fefferman-B/QuasiFeffermanB/TailEnergy.lean",
+      "before_sha256": "b592255a5d048a8bb3ecaf6b51156173d38449d9ef04f4ce2a560196e8c92440",
+      "after_sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "public_signatures_identical": true,
+      "public_declaration_count": 12,
+      "admission_token_scan": "No sorry, admit, or axiom token"
+    }
+  ],
+  "changed_declarations": [
+    {
+      "name": "QuasiFeffermanB.torusDatumRepresentative_measurePreserving",
+      "file": "Quasi-Fefferman-B/QuasiFeffermanB/PhysicalFourierL2.lean",
+      "cached_failure": {
+        "run_id": "43523716429",
+        "line": 60,
+        "message": "Type mismatch after simplification: expanded WithLp.toLp/subtype/measurableEquivPiIoc map versus torusDatumRepresentative"
+      },
+      "change": "Replace the final simpa with an explicit change to the literal torus representative map, then exact htoLp.comp (hsub.comp heq).",
+      "equality": "torusDatumRepresentative = (fun theta => WithLp.toLp 2 ((UnitAddTorus.measurableEquivPiIoc (0 : Fin 3 -> Real) theta).val))",
+      "measures_preserved": [
+        "normalized unit-torus volume",
+        "subtype comap of product Lebesgue measure",
+        "unitProductMeasure 3",
+        "volume.restrict unitCube"
+      ],
+      "primary_entrypoints": [
+        "F_torusDatumRepresentative",
+        "M_MeasurePreserving_comp",
+        "M_torusIoc_measurePreserving"
+      ]
+    },
+    {
+      "name": "QuasiFeffermanB.physicalH1_gradient_column_zero_of_ae_zero",
+      "file": "Quasi-Fefferman-B/QuasiFeffermanB/TailEnergy.lean",
+      "cached_failure": {
+        "run_id": "43523716429",
+        "line": 63,
+        "message": "Type mismatch after simplification: actual fderiv column versus coordinateDerivative"
+      },
+      "change": "Explicitly change the Tendsto target to the fderiv column and the corresponding original G column; normalize only Function.comp_def and ContinuousLinearMap.apply_apply in the supplied compCLM limit.",
+      "target": "Tendsto (fun n => physicalFieldInner (fun x => fderiv Real (w n) x (unitVector j)) g) atTop (nhds (physicalFieldInner (fun x => G x (unitVector j)) g))",
+      "preserved_inputs": [
+        "the same H1 approximation sequence",
+        "the same derivative L2 convergence",
+        "the same original G",
+        "the same column g",
+        "all original MemLp hypotheses"
+      ],
+      "primary_entrypoints": [
+        "F_coordinateDerivative",
+        "F_compCLM_limit",
+        "F_existing_column_normal_form"
+      ]
+    },
+    {
+      "name": "QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY",
+      "file": "Quasi-Fefferman-B/QuasiFeffermanB/TailEnergy.lean",
+      "cached_failure": {
+        "run_id": "43523716429",
+        "line": 206,
+        "message": "Type mismatch after simplification: right-addition timeTranslate versus left-addition Shift and original gradient translate"
+      },
+      "change": "Prove separate velocity and gradient function equalities by funext, an explicit change of the pointwise goal, and congrArg applied to add_comm; rewrite both in LH_RESTART_FROM_ENERGY_START.",
+      "equalities": [
+        "timeTranslate delta u = Shift delta u",
+        "timeTranslate delta G = (fun t => G (delta + t))"
+      ],
+      "preserved_inputs": [
+        "nu >= 0",
+        "the original CriticalLerayHopf record",
+        "delta >= 0",
+        "TailEnergyEquality with the original G"
+      ],
+      "added_H1_premise_at_delta": false,
+      "primary_entrypoints": [
+        "Q_timeTranslate",
+        "Q_Shift",
+        "Q_native_energy_restart"
+      ]
+    }
+  ],
+  "primary_sources": [
+    {
+      "id": "F_torusDatumRepresentative",
+      "repository": "randogelist/Methlib",
+      "ref": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+      "path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierRealization.lean",
+      "declaration": "SingularClosure.torusDatumRepresentative",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierRealization.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierRealization.lean",
+      "line": 31,
+      "blob_sha": "cb8f865f3531fe9d4239c2bcc074f06d148d9d60"
+    },
+    {
+      "id": "F_coordinateDerivative",
+      "repository": "randogelist/Methlib",
+      "ref": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+      "path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/Contracts.lean",
+      "declaration": "SingularClosure.coordinateDerivative",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/Contracts.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/Contracts.lean",
+      "line": 56,
+      "blob_sha": "7d64a61a47bedb2bd7a2801641c5959178837f04"
+    },
+    {
+      "id": "F_compCLM_limit",
+      "repository": "randogelist/Methlib",
+      "ref": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+      "path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+      "declaration": "SingularClosure.critical_physicalFieldInner_compCLM_tendsto",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+      "line": 85,
+      "blob_sha": "560f34d6cdf1bc9b17690f1533fec582f86e6c9b"
+    },
+    {
+      "id": "F_existing_column_normal_form",
+      "repository": "randogelist/Methlib",
+      "ref": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+      "path": "regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+      "declaration": "SingularClosure.CRITICAL_WEAK_GRADIENT_OF_SMOOTH_APPROXIMATION",
+      "url": "https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalWeakGradient.lean",
+      "line": 109,
+      "proof_normal_form_line": 133,
+      "blob_sha": "560f34d6cdf1bc9b17690f1533fec582f86e6c9b"
+    },
+    {
+      "id": "M_MeasurePreserving_comp",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "db584cd6d46c92f209a44c0f1c829460d327499d",
+      "path": "Mathlib/Dynamics/Ergodic/MeasurePreserving.lean",
+      "declaration": "MeasureTheory.MeasurePreserving.comp",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Dynamics/Ergodic/MeasurePreserving.lean",
+      "raw_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Dynamics/Ergodic/MeasurePreserving.lean",
+      "line": 99,
+      "blob_sha": "f032f13e6b867ce1de2fd1ca1e6d1b62c5ab902f"
+    },
+    {
+      "id": "M_torusIoc_measurePreserving",
+      "repository": "leanprover-community/mathlib4",
+      "ref": "db584cd6d46c92f209a44c0f1c829460d327499d",
+      "path": "Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+      "declaration": "UnitAddTorus.measurePreserving_equivPiIoc",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+      "raw_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/AddCircleMulti.lean",
+      "line": 169,
+      "blob_sha": "08ab569e1977c455fdde0a67df2131ea1fc864c5"
+    },
+    {
+      "id": "Q_timeTranslate",
+      "repository": "randogelist/Methlib",
+      "ref": "17641ba02784ae108af0da5874073786d7df46ec",
+      "path": "Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean",
+      "declaration": "QuasiFeffermanB.timeTranslate",
+      "url": "https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean",
+      "line": 19
+    },
+    {
+      "id": "Q_Shift",
+      "repository": "randogelist/Methlib",
+      "ref": "17641ba02784ae108af0da5874073786d7df46ec",
+      "path": "Quasi-Fefferman-B/QuasiFeffermanB/Semantics.lean",
+      "declaration": "QuasiFeffermanB.Shift",
+      "url": "https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/Semantics.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/Semantics.lean",
+      "line": 35
+    },
+    {
+      "id": "Q_native_energy_restart",
+      "repository": "randogelist/Methlib",
+      "ref": "17641ba02784ae108af0da5874073786d7df46ec",
+      "path": "Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean",
+      "declaration": "QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START",
+      "url": "https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean",
+      "raw_url": "https://raw.githubusercontent.com/randogelist/Methlib/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean",
+      "line": 215,
+      "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "cached_exact_declaration_audit": "PASS in run 43523716429"
+    }
+  ],
+  "verification": {
+    "method": "Read-only source inspection, comparison against R6 declaration headers, exact primary-source API inspection, and scoped diff review",
+    "matching_external_compile_for_changed_sources": false,
+    "matching_external_theorem_axiom_audit_for_changed_sources": false,
+    "candidate_bodies_require_external_elaboration": true,
+    "promotion_performed": false,
+    "latest_cached_run": "43523716429",
+    "latest_cached_root_status": "PENDING",
+    "residual_statement": "The three cached normal-form failures are addressed in source; external compilation and exact theorem-level audits remain pending for these changed files."
+  }
+}
+

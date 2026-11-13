@@ -1,0 +1,92 @@
+{
+  "run": 43523716429,
+  "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+  "status": "FAIL",
+  "foundation": "PASS",
+  "build_pass": 42,
+  "build_fail": 7,
+  "blocked": 25,
+  "exact_audited_declarations": 227,
+  "retained_prior_declarations": 178,
+  "new_exact_audited_declarations": 49,
+  "verified_object_cache_hits": 34,
+  "new_passing_modules": [
+    "QuasiFeffermanB.CaloricConvolution",
+    "QuasiFeffermanB.EnergyFiniteWeakPairing",
+    "QuasiFeffermanB.LHRestart",
+    "QuasiFeffermanB.CaloricFrequencyGeometry",
+    "QuasiFeffermanB.ZeroData",
+    "QuasiFeffermanB.CaloricFourierEstimate",
+    "QuasiFeffermanB.SafeCutoff",
+    "QuasiFeffermanB.EnergyGlobalLimit"
+  ],
+  "new_declarations_by_source": {
+    "QuasiFeffermanB/CaloricConvolution.lean": [
+      "QuasiFeffermanB.caloric_primitive_continuousOn",
+      "QuasiFeffermanB.caloric_primitive_hasDerivAt",
+      "QuasiFeffermanB.caloricVolterra_kernel",
+      "QuasiFeffermanB.caloricVolterra_continuousOn",
+      "QuasiFeffermanB.caloricVolterra_hasDerivAt",
+      "QuasiFeffermanB.caloricVolterra_nonneg_le_primitive",
+      "QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND"
+    ],
+    "QuasiFeffermanB/EnergyFiniteWeakPairing.lean": [
+      "QuasiFeffermanB.energy_galerkin_mode_pairing",
+      "QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING",
+      "QuasiFeffermanB.energyGalerkin_finite_test_pairing"
+    ],
+    "QuasiFeffermanB/LHRestart.lean": [
+      "QuasiFeffermanB.lh_ae_good_energy_time",
+      "QuasiFeffermanB.restart_representative_norm_sq",
+      "QuasiFeffermanB.restart_representative_inner",
+      "QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound",
+      "QuasiFeffermanB.lh_energy_le_from_start",
+      "QuasiFeffermanB.lh_energy_le_at_good_time",
+      "QuasiFeffermanB.lh_strong_right_trace_of_energy_start",
+      "QuasiFeffermanB.lh_strong_right_trace_at_good_time",
+      "QuasiFeffermanB.restart_representative_edist",
+      "QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right",
+      "QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start",
+      "QuasiFeffermanB.lh_shifted_strong_trace_at_good_time",
+      "QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START",
+      "QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME",
+      "QuasiFeffermanB.LH_RESTART_AE",
+      "QuasiFeffermanB.LH_RESTART_AE_Ioc",
+      "QuasiFeffermanB.LH_RESTART_AE_Ioo"
+    ],
+    "QuasiFeffermanB/CaloricFrequencyGeometry.lean": [
+      "QuasiFeffermanB.frequencyRadius_pos",
+      "QuasiFeffermanB.frequencyRadius_sq",
+      "QuasiFeffermanB.complexFrequency_norm_sq",
+      "QuasiFeffermanB.complexFrequency_norm",
+      "QuasiFeffermanB.normalizedComplexFrequency_norm",
+      "QuasiFeffermanB.complexFrequency_inner",
+      "QuasiFeffermanB.normalizedComplexFrequency_inner",
+      "QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq",
+      "QuasiFeffermanB.coefficientLeray_eq_complexTransverse",
+      "QuasiFeffermanB.complexTransverse_smul",
+      "QuasiFeffermanB.symmetricFrequencyTensor_normalized",
+      "QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound",
+      "QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius"
+    ],
+    "QuasiFeffermanB/ZeroData.lean": [
+      "QuasiFeffermanB.ZERO_LH_VELOCITY",
+      "QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE"
+    ],
+    "QuasiFeffermanB/CaloricFourierEstimate.lean": [
+      "QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN"
+    ],
+    "QuasiFeffermanB/SafeCutoff.lean": [
+      "QuasiFeffermanB.CLASSICAL_TAIL_OF_GLOBAL_SMOOTH_NSE",
+      "QuasiFeffermanB.ZERO_LH_HAS_SMOOTH_TAIL",
+      "QuasiFeffermanB.SAFE_CUTOFF_TAIL"
+    ],
+    "QuasiFeffermanB/EnergyGlobalLimit.lean": [
+      "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT",
+      "QuasiFeffermanB.energy_modal_limit_constraints",
+      "QuasiFeffermanB.energy_modal_limit_H1_representative"
+    ]
+  },
+  "root_status": "A_TIER_CANDIDATE",
+  "local_lean_executions": 0
+}

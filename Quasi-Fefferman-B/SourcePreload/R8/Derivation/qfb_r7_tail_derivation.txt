@@ -1,0 +1,424 @@
+QFB_R7_ORIGINAL_LH_TAIL_DERIVATION
+MODE=B_TIER_DERIVATION; MARKER=!.
+NO_LOCAL_LEAN; SOURCE_EDITS=0; CI_ACTIONS=0; NEW_COMPILER_EVIDENCE=0.
+R6_SOURCE_COMMIT=17641ba02784ae108af0da5874073786d7df46ec.
+FOUNDATION=09dfe94a1ef150e21d09df3013fbe09002ef139c.
+MATHLIB=db584cd6d46c92f209a44c0f1c829460d327499d.
+CACHED_RUN=43523716429; PRIOR_CACHE_RUN=43151440082.
+R6_SOURCE=qfb_r6_stage/Quasi-Fefferman-B/QuasiFeffermanB/.
+Q[...] denotes the named declaration in the indicated R6 source file.
+F[...] denotes SingularClosure at FOUNDATION; M[...] denotes Mathlib at MATHLIB.
+B_REFERENCE=QUASI_FEFFERMAN_B_METHLIB_COMPOSED_COMPLETION_B_TIER.txt, Parts III–IV.
+
+I. EXACT SCOPED IMPLICATION
+
+Let m=volume.restrict unitCube, nu>0, a:CriticalPhysicalL2,
+ha:EnergySigmaZero a, u:Velocity, G:WeakGradientTrajectory, and
+hu:CriticalLerayHopf nu a u G. Define
+  E(f)=physicalEnergy f, D(K)=criticalGradientEnergy K,
+  [f]=criticalL2Representative f, H(f)=physicalHalfEnergy f,
+  M=||a||_2^2, c=2*pi*nu^2,
+  tau=cutoff a nu=||a||_2^4/(8*pi^2*nu^5), safeCutoff a nu=2*tau.
+H is extended nonnegative and equals the SQUARED homogeneous half-order seminorm.
+The exact scoped conclusion is
+  HasSmoothTail nu u (2*tau) AND
+  forall delta>tau,
+    HasSmoothTail nu u delta AND
+    (forall t>=delta, E(u(t))+2*nu*integral_delta^t D(G(r)) dr=E(u(delta))) AND
+    CriticalLerayHopf nu [u(delta)] (Shift delta u) (r=>G(delta+r)) AND
+    (forall v H', CriticalLerayHopf nu [u(delta)] v H' ->
+       forall r>=0, v(r)=u(delta+r) m-almost everywhere).
+Source: Q[RootContract.lean:ClassicalTail, HasSmoothTail, TailEnergyEquality,
+UniqueFuture, QuasiFeffermanBStatement]; Q[Semantics.lean:Shift, SameVelocity].
+ClassicalTail includes actual joint smoothness, periodicity, incompressibility,
+the actual NSE, and BOTH velocity and pressure zero means on the CLOSED tail.
+The variables u,G remain the arbitrary original LH pair throughout.
+No existence theorem for the original datum is used to establish this implication.
+
+II. NATIVE LH QUANTIFIERS AND CARRIERS
+
+F[CriticalLerayHopf.lean:CriticalLerayHopf] supplies eleven fields.
+The actual time-class functions are
+  t=>[u(t)] in L-infinity((0,T]; Lp Vec 2 m),
+  t=>[G(t)] in L2((0,T]; Lp (Vec->L[Real]Vec) 2 m).
+The generic definition of criticalL2Representative accepts both codomains.
+Spatial velocity L2 membership holds at EVERY t>=0; native H1 membership
+holds only for almost every t in each (0,T].
+Weak continuity tests every fixed spatial L2 field on the whole [0,infinity).
+The interval-energy field has the order
+  forall T>0, ae s in (0,T], forall t in [s,T],
+    E(u(t))+2*nu*integral_s^t D(G(r)) dr<=E(u(s)).
+Neither interchange of ae s and forall t nor all-time native H1 is permitted.
+F[CriticalPhysicalH1.lean:CriticalPhysicalH1] supplies smooth periodic
+approximants w_n with w_n->u and Dw_n->G in the actual spatial L2 seminorms.
+
+III. FOURTH-POWER BUDGET WITH THE FROZEN CONSTANT
+
+Q[LHEnergy.lean:LH_ENERGY_BOUNDS] gives E(u(t))<=M for every t>=0,
+D>=0, interval integrability of D on [0,T], and integral_0^T D<=M/(2*nu).
+Q[FourierEnergy.lean:physicalH1_cutoff_bounds, criticalEnergy_midpoint,
+physicalH1_halfEnergy_ne_top, physicalH1_halfEnergy_midpoint] gives, at H1 times,
+  H(u(t))<infinity, h(t)^2<=E(u(t))*D(G(t)), h(t)=H(u(t)).toReal.
+The finite interpolation step is Cauchy–Schwarz for the actual Fourier
+coefficients; its selected finite-sum entry is Finset.sum_sq_le_sum_mul_sum_of_sq_le_mul.
+Q[CriticalTimeBudget.lean:LH_HALF_ENERGY_AE_FINITE, LH_HALF_ENERGY_AEMEASURABLE]
+separately establishes finiteness and measurability on (0,T).
+Thus toReal does not conceal infinite energy on a positive-measure set.
+The actual L2 trajectory supplies coefficient measurability through
+Q[FourierEnergy.lean:physicalHalfEnergy_aemeasurable].
+M[MeasureTheory/Integral/IntervalIntegral/Basic.lean:intervalIntegrable_iff_integrableOn_Ioo_of_le,
+intervalIntegral.integral_of_le, integral_Ioc_eq_integral_Ioo] identifies
+the real dissipation integral with its restriction to (0,T).
+Then h^2<=M*D almost everywhere; Integrable.mono', integral_mono_ae and
+integral_const_mul give
+  integral_(0,T) h(t)^2 dt <= M*integral_(0,T) D <= M^2/(2*nu).
+This is Q[CriticalTimeBudget.lean:LH_FOURTH_POWER_BUDGET].
+
+IV. ONE RESTART CONULL SET, WITH EVERY FUTURE TERMINAL
+
+For each n:Nat, intersect the native H1 and energy-start sets on (0,n+1].
+Using ae_restrict_iff' and ae_all_iff, take one countable conull intersection.
+For s>0 in this intersection choose n+1>s to obtain H1 at s.
+For an arbitrary terminal t>=s choose m+1>t; its interval-energy assertion gives
+  E(u(t))+2*nu*integral_s^t D(G(r)) dr<=E(u(s)).              (ES_s)
+The same s satisfies (ES_s) for ALL t>=s.
+Source: Q[LHRestart.lean:LHGoodEnergyTime, lh_ae_good_energy_time].
+At an energy start s>=0, set U(t)=[u(t)], A=[u(s)].
+Q[LHRestart.lean:restart_representative_norm_sq, restart_representative_inner]
+identifies ||U(t)||^2=E(u(t)) and <U(t),A>=physicalFieldInner(u(t),u(s)).
+Nonnegative dissipation gives ||U(t)||<=||A|| for t>=s.
+Native weak continuity and the Hilbert identity norm_sub_sq_real imply
+  0<=||U(t)-A||^2<=2||A||^2-2<U(t),A> ->0 as t downarrow s.
+The selected trace entries are strong_tendsto_of_inner_and_norm_bound,
+lh_strong_right_trace_of_energy_start, restart_representative_edist,
+and lh_shifted_strong_trace_of_energy_start in Q[LHRestart.lean].
+Their ingredients include squeeze_zero', Real.continuous_sqrt and the exact
+Lp edistance/eLpNorm identity. No H1 premise at s is used in this trace proof.
+
+V. FULL NATIVE RESTART, NOT ONLY THE ENERGY INEQUALITY
+
+Q[TimeTranslate.lean:timeTranslate_measurePreserving_Ioc] transports Lebesgue
+measure on (0,T] to that on (s,T+s] under r=>r+s.
+M[Dynamics/Ergodic/MeasurePreserving.lean:MeasurePreserving.restrict_preimage]
+uses exactly the preimage equality (r+s in (s,T+s]) iff r in (0,T].
+For s>=0, restrict from (0,T+s] to (s,T+s], then pull back.
+The selected entries are Measure.restrict_mono_set, MemLp.mono_measure,
+MemLp.comp_measurePreserving and Q[TimeTranslate.lean:timeTranslate_memLp_Ioc,
+timeTranslate_ae_Ioc]. They preserve BOTH actual Bochner carriers in Section II.
+IntervalIntegrable.mono_set and IntervalIntegrable.comp_add_right transport
+dissipation and test-pairing integrability to [0,T] or [alpha,beta].
+intervalIntegral.integral_comp_add_right preserves the exact endpoints.
+Q[TimeTranslate.lean:timeTranslate_integrated_momentum] handles all test fields.
+For a test slab 0<alpha<=beta, c0=alpha/4 and
+  q(r)=c0+smoothTransition((r-s-c0)/c0)*(r-s-c0)
+give q>0 globally and q(r)=r-s, q'(r)=1 near [s+alpha,s+beta].
+restartTest_is_test, restartTest_eq and restartTest_timeDerivative supply the
+globally admissible translated test and all three separate integrability clauses.
+Initial equality follows from criticalL2Representative_eq and MemLp.coeFn_toLp;
+weak continuity composes with translation; strong trace is Section IV.
+All original interval-energy start quantifiers translate by the same measure map.
+Q[LHRestart.lean:LH_RESTART_FROM_ENERGY_START] therefore constructs all eleven fields.
+Consequently Q[LHRestart.lean:LH_RESTART_AE_Ioo] proves conullness on (0,T) of
+  Good(s):=CriticalPhysicalH1(u(s),G(s)) AND
+    CriticalLerayHopf nu [u(s)] (timeTranslate s u) (timeTranslate s G).   (GOOD)
+
+VI. STRICT SELECTION INSIDE THAT SAME SET
+
+Fix an arbitrary delta>tau. Then delta>0 and
+  M^2/(2*nu)<c^2*delta,
+because c^2*delta*(2*nu)=delta*(8*pi^2*nu^5).
+Entry: Q[GoodTime.lean:fourthPower_budget_lt_threshold].
+If h(s)^2>=c^2 throughout GOOD outside a null set in (0,delta), monotonicity
+of the integral and volume(Ioo 0 delta)=delta contradict Section III.
+Q[GoodTime.lean:exists_good_time_of_integral_lt, LH_GOOD_SUBCRITICAL_TIME]
+therefore selects ONE s satisfying 0<s<delta, GOOD(s), native H1(u(s),G(s)),
+and H(u(s))<ENNReal.ofReal(c).
+The last conversion uses finiteness at that selected H1 time,
+ENNReal.ofReal_toReal and ENNReal.ofReal_lt_ofReal_iff.
+The quantified predicate is exactly (GOOD); no independently selected restart
+or independently selected small-energy time is substituted.
+An intermediate-horizon quantitative-margin refinement preserves (GOOD);
+the present implication requires only 0<s<delta and strict H(u(s))<c.
+
+VII. EXACT PHYSICAL H1 ADMISSION
+
+Q[MeanPreservation.lean:LH_CONSTANT_PAIRING_PRESERVED] derives conservation
+of every constant-vector pairing from native momentum and weak continuity at zero.
+Constant tests are admissible; their time, Laplace and transport terms vanish.
+Gradient annihilation is a native momentum field at positive times.
+Thus Q[MeanPreservation.lean:LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO] gives
+  EnergySigmaZero([u(s)]).
+Q[SpatialAdmission.lean:EnergySigmaZero.fourier_constraints] and
+criticalCube_datumFourierCoeff_congr_ae transfer these exact constraints to u(s).
+Let b=physicalH1SobolevDatum(H1(u(s),G(s)), meanZero).
+Q[PhysicalH1Admission.lean:physicalH1_mem_sobolevTwo] applies memℓp_gen'
+to finite weighted coefficient sums bounded by D(G(s)); hence b:CriticalSobolev 2.
+The declarations physicalH1SobolevDatum_coeff, _half_norm_sq and _physicalL2 give
+  criticalCoeff 2 b=datumFourierCoeff(u(s)),
+  ||criticalSobolevLower 1 2 b||^2=H(u(s)).toReal<c,
+  criticalInitialPhysicalL2(criticalSobolevLower 1 2 b)=[u(s)].           (TRACE)
+These are identities for the literal physical coefficients and L2 trace.
+With B=||criticalSobolevLower 1 2 b||^2/(4*pi), one has 0<=B<nu^2/2.
+Q[CaloricNumericalAdmission.lean:SPECTRAL_H1_CALORIC_BUDGET] supplies S=4*B/nu:
+  forall N, forall g:Gal(nu,finiteSynthesis N(criticalCoeff 2 b),N),
+  forall T>=0, integral_0^T finiteChi0(cutoffModes N,g.coeff(t))^2 dt<=S.
+Its independent entries are COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN,
+FINITE_CALORIC_SCHUR, GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC,
+criticalGalerkin_initial_coeff and criticalEnergy_le_norm_sq.
+Their complete numerical derivation is B_REFERENCE Part III.
+Q[CaloricH1Regularity.lean:CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET]
+constructs L:CriticalPositiveSobolevFlow nu, strong L2 trace (TRACE), and
+forall T>0, MemLp(t=>criticalSpatialNorm 6(L.velocity t)) 4 (volume.restrict(Ioc 0 T)).
+Its construction proceeds through Galerkin enstrophy accumulation, critical
+compactness, an H2 seed and positive flow realization before any LH comparison.
+Q[ExactAdmission.lean:EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET]
+uses only L, its trace and Serrin bound; the returned comparison conjunct is unused.
+Together with the numerical budget this proves the exact ExactH1Admission edge.
+
+VIII. COMPARISON WITH THE ORIGINAL PATH; CLOSED TAIL
+
+Apply Q[CaloricAdmission.lean:POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN]
+to the ORIGINAL restarted path from GOOD(s), datum [u(s)], and reference L.
+Its foundation input is F[CriticalSerrinUniqueness.lean:
+CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON], with horizon T=r-s for each r>s.
+Hence
+  forall r>s, u(r)=L.velocity(r-s) m-almost everywhere.                 (MATCH)
+No time-almost-everywhere weakening occurs; the spatial null set may depend on r.
+Set v=L.velocity and p=L.pressure. F[CriticalPositiveFlow.lean:
+CRITICAL_POSITIVE_PHYSICAL_NSE] gives PositiveSmoothNSE nu v p.
+For t>=delta, t-s>=delta-s>0. Compose the actual joint smooth fields with
+(t,x)=>(t-s,x). All periodicity, zero-mean, divergence and PDE clauses transfer.
+Q[TailRegularity.lean:positive_timeDerivative_translate] identifies the actual
+timeDerivative; CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE includes t=delta.
+MATCH then gives HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW, hence HasSmoothTail nu u delta.
+
+IX. ZERO H1 VELOCITY HAS ZERO ORIGINAL WEAK GRADIENT
+
+Let hz:CriticalPhysicalH1 z K and z=0 m-almost everywhere.
+Choose its actual smooth periodic approximants w_n with Dw_n->K in spatial L2.
+For j:Fin 3 set g_j(x)=K(x)(unitVector j).
+ContinuousLinearMap.apply combined with ContinuousLinearMap.comp_memLp'
+and hz.derivative_L2 gives g_j in L2(m).
+F[CriticalPhysicalH1.lean:CriticalPhysicalH1.weakGradient] supplies IBP.
+For the smooth periodic test phi=coordinateDerivative(w_n,j),
+  <z,D_j phi>=-<g_j,phi>.
+The left side is zero, so <D_j w_n,g_j>=0 for every n.
+Smoothness and periodicity of phi use coordinateDerivative_smooth and
+coordinateDerivative_spatialPeriodic; inner symmetry is
+critical_physicalFieldInner_comm.
+F[CriticalWeakGradient.lean:critical_physicalFieldInner_compCLM_tendsto]
+applies with E=(Vec->L[Real]Vec), A(K)=K(unitVector j), f_n=Dw_n, f=K,
+and test g_j. It yields <D_j w_n,g_j> -> <g_j,g_j>.
+The source requires the actual derivative L2 convergence, all f_n in L2,
+K in L2, and g_j in L2; compact-cube smoothness supplies f_n membership.
+tendsto_nhds_unique gives <g_j,g_j>=0.
+F[CriticalWeakGradient.lean:critical_physicalFieldInner_eq_L2_inner],
+real_inner_self_eq_norm_sq and norm_eq_zero give the L2 class of g_j equal zero.
+MemLp.coeFn_toLp and Lp.coeFn_zero yield g_j=0 m-almost everywhere.
+Intersect the three column conull sets with ae_all_iff. On their intersection,
+  K(x)y=K(x)(sum_j y_j*unitVector j)=sum_j y_j*K(x)(unitVector j)=0.
+The entries sum_coordinate_unitVector, map_sum, map_smul and
+ContinuousLinearMap.ext identify the entire operator K(x)=0.
+This derives Q[TailEnergy.lean:physicalH1_gradient_column_zero_of_ae_zero,
+physicalH1_gradient_zero_of_ae_zero]. No extra density or Fourier premise occurs.
+
+X. IDENTIFICATION OF THE ORIGINAL G ON EACH TAIL INTERVAL
+
+At a native H1 time r>s, MATCH gives u(r)=v(r-s) m-almost everywhere.
+F[CriticalH1Algebra.lean:CriticalPhysicalH1.sub_smooth] gives
+  CriticalPhysicalH1(u(r)-v(r-s), G(r)-fderiv Real(v(r-s))).
+The velocity difference is zero almost everywhere. Section IX therefore gives
+  G(r)=fderiv Real(v(r-s)) m-almost everywhere.                         (GRAD)
+Q[TailEnergy.lean:physicalH1_gradient_eq_smooth] is this exact implication.
+The finite column-energy definition and integral_congr_ae imply
+  D(G(r))=criticalGradientEnergy(fderiv Real(v(r-s)))
+         =physicalDissipation(v(r-s)).                                (DISS)
+The final equality is F[CriticalH1Algebra.lean:criticalGradientEnergy_fderiv].
+Selected Q entries: tail_criticalGradientEnergy_congr_ae,
+physicalH1_gradientEnergy_eq_smooth.
+There is no comparison constant between operator and coordinate-gradient norms.
+For any fixed terminal t>=delta, t>0 and native hu.spatial_H1(t) holds a.e.
+on (0,t]. Restriction to (delta,t] proves (DISS) a.e. on that interval.
+No GRAD assertion at every r, at r=delta, or at r=t is required.
+
+XI. EXACT ORIGINAL-G ENERGY EQUALITY FOR EVERY TERMINAL
+
+Fix t>=delta. F[CriticalSmoothEnergy.lean:CRITICAL_SMOOTH_NSE_ENERGY_IDENTITY]
+applies on [delta-s,t-s], whose left endpoint is strictly positive, and yields
+  E(v(t-s))+2*nu*integral_(delta-s)^(t-s) physicalDissipation(v(q)) dq
+    =E(v(delta-s)).
+Its interval-integrability conclusion concerns the actual smooth dissipation.
+By DISS and M[MeasureTheory/Integral/IntervalIntegral/Basic.lean:
+intervalIntegral.integral_congr_ae_restrict, integral_comp_sub_right],
+  integral_delta^t D(G(r)) dr
+    =integral_delta^t physicalDissipation(v(r-s)) dr
+    =integral_(delta-s)^(t-s) physicalDissipation(v(q)) dq.
+The restriction domain is uIoc delta t=Ioc delta t since delta<=t.
+MATCH at the two individual endpoint times and
+Q[TailEnergy.lean:tail_physicalEnergy_congr_ae] identify both endpoint energies.
+Consequently forall t>=delta,
+  E(u(t))+2*nu*integral_delta^t D(G(r)) dr=E(u(delta)).                  (TAIL-E)
+The case t=delta has the zero interval integral and is included.
+This is LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE and its POSITIVE_FLOW wrapper.
+The trajectory G is exactly the original supplied G.
+
+XII. RESTART AT EVERY delta>tau
+
+TAIL-E implies the all-terminal energy inequality (ES_delta).
+Since delta>tau>=0, Q[LHRestart.lean:LH_RESTART_FROM_ENERGY_START] applies,
+without any pointwise H1 assumption at delta.
+The resulting native pair is timeTranslate delta u, timeTranslate delta G.
+The exact function identities are
+  timeTranslate delta u=(r=>u(r+delta))=Shift delta u,
+  timeTranslate delta G=(r=>G(r+delta))=(r=>G(delta+r)).
+Function extensionality and add_comm transport the entire LH record.
+Thus Q[TailEnergy.lean:LH_RESTART_OF_TAIL_ENERGY] has the exact required type
+  CriticalLerayHopf nu [u(delta)] (Shift delta u) (r=>G(delta+r)).        (RESTART)
+Its strong_trace is therefore a proved native field at this arbitrary delta.
+The universal delta quantifier has not been replaced by almost-every delta.
+
+XIII. STRICT SHIFT AND SERRIN MEMBERSHIP
+
+Set epsilon=delta-s>0 and V(r)=v(r+epsilon), P(r)=p(r+epsilon).
+Q[TailUniqueness.lean:positiveSmoothNSE_timeTranslate] gives their actual NSE.
+For each T>0, r in [0,T] implies r+epsilon in (0,T+epsilon].
+F[CriticalSmoothLpContinuity.lean:
+CriticalPositiveSolenoidalTest.eLpNorm_six_toReal_continuousOn]
+therefore gives continuity of r=>||V(r)||_6 on [0,T].
+M[Analysis/Normed/Group/Bounded.lean:IsCompact.exists_bound_of_continuousOn]
+supplies a finite bound there.
+M[MeasureTheory/Integral/IntegrableOn.lean:
+ContinuousOn.aestronglyMeasurable_of_isCompact] supplies measurability.
+The finite restricted measure and M[MeasureTheory/Function/LpSeminorm/Basic.lean:MemLp.of_bound]
+give L4 membership on [0,T]; Measure.restrict_mono_set and MemLp.mono_measure
+restrict it to (0,T]. This is positive_reference_strict_shift_serrin.
+Strict epsilon>0 is essential for this compactness argument at shifted time zero.
+No assumption of regularity of v at its original time zero is introduced.
+
+XIV. EVERY COMPETING LH FUTURE, INCLUDING SHIFTED TIME ZERO
+
+MATCH gives forall r>0, Shift delta u(r)=V(r) m-almost everywhere.
+Subtract the same physical representative of [u(delta)] and use eLpNorm_congr_ae.
+The strong_trace of RESTART transfers to V with exactly datum [u(delta)].
+Now fix arbitrary w,H' with CriticalLerayHopf nu [u(delta)] w H'.
+No smoothness, Serrin, chosen-gradient or existence premise is imposed on w,H'.
+For each r>0, F[CriticalSerrinUniqueness.lean:
+CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON] applies to w,V,P, horizon T=r,
+the transferred trace, and Section XIII's Serrin bound. It gives w(r)=V(r) a.e.
+Combining with MATCH yields w(r)=Shift delta u(r) a.e.
+For r=0, hw.initial and RESTART.initial have the identical datum [u(delta)];
+their transitive equality gives the required equality at zero.
+Therefore SameVelocity w (Shift delta u) holds for every such w,H'.
+Together with RESTART this is the exact UniqueFuture nu u G delta.
+Selected Q entries: LH_UNIQUE_FUTURE_OF_REFERENCE_SHIFT_SERRIN,
+LH_UNIQUE_FUTURE_OF_SMOOTH_REFERENCE, LH_UNIQUE_FUTURE_OF_SMOOTH_FLOW.
+All-time spatial-a.e. equality is the endpoint; pressure or gradient uniqueness
+for the arbitrary competitor is neither assumed nor asserted.
+
+XV. SAFE CLOSED CUTOFF AND ZERO DATUM
+
+If a!=0, Q[Cutoff.lean:CUTOFF_POS, SAFE_CUTOFF_GT] gives tau>0 and 2*tau>tau.
+Section VIII at delta=2*tau yields the closed safe tail.
+If a=0, native kinetic energy satisfies 0<=E(u(t))<=||0||^2=0 for EVERY t>=0.
+restart_representative_norm_sq, norm_eq_zero and representative ae equality
+give [u(t)]=0 and u(t)=0 m-almost everywhere for each such t.
+Q[ZeroData.lean:ZERO_LH_VELOCITY] proves exactly this SameVelocity statement.
+F[Contracts.lean:globalSmoothNSE_zero] provides velocity=0, pressure=0,
+including actual smoothness and NSE at time zero.
+Q[ZeroData.lean:ZERO_LH_SMOOTH_REPRESENTATIVE] and
+Q[SafeCutoff.lean:ZERO_LH_HAS_SMOOTH_TAIL] yield HasSmoothTail nu u 0.
+Because tau=2*tau=0, this is exactly the zero-datum safe-tail clause.
+No application of delta>tau is made at delta=tau=0.
+For every delta>0 the preceding tail/energy/future proof applies unchanged.
+Equivalently, Section IX gives G=0 at native H1 times; TAIL-E follows with
+both endpoint energies zero, RESTART follows, and every competing zero-datum
+LH velocity vanishes by ZERO_LH_VELOCITY.
+Q[SafeCutoff.lean:SAFE_CUTOFF_TAIL] combines both datum cases.
+
+XVI. R6 NORMALIZATION OBLIGATIONS; NO SOURCE MUTATIONS
+
+Observed TailEnergy.lean:63 compares a CLM column with coordinateDerivative.
+The exact pointwise identity is
+  SingularClosure.coordinateDerivative(w_n,j)(x)
+    =fderiv Real(w_n)(x)(unitVector j).
+Source: F[Contracts.lean:coordinateDerivative].
+A complete target normal form for the limit proof is
+  Tendsto (n=>physicalFieldInner
+    (x=>fderiv Real(w_n)(x)(unitVector j)) g)
+    atTop (nhds(physicalFieldInner g g)).
+After an explicit change to this target, Function.comp_def and
+ContinuousLinearMap.apply_apply normalize the supplied compCLM limit.
+F[CriticalWeakGradient.lean:CRITICAL_WEAK_GRADIENT_OF_SMOOTH_APPROXIMATION]
+uses this exact explicit change in its derivative-column limit proof.
+No convergence premise changes; g(x)=G(x)(unitVector j) is retained.
+
+Observed TailEnergy.lean:206 compares right-addition and left-addition shifts.
+For any f:Real->E the equality
+  QuasiFeffermanB.timeTranslate delta f=(r=>f(delta+r))
+follows by funext r, changing the goal to f(r+delta)=f(delta+r),
+then congrArg f (add_comm r delta).
+Apply this separately at E=Field and E=(Vec->(Vec->L[Real]Vec)).
+Rewrite these two function equalities in the audited
+LH_RESTART_FROM_ENERGY_START conclusion; identify Shift by its definition.
+No extensional identification of the two gradient codomains is required:
+they are already the identical operator-field type.
+
+Observed PhysicalFourierL2.lean:60 compares the named torus representative
+with the expanded map obtained from MeasurePreserving.comp.
+Set S={x:Fin 3->Real | forall i, x_i in Ioc 0 1} and
+  e=UnitAddTorus.measurableEquivPiIoc(0:Fin 3->Real),
+  j:S->(Fin 3->Real)=Subtype.val, w=WithLp.toLp 2.
+F[PeriodicFourierRealization.lean:torusDatumRepresentative] defines
+  torusDatumRepresentative(theta)=w((e(theta)).val)
+literally, with Vec=EuclideanSpace Real(Fin 3)=WithLp 2(Fin 3->Real).
+Hence w o j o e=torusDatumRepresentative by function extensionality and rfl.
+The three measures are normalized torus volume, comap j volume on S,
+and cube-restricted Euclidean volume after w.
+M[Analysis/Fourier/AddCircleMulti.lean:UnitAddTorus.measurePreserving_equivPiIoc]
+provides the first map; map_comap_subtype_coe provides j's restricted-volume map.
+Measure.restrict_pi_pi and Ioc_ae_eq_Icc identify its product measure with the
+closed unit-box product measure. PiLp.volume_preserving_toLp restricted by
+MeasurePreserving.restrict_preimage provides w's cube map.
+MeasurePreserving.comp produces exactly the displayed expansion.
+An explicit change to that expansion, or rewriting the proved map equality,
+transports the existing measure-preserving proof to the named endpoint.
+The endpoint measures, subtype carrier and Euclidean L2 norm remain unchanged.
+These three normalizations are B_TIER equalities; no repaired Lean body is claimed.
+
+XVII. NONCIRCULAR ASSEMBLY AND EVIDENCE BOUNDARY
+
+The dependency order is energy -> restart -> strict selection -> physical
+admission -> independent caloric reference -> comparison -> original-G identity
+-> tail energy -> arbitrary-trace restart -> comparison of arbitrary futures.
+Admission constructs its regular flow before the comparison theorem is applied.
+The tail implication uses only the given hu; its proof contains no use of the
+root's existential LH conclusion or its own UniqueFuture conclusion.
+Q[RootAssembly.lean:TAIL_REFERENCE_FROM_EXACT_ADMISSION,
+TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION] records this composition.
+Q[TailChain.lean:Q09_POST_CUTOFF_SMOOTHNESS, Q11_POST_CUTOFF_ENERGY_EQUALITY,
+Q12_POST_CUTOFF_TRACE_UNIQUENESS, Q13_ZERO_AND_SAFE_CLOSED_CUTOFF]
+preserves the exact frozen outputs. Quasi_Fefferman_B_of_LH_existence
+retains the separate global-LH existence input; the present scoped implication
+does not discharge that independently assigned existence construction.
+
+CACHED R6: 42 module PASS / 7 FAIL / 25 BLOCKED_BY_DEPENDENCY;
+34 cached verified objects; 227 exact audited declarations; root_status=PENDING.
+LHRestart: PASS, EXTERNAL_COMPILER, audit PASS; all 17 selected declarations audited.
+Its source SHA256 is 2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc,
+equal to the inspected R6 file. The recorded axioms are
+{Classical.choice, Quot.sound, propext}; no sorryAx or unapproved axiom is recorded.
+ZeroData and SafeCutoff: external compilation PASS and audit PASS.
+CriticalTimeBudget and GoodTime: cached verified build PASS and audit PASS.
+TailEnergy: FAIL at 63,206; PhysicalFourierL2: FAIL at 60.
+TailUniqueness, RootAssembly, ExactAdmission and TailChain: dependency-blocked.
+The declaration name EXACT_H1_ADMISSION_UNCONDITIONAL supplies no audit promotion.
+STATUS: scoped mathematical tail implication = B_TIER (!).
+ROOT_FORMAL_STATUS=A_TIER_CANDIDATE; FORMAL_CLOSURE=NOT_ESTABLISHED;
+UNCONDITIONAL_CLOSURE=NOT_ESTABLISHED. New runs, edits and promotions are absent.
+
+PRIMARY SOURCE URL PREFIXES
+Q: https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/
+F: https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/
+M: https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/
+EVIDENCE: qfb_external_run_43523716429.log; qfb_external_run_43523716429_audit.json.
+

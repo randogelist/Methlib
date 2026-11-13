@@ -1,4 +1,28 @@
-# Quasi-Fefferman_B
+# Quasi-Fefferman-B: R8 source preload
+
+| Current field | Value |
+|---|---|
+| Source preload | [SourcePreload/R8](SourcePreload/R8/README.md) |
+| Pinned primary-source snapshots | `35` Lean files + `1` Mathlib license |
+| Candidate proof-source normalizations | `7` modules; public statements unchanged |
+| Selected QFB exports | `10`; [endpoint-index.json](QuasiFeffermanB/Endpoints/endpoint-index.json) |
+| Mathematical continuation | Four R7 contracts and four complete derivation components |
+| Latest cached run | [43523716429](https://github.com/randogelist/Methlib/actions/runs/43523716429) |
+| Cached exact result | `42 PASS`; `7 FAIL`; `25 BLOCKED`; `227` audited declarations |
+| Preserved cached identities | `42` dependency fingerprints; `227` declaration source hashes |
+| R8 local Lean / new external runs | `0 / 0` |
+| R8 source / root status | `A_TIER_CANDIDATE` |
+| Frozen cutoff | `norm(a)^4 / (8*pi^2*nu^5)` |
+
+```lean
+import QuasiFeffermanB.Endpoints.Root
+```
+
+`EXTERNAL_CACHED_RUNNER = preload.cmd`  
+`MATHEMATICAL_DERIVATION = B_TIER`  
+`NEW_SOURCE_PROMOTION = PENDING_MATCHING_EXTERNAL_COMPILER_AND_THEOREM_AXIOM_AUDIT`
+
+## Historical R6 package record
 
 | Field | Value |
 |---|---|
@@ -64,7 +88,7 @@ assembly and its earlier audit provenance.
 
 `LOCAL_LEAN_EXECUTIONS = 0`.
 
-`!=!` = the exact named endpoint passed the external compiler and its
+`!!` = the exact named endpoint passed the external compiler and its
 matching theorem-level axiom audit; permitted axioms:
 `propext`, `Classical.choice`, `Quot.sound`.
 
@@ -78,7 +102,7 @@ not automatically resolve the larger Q/A endpoint.
 | Q00 | Concrete physical carrier and exact root contract defined |
 | Q01 | Energy-level Fourier compactness candidates; actual LH limit pending |
 | Q02 | Native LH energy theorem candidate |
-| Q03–Q04 | `!=!` Exact physical interpolation and native LH budget |
+| Q03–Q04 | `!!` Exact physical interpolation and native LH budget |
 | Q05 | Native full LH restart candidate |
 | Q06 | Exact numerical caloric admission pending |
 | Q07 | Native strict good-time theorem candidate |
@@ -94,7 +118,7 @@ not automatically resolve the larger Q/A endpoint.
 
 ## Historical verified exact declarations
 
-`!=!` = exact external compiler and standard-only theorem axiom audit.
+`!!` = exact external compiler and standard-only theorem axiom audit.
 
 Evidence: [run 43150307199](https://github.com/randogelist/Methlib/actions/runs/43150307199),
 commit `7da82ecbe5c90a68bb85781190acbeca4e2d2489`.
@@ -106,10 +130,10 @@ establishes the unconditional root.
 
 | Frozen endpoint | Status | Exact evidence |
 |---|---|---|
-| Q03 Fourier Hhalf interpolation | `!=!` | `physicalH1_halfEnergy_midpoint`; literal extended Fourier energy |
-| Q04 native LH fourth-power budget | `!=!` | `LH_HALF_ENERGY_AE_FINITE`, `LH_HALF_ENERGY_AEMEASURABLE`, `LH_FOURTH_POWER_BUDGET` |
-| A01 symmetric Euclidean Leray multiplier | `!=!` | `SYMMETRIC_COMPLEX_LERAY_MULTIPLIER`, scaled variant |
-| A05 continuous quadratic barrier | `!=!` | `CONTINUOUS_QUADRATIC_BARRIER` and its square-budget consequences |
+| Q03 Fourier Hhalf interpolation | `!!` | `physicalH1_halfEnergy_midpoint`; literal extended Fourier energy |
+| Q04 native LH fourth-power budget | `!!` | `LH_HALF_ENERGY_AE_FINITE`, `LH_HALF_ENERGY_AEMEASURABLE`, `LH_FOURTH_POWER_BUDGET` |
+| A01 symmetric Euclidean Leray multiplier | `!!` | `SYMMETRIC_COMPLEX_LERAY_MULTIPLIER`, scaled variant |
+| A05 continuous quadratic barrier | `!!` | `CONTINUOUS_QUADRATIC_BARRIER` and its square-budget consequences |
 | Q02 zero-inclusive energy endpoint | `PENDING` | Positive-horizon `LH_ENERGY_BOUNDS` verified; zero-inclusive wrapper prepared |
 | Q01 arbitrary-L2 LH existence | `PENDING` | Physical weak momentum and interval energy passage under construction |
 | Q06 exact H1 admission | `PENDING` | Full numerical candidate chain prepared; external compiler pending |
@@ -117,126 +141,126 @@ establishes the unconditional root.
 
 | Marker | Exact declaration |
 |---|---|
-| `!=!` | `QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION` |
-| `!=!` | `QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET` |
-| `!=!` | `QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT` |
-| `!=!` | `QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE` |
-| `!=!` | `QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER` |
-| `!=!` | `QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY` |
-| `!=!` | `QuasiFeffermanB.CUTOFF_NONNEG` |
-| `!=!` | `QuasiFeffermanB.CUTOFF_POS` |
-| `!=!` | `QuasiFeffermanB.CUTOFF_ZERO` |
-| `!=!` | `QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE` |
-| `!=!` | `QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE` |
-| `!=!` | `QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM` |
-| `!=!` | `QuasiFeffermanB.ENERGY_SLICE_CUTOFF` |
-| `!=!` | `QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0` |
-| `!=!` | `QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0` |
-| `!=!` | `QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION` |
-| `!=!` | `QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED` |
-| `!=!` | `QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW` |
-| `!=!` | `QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE` |
-| `!=!` | `QuasiFeffermanB.LH_CONSTANT_PAIRING_PRESERVED` |
-| `!=!` | `QuasiFeffermanB.LH_ENERGY_BOUNDS` |
-| `!=!` | `QuasiFeffermanB.LH_FOURTH_POWER_BUDGET` |
-| `!=!` | `QuasiFeffermanB.LH_HALF_ENERGY_AEMEASURABLE` |
-| `!=!` | `QuasiFeffermanB.LH_HALF_ENERGY_AE_FINITE` |
-| `!=!` | `QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO` |
-| `!=!` | `QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT` |
-| `!=!` | `QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN` |
-| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET` |
-| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET` |
-| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET` |
-| `!=!` | `QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET` |
-| `!=!` | `QuasiFeffermanB.SAFE_CUTOFF_GT` |
-| `!=!` | `QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT` |
-| `!=!` | `QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET` |
-| `!=!` | `QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER` |
-| `!=!` | `QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED` |
-| `!=!` | `QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE` |
-| `!=!` | `QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN` |
-| `!=!` | `QuasiFeffermanB.caloricBilinearConstant_pos` |
-| `!=!` | `QuasiFeffermanB.caloricBilinearConstant_sq` |
-| `!=!` | `QuasiFeffermanB.caloricHeatBudget_nonneg` |
-| `!=!` | `QuasiFeffermanB.caloricHeatBudget_sq` |
-| `!=!` | `QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian` |
-| `!=!` | `QuasiFeffermanB.caloric_criticalEnergy_le_succ` |
-| `!=!` | `QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy` |
-| `!=!` | `QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian` |
-| `!=!` | `QuasiFeffermanB.caloric_fourierCharacter_norm` |
-| `!=!` | `QuasiFeffermanB.coefficientLeray_transport_symmetric` |
-| `!=!` | `QuasiFeffermanB.coefficientTransport_frequencyDot` |
-| `!=!` | `QuasiFeffermanB.coefficientTransport_symmetric` |
-| `!=!` | `QuasiFeffermanB.complexTransverse_pythagoras` |
-| `!=!` | `QuasiFeffermanB.complexTransverse_symmetric` |
-| `!=!` | `QuasiFeffermanB.complexVecNorm_add_le` |
-| `!=!` | `QuasiFeffermanB.complexVecNorm_eq_norm` |
-| `!=!` | `QuasiFeffermanB.complexVecNorm_finset_sum_le` |
-| `!=!` | `QuasiFeffermanB.complexVecNorm_nonneg` |
-| `!=!` | `QuasiFeffermanB.complexVecNorm_smul` |
-| `!=!` | `QuasiFeffermanB.complexVecNorm_sq` |
-| `!=!` | `QuasiFeffermanB.constant_positive_solenoidal_test` |
-| `!=!` | `QuasiFeffermanB.constant_weak_momentum_integrand` |
-| `!=!` | `QuasiFeffermanB.criticalEnergy_midpoint` |
-| `!=!` | `QuasiFeffermanB.criticalFourthPower_budget` |
-| `!=!` | `QuasiFeffermanB.criticalFourthPower_integrable` |
-| `!=!` | `QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2` |
-| `!=!` | `QuasiFeffermanB.energyCutoff_nonneg` |
-| `!=!` | `QuasiFeffermanB.energyGalerkin_H0_time_difference_bound` |
-| `!=!` | `QuasiFeffermanB.energyModeRhsBound_nonneg` |
-| `!=!` | `QuasiFeffermanB.energyModeTransportBound_nonneg` |
-| `!=!` | `QuasiFeffermanB.energyModeTransport_norm_le` |
-| `!=!` | `QuasiFeffermanB.energyTimeH0L2_norm_sq` |
-| `!=!` | `QuasiFeffermanB.energyTimeH0L2_sub_norm_sq` |
-| `!=!` | `QuasiFeffermanB.energy_H0_tail_sq` |
-| `!=!` | `QuasiFeffermanB.energy_coefficient_curve_precompact` |
-| `!=!` | `QuasiFeffermanB.finiteChi0_nonneg` |
-| `!=!` | `QuasiFeffermanB.finite_convolution_swap` |
-| `!=!` | `QuasiFeffermanB.fullFourierRhs_energy_bound` |
-| `!=!` | `QuasiFeffermanB.galerkin_H0_energy_bound` |
-| `!=!` | `QuasiFeffermanB.galerkin_H0_norm_sq` |
-| `!=!` | `QuasiFeffermanB.galerkin_energy_coefficient_modulus` |
-| `!=!` | `QuasiFeffermanB.globalEnergyCoefficient_continuousOn` |
-| `!=!` | `QuasiFeffermanB.globalEnergyCoefficient_eq_horizon` |
-| `!=!` | `QuasiFeffermanB.globalEnergyCoefficient_uniform_limit` |
-| `!=!` | `QuasiFeffermanB.norm_component_le_complexVecNorm` |
-| `!=!` | `QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2` |
-| `!=!` | `QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq` |
-| `!=!` | `QuasiFeffermanB.physicalEnergy_tendsto_of_L2` |
-| `!=!` | `QuasiFeffermanB.physicalH1HalfDatum_norm_sq` |
-| `!=!` | `QuasiFeffermanB.physicalH1_cutoff_bounds` |
-| `!=!` | `QuasiFeffermanB.physicalH1_cutoff_midpoint` |
-| `!=!` | `QuasiFeffermanB.physicalH1_halfEnergy_le` |
-| `!=!` | `QuasiFeffermanB.physicalH1_halfEnergy_midpoint` |
-| `!=!` | `QuasiFeffermanB.physicalH1_halfEnergy_ne_top` |
-| `!=!` | `QuasiFeffermanB.physicalH1_halfEnergy_summable` |
-| `!=!` | `QuasiFeffermanB.physicalH1_mem_halfSobolev` |
-| `!=!` | `QuasiFeffermanB.physicalHalfEnergyTerm_nonneg` |
-| `!=!` | `QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero` |
-| `!=!` | `QuasiFeffermanB.physicalHalfEnergy_aemeasurable` |
-| `!=!` | `QuasiFeffermanB.physicalHalfEnergy_cutoff` |
-| `!=!` | `QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum` |
-| `!=!` | `QuasiFeffermanB.physical_inner_congr_left_ae` |
-| `!=!` | `QuasiFeffermanB.positive_timeDerivative_translate` |
-| `!=!` | `QuasiFeffermanB.restartTest_eq` |
-| `!=!` | `QuasiFeffermanB.restartTest_is_test` |
-| `!=!` | `QuasiFeffermanB.restartTest_timeDerivative` |
-| `!=!` | `QuasiFeffermanB.restartTimeClamp_contDiff` |
-| `!=!` | `QuasiFeffermanB.restartTimeClamp_eq` |
-| `!=!` | `QuasiFeffermanB.restartTimeClamp_hasDerivAt` |
-| `!=!` | `QuasiFeffermanB.restartTimeClamp_pos` |
-| `!=!` | `QuasiFeffermanB.timeTranslate_ae_Ioc` |
-| `!=!` | `QuasiFeffermanB.timeTranslate_integrated_momentum` |
-| `!=!` | `QuasiFeffermanB.timeTranslate_measurePreserving_Ioc` |
-| `!=!` | `QuasiFeffermanB.timeTranslate_memLp_Ioc` |
-| `!=!` | `SingularClosure.GalerkinSolution.energy_H0_time_tail` |
+| `!!` | `QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION` |
+| `!!` | `QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET` |
+| `!!` | `QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT` |
+| `!!` | `QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE` |
+| `!!` | `QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER` |
+| `!!` | `QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY` |
+| `!!` | `QuasiFeffermanB.CUTOFF_NONNEG` |
+| `!!` | `QuasiFeffermanB.CUTOFF_POS` |
+| `!!` | `QuasiFeffermanB.CUTOFF_ZERO` |
+| `!!` | `QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE` |
+| `!!` | `QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE` |
+| `!!` | `QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM` |
+| `!!` | `QuasiFeffermanB.ENERGY_SLICE_CUTOFF` |
+| `!!` | `QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0` |
+| `!!` | `QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0` |
+| `!!` | `QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0` |
+| `!!` | `QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS` |
+| `!!` | `QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY` |
+| `!!` | `QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND` |
+| `!!` | `QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL` |
+| `!!` | `QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE` |
+| `!!` | `QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND` |
+| `!!` | `QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION` |
+| `!!` | `QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED` |
+| `!!` | `QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW` |
+| `!!` | `QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE` |
+| `!!` | `QuasiFeffermanB.LH_CONSTANT_PAIRING_PRESERVED` |
+| `!!` | `QuasiFeffermanB.LH_ENERGY_BOUNDS` |
+| `!!` | `QuasiFeffermanB.LH_FOURTH_POWER_BUDGET` |
+| `!!` | `QuasiFeffermanB.LH_HALF_ENERGY_AEMEASURABLE` |
+| `!!` | `QuasiFeffermanB.LH_HALF_ENERGY_AE_FINITE` |
+| `!!` | `QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO` |
+| `!!` | `QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT` |
+| `!!` | `QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN` |
+| `!!` | `QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET` |
+| `!!` | `QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET` |
+| `!!` | `QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET` |
+| `!!` | `QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET` |
+| `!!` | `QuasiFeffermanB.SAFE_CUTOFF_GT` |
+| `!!` | `QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT` |
+| `!!` | `QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET` |
+| `!!` | `QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER` |
+| `!!` | `QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED` |
+| `!!` | `QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE` |
+| `!!` | `QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN` |
+| `!!` | `QuasiFeffermanB.caloricBilinearConstant_pos` |
+| `!!` | `QuasiFeffermanB.caloricBilinearConstant_sq` |
+| `!!` | `QuasiFeffermanB.caloricHeatBudget_nonneg` |
+| `!!` | `QuasiFeffermanB.caloricHeatBudget_sq` |
+| `!!` | `QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian` |
+| `!!` | `QuasiFeffermanB.caloric_criticalEnergy_le_succ` |
+| `!!` | `QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy` |
+| `!!` | `QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian` |
+| `!!` | `QuasiFeffermanB.caloric_fourierCharacter_norm` |
+| `!!` | `QuasiFeffermanB.coefficientLeray_transport_symmetric` |
+| `!!` | `QuasiFeffermanB.coefficientTransport_frequencyDot` |
+| `!!` | `QuasiFeffermanB.coefficientTransport_symmetric` |
+| `!!` | `QuasiFeffermanB.complexTransverse_pythagoras` |
+| `!!` | `QuasiFeffermanB.complexTransverse_symmetric` |
+| `!!` | `QuasiFeffermanB.complexVecNorm_add_le` |
+| `!!` | `QuasiFeffermanB.complexVecNorm_eq_norm` |
+| `!!` | `QuasiFeffermanB.complexVecNorm_finset_sum_le` |
+| `!!` | `QuasiFeffermanB.complexVecNorm_nonneg` |
+| `!!` | `QuasiFeffermanB.complexVecNorm_smul` |
+| `!!` | `QuasiFeffermanB.complexVecNorm_sq` |
+| `!!` | `QuasiFeffermanB.constant_positive_solenoidal_test` |
+| `!!` | `QuasiFeffermanB.constant_weak_momentum_integrand` |
+| `!!` | `QuasiFeffermanB.criticalEnergy_midpoint` |
+| `!!` | `QuasiFeffermanB.criticalFourthPower_budget` |
+| `!!` | `QuasiFeffermanB.criticalFourthPower_integrable` |
+| `!!` | `QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2` |
+| `!!` | `QuasiFeffermanB.energyCutoff_nonneg` |
+| `!!` | `QuasiFeffermanB.energyGalerkin_H0_time_difference_bound` |
+| `!!` | `QuasiFeffermanB.energyModeRhsBound_nonneg` |
+| `!!` | `QuasiFeffermanB.energyModeTransportBound_nonneg` |
+| `!!` | `QuasiFeffermanB.energyModeTransport_norm_le` |
+| `!!` | `QuasiFeffermanB.energyTimeH0L2_norm_sq` |
+| `!!` | `QuasiFeffermanB.energyTimeH0L2_sub_norm_sq` |
+| `!!` | `QuasiFeffermanB.energy_H0_tail_sq` |
+| `!!` | `QuasiFeffermanB.energy_coefficient_curve_precompact` |
+| `!!` | `QuasiFeffermanB.finiteChi0_nonneg` |
+| `!!` | `QuasiFeffermanB.finite_convolution_swap` |
+| `!!` | `QuasiFeffermanB.fullFourierRhs_energy_bound` |
+| `!!` | `QuasiFeffermanB.galerkin_H0_energy_bound` |
+| `!!` | `QuasiFeffermanB.galerkin_H0_norm_sq` |
+| `!!` | `QuasiFeffermanB.galerkin_energy_coefficient_modulus` |
+| `!!` | `QuasiFeffermanB.globalEnergyCoefficient_continuousOn` |
+| `!!` | `QuasiFeffermanB.globalEnergyCoefficient_eq_horizon` |
+| `!!` | `QuasiFeffermanB.globalEnergyCoefficient_uniform_limit` |
+| `!!` | `QuasiFeffermanB.norm_component_le_complexVecNorm` |
+| `!!` | `QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2` |
+| `!!` | `QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq` |
+| `!!` | `QuasiFeffermanB.physicalEnergy_tendsto_of_L2` |
+| `!!` | `QuasiFeffermanB.physicalH1HalfDatum_norm_sq` |
+| `!!` | `QuasiFeffermanB.physicalH1_cutoff_bounds` |
+| `!!` | `QuasiFeffermanB.physicalH1_cutoff_midpoint` |
+| `!!` | `QuasiFeffermanB.physicalH1_halfEnergy_le` |
+| `!!` | `QuasiFeffermanB.physicalH1_halfEnergy_midpoint` |
+| `!!` | `QuasiFeffermanB.physicalH1_halfEnergy_ne_top` |
+| `!!` | `QuasiFeffermanB.physicalH1_halfEnergy_summable` |
+| `!!` | `QuasiFeffermanB.physicalH1_mem_halfSobolev` |
+| `!!` | `QuasiFeffermanB.physicalHalfEnergyTerm_nonneg` |
+| `!!` | `QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero` |
+| `!!` | `QuasiFeffermanB.physicalHalfEnergy_aemeasurable` |
+| `!!` | `QuasiFeffermanB.physicalHalfEnergy_cutoff` |
+| `!!` | `QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum` |
+| `!!` | `QuasiFeffermanB.physical_inner_congr_left_ae` |
+| `!!` | `QuasiFeffermanB.positive_timeDerivative_translate` |
+| `!!` | `QuasiFeffermanB.restartTest_eq` |
+| `!!` | `QuasiFeffermanB.restartTest_is_test` |
+| `!!` | `QuasiFeffermanB.restartTest_timeDerivative` |
+| `!!` | `QuasiFeffermanB.restartTimeClamp_contDiff` |
+| `!!` | `QuasiFeffermanB.restartTimeClamp_eq` |
+| `!!` | `QuasiFeffermanB.restartTimeClamp_hasDerivAt` |
+| `!!` | `QuasiFeffermanB.restartTimeClamp_pos` |
+| `!!` | `QuasiFeffermanB.timeTranslate_ae_Ioc` |
+| `!!` | `QuasiFeffermanB.timeTranslate_integrated_momentum` |
+| `!!` | `QuasiFeffermanB.timeTranslate_measurePreserving_Ioc` |
+| `!!` | `QuasiFeffermanB.timeTranslate_memLp_Ioc` |
+| `!!` | `SingularClosure.GalerkinSolution.energy_H0_time_tail` |
 
 `QFB_ROOT_UNCONDITIONAL_A_TIER = PENDING`.
 

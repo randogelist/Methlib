@@ -1,0 +1,30 @@
+[
+  {
+    "source": "qfb_r7_root_refinement.txt",
+    "copy": "SourcePreload/R8/Derivation/qfb_r7_root_refinement.txt",
+    "sha256": "e53a9fe80e7ff1dd21143aaa51ed49269f2b42bfa165d247c470d0432248f646",
+    "bytes": 19230,
+    "scope": "VERBATIM_R7_MATHEMATICAL_DERIVATION; historical run/source-edit metadata applies to R7"
+  },
+  {
+    "source": "qfb_r7_q01_derivation.txt",
+    "copy": "SourcePreload/R8/Derivation/qfb_r7_q01_derivation.txt",
+    "sha256": "1b44257426c0f519654a05210427865f0e501c0b816cc21168dba922768c9d1a",
+    "bytes": 24904,
+    "scope": "VERBATIM_R7_MATHEMATICAL_DERIVATION; historical run/source-edit metadata applies to R7"
+  },
+  {
+    "source": "qfb_r7_caloric_derivation.txt",
+    "copy": "SourcePreload/R8/Derivation/qfb_r7_caloric_derivation.txt",
+    "sha256": "7c07d2398fb096fe34f776b313659ef7219bc272bd0a50ee8eec5a6cabc0454e",
+    "bytes": 25278,
+    "scope": "VERBATIM_R7_MATHEMATICAL_DERIVATION; historical run/source-edit metadata applies to R7"
+  },
+  {
+    "source": "qfb_r7_tail_derivation.txt",
+    "copy": "SourcePreload/R8/Derivation/qfb_r7_tail_derivation.txt",
+    "sha256": "fd343c7201a1281590d9ec43c371d79d2e8a66781f08aba68972ecbf17bdcdb5",
+    "bytes": 25253,
+    "scope": "VERBATIM_R7_MATHEMATICAL_DERIVATION; historical run/source-edit metadata applies to R7"
+  }
+]

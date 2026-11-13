@@ -57,6 +57,7 @@ private theorem latticeBox_gaussian_sum (N : ℕ) (t : ℝ) :
   let s : Finset ℤ := Finset.Icc (-(N : ℤ)) (N : ℤ)
   let r : ℤ → ℝ := fun n => Real.exp (-Real.pi * t * (n : ℝ) ^ 2)
   have hsquare : (∑ p ∈ s.product s, r p.1 * r p.2) = (∑ n ∈ s, r n) ^ 2 := by
+    simp only [Finset.product_eq_sprod]
     rw [Finset.sum_product, ← Finset.sum_mul_sum, pow_two]
   change (∑ k ∈ ((s.product s).product s).image
     (fun q : (ℤ × ℤ) × ℤ => (![q.1.1, q.1.2, q.2] : Frequency)),
@@ -68,6 +69,7 @@ private theorem latticeBox_gaussian_sum (N : ℕ) (t : ℝ) :
       intro q _
       exact hfactor q.1.1 q.1.2 q.2
     _ = (∑ p ∈ s.product s, r p.1 * r p.2) * (∑ n ∈ s, r n) := by
+      simp only [Finset.product_eq_sprod]
       rw [Finset.sum_product, Finset.sum_mul_sum]
     _ = (∑ n ∈ s, r n) ^ 3 := by rw [hsquare]; ring
 

@@ -28,9 +28,10 @@ theorem REAL_SCALAR_DUHAMEL
   have hDd (t : ℝ) (ht : t ∈ Ioo 0 T) :
       HasDerivAt D (Real.exp (α * t) • f t) t := by
     have h := (((hasDerivAt_id t).const_mul α).exp).smul (hdu t ht)
-    convert h using 1
+    apply h.congr_deriv
+    change Real.exp (α * t) • (f t - α • u t) +
+        (Real.exp (α * t) * (α * 1)) • u t = Real.exp (α * t) • f t
     simp only [smul_sub, smul_smul, mul_one]
-    rw [mul_comm (Real.exp (α * t)) α]
     abel
   have hFi : IntervalIntegrable (fun t => Real.exp (α * t) • f t) volume 0 T :=
     (he.continuousOn.smul hf).intervalIntegrable_of_Icc hT
@@ -46,6 +47,8 @@ theorem REAL_SCALAR_DUHAMEL
     rw [← intervalIntegral.integral_smul]
     apply intervalIntegral.integral_congr
     intro s _
+    change Real.exp (-α * T) • (Real.exp (α * s) • f s) =
+      Real.exp (-α * (T - s)) • f s
     rw [smul_smul, ← Real.exp_add]
     congr 2 <;> ring
   rw [hkernel] at hmul
@@ -65,7 +68,7 @@ theorem GALERKIN_COMPLEX_MODE_CONTINUOUS
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N) (k : Frequency) :
     ContinuousOn (fun t => complexVec (g.coeff t k)) (Ici 0) := by
   simp_rw [complexVec_sum_units]
-  apply continuousOn_finset_sum
+  apply continuousOn_finsetSum Finset.univ
   intro i _
   exact (g.coefficient_continuous k i).smul continuousOn_const
 
@@ -86,7 +89,7 @@ theorem GALERKIN_COMPLEX_FORCING_CONTINUOUS
       (Ici 0) := by
   have hR : ContinuousOn (fun t => complexVec (galerkinRhs ν N (g.coeff t) k)) (Ici 0) := by
     simp_rw [complexVec_sum_units]
-    apply continuousOn_finset_sum
+    apply continuousOn_finsetSum Finset.univ
     intro i _
     exact (g.rhs_continuousOn hk i).smul continuousOn_const
   have h := hR.add ((GALERKIN_COMPLEX_MODE_CONTINUOUS g k).const_smul
@@ -114,12 +117,13 @@ theorem GALERKIN_MODE_DUHAMEL
     ((GALERKIN_COMPLEX_MODE_CONTINUOUS g k).mono (fun t ht => ht.1))
     ((GALERKIN_COMPLEX_FORCING_CONTINUOUS g k hk).mono (fun t ht => ht.1))
   intro t ht
-  convert GALERKIN_COMPLEX_MODE_HAS_DERIV g k hk t ht.1 using 1
-  ext i
-  change -coefficientLeray k (coefficientTransport N (g.coeff t) k) i -
-      ((ν * (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) : ℝ) : ℂ) * g.coeff t k i =
-    -((ν * (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) : ℝ) : ℂ) * g.coeff t k i -
-      coefficientLeray k (coefficientTransport N (g.coeff t) k) i
+  apply (GALERKIN_COMPLEX_MODE_HAS_DERIV g k hk t ht.1).congr_deriv
+  apply PiLp.ext
+  intro i
+  change -((ν * (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) : ℝ) : ℂ) * g.coeff t k i -
+      coefficientLeray k (coefficientTransport N (g.coeff t) k) i =
+    -coefficientLeray k (coefficientTransport N (g.coeff t) k) i -
+      ((ν * (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ) : ℝ) : ℂ) * g.coeff t k i
   ring
 
 end

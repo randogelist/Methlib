@@ -57,9 +57,12 @@ theorem finiteTimeL2_add_le
     (hf : ContinuousOn f (Icc 0 T)) (hg : ContinuousOn g (Icc 0 T))
     (hf0 : ∀ t ∈ Icc 0 T, 0 ≤ f t) (hg0 : ∀ t ∈ Icc 0 T, 0 ≤ g t) :
     finiteTimeL2 T (fun t => f t + g t) ≤ finiteTimeL2 T f + finiteTimeL2 T g := by
-  have hiF := (hf.pow 2).intervalIntegrable_of_Icc hT
-  have hiG := (hg.pow 2).intervalIntegrable_of_Icc hT
-  have hiFG := (hf.mul hg).intervalIntegrable_of_Icc hT
+  have hiF : IntervalIntegrable (fun t => f t ^ 2) volume 0 T :=
+    (hf.pow 2).intervalIntegrable_of_Icc hT
+  have hiG : IntervalIntegrable (fun t => g t ^ 2) volume 0 T :=
+    (hg.pow 2).intervalIntegrable_of_Icc hT
+  have hiFG : IntervalIntegrable (fun t => f t * g t) volume 0 T :=
+    (hf.mul hg).intervalIntegrable_of_Icc hT
   have heq : (∫ t in (0 : ℝ)..T, (f t + g t) ^ 2) =
       (∫ t in (0 : ℝ)..T, f t ^ 2) +
         2 * (∫ t in (0 : ℝ)..T, f t * g t) +
@@ -91,7 +94,7 @@ theorem finiteTimeL2_sum_le
   | empty => simp [finiteTimeL2]
   | @insert i s hi ih =>
       have hfc : ContinuousOn (fun t => ∑ j ∈ s, f j t) (Icc 0 T) :=
-        continuousOn_finset_sum (fun j hj => hf j (Finset.mem_insert_of_mem hj))
+        continuousOn_finsetSum s (fun j hj => hf j (Finset.mem_insert_of_mem hj))
       have hfn : ∀ t ∈ Icc 0 T, 0 ≤ ∑ j ∈ s, f j t :=
         fun t ht => Finset.sum_nonneg (fun j hj => hf0 j (Finset.mem_insert_of_mem hj) t ht)
       simp only [Finset.sum_insert hi]

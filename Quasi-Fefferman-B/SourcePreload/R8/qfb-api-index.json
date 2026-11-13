@@ -1,0 +1,984 @@
+{
+  "schema": 1,
+  "revision": "R8",
+  "registry_status": "SOURCE_PRELOAD_WITH_RETAINED_EXACT_CACHED_EVIDENCE",
+  "source_snapshot": "Current R8 staged source; per-file SHA256 is normative",
+  "baseline_commit": "17641ba02784ae108af0da5874073786d7df46ec",
+  "foundation_sha": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "lean": "4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "selection_inputs": [
+    {
+      "path": "SourcePreload/R8/future-endpoints.json",
+      "sha256": "3101d4fc87b46ccfdfeacb3973e53ac754a5829afb2afcbe372c94543271b191",
+      "selection": "All QuasiFeffermanB names in contracts[*].entrypoints"
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/endpoint-index.json",
+      "sha256": "0677a374ee8ab2b01dbd30cee2d145c70de7579e72de746c31791313bd1d44bd",
+      "selection": "All 10 selected_exports; signatures re-extracted from current source"
+    },
+    {
+      "selection": "Named dependencies",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT",
+        "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW",
+        "QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START",
+        "QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY",
+        "QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO"
+      ]
+    }
+  ],
+  "cached_evidence_policy": "A_TIER_EXACT_DECLARATION only when the exact declaration audit, source SHA256, module build/audit, allowed axioms and transitive dependency fingerprint match the current source. No contract promotion.",
+  "root": {
+    "target": "QuasiFeffermanB.Endpoints.Root",
+    "declaration": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED",
+    "type": "QuasiFeffermanB.QuasiFeffermanBStatement",
+    "scope_changed": false,
+    "import_closure_modules": 74,
+    "status": "A_TIER_CANDIDATE"
+  },
+  "probe": {
+    "path": "SourcePreload/R8/Probes/QFB.lean",
+    "status": "SOURCE_ONLY",
+    "executed": false,
+    "sha256": "8497f03c28657101f64b08d7d7720fce25218db55622d3adef64bf14cac2c3a8",
+    "check_commands": 28,
+    "axiom_print_commands": 28,
+    "registered_for_root_audit": false
+  },
+  "counts": {
+    "selected_declarations": 28,
+    "source_modules": 21,
+    "future_qfb_entrypoints": 16,
+    "selected_exports": 10,
+    "additional_named_dependencies": 5,
+    "A_TIER_EXACT_DECLARATION": 12,
+    "A_TIER_CANDIDATE": 16,
+    "missing_entrypoints": 0
+  },
+  "missing_entrypoints": [],
+  "entries": [
+    {
+      "declaration": "QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET",
+      "module": "QuasiFeffermanB.CaloricH1Regularity",
+      "source": "QuasiFeffermanB/CaloricH1Regularity.lean",
+      "line": 17,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "signature": "theorem CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET\n    (ν : ℝ) (hν : 0 < ν) (b : CriticalSobolev 2)\n    (hreal : SpectralReality (criticalCoeff 2 b))\n    (hsol : SpectralSolenoidal (criticalCoeff 2 b))\n    (hzero : SpectralMeanZero (criticalCoeff 2 b))\n    (S : ℝ)\n    (hbudget : ∀ (N : ℕ)\n      (g : GalerkinSolution ν (finiteSynthesis N (criticalCoeff 2 b)) N),\n      ∀ T : ℝ, 0 ≤ T →\n        (∫ t in (0 : ℝ)..T, finiteChi0 (cutoffModes N) (g.coeff t) ^ 2) ≤ S) :\n    ∃ L : CriticalPositiveSobolevFlow ν,\n      PositiveSmoothNSE ν L.velocity L.pressure ∧\n      Tendsto (fun t => eLpNorm\n        (L.velocity t - (criticalInitialPhysicalL2\n          (criticalSobolevLower 1 2 (by norm_num) b) : Field)) 2\n        (volume.restrict unitCube)) (𝓝[>] (0 : ℝ)) (𝓝 0) ∧\n      (∀ T : ℝ, 0 < T → MemLp\n        (fun t => criticalSpatialNorm 6 (L.velocity t)) 4\n        (volume.restrict (Ioc (0 : ℝ) T))) ∧\n      (∀ t : ℝ, 0 < t → physicalDissipation (L.velocity t) ≤\n        ‖b‖ ^ 2 * Real.exp (S / ν)) ∧\n      (∀ (v : Velocity) (G : ℝ → Vec → (Vec →L[ℝ] Vec)),\n        CriticalLerayHopf ν\n          (criticalInitialPhysicalL2 (criticalSobolevLower 1 2 (by norm_num) b)) v G →\n        ∀ t : ℝ, 0 < t → v t =ᵐ[volume.restrict unitCube] L.velocity t)",
+      "signature_sha256": "3fd577bc8e3899ff0529dff81dc2d5786dd141e1740039a7c2c3da5ed33aef13",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET : ∀ (ν : ℝ),\n  0 < ν →\n    ∀ (b : SingularClosure.CriticalSobolev 2),\n      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 b) →\n        SingularClosure.SpectralSolenoidal (SingularClosure.criticalCoeff 2 b) →\n          SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 b) →\n            ∀ (S : ℝ),\n              (∀ (N : ℕ)\n                  (g :\n                    SingularClosure.GalerkinSolution ν\n                      (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 b)) N)\n                  (T : ℝ),\n                  0 ≤ T →\n                    ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤ S) →\n                ∃ L,\n                  SingularClosure.PositiveSmoothNSE ν L.velocity L.pressure ∧\n                    Filter.Tendsto\n                        (fun t =>\n                          MeasureTheory.eLpNorm\n                            (L.velocity t -\n                              ↑↑(SingularClosure.criticalInitialPhysicalL2\n                                    ((SingularClosure.criticalSobolevLower 1 2 ⋯) b)))\n                            2 (MeasureTheory.volume.restrict SingularClosure.unitCube))\n                        (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) ∧\n                      (∀ (T : ℝ),\n                          0 < T →\n                            MeasureTheory.MemLp (fun t => SingularClosure.criticalSpatialNorm 6 (L.velocity t)) 4\n                              (MeasureTheory.volume.restrict (Set.Ioc 0 T))) ∧\n                        (∀ (t : ℝ),\n                            0 < t → SingularClosure.physicalDissipation (L.velocity t) ≤ ‖b‖ ^ 2 * Real.exp (S / ν)) ∧\n                          ∀ (v : SingularClosure.Velocity)\n                            (G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec),\n                            SingularClosure.CriticalLerayHopf ν\n                                (SingularClosure.criticalInitialPhysicalL2\n                                  ((SingularClosure.criticalSobolevLower 1 2 ⋯) b))\n                                v G →\n                              ∀ (t : ℝ),\n                                0 < t → v t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity t",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/CaloricH1Regularity.lean",
+        "source_sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+        "dependency_fingerprint": "ef355e8781cd8dd52ae450d7bd4d99618ee388a5d3b0be033592ed7b0e6f86e4",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": true,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT",
+      "module": "QuasiFeffermanB.EnergyGlobalLimit",
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "line": 17,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "signature": "theorem ENERGY_GALERKIN_GLOBAL_LIMIT\n    (ν : ℝ) (hν : 0 < ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n))\n    (R : ℝ) (hR : 0 ≤ R)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) :\n    ∃ U : ℝ → TorusSobolev 0, ∃ φ : ℕ → ℕ, StrictMono φ ∧\n      (∀ t, 0 ≤ t → ‖U t‖ ≤ R) ∧\n      (∀ k i, ContinuousOn (fun t => (U t).val k i) (Ici 0)) ∧\n      (∀ T k i, TendstoUniformlyOn (fun n t => (g (φ n)).coeff t k i)\n        (fun t => (U t).val k i) atTop (Icc (0 : ℝ) T)) ∧\n      (∀ T : ℝ, 0 ≤ T → ∃ v : EnergyTimeH0L2 T,\n        Tendsto (fun n => (g (φ n)).energyTimeH0L2 T) atTop (𝓝 v) ∧\n        (∀ᵐ t ∂volume.restrict (Icc (0 : ℝ) T), v t = U t))",
+      "signature_sha256": "23e2c74ebfe18cab7e14ec1f6f162f2453c6f3c5722a1ed34c8334aca775c80b",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "named_dependency"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT : ∀ (ν : ℝ),\n  0 < ν →\n    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))\n      (R : ℝ),\n      0 ≤ R →\n        (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →\n          ∃ U φ,\n            StrictMono φ ∧\n              (∀ (t : ℝ), 0 ≤ t → ‖U t‖ ≤ R) ∧\n                (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) (Set.Ici 0)) ∧\n                  (∀ (T : ℝ) (k : SingularClosure.Frequency) (i : Fin 3),\n                      TendstoUniformlyOn (fun n t => (g (φ n)).coeff t k i) (fun t => ↑(U t) k i) Filter.atTop\n                        (Set.Icc 0 T)) ∧\n                    ∀ (T : ℝ),\n                      0 ≤ T →\n                        ∃ v,\n                          Filter.Tendsto (fun n => (g (φ n)).energyTimeH0L2 T) Filter.atTop (nhds v) ∧\n                            ∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T), ↑↑v t = U t",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+        "source_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+        "dependency_fingerprint": "220012f9e5e7f98c77a2f1957dfa20ef7ce294b671a7843fbb6f0fa2fe28ac59",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS",
+      "module": "QuasiFeffermanB.Endpoints.InitialCoefficients",
+      "source": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
+      "line": 18,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "243327d3daa81a5b16e559cecb4df96bdc6cae14d42440ad4e8a372b36c27d1e",
+      "signature": "theorem ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS\n    (ν : ℝ) (hν : 0 ≤ ν) (a : EnergyDatum)\n    (σ : ℕ → ℕ) (hσ : StrictMono σ) (c : FourierCoeff)\n    (h0 : ∀ k i, Tendsto\n      (fun n => (energyDatumGalerkinFamily ν hν a (σ n)).coeff 0 k i)\n      atTop (𝓝 (c k i))) :\n    c = datumFourierCoeff (a.val : Field)",
+      "signature_sha256": "a3fe3a1166c26a29cd39a5b2ec56d045135deb5030b79fd783888843f89d2d0a",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV",
+      "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "line": 176,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "signature": "theorem ENERGY_GALERKIN_PAIRING_HASDERIV\n    {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ) (t : ℝ) (ht : 0 < t) :\n    HasDerivAt (fun r => physicalFieldInner (g.velocity r) (φ r))\n      (physicalFieldInner (g.velocity t) (timeDerivative φ t) +\n       physicalFieldInner (timeDerivative g.velocity t) (φ t)) t",
+      "signature_sha256": "8fa4e70f02fa28dbc8fdac0a2c795ad41bbcbe6c095e0d78cfe875d2a756bb03",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_MOMENTUM",
+      "module": "QuasiFeffermanB.Endpoints.PhysicalMomentum",
+      "source": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
+      "line": 463,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "d2e122aab16d773a42629464eb99cb86b2a5ddb7bac571a4d0585534929faf19",
+      "signature": "theorem ENERGY_GALERKIN_PHYSICAL_MOMENTUM\n    (ν : ℝ) (hν : 0 ≤ ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n))\n    (R : ℝ) (hR : 0 ≤ R)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2)\n    (U : ℝ → TorusSobolev 0) (hN : Tendsto N atTop atTop)\n    (hc : ∀ r : ℝ, 0 ≤ r → ∀ k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (𝓝 ((U r).val k i)))\n    (htime : ∀ T : ℝ, 0 < T → ∃ z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (𝓝 z) ∧\n      ∀ᵐ r ∂volume.restrict (Icc (0 : ℝ) T), z r = U r) :\n    CriticalIntegratedWeakMomentum ν (energyPeriodicVelocity U)",
+      "signature_sha256": "bb3995fca7d3c2d94186f0b143c31a1ce7f1de46812ddea7c800152bc65d58b7",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY",
+      "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "line": 300,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "signature": "theorem ENERGY_GALERKIN_TIME_TEST_IDENTITY\n    {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ)\n    (s t : ℝ) (hs : 0 < s) (hst : s ≤ t) :\n    physicalFieldInner (g.velocity t) (φ t) -\n      physicalFieldInner (g.velocity s) (φ s) =\n    ∫ r in s..t,\n      physicalFieldInner (g.velocity r) (timeDerivative φ r) +\n      ν * physicalFieldInner (g.velocity r) (laplacian (φ r)) +\n      criticalWeakTransport (g.velocity r)\n        (finiteSynthesis N (datumFourierCoeff (φ r)))",
+      "signature_sha256": "32da2f97ba69bbb5ac80c80ab7e1d01419aeb3c082c78fc8459ee7acab021df5",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO",
+      "module": "QuasiFeffermanB.Endpoints.WeakH0Limit",
+      "source": "QuasiFeffermanB/Endpoints/WeakH0Limit.lean",
+      "line": 69,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "63f6e60497dd916991b09b0eddfd314fd087f0e69ea64fe3e8ac0c7b0c2adfa4",
+      "signature": "theorem ENERGY_H0_WEAK_TENDSTO\n    (F : ℕ → TorusSobolev 0) (v : TorusSobolev 0)\n    (R : ℝ) (hR : 0 ≤ R) (hF : ∀ n, ‖F n‖ ≤ R) (hv : ‖v‖ ≤ R)\n    (hc : ∀ k i, Tendsto (fun n => (F n).val k i) atTop (𝓝 (v.val k i)))\n    (w : TorusSobolev 0) :\n    Tendsto (fun n => inner ℂ (F n) w) atTop (𝓝 (inner ℂ v w))",
+      "signature_sha256": "e2bbd7c8cd22e1ca508fba9bb108ee482142b71efab16bfffbce9479c7529d4c",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY",
+      "module": "QuasiFeffermanB.Endpoints.LimitEnergy",
+      "source": "QuasiFeffermanB/Endpoints/LimitEnergy.lean",
+      "line": 95,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
+      "signature": "theorem ENERGY_PERIODIC_LIMIT_ENERGY\n    (ν : ℝ) (hν : 0 < ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n)) (R : ℝ)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2)\n    (U : ℝ → TorusSobolev 0)\n    (hcoord : ∀ k i, ContinuousOn (fun t => (U t).val k i) (Ici 0))\n    (hc : ∀ r, 0 ≤ r → ∀ k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (𝓝 ((U r).val k i)))\n    (htime : ∀ T : ℝ, 0 ≤ T → ∃ z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (𝓝 z) ∧\n      (∀ᵐ r ∂volume.restrict (Icc (0 : ℝ) T), z r = U r)) :\n    (∀ t : ℝ, 0 ≤ t →\n      physicalEnergy (energyPeriodicVelocity U t) +\n        2 * ν * (∫ r in (0 : ℝ)..t, criticalGradientEnergy (energyGlobalGradient U r))\n          ≤ R ^ 2) ∧\n    (∀ T : ℝ, 0 < T →\n      ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), ∀ t ∈ Icc s T,\n        physicalEnergy (energyPeriodicVelocity U t) +\n          2 * ν * (∫ r in s..t, criticalGradientEnergy (energyGlobalGradient U r))\n            ≤ physicalEnergy (energyPeriodicVelocity U s))",
+      "signature_sha256": "630c4b38d13d463a0d8cb1a21390e9feccc63fe327a0f0eb61db2188b2833c7d",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_GLOBAL_CONULL_ENERGY_STARTS"
+        },
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM",
+      "module": "QuasiFeffermanB.Endpoints.TestProjection",
+      "source": "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "line": 196,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+      "signature": "theorem ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ)\n    (s t : ℝ) (hs : 0 < s) (hst : s ≤ t) :\n    TendstoUniformlyOn\n      (fun N (z : ℝ × Vec) =>\n        fderiv ℝ (finiteSynthesis N (datumFourierCoeff (φ z.1))) z.2)\n      (fun z : ℝ × Vec => fderiv ℝ (φ z.1) z.2)\n      atTop ((Icc s t) ×ˢ unitCube)",
+      "signature_sha256": "9ab0d6829255fb4a4a7168f0dcec859d5a4eda461ffc0d421e3f5b6bc48679ee",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW",
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "line": 79,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "signature": "theorem HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW\n    {ν : ℝ} {u : Velocity} (L : CriticalPositiveSobolevFlow ν)\n    (s δ : ℝ) (hs : 0 ≤ s) (hsδ : s < δ)\n    (hagreement : ∀ t : ℝ, s < t →\n      u t =ᵐ[volume.restrict unitCube] L.velocity (t - s)) :\n    HasSmoothTail ν u δ",
+      "signature_sha256": "5f8dba73a60ea2d78c2fdbba0a00fa53031476c683a5bd1720ecde5f702e7a3a",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "named_dependency"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW : ∀ {ν : ℝ} {u : SingularClosure.Velocity}\n  (L : SingularClosure.CriticalPositiveSobolevFlow ν) (s δ : ℝ),\n  0 ≤ s →\n    s < δ →\n      (∀ (t : ℝ), s < t → u t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity (t - s)) →\n        QuasiFeffermanB.HasSmoothTail ν u δ",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/TailRegularity.lean",
+        "source_sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+        "dependency_fingerprint": "05717ff9ee4b34e3cde048fa64ba1d8ddc637e9470fd8d1adc01c5784aae3e94",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_ENERGY_BOUNDS",
+      "module": "QuasiFeffermanB.LHEnergy",
+      "source": "QuasiFeffermanB/LHEnergy.lean",
+      "line": 14,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "signature": "theorem LH_ENERGY_BOUNDS\n    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity}\n    {G : WeakGradientTrajectory}\n    (hν : 0 < ν) (hu : CriticalLerayHopf ν a u G) :\n    (∀ t : ℝ, 0 ≤ t → physicalEnergy (u t) ≤ ‖a‖ ^ 2) ∧\n    ∀ T : ℝ, 0 < T →\n      IntervalIntegrable (fun t => criticalGradientEnergy (G t)) volume 0 T ∧\n      (∫ t in (0 : ℝ)..T, criticalGradientEnergy (G t)) ≤ ‖a‖ ^ 2 / (2 * ν)",
+      "signature_sha256": "9cb85cf5d49be3284af9f854ecd6ec72f6337aa76f41da14e30b0bbd82b0ac19",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_H1_RESTART_BOUND"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.LH_ENERGY_BOUNDS : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2} {u : SingularClosure.Velocity}\n  {G : QuasiFeffermanB.WeakGradientTrajectory},\n  0 < ν →\n    SingularClosure.CriticalLerayHopf ν a u G →\n      (∀ (t : ℝ), 0 ≤ t → SingularClosure.physicalEnergy (u t) ≤ ‖a‖ ^ 2) ∧\n        ∀ (T : ℝ),\n          0 < T →\n            IntervalIntegrable (fun t => SingularClosure.criticalGradientEnergy (G t)) MeasureTheory.volume 0 T ∧\n              ∫ (t : ℝ) in 0..T, SingularClosure.criticalGradientEnergy (G t) ≤ ‖a‖ ^ 2 / (2 * ν)",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/LHEnergy.lean",
+        "source_sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+        "dependency_fingerprint": "a2bb0b4741b9fe128fa16ffda916f270da031ff07a5a20b8a991d6172ff4e8c0",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_FOURTH_POWER_BUDGET",
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "line": 99,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "signature": "theorem LH_FOURTH_POWER_BUDGET\n    {ν : ℝ} {a : SingularClosure.CriticalPhysicalL2}\n    {u : SingularClosure.Velocity} {G : WeakGradientTrajectory}\n    (hν : 0 < ν) (hu : SingularClosure.CriticalLerayHopf ν a u G)\n    {T : ℝ} (hT : 0 < T) :\n    Integrable (fun t => (physicalHalfEnergy (u t)).toReal ^ 2) (criticalTimeMeasure T) ∧\n      (∫ t, (physicalHalfEnergy (u t)).toReal ^ 2 ∂criticalTimeMeasure T) ≤\n        ‖a‖ ^ 4 / (2 * ν)",
+      "signature_sha256": "800621f0c93db47cc799c39afce4e63793f3638655d02ba87380e50c70098313",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_SUBCRITICAL_RESTART"
+        },
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_H1_RESTART_BOUND"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.LH_FOURTH_POWER_BUDGET : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}\n  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},\n  0 < ν →\n    SingularClosure.CriticalLerayHopf ν a u G →\n      ∀ {T : ℝ},\n        0 < T →\n          MeasureTheory.Integrable (fun t => (QuasiFeffermanB.physicalHalfEnergy (u t)).toReal ^ 2)\n              (QuasiFeffermanB.criticalTimeMeasure T) ∧\n            ∫ (t : ℝ), (QuasiFeffermanB.physicalHalfEnergy (u t)).toReal ^ 2 ∂QuasiFeffermanB.criticalTimeMeasure T ≤\n              ‖a‖ ^ 4 / (2 * ν)",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+        "source_sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+        "dependency_fingerprint": "7dd3bb0f749128622b7685b1d1b9f52f0cc8e240014d4cc35330729a5732064c",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO",
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "line": 77,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "signature": "theorem LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO\n    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity}\n    {G : WeakGradientTrajectory}\n    (hu : CriticalLerayHopf ν a u G) (ha : EnergySigmaZero a)\n    (t : ℝ) (ht : 0 < t) :\n    EnergySigmaZero (criticalL2Representative (u t))",
+      "signature_sha256": "ac6206309c647ee9200bdb71652ddfb81f02a396c3ae84929e018427975d6698",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "named_dependency"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}\n  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},\n  SingularClosure.CriticalLerayHopf ν a u G →\n    QuasiFeffermanB.EnergySigmaZero a →\n      ∀ (t : ℝ), 0 < t → QuasiFeffermanB.EnergySigmaZero (SingularClosure.criticalL2Representative (u t))",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/MeanPreservation.lean",
+        "source_sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+        "dependency_fingerprint": "22b0e855f3fd6f3e6d6e6f5630aeee665be96f0adac35420cbe8bf7ac389b405",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_AE_Ioo",
+      "module": "QuasiFeffermanB.LHRestart",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "line": 312,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "signature": "theorem LH_RESTART_AE_Ioo\n    {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}\n    {G : ℝ → Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν) (T : ℝ) :\n    ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) T),\n      CriticalPhysicalH1 (v s) (G s) ∧\n      CriticalLerayHopf ν (criticalL2Representative (v s))\n        (timeTranslate s v) (timeTranslate s G)",
+      "signature_sha256": "10c7226333ec43f944ef739befdd953672731cb746f545b1e123e074e2e374eb",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_SUBCRITICAL_RESTART"
+        },
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_H1_RESTART_BOUND"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.LH_RESTART_AE_Ioo : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2} {v : SingularClosure.Velocity}\n  {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},\n  SingularClosure.CriticalLerayHopf ν a₀ v G →\n    0 ≤ ν →\n      ∀ (T : ℝ),\n        ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioo 0 T),\n          SingularClosure.CriticalPhysicalH1 (v s) (G s) ∧\n            SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))\n              (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/LHRestart.lean",
+        "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+        "dependency_fingerprint": "56a67122f81a086ae806161eb06e8c9345595179f0bc7c36d86793247c95f348",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START",
+      "module": "QuasiFeffermanB.LHRestart",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "line": 215,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "signature": "theorem LH_RESTART_FROM_ENERGY_START\n    {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}\n    {G : ℝ → Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalLerayHopf ν a₀ v G) (hν : 0 ≤ ν)\n    {s : ℝ} (hs : 0 ≤ s)\n    (hE : ∀ r : ℝ, s ≤ r → physicalEnergy (v r) +\n      2 * ν * (∫ q in s..r, criticalGradientEnergy (G q)) ≤ physicalEnergy (v s)) :\n    CriticalLerayHopf ν (criticalL2Representative (v s))\n      (timeTranslate s v) (timeTranslate s G)",
+      "signature_sha256": "77d355caa4f47d76a1b37732c5c7a7f4a46ba2cc5e0480cd8b0beaec75ff8155",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "named_dependency"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}\n  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},\n  SingularClosure.CriticalLerayHopf ν a₀ v G →\n    0 ≤ ν →\n      ∀ {s : ℝ},\n        0 ≤ s →\n          (∀ (r : ℝ),\n              s ≤ r →\n                SingularClosure.physicalEnergy (v r) +\n                    2 * ν * ∫ (q : ℝ) in s..r, SingularClosure.criticalGradientEnergy (G q) ≤\n                  SingularClosure.physicalEnergy (v s)) →\n            SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))\n              (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/LHRestart.lean",
+        "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+        "dependency_fingerprint": "56a67122f81a086ae806161eb06e8c9345595179f0bc7c36d86793247c95f348",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY",
+      "module": "QuasiFeffermanB.TailEnergy",
+      "source": "QuasiFeffermanB/TailEnergy.lean",
+      "line": 202,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "signature": "theorem LH_RESTART_OF_TAIL_ENERGY\n    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}\n    (hν : 0 ≤ ν) (hu : CriticalLerayHopf ν a u G)\n    {δ : ℝ} (hδ : 0 ≤ δ) (hE : TailEnergyEquality ν u G δ) :\n    CriticalLerayHopf ν (criticalL2Representative (u δ))\n      (Shift δ u) (fun t => G (δ + t))",
+      "signature_sha256": "99bd8de5f19e75f90c268e147e9dce29cdc4e52ce2068fc633304b766d35943c",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "named_dependency"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW",
+      "module": "QuasiFeffermanB.TailEnergy",
+      "source": "QuasiFeffermanB/TailEnergy.lean",
+      "line": 188,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "signature": "theorem LH_TAIL_ENERGY_OF_POSITIVE_FLOW\n    {ν : ℝ} {a : CriticalPhysicalL2} {u : Velocity} {G : WeakGradientTrajectory}\n    (hν : 0 < ν) (hu : CriticalLerayHopf ν a u G)\n    (L : CriticalPositiveSobolevFlow ν)\n    {s δ : ℝ} (hs : 0 ≤ s) (hδ : s < δ)\n    (heq : ∀ r : ℝ, s < r →\n      u r =ᵐ[volume.restrict unitCube] L.velocity (r - s)) :\n    TailEnergyEquality ν u G δ",
+      "signature_sha256": "8dcf73b024b4f58bfba4fe6c81d3bd7f8d061f882b0131456c89563fb8a62b7d",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN",
+      "module": "QuasiFeffermanB.CaloricAdmission",
+      "source": "QuasiFeffermanB/CaloricAdmission.lean",
+      "line": 22,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "signature": "theorem POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN\n    (ν : ℝ) (hν : 0 < ν) (a₀ : CriticalPhysicalL2)\n    (L : CriticalPositiveSobolevFlow ν)\n    (htrace : Tendsto\n      (fun t => eLpNorm (L.velocity t - (a₀ : Vec → Vec)) 2\n        (volume.restrict unitCube)) (𝓝[>] (0 : ℝ)) (𝓝 0))\n    (hSerrin : ∀ T : ℝ, 0 < T →\n      MemLp (fun t => criticalSpatialNorm 6 (L.velocity t)) 4\n        (volume.restrict (Ioc (0 : ℝ) T)))\n    (v : Velocity) (G : ℝ → Vec → (Vec →L[ℝ] Vec))\n    (hv : CriticalLerayHopf ν a₀ v G) :\n    ∀ t : ℝ, 0 < t → v t =ᵐ[volume.restrict unitCube] L.velocity t",
+      "signature_sha256": "8df1028fd17b3f4809aeeb153c5530e72ac8e02de5bd0749b997f88399c4ea68",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN : ∀ (ν : ℝ),\n  0 < ν →\n    ∀ (a₀ : ↥SingularClosure.CriticalPhysicalL2) (L : SingularClosure.CriticalPositiveSobolevFlow ν),\n      Filter.Tendsto\n          (fun t =>\n            MeasureTheory.eLpNorm (L.velocity t - ↑↑a₀) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))\n          (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) →\n        (∀ (T : ℝ),\n            0 < T →\n              MeasureTheory.MemLp (fun t => SingularClosure.criticalSpatialNorm 6 (L.velocity t)) 4\n                (MeasureTheory.volume.restrict (Set.Ioc 0 T))) →\n          ∀ (v : SingularClosure.Velocity)\n            (G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec),\n            SingularClosure.CriticalLerayHopf ν a₀ v G →\n              ∀ (t : ℝ), 0 < t → v t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity t",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/CaloricAdmission.lean",
+        "source_sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+        "dependency_fingerprint": "4a7b636e70edc3377471b16eb2ad7dbad20e8ab364247e1bc35d31e65d6dd40c",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE",
+      "module": "QuasiFeffermanB.Endpoints.LerayHopfExistence",
+      "source": "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean",
+      "line": 35,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
+      "signature": "theorem Q01_LERAY_HOPF_EXISTENCE\n    (ν : ℝ) (hν : 0 < ν) (a : CriticalPhysicalL2) (ha : EnergySigmaZero a) :\n    ∃ (u : Velocity) (G : WeakGradientTrajectory), CriticalLerayHopf ν a u G",
+      "signature_sha256": "73f34dbf59575ccba421f3929e69bc6032c052990310f5593430cddbe0348c31",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_GLOBAL_CONULL_ENERGY_STARTS"
+        },
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED",
+      "module": "QuasiFeffermanB.Endpoints.Root",
+      "source": "QuasiFeffermanB/Endpoints/Root.lean",
+      "line": 15,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+      "signature": "theorem QUASI_FEFFERMAN_B_COMPOSED : QuasiFeffermanBStatement",
+      "signature_sha256": "7bf7e6a9a6725e7b48a29a3e3270ed870e3eb085097002baf3dc1730d08db373",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT",
+      "module": "QuasiFeffermanB.Endpoints.CaloricBudget",
+      "source": "QuasiFeffermanB/Endpoints/CaloricBudget.lean",
+      "line": 17,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "cc5b78965699e80c612756aed478b5b36359a471b6f2cfc30686fcaeabd44461",
+      "signature": "theorem SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT\n    (ν : ℝ) (hν : 0 < ν) (b : CriticalSobolev 2)\n    (hreal : SpectralReality (criticalCoeff 2 b))\n    (_hsol : SpectralSolenoidal (criticalCoeff 2 b))\n    (_hzero : SpectralMeanZero (criticalCoeff 2 b))\n    (hsmall : ‖criticalSobolevLower 1 2 (by norm_num) b‖ ^ 2 <\n      2 * Real.pi * ν ^ 2)\n    (N : ℕ) (g : GalerkinSolution ν (finiteSynthesis N (criticalCoeff 2 b)) N)\n    (T : ℝ) (hT : 0 ≤ T) :\n    (∫ t in (0 : ℝ)..T, finiteChi0 (cutoffModes N) (g.coeff t) ^ 2) ≤\n      ‖criticalSobolevLower 1 2 (by norm_num) b‖ ^ 2 / (Real.pi * ν)",
+      "signature_sha256": "fd4cda88ba2fe02aeee3186b97939bd602bb163b9dbc003bc92f1f7f1db4596a",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        },
+        {
+          "selection": "selected_export"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.exists_good_time_of_integral_lt",
+      "module": "QuasiFeffermanB.GoodTime",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "line": 12,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "signature": "theorem exists_good_time_of_integral_lt\n    {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}\n    (hT : 0 < T) (hc : 0 ≤ c)\n    (hf : Integrable f (criticalTimeMeasure T))\n    (hgood : ∀ᵐ t ∂criticalTimeMeasure T, Good t)\n    (hbudget : (∫ t, f t ∂criticalTimeMeasure T) < c * T) :\n    ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c",
+      "signature_sha256": "8fea5a8a385346f5942ea630f9f2c1c93e7bb24d6536e640a1c85f2fad3aef4e",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_SUBCRITICAL_RESTART"
+        },
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_H1_RESTART_BOUND"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.exists_good_time_of_integral_lt : ∀ {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ},\n  0 < T →\n    0 ≤ c →\n      MeasureTheory.Integrable f (QuasiFeffermanB.criticalTimeMeasure T) →\n        (∀ᵐ (t : ℝ) ∂QuasiFeffermanB.criticalTimeMeasure T, Good t) →\n          ∫ (t : ℝ), f t ∂QuasiFeffermanB.criticalTimeMeasure T < c * T → ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/GoodTime.lean",
+        "source_sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+        "dependency_fingerprint": "0fff069a0f4188787c65bb8546649ab72a1325e17986ea3e5ea34467b2f169f3",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.lh_ae_good_energy_time",
+      "module": "QuasiFeffermanB.LHRestart",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "line": 28,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "signature": "theorem lh_ae_good_energy_time\n    {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}\n    {G : ℝ → Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalLerayHopf ν a₀ v G) :\n    ∀ᵐ s ∂volume.restrict (Ioi (0 : ℝ)), LHGoodEnergyTime ν v G s",
+      "signature_sha256": "6486539a6fe42cd8ebff35eafb06bec4c169cf1cb8c6f313b8cddf3a2a2c9bef",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_GLOBAL_CONULL_ENERGY_STARTS"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.lh_ae_good_energy_time : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}\n  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},\n  SingularClosure.CriticalLerayHopf ν a₀ v G →\n    ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioi 0), QuasiFeffermanB.LHGoodEnergyTime ν v G s",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/LHRestart.lean",
+        "source_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+        "dependency_fingerprint": "56a67122f81a086ae806161eb06e8c9345595179f0bc7c36d86793247c95f348",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1SobolevDatum_coeff",
+      "module": "QuasiFeffermanB.PhysicalH1Admission",
+      "source": "QuasiFeffermanB/PhysicalH1Admission.lean",
+      "line": 75,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+      "signature": "theorem physicalH1SobolevDatum_coeff\n    {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalPhysicalH1 v G) (hz : SpectralMeanZero (datumFourierCoeff v)) :\n    criticalCoeff 2 (physicalH1SobolevDatum hv hz) = datumFourierCoeff v",
+      "signature_sha256": "ae9137d7d4836c0b0006fd7c3e632d220b9ed74e81fafac0bab7715da6ed062f",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq",
+      "module": "QuasiFeffermanB.PhysicalH1Admission",
+      "source": "QuasiFeffermanB/PhysicalH1Admission.lean",
+      "line": 89,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+      "signature": "theorem physicalH1SobolevDatum_half_norm_sq\n    {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalPhysicalH1 v G) (hz : SpectralMeanZero (datumFourierCoeff v)) :\n    ‖criticalSobolevLower 1 2 (by norm_num) (physicalH1SobolevDatum hv hz)‖ ^ 2 =\n      (physicalHalfEnergy v).toReal",
+      "signature_sha256": "90702bd481055204654d13624f21a74a83934f6c661df293317ad6228f42a940",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1SobolevDatum_physicalL2",
+      "module": "QuasiFeffermanB.PhysicalH1Admission",
+      "source": "QuasiFeffermanB/PhysicalH1Admission.lean",
+      "line": 96,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+      "signature": "theorem physicalH1SobolevDatum_physicalL2\n    {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalPhysicalH1 v G) (hz : SpectralMeanZero (datumFourierCoeff v)) :\n    criticalInitialPhysicalL2\n      (criticalSobolevLower 1 2 (by norm_num) (physicalH1SobolevDatum hv hz)) =\n        criticalL2Representative v",
+      "signature_sha256": "55b5c5653010372f527c6e34f23a7bb301c90c1f1b256e03b950043cbf41655f",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_halfEnergy_ne_top",
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "line": 198,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "signature": "theorem physicalH1_halfEnergy_ne_top {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalPhysicalH1 v G) : physicalHalfEnergy v ≠ ⊤",
+      "signature_sha256": "e90545e729675b1a00356a22784099c3b7aa7f238676beeb50914798be633850",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_BUFFERED_SUBCRITICAL_RESTART"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_EXACT_DECLARATION",
+      "contract_completion": false,
+      "cached_evidence": {
+        "run_id": 43523716429,
+        "commit": "17641ba02784ae108af0da5874073786d7df46ec",
+        "status_json": "qfb_external_run_43523716429_audit.json",
+        "status_json_sha256": "623a727601a0c2c5bdb500ea37825a921232580a31285b4004522448ac55cdaa",
+        "type": "@QuasiFeffermanB.physicalH1_halfEnergy_ne_top : ∀ {v : SingularClosure.Field}\n  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},\n  SingularClosure.CriticalPhysicalH1 v G → QuasiFeffermanB.physicalHalfEnergy v ≠ ⊤",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "source": "QuasiFeffermanB/FourierEnergy.lean",
+        "source_sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+        "dependency_fingerprint": "8237eaf64ab2c83acc4148bb8d6094fd4a78cdcac1e17da02caadc1656e45e65",
+        "compiler_version": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+        "type_rendering": "readable compiler presentation; pinned source is normative",
+        "type_prettyprinter_elisions": false,
+        "status": "A_TIER_EXACT_DECLARATION",
+        "module_build": "PASS",
+        "module_audit": "PASS",
+        "current_source_sha256_matches": true,
+        "current_dependency_fingerprint_matches": true,
+        "allowed_axioms_verified": true,
+        "contract_completion": false
+      }
+    },
+    {
+      "declaration": "QuasiFeffermanB.physicalH1_weighted_finite_bound",
+      "module": "QuasiFeffermanB.PhysicalH1Admission",
+      "source": "QuasiFeffermanB/PhysicalH1Admission.lean",
+      "line": 33,
+      "kind": "theorem",
+      "visibility": "PUBLIC",
+      "source_sha256": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+      "signature": "theorem physicalH1_weighted_finite_bound\n    {v : Field} {G : Vec → (Vec →L[ℝ] Vec)}\n    (hv : CriticalPhysicalH1 v G) (hz : SpectralMeanZero (datumFourierCoeff v))\n    (S : Finset FourierIndex) :\n    (∑ ki ∈ S, ‖criticalWeightedCoeff 2 (datumFourierCoeff v) ki‖ ^ 2) ≤\n      criticalGradientEnergy G",
+      "signature_sha256": "c2ad1c7fb96fdb89f7eea0bc88087c3e94c93c88b82073f26b1b1b36983372c9",
+      "signature_origin": "EXACT_CURRENT_SOURCE; source notation and binder names retained",
+      "selected_by": [
+        {
+          "selection": "future_entrypoint",
+          "contract": "R7_QUANTITATIVE_CLASSICAL_TAIL_DISSIPATION"
+        }
+      ],
+      "in_root_import_closure": true,
+      "status": "A_TIER_CANDIDATE",
+      "contract_completion": false,
+      "candidate_evidence": "SOURCE_SIGNATURE_ONLY; no matching cached exact declaration with unchanged source and dependency fingerprint"
+    }
+  ],
+  "promotion": {
+    "new_external_runs": 0,
+    "new_A_tier_promotions": 0,
+    "local_Lean_executions": 0,
+    "local_Lake_executions": 0,
+    "CI_actions": 0,
+    "GitHub_actions": 0
+  }
+}

@@ -1,0 +1,383 @@
+QFB_R7_Q01_GALERKIN_TO_PHYSICAL_LERAY_HOPF_B_TIER
+
+MODE = B_TIER_DERIVATION.
+SCOPE = Q01_LERAY_HOPF_EXISTENCE, original physical carrier and eleven fields.
+QFB_SOURCE = 17641ba02784ae108af0da5874073786d7df46ec, R6 candidate source.
+FOUNDATION = 09dfe94a1ef150e21d09df3013fbe09002ef139c.
+MATHLIB = db584cd6d46c92f209a44c0f1c829460d327499d.
+LOCAL_LEAN_EXECUTIONS = 0; LOCAL_LAKE_EXECUTIONS = 0; LEAN_SOURCE_EDITS = 0.
+CI_ACTIONS = 0; NEW_ANALYTIC_PREMISES = 0; ROOT_CUTOFF_CHANGES = 0.
+
+EVIDENCE = cached external run 43523716429 at QFB_SOURCE.
+EVIDENCE_COUNTS = 42 PASS, 7 FAIL, 25 BLOCKED; 227 exact audited declarations.
+EVIDENCE_REUSE = 178 retained declarations, 49 additional declarations, 34 verified object-cache hits.
+EXACT_A_TIER_INPUTS_INCLUDE = ENERGY_GALERKIN_GLOBAL_LIMIT;
+  energy_modal_limit_constraints; energy_modal_limit_H1_representative;
+  ENERGY_FINITE_GALERKIN_WEAK_PAIRING; energyGalerkin_finite_test_pairing.
+SELECTED_NEW_ENDPOINTS = all ten remain A_TIER_CANDIDATE; none has a completed audit.
+Q01_FORMAL_STATUS = PENDING; this report adds mathematical derivations only.
+Evidence identity is recorded in qfb_r7_evidence_verification.json.
+
+0. EXACT TARGET, NOTATION, AND WITNESS ORDER
+
+The target [E7] has exactly the following signature:
+  theorem Q01_LERAY_HOPF_EXISTENCE
+      (ν : ℝ) (hν : 0 < ν) (a : CriticalPhysicalL2) (ha : EnergySigmaZero a) :
+      ∃ (u : Velocity) (G : WeakGradientTrajectory), CriticalLerayHopf ν a u G
+Fix these four inputs. Set R = ||a||, A = (a,ha) : EnergyDatum, and μQ = volume.restrict unitCube.
+Write H0 = TorusSobolev 0, H2c = CriticalSobolev 2, μT = volume.restrict(Icc 0 T).
+Write E(v) = physicalEnergy v and D(G) = criticalGradientEnergy G.
+Critical order 2 is the homogeneous physical H1 order; H0 is the actual order-zero Fourier Hilbert space.
+The construction order is
+  (ν,hν,a,ha) -> actual Galerkin family g -> one σ and one U -> fixed u and fixed G
+  -> local proof witnesses zT, WT, ψT -> all eleven CriticalLerayHopf fields.
+The local witnesses never replace U, u, G, or the primary subsequence σ.
+
+1. ACTUAL GALERKIN FAMILY AND ONE GLOBAL SUBSEQUENCE
+
+[Q1] energyDatumGalerkinFamily defines, without an existence premise,
+  g_n : GalerkinSolution ν (finiteSynthesis(n+1)(datumFourierCoeff a)) (n+1).
+Its foundation constructor is [F1] criticalGalerkinSolution, obtained from
+CRITICAL_GALERKIN_GLOBAL_EXISTS_UNIQUE using the actual reality and solenoidality of a.
+[Q1] energyDatumGalerkinFamily_initial gives c_n(0)=cutoffCoeff(n+1)(datumFourierCoeff a).
+[Q1] energyDatumGalerkinFamily_energy_initial gives E_n(0)<=R²;
+the proof uses [Q16] physicalL2_coefficientEnergy_le and physicalEnergy_eq_toLp_norm_sq.
+Thus no cutoff datum, initial coefficient family, or initial energy bound is an extra premise.
+
+[Q2] ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE simultaneously extracts
+  ∃σ, StrictMono σ ∧ ∀m,k,i, uniform convergence on [0,m+1].
+The countable index is Nat × FourierIndex. The input compactness is
+energy_coefficient_curve_precompact, from galerkin_H0_energy_bound and
+galerkin_energy_coefficient_modulus in EnergyGalerkinCompactness.lean.
+The selected σ precedes every horizon and Fourier coordinate. On overlaps, equality of
+limits follows from tendsto_nhds_unique; no additional overlap certificate is assumed.
+globalEnergyCoefficient_eq_horizon and globalEnergyCoefficient_continuousOn glue the curves.
+
+[Q3] ENERGY_GALERKIN_GLOBAL_LIMIT then provides this exact package:
+  ∃U : ℝ -> H0, ∃σ : ℕ -> ℕ, StrictMono σ ∧
+    (∀r>=0, ||U r||<=R) ∧
+    (∀k i, ContinuousOn (r |-> (U r).val k i) (Ici 0)) ∧
+    (∀T k i, TendstoUniformlyOn (n,r |-> (g_(σ n)).coeff r k i)
+      (r |-> (U r).val k i) atTop (Icc 0 T)) ∧
+    (∀T>=0, ∃zT : EnergyTimeH0L2 T,
+      g_(σ n).energyTimeH0L2 T -> zT strongly ∧ zT = U μT-a.e.).
+The order-zero realization uses [F3] criticalH0Equiv_coeff and its isometry norm_map.
+For all r>=0, coefficientwise norm lower semicontinuity supplies ||U r||<=R.
+
+The strong convergence in the last conjunct is along the SAME σ, without another extraction.
+[Q17] galerkin_H1_time_energy_bound gives B_T = T R² + R²/(2ν).
+[Q4] energyGalerkin_H0_time_difference_bound bounds the squared time-H0 gap by
+  24 K^(-1) B_T + 3 T η²,
+where η bounds the finite-band difference. Uniform convergence of finitely many coordinates
+makes η arbitrarily small; K is selected first to control the tail. Completeness gives zT via
+ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM.
+[Q5] energyGalerkinTimeLimits_compatible identifies zT with U a.e. by [M1]
+tendstoInMeasure_of_tendsto_Lp, exists_seq_tendsto_ae, and coefficient injectivity.
+This identification changes no limit and does not impose a new compatibility premise.
+
+From now on Γ_n=g_(σ n), M_n=σ n+1. StrictMono σ implies M_n->∞.
+For every r>=0 and every k,i, Γ_n.coeff r k i -> (U r).val k i.
+This all-time conclusion follows by evaluating uniform convergence on [0,r+1].
+[Q3] energy_modal_limit_constraints gives reality, solenoidality, and zero mean at EVERY r>=0.
+
+2. ACTUAL INITIAL DATUM, EVERY-TIME WEAK LIMIT, AND STRONG INITIAL TRACE
+
+[E1] ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS yields
+  (U 0).val = datumFourierCoeff(a : Field).
+For k!=0, [F10] eventually_mem_cutoffModes_strictMono makes the initial coefficient
+eventually equal to the datum coefficient. For k=0, both are zero by EnergySigmaZero.
+Uniqueness of each scalar limit proves equality of the complete coefficient arrays.
+No convergence of the initial energies is required in this argument.
+
+Fix, once and for all,
+  u(t) = energyPeriodicVelocity U t = energyPeriodicField(U t).
+[Q11] energyPeriodicField_coe identifies this literal periodic field a.e. with
+the actual L2 class energyPhysicalVelocityL2 U t. energyPeriodicField_periodic holds pointwise.
+[Q11] energyPeriodicVelocity_memLp and energyPeriodicVelocity_L2 hold for every t.
+[Q16] torusSobolevH0_physical_norm and physicalEnergy_eq_toLp_norm_sq give
+  E(u(t)) = ||U t||², t>=0.                                      (E-ID)
+[Q8] energyPhysicalVelocityL2_initial gives the exact L2-class equality at t=0;
+energyPeriodicVelocity_initial gives u(0)=a μQ-a.e.; energyPhysical_initial_norm gives ||U0||=R.
+The zero Fourier mode is retained in this identification; it is zero because ha proves it.
+
+[E2] ENERGY_H0_WEAK_TENDSTO converts bounded coordinate convergence into weak H0 convergence.
+For w in H0 choose a finite projection P_S w with ||P_S w-w|| small. Then
+  |<F_n,w>-<v,w>| <= 2R ||P_S w-w|| + |<F_n,P_S w>-<v,P_S w>|.
+The finite term converges coordinatewise. The projection approximation is exactly
+[Q6] energy_lp_projection_tendsto, obtained from lp.hasSum_single; its pairing identity is
+energy_lp_inner_projection. This argument quantifies over every test w after fixing U and σ.
+[E2] ENERGY_PHYSICAL_L2_WEAK_TENDSTO transports the weak limit through the real adjoint of
+energyH0PhysicalMap; critical_physicalFieldInner_eq_L2_inner [F9] identifies literal pairings.
+energy_galerkin_physical_L2 identifies each Γ_n by physical Fourier injectivity.
+Consequently ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO holds for EVERY r>=0 and every physical L2 test.
+Endpoint pairings never rely on membership of r in an a.e. convergence set.
+
+[Q6] ENERGY_H0_WEAK_CONTINUITY and [Q7] ENERGY_PERIODIC_WEAK_CONTINUITY similarly give
+  ∀φ in L2(μQ), t |-> physicalFieldInner(u(t),φ) continuous on [0,∞).
+The norm bound ||U t||<=||U0|| and weak continuity at 0 imply
+  ||U t-U0||² <= 2||U0||² - 2 Re<U t,U0> -> 0 as t↓0.
+This is ENERGY_H0_STRONG_INITIAL_TRACE [Q6], transported by
+ENERGY_PHYSICAL_STRONG_INITIAL_TRACE [Q8] to the actual eLpNorm(u(t)-a,2,μQ)->0.
+No energy inequality for the final solution is used to establish this initial trace.
+
+3. ONE GLOBAL GRADIENT AND LOCAL MEASURABILITY
+
+[Q3] energy_modal_limit_H1_representative yields, for every T>=0,
+  ∃WT : ℝ -> H2c, MemLp WT 2 μT ∧ criticalCoeff 2(WT r)=(U r).val μT-a.e.
+    ∧ integral_[0,T] ||WT r||² <= R²/(2ν).
+Its actual input is [F2] critical_memLp_realization_of_modal_limit. The Fourier/time Fatou bound
+proves weighted membership a.e.; continuous finite projections prove Bochner measurability.
+It is not an assumption that a chosen Fourier coefficient limit is strongly measurable.
+
+Define X2(t)=energyGlobalH1State U t: the element with coefficient array (U t).val if its
+order-two weighted array lies in lp², and 0 otherwise. Define, once and for all,
+  G(t) = energyGlobalGradient U t = the L2 representative of energyPhysicalGradient(X2(t)).
+[Q10] energyGlobalH1State_eq and energyGlobalH1State_ae_eq prove X2=WT μT-a.e. for every T.
+Therefore all local WT are compatible with the SAME G; there is no horizon-dependent physical gradient.
+[Q9] ENERGY_FOURIER_H1_PHYSICAL_REALIZATION gives physical H1 by finite Fourier approximations
+converging both in velocity L2 and derivative L2. [Q11] energyPeriodicVelocity_spatial_H1
+transports the velocity representative while retaining this derivative G.
+[Q9] energyPhysicalGradient_energy, via the sum of coordinate-gradient energies, gives
+  D(G(r)) = ||WT r||² μT-a.e.                                    (D-ID)
+This identity has constant 1; no operator-norm equivalence factor enters the energy inequality.
+
+For the velocity time class, zT=U a.e. implies MemLp U 2 μT by [M5] memLp_congr_ae.
+The all-time norm bound gives MemLp U ∞ μT by memLp_top_of_bound. The continuous real-linear
+energyH0PhysicalMap carries this to the actual physical L2 class by comp_memLp'.
+For the gradient time class, [Q10] energyGlobalH1State_memLp uses
+  (memLp_congr_ae (energyGlobalH1State_ae_eq ...)).mpr hWT;
+energyGlobalGradient_memLp then uses energyPhysicalGradient.comp_memLp'.
+[F6] criticalL2Representative_eq and Lp.toLp_coeFn identify the exact record-valued trajectories.
+[M2] Measure.restrict_mono and [M5] MemLp.mono_measure restrict Icc 0 T to Ioc 0 T.
+(D-ID) and memLp_two_iff_integrable_sq_norm give dissipation integrability; the conversion is
+intervalIntegrable_iff_integrableOn_Ioc_of_le, with the original T>0 premise.
+No H1 assertion at t=0 or at an exceptional terminal time is introduced.
+
+4. FINITE TIME-DEPENDENT TEST IDENTITY
+
+Fix any CriticalPositiveSolenoidalTest φ and any 0<s<=t. φ is not required to have zero mean.
+Write P_N φ(r)=finiteSynthesis N(datumFourierCoeff(φ r)).
+[F7] GalerkinSolution.velocity_hasDerivWithinAt and timeDerivative_eq_finiteSynthesis imply
+  ∂r g.velocity(r,x) = finiteSynthesis N(galerkinRhs ν N(g.coeff r))(x), r>0.
+At positive r the within-Ici derivative is an ordinary derivative by Ici_mem_nhds.
+Both velocity and derivative are jointly continuous: finite synthesis is a finite sum of
+continuous characters times coefficients, and galerkinRhs is polynomial with fixed Leray denominators.
+[M6] HasDerivAt.inner and [F4] critical_hasDerivAt_real_cube_integral yield
+  d/dr <g(r),φ(r)> = <g(r),∂rφ(r)> + <∂r g(r),φ(r)>.
+The compact-cube theorem derives the local integral domination from joint continuity.
+
+[Q14] energyGalerkin_finite_test_pairing gives
+  <∂r g,P_Nφ> = ν<g,ΔP_Nφ> + B(g,P_Nφ),
+where B(v,φ)=criticalWeakTransport v φ = integral_Q <v,Dφ(v)>.
+[E3] energy_finite_projection_pairing removes the projection from both linear pairings;
+its proof uses integral_finiteSynthesis_pairing and criticalGalerkin_datumFourierCoeff_finiteSynthesis.
+Only reality of datumFourierCoeff φ is needed, not zero mean of φ.
+[E3] energy_test_projection_laplacian uses finiteSynthesis_laplacian and datumFourierCoeff_laplacian:
+  ΔP_Nφ = P_NΔφ.
+Thus the time derivative is <g,∂rφ> + ν<g,Δφ> + B(g,P_Nφ), with positive transport sign.
+The projected transport is continuous because it equals <∂r g,φ>-ν<g,Δφ>.
+[E3] ENERGY_GALERKIN_TIME_TEST_INTEGRABLE gives the three separate integrabilities.
+[M9] integral_eq_sub_of_hasDerivAt_of_le gives integral = terminal pairing - initial pairing;
+its symmetry is exactly [E3] ENERGY_GALERKIN_TIME_TEST_IDENTITY.
+
+5. MOMENTUM LIMIT FOR THE FIXED GLOBAL u
+
+Fix T>0. [M1] tendstoInMeasure_of_tendsto_Lp and exists_seq_tendsto_ae select
+  ∃ψT, StrictMono ψT ∧ Γ_(ψT n).sobolevState 0 r -> U r for μT-a.e. r.
+The representative identities hold simultaneously for every n by [M3] ae_all_iff.
+Applying energyH0PhysicalMap gives physical L2 convergence at those r; this is the actual
+private lemma energyPM_physical_subsequence [E5]. This ψT is auxiliary; U and σ stay fixed.
+One such ψT suffices for all tests and positive subslabs inside [0,T], because L2 convergence
+already implies convergence against every fixed continuous linear or quadratic test.
+
+For 0<s<=t<=T, the linear pairings converge a.e. by continuity of the physical L2 inner product.
+[Q13] energyWeakTransport_eq_L2_inner realizes B(v,φ) as <v,M_(Dφ)v> with a bounded
+continuous linear matrix action. energyWeakTransport_L2_tendsto gives convergence for fixed φ.
+The moving-cutoff error obeys the direct physical estimate
+  |B(v,P_Nφ(r))-B(v,φ(r))| <= sup_Q ||D(P_Nφ(r))-Dφ(r)|| * E(v).
+[E4] ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM makes this error vanish uniformly in r∈[s,t]
+because M_(ψT n)->∞ and E(Γ_n(r)) is uniformly bounded.
+[Q15] ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT supplies a summable Fourier majorant;
+[E4] ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND controls EVERY cutoff, including the initial ones.
+
+For dominated convergence, the proof in [E5] uses the finite bound
+  B0=(||energyH0PhysicalMap|| R)²,
+  |<Γ_n,∂rφ>| <= B0 + Ct² μQ(Q),
+  |<Γ_n,Δφ>| <= B0 + CΔ² μQ(Q),
+  |B(Γ_n,P_(M_n)φ)| <= CP B0.
+Ct,CΔ,CP exist on the fixed compact positive slab. The finite integrands are measurable by Section 4.
+[M4] tendsto_integral_of_dominated_convergence and aestronglyMeasurable_of_tendsto_ae
+give both integrability of all three limits and convergence of their integrals.
+The endpoint pairings at s and t converge by the all-time weak statement in Section 2,
+even if either endpoint lies outside the a.e. strong-convergence set.
+Passing the finite identity to the limit proves the momentum identity for arbitrary φ,s,t.
+[Q11] energyPeriodicField_gradient_annihilation proves the remaining spatial solenoidal test field.
+Together with literal periodicity and spatial L2 this is [E5] ENERGY_GALERKIN_PHYSICAL_MOMENTUM.
+No nonlinear modal equation or smoothness of the limiting velocity is used.
+
+6. JOINT TERMINAL-PLUS-DISSIPATION LOWER SEMICONTINUITY
+
+[Q12] ENERGY_MODAL_INTERVAL_BUDGET_LIMIT has the precise general form:
+  F0_n -> v coefficientwise; F2_n(r) -> W(r) coefficientwise a.e.; c>0;
+  integral ||F2_n||² and integral ||W||² exist;
+  ||F0_n||² + c integral ||F2_n||² <= B_n, B_n->b
+  ==> ||v||² + c integral ||W||² <= b.
+The terminal and dissipation terms consume one shared budget.
+Indeed [F2] criticalExtendedSquare_le_liminf implies, for each ε>0,
+  eventually ||F0_n||² >= ||v||²-ε, B_n<=b+ε.
+Hence eventually integral ||F2_n||² <= (b-||v||²+2ε)/c.
+[Q12] energy_modal_lintegral_le_of_eventual_budget applies Fourier/time Fatou to this SAME residual
+budget. Since W is L2, conversion from the nonnegative lintegral gives the real integral bound.
+Letting ε↓0 proves the displayed conclusion. Separate upper bounds are not substituted for it.
+
+For initial energy fix t>=0, choose W_t from Section 3, and use
+  F0_n=Γ_n.criticalState 0 t, v=criticalH0Equiv.symm(U t),
+  F2_n(r)=Γ_n.criticalState 2 r, c=2ν, B_n=R², b=R².
+[F8] criticalState_norm_sq_nat plus criticalEnergy_two_eq_coefficientDissipation identifies
+||F2_n(r)||² with the literal coefficient dissipation. [Q12] GALERKIN_INTERVAL_ENERGY_IDENTITY
+supplies the joint budget; no initial-energy convergence premise occurs.
+(E-ID),(D-ID), intervalIntegral.integral_of_le, and integral_Icc_eq_integral_Ioc give
+  ∀t>=0, E(u(t))+2ν integral_0^t D(G(r)) dr <= R².                 (EI0)
+At t=0 the integral vanishes; the argument does not require a to belong to H1.
+
+7. CONULL STARTS BEFORE ALL TERMINAL TIMES
+
+Fix T>0. Select W_T, zT and ψT ONCE, before selecting a starting time.
+Let S_T⊆[0,T] be a μT-conull set on which all of the following hold:
+  Γ_(ψT n).energyTimeH0L2 T(s) -> zT(s);
+  ∀n, Γ_n.energyTimeH0L2 T(s)=Γ_n.sobolevState 0 s;
+  zT(s)=U(s).
+Existence follows from [M1], MemLp.coeFn_toLp, [M3] ae_all_iff, and [M2] ae_restrict_mem.
+For every s∈S_T, strong H0 convergence implies
+  coefficientEnergy(M_(ψT n), Γ_(ψT n).coeff s) -> ||U s||².       (START)
+The selected S_T does not depend on any terminal t.
+
+Now, and only now, fix arbitrary t∈[s,T]. Restrict W_T and its coefficient identity to [s,t]
+using [M2] ae_restrict_of_ae_restrict_of_subset and [M5] MemLp.mono_measure.
+All-time coefficient convergence along σ persists along ψT at every r∈[s,t].
+Apply [Q12] ENERGY_GALERKIN_INTERVAL_LIMIT with the same W_T, the same ψT, and (START).
+Its terminal bound uses coefficientwise lower semicontinuity, not strong convergence at t.
+After (E-ID),(D-ID),
+  ∀s∈S_T, ∀t∈[s,T], E(u(t))+2ν integral_s^t D(G(r))dr <= E(u(s)). (EIT)
+Restriction from Icc 0 T to Ioc 0 T gives exactly the record's quantifier order
+  ∀T>0, ∀ᵐs∂volume.restrict(Ioc 0 T), ∀t∈Icc s T, (EIT).
+This is the second conclusion of [E6] ENERGY_PERIODIC_LIMIT_ENERGY.
+
+GLOBAL STRENGTHENING, B_TIER COROLLARY; no existing export is asserted:
+  ∀ᵐs∂volume.restrict(Ioi 0), ∀t:ℝ, s<=t ->
+    E(u(t))+2ν integral_s^t D(G(r))dr <= E(u(s)).                 (GLOBAL-START)
+Proof: for m∈Nat put T_m=m+1 and let P_m(s) be
+  s∈Ioc 0 T_m -> ∀t∈Icc s T_m, (EIT).
+[M2] ae_restrict_iff' converts each local assertion to ∀ᵐs∂volume,P_m(s).
+[M3] ae_all_iff yields ∀ᵐs∂volume,∀m,P_m(s). Restrict this assertion to Ioi 0.
+For one such s and ANY t>=s, choose m with t<T_m using exists_nat_gt.
+Then s∈Ioc 0 T_m and t∈Icc s T_m, so P_m(s) proves the desired inequality.
+The single conull set is selected before t; no uncountable intersection is taken.
+This strengthening is independent of which auxiliary ψT proved each local assertion.
+
+8. ORIGINAL RECORD ASSEMBLY
+
+Using the single u and G already fixed, the eleven fields of [F6] are:
+  momentum: Section 5; velocity_L2: [Q11] energyPeriodicVelocity_memLp;
+  velocity_energy_class: Section 3, U measurable from zT and uniformly bounded;
+  gradient_energy_class: Section 3, canonical X2 equals W_T a.e.;
+  initial: Section 2, equality to the original a a.e.;
+  weak_continuity: Section 2, all L2 tests and every nonnegative time;
+  strong_trace: Section 2, right-hand physical eLpNorm limit;
+  spatial_H1: Section 3, physical closure with this same G;
+  dissipation_integrable: Section 3, every finite positive horizon;
+  energy_initial: (EI0); energy_intervals: (EIT).
+The final constructor [E7] Q01_LERAY_HOPF_EXISTENCE needs no additional hypothesis.
+Nontrivial hidden analytic premise identified in this chain: NONE.
+Compiler completeness is a separate condition and is not inferred from this derivation.
+
+9. R6 FINITE-TEST FAILURE FRONTIER: EXACT B_TIER NORMAL FORMS
+
+[E3]:45, ContinuousOn.smul unification. For fixed i define the typed scalar function
+  S_i(z) = (sum_(k∈cutoffModes N) fourierCharacter k z.2 * c z.1 k i).re : ℝ.
+Prove ContinuousOn S_i {z:ℝ×Vec | z.1∈I} by finite sums and Complex.continuous_re.
+Separately type the constant vector function z |-> (unitVector i : Vec).
+[M7] ContinuousOn.smul then acts on known ℝ-valued and Vec-valued functions and gives
+ContinuousOn (z |-> S_i(z) • unitVector i) on that same set. Finite sum in i completes synthesis.
+This resolves the scalar/action inference obligation mathematically; no new continuity premise is needed.
+
+[E3]:88,97, interval membership. Select the explicit typed inclusion
+  hsub : Ioi (0:ℝ) ⊆ Ici (0:ℝ) := Ioi_subset_Ici_self.
+Apply (g.coefficient_continuous k i).mono hsub. [M8] supplies the inclusion as the generated
+order-dual of Iio_subset_Iic_self. The former untyped hr.le terms add no mathematical content.
+
+[E3]:114, pairing differentiation timeout; :252, dependent unknown constant.
+The exact typed intermediates for [F4] are
+  F(r,x)=inner ℝ (g.velocity r x) (φ r x);
+  D(r,x)=inner ℝ (g.velocity r x) (timeDerivative φ r x)
+         +inner ℝ (timeDerivative g.velocity r x) (φ r x);
+  hF : ContinuousOn (z |-> F z.1 z.2) {z|0<z.1};
+  hD : ContinuousOn (z |-> D z.1 z.2) {z|0<z.1};
+  hd : ∀r>0, ∀x, HasDerivAt (q |-> F(q,x)) (D(r,x)) r.
+Section 4 derives hF,hD,hd using only the finite coefficient ODE and the given smooth test.
+[F4] then differentiates the cube integral; physicalFieldInner_integrable and integral_add
+identify the two resulting pairings. This is also the exact ordering in [F5]
+critical_positive_pairing_hasDerivAt. No runtime-success claim follows from these typed forms.
+
+[E3]:246, unreduced function subtraction. Write A(r)=<∂r g,φ>, L(r)=<g,Δφ>, B(r)=B(g,P_Nφ).
+The exact finite identity is A(r)=ν L(r)+B(r). The required congruence is
+  B(r)=A(r)-ν L(r).
+Expose this scalar goal before arithmetic; the original goal still contains (A-(ν*L))(r).
+Pi.sub_apply reduces that expression to the scalar difference; substitution and ring arithmetic finish.
+
+[E4]:193, No goals to be solved. The finite derivative coefficient at k=0 is zero because
+derivativeSymbol j 0=0. After rewriting the inserted zero mode and zero_add, the equality is closed;
+the trailing rfl is redundant. The commutation identity and the test mean need no alteration.
+
+[Q12] still contains normalization-sensitive, dependency-blocked proof text for the order-two norm
+and inverse criticalH0Equiv coefficient transport. Their exact mathematical forms are
+  ||g.criticalState (2:ℤ) r||² = criticalEnergy (2:ℕ) N (g.coeff r)
+    = coefficientDissipation N (g.coeff r),
+  criticalCoeff 0(criticalH0Equiv.symm z)=z.val.
+The first uses [F8] and Nat.cast_ofNat; the second follows from [F3] criticalH0Equiv_coeff
+and apply_symm_apply. These are pending source-normalization obligations, not hidden premises.
+
+10. PINNED SOURCE REGISTER
+
+For every Q/E entry below, append its path to this immutable prefix:
+https://github.com/randogelist/Methlib/blob/17641ba02784ae108af0da5874073786d7df46ec/Quasi-Fefferman-B/QuasiFeffermanB/
+Q1=EnergyDatumApproximation.lean; Q2=EnergyGlobalCoefficient.lean; Q3=EnergyGlobalLimit.lean;
+Q4=EnergyTimeCompactness.lean; Q5=EnergyLimitCompatibility.lean; Q6=EnergyWeakContinuity.lean;
+Q7=EnergyPhysicalContinuity.lean; Q8=EnergyPhysicalTrace.lean; Q9=EnergyH1Realization.lean;
+Q10=EnergyGlobalPhysical.lean; Q11=EnergyPeriodicRepresentative.lean; Q12=EnergyLimitEnergy.lean;
+Q13=EnergyTransportContinuity.lean; Q14=EnergyFiniteWeakPairing.lean; Q15=EnergyTestDecay.lean;
+Q16=PhysicalFourierL2.lean; Q17=LHExistence.lean.
+E1=Endpoints/InitialCoefficients.lean; E2=Endpoints/WeakH0Limit.lean;
+E3=Endpoints/FiniteTimeTest.lean; E4=Endpoints/TestProjection.lean;
+E5=Endpoints/PhysicalMomentum.lean; E6=Endpoints/LimitEnergy.lean; E7=Endpoints/LerayHopfExistence.lean.
+
+Foundation prefix:
+https://github.com/randogelist/Methlib/blob/09dfe94a1ef150e21d09df3013fbe09002ef139c/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/
+F1=CriticalGalerkin.lean; F2=CriticalLimitFatou.lean; F3=CriticalSpacesEmbedding.lean;
+F4=CriticalSmoothEnergy.lean:31; F5=CriticalClassicalWeakMomentum.lean:115;
+F6=CriticalLerayHopf.lean:38; F7=GalerkinTimeDerivative.lean:29,65;
+F8=CriticalUniformBounds.lean:17 and CriticalFourierInterpolation.lean:107;
+F9=CriticalWeakGradient.lean:47; F10=SobolevLimitInitial.lean.
+
+Mathlib prefix:
+https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/
+M1=MeasureTheory/Function/ConvergenceInMeasure.lean:277,474;
+M2=MeasureTheory/Measure/Restrict.lean:627,641,655;
+M3=MeasureTheory/OuterMeasure/AE.lean:97;
+M4=MeasureTheory/Integral/DominatedConvergence.lean:57; measurability additionally uses
+  MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean;
+M5=MeasureTheory/Function/LpSeminorm/Basic.lean:485,581, with Lp operations in
+  MeasureTheory/Function/LpSpace/Basic.lean:111 and MeasureTheory/Function/L2Space.lean;
+M6=Analysis/InnerProductSpace/Calculus.lean:109;
+M7=Topology/Algebra/MulAction.lean:132;
+M8=Order/Interval/Set/Basic.lean:255-256, to_dual-generated Ioi_subset_Ici_self;
+M9=MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean:1140.
+
+Cached external evidence:
+https://github.com/randogelist/Methlib/actions/runs/43523716429
+Local evidence: qfb_external_run_43523716429_audit.json; qfb_external_run_43523716429.log;
+qfb_r7_evidence_verification.json. No additional run was requested by this derivation.
+
+RESULT = !=B_TIER Q01, exact original datum, fixed global U/u/G, and preserved energy quantifiers.
+ADDITIONAL_RESULT = GLOBAL-START, one conull positive-time set preceding ALL terminal times.
+FORMAL_PROMOTION = NONE FROM THIS REPORT.

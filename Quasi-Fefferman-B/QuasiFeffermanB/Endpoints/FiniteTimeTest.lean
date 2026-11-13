@@ -42,12 +42,18 @@ theorem energy_finiteSynthesis_joint_continuousOn
   simp_rw [finiteSynthesis_eq_sum_unitVector]
   apply continuousOn_finset_sum
   intro i _
-  apply ContinuousOn.smul _ continuousOn_const
-  apply Complex.continuous_re.comp_continuousOn
-  apply continuousOn_finset_sum
-  intro k _
-  exact ((fourierCharacter_contDiff k).continuous.comp continuous_snd).continuousOn.mul
-    ((hc k i).comp continuous_fst.continuousOn (fun z hz => hz))
+  have hscalar : ContinuousOn
+      (fun z : ℝ × Vec =>
+        (∑ k ∈ cutoffModes N, fourierCharacter k z.2 * c z.1 k i).re)
+      {z | z.1 ∈ I} := by
+    apply Complex.continuous_re.comp_continuousOn
+    apply continuousOn_finset_sum
+    intro k _
+    exact ((fourierCharacter_contDiff k).continuous.comp continuous_snd).continuousOn.mul
+      ((hc k i).comp continuous_fst.continuousOn (fun z hz => hz))
+  have hunit : ContinuousOn (fun _ : ℝ × Vec => (unitVector i : Vec))
+      {z | z.1 ∈ I} := continuousOn_const
+  simpa only [Pi.smul_apply] using hscalar.smul hunit
 
 /-- The actual finite NSE vector field preserves coordinate continuity.
 Every denominator in the Leray multiplier is a constant in time. -/
@@ -84,17 +90,19 @@ theorem energy_galerkinRhs_coordinate_continuousOn
 theorem energyGalerkin_velocity_continuousOn
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N) :
     ContinuousOn (fun z : ℝ × Vec => g.velocity z.1 z.2) {z | 0 < z.1} := by
+  have hsub : Ioi (0 : ℝ) ⊆ Ici (0 : ℝ) := Ioi_subset_Ici_self
   exact energy_finiteSynthesis_joint_continuousOn N g.coeff (Ioi 0)
-    (fun k i => (g.coefficient_continuous k i).mono (fun _ hr => hr.le))
+    (fun k i => (g.coefficient_continuous k i).mono hsub)
 
 /-- Joint positive-time continuity of the literal within-`Ici 0` derivative. -/
 theorem energyGalerkin_timeDerivative_continuousOn
     {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N) :
     ContinuousOn (fun z : ℝ × Vec => timeDerivative g.velocity z.1 z.2)
       {z | 0 < z.1} := by
+  have hsub : Ioi (0 : ℝ) ⊆ Ici (0 : ℝ) := Ioi_subset_Ici_self
   have hcoeff : ∀ k : Frequency, ∀ i : Fin 3,
       ContinuousOn (fun r => g.coeff r k i) (Ioi 0) :=
-    fun k i => (g.coefficient_continuous k i).mono (fun _ hr => hr.le)
+    fun k i => (g.coefficient_continuous k i).mono hsub
   have h := energy_finiteSynthesis_joint_continuousOn N
     (fun r => galerkinRhs ν N (g.coeff r)) (Ioi 0)
     (energy_galerkinRhs_coordinate_continuousOn ν N g.coeff (Ioi 0) hcoeff)
@@ -111,6 +119,58 @@ theorem energyGalerkin_velocity_hasDerivAt
   rw [g.timeDerivative_eq_finiteSynthesis t ht.le]
   exact (g.velocity_hasDerivWithinAt t ht.le x).hasDerivAt (Ici_mem_nhds ht)
 
+/-- A separate opaque proof of the physical product rule keeps integral
+elaboration independent of the finite Galerkin representation. -/
+private theorem energy_physical_pairing_hasDerivAt_of_joint
+    (u du v dv : Velocity)
+    (hu : ContinuousOn (fun z : ℝ × Vec => u z.1 z.2) {z | 0 < z.1})
+    (hdu : ContinuousOn (fun z : ℝ × Vec => du z.1 z.2) {z | 0 < z.1})
+    (hv : ContinuousOn (fun z : ℝ × Vec => v z.1 z.2) {z | 0 < z.1})
+    (hdv : ContinuousOn (fun z : ℝ × Vec => dv z.1 z.2) {z | 0 < z.1})
+    (hud : ∀ r : ℝ, 0 < r → ∀ x : Vec,
+      HasDerivAt (fun q => u q x) (du r x) r)
+    (hvd : ∀ r : ℝ, 0 < r → ∀ x : Vec,
+      HasDerivAt (fun q => v q x) (dv r x) r)
+    (t : ℝ) (ht : 0 < t) :
+    HasDerivAt (fun r => physicalFieldInner (u r) (v r))
+      (physicalFieldInner (u t) (dv t) + physicalFieldInner (du t) (v t)) t := by
+  let F : ℝ → Vec → ℝ := fun r x => inner ℝ (u r x) (v r x)
+  let D : ℝ → Vec → ℝ := fun r x =>
+    inner ℝ (u r x) (dv r x) + inner ℝ (du r x) (v r x)
+  have hF : ContinuousOn (fun z : ℝ × Vec => F z.1 z.2) {z | 0 < z.1} :=
+    hu.inner hv
+  have hD : ContinuousOn (fun z : ℝ × Vec => D z.1 z.2) {z | 0 < z.1} :=
+    (hu.inner hdv).add (hdu.inner hv)
+  have hd : ∀ r : ℝ, 0 < r → ∀ x : Vec,
+      HasDerivAt (fun q => F q x) (D r x) r := by
+    intro r hr x
+    change HasDerivAt (fun q => inner ℝ (u q x) (v q x))
+      (inner ℝ (u r x) (dv r x) + inner ℝ (du r x) (v r x)) r
+    exact (hud r hr x).inner ℝ (hvd r hr x)
+  have hIntegral : HasDerivAt (fun r => ∫ x in unitCube, F r x)
+      (∫ x in unitCube, D t x) t :=
+    critical_hasDerivAt_real_cube_integral F D hF hD hd t ht
+  have huc : Continuous (u t) :=
+    hu.comp_continuous (continuous_const.prodMk continuous_id) (fun _ => ht)
+  have hduc : Continuous (du t) :=
+    hdu.comp_continuous (continuous_const.prodMk continuous_id) (fun _ => ht)
+  have hvc : Continuous (v t) :=
+    hv.comp_continuous (continuous_const.prodMk continuous_id) (fun _ => ht)
+  have hdvc : Continuous (dv t) :=
+    hdv.comp_continuous (continuous_const.prodMk continuous_id) (fun _ => ht)
+  have hI₁ : IntegrableOn (fun x => inner ℝ (u t x) (dv t x)) unitCube volume :=
+    physicalFieldInner_integrable (u t) (dv t) huc hdvc
+  have hI₂ : IntegrableOn (fun x => inner ℝ (du t x) (v t x)) unitCube volume :=
+    physicalFieldInner_integrable (du t) (v t) hduc hvc
+  have hDIntegral : (∫ x in unitCube, D t x) =
+      physicalFieldInner (u t) (dv t) + physicalFieldInner (du t) (v t) := by
+    change (∫ x in unitCube, inner ℝ (u t x) (dv t x) + inner ℝ (du t x) (v t x)) =
+      (∫ x in unitCube, inner ℝ (u t x) (dv t x)) +
+        (∫ x in unitCube, inner ℝ (du t x) (v t x))
+    exact integral_add hI₁ hI₂
+  rw [hDIntegral] at hIntegral
+  exact hIntegral
+
 /-- Differentiation of the actual physical pairing, without a smoothness
 bootstrap for the Galerkin trajectory. -/
 theorem ENERGY_GALERKIN_PAIRING_HASDERIV
@@ -119,29 +179,12 @@ theorem ENERGY_GALERKIN_PAIRING_HASDERIV
     HasDerivAt (fun r => physicalFieldInner (g.velocity r) (φ r))
       (physicalFieldInner (g.velocity t) (timeDerivative φ t) +
        physicalFieldInner (timeDerivative g.velocity t) (φ t)) t := by
-  have hg := energyGalerkin_velocity_continuousOn g
-  have hgt := energyGalerkin_timeDerivative_continuousOn g
-  have h := critical_hasDerivAt_real_cube_integral
-    (fun r x => inner ℝ (g.velocity r x) (φ r x))
-    (fun r x => inner ℝ (g.velocity r x) (timeDerivative φ r x) +
-      inner ℝ (timeDerivative g.velocity r x) (φ r x))
-    (hg.inner hφ.smooth.continuousOn)
-    ((hg.inner hφ.timeDerivative_continuousOn).add
-      (hgt.inner hφ.smooth.continuousOn))
-    (fun r hr x => (energyGalerkin_velocity_hasDerivAt g r hr x).inner ℝ
-      (hφ.time_hasDerivAt r hr x)) t ht
-  have hgc : Continuous (g.velocity t) :=
-    (finiteSynthesis_contDiff N (g.coeff t)).continuous
-  have hgtc : Continuous (timeDerivative g.velocity t) :=
-    hgt.comp_continuous (continuous_const.prodMk continuous_id) (fun _ => ht)
-  have hφtc : Continuous (timeDerivative φ t) :=
-    hφ.timeDerivative_continuousOn.comp_continuous
-      (continuous_const.prodMk continuous_id) (fun _ => ht)
-  rw [integral_add
-    (physicalFieldInner_integrable (g.velocity t) (timeDerivative φ t) hgc hφtc)
-    (physicalFieldInner_integrable (timeDerivative g.velocity t) (φ t)
-      hgtc (hφ.spatial_smooth ht).continuous)] at h
-  exact h
+  exact energy_physical_pairing_hasDerivAt_of_joint
+    g.velocity (timeDerivative g.velocity) φ (timeDerivative φ)
+    (energyGalerkin_velocity_continuousOn g)
+    (energyGalerkin_timeDerivative_continuousOn g)
+    hφ.smooth.continuousOn hφ.timeDerivative_continuousOn
+    (energyGalerkin_velocity_hasDerivAt g) hφ.time_hasDerivAt t ht
 
 /-- Finite synthesis pairs with the Fourier projection of a continuous real
 field exactly as it pairs with the original field.  No mean-zero hypothesis
@@ -243,7 +286,12 @@ theorem ENERGY_GALERKIN_TIME_TEST_INTEGRABLE
     apply (hderiv.sub (hlap.const_mul ν)).congr
     intro r hr
     have he := energyGalerkin_projected_test_pairing g φ hφ r (hs.trans_le hr.1)
-    linarith only [he]
+    change criticalWeakTransport (g.velocity r)
+        (finiteSynthesis N (datumFourierCoeff (φ r))) =
+      physicalFieldInner (timeDerivative g.velocity r) (φ r) -
+        ν * physicalFieldInner (g.velocity r) (laplacian (φ r))
+    rw [he]
+    ring
   exact ⟨htime.intervalIntegrable_of_Icc hst,
     hlap.intervalIntegrable_of_Icc hst, htransport.intervalIntegrable_of_Icc hst⟩
 

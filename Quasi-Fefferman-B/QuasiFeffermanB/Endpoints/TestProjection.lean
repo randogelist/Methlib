@@ -190,7 +190,6 @@ theorem energyTest_derivative_entries_uniform
   rw [Finset.sum_insert (cutoffModes_zero_not_mem N)]
   have hzero : F 0 z = 0 := by simp [F, derivativeSymbol]
   rw [hzero, zero_add]
-  rfl
 
 /-- Uniform convergence in the actual spatial operator norm of the original
 Galerkin test projections, for every positive compact time slab. -/

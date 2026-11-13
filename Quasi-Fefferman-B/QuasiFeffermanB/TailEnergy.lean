@@ -60,8 +60,10 @@ theorem physicalH1_gradient_column_zero_of_ae_zero
     linarith
   have hlim : Tendsto (fun n => physicalFieldInner (coordinateDerivative (w n) j) g)
       atTop (𝓝 (physicalFieldInner g g)) := by
-    simpa only [g, coordinateDerivative, Function.comp_def,
-      ContinuousLinearMap.apply_apply] using
+    change Tendsto (fun n => physicalFieldInner
+      (fun x => fderiv ℝ (w n) x (unitVector j)) g) atTop
+      (𝓝 (physicalFieldInner (fun x => G x (unitVector j)) g))
+    simpa only [Function.comp_def, ContinuousLinearMap.apply_apply] using
       critical_physicalFieldInner_compCLM_tendsto
         (ContinuousLinearMap.apply ℝ Vec (unitVector j))
         (fun n => fderiv ℝ (w n)) G g hD2 hv.derivative_L2 hg hderivative
@@ -203,8 +205,18 @@ theorem LH_RESTART_OF_TAIL_ENERGY
     {δ : ℝ} (hδ : 0 ≤ δ) (hE : TailEnergyEquality ν u G δ) :
     CriticalLerayHopf ν (criticalL2Representative (u δ))
       (Shift δ u) (fun t => G (δ + t)) := by
-  simpa only [Shift, timeTranslate, add_comm] using
+  have hvelocity : timeTranslate δ u = Shift δ u := by
+    funext t
+    change u (t + δ) = u (δ + t)
+    exact congrArg u (add_comm t δ)
+  have hgradient : timeTranslate δ G = (fun t => G (δ + t)) := by
+    funext t
+    change G (t + δ) = G (δ + t)
+    exact congrArg G (add_comm t δ)
+  have hrestart :=
     LH_RESTART_FROM_ENERGY_START hu hν hδ (fun t ht => (hE t ht).le)
+  rw [hvelocity, hgradient] at hrestart
+  exact hrestart
 
 end
 end QuasiFeffermanB
