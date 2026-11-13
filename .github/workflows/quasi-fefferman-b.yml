@@ -1,4 +1,4 @@
-name: Quasi Fefferman B exact candidate endpoints
+name: Quasi Fefferman B cached endpoint preload
 
 on:
   push:
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   exact-endpoints:
-    name: Lean 4.33.0 / exact candidate declarations
+    name: Lean 4.33.0 / root import closure
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     defaults:
@@ -108,11 +108,11 @@ jobs:
       - name: Test fail-closed audit policy
         run: python3 qfb/scripts/audit.py --self-test
 
-      - name: Compile independent candidates and audit every named declaration
+      - name: Preload the exact root import closure and audit every selected declaration
         id: endpoints
         run: |
           set -euo pipefail
-          lake env python3 qfb/scripts/audit.py --package . 2>&1 | tee evidence/external-driver.log
+          lake env python3 qfb/scripts/audit.py --package . --target QuasiFeffermanB.Endpoints.Root 2>&1 | tee evidence/external-driver.log
           sha256sum --check evidence/lockfiles-before.sha256
 
       - name: Preserve reused and newly checked foundation objects
@@ -136,3 +136,4 @@ jobs:
           name: quasi-fefferman-b-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: package/evidence
           if-no-files-found: error
+

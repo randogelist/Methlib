@@ -1,0 +1,18 @@
+{
+  "status": "STATIC_PRELOAD_VALIDATION_PASS",
+  "root_modules": 74,
+  "root_audit_modules": 71,
+  "root_declarations": 409,
+  "all_source_modules": 79,
+  "all_theorems": 423,
+  "unchanged_lean_sources": 79,
+  "retained_cache_eligible_fingerprints": 34,
+  "retained_cached_declaration_source_hashes": 178,
+  "negative_policy_fixtures": [
+    "excluded source hash mismatch",
+    "duplicate audit module",
+    "module/source mismatch"
+  ],
+  "local_lean_executions": 0,
+  "new_a_tier_promotions": 0
+}

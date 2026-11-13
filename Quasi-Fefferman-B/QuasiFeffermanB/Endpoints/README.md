@@ -1,4 +1,4 @@
-# Quasi-Fefferman-B: R5 endpoint integration
+# Quasi-Fefferman-B: R6 endpoint preload
 
 | Field | Value |
 |---|---|
@@ -10,6 +10,26 @@
 | Theorem-level axiom audit of this extraction | Pending |
 | Local Lean execution | `0` |
 | New external Lean runs | `0` |
+
+## R6 preload
+
+```lean
+import QuasiFeffermanB.Endpoints.Root
+```
+
+`SOURCE_PROBE = ../../preload.lean`  
+`EXTERNAL_WINDOWS_ENTRY = ../../preload.cmd`  
+`SOURCE_THEOREM_CHANGES = 0`  
+`MANIFEST_VALIDATION = ALL_79_SOURCES`  
+`ROOT_IMPORT_CLOSURE = 74_MODULES`  
+`ROOT_DECLARATION_AUDITS = 409`  
+`PLAN = preload-plan.json`
+
+Cached objects require matching native pins, compiler version, transitive
+source fingerprints and object SHA256. Every reused theorem module receives
+a fresh exact declaration/type/axiom audit. Source preload alone establishes
+no A-tier promotion. The preceding status table records the R5 assembly
+before external preload execution.
 
 ## Module–endpoint map
 

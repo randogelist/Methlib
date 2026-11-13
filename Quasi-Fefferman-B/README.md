@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Mode | `B_TIER_DERIVATION` |
-| Continuation | `R5` |
+| Continuation | `R6` endpoint preload; `R5` mathematical/source assembly |
 | Exact root type | `QuasiFeffermanB.QuasiFeffermanBStatement` |
 | Prepared root declaration | `QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED` |
 | Mathematical / source status | `!=B_TIER`; `A_TIER_CANDIDATE` |
@@ -11,10 +11,34 @@
 | Repository directory | `/Quasi-Fefferman-B/` |
 | Formal root status | `PENDING_EXTERNAL_COMPILER_AND_THEOREM_AXIOM_AUDIT` |
 | Implementation | Nine extracted endpoint modules; R5 support-interface repairs |
-| Endpoint resolution marker | `!=!` only after matching external compiler and axiom audit |
+| Endpoint resolution marker | `!!` only after matching external compiler and axiom audit |
 | Local Lean executions | `0` |
 
 [QUASI_FEFFERMAN_B_CHAIN_R1_B_TIER.txt](QUASI_FEFFERMAN_B_CHAIN_R1_B_TIER.txt)
+
+## R6 endpoint preload
+
+```lean
+import QuasiFeffermanB.Endpoints.Root
+```
+
+| Preload field | Exact value |
+|---|---|
+| Source probe | [preload.lean](preload.lean): ten selected exports, exact type/axiom commands |
+| External Windows entry | [preload.cmd](preload.cmd), Lean `4.33.0` |
+| Execution scope | Root plus its complete import closure: 74 modules, 71 audit modules, 409 declarations |
+| Snapshot validation | All 79 source modules; exact committed source hashes |
+| Immutable preload plan | [preload-plan.json](QuasiFeffermanB/Endpoints/preload-plan.json) |
+| Cached baseline compatibility | 34 dependency fingerprints; 178 exact declaration source hashes |
+| Cache reuse condition | Native pins, compiler version, transitive fingerprint and object SHA256 |
+| Fresh audit requirement | Every registered declaration in the selected closure, including reused objects |
+| Theorem/premise changes | `0` |
+| Root promotion | Matching external compiler and root axiom audit required |
+
+`run.cmd` without arguments retains the full-package audit. The cached CI
+workflow and `preload.cmd` select `QuasiFeffermanB.Endpoints.Root`.
+Target-scope success does not assert success for the five excluded modules.
+The R5 counts and historical evidence below precede the R6 external preload.
 
 ## Current endpoint composition
 

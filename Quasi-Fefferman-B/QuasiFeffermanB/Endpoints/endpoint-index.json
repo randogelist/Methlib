@@ -32,7 +32,7 @@
       "module": "QuasiFeffermanB.Endpoints.InitialCoefficients",
       "source": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
       "line": 18,
-      "signature": "theorem ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS\n    (ν : ℝ) (hν : 0 ≤ ν) (a : EnergyDatum)\n    (σ : ℕ → ℕ) (hσ : StrictMono σ) (c : FourierCoeff)\n    (h0 : ∀ k i, Tendsto\n      (fun n => (energyDatumGalerkinFamily ν hν a (σ n)).coeff 0 k i)\n      atTop (𝓝 (c k i))) :\n    c = datumFourierCoeff (a.val : Field)",
+      "signature": "theorem ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS\n    (\u03bd : \u211d) (h\u03bd : 0 \u2264 \u03bd) (a : EnergyDatum)\n    (\u03c3 : \u2115 \u2192 \u2115) (h\u03c3 : StrictMono \u03c3) (c : FourierCoeff)\n    (h0 : \u2200 k i, Tendsto\n      (fun n => (energyDatumGalerkinFamily \u03bd h\u03bd a (\u03c3 n)).coeff 0 k i)\n      atTop (\ud835\udcdd (c k i))) :\n    c = datumFourierCoeff (a.val : Field)",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -42,7 +42,7 @@
       "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
       "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
       "line": 116,
-      "signature": "theorem ENERGY_GALERKIN_PAIRING_HASDERIV\n    {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ) (t : ℝ) (ht : 0 < t) :\n    HasDerivAt (fun r => physicalFieldInner (g.velocity r) (φ r))\n      (physicalFieldInner (g.velocity t) (timeDerivative φ t) +\n       physicalFieldInner (timeDerivative g.velocity t) (φ t)) t",
+      "signature": "theorem ENERGY_GALERKIN_PAIRING_HASDERIV\n    {\u03bd : \u211d} {a : Field} {N : \u2115} (g : GalerkinSolution \u03bd a N)\n    (\u03c6 : Velocity) (h\u03c6 : CriticalPositiveSolenoidalTest \u03c6) (t : \u211d) (ht : 0 < t) :\n    HasDerivAt (fun r => physicalFieldInner (g.velocity r) (\u03c6 r))\n      (physicalFieldInner (g.velocity t) (timeDerivative \u03c6 t) +\n       physicalFieldInner (timeDerivative g.velocity t) (\u03c6 t)) t",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -52,7 +52,7 @@
       "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
       "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
       "line": 252,
-      "signature": "theorem ENERGY_GALERKIN_TIME_TEST_IDENTITY\n    {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ)\n    (s t : ℝ) (hs : 0 < s) (hst : s ≤ t) :\n    physicalFieldInner (g.velocity t) (φ t) -\n      physicalFieldInner (g.velocity s) (φ s) =\n    ∫ r in s..t,\n      physicalFieldInner (g.velocity r) (timeDerivative φ r) +\n      ν * physicalFieldInner (g.velocity r) (laplacian (φ r)) +\n      criticalWeakTransport (g.velocity r)\n        (finiteSynthesis N (datumFourierCoeff (φ r)))",
+      "signature": "theorem ENERGY_GALERKIN_TIME_TEST_IDENTITY\n    {\u03bd : \u211d} {a : Field} {N : \u2115} (g : GalerkinSolution \u03bd a N)\n    (\u03c6 : Velocity) (h\u03c6 : CriticalPositiveSolenoidalTest \u03c6)\n    (s t : \u211d) (hs : 0 < s) (hst : s \u2264 t) :\n    physicalFieldInner (g.velocity t) (\u03c6 t) -\n      physicalFieldInner (g.velocity s) (\u03c6 s) =\n    \u222b r in s..t,\n      physicalFieldInner (g.velocity r) (timeDerivative \u03c6 r) +\n      \u03bd * physicalFieldInner (g.velocity r) (laplacian (\u03c6 r)) +\n      criticalWeakTransport (g.velocity r)\n        (finiteSynthesis N (datumFourierCoeff (\u03c6 r)))",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -62,7 +62,7 @@
       "module": "QuasiFeffermanB.Endpoints.TestProjection",
       "source": "QuasiFeffermanB/Endpoints/TestProjection.lean",
       "line": 197,
-      "signature": "theorem ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ)\n    (s t : ℝ) (hs : 0 < s) (hst : s ≤ t) :\n    TendstoUniformlyOn\n      (fun N (z : ℝ × Vec) =>\n        fderiv ℝ (finiteSynthesis N (datumFourierCoeff (φ z.1))) z.2)\n      (fun z : ℝ × Vec => fderiv ℝ (φ z.1) z.2)\n      atTop ((Icc s t) ×ˢ unitCube)",
+      "signature": "theorem ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM\n    (\u03c6 : Velocity) (h\u03c6 : CriticalPositiveSolenoidalTest \u03c6)\n    (s t : \u211d) (hs : 0 < s) (hst : s \u2264 t) :\n    TendstoUniformlyOn\n      (fun N (z : \u211d \u00d7 Vec) =>\n        fderiv \u211d (finiteSynthesis N (datumFourierCoeff (\u03c6 z.1))) z.2)\n      (fun z : \u211d \u00d7 Vec => fderiv \u211d (\u03c6 z.1) z.2)\n      atTop ((Icc s t) \u00d7\u02e2 unitCube)",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -72,7 +72,7 @@
       "module": "QuasiFeffermanB.Endpoints.WeakH0Limit",
       "source": "QuasiFeffermanB/Endpoints/WeakH0Limit.lean",
       "line": 69,
-      "signature": "theorem ENERGY_H0_WEAK_TENDSTO\n    (F : ℕ → TorusSobolev 0) (v : TorusSobolev 0)\n    (R : ℝ) (hR : 0 ≤ R) (hF : ∀ n, ‖F n‖ ≤ R) (hv : ‖v‖ ≤ R)\n    (hc : ∀ k i, Tendsto (fun n => (F n).val k i) atTop (𝓝 (v.val k i)))\n    (w : TorusSobolev 0) :\n    Tendsto (fun n => inner ℂ (F n) w) atTop (𝓝 (inner ℂ v w))",
+      "signature": "theorem ENERGY_H0_WEAK_TENDSTO\n    (F : \u2115 \u2192 TorusSobolev 0) (v : TorusSobolev 0)\n    (R : \u211d) (hR : 0 \u2264 R) (hF : \u2200 n, \u2016F n\u2016 \u2264 R) (hv : \u2016v\u2016 \u2264 R)\n    (hc : \u2200 k i, Tendsto (fun n => (F n).val k i) atTop (\ud835\udcdd (v.val k i)))\n    (w : TorusSobolev 0) :\n    Tendsto (fun n => inner \u2102 (F n) w) atTop (\ud835\udcdd (inner \u2102 v w))",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -82,7 +82,7 @@
       "module": "QuasiFeffermanB.Endpoints.PhysicalMomentum",
       "source": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
       "line": 463,
-      "signature": "theorem ENERGY_GALERKIN_PHYSICAL_MOMENTUM\n    (ν : ℝ) (hν : 0 ≤ ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n))\n    (R : ℝ) (hR : 0 ≤ R)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2)\n    (U : ℝ → TorusSobolev 0) (hN : Tendsto N atTop atTop)\n    (hc : ∀ r : ℝ, 0 ≤ r → ∀ k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (𝓝 ((U r).val k i)))\n    (htime : ∀ T : ℝ, 0 < T → ∃ z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (𝓝 z) ∧\n      ∀ᵐ r ∂volume.restrict (Icc (0 : ℝ) T), z r = U r) :\n    CriticalIntegratedWeakMomentum ν (energyPeriodicVelocity U)",
+      "signature": "theorem ENERGY_GALERKIN_PHYSICAL_MOMENTUM\n    (\u03bd : \u211d) (h\u03bd : 0 \u2264 \u03bd) (a : \u2115 \u2192 Field) (N : \u2115 \u2192 \u2115)\n    (g : \u2200 n, GalerkinSolution \u03bd (a n) (N n))\n    (R : \u211d) (hR : 0 \u2264 R)\n    (hinit : \u2200 n, coefficientEnergy (N n) ((g n).coeff 0) \u2264 R ^ 2)\n    (U : \u211d \u2192 TorusSobolev 0) (hN : Tendsto N atTop atTop)\n    (hc : \u2200 r : \u211d, 0 \u2264 r \u2192 \u2200 k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (\ud835\udcdd ((U r).val k i)))\n    (htime : \u2200 T : \u211d, 0 < T \u2192 \u2203 z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (\ud835\udcdd z) \u2227\n      \u2200\u1d50 r \u2202volume.restrict (Icc (0 : \u211d) T), z r = U r) :\n    CriticalIntegratedWeakMomentum \u03bd (energyPeriodicVelocity U)",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -92,7 +92,7 @@
       "module": "QuasiFeffermanB.Endpoints.LimitEnergy",
       "source": "QuasiFeffermanB/Endpoints/LimitEnergy.lean",
       "line": 95,
-      "signature": "theorem ENERGY_PERIODIC_LIMIT_ENERGY\n    (ν : ℝ) (hν : 0 < ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n)) (R : ℝ)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2)\n    (U : ℝ → TorusSobolev 0)\n    (hcoord : ∀ k i, ContinuousOn (fun t => (U t).val k i) (Ici 0))\n    (hc : ∀ r, 0 ≤ r → ∀ k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (𝓝 ((U r).val k i)))\n    (htime : ∀ T : ℝ, 0 ≤ T → ∃ z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (𝓝 z) ∧\n      (∀ᵐ r ∂volume.restrict (Icc (0 : ℝ) T), z r = U r)) :\n    (∀ t : ℝ, 0 ≤ t →\n      physicalEnergy (energyPeriodicVelocity U t) +\n        2 * ν * (∫ r in (0 : ℝ)..t, criticalGradientEnergy (energyGlobalGradient U r))\n          ≤ R ^ 2) ∧\n    (∀ T : ℝ, 0 < T →\n      ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), ∀ t ∈ Icc s T,\n        physicalEnergy (energyPeriodicVelocity U t) +\n          2 * ν * (∫ r in s..t, criticalGradientEnergy (energyGlobalGradient U r))\n            ≤ physicalEnergy (energyPeriodicVelocity U s))",
+      "signature": "theorem ENERGY_PERIODIC_LIMIT_ENERGY\n    (\u03bd : \u211d) (h\u03bd : 0 < \u03bd) (a : \u2115 \u2192 Field) (N : \u2115 \u2192 \u2115)\n    (g : \u2200 n, GalerkinSolution \u03bd (a n) (N n)) (R : \u211d)\n    (hinit : \u2200 n, coefficientEnergy (N n) ((g n).coeff 0) \u2264 R ^ 2)\n    (U : \u211d \u2192 TorusSobolev 0)\n    (hcoord : \u2200 k i, ContinuousOn (fun t => (U t).val k i) (Ici 0))\n    (hc : \u2200 r, 0 \u2264 r \u2192 \u2200 k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (\ud835\udcdd ((U r).val k i)))\n    (htime : \u2200 T : \u211d, 0 \u2264 T \u2192 \u2203 z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (\ud835\udcdd z) \u2227\n      (\u2200\u1d50 r \u2202volume.restrict (Icc (0 : \u211d) T), z r = U r)) :\n    (\u2200 t : \u211d, 0 \u2264 t \u2192\n      physicalEnergy (energyPeriodicVelocity U t) +\n        2 * \u03bd * (\u222b r in (0 : \u211d)..t, criticalGradientEnergy (energyGlobalGradient U r))\n          \u2264 R ^ 2) \u2227\n    (\u2200 T : \u211d, 0 < T \u2192\n      \u2200\u1d50 s \u2202volume.restrict (Ioc (0 : \u211d) T), \u2200 t \u2208 Icc s T,\n        physicalEnergy (energyPeriodicVelocity U t) +\n          2 * \u03bd * (\u222b r in s..t, criticalGradientEnergy (energyGlobalGradient U r))\n            \u2264 physicalEnergy (energyPeriodicVelocity U s))",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -102,7 +102,7 @@
       "module": "QuasiFeffermanB.Endpoints.LerayHopfExistence",
       "source": "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean",
       "line": 35,
-      "signature": "theorem Q01_LERAY_HOPF_EXISTENCE\n    (ν : ℝ) (hν : 0 < ν) (a : CriticalPhysicalL2) (ha : EnergySigmaZero a) :\n    ∃ (u : Velocity) (G : WeakGradientTrajectory), CriticalLerayHopf ν a u G",
+      "signature": "theorem Q01_LERAY_HOPF_EXISTENCE\n    (\u03bd : \u211d) (h\u03bd : 0 < \u03bd) (a : CriticalPhysicalL2) (ha : EnergySigmaZero a) :\n    \u2203 (u : Velocity) (G : WeakGradientTrajectory), CriticalLerayHopf \u03bd a u G",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -112,7 +112,7 @@
       "module": "QuasiFeffermanB.Endpoints.CaloricBudget",
       "source": "QuasiFeffermanB/Endpoints/CaloricBudget.lean",
       "line": 17,
-      "signature": "theorem SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT\n    (ν : ℝ) (hν : 0 < ν) (b : CriticalSobolev 2)\n    (hreal : SpectralReality (criticalCoeff 2 b))\n    (_hsol : SpectralSolenoidal (criticalCoeff 2 b))\n    (_hzero : SpectralMeanZero (criticalCoeff 2 b))\n    (hsmall : ‖criticalSobolevLower 1 2 (by norm_num) b‖ ^ 2 <\n      2 * Real.pi * ν ^ 2)\n    (N : ℕ) (g : GalerkinSolution ν (finiteSynthesis N (criticalCoeff 2 b)) N)\n    (T : ℝ) (hT : 0 ≤ T) :\n    (∫ t in (0 : ℝ)..T, finiteChi0 (cutoffModes N) (g.coeff t) ^ 2) ≤\n      ‖criticalSobolevLower 1 2 (by norm_num) b‖ ^ 2 / (Real.pi * ν)",
+      "signature": "theorem SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT\n    (\u03bd : \u211d) (h\u03bd : 0 < \u03bd) (b : CriticalSobolev 2)\n    (hreal : SpectralReality (criticalCoeff 2 b))\n    (_hsol : SpectralSolenoidal (criticalCoeff 2 b))\n    (_hzero : SpectralMeanZero (criticalCoeff 2 b))\n    (hsmall : \u2016criticalSobolevLower 1 2 (by norm_num) b\u2016 ^ 2 <\n      2 * Real.pi * \u03bd ^ 2)\n    (N : \u2115) (g : GalerkinSolution \u03bd (finiteSynthesis N (criticalCoeff 2 b)) N)\n    (T : \u211d) (hT : 0 \u2264 T) :\n    (\u222b t in (0 : \u211d)..T, finiteChi0 (cutoffModes N) (g.coeff t) ^ 2) \u2264\n      \u2016criticalSobolevLower 1 2 (by norm_num) b\u2016 ^ 2 / (Real.pi * \u03bd)",
       "status": "A_TIER_CANDIDATE",
       "external_compilation": "PENDING",
       "theorem_level_axiom_audit": "PENDING"
@@ -478,5 +478,26 @@
     "root_declaration_registered": true,
     "recursive_subfolder_discovery": true,
     "new_compiler_evidence": false
+  },
+  "preload_revision": "R6",
+  "preload": {
+    "target": "QuasiFeffermanB.Endpoints.Root",
+    "entry": "preload.lean",
+    "external_windows_runner": "preload.cmd",
+    "plan": "QuasiFeffermanB/Endpoints/preload-plan.json",
+    "manifest_validation": "ALL_SOURCES",
+    "execution_scope": "TARGET_IMPORT_CLOSURE",
+    "selected_modules": 74,
+    "selected_audit_modules": 71,
+    "selected_declarations": 409,
+    "cache_policy": [
+      "native pins",
+      "compiler version",
+      "transitive source fingerprint",
+      "object SHA256",
+      "fresh declaration audit"
+    ],
+    "source_theorem_changes": 0,
+    "root_status": "PENDING_EXTERNAL_COMPILER_AND_THEOREM_AXIOM_AUDIT"
   }
 }
