@@ -55,7 +55,8 @@ theorem ENERGY_GALERKIN_GLOBAL_LIMIT
   choose V hV hVR using hex
   let U : ℝ → TorusSobolev 0 := fun t => criticalH0Equiv (V t)
   have hU (t : ℝ) : (U t).val = C t := by
-    rw [U, criticalH0Equiv_coeff, hV t]
+    change (criticalH0Equiv (V t)).val = C t
+    exact (criticalH0Equiv_coeff (V t)).trans (hV t)
   refine ⟨U, φ, hφ, ?_, ?_, ?_, ?_⟩
   · intro t _
     simpa only [U, criticalH0Equiv.norm_map] using hVR t
@@ -75,7 +76,8 @@ theorem ENERGY_GALERKIN_GLOBAL_LIMIT
         funext n t
         rw [(g (φ n)).sobolevState_coeff 0 t.property.1]
       rw [heq]
-      simpa only [hU] using tendstoUniformlyOn_iff_tendstoUniformly_comp_coe.mp (hconv T k i)
+      simpa only [Function.comp_def, hU] using
+        tendstoUniformlyOn_iff_tendstoUniformly_comp_coe.mp (hconv T k i)
     have hbudget (n : ℕ) :
         (∫ t in (0 : ℝ)..T, ‖(g (φ n)).sobolevState 1 t‖ ^ 2) ≤ B :=
       galerkin_H1_time_energy_bound hν (g (φ n)) R T hT (hinit (φ n))
@@ -153,7 +155,11 @@ theorem energy_modal_limit_H1_representative
   · intro n
     have heq (t : ℝ) : ‖(g n).criticalState 2 t‖ ^ 2 =
         coefficientDissipation (N n) ((g n).coeff t) := by
-      rw [(g n).criticalState_norm_sq_nat 2 t, criticalEnergy_two_eq_coefficientDissipation]
+      have hnat : ‖(g n).criticalState (2 : ℤ) t‖ ^ 2 =
+          criticalEnergy (2 : ℕ) (N n) ((g n).coeff t) := by
+        simpa only [Nat.cast_ofNat] using (g n).criticalState_norm_sq_nat 2 t
+      exact hnat.trans
+        (criticalEnergy_two_eq_coefficientDissipation (N n) ((g n).coeff t))
     simp_rw [heq]
     apply (le_div_iff₀ (by positivity : 0 < 2 * ν)).mpr
     have hE := (g n).coefficientEnergy_integral_identity hT

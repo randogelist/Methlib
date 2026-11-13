@@ -65,8 +65,15 @@ theorem caloricVolterra_hasDerivAt
   have hexp : Real.exp (-ν * κ ^ 2 * t) * Real.exp (ν * κ ^ 2 * t) = 1 := by
     rw [← Real.exp_add]
     convert Real.exp_zero using 1 <;> ring
-  convert he.mul hp using 1 <;> simp only [caloricVolterra, id_eq, mul_one]
-  linear_combination -(κ * f t) * hexp
+  apply (he.mul hp).congr_deriv
+  change
+    Real.exp (-ν * κ ^ 2 * t) * (-ν * κ ^ 2 * 1) *
+        (∫ s in (0 : ℝ)..t, κ * Real.exp (ν * κ ^ 2 * s) * f s) +
+      Real.exp (-ν * κ ^ 2 * t) * (κ * Real.exp (ν * κ ^ 2 * t) * f t) =
+    κ * f t - ν * κ ^ 2 *
+      (Real.exp (-ν * κ ^ 2 * t) *
+        ∫ s in (0 : ℝ)..t, κ * Real.exp (ν * κ ^ 2 * s) * f s)
+  linear_combination (κ * f t) * hexp
 
 theorem caloricVolterra_nonneg_le_primitive
     (ν κ T : ℝ) (f : ℝ → ℝ) (hν : 0 ≤ ν) (hκ : 0 ≤ κ)
@@ -115,11 +122,13 @@ theorem CALORIC_VOLTERRA_L2_SQUARE_BOUND
     ((hy.pow 2).add (hZ.const_mul _)).sub ((hF.pow 2).const_mul _)
   have hd (t : ℝ) (ht : t ∈ Ioo 0 T) :
       HasDerivAt E (2 * κ * f t * (y t - κ * F t)) t := by
-    have hyd := caloricVolterra_hasDerivAt ν κ T f hf t ht
-    have hFd := caloric_primitive_hasDerivAt hf ht
-    have hZd := caloric_primitive_hasDerivAt (hy.pow 2) ht
-    convert ((hyd.pow 2).add (hZd.const_mul (2 * ν * κ ^ 2))).sub
-      ((hFd.pow 2).const_mul (κ ^ 2)) using 1 <;> simp only [E, y, F, Z] <;> ring
+    have hyd : HasDerivAt y (κ * f t - ν * κ ^ 2 * y t) t :=
+      caloricVolterra_hasDerivAt ν κ T f hf t ht
+    have hFd : HasDerivAt F (f t) t := caloric_primitive_hasDerivAt hf ht
+    have hZd : HasDerivAt Z (y t ^ 2) t := caloric_primitive_hasDerivAt (hy.pow 2) ht
+    apply (((hyd.pow 2).add (hZd.const_mul (2 * ν * κ ^ 2))).sub
+      ((hFd.pow 2).const_mul (κ ^ 2))).congr_deriv
+    ring
   have ha : AntitoneOn E (Icc 0 T) := by
     apply antitoneOn_of_deriv_nonpos (convex_Icc 0 T) hE
     · intro t ht

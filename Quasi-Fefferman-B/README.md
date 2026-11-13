@@ -2,18 +2,39 @@
 
 | Field | Value |
 |---|---|
-| Mode | `A_TIER_DERIVATION` |
-| Round | `4` |
-| Canonical theorem | `Quasi_Fefferman_B` |
-| Root status | `! B_TIER`; `A_TIER_CANDIDATE` |
+| Mode | `B_TIER_DERIVATION` |
+| Continuation | `R5` |
+| Exact root type | `QuasiFeffermanB.QuasiFeffermanBStatement` |
+| Prepared root declaration | `QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED` |
+| Mathematical / source status | `!=B_TIER`; `A_TIER_CANDIDATE` |
 | Branch | `QUASI-FEFFERMAN-B` |
 | Repository directory | `/Quasi-Fefferman-B/` |
-| New Lean root | `PENDING` |
-| Implementation | External cached compilation in progress |
+| Formal root status | `PENDING_EXTERNAL_COMPILER_AND_THEOREM_AXIOM_AUDIT` |
+| Implementation | Nine extracted endpoint modules; R5 support-interface repairs |
 | Endpoint resolution marker | `!=!` only after matching external compiler and axiom audit |
 | Local Lean executions | `0` |
 
 [QUASI_FEFFERMAN_B_CHAIN_R1_B_TIER.txt](QUASI_FEFFERMAN_B_CHAIN_R1_B_TIER.txt)
+
+## Current endpoint composition
+
+[Extracted endpoint folder](QuasiFeffermanB/Endpoints/README.md)
+contains the eight selected Q01 endpoints, the explicit caloric budget and
+the deterministic root composition. The root consumes the original physical
+Leray–Hopf existence statement and the existing exact admission chain.
+
+R5 supplies candidate repairs for the six inherited failed modules and
+applies the three previously derived import reductions. Source signatures,
+analytic premises and the frozen cutoff are retained. Recursive source
+fingerprinting and audit registration now include the endpoint subfolder.
+
+Evidence baseline: [run 43151440082](https://github.com/randogelist/Methlib/actions/runs/43151440082),
+commit `e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c`.
+The baseline contains 178 exact audited declarations. R5 introduces no
+new external compiler evidence and no new A-tier promotion.
+
+The status and declaration tables below retain the historical initial
+assembly and its earlier audit provenance.
 
 ## External endpoint status
 
@@ -47,7 +68,7 @@ not automatically resolve the larger Q/A endpoint.
 · [Candidate manifest](endpoint-manifest.json)
 · [Native Windows runner](run.cmd)
 
-## Verified exact declarations
+## Historical verified exact declarations
 
 `!=!` = exact external compiler and standard-only theorem axiom audit.
 
@@ -546,3 +567,4 @@ Subsequent formalization: pinned-cache reuse; independent endpoint bodies;
 native asynchronous elaboration where dependency-safe; deterministic root.
 All source, semantic, analytic, admission, and audit obligations remain
 explicit until discharged. No local Lean execution.
+

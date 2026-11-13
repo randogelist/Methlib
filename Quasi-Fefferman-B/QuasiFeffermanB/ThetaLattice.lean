@@ -46,15 +46,30 @@ private theorem latticeBox_gaussian_sum (N : ℕ) (t : ℝ) :
       Real.exp (-Real.pi * t * (a : ℝ) ^ 2) *
         Real.exp (-Real.pi * t * (b : ℝ) ^ 2) *
           Real.exp (-Real.pi * t * (c : ℝ) ^ 2) := by
-    simp only [galerkinFreqSq, Fin.sum_univ_succ]
-    push_cast
-    simp only [mul_add, Real.exp_add, add_zero]
-    ring
-  unfold latticeBox
+    have hsq : (galerkinFreqSq ![a, b, c] : ℝ) =
+        (a : ℝ) ^ 2 + (b : ℝ) ^ 2 + (c : ℝ) ^ 2 := by
+      simp [galerkinFreqSq, Fin.sum_univ_three]
+    rw [hsq,
+      show -Real.pi * t * ((a : ℝ) ^ 2 + (b : ℝ) ^ 2 + (c : ℝ) ^ 2) =
+        (-Real.pi * t * (a : ℝ) ^ 2 + -Real.pi * t * (b : ℝ) ^ 2) +
+          -Real.pi * t * (c : ℝ) ^ 2 by ring,
+      Real.exp_add, Real.exp_add]
+  let s : Finset ℤ := Finset.Icc (-(N : ℤ)) (N : ℤ)
+  let r : ℤ → ℝ := fun n => Real.exp (-Real.pi * t * (n : ℝ) ^ 2)
+  have hsquare : (∑ p ∈ s.product s, r p.1 * r p.2) = (∑ n ∈ s, r n) ^ 2 := by
+    rw [Finset.sum_product, ← Finset.sum_mul_sum, pow_two]
+  change (∑ k ∈ ((s.product s).product s).image
+    (fun q : (ℤ × ℤ) × ℤ => (![q.1.1, q.1.2, q.2] : Frequency)),
+      Real.exp (-Real.pi * t * (galerkinFreqSq k : ℝ))) = (∑ n ∈ s, r n) ^ 3
   rw [Finset.sum_image (fun _ _ _ _ h => tuple_frequency_injective h)]
-  simp only [Finset.sum_product, hfactor]
-  simp only [← Finset.mul_sum, ← Finset.sum_mul]
-  ring
+  calc
+    _ = ∑ q ∈ (s.product s).product s, (r q.1.1 * r q.1.2) * r q.2 := by
+      apply Finset.sum_congr rfl
+      intro q _
+      exact hfactor q.1.1 q.1.2 q.2
+    _ = (∑ p ∈ s.product s, r p.1 * r p.2) * (∑ n ∈ s, r n) := by
+      rw [Finset.sum_product, Finset.sum_mul_sum]
+    _ = (∑ n ∈ s, r n) ^ 3 := by rw [hsquare]; ring
 
 /-- Finite nonzero Galerkin Gaussian sums satisfy the exact normalized
 three-dimensional theta envelope. -/

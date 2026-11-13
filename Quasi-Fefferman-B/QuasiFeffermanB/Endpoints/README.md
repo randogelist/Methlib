@@ -1,8 +1,8 @@
-# Quasi-Fefferman-B: R4 endpoint extraction
+# Quasi-Fefferman-B: R5 endpoint integration
 
 | Field | Value |
 |---|---|
-| Mathematical derivation | `B_TIER`; complete R1–R4 derivation in `QUASI_FEFFERMAN_B_METHLIB_COMPOSED_COMPLETION_B_TIER.txt` |
+| Mathematical derivation | `B_TIER`; complete R1–R5 derivation in `QUASI_FEFFERMAN_B_METHLIB_COMPOSED_COMPLETION_B_TIER.txt` |
 | New Lean source | `A_TIER_CANDIDATE` |
 | Exact root | `QuasiFeffermanB.QuasiFeffermanBStatement` |
 | Root declaration | `QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED` |
@@ -29,6 +29,31 @@ Additional helper declarations implement physical representative transport,
 finite test calculus, bounded weak convergence and the limit passages.
 `endpoint-index.json` records exact file hashes, declarations, dependencies
 and a topological module order.
+
+## R5 support-interface repairs
+
+| Source | Selected normalization |
+|---|---|
+| `CaloricConvolution` | Typed derivative identities; `HasDerivAt.congr_deriv`; exponential-product algebra |
+| `ThetaLattice` | Exact three-coordinate square; exponential factorization; finite product sums |
+| `CaloricFrequencyGeometry` | Complex scalar commutativity in the normalized inner product |
+| `EnergyGlobalLimit` | Explicit coefficient transport; subtype function composition; integer Sobolev order |
+| `LHRestart` | Explicit translated interval inequalities |
+| `PhysicalFourierL2` | Exact torus subtype; Euclidean norm square; `integral_sub'`; zero weighted coefficient |
+| `EnergyPeriodicRepresentative` | Three `memLp_congr_ae` transports; explicit `SingularClosure.gradient` |
+| `EnergyGlobalPhysical` | Direct canonical-state membership transport; reduced import |
+| `EnergyFiniteWeakPairing` | Native finite-pairing imports; explicit gradient |
+| `EnergyPhysicalContinuity` | Direct `CriticalWeakGradient` pairing identity |
+
+The ten support-module edits preserve 111 declaration interfaces, with one
+explicit namespace qualification of the intended gradient. The nine R4 Lean
+endpoint files retain their exact source bytes.
+
+The actual root support closure decreases from 67 to 65 baseline modules;
+the Q01 support closure contains 22 baseline modules. Recursive manifest
+and audit discovery registers all 79 source files, 76 theorem-containing
+modules and 423 theorem declarations, including the exact root declaration.
+These registration counts are not compiler or audit passes.
 
 ## Deterministic root composition
 
@@ -77,10 +102,11 @@ the normalization.
 | Cached baseline module results | `34 PASS`; `8 FAIL`; `28 BLOCKED_BY_DEPENDENCY` |
 | Allowed audit axioms | `propext`, `Classical.choice`, `Quot.sound` |
 
-The baseline sources and their cached evidence remain separate from the new
-candidate declarations. Existing failed and blocked imports remain external
-compilation gates. The R3 proposed import reductions are not applied by this
-extraction. New source does not inherit an audit pass from an imported theorem.
+The six inherited direct failures have candidate source repairs. Their
+external compilation and all dependent declaration audits remain pending.
+The three R3 import reductions are applied. The 34 previously passing module
+dependency fingerprints and 178 audited declaration source hashes still
+match; the changed modules and extracted endpoints acquire no new pass.
 
 Placement: this folder is an overlay within the existing QFB package.
 Foundation and Mathlib dependencies are supplied by that package.

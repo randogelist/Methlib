@@ -6,13 +6,13 @@ import re
 
 root = Path(__file__).resolve().parents[1]
 modules = []
-for source in sorted((root / "QuasiFeffermanB").glob("*.lean")):
+for source in sorted((root / "QuasiFeffermanB").rglob("*.lean")):
     text = source.read_text(encoding="utf-8")
     names = re.findall(r"^theorem\s+([A-Za-z_][A-Za-z_0-9'.]*)", text, re.M)
     if not names:
         continue  # definitions-only imports are hashed separately below
     modules.append({
-        "module": f"QuasiFeffermanB.{source.stem}",
+        "module": source.relative_to(root).with_suffix("").as_posix().replace("/", "."),
         "source": source.relative_to(root).as_posix(),
         "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "declarations": [name.removeprefix("_root_.") if name.startswith("_root_.")
@@ -21,7 +21,7 @@ for source in sorted((root / "QuasiFeffermanB").glob("*.lean")):
     })
 sources = {
     source.relative_to(root).as_posix(): hashlib.sha256(source.read_bytes()).hexdigest()
-    for source in sorted((root / "QuasiFeffermanB").glob("*.lean"))
+    for source in sorted((root / "QuasiFeffermanB").rglob("*.lean"))
 }
 manifest = {
     "schema": 1,
@@ -38,3 +38,4 @@ manifest = {
 (root / "endpoint-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 print(json.dumps({"modules": len(modules), "sources": len(sources),
                   "declarations": sum(len(m["declarations"]) for m in modules)}))
+

@@ -123,7 +123,7 @@ def main():
     if set(manifest["allowed_axioms"]) != ALLOWED:
         raise ValueError("Axiom policy mismatch")
     actual_sources = {f.relative_to(root).as_posix(): hashlib.sha256(f.read_bytes()).hexdigest()
-                      for f in sorted((root / "QuasiFeffermanB").glob("*.lean"))}
+                      for f in sorted((root / "QuasiFeffermanB").rglob("*.lean"))}
     if actual_sources != manifest["sources"]:
         raise ValueError("Source snapshot mismatch; refresh the committed manifest")
     modules = {}
@@ -251,3 +251,4 @@ if __name__ == "__main__":
     except Exception as error:
         print(f"AUDIT_DRIVER_FAIL: {error}", file=sys.stderr)
         sys.exit(1)
+

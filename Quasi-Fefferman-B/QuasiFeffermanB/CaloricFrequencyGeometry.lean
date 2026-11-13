@@ -63,7 +63,7 @@ theorem complexFrequency_inner (k : Frequency) (z : Fin 3 → ℂ) :
 theorem normalizedComplexFrequency_inner (k : Frequency) (z : Fin 3 → ℂ) :
     inner ℂ (normalizedComplexFrequency k) (complexVec z) =
       (frequencyRadius k : ℂ)⁻¹ * frequencyDot k z := by
-  simp [normalizedComplexFrequency, inner_smul_left, complexFrequency_inner]
+  simp [normalizedComplexFrequency, inner_smul_left, complexFrequency_inner, mul_comm]
 
 theorem frequency_complex_square_sum_eq_radius_sq (k : Frequency) :
     (∑ i : Fin 3, (k i : ℂ) ^ 2) = (frequencyRadius k : ℂ) ^ 2 := by

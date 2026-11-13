@@ -1,4 +1,3 @@
-import QuasiFeffermanB.EnergyTransportContinuity
 import SingularClosure.CriticalClassicalWeakMomentum
 import SingularClosure.GalerkinTimeDerivative
 
@@ -38,7 +37,7 @@ theorem ENERGY_FINITE_GALERKIN_WEAK_PAIRING
       ν * physicalFieldInner (finiteSynthesis N c) (laplacian (finiteSynthesis N b)) +
         criticalWeakTransport (finiteSynthesis N c) (finiteSynthesis N b) := by
   have hdiv : ∀ p : Vec → ℝ, ContDiff ℝ ∞ p → SpatialPeriodic p →
-      physicalFieldInner (finiteSynthesis N c) (gradient p) = 0 := by
+      physicalFieldInner (finiteSynthesis N c) (SingularClosure.gradient p) = 0 := by
     intro p hp hpp
     exact critical_smooth_integral_inner_gradient_eq_zero _ p (finiteSynthesis_contDiff N c)
       hp (finiteSynthesis_periodic N c) hpp (finiteSynthesis_divergence_free N c hcs)

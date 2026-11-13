@@ -271,7 +271,9 @@ theorem LH_RESTART_FROM_ENERGY_START
         physicalEnergy (v (r + s))
     rw [intervalIntegral.integral_comp_add_right
       (fun q => criticalGradientEnergy (G q)) s]
-    exact hr (t + s) ⟨add_le_add_right ht.1 s, add_le_add_right ht.2 s⟩
+    have hleft : r + s ≤ t + s := by linarith only [ht.1]
+    have hright : t + s ≤ T + s := by linarith only [ht.2]
+    exact hr (t + s) ⟨hleft, hright⟩
 
 theorem LH_RESTART_AT_GOOD_TIME
     {ν : ℝ} {a₀ : CriticalPhysicalL2} {v : Velocity}

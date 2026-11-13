@@ -1,6 +1,6 @@
 import QuasiFeffermanB.EnergyWeakContinuity
 import QuasiFeffermanB.EnergyPeriodicRepresentative
-import QuasiFeffermanB.LHRestart
+import SingularClosure.CriticalWeakGradient
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-! Actual physical L2 weak continuity through the real adjoint of the
@@ -48,8 +48,10 @@ theorem ENERGY_PERIODIC_WEAK_CONTINUITY
   have heq : (fun t => inner ℝ (energyPhysicalVelocityL2 U t) (criticalL2Representative φ)) =
       (fun t => physicalFieldInner (energyPeriodicVelocity U t) φ) := by
     funext t
-    rw [← energyPeriodicVelocity_L2 U t]
-    exact restart_representative_inner _ _ (energyPeriodicVelocity_memLp U t) hφ
+    have hv := energyPeriodicVelocity_memLp U t
+    rw [← energyPeriodicVelocity_L2 U t,
+      criticalL2Representative_eq _ hv, criticalL2Representative_eq _ hφ]
+    exact (critical_physicalFieldInner_eq_L2_inner _ _ hv hφ).symm
   rwa [heq] at h
 
 end

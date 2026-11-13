@@ -1,5 +1,4 @@
 import QuasiFeffermanB.EnergyH1Realization
-import QuasiFeffermanB.EnergyDatumGlobal
 
 /-! A single physical velocity and weak-gradient representative for the
 global energy-level Fourier limit. Local Bochner representatives are proved
@@ -52,7 +51,7 @@ theorem energyGlobalH1State_memLp (U : ℝ → TorusSobolev 0)
     (hW : MemLp W 2 μ)
     (hw : ∀ᵐ t ∂μ, criticalCoeff 2 (W t) = (U t).val) :
     MemLp (energyGlobalH1State U) 2 μ :=
-  hW.congr (energyGlobalH1State_ae_eq U W μ hw).symm
+  (memLp_congr_ae (energyGlobalH1State_ae_eq U W μ hw)).mpr hW
 
 theorem energyGlobalGradient_memLp (U : ℝ → TorusSobolev 0)
     (W : ℝ → CriticalSobolev 2) (μ : Measure ℝ)

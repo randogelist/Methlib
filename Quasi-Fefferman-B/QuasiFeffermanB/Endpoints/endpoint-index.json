@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assembly_revision": "R4",
+  "assembly_revision": "R5",
   "mathematical_status": "B_TIER",
   "source_status": "A_TIER_CANDIDATE",
   "formal_root_status": "PENDING",
@@ -20,8 +20,8 @@
   "local_lean_executions": 0,
   "new_external_lean_runs": 0,
   "new_a_tier_promotions": 0,
-  "baseline_source_changes": 0,
-  "proposed_R3_import_reductions_applied": false,
+  "baseline_source_changes": 10,
+  "proposed_R3_import_reductions_applied": true,
   "new_lean_module_count": 9,
   "selected_Q01_endpoint_count": 8,
   "supplementary_explicit_budget_count": 1,
@@ -327,7 +327,6 @@
     "QuasiFeffermanB.CriticalTimeBudget",
     "QuasiFeffermanB.Cutoff",
     "QuasiFeffermanB.EnergyDatumApproximation",
-    "QuasiFeffermanB.EnergyDatumGlobal",
     "QuasiFeffermanB.EnergyFiniteWeakPairing",
     "QuasiFeffermanB.EnergyGalerkinCompactness",
     "QuasiFeffermanB.EnergyGlobalCoefficient",
@@ -336,7 +335,6 @@
     "QuasiFeffermanB.EnergyH1Realization",
     "QuasiFeffermanB.EnergyLimitCompatibility",
     "QuasiFeffermanB.EnergyLimitEnergy",
-    "QuasiFeffermanB.EnergyModalEquation",
     "QuasiFeffermanB.EnergyPeriodicRepresentative",
     "QuasiFeffermanB.EnergyPhysicalContinuity",
     "QuasiFeffermanB.EnergyPhysicalTrace",
@@ -373,8 +371,8 @@
   ],
   "actual_root_baseline_module_status_counts": {
     "PASS": 34,
-    "BLOCKED_BY_DEPENDENCY": 27,
-    "FAIL": 6
+    "FAIL": 6,
+    "BLOCKED_BY_DEPENDENCY": 25
   },
   "actual_root_cached_direct_failures": [
     "QuasiFeffermanB.CaloricConvolution",
@@ -385,11 +383,100 @@
     "QuasiFeffermanB.ThetaLattice"
   ],
   "static_validation": {
-    "baseline_source_fingerprints_unchanged": 70,
-    "new_import_graph_acyclic": true,
-    "new_public_names_unique": true,
-    "all_selected_exports_have_proof_bodies": true,
+    "all_new_R4_lean_source_bytes_preserved": 9,
+    "unchanged_baseline_source_files": 60,
+    "all_candidate_imports_resolved_and_acyclic": true,
+    "cached_pass_dependency_fingerprints_retained": 34,
+    "cached_exact_declaration_source_hashes_retained": 178,
     "forbidden_admission_tokens_outside_comments_and_strings": 0,
-    "scope": "Lexical, source-signature and dependency checks only; no Lean verification."
+    "scope": "Lexical, signature, import, manifest and cache-identity checks only; no Lean verification."
+  },
+  "extraction_parent_commit": "3eba8cc67ebf397343f24a463bba462b52e2ccb5",
+  "candidate_repair_sources": [
+    {
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "baseline_sha256": "8c4f04896761e10ca64907b22c43214d5b5c144571abaad8b829d606bcb83c45",
+      "candidate_sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "declarations_preserved": 8,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "baseline_sha256": "22c5cd6d85a423aeb6ef0e1c7f9bb16ad3d19d786fd4b7bf004c38e068b7ac4f",
+      "candidate_sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "declarations_preserved": 16,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/EnergyFiniteWeakPairing.lean",
+      "baseline_sha256": "1bd6fc0d9297450f33ab2bc18dce6aa61ac60f52f378e5512983562132d05778",
+      "candidate_sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "declarations_preserved": 3,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "baseline_sha256": "a245688ff9f6a54eb73c253f1eb9aece6f66088409a639a2c5273d0f3186d9cb",
+      "candidate_sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "declarations_preserved": 3,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/EnergyGlobalPhysical.lean",
+      "baseline_sha256": "21f874926f2ac1205aa8b939304bf6a59e1e758dee29594a5dd38cdd442b3e55",
+      "candidate_sha256": "49e137be886e3b078989bd7b19788f62f5aa9f1a5613601d5745ea8dbdf48fe6",
+      "declarations_preserved": 13,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/EnergyPeriodicRepresentative.lean",
+      "baseline_sha256": "fbeda744222725ab5612fcbb7553193f5a0862505e5b387703c6d1519ed999ed",
+      "candidate_sha256": "abfb3d2d2aa523a21513f29d1a07c14224e17739890df161b7257604cff95fb9",
+      "declarations_preserved": 12,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/EnergyPhysicalContinuity.lean",
+      "baseline_sha256": "1091e683e69cdfb9a493fb13d56a64893946f037fcfbebd6837529fad78524b7",
+      "candidate_sha256": "34e854c8f313dcb7812a84491b2d1ea8f67d3c02617133444341f085c192c340",
+      "declarations_preserved": 4,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "baseline_sha256": "76d72c4421f6d93eb705b4ff827bd39280664929e68a143800aad18eea72a097",
+      "candidate_sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "declarations_preserved": 18,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/PhysicalFourierL2.lean",
+      "baseline_sha256": "194b2fd57c746eb86c2cf3445e0cc49bd9523a1e77e2240660668d821f22e0c3",
+      "candidate_sha256": "ded4d0767f82ea59635f91b1972bcf892c4c253971dcd65d6a8edda81cadc97e",
+      "declarations_preserved": 28,
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "source": "QuasiFeffermanB/ThetaLattice.lean",
+      "baseline_sha256": "6fe33f0df01e430b96596ab6696aa1d85bda75a0673f8e31f74679f5a309c088",
+      "candidate_sha256": "b9d639544c6f79dd1e95501784f79ca84c20affb697567c7a1ebdb8bf21fed4b",
+      "declarations_preserved": 6,
+      "status": "A_TIER_CANDIDATE"
+    }
+  ],
+  "exact_statement_preservation": {
+    "checked_declarations": 111,
+    "byte_normalized_signature_changes": 1,
+    "sole_change": "gradient -> SingularClosure.gradient in energyPeriodicField_gradient_annihilation",
+    "new_analytic_premises": 0,
+    "changed_cutoff_constants": 0
+  },
+  "external_audit_registration": {
+    "source_files": 79,
+    "audit_modules": 76,
+    "registered_theorem_declarations": 423,
+    "root_declaration_registered": true,
+    "recursive_subfolder_discovery": true,
+    "new_compiler_evidence": false
   }
 }

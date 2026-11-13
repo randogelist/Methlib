@@ -19,11 +19,13 @@ local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
 
 theorem torusDatumRepresentative_measurePreserving :
     MeasurePreserving torusDatumRepresentative volume (volume.restrict unitCube) := by
-  let S : Set (Fin 3 → ℝ) := {x | ∀ i, x i ∈ Ioc (0 : ℝ) 1}
+  let S : Set (Fin 3 → ℝ) :=
+    {x | ∀ i, x i ∈ Ioc ((0 : Fin 3 → ℝ) i) (((0 : Fin 3 → ℝ) i) + 1)}
   have hS : MeasurableSet S := MeasurableSet.univ_pi' (fun _ => measurableSet_Ioc)
   have hSprod : S = Set.univ.pi (fun _ : Fin 3 => Ioc (0 : ℝ) 1) := by
     ext x
-    simp only [S, Set.mem_setOf_eq, Set.mem_pi, Set.mem_univ, forall_true_left]
+    simp only [S, Pi.zero_apply, zero_add, Set.mem_setOf_eq,
+      Set.mem_pi, Set.mem_univ, forall_true_left]
   have hSmeasure : (volume : Measure (Fin 3 → ℝ)).restrict S = unitProductMeasure 3 := by
     change ((Measure.pi (fun _ : Fin 3 => (volume : Measure ℝ))).restrict S) = _
     rw [hSprod, Measure.restrict_pi_pi]
@@ -54,8 +56,7 @@ theorem torusDatumRepresentative_measurePreserving :
     exact h
   have heq : MeasurePreserving (UnitAddTorus.measurableEquivPiIoc (0 : Fin 3 → ℝ))
       volume (Measure.comap (Subtype.val : S → (Fin 3 → ℝ)) volume) := by
-    simpa only [S, Pi.zero_apply, zero_add] using
-      UnitAddTorus.measurePreserving_equivPiIoc (0 : Fin 3 → ℝ)
+    exact UnitAddTorus.measurePreserving_equivPiIoc (0 : Fin 3 → ℝ)
   simpa only [Function.comp_def, torusDatumRepresentative] using
     htoLp.comp (hsub.comp heq)
 
@@ -104,10 +105,11 @@ theorem physicalTorusComponentL2_sum_norm_sq (v : Field)
   rw [physicalEnergy_eq_integral_norm_sq]
   apply integral_congr_ae
   exact Filter.Eventually.of_forall fun x => by
-    rw [PiLp.norm_sq_eq_of_L2]
-    apply Finset.sum_congr rfl
-    intro i _
-    simp only [Complex.norm_real]
+    change (∑ i : Fin 3, ‖(v x i : ℂ)‖ ^ 2) = ‖v x‖ ^ 2
+    calc
+      (∑ i : Fin 3, ‖(v x i : ℂ)‖ ^ 2) =
+          ∑ i : Fin 3, ‖v x i‖ ^ 2 := by simp only [Complex.norm_real]
+      _ = ‖v x‖ ^ 2 := (PiLp.norm_sq_eq_of_L2 (fun _ : Fin 3 => ℝ) (v x)).symm
 
 theorem physicalL2_coefficientEnergy_le (N : ℕ) (v : Field)
     (hv : MemLp v 2 (volume.restrict unitCube)) :
@@ -188,7 +190,7 @@ theorem physical_datumFourierCoeff_sub (v w : Field)
     funext x
     simp [datumFourierIntegrand, Complex.ofReal_sub, mul_sub]
   change (∫ x in unitCube, datumFourierIntegrand (v - w) k i x) = _
-  rw [heq, integral_sub (physical_datumFourierIntegrand_integrable v hv k i)
+  rw [heq, integral_sub' (physical_datumFourierIntegrand_integrable v hv k i)
     (physical_datumFourierIntegrand_integrable w hw k i)]
   rfl
 
@@ -232,7 +234,14 @@ theorem physicalH1HalfDatum_physicalL2
 def physicalL2SobolevDatum (v : Field)
     (hv : MemLp v 2 (volume.restrict unitCube)) : CriticalSobolev 0 :=
   criticalSobolevOfCoeff 0 (datumFourierCoeff v) (by
-    simpa only [criticalWeightedCoeff, zpow_zero, one_mul] using physicalL2_fourier_mem v hv)
+    have hw : criticalWeightedCoeff (0 : ℤ) (datumFourierCoeff v) =
+        (fun ki : FourierIndex => datumFourierCoeff v ki.1 ki.2) := by
+      funext ki
+      change (criticalHalfWeight ki.1 : ℂ) ^ (0 : ℤ) *
+        datumFourierCoeff v ki.1 ki.2 = datumFourierCoeff v ki.1 ki.2
+      rw [zpow_zero, one_mul]
+    rw [hw]
+    exact physicalL2_fourier_mem v hv)
 
 @[simp] theorem physicalL2SobolevDatum_coeff (v : Field)
     (hv : MemLp v 2 (volume.restrict unitCube)) :
