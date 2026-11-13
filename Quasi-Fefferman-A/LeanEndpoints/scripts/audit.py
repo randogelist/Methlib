@@ -193,7 +193,7 @@ def external_audit(base: Path, manifest: dict) -> None:
         dependency_snapshot("after")
         status["endpoint_status"] = "EXTERNAL_COMPILER_AND_EXACT_AXIOM_AUDIT_PASS"
         status["physical_QFA_root_inferred"] = False
-        print("EXTERNAL_SCALAR_ENDPOINT_AUDIT_PASS; QFA_ROOT_FORMALIZATION_PENDING")
+        print("EXTERNAL_ENDPOINT_AUDIT_PASS; QFA_ROOT_FORMALIZATION_PENDING")
     except Exception as error:
         status["endpoint_status"] = "FAIL"
         status["error"] = str(error)

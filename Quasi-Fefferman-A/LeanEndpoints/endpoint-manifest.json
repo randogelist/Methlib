@@ -1,11 +1,11 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "mathematical_status": "B_TIER",
   "lean_status": "A_TIER_CANDIDATE",
   "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
   "lean": "4.33.0",
   "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
-  "source_parent_commit": "e91397da79d11e08a6499feec8bd5c18465a4107",
+  "source_parent_commit": "bf028db80b675a09c6144135e289c5c48572075a",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -24,22 +24,28 @@
   },
   "sources": {
     ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
-    "Audit.lean": "cf71d46e97247cf7778ea4b220a4f9610545fa04af33cc884296d51995ed340a",
+    "Audit.lean": "4888e7abec10936beac9a154a25109dea3adc223f478aec59386bc3fb3e167bc",
     "QFA/Endpoints/Agmon/Contracts.lean": "a8094d33071c0cc9da07fea80bd9b481eb5e1a87b08d8109835007cbc5c03ec0",
     "QFA/Endpoints/Agmon/Scalar.lean": "d8b0dd43cfabda0510d4c01c358cdc959d6d7fc266f097c8470df361babfc034",
     "QFA/Endpoints/Comparison/AdmissibleTimes.lean": "ced4416fb261e3a08a45b321ea13d1c4051641e06f5b7d7ef2b49d4ab556f3a9",
     "QFA/Endpoints/Comparison/RelativeEnergy.lean": "ff79ddced5e8dc97b430bbea95f5eb54686864632df01003f5f5211e90e80285",
+    "QFA/Endpoints/Composition/GoodTimeAndTrace.lean": "27170ebd29b091e4d93cbecee1ae8e7d5860acbe03988d7c5fa090e73e24655e",
     "QFA/Endpoints/Composition/GoodTimeOfEnvelope.lean": "4cffe763361a0bd8d70ef79276c7127ddb18736415b9c4b9b5ca9d5aa5e6110d",
     "QFA/Endpoints/Energy/ProductBudget.lean": "e49714c24f0508ec82ec66f972e1e3aa5071f8ae5046483a267bbd0dbf3a97f2",
     "QFA/Endpoints/GoodTime/Basic.lean": "2a69494e312c0fd2178d7fb1c1f6ed22e2e3ce2e3382ed40fa4c694c003a9fc5",
     "QFA/Endpoints/GoodTime/Cutoff.lean": "375484ddc427f6c9abdaa2a738c33a4a96c639a7b3e0476210dec1717473f6f9",
     "QFA/Endpoints/GoodTime/Interval.lean": "c0a528c3f98a9c611dfb4fbaaf969ac0328a5448bc313c259d173cbd1b6570ec",
-    "QFA.lean": "981f18093783731f05f6a44b58ddd2659cdede2b09344cb74afe086cae3eaef2",
+    "QFA/Endpoints/Representation/Complexification.lean": "32c4b3035ddf7de4de8157185ec73df5de2b60e5ba3b8fa476da41a9c85da80e",
+    "QFA/Endpoints/Representation/EnergyProfile.lean": "7800b44ca6ac8bf4c32f8720bf5f865c23bfba36e1c77135a7f1327afbfe219e",
+    "QFA/Endpoints/Restart/EnergyShift.lean": "a8f561949ae04161498ad2bce280ea72a2f622798a4b3576a4a61b96506b1a72",
+    "QFA/Endpoints/Restart/HilbertTrace.lean": "22005e1af6599c0563dd61f735f6bfd33bdbe9843865ecd188b44707e15e68f6",
+    "QFA/Endpoints/Restart/TimeTranslate.lean": "b10e9246b4c9791a3ce36e6fc5195f1e1f333b3bebe6def69e1d3126f7a78a0a",
+    "QFA.lean": "e4db50fb57b252805315ef338120ffaa70f7ad1f0181b70005b425858b76e9b1",
     "lake-manifest.json": "d6d1cf29b10a13526b356cfb5bdfcccc8aaf33c39b6c68a2990b533a015b41a8",
-    "lakefile.lean": "614dd2cea65be5a53bafdd1eee430697a94c84dc71cc728f2b17c17fd20c1331",
+    "lakefile.lean": "9ad19e6e4f85c8a26815640e318315b85ce6106325aed991cb89d4f76bacee7f",
     "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
     "run.cmd": "25fdf43a23b45a6d28e89e808fe9174f3c5ac69219de3c1653787ddbce274f07",
-    "scripts/audit.py": "46b68355f5578304a356af0c121d39d144b48189159f4ab7292a49e83a707923"
+    "scripts/audit.py": "8b5fd4945a300c458a3bf1487a60448b4ed29eabf041277b2b16eaf31a52529f"
   },
   "declarations": [
     {
@@ -50,7 +56,11 @@
       "signature": "theorem envelope_zero (M ν : ℝ) (D : ℝ → ℝ) :\n    envelope M ν D 0 = M ^ 2",
       "id": "LE001",
       "step": "D04.01",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.01"
+      ]
     },
     {
       "name": "QFA.Energy.envelope_absolutelyContinuousOnInterval",
@@ -60,7 +70,11 @@
       "signature": "theorem envelope_absolutelyContinuousOnInterval\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    AbsolutelyContinuousOnInterval (envelope M ν D) 0 R",
       "id": "LE002",
       "step": "D04.02",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.02"
+      ]
     },
     {
       "name": "QFA.Energy.envelope_hasDerivAt_ae",
@@ -70,7 +84,11 @@
       "signature": "theorem envelope_hasDerivAt_ae\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    ∀ᵐ t ∂volume, t ∈ uIcc (0 : ℝ) R →\n      HasDerivAt (envelope M ν D) (-(2 * ν * D t)) t",
       "id": "LE003",
       "step": "D04.03",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.03"
+      ]
     },
     {
       "name": "QFA.Energy.envelope_product_intervalIntegrable",
@@ -80,7 +98,11 @@
       "signature": "theorem envelope_product_intervalIntegrable\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    IntervalIntegrable (fun t => envelope M ν D t * D t) volume 0 R",
       "id": "LE004",
       "step": "D04.04",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.04"
+      ]
     },
     {
       "name": "QFA.Energy.envelope_product_integral",
@@ -90,7 +112,11 @@
       "signature": "theorem envelope_product_integral\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hν : ν ≠ 0)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    (∫ t in (0 : ℝ)..R, envelope M ν D t * D t) =\n      (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν)",
       "id": "LE005",
       "step": "D04.05",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.05"
+      ]
     },
     {
       "name": "QFA.Energy.product_budget_of_envelope_identity",
@@ -100,7 +126,11 @@
       "signature": "theorem product_budget_of_envelope_identity\n    {E D F : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hFD : IntervalIntegrable (fun t => F t * D t) volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDm : AEStronglyMeasurable D (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), E t ≤ F t)\n    (hidentity : (∫ t in (0 : ℝ)..R, F t * D t) =\n      (M ^ 4 - (F R) ^ 2) / (4 * ν)) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤\n        (M ^ 4 - (F R) ^ 2) / (4 * ν) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)",
       "id": "LE006",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.06"
+      ]
     },
     {
       "name": "QFA.Energy.product_budget",
@@ -110,7 +140,11 @@
       "signature": "theorem product_budget\n    {E D : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      E t ≤ envelope M ν D t) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤\n        (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)",
       "id": "LE007",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.06"
+      ]
     },
     {
       "name": "QFA.Energy.product_budget_Ioo",
@@ -120,7 +154,11 @@
       "signature": "theorem product_budget_Ioo\n    {E D : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      E t ≤ envelope M ν D t) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in Ioo (0 : ℝ) R, E t * D t) ≤ M ^ 4 / (4 * ν)",
       "id": "LE008",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D04.06"
+      ]
     },
     {
       "name": "QFA.Endpoints.GoodTime.qfa_cutoff_nonneg",
@@ -130,7 +168,11 @@
       "signature": "theorem qfa_cutoff_nonneg (M : ℝ) {ν : ℝ} (hν : 0 < ν) :\n    0 ≤ M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5)",
       "id": "LE009",
       "step": "D05.01",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D05.01"
+      ]
     },
     {
       "name": "QFA.Endpoints.GoodTime.qfa_budget_lt_threshold",
@@ -140,7 +182,11 @@
       "signature": "theorem qfa_budget_lt_threshold\n    {M ν δ : ℝ} (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ) :\n    M ^ 4 / (4 * ν) < (4 * Real.pi ^ 2 * ν ^ 4) * δ",
       "id": "LE010",
       "step": "D05.01",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D05.01"
+      ]
     },
     {
       "name": "QFA.Endpoints.GoodTime.exists_good_time_of_integral_lt",
@@ -150,7 +196,11 @@
       "signature": "theorem exists_good_time_of_integral_lt\n    {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}\n    (hT : 0 < T) (hc : 0 ≤ c)\n    (hf : Integrable f (volume.restrict (Ioo (0 : ℝ) T)))\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) T), Good t)\n    (hbudget : (∫ t in Ioo (0 : ℝ) T, f t) < c * T) :\n    ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c",
       "id": "LE011",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D05.02"
+      ]
     },
     {
       "name": "QFA.Endpoints.GoodTime.exists_subcritical_product_good_time",
@@ -160,7 +210,11 @@
       "signature": "theorem exists_subcritical_product_good_time\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hprod : Integrable (fun t => E t * D t)\n      (volume.restrict (Ioo (0 : ℝ) δ)))\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)\n    (hbudget : (∫ t in Ioo (0 : ℝ) δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
       "id": "LE012",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D05.02"
+      ]
     },
     {
       "name": "QFA.Endpoints.GoodTime.exists_subcritical_product_good_time_of_interval_budget",
@@ -170,7 +224,11 @@
       "signature": "theorem exists_subcritical_product_good_time_of_interval_budget\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hprod : IntervalIntegrable (fun t => E t * D t) volume 0 δ)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)\n    (hbudget : (∫ t in (0 : ℝ)..δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
       "id": "LE013",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D05.02"
+      ]
     },
     {
       "name": "QFA.Endpoints.Composition.exists_subcritical_good_time_of_envelope",
@@ -180,7 +238,11 @@
       "signature": "theorem exists_subcritical_good_time_of_envelope\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hD : IntervalIntegrable D volume (0 : ℝ) δ)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) δ)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ),\n      E t ≤ QFA.Energy.envelope M ν D t)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
       "id": "LE014",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D05.02"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.agmon_fourth_power",
@@ -190,7 +252,11 @@
       "signature": "theorem agmon_fourth_power\n    {D Z A : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z)\n    (hAgmon : A ^ 2 ≤ Real.sqrt (D * Z) / (2 * Real.pi)) :\n    4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z",
       "id": "LE015",
       "step": "D06.06",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.06"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.nonlinear_fourth_power_of_agmon_fourth",
@@ -200,7 +266,11 @@
       "signature": "theorem nonlinear_fourth_power_of_agmon_fourth\n    {E D Z A N : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z) (hN : 0 ≤ N)\n    (hInterpolation : D ^ 2 ≤ E * Z)\n    (hAgmon : 4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z)\n    (hConvection : N ≤ A * Real.sqrt D * Real.sqrt Z) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4",
       "id": "LE016",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.ScalarProfile.nonlinear_fourth_power",
@@ -210,7 +280,11 @@
       "signature": "theorem ScalarProfile.nonlinear_fourth_power\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4",
       "id": "LE017",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.nonlinear_le_of_product_le",
@@ -220,7 +294,11 @@
       "signature": "theorem nonlinear_le_of_product_le\n    {E D Z N c : ℝ} (hZ : 0 ≤ Z) (hc : 0 ≤ c)\n    (hFourth : 4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4)\n    (hProduct : E * D ≤ 4 * Real.pi ^ 2 * c ^ 4) :\n    N ≤ c * Z",
       "id": "LE018",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.nonlinearCoefficient_nonneg",
@@ -230,7 +308,11 @@
       "signature": "theorem nonlinearCoefficient_nonneg (E D : ℝ) :\n    0 ≤ nonlinearCoefficient E D",
       "id": "LE019",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.nonlinearCoefficient_fourth",
@@ -240,7 +322,11 @@
       "signature": "theorem nonlinearCoefficient_fourth\n    {E D : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) :\n    4 * Real.pi ^ 2 * nonlinearCoefficient E D ^ 4 = E * D",
       "id": "LE020",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.ScalarProfile.nonlinear_le_coefficient",
@@ -250,7 +336,11 @@
       "signature": "theorem ScalarProfile.nonlinear_le_coefficient\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :\n    N ≤ nonlinearCoefficient E D * Z",
       "id": "LE021",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero",
@@ -260,7 +350,11 @@
       "signature": "theorem ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) (hZ : Z = 0) : N = 0",
       "id": "LE022",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D06.08"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.nonlinearCoefficient_lt_viscosity",
@@ -270,7 +364,11 @@
       "signature": "theorem nonlinearCoefficient_lt_viscosity\n    {E D ν : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) (hν : 0 < ν)\n    (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :\n    nonlinearCoefficient E D < ν",
       "id": "LE023",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D07.01"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.ScalarProfile.enstrophy_absorption",
@@ -280,7 +378,11 @@
       "signature": "theorem ScalarProfile.enstrophy_absorption\n    {E D Z A N d ν : ℝ} (h : ScalarProfile E D Z A N)\n    (hEnstrophy : d / 2 + ν * Z ≤ N) :\n    d + 2 * (ν - nonlinearCoefficient E D) * Z ≤ 0",
       "id": "LE024",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D07.01"
+      ]
     },
     {
       "name": "QFA.Endpoints.Agmon.ScalarProfile.viscosity_margin_pos",
@@ -290,7 +392,11 @@
       "signature": "theorem ScalarProfile.viscosity_margin_pos\n    {E D Z A N ν : ℝ} (h : ScalarProfile E D Z A N) (hν : 0 < ν)\n    (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :\n    0 < ν - nonlinearCoefficient E D",
       "id": "LE025",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D07.01"
+      ]
     },
     {
       "name": "QFA.Endpoints.Comparison.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO",
@@ -300,7 +406,11 @@
       "signature": "theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO\n    {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)\n    (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :\n    ∃ ε : ℕ → ℝ,\n      (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧\n      Tendsto ε atTop (𝓝 0)",
       "id": "LE026",
       "step": "D09.03",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D09.03"
+      ]
     },
     {
       "name": "QFA.Endpoints.Comparison.critical_comparison_differential_gronwall",
@@ -310,7 +420,11 @@
       "signature": "theorem critical_comparison_differential_gronwall\n    {y d a : ℝ → ℝ} {s T : ℝ} (hst : s ≤ T)\n    (hy : ContinuousOn y (Icc s T)) (ha : ContinuousOn a (Icc s T))\n    (hderiv : ∀ t ∈ Ioo s T, HasDerivAt y (d t) t)\n    (hbound : ∀ t ∈ Ioo s T, d t ≤ a t * y t) :\n    ∀ t ∈ Icc s T, y t ≤ y s * Real.exp (∫ r in s..t, a r)",
       "id": "LE027",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D09.04"
+      ]
     },
     {
       "name": "QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_GRONWALL",
@@ -320,7 +434,11 @@
       "signature": "theorem CRITICAL_RELATIVE_ENERGY_GRONWALL\n    {e a : ℝ → ℝ} {s T δ : ℝ} (hst : s ≤ T)\n    (ha : ContinuousOn a (Icc s T))\n    (ha_nonneg : ∀ t ∈ Icc s T, 0 ≤ a t)\n    (hprod : IntervalIntegrable (fun r => a r * e r) volume s T)\n    (hrelative : ∀ t ∈ Icc s T,\n      e t ≤ δ + ∫ r in s..t, a r * e r) :\n    ∀ t ∈ Icc s T, e t ≤ δ * Real.exp (∫ r in s..t, a r)",
       "id": "LE028",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D09.04"
+      ]
     },
     {
       "name": "QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE",
@@ -330,7 +448,11 @@
       "signature": "theorem CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE\n    {e a : ℝ → ℝ} {T M : ℝ} {ε : ℕ → ℝ}\n    (hT : 0 < T)\n    (he_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ e t)\n    (ha : ContinuousOn a (Ioc 0 T))\n    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)\n    (ha_integrable : IntervalIntegrable a volume 0 T)\n    (hprod : IntervalIntegrable (fun r => a r * e r) volume 0 T)\n    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)\n    (hε : ∀ n, ε n ∈ Ioc 0 T)\n    (hε_zero : Tendsto ε atTop (𝓝 0))\n    (htrace : Tendsto (fun n => e (ε n)) atTop (𝓝 0))\n    (hrelative : ∀ n t, t ∈ Icc (ε n) T →\n      e t ≤ e (ε n) + ∫ r in ε n..t, a r * e r) :\n    ∀ t ∈ Ioc 0 T, e t = 0",
       "id": "LE029",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D09.04"
+      ]
     },
     {
       "name": "QFA.Endpoints.Comparison.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE",
@@ -340,7 +462,617 @@
       "signature": "theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE\n    {V : Type*} [NormedAddCommGroup V]\n    {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}\n    (hT : 0 < T)\n    (ha : ContinuousOn a (Ioc 0 T))\n    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)\n    (ha_integrable : IntervalIntegrable a volume 0 T)\n    (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)\n    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)\n    (hε : ∀ n, ε n ∈ Ioc 0 T)\n    (hε_zero : Tendsto ε atTop (𝓝 0))\n    (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))\n    (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))\n    (hrelative : ∀ n t, t ∈ Icc (ε n) T →\n      ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +\n        ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :\n    ∀ t ∈ Ioc 0 T, u t = v t",
       "id": "LE030",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE"
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem",
+      "application_steps": [
+        "D09.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyVectorLI",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 51,
+      "signature": "def complexifyVectorLI : Space →ₗᵢ[ℝ] ComplexVector",
+      "kind": "proof_carrying_definition",
+      "id": "LE031",
+      "step": "D02.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.01"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyVectorLI_apply",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 71,
+      "signature": "theorem complexifyVectorLI_apply (v : Space) (j : Fin 3) :\n    complexifyVectorLI v j = (v j : ℂ)",
+      "kind": "theorem",
+      "id": "LE032",
+      "step": "D02.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.01"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyVectorLI_zero",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 75,
+      "signature": "theorem complexifyVectorLI_zero : complexifyVectorLI 0 = 0",
+      "kind": "theorem",
+      "id": "LE033",
+      "step": "D02.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.01"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyVectorLI_norm",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 79,
+      "signature": "theorem complexifyVectorLI_norm (v : Space) : ‖complexifyVectorLI v‖ = ‖v‖",
+      "kind": "theorem",
+      "id": "LE034",
+      "step": "D02.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.01"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyVectorLI_norm_sq",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 82,
+      "signature": "theorem complexifyVectorLI_norm_sq (v : Space) :\n    ‖complexifyVectorLI v‖ ^ 2 = ‖v‖ ^ 2",
+      "kind": "theorem",
+      "id": "LE035",
+      "step": "D02.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.01"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyVectorLI_isometry",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 86,
+      "signature": "theorem complexifyVectorLI_isometry : Isometry complexifyVectorLI",
+      "kind": "theorem",
+      "id": "LE036",
+      "step": "D02.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.01"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_ae",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 98,
+      "signature": "theorem complexifyL2_ae (v : RealL2) :\n    (fun x : Space => complexifyL2 v x) =ᵐ[volume]\n      (fun x : Space => complexifyVectorLI (v x))",
+      "kind": "theorem",
+      "id": "LE037",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_norm",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 105,
+      "signature": "theorem complexifyL2_norm (v : RealL2) : ‖complexifyL2 v‖ = ‖v‖",
+      "kind": "theorem",
+      "id": "LE038",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_add",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 114,
+      "signature": "theorem complexifyL2_add (v w : RealL2) :\n    complexifyL2 (v + w) = complexifyL2 v + complexifyL2 w",
+      "kind": "theorem",
+      "id": "LE039",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_smul",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 122,
+      "signature": "theorem complexifyL2_smul (c : ℝ) (v : RealL2) :\n    complexifyL2 (c • v) = c • complexifyL2 v",
+      "kind": "theorem",
+      "id": "LE040",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2LI",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 131,
+      "signature": "def complexifyL2LI : RealL2 →ₗᵢ[ℝ] ComplexL2",
+      "kind": "proof_carrying_definition",
+      "id": "LE041",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_isometry",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 137,
+      "signature": "theorem complexifyL2_isometry : Isometry complexifyL2",
+      "kind": "theorem",
+      "id": "LE042",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_zero",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 141,
+      "signature": "theorem complexifyL2_zero : complexifyL2 0 = 0",
+      "kind": "theorem",
+      "id": "LE043",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_velocityEnergy",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 144,
+      "signature": "theorem complexifyL2_velocityEnergy (v : RealL2) :\n    velocityEnergy (complexifyL2 v) = ‖v‖ ^ 2",
+      "kind": "theorem",
+      "id": "LE044",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_gradientEnergy",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 150,
+      "signature": "theorem complexifyL2_gradientEnergy (G : Fin 3 → RealL2) :\n    gradientEnergy (fun j => complexifyL2 (G j)) = ∑ j : Fin 3, ‖G j‖ ^ 2",
+      "kind": "theorem",
+      "id": "LE045",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_laplacianEnergy",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 158,
+      "signature": "theorem complexifyL2_laplacianEnergy (L : RealL2) :\n    laplacianEnergy (complexifyL2 L) = ‖L‖ ^ 2",
+      "kind": "theorem",
+      "id": "LE046",
+      "step": "D02.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.integrable_compact_test_smul",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 168,
+      "signature": "theorem integrable_compact_test_smul\n    {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]\n    (v : Lp F 2 (volume : Measure Space)) {ψ : Space → ℝ}\n    (hψ : Continuous ψ) (hcompact : HasCompactSupport ψ) :\n    Integrable (fun x : Space => ψ x • v x) volume",
+      "kind": "theorem",
+      "id": "LE047",
+      "step": "D02.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.integral_test_smul_complexifyL2",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 181,
+      "signature": "theorem integral_test_smul_complexifyL2\n    (v : RealL2) (ψ : Space → ℝ)\n    (hInt : Integrable (fun x : Space => ψ x • v x) volume) :\n    (∫ x : Space, ψ x • complexifyL2 v x) =\n      complexifyVectorCLM (∫ x : Space, ψ x • v x)",
+      "kind": "theorem",
+      "id": "LE048",
+      "step": "D02.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.weakTestIdentity_complexify",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 198,
+      "signature": "theorem weakTestIdentity_complexify\n    (v G : RealL2) (dψ ψ : Space → ℝ)\n    (hv : Integrable (fun x : Space => dψ x • v x) volume)\n    (hG : Integrable (fun x : Space => ψ x • G x) volume)\n    (hId : (∫ x : Space, dψ x • v x) = -(∫ x : Space, ψ x • G x)) :\n    (∫ x : Space, dψ x • complexifyL2 v x) =\n      -(∫ x : Space, ψ x • complexifyL2 G x)",
+      "kind": "theorem",
+      "id": "LE049",
+      "step": "D02.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Representation.complexifyL2_weakDirectionalDerivative",
+      "source": "QFA/Endpoints/Representation/Complexification.lean",
+      "module": "QFA.Endpoints.Representation.Complexification",
+      "line": 227,
+      "signature": "theorem complexifyL2_weakDirectionalDerivative\n    {v G : RealL2} {e : Space} (h : RealTestWeakDirectionalDerivative v G e) :\n    RealTestWeakDirectionalDerivative (complexifyL2 v) (complexifyL2 G) e",
+      "kind": "theorem",
+      "id": "LE050",
+      "step": "D02.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.03"
+      ]
+    },
+    {
+      "name": "QFA.Representation.velocityEnergy_nonneg",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 54,
+      "signature": "theorem velocityEnergy_nonneg (v : RealSpatialL2) :\n    0 ≤ velocityEnergy v",
+      "kind": "theorem",
+      "id": "LE051",
+      "step": "D02.05",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.05",
+        "D04.06"
+      ]
+    },
+    {
+      "name": "QFA.Representation.gradientEnergy_nonneg",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 58,
+      "signature": "theorem gradientEnergy_nonneg (G : Fin 3 → RealSpatialL2) :\n    0 ≤ gradientEnergy G",
+      "kind": "theorem",
+      "id": "LE052",
+      "step": "D02.05",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.05"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.velocityEnergy_aestronglyMeasurable",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 86,
+      "signature": "theorem EnergyProfile.velocityEnergy_aestronglyMeasurable\n    {ν R : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) (hR : 0 < R) :\n    AEStronglyMeasurable (fun t => velocityEnergy (u t))\n      (volume.restrict (Ioo (0 : ℝ) R))",
+      "kind": "theorem",
+      "id": "LE053",
+      "step": "D02.05",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.05"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.gradientEnergy_integrable",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 98,
+      "signature": "theorem EnergyProfile.gradientEnergy_integrable\n    {ν R : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) (hR : 0 < R) :\n    Integrable (fun t => gradientEnergy (G t))\n      (volume.restrict (Ioo (0 : ℝ) R))",
+      "kind": "theorem",
+      "id": "LE054",
+      "step": "D02.05",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.05"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.gradientEnergy_intervalIntegrable",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 120,
+      "signature": "theorem EnergyProfile.gradientEnergy_intervalIntegrable\n    {ν R : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) (hR : 0 < R) :\n    IntervalIntegrable (fun t => gradientEnergy (G t)) volume (0 : ℝ) R",
+      "kind": "theorem",
+      "id": "LE055",
+      "step": "D02.05",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.05"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.velocityEnergy_le_envelope",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 133,
+      "signature": "theorem EnergyProfile.velocityEnergy_le_envelope\n    {ν : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) {t : ℝ} (ht : 0 ≤ t) :\n    velocityEnergy (u t) ≤\n      QFA.Energy.envelope ‖a‖ ν (fun r => gradientEnergy (G r)) t",
+      "kind": "theorem",
+      "id": "LE056",
+      "step": "D04.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D04.01"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.velocityEnergy_le_envelope_ae",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 148,
+      "signature": "theorem EnergyProfile.velocityEnergy_le_envelope_ae\n    {ν R : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) :\n    ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      velocityEnergy (u t) ≤\n        QFA.Energy.envelope ‖a‖ ν (fun r => gradientEnergy (G r)) t",
+      "kind": "theorem",
+      "id": "LE057",
+      "step": "D04.01",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D04.01",
+        "D04.06"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.energy_product_budget_Ioo",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 163,
+      "signature": "theorem EnergyProfile.energy_product_budget_Ioo\n    {ν R : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    (h : EnergyProfile ν a u G) (hν : 0 < ν) (hR : 0 < R) :\n    Integrable (fun t => velocityEnergy (u t) * gradientEnergy (G t))\n        (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in Ioo (0 : ℝ) R, velocityEnergy (u t) * gradientEnergy (G t)) ≤\n        ‖a‖ ^ 4 / (4 * ν)",
+      "kind": "theorem",
+      "id": "LE058",
+      "step": "D04.06",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D04.06"
+      ]
+    },
+    {
+      "name": "QFA.Representation.EnergyProfile.exists_subcritical_good_time",
+      "source": "QFA/Endpoints/Representation/EnergyProfile.lean",
+      "module": "QFA.Endpoints.Representation.EnergyProfile",
+      "line": 188,
+      "signature": "theorem EnergyProfile.exists_subcritical_good_time\n    {ν δ : ℝ} {a : RealSpatialL2}\n    {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}\n    {Good : ℝ → Prop}\n    (h : EnergyProfile ν a u G) (hν : 0 < ν)\n    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧\n      velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4",
+      "kind": "theorem",
+      "id": "LE059",
+      "step": "D05.02",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D02.05",
+        "D05.02"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_tendsto_nhdsWithin_right",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 57,
+      "signature": "theorem timeTranslate_tendsto_nhdsWithin_right (s : ℝ) :\n    Tendsto (fun t : ℝ => t + s) (𝓝[>] (0 : ℝ)) (𝓝[>] s)",
+      "kind": "theorem",
+      "id": "LE060",
+      "step": "D05.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_measurePreserving_Ioc",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 70,
+      "signature": "theorem timeTranslate_measurePreserving_Ioc (s T : ℝ) :\n    MeasurePreserving (fun t : ℝ => t + s)\n      (volume.restrict (Ioc (0 : ℝ) T))\n      (volume.restrict (Ioc s (T + s)))",
+      "kind": "theorem",
+      "id": "LE061",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_memLp_Ioc",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 84,
+      "signature": "theorem timeTranslate_memLp_Ioc\n    {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {p : ℝ≥0∞}\n    {s T : ℝ} (hs : 0 ≤ s)\n    (hf : MemLp f p (volume.restrict (Ioc (0 : ℝ) (T + s)))) :\n    MemLp (timeTranslate s f) p (volume.restrict (Ioc (0 : ℝ) T))",
+      "kind": "theorem",
+      "id": "LE062",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_ae_Ioc",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 98,
+      "signature": "theorem timeTranslate_ae_Ioc {P : ℝ → Prop} {s T : ℝ} (hs : 0 ≤ s)\n    (hP : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)), P r) :\n    ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T), P (r + s)",
+      "kind": "theorem",
+      "id": "LE063",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_intervalIntegral",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 118,
+      "signature": "theorem timeTranslate_intervalIntegral (f : ℝ → ℝ) (s a b : ℝ) :\n    (∫ t in a..b, timeTranslate s f t) = ∫ t in a + s..b + s, f t",
+      "kind": "theorem",
+      "id": "LE064",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_intervalIntegrable",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 125,
+      "signature": "theorem timeTranslate_intervalIntegrable\n    {f : ℝ → ℝ} {s a b : ℝ}\n    (hf : IntervalIntegrable f volume (a + s) (b + s)) :\n    IntervalIntegrable (timeTranslate s f) volume a b",
+      "kind": "theorem",
+      "id": "LE065",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_dissipation_intervalIntegrable",
+      "source": "QFA/Endpoints/Restart/TimeTranslate.lean",
+      "module": "QFA.Endpoints.Restart.TimeTranslate",
+      "line": 135,
+      "signature": "theorem timeTranslate_dissipation_intervalIntegrable\n    {D : ℝ → ℝ} {s T : ℝ} (hs : 0 ≤ s) (hT : 0 ≤ T)\n    (hD : IntervalIntegrable D volume (0 : ℝ) (T + s)) :\n    IntervalIntegrable (timeTranslate s D) volume (0 : ℝ) T",
+      "kind": "theorem",
+      "id": "LE066",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.energy_le_of_energy_start",
+      "source": "QFA/Endpoints/Restart/EnergyShift.lean",
+      "module": "QFA.Endpoints.Restart.EnergyShift",
+      "line": 46,
+      "signature": "theorem energy_le_of_energy_start\n    {E D : ℝ → ℝ} {ν s t : ℝ}\n    (hν : 0 ≤ ν) (hs : 0 ≤ s)\n    (hD : ∀ r : ℝ, 0 ≤ r → 0 ≤ D r)\n    (hE : ∀ r : ℝ, s ≤ r →\n      E r + 2 * ν * (∫ q in s..r, D q) ≤ E s)\n    (hst : s ≤ t) :\n    E t ≤ E s",
+      "kind": "theorem",
+      "id": "LE067",
+      "step": "D05.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_energy_from_start",
+      "source": "QFA/Endpoints/Restart/EnergyShift.lean",
+      "module": "QFA.Endpoints.Restart.EnergyShift",
+      "line": 64,
+      "signature": "theorem timeTranslate_energy_from_start\n    {E D : ℝ → ℝ} {ν s : ℝ}\n    (hE : ∀ r : ℝ, s ≤ r →\n      E r + 2 * ν * (∫ q in s..r, D q) ≤ E s) :\n    ∀ t : ℝ, 0 ≤ t →\n      timeTranslate s E t +\n        2 * ν * (∫ q in (0 : ℝ)..t, timeTranslate s D q) ≤ E s",
+      "kind": "theorem",
+      "id": "LE068",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.timeTranslate_energy_intervals",
+      "source": "QFA/Endpoints/Restart/EnergyShift.lean",
+      "module": "QFA.Endpoints.Restart.EnergyShift",
+      "line": 79,
+      "signature": "theorem timeTranslate_energy_intervals\n    {E D : ℝ → ℝ} {ν s T : ℝ} (hs : 0 ≤ s)\n    (hE : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)),\n      ∀ t ∈ Icc r (T + s),\n        E t + 2 * ν * (∫ q in r..t, D q) ≤ E r) :\n    ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T),\n      ∀ t ∈ Icc r T,\n        timeTranslate s E t +\n          2 * ν * (∫ q in r..t, timeTranslate s D q) ≤ timeTranslate s E r",
+      "kind": "theorem",
+      "id": "LE069",
+      "step": "D05.04",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.04"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.strong_tendsto_of_inner_and_norm_bound",
+      "source": "QFA/Endpoints/Restart/HilbertTrace.lean",
+      "module": "QFA.Endpoints.Restart.HilbertTrace",
+      "line": 50,
+      "signature": "theorem strong_tendsto_of_inner_and_norm_bound\n    {ι : Type*} {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n    {l : Filter ι} {f : ι → E} {a : E}\n    (hinner : Tendsto (fun i => inner ℝ (f i) a) l (𝓝 (‖a‖ ^ 2)))\n    (hbound : ∀ᶠ i in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) :\n    Tendsto f l (𝓝 a)",
+      "kind": "theorem",
+      "id": "LE070",
+      "step": "D05.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.strong_right_trace_of_energy_start",
+      "source": "QFA/Endpoints/Restart/HilbertTrace.lean",
+      "module": "QFA.Endpoints.Restart.HilbertTrace",
+      "line": 80,
+      "signature": "theorem strong_right_trace_of_energy_start\n    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H]\n    {u : ℝ → H} {D : ℝ → ℝ} {ν s : ℝ}\n    (hν : 0 ≤ ν) (hs : 0 ≤ s)\n    (hD : ∀ r : ℝ, 0 ≤ r → 0 ≤ D r)\n    (hweak : ContinuousOn (fun t => inner ℝ (u t) (u s)) (Ici (0 : ℝ)))\n    (hE : ∀ r : ℝ, s ≤ r →\n      ‖u r‖ ^ 2 + 2 * ν * (∫ q in s..r, D q) ≤ ‖u s‖ ^ 2) :\n    Tendsto u (𝓝[>] s) (𝓝 (u s))",
+      "kind": "theorem",
+      "id": "LE071",
+      "step": "D05.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Restart.shifted_strong_trace_of_energy_start",
+      "source": "QFA/Endpoints/Restart/HilbertTrace.lean",
+      "module": "QFA.Endpoints.Restart.HilbertTrace",
+      "line": 103,
+      "signature": "theorem shifted_strong_trace_of_energy_start\n    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H]\n    {u : ℝ → H} {D : ℝ → ℝ} {ν s : ℝ}\n    (hν : 0 ≤ ν) (hs : 0 ≤ s)\n    (hD : ∀ r : ℝ, 0 ≤ r → 0 ≤ D r)\n    (hweak : ContinuousOn (fun t => inner ℝ (u t) (u s)) (Ici (0 : ℝ)))\n    (hE : ∀ r : ℝ, s ≤ r →\n      ‖u r‖ ^ 2 + 2 * ν * (∫ q in s..r, D q) ≤ ‖u s‖ ^ 2) :\n    Tendsto (timeTranslate s u) (𝓝[>] (0 : ℝ)) (𝓝 (u s))",
+      "kind": "theorem",
+      "id": "LE072",
+      "step": "D05.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.03"
+      ]
+    },
+    {
+      "name": "QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace",
+      "source": "QFA/Endpoints/Composition/GoodTimeAndTrace.lean",
+      "module": "QFA.Endpoints.Composition.GoodTimeAndTrace",
+      "line": 32,
+      "signature": "theorem exists_subcritical_good_time_with_strong_trace\n    {ν δ : ℝ} {a : QFA.Representation.RealSpatialL2}\n    {u : ℝ → QFA.Representation.RealSpatialL2}\n    {G : ℝ → Fin 3 → QFA.Representation.RealSpatialL2}\n    {Good : ℝ → Prop}\n    (h : QFA.Representation.EnergyProfile ν a u G)\n    (hν : 0 < ν)\n    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hweak : ∀ b : QFA.Representation.RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))\n    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),\n      Good s ∧ ∀ r : ℝ, s ≤ r →\n        QFA.Representation.velocityEnergy (u r) +\n          2 * ν * (∫ q in s..r, QFA.Representation.gradientEnergy (G q)) ≤\n            QFA.Representation.velocityEnergy (u s)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧\n      QFA.Representation.velocityEnergy (u s) *\n        QFA.Representation.gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 ∧\n      (∀ r : ℝ, s ≤ r →\n        QFA.Representation.velocityEnergy (u r) +\n          2 * ν * (∫ q in s..r, QFA.Representation.gradientEnergy (G q)) ≤\n            QFA.Representation.velocityEnergy (u s)) ∧\n      Tendsto u (𝓝[>] s) (𝓝 (u s)) ∧\n      Tendsto (QFA.Endpoints.Restart.timeTranslate s u)\n        (𝓝[>] (0 : ℝ)) (𝓝 (u s))",
+      "kind": "theorem",
+      "id": "LE073",
+      "step": "D05.03",
+      "status": "A_TIER_CANDIDATE",
+      "application_steps": [
+        "D05.02",
+        "D05.03"
+      ]
     }
   ],
   "analytic_targets": [
@@ -365,5 +1097,10 @@
       "source": "QFA/Endpoints/Agmon/Contracts.lean",
       "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
     }
-  ]
+  ],
+  "declaration_counts": {
+    "theorems": 71,
+    "proof_carrying_definitions": 2,
+    "audit_roots": 73
+  }
 }

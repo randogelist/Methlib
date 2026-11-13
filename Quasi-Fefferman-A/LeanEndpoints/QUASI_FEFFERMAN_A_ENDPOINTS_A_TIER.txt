@@ -1,5 +1,5 @@
 QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER
-VERSION = 0.1.0
+VERSION = 0.2.0
 STATUS = A_TIER_CANDIDATE
 MATHEMATICAL_DERIVATION = B_TIER
 EXACT_PHYSICAL_QFA_ROOT = FROZEN; LEAN_IMPLEMENTATION_PENDING
@@ -10,8 +10,10 @@ LOCAL_LEAN_EXECUTIONS = 0
 PACKAGE
   Quasi-Fefferman-A/LeanEndpoints
   Aggregator: QFA.lean
-  Candidate endpoint modules: 9
-  Public theorem declarations: LE001-LE030
+  Candidate endpoint modules: 15
+  Public theorem declarations: 71
+  Proof-carrying linear-isometry definitions: 2
+  Exact audit roots: LE001-LE073
   Analytic Prop definitions: LC001-LC003; no proof inhabitants supplied
 
 PINNED EXTERNAL BASELINE
@@ -19,26 +21,37 @@ PINNED EXTERNAL BASELINE
   Toolchain: leanprover/lean4:v4.33.0
   Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
   Transitive dependencies: lake-manifest.json
+  Integration parent: bf028db80b675a09c6144135e289c5c48572075a
 
 EXACT STATEMENT REGISTER
-  endpoint-manifest.json binds each theorem name to its source path,
-  exact prepared signature, derivation location and source SHA256.
-  Audit.lean emits the compiler type and #print axioms for every registered
-  public theorem. Private helpers remain in the audited dependency closure.
+  endpoint-manifest.json binds each declaration name to its kind, source
+  path, exact prepared signature, derivation locations and source SHA256.
+  Audit.lean emits the compiler type and #print axioms for all 73 roots.
+  LE031 complexifyVectorLI and LE041 complexifyL2LI contain linearity and
+  norm-preservation proofs; both are separately audited as constructions.
+  Private helpers remain in the transitive dependency closure.
 
 SOURCE STATUS
-  All 30 theorem declarations have proposed proof bodies.
+  All 71 theorem declarations have proposed proof bodies.
+  Both linear-isometry constructions have proposed proof-bearing bodies.
   No sorry, admit, arbitrary axiom declaration or native_decide proof occurs
   in the inspected candidate source.
   This is source inspection, not successful Lean elaboration or axiom evidence.
   The three analytic Prop definitions supply signatures only.
+
+MATHEMATICAL DERIVATIONS
+  QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt: LE001-LE030.
+  QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt: LE031-LE073.
+  ../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt: exact frozen root,
+    133 pinned source declarations, 45 derivation locations, 171 source
+    applications, complete inline and reverse indices.
 
 EXECUTION
   User's external native Windows environment: run.cmd
   Mathlib objects: lake exe cache get
   Candidate objects: incremental lake build QFA
   Independent elaboration: Elab.async=true in endpoint modules
-  Final chain: explicit deterministic composition
+  Final chains: explicit deterministic composition
   Cache deletion: none
 
 EVIDENCE
@@ -60,17 +73,32 @@ AXIOM POLICY
 
 PROMOTION BOUNDARY
   Prepared source alone -> A_TIER_CANDIDATE only.
-  Matching external compiler success AND exact theorem-level axiom audit
-    -> evidence for the individual compiled scalar declaration only.
+  Matching external compiler success AND exact declaration-level axiom audit
+    -> evidence for the individual compiled declaration only.
   Successful typing of an analytic Prop definition does not prove that Prop.
-  No scalar theorem is promoted to the actual whole-space QFA root.
+  No scalar, representation, energy-data or temporal endpoint is promoted
+  to the actual whole-space QFA root.
   No FORMAL_CLOSURE, CONDITIONAL_FORMAL_CLOSURE or UNCONDITIONAL_CLOSURE
   is established by this package preparation.
 
+EXTRACTED REPRESENTATION/RESTART BOUNDARY
+  LE031-LE050: actual vector/L2 maps, supplied energy preservation and real
+    compact-test derivative transport; physical witness identification and
+    Laplacian assembly remain separate.
+  LE051-LE059: full-volume L2-valued EnergyProfile implies scalar integrability,
+    envelope, product budget and strict good time. EnergyProfile is not an
+    LH definition; G is not asserted there to be a weak gradient.
+  LE060-LE072: generic time shifts, energy transport and Hilbert strong traces.
+  LE073: field profile plus explicit weak continuity and a.e. energy-start
+    data imply strict good time and both strong traces.
+  No physical weak momentum equation or LH membership is concluded by LE073.
+
 PHYSICAL REMAINDERS
-  Whole-space LH construction and profile realization;
-  physical restart and weak-equation translation;
-  AD01, AD08, AD03 and the analytic LC endpoints;
+  Whole-space LH construction, actual gradient identification and profile realization;
+  initial-trace identification of a and physical full-measure restart predicate;
+  AD01 physical derivative identification and Laplacian assembly;
+  AD02 physical weak-equation restart at D05.05;
+  AD08 compact/complex/Schwartz extension, AD03 inverse representative and LC targets;
   local strong existence, actual energy/enstrophy and continuation;
   comparison coefficient/product integrability and physical cross-testing;
   pressure realization, full NSE residual elimination and exact root assembly.
