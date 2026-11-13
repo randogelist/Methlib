@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "source_base": "59a220c10f4f1600498c1b423b809695fb58a92f",
+  "expected_checkpoints": 16,
+  "entries": [
+    {
+      "id": "P01",
+      "module": "SingularClosure.H12Frontier.ProductConstants",
+      "audit": "ci/product_audits/P01.lean",
+      "spec": "ci/product_audits/P01.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_CERTIFICATE"
+      ]
+    },
+    {
+      "id": "P02",
+      "module": "SingularClosure.H12Frontier.ProductConstants",
+      "audit": "ci/product_audits/P02.lean",
+      "spec": "ci/product_audits/P02.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.product_literatureK2_eq",
+        "SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY"
+      ]
+    },
+    {
+      "id": "P03",
+      "module": "SingularClosure.H12Frontier.ProductNormalization",
+      "audit": "ci/product_audits/P03.lean",
+      "spec": "ci/product_audits/P03.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.product_coefficient_normalization",
+        "SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY"
+      ]
+    },
+    {
+      "id": "P04",
+      "module": "SingularClosure.H12Frontier.ProductNormalization",
+      "audit": "ci/product_audits/P04.lean",
+      "spec": "ci/product_audits/P04.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF",
+        "SingularClosure.H12Frontier.product_scale_cube_gt_one",
+        "SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO"
+      ]
+    },
+    {
+      "id": "P05",
+      "module": "SingularClosure.H12Frontier.ProductConstants",
+      "audit": "ci/product_audits/P05.lean",
+      "spec": "ci/product_audits/P05.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.productDissipationConstant_eq",
+        "SingularClosure.H12Frontier.productDerivativeConstant_eq",
+        "SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS"
+      ]
+    },
+    {
+      "id": "P06",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P06.lean",
+      "spec": "ci/product_audits/P06.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY"
+      ]
+    },
+    {
+      "id": "P07",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P07.lean",
+      "spec": "ci/product_audits/P07.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL"
+      ]
+    },
+    {
+      "id": "P08",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P08.lean",
+      "spec": "ci/product_audits/P08.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET"
+      ]
+    },
+    {
+      "id": "P09",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P09.lean",
+      "spec": "ci/product_audits/P09.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET",
+        "SingularClosure.H12Frontier.PRODUCT_DATUM_AX6"
+      ]
+    },
+    {
+      "id": "P10",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P10.lean",
+      "spec": "ci/product_audits/P10.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE",
+        "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE",
+        "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET"
+      ]
+    },
+    {
+      "id": "P11",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P11.lean",
+      "spec": "ci/product_audits/P11.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW"
+      ]
+    },
+    {
+      "id": "P12",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P12.lean",
+      "spec": "ci/product_audits/P12.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF",
+        "SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC",
+        "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF",
+        "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC",
+        "SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY"
+      ]
+    },
+    {
+      "id": "P13",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P13.lean",
+      "spec": "ci/product_audits/P13.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS"
+      ]
+    },
+    {
+      "id": "P14",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P14.lean",
+      "spec": "ci/product_audits/P14.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_SERRIN_LERAYHOPF"
+      ]
+    },
+    {
+      "id": "P15",
+      "module": "SingularClosure.H12Frontier.ProductRoot",
+      "audit": "ci/product_audits/P15.lean",
+      "spec": "ci/product_audits/P15.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE"
+      ]
+    },
+    {
+      "id": "P16",
+      "module": "SingularClosure.H12Frontier.ProductRoot",
+      "audit": "ci/product_audits/P16.lean",
+      "spec": "ci/product_audits/P16.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT",
+        "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN"
+      ]
+    }
+  ],
+  "additional_allowed_axioms": [],
+  "checkpoint_marker": "<=>"
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.productDissipationConstant_eq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.productDissipationConstant_eq"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.productDerivativeConstant_eq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.productDerivativeConstant_eq"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS"
+    }
+  ]
+}

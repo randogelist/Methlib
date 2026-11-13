@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.product_scale_cube_gt_one",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.product_scale_cube_gt_one"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO"
+    }
+  ]
+}
