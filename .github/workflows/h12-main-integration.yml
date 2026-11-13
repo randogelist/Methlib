@@ -1,0 +1,218 @@
+name: H12 main integration
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+    paths:
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/**'
+      - '.github/workflows/h12-main-integration.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/**'
+      - '.github/workflows/h12-main-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: h12-main-integration-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  integration:
+    name: Lean 4.33.0 / merged frontier and P01-P16
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: package
+        shell: bash
+    env:
+      PROJECT: regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER
+      PARENT_PROJECT: regularity-B-assembly/Singular-Axiomatic-closure
+      SOURCE_SHA: ${{ github.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+      BASE_SOURCE_SHA: 59a220c10f4f1600498c1b423b809695fb58a92f
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - name: Checkout exact event candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          path: repository
+          persist-credentials: false
+      - name: Verify candidate identity and inherited Lean sources
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$SOURCE_SHA"
+          git -C repository fetch --no-tags --depth=1 origin "$BASE_SOURCE_SHA"
+          mkdir package
+          git -C repository archive "$SOURCE_SHA:$PROJECT" | tar -xf - -C package
+          mkdir -p package/evidence/main-integration
+          echo "$SOURCE_SHA" > package/evidence/commit.txt
+          echo "$GITHUB_SHA" > package/evidence/workflow-event-sha.txt
+          echo "$HEAD_SHA" > package/evidence/head-commit.txt
+          echo "$BASE_SHA" > package/evidence/base-commit.txt
+          echo "$BASE_SOURCE_SHA" > package/evidence/base-source-commit.txt
+          git -C repository rev-parse "$SOURCE_SHA^{tree}" > package/evidence/tree.txt
+          git -C repository archive --format=zip "$SOURCE_SHA:$PROJECT" > package/evidence/source_snapshot.zip
+          cp repository/.github/workflows/h12-main-integration.yml package/evidence/workflow.yml
+          git -C repository diff --name-status "$BASE_SOURCE_SHA" "$SOURCE_SHA" -- "$PROJECT" > package/evidence/base-diff.txt
+          python3 - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          def git(*args):
+              return subprocess.check_output(['git', '-C', 'repository', *args], text=True).strip()
+          source = os.environ['SOURCE_SHA']
+          head = os.environ['HEAD_SHA']
+          base = os.environ['BASE_SHA']
+          headers = git('cat-file', '-p', source).split('\n\n', 1)[0].splitlines()
+          parents = [line.split(' ', 1)[1] for line in headers if line.startswith('parent ')]
+          context = {
+              'source_commit': source,
+              'workflow_event_sha': os.environ['GITHUB_SHA'],
+              'head_commit': head,
+              'target_base_commit': base or None,
+              'frontier_base_commit': os.environ['BASE_SOURCE_SHA'],
+              'event_name': os.environ['GITHUB_EVENT_NAME'],
+              'event_ref': os.environ['GITHUB_REF'],
+              'candidate_tree': git('rev-parse', source + '^{tree}'),
+              'candidate_parents': parents,
+              'status': 'UNVERIFIED',
+          }
+          evidence = Path('package/evidence')
+          context_path = evidence / 'merge-context.json'
+          context_path.write_text(json.dumps(context, indent=2) + '\n')
+          if source != os.environ['GITHUB_SHA'] or git('rev-parse', 'HEAD') != source:
+              raise SystemExit('EVENT_CANDIDATE_IDENTITY_MISMATCH')
+          if os.environ['GITHUB_EVENT_NAME'] == 'pull_request':
+              if os.environ.get('GITHUB_BASE_REF') != 'main':
+                  raise SystemExit('MAIN_TARGET_REQUIRED')
+              if parents != [base, head]:
+                  raise SystemExit('MERGE_PARENTS_DO_NOT_MATCH_EVENT_BASE_AND_HEAD')
+          elif os.environ['GITHUB_REF'] != 'refs/heads/main':
+              raise SystemExit('NON_PR_MAIN_REF_REQUIRED')
+          context['status'] = 'VERIFIED'
+          context_path.write_text(json.dumps(context, indent=2) + '\n')
+          baseline = os.environ['BASE_SOURCE_SHA']
+          prefix = os.environ['PROJECT'] + '/'
+          names = git('ls-tree', '-r', '--name-only', baseline, prefix).splitlines()
+          protected = [name for name in names if name.endswith('.lean') or name in
+              [prefix + 'lean-toolchain', prefix + 'lake-manifest.json', prefix + 'lakefile.toml']]
+          if not protected:
+              raise SystemExit('EMPTY_INHERITED_SOURCE_SET')
+          checked = []
+          for name in protected:
+              before = git('rev-parse', baseline + ':' + name)
+              after = git('rev-parse', source + ':' + name)
+              if before != after:
+                  raise SystemExit('INHERITED_SOURCE_CHANGED:' + name)
+              checked.append({'path': name, 'git_blob': after})
+          (evidence / 'inherited-sources.json').write_text(json.dumps({
+              'status': 'PASS', 'baseline': baseline, 'candidate': source,
+              'checked_files': checked,
+          }, indent=2) + '\n')
+          print('MERGED_CANDIDATE_AND_INHERITED_LEAN_VERIFIED')
+          PY
+          cd package
+          cp lean-toolchain evidence/lean-toolchain.txt
+          cp lake-manifest.json evidence/lake-manifest.json
+          sha256sum lake-manifest.json > evidence/lockfile-before.sha256
+      - name: Scan all parent-package sources without Lean
+        working-directory: repository/regularity-B-assembly/Singular-Axiomatic-closure
+        run: |
+          set -euo pipefail
+          mkdir -p evidence "$GITHUB_WORKSPACE/package/evidence/parent-source-check"
+          set +e
+          python3 ci/check_sources.py | tee evidence/main-integration-source-policy.json
+          scan_status=${PIPESTATUS[0]}
+          set -e
+          cp evidence/main-integration-source-policy.json evidence/sources.json evidence/sources.sha256 "$GITHUB_WORKSPACE/package/evidence/parent-source-check/"
+          exit "$scan_status"
+      - name: Install pinned toolchain without building
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Restore dependency cache
+        id: deps
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+      - name: Restore compiled project cache
+        id: project
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: h12-main-integration-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/SingularClosure/**/*.lean', 'package/ci/**/*.lean', 'package/*.lean') }}
+          restore-keys: |
+            h12-main-integration-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            h12-product-adapter-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            h12-frontier-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+      - name: Require restored caches and verify compiler pins
+        id: cached
+        env:
+          DEPENDENCY_CACHE_KEY: ${{ steps.deps.outputs.cache-matched-key }}
+          PROJECT_CACHE_KEY: ${{ steps.project.outputs.cache-matched-key }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          dependency_key = os.environ['DEPENDENCY_CACHE_KEY']
+          project_key = os.environ['PROJECT_CACHE_KEY']
+          mathlib = Path('.lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean')
+          candidates = [
+              Path('.lake/build/lib/lean/SingularClosure/H12Frontier/ReplayClosure.olean'),
+              Path('.lake/build/lib/lean/SingularClosure/SmallDataClosure.olean'),
+          ]
+          available = [str(path) for path in candidates if path.is_file() and path.stat().st_size]
+          ready = bool(dependency_key and project_key and mathlib.is_file() and mathlib.stat().st_size and available)
+          Path('evidence/cache.json').write_text(json.dumps({
+              'dependency_cache': 'RESTORED' if dependency_key else 'MISSING',
+              'project_cache': 'RESTORED' if project_key else 'MISSING',
+              'dependency_cache_key': dependency_key,
+              'project_cache_key': project_key,
+              'mathlib_object_present': mathlib.is_file() and bool(mathlib.stat().st_size),
+              'project_bootstrap_objects': available,
+              'uncached_fallback': False,
+              'status': 'PASS' if ready else 'FAIL',
+          }, indent=2) + '\n')
+          if not ready:
+              raise SystemExit('RESTORED_COMPILED_DEPENDENCY_AND_PROJECT_CACHES_REQUIRED')
+          PY
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          sha256sum --check evidence/lockfile-before.sha256
+      - name: Compile and audit frontier regressions and sixteen product checkpoints
+        id: integration
+        run: python3 ci/build_main_integration.py
+      - name: Preserve validated incremental compiler cache
+        if: always() && steps.cached.outcome == 'success' && steps.integration.outcome == 'success' && steps.project.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.project.outputs.cache-primary-key }}
+      - name: Upload exact candidate and proof evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: h12-main-integration-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
+          if-no-files-found: error
