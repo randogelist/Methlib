@@ -1,0 +1,12 @@
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.productDissipationConstant_eq
+'SingularClosure.H12Frontier.productDissipationConstant_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.productDerivativeConstant_eq
+'SingularClosure.H12Frontier.productDerivativeConstant_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/product_audits/P05.lean:30:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS
+'SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS' depends on axioms: [propext, Classical.choice, Quot.sound]

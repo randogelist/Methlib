@@ -1,0 +1,962 @@
+FRONTIER_H12_PRODUCT_ADAPTER_CHAIN_B_TIER
+======================================
+
+MODE=B_TIER_DERIVATION
+THEOREM=FRONTIER_H12_PRODUCT_ADAPTER_CHAIN
+NATIVE_ROOT=FRONTIER_H12_PRODUCT_NATIVE
+PUBLIC_ROOT=FRONTIER_H12_PRODUCT
+STATUS=! B_TIER
+VERSION=1
+DATE=2026-11-13
+NEW_ROOT_A_TIER=NOT_ESTABLISHED
+LOCAL_LEAN_EXECUTIONS=0
+NEW_EXTERNAL_LEAN_EXECUTIONS=0
+REPLAY_POLICY=EXTERNAL_CACHED_ONLY
+
+REPOSITORY=randogelist/Methlib
+BRANCH=H12_extension
+SOURCE_PIN=59a220c10f4f1600498c1b423b809695fb58a92f
+COMPILED_SOURCE_PIN=d8b5e510411c224fd7b284b0a65eb2f9b08b3d83
+PACKAGE=regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER
+NAMESPACE=SingularClosure.H12Frontier
+LEAN_TOOLCHAIN=leanprover/lean4:v4.33.0
+MATHLIB_PIN=db584cd6d46c92f209a44c0f1c829460d327499d
+
+0. SCOPE
+--------
+
+  Omega := (R/Z)^3;
+  |Omega| := 1;
+  nu > 0;
+  f := 0;
+  partial_t u + (u . grad)u - nu Delta u + grad p = 0;
+  div u = 0.
+
+  a : SingularClosure.CriticalSobolev 1;
+  ha : SingularClosure.CriticalSigmaZero a.
+
+  ha.reality    : SpectralReality (criticalCoeff 1 a);
+  ha.solenoidal : SpectralSolenoidal (criticalCoeff 1 a);
+  ha.mean_zero  : SpectralMeanZero (criticalCoeff 1 a).
+
+  CriticalSobolev q <-> spectral order q/2.
+  q=1  <-> H^(1/2); q=3 <-> H^(3/2); q=-1 <-> H^(-1/2).
+
+  Quantification(a) = all CriticalSobolev 1 data satisfying ha.
+  AdditionalDatumPremises = emptyset.
+  InitialSmoothnessPremise = emptyset.
+  FiniteSupportPremise(a) = emptyset.
+
+  ExistingCanonicalRoot := FRONTIER_H12;
+  ExistingCanonicalCoefficient := frontierConstant;
+  ExistingCanonicalK2 := literatureK2.
+
+  Comparison = fixed-instance sufficient-ball inclusion.
+  Comparison != optimal-literature-radius comparison.
+  Comparison != ordering against criticalNonlinearConstant.
+
+1. FIXED OBJECTS
+----------------
+
+  s := paperScale = 2*pi;
+  V := s^3;
+  A := nativeSix = sixSource.toReal + 1;
+  B := nativeThree = derivativeSource.toReal + halfSource.toReal + 1;
+  P := nativeProduct = A*B;
+  K := literatureK2;
+  CF := frontierConstant;
+  Ctr := criticalTransportConstant.
+
+  certP := nativeProductCertificate;
+  certF := frontierCertificate.
+
+  certP.constant = P;
+  certP.positive = nativeProduct_pos;
+  certP.bound = EXPLICIT_PRODUCT_NONLINEAR_BOUND.
+
+  certF = NonlinearCertificate.enlarge certP CF
+            nativeProduct_le_frontierConstant.
+
+  A>0; B>0; P>0; K>0; CF>0; s>1; V>1.
+  CF = V*P.
+  CF = K/(2*sqrt(pi)).
+  K = 2*sqrt(pi)*V*P.
+
+  h(a) := ||a||;
+  p(a) := paperNorm 1 a;
+  p(a)^2 = sum_(k!=0) |k| sum_(i=1)^3 |ahat_i(k)|^2;
+  h(a)^2 = sum_(k!=0) 2*pi*|k| sum_(i=1)^3 |ahat_i(k)|^2;
+  ha.mean_zero => h(a)=sqrt(s)*p(a).
+
+  deltaP(nu,a) := nu-P*h(a);
+  DP(nu,a) := h(a)^2/(2*deltaP(nu,a));
+  VP(nu,a) := (nu+Ctr*h(a))^2*h(a)^2/(2*deltaP(nu,a));
+  QP(nu,a) := h(a)^4/(4*deltaP(nu,a));
+  kappaP := sqrt(2)*V.
+
+  productDissipationConstant nu a
+    := Replay.dissipationConstant certP nu a = DP(nu,a).
+  productDerivativeConstant nu a
+    := Replay.derivativeConstant certP nu a = VP(nu,a).
+
+2. EXACT CONCLUSION
+-------------------
+
+  Iplus := (0,infinity);
+  W_U(t) := U.flow.threeHalfState t;
+  Z_U(t) := U.flow.negativeHalfDerivative t;
+  u_U(t) := U.flow.velocity t;
+  p_U(t) := U.flow.pressure t;
+  d_U(t) := physicalDissipation (u_U(t));
+  sigma_U(t) := criticalSpatialNorm 6 (u_U(t));
+  a_phys := criticalInitialPhysicalL2 a.
+
+  ProductConclusion(nu,a) :=
+    CriticalDatumAX6 nu a
+    AND exists U : CriticalRegularSolution nu a,
+      CriticalLerayHopf nu a_phys U.lerayVelocity U.lerayGradient
+      AND U.lerayHopfUnique
+      AND PositiveSmoothNSE nu u_U p_U
+      AND [W_U in L^2(Iplus;CriticalSobolev 3)
+           AND integral_Iplus ||W_U(t)||^2 dt <= DP(nu,a)]
+      AND [Z_U in L^2(Iplus;CriticalSobolev (-1))
+           AND integral_Iplus ||Z_U(t)||^2 dt <= VP(nu,a)]
+      AND sigma_U in L^4(Iplus)
+      AND [forall T>0,
+           IntegrableOn (d_U^2) [0,T]
+           AND integral_0^T d_U(t)^2 dt
+               <= (h(a)^4-||U.critical T||^4)/(4*deltaP(nu,a))].
+
+  Measure(time) := Lebesgue;
+  Measure(space) := volume.restrict unitCube.
+
+  CriticalRegularSolution nu a entails:
+    U.critical in C([0,infinity);CriticalSobolev 1);
+    U.critical 0 = a;
+    forall t>=0, ||U.critical t|| <= ||a||;
+    forall t>0,
+      (U.flow.state 0 t).val = criticalCoeff 1 (U.critical t).
+
+  U.lerayHopfUnique :=
+    forall v G,
+      CriticalLerayHopf nu a_phys v G
+      -> forall t>0, v(t)=u_U(t) a.e.[volume.restrict unitCube].
+
+  Quantifier(U) = one common solution for all conjuncts.
+  UniquenessClass = CriticalLerayHopf.
+  UniquenessEquality = a.e. spatial equality at every positive time.
+
+3. ROOT STATEMENTS
+------------------
+
+  ! FRONTIER_H12_PRODUCT_NATIVE:
+    forall nu>0, forall a:CriticalSobolev 1,
+      CriticalSigmaZero a
+      -> P*h(a)<nu
+      -> ProductConclusion(nu,a).
+
+  ! PRODUCT_SMALLNESS_IFF:
+    forall nu:R, forall a:CriticalSobolev 1,
+      SpectralMeanZero (criticalCoeff 1 a)
+      -> [p(a)<(sqrt(2)*s^3/K)*nu <-> P*h(a)<nu].
+
+  ! FRONTIER_H12_PRODUCT:
+    forall nu>0, forall a:CriticalSobolev 1,
+      CriticalSigmaZero a
+      -> p(a)<(sqrt(2)*(2*pi)^3/K)*nu
+      -> ProductConclusion(nu,a).
+
+  ! PRODUCT_RADIUS_RATIO:
+    forall nu>0,
+      nu/P = (2*pi)^3*(nu/CF) > nu/CF.
+
+4. ADAPTER DERIVATION: CONSTANTS AND SMALLNESS
+--------------------------------------------
+
+  [P01] PRODUCT_CERTIFICATE
+
+    Existing:
+      nativeProduct_pos : 0<P;
+      EXPLICIT_PRODUCT_NONLINEAR_BOUND :
+        forall N c,
+          Supp_N(c) -> Reality(c) -> Solenoidal(c)
+          -> |criticalNonlinearPower 1 N c|
+             <= P*sqrt(criticalEnergy 1 N c)*criticalEnergy 3 N c.
+
+    Definition:
+      Supp_N(c) := forall k notin cutoffModes N, forall i, c(k,i)=0.
+
+    Construction:
+      certP := {constant=P,
+                positive=nativeProduct_pos,
+                bound=EXPLICIT_PRODUCT_NONLINEAR_BOUND}.
+
+    Therefore:
+      certP : NonlinearCertificate;
+      certP.constant=P.
+
+  [P02] PRODUCT_CONSTANT_IDENTITY
+
+    Existing:
+      frontierConstant_eq_nativeProduct : CF=s^3*P;
+      frontierConstant := K/(2*sqrt(pi));
+      sqrt_scale_relation : sqrt(2)*sqrt(s)=2*sqrt(pi).
+
+    Derivation:
+      K/(2*sqrt(pi))=V*P
+      => K=2*sqrt(pi)*V*P
+      => K=sqrt(2)*sqrt(s)*V*P
+      => K/(sqrt(2)*V)=sqrt(s)*P.
+
+    Denominators:
+      sqrt(2)>0; sqrt(pi)>0; V>0; P>0; K>0.
+
+    Therefore:
+      sqrt(2)*V/K = 1/(sqrt(s)*P).
+
+  [P03] PRODUCT_NORM_IDENTITY
+
+    hz := SpectralMeanZero (criticalCoeff 1 a).
+    nativeHhalf_norm(a,hz): h(a)=sqrt(s)*p(a).
+
+    P*h(a)
+      = P*sqrt(s)*p(a)
+      = [K/(sqrt(2)*V)]*p(a).
+
+    Therefore:
+      PRODUCT_COEFFICIENT_NORM_IDENTITY:
+        P*||a|| = [K/(sqrt(2)*s^3)]*paperNorm 1 a.
+
+  [P04] PRODUCT_SMALLNESS_IFF
+
+    c := K/(sqrt(2)*V)>0.
+
+    P*h(a)<nu
+      <-> c*p(a)<nu
+      <-> p(a)<nu/c
+      <-> p(a)<[sqrt(2)*V/K]*nu.
+
+    Quantifier(nu)=R; assumption(nu>0)=unnecessary for this equivalence.
+    Assumption(hz)=necessary for the invoked native norm bridge.
+
+  [P05] PRODUCT_MARGIN_AND_BUDGETS
+
+    P*h(a)<nu => deltaP(nu,a)>0.
+
+    Replay.dissipationConstant certP nu a
+      = h(a)^2/[2*(nu-certP.constant*h(a))]
+      = DP(nu,a)>=0.
+
+    Replay.derivativeConstant certP nu a
+      = (nu+Ctr*h(a))^2*h(a)^2/[2*(nu-certP.constant*h(a))]
+      = VP(nu,a)>=0.
+
+    Ctr_after = Ctr_before = criticalTransportConstant.
+
+5. ADAPTER DERIVATION: FINITE ENERGY AND AX6
+------------------------------------------
+
+  Fix nu>0, a, ha, P*h(a)<nu.
+  h0 := h(a); delta := nu-P*h0>0.
+  N:N;
+  g : GalerkinSolution nu (finiteSynthesis N (criticalCoeff 1 a)) N.
+  E_q(t) := criticalEnergy q N (g.coeff t).
+  R_1(t) := criticalEnergyRate nu 1 N (g.coeff t).
+
+  [P06] PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY
+
+    g.mode_support(t), g.real_symmetry(t), g.solenoidal(t)
+      -> certP.bound(N,g.coeff(t),...)
+      -> R_1(t)+2*(nu-P*sqrt(E_1(t)))*E_3(t)<=0, t>=0.
+
+    g.criticalEnergy_balance(1,t): dE_1/dt=R_1(t).
+
+    Therefore:
+      E_1'(t)+2*(nu-P*sqrt(E_1(t)))*E_3(t)<=0.
+
+    Existing specialization:
+      Replay.differentialInequality certP.
+
+  [P07] PRODUCT_GALERKIN_ENERGY_AND_DISSIPATION
+
+    Existing initial projection bound:
+      E_1(0)<=h0^2.
+
+    Boundary positivity:
+      sqrt(E_1)<=h0 => nu-P*sqrt(E_1)>=delta>0.
+
+    Continuous first-exit argument:
+      E_1(t)<=h0^2, t>=0.
+
+    Integration:
+      E_1(t)+2*delta*integral_0^t E_3(r)dr<=h0^2.
+
+    Therefore:
+      integral_0^T E_3(t)dt<=DP(nu,a), T>=0.
+
+    Existing specializations:
+      Replay.energyInvariant certP;
+      Replay.dissipationBudget certP;
+      Replay.stateNormBound certP;
+      Replay.stateThreeIntegral certP.
+
+  [P08] PRODUCT_GALERKIN_SHARP_QUARTIC
+
+    Existing interpolation:
+      E_2(t)^2<=E_1(t)*E_3(t).
+
+    E_1'+2*delta*E_3<=0
+      => (E_1^2)'+4*delta*E_1*E_3<=0
+      => (E_1^2)'+4*delta*E_2^2<=0.
+
+    Therefore:
+      E_1(T)^2+4*delta*integral_0^T E_2(t)^2dt<=E_1(0)^2<=h0^4;
+      integral_0^T E_2(t)^2dt<=[h0^4-E_1(T)^2]/(4*delta).
+
+    Existing identity:
+      E_2(t)=coefficientDissipation N (g.coeff t).
+
+    Existing specialization:
+      Replay.sharpSquareBudget certP.
+
+  [P09] PRODUCT_SIX_CHANNEL_BUDGET_AND_DATUM_AX6
+
+    Existing six-channel transfer:
+      budget6 N g.coeff T <= ENNReal.ofReal QP(nu,a).
+
+    M := Real.toNNReal QP(nu,a).
+    QP(nu,a)>=0.
+    Uniformity(M): independent of N and g.
+
+    Existing specializations:
+      Replay.sixChannelBudget certP;
+      Replay.datumAX6 certP nu hnu a
+        ha.reality ha.solenoidal ha.mean_zero hsmall.
+
+    Therefore:
+      CriticalDatumAX6 nu a.
+
+  [P10] PRODUCT_TIME_DERIVATIVE_BUDGET
+
+    Existing transport estimate and [P07]:
+      ||g.criticalRhs(-1,t)||
+        <= (nu+Ctr*h0)*sqrt(E_3(t)).
+
+    Squaring and integrating:
+      integral_0^T ||g.criticalRhs(-1,t)||^2dt
+        <= (nu+Ctr*h0)^2*integral_0^T E_3(t)dt
+        <= (nu+Ctr*h0)^2*h0^2/(2*delta)
+        = VP(nu,a).
+
+    Existing specializations:
+      Replay.timeDerivativePointwise certP;
+      Replay.timeDerivativeSquare certP;
+      Replay.timeDerivativeBudget certP.
+
+6. ADAPTER DERIVATION: LIMIT, TRACE, SMOOTHNESS, UNIQUENESS
+--------------------------------------------------------
+
+  [P11] PRODUCT_COMPACTNESS_AND_POSITIVE_FLOW
+
+    Inputs = {nu>0, ha, hsmall, [P07], [P08], [P10]}.
+
+    Replay.globalCompactness certP
+      -> exists u: R->CriticalSobolev 1, exists phi:N->N,
+           StrictMono(phi)
+           AND forall t>=0, ||u(t)||<=h0
+           AND local uniform L^2 convergence of Galerkin subsequence
+               to (fun t => criticalToTorusH0 1 (by norm_num) (u(t)))
+           AND forall T>=0, exists u1:TimeH1L2 T,
+                 Tendsto (fun n => (g_phi(n)).criticalTimeH1L2 T)
+                   atTop (nhds u1).
+
+    g_phi(n) := criticalDatumGalerkinFamily nu hnu.le a
+                  ha.reality ha.solenoidal (phi n).
+
+    Replay.positiveEnstrophy certP
+      -> Replay.positiveH2 certP
+      -> Replay.positiveAllOrders certP
+      -> Replay.positiveFlow certP.
+
+    Result:
+      exists L:CriticalPositiveSobolevFlow nu,
+        forall t>0, (L.state 0 t).val=criticalCoeff 1 (u(t)).
+
+    Quantifiers(positive-time bounds): 0<tau<=T.
+    No positive-time estimate replaces ha or hsmall.
+
+  [P12] PRODUCT_LIMIT_BUDGETS_AND_STRONG_TRACE
+
+    Replay.limitNegativeHalf certP:
+      local H^(-1/2) representative of fullFourierRhs with budget VP.
+
+    J_T := integral^lin_[0,T]
+      [criticalExtendedSquare 2 (criticalCoeff 1 (u(t)))]^2 dt : ENNReal.
+
+    Replay.limitQuartic certP:
+      ENNReal.ofReal(||u(T)||^4)
+        + ENNReal.ofReal(4*delta)*J_T <= ENNReal.ofReal(h0^4).
+
+    delta>0 -> 0<ENNReal.ofReal(4*delta)<infinity.
+    Therefore J_T<infinity.
+
+    Replay.physicalNegativeHalf certP:
+      derivative representative = actual physical time derivative a.e.
+
+    Replay.physicalQuartic certP:
+      a.e. spectral-integrand = ENNReal.ofReal(physicalDissipation(u_U(t))^2);
+      IntegrableOn (fun t => physicalDissipation(u_U(t))^2) [0,T];
+      integral_0^T physicalDissipation(u_U(t))^2dt
+        <= [h0^4-||u(T)||^4]/(4*delta).
+
+    CRITICAL_GALERKIN_GLOBAL_STRONG_TRACE:
+      local L^2_t H^(3/2) + local L^2_t H^(-1/2) derivative
+      + Galerkin convergence + initial Fourier approximation
+      -> u in C([0,infinity);CriticalSobolev 1), u(0)=a.
+
+    Existing assembly:
+      Replay.quantitativeRegularity certP nu hnu a ha hsmall
+      -> exists U:CriticalRegularSolution nu a,
+           local W-budget DP
+           AND local Z-budget VP
+           AND forall T>0,
+             integral_0^T d_U(t)^2dt
+               <= [h0^4-||U.critical T||^4]/(4*delta).
+
+  [P13] PRODUCT_GLOBAL_ENERGY_CLASS
+
+    DP>=0; VP>=0; all local budgets independent of T.
+
+    U.global_energy_class(DP,VP,...)
+      -> W_U in L^2(Iplus), integral_Iplus ||W_U||^2<=DP
+      -> Z_U in L^2(Iplus), integral_Iplus ||Z_U||^2<=VP.
+
+    Existing assembly:
+      Replay.globalEnergyClass certP nu hnu a ha hsmall.
+
+  [P14] PRODUCT_SERRIN_LERAYHOPF_AND_UNIQUENESS
+
+    forall T>0,
+      integral_0^T d_U(t)^2dt
+        <= [h0^4-||U.critical T||^4]/(4*delta)
+        <= QP(nu,a).
+
+    U.serrin_global_memLp_of_quartic_budget(QP,...)
+      -> sigma_U in L^4(Iplus).
+
+    U.serrin_time_memLp(T,...)
+      -> sigma_U in L^4((0,T]) for every T>0.
+
+    U.lerayHopf_of_quartic(...)
+      -> CriticalLerayHopf nu a_phys U.lerayVelocity U.lerayGradient.
+
+    U.lerayHopfUnique_of_serrin(hnu,...)
+      -> U.lerayHopfUnique.
+
+    U.physicalNSE
+      -> PositiveSmoothNSE nu U.flow.velocity U.flow.pressure.
+
+    Existing deterministic assembly:
+      Replay.fullClosure certP nu hnu a ha hsmall.
+
+  [P15] PRODUCT_NATIVE_ROOT
+
+    T(cert) := exact conclusion type of Replay.fullClosure at cert.
+
+    Replay.fullClosure : forall cert:NonlinearCertificate, T(cert).
+    certP : NonlinearCertificate.                         [P01]
+    Therefore T(certP).                                 forall-elimination
+
+    certP.constant=P.                                   definitional equality
+    dissipationConstant certP=productDissipationConstant.
+    derivativeConstant certP=productDerivativeConstant.
+
+    Therefore:
+      forall nu>0, a, ha, P*||a||<nu,
+        ProductConclusion(nu,a).
+
+    Proof-term specialization:
+      @SingularClosure.H12Frontier.Replay.fullClosure
+        SingularClosure.H12Frontier.nativeProductCertificate.
+
+    AdapterStatus(P15)=! B_TIER.
+    NewNamedLeanRootCompilation(P15)=PENDING.
+
+  [P16] PRODUCT_PUBLIC_ROOT
+
+    hpublic : p(a)<[sqrt(2)*V/K]*nu.
+    hnative := (PRODUCT_SMALLNESS_IFF nu a ha.mean_zero).mp hpublic.
+    hnative : P*||a||<nu.
+    FRONTIER_H12_PRODUCT_NATIVE nu hnu a ha hnative
+      : ProductConclusion(nu,a).
+
+    Therefore FRONTIER_H12_PRODUCT.
+
+    New analytic premise = emptyset.
+    New nonlinear estimate = emptyset.
+    New compactness premise = emptyset.
+    New uniqueness premise = emptyset.
+    Unresolved certificate/admission premise in mathematical root = emptyset.
+    New exact-root external certification = PENDING.
+
+7. EXACT RADIUS COMPARISON
+--------------------------
+
+  rF_native := nu/CF;
+  rP_native := nu/P;
+  rF_public := sqrt(2)*nu/K;
+  rP_public := sqrt(2)*V*nu/K.
+
+  nu>0, P>0, CF=V*P, V>1
+    => rP_native=V*rF_native>rF_native>0;
+    => rP_public=V*rF_public>rF_public>0.
+
+  BF(nu) := {a | CriticalSigmaZero a AND CF*||a||<nu};
+  BP(nu) := {a | CriticalSigmaZero a AND P*||a||<nu}.
+
+  a in BF
+    => P*||a||<=CF*||a||<nu
+    => a in BP.
+
+  Strictness witness:
+    w(x) := sqrt(2)*e_1*cos(2*pi*x_2);
+    what(0,1,0)=what(0,-1,0)=e_1/sqrt(2);
+    all other Fourier coefficients=0;
+    reality(w), solenoidal(w), mean_zero(w);
+    p(w)^2=1/2+1/2=1;
+    p(w)=1.
+
+    m := (rF_public+rP_public)/2;
+    a_m := m*w;
+    0<rF_public<p(a_m)=m<rP_public;
+    a_m in BP(nu) setminus BF(nu).
+
+  Therefore:
+    BF(nu) proper_subset BP(nu);
+    kappaP=sqrt(2)*(2*pi)^3>sqrt(2).
+
+  Fixed-data compatibility on BF(nu):
+    deltaF := nu-CF*h(a)>0;
+    deltaP>=deltaF;
+    DP<=DF;
+    VP<=VF;
+    QP<=QF.
+
+  For a in BP(nu) setminus BF(nu):
+    deltaP>0;
+    deltaF<=0;
+    old frontier budget positivity is unavailable.
+
+8. EXISTING-ENDPOINT ADAPTER MAP
+--------------------------------
+
+  Namespace F := SingularClosure.H12Frontier.
+  Namespace R := SingularClosure.H12Frontier.Replay.
+  Namespace S := SingularClosure.
+
+  Existing                              Product adapter                 Proof
+  --------------------------------------------------------------------------------
+  F.nativeProductCertificate            certP                           definition
+  F.frontierConstant_eq_nativeProduct   PRODUCT_CONSTANT_IDENTITY        P02
+  F.nativeHhalf_norm                    PRODUCT_COEFFICIENT_NORM_IDENTITY P03
+  F.coefficient_norm_identity           PRODUCT_SMALLNESS_IFF            P04
+  R.dissipationConstant certP           productDissipationConstant       P05
+  R.derivativeConstant certP            productDerivativeConstant        P05
+  R.differentialInequality certP        productDifferentialInequality    P06
+  R.energyInvariant certP              productEnergyInvariant           P07
+  R.dissipationBudget certP            productDissipationBudget         P07
+  R.sharpSquareBudget certP            productSharpQuarticBudget        P08
+  R.sixChannelBudget certP             productSixChannelBudget          P09
+  R.datumAX6 certP                     productDatumAX6                  P09
+  R.timeDerivativeBudget certP         productTimeDerivativeBudget      P10
+  R.globalCompactness certP            productGlobalCompactness         P11
+  R.positiveFlow certP                 productPositiveFlow              P11
+  R.limitNegativeHalf certP            productLimitNegativeHalf         P12
+  R.limitQuartic certP                 productLimitQuartic              P12
+  R.quantitativeRegularity certP       productQuantitativeRegularity    P12
+  R.globalEnergyClass certP            productGlobalEnergyClass         P13
+  R.fullClosure certP                  FRONTIER_H12_PRODUCT_NATIVE      P15
+  PRODUCT_SMALLNESS_IFF + native root  FRONTIER_H12_PRODUCT             P16
+  F.frontierConstant_eq_nativeProduct  PRODUCT_RADIUS_RATIO             section 7
+
+  NewNameStatus(all product adapters) = mathematical endpoint names.
+  ExistingLeanDeclarationStatus(new names) = NOT_ASSERTED.
+  MandatoryNewPDEProofBodies = emptyset.
+
+9. FORMALIZATION DECOMPOSITION
+------------------------------
+
+  Planned module                                      Content
+  -----------------------------------------------------------------------------
+  SingularClosure/H12Frontier/ProductConstants.lean   P02; P05; budget aliases
+  SingularClosure/H12Frontier/ProductNormalization.lean P03; P04; radius ratio
+  SingularClosure/H12Frontier/ProductMilestones.lean  P06-P14 specializations
+  SingularClosure/H12Frontier/ProductRoot.lean        P15; P16; exact root types
+
+  MinimumRootImports =
+    {SingularClosure.H12Frontier.ExplicitNonlinear,
+     SingularClosure.H12Frontier.ConstantNormalization,
+     SingularClosure.H12Frontier.ReplayClosure}.
+
+  ClosureInstantiation = @Replay.fullClosure nativeProductCertificate.
+  UnchangedSemanticObjects =
+    {CriticalSobolev, CriticalSigmaZero, CriticalDatumAX6,
+     CriticalRegularSolution, CriticalLerayHopf, PositiveSmoothNSE,
+     criticalInitialPhysicalL2, criticalTransportConstant}.
+
+  CoefficientSubstitutions =
+    cert.constant -> nativeProduct;
+    dissipationConstant cert -> productDissipationConstant;
+    derivativeConstant cert -> productDerivativeConstant;
+    4*(nu-cert.constant*||a||) -> 4*(nu-nativeProduct*||a||).
+
+  PublicSmallnessSubstitution =
+    paperNorm 1 a < (sqrt(2)*paperScale^3/literatureK2)*nu.
+
+  ExistingGenerator := ci/assemble_frontier_concrete.py;
+  ExistingGenerator.specialize(cert) := frontierCertificate;
+  ExistingGenerator.Output includes Root.lean, LimitMilestones.lean,
+    ci/frontier_plan.json, ci/frontier_audits/*.
+
+  ProductRegistrationConstraint :=
+    product source modules outside existing overwritten output paths
+    AND product audit entries reproducibly registered after generation
+    AND generated-source manifest includes every generated product module
+    AND source hashes identify the final exact adapter snapshot.
+
+  ProposedAuditGroups =
+    {P_CONSTANTS, P_NORMALIZATION, P_MILESTONES, P_NATIVE, P_PUBLIC, P_RADIUS}.
+
+  ProofSpine =
+    fixed signatures -> independent opaque edge theorems
+    -> native asynchronous elaboration -> deterministic root composition.
+
+  SchedulingVariation => invariant(theorem,premises,axioms,endpoint).
+
+10. CACHED EXTERNAL CERTIFICATION BOUNDARY
+-----------------------------------------
+
+  ExistingRun = https://github.com/randogelist/Methlib/actions/runs/43317474994
+  ExistingJob = 131529143429.
+  ExistingCompiledCommit = d8b5e510411c224fd7b284b0a65eb2f9b08b3d83.
+  ExistingCompiler = Lean 4.33.0, external x86_64 Linux.
+  ExistingDependencyCache = RESTORED.
+  ExistingProjectCache = RESTORED.
+  ExistingAuditGroups = 26.
+  ExistingAuditedDeclarations = 51.
+  ExistingCoreExactTypeAudits = PASS_ALL_14.
+  ExistingCoreAxiomAudits = PASS_STANDARD_ONLY_ALL_14.
+  ExistingRootAxioms = {propext, Classical.choice, Quot.sound}.
+
+  EvidenceSource = verification/frontier/EXECUTION.json.
+  EvidenceKind = repository execution record + external workflow metadata.
+  RawAuditArtifactReparsedInThisDerivation = false.
+
+  DirectAuditRegistrations:
+    S_PRODUCT -> EXPLICIT_PRODUCT_NONLINEAR_BOUND, nativeProduct_pos;
+    S_REPLAY_CLOSURE -> Replay.globalEnergyClass, Replay.fullClosure;
+    E13 -> FRONTIER_H12_NATIVE;
+    E14 -> FRONTIER_H12.
+
+  CompiledDependencyOnlyInViewedAuditIndex:
+    nativeHhalf_norm;
+    frontierConstant_eq_nativeProduct.
+
+  FutureProductRootPromotionRequires =
+    (exact source commit/hash match)
+    AND (Lean 4.33.0 + pinned Mathlib)
+    AND (cached dependency/project replay)
+    AND (all new theorem bodies accepted)
+    AND (exact-type examples accepted)
+    AND (theorem-level #print axioms audited)
+    AND (axioms subset {propext,Classical.choice,Quot.sound})
+    AND (sorryAx absent)
+    AND (same datum hypotheses + same-solution conclusion).
+
+  NewNamedRootExternalEvidence = emptyset.
+  NewNamedRootStatus = ! B_TIER.
+  NewNamedRootMarkers(!!,!!!,!!!!) = NOT_ASSIGNED.
+
+11. SCOPE REGISTER
+------------------
+
+  CompleteMathematicalAdapterDerivation = P01-P16.
+  RootImportedEndpoints = explicitly identified above.
+  AddedAnalyticHypotheses = emptyset.
+  AddedCertificateExistenceHypotheses = emptyset.
+  NewCompilerEvidence = emptyset.
+
+  EqualitiesEstablished =
+    {CF=(2*pi)^3*P,
+     rP_native=(2*pi)^3*rF_native,
+     rP_public=(2*pi)^3*rF_public,
+     native-product antecedent <-> product-public antecedent}.
+
+  ExcludedAssertions =
+    {P<criticalNonlinearConstant,
+     optimality(P), optimality(K),
+     arbitrary-prescribed-numerical-K theorem,
+     arbitrary-large-H^(1/2)-data regularity,
+     arbitrary-weak-solution uniqueness,
+     pointwise-spatial equality of arbitrary Leray-Hopf representatives,
+     initial-time smoothness/analyticity for arbitrary H^(1/2) data,
+     E_DYSON_L1 existence without its own hypotheses}.
+
+  FrozenOriginalRoot = FRONTIER_H12;
+  AdaptedRoot = FRONTIER_H12_PRODUCT;
+  GainScope = removal of the existing coefficient enlargement P -> (2*pi)^3*P.
+
+  ! FRONTIER_H12_PRODUCT_ADAPTER_CHAIN.
+
+12. EXACT TYPE SCHEMAS AND PINNED SOURCE INDEX
+---------------------------------------------
+
+  AppendixGeneration = textual extraction from pinned source;
+  AppendixElaboration = NOT_EXECUTED;
+  TypeSchemas = formalization targets, not external compiler evidence.
+
+12.1 PRODUCT DEFINITIONS (TARGET SCHEMAS)
+
+namespace SingularClosure.H12Frontier
+
+noncomputable def productDissipationConstant (ν : ℝ) (a : CriticalSobolev 1) : ℝ :=
+  Replay.dissipationConstant nativeProductCertificate ν a
+
+noncomputable def productDerivativeConstant (ν : ℝ) (a : CriticalSobolev 1) : ℝ :=
+  Replay.derivativeConstant nativeProductCertificate ν a
+
+12.2a FRONTIER_H12_PRODUCT_NATIVE (EXACT TARGET TYPE)
+
+theorem FRONTIER_H12_PRODUCT_NATIVE :
+    ∀ (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+    (hsmall : nativeProduct * ‖a‖ < ν),
+    CriticalDatumAX6 ν a ∧ ∃ U : CriticalRegularSolution ν a,
+      CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient ∧
+      U.lerayHopfUnique ∧
+      PositiveSmoothNSE ν U.flow.velocity U.flow.pressure ∧
+      (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.threeHalfState t‖ ^ 2) ≤ productDissipationConstant ν a) ∧
+      (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.negativeHalfDerivative t‖ ^ 2) ≤
+          productDerivativeConstant ν a) ∧
+      MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+        (volume.restrict (Ioi (0 : ℝ))) ∧
+      (∀ T : ℝ, 0 < T →
+        IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume ∧
+        (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤
+          (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) /
+            (4 * (ν - nativeProduct * ‖a‖)))
+
+
+PROOF_TERM_RECIPE (NOT COMPILED):
+  @Replay.fullClosure nativeProductCertificate
+
+12.2b FRONTIER_H12_PRODUCT (EXACT TARGET TYPE)
+
+theorem FRONTIER_H12_PRODUCT :
+    ∀ (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+    (hsmall : paperNorm 1 a < (Real.sqrt 2 * paperScale ^ 3 / literatureK2) * ν),
+    CriticalDatumAX6 ν a ∧ ∃ U : CriticalRegularSolution ν a,
+      CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient ∧
+      U.lerayHopfUnique ∧
+      PositiveSmoothNSE ν U.flow.velocity U.flow.pressure ∧
+      (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.threeHalfState t‖ ^ 2) ≤ productDissipationConstant ν a) ∧
+      (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.negativeHalfDerivative t‖ ^ 2) ≤
+          productDerivativeConstant ν a) ∧
+      MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+        (volume.restrict (Ioi (0 : ℝ))) ∧
+      (∀ T : ℝ, 0 < T →
+        IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume ∧
+        (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤
+          (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) /
+            (4 * (ν - nativeProduct * ‖a‖)))
+
+
+PROOF_TERM_RECIPE (NOT COMPILED):
+  intro ν hν a ha hsmall
+  exact FRONTIER_H12_PRODUCT_NATIVE ν hν a ha
+    ((PRODUCT_SMALLNESS_IFF ν a ha.mean_zero).mp hsmall)
+
+12.3 PRODUCT_SMALLNESS_IFF (TARGET SIGNATURE)
+
+theorem PRODUCT_SMALLNESS_IFF (ν : ℝ) (a : CriticalSobolev 1)
+    (hz : SpectralMeanZero (criticalCoeff 1 a)) :
+    paperNorm 1 a < (Real.sqrt 2 * paperScale ^ 3 / literatureK2) * ν ↔
+      nativeProduct * ‖a‖ < ν
+
+DERIVATION = P02 + P03 + P04.
+
+end SingularClosure.H12Frontier
+
+12.4 PINNED SOURCE ENDPOINT INDEX
+
+URL_BASE=https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/
+RAW_BASE=https://raw.githubusercontent.com/randogelist/Methlib/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/
+SOURCE_URL(path,line)=URL_BASE+path+'#L'+line.
+RAW_URL(path)=RAW_BASE+path.
+
+SingularClosure/H12Frontier/Contracts.lean
+  SHA256=c40b0303060a04706e1c586486a5e5780b4dc0cb60ea8ba2261c19e65bc8c2df
+  L10: NonlinearCertificate
+  L19: NonlinearCertificate.enlarge
+
+SingularClosure/H12Frontier/ExplicitNonlinear.lean
+  SHA256=3105b24036ba1eee6852903881c00b1c74e7e2969c55321cdc2ce99949ee07d2
+  L25: nativeSix
+  L26: nativeThree
+  L36: nativeSix_bound
+  L48: nativeThree_bound
+  L61: nativeHalf_bound
+  L74: nativeProduct
+  L76: nativeProduct_pos
+  L79: EXPLICIT_PRODUCT_NONLINEAR_BOUND
+  L135: nativeProductCertificate
+
+SingularClosure/H12Frontier/Normalization.lean
+  SHA256=e9ac1c83e50374dfc398400c263d49f837e1536817db1fd7c86c546a4876327b
+  L20: paperNorm
+  L75: FRONTIER_H12_NORM_BRIDGE
+  L83: nativeHhalf_norm
+
+SingularClosure/H12Frontier/LiteratureConstants.lean
+  SHA256=d0b75be9c8909d0241b9351f6e6aacb53e4758315c81e22f6d605b4cb2937cb7
+  L142: literatureK2
+  L147: literatureK2_pos
+  L145: frontierConstant
+  L155: sqrt_scale_relation
+  L164: frontierConstant_eq_nativeProduct
+
+SingularClosure/H12Frontier/ConstantNormalization.lean
+  SHA256=aedb4f7139c1b11d507af7df8511dc92e88266af6898007f4798691b0a526a22
+  L20: coefficient_norm_identity
+  L28: FRONTIER_H12_SMALLNESS_IFF
+
+SingularClosure/H12Frontier/NonlinearBound.lean
+  SHA256=09661b536d4f126aa6e501bc9d9638f53cb9b5881663ecf5853676f7e4c74118
+  L9: frontierCertificate
+
+SingularClosure/H12Frontier/ReplayEnergy.lean
+  SHA256=8fdaca69b5655b6192d310fc0c5ec099674c65e30e2f0b436f26dcb0dcc60425
+  L13: differentialInequality
+  L23: energyInvariant
+  L36: dissipationBudget
+  L53: sharpSquareBudget
+  L77: sixChannelBudget
+  L88: datumAX6
+
+SingularClosure/H12Frontier/ReplayDerivative.lean
+  SHA256=8e67e3af8272d47af8ee07229013be17bb28a03ee513c2fe1e1d58fd5536dac5
+  L13: timeDerivativePointwise
+  L42: timeDerivativeSquare
+  L54: timeDerivativeBudget
+
+SingularClosure/H12Frontier/ReplayCompactness.lean
+  SHA256=b86de1334354765fb13e246fb1179681d9cac8fc0b44423bfafab6a7f6e1716e
+  L27: dissipationConstant
+  L30: derivativeConstant
+  L48: stateThreeIntegral
+  L66: globalCompactness
+
+SingularClosure/H12Frontier/ReplayPositiveTime.lean
+  SHA256=9cfd5fe96a36027a4720fbe56095ce92de0c20ce1ec9ecfa274f8807bc023cb4
+  L15: positiveEnstrophy
+  L69: positiveH2
+  L122: positiveAllOrders
+  L136: positiveFlow
+
+SingularClosure/H12Frontier/ReplayLimit.lean
+  SHA256=b67fee18e5441fcff3dfd7be16e70e371029d23f3fc8f2cf254d8ca98744e9dc
+  L13: limitQuartic
+  L68: limitNegativeHalf
+
+SingularClosure/H12Frontier/ReplayPhysical.lean
+  SHA256=85915b532a45343d282a9c7cf0414411882f7cfb69c95d04187286c8c3ed97e2
+  L13: physicalNegativeHalf
+  L35: physicalQuartic
+
+SingularClosure/H12Frontier/ReplayQuantitative.lean
+  SHA256=69cbafbfe7751e24e8098675a6337a56d48df9e79add57b7664b568a964425ea
+  L14: quantitativeRegularity
+
+SingularClosure/H12Frontier/ReplayClosure.lean
+  SHA256=ab15966aea8cec6526d790e37d03a0a0403f4872bc3f6c2325d4686a0a48ed08
+  L13: globalEnergyClass
+  L36: fullClosure
+
+SingularClosure/CriticalRegularityContracts.lean
+  SHA256=2e5e8664d43a8ffcef014d6fb25c41f1e4696ac94003eab535d39b0398a51257
+  L11: CriticalSigmaZero
+  L18: CriticalRegularSolution
+  L37: CriticalRegularSolution.physicalNSE
+
+SingularClosure/SmallDataUniqueness.lean
+  SHA256=2fa87f442f4c844c90d96089e103642557b0833f1c991f8039ccf4193aa11714
+  L13: CriticalRegularSolution.lerayHopfUnique
+  L19: CriticalRegularSolution.lerayHopfUnique_of_serrin
+
+SingularClosure/H12Frontier/Root.lean
+  SHA256=229049c84da4357b5ac14772bf1eeaa2360ab889893a1ca26d59aa64adff4fd7
+  L14: FRONTIER_H12_NATIVE
+  L36: FRONTIER_H12
+
+12.5 SOURCE AND EVIDENCE LINKS
+
+REPOSITORY:
+https://github.com/randogelist/Methlib/tree/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER
+
+PARAMETRIC_CLOSURE:
+https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/SingularClosure/H12Frontier/ReplayClosure.lean
+
+PRODUCT_CERTIFICATE:
+https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/SingularClosure/H12Frontier/ExplicitNonlinear.lean
+
+CONSTANT_IDENTITY:
+https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/SingularClosure/H12Frontier/LiteratureConstants.lean
+
+GENERATOR:
+https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/assemble_frontier_concrete.py
+
+AUDIT_REGISTRY:
+https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/frontier_plan.json
+
+EXECUTION_RECORD:
+https://github.com/randogelist/Methlib/blob/59a220c10f4f1600498c1b423b809695fb58a92f/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/verification/frontier/EXECUTION.json
+
+CACHED_EXTERNAL_RUN:
+https://github.com/randogelist/Methlib/actions/runs/43317474994
+
+COMPILED_TO_SOURCE_COMPARISON:
+https://github.com/randogelist/Methlib/compare/d8b5e510411c224fd7b284b0a65eb2f9b08b3d83...59a220c10f4f1600498c1b423b809695fb58a92f
+
+PRIOR_B_TIER_ANALYTIC_DERIVATION:
+https://chatgpt.com/library?file_id=libfile_a45baff268a08191a379a20e35e262a3&account_id=personal
+
+12.6 MATHLIB ALGEBRA INTERFACE
+
+PIN=db584cd6d46c92f209a44c0f1c829460d327499d.
+Imported occurrence evidence = pinned Methlib source expressions.
+
+  Real.pi_pos; Real.sqrt_pos; Real.sqrt_nonneg; Real.sq_sqrt;
+  Real.sqrt_mul; Real.sqrt_sq; norm_nonneg;
+  mul_pos; div_pos; sub_pos; lt_div_iff₀; le_div_iff₀;
+  eq_div_iff; div_eq_iff; mul_assoc; mul_comm;
+  mul_le_mul_of_nonneg_right; mul_le_mul_of_nonneg_left;
+  intervalIntegral.integral_mono_on; intervalIntegral.integral_const_mul;
+  ENNReal.ofReal_le_ofReal; ENNReal.toReal_mul;
+  ENNReal.toReal_ofReal; ENNReal.ofReal_toReal.
+
+  Arithmetic normalization = ring / field_simp / positivity / nlinarith.
+  New analytic Mathlib endpoint requirement = emptyset.
+  New exact Lean elaboration requirement = all new declared adapter endpoints.
+
+FINAL:
+  ! B_TIER: FRONTIER_H12_PRODUCT_ADAPTER_CHAIN.
+  P||a||<nu <-> paperNorm(1,a)<sqrt(2)*(2*pi)^3*nu/K2.
+  certP -> Replay.fullClosure -> ProductConclusion.
+  New product-root external audit = PENDING.
+
+END.

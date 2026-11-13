@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY"
+    }
+  ]
+}

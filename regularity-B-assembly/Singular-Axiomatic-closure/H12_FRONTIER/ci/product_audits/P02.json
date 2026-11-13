@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.product_literatureK2_eq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.product_literatureK2_eq"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY"
+    }
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "schema_version": 1,
+  "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+  "workflow_event_sha": "d45411004d3316aff6384d55fd68a01a41c77969",
+  "run_id": "43357771407",
+  "run_attempt": "1",
+  "expected_checkpoints": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16"
+  ],
+  "compiled_and_audited_checkpoints": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16"
+  ],
+  "status": "PASS",
+  "completion_requires_scope_review": true,
+  "entries": [
+    {
+      "id": "P01",
+      "module": "SingularClosure.H12Frontier.ProductConstants",
+      "audit": "ci/product_audits/P01.lean",
+      "spec": "ci/product_audits/P01.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_CERTIFICATE"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P01-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_CERTIFICATE"
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "module": "SingularClosure.H12Frontier.ProductConstants",
+      "audit": "ci/product_audits/P02.lean",
+      "spec": "ci/product_audits/P02.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.product_literatureK2_eq",
+        "SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P01-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.product_literatureK2_eq"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY"
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "module": "SingularClosure.H12Frontier.ProductNormalization",
+      "audit": "ci/product_audits/P03.lean",
+      "spec": "ci/product_audits/P03.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.product_coefficient_normalization",
+        "SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P03-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.product_coefficient_normalization"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY"
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "module": "SingularClosure.H12Frontier.ProductNormalization",
+      "audit": "ci/product_audits/P04.lean",
+      "spec": "ci/product_audits/P04.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF",
+        "SingularClosure.H12Frontier.product_scale_cube_gt_one",
+        "SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P03-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.product_scale_cube_gt_one"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO"
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "module": "SingularClosure.H12Frontier.ProductConstants",
+      "audit": "ci/product_audits/P05.lean",
+      "spec": "ci/product_audits/P05.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.productDissipationConstant_eq",
+        "SingularClosure.H12Frontier.productDerivativeConstant_eq",
+        "SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P01-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.productDissipationConstant_eq"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.productDerivativeConstant_eq"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS"
+        }
+      ]
+    },
+    {
+      "id": "P06",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P06.lean",
+      "spec": "ci/product_audits/P06.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY"
+        }
+      ]
+    },
+    {
+      "id": "P07",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P07.lean",
+      "spec": "ci/product_audits/P07.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL"
+        }
+      ]
+    },
+    {
+      "id": "P08",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P08.lean",
+      "spec": "ci/product_audits/P08.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC",
+        "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET"
+        }
+      ]
+    },
+    {
+      "id": "P09",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P09.lean",
+      "spec": "ci/product_audits/P09.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET",
+        "SingularClosure.H12Frontier.PRODUCT_DATUM_AX6"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_DATUM_AX6"
+        }
+      ]
+    },
+    {
+      "id": "P10",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P10.lean",
+      "spec": "ci/product_audits/P10.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE",
+        "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE",
+        "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET"
+        }
+      ]
+    },
+    {
+      "id": "P11",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P11.lean",
+      "spec": "ci/product_audits/P11.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS",
+        "SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW"
+        }
+      ]
+    },
+    {
+      "id": "P12",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P12.lean",
+      "spec": "ci/product_audits/P12.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF",
+        "SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC",
+        "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF",
+        "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC",
+        "SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY"
+        }
+      ]
+    },
+    {
+      "id": "P13",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P13.lean",
+      "spec": "ci/product_audits/P13.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS"
+        }
+      ]
+    },
+    {
+      "id": "P14",
+      "module": "SingularClosure.H12Frontier.ProductMilestones",
+      "audit": "ci/product_audits/P14.lean",
+      "spec": "ci/product_audits/P14.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.PRODUCT_SERRIN_LERAYHOPF"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P06-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.PRODUCT_SERRIN_LERAYHOPF"
+        }
+      ]
+    },
+    {
+      "id": "P15",
+      "module": "SingularClosure.H12Frontier.ProductRoot",
+      "audit": "ci/product_audits/P15.lean",
+      "spec": "ci/product_audits/P15.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P15-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE"
+        }
+      ]
+    },
+    {
+      "id": "P16",
+      "module": "SingularClosure.H12Frontier.ProductRoot",
+      "audit": "ci/product_audits/P16.lean",
+      "spec": "ci/product_audits/P16.json",
+      "declarations": [
+        "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT",
+        "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN"
+      ],
+      "source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+      "status": "COMPILE_AND_AUDIT_PASS",
+      "exact_type": "PASS",
+      "axiom_audit": "PASS_STANDARD_ONLY",
+      "build_log": "P15-build.log",
+      "audited_declarations": [
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT"
+        },
+        {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "name": "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN"
+        }
+      ]
+    }
+  ]
+}

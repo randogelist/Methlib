@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.product_literatureK2_eq
+'SingularClosure.H12Frontier.product_literatureK2_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY
+'SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY' depends on axioms: [propext, Classical.choice, Quot.sound]

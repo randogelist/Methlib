@@ -1,0 +1,14 @@
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.product_coefficient_normalization
+'SingularClosure.H12Frontier.product_coefficient_normalization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/product_audits/P03.lean:20:5: warning: Variable name `hz` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hz
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY
+'SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
