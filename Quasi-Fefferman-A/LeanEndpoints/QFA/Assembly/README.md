@@ -6,10 +6,10 @@ import QFA.Assembly
 
 ```text
 VERSION = 0.3.0
-NEW_THEOREM_CANDIDATES = 20
+NEW_VERIFIED_THEOREMS = 20
 LOCAL_INDICES = LE074-LE093
-LEAN_STATUS = A_TIER_CANDIDATE
-EXTERNAL_COMPILER_AND_AXIOM_AUDIT = PENDING
+LEAN_STATUS = A_TIER
+EXTERNAL_COMPILER_AND_AXIOM_AUDIT = PASS
 LOCAL_LEAN_EXECUTIONS = 0
 ```
 
@@ -51,5 +51,10 @@ The singleton contains functions on `{t : ℝ // 0 ≤ t}`.
 - [Indexed frozen-root derivation](../../../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt): entry points at their mathematical application steps.
 - [run.cmd](../../run.cmd): cached external native Windows Lean 4.33.0 execution.
 
-The frozen physical QFA root is unchanged. No matching external compiler or
-declaration-level axiom-audit evidence is included in this source package.
+The frozen physical QFA root is unchanged and remains B_TIER.
+LE074–LE093 are verified within the exact 93-root audit at commit
+`97d745678734a2bb9d7c1d9d4ae05d1a36c0a162`. [Run 43528295686](https://github.com/randogelist/Methlib/actions/runs/43528295686), attempt 1;
+[verified evidence](../../../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt).
+LC001–LC004 and AO01–AO08 remain unresolved. Source-header candidate
+comments retain their preparation snapshot; the endpoint ledger records
+the current exact declaration status.

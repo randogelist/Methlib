@@ -1,16 +1,17 @@
 QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER
 VERSION = 0.3.0
-STATUS = A_TIER_CANDIDATE
+STATUS = A_TIER
+MARKER = !!=A_TIER
 MATHEMATICAL_DERIVATION = B_TIER
 EXACT_PHYSICAL_QFA_ROOT = FROZEN; LEAN_IMPLEMENTATION_PENDING
-EXTERNAL_COMPILER_EVIDENCE = ABSENT
-THEOREM_LEVEL_AXIOM_AUDIT_EVIDENCE = ABSENT
+EXTERNAL_COMPILER_EVIDENCE = PASS
+THEOREM_LEVEL_AXIOM_AUDIT_EVIDENCE = PASS
 LOCAL_LEAN_EXECUTIONS = 0
 
 PACKAGE
   Quasi-Fefferman-A/LeanEndpoints
   Aggregator: QFA.lean
-  Candidate endpoint/assembly proof modules: 19
+  Verified endpoint/assembly proof modules: 19
   Public theorem declarations: 91
   Proof-carrying linear-isometry definitions: 2
   Exact audit roots: LE001-LE093
@@ -25,19 +26,22 @@ PINNED EXTERNAL BASELINE
 
 EXACT STATEMENT REGISTER
   endpoint-manifest.json binds each declaration name to its kind, source
-  path, exact prepared signature, derivation locations and source SHA256.
+  path, exact signature, derivation locations and source SHA256.
   Audit.lean emits the compiler type and #print axioms for all 93 roots.
   LE031 complexifyVectorLI and LE041 complexifyL2LI contain linearity and
   norm-preservation proofs; both are separately audited as constructions.
   Private helpers remain in the transitive dependency closure.
 
-SOURCE STATUS
-  All 91 theorem declarations have proposed proof bodies.
-  Both linear-isometry constructions have proposed proof-bearing bodies.
-  No sorry, admit, arbitrary axiom declaration or native_decide proof occurs
-  in the inspected candidate source.
-  This is source inspection, not successful Lean elaboration or axiom evidence.
-  The four analytic Prop definitions supply signatures only.
+SOURCE AND VERIFICATION STATUS
+  All 91 exact theorem declarations and both proof-carrying linear isometries
+  passed the matching external compiler and exact transitive axiom audit.
+  No sorryAx or unapproved axiom occurs in any of the 93 audited closures.
+  The four analytic Prop definitions remain targets without proof inhabitants.
+  This ledger records current status. Candidate-status comments in unchanged
+  Lean source headers and immutable B-tier supplements are preparation snapshots.
+  Every Lean source, run.cmd, audit.py and dependency input retains its compiled
+  bytes. The current manifest differs from the preserved compiled manifest only
+  by declaration/status/evidence metadata and the assembly-manifest metadata hash.
 
 MATHEMATICAL DERIVATIONS
   QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt: LE001-LE030.
@@ -52,24 +56,36 @@ EXECUTION
   GitHub Actions: .github/workflows/qfa-endpoints.yml
   Branch trigger: QFA; package or workflow changes
   Hosted runner: windows-2022; native Windows Lean 4.33.0
-  Cache layers: native toolchain, pinned dependencies, incremental endpoints
+  Cache layers: native toolchain, pinned dependencies, compiled Lake
+    configurations (.lake/config), incremental endpoint objects
   CI evidence binding: tested commit, workflow identity, run ID and attempt
   User's external native Windows environment: run.cmd
   Mathlib objects: lake exe cache get
-  Candidate objects: incremental lake build QFA
+  Endpoint objects: incremental lake build QFA
   Independent elaboration: Elab.async=true in endpoint modules
   Final chains: explicit deterministic composition
   Cache deletion: none
 
+VERIFIED EXTERNAL EXECUTION
+  Compiler: Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+  Compiled commit: 97d745678734a2bb9d7c1d9d4ae05d1a36c0a162
+  GitHub run: 43528295686; attempt: 1
+  Run URL: https://github.com/randogelist/Methlib/actions/runs/43528295686
+  Run conclusion: completed / success
+  Compiled source-manifest SHA256: 6c25121124c5f6bf461d932921b54bc3ffdcceb5648d91fb7184f4fa98cd75bf
+  Exact audit-name SHA256: cec806256182932155a5d2431883875c3dd571ee4c8d241245dd10905b5b55f1
+  Nine locked dependency revisions: before/after identities and clean statuses verified
+  Cache policy: MATHLIB_CACHE_AND_INCREMENTAL_LAKE
+
 EVIDENCE
-  evidence/source-manifest.json
-  evidence/lean-version.txt
-  evidence/mathlib-cache.log
-  evidence/before-revision-*.txt and evidence/after-revision-*.txt
-  evidence/before-status-*.txt and evidence/after-status-*.txt
-  evidence/build.log
-  evidence/axioms.log
-  evidence/status.json
+  Recorded directory: ../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162
+  VERIFICATION.txt; github-run.json; record-sha256.json
+  source-manifest.json; lean-version.txt; commit.txt
+  mathlib-cache.log; cache-ready.json; build.log; axioms.log; status.json
+  before-revision-*.txt; after-revision-*.txt
+  before-status-*.txt; after-status-*.txt
+  Exact compiler types: axioms.log TYPE_BEGIN/TYPE_END regions, cross-checked
+  against status.json. The appendix records each exact name and axiom set.
 
 AXIOM POLICY
   Allowed foundational axioms: propext, Classical.choice, Quot.sound.
@@ -86,7 +102,7 @@ PROMOTION BOUNDARY
   No scalar, representation, energy-data or temporal endpoint is promoted
   to the actual whole-space QFA root.
   No FORMAL_CLOSURE, CONDITIONAL_FORMAL_CLOSURE or UNCONDITIONAL_CLOSURE
-  is established by this package preparation.
+  is established for the physical root by this endpoint verification.
 
 EXTRACTED REPRESENTATION/RESTART BOUNDARY
   LE031-LE050: actual vector/L2 maps, supplied energy preservation and real
@@ -108,7 +124,7 @@ ASSEMBLY STATUS
   LE085-LE089: actual field norm estimates to exact nonlinear absorption.
   LE090-LE092: a.e. comparison starts and common traces to all-time equality.
   LE093: singleton only after nonnegative-time restriction, with reference membership.
-  Existing LE001-LE073 signatures and endpoint source bodies remain unchanged.
+  All LE001-LE093 signatures and compiled proof bodies are unchanged by status recording.
   The new four assembly files have independent proof bodies and explicit final
     compositions; they do not add analytic axiom declarations.
 
@@ -123,5 +139,661 @@ PHYSICAL REMAINDERS
   local strong existence, actual energy/enstrophy and continuation;
   comparison coefficient/product integrability and physical cross-testing;
   pressure realization, full NSE residual elimination and exact root assembly.
+
+APPENDIX: EXACT VERIFIED DECLARATIONS AND TRANSITIVE AXIOM SETS
+  Scope: LE001-LE093; 91 theorems and 2 proof-carrying definitions.
+  Axiom lists are parsed from the matching compiler's #print axioms reports.
+  Compiler type source: ../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/axioms.log
+
+[LE001]
+DECLARATION = QFA.Energy.envelope_zero
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 462cbe5deeea9d0e0e93e48398dd23bc3e45bad531457de3bd7106eb3c7b0eb7
+
+[LE002]
+DECLARATION = QFA.Energy.envelope_absolutelyContinuousOnInterval
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = fdcf1ac7063ec35166dae0e830c8466aa783c30630f0be93b7a0c598d6842dd5
+
+[LE003]
+DECLARATION = QFA.Energy.envelope_hasDerivAt_ae
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c449eb221828129e03d9ac58d40cd04e1f95a3788fb14b6939dd07d287936532
+
+[LE004]
+DECLARATION = QFA.Energy.envelope_product_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 9266384924bda70224243ba85bca6fd6112dda167f976a76c0de4e40eafc480b
+
+[LE005]
+DECLARATION = QFA.Energy.envelope_product_integral
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 9cc311a61f82f035284f968dc31ad238e95fe00ecca2b3de54e617369226cd05
+
+[LE006]
+DECLARATION = QFA.Energy.product_budget_of_envelope_identity
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c2c293135640914aacf4dbf4b4e99e17fd44feb383af887edd19f37c7648e434
+
+[LE007]
+DECLARATION = QFA.Energy.product_budget
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = ca6e4ee833516274735543b550bea27eabb167770af6c89b8b73aad204193822
+
+[LE008]
+DECLARATION = QFA.Energy.product_budget_Ioo
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 20f1027c88350e53c8d252b76c24a020672a78939aa62e43be32cc6c0253a237
+
+[LE009]
+DECLARATION = QFA.Endpoints.GoodTime.qfa_cutoff_nonneg
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 08373803d2aea7b983eddaa84a6db152f0add4c42262facfa5b8bf02e21940bb
+
+[LE010]
+DECLARATION = QFA.Endpoints.GoodTime.qfa_budget_lt_threshold
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = ea90f134090597b2be9bf2f2f14934cb34f2ea099b92f762e8ff82b5066ff271
+
+[LE011]
+DECLARATION = QFA.Endpoints.GoodTime.exists_good_time_of_integral_lt
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = a146398f4f7ef2d00bc73f1ee1a447960b3bf495f50aed9b8237650126f2598f
+
+[LE012]
+DECLARATION = QFA.Endpoints.GoodTime.exists_subcritical_product_good_time
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = e8cd9896df018c7695f472e38c9fb99826230d0097240e863a3e787953666686
+
+[LE013]
+DECLARATION = QFA.Endpoints.GoodTime.exists_subcritical_product_good_time_of_interval_budget
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 41f1fca0279690a224b2d2617451c67cd0907515462029c969a9eb7e5bf5913d
+
+[LE014]
+DECLARATION = QFA.Endpoints.Composition.exists_subcritical_good_time_of_envelope
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = d363d2f404c1bc9c635dc0916b7391b7ccdf5bd04bae2c511c05a552ee437f9b
+
+[LE015]
+DECLARATION = QFA.Endpoints.Agmon.agmon_fourth_power
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = a18a83d754c0b5836563b01d30427e1876f54aa401aacc32be4629cc6a2b45ba
+
+[LE016]
+DECLARATION = QFA.Endpoints.Agmon.nonlinear_fourth_power_of_agmon_fourth
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 00e7904bd1482cc14810dccb9a6e22bfe082643e24dcf7ca6ffe3d62e8418d5f
+
+[LE017]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.nonlinear_fourth_power
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = ff0e0aa0017ce6942033c65b8d2361069286097e934a30f6a81227ab91cc9492
+
+[LE018]
+DECLARATION = QFA.Endpoints.Agmon.nonlinear_le_of_product_le
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = fb8618bb0d27347577898fc47898bac16ae99796e43581449354144c7af47e1d
+
+[LE019]
+DECLARATION = QFA.Endpoints.Agmon.nonlinearCoefficient_nonneg
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = f16a54b25cebaecd4137806b6986cbcf96c3aeebf4081a5dc63c232fb40bd2b9
+
+[LE020]
+DECLARATION = QFA.Endpoints.Agmon.nonlinearCoefficient_fourth
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 926c65403efe57ff1f5d2c0dd8e0937bb6e187094a3d33d0d5b273bccc45b8a0
+
+[LE021]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.nonlinear_le_coefficient
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 0447e4cc55fb05baaccb18737fa0a25fff3d546ac1e3d17a9a3b92fe2a2410e9
+
+[LE022]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 83781a5582141c6c6526f81d27ebb8922d250a4b6830c72165af4b544f83f177
+
+[LE023]
+DECLARATION = QFA.Endpoints.Agmon.nonlinearCoefficient_lt_viscosity
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 4b559c328e144f4be91175cd02731d7536b9bca53be9ab1037b815ac84964b8f
+
+[LE024]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.enstrophy_absorption
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 1f53874f6a3405d52de2c15194d9a8df13a58fc6037121099226121907463255
+
+[LE025]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.viscosity_margin_pos
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c1c87d6c769d348c924e9feb797c4e467daf709e57216619ca29968c42b0e2b5
+
+[LE026]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = dd24a3f8c2cf0c4b3b55f3ce5b350c02cebe723444716d2586a5e5311801f29c
+
+[LE027]
+DECLARATION = QFA.Endpoints.Comparison.critical_comparison_differential_gronwall
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = fa3b298256c4fe8160cb6dc04cd11f8231cab4e36717ef27bd849d76d7b4ee68
+
+[LE028]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_GRONWALL
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 261972c3ae4856d9a1eda3a4c745558013c6d428253f9e08d2139f4d2dc57717
+
+[LE029]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = a059c882e05e2cfcd271771c186565b4e83535d0a59e1c10278550216c542dc7
+
+[LE030]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 7adae363415004039be556ae8abf9722d066ee2b50be423a8250fbae8386c9c7
+
+[LE031]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI
+KIND = proof_carrying_definition
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 59d37d954da7214a4632030557ce7c4653bacc8184134a463439cf35594d1f8f
+
+[LE032]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_apply
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = eed47053370fc1acdefc7e3aacabf9fff11e805a6c4256d83dc6bf8246f767ff
+
+[LE033]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_zero
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c350f943ee5beaf818b3fb8a55a7673f690634f606103381e5c8503bf8ea5de1
+
+[LE034]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_norm
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 78efbb072465adef4835f0e8cb2da61f1b25d32b2afc5314a71bda54b6daac01
+
+[LE035]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_norm_sq
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = cca78ed87846e63cf1f504326f1818528bbce99d3822b082d8522c74ed62806d
+
+[LE036]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_isometry
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 89d1b1079d74452113328a029f2eacff47cdafe14450ef9cb2d8e1021248764b
+
+[LE037]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_ae
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = e9f32d18d2cc531f2ebbaf67e490f90f9056696d5af8d6264450d0443e439d14
+
+[LE038]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_norm
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = bd1d2c03a7c690024853ab1bade1aa2c680626df8c26ddaa403733f999c53a70
+
+[LE039]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_add
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c1cfbf0f9224bcdc06fd8846d902fbd19399b772b7706578dfaf97ecbc1214b6
+
+[LE040]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_smul
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = e2b1beb109a4626f8cc61dd63d6b0654a4c001e149d5839c4c1f4702f787dbe1
+
+[LE041]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2LI
+KIND = proof_carrying_definition
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = cb6871bfb4009ce1a824a954ea69081caa8fdb6a2d3ce0443fd7c0fb0de9b72e
+
+[LE042]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_isometry
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = e104d9a744b6a3191a3024bab0902319dd4a319dab318a794581c4e7fbe2d0d1
+
+[LE043]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_zero
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 9377e2a9652d19b99fbf7dceb1490043c9ba5a62a5e25c49ffe2277f71aad8cf
+
+[LE044]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_velocityEnergy
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = ed895dbba84b254dc1be875d99096427103de8fa628fd405d226722cd8882a69
+
+[LE045]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_gradientEnergy
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 4e9da8b8a0a7a289eb751d606231fc3c3364c0fc098bfaec9b31f29fdbe9430c
+
+[LE046]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_laplacianEnergy
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 1a68864667bd1efb9c5fb4e3f51de4bd0c1360f85bdc335b1ece17e6b0e3fe37
+
+[LE047]
+DECLARATION = QFA.Endpoints.Representation.integrable_compact_test_smul
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = ff53b5889492f79419aa8151c76a6a8c5a718b9705be5129b0967e64abd832c7
+
+[LE048]
+DECLARATION = QFA.Endpoints.Representation.integral_test_smul_complexifyL2
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = f11a4031ad0bd4caf3208309b984a52865814e4b7ee8bc14468a2f7e39b0c253
+
+[LE049]
+DECLARATION = QFA.Endpoints.Representation.weakTestIdentity_complexify
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = b389d5d138b15769ac412d98661312f4198c5150c8d35678f99e884be4112a49
+
+[LE050]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_weakDirectionalDerivative
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = d6613ef9bae0978c6579d90841b63b1dd0e332e6938400adc35c04b630a0ae0e
+
+[LE051]
+DECLARATION = QFA.Representation.velocityEnergy_nonneg
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 88fa96cca5f50ae7c294605cb8c33fc00c6012c76c019c6ba2453edce237371e
+
+[LE052]
+DECLARATION = QFA.Representation.gradientEnergy_nonneg
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 0780a5daa424b7748b5979b595aa045485ba26645c7233c6825b62a60082b00c
+
+[LE053]
+DECLARATION = QFA.Representation.EnergyProfile.velocityEnergy_aestronglyMeasurable
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 76c0db06931868d25210e2537025273c471056b439255979f27ca33492a62c69
+
+[LE054]
+DECLARATION = QFA.Representation.EnergyProfile.gradientEnergy_integrable
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 0c5eedd134cbf609a63388510be4d0f070dd226ada1cf2ffa3faeaec18b4a050
+
+[LE055]
+DECLARATION = QFA.Representation.EnergyProfile.gradientEnergy_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = b5b72bebc9cb6095f2ffa5ca89ee4ca0368f44879ece3193e5f520c69d090fbe
+
+[LE056]
+DECLARATION = QFA.Representation.EnergyProfile.velocityEnergy_le_envelope
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 7a6ad6caccf6f83c1d9d2b569ffd2806ed8bf8be0d24b3ef2f373cde39c9078e
+
+[LE057]
+DECLARATION = QFA.Representation.EnergyProfile.velocityEnergy_le_envelope_ae
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 9bd64632171e9b47ff529f642d24bd296b2f238c2d396ce540094493aa386a72
+
+[LE058]
+DECLARATION = QFA.Representation.EnergyProfile.energy_product_budget_Ioo
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c36f32452e676d29fdae95075c01d29ff8b3feefda4a6d91b41d288a2473e282
+
+[LE059]
+DECLARATION = QFA.Representation.EnergyProfile.exists_subcritical_good_time
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = b8be130be675e95dc9162646787035996873e14cc05ab23d10c696034bb30b5a
+
+[LE060]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_tendsto_nhdsWithin_right
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = e4d448f2083c274afca2a6d7c8b14363b1f43343b48ac744f3cac41c5ab65b25
+
+[LE061]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_measurePreserving_Ioc
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 3a586e79acbac457fe72ba018a732cbbb76e62f9036b9fd903644a7fa7ae2d82
+
+[LE062]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_memLp_Ioc
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 3478ffaace82f2832411b733c7f626d56435d23f293287da4dc6aac473c6f9c4
+
+[LE063]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_ae_Ioc
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 4a499c8b3457bc62c66974ca3e6245e5a9f3a6a1843ec28f7aaa96ffc08731bd
+
+[LE064]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_intervalIntegral
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 5f80cbd07fc9e8679a149e7b680afeb0f2086350261eeafafcdb20ca1d144def
+
+[LE065]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 77198ff8a68f505f9d7aa3fc8883451cf5a469cea11ecfa4043eae3529838b6f
+
+[LE066]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_dissipation_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 1fbb3e74de305b9d54141a2ce48e71229ff4cb44a48bbdc415ccf3d4e28f4aac
+
+[LE067]
+DECLARATION = QFA.Endpoints.Restart.energy_le_of_energy_start
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 2924b96838755d72ed5dd6b5b1a38993aae8e13813da61a49ea5e8d1b58f4bda
+
+[LE068]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_energy_from_start
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 662f4e402548a90f7a1e6382276d82a9a5562c383f01760e37231cc58e4069bf
+
+[LE069]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_energy_intervals
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 2b18a108ee573e5b602340a8b14de60811329331971c7f70109bdb55872a94bc
+
+[LE070]
+DECLARATION = QFA.Endpoints.Restart.strong_tendsto_of_inner_and_norm_bound
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 49f336101672500671978ebd1cfc1b8fec151417c3b65d4c77b5b14b8a35acb3
+
+[LE071]
+DECLARATION = QFA.Endpoints.Restart.strong_right_trace_of_energy_start
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = ebe753c8e529fbfc6e8095c893a089eba62bd930902b4c073eb9b9e7234a02bb
+
+[LE072]
+DECLARATION = QFA.Endpoints.Restart.shifted_strong_trace_of_energy_start
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = a13031d693b1013aeb83beb6c4c76fd8be2cef8dc797ff2ba405de34f6aceabe
+
+[LE073]
+DECLARATION = QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = b3f72c04be912b58c7a53f6e503ab7d56cfbde0d49f48c53f3f74c239ef2ef0e
+
+[LE074]
+DECLARATION = QFA.Assembly.Representation.complexifyL2_sum
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = a9aa1c8b3c72ccde631603dd992a6a24368ecfcf18523a7d172d50a7cee93587
+
+[LE075]
+DECLARATION = QFA.Assembly.Representation.complexify_compactDerivativeData
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 7bc108e9d017a9138ae0200261bb70876e7c9f84dee826fb4cab287a854332e6
+
+[LE076]
+DECLARATION = QFA.Assembly.Representation.schwartzWitnesses_of_compactData
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 5677e8241caa51bce8e550fbd6bc9bdc04c22db130842d5ee84094bc4f8cd523
+
+[LE077]
+DECLARATION = QFA.Assembly.Representation.spectralRealization_of_compactData
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 497d7c37f0a164dcaae9f7957f63928aa34c08ee56e53b6a29524ffd89e1f0dd
+
+[LE078]
+DECLARATION = QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioc
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = b46a32c6842e338d0ea198d83c228b27f8ae00fac1784453276ce0985b944a0d
+
+[LE079]
+DECLARATION = QFA.Assembly.Restart.timeTranslate_aestronglyMeasurable_Ioo
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 360d02eb2cef2ce6273bbf844419c78c4d212428ada727372a318fad4e0e9d76
+
+[LE080]
+DECLARATION = QFA.Assembly.Restart.timeTranslate_memLp_Ioo
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 70dfb0c2ba70f36cb92e4cfb2d6d8143ea64146aee927fceb8b14f7cacb3e33f
+
+[LE081]
+DECLARATION = QFA.Assembly.Restart.timeTranslate_weakPairingContinuousOn
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = c3020841803b2809ff79acb06afff4858ff759b4e71300805fbe86456d315e78
+
+[LE082]
+DECLARATION = QFA.Assembly.Restart.energyProfile_timeTranslate
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 70fd6973522b7f127282cb6845c9631bfe496d6d131a838488a42f56f7565486
+
+[LE083]
+DECLARATION = QFA.Assembly.Restart.restartData_of_energyStart
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = e85a80b15373224b6287e51ad4e460500e3da06725096ca24514ad3a7a6a4cf6
+
+[LE084]
+DECLARATION = QFA.Assembly.Restart.exists_restartData_before
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 7a78ae42a8a0f403b7327461ec2579b7899ec1847d22534051a7bf951d296942
+
+[LE085]
+DECLARATION = QFA.Assembly.AnalyticInputs.scalarProfile_of_field_estimates
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = afb35eb4cda9c5b529a821a08b933ce9cbb548ad0fd34bcfd46849326860ca22
+
+[LE086]
+DECLARATION = QFA.Assembly.AnalyticInputs.scalarProfile_of_complexified_field_estimates
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 2f9196f67ba20c3032565ff758a85976b32fb77d9378d09e2e6a7389a4b8f7a7
+
+[LE087]
+DECLARATION = QFA.Assembly.AnalyticInputs.exists_scalarProfile_of_analytic_endpoints
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 15af2835afd2404ff418dba030d8e62186bfc97a13b04e6eff4ffdcae866945c
+
+[LE088]
+DECLARATION = QFA.Assembly.AnalyticInputs.nonlinear_estimates_of_analytic_endpoints
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 4e947fa541a7cff5a8f6d54c813c02a88179debbec3224ff9f68663f854d5a51
+
+[LE089]
+DECLARATION = QFA.Assembly.AnalyticInputs.exists_positive_margin_of_analytic_endpoints
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = b7bbb967e3d7c28591153d8f2c5bc9aadedbade80345144213da86098617a32f
+
+[LE090]
+DECLARATION = QFA.Assembly.Comparison.eq_on_Ioc_of_ae_relative_energy
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 59d3eef2d3986fd96fa10a7d7a64ab68e2aed485f29e6354a2f6f3ff9a1db19b
+
+[LE091]
+DECLARATION = QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 5d478f3c5a6f85172621de0840c7465a79f370e7cc6f831adea170568de10efb
+
+[LE092]
+DECLARATION = QFA.Assembly.Comparison.eq_on_nonnegative_of_ae_relative_energy
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 3c6d80ad8c122ec9b10ccce1cd3fac723d5a2c0abb8792fcc5b56999afa7b1cf
+
+[LE093]
+DECLARATION = QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative
+KIND = theorem
+STATUS = A_TIER
+AXIOMS = [Classical.choice, Quot.sound, propext]
+COMPILER_TYPE_SHA256 = 86f3d77aaa4297fdb31295b84a518a100b80a47066fa2e25f59476e40474e19a
 
 END OF QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER

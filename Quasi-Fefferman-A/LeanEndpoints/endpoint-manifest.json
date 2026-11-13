@@ -1,7 +1,7 @@
 {
   "version": "0.3.0",
   "mathematical_status": "B_TIER",
-  "lean_status": "A_TIER_CANDIDATE",
+  "lean_status": "A_TIER",
   "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
   "lean": "4.33.0",
   "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
@@ -46,7 +46,7 @@
     "QFA/Endpoints/Restart/HilbertTrace.lean": "2715d102af4ac35b4e52a4f145792c75a67d39c16f41ee03f2ad6a58f1156727",
     "QFA/Endpoints/Restart/TimeTranslate.lean": "ec4370573c9dbdcb482c9ce732f5c6ebed2a1eed2711c5361a4c307906080e7d",
     "QFA.lean": "2dae30bc12a7c0c1fa94bf1461689eb3ce1d3eaff4c4d66cded5d973a21ec721",
-    "assembly-manifest.json": "744903bc91543a811b59ce230240405d9c1f3aba203400b67cb1aa9309c7701d",
+    "assembly-manifest.json": "76cdfd258deb5e372082ce3745b8aff03ce5d6af2276d7f83578ef13bb555259",
     "lake-manifest.json": "d6d1cf29b10a13526b356cfb5bdfcccc8aaf33c39b6c68a2990b533a015b41a8",
     "lakefile.lean": "082fa0336d2b38e238f6444e163513b4590e0f003f9a951293827d31c04a5012",
     "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
@@ -62,7 +62,7 @@
       "signature": "theorem envelope_zero (M ν : ℝ) (D : ℝ → ℝ) :\n    envelope M ν D 0 = M ^ 2",
       "id": "LE001",
       "step": "D04.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.01"
@@ -76,7 +76,7 @@
       "signature": "theorem envelope_absolutelyContinuousOnInterval\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    AbsolutelyContinuousOnInterval (envelope M ν D) 0 R",
       "id": "LE002",
       "step": "D04.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.02"
@@ -90,7 +90,7 @@
       "signature": "theorem envelope_hasDerivAt_ae\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    ∀ᵐ t ∂volume, t ∈ uIcc (0 : ℝ) R →\n      HasDerivAt (envelope M ν D) (-(2 * ν * D t)) t",
       "id": "LE003",
       "step": "D04.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.03"
@@ -104,7 +104,7 @@
       "signature": "theorem envelope_product_intervalIntegrable\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    IntervalIntegrable (fun t => envelope M ν D t * D t) volume 0 R",
       "id": "LE004",
       "step": "D04.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.04"
@@ -118,7 +118,7 @@
       "signature": "theorem envelope_product_integral\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hν : ν ≠ 0)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    (∫ t in (0 : ℝ)..R, envelope M ν D t * D t) =\n      (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν)",
       "id": "LE005",
       "step": "D04.05",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.05"
@@ -132,7 +132,7 @@
       "signature": "theorem product_budget_of_envelope_identity\n    {E D F : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hFD : IntervalIntegrable (fun t => F t * D t) volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDm : AEStronglyMeasurable D (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), E t ≤ F t)\n    (hidentity : (∫ t in (0 : ℝ)..R, F t * D t) =\n      (M ^ 4 - (F R) ^ 2) / (4 * ν)) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤\n        (M ^ 4 - (F R) ^ 2) / (4 * ν) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)",
       "id": "LE006",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.06"
@@ -146,7 +146,7 @@
       "signature": "theorem product_budget\n    {E D : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      E t ≤ envelope M ν D t) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤\n        (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)",
       "id": "LE007",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.06"
@@ -160,7 +160,7 @@
       "signature": "theorem product_budget_Ioo\n    {E D : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      E t ≤ envelope M ν D t) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in Ioo (0 : ℝ) R, E t * D t) ≤ M ^ 4 / (4 * ν)",
       "id": "LE008",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D04.06"
@@ -174,7 +174,7 @@
       "signature": "theorem qfa_cutoff_nonneg (M : ℝ) {ν : ℝ} (hν : 0 < ν) :\n    0 ≤ M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5)",
       "id": "LE009",
       "step": "D05.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D05.01"
@@ -188,7 +188,7 @@
       "signature": "theorem qfa_budget_lt_threshold\n    {M ν δ : ℝ} (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ) :\n    M ^ 4 / (4 * ν) < (4 * Real.pi ^ 2 * ν ^ 4) * δ",
       "id": "LE010",
       "step": "D05.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D05.01"
@@ -202,7 +202,7 @@
       "signature": "theorem exists_good_time_of_integral_lt\n    {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}\n    (hT : 0 < T) (hc : 0 ≤ c)\n    (hf : Integrable f (volume.restrict (Ioo (0 : ℝ) T)))\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) T), Good t)\n    (hbudget : (∫ t in Ioo (0 : ℝ) T, f t) < c * T) :\n    ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c",
       "id": "LE011",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D05.02"
@@ -216,7 +216,7 @@
       "signature": "theorem exists_subcritical_product_good_time\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hprod : Integrable (fun t => E t * D t)\n      (volume.restrict (Ioo (0 : ℝ) δ)))\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)\n    (hbudget : (∫ t in Ioo (0 : ℝ) δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
       "id": "LE012",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D05.02"
@@ -230,7 +230,7 @@
       "signature": "theorem exists_subcritical_product_good_time_of_interval_budget\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hprod : IntervalIntegrable (fun t => E t * D t) volume 0 δ)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)\n    (hbudget : (∫ t in (0 : ℝ)..δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
       "id": "LE013",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D05.02"
@@ -244,7 +244,7 @@
       "signature": "theorem exists_subcritical_good_time_of_envelope\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hD : IntervalIntegrable D volume (0 : ℝ) δ)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) δ)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ),\n      E t ≤ QFA.Energy.envelope M ν D t)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
       "id": "LE014",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D05.02"
@@ -258,7 +258,7 @@
       "signature": "theorem agmon_fourth_power\n    {D Z A : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z)\n    (hAgmon : A ^ 2 ≤ Real.sqrt (D * Z) / (2 * Real.pi)) :\n    4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z",
       "id": "LE015",
       "step": "D06.06",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.06"
@@ -272,7 +272,7 @@
       "signature": "theorem nonlinear_fourth_power_of_agmon_fourth\n    {E D Z A N : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z) (hN : 0 ≤ N)\n    (hInterpolation : D ^ 2 ≤ E * Z)\n    (hAgmon : 4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z)\n    (hConvection : N ≤ A * Real.sqrt D * Real.sqrt Z) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4",
       "id": "LE016",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -286,7 +286,7 @@
       "signature": "theorem ScalarProfile.nonlinear_fourth_power\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4",
       "id": "LE017",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -300,7 +300,7 @@
       "signature": "theorem nonlinear_le_of_product_le\n    {E D Z N c : ℝ} (hZ : 0 ≤ Z) (hc : 0 ≤ c)\n    (hFourth : 4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4)\n    (hProduct : E * D ≤ 4 * Real.pi ^ 2 * c ^ 4) :\n    N ≤ c * Z",
       "id": "LE018",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -314,7 +314,7 @@
       "signature": "theorem nonlinearCoefficient_nonneg (E D : ℝ) :\n    0 ≤ nonlinearCoefficient E D",
       "id": "LE019",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -328,7 +328,7 @@
       "signature": "theorem nonlinearCoefficient_fourth\n    {E D : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) :\n    4 * Real.pi ^ 2 * nonlinearCoefficient E D ^ 4 = E * D",
       "id": "LE020",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -342,7 +342,7 @@
       "signature": "theorem ScalarProfile.nonlinear_le_coefficient\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :\n    N ≤ nonlinearCoefficient E D * Z",
       "id": "LE021",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -356,7 +356,7 @@
       "signature": "theorem ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) (hZ : Z = 0) : N = 0",
       "id": "LE022",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D06.08"
@@ -370,7 +370,7 @@
       "signature": "theorem nonlinearCoefficient_lt_viscosity\n    {E D ν : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) (hν : 0 < ν)\n    (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :\n    nonlinearCoefficient E D < ν",
       "id": "LE023",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D07.01"
@@ -384,7 +384,7 @@
       "signature": "theorem ScalarProfile.enstrophy_absorption\n    {E D Z A N d ν : ℝ} (h : ScalarProfile E D Z A N)\n    (hEnstrophy : d / 2 + ν * Z ≤ N) :\n    d + 2 * (ν - nonlinearCoefficient E D) * Z ≤ 0",
       "id": "LE024",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D07.01"
@@ -398,7 +398,7 @@
       "signature": "theorem ScalarProfile.viscosity_margin_pos\n    {E D Z A N ν : ℝ} (h : ScalarProfile E D Z A N) (hν : 0 < ν)\n    (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :\n    0 < ν - nonlinearCoefficient E D",
       "id": "LE025",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D07.01"
@@ -412,7 +412,7 @@
       "signature": "theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO\n    {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)\n    (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :\n    ∃ ε : ℕ → ℝ,\n      (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧\n      Tendsto ε atTop (𝓝 0)",
       "id": "LE026",
       "step": "D09.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D09.03"
@@ -426,7 +426,7 @@
       "signature": "theorem critical_comparison_differential_gronwall\n    {y d a : ℝ → ℝ} {s T : ℝ} (hst : s ≤ T)\n    (hy : ContinuousOn y (Icc s T)) (ha : ContinuousOn a (Icc s T))\n    (hderiv : ∀ t ∈ Ioo s T, HasDerivAt y (d t) t)\n    (hbound : ∀ t ∈ Ioo s T, d t ≤ a t * y t) :\n    ∀ t ∈ Icc s T, y t ≤ y s * Real.exp (∫ r in s..t, a r)",
       "id": "LE027",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D09.04"
@@ -440,7 +440,7 @@
       "signature": "theorem CRITICAL_RELATIVE_ENERGY_GRONWALL\n    {e a : ℝ → ℝ} {s T δ : ℝ} (hst : s ≤ T)\n    (ha : ContinuousOn a (Icc s T))\n    (ha_nonneg : ∀ t ∈ Icc s T, 0 ≤ a t)\n    (hprod : IntervalIntegrable (fun r => a r * e r) volume s T)\n    (hrelative : ∀ t ∈ Icc s T,\n      e t ≤ δ + ∫ r in s..t, a r * e r) :\n    ∀ t ∈ Icc s T, e t ≤ δ * Real.exp (∫ r in s..t, a r)",
       "id": "LE028",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D09.04"
@@ -454,7 +454,7 @@
       "signature": "theorem CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE\n    {e a : ℝ → ℝ} {T M : ℝ} {ε : ℕ → ℝ}\n    (hT : 0 < T)\n    (he_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ e t)\n    (ha : ContinuousOn a (Ioc 0 T))\n    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)\n    (ha_integrable : IntervalIntegrable a volume 0 T)\n    (hprod : IntervalIntegrable (fun r => a r * e r) volume 0 T)\n    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)\n    (hε : ∀ n, ε n ∈ Ioc 0 T)\n    (hε_zero : Tendsto ε atTop (𝓝 0))\n    (htrace : Tendsto (fun n => e (ε n)) atTop (𝓝 0))\n    (hrelative : ∀ n t, t ∈ Icc (ε n) T →\n      e t ≤ e (ε n) + ∫ r in ε n..t, a r * e r) :\n    ∀ t ∈ Ioc 0 T, e t = 0",
       "id": "LE029",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D09.04"
@@ -468,7 +468,7 @@
       "signature": "theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE\n    {V : Type*} [NormedAddCommGroup V]\n    {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}\n    (hT : 0 < T)\n    (ha : ContinuousOn a (Ioc 0 T))\n    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)\n    (ha_integrable : IntervalIntegrable a volume 0 T)\n    (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)\n    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)\n    (hε : ∀ n, ε n ∈ Ioc 0 T)\n    (hε_zero : Tendsto ε atTop (𝓝 0))\n    (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))\n    (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))\n    (hrelative : ∀ n t, t ∈ Icc (ε n) T →\n      ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +\n        ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :\n    ∀ t ∈ Ioc 0 T, u t = v t",
       "id": "LE030",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "kind": "theorem",
       "application_steps": [
         "D09.03",
@@ -484,7 +484,7 @@
       "kind": "proof_carrying_definition",
       "id": "LE031",
       "step": "D02.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.01"
       ]
@@ -498,7 +498,7 @@
       "kind": "theorem",
       "id": "LE032",
       "step": "D02.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.01"
       ]
@@ -512,7 +512,7 @@
       "kind": "theorem",
       "id": "LE033",
       "step": "D02.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.01"
       ]
@@ -526,7 +526,7 @@
       "kind": "theorem",
       "id": "LE034",
       "step": "D02.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.01"
       ]
@@ -540,7 +540,7 @@
       "kind": "theorem",
       "id": "LE035",
       "step": "D02.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.01"
       ]
@@ -554,7 +554,7 @@
       "kind": "theorem",
       "id": "LE036",
       "step": "D02.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.01"
       ]
@@ -568,7 +568,7 @@
       "kind": "theorem",
       "id": "LE037",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -582,7 +582,7 @@
       "kind": "theorem",
       "id": "LE038",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -596,7 +596,7 @@
       "kind": "theorem",
       "id": "LE039",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -610,7 +610,7 @@
       "kind": "theorem",
       "id": "LE040",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -624,7 +624,7 @@
       "kind": "proof_carrying_definition",
       "id": "LE041",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -638,7 +638,7 @@
       "kind": "theorem",
       "id": "LE042",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -652,7 +652,7 @@
       "kind": "theorem",
       "id": "LE043",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -666,7 +666,7 @@
       "kind": "theorem",
       "id": "LE044",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02",
         "D06.08"
@@ -681,7 +681,7 @@
       "kind": "theorem",
       "id": "LE045",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02"
       ]
@@ -695,7 +695,7 @@
       "kind": "theorem",
       "id": "LE046",
       "step": "D02.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.02",
         "D06.08"
@@ -710,7 +710,7 @@
       "kind": "theorem",
       "id": "LE047",
       "step": "D02.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.03"
       ]
@@ -724,7 +724,7 @@
       "kind": "theorem",
       "id": "LE048",
       "step": "D02.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.03"
       ]
@@ -738,7 +738,7 @@
       "kind": "theorem",
       "id": "LE049",
       "step": "D02.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.03"
       ]
@@ -752,7 +752,7 @@
       "kind": "theorem",
       "id": "LE050",
       "step": "D02.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.03"
       ]
@@ -766,7 +766,7 @@
       "kind": "theorem",
       "id": "LE051",
       "step": "D02.05",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.05",
         "D04.06"
@@ -781,7 +781,7 @@
       "kind": "theorem",
       "id": "LE052",
       "step": "D02.05",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.05"
       ]
@@ -795,7 +795,7 @@
       "kind": "theorem",
       "id": "LE053",
       "step": "D02.05",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.05"
       ]
@@ -809,7 +809,7 @@
       "kind": "theorem",
       "id": "LE054",
       "step": "D02.05",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.05"
       ]
@@ -823,7 +823,7 @@
       "kind": "theorem",
       "id": "LE055",
       "step": "D02.05",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.05"
       ]
@@ -837,7 +837,7 @@
       "kind": "theorem",
       "id": "LE056",
       "step": "D04.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D04.01"
       ]
@@ -851,7 +851,7 @@
       "kind": "theorem",
       "id": "LE057",
       "step": "D04.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D04.01",
         "D04.06"
@@ -866,7 +866,7 @@
       "kind": "theorem",
       "id": "LE058",
       "step": "D04.06",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D04.06"
       ]
@@ -880,7 +880,7 @@
       "kind": "theorem",
       "id": "LE059",
       "step": "D05.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.05",
         "D05.02"
@@ -895,7 +895,7 @@
       "kind": "theorem",
       "id": "LE060",
       "step": "D05.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.03"
       ]
@@ -909,7 +909,7 @@
       "kind": "theorem",
       "id": "LE061",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -923,7 +923,7 @@
       "kind": "theorem",
       "id": "LE062",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -937,7 +937,7 @@
       "kind": "theorem",
       "id": "LE063",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -951,7 +951,7 @@
       "kind": "theorem",
       "id": "LE064",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -965,7 +965,7 @@
       "kind": "theorem",
       "id": "LE065",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -979,7 +979,7 @@
       "kind": "theorem",
       "id": "LE066",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -993,7 +993,7 @@
       "kind": "theorem",
       "id": "LE067",
       "step": "D05.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.03"
       ]
@@ -1007,7 +1007,7 @@
       "kind": "theorem",
       "id": "LE068",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1021,7 +1021,7 @@
       "kind": "theorem",
       "id": "LE069",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1035,7 +1035,7 @@
       "kind": "theorem",
       "id": "LE070",
       "step": "D05.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.03"
       ]
@@ -1049,7 +1049,7 @@
       "kind": "theorem",
       "id": "LE071",
       "step": "D05.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.03"
       ]
@@ -1063,7 +1063,7 @@
       "kind": "theorem",
       "id": "LE072",
       "step": "D05.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.03",
         "D05.04"
@@ -1078,7 +1078,7 @@
       "kind": "theorem",
       "id": "LE073",
       "step": "D05.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.02",
         "D05.03",
@@ -1094,7 +1094,7 @@
       "kind": "theorem",
       "id": "LE074",
       "step": "D02.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.03"
       ]
@@ -1108,7 +1108,7 @@
       "kind": "theorem",
       "id": "LE075",
       "step": "D02.03",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D02.03",
         "D06.02"
@@ -1123,7 +1123,7 @@
       "kind": "theorem",
       "id": "LE076",
       "step": "D06.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D06.02"
       ]
@@ -1137,7 +1137,7 @@
       "kind": "theorem",
       "id": "LE077",
       "step": "D06.02",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D06.02"
       ]
@@ -1151,7 +1151,7 @@
       "kind": "theorem",
       "id": "LE078",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1165,7 +1165,7 @@
       "kind": "theorem",
       "id": "LE079",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1179,7 +1179,7 @@
       "kind": "theorem",
       "id": "LE080",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1193,7 +1193,7 @@
       "kind": "theorem",
       "id": "LE081",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1207,7 +1207,7 @@
       "kind": "theorem",
       "id": "LE082",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1221,7 +1221,7 @@
       "kind": "theorem",
       "id": "LE083",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1235,7 +1235,7 @@
       "kind": "theorem",
       "id": "LE084",
       "step": "D05.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D05.04"
       ]
@@ -1249,7 +1249,7 @@
       "kind": "theorem",
       "id": "LE085",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D06.08"
       ]
@@ -1263,7 +1263,7 @@
       "kind": "theorem",
       "id": "LE086",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D06.08"
       ]
@@ -1277,7 +1277,7 @@
       "kind": "theorem",
       "id": "LE087",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D06.08",
         "D07.01"
@@ -1292,7 +1292,7 @@
       "kind": "theorem",
       "id": "LE088",
       "step": "D06.08",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D06.08"
       ]
@@ -1306,7 +1306,7 @@
       "kind": "theorem",
       "id": "LE089",
       "step": "D07.01",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D07.01"
       ]
@@ -1320,7 +1320,7 @@
       "kind": "theorem",
       "id": "LE090",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D09.03",
         "D09.04"
@@ -1335,7 +1335,7 @@
       "kind": "theorem",
       "id": "LE091",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D09.04"
       ]
@@ -1349,7 +1349,7 @@
       "kind": "theorem",
       "id": "LE092",
       "step": "D09.04",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D09.04"
       ]
@@ -1363,7 +1363,7 @@
       "kind": "theorem",
       "id": "LE093",
       "step": "D10.07",
-      "status": "A_TIER_CANDIDATE",
+      "status": "A_TIER",
       "application_steps": [
         "D10.07"
       ]
@@ -1411,6 +1411,25 @@
     "branch": "QFA",
     "compiler": "native Windows Lean 4.33.0",
     "audit_roots": 93,
-    "status": "PENDING"
+    "status": "PASS",
+    "compiled_commit": "97d745678734a2bb9d7c1d9d4ae05d1a36c0a162",
+    "run_id": 43528295686,
+    "run_attempt": 1,
+    "run_url": "https://github.com/randogelist/Methlib/actions/runs/43528295686",
+    "compiler_record": "Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+    "compiled_source_manifest_sha256": "6c25121124c5f6bf461d932921b54bc3ffdcceb5648d91fb7184f4fa98cd75bf",
+    "evidence_directory": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162",
+    "evidence_files": {
+      "VERIFICATION.txt": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt",
+      "github-run.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/github-run.json",
+      "source-manifest.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/source-manifest.json",
+      "lean-version.txt": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/lean-version.txt",
+      "build.log": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/build.log",
+      "axioms.log": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/axioms.log",
+      "status.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/status.json",
+      "record-sha256.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/record-sha256.json"
+    },
+    "record_sha256": "f321ac6d969104979adc541f6d142bc780d6ca3930a10879ffc0e76734022b74",
+    "physical_QFA_root_inferred": false
   }
 }

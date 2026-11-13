@@ -2,7 +2,7 @@
   "version": "0.3.0",
   "import": "QFA.Assembly",
   "source_parent_commit": "0ebdf99322b661016d5537e7902b274fd13e72c9",
-  "status": "A_TIER_CANDIDATE",
+  "status": "A_TIER",
   "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
   "new_declaration_ids": [
     "LE074",
@@ -220,8 +220,29 @@
     "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
     "runner": "run.cmd",
     "cache_policy": "MATHLIB_CACHE_AND_INCREMENTAL_LAKE",
-    "compiler_status": "PENDING",
-    "axiom_audit_status": "PENDING",
-    "local_lean_executions": 0
+    "compiler_status": "PASS",
+    "axiom_audit_status": "PASS",
+    "local_lean_executions": 0,
+    "execution": "GITHUB_ACTIONS",
+    "status": "PASS",
+    "compiled_commit": "97d745678734a2bb9d7c1d9d4ae05d1a36c0a162",
+    "run_id": 43528295686,
+    "run_attempt": 1,
+    "run_url": "https://github.com/randogelist/Methlib/actions/runs/43528295686",
+    "compiler_record": "Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+    "compiled_source_manifest_sha256": "6c25121124c5f6bf461d932921b54bc3ffdcceb5648d91fb7184f4fa98cd75bf",
+    "evidence_directory": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162",
+    "evidence_files": {
+      "VERIFICATION.txt": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt",
+      "github-run.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/github-run.json",
+      "source-manifest.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/source-manifest.json",
+      "lean-version.txt": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/lean-version.txt",
+      "build.log": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/build.log",
+      "axioms.log": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/axioms.log",
+      "status.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/status.json",
+      "record-sha256.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/record-sha256.json"
+    },
+    "record_sha256": "f321ac6d969104979adc541f6d142bc780d6ca3930a10879ffc0e76734022b74",
+    "physical_QFA_root_inferred": false
   }
 }

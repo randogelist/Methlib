@@ -1,0 +1,24 @@
+QFA EXACT ENDPOINT EVIDENCE VERIFICATION
+repository: randogelist/Methlib
+branch: QFA
+compiled_commit: 97d745678734a2bb9d7c1d9d4ae05d1a36c0a162
+github_run: 43528295686
+run_attempt: 1
+run_url: https://github.com/randogelist/Methlib/actions/runs/43528295686
+run_conclusion: completed / success
+compiler: Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+source_manifest_sha256: 6c25121124c5f6bf461d932921b54bc3ffdcceb5648d91fb7184f4fa98cd75bf
+github_run_metadata_sha256: 19806d1c40ff52875310263dda440fe039d21da8438a070bab38a40debf1d371
+exact_audit_names_sha256: cec806256182932155a5d2431883875c3dd571ee4c8d241245dd10905b5b55f1
+endpoint_evidence: PASS; LE001-LE093; 91 theorems + 2 proof-carrying definitions
+axiom_crosscheck: audit.py inspect_axioms; exact compiler types and axiom sets
+allowed_axioms: Classical.choice, Quot.sound, propext
+current_source_hashes: exact compiled manifest match
+dependency_snapshots: 9 exact pins; before/after statuses clean
+cache_policy: MATHLIB_CACHE_AND_INCREMENTAL_LAKE
+root_status: B_TIER_ROOT_FORMALIZATION_PENDING
+physical_QFA_root_inferred: false
+LC001-LC004: PROP_TARGET_NO_SUPPLIED_INHABITANT
+record_scope: exact endpoint evidence; no package-status or root promotion
+local_Lean_or_Lake_execution_by_recorder: 0
+provenance: supplied downloaded GitHub workflow-run metadata and CI artifacts; offline consistency verification

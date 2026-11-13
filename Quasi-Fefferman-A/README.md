@@ -5,7 +5,8 @@
 | Goal identifier | `QUASI_FEFFERMAN_A` |
 | Development branch | `QFA` |
 | Specification status | `FROZEN` |
-| External Lean verification | `PENDING` |
+| External endpoint verification | `PASS`; LE001–LE093 |
+| Physical root formalization | `B_TIER_ROOT_FORMALIZATION_PENDING` |
 
 ## Definitions
 
@@ -100,10 +101,15 @@ $$
 $$
 \mathrm{GoalFrozen},
 \qquad
-\mathrm{ExternalCompilerPass}=\mathrm{PENDING},
+\mathrm{EndpointCompilerPass}=\mathrm{PASS},
 \qquad
-\mathrm{TheoremLevelAxiomAudit}=\mathrm{PENDING}.
+\mathrm{EndpointAxiomAudit}=\mathrm{PASS}.
 $$
+
+Exact scope: LE001–LE093, compiled commit `97d745678734a2bb9d7c1d9d4ae05d1a36c0a162`.
+[CI run 43528295686](https://github.com/randogelist/Methlib/actions/runs/43528295686), attempt 1; [verified evidence](CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt).
+The complete physical root remains `B_TIER`. The endpoint ledger records
+current status; preserved source comments record their preparation snapshot.
 
 ## B-tier derivations
 
@@ -127,10 +133,10 @@ theorem-level axiom-audit evidence.
 `Energy`, `GoodTime`, `Agmon`, `Comparison`, `Representation`, `Restart`,
 `Composition` under `LeanEndpoints/QFA/Endpoints/`.
 
-Status: `A_TIER_CANDIDATE`; 91 theorem bodies and two proof-carrying
+Status: `!!=A_TIER`; 91 theorem bodies and two proof-carrying
 linear-isometry constructions in 19 proof modules. Four analytic
 Prop targets retain no supplied proof inhabitants. All 93 proof-bearing
-declarations have exact external audit entries.
+declarations have matching external compiler and exact axiom-audit PASS evidence.
 
 LE073 composes the concrete full-volume L2 energy profile, weak pairing
 continuity and a.e. energy starts into a strict subcritical time, the
@@ -150,7 +156,7 @@ import QFA.Assembly
 ```
 
 [Assembly](LeanEndpoints/QFA/Assembly/README.md): four interfaces under
-`LeanEndpoints/QFA/Assembly/`, with 20 additional theorem candidates.
+`LeanEndpoints/QFA/Assembly/`, with 20 verified assembly theorems.
 The assembly constructs shifted energy data, composes supplied analytic
 estimates, constructs comparison sequences, and restricts singleton equality
 to nonnegative time. [assembly-manifest.json](LeanEndpoints/assembly-manifest.json)

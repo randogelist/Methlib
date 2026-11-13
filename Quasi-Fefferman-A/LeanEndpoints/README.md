@@ -4,14 +4,20 @@
 |---|---|
 | Branch / package version | `QFA` / `0.3.0` |
 | Mathematical derivation | `!=B_TIER` |
-| Prepared Lean source | `A_TIER_CANDIDATE` |
-| Public theorem candidates | 91 |
+| Exact compiled endpoints | `!!=A_TIER` |
+| Public verified theorem declarations | 91 |
 | Proof-carrying linear-isometry constructions | 2 |
 | Exact external axiom-audit roots | 93 |
 | Analytic proposition targets without supplied proofs | 4 |
 | Endpoint / assembly proof modules | 19 |
-| External compiler and exact declaration axiom audit | `PENDING` |
+| External compiler and exact declaration axiom audit | `PASS`; LE001–LE093 |
 | Local Lean executions | 0 |
+
+Compiled endpoint source: `97d745678734a2bb9d7c1d9d4ae05d1a36c0a162`.
+Compiler: `Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)`.
+Evidence: [CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162](../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt).
+Status-recording edits affect documentation and manifest metadata only;
+the compiled Lean sources, runner, dependency lock and audit parser are unchanged.
 
 ## Reusable assembly
 
@@ -111,7 +117,7 @@ u(s+\tau)\xrightarrow[\tau\downarrow0]{H}u(s).
 \end{gathered}
 $$
 
-Candidate declaration:
+Verified declaration:
 `QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace`.
 
 The product integrability and product budget are derived from the profile.
@@ -153,7 +159,7 @@ four analytic proposition targets is supplied.
 - [QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt](QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt): complete representation/profile/restart derivations, LE031–LE073.
 - [Indexed root derivation](../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt): v1.4; 139 pinned source declarations, 45 derivation locations, 180 source applications, and all local indices at their points of use.
 - [QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt](QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt): complete derivations of LE074–LE093 and the exact later interfaces.
-- [QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt](QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt): candidate status and external evidence requirements.
+- [QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt](QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt): current A_TIER status, exact external evidence, and all 93 axiom reports.
 - [endpoint-manifest.json](endpoint-manifest.json): exact declaration names, kinds, signatures, source hashes, and dependency pins.
 - [Audit.lean](Audit.lean): compiler types and transitive axiom reports for all 93 exact declarations.
 - [run.cmd](run.cmd): cached external native Windows execution.
@@ -165,13 +171,18 @@ four analytic proposition targets is supplied.
 Workflow: [qfa-endpoints.yml](../../.github/workflows/qfa-endpoints.yml).
 Trigger: package/workflow changes on branch `QFA`, or `workflow_dispatch`.
 Runner: `windows-2022`; native Lean `4.33.0`; exact locked dependencies.
-Cache layers: native toolchain, pinned dependency objects, incremental QFA objects.
+Cache layers: native toolchain, pinned dependency objects, compiled Lake
+configurations (`.lake/config`), incremental QFA objects.
 Evidence: compiler version, tested commit, source manifest, dependency identities,
 compiler types, and all 93 exact axiom reports. Evidence and tested-source
 artifacts are uploaded on every completed attempt, including failures.
 
-CI status remains `A_TIER_CANDIDATE` until the exact compiler and axiom audit pass.
-Successful endpoint verification leaves the physical QFA root pending.
+CI result: exact LE001–LE093 compiler and axiom-audit `PASS` at
+commit `97d745678734a2bb9d7c1d9d4ae05d1a36c0a162`; [run 43528295686](https://github.com/randogelist/Methlib/actions/runs/43528295686),
+attempt 1. [Verified evidence](../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt)
+preserves the compiled source manifest and exact compiler types/axiom sets.
+The current ledger supersedes preparation-status comments in unchanged Lean
+sources and B-tier supplements. The physical QFA root remains pending.
 
 ### Native Windows command
 
