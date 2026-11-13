@@ -3,7 +3,6 @@ import QFA
 set_option pp.universes false
 set_option pp.explicit true
 set_option pp.fullNames true
-set_option pp.width 200
 
 #eval IO.println "TYPE_BEGIN:QFA.Energy.envelope_zero"
 #check @QFA.Energy.envelope_zero
