@@ -1,10 +1,11 @@
 QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
-VERSION = 1.0.0
+VERSION = 1.1.0
 MODE = B_TIER_DERIVATION
 MARKER = !=B_TIER
 ROOT_SPECIFICATION = FROZEN
 MATHEMATICAL_STATUS = COMPLETE_COMPOSED_CLASSICAL_DERIVATION
 SOURCE_STATUS = EXACT_DECLARATIONS_INSPECTED
+INDEX_POLICY = DECLARATION_AT_POINT_OF_USE
 EXTERNAL_LEAN_VERIFICATION = PENDING
 LOCAL_LEAN_EXECUTIONS = 0
 
@@ -16,6 +17,7 @@ QFB_COMPARISON_PIN = e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c
 MATHLIB_PIN = db584cd6d46c92f209a44c0f1c829460d327499d
 SELECTED_SOURCE_TOOLCHAIN = leanprover/lean4:v4.33.0
 PARENT_DERIVATION = QUASI_FEFFERMAN_A_B_TIER.txt
+DOCUMENT_PARENT_COMMIT = 717e853a7ffa1dee986e312392c63baf388f1d85
 
 [00] STATUS AND SCOPE
 
@@ -36,6 +38,21 @@ Classical input: an established analytic theorem, explicitly specified below;
 No QFA Lean file, external compiler result, or theorem-level axiom audit is
 established by this TXT. No A_TIER, FORMAL_CLOSURE, or UNCONDITIONAL_CLOSURE
 promotion follows from source inspection.
+
+INDEX CONVENTION:
+  [Dxx.yy] = located mathematical derivation step.
+  [EPnnn] = one exact existing source declaration, assigned at first use.
+  APPLY [EPnnn] = mathematical use with the displayed hypothesis substitution;
+    it does not assert execution or elaboration of a new Lean call.
+  AD01-AD08 = new composed mathematical adapter bodies recorded at their steps.
+  C01-C04 = established classical analytic inputs, specified in [03].
+  Appendix A: derivation step -> consumed entry-point indices.
+  Appendix B: entry-point index -> exact declaration, pinned source signature,
+    source location, and all application locations.
+  Generic QFB patterns are source-inspected transfer candidates; their code
+    has not been imported into QFA by this TXT update.
+  Elementary finite-dimensional, algebraic and limit calculations are written
+    explicitly; they are not represented as fictitious existing QFA lemmas.
 
 [01] EXACT ROOT STATEMENT
 
@@ -95,48 +112,78 @@ Quantifier preservation:
   No smallness or mean-zero hypothesis on a is added.
   The numerical constant is sufficient; optimality is not asserted.
 
-[02] SELECTED REPRESENTATIONS
+[02] REPRESENTATIONS WITH SOURCE APPLICATIONS
 
-Spatial domain:
-  X = EuclideanSpace R (Fin 3), measure = volume.
-Real velocity Hilbert space:
-  L2 = MeasureTheory.Lp X 2 (volume on X).
-Complex Fourier codomain:
-  Y = EuclideanSpace C (Fin 3).
+[D02.01] Real and complex vector spaces; derived bridge AD01.
+  X=EuclideanSpace R (Fin 3), Y=EuclideanSpace C (Fin 3).
+  The spatial measure is full Lebesgue volume on X.
+  Define J:X->Y componentwise by J(x)_j=(x_j:C).
 
-The solenoidal condition is a distributional predicate on the real L2 class.
-An H1 state carries three L2 weak-derivative witnesses G_j.
+  APPLY [EP001] Complex.ofRealLI to each coordinate.
+  APPLY [EP002] EuclideanSpace.norm_sq_eq over R and C.
+  OUTPUT:
+    ||Jx||^2=sum_j |(x_j:C)|^2=sum_j |x_j|^2=||x||^2.
+  Nonnegativity of norms gives ||Jx||=||x||.
+  Coordinatewise linearity gives real linearity, and application to x-y
+  gives ||Jx-Jy||=||x-y||. Thus J is a zero-preserving linear isometry.
 
-  E(v) = ||v||_2^2;
-  D(v) = sum_(j=1)^3 ||G_j||_2^2;
-  Z(v) = ||Delta v||_2^2.
+[D02.02] Isometric lift to spatial L2; continuation of AD01.
+  Real spatial L2 = MeasureTheory.Lp X 2 (volume on X).
+  Complex spatial L2 = MeasureTheory.Lp Y 2 (volume on X).
+  APPLY [EP003] LipschitzWith.compLp with g=J, Lipschitz constant 1,
+    g(0)=0, p=2, and measure=volume.
+  OUTPUT: J2(v), the complex L2 class induced by J composed with v.
+  APPLY [EP004] LipschitzWith.coeFn_compLp to identify representatives a.e.
+  APPLY [EP005] MeasureTheory.Lp.norm_le_norm_of_ae_le in both directions,
+    using ||J(v(x))||=||v(x)||.
+  OUTPUT: ||J2(v)||_2=||v||_2.
 
-D is the Frobenius gradient energy. The operator norm of a Frechet derivative
-is not definitionally the Frobenius norm; substituting one for the other would
-invalidate the exact spectral norm identities and the constant audit.
+[D02.03] Weak derivative witnesses; continuation of AD01.
+  Let G_j in real L2 satisfy the physical weak derivative identity
+    integral (partial_j psi)*v = -integral psi*G_j
+  for every real smooth compactly supported scalar psi.
+  Compact support and local L2 membership make both integrands integrable.
+  APPLY [EP006] ContinuousLinearMap.integral_comp_comm with the real-linear
+    continuous map J and each of those integrands.
+  OUTPUT: J2(G_j) is the weak derivative of J2(v).
+  Iterate for second derivatives and sum to obtain the same statement for
+  the Laplacian. Therefore complexification preserves all physical energies:
+    E=||v||_2^2,
+    D=sum_j ||partial_j v||_2^2,
+    Z=||Delta v||_2^2.
+  This proves AD01 mathematically; the Lean adapter body remains to be written.
 
-Complexification is componentwise and isometric. Its adapters identify the
-real vector norm, L2 norm, derivative norms, and Laplacian norm with the
-corresponding complex Hilbert norms. No componentwise supremum estimate is used.
+  D is the Frobenius gradient energy. The norm of fderiv as a continuous
+  linear map is an operator norm and is not substituted for this sum.
 
-Sobolev source choice:
-  TemperedDistribution.MemSobolev s 2;
-  physical weak derivatives identified with tempered derivatives;
-  exact physical norm formulas proved separately.
+[D02.04] Sobolev representation for the spectral layer.
+  SELECT [EP007] TemperedDistribution.MemSobolev with p=2.
+  CONDITIONAL REPRESENTATION CONTRACT:
+    once MemSobolev s 2 has been established, APPLY
+      [EP008] TemperedDistribution.memSobolev_iff_exists_smulLeftCLM_fourier
+    to obtain the weighted Fourier L2 witness with weight
+      (1+|k|^2)^(s/2).
+    With that same MemSobolev premise, APPLY
+      [EP009] TemperedDistribution.MemSobolev.lineDerivOp and
+      [EP010] TemperedDistribution.MemSobolev.laplacian
+    at the required derivative orders.
+  The equivalence supplies no weighted integrability for an arbitrary L2
+  field. Physical integer-order membership is established independently by
+  AD08/[D06.02] before these source implications are invoked.
+  Membership uses the native Fourier convention. Physical norm equalities
+  are derived in [D06.02]; they are not identified with Bessel norms by fiat.
 
-Mathlib's Bessel weight is (1+|k|^2)^(s/2) in its native Fourier convention.
-It determines the usual H^s membership, but it is not an identity of all
-physical H^s norm conventions without the required 2*pi conversions.
-
-For an arbitrary LH trajectory:
-  E(t)=||u(t)||_2^2 at every time;
-  D(t)=||grad u(t)||_2^2 at the a.e. H1 times;
-  D(t)=0 on the remaining null set.
-
-The energy-class Bochner representative supplies a.e. strong measurability.
-Its a.e. agreement with the all-time weakly continuous representative supplies
-measurability of E for the scalar integral layer. No continuity or derivative
-of weak E is required.
+[D02.05] Trajectory profile supplied by the actual LH class.
+  Physical trajectories have domain [0,infinity), with equality at every
+  nonnegative time. Any total-real extension used by a scalar source theorem
+  is auxiliary; negative-time values are outside the trajectory singleton.
+  E(t)=||u(t)||_2^2 at every nonnegative time.
+  D(t)=||grad u(t)||_2^2 at H1 times, and D=0 on the remaining null set.
+  The Bochner energy-class representative and its a.e. agreement with the
+  weakly continuous representative imply a.e. strong measurability of E.
+  The gradient energy class gives D>=0 a.e. and D in L1 on finite intervals.
+  The all-time energy inequality gives E<=F in [D04.01].
+  These are actual whole-space LH fields; C01 supplies their inhabitation.
 
 [03] CLASSICAL ANALYTIC INPUTS
 
@@ -185,389 +232,660 @@ C01-C04 are classical mathematical inputs. Their actual whole-space Lean
 endpoints are not supplied by a periodic declaration or by a certificate
 field that assumes the same analytic conclusion.
 
-[04] ENERGY-PRODUCT BUDGET: FINITE INTERVAL COMPOSITION
+[04] INDEXED FINITE-INTERVAL ENERGY-PRODUCT BUDGET
 
 DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
-  For R>0 and u in LH_nu(a),
+  R>=0, nu>0, D interval integrable on [0,R],
+  E a.e. strongly measurable, D>=0 and 0<=E<=F a.e. on [0,R],
+  F(t)=M^2-2*nu*integral_0^t D,
+    imply E*D integrable on (0,R) and
+      integral_0^R E*D <= (M^4-F(R)^2)/(4*nu) <= M^4/(4*nu).
 
-    integral_0^R E(t)*D(t) dt
-      <= (M^4-F(R)^2)/(4*nu)
-      <= M^4/(4*nu),
+[D04.01] Physical instantiation and endpoint measure convention.
+  USE [D02.05] with the zero-start energy inequality:
+    0<=E(t)<=M^2-2*nu*integral_0^t D=F(t).
+  APPLY [EP011] MeasureTheory.restrict_Ioo_eq_restrict_Ioc
+    with endpoints 0,R and Lebesgue measure.
+  OUTPUT: equality of the open and half-open restricted measures; this
+    transports integrability, a.e. predicates, and set integrals together.
+  APPLY [EP012] intervalIntegrable_iff_integrableOn_Ioc_of_le
+    with 0<=R to pass from the physical L1 statement to IntervalIntegrable.
 
-  where F(t)=M^2-2*nu*integral_0^t D(r) dr.
+[D04.02] Absolute-continuity construction.
+  Set A(t)=integral_0^t D.
+  APPLY [EP013] IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
+    with f=D, a=0, b=R, c=0; the base point belongs to uIcc 0 R.
+  OUTPUT: A is absolutely continuous on [0,R].
+  APPLY [EP014] ContDiffOn.absolutelyContinuousOnInterval to the constant M^2.
+  APPLY [EP015] AbsolutelyContinuousOnInterval.const_mul with scalar 2*nu.
+  APPLY [EP016] AbsolutelyContinuousOnInterval.sub to M^2 and 2*nu*A.
+  OUTPUT: F is absolutely continuous on [0,R].
 
-Proof:
-  The energy inequality gives 0<=E(t)<=F(t)<=M^2.
-  D is nonnegative and integrable on each finite interval.
-  Therefore the primitive of D is absolutely continuous, and so is F.
-  Almost everywhere, F'(t)=-2*nu*D(t).
-  F is continuous; hence F*D is integrable.
-  A.e. measurability and 0<=E*D<=F*D establish integrability of E*D.
+[D04.03] A.e. derivative of the envelope.
+  APPLY [EP017] IntervalIntegrable.ae_hasDerivAt_integral
+    with f=D, a=0, b=R, c=0.
+  APPLY [EP018] HasDerivAt.const_mul with scalar 2*nu,
+    then [EP019] HasDerivAt.const_sub with constant M^2.
+  APPLY [EP020] HasDerivAt.deriv.
+  OUTPUT: deriv F(t)=-2*nu*D(t) almost everywhere on [0,R].
+  No derivative assertion is made about weak E.
 
-  The absolutely-continuous product identity, with both factors F, gives
+[D04.04] Integrability before comparison.
+  APPLY [EP021] AbsolutelyContinuousOnInterval.continuousOn to F.
+  APPLY [EP022] IntervalIntegrable.continuousOn_mul
+    with integrable f=D and continuous g=F.
+  OUTPUT: F*D is integrable.
+  A.e. measurability of E,D gives a.e. measurability of E*D; and
+    0<=E*D<=F*D almost everywhere.
+  APPLY [EP023] MeasureTheory.Integrable.mono_nonneg
+    with f=E*D, g=F*D, measure=volume.restrict(Ioo 0 R).
+  OUTPUT: E*D is integrable. The totalized Bochner integral is not used
+    as a replacement for this integrability premise.
 
-    integral_0^R [F'(t)*F(t)+F(t)*F'(t)] dt = F(R)^2-F(0)^2.
+[D04.05] Exact square identity.
+  APPLY [EP024] AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
+    with f=g=F, a=0, b=R.
+  OUTPUT:
+    integral_0^R [deriv F*F+F*deriv F]=F(R)^2-F(0)^2.
+  APPLY [EP025] intervalIntegral.integral_congr_ae
+    with the a.e. derivative identity from [D04.03].
+  Since F(0)=M^2,
+    -4*nu*integral_0^R F*D=F(R)^2-M^4.
+  Division by the positive number 4*nu gives
+    integral_0^R F*D=(M^4-F(R)^2)/(4*nu).
 
-  Substitution of the a.e. derivative and F(0)=M^2 gives
+[D04.06] Product comparison and numerical budget.
+  APPLY [EP026] MeasureTheory.integral_mono_ae
+    with f=E*D, g=F*D and the established integrability of both functions.
+  APPLY [EP027] intervalIntegral.integral_of_le with 0<=R,
+    together with the restricted-measure identity in [D04.01].
+  OUTPUT:
+    integral_0^R E*D <= (M^4-F(R)^2)/(4*nu) <= M^4/(4*nu).
+  The last inequality follows from F(R)^2>=0. QED.
 
-    -4*nu*integral_0^R F(t)*D(t) dt = F(R)^2-M^4.
+Only the finite budget R=delta is needed for the frozen root.
 
-  Since 4*nu>0, integral comparison yields the stated bound. QED.
+[05] INDEXED GOOD TIME, STRONG TRACE, AND PHYSICAL RESTART
 
-Selected Mathlib composition:
-  IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
-    -> AbsolutelyContinuousOnInterval.const_mul / .sub / .continuousOn
-    -> IntervalIntegrable.ae_hasDerivAt_integral
-    -> IntervalIntegrable.continuousOn_mul
-    -> MeasureTheory.Integrable.mono_nonneg
-    -> AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
-    -> intervalIntegral.integral_congr_ae
-    -> MeasureTheory.integral_mono_ae.
+Let G_u(s) assert H1 membership, a valid strong-energy start, and agreement
+of the chosen weak-derivative and all-time trajectory representatives.
+The actual LH class makes G_u true almost everywhere on positive time.
 
-Integral convention adapter:
-  For R>=0 and Lebesgue measure,
-    integral_0^R = integral_(0,R] = integral_(0,R).
-  Use intervalIntegrable_iff_integrableOn_Ioo_of_le,
-  intervalIntegral.integral_of_le, and integral_Ioc_eq_integral_Ioo.
+[D05.01] Frozen cutoff arithmetic.
+  Put kappa=4*pi^2*nu^4>0.
+  Since nu>0,
+    delta>M^4/(16*pi^2*nu^5)
+      -> M^4/(4*nu)<kappa*delta.
+  USE [D04.06] at R=delta:
+    integral_0^delta E*D<kappa*delta.
 
-The exact root uses only this finite-interval estimate at R=delta.
-The parent derivation's infinite-horizon bound remains valid, but monotone
-convergence is not a dependency of the selected minimal root composition.
+[D05.02] Extraction retaining the good predicate.
+  APPLY [EP028] QuasiFeffermanB.exists_good_time_of_integral_lt
+    with f=E*D, Good=G_u, T=delta, c=kappa.
+  DISCHARGE:
+    hT: delta>0, from the nonnegative cutoff;
+    hc: kappa>=0;
+    hf: [D04.04], with criticalTimeMeasure=volume.restrict(Ioo 0 delta);
+    hgood: the actual LH full-measure predicate;
+    hbudget: [D05.01].
+  OUTPUT: exists s with 0<s<delta, G_u(s), and E(s)D(s)<kappa.
+  Mathematical proof: absence of such s would imply E*D>=kappa a.e.;
+  integration would contradict the strict budget. No continuity of E*D,
+  arbitrary point selection, or measurable-set assumption on G_u is needed.
+  The generic QFB proof is selected for later selective port.
 
-[05] GOOD RESTART: STRICT AVERAGE AND STRONG RIGHT TRACE
+[D05.03] Strong right L2 trace at the selected time.
+  Set b=u(s). The energy inequality gives ||u(t)||_2^2<=||b||_2^2 for t>=s.
+  Weak continuity gives <u(t),b> -> ||b||_2^2 as t->s+.
+  APPLY [EP029] QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound
+    with the real spatial L2 Hilbert space, f(t)=u(t), a=b,
+    and the right-neighborhood filter at s.
+  Underlying identity: [EP030] norm_sub_sq_real, with x=u(t), y=b,
+    gives 0<=||u(t)-b||_2^2<=2||b||_2^2-2<u(t),b> -> 0.
+  OUTPUT: u(t)->b strongly in L2 as t->s+.
+  APPLY [EP031] QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right
+    to transfer this limit to tau->0+ for u_s(tau)=u(s+tau).
 
-Set kappa=4*pi^2*nu^4>0.
-Let G_u be a full-measure predicate consisting of:
-  u(s) in V;
-  validity of the strong energy inequality starting at s;
-  agreement of the selected weak-derivative and trajectory representatives.
+[D05.04] Temporal energy and measure transport.
+  APPLY [EP032] QuasiFeffermanB.timeTranslate_measurePreserving_Ioc
+    with shift s and finite horizon R.
+  APPLY [EP033] QuasiFeffermanB.timeTranslate_memLp_Ioc
+    with p=2 for gradients and p=infinity for velocity energy classes.
+  APPLY [EP034] QuasiFeffermanB.timeTranslate_ae_Ioc
+    to the valid energy-start predicate; s>=0 is supplied by [D05.02].
+  APPLY [EP035] intervalIntegral.integral_comp_add_right
+    to each dissipation interval, with shift s.
+  OUTPUT: translated energy classes and the translated strong energy
+    inequality, including the zero start supplied by G_u(s).
+
+[D05.05] Actual translated weak equation; derived bridge AD02.
+  Fix a smooth compactly supported solenoidal phi(tau,x) on tau>=0.
+  SELECT [EP036] Real.smoothTransition and set
+    chi_epsilon(tau)=smoothTransition(tau/epsilon), epsilon>0.
+  APPLY [EP037] Real.smoothTransition.contDiff,
+    [EP038] Real.smoothTransition.zero_of_nonpos,
+    [EP039] Real.smoothTransition.one_of_one_le,
+    [EP040] Real.smoothTransition.nonneg,
+    [EP041] Real.smoothTransition.le_one,
+    and [EP042] Real.smoothTransition.monotone.
+  OUTPUT: a smooth increasing cutoff, zero on tau<=0, one on tau>=epsilon,
+    with 0<=chi_epsilon<=1.
+  APPLY [EP043] Monotone.deriv_nonneg to the scaled monotone cutoff.
+  The elementary FTC gives integral_0^epsilon chi_epsilon'=1.
+  Define psi_epsilon(t,x)=0 for t<=s, and
+    psi_epsilon(t,x)=chi_epsilon(t-s)*phi(t-s,x) for t>s.
+  All derivatives of smoothTransition at zero vanish, since it is smooth and
+  identically zero to the left. The one-sided products therefore glue smoothly
+  at t=s. Insert this compactly supported solenoidal test in the original weak NSE.
+  Since s>0, the original initial boundary term vanishes.
+  The temporal derivative produces the additional term
+    integral_0^epsilon chi_epsilon'(tau)
+      <u(s+tau),phi(tau)> d tau.
+  Its difference from <b,phi(0)> is bounded by
+    sup_(0<tau<epsilon) |<u(s+tau),phi(tau)>-<b,phi(0)>|,
+  since chi_epsilon'>=0 and its integral is one.
+  This bound tends to zero by [D05.03] and smoothness of phi.
+
+  On the fixed compact spacetime support, the remaining terms are dominated
+  by integrable functions: u against bounded test derivatives; u tensor u
+  against bounded grad phi; and grad u against bounded grad phi. The LH
+  L-infinity(L2) and L2(dot H1) bounds supply these integrabilities.
+  APPLY [EP044] MeasureTheory.tendsto_integral_of_dominated_convergence
+    to any sequence epsilon_n->0+, separately for the three terms.
+  OUTPUT:
+    integral integral [u_s.partial_tau phi+(u_s tensor u_s):grad phi
+                      -nu*grad u_s:grad phi]
+      + integral b.phi(0)=0.
+  Together with [D05.03]-[D05.04], this proves u_s in LH_nu(b).
+  AD02 is mathematically derived; the physical whole-space Lean body remains
+  to be constructed. QED.
 
 DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
+  every u in LH_nu(a), every delta>T_QFA
+    -> exists s in (0,delta): u_s in LH_nu(u(s)), u(s) in H1,
+       E(s)D(s)<4*pi^2*nu^4.
 
-  delta>M^4/(16*pi^2*nu^5)
-    -> exists s in (0,delta):
-         G_u(s) and E(s)*D(s)<kappa
-         and u_s in LH_nu(u(s)),
-  where u_s(tau)=u(s+tau).
+[06] INDEXED FOURIER, INVERSE REPRESENTATIVE, AND EXACT CONSTANT
 
-Proof of strict selection:
-  nu>0 implies
-    M^4/(4*nu) < kappa*delta.
-  Section [04] supplies integral_0^delta E*D < kappa*delta.
-  If E*D>=kappa almost everywhere on the good set, integral monotonicity
-  and its full measure give integral_0^delta E*D >= kappa*delta.
-  Contradiction. Thus an s in (0,delta) satisfying G_u and E*D<kappa exists.
+[D06.01] Native Fourier convention.
+  For integrable fields, APPLY [EP045] Real.fourier_eq' with domain X and
+    codomain Y: F0(v)(k)=integral exp(-2*pi*i*x.k)*v(x) dx.
+  For general physical L2 or H2 data, F0_2 denotes the L2 transform in
+    [D06.02]; no ordinary Bochner-integral formula is asserted for such data
+    before L1 membership and the corresponding compatibility are established.
+  APPLY [EP046] Real.fourierInv_eq' for the positive inverse exponent.
+  The frozen angular transform is
+    H(v)(xi)=(2*pi)^(-3/2)*F0(v)(xi/(2*pi)).
+  The substitution xi=2*pi*k identifies the physical norms. All subsequent
+  source applications use native F0 normalization.
 
-Equivalent source implementation:
-  QuasiFeffermanB.exists_good_time_of_integral_lt
-  with f=E*D, c=kappa, T=delta, Good=G_u.
-  Its criticalTimeMeasure T is volume.restrict(Ioo 0 T).
-  The generic lemma is selected for a later selective port, with provenance.
-  Its specialized QFB cutoff theorem is not the selected constant argument.
+[D06.02] Exact spectral energies; derived bridge AD08.
+  USE AD01, [D02.01]-[D02.03], to complexify v and its weak derivatives.
+  SELECT [EP047] MeasureTheory.Lp.fourierTransformₗᵢ on Lp Y 2 volume.
 
-No measurability of the predicate G_u is needed for this extraction: a.e.
-truth suffices. The frequent set {E*D<kappa} intersects the eventual good
-predicate and interval membership. The intersection has positive measure.
+  Compact-test to Schwartz-test extension:
+    Put chi_R(x)=1-smoothTransition((|x|^2/R^2-1)/3), R>0.
+    The cutoff sources in [D05.05] imply chi_R=1 on |x|<=R,
+    chi_R=0 on |x|>=2R, 0<=chi_R<=1, and |grad chi_R|<=C/R.
+    The derivative bound follows because smoothTransition' is bounded on
+    [0,1] and vanishes outside this interval.
+    First extend the real-test identity to complex tests by applying it
+    separately to the real and imaginary parts and combining the two equalities.
+    Insert chi_R*phi into this compact-test identity, for any Schwartz phi. The two main terms converge by L2 pairing; the cutoff
+    error is bounded by (C/R)*||v||_2*||phi||_2 and tends to zero.
+    APPLY [EP044] MeasureTheory.tendsto_integral_of_dominated_convergence
+      to the main compact-cutoff terms; Cauchy-Schwarz supplies their L1
+      dominators. Repeat for the required derivative witnesses.
+    OUTPUT: the physical weak derivative identity holds as an identity
+      of tempered distributions, without assuming a Schwartz-test identity.
 
-Proof of strong right trace at s:
-  Let b=u(s). For t>=s, energy gives ||u(t)||_2^2<=||b||_2^2.
-  Weak continuity gives <u(t),b> -> ||b||_2^2 as t -> s+.
-  The exact Hilbert identity gives
+  Noncircular weighted-L2 recovery:
+    For a known physical derivative G=partial^alpha v in L2, put
+      h=F0_2(v), q=F0_2(G).
+    APPLY [EP048] MeasureTheory.Lp.fourier_toTemperedDistribution_eq.
+    APPLY [EP049] TemperedDistribution.fourier_lineDerivOp_eq successively,
+      or [EP050] TemperedDistribution.laplacian_eq_fourierMultiplierCLM.
+    OUTPUT: T_q=g*T_h, where g is the appropriate polynomial multiplier.
+    Initially g*h is only locally integrable:
+      APPLY [EP051] MeasureTheory.MemLp.locallyIntegrable to h;
+      APPLY [EP052] MeasureTheory.LocallyIntegrable.continuous_smul to g,h.
+    Evaluate T_q=g*T_h on compact smooth tests, using
+      [EP053] HasCompactSupport.toSchwartzMap,
+      [EP054] MeasureTheory.Lp.toTemperedDistribution_apply,
+      [EP055] TemperedDistribution.smulLeftCLM_apply_apply, and
+      [EP056] SchwartzMap.smulLeftCLM_apply_apply.
+    APPLY [EP057] ae_eq_of_integral_contDiff_smul_eq to q and g*h.
+    OUTPUT: q=g*h almost everywhere.
+    Only now APPLY [EP058] MeasureTheory.MemLp.ae_eq to transport MemLp q 2
+      to MemLp (g*h) 2.
+    Thus no nonexistent weighted L2 witness is assumed during its construction.
 
-    0 <= ||u(t)-b||_2^2
-       = ||u(t)||_2^2 + ||b||_2^2 - 2*<u(t),b>
-      <= 2*||b||_2^2 - 2*<u(t),b> -> 0.
+  Norm identities:
+    APPLY [EP059] MeasureTheory.Lp.norm_fourier_eq to v, each weak derivative,
+      and Delta v.
+    APPLY [EP060] MeasureTheory.Lp.ker_toTemperedDistributionCLM_eq_bot
+      whenever the now-established L2 witnesses must be identified.
+    APPLY [EP061] OrthonormalBasis.sum_sq_inner_left to the coordinate basis.
+    OUTPUT:
+      E=integral |h|^2;
+      D=integral (2*pi)^2*|k|^2*|h|^2;
+      Z=integral (2*pi)^4*|k|^4*|h|^2.
+    Integer-order physical/Sobolev membership follows by finite polynomial
+    weight inequalities: (1+|k|^2)^m is bounded above and below, up to positive
+    dimension/order constants, by the sum of |k^alpha|^2 for |alpha|<=m.
+    APPLY [EP062] Function.hasTemperateGrowth_one_add_norm_sq_rpow to the
+      Bessel weight (1+|k|^2)^(m/2).
+    The general multiplication/testing argument of AD06 identifies its
+      weighted L2 witness with the Bessel multiplier distribution; then the
+      equivalence in [D02.04] supplies MemSobolev m 2. This applies equally
+      to odd and even integer m.
+    These membership constants do not enter the exact E,D,Z equalities.
 
-  Hence u(t)->b strongly in L2.
-  Selected generic helper:
-    QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound.
-  Underlying Mathlib identity:
-    norm_sub_sq_real.
+[D06.03] Exact radial kernel and its integrability.
+  For lambda>0 set
+    W(k)=(2*pi)^2*|k|^2+lambda^2*(2*pi)^4*|k|^4.
+  Set W(0)^(-1)=0; the singleton {0} is null.
+  APPLY [EP063] MeasureTheory.integrable_fun_norm_addHaar
+    to the radial reciprocal kernel, dimension=3, measure=volume.
+  APPLY [EP064] integrable_inv_one_add_sq after positive scaling
+    b=2*pi*lambda. Cancellation of radial r^2 is performed only for r>0.
+  OUTPUT: W^(-1) is integrable.
+  APPLY [EP065] MeasureTheory.integral_fun_norm_addHaar.
+  APPLY [EP066] EuclideanSpace.volume_ball_fin_three with center 0, radius 1,
+    giving 3*volume.real(ball 0 1)=4*pi.
+  APPLY [EP067] integral_comp_mul_left_Ioi with a=0, b=2*pi*lambda>0.
+  APPLY [EP068] integral_Ioi_inv_one_add_sq with i=0.
+  OUTPUT:
+    integral W^(-1)
+      =(1/pi)*integral_0^infinity [1+(2*pi*lambda*r)^2]^(-1) dr
+      =(1/pi)*(1/(2*pi*lambda))*(pi/2)=1/(4*pi*lambda).
 
-Translation of the weak equation, the energy integrals, and the full-measure
-energy-start set yields u_s in LH_nu(b). Selected temporal source patterns:
-  QuasiFeffermanB.timeTranslate_measurePreserving_Ioc;
-  QuasiFeffermanB.timeTranslate_memLp_Ioc;
-  QuasiFeffermanB.timeTranslate_ae_Ioc;
-  intervalIntegral.integral_comp_add_right;
-  IntervalIntegrable.comp_add_right.
-
-The generic temporal lemmas preserve time measures. The distributional
-whole-space NSE restart proof remains a separate physical adapter. QED.
-
-[06] EXACT FOURIER NORMALIZATION AND AGMON CONSTANT
-
-Selected native Fourier convention:
-  F0(v)(k) = integral_R3 exp(-2*pi*i*x.k)*v(x) dx.
-Frozen angular convention:
-  H(v)(xi) = (2*pi)^(-3/2)*F0(v)(xi/(2*pi)).
-The change of variables xi=2*pi*k identifies the physical norms.
-The selected implementation computes directly in F0 normalization.
-
-For v in H2(R3;R3), complexify v and put h=F0(v).
-The L2 Fourier isometry and distributional derivative identities yield
-
-  E = integral |h(k)|^2 dk;
-  D = integral (2*pi)^2*|k|^2*|h(k)|^2 dk;
-  Z = integral (2*pi)^4*|k|^4*|h(k)|^2 dk.
-
-The sum of directional frequency squares equals |k|^2 by
-OrthonormalBasis.sum_sq_inner_left. All vector norms are Hilbert norms.
-
-For lambda>0, define
-  W_lambda(k)=(2*pi)^2*|k|^2 + lambda^2*(2*pi)^4*|k|^4.
-The reciprocal is assigned zero at k=0; the singleton is Lebesgue null.
-
-Radial integration and positive scaling give
-
-  integral_R3 W_lambda(k)^(-1) dk
-    = 4*pi*integral_0^infinity
-        r^2/[(2*pi)^2*r^2+lambda^2*(2*pi)^4*r^4] dr
-    = (1/pi)*integral_0^infinity [1+(2*pi*lambda*r)^2]^(-1) dr
-    = (1/pi)*(1/(2*pi*lambda))*(pi/2)
-    = 1/(4*pi*lambda).
-
-The same reduction proves integrability, using integrable_inv_one_add_sq.
-Cancellation of r^2 is restricted to r>0.
-
-Weighted Cauchy-Schwarz:
-  sqrt(W_lambda)*|h| and 1/sqrt(W_lambda) belong to L2;
-  their product equals |h| almost everywhere;
-  consequently h belongs to L1 and
-
+[D06.04] Weighted Cauchy-Schwarz with genuine integrability.
+  Set f(k)=sqrt(W(k))*|h(k)|, g(k)=1/sqrt(W(k)).
+  Their squared integrals are D+lambda^2*Z and 1/(4*pi*lambda).
+  APPLY [EP069] MeasureTheory.memLp_two_iff_integrable_sq to f and g,
+    with the a.e. measurability of the Fourier representative.
+  APPLY [EP070] MeasureTheory.MemLp.integrable_mul to f and g.
+  Since f*g=|h| away from {0}, h belongs to L1.
+  APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
+    with p=q=2, nonnegative f,g, and their MemLp proofs.
+  OUTPUT:
     (integral |h|)^2 <= (D+lambda^2*Z)/(4*pi*lambda).
 
-The L1 inverse Fourier map supplies a bounded continuous representative V.
-Its distributional agreement with the L2 inverse identifies V=v a.e.
-The pointwise inverse Fourier bound then gives
+[D06.05a] The L1 and L2 inverse objects; derived bridge AD03.
+  Let h1 and h2 be the L1 and L2 classes of the same h.
+  SELECT [EP072] Real.Lp.fourierTransformInvCLM at h1, obtaining a bounded
+    continuous function V.
+  APPLY [EP073] Real.Lp.fourierTransformInvCLM_apply to identify the underlying
+    inverse map, and [EP074] Real.Lp.fourierTransformInv_apply for its chosen
+    L1 representative.
+  APPLY [EP075] Real.Lp.fourierTransformInv_toLp to the raw function h and its
+    MemLp h 1 proof. OUTPUT:
+    V(x)=F0^(-1)(h)(x), interpreted by the absolutely convergent integral.
+  This last conversion uses equality of inverse integrals; it does not assume
+    the chosen L1 representative equals raw h at every point.
+  Let v2 be the inverse of h2 under the L2 Fourier isometry.
+  APPLY [EP076] MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq
+    to identify the tempered embedding of v2.
 
-    ||v||_infinity^2 <= (D+lambda^2*Z)/(4*pi*lambda).
+[D06.05b] Equality on compact smooth tests; continuation of AD03.
+  Fix a real smooth compactly supported test psi, and put phi=(psi:C).
+  APPLY [EP053] HasCompactSupport.toSchwartzMap to phi.
+  APPLY [EP077] VectorFourier.integral_fourierIntegral_smul_eq_flip
+    with scalar f=phi, vector g=h, full volume, and the bilinear form
+    L=-inner, corresponding to the inverse Fourier sign.
+  Its L1 premises hold because phi is Schwartz and h is integrable.
+  OUTPUT:
+    integral phi(x)*V(x) dx = integral F0^(-1)(phi)(k)*h(k) dk.
+  APPLY [EP054] MeasureTheory.Lp.toTemperedDistribution_apply to v2 and h2.
+  APPLY [EP078] TemperedDistribution.fourierInv_apply to the distribution h2.
+  APPLY [EP079] SchwartzMap.fourierInv_coe to identify the Schwartz inverse
+    test with its ordinary inverse Fourier function.
+  OUTPUT:
+    integral phi(x)*v2(x) dx = integral F0^(-1)(phi)(k)*h(k) dk.
+  Thus the two representatives have equal integrals against every real psi.
 
-For D,Z>0 choose lambda=sqrt(D/Z):
+[D06.05c] A.e. identification; completion of AD03.
+  APPLY [EP080] Continuous.locallyIntegrable to the bounded continuous V.
+  APPLY [EP051] MeasureTheory.MemLp.locallyIntegrable to v2 with p=2>=1.
+  APPLY [EP057] ae_eq_of_integral_contDiff_smul_eq
+    with f=V, f'=the L2 representative v2, and [D06.05b].
+  OUTPUT: V=v2 almost everywhere; consequently V represents the original v.
+  AD03 has a complete B-tier derivation from inspected source statements.
+  The corresponding composed Lean declaration remains unwritten.
 
-  DERIVED ENDPOINT QFA_AGMON_R3:
-    ||v||_infinity^2 <= sqrt(D*Z)/(2*pi).
+[D06.06] Agmon optimization.
+  APPLY [EP081] VectorFourier.norm_fourierIntegral_le_integral_norm
+    to the inverse Fourier integral V with L=-inner.
+  OUTPUT: ||V(x)||<=integral |h| for every x.
+  USE [D06.04]-[D06.05c]:
+    ||v||_infinity^2<=(D+lambda^2*Z)/(4*pi*lambda).
+  For D,Z>0 choose lambda=sqrt(D/Z):
+    ||v||_infinity^2<=sqrt(D*Z)/(2*pi).
+  If D=0 or Z=0, the corresponding nonnegative spectral integrand vanishes
+  a.e., hence h=0 off {0}; L2 Plancherel gives v=0. The same bound follows.
 
-If D=0 or Z=0, the corresponding weighted spectral integral vanishes.
-Then h=0 off the null singleton {0}, and Plancherel gives v=0. The same
-Agmon estimate holds in these cases.
+[D06.07] Physical energy interpolation.
+  APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
+    with p=q=2, f=|h| and g=(2*pi)^2*|k|^2*|h|.
+  Their squared integrals are E and Z; their product integral is D.
+  OUTPUT: D<=sqrt(E*Z), equivalently D^2<=E*Z.
 
-A second Cauchy-Schwarz estimate gives
+[D06.08] Nonlinear enstrophy coefficient.
+  Pointwise Euclidean Cauchy-Schwarz gives
+    |(v.grad)v|<=|v|*|grad v|_F.
+  APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
+    to |grad v|_F and |Delta v|, p=q=2, after extracting ||v||_infinity.
+  USE [D06.06]-[D06.07]:
+    |<(v.grad)v,Delta v>|
+      <=||v||_infinity*sqrt(D)*sqrt(Z)
+      <=(2*pi)^(-1/2)*D^(3/4)*Z^(3/4)
+      <=(2*pi)^(-1/2)*(E*D)^(1/4)*Z.
+  All vector norms are Hilbert norms. No coordinate-count factor occurs.
 
-  DERIVED ENDPOINT QFA_L2_H1_H2_INTERPOLATION:
-    D <= sqrt(E*Z), equivalently D^2<=E*Z.
+[07] INDEXED GLOBAL STRONG RESTART
 
-Pointwise |(v.grad)v|<=|v|*|grad v|_F and integral Holder now give
+[D07.01] Local strong object and subcritical margin.
+  USE [D05.02]-[D05.05]: b=u(s) in H1, E_s*D_s<4*pi^2*nu^4.
+  INVOKE C02 for b at time s, obtaining v on [s,Tmax).
+  INVOKE C03 for energy/enstrophy and positive-time smoothing.
+  Put C=(2*pi)^(-1/2), eta=nu-C*(E_s*D_s)^(1/4)>0.
+  Energy gives E_v<=E_s; [D06.08] gives
+    (1/2)*D_v'+[nu-C*(E_v*D_v)^(1/4)]*Z_v<=0.
 
-  |<(v.grad)v,Delta v>|
-    <= ||v||_infinity*sqrt(D)*sqrt(Z)
-    <= (2*pi)^(-1/2)*D^(3/4)*Z^(3/4)
-    <= (2*pi)^(-1/2)*(E*D)^(1/4)*Z.
-
-Thus the coefficient 1/sqrt(2*pi) is preserved for vector fields, without
-a factor 3 or sqrt(3). The exact source inputs are recorded in Appendix B.
-
-New formal adapters required by this section:
-  real/complex isometry;
-  physical derivative/distribution identification;
-  exact spectral norm identities;
-  L1 inverse/L2 inverse representative compatibility;
-  radial-integral assembly, integrability, weighted estimate, optimization.
-The existing sources supply the constituent theorems, not an already named
-whole-space QFA_AGMON_R3 declaration.
-
-[07] SUBCRITICAL PRODUCT: GLOBAL STRONG RESTART
-
-Fix b=u(s) from [05]. Write
-  E_s=||b||_2^2, D_s=||grad b||_2^2,
-  E_s*D_s<4*pi^2*nu^4,
-  C=(2*pi)^(-1/2), eta=nu-C*(E_s*D_s)^(1/4)>0.
-
-C02 supplies a maximal H1 strong solution v starting from b at time s.
-The energy identity gives E_v(t)<=E_s.
-Section [06] and enstrophy give, at positive smooth times,
-
-  (1/2)*D_v'(t) + [nu-C*(E_v(t)*D_v(t))^(1/4)]*Z_v(t) <= 0.
-
-Selected Methlib scalar theorem:
-  SingularClosure.scalar_invariant_of_deriv_nonpos_below.
-
-Its signature requires a right derivative even at its initial endpoint.
-An H1 trace at s does not itself discharge this hypothesis.
-
-DERIVED POSITIVE-TIME ADAPTER:
-  If E_s=0, the strong energy identity gives v=0 and the result follows.
-  Otherwise choose B>D_s such that E_s*B<4*pi^2*nu^4.
-  For every fixed s<R<Tmax, continuity in H1 gives D_v(q)<B for q>s
-  sufficiently near s. On [q,R], smoothing supplies the derivative data.
-
-  Instantiate the scalar theorem with
+[D07.02] Positive-time invariant; derived bridge AD04.
+  For E_s=0, energy gives v=0. Assume E_s>0.
+  Choose B>D_s with E_s*B<4*pi^2*nu^4.
+  Fix s<R<Tmax. C(H1) implies D_v(q)<B for q>s sufficiently near s.
+  APPLY [EP082] SingularClosure.scalar_invariant_of_deriv_nonpos_below with
     A(t)=D_v(q+t), d(t)=D_v'(q+t),
     a=D_v(q), b=B, T=R-q.
-  Whenever A(t)<=B,
-    nu-C*(E_v(q+t)*A(t))^(1/4)
-      >= nu-C*(E_s*B)^(1/4)>0,
-  so the enstrophy inequality implies d(t)<=0.
-  Therefore D_v(t)<=D_v(q) on [q,R].
-  Let q -> s+ and use C(H1): D_v(t)<=D_s.
+  DISCHARGE:
+    hT: q<=R;
+    hab: D_v(q)<B;
+    hA: strong H1 continuity;
+    hinit: equality A(0)=D_v(q);
+    hderiv: C03 at positive times q+t>s, including t=0;
+    hbound: if A(t)<=B, then
+      nu-C*(E_v(q+t)*A(t))^(1/4)>=nu-C*(E_s*B)^(1/4)>0,
+      and Z_v>=0, so the enstrophy inequality gives d(t)<=0.
+  OUTPUT: D_v(t)<=D_v(q) on [q,R].
+  Let q->s+; C(H1) gives D_v(q)->D_s.
+  APPLY [EP083] le_of_tendsto_of_tendsto to the constant D_v(t) and D_v(q).
+  OUTPUT: D_v(t)<=D_s.
+  The required derivative is never asserted at the raw H1 start s.
 
-Consequently E_v(t)*D_v(t)<=E_s*D_s and
-  D_v'(t)+2*eta*Z_v(t)<=0.
-Integration from q>s and passage q -> s+ give
+[D07.03] Quantitative enstrophy budget.
+  USE [D07.02]: E_v*D_v<=E_s*D_s, hence D_v'+2*eta*Z_v<=0.
+  APPLY [EP084] intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
+    to D_v on [q,t], q>s. C03 supplies continuity, derivative and derivative
+    integrability there. Integral monotonicity gives
+    D_v(t)+2*eta*integral_q^t Z_v<=D_v(q).
+  For the passage q->s+, APPLY
+    [EP013] IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
+    to Z_v on [s,t], using C02, then
+    [EP021] AbsolutelyContinuousOnInterval.continuousOn.
+  Thus integral_q^t Z_v->integral_s^t Z_v and D_v(q)->D_s.
+  APPLY [EP083] le_of_tendsto_of_tendsto to the integrated inequality.
+  OUTPUT:
+    D_v(t)+2*eta*integral_s^t Z_v<=D_s.
 
-  D_v(t)+2*eta*integral_s^t Z_v(r) dr <= D_s.
+[D07.04] Global continuation.
+  E_v(t)+D_v(t)<=E_s+D_s on every compact interval below Tmax.
+  INVOKE the C02 H1 continuation alternative.
+  OUTPUT: Tmax=infinity; v is global strong and smooth for t>s. QED.
 
-The limits use D_v(q)->D_s and local integrability of Z from C02.
-The uniform H1 bound E_v+D_v<=E_s+D_s excludes finite Tmax by C02.
+[08] INDEXED COMPARISON MAJORANT AND PRODUCT INTEGRABILITY
 
-DERIVED ENDPOINT QFA_GLOBAL_STRONG_OF_SUBCRITICAL_PRODUCT:
-  b in V and E_s*D_s<4*pi^2*nu^4
-    -> global strong v from b;
-       v smooth for t>s;
-       E_v<=E_s, D_v<=D_s;
-       D_v(t)+2*eta*integral_s^t Z_v<=D_s.
+[D08.01] Finite-horizon coefficient.
+  Fix R>0. Put V(t)=v(s+t), d(t)=D_v(s+t), z(t)=Z_v(s+t), and
+    g(t)=sqrt(d(t))*sqrt(z(t))/(2*pi*nu) for t>0, g(0)=0.
+  C03 gives continuity of d,z on (0,R].
+  APPLY [EP085] ContinuousOn.sqrt to each factor, then
+    [EP086] ContinuousOn.mul and [EP087] ContinuousOn.div_const.
+  OUTPUT: g is continuous on (0,R].
+  Agmon [D06.06] gives nu^(-1)*||V(t)||_infinity^2<=g(t).
 
-No application of the scalar theorem at an unjustified H1 derivative time
-is included in this composition. QED.
+[D08.02] Coefficient integrability without an endpoint continuity premise.
+  APPLY [EP088] ContinuousOn.aestronglyMeasurable to d,z and to
+    sqrt(d),sqrt(z) on (0,R], using [D08.01].
+  APPLY [EP089] MeasureTheory.integrable_const with constant D_s and the finite
+    restricted measure, then [EP090] MeasureTheory.Integrable.mono' using
+    0<=d<=D_s. This establishes d in L1 before its integral is estimated.
+  C02-[D07.03] give z in L1. The strong bounds give
+    integral_0^R d<=D_s*R and integral_0^R z<=D_s/(2*eta).
+  APPLY [EP069] MeasureTheory.memLp_two_iff_integrable_sq
+    to sqrt(d) and sqrt(z), using nonnegativity and (sqrt d)^2=d,
+    (sqrt z)^2=z almost everywhere.
+  APPLY [EP070] MeasureTheory.MemLp.integrable_mul to these two L2 functions.
+  APPLY [EP091] MeasureTheory.Integrable.div_const with divisor 2*pi*nu.
+  OUTPUT: g in L1(0,R), nonnegative.
 
-[08] CONTINUOUS INTEGRABLE COMPARISON MAJORANT
+[D08.03] Explicit coefficient budget.
+  APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
+    with p=q=2, f=sqrt(d), g=sqrt(z), measure restricted to (0,R).
+  OUTPUT:
+    integral_0^R g
+      <=sqrt(integral_0^R d)*sqrt(integral_0^R z)/(2*pi*nu)
+      <=D_s/(2*pi*nu)*sqrt(R/(2*eta))=:B_R.
 
-For a finite shifted horizon R>0, set V(t)=v(s+t), 0<=t<=R.
-For t>0 define
-  g(t)=sqrt(D_v(s+t))*sqrt(Z_v(s+t))/(2*pi*nu),
-and set g(0)=0.
+[D08.04] Integrability of the relative-energy product.
+  For arbitrary U in LH_nu(b), set e(t)=||U(t)-V(t)||_2^2.
+  Both energy bounds and the norm square inequality give
+    0<=e(t)<=2||U(t)||_2^2+2||V(t)||_2^2<=4*E_s.
+  APPLY [EP092] Continuous.comp_aestronglyMeasurable₂ to the continuous map
+    (x,y)|->||x-y||^2 and the actual a.e. measurable time-energy
+    representatives U,V. OUTPUT: e is a.e. strongly measurable.
+  APPLY [EP093] MeasureTheory.Integrable.mul_bdd
+    with integrable g, bounded factor e and bound 4*E_s.
+  OUTPUT: g*e in L1(0,R). No continuity of e is required.
 
-Agmon gives nu^(-1)*||V(t)||_infinity^2<=g(t).
-Positive-time H2 continuity gives g continuous on (0,R].
-The enstrophy budget gives
+[09] INDEXED RELATIVE ENERGY AND ALL-TIME EQUALITY
 
-  integral_0^R g(t) dt
-    <= sqrt(D_s)/(2*pi*nu) * sqrt(R*integral_s^(s+R) Z_v)
-    <= D_s/(2*pi*nu)*sqrt(R/(2*eta))
-    =: B_R < infinity.
+[D09.01] Actual weak/strong cross-testing.
+  INVOKE C04 for U in LH_nu(b), the strong V, and a valid energy start epsilon.
+  With w=U-V, incompressibility and integration by parts give
+    (1/2)*e(t)+nu*integral_epsilon^t ||grad w||_2^2
+      <=(1/2)*e(epsilon)+integral_epsilon^t integral (w.grad)w . V.
+  Pointwise and integral Cauchy-Schwarz, followed by Young's inequality, give
+    |integral (w.grad)w . V|
+      <=||V||_infinity*||w||_2*||grad w||_2
+      <=(nu/2)||grad w||_2^2+(1/(2*nu))||V||_infinity^2*e.
+  USE [D08.01], multiply by two, and absorb:
+    e(t)+nu*integral_epsilon^t ||grad w||_2^2
+      <=e(epsilon)+integral_epsilon^t g*e.
+  Discarding the nonnegative dissipation gives the scalar comparison premise.
 
-Thus g is nonnegative and integrable through t=0, although no continuity
-there is required.
+[D09.02] Upgrade of a.e. upper endpoints; derived bridge AD05.
+  If C04 initially supplies the inequality only at a.e. upper time,
+  let H(t)=e(epsilon)+integral_epsilon^t g*e.
+  APPLY [EP013] IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
+    to g*e using [D08.04], then
+    [EP021] AbsolutelyContinuousOnInterval.continuousOn. OUTPUT: H continuous.
+  Fix t>epsilon. The interval
+    I_n=(max(epsilon,t-1/(n+1)),t)
+  has positive measure. APPLY
+    [EP094] MeasureTheory.Measure.exists_mem_of_measure_ne_zero_of_ae
+    to I_n and the full-measure predicate of valid upper endpoints.
+  OUTPUT: valid r_n in I_n, hence r_n->t.
+  Put w(t)=U(t)-V(t). APPLY [EP030] norm_sub_sq_real to w(r_n),w(t).
+  Since the squared norm is nonnegative,
+    2<w(r_n),w(t)>-||w(t)||_2^2<=||w(r_n)||_2^2<=H(r_n).
+  Weak continuity of U and strong continuity of V yield
+    <w(r_n),w(t)> -> ||w(t)||_2^2.
+  Continuity of H therefore gives e(t)<=H(t).
+  At t=epsilon the inequality is equality. Thus the scalar premise holds
+  at every upper endpoint, without norm continuity of the weak trajectory.
 
-For any U in LH_nu(b), put e(t)=||U(t)-V(t)||_2^2.
-The two energy bounds imply
-  0<=e(t)<=2*||U(t)||_2^2+2*||V(t)||_2^2<=4*E_s.
-Therefore g*e is integrable on (0,R).
-The choice of g avoids a separate continuity proof for the L-infinity norm.
+[D09.03] Admissible starts tending to zero.
+  APPLY [EP095] SingularClosure.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+    with T=R, P=the joint valid-energy-start and cross-testing predicate.
+  DISCHARGE hT by R>0 and hP by the actual LH/C04 full-measure properties.
+  OUTPUT: epsilon_n in (0,R], P(epsilon_n), epsilon_n->0.
+  No monotonicity of epsilon_n is asserted or needed.
 
-[09] WHOLE-SPACE RELATIVE ENERGY AND SELECTED COMPARISON ENDPOINT
+[D09.04] Norm-valued comparison: complete premise substitution.
+  APPLY [EP096] SingularClosure.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE:
+    source normed group V := real spatial L2;
+    source u := U; source v := V; source a := g;
+    source a_0 := b; source T := R; source M := B_R.
+  DISCHARGE:
+    hT: R>0;
+    ha and ha_nonneg: [D08.01];
+    ha_integrable: [D08.02];
+    hprod: [D08.04];
+    hbudget: [D08.03];
+    h_epsilon and h_epsilon_zero: [D09.03];
+    hu_trace: the strong initial trace of U;
+    hv_trace: C([s,s+R];H1) of the strong solution;
+    hrelative: [D09.01]-[D09.02].
+  OUTPUT: U(t)=V(t) in spatial L2 for every t in (0,R].
+  The common datum gives equality at zero; arbitrary R gives global equality.
 
-Let U in LH_nu(b) be arbitrary. Write w=U-V.
-At admissible positive starting times epsilon, C04 gives
-
-  (1/2)*||w(t)||_2^2 + nu*integral_epsilon^t ||grad w||_2^2
-    <= (1/2)*||w(epsilon)||_2^2
-       + integral_epsilon^t integral_R3 (w.grad)w . V.
-
-Incompressibility and integration by parts give this form of the cross term.
-At a.e. time,
-  |integral (w.grad)w . V|
-    <= ||V||_infinity*||w||_2*||grad w||_2
-    <= (nu/2)*||grad w||_2^2
-       +(1/(2*nu))*||V||_infinity^2*||w||_2^2.
-
-After multiplication by two and absorption,
-
-  e(t)+nu*integral_epsilon^t ||grad w||_2^2
-    <= e(epsilon)+integral_epsilon^t g(r)*e(r) dr.
-
-Dropping the nonnegative dissipation term gives the required scalar inequality.
-If the testing construction initially supplies only a.e. upper endpoints,
-weak L2 continuity of U, strong continuity of V, weak lower semicontinuity
-of the squared norm, and continuity of the integral primitive extend it to
-every upper endpoint. This is part of the physical comparison adapter.
-
-The full-measure admissible-time predicate and
-  SingularClosure.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
-give a sequence epsilon_n in (0,R] with epsilon_n->0 and all necessary
-start-time properties. Monotonicity of this sequence is not required.
-
-Both U and V have strong initial trace b. Hence e(epsilon_n)->0.
-Sections [08]-[09] discharge all scalar hypotheses of
-
-  SingularClosure.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
-
-with:
-  normed group = real spatial L2;
-  u=U, v=V, a=g, a_0=b, T=R, M=B_R.
-
-The scalar source theorem yields U(t)=V(t) in L2 for every t in (0,R].
-The common datum gives equality at zero. Since R is arbitrary, U=V globally.
-
-Explicit mathematical comparison:
-  for fixed t>0 and all sufficiently large n,
+  The scalar argument is
     e(t)<=e(epsilon_n)*exp(integral_epsilon_n^t g)
-        <=e(epsilon_n)*exp(B_R)->0.
-  With e>=0, e(t)=0. QED.
+        <=e(epsilon_n)*exp(B_R)->0,
+  together with e>=0. The whole-space testing input C04 remains explicit.
 
-DERIVED ENDPOINT QFA_WEAK_STRONG_EQ:
-  Every LH trajectory from the subcritical H1 datum b equals the global
-  strong reference velocity at every time.
+[10] INDEXED PRESSURE CONSTRUCTION AND EXACT ROOT
 
-The selected Methlib theorem proves the scalar comparison. The whole-space
-cross-testing inequality above remains an actual formalization obligation;
-it is not supplied by a generic comparison signature alone.
+[D10.01] Products on positive regular tails.
+  C03 gives v(t) in H2 for t>s; [D06.06] gives v(t) in L-infinity.
+  Each v_i also belongs to L2.
+  APPLY [EP097] MeasureTheory.memLp_top_of_bound to the bounded component.
+  APPLY [EP098] MeasureTheory.MemLp.mul with exponents infinity,2,2.
+  OUTPUT: v_i*v_j in L2 at every positive regular time.
 
-[10] SMOOTH PRESSURE AND ROOT ASSEMBLY
+[D10.02] Bounded measurable Fourier multiplier.
+  Set m_ij(k)=-k_i*k_j/|k|^2 for k!=0, and m_ij(0)=0.
+  Rational operations give Borel measurability; |k_i|,|k_j|<=|k| give |m_ij|<=1.
+  APPLY [EP097] MeasureTheory.memLp_top_of_bound with bound 1.
+  APPLY [EP099] MeasureTheory.MemLp.smul with exponents infinity,2,2.
+  APPLY [EP005] MeasureTheory.Lp.norm_le_norm_of_ae_le to |m_ij*h|<=|h|.
+  SELECT [EP100] ContinuousLinearMap.holderL for scalar multiplication,
+    measure=volume and exponents infinity,2,2, then fix the L-infinity symbol m.
+  OUTPUT: an actual bounded linear L2 multiplication operator M_m.
+  Conjugate M_m by the L2 Fourier isometry from [D06.02].
+  OUTPUT: T_ij(f)=F0^(-1)(m_ij*F0(f)) is L2 contractive.
+  Define p=sum_(i,j) T_ij(v_i*v_j).
 
-At every positive time after s, v belongs to H2 and hence to L-infinity by [06].
-Thus v_i*v_j belongs to L2, using L-infinity times L2.
+[D10.03] Temperate multiplication on L2 distributions; derived bridge AD06.
+  Let h and g*h belong to L2, and assume g.HasTemperateGrowth.
+  This includes the polynomial derivative symbols and the Bessel weights.
+  No global Lp hypothesis on g is imposed.
+  APPLY [EP054] MeasureTheory.Lp.toTemperedDistribution_apply
+    to h and g*h, testing with an arbitrary Schwartz phi.
+  APPLY [EP055] TemperedDistribution.smulLeftCLM_apply_apply
+    and [EP056] SchwartzMap.smulLeftCLM_apply_apply to the same test.
+  Both sides evaluate to integral phi(k)*g(k)*h(k).
+  OUTPUT: the tempered distribution of g*h equals g times that of h.
 
-For k!=0 define m_ij(k)=-k_i*k_j/|k|^2, and set m_ij(0)=0.
-Each symbol is Borel measurable and satisfies |m_ij|<=1.
-Consequently multiplication by m_ij maps Fourier L2 to L2 contractively.
-Define
+  For a bounded measurable m and such a g,
+    g*(m*h)=m*(g*h) belongs to L2 by [D10.02].
+  The multiplication identity, Fourier/distribution compatibility, and
+    [EP060] MeasureTheory.Lp.ker_toTemperedDistributionCLM_eq_bot
+  therefore give
+    partial^alpha(T_m f)=T_m(partial^alpha f)
+  whenever the physical derivatives in question belong to L2.
+  This proves Hm preservation for the bounded multiplier.
+  A global Holder assumption on polynomial g is not introduced.
 
-  p(t)=sum_(i,j) F0^(-1)[m_ij*F0(v_i(t)*v_j(t))].
+[D10.04] Smooth pressure.
+  For every integer m>=0, C03 gives v in H^(m+2) at positive times.
+  Leibniz expresses each derivative of v_i*v_j through order m as a finite sum.
+  Agmon [D06.06], applied to differentiated velocities, bounds one factor
+  in L-infinity; the other factor is L2. APPLY
+    [EP098] MeasureTheory.MemLp.mul termwise as in [D10.01].
+  OUTPUT: v_i*v_j in Hm; AD06 gives p in Hm for every m.
+  APPLY [EP101] TemperedDistribution.MemSobolev.fourier_memL1
+    at sufficiently high order to each required derivative.
+  More explicitly, every Fourier moment is integrable: for n>=0 use
+    |k|^n*|phat| = (1+|k|^2)^(-1) * [(1+|k|^2)*|k|^n*|phat|].
+  The second factor belongs to L2 by H^(n+2) membership.
+  APPLY [EP102] integrable_rpow_neg_one_add_norm_sq with parameter r=4,
+    so dimension 3<r and the theorem's power -r/2 equals -2.
+  OUTPUT: (1+|k|^2)^(-2) is integrable.
+  APPLY [EP069] MeasureTheory.memLp_two_iff_integrable_sq to conclude that
+    (1+|k|^2)^(-1) belongs to L2.
+  APPLY [EP070] MeasureTheory.MemLp.integrable_mul to these two L2 factors.
+  Their product identity proves Integrable(k|->|k|^n*|phat(k)|).
+  APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg with p=q=2
+    for the numerical bound, after this integrability has been established.
+  APPLY [EP103] Real.contDiff_fourier with N=infinity, together with
+    [EP104] Real.fourierInv_eq_fourier_comp_neg to handle the inverse.
+  USE AD03 to identify this smooth representative with the pressure L2 class.
+  C03 time regularity passes through the bounded linear multipliers and the
+    bounded Sobolev-to-L-infinity embeddings supplied by Agmon. Leibniz
+    products are bounded bilinear maps at sufficiently high Sobolev order.
+  Consequently all mixed time-space derivatives are continuous; p is smooth
+    on t>s. This argument is independent of the residual calculation below.
 
-Selected construction:
-  memLp_top_of_bound
-    -> MemLp.smul / MemLp.mul
-    -> Lp.norm_le_norm_of_ae_le
-    -> L2 Fourier isometry and inverse.
+[D10.05] Poisson identity and real-valuedness.
+  APPLY [EP070] MeasureTheory.MemLp.integrable_mul to the two L2 components:
+    the real product f=v_i*v_j belongs to L1, and to L2 by [D10.01].
+  APPLY [EP105] Real.fourierTransform_toLp to identify the ordinary forward
+    integral with its bounded continuous L1 Fourier representative.
+  The forward analogue of AD03 uses
+    [EP106] TemperedDistribution.fourier_apply and
+    [EP048] MeasureTheory.Lp.fourier_toTemperedDistribution_eq, and
+    [EP107] SchwartzMap.fourier_coe
+    in the same compact-test/Fubini proof; hence the ordinary and L2 Fourier
+    representatives agree a.e. Conjugating the absolutely convergent forward
+    integral gives h(-k)=conj(h(k)) for real f.
+  The real even symbol m_ij preserves this identity. The high Sobolev
+    estimates in [D10.04] make m_ij*h integrable.
+  APPLY [EP108] MeasureTheory.integral_conj to the inverse integral,
+    and [EP104] Real.fourierInv_eq_fourier_comp_neg with reflection k->-k.
+  OUTPUT: the inverse pressure representative is real-valued.
+  USE [D10.03] with g(k)=-(2*pi)^2*|k|^2, and the directional derivative
+  identities from [D06.02]. Algebra gives
+    -Delta p=sum_(i,j) partial_i partial_j(v_i*v_j).
+  The L2 normalization excludes spatial additive constants.
 
-The real and even symbol preserves real-valuedness through Fourier conjugate
-symmetry. The multiplier identity gives
-  -Delta p = sum_(i,j) partial_i partial_j(v_i*v_j).
-The projected strong NSE and this pressure reconstruction yield the full NSE.
-The L2 pressure normalization excludes spatial additive constants.
+[D10.06] Recovery of the full NSE; derived bridge AD07.
+  At positive time let
+    R=partial_t v+(v.grad)v-nu*Delta v+grad p.
+  C03 and [D10.01]-[D10.03] give R in L2; higher positive-time Sobolev
+  regularity is used for grad p.
+  Solenoidal weak NSE gives integral R.phi=0 for every smooth compact
+  solenoidal phi. The Poisson identity and div v=0 give div R=0.
+  For arbitrary compact smooth scalar psi and i!=j, take
+    phi_i=partial_j psi, phi_j=-partial_i psi, all other components zero.
+  Then phi is solenoidal, and testing yields
+    partial_j R_i-partial_i R_j=0 in distributions.
+  APPLY [EP049] TemperedDistribution.fourier_lineDerivOp_eq to these identities.
+  APPLY [EP052] MeasureTheory.LocallyIntegrable.continuous_smul to the
+    polynomial frequency factors and the L2 Fourier representative Rhat.
+  APPLY [EP109] ae_eq_zero_of_integral_contDiff_smul_eq_zero
+    to their zero distributions. OUTPUT, almost everywhere,
+    k_j*Rhat_i-k_i*Rhat_j=0 and sum_j k_j*Rhat_j=0.
+  Multiplying the first identities by k_j and summing gives
+    |k|^2*Rhat_i=0.
+  Hence Rhat=0 off the null singleton {0}. APPLY
+    [EP059] MeasureTheory.Lp.norm_fourier_eq to obtain R=0.
+  Positive-time continuity upgrades a.e. time identities to every positive
+  time. Thus the constructed pressure solves the full NSE. Poisson alone
+  is not used as a sufficient condition for this conclusion.
 
-For any nonnegative integer m, positive-time v belongs to H^(m+2).
-Leibniz expresses derivatives through order m of v_i*v_j as finite sums.
-Agmon on the differentiated velocity bounds one factor in L-infinity, and
-the other factor belongs to L2. Thus v_i*v_j belongs to H^m.
-The bounded symbol commutes with polynomial frequency multipliers, so p
-belongs to H^m for every m. The corresponding time regularity from C03 and
-Fourier reconstruction give a smooth spacetime pressure representative.
+[D10.07] Root assembly and quantifier preservation.
+  INVOKE C01: LH_nu(a) is nonempty, with the strong initial trace.
+  Fix arbitrary u in LH_nu(a), arbitrary delta>T_QFA(a,nu).
+  USE [D04.01]-[D05.05]: choose s in (0,delta), b=u(s), with an actual
+    LH restart and E_s*D_s<4*pi^2*nu^4.
+  USE [D06.01]-[D07.04]: construct the global strong reference from b.
+  USE [D08.01]-[D09.04]: the restarted u equals this reference at every time.
+  USE [D10.01]-[D10.06]: smooth velocity and pressure representatives exist
+    on t>s, hence on a neighborhood of [delta,infinity).
+  OUTPUT: Q2 with the frozen strict cutoff.
 
-The pressure route uses positive-time H2. A separate H1-to-L4 embedding
-adapter is unnecessary for this root composition.
-
-The smooth-symbol theorem
-  TemperedDistribution.MemSobolev.fourierMultiplierCLM_of_bounded
-also requires HasTemperateGrowth, including global smoothness.
-The Riesz symbols above fail that condition at zero. Hence the selected
-pressure construction uses bounded measurable multiplication on L2.
-
-ROOT PROOF:
-  C01 establishes Q0 and supplies the stipulated strong initial traces Q1.
-  Fix arbitrary u in LH_nu(a) and arbitrary delta>T_QFA(a,nu).
-  Sections [04]-[05] give s in (0,delta) with a good subcritical H1 trace b.
-  Sections [06]-[07] give a global strong reference v from b at time s.
-  Sections [08]-[09], applied to the shifted u, give u(t)=v(t) for t>=s.
-  Since s<delta, smoothing and the pressure construction hold on a time
-  neighborhood of every point of [delta,infinity). Therefore Q2 holds.
-
-  The shifted smooth tail tau |-> u(delta+tau) is LH_nu(u(delta)) by its
-  energy identity, strong trace, and translated distributional equation.
-  For any other LH velocity from u(delta), repeat [08]-[09] against that
-  strong tail on every finite horizon. The two velocities coincide.
-  Thus the admissible future set is exactly the singleton in Q3. QED.
+  C03 energy equality and the translated weak equation give
+    tau |-> u(delta+tau) in LH_nu(u(delta)).
+  For any other LH trajectory from that same trace, apply [D08.01]-[D09.04]
+    against this smooth reference tail on every finite horizon.
+  APPLY [EP110] Set.eq_singleton_iff_unique_mem to the set of velocity
+    trajectories, with the tail as the member and [D09.04] as uniqueness.
+  OUTPUT: LH_nu(u(delta))={tau |-> u(delta+tau)}, namely Q3.
+  Together with C01 and Q1, the exact theorem [01] follows. QED.
 
 [11] ENTRY-POINT DECISIONS
 
@@ -586,6 +904,7 @@ theorem-level axiom audit.
 SELECTED QFB PATTERNS FOR LATER SELECTIVE PORT:
   exists_good_time_of_integral_lt;
   strong_tendsto_of_inner_and_norm_bound;
+  timeTranslate_tendsto_nhdsWithin_right;
   timeTranslate_measurePreserving_Ioc;
   timeTranslate_memLp_Ioc;
   timeTranslate_ae_Ioc.
@@ -653,44 +972,73 @@ QFA_SMOOTH_PRESSURE:
 QUASI_FEFFERMAN_A:
   whole-space existence + the preceding derived endpoints -> exact [01].
 
-[13] CONSTRUCTION ORDER AND REMAINING FORMAL OBLIGATIONS
 
-Selected first implementation slice:
-  1. Scalar energy-envelope budget and interval/set-integral adapters.
-  2. Generic strict-average extraction and Hilbert strong-trace lemma.
-  3. Whole-space trajectory semantics and actual restart adapter.
-  4. Exact spectral identities, radial kernel, vector Agmon, interpolation.
-  5. Positive-time scalar-barrier adapter and enstrophy budget.
-  6. Whole-space relative energy + generic Methlib comparison.
-  7. Pressure reconstruction, tail membership, deterministic root composition.
+Additional explicit adapter contracts:
+  QFA_COMPLEXIFICATION_ISOMETRY: AD01.
+  QFA_L1_L2_INVERSE_COMPATIBILITY: AD03.
+  QFA_WEIGHTED_L2_FROM_PHYSICAL_DERIVATIVE: AD08.
+  QFA_PRESSURE_MULTIPLIER_COMMUTES_DERIVATIVE: AD06.
+  QFA_L2_HARMONIC_RESIDUAL_ZERO: AD07.
+These are mathematical endpoint names, not existing source declarations.
 
-Parallel analytic construction obligations:
-  P01. Whole-space Leray-Hopf existence with the exact representative and
-       strong energy-start convention.
-  P02. Whole-space local H1 NSE construction and H1 continuation alternative.
-  P03. Energy/enstrophy identities and positive-time high Sobolev smoothing.
-  P04. Legitimate whole-space relative-energy testing and endpoint extension.
+[13] ADAPTER LEDGER AND FORMALIZATION BOUNDARY
 
-Representation and estimate adapters:
-  A01. Whole-space L2, weak-gradient, solenoidal and trajectory semantics.
-  A02. Real/complex isometry and physical/distributional derivative agreement.
-  A03. L1 inverse/L2 inverse representative compatibility.
-  A04. Exact radial integral and weighted Fourier estimate assembly.
-  A05. Time-translation of physical weak NSE and the strong energy convention.
-  A06. Positive-time barrier passage q -> s+.
-  A07. Continuous comparison majorant and product integrability.
-  A08. Bounded pressure multipliers, real-valuedness, Poisson identity and
-       joint spacetime smoothness.
+The following mathematical adapter bodies are now explicit and indexed:
 
-These are implementation obligations, not new assumptions added to the
-mathematical frozen root. Treating an unresolved obligation as a named
-certificate would change the formal status to a conditional implication;
-it would not discharge the physical endpoint.
+  AD01  Real/complex vector and L2 isometry; weak derivative transport.
+        Locations: D02.01-D02.03.
+  AD02  Actual weak-equation restart, including the initial boundary term.
+        Locations: D05.03-D05.05.
+  AD03  L1/L2 inverse representative identification by compact-test equality;
+        forward identification by the same argument.
+        Locations: D06.05a-D06.05c; D10.05.
+  AD04  Positive-time barrier and q->s+ passage at an H1 restart.
+        Locations: D07.02-D07.03.
+  AD05  All-time upper endpoints from weak continuity and a Hilbert identity.
+        Location: D09.02.
+  AD06  Polynomial/distribution compatibility and bounded-multiplier derivative
+        commutation without a global Lp assumption on the polynomial.
+        Location: D10.03.
+  AD07  Full NSE recovery from the solenoidal equation and reconstructed
+        pressure, by eliminating the L2 divergence-free/curl-free residual.
+        Location: D10.06.
+  AD08  Compact-to-Schwartz weak derivative extension; noncircular recovery
+        of weighted Fourier L2 membership; exact physical spectral energies.
+        Location: D06.02.
+
+Status of AD01-AD08:
+  B_TIER mathematical derivations recorded.
+  Corresponding composed QFA Lean implementations: NOT_PREPARED.
+  Matching external compilation and theorem-level axiom evidence: PENDING.
+
+The coefficient-integrability chain D08.01-D08.04 also has explicit API
+applications. In particular, both g in L1 and g*e in L1 precede the comparison
+theorem invocation. All source premise substitutions are located in the proof.
+
+Separate actual analytic formalization obligations:
+  P01 = C01: whole-space LH existence with the exact trace and energy-start
+    representative convention.
+  P02 = C02: whole-space local H1 NSE and the H1 continuation alternative.
+  P03 = C03: strong energy/enstrophy identities and high Sobolev/time smoothing.
+  P04 = C04: legitimate whole-space weak/strong cross-testing.
+
+Implementation order:
+  scalar budget and strict selection;
+  whole-space trajectory and derivative semantics, AD01 and AD02;
+  spectral/representative adapters AD08 and AD03;
+  exact radial/Agmon calculation and AD04;
+  coefficient integrability, actual relative energy, AD05 and comparison;
+  pressure multipliers AD06, smoothness, AD07, and exact root assembly.
+
+No analytic obligation is discharged by replacing it with a certificate
+field containing its conclusion. The mathematical theorem invokes the
+established classical inputs C01-C04; the Lean implementation must prove
+or legitimately instantiate their actual whole-space endpoints.
 
 Verification gate:
   matching external compiler + exact root theorem-level axiom audit;
   no sorryAx or unapproved axioms;
-  retain caches for external Lean runs;
+  cached external Lean runs;
   no local Lean execution.
 
 [14] SOURCE PROVENANCE
@@ -741,452 +1089,1259 @@ R03. C. L. Fefferman, Existence and smoothness of the Navier-Stokes equation.
      https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf
      Problem context only; the frozen eventual-regularity root is [01].
 
-APPENDICES: EXACT SOURCE SIGNATURES AND ADAPTER PARAMETERS
-
-The appended signatures are source excerpts with ambient variables summarized
-where needed. They are reference text, not a new executable Lean file.
-
-APPENDIX A. MATHLIB AC AND MEASURE SIGNATURES
-
-2.1 Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean:412
-
-theorem _root_.IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
-    {f : ℝ → ℝ} {a b c : ℝ}
-    (h : IntervalIntegrable f volume a b) (hc : c ∈ uIcc a b) :
-    AbsolutelyContinuousOnInterval (fun x ↦ ∫ v in c..x, f v) a b
-
-QFA: f=D, a=c=0, b=delta. Membership 0 in uIcc 0 delta is automatic.
-
-2.2 Same file:216,204,245,289
-
-theorem AbsolutelyContinuousOnInterval.const_mul {f : ℝ → ℝ}
-    (α : ℝ) (hf : AbsolutelyContinuousOnInterval f a b) :
-    AbsolutelyContinuousOnInterval (fun x ↦ α * f x) a b
-
-theorem AbsolutelyContinuousOnInterval.sub
-    (hf : AbsolutelyContinuousOnInterval f a b)
-    (hg : AbsolutelyContinuousOnInterval g a b) :
-    AbsolutelyContinuousOnInterval (f - g) a b
-
-theorem AbsolutelyContinuousOnInterval.continuousOn
-    (hf : AbsolutelyContinuousOnInterval f a b) :
-    ContinuousOn f (uIcc a b)
-
-theorem AbsolutelyContinuousOnInterval.mul {f g : ℝ → ℝ}
-    (hf : AbsolutelyContinuousOnInterval f a b)
-    (hg : AbsolutelyContinuousOnInterval g a b) :
-    AbsolutelyContinuousOnInterval (f * g) a b
-
-Constant function AC adapter:
-  LipschitzWith.const (Topology/EMetricSpace/Lipschitz.lean:198)
-  -> LipschitzWith.lipschitzOnWith (same:136)
-  -> LipschitzOnWith.absolutelyContinuousOnInterval
-     (Function/AbsolutelyContinuous.lean:294).
-Alternative: ContDiffOn.absolutelyContinuousOnInterval (same:312).
-
-2.3 Mathlib/MeasureTheory/Integral/IntervalIntegral/LebesgueDifferentiationThm.lean:66
-
-theorem IntervalIntegrable.ae_hasDerivAt_integral {f : ℝ → E} {a b : ℝ}
-    (hf : IntervalIntegrable f volume a b) :
-    ∀ᵐ x, x ∈ uIcc a b → ∀ c ∈ uIcc a b,
-      HasDerivAt (fun x => ∫ (t : ℝ) in c..x, f t) (f x) x
-
-Ambient E: NormedAddCommGroup, NormedSpace ℝ, CompleteSpace. QFA uses ℝ.
-Apply c=0. Combine with HasDerivAt.const_mul and HasDerivAt.const_sub.
-
-Mathlib/Analysis/Calculus/Deriv/Mul.lean:355
-theorem HasDerivAt.const_mul (c : 𝔸) (hd : HasDerivAt d d' x) :
-    HasDerivAt (fun y => c * d y) (c * d') x
-
-Mathlib/Analysis/Calculus/Deriv/Add.lean:434
-nonrec theorem HasDerivAt.const_sub (c : F) (hf : HasDerivAt f f' x) :
-    HasDerivAt (fun x ↦ c - f x) (-f') x
-
-Mathlib/Analysis/Calculus/Deriv/Basic.lean:438
-theorem HasDerivAt.deriv (h : HasDerivAt f f' x) : deriv f x = f'
-
-2.4 Mathlib/MeasureTheory/Integral/IntervalIntegral/AbsolutelyContinuousFun.lean:245
-
-theorem AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
-    {f g : ℝ → ℝ} {a b : ℝ}
-    (hf : AbsolutelyContinuousOnInterval f a b)
-    (hg : AbsolutelyContinuousOnInterval g a b) :
-    ∫ x in a..b, deriv f x * g x + f x * deriv g x =
-      f b * g b - f a * g a
-
-QFA: f=g=F, a=0, b=delta. This is the preferred budget identity.
-
-Equivalent alternate core (same file:225):
-theorem AbsolutelyContinuousOnInterval.integral_deriv_eq_sub
-    {f : ℝ → ℝ} {a b : ℝ}
-    (hf : AbsolutelyContinuousOnInterval f a b) :
-    ∫ (x : ℝ) in a..b, deriv f x = f b - f a
-
-Use alternate with f=F*F and AC multiplication if desired.
-
-2.5 Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean:355
-
-theorem IntervalIntegrable.continuousOn_mul {f g : ℝ → A}
-    (hf : IntervalIntegrable f μ a b)
-    (hg : ContinuousOn g [[a, b]]) :
-    IntervalIntegrable (fun x => g x * f x) μ a b
-
-QFA: f=D, g=F. A=ℝ.
-
-Mathlib/MeasureTheory/Function/L1Space/Integrable.lean:91
-theorem MeasureTheory.Integrable.mono_nonneg
-    [Lattice β] [HasSolidNorm β] [AddLeftMono β] {f g : α → β}
-    (hg : Integrable g μ) (hf : AEStronglyMeasurable f μ)
-    (hnonneg : ∀ᵐ a ∂μ, 0 ≤ f a) (h : ∀ᵐ a ∂μ, f a ≤ g a) :
-    Integrable f μ
-
-QFA: measure=volume.restrict(Ioo 0 delta), f=ED, g=FD, β=ℝ.
-A.e. measurability of ED follows from AEStronglyMeasurable.mul
-(Function/StronglyMeasurable/AEStronglyMeasurable.lean:301).
-
-2.6 Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:627
-
-lemma MeasureTheory.integral_mono_ae {f g : α → E}
-    (hf : Integrable f μ) (hg : Integrable g μ)
-    (h : f ≤ᵐ[μ] g) : ∫ x, f x ∂μ ≤ ∫ x, g x ∂μ
-
-QFA scalar specialization E=ℝ, restricted measure as above.
-
-Interval alternative, IntervalIntegral/Basic.lean:1424:
-theorem intervalIntegral.integral_mono_ae_restrict
-    (hab : a ≤ b) (hf : IntervalIntegrable f μ a b)
-    (hg : IntervalIntegrable g μ a b)
-    (h : f ≤ᵐ[μ.restrict (Icc a b)] g) :
-    (∫ u in a..b, f u ∂μ) ≤ ∫ u in a..b, g u ∂μ
-
-2.7 Same IntervalIntegral/Basic.lean:1242,1257
-
-theorem intervalIntegral.integral_congr_ae
-    (h : ∀ᵐ x ∂μ, x ∈ Ι a b → f x = g x) :
-    ∫ x in a..b, f x ∂μ = ∫ x in a..b, g x ∂μ
-
-theorem intervalIntegral.integral_congr_ae_restrict
-    {a b : ℝ} {f g : ℝ → E} {μ : Measure ℝ}
-    (h : f =ᵐ[μ.restrict (Ι a b)] g) :
-    ∫ x in a..b, f x ∂μ = ∫ x in a..b, g x ∂μ
-
-Use for the a.e. derivative replacement in the FTC identity.
-
-
-INTERVAL / SET BRIDGES
-
-Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean:150
-theorem intervalIntegrable_iff_integrableOn_Ioo_of_le [NullSingletonClass μ]
-    (hab : a ≤ b) (ha : ‖f a‖ₑ ≠ ∞ := by finiteness)
-    (hb : ‖f b‖ₑ ≠ ∞ := by finiteness) :
-    IntervalIntegrable f μ a b ↔ IntegrableOn f (Ioo a b) μ
-
-Same:677
-theorem intervalIntegral.integral_of_le (h : a ≤ b) :
-    ∫ x in a..b, f x ∂μ = ∫ x in Ioc a b, f x ∂μ
-
-Mathlib/MeasureTheory/Integral/Bochner/Set.lean:712
-theorem MeasureTheory.integral_Ioc_eq_integral_Ioo [NullSingletonClass μ] :
-    ∫ t in Ioc x y, f t ∂μ = ∫ t in Ioo x y, f t ∂μ
-
-For real-valued E,D all endpoint enorm-finiteness side conditions are
-automatic. Lebesgue measure supplies NullSingletonClass. delta>=0 gives
-uIcc 0 delta = Icc 0 delta and uIoc 0 delta = Ioc 0 delta.
-
-
-APPENDIX B. MATHLIB FOURIER / SOBOLEV SIGNATURES
-
-[F01] Mathlib/Analysis/Fourier/FourierTransform.lean:438
-namespace Real
-lemma fourier_eq' (f : V -> E) (w : V) :
-  F f w = integral v, Complex.exp ((up(-2*pi*<v,w>) * Complex.I)) smul f v
-Actual Lean statement:
-lemma fourier_eq' (f : V → E) (w : V) :
-    𝓕 f w = ∫ v, Complex.exp ((↑(-2 * π * ⟪v, w⟫) * Complex.I)) • f v := by ...
-V is a finite-dimensional real inner-product space with its Borel measurable structure;
-E is a complex normed space. Real.fourierInv_eq' at line 451 has the positive exponent.
-
-[F02] Mathlib/Analysis/Fourier/LpSpace.lean:50,89,93
-namespace MeasureTheory.Lp
-def fourierTransformₗᵢ : (Lp (α := E) F 2) ≃ₗᵢ[ℂ] (Lp (α := E) F 2)
-theorem norm_fourier_eq (f : Lp (α := E) F 2) : ‖𝓕 f‖ = ‖f‖
-theorem inner_fourier_eq (f g : Lp (α := E) F 2) : ⟪𝓕 f, 𝓕 g⟫ = ⟪f, g⟫
-Variables: E is a finite-dimensional real inner-product space with measurable/Borel structure;
-F is a complete complex inner-product space. Full volume is the measure.
-This is an actual L2 linear isometry equivalence, not merely Schwartz Plancherel.
-FourierPair and FourierInvPair instances in the same file give inverse identities.
-
-[F03] Mathlib/Analysis/Fourier/LpSpace.lean:99,108,120,132
-theorem SchwartzMap.toLp_fourier_eq (f : 𝓢(E, F)) :
-  𝓕 (f.toLp 2) = (𝓕 f).toLp 2
-theorem SchwartzMap.toLp_fourierInv_eq (f : 𝓢(E, F)) :
-  𝓕⁻ (f.toLp 2) = (𝓕⁻ f).toLp 2
-theorem MeasureTheory.Lp.fourier_toTemperedDistribution_eq (f : Lp (α := E) F 2) :
-  𝓕 (f : 𝓢'(E, F)) = (𝓕 f : Lp (α := E) F 2)
-theorem MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq (f : Lp (α := E) F 2) :
-  𝓕⁻ (f : 𝓢'(E, F)) = (𝓕⁻ f : Lp (α := E) F 2)
-The last two right-hand sides are coerced to tempered distributions by elaboration.
-
-[F04] Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean:181,205,314,318
-SchwartzMap.fourier_fderivCLM_eq and SchwartzMap.fourier_lineDerivOp_eq implement the
-2*pi*i directional multiplier on Schwartz functions.
-theorem fourier_lineDerivOp_eq (f : 𝓢(V, E)) (m : V) :
-  𝓕 (∂_{m} f) = (2 * π * Complex.I) • smulLeftCLM E (inner ℝ · m) (𝓕 f)
-theorem integral_norm_sq_fourier (f : 𝓢(V, H)) :
-  ∫ ξ, ‖𝓕 f ξ‖ ^ 2 = ∫ x, ‖f x‖ ^ 2
-H can be any complete complex Hilbert space. Therefore vector estimates need no factor 3.
-
-[F05] Mathlib/Analysis/Distribution/TemperedDistribution.lean:568
-theorem TemperedDistribution.fourier_lineDerivOp_eq (f : 𝓢'(E, F)) (m : E) :
-  𝓕 (∂_{m} f) = (2 * π * Complex.I) • smulLeftCLM F (inner ℝ · m) (𝓕 f)
-Mathlib/Analysis/Distribution/FourierMultiplier.lean:209
-theorem TemperedDistribution.laplacian_eq_fourierMultiplierCLM (f : 𝓢'(E, F)) :
-  Δ f = -(2 * π) ^ 2 • fourierMultiplierCLM F (fun x ↦ Complex.ofReal (‖x‖ ^ 2)) f
-Polynomial multipliers are smooth and of temperate growth, so these APIs apply.
-
-[F06] Mathlib/Analysis/Distribution/Sobolev.lean:149,153,218,241,298,316,344
-def TemperedDistribution.MemSobolev (s : ℝ) (p : ℝ≥0∞) [hp : Fact (1 ≤ p)]
-    (f : 𝓢'(E, F)) : Prop :=
-  ∃ (f' : Lp F p (volume : Measure E)), besselPotential E F s f = f'
-theorem TemperedDistribution.memSobolev_zero_iff {p : ℝ≥0∞} [hp : Fact (1 ≤ p)]
-    {f : 𝓢'(E, F)} : MemSobolev 0 p f ↔ ∃ (f' : Lp F p (volume : Measure E)), f = f'
-theorem TemperedDistribution.memSobolev_iff_exists_smulLeftCLM_fourier
-    {s : ℝ} {f : 𝓢'(E, F)} :
-  MemSobolev s 2 f ↔ ∃ (f' : Lp F 2 (volume : Measure E)),
-    smulLeftCLM F (fun x ↦ ((1 + ‖x‖ ^ 2) ^ (s / 2) : ℝ)) (𝓕 f) = f'
-theorem TemperedDistribution.MemSobolev.fourier_memL1 {s : ℝ}
-    (hs : Module.finrank ℝ E < 2 * s) {f : 𝓢'(E, F)} (hf : MemSobolev s 2 f) :
-  ∃ (v : Lp F 1 (volume : Measure E)), 𝓕 f = (v : 𝓢'(E, F))
-theorem TemperedDistribution.MemSobolev.mono {s s' : ℝ} (h : s' ≤ s)
-    {f : 𝓢'(E, F)} (hf : MemSobolev s 2 f) : MemSobolev s' 2 f
-theorem TemperedDistribution.MemSobolev.lineDerivOp {s : ℝ} {f : 𝓢'(E, F)}
-    (hf : MemSobolev s 2 f) {m : E} : MemSobolev (s - 1) 2 (∂_{m} f)
-theorem TemperedDistribution.MemSobolev.laplacian {s : ℝ} {f : 𝓢'(E, F)}
-    (hf : MemSobolev s 2 f) : MemSobolev (s - 2) 2 (Δ f)
-The Bessel weight is (1+|k|^2)^(s/2), i.e. (1-(2*pi)^(-2) Delta)^(s/2).
-Thus membership agrees with physical Hs, but constants/norms need explicit conversion.
-The file header's memSobolev_two_iff_fourier is stale: use the actual name above.
-
-[F07] Mathlib/Analysis/Fourier/FourierTransform.lean:570,599
-Within namespace Real, declarations Lp.fourierTransformInv and Lp.fourierTransformInvCLM:
-def Real.Lp.fourierTransformInv (f : Lp (α := V) E 1) : V →ᵇ E
-def Real.Lp.fourierTransformInvCLM : Lp (α := V) E 1 →L[ℂ] V →ᵇ E
-Line 580:
-theorem Real.Lp.fourierTransformInv_apply (f : Lp (α := V) E 1) (x : V) :
-  Lp.fourierTransformInv f x = 𝓕⁻ (f : V → E) x
-Use this to select the bounded continuous representative once the transform is L1.
-The compatibility of this L1 inverse representative with the L2 inverse still needs an adapter;
-the inspected LpSpace file provides L2-to-distribution compatibility, not that complete adapter.
-
-[F08] Mathlib/Analysis/Fourier/FourierTransform.lean:100
-theorem VectorFourier.norm_fourierIntegral_le_integral_norm (e : AddChar 𝕜 𝕊)
-    (μ : Measure V) (L : V →ₗ[𝕜] W →ₗ[𝕜] 𝕜) (f : V → E) (w : W) :
-  ‖fourierIntegral e μ L f w‖ ≤ ∫ v : V, ‖f v‖ ∂μ
-Instantiate with e=fourierChar, L=-inner, and full volume for inverse-Fourier bound.
-
-[F09] Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:1191
-theorem MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg {p q : ℝ}
-    (hpq : p.HolderConjugate q) {f g : α → ℝ}
-    (hf_nonneg : 0 ≤ᵐ[μ] f) (hg_nonneg : 0 ≤ᵐ[μ] g)
-    (hf : MemLp f (ENNReal.ofReal p) μ) (hg : MemLp g (ENNReal.ofReal q) μ) :
-  ∫ a, f a * g a ∂μ ≤ (∫ a, f a ^ p ∂μ) ^ (1 / p) * (∫ a, g a ^ q ∂μ) ^ (1 / q)
-Instantiate p=q=2. Both MemLp obligations must be proved before use; a totalized divergent
-Bochner integral is not a substitute for integrability evidence.
-
-[F10] Mathlib/MeasureTheory/Constructions/HaarToSphere.lean:255,296
-For nontrivial finite-dimensional real normed E, Borel structure, additive Haar measure mu:
-lemma MeasureTheory.integrable_fun_norm_addHaar {f : ℝ → F} :
-  Integrable (f ‖·‖) μ ↔ IntegrableOn
-    (fun y : ℝ ↦ y ^ (Module.finrank ℝ E - 1) • f y) (Ioi 0)
-lemma MeasureTheory.integral_fun_norm_addHaar (f : ℝ → F) :
-  ∫ x, f (‖x‖) ∂μ = Module.finrank ℝ E • μ.real (ball 0 1) •
-    ∫ y in Ioi (0 : ℝ), y ^ (Module.finrank ℝ E - 1) • f y
-The source uses local notation dim E := Module.finrank R E.
-
-[F11] Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean:408
-lemma EuclideanSpace.volume_ball_fin_three (x : EuclideanSpace ℝ (Fin 3)) (r : ℝ) :
-  volume (ball x r) = .ofReal r ^ 3 * .ofReal (π * 4 / 3)
-Hence 3 * volume.real (ball 0 1) = 4*pi.
-
-[F12] Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean:267,280
-Global declarations (the file opens Real; it is not in namespace Real):
-theorem integrable_inv_one_add_sq : Integrable fun (x : ℝ) ↦ (1 + x ^ 2)⁻¹
-theorem integral_Ioi_inv_one_add_sq {i : ℝ} :
-  ∫ (x : ℝ) in Set.Ioi i, (1 + x ^ 2)⁻¹ = (π / 2) - arctan i
-Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean:1187
-Global theorem integral_comp_mul_left_Ioi (g : ℝ → E) (a : ℝ) {b : ℝ} (hb : 0 < b) :
-  ∫ x in Ioi a, g (b * x) = b⁻¹ • ∫ x in Ioi (b * a), g x
-
-[F13] Mathlib/Analysis/InnerProductSpace/PiL2.lean:537
-theorem OrthonormalBasis.sum_sq_inner_left {ι E : Type*} [NormedAddCommGroup E]
-    [InnerProductSpace ℝ E] [Fintype ι] (b : OrthonormalBasis ι ℝ E) (x : E) :
-  ∑ i : ι, ⟪x, b i⟫ ^ 2 = ‖x‖ ^ 2
-This recovers the exact radial frequency weight from the sum of directional energies,
-without a finite-dimensional norm-equivalence loss.
-
-
-BOUNDED MULTIPLIER APIS
-Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean:538
-theorem MeasureTheory.memLp_top_of_bound {f : α → E}
-    (hf : AEStronglyMeasurable f μ) (C : ℝ)
-    (hfC : ∀ᵐ x ∂μ, ‖f x‖ ≤ C) : MemLp f ∞ μ
-Same file:502, alternative direct domination route:
-theorem MeasureTheory.MemLp.of_le {f : α → E} {g : α → F}
-    (hg : MemLp g p μ) (hf : AEStronglyMeasurable f μ)
-    (hfg : ∀ᵐ x ∂μ, ‖f x‖ ≤ ‖g x‖) : MemLp f p μ
-Mathlib/MeasureTheory/Function/LpSeminorm/CompareExp.lean:306
-theorem MeasureTheory.MemLp.smul {p q r : ℝ≥0∞} {f : α → E} {φ : α → 𝕜}
-    (hf : MemLp f q μ) (hφ : MemLp φ p μ) [hpqr : HolderTriple p q r] :
-  MemLp (φ • f) r μ
-Same file:319,325, scalar product variants:
-theorem MeasureTheory.MemLp.mul (hf : MemLp f q μ) (hφ : MemLp φ p μ)
-    [hpqr : HolderTriple p q r] : MemLp (φ * f) r μ
-theorem MeasureTheory.MemLp.mul' (hf : MemLp f q μ) (hφ : MemLp φ p μ)
-    [hpqr : HolderTriple p q r] : MemLp (fun x ↦ φ x * f x) r μ
-Mathlib/Data/ENNReal/Holder.lean:62,65:
-ENNReal.HolderTriple.symm and ENNReal.HolderTriple.instInfty provide triple infinity,2,2.
-Mathlib/MeasureTheory/Function/Holder.lean:183,188:
-lemma MeasureTheory.Lp.coeFn_lpSMul (f : Lp 𝕜 p μ) (g : Lp E q μ) :
-  (f • g : Lp E r μ) =ᵐ[μ] ⇑f • g
-protected lemma MeasureTheory.Lp.norm_smul_le (f : Lp 𝕜 p μ) (g : Lp E q μ) :
-  ‖f • g‖ ≤ ‖f‖ * ‖g‖
-Mathlib/MeasureTheory/Function/LpSpace/Basic.lean:342:
-theorem MeasureTheory.Lp.norm_le_norm_of_ae_le {f : Lp E p μ} {g : Lp F p μ}
-    (h : ∀ᵐ x ∂μ, ‖f x‖ ≤ ‖g x‖) : ‖f‖ ≤ ‖g‖
-
-
-APPENDIX C. METHLIB SCALAR / QFB GENERIC SIGNATURES
-
-regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInvariant.lean
-Git blob: af406054f59aad6d1567f048b9a6e66fe83c34f0
-https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInvariant.lean
-Line 23; namespace SingularClosure
-theorem scalar_invariant_of_deriv_nonpos_below
-    {A d : ℝ → ℝ} {T a b : ℝ}
-    (hT : 0 ≤ T) (hab : a < b)
-    (hA : ContinuousOn A (Icc 0 T)) (hinit : A 0 ≤ a)
-    (hderiv : ∀ t ∈ Ico 0 T, HasDerivWithinAt A (d t) (Ici 0) t)
-    (hbound : ∀ t ∈ Ico 0 T, A t ≤ b → d t ≤ 0) :
-    ∀ t ∈ Icc 0 T, A t ≤ a := by
-
-regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalAdmissibleTimes.lean
-Git blob: 5cfb88877679bec7fb112a07b59546eb6727cc0d
-https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalAdmissibleTimes.lean
-Line 16; namespace SingularClosure
-theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
-    {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)
-    (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :
-    ∃ ε : ℕ → ℝ,
-      (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧
-      Tendsto ε atTop (𝓝 0) := by
-
-regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
-Git blob: d71ef8ce484750c41bae8fd5530b5513e28f384d
-https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
-Line 90; namespace SingularClosure
-theorem CRITICAL_RELATIVE_ENERGY_GRONWALL
-    {e a : ℝ → ℝ} {s T δ : ℝ} (hst : s ≤ T)
-    (ha : ContinuousOn a (Icc s T))
-    (ha_nonneg : ∀ t ∈ Icc s T, 0 ≤ a t)
-    (hprod : IntervalIntegrable (fun r => a r * e r) volume s T)
-    (hrelative : ∀ t ∈ Icc s T,
-      e t ≤ δ + ∫ r in s..t, a r * e r) :
-    ∀ t ∈ Icc s T, e t ≤ δ * Real.exp (∫ r in s..t, a r) := by
-
-regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
-Git blob: d71ef8ce484750c41bae8fd5530b5513e28f384d
-https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
-Line 186; namespace SingularClosure
-theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
-    {V : Type*} [NormedAddCommGroup V]
-    {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}
-    (hT : 0 < T)
-    (ha : ContinuousOn a (Ioc 0 T))
-    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
-    (ha_integrable : IntervalIntegrable a volume 0 T)
-    (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)
-    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
-    (hε : ∀ n, ε n ∈ Ioc 0 T)
-    (hε_zero : Tendsto ε atTop (𝓝 0))
-    (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))
-    (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))
-    (hrelative : ∀ n t, t ∈ Icc (ε n) T →
-      ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +
-        ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :
-    ∀ t ∈ Ioc 0 T, u t = v t := by
-
-regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLocalUniqueness.lean
-Git blob: 4ebe95dc848cbff223e1016599925448c4441aee
-https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLocalUniqueness.lean
-Line 17; namespace SingularClosure
-theorem CRITICAL_RELATIVE_ENERGY_ZERO_OF_LOCAL_ADMISSIBLE_TRACE
-    {e a : ℝ → ℝ} {T M : ℝ} {ε : ℕ → ℝ}
-    (hT : 0 < T)
-    (he_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ e t)
-    (ha : ContinuousOn a (Ioc 0 T))
-    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
-    (ha_integrable : IntervalIntegrable a volume 0 T)
-    (hprod : ∀ n, IntervalIntegrable (fun r => a r * e r) volume (ε n) T)
-    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
-    (hε : ∀ n, ε n ∈ Ioc 0 T)
-    (hε_zero : Tendsto ε atTop (𝓝 0))
-    (htrace : Tendsto (fun n => e (ε n)) atTop (𝓝 0))
-    (hrelative : ∀ n t, t ∈ Icc (ε n) T →
-      e t ≤ e (ε n) + ∫ r in ε n..t, a r * e r) :
-    ∀ t ∈ Ioc 0 T, e t = 0 := by
-
-Quasi-Fefferman-B/QuasiFeffermanB/GoodTime.lean
-Git blob: 628486116b7120e5e66cfcfcae08693b7516933b
-https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/GoodTime.lean
-Line 12; namespace QuasiFeffermanB
-theorem exists_good_time_of_integral_lt
-    {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}
-    (hT : 0 < T) (hc : 0 ≤ c)
-    (hf : Integrable f (criticalTimeMeasure T))
-    (hgood : ∀ᵐ t ∂criticalTimeMeasure T, Good t)
-    (hbudget : (∫ t, f t ∂criticalTimeMeasure T) < c * T) :
-    ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c := by
-
-Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean
-Git blob: 99c8781a467659b4a44da1a22f284e15f375e523
-https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean
-Line 71; namespace QuasiFeffermanB
-theorem strong_tendsto_of_inner_and_norm_bound
-    {ι : Type*} {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
-    {l : Filter ι} {f : ι → E} {a : E}
-    (hinner : Tendsto (fun i => inner ℝ (f i) a) l (𝓝 (‖a‖ ^ 2)))
-    (hbound : ∀ᶠ i in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) :
-    Tendsto f l (𝓝 a) := by
-
-Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
-Git blob: 6417b89a2008f3af626819381a31d5c92fb58cd6
-https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
-Line 164; namespace QuasiFeffermanB
-theorem timeTranslate_measurePreserving_Ioc (s T : ℝ) :
-    MeasurePreserving (fun t : ℝ => t + s)
-      (volume.restrict (Ioc (0 : ℝ) T))
-      (volume.restrict (Ioc s (T + s))) := by
-
-Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
-Git blob: 6417b89a2008f3af626819381a31d5c92fb58cd6
-https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
-Line 176; namespace QuasiFeffermanB
-theorem timeTranslate_memLp_Ioc
-    {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {p : ℝ≥0∞}
-    {s T : ℝ} (hs : 0 ≤ s)
-    (hf : MemLp f p (volume.restrict (Ioc (0 : ℝ) (T + s)))) :
-    MemLp (timeTranslate s f) p (volume.restrict (Ioc (0 : ℝ) T)) := by
-
-Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
-Git blob: 6417b89a2008f3af626819381a31d5c92fb58cd6
-https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
-Line 187; namespace QuasiFeffermanB
-theorem timeTranslate_ae_Ioc {P : ℝ → Prop} {s T : ℝ} (hs : 0 ≤ s)
-    (hP : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)), P r) :
-    ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T), P (r + s) := by
-
-criticalTimeMeasure definition (QFB CriticalTimeBudget.lean:20): volume.restrict (Ioo 0 T).
-Git blob: 1d02c36c3f5743087687f50546c6e5829b26272e.
-
+APPENDIX A. LOCATED ENTRY-POINT CONSUMPTION INDEX
+
+Each index below is also printed at the actual derivation step,
+beside its argument substitution and mathematical output.
+
+D02.01  Real and complex vector spaces; derived bridge AD01.
+  EP001, EP002
+D02.02  Isometric lift to spatial L2; continuation of AD01.
+  EP003, EP004, EP005
+D02.03  Weak derivative witnesses; continuation of AD01.
+  EP006
+D02.04  Sobolev representation for the spectral layer.
+  EP007, EP008, EP009, EP010
+D02.05  Trajectory profile supplied by the actual LH class.
+  Derived calculation / classical input; no new source invocation.
+D04.01  Physical instantiation and endpoint measure convention.
+  EP011, EP012
+D04.02  Absolute-continuity construction.
+  EP013, EP014, EP015, EP016
+D04.03  A.e. derivative of the envelope.
+  EP017, EP018, EP019, EP020
+D04.04  Integrability before comparison.
+  EP021, EP022, EP023
+D04.05  Exact square identity.
+  EP024, EP025
+D04.06  Product comparison and numerical budget.
+  EP026, EP027
+D05.01  Frozen cutoff arithmetic.
+  Derived calculation / classical input; no new source invocation.
+D05.02  Extraction retaining the good predicate.
+  EP028
+D05.03  Strong right L2 trace at the selected time.
+  EP029, EP030, EP031
+D05.04  Temporal energy and measure transport.
+  EP032, EP033, EP034, EP035
+D05.05  Actual translated weak equation; derived bridge AD02.
+  EP036, EP037, EP038, EP039, EP040, EP041, EP042, EP043, EP044
+D06.01  Native Fourier convention.
+  EP045, EP046
+D06.02  Exact spectral energies; derived bridge AD08.
+  EP047, EP044, EP048, EP049, EP050, EP051, EP052, EP053, EP054, EP055, EP056, EP057, EP058, EP059, EP060, EP061, EP062
+D06.03  Exact radial kernel and its integrability.
+  EP063, EP064, EP065, EP066, EP067, EP068
+D06.04  Weighted Cauchy-Schwarz with genuine integrability.
+  EP069, EP070, EP071
+D06.05a  The L1 and L2 inverse objects; derived bridge AD03.
+  EP072, EP073, EP074, EP075, EP076
+D06.05b  Equality on compact smooth tests; continuation of AD03.
+  EP053, EP077, EP054, EP078, EP079
+D06.05c  A.e. identification; completion of AD03.
+  EP080, EP051, EP057
+D06.06  Agmon optimization.
+  EP081
+D06.07  Physical energy interpolation.
+  EP071
+D06.08  Nonlinear enstrophy coefficient.
+  EP071
+D07.01  Local strong object and subcritical margin.
+  Derived calculation / classical input; no new source invocation.
+D07.02  Positive-time invariant; derived bridge AD04.
+  EP082, EP083
+D07.03  Quantitative enstrophy budget.
+  EP084, EP013, EP021, EP083
+D07.04  Global continuation.
+  Derived calculation / classical input; no new source invocation.
+D08.01  Finite-horizon coefficient.
+  EP085, EP086, EP087
+D08.02  Coefficient integrability without an endpoint continuity premise.
+  EP088, EP089, EP090, EP069, EP070, EP091
+D08.03  Explicit coefficient budget.
+  EP071
+D08.04  Integrability of the relative-energy product.
+  EP092, EP093
+D09.01  Actual weak/strong cross-testing.
+  Derived calculation / classical input; no new source invocation.
+D09.02  Upgrade of a.e. upper endpoints; derived bridge AD05.
+  EP013, EP021, EP094, EP030
+D09.03  Admissible starts tending to zero.
+  EP095
+D09.04  Norm-valued comparison: complete premise substitution.
+  EP096
+D10.01  Products on positive regular tails.
+  EP097, EP098
+D10.02  Bounded measurable Fourier multiplier.
+  EP097, EP099, EP005, EP100
+D10.03  Temperate multiplication on L2 distributions; derived bridge AD06.
+  EP054, EP055, EP056, EP060
+D10.04  Smooth pressure.
+  EP098, EP101, EP102, EP069, EP070, EP071, EP103, EP104
+D10.05  Poisson identity and real-valuedness.
+  EP070, EP105, EP106, EP048, EP107, EP108, EP104
+D10.06  Recovery of the full NSE; derived bridge AD07.
+  EP049, EP052, EP109, EP059
+D10.07  Root assembly and quantifier preservation.
+  EP110
+
+APPENDIX B. PINNED DECLARATION INDEX AND SOURCE SIGNATURES
+
+One EP identifier denotes one existing declaration. Signatures are copied
+from the pinned source. Namespace qualification is given by DECLARATION;
+the signature may use its local namespace spelling. Ambient variables,
+typeclass instances and local notation are those of the linked source.
+The QFA specializations and premise discharges occur at APPLIED_AT.
+
+SOURCE_CLASS:
+  MATHLIB_EXISTING: declaration in the pinned Mathlib dependency.
+  METHLIB_EXISTING: declaration in QFA's inherited singular-closure source.
+  METHLIB_QFB_PATTERN: declaration in the separate pinned QFB source;
+    selected for later selective transfer, not imported by this artifact.
+
+All source classes mean SOURCE_INSPECTED. None asserts QFA compiler evidence.
+
+[EP001]
+DECLARATION = Complex.ofRealLI
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Complex/Basic.lean#L281
+GIT_BLOB = bc2acadf83f392e9144a7eb142947709381db61d
+SIGNATURE:
+  def ofRealLI : ℝ →ₗᵢ[ℝ] ℂ
+
+[EP002]
+DECLARATION = EuclideanSpace.norm_sq_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/PiL2.lean#L151
+GIT_BLOB = a938a909f274d3e80ab0fdb44aa490022fd40d2d
+SIGNATURE:
+  theorem EuclideanSpace.norm_sq_eq {𝕜 : Type*} [RCLike 𝕜] {n : Type*} [Fintype n]
+      (x : EuclideanSpace 𝕜 n) : ‖x‖ ^ 2 = ∑ i, ‖x i‖ ^ 2
+
+[EP003]
+DECLARATION = LipschitzWith.compLp
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean#L692
+GIT_BLOB = f771df1cab54c03c2feb5ea2a42a4578104d5feb
+SIGNATURE:
+  def compLp (hg : LipschitzWith c g) (g0 : g 0 = 0) (f : Lp E p μ) : Lp F p μ
+
+[EP004]
+DECLARATION = LipschitzWith.coeFn_compLp
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean#L697
+GIT_BLOB = f771df1cab54c03c2feb5ea2a42a4578104d5feb
+SIGNATURE:
+  theorem coeFn_compLp (hg : LipschitzWith c g) (g0 : g 0 = 0) (f : Lp E p μ) :
+      hg.compLp g0 f =ᵐ[μ] g ∘ f
+
+[EP005]
+DECLARATION = MeasureTheory.Lp.norm_le_norm_of_ae_le
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.02, D10.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean#L342
+GIT_BLOB = f771df1cab54c03c2feb5ea2a42a4578104d5feb
+SIGNATURE:
+  theorem norm_le_norm_of_ae_le {f : Lp E p μ} {g : Lp F p μ} (h : ∀ᵐ x ∂μ, ‖f x‖ ≤ ‖g x‖) :
+      ‖f‖ ≤ ‖g‖
+
+[EP006]
+DECLARATION = ContinuousLinearMap.integral_comp_comm
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/ContinuousLinearMap.lean#L69
+GIT_BLOB = 222cd4649f08e9b969a92ad5d64a87ea5cbbe4d9
+SIGNATURE:
+  theorem integral_comp_comm [CompleteSpace E] (L : E →L[𝕜] Fₗ) {φ : X → E} (φ_int : Integrable φ μ) :
+      ∫ x, L (φ x) ∂μ = L (∫ x, φ x ∂μ)
+
+[EP007]
+DECLARATION = TemperedDistribution.MemSobolev
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/Sobolev.lean#L149
+GIT_BLOB = 3a49f003320e3ae47293c7e2c1511f4e41648554
+SIGNATURE:
+  def MemSobolev (s : ℝ) (p : ℝ≥0∞) [hp : Fact (1 ≤ p)] (f : 𝓢'(E, F)) : Prop
+
+[EP008]
+DECLARATION = TemperedDistribution.memSobolev_iff_exists_smulLeftCLM_fourier
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/Sobolev.lean#L218
+GIT_BLOB = 3a49f003320e3ae47293c7e2c1511f4e41648554
+SIGNATURE:
+  theorem memSobolev_iff_exists_smulLeftCLM_fourier {s : ℝ} {f : 𝓢'(E, F)} :
+      MemSobolev s 2 f ↔ ∃ (f' : Lp F 2 (volume : Measure E)),
+      smulLeftCLM F (fun x ↦ ((1 + ‖x‖ ^ 2) ^ (s / 2) : ℝ)) (𝓕 f) = f'
+
+[EP009]
+DECLARATION = TemperedDistribution.MemSobolev.lineDerivOp
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/Sobolev.lean#L316
+GIT_BLOB = 3a49f003320e3ae47293c7e2c1511f4e41648554
+SIGNATURE:
+  theorem MemSobolev.lineDerivOp {s : ℝ} {f : 𝓢'(E, F)} (hf : MemSobolev s 2 f) {m : E} :
+      MemSobolev (s - 1) 2 (∂_{m} f)
+
+[EP010]
+DECLARATION = TemperedDistribution.MemSobolev.laplacian
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D02.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/Sobolev.lean#L344
+GIT_BLOB = 3a49f003320e3ae47293c7e2c1511f4e41648554
+SIGNATURE:
+  theorem MemSobolev.laplacian {s : ℝ} {f : 𝓢'(E, F)} (hf : MemSobolev s 2 f) :
+      MemSobolev (s - 2) 2 (Δ f)
+
+[EP011]
+DECLARATION = MeasureTheory.restrict_Ioo_eq_restrict_Ioc
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Measure/Typeclasses/NullSingletonClass.lean#L137
+GIT_BLOB = d760ba899effb40882ec47e4958f10b1f147e656
+SIGNATURE:
+  theorem restrict_Ioo_eq_restrict_Ioc : μ.restrict (Ioo a b) = μ.restrict (Ioc a b)
+
+[EP012]
+DECLARATION = intervalIntegrable_iff_integrableOn_Ioc_of_le
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L131
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+SIGNATURE:
+  theorem intervalIntegrable_iff_integrableOn_Ioc_of_le (hab : a ≤ b) :
+      IntervalIntegrable f μ a b ↔ IntegrableOn f (Ioc a b) μ
+
+[EP013]
+DECLARATION = IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.02, D07.03, D09.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean#L412
+GIT_BLOB = 5ba2a331eda751d5931022617f7fd1bd3078969e
+SIGNATURE:
+  theorem _root_.IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral {f : ℝ → ℝ}
+      {a b c : ℝ} (h : IntervalIntegrable f volume a b) (hc : c ∈ uIcc a b) :
+      AbsolutelyContinuousOnInterval (fun x ↦ ∫ v in c..x, f v) a b
+
+[EP014]
+DECLARATION = ContDiffOn.absolutelyContinuousOnInterval
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean#L312
+GIT_BLOB = 5ba2a331eda751d5931022617f7fd1bd3078969e
+SIGNATURE:
+  theorem _root_.ContDiffOn.absolutelyContinuousOnInterval {E : Type*} [NormedAddCommGroup E]
+      [NormedSpace ℝ E] {f : ℝ → E} (hf : ContDiffOn ℝ 1 f (uIcc a b)) :
+      AbsolutelyContinuousOnInterval f a b
+
+[EP015]
+DECLARATION = AbsolutelyContinuousOnInterval.const_mul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean#L216
+GIT_BLOB = 5ba2a331eda751d5931022617f7fd1bd3078969e
+SIGNATURE:
+  theorem const_mul {f : ℝ → ℝ} (α : ℝ) (hf : AbsolutelyContinuousOnInterval f a b) :
+      AbsolutelyContinuousOnInterval (fun x ↦ α * f x) a b
+
+[EP016]
+DECLARATION = AbsolutelyContinuousOnInterval.sub
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean#L204
+GIT_BLOB = 5ba2a331eda751d5931022617f7fd1bd3078969e
+SIGNATURE:
+  theorem sub (hf : AbsolutelyContinuousOnInterval f a b)
+      (hg : AbsolutelyContinuousOnInterval g a b) :
+      AbsolutelyContinuousOnInterval (f - g) a b
+
+[EP017]
+DECLARATION = IntervalIntegrable.ae_hasDerivAt_integral
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/LebesgueDifferentiationThm.lean#L66
+GIT_BLOB = 23dad80410b6b8745035e1916ff828433a635910
+SIGNATURE:
+  theorem IntervalIntegrable.ae_hasDerivAt_integral {f : ℝ → E} {a b : ℝ}
+      (hf : IntervalIntegrable f volume a b) :
+      ∀ᵐ x, x ∈ uIcc a b → ∀ c ∈ uIcc a b, HasDerivAt (fun x => ∫ (t : ℝ) in c..x, f t) (f x) x
+
+[EP018]
+DECLARATION = HasDerivAt.const_mul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Mul.lean#L355
+GIT_BLOB = f688112f3812e3f50cdf169956d6c1323d32c19a
+SIGNATURE:
+  theorem HasDerivAt.const_mul (c : 𝔸) (hd : HasDerivAt d d' x) :
+      HasDerivAt (fun y => c * d y) (c * d') x
+
+[EP019]
+DECLARATION = HasDerivAt.const_sub
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Add.lean#L434
+GIT_BLOB = abf6222dfea0240b26ecd8846b5ff6de62c50c92
+SIGNATURE:
+  nonrec theorem HasDerivAt.const_sub (c : F) (hf : HasDerivAt f f' x) :
+      HasDerivAt (fun x ↦ c - f x) (-f') x
+
+[EP020]
+DECLARATION = HasDerivAt.deriv
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Basic.lean#L438
+GIT_BLOB = 99b298181811591362a2467cfd825017ac9d0fef
+SIGNATURE:
+  theorem HasDerivAt.deriv (h : HasDerivAt f f' x) : deriv f x = f'
+
+[EP021]
+DECLARATION = AbsolutelyContinuousOnInterval.continuousOn
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.04, D07.03, D09.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean#L245
+GIT_BLOB = 5ba2a331eda751d5931022617f7fd1bd3078969e
+SIGNATURE:
+  theorem continuousOn (hf : AbsolutelyContinuousOnInterval f a b) :
+      ContinuousOn f (uIcc a b)
+
+[EP022]
+DECLARATION = IntervalIntegrable.continuousOn_mul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L355
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+SIGNATURE:
+  theorem continuousOn_mul {f g : ℝ → A} (hf : IntervalIntegrable f μ a b)
+      (hg : ContinuousOn g [[a, b]]) : IntervalIntegrable (fun x => g x * f x) μ a b
+
+[EP023]
+DECLARATION = MeasureTheory.Integrable.mono_nonneg
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L91
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+SIGNATURE:
+  theorem Integrable.mono_nonneg [Lattice β] [HasSolidNorm β] [AddLeftMono β] {f g : α → β}
+      (hg : Integrable g μ) (hf : AEStronglyMeasurable f μ) (hnonneg : ∀ᵐ a ∂μ, 0 ≤ f a)
+      (h : ∀ᵐ a ∂μ, f a ≤ g a) :
+      Integrable f μ
+
+[EP024]
+DECLARATION = AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/AbsolutelyContinuousFun.lean#L245
+GIT_BLOB = 8873f71ee9955b0f3d6cec786a38c255b05a41a9
+SIGNATURE:
+  theorem AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
+      {f g : ℝ → ℝ} {a b : ℝ}
+      (hf : AbsolutelyContinuousOnInterval f a b) (hg : AbsolutelyContinuousOnInterval g a b) :
+      ∫ x in a..b, deriv f x * g x + f x * deriv g x = f b * g b - f a * g a
+
+[EP025]
+DECLARATION = intervalIntegral.integral_congr_ae
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L1242
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+SIGNATURE:
+  theorem integral_congr_ae (h : ∀ᵐ x ∂μ, x ∈ Ι a b → f x = g x) :
+      ∫ x in a..b, f x ∂μ = ∫ x in a..b, g x ∂μ
+
+[EP026]
+DECLARATION = MeasureTheory.integral_mono_ae
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L627
+GIT_BLOB = 5aab70490dd61ebcfaf9c50ef26dcb612c25091b
+SIGNATURE:
+  lemma integral_mono_ae {f g : α → E} (hf : Integrable f μ) (hg : Integrable g μ)
+      (h : f ≤ᵐ[μ] g) : ∫ x, f x ∂μ ≤ ∫ x, g x ∂μ
+
+[EP027]
+DECLARATION = intervalIntegral.integral_of_le
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D04.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L677
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+SIGNATURE:
+  theorem integral_of_le (h : a ≤ b) : ∫ x in a..b, f x ∂μ = ∫ x in Ioc a b, f x ∂μ
+
+[EP028]
+DECLARATION = QuasiFeffermanB.exists_good_time_of_integral_lt
+SOURCE_CLASS = METHLIB_QFB_PATTERN
+APPLIED_AT = D05.02
+SOURCE = https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/GoodTime.lean#L12
+GIT_BLOB = 628486116b7120e5e66cfcfcae08693b7516933b
+SIGNATURE:
+  theorem exists_good_time_of_integral_lt
+      {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}
+      (hT : 0 < T) (hc : 0 ≤ c)
+      (hf : Integrable f (criticalTimeMeasure T))
+      (hgood : ∀ᵐ t ∂criticalTimeMeasure T, Good t)
+      (hbudget : (∫ t, f t ∂criticalTimeMeasure T) < c * T) :
+      ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c
+
+[EP029]
+DECLARATION = QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound
+SOURCE_CLASS = METHLIB_QFB_PATTERN
+APPLIED_AT = D05.03
+SOURCE = https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean#L71
+GIT_BLOB = 99c8781a467659b4a44da1a22f284e15f375e523
+SIGNATURE:
+  theorem strong_tendsto_of_inner_and_norm_bound
+      {ι : Type*} {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+      {l : Filter ι} {f : ι → E} {a : E}
+      (hinner : Tendsto (fun i => inner ℝ (f i) a) l (𝓝 (‖a‖ ^ 2)))
+      (hbound : ∀ᶠ i in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) :
+      Tendsto f l (𝓝 a)
+
+[EP030]
+DECLARATION = norm_sub_sq_real
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.03, D09.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/Basic.lean#L435
+GIT_BLOB = df294ad3a9269545374b410a9f806932b4417025
+SIGNATURE:
+  theorem norm_sub_sq_real (x y : F) : ‖x - y‖ ^ 2 = ‖x‖ ^ 2 - 2 * ⟪x, y⟫_ℝ + ‖y‖ ^ 2
+
+[EP031]
+DECLARATION = QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right
+SOURCE_CLASS = METHLIB_QFB_PATTERN
+APPLIED_AT = D05.03
+SOURCE = https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean#L169
+GIT_BLOB = 99c8781a467659b4a44da1a22f284e15f375e523
+SIGNATURE:
+  theorem timeTranslate_tendsto_nhdsWithin_right (s : ℝ) :
+      Tendsto (fun t : ℝ => t + s) (𝓝[>] (0 : ℝ)) (𝓝[>] s)
+
+[EP032]
+DECLARATION = QuasiFeffermanB.timeTranslate_measurePreserving_Ioc
+SOURCE_CLASS = METHLIB_QFB_PATTERN
+APPLIED_AT = D05.04
+SOURCE = https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean#L164
+GIT_BLOB = 6417b89a2008f3af626819381a31d5c92fb58cd6
+SIGNATURE:
+  theorem timeTranslate_measurePreserving_Ioc (s T : ℝ) :
+      MeasurePreserving (fun t : ℝ => t + s)
+        (volume.restrict (Ioc (0 : ℝ) T))
+        (volume.restrict (Ioc s (T + s)))
+
+[EP033]
+DECLARATION = QuasiFeffermanB.timeTranslate_memLp_Ioc
+SOURCE_CLASS = METHLIB_QFB_PATTERN
+APPLIED_AT = D05.04
+SOURCE = https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean#L176
+GIT_BLOB = 6417b89a2008f3af626819381a31d5c92fb58cd6
+SIGNATURE:
+  theorem timeTranslate_memLp_Ioc
+      {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {p : ℝ≥0∞}
+      {s T : ℝ} (hs : 0 ≤ s)
+      (hf : MemLp f p (volume.restrict (Ioc (0 : ℝ) (T + s)))) :
+      MemLp (timeTranslate s f) p (volume.restrict (Ioc (0 : ℝ) T))
+
+[EP034]
+DECLARATION = QuasiFeffermanB.timeTranslate_ae_Ioc
+SOURCE_CLASS = METHLIB_QFB_PATTERN
+APPLIED_AT = D05.04
+SOURCE = https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean#L187
+GIT_BLOB = 6417b89a2008f3af626819381a31d5c92fb58cd6
+SIGNATURE:
+  theorem timeTranslate_ae_Ioc {P : ℝ → Prop} {s T : ℝ} (hs : 0 ≤ s)
+      (hP : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)), P r) :
+      ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T), P (r + s)
+
+[EP035]
+DECLARATION = intervalIntegral.integral_comp_add_right
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L954
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+SIGNATURE:
+  theorem integral_comp_add_right (d) : (∫ x in a..b, f (x + d)) = ∫ x in a + d..b + d, f x
+
+[EP036]
+DECLARATION = Real.smoothTransition
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L146
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  def Real.smoothTransition (x : ℝ) : ℝ
+
+[EP037]
+DECLARATION = Real.smoothTransition.contDiff
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L206
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  protected theorem contDiff {n : ℕ∞} : ContDiff ℝ n smoothTransition
+
+[EP038]
+DECLARATION = Real.smoothTransition.zero_of_nonpos
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L168
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  theorem zero_of_nonpos (h : x ≤ 0) : smoothTransition x = 0
+
+[EP039]
+DECLARATION = Real.smoothTransition.one_of_one_le
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L161
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  theorem one_of_one_le (h : 1 ≤ x) : smoothTransition x = 1
+
+[EP040]
+DECLARATION = Real.smoothTransition.nonneg
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L191
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  theorem nonneg (x : ℝ) : 0 ≤ smoothTransition x
+
+[EP041]
+DECLARATION = Real.smoothTransition.le_one
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L188
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  theorem le_one (x : ℝ) : smoothTransition x ≤ 1
+
+[EP042]
+DECLARATION = Real.smoothTransition.monotone
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean#L223
+GIT_BLOB = cd24266ad8eb620150d7dd302ea1d6932745c14b
+SIGNATURE:
+  protected theorem monotone : Monotone smoothTransition
+
+[EP043]
+DECLARATION = Monotone.deriv_nonneg
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/Deriv/Slope.lean#L191
+GIT_BLOB = e56c725fab8b850125cadac0b42e67a910dc55cf
+SIGNATURE:
+  lemma Monotone.deriv_nonneg (hg : Monotone g) : 0 ≤ deriv g x
+
+[EP044]
+DECLARATION = MeasureTheory.tendsto_integral_of_dominated_convergence
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D05.05, D06.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/DominatedConvergence.lean#L57
+GIT_BLOB = e01402b504d1b8f96ed88bdd18266da7def493aa
+SIGNATURE:
+  theorem tendsto_integral_of_dominated_convergence {F : ℕ → α → G} {f : α → G} (bound : α → ℝ)
+      (F_measurable : ∀ n, AEStronglyMeasurable (F n) μ) (bound_integrable : Integrable bound μ)
+      (h_bound : ∀ n, ∀ᵐ a ∂μ, ‖F n a‖ ≤ bound a)
+      (h_lim : ∀ᵐ a ∂μ, Tendsto (fun n => F n a) atTop (𝓝 (f a))) :
+      Tendsto (fun n => ∫ a, F n a ∂μ) atTop (𝓝 <| ∫ a, f a ∂μ)
+
+[EP045]
+DECLARATION = Real.fourier_eq'
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L438
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  lemma fourier_eq' (f : V → E) (w : V) :
+      𝓕 f w = ∫ v, Complex.exp ((↑(-2 * π * ⟪v, w⟫) * Complex.I)) • f v
+
+[EP046]
+DECLARATION = Real.fourierInv_eq'
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L451
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  lemma fourierInv_eq' (f : V → E) (w : V) :
+      𝓕⁻ f w = ∫ v, Complex.exp ((↑(2 * π * ⟪v, w⟫) * Complex.I)) • f v
+
+[EP047]
+DECLARATION = MeasureTheory.Lp.fourierTransformₗᵢ
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/LpSpace.lean#L50
+GIT_BLOB = 936f6b6edc93047562a7a90084f309fc309fc2cf
+SIGNATURE:
+  def fourierTransformₗᵢ : (Lp (α := E) F 2) ≃ₗᵢ[ℂ] (Lp (α := E) F 2)
+
+[EP048]
+DECLARATION = MeasureTheory.Lp.fourier_toTemperedDistribution_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/LpSpace.lean#L120
+GIT_BLOB = 936f6b6edc93047562a7a90084f309fc309fc2cf
+SIGNATURE:
+  theorem fourier_toTemperedDistribution_eq (f : Lp (α := E) F 2) :
+      𝓕 (f : 𝓢'(E, F)) = (𝓕 f : Lp (α := E) F 2)
+
+[EP049]
+DECLARATION = TemperedDistribution.fourier_lineDerivOp_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperedDistribution.lean#L568
+GIT_BLOB = 3bbfd124249ffd78c7ab943d7e4f1475f80e2373
+SIGNATURE:
+  theorem fourier_lineDerivOp_eq (f : 𝓢'(E, F)) (m : E) :
+      𝓕 (∂_{m} f) = (2 * π * Complex.I) • smulLeftCLM F (inner ℝ · m) (𝓕 f)
+
+[EP050]
+DECLARATION = TemperedDistribution.laplacian_eq_fourierMultiplierCLM
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/FourierMultiplier.lean#L208
+GIT_BLOB = 3ea0629964633cea4a849c115511ce981c00d235
+SIGNATURE:
+  theorem laplacian_eq_fourierMultiplierCLM (f : 𝓢'(E, F)) :
+      Δ f = -(2 * π) ^ 2 • fourierMultiplierCLM F (fun x ↦ Complex.ofReal (‖x‖ ^ 2)) f
+
+[EP051]
+DECLARATION = MeasureTheory.MemLp.locallyIntegrable
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D06.05c
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean#L351
+GIT_BLOB = dc00e515b31d960ce61d0ce79d08ba0d8ab3af83
+SIGNATURE:
+  theorem MemLp.locallyIntegrable [IsLocallyFiniteMeasure μ] {p : ℝ≥0∞}
+      (hf : MemLp f p μ) (hp : 1 ≤ p) : LocallyIntegrable f μ
+
+[EP052]
+DECLARATION = MeasureTheory.LocallyIntegrable.continuous_smul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean#L829
+GIT_BLOB = dc00e515b31d960ce61d0ce79d08ba0d8ab3af83
+SIGNATURE:
+  theorem continuous_smul [SecondCountableTopologyEither X 𝕜] {f : X → E} {g : X → 𝕜}
+      (hg : Continuous g) (hf : LocallyIntegrable f μ) : LocallyIntegrable (fun x => g x • f x) μ
+
+[EP053]
+DECLARATION = HasCompactSupport.toSchwartzMap
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D06.05b
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean#L555
+GIT_BLOB = 3662f5e0037dafdaa62d8661e27c4dac33ed4858
+SIGNATURE:
+  def _root_.HasCompactSupport.toSchwartzMap {f : E → F} (h₁ : HasCompactSupport f)
+      (h₂ : ContDiff ℝ ∞ f) : 𝓢(E, F)
+
+[EP054]
+DECLARATION = MeasureTheory.Lp.toTemperedDistribution_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D06.05b, D10.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperedDistribution.lean#L169
+GIT_BLOB = 3bbfd124249ffd78c7ab943d7e4f1475f80e2373
+SIGNATURE:
+  theorem toTemperedDistribution_apply {p : ℝ≥0∞} [hp : Fact (1 ≤ p)] (f : Lp F p μ)
+      (g : 𝓢(E, ℂ)) :
+      toTemperedDistribution f g = ∫ (x : E), g x • f x ∂μ
+
+[EP055]
+DECLARATION = TemperedDistribution.smulLeftCLM_apply_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperedDistribution.lean#L252
+GIT_BLOB = 3bbfd124249ffd78c7ab943d7e4f1475f80e2373
+SIGNATURE:
+  theorem smulLeftCLM_apply_apply (g : E → ℂ) (f : 𝓢'(E, F)) (f' : 𝓢(E, ℂ)) :
+      smulLeftCLM F g f f' = f (SchwartzMap.smulLeftCLM ℂ g f')
+
+[EP056]
+DECLARATION = SchwartzMap.smulLeftCLM_apply_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean#L748
+GIT_BLOB = 3662f5e0037dafdaa62d8661e27c4dac33ed4858
+SIGNATURE:
+  theorem smulLeftCLM_apply_apply {g : E → 𝕜} (hg : g.HasTemperateGrowth) (f : 𝓢(E, F)) (x : E) :
+      smulLeftCLM F g f x = g x • f x
+
+[EP057]
+DECLARATION = ae_eq_of_integral_contDiff_smul_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D06.05c
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean#L195
+GIT_BLOB = 037760b7168e251ceb32aebcc54d5df2eca94c75
+SIGNATURE:
+  theorem ae_eq_of_integral_contDiff_smul_eq
+      (hf : LocallyIntegrable f μ) (hf' : LocallyIntegrable f' μ) (h : ∀ (g : E → ℝ),
+        ContDiff ℝ ∞ g → HasCompactSupport g → ∫ x, g x • f x ∂μ = ∫ x, g x • f' x ∂μ) :
+      ∀ᵐ x ∂μ, f x = f' x
+
+[EP058]
+DECLARATION = MeasureTheory.MemLp.ae_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean#L489
+GIT_BLOB = 4d153c2f0274921c63b04eccd3899bb5ebd7e71a
+SIGNATURE:
+  theorem MemLp.ae_eq [TopologicalSpace ε] {f g : α → ε} (hfg : f =ᵐ[μ] g) (hf_Lp : MemLp f p μ) :
+      MemLp g p μ
+
+[EP059]
+DECLARATION = MeasureTheory.Lp.norm_fourier_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/LpSpace.lean#L89
+GIT_BLOB = 936f6b6edc93047562a7a90084f309fc309fc2cf
+SIGNATURE:
+  theorem norm_fourier_eq (f : Lp (α := E) F 2) : ‖𝓕 f‖ = ‖f‖
+
+[EP060]
+DECLARATION = MeasureTheory.Lp.ker_toTemperedDistributionCLM_eq_bot
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02, D10.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperedDistribution.lean#L215
+GIT_BLOB = 3bbfd124249ffd78c7ab943d7e4f1475f80e2373
+SIGNATURE:
+  theorem ker_toTemperedDistributionCLM_eq_bot {p : ℝ≥0∞} [hp : Fact (1 ≤ p)] :
+      (MeasureTheory.Lp.toTemperedDistributionCLM F μ p).ker = ⊥
+
+[EP061]
+DECLARATION = OrthonormalBasis.sum_sq_inner_left
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/PiL2.lean#L537
+GIT_BLOB = a938a909f274d3e80ab0fdb44aa490022fd40d2d
+SIGNATURE:
+  theorem sum_sq_inner_left {ι E : Type*} [NormedAddCommGroup E]
+      [InnerProductSpace ℝ E] [Fintype ι] (b : OrthonormalBasis ι ℝ E) (x : E) :
+      ∑ i : ι, ⟪x, b i⟫ ^ 2 = ‖x‖ ^ 2
+
+[EP062]
+DECLARATION = Function.hasTemperateGrowth_one_add_norm_sq_rpow
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperateGrowth.lean#L338
+GIT_BLOB = 06f67664fb41bd2318a27a9427e96098ce013282
+SIGNATURE:
+  theorem hasTemperateGrowth_one_add_norm_sq_rpow (r : ℝ) :
+      (fun (x : H) ↦ (1 + ‖x‖ ^ 2) ^ r).HasTemperateGrowth
+
+[EP063]
+DECLARATION = MeasureTheory.integrable_fun_norm_addHaar
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Constructions/HaarToSphere.lean#L255
+GIT_BLOB = 88741fd12812cff20a57d1168cccbcf4ed5e0901
+SIGNATURE:
+  lemma integrable_fun_norm_addHaar {f : ℝ → F} :
+      Integrable (f ‖·‖) μ ↔ IntegrableOn (fun y : ℝ ↦ y ^ (dim E - 1) • f y) (Ioi 0)
+
+[EP064]
+DECLARATION = integrable_inv_one_add_sq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean#L268
+GIT_BLOB = 2a14f893870c0aca2bc351ea41ed7ac8b24f41ad
+SIGNATURE:
+  theorem integrable_inv_one_add_sq : Integrable fun (x : ℝ) ↦ (1 + x ^ 2)⁻¹
+
+[EP065]
+DECLARATION = MeasureTheory.integral_fun_norm_addHaar
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Constructions/HaarToSphere.lean#L296
+GIT_BLOB = 88741fd12812cff20a57d1168cccbcf4ed5e0901
+SIGNATURE:
+  lemma integral_fun_norm_addHaar (f : ℝ → F) :
+      ∫ x, f (‖x‖) ∂μ = dim E • μ.real (ball 0 1) • ∫ y in Ioi (0 : ℝ), y ^ (dim E - 1) • f y
+
+[EP066]
+DECLARATION = EuclideanSpace.volume_ball_fin_three
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean#L408
+GIT_BLOB = 0443714debdab2cead12355e03ec0886854810fb
+SIGNATURE:
+  lemma volume_ball_fin_three (x : EuclideanSpace ℝ (Fin 3)) (r : ℝ) :
+      volume (ball x r) = .ofReal r ^ 3 * .ofReal (π * 4 / 3)
+
+[EP067]
+DECLARATION = integral_comp_mul_left_Ioi
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean#L1187
+GIT_BLOB = 7de909dd857336d631a72f8d2b2e81be32bb02c9
+SIGNATURE:
+  theorem integral_comp_mul_left_Ioi (g : ℝ → E) (a : ℝ) {b : ℝ} (hb : 0 < b) :
+      ∫ x in Ioi a, g (b * x) = b⁻¹ • ∫ x in Ioi (b * a), g x
+
+[EP068]
+DECLARATION = integral_Ioi_inv_one_add_sq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean#L280
+GIT_BLOB = 2a14f893870c0aca2bc351ea41ed7ac8b24f41ad
+SIGNATURE:
+  theorem integral_Ioi_inv_one_add_sq {i : ℝ} :
+      ∫ (x : ℝ) in Set.Ioi i, (1 + x ^ 2)⁻¹ = (π / 2) - arctan i
+
+[EP069]
+DECLARATION = MeasureTheory.memLp_two_iff_integrable_sq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.04, D08.02, D10.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L2Space.lean#L52
+GIT_BLOB = 8431ba00bd432c998aefff3f636714e55b3363df
+SIGNATURE:
+  theorem memLp_two_iff_integrable_sq {f : α → ℝ} (hf : AEStronglyMeasurable f μ) :
+      MemLp f 2 μ ↔ Integrable (fun x => f x ^ 2) μ
+
+[EP070]
+DECLARATION = MeasureTheory.MemLp.integrable_mul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.04, D08.02, D10.04, D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L1085
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+SIGNATURE:
+  lemma MemLp.integrable_mul {p q : ℝ≥0∞} {f g : α → 𝕜} (hf : MemLp f p μ) (hg : MemLp g q μ)
+      [HolderTriple p q 1] :
+      Integrable (f * g) μ
+
+[EP071]
+DECLARATION = MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.04, D06.07, D06.08, D08.03, D10.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L1191
+GIT_BLOB = 5aab70490dd61ebcfaf9c50ef26dcb612c25091b
+SIGNATURE:
+  theorem integral_mul_le_Lp_mul_Lq_of_nonneg {p q : ℝ} (hpq : p.HolderConjugate q) {f g : α → ℝ}
+      (hf_nonneg : 0 ≤ᵐ[μ] f) (hg_nonneg : 0 ≤ᵐ[μ] g) (hf : MemLp f (ENNReal.ofReal p) μ)
+      (hg : MemLp g (ENNReal.ofReal q) μ) :
+      ∫ a, f a * g a ∂μ ≤ (∫ a, f a ^ p ∂μ) ^ (1 / p) * (∫ a, g a ^ q ∂μ) ^ (1 / q)
+
+[EP072]
+DECLARATION = Real.Lp.fourierTransformInvCLM
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05a
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L599
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  def Lp.fourierTransformInvCLM : Lp (α := V) E 1 →L[ℂ] V →ᵇ E
+
+[EP073]
+DECLARATION = Real.Lp.fourierTransformInvCLM_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05a
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L603
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  theorem Lp.fourierTransformInvCLM_apply (f : Lp (α := V) E 1) :
+      Lp.fourierTransformInvCLM V E f = Lp.fourierTransformInv f
+
+[EP074]
+DECLARATION = Real.Lp.fourierTransformInv_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05a
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L580
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  theorem Lp.fourierTransformInv_apply (f : Lp (α := V) E 1) (x : V) :
+      Lp.fourierTransformInv f x = 𝓕⁻ (f : V → E) x
+
+[EP075]
+DECLARATION = Real.Lp.fourierTransformInv_toLp
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05a
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L591
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  theorem Lp.fourierTransformInv_toLp {f : V → E} (hf : MemLp f 1) :
+      (Lp.fourierTransformInv hf.toLp : V → E) = 𝓕⁻ f
+
+[EP076]
+DECLARATION = MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05a
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/LpSpace.lean#L132
+GIT_BLOB = 936f6b6edc93047562a7a90084f309fc309fc2cf
+SIGNATURE:
+  theorem fourierInv_toTemperedDistribution_eq (f : Lp (α := E) F 2) :
+      𝓕⁻ (f : 𝓢'(E, F)) = (𝓕⁻ f : Lp (α := E) F 2)
+
+[EP077]
+DECLARATION = VectorFourier.integral_fourierIntegral_smul_eq_flip
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05b
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L242
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  theorem integral_fourierIntegral_smul_eq_flip
+      {f : V → ℂ} {g : W → F} (he : Continuous e)
+      (hL : Continuous fun p : V × W ↦ L p.1 p.2) (hf : Integrable f μ) (hg : Integrable g ν) :
+      ∫ ξ, (fourierIntegral e μ L f ξ) • (g ξ) ∂ν =
+        ∫ x, (f x) • (fourierIntegral e ν L.flip g x) ∂μ
+
+[EP078]
+DECLARATION = TemperedDistribution.fourierInv_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05b
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperedDistribution.lean#L506
+GIT_BLOB = 3bbfd124249ffd78c7ab943d7e4f1475f80e2373
+SIGNATURE:
+  theorem fourierInv_apply (f : 𝓢'(E, F)) (g : 𝓢(E, ℂ)) : 𝓕⁻ f g = f (𝓕⁻ g)
+
+[EP079]
+DECLARATION = SchwartzMap.fourierInv_coe
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05b
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean#L118
+GIT_BLOB = 29b759c53de55f6eee6359d7603e7a12c94d70e1
+SIGNATURE:
+  lemma fourierInv_coe (f : 𝓢(V, E)) : 𝓕⁻ f = 𝓕⁻ (f : V → E)
+
+[EP080]
+DECLARATION = Continuous.locallyIntegrable
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.05c
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean#L560
+GIT_BLOB = dc00e515b31d960ce61d0ce79d08ba0d8ab3af83
+SIGNATURE:
+  theorem Continuous.locallyIntegrable [IsLocallyFiniteMeasure μ] [SecondCountableTopologyEither X E]
+      (hf : Continuous f) : LocallyIntegrable f μ
+
+[EP081]
+DECLARATION = VectorFourier.norm_fourierIntegral_le_integral_norm
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L100
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  theorem norm_fourierIntegral_le_integral_norm (e : AddChar 𝕜 𝕊) (μ : Measure V)
+      (L : V →ₗ[𝕜] W →ₗ[𝕜] 𝕜) (f : V → E) (w : W) :
+      ‖fourierIntegral e μ L f w‖ ≤ ∫ v : V, ‖f v‖ ∂μ
+
+[EP082]
+DECLARATION = SingularClosure.scalar_invariant_of_deriv_nonpos_below
+SOURCE_CLASS = METHLIB_EXISTING
+APPLIED_AT = D07.02
+SOURCE = https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInvariant.lean#L23
+GIT_BLOB = af406054f59aad6d1567f048b9a6e66fe83c34f0
+SIGNATURE:
+  theorem scalar_invariant_of_deriv_nonpos_below
+      {A d : ℝ → ℝ} {T a b : ℝ}
+      (hT : 0 ≤ T) (hab : a < b)
+      (hA : ContinuousOn A (Icc 0 T)) (hinit : A 0 ≤ a)
+      (hderiv : ∀ t ∈ Ico 0 T, HasDerivWithinAt A (d t) (Ici 0) t)
+      (hbound : ∀ t ∈ Ico 0 T, A t ≤ b → d t ≤ 0) :
+      ∀ t ∈ Icc 0 T, A t ≤ a
+
+[EP083]
+DECLARATION = le_of_tendsto_of_tendsto
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D07.02, D07.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Order/OrderClosed.lean#L472
+GIT_BLOB = 9603945a9c797c1d1d695ddf79281f6887211098
+SIGNATURE:
+  theorem le_of_tendsto_of_tendsto {f g : β → α} {b : Filter β} {a₁ a₂ : α} [hb : NeBot b]
+      (hf : Tendsto f b (𝓝 a₁)) (hg : Tendsto g b (𝓝 a₂)) (h : f ≤ᶠ[b] g) : a₁ ≤ a₂
+
+[EP084]
+DECLARATION = intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D07.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean#L1140
+GIT_BLOB = 82d269a5e9269d791f5581f5f0da29cfc125541a
+SIGNATURE:
+  theorem integral_eq_sub_of_hasDerivAt_of_le (hab : a ≤ b) (hcont : ContinuousOn f (Icc a b))
+      (hderiv : ∀ x ∈ Ioo a b, HasDerivAt f (f' x) x) (hint : IntervalIntegrable f' volume a b) :
+      ∫ y in a..b, f' y = f b - f a
+
+[EP085]
+DECLARATION = ContinuousOn.sqrt
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Real/Sqrt.lean#L472
+GIT_BLOB = e111a1394cab20b87caedeef62f5bd0f7f072141
+SIGNATURE:
+  theorem ContinuousOn.sqrt (h : ContinuousOn f s) : ContinuousOn (fun x => √(f x)) s
+
+[EP086]
+DECLARATION = ContinuousOn.mul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/Monoid/Defs.lean#L106
+GIT_BLOB = ce0d24800f89a7897927104b17efa7c5540e84cf
+SIGNATURE:
+  theorem ContinuousOn.mul (hf : ContinuousOn f s) (hg : ContinuousOn g s) :
+      ContinuousOn (f * g) s
+
+[EP087]
+DECLARATION = ContinuousOn.div_const
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/Algebra/GroupWithZero.lean#L69
+GIT_BLOB = ad409ad08d53ad030bfd8f29cb2825a19b33872e
+SIGNATURE:
+  theorem ContinuousOn.div_const (hf : ContinuousOn f s) (y : G₀) :
+      ContinuousOn (fun x => f x / y) s
+
+[EP088]
+DECLARATION = ContinuousOn.aestronglyMeasurable
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntegrableOn.lean#L760
+GIT_BLOB = b96636b34e70dac887fe20e5b53d0bf15152829a
+SIGNATURE:
+  theorem ContinuousOn.aestronglyMeasurable [TopologicalSpace α] [TopologicalSpace β]
+      [h : SecondCountableTopologyEither α β] [OpensMeasurableSpace α] [PseudoMetrizableSpace β]
+      {f : α → β} {s : Set α} {μ : Measure α} (hf : ContinuousOn f s) (hs : MeasurableSet s) :
+      AEStronglyMeasurable f (μ.restrict s)
+
+[EP089]
+DECLARATION = MeasureTheory.integrable_const
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L163
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+SIGNATURE:
+  theorem integrable_const [IsFiniteMeasure μ] (c : β) : Integrable (fun _ : α => c) μ
+
+[EP090]
+DECLARATION = MeasureTheory.Integrable.mono'
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L101
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+SIGNATURE:
+  theorem Integrable.mono' {f : α → β} {g : α → ℝ} (hg : Integrable g μ)
+      (hf : AEStronglyMeasurable f μ) (h : ∀ᵐ a ∂μ, ‖f a‖ ≤ g a) : Integrable f μ
+
+[EP091]
+DECLARATION = MeasureTheory.Integrable.div_const
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L1097
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+SIGNATURE:
+  theorem Integrable.div_const {f : α → 𝕜} (h : Integrable f μ) (c : 𝕜) :
+      Integrable (fun x => f x / c) μ
+
+[EP092]
+DECLARATION = Continuous.comp_aestronglyMeasurable₂
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean#L262
+GIT_BLOB = 6ea6fa20830981f5e7b178981f05b49a9416c1b6
+SIGNATURE:
+  theorem _root_.Continuous.comp_aestronglyMeasurable₂
+      {β' : Type*} [TopologicalSpace β']
+      {g : β → β' → γ} {f : α → β} {f' : α → β'} (hg : Continuous g.uncurry)
+      (hf : AEStronglyMeasurable[m] f μ) (h'f : AEStronglyMeasurable[m] f' μ) :
+      AEStronglyMeasurable[m] (fun x => g (f x) (f' x)) μ
+
+[EP093]
+DECLARATION = MeasureTheory.Integrable.mul_bdd
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D08.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L1072
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+SIGNATURE:
+  theorem Integrable.mul_bdd {f g : α → 𝕜} {c : ℝ} (hf : Integrable f μ)
+      (hg : AEStronglyMeasurable g μ) (hg_bound : ∀ᵐ x ∂μ, ‖g x‖ ≤ c) :
+      Integrable (fun x => f x * g x) μ
+
+[EP094]
+DECLARATION = MeasureTheory.Measure.exists_mem_of_measure_ne_zero_of_ae
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D09.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Measure/Restrict.lean#L416
+GIT_BLOB = 1c0d3412b2148bc91c4f4c0b2de56abcc502f975
+SIGNATURE:
+  theorem exists_mem_of_measure_ne_zero_of_ae (hs : μ s ≠ 0) {p : α → Prop}
+      (hp : ∀ᵐ x ∂μ.restrict s, p x) : ∃ x, x ∈ s ∧ p x
+
+[EP095]
+DECLARATION = SingularClosure.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+SOURCE_CLASS = METHLIB_EXISTING
+APPLIED_AT = D09.03
+SOURCE = https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalAdmissibleTimes.lean#L16
+GIT_BLOB = 5cfb88877679bec7fb112a07b59546eb6727cc0d
+SIGNATURE:
+  theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+      {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)
+      (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :
+      ∃ ε : ℕ → ℝ,
+        (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧
+        Tendsto ε atTop (𝓝 0)
+
+[EP096]
+DECLARATION = SingularClosure.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+SOURCE_CLASS = METHLIB_EXISTING
+APPLIED_AT = D09.04
+SOURCE = https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean#L186
+GIT_BLOB = d71ef8ce484750c41bae8fd5530b5513e28f384d
+SIGNATURE:
+  theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+      {V : Type*} [NormedAddCommGroup V]
+      {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}
+      (hT : 0 < T)
+      (ha : ContinuousOn a (Ioc 0 T))
+      (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
+      (ha_integrable : IntervalIntegrable a volume 0 T)
+      (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)
+      (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
+      (hε : ∀ n, ε n ∈ Ioc 0 T)
+      (hε_zero : Tendsto ε atTop (𝓝 0))
+      (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))
+      (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))
+      (hrelative : ∀ n t, t ∈ Icc (ε n) T →
+        ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +
+          ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :
+      ∀ t ∈ Ioc 0 T, u t = v t
+
+[EP097]
+DECLARATION = MeasureTheory.memLp_top_of_bound
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.01, D10.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean#L538
+GIT_BLOB = 4d153c2f0274921c63b04eccd3899bb5ebd7e71a
+SIGNATURE:
+  theorem memLp_top_of_bound {f : α → E} (hf : AEStronglyMeasurable f μ) (C : ℝ)
+      (hfC : ∀ᵐ x ∂μ, ‖f x‖ ≤ C) : MemLp f ∞ μ
+
+[EP098]
+DECLARATION = MeasureTheory.MemLp.mul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.01, D10.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSeminorm/CompareExp.lean#L319
+GIT_BLOB = 876635b9437d6dc051d2e2990107341b2e3aa728
+SIGNATURE:
+  theorem MemLp.mul (hf : MemLp f q μ) (hφ : MemLp φ p μ) [hpqr : HolderTriple p q r] :
+      MemLp (φ * f) r μ
+
+[EP099]
+DECLARATION = MeasureTheory.MemLp.smul
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSeminorm/CompareExp.lean#L306
+GIT_BLOB = 876635b9437d6dc051d2e2990107341b2e3aa728
+SIGNATURE:
+  theorem MemLp.smul {p q r : ℝ≥0∞} {f : α → E} {φ : α → 𝕜} (hf : MemLp f q μ) (hφ : MemLp φ p μ)
+      [hpqr : HolderTriple p q r] : MemLp (φ • f) r μ
+
+[EP100]
+DECLARATION = ContinuousLinearMap.holderL
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/Holder.lean#L125
+GIT_BLOB = 28a09ce608dfff93cf2006587836e591a9f7dff2
+SIGNATURE:
+  def holderL : Lp E p μ →L[𝕜] Lp F q μ →L[𝕜] Lp G r μ
+
+[EP101]
+DECLARATION = TemperedDistribution.MemSobolev.fourier_memL1
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/Sobolev.lean#L241
+GIT_BLOB = 3a49f003320e3ae47293c7e2c1511f4e41648554
+SIGNATURE:
+  theorem MemSobolev.fourier_memL1 {s : ℝ} (hs : Module.finrank ℝ E < 2 * s) {f : 𝓢'(E, F)}
+      (hf : MemSobolev s 2 f) :
+      ∃ (v : Lp F 1 (volume : Measure E)), 𝓕 f = (v : 𝓢'(E, F))
+
+[EP102]
+DECLARATION = integrable_rpow_neg_one_add_norm_sq
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/JapaneseBracket.lean#L147
+GIT_BLOB = 7002ba9f72b6ff9d2cb6b972d5759845af4ceaad
+SIGNATURE:
+  theorem integrable_rpow_neg_one_add_norm_sq {r : ℝ} (hnr : (finrank ℝ E : ℝ) < r) :
+      Integrable (fun x ↦ ((1 : ℝ) + ‖x‖ ^ 2) ^ (-r / 2)) μ
+
+[EP103]
+DECLARATION = Real.contDiff_fourier
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransformDeriv.lean#L704
+GIT_BLOB = 0a07d00935193c4a73947b5a573ede24b5344720
+SIGNATURE:
+  theorem contDiff_fourier {N : ℕ∞}
+      (hf : ∀ (n : ℕ), n ≤ N → Integrable (fun v ↦ ‖v‖ ^ n * ‖f v‖)) :
+      ContDiff ℝ N (𝓕 f)
+
+[EP104]
+DECLARATION = Real.fourierInv_eq_fourier_comp_neg
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.04, D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L464
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  lemma fourierInv_eq_fourier_comp_neg (f : V → E) :
+      𝓕⁻ f = 𝓕 (fun x ↦ f (-x))
+
+[EP105]
+DECLARATION = Real.fourierTransform_toLp
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Fourier/FourierTransform.lean#L524
+GIT_BLOB = afb0c9ea45eb72c9c8a6b9db78f5deceb52a7193
+SIGNATURE:
+  theorem fourierTransform_toLp {f : V → E} (hf : MemLp f 1) :
+      (Lp.fourierTransform hf.toLp : V → E) = 𝓕 f
+
+[EP106]
+DECLARATION = TemperedDistribution.fourier_apply
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/TemperedDistribution.lean#L482
+GIT_BLOB = 3bbfd124249ffd78c7ab943d7e4f1475f80e2373
+SIGNATURE:
+  theorem fourier_apply (f : 𝓢'(E, F)) (g : 𝓢(E, ℂ)) : 𝓕 f g = f (𝓕 g)
+
+[EP107]
+DECLARATION = SchwartzMap.fourier_coe
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean#L98
+GIT_BLOB = 29b759c53de55f6eee6359d7603e7a12c94d70e1
+SIGNATURE:
+  lemma fourier_coe (f : 𝓢(V, E)) : 𝓕 f = 𝓕 (f : V → E)
+
+[EP108]
+DECLARATION = MeasureTheory.integral_conj
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/ContinuousLinearMap.lean#L173
+GIT_BLOB = 222cd4649f08e9b969a92ad5d64a87ea5cbbe4d9
+SIGNATURE:
+  theorem integral_conj {f : X → 𝕜} : ∫ x, conj (f x) ∂μ = conj (∫ x, f x ∂μ)
+
+[EP109]
+DECLARATION = ae_eq_zero_of_integral_contDiff_smul_eq_zero
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.06
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean#L186
+GIT_BLOB = 037760b7168e251ceb32aebcc54d5df2eca94c75
+SIGNATURE:
+  theorem ae_eq_zero_of_integral_contDiff_smul_eq_zero (hf : LocallyIntegrable f μ)
+      (h : ∀ (g : E → ℝ), ContDiff ℝ ∞ g → HasCompactSupport g → ∫ x, g x • f x ∂μ = 0) :
+      ∀ᵐ x ∂μ, f x = 0
+
+[EP110]
+DECLARATION = Set.eq_singleton_iff_unique_mem
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D10.07
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Data/Set/Insert.lean#L260
+GIT_BLOB = 0c1f4d8fd00c74776c16243e11f2ea2a533cbdaf
+SIGNATURE:
+  theorem eq_singleton_iff_unique_mem : s = {a} ↔ a ∈ s ∧ ∀ x ∈ s, x = a
 
 END OF QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
