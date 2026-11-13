@@ -1,0 +1,395 @@
+{
+  "schema": 1,
+  "assembly_revision": "R4",
+  "mathematical_status": "B_TIER",
+  "source_status": "A_TIER_CANDIDATE",
+  "formal_root_status": "PENDING",
+  "root_declaration": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED",
+  "exact_root_type": "QuasiFeffermanB.QuasiFeffermanBStatement",
+  "baseline_commit": "e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c",
+  "foundation_commit": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "mathlib_commit": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "compiler_version_for_cached_baseline": "4.33.0",
+  "cached_external_run": "43151440082",
+  "cached_exact_baseline_declarations": 178,
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "local_lean_executions": 0,
+  "new_external_lean_runs": 0,
+  "new_a_tier_promotions": 0,
+  "baseline_source_changes": 0,
+  "proposed_R3_import_reductions_applied": false,
+  "new_lean_module_count": 9,
+  "selected_Q01_endpoint_count": 8,
+  "supplementary_explicit_budget_count": 1,
+  "new_root_count": 1,
+  "selected_exports": [
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS",
+      "module": "QuasiFeffermanB.Endpoints.InitialCoefficients",
+      "source": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
+      "line": 18,
+      "signature": "theorem ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS\n    (ν : ℝ) (hν : 0 ≤ ν) (a : EnergyDatum)\n    (σ : ℕ → ℕ) (hσ : StrictMono σ) (c : FourierCoeff)\n    (h0 : ∀ k i, Tendsto\n      (fun n => (energyDatumGalerkinFamily ν hν a (σ n)).coeff 0 k i)\n      atTop (𝓝 (c k i))) :\n    c = datumFourierCoeff (a.val : Field)",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV",
+      "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "line": 116,
+      "signature": "theorem ENERGY_GALERKIN_PAIRING_HASDERIV\n    {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ) (t : ℝ) (ht : 0 < t) :\n    HasDerivAt (fun r => physicalFieldInner (g.velocity r) (φ r))\n      (physicalFieldInner (g.velocity t) (timeDerivative φ t) +\n       physicalFieldInner (timeDerivative g.velocity t) (φ t)) t",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY",
+      "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "line": 252,
+      "signature": "theorem ENERGY_GALERKIN_TIME_TEST_IDENTITY\n    {ν : ℝ} {a : Field} {N : ℕ} (g : GalerkinSolution ν a N)\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ)\n    (s t : ℝ) (hs : 0 < s) (hst : s ≤ t) :\n    physicalFieldInner (g.velocity t) (φ t) -\n      physicalFieldInner (g.velocity s) (φ s) =\n    ∫ r in s..t,\n      physicalFieldInner (g.velocity r) (timeDerivative φ r) +\n      ν * physicalFieldInner (g.velocity r) (laplacian (φ r)) +\n      criticalWeakTransport (g.velocity r)\n        (finiteSynthesis N (datumFourierCoeff (φ r)))",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM",
+      "module": "QuasiFeffermanB.Endpoints.TestProjection",
+      "source": "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "line": 197,
+      "signature": "theorem ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM\n    (φ : Velocity) (hφ : CriticalPositiveSolenoidalTest φ)\n    (s t : ℝ) (hs : 0 < s) (hst : s ≤ t) :\n    TendstoUniformlyOn\n      (fun N (z : ℝ × Vec) =>\n        fderiv ℝ (finiteSynthesis N (datumFourierCoeff (φ z.1))) z.2)\n      (fun z : ℝ × Vec => fderiv ℝ (φ z.1) z.2)\n      atTop ((Icc s t) ×ˢ unitCube)",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO",
+      "module": "QuasiFeffermanB.Endpoints.WeakH0Limit",
+      "source": "QuasiFeffermanB/Endpoints/WeakH0Limit.lean",
+      "line": 69,
+      "signature": "theorem ENERGY_H0_WEAK_TENDSTO\n    (F : ℕ → TorusSobolev 0) (v : TorusSobolev 0)\n    (R : ℝ) (hR : 0 ≤ R) (hF : ∀ n, ‖F n‖ ≤ R) (hv : ‖v‖ ≤ R)\n    (hc : ∀ k i, Tendsto (fun n => (F n).val k i) atTop (𝓝 (v.val k i)))\n    (w : TorusSobolev 0) :\n    Tendsto (fun n => inner ℂ (F n) w) atTop (𝓝 (inner ℂ v w))",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_MOMENTUM",
+      "module": "QuasiFeffermanB.Endpoints.PhysicalMomentum",
+      "source": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
+      "line": 463,
+      "signature": "theorem ENERGY_GALERKIN_PHYSICAL_MOMENTUM\n    (ν : ℝ) (hν : 0 ≤ ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n))\n    (R : ℝ) (hR : 0 ≤ R)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2)\n    (U : ℝ → TorusSobolev 0) (hN : Tendsto N atTop atTop)\n    (hc : ∀ r : ℝ, 0 ≤ r → ∀ k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (𝓝 ((U r).val k i)))\n    (htime : ∀ T : ℝ, 0 < T → ∃ z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (𝓝 z) ∧\n      ∀ᵐ r ∂volume.restrict (Icc (0 : ℝ) T), z r = U r) :\n    CriticalIntegratedWeakMomentum ν (energyPeriodicVelocity U)",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY",
+      "module": "QuasiFeffermanB.Endpoints.LimitEnergy",
+      "source": "QuasiFeffermanB/Endpoints/LimitEnergy.lean",
+      "line": 95,
+      "signature": "theorem ENERGY_PERIODIC_LIMIT_ENERGY\n    (ν : ℝ) (hν : 0 < ν) (a : ℕ → Field) (N : ℕ → ℕ)\n    (g : ∀ n, GalerkinSolution ν (a n) (N n)) (R : ℝ)\n    (hinit : ∀ n, coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2)\n    (U : ℝ → TorusSobolev 0)\n    (hcoord : ∀ k i, ContinuousOn (fun t => (U t).val k i) (Ici 0))\n    (hc : ∀ r, 0 ≤ r → ∀ k i,\n      Tendsto (fun n => (g n).coeff r k i) atTop (𝓝 ((U r).val k i)))\n    (htime : ∀ T : ℝ, 0 ≤ T → ∃ z : EnergyTimeH0L2 T,\n      Tendsto (fun n => (g n).energyTimeH0L2 T) atTop (𝓝 z) ∧\n      (∀ᵐ r ∂volume.restrict (Icc (0 : ℝ) T), z r = U r)) :\n    (∀ t : ℝ, 0 ≤ t →\n      physicalEnergy (energyPeriodicVelocity U t) +\n        2 * ν * (∫ r in (0 : ℝ)..t, criticalGradientEnergy (energyGlobalGradient U r))\n          ≤ R ^ 2) ∧\n    (∀ T : ℝ, 0 < T →\n      ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), ∀ t ∈ Icc s T,\n        physicalEnergy (energyPeriodicVelocity U t) +\n          2 * ν * (∫ r in s..t, criticalGradientEnergy (energyGlobalGradient U r))\n            ≤ physicalEnergy (energyPeriodicVelocity U s))",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE",
+      "module": "QuasiFeffermanB.Endpoints.LerayHopfExistence",
+      "source": "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean",
+      "line": 35,
+      "signature": "theorem Q01_LERAY_HOPF_EXISTENCE\n    (ν : ℝ) (hν : 0 < ν) (a : CriticalPhysicalL2) (ha : EnergySigmaZero a) :\n    ∃ (u : Velocity) (G : WeakGradientTrajectory), CriticalLerayHopf ν a u G",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT",
+      "module": "QuasiFeffermanB.Endpoints.CaloricBudget",
+      "source": "QuasiFeffermanB/Endpoints/CaloricBudget.lean",
+      "line": 17,
+      "signature": "theorem SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT\n    (ν : ℝ) (hν : 0 < ν) (b : CriticalSobolev 2)\n    (hreal : SpectralReality (criticalCoeff 2 b))\n    (_hsol : SpectralSolenoidal (criticalCoeff 2 b))\n    (_hzero : SpectralMeanZero (criticalCoeff 2 b))\n    (hsmall : ‖criticalSobolevLower 1 2 (by norm_num) b‖ ^ 2 <\n      2 * Real.pi * ν ^ 2)\n    (N : ℕ) (g : GalerkinSolution ν (finiteSynthesis N (criticalCoeff 2 b)) N)\n    (T : ℝ) (hT : 0 ≤ T) :\n    (∫ t in (0 : ℝ)..T, finiteChi0 (cutoffModes N) (g.coeff t) ^ 2) ≤\n      ‖criticalSobolevLower 1 2 (by norm_num) b‖ ^ 2 / (Real.pi * ν)",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    },
+    {
+      "declaration": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED",
+      "module": "QuasiFeffermanB.Endpoints.Root",
+      "source": "QuasiFeffermanB/Endpoints/Root.lean",
+      "line": 15,
+      "signature": "theorem QUASI_FEFFERMAN_B_COMPOSED : QuasiFeffermanBStatement",
+      "status": "A_TIER_CANDIDATE",
+      "external_compilation": "PENDING",
+      "theorem_level_axiom_audit": "PENDING"
+    }
+  ],
+  "topological_new_module_order": [
+    "QuasiFeffermanB.Endpoints.CaloricBudget",
+    "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+    "QuasiFeffermanB.Endpoints.InitialCoefficients",
+    "QuasiFeffermanB.Endpoints.WeakH0Limit",
+    "QuasiFeffermanB.Endpoints.TestProjection",
+    "QuasiFeffermanB.Endpoints.PhysicalMomentum",
+    "QuasiFeffermanB.Endpoints.LimitEnergy",
+    "QuasiFeffermanB.Endpoints.LerayHopfExistence",
+    "QuasiFeffermanB.Endpoints.Root"
+  ],
+  "sources": [
+    {
+      "path": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
+      "sha256": "243327d3daa81a5b16e559cecb4df96bdc6cae14d42440ad4e8a372b36c27d1e",
+      "bytes": 1535,
+      "lines": 42,
+      "public_declarations": [
+        "ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS"
+      ],
+      "imports": [
+        "QuasiFeffermanB.EnergyDatumApproximation",
+        "SingularClosure.SobolevLimitInitial"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "sha256": "41bcd4240fe9048d7782e9522e5ac9dd5235c3ef0b3e26a973b972fa91fa2ab9",
+      "bytes": 13870,
+      "lines": 284,
+      "public_declarations": [
+        "energy_finiteSynthesis_joint_continuousOn",
+        "energy_galerkinRhs_coordinate_continuousOn",
+        "energyGalerkin_velocity_continuousOn",
+        "energyGalerkin_timeDerivative_continuousOn",
+        "energyGalerkin_velocity_hasDerivAt",
+        "ENERGY_GALERKIN_PAIRING_HASDERIV",
+        "energy_finite_projection_pairing",
+        "energy_test_projection_laplacian",
+        "energyTest_fourier_solenoidal",
+        "energyGalerkin_projected_test_pairing",
+        "ENERGY_GALERKIN_TIME_TEST_INTEGRABLE",
+        "ENERGY_GALERKIN_TIME_TEST_IDENTITY"
+      ],
+      "imports": [
+        "QuasiFeffermanB.EnergyFiniteWeakPairing",
+        "QuasiFeffermanB.SpatialAdmission",
+        "SingularClosure.CriticalGalerkin",
+        "SingularClosure.SmoothFourierLaplacian"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "sha256": "ee3960d6d2ee051052810c5b7b8477483273a7e2ad0701bde806466231a02fed",
+      "bytes": 12583,
+      "lines": 273,
+      "public_declarations": [
+        "energy_sobolevCutoffModes_tendsto",
+        "energy_smooth_datumFourier_reconstruction",
+        "energy_smooth_derivative_fourierSeries",
+        "energy_finite_derivative_fourierSum",
+        "energy_vector_norm_le_three",
+        "energy_operator_norm_le_nine",
+        "energyTest_derivative_entries_uniform",
+        "ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM",
+        "ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND"
+      ],
+      "imports": [
+        "QuasiFeffermanB.EnergyTestDecay",
+        "SingularClosure.PeriodicFourierInjective",
+        "SingularClosure.SobolevSmoothRealization",
+        "Mathlib.Analysis.Normed.Group.FunctionSeries",
+        "Mathlib.Topology.MetricSpace.Pseudo.Basic"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/WeakH0Limit.lean",
+      "sha256": "63f6e60497dd916991b09b0eddfd314fd087f0e69ea64fe3e8ac0c7b0c2adfa4",
+      "bytes": 9522,
+      "lines": 196,
+      "public_declarations": [
+        "ENERGY_LP_WEAK_TENDSTO",
+        "ENERGY_H0_WEAK_TENDSTO",
+        "ENERGY_H0_LIMIT_NORM_LE",
+        "ENERGY_PHYSICAL_L2_WEAK_TENDSTO",
+        "energy_galerkin_physical_L2",
+        "ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO"
+      ],
+      "imports": [
+        "QuasiFeffermanB.EnergyWeakContinuity",
+        "QuasiFeffermanB.EnergyPhysicalContinuity",
+        "QuasiFeffermanB.EnergyGalerkinCompactness",
+        "SingularClosure.CriticalLimitUniform",
+        "SingularClosure.CriticalWeakGradient"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
+      "sha256": "d2e122aab16d773a42629464eb99cb86b2a5ddb7bac571a4d0585534929faf19",
+      "bytes": 26487,
+      "lines": 492,
+      "public_declarations": [
+        "ENERGY_GALERKIN_PHYSICAL_MOMENTUM"
+      ],
+      "imports": [
+        "QuasiFeffermanB.Endpoints.WeakH0Limit",
+        "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+        "QuasiFeffermanB.Endpoints.TestProjection",
+        "QuasiFeffermanB.EnergyGlobalLimit",
+        "QuasiFeffermanB.EnergyTransportContinuity",
+        "Mathlib.MeasureTheory.Function.ConvergenceInMeasure",
+        "Mathlib.MeasureTheory.Integral.DominatedConvergence"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/LimitEnergy.lean",
+      "sha256": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
+      "bytes": 9913,
+      "lines": 193,
+      "public_declarations": [
+        "ENERGY_PERIODIC_LIMIT_ENERGY"
+      ],
+      "imports": [
+        "QuasiFeffermanB.EnergyGlobalLimit",
+        "QuasiFeffermanB.EnergyLimitEnergy",
+        "QuasiFeffermanB.EnergyPeriodicRepresentative",
+        "Mathlib.MeasureTheory.Function.ConvergenceInMeasure",
+        "Mathlib.MeasureTheory.Measure.Restrict"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean",
+      "sha256": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
+      "bytes": 7264,
+      "lines": 152,
+      "public_declarations": [
+        "Q01_LERAY_HOPF_EXISTENCE"
+      ],
+      "imports": [
+        "QuasiFeffermanB.Endpoints.InitialCoefficients",
+        "QuasiFeffermanB.Endpoints.PhysicalMomentum",
+        "QuasiFeffermanB.Endpoints.LimitEnergy",
+        "QuasiFeffermanB.EnergyPhysicalContinuity",
+        "QuasiFeffermanB.EnergyPhysicalTrace",
+        "Mathlib.MeasureTheory.Measure.Restrict"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/CaloricBudget.lean",
+      "sha256": "cc5b78965699e80c612756aed478b5b36359a471b6f2cfc30686fcaeabd44461",
+      "bytes": 2366,
+      "lines": 57,
+      "public_declarations": [
+        "SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT"
+      ],
+      "imports": [
+        "QuasiFeffermanB.CaloricNumericalAdmission"
+      ]
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/Root.lean",
+      "sha256": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+      "bytes": 588,
+      "lines": 18,
+      "public_declarations": [
+        "QUASI_FEFFERMAN_B_COMPOSED"
+      ],
+      "imports": [
+        "QuasiFeffermanB.Endpoints.LerayHopfExistence",
+        "QuasiFeffermanB.Endpoints.CaloricBudget",
+        "QuasiFeffermanB.TailChain"
+      ]
+    }
+  ],
+  "actual_root_baseline_import_closure": [
+    "QuasiFeffermanB.CaloricAdmission",
+    "QuasiFeffermanB.CaloricBarrier",
+    "QuasiFeffermanB.CaloricBootstrap",
+    "QuasiFeffermanB.CaloricCompactness",
+    "QuasiFeffermanB.CaloricConstants",
+    "QuasiFeffermanB.CaloricConvolution",
+    "QuasiFeffermanB.CaloricEnstrophy",
+    "QuasiFeffermanB.CaloricFiniteNorm",
+    "QuasiFeffermanB.CaloricFlowControl",
+    "QuasiFeffermanB.CaloricFourierBridge",
+    "QuasiFeffermanB.CaloricFourierEstimate",
+    "QuasiFeffermanB.CaloricFrequencyGeometry",
+    "QuasiFeffermanB.CaloricGalerkinBudget",
+    "QuasiFeffermanB.CaloricGalerkinMajorant",
+    "QuasiFeffermanB.CaloricH1Regularity",
+    "QuasiFeffermanB.CaloricH2",
+    "QuasiFeffermanB.CaloricKernel",
+    "QuasiFeffermanB.CaloricMultiplier",
+    "QuasiFeffermanB.CaloricNumericalAdmission",
+    "QuasiFeffermanB.CaloricPhysicalControl",
+    "QuasiFeffermanB.CaloricSmoothing",
+    "QuasiFeffermanB.CriticalTimeBudget",
+    "QuasiFeffermanB.Cutoff",
+    "QuasiFeffermanB.EnergyDatumApproximation",
+    "QuasiFeffermanB.EnergyDatumGlobal",
+    "QuasiFeffermanB.EnergyFiniteWeakPairing",
+    "QuasiFeffermanB.EnergyGalerkinCompactness",
+    "QuasiFeffermanB.EnergyGlobalCoefficient",
+    "QuasiFeffermanB.EnergyGlobalLimit",
+    "QuasiFeffermanB.EnergyGlobalPhysical",
+    "QuasiFeffermanB.EnergyH1Realization",
+    "QuasiFeffermanB.EnergyLimitCompatibility",
+    "QuasiFeffermanB.EnergyLimitEnergy",
+    "QuasiFeffermanB.EnergyModalEquation",
+    "QuasiFeffermanB.EnergyPeriodicRepresentative",
+    "QuasiFeffermanB.EnergyPhysicalContinuity",
+    "QuasiFeffermanB.EnergyPhysicalTrace",
+    "QuasiFeffermanB.EnergyTestDecay",
+    "QuasiFeffermanB.EnergyTimeCompactness",
+    "QuasiFeffermanB.EnergyTransportContinuity",
+    "QuasiFeffermanB.EnergyWeakContinuity",
+    "QuasiFeffermanB.ExactAdmission",
+    "QuasiFeffermanB.FiniteCaloricSchur",
+    "QuasiFeffermanB.FourierEnergy",
+    "QuasiFeffermanB.GoodTime",
+    "QuasiFeffermanB.LHEnergy",
+    "QuasiFeffermanB.LHExistence",
+    "QuasiFeffermanB.LHRestart",
+    "QuasiFeffermanB.MeanPreservation",
+    "QuasiFeffermanB.PhysicalFourierL2",
+    "QuasiFeffermanB.PhysicalH1Admission",
+    "QuasiFeffermanB.RegularReference",
+    "QuasiFeffermanB.RootAssembly",
+    "QuasiFeffermanB.RootContract",
+    "QuasiFeffermanB.SafeCutoff",
+    "QuasiFeffermanB.Semantics",
+    "QuasiFeffermanB.SpatialAdmission",
+    "QuasiFeffermanB.TailChain",
+    "QuasiFeffermanB.TailEnergy",
+    "QuasiFeffermanB.TailRegularity",
+    "QuasiFeffermanB.TailUniqueness",
+    "QuasiFeffermanB.ThetaGaussian",
+    "QuasiFeffermanB.ThetaLattice",
+    "QuasiFeffermanB.ThetaResolvent",
+    "QuasiFeffermanB.ThetaSchur",
+    "QuasiFeffermanB.TimeTranslate",
+    "QuasiFeffermanB.ZeroData"
+  ],
+  "actual_root_baseline_module_status_counts": {
+    "PASS": 34,
+    "BLOCKED_BY_DEPENDENCY": 27,
+    "FAIL": 6
+  },
+  "actual_root_cached_direct_failures": [
+    "QuasiFeffermanB.CaloricConvolution",
+    "QuasiFeffermanB.CaloricFrequencyGeometry",
+    "QuasiFeffermanB.EnergyGlobalLimit",
+    "QuasiFeffermanB.LHRestart",
+    "QuasiFeffermanB.PhysicalFourierL2",
+    "QuasiFeffermanB.ThetaLattice"
+  ],
+  "static_validation": {
+    "baseline_source_fingerprints_unchanged": 70,
+    "new_import_graph_acyclic": true,
+    "new_public_names_unique": true,
+    "all_selected_exports_have_proof_bodies": true,
+    "forbidden_admission_tokens_outside_comments_and_strings": 0,
+    "scope": "Lexical, source-signature and dependency checks only; no Lean verification."
+  }
+}
