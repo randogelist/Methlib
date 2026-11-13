@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 import time
+from axiom_parser import split_axiom_list, normalize_axiom_name
 
 TOOLCHAIN='leanprover/lean4:v4.34.0-rc1'
 MATHLIB='de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11'
@@ -66,8 +67,7 @@ def verify_axioms(log,names):
     parsed={}
     for m in RECORD.finditer(ANSI.sub('',log)):
         raw=(m.group(2) or '').strip()
-        # Approved foundational names have no universe instantiations.
-        values=set(x.strip() for x in raw.split(',') if x.strip())
+        values={normalize_axiom_name(x) for x in split_axiom_list(raw)}
         if m.group(1) in parsed: raise ValueError('Duplicate axiom record: '+m.group(1))
         parsed[m.group(1)]=values
     if set(parsed)!=set(names): raise ValueError('Missing or unexpected axiom records')
@@ -84,6 +84,10 @@ def run(command,package,log):
             out.write(line); out.flush(); print(line,end='',flush=True)
         code=proc.wait()
     return code,round(time.monotonic()-started,3)
+
+def imports(text):
+    return [dep for match in re.finditer(r'^\s*(?:public\s+)?import\s+([^\n]+)',strip_comments(text),re.M)
+            for dep in match.group(1).split()]
 
 def modules(package):
     found={}
@@ -103,10 +107,8 @@ def modules(package):
         if name in visited:return
         if name in active:raise ValueError('Import cycle '+name)
         active.add(name)
-        text=strip_comments(found[name].read_text())
-        for match in re.finditer(r'^\s*(?:public\s+)?import\s+([^\n]+)',text,re.M):
-            for dep in match.group(1).split():
-                if dep in found: visit(dep)
+        for dep in imports(found[name].read_text()):
+            if dep in found: visit(dep)
         active.remove(name); visited.add(name); order.append(name)
     for name in sorted(new): visit(name)
     return found,new,order
@@ -154,19 +156,29 @@ def main():
     for name in new:
         code=strip_comments(found[name].read_text())
         if re.search(r'\b(?:sorry|admit|axiom|unsafe|native_decide)\b',code):raise ValueError('Forbidden proof admission in '+name)
-    results=[]; failure=False
+    results=[]; by_name={}; failure=False
     for name in order:
         slug=name.replace('.','-'); is_new=name in new
-        code,seconds=run(['lake','build',name],package,evidence/(slug+'-build.log'))
-        result={'module':name,'source_sha256':digest(found[name]),'new_module':is_new,'build_exit':code,'seconds':seconds}
-        if code:
+        print('HODGE_MODULE_START '+name,flush=True)
+        blocked=[dep for dep in imports(found[name].read_text())
+                 if by_name.get(dep,{}).get('status') in ('BUILD_FAILED','BLOCKED_DEPENDENCY')]
+        result={'module':name,'source_sha256':digest(found[name]),'new_module':is_new}
+        if blocked:
+            code=None; result.update(status='BLOCKED_DEPENDENCY',blocked_by=blocked,
+                                     build_exit=None,seconds=0); failure=True
+        else:
+            code,seconds=run(['lake','build',name],package,evidence/(slug+'-build.log'))
+            result.update(build_exit=code,seconds=seconds)
+        if blocked:
+            pass
+        elif code:
             result['status']='BUILD_FAILED'; failure=True
         elif not is_new:
             result['status']='UPSTREAM_BUILD_PASS'
         else:
             names=declarations(found[name].read_text())
             audit=evidence/(slug+'-Audit.lean')
-            audit.write_text('import '+name+'\nset_option pp.universes true\nset_option pp.explicit true\nset_option pp.width 180\n'+''.join('#check @'+n+'\n#print axioms '+n+'\n' for n in names))
+            audit.write_text('import '+name+'\nset_option pp.universes true\nset_option pp.fullNames true\nset_option pp.explicit true\nset_option pp.width 180\n'+''.join('#check @'+n+'\n#print axioms '+n+'\n' for n in names))
             code,_=run(['lake','env','lean',str(audit)],package,evidence/(slug+'-audit.log'))
             result['audit_exit']=code; result['audit_source_sha256']=digest(audit)
             try:
@@ -175,9 +187,11 @@ def main():
                 result['status']='PASS_STANDARD_ONLY' if names else 'BUILD_PASS_NO_NAMED_THEOREMS'
             except ValueError as exc:
                 result['status']='AUDIT_FAILED'; result['error']=str(exc); failure=True
-            (evidence/(slug+'-result.json')).write_text(json.dumps(result,indent=2)+'\n')
+        (evidence/(slug+'-result.json')).write_text(json.dumps(result,indent=2)+'\n')
         results.append(result)
+        by_name[name]=result
         (evidence/'summary.json').write_text(json.dumps({'status':'IN_PROGRESS','results':results,'unconditional_promotion':'REQUIRES_EXACT_TYPE_REVIEW'},indent=2)+'\n')
+        print('HODGE_MODULE_END '+name+' '+result['status'],flush=True)
     if source_manifest(package)!=before:raise ValueError('Build changed source files')
     summary={'status':'FAIL' if failure else 'PASS','results':results,'unconditional_promotion':'REQUIRES_EXACT_TYPE_REVIEW','source_manifest_sha256':digest(evidence/'source-manifest.json')}
     (evidence/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')

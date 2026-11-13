@@ -1,0 +1,48 @@
+FourierHodgeLaws_inhabitant_A_TIER
+================================
+
+STATUS = A_TIER_CANDIDATE
+EXACT_ROOT = NSEMaxwell.Bridge.FourierHodgeLaws
+COMPILER = Lean 4.34.0-rc1
+MATHLIB_PIN = de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+UPSTREAM_DEFINITION_PIN = 9f5500cd5dadc351ab3ec98db09dccaa9a22eb25
+LOCAL_LEAN_LAKE_ELAN_EXECUTIONS = 0
+
+H1 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
+H2 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
+H3 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
+H4 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
+
+Prepared target declarations:
+  NSEMaxwell.HodgeProof.h1_reconstruct_velocity
+  NSEMaxwell.HodgeProof.h2_reconstruct_curl
+  NSEMaxwell.HodgeProof.h3_canonical_smoothness
+  NSEMaxwell.HodgeProof.h4_electric_hodge
+  NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant
+  NSEMaxwell.HodgeProof.exact_equivalence_native
+
+Candidate root assembly:
+  actual smooth-datum Fourier decay + cosine/character identity
+  -> actual inverse-Laplacian spatial calculus -> H1, H2, H4;
+  actual compact-uniform coefficient decay + parameter derivative identities
+  -> actual scalarL joint smoothing on t >= 0
+  -> actual vectorL joint smoothing -> H3;
+  H1 + H2 + H3 + H4 -> NSEMaxwell.Bridge.FourierHodgeLaws
+  -> NSEMaxwell.Classical.ExactEquivalence.
+
+ROOT_TYPE_HAS_UNRESOLVED_ANALYTIC_PREMISES = NO
+ROOT_BODY_EXTERNAL_KERNEL_ACCEPTANCE = PENDING
+
+PROMOTION_GATE = matching source hash + external compiler PASS
+                + exact theorem type + fresh theorem-level axiom audit.
+APPROVED_AXIOMS = {propext, Classical.choice, Quot.sound}
+UNCONDITIONAL_ROOT = NOT_ESTABLISHED
+FORMAL_CLOSURE_OF_NEW_ROOT = NOT_ESTABLISHED
+
+External reproduction:
+  Windows: run.cmd
+  Linux: bash run.sh
+  Python 3, Git, and the pinned native Lean toolchain are required.
+  Existing dependency and project caches are retained.
+
+Compiler evidence will be indexed here after source-matching verification.

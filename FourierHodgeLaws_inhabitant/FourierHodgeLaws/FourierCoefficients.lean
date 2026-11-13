@@ -19,12 +19,34 @@ open NSEMaxwell.Classical
 
 noncomputable section
 
+theorem scalarLift_coordinateDerivative (f : ScalarField)
+    (hf : ContDiff ℝ ∞ f) (j : Fin 3) :
+    coordinateDerivative (scalarLift f) j =
+      scalarLift (fun x => fderiv ℝ f x (unitVector j)) := by
+  funext x
+  ext i
+  have hd := ((scalarLift_contDiff f hf).differentiable (by simp) x).hasFDerivAt
+  have hp := (EuclideanSpace.proj i : Vec →L[ℝ] ℝ).hasFDerivAt.comp x hd
+  have hr := (hf.differentiable (by simp) x).hasFDerivAt
+  have he := congrArg (fun L : Vec →L[ℝ] ℝ => L (unitVector j)) (hp.unique hr)
+  simpa only [coordinateDerivative, ContinuousLinearMap.comp_apply,
+    EuclideanSpace.coe_proj, scalarLift_component] using he
+
 theorem datumFourierCoeff_coordinateDerivative (a : Field)
     (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) (j : Fin 3) :
     SingularClosure.datumFourierCoeff (coordinateDerivative a j) =
       SingularClosure.spectralMultiplier (SingularClosure.derivativeSymbol j)
         (SingularClosure.datumFourierCoeff a) := by
   exact SingularClosure.datumFourierCoeff_coordinateDerivative j a ha hp
+
+theorem scalarCoeff_coordinateDerivative (f : ScalarField)
+    (hf : ContDiff ℝ ∞ f) (hp : SpatialPeriodic f) (j : Fin 3) (k : Frequency) :
+    scalarCoeff (fun x => fderiv ℝ f x (unitVector j)) k =
+      SingularClosure.derivativeSymbol j k * scalarCoeff f k := by
+  have h := congrFun (congrFun (datumFourierCoeff_coordinateDerivative (scalarLift f)
+    (scalarLift_contDiff f hf) (scalarLift_periodic f hp) j) k) (0 : Fin 3)
+  rw [scalarLift_coordinateDerivative f hf j] at h
+  exact h
 
 theorem rapid_datumFourierCoeff (a : Field)
     (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) (i : Fin 3) :

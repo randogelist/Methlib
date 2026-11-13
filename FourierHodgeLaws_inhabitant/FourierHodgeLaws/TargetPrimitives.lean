@@ -139,14 +139,16 @@ theorem scalarCoeff_neg (f : ScalarField) (k : Frequency) :
 theorem inverseVectorCoeff_reality (a : Field) :
     SingularClosure.SpectralReality (inverseVectorCoeff a) := by
   intro k i
-  simp only [inverseVectorCoeff, inverseLaplacianSymbol_neg,
-    SingularClosure.datumFourierCoeff_reality a k i, star_mul, Complex.star_def,
-    Complex.conj_ofReal]
+  unfold inverseVectorCoeff
+  rw [inverseLaplacianSymbol_neg, SingularClosure.datumFourierCoeff_reality a k i,
+    star_mul]
+  simp only [Complex.star_def, Complex.conj_ofReal]
 
 theorem inverseScalarCoeff_neg (f : ScalarField) (k : Frequency) :
     inverseScalarCoeff f (-k) = star (inverseScalarCoeff f k) := by
-  simp only [inverseScalarCoeff, inverseLaplacianSymbol_neg, scalarCoeff_neg,
-    star_mul, Complex.star_def, Complex.conj_ofReal]
+  unfold inverseScalarCoeff
+  rw [inverseLaplacianSymbol_neg, scalarCoeff_neg, star_mul]
+  simp only [Complex.star_def, Complex.conj_ofReal]
 
 end
 

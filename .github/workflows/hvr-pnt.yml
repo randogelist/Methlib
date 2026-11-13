@@ -2,6 +2,7 @@ name: HVR full PNT composition (Linux)
 
 on:
   push:
+    branches-ignore: [FourierHodgeLaws_inhabitant]
   pull_request:
   workflow_dispatch:
 
