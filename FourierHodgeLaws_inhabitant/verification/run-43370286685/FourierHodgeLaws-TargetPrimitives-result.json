@@ -1,0 +1,210 @@
+{
+  "module": "FourierHodgeLaws.TargetPrimitives",
+  "source_sha256": "4fffe11365b4b539a063320719565a4e220983ed9113229c9613e87c58f02158",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.172,
+  "audit_exit": 0,
+  "audit_source_sha256": "79549dd495cac370ba1a5cb43f1c9ac9d2779c7c89e95957c367f2bc4b5f2d56",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.native_unitVector",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_unitCube",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_spatialPeriodic_iff",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_spatialMean",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_coordinateDerivative",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_divergence",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_gradient",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.native_laplacian",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarLift_component",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarLift_contDiff",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarLift_periodic",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_scalarLift",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_zero",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_neg",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_nonneg",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_le_one",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_complex_norm_le_one",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_zero",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_zero",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarCoeff_neg",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_reality",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_neg",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

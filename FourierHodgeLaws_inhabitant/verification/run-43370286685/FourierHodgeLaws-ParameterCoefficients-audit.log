@@ -1,0 +1,145 @@
+@NSEMaxwell.HodgeProof.cubeSlice_contDiff.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ∀ {t : ℝ}, LE.le.{0} 0 t → ContDiff.{0, 0, u_1} ℝ (↑Top.top.{0}) (F t)
+'NSEMaxwell.HodgeProof.cubeSlice_contDiff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => NSEMaxwell.HodgeProof.cubeTimeDerivative.{u_1} F z.1 z.2)
+      NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ∀ {t : ℝ},
+      LE.le.{0} 0 t →
+        ∀ (x : NSEMaxwell.Classical.Vec),
+          HasDerivWithinAt.{0, u_1} (fun s => F s x) (NSEMaxwell.HodgeProof.cubeTimeDerivative.{u_1} F t x)
+            (Set.Ici.{0} 0) t
+'NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound.{u_1} : ∀ {E : Type u_1}
+  [inst : NormedAddCommGroup.{u_1} E] [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E]
+  (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ∀ {t : ℝ},
+      LE.le.{0} 0 t →
+        ∃ C,
+          MeasureTheory.IntegrableOn.{0, 0} (fun x => C) NSEMaxwell.Classical.unitCube
+              MeasureTheory.MeasureSpace.volume.{0} ∧
+            ∀ᶠ (s : ℝ) in nhdsWithin.{0} t (Set.Ici.{0} 0),
+              ∀ (x : NSEMaxwell.Classical.Vec),
+                Membership.mem.{0, 0} NSEMaxwell.Classical.unitCube x →
+                  LE.le.{0} (Norm.norm.{u_1} (HSub.hSub.{u_1, u_1, u_1} (F s x) (F t x)))
+                    (HMul.hMul.{0, 0, 0} C (Norm.norm.{0} (HSub.hSub.{0, 0, 0} s t)))
+'NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ∀ {t : ℝ},
+      LE.le.{0} 0 t →
+        HasDerivWithinAt.{0, u_1} (fun s => ∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube, F s x)
+          (∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube,
+            NSEMaxwell.HodgeProof.cubeTimeDerivative.{u_1} F t x)
+          (Set.Ici.{0} 0) t
+'NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeIntegral_derivWithin.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ∀ {t : ℝ},
+      LE.le.{0} 0 t →
+        Eq.{u_1 + 1}
+          (derivWithin.{0, u_1} (fun s => ∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube, F s x)
+            (Set.Ici.{0} 0) t)
+          (∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube,
+            NSEMaxwell.HodgeProof.cubeTimeDerivative.{u_1} F t x)
+'NSEMaxwell.HodgeProof.cubeIntegral_derivWithin' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (n : ℕ) (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ContDiffOn.{0, 0, u_1} ℝ (↑n) (fun t => ∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube, F t x)
+      (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn.{u_1} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E]
+  [inst_1 : NormedSpace.{0, u_1} ℝ E] [CompleteSpace.{u_1} E] (F : ℝ → NSEMaxwell.Classical.Vec → E),
+  ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (fun z => F z.1 z.2) NSEMaxwell.Classical.forwardSpacetime →
+    ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0})
+      (fun t => ∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube, F t x) (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth : ∀ {f : NSEMaxwell.Classical.Pressure},
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarTimeDerivative f t
+'NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic : ∀ {f : NSEMaxwell.Classical.Pressure},
+  NSEMaxwell.Classical.PeriodicPressure f →
+    NSEMaxwell.Classical.PeriodicPressure fun t => NSEMaxwell.Classical.scalarTimeDerivative f t
+'NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth : ∀ {f : NSEMaxwell.Classical.Pressure},
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (j : Fin 3),
+      NSEMaxwell.Classical.SmoothPressure fun t x => (fderiv.{0, 0, 0} ℝ (f t) x) (NSEMaxwell.Classical.unitVector j)
+'NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic : ∀ {f : NSEMaxwell.Classical.Pressure},
+  NSEMaxwell.Classical.PeriodicPressure f →
+    ∀ (j : Fin 3),
+      NSEMaxwell.Classical.PeriodicPressure fun t x => (fderiv.{0, 0, 0} ℝ (f t) x) (NSEMaxwell.Classical.unitVector j)
+'NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency),
+      ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0})
+        (fun z => HMul.hMul.{0, 0, 0} (Star.star.{0} (SingularClosure.fourierCharacter k z.2)) ↑(f z.1 z.2))
+        NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency),
+      ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (fun t => NSEMaxwell.HodgeProof.scalarCoeff (f t) k) (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency) {t : ℝ},
+      LE.le.{0} 0 t →
+        HasDerivWithinAt.{0, 0} (fun s => NSEMaxwell.HodgeProof.scalarCoeff (f s) k)
+          (NSEMaxwell.HodgeProof.scalarCoeff (NSEMaxwell.Classical.scalarTimeDerivative f t) k) (Set.Ici.{0} 0) t
+'NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_derivWithin : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency) {t : ℝ},
+      LE.le.{0} 0 t →
+        Eq.{1} (derivWithin.{0, 0} (fun s => NSEMaxwell.HodgeProof.scalarCoeff (f s) k) (Set.Ici.{0} 0) t)
+          (NSEMaxwell.HodgeProof.scalarCoeff (NSEMaxwell.Classical.scalarTimeDerivative f t) k)
+'NSEMaxwell.HodgeProof.scalarCoeff_derivWithin' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency) {t : ℝ},
+      LT.lt.{0} 0 t →
+        HasDerivAt.{0, 0} (fun s => NSEMaxwell.HodgeProof.scalarCoeff (f s) k)
+          (NSEMaxwell.HodgeProof.scalarCoeff (NSEMaxwell.Classical.scalarTimeDerivative f t) k) t
+'NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency),
+      ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (fun z => NSEMaxwell.HodgeProof.scalarCoeff (f z.1) k)
+        NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ∀ (k : NSEMaxwell.Classical.Frequency) (i : Fin 3),
+      ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (fun t => SingularClosure.datumFourierCoeff (u t) k i) (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ∀ (k : NSEMaxwell.Classical.Frequency) (i : Fin 3) {t : ℝ},
+      LE.le.{0} 0 t →
+        HasDerivWithinAt.{0, 0} (fun s => SingularClosure.datumFourierCoeff (u s) k i)
+          (SingularClosure.datumFourierCoeff (NSEMaxwell.Classical.timeDerivative u t) k i) (Set.Ici.{0} 0) t
+'NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

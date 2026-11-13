@@ -1,0 +1,165 @@
+{
+  "module": "FourierHodgeLaws.ParameterSmoothing",
+  "source_sha256": "693e24c88e42270212ba4d6053b9141fcf2d1bbb983ab04bf6bfc43dbb870b0d",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 14.643,
+  "audit_exit": 0,
+  "audit_source_sha256": "3785982efb40bf0e67c746cd9c1766ff803d01b0948dc742fb60be714b6a2e91",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.phaseProjection_eq_sum",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarL_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

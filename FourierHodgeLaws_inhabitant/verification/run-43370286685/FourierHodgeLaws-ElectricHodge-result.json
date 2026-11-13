@@ -1,0 +1,66 @@
+{
+  "module": "FourierHodgeLaws.ElectricHodge",
+  "source_sha256": "9a86c179c75a512f15a31e621afc5ace526dfb636e0ad8b704c4081731be10dd",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.281,
+  "audit_exit": 0,
+  "audit_source_sha256": "582e34af839d67a9abec0322a8220bd76862e19841dde78009c4ef843e99a084",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialMean_lamb_zero",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.G_smooth_of_velocity_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialMean_G_of_reconstruction",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.G_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_G",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.electric_hodge",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

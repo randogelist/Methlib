@@ -1,0 +1,28 @@
+NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing : (∀ (B : NSEMaxwell.Classical.Velocity),
+    NSEMaxwell.Classical.SmoothVelocity B →
+      NSEMaxwell.Classical.PeriodicVelocity B →
+        NSEMaxwell.Classical.SmoothVelocity fun t => NSEMaxwell.Classical.vectorL (B t)) →
+  (∀ (f : NSEMaxwell.Classical.Pressure),
+      NSEMaxwell.Classical.SmoothPressure f →
+        NSEMaxwell.Classical.PeriodicPressure f →
+          NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarL (f t)) →
+    NSEMaxwell.Bridge.FourierHodgeLaws
+'NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing : (∀ (B : NSEMaxwell.Classical.Velocity),
+    NSEMaxwell.Classical.SmoothVelocity B →
+      NSEMaxwell.Classical.PeriodicVelocity B →
+        NSEMaxwell.Classical.SmoothVelocity fun t => NSEMaxwell.Classical.vectorL (B t)) →
+  (∀ (f : NSEMaxwell.Classical.Pressure),
+      NSEMaxwell.Classical.SmoothPressure f →
+        NSEMaxwell.Classical.PeriodicPressure f →
+          NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarL (f t)) →
+    NSEMaxwell.Classical.ExactEquivalence
+'NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant : NSEMaxwell.Bridge.FourierHodgeLaws
+'NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.exact_equivalence_native : NSEMaxwell.Classical.ExactEquivalence
+'NSEMaxwell.HodgeProof.exact_equivalence_native' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

@@ -1,0 +1,93 @@
+{
+  "module": "FourierHodgeLaws.UniformCoefficientBounds",
+  "source_sha256": "ee3d428ae138b05907a15bd3cc68d0a9afcd041b5ea400888bfaa75e1fb1402e",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.167,
+  "audit_exit": 0,
+  "audit_source_sha256": "778c91ae13df1c8db1288843fb9e724e3bb08290a43ff9a9251939fcb7347bc4",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.compact_velocity_norm_bound",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.compact_componentL1_bound",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.uniform_fourierDecayConstant",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

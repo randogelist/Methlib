@@ -1,0 +1,75 @@
+{
+  "module": "FourierHodgeLaws.PoissonFromCoefficients",
+  "source_sha256": "23cf86397aa7029712671127bbdf7fc28abcd0eafb182d7c4ca48e7afb44fd06",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.055,
+  "audit_exit": 0,
+  "audit_source_sha256": "96822489254054728b4c7522bcf1a43f7934a7eacd2bc6d59a0aae52739a56e1",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_add",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_sub",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_neg",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_const",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_laplacian",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.laplacianFrequency_mul_inverseLaplacianSymbol",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.neg_laplacian_vectorL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

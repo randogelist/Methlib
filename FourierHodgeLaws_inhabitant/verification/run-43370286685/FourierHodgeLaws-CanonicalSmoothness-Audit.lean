@@ -1,0 +1,14 @@
+import FourierHodgeLaws.CanonicalSmoothness
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.canonicalVelocity_smooth_of_vectorL_smooth
+#print axioms NSEMaxwell.HodgeProof.canonicalVelocity_smooth_of_vectorL_smooth
+#check @NSEMaxwell.HodgeProof.canonicalVelocity_divergence_free_of_vectorL_smooth
+#print axioms NSEMaxwell.HodgeProof.canonicalVelocity_divergence_free_of_vectorL_smooth
+#check @NSEMaxwell.HodgeProof.canonicalPressure_smooth_of_scalarL_smooth
+#print axioms NSEMaxwell.HodgeProof.canonicalPressure_smooth_of_scalarL_smooth
+#check @NSEMaxwell.HodgeProof.canonical_smoothness_of_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.canonical_smoothness_of_parameter_smoothing
+#check @NSEMaxwell.HodgeProof.H3_of_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.H3_of_parameter_smoothing

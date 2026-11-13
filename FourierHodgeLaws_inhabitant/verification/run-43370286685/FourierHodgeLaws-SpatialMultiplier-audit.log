@@ -1,0 +1,74 @@
+NSEMaxwell.HodgeProof.scalarL_summable : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+      ∀ (x : NSEMaxwell.Classical.Vec),
+        Summable.{0, 0} fun k =>
+          HMul.hMul.{0, 0, 0} (NSEMaxwell.Classical.inverseLaplacianSymbol k)
+            (∫ (y : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube,
+              HMul.hMul.{0, 0, 0} (NSEMaxwell.Classical.cosineKernel k x y) (f y))
+'NSEMaxwell.HodgeProof.scalarL_summable' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.cosine_mul_integrable : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  Continuous.{0, 0} f →
+    ∀ (k : NSEMaxwell.Classical.Frequency) (x : NSEMaxwell.Classical.Vec),
+      MeasureTheory.IntegrableOn.{0, 0} (fun y => HMul.hMul.{0, 0, 0} (NSEMaxwell.Classical.cosineKernel k x y) (f y))
+        NSEMaxwell.Classical.unitCube MeasureTheory.MeasureSpace.volume.{0}
+'NSEMaxwell.HodgeProof.cosine_mul_integrable' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarL_add : ∀ (f g : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) g →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+        NSEMaxwell.Classical.SpatialPeriodic.{0} g →
+          Eq.{1} (NSEMaxwell.Classical.scalarL (HAdd.hAdd.{0, 0, 0} f g))
+            (HAdd.hAdd.{0, 0, 0} (NSEMaxwell.Classical.scalarL f) (NSEMaxwell.Classical.scalarL g))
+'NSEMaxwell.HodgeProof.scalarL_add' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarL_sub : ∀ (f g : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) g →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+        NSEMaxwell.Classical.SpatialPeriodic.{0} g →
+          Eq.{1} (NSEMaxwell.Classical.scalarL (HSub.hSub.{0, 0, 0} f g))
+            (HSub.hSub.{0, 0, 0} (NSEMaxwell.Classical.scalarL f) (NSEMaxwell.Classical.scalarL g))
+'NSEMaxwell.HodgeProof.scalarL_sub' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.scalarL_finset_sum.{u_1} : ∀ {ι : Type u_1} (s : Finset.{u_1} ι)
+  (f : ι → NSEMaxwell.Classical.ScalarField),
+  (∀ (i : ι), ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) (f i)) →
+    (∀ (i : ι), NSEMaxwell.Classical.SpatialPeriodic.{0} (f i)) →
+      Eq.{1} (NSEMaxwell.Classical.scalarL fun x => ∑ i ∈ s, f i x) fun x =>
+        ∑ i ∈ s, NSEMaxwell.Classical.scalarL (f i) x
+'NSEMaxwell.HodgeProof.scalarL_finset_sum' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.coordinateDerivative_vectorL_commute : ∀ (F : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+      ∀ (j : Fin 3),
+        Eq.{1} (NSEMaxwell.Classical.coordinateDerivative (NSEMaxwell.Classical.vectorL F) j)
+          (NSEMaxwell.Classical.vectorL (NSEMaxwell.Classical.coordinateDerivative F j))
+'NSEMaxwell.HodgeProof.coordinateDerivative_vectorL_commute' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.coordinate_component_periodic : ∀ (F : NSEMaxwell.Classical.Field),
+  NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+    ∀ (j i : Fin 3),
+      NSEMaxwell.Classical.SpatialPeriodic.{0} fun x =>
+        WithLp.ofLp.{0} (NSEMaxwell.Classical.coordinateDerivative F j x) i
+'NSEMaxwell.HodgeProof.coordinate_component_periodic' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarL_coordinateComponent : ∀ (F : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+      ∀ (j i : Fin 3) (x : NSEMaxwell.Classical.Vec),
+        Eq.{1}
+          (NSEMaxwell.Classical.scalarL (fun y => WithLp.ofLp.{0} (NSEMaxwell.Classical.coordinateDerivative F j y) i)
+            x)
+          (WithLp.ofLp.{0} (NSEMaxwell.Classical.coordinateDerivative (NSEMaxwell.Classical.vectorL F) j x) i)
+'NSEMaxwell.HodgeProof.scalarL_coordinateComponent' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.divergence_vectorL_commute : ∀ (F : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+      Eq.{1} (NSEMaxwell.Classical.divergence (NSEMaxwell.Classical.vectorL F))
+        (NSEMaxwell.Classical.scalarL (NSEMaxwell.Classical.divergence F))
+'NSEMaxwell.HodgeProof.divergence_vectorL_commute' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.curl_vectorL_commute : ∀ (F : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+      Eq.{1} (NSEMaxwell.Classical.spatialCurl (NSEMaxwell.Classical.vectorL F))
+        (NSEMaxwell.Classical.vectorL (NSEMaxwell.Classical.spatialCurl F))
+'NSEMaxwell.HodgeProof.curl_vectorL_commute' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

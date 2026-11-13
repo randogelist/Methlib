@@ -1,0 +1,2357 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "module": "MaxwellEndpoint.Geometry",
+      "source_sha256": "67d984b5c32a29ef0f278382c7d279e250dabbc45f84997513f9609c85bfa541",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "MaxwellEndpoint.Constitutive",
+      "source_sha256": "e85061de1f8e633d652bd791ef0c9478eca242a6c4d783b09ed4cccfd3087616",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "MaxwellEndpoint.System",
+      "source_sha256": "518558263ca34aeb4d01fd88a8e26cb518c37d7a9cf276a62932175fdd32b024",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "MaxwellEndpoint.Native",
+      "source_sha256": "45d79ffb394ed250c276490f8fbc8e560433f6f4cfea69bfee66f57d277c9d9d",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "MaxwellEndpoint",
+      "source_sha256": "99d68c53adc959ad1d18851bdc9a8a4001d8f2e31b6624048fd622beb28dae68",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Classical",
+      "source_sha256": "d8db7b5d7cce8d443a2143880dc65c48799d7e153eb49d37e4eb3c23230eb109",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.DominatedWithin",
+      "source_sha256": "d42ff10c78decd35907a1574e37a86de5fe87b32ad0c5e4ed4ed83997ea7766b",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Kinematics",
+      "source_sha256": "0aefff77048a6ccaa1a2757912bbfec63852f5285489e617cf98fc7336f4a505",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.CurlCurl",
+      "source_sha256": "9f3745456951c42e3f44781ccf29ad880284226b274bc235703269d0718bf1fa",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Spacetime",
+      "source_sha256": "ebea01c7422186aaa0ec4c72c26774ee32f96291756be7775ba40f569eb89c57",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Lamb",
+      "source_sha256": "8ff4187b618df7a1936e43ddab8562ffb3d01c7cd666e3fc1ec2eb765f8ae2f8",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.PeriodicIntegration",
+      "source_sha256": "1e5ab9beb9eeb11fbf595ff4fbdad263ebd4f38e17f02f3ed53e687bfb03664c",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.TemporalMean",
+      "source_sha256": "cf6a9d1afa1303db16e882cf52fc4e4db26842cf128a0a6fc050ac80735f5de6",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Constitutive",
+      "source_sha256": "d7f1d613a094b2d7679d27d621286ac98e4998a67529f74c4614dcff4f1b4d81",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Negation",
+      "source_sha256": "4763b648a80780e3e8694b8953b249823a5349cfd52d3dbb7e0695781a1f531d",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Pressure",
+      "source_sha256": "c46ba912d016697050c20c7effbe82d463d233469641c886dbb5a89cb1503677",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.Ampere",
+      "source_sha256": "e1ee9e880e2c50360fea276a49fe3ca4c05c8104fa7b29740877cde3d30bc648",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.ConstantPaths",
+      "source_sha256": "14ddfa21be65dcb38ec3f9b2a5c62463de3846fd44c23b32a27ac0f083c206cf",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.AnalyticContracts",
+      "source_sha256": "7664e157e5ebe3c8ffc24a3eba714b180b248bb950e8b8c4ab5c2c3190b49f3e",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwellForward",
+      "source_sha256": "d2a74b2268c54de3593996480d18429aa11060ce72396c7d2cea8071cfb57845",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwellReverse",
+      "source_sha256": "b6cb2beb70264b98d23a8143def620121112077e3326125b4e51833990e9de04",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.AnalyticBridge",
+      "source_sha256": "d1e5a1439d01599cacea35a0c45f6c2e3842011130b8645681f02cff817b5402",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.LocalEvolution",
+      "source_sha256": "6ada4c7209bfcf163490fdd13d4ebb2381feed274b5ccec447025cac75f3a680",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.MeanConservation",
+      "source_sha256": "3bf93c76cfd27a1644c2a1f760b28a1710e62aa607202c1ddc81188a2f922da6",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.FourierPeriodic",
+      "source_sha256": "1d49a7d1ead33dd2eb0ab6dd2d90d1dddeefe032d0bd1773f305c85c974591ef",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.CanonicalSmoothness",
+      "source_sha256": "d63f7555c73d78141e53d86b463848e2594d01a6dcf8a0b3c026ac8de79dd021",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "NSEMaxwell.AnalyticReduction",
+      "source_sha256": "2813f7dd8035681265656a3b6bb2476dbd30e928dc8a737bcb7e3277a8ae77ba",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterIntegral",
+      "source_sha256": "e057005dbf269c7fd797241224651d9f145272f9674f50faa24e2e3dba2e7fe7",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.321,
+      "audit_exit": 0,
+      "audit_source_sha256": "90a20aa47177fea158cf92ca94ea1ca9f23f77cebb83e52bb3eba1e8b939549c",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_scalar_embed",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarMean_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.CanonicalSmoothness",
+      "source_sha256": "6a083df75f1dff1fbddd94414d7a86f32c00cdb41c751f54d62c6ef308160aaf",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.261,
+      "audit_exit": 0,
+      "audit_source_sha256": "b4b27c92d6f4894975fb10d7b7d8a933e17807d3ecf8022ff12471da134d720a",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalVelocity_smooth_of_vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalVelocity_divergence_free_of_vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalPressure_smooth_of_scalarL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.H3_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "SingularClosure.Contracts",
+      "source_sha256": "4c59cbf26fd4196529a4865ac09404d18015228c737055c2674cbcc4a5fd18f7",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.SixChannels",
+      "source_sha256": "1c7f53956d9a766a3c8e4e781aa850a26351761ef0086c7ffd10047762854eab",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.Galerkin",
+      "source_sha256": "e1ac5c944bab2667b02ae6c75b46f63605354b8c928c56298aee0e28b043a6fa",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.Admission",
+      "source_sha256": "cd8e62a4f88a33b14d3a699b2431e801d590bcadf02d03b2e67ef3ebb5dc63ca",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PhysicalChannels",
+      "source_sha256": "0d522433e0a511a1c0f41b25947a05ece9780cacbe6809d105fdbb8991dca89f",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PhysicalEnstrophy",
+      "source_sha256": "720eaee5f18ea728c366880aeb05ced52bd9167369103cb19450991f74e08614",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.FourierIntegral",
+      "source_sha256": "8ecd56d311006a4db14bbe41a9d920d1760412f2ead5f3684239b85f0ad5290e",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PhysicalProjection",
+      "source_sha256": "8ad95865c4dcec61caae216aa8fd09043f2e0e760a128752d00aee5aa82c4287",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.GalerkinAlgebra",
+      "source_sha256": "f361277b03794598be46b2c5faaee641d3d0772a4c75eab543fd86aa0ea088a8",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.GalerkinEnergy",
+      "source_sha256": "1f0e5b8a62e9d65bd7161efdfe539793157e8edbe94434d0c43b7af4644d5c02",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.GalerkinReality",
+      "source_sha256": "48dcb88fd3b82c93a8227432d4e909f4834434b51e24dfd9f2bdcc6f6d03cbe4",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.LerayPressure",
+      "source_sha256": "fb20ecd6a63415920817de69141c2b6ce23ce1967c2d52c4c9415ceaaf744a27",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.FourierPressure",
+      "source_sha256": "841c510c2133581789aa99c747d1315849abadabb7a2df019648a1ae5cd4b2fb",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PhysicalParseval",
+      "source_sha256": "5785d4892b4d869c19532547247eea3848d670f23b3f93a7c7288233b6cd9338",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.FiniteParseval",
+      "source_sha256": "63c51f81c008bf435d39b92710860dded6a9e09537a8056aeb425bd5769f5997",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.FiniteHessian",
+      "source_sha256": "1c2cc4c469bf1ccd75c3842ce9d17b72aba34866dd926c10d3ba98446fcd8b7d",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.EnstrophyInequality",
+      "source_sha256": "903678f104e8f312e0c7b2ed5f7846109931cea773b8a989df7ab14de2a93c17",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PhysicalBilinear",
+      "source_sha256": "6062c88611b7b2d8885d62272d2be88a95cbec37335a1129a636e84b564b3262",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.InitialFourier",
+      "source_sha256": "acc40e4e4acd8ffa46fdd6ea1a46ac38fa4196bb329cc2856be04c183aaa4b6e",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.InitialCutoffBounds",
+      "source_sha256": "f9f7eec7c6f8fa46f45ce4bc5942ff9627fe532e377780d5701f144ffd833c30",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.FourierDecay",
+      "source_sha256": "8e9ccc5d7f43105c19eb4726dc6de30a97edfdad52945e96551ad20559526c45",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.FourierSeriesCalculus",
+      "source_sha256": "074ce0aa9a379ac5f378b57a0da44d95b54769e53689057337f9262f0579b846",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "FourierHodgeLaws.TargetPrimitives",
+      "source_sha256": "4fffe11365b4b539a063320719565a4e220983ed9113229c9613e87c58f02158",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.172,
+      "audit_exit": 0,
+      "audit_source_sha256": "79549dd495cac370ba1a5cb43f1c9ac9d2779c7c89e95957c367f2bc4b5f2d56",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.native_unitVector",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_unitCube",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_spatialPeriodic_iff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_spatialMean",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_divergence",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_gradient",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_laplacian",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_contDiff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_scalarLift",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_nonneg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_le_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_complex_norm_le_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_reality",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "SingularClosure.TorusSobolev",
+      "source_sha256": "7e30008b592ff6124d10d0e6306e96f3528395bcee13fd11df3d1a6497834389",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.LatticeSobolevSummability",
+      "source_sha256": "34634888f8a8601ebb6a5c40f57d2b4a19b0f77295a0c37aeb59fbbd6ea09203",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.SmoothDatumSobolev",
+      "source_sha256": "533948ef73136fc1fe995e073063860044bd3e4d63081f2ba0c49383c51e4466",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.SobolevSmoothRealization",
+      "source_sha256": "9cc5097590bede10a43dcb711b869cd2c65ad955cf1636bc41ca5f4f29bf6ead",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "FourierHodgeLaws.FourierCoefficients",
+      "source_sha256": "280e00740d779c6c592a6a9a6ce650355297050e7a75f18affbe8348aa8c3212",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.133,
+      "audit_exit": 0,
+      "audit_source_sha256": "454fbda9939ded7423500939f879df8323c94d2ad5b47cd560019cda59ab62be",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_datumFourierCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_scalarCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_mul_bounded",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "SingularClosure.HilbertChannels",
+      "source_sha256": "363e4a068a835c2d67c13ad9eed8cf313ea9b402959aab343d40e379238c4f09",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.CoordinateAverage",
+      "source_sha256": "3cdfd38ab7cc38805c04dfcba99bdbea711753c00cb2215d030d622514685076",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.CoordinateAverageOrthogonal",
+      "source_sha256": "0021524a73fb9c7d0ff4a9b9efe359f6479f649202c8d573c59d5e2718996ab9",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PeriodicCover",
+      "source_sha256": "9d6f0d78c7a043ef7d8a7db1c3d5f647a84492ff6c3843d85527638990f7929f",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PeriodicFourierRealization",
+      "source_sha256": "f4118fd9507488f5bf8cd3df2c1f174f245a32928b118eeb967017865edd2871",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "SingularClosure.PeriodicFourierInjective",
+      "source_sha256": "2da981fc1a5db3b5b796fa11a687fe6e993a54938d83bc74513e0220c4f80e81",
+      "new_module": false,
+      "build_exit": 0,
+      "seconds": 0,
+      "aggregate_log": "upstream-aggregate-build.log",
+      "aggregate_log_sha256": "e672c43f1c2c7d2f27a6ba0acb79d6293fc2b43b1dfe78c471ce66f21169d186",
+      "status": "UPSTREAM_BUILD_PASS"
+    },
+    {
+      "module": "FourierHodgeLaws.CosineMultiplier",
+      "source_sha256": "d12c8efdffdbf21e98aed74ed436032e314343f7aa80df61d4ad3e6ee4accc42",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.136,
+      "audit_exit": 0,
+      "audit_source_sha256": "1a268c8570abb849a6c4b37f8cf6f1501c8f60f919d0c6b220466a49a848e29b",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierCharacter_mul_star",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cosineKernel_eq_character_re",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalar_cosine_integral",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalar_cosine_summand",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_eq_realFourierSeries",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vector_cosine_integral_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vector_cosine_summand_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_eq_smoothFourierSynthesis",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_vectorL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.CanonicalFromScalar",
+      "source_sha256": "c9c0901c3ae1d1484b53d34e0a2c3bc961f92739a5067c6ae19d4388cef5ea38",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.153,
+      "audit_exit": 0,
+      "audit_source_sha256": "60ba5f3a1dc802a45fbceb1ecc197e61c25af72a6be816f9dd4d78b331699d85",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.ClosedHalfspaceSmooth",
+      "source_sha256": "2a6aa1174674cc2b8bd62ec09edde8fd8409891cc97e5e6461fcf1805585ba16",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.2,
+      "audit_exit": 0,
+      "audit_source_sha256": "f9f939615d12e9b228d56f770be2265c4849dc6878228427aa1489d560df8bc4",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.isOpen_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.convex_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.closure_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterCoefficients",
+      "source_sha256": "016d9cf0c1deda75770d39f66c2e5c684435448bc7c9785cbc5d28612db54eee",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.173,
+      "audit_exit": 0,
+      "audit_source_sha256": "a69ad194980d599130a438323019c2ecb00b91cde348c96f630e74e3ce103a81",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeSlice_contDiff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_derivWithin",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_derivWithin",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.UniformCoefficientBounds",
+      "source_sha256": "ee3d428ae138b05907a15bd3cc68d0a9afcd041b5ea400888bfaa75e1fb1402e",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.167,
+      "audit_exit": 0,
+      "audit_source_sha256": "778c91ae13df1c8db1288843fb9e724e3bb08290a43ff9a9251939fcb7347bc4",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.compact_velocity_norm_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.compact_componentL1_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_fourierDecayConstant",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterSmoothing",
+      "source_sha256": "693e24c88e42270212ba4d6053b9141fcf2d1bbb983ab04bf6bfc43dbb870b0d",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 14.643,
+      "audit_exit": 0,
+      "audit_source_sha256": "3785982efb40bf0e67c746cd9c1766ff803d01b0948dc742fb60be714b6a2e91",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.phaseProjection_eq_sum",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.CanonicalInhabitant",
+      "source_sha256": "0eb4841a7bcd633fc3ef2c4509a06023b897b174c3f447cccf853dc36d12796a",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 8.558,
+      "audit_exit": 0,
+      "audit_source_sha256": "85093aa8e6074dee1db25246bf84e6418d5515a5a670239da2e0b05180d21a7c",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h3_canonical_smoothness",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.SpatialHodge",
+      "source_sha256": "96492e65f07cc825eb9e5ae2f43de61ee3b6f4ba2c96ac85dbf44290be228df4",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.171,
+      "audit_exit": 0,
+      "audit_source_sha256": "1fbf6c1be3327840b999ad6728e50df1252ff48efeb8a7803a48e067037b9571",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinateDerivative_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.divergence_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialCurl_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.ElectricHodge",
+      "source_sha256": "9a86c179c75a512f15a31e621afc5ace526dfb636e0ad8b704c4081731be10dd",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.281,
+      "audit_exit": 0,
+      "audit_source_sha256": "582e34af839d67a9abec0322a8220bd76862e19841dde78009c4ef843e99a084",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_lamb_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.G_smooth_of_velocity_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_G_of_reconstruction",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.G_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_G",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.electric_hodge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.SpatialMultiplier",
+      "source_sha256": "9385b39dbebac0062302f458c2e4d6e0b3f072330bc81e896f2907b463de3d9f",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.151,
+      "audit_exit": 0,
+      "audit_source_sha256": "bbbccb253bb300cf8a05163958f37de1680fe8a39eb1bafebbd4ae499ce79739",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cosine_mul_integrable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_sub",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_finset_sum",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinateDerivative_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinate_component_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_coordinateComponent",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.divergence_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.curl_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.PoissonFromCoefficients",
+      "source_sha256": "23cf86397aa7029712671127bbdf7fc28abcd0eafb182d7c4ca48e7afb44fd06",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.055,
+      "audit_exit": 0,
+      "audit_source_sha256": "96822489254054728b4c7522bcf1a43f7934a7eacd2bc6d59a0aae52739a56e1",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_sub",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_const",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_laplacian",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.laplacianFrequency_mul_inverseLaplacianSymbol",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.neg_laplacian_vectorL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.SpatialInhabitant",
+      "source_sha256": "4a414a1125fffa62e0e4f760186fc1597cb116052c138ec3a486a0cb7c6b693f",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.006,
+      "audit_exit": 0,
+      "audit_source_sha256": "08fb251b14b03d2b10b549470a72d73abdf75fe56f5b9a56efc961978d35c485",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h1_reconstruct_velocity",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h2_reconstruct_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h4_electric_hodge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.Inhabitant",
+      "source_sha256": "8c08d265db70b08219548c9b3c7857de9404b59dce5f2d94dc6a65f1020cd14a",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 8.444,
+      "audit_exit": 0,
+      "audit_source_sha256": "e9f7ae84df61bf81466812b647eef8b7c534a729b134590c2755fbe0be5ce1f1",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.exact_equivalence_native",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterJets",
+      "source_sha256": "e448aacc166ec7482242dd7f1d9a494b098a0bb4d6334f4d29bad761d7e87eab",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.196,
+      "audit_exit": 0,
+      "audit_source_sha256": "fc2a9ea3275edd78b0c1d8c7413073848f627f30ed4def57e676530d7027211b",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "module": "FourierHodgeLaws_inhabitant",
+      "source_sha256": "5ef6dfdfbe222edae1d62c232781b46c6c143d0360e1dcce436a0c03fac59de1",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 8.234,
+      "audit_exit": 0,
+      "audit_source_sha256": "af359348365b1f1ac35d327229fbad817f77a54c5be1d0cf31201dce8df5191f",
+      "declarations": [],
+      "status": "BUILD_PASS_NO_NAMED_THEOREMS"
+    }
+  ],
+  "upstream_aggregate": {
+    "modules": [
+      "MaxwellEndpoint.Geometry",
+      "MaxwellEndpoint.Constitutive",
+      "MaxwellEndpoint.System",
+      "MaxwellEndpoint.Native",
+      "MaxwellEndpoint",
+      "NSEMaxwell.Classical",
+      "NSEMaxwell.DominatedWithin",
+      "NSEMaxwell.Kinematics",
+      "NSEMaxwell.CurlCurl",
+      "NSEMaxwell.Spacetime",
+      "NSEMaxwell.Lamb",
+      "NSEMaxwell.PeriodicIntegration",
+      "NSEMaxwell.TemporalMean",
+      "NSEMaxwell.Constitutive",
+      "NSEMaxwell.Negation",
+      "NSEMaxwell.Pressure",
+      "NSEMaxwell.Ampere",
+      "NSEMaxwell.ConstantPaths",
+      "NSEMaxwell.AnalyticContracts",
+      "NSEMaxwellForward",
+      "NSEMaxwellReverse",
+      "NSEMaxwell.AnalyticBridge",
+      "NSEMaxwell.LocalEvolution",
+      "NSEMaxwell.MeanConservation",
+      "NSEMaxwell.FourierPeriodic",
+      "NSEMaxwell.CanonicalSmoothness",
+      "NSEMaxwell.AnalyticReduction",
+      "SingularClosure.Contracts",
+      "SingularClosure.SixChannels",
+      "SingularClosure.Galerkin",
+      "SingularClosure.Admission",
+      "SingularClosure.PhysicalChannels",
+      "SingularClosure.PhysicalEnstrophy",
+      "SingularClosure.FourierIntegral",
+      "SingularClosure.PhysicalProjection",
+      "SingularClosure.GalerkinAlgebra",
+      "SingularClosure.GalerkinEnergy",
+      "SingularClosure.GalerkinReality",
+      "SingularClosure.LerayPressure",
+      "SingularClosure.FourierPressure",
+      "SingularClosure.PhysicalParseval",
+      "SingularClosure.FiniteParseval",
+      "SingularClosure.FiniteHessian",
+      "SingularClosure.EnstrophyInequality",
+      "SingularClosure.PhysicalBilinear",
+      "SingularClosure.InitialFourier",
+      "SingularClosure.InitialCutoffBounds",
+      "SingularClosure.FourierDecay",
+      "SingularClosure.FourierSeriesCalculus",
+      "SingularClosure.TorusSobolev",
+      "SingularClosure.LatticeSobolevSummability",
+      "SingularClosure.SmoothDatumSobolev",
+      "SingularClosure.SobolevSmoothRealization",
+      "SingularClosure.HilbertChannels",
+      "SingularClosure.CoordinateAverage",
+      "SingularClosure.CoordinateAverageOrthogonal",
+      "SingularClosure.PeriodicCover",
+      "SingularClosure.PeriodicFourierRealization",
+      "SingularClosure.PeriodicFourierInjective"
+    ],
+    "exit_code": 0,
+    "seconds": 4.462,
+    "log": "upstream-aggregate-build.log"
+  },
+  "unconditional_promotion": "REQUIRES_EXACT_TYPE_REVIEW",
+  "source_manifest_sha256": "f0ca3729dad394aaa69dcba4619b92fa42ff1d3a4e00ea926003d84b194ad437"
+}

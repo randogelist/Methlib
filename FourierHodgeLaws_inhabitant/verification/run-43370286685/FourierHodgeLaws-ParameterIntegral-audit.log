@@ -1,0 +1,31 @@
+NSEMaxwell.HodgeProof.spatialMean_contDiffOn_nat : ∀ (n : ℕ) (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ContDiffOn.{0, 0, 0} ℝ (↑n) (fun t => NSEMaxwell.Classical.spatialMean (u t)) (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.spatialMean_contDiffOn_nat' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.spatialMean_contDiffOn : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (fun t => NSEMaxwell.Classical.spatialMean (u t)) (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.spatialMean_contDiffOn' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.spatialMean_scalar_embed : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  Eq.{1}
+    (WithLp.ofLp.{0}
+      (NSEMaxwell.Classical.spatialMean fun x => HSMul.hSMul.{0, 0, 0} (f x) (NSEMaxwell.Classical.unitVector 0)) 0)
+    (NSEMaxwell.Classical.scalarMean f)
+'NSEMaxwell.HodgeProof.spatialMean_scalar_embed' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarMean_contDiffOn : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (fun t => NSEMaxwell.Classical.scalarMean (f t)) (Set.Ici.{0} 0)
+'NSEMaxwell.HodgeProof.scalarMean_contDiffOn' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.spatialMean_trajectory_smooth : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    NSEMaxwell.Classical.SmoothVelocity fun t x => NSEMaxwell.Classical.spatialMean (u t)
+'NSEMaxwell.HodgeProof.spatialMean_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarMean_trajectory_smooth : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.SmoothPressure fun t x => NSEMaxwell.Classical.scalarMean (f t)
+'NSEMaxwell.HodgeProof.scalarMean_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    NSEMaxwell.Classical.SmoothPressure fun t x =>
+      NSEMaxwell.Classical.scalarMean fun x => HPow.hPow.{0, 0, 0} (Norm.norm.{0} (u t x)) 2
+'NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

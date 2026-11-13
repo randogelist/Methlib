@@ -1,0 +1,16 @@
+NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws
+'NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.h1_reconstruct_velocity : ∀ (a : NSEMaxwell.Classical.Field),
+  NSEMaxwell.Classical.Data a →
+    Eq.{1} (NSEMaxwell.Classical.U (NSEMaxwell.Classical.spatialMean a) (NSEMaxwell.Classical.spatialCurl a)) a
+'NSEMaxwell.HodgeProof.h1_reconstruct_velocity' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.h2_reconstruct_curl : ∀ (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Field),
+  NSEMaxwell.Classical.MagneticData B → Eq.{1} (NSEMaxwell.Classical.spatialCurl (NSEMaxwell.Classical.U m B)) B
+'NSEMaxwell.HodgeProof.h2_reconstruct_curl' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.h4_electric_hodge : ∀ (ν : ℝ) (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Field),
+  NSEMaxwell.Classical.MagneticData B →
+    Eq.{1}
+      (HAdd.hAdd.{0, 0, 0} (NSEMaxwell.Classical.G ν m B)
+        (NSEMaxwell.Classical.gradient (NSEMaxwell.Bridge.headPotential ν m B)))
+      (NSEMaxwell.Classical.K (NSEMaxwell.Classical.spatialCurl (NSEMaxwell.Classical.G ν m B)))
+'NSEMaxwell.HodgeProof.h4_electric_hodge' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

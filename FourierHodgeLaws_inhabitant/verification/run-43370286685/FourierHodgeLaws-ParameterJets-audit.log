@@ -1,0 +1,24 @@
+@NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets.{u_1, u_2,
+    u_3} : ∀ {ι : Type u_1} {E : Type u_2} [inst : NormedAddCommGroup.{u_2} E] [inst_1 : NormedSpace.{0, u_2} ℝ E]
+  {F : ℕ → Type u_3} [inst_2 : (n : ℕ) → NormedAddCommGroup.{u_3} (F n)]
+  [inst_3 : (n : ℕ) → NormedSpace.{0, u_3} ℝ (F n)] [∀ (n : ℕ), CompleteSpace.{u_3} (F n)] {s : Set.{u_2} E},
+  IsOpen.{u_2} s →
+    Convex.{0, u_2} ℝ s →
+      UniqueDiffOn.{0, u_2} ℝ (closure.{u_2} s) →
+        ∀ (J : (n : ℕ) → ι → E → F n)
+          (C :
+            (n : ℕ) →
+              ContinuousLinearMap.{0, 0, u_3, max u_3 u_2} (RingHom.id.{0} ℝ) (F (HAdd.hAdd.{0, 0, 0} n 1))
+                (ContinuousLinearMap.{0, 0, u_2, u_3} (RingHom.id.{0} ℝ) E (F n)))
+          (u : ℕ → ι → ℝ),
+          (∀ (n : ℕ), Summable.{0, u_1} (u n)) →
+            (∀ (n : ℕ) (i : ι) (x : E),
+                Membership.mem.{u_2, u_2} (closure.{u_2} s) x → LE.le.{0} (Norm.norm.{u_3} (J n i x)) (u n i)) →
+              (∀ (n : ℕ) (i : ι), ContinuousOn.{u_2, u_3} (J n i) (closure.{u_2} s)) →
+                (∀ (n : ℕ) (i : ι) (x : E),
+                    Membership.mem.{u_2, u_2} s x →
+                      HasFDerivAt.{0, u_2, u_3} (J n i) ((C n) (J (HAdd.hAdd.{0, 0, 0} n 1) i x)) x) →
+                  ∀ (q : ℕ), ContDiffOn.{0, u_2, u_3} ℝ (↑Top.top.{0}) (fun x => ∑' (i : ι), J q i x) (closure.{u_2} s)
+'NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

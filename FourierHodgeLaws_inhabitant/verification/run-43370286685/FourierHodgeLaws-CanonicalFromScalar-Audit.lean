@@ -1,0 +1,10 @@
+import FourierHodgeLaws.CanonicalFromScalar
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing
+#check @NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing
+#check @NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing

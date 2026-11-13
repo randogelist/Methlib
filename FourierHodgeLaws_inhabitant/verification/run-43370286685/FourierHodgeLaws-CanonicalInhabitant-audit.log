@@ -1,0 +1,8 @@
+NSEMaxwell.HodgeProof.canonical_smoothness : ∀ (ν c : ℝ) (m : NSEMaxwell.Classical.Vec)
+  (B : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity B →
+    NSEMaxwell.Classical.PeriodicVelocity B → NSEMaxwell.Bridge.CanonicalSmoothness ν c m B
+'NSEMaxwell.HodgeProof.canonical_smoothness' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.h3_canonical_smoothness : ∀ (ν c : ℝ) (m : NSEMaxwell.Classical.Vec)
+  (B : NSEMaxwell.Classical.Velocity), NSEMaxwell.Bridge.MagneticPath B → NSEMaxwell.Bridge.CanonicalSmoothness ν c m B
+'NSEMaxwell.HodgeProof.h3_canonical_smoothness' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

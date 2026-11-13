@@ -1,0 +1,12 @@
+import FourierHodgeLaws.Inhabitant
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing
+#check @NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing
+#print axioms NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing
+#check @NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant
+#print axioms NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant
+#check @NSEMaxwell.HodgeProof.exact_equivalence_native
+#print axioms NSEMaxwell.HodgeProof.exact_equivalence_native

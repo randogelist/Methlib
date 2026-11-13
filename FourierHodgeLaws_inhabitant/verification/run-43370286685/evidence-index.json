@@ -1,0 +1,447 @@
+{
+  "status": "PASS",
+  "proof_commit": "f927f1e31196f0be71b2581dc85f6e3fd19e0746",
+  "run_id": 43370286685,
+  "run_url": "https://github.com/randogelist/Methlib/actions/runs/43370286685",
+  "artifact_id": 14012471434,
+  "artifact_sha256": "4aac443289f894f2844db10a663098dce5da03f16197a9b1027a6916d3b011b0",
+  "named_theorems": 163,
+  "proof_source_files": 19,
+  "approved_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "retained_files": [
+    {
+      "path": "FourierHodgeLaws-CanonicalFromScalar-Audit.lean",
+      "sha256": "60ba5f3a1dc802a45fbceb1ecc197e61c25af72a6be816f9dd4d78b331699d85",
+      "bytes": 607
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalFromScalar-audit.log",
+      "sha256": "dc2190c2ea3a66cab0fd67212204db1ece598ca476e60ecd5d6308c16181115f",
+      "bytes": 1956
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalFromScalar-build.log",
+      "sha256": "a321410dfadf22c917b97ef869e66ab7a3cb50e995ea199c79fb46b524a017d1",
+      "bytes": 22911
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalFromScalar-result.json",
+      "sha256": "b16b6a533b35e545d830423751ee07a8f1d2e496e20108fda5598109bf234e29",
+      "bytes": 1065
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalInhabitant-Audit.lean",
+      "sha256": "85093aa8e6074dee1db25246bf84e6418d5515a5a670239da2e0b05180d21a7c",
+      "bytes": 351
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalInhabitant-audit.log",
+      "sha256": "f7f935d9ed0457ae530d46c14fad0f9e4195e81b5da4439b68b92895a38ddc58",
+      "bytes": 717
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalInhabitant-build.log",
+      "sha256": "22bc162fb5ef007ad2ebb6e2895d7fb5feb90c84c62975dbd7a864a324aee38c",
+      "bytes": 33251
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalInhabitant-result.json",
+      "sha256": "bc3d2f2a8a9f33d3568c8e85204f9b4eb579e0665597f832783cdc2bb6bd33bd",
+      "bytes": 786
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalSmoothness-Audit.lean",
+      "sha256": "b4b27c92d6f4894975fb10d7b7d8a933e17807d3ecf8022ff12471da134d720a",
+      "bytes": 875
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalSmoothness-audit.log",
+      "sha256": "80f5aa9e2170dc2a311852e957d42f7786c285a679ec07613caee4ee4901eaf1",
+      "bytes": 3344
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalSmoothness-build.log",
+      "sha256": "75ff3d152f0aa5a457607814e27561b62901668a898fe2af146e888db9b1cfe3",
+      "bytes": 4695
+    },
+    {
+      "path": "FourierHodgeLaws-CanonicalSmoothness-result.json",
+      "sha256": "4c58cdd16340f96adddaf15f3fc35ea3d8a8b3e2f3c80ab650cf62107ecc69a0",
+      "bytes": 1501
+    },
+    {
+      "path": "FourierHodgeLaws-ClosedHalfspaceSmooth-Audit.lean",
+      "sha256": "f9f939615d12e9b228d56f770be2265c4849dc6878228427aa1489d560df8bc4",
+      "bytes": 1211
+    },
+    {
+      "path": "FourierHodgeLaws-ClosedHalfspaceSmooth-audit.log",
+      "sha256": "32759a324bb2d136353589882657008f157afe2b03e15d4f35cea49e660050c6",
+      "bytes": 6100
+    },
+    {
+      "path": "FourierHodgeLaws-ClosedHalfspaceSmooth-build.log",
+      "sha256": "1b05d7b2a2fe13ce85d23adb5757759fa9facc74a2fbf6c72783f2acb60b727e",
+      "bytes": 895
+    },
+    {
+      "path": "FourierHodgeLaws-ClosedHalfspaceSmooth-result.json",
+      "sha256": "99244d9ff253c66ae9bfd7ce16a65d66b7b35322c48aba0bf048e7c0a9606f97",
+      "bytes": 2121
+    },
+    {
+      "path": "FourierHodgeLaws-CosineMultiplier-Audit.lean",
+      "sha256": "1a268c8570abb849a6c4b37f8cf6f1501c8f60f919d0c6b220466a49a848e29b",
+      "bytes": 1806
+    },
+    {
+      "path": "FourierHodgeLaws-CosineMultiplier-audit.log",
+      "sha256": "04575b6affeed44e0a5627c114c244aeaae0770aa85ee8121e440ec699dca95a",
+      "bytes": 7309
+    },
+    {
+      "path": "FourierHodgeLaws-CosineMultiplier-build.log",
+      "sha256": "c42850a7e8a70f3183e23cd28f192300065ff0e275392639d3ddcd19ae1f0d13",
+      "bytes": 21025
+    },
+    {
+      "path": "FourierHodgeLaws-CosineMultiplier-result.json",
+      "sha256": "a6d0e75aa29dae88e6adb5ac71d736494475ed4064df808721aa622e0476a779",
+      "bytes": 3475
+    },
+    {
+      "path": "FourierHodgeLaws-ElectricHodge-Audit.lean",
+      "sha256": "582e34af839d67a9abec0322a8220bd76862e19841dde78009c4ef843e99a084",
+      "bytes": 927
+    },
+    {
+      "path": "FourierHodgeLaws-ElectricHodge-audit.log",
+      "sha256": "593f7491732c3829aacf496be54ac722a0a292183c154a920abbd25ac7edafdb",
+      "bytes": 2975
+    },
+    {
+      "path": "FourierHodgeLaws-ElectricHodge-build.log",
+      "sha256": "e973e69965883d433a3bfb228dd0dd519dcf2d416278135fef30571e89768a26",
+      "bytes": 4353
+    },
+    {
+      "path": "FourierHodgeLaws-ElectricHodge-result.json",
+      "sha256": "a81a5c74da8f92e5c416f4872c7305aa9b652cb5274d892da5fb7f7838a10eb9",
+      "bytes": 1675
+    },
+    {
+      "path": "FourierHodgeLaws-FourierCoefficients-Audit.lean",
+      "sha256": "454fbda9939ded7423500939f879df8323c94d2ad5b47cd560019cda59ab62be",
+      "bytes": 1371
+    },
+    {
+      "path": "FourierHodgeLaws-FourierCoefficients-audit.log",
+      "sha256": "a52f5577ac4f62f06ba10a6b57616e69945e9ff9b7f835cd7bee9449d1e7ea73",
+      "bytes": 4884
+    },
+    {
+      "path": "FourierHodgeLaws-FourierCoefficients-build.log",
+      "sha256": "a098668d9929ea4890c41cac4b5ef4a04d8257a234b25398ed55cf9310cbb6bb",
+      "bytes": 16101
+    },
+    {
+      "path": "FourierHodgeLaws-FourierCoefficients-result.json",
+      "sha256": "6edde318a768ec496128e4bf1f0530cc0cbfa1deb92aa91dfd6841e99d4e7e2a",
+      "bytes": 2504
+    },
+    {
+      "path": "FourierHodgeLaws-Inhabitant-Audit.lean",
+      "sha256": "e9f7ae84df61bf81466812b647eef8b7c534a729b134590c2755fbe0be5ce1f1",
+      "bytes": 652
+    },
+    {
+      "path": "FourierHodgeLaws-Inhabitant-audit.log",
+      "sha256": "9a9f29cb85867fcb620487b49b7b411408779865547e6aa1ec1dd50969760644",
+      "bytes": 1826
+    },
+    {
+      "path": "FourierHodgeLaws-Inhabitant-build.log",
+      "sha256": "9e44381ff7f7cb96e3605c0f05b85c5dcd849f8826d46ca6f97babcdc35cd9d6",
+      "bytes": 33938
+    },
+    {
+      "path": "FourierHodgeLaws-Inhabitant-result.json",
+      "sha256": "764c68491d399215e535b870add6e07cc35a15a85386d01c1c165df06929b0ee",
+      "bytes": 1234
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterCoefficients-Audit.lean",
+      "sha256": "a69ad194980d599130a438323019c2ecb00b91cde348c96f630e74e3ce103a81",
+      "bytes": 2579
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterCoefficients-audit.log",
+      "sha256": "c1809dfdcfcd92ea289d70327d2d620ee116ad83f42ecae07bf975a618a6b7d7",
+      "bytes": 11129
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterCoefficients-build.log",
+      "sha256": "f1dc51302fb6b94e65b7c2c629f761e6054fad73e4ebaa6ef045a7aec1341162",
+      "bytes": 18566
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterCoefficients-result.json",
+      "sha256": "9e14d4d97695c10b15d2f726e6da2e47cb95dbc054471e14f162c62b46f17c63",
+      "bytes": 4619
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterIntegral-Audit.lean",
+      "sha256": "90a20aa47177fea158cf92ca94ea1ca9f23f77cebb83e52bb3eba1e8b939549c",
+      "bytes": 961
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterIntegral-audit.log",
+      "sha256": "ff689f632bf41bf49efb35d0986fc421c20708092fa3dd4392ec5fce442547fa",
+      "bytes": 2576
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterIntegral-build.log",
+      "sha256": "f375ad339ab9b8c1c7a8393ced6b9e41ce8084e97a766598265d9bc902a01fa0",
+      "bytes": 4695
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterIntegral-result.json",
+      "sha256": "01e1b078bb16caed371d6155b23977135f75b780b68a9ff1dec97e22d152039b",
+      "bytes": 1845
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterJets-Audit.lean",
+      "sha256": "fc2a9ea3275edd78b0c1d8c7413073848f627f30ed4def57e676530d7027211b",
+      "bytes": 275
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterJets-audit.log",
+      "sha256": "657f80a56fb95c6a0914a79bf97e947776c1d8eacac6308cc5a87074b88401a0",
+      "bytes": 1610
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterJets-build.log",
+      "sha256": "19c3f408cc60c7ae400a25a22af44b7d180c95aca62451c0ef7b303fb79d6550",
+      "bytes": 895
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterJets-result.json",
+      "sha256": "3d261f0f4f607701bb50331f476b3996a1ef135555757b7bbd0f971eaa7932f6",
+      "bytes": 594
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterSmoothing-Audit.lean",
+      "sha256": "3785982efb40bf0e67c746cd9c1766ff803d01b0948dc742fb60be714b6a2e91",
+      "bytes": 2454
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterSmoothing-audit.log",
+      "sha256": "033a97a3f7aff5cdefd062c6d778967ff5c986e2a62cb2d29a1f1344b0a0dcb8",
+      "bytes": 9202
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterSmoothing-build.log",
+      "sha256": "b7bebc8b763fe021363776ae06180878219d6cb20ccb25bf48e520d718dedbe9",
+      "bytes": 33188
+    },
+    {
+      "path": "FourierHodgeLaws-ParameterSmoothing-result.json",
+      "sha256": "a4110f2770bbe45604da78d0f397e0a0753d47555ce9a795165a2576c43a7817",
+      "bytes": 4103
+    },
+    {
+      "path": "FourierHodgeLaws-PoissonFromCoefficients-Audit.lean",
+      "sha256": "96822489254054728b4c7522bcf1a43f7934a7eacd2bc6d59a0aae52739a56e1",
+      "bytes": 967
+    },
+    {
+      "path": "FourierHodgeLaws-PoissonFromCoefficients-audit.log",
+      "sha256": "ad946a988d7512ad9948ec5e717a0c6892b57398d26fef80f718f666215d6bbb",
+      "bytes": 2832
+    },
+    {
+      "path": "FourierHodgeLaws-PoissonFromCoefficients-build.log",
+      "sha256": "3e2aa53c1ee4542571d2b1ade9be42e17f9cff4fc9107fde6eb675558e88bf9b",
+      "bytes": 21721
+    },
+    {
+      "path": "FourierHodgeLaws-PoissonFromCoefficients-result.json",
+      "sha256": "9470f447720edf913258acc75149840347fb0922a7ffeb845edfc102fd39b253",
+      "bytes": 1851
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialHodge-Audit.lean",
+      "sha256": "1fbf6c1be3327840b999ad6728e50df1252ff48efeb8a7803a48e067037b9571",
+      "bytes": 1956
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialHodge-audit.log",
+      "sha256": "969e98def376828748c310ea6d289d117d7dc9d8167e1b8e1194009202a0d5b4",
+      "bytes": 6120
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialHodge-build.log",
+      "sha256": "4a05d90d81730d1ac1a6fb46e6417f858599fdafab83d2f8ce5c0422a0f1ac60",
+      "bytes": 4353
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialHodge-result.json",
+      "sha256": "b7616ee4ed75ab6ba98819f6bd73e7d82ecbf9672c1af9534d612199a865b64a",
+      "bytes": 3246
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialInhabitant-Audit.lean",
+      "sha256": "08fb251b14b03d2b10b549470a72d73abdf75fe56f5b9a56efc961978d35c485",
+      "bytes": 571
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialInhabitant-audit.log",
+      "sha256": "845eada90e833bd2294f2a83178daf89f29ef5cb66ad1d5744f78bd81fcf7611",
+      "bytes": 1430
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialInhabitant-build.log",
+      "sha256": "d3cff9a65bf2be7c4dacd5fb886d2d8b9c474ff0d2d4ad3d9c75505a07e314ef",
+      "bytes": 23265
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialInhabitant-result.json",
+      "sha256": "cbfb229480d19734980f4d17aea4d1e3414c133ed369de554e57e24b66d27bbb",
+      "bytes": 1197
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialMultiplier-Audit.lean",
+      "sha256": "bbbccb253bb300cf8a05163958f37de1680fe8a39eb1bafebbd4ae499ce79739",
+      "bytes": 1237
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialMultiplier-audit.log",
+      "sha256": "3666b7d5aa465415b4b75af1da85f4955372f7aaf28885eeca9505f8ebc8c485",
+      "bytes": 5257
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialMultiplier-build.log",
+      "sha256": "ed069fa1958a5bcbd809d053463b57dd51afa9a3e93351fda8c3183cf6ad089b",
+      "bytes": 21025
+    },
+    {
+      "path": "FourierHodgeLaws-SpatialMultiplier-result.json",
+      "sha256": "aa97f7c1cba27cdcecf27ec5396ab8f78d2121ba080786210fce45a73af0cfee",
+      "bytes": 2436
+    },
+    {
+      "path": "FourierHodgeLaws-TargetPrimitives-Audit.lean",
+      "sha256": "79549dd495cac370ba1a5cb43f1c9ac9d2779c7c89e95957c367f2bc4b5f2d56",
+      "bytes": 2620
+    },
+    {
+      "path": "FourierHodgeLaws-TargetPrimitives-audit.log",
+      "sha256": "ddd25f27a8d917e4d5883a890d1c5b072b075606f6652cf6a77e71516996d735",
+      "bytes": 6520
+    },
+    {
+      "path": "FourierHodgeLaws-TargetPrimitives-build.log",
+      "sha256": "ea43812d190b21ae6f27ef585c8483d54a88fa4f0a3fd5d441a65f4384534bda",
+      "bytes": 12563
+    },
+    {
+      "path": "FourierHodgeLaws-TargetPrimitives-result.json",
+      "sha256": "427f4752f603449b99658e5e7131e69558af357f388c581a1adbadf204c1a3ff",
+      "bytes": 4939
+    },
+    {
+      "path": "FourierHodgeLaws-UniformCoefficientBounds-Audit.lean",
+      "sha256": "778c91ae13df1c8db1288843fb9e724e3bb08290a43ff9a9251939fcb7347bc4",
+      "bytes": 1332
+    },
+    {
+      "path": "FourierHodgeLaws-UniformCoefficientBounds-audit.log",
+      "sha256": "e1648f2c0b26a40dc2e3c9d150e3a097766d99200c1fe48d8b794d157c1e013b",
+      "bytes": 5483
+    },
+    {
+      "path": "FourierHodgeLaws-UniformCoefficientBounds-build.log",
+      "sha256": "9b364d419dd6e81c8ef90d12ef6a4f701abe34cfacb1344900579d94928d144d",
+      "bytes": 19298
+    },
+    {
+      "path": "FourierHodgeLaws-UniformCoefficientBounds-result.json",
+      "sha256": "0a215765f29765b24038726c78b70c76b73a5093b370310e15283d11730ad055",
+      "bytes": 2336
+    },
+    {
+      "path": "FourierHodgeLaws_inhabitant-Audit.lean",
+      "sha256": "af359348365b1f1ac35d327229fbad817f77a54c5be1d0cf31201dce8df5191f",
+      "bytes": 120
+    },
+    {
+      "path": "FourierHodgeLaws_inhabitant-audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "FourierHodgeLaws_inhabitant-build.log",
+      "sha256": "53121be25c4e863c65989afda6b85cd28628f541c0ca71a1ee1f2dfc89c7333f",
+      "bytes": 33938
+    },
+    {
+      "path": "FourierHodgeLaws_inhabitant-result.json",
+      "sha256": "caa7276f4f48d8942e3d41e289c75ecd478a1f8a80536177c09021f507cd25d1",
+      "bytes": 372
+    },
+    {
+      "path": "hydration.json",
+      "sha256": "4e5327239f30a6ce5d3f95d1dea81ed689953590111e6e58ec7c18a0b04e5bf9",
+      "bytes": 2948
+    },
+    {
+      "path": "lean-version.log",
+      "sha256": "6cd69c5752c644291ede2418997a70e9994409d30b15fe5ef14a1be60f27f8ef",
+      "bytes": 110
+    },
+    {
+      "path": "native-sources.json",
+      "sha256": "3dc30243705c22b792918ba81d66ec3305d0c0a1b3b59faa66d00bd3477b6d73",
+      "bytes": 11079
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "c28db39f3b8fd735c78631138efba667b182f468760d890dc37dc8fa4496dd1d",
+      "bytes": 1299
+    },
+    {
+      "path": "review.json",
+      "sha256": "8eb28bf8abb8ed6861821c0898468b62606f56200433d56599eb15a3c2c30d54",
+      "bytes": 94348
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "f0ca3729dad394aaa69dcba4619b92fa42ff1d3a4e00ea926003d84b194ad437",
+      "bytes": 1992686
+    },
+    {
+      "path": "staging.json",
+      "sha256": "cd01040b444c40c06c3a10b353b7959676bef3eead0a49f10a0056df0eb983ff",
+      "bytes": 1401269
+    },
+    {
+      "path": "summary.json",
+      "sha256": "a601dbe88e4e76d884ca94e5229b94f39d9a92fa58c1cd1609433eee9b0f6f31",
+      "bytes": 75618
+    },
+    {
+      "path": "upstream-aggregate.json",
+      "sha256": "6e9dd0625b4cb80865db47b7ed176d2fb0098d792060a7d19b47dbe97af6fb58",
+      "bytes": 2215
+    },
+    {
+      "path": "workflow.yml",
+      "sha256": "c1f9eb20720a85f897a9578d8f49469daf6c662cc8cb0f4e2ffa838cbd7a644c",
+      "bytes": 5563
+    }
+  ]
+}

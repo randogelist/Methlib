@@ -1,0 +1,21 @@
+{
+  "module": "FourierHodgeLaws.ParameterJets",
+  "source_sha256": "e448aacc166ec7482242dd7f1d9a494b098a0bb4d6334f4d29bad761d7e87eab",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.196,
+  "audit_exit": 0,
+  "audit_source_sha256": "fc2a9ea3275edd78b0c1d8c7413073848f627f30ed4def57e676530d7027211b",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

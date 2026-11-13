@@ -1,0 +1,99 @@
+NSEMaxwell.HodgeProof.compact_velocity_norm_bound : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ∀ (T : ℝ),
+      ∃ C,
+        LE.le.{0} 0 C ∧
+          ∀ (t : ℝ),
+            Membership.mem.{0, 0} (Set.Icc.{0} 0 T) t →
+              ∀ (x : NSEMaxwell.Classical.Vec),
+                Membership.mem.{0, 0} NSEMaxwell.Classical.unitCube x → LE.le.{0} (Norm.norm.{0} (u t x)) C
+'NSEMaxwell.HodgeProof.compact_velocity_norm_bound' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.compact_componentL1_bound : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ∀ (T : ℝ),
+      ∃ C,
+        LE.le.{0} 0 C ∧
+          ∀ (t : ℝ),
+            Membership.mem.{0, 0} (Set.Icc.{0} 0 T) t →
+              ∀ (i : Fin 3),
+                LE.le.{0}
+                  (∫ (x : NSEMaxwell.Classical.Vec) in NSEMaxwell.Classical.unitCube,
+                    Norm.norm.{0} (WithLp.ofLp.{0} (u t x) i))
+                  C
+'NSEMaxwell.HodgeProof.compact_componentL1_bound' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ∀ (j : Fin 3) (m : ℕ),
+      NSEMaxwell.Classical.SmoothVelocity fun t => SingularClosure.iteratedCoordinateDerivative j m (u t)
+'NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.uniform_fourierDecayConstant : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    ∀ (T : ℝ) (m : ℕ),
+      ∃ C,
+        LE.le.{0} 0 C ∧
+          ∀ (t : ℝ),
+            Membership.mem.{0, 0} (Set.Icc.{0} 0 T) t → LE.le.{0} (SingularClosure.fourierDecayConstant m (u t)) C
+'NSEMaxwell.HodgeProof.uniform_fourierDecayConstant' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound : ∀ (u : NSEMaxwell.Classical.Velocity),
+  NSEMaxwell.Classical.SmoothVelocity u →
+    NSEMaxwell.Classical.PeriodicVelocity u →
+      ∀ (T : ℝ) (m : ℕ),
+        ∃ M,
+          Summable.{0, 0} M ∧
+            (∀ (k : NSEMaxwell.Classical.Frequency), LE.le.{0} 0 (M k)) ∧
+              ∀ (t : ℝ),
+                Membership.mem.{0, 0} (Set.Icc.{0} 0 T) t →
+                  ∀ (k : NSEMaxwell.Classical.Frequency) (i : Fin 3),
+                    LE.le.{0}
+                      (HMul.hMul.{0, 0, 0} (Norm.norm.{0} (SingularClosure.datumFourierCoeff (u t) k i))
+                        (HPow.hPow.{0, 0, 0} (Norm.norm.{0} (SingularClosure.fourierPhaseCLM k)) m))
+                      (M k)
+'NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.SmoothVelocity fun t => NSEMaxwell.HodgeProof.scalarLift (f t)
+'NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.PeriodicPressure f →
+    NSEMaxwell.Classical.PeriodicVelocity fun t => NSEMaxwell.HodgeProof.scalarLift (f t)
+'NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ (T : ℝ) (m : ℕ),
+        ∃ M,
+          Summable.{0, 0} M ∧
+            (∀ (k : NSEMaxwell.Classical.Frequency), LE.le.{0} 0 (M k)) ∧
+              ∀ (t : ℝ),
+                Membership.mem.{0, 0} (Set.Icc.{0} 0 T) t →
+                  ∀ (k : NSEMaxwell.Classical.Frequency),
+                    LE.le.{0}
+                      (HMul.hMul.{0, 0, 0} (Norm.norm.{0} (NSEMaxwell.HodgeProof.scalarCoeff (f t) k))
+                        (HPow.hPow.{0, 0, 0} (Norm.norm.{0} (SingularClosure.fourierPhaseCLM k)) m))
+                      (M k)
+'NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ (T : ℝ) (m : ℕ),
+        ∃ M,
+          Summable.{0, 0} M ∧
+            (∀ (k : NSEMaxwell.Classical.Frequency), LE.le.{0} 0 (M k)) ∧
+              ∀ (t : ℝ),
+                Membership.mem.{0, 0} (Set.Icc.{0} 0 T) t →
+                  ∀ (k : NSEMaxwell.Classical.Frequency),
+                    LE.le.{0}
+                      (HMul.hMul.{0, 0, 0} (Norm.norm.{0} (NSEMaxwell.HodgeProof.inverseScalarCoeff (f t) k))
+                        (HPow.hPow.{0, 0, 0} (Norm.norm.{0} (SingularClosure.fourierPhaseCLM k)) m))
+                      (M k)
+'NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

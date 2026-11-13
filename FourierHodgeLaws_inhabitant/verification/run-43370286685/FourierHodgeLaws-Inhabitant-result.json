@@ -1,0 +1,48 @@
+{
+  "module": "FourierHodgeLaws.Inhabitant",
+  "source_sha256": "8c08d265db70b08219548c9b3c7857de9404b59dce5f2d94dc6a65f1020cd14a",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 8.444,
+  "audit_exit": 0,
+  "audit_source_sha256": "e9f7ae84df61bf81466812b647eef8b7c534a729b134590c2755fbe0be5ce1f1",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.exact_equivalence_native",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

@@ -1,0 +1,30 @@
+NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing : (∀ (f : NSEMaxwell.Classical.Pressure),
+    NSEMaxwell.Classical.SmoothPressure f →
+      NSEMaxwell.Classical.PeriodicPressure f →
+        NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarL (f t)) →
+  ∀ (B : NSEMaxwell.Classical.Velocity),
+    NSEMaxwell.Classical.SmoothVelocity B →
+      NSEMaxwell.Classical.PeriodicVelocity B →
+        NSEMaxwell.Classical.SmoothVelocity fun t => NSEMaxwell.Classical.vectorL (B t)
+'NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing : (∀ (f : NSEMaxwell.Classical.Pressure),
+    NSEMaxwell.Classical.SmoothPressure f →
+      NSEMaxwell.Classical.PeriodicPressure f →
+        NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarL (f t)) →
+  ∀ (ν c : ℝ) (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Velocity),
+    NSEMaxwell.Classical.SmoothVelocity B →
+      NSEMaxwell.Classical.PeriodicVelocity B → NSEMaxwell.Bridge.CanonicalSmoothness ν c m B
+'NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing : (∀ (f : NSEMaxwell.Classical.Pressure),
+    NSEMaxwell.Classical.SmoothPressure f →
+      NSEMaxwell.Classical.PeriodicPressure f →
+        NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarL (f t)) →
+  ∀ (ν c : ℝ) (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Velocity),
+    NSEMaxwell.Bridge.MagneticPath B → NSEMaxwell.Bridge.CanonicalSmoothness ν c m B
+'NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

@@ -1,0 +1,37 @@
+NSEMaxwell.HodgeProof.datumFourierCoeff_add : ∀ (a b : NSEMaxwell.Classical.Field),
+  Continuous.{0, 0} a →
+    Continuous.{0, 0} b →
+      Eq.{1} (SingularClosure.datumFourierCoeff (HAdd.hAdd.{0, 0, 0} a b))
+        (HAdd.hAdd.{0, 0, 0} (SingularClosure.datumFourierCoeff a) (SingularClosure.datumFourierCoeff b))
+'NSEMaxwell.HodgeProof.datumFourierCoeff_add' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_sub : ∀ (a b : NSEMaxwell.Classical.Field),
+  Continuous.{0, 0} a →
+    Continuous.{0, 0} b →
+      Eq.{1} (SingularClosure.datumFourierCoeff (HSub.hSub.{0, 0, 0} a b))
+        (HSub.hSub.{0, 0, 0} (SingularClosure.datumFourierCoeff a) (SingularClosure.datumFourierCoeff b))
+'NSEMaxwell.HodgeProof.datumFourierCoeff_sub' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_neg : ∀ (a : NSEMaxwell.Classical.Field),
+  Eq.{1} (SingularClosure.datumFourierCoeff (Neg.neg.{0} a)) (Neg.neg.{0} (SingularClosure.datumFourierCoeff a))
+'NSEMaxwell.HodgeProof.datumFourierCoeff_neg' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_const : ∀ (m : NSEMaxwell.Classical.Vec),
+  Eq.{1} (SingularClosure.datumFourierCoeff fun x => m) fun k i => ite.{1} (Eq.{1} k 0) (↑(WithLp.ofLp.{0} m i)) 0
+'NSEMaxwell.HodgeProof.datumFourierCoeff_const' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_laplacian : ∀ (a : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) a →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} a →
+      Eq.{1} (SingularClosure.datumFourierCoeff (NSEMaxwell.Classical.laplacian a))
+        (SingularClosure.laplacianCoefficient (SingularClosure.datumFourierCoeff a))
+'NSEMaxwell.HodgeProof.datumFourierCoeff_laplacian' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.laplacianFrequency_mul_inverseLaplacianSymbol : ∀ (k : NSEMaxwell.Classical.Frequency),
+  Ne.{1} k 0 →
+    Eq.{1} (HMul.hMul.{0, 0, 0} (SingularClosure.laplacianFrequency k) (NSEMaxwell.Classical.inverseLaplacianSymbol k))
+      1
+'NSEMaxwell.HodgeProof.laplacianFrequency_mul_inverseLaplacianSymbol' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.neg_laplacian_vectorL : ∀ (a : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) a →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} a →
+      Eq.{1} (Neg.neg.{0} (NSEMaxwell.Classical.laplacian (NSEMaxwell.Classical.vectorL a)))
+        (HSub.hSub.{0, 0, 0} a fun x => NSEMaxwell.Classical.spatialMean a)
+'NSEMaxwell.HodgeProof.neg_laplacian_vectorL' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

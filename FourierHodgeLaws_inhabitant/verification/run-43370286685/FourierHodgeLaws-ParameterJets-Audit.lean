@@ -1,0 +1,6 @@
+import FourierHodgeLaws.ParameterJets
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets
+#print axioms NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets

@@ -1,0 +1,75 @@
+{
+  "module": "FourierHodgeLaws.ParameterIntegral",
+  "source_sha256": "e057005dbf269c7fd797241224651d9f145272f9674f50faa24e2e3dba2e7fe7",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.321,
+  "audit_exit": 0,
+  "audit_source_sha256": "90a20aa47177fea158cf92ca94ea1ca9f23f77cebb83e52bb3eba1e8b939549c",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn_nat",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialMean_scalar_embed",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarMean_contDiffOn",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialMean_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.scalarMean_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

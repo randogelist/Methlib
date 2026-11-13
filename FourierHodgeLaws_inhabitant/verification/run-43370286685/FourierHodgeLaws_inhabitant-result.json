@@ -1,0 +1,11 @@
+{
+  "module": "FourierHodgeLaws_inhabitant",
+  "source_sha256": "5ef6dfdfbe222edae1d62c232781b46c6c143d0360e1dcce436a0c03fac59de1",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 8.234,
+  "audit_exit": 0,
+  "audit_source_sha256": "af359348365b1f1ac35d327229fbad817f77a54c5be1d0cf31201dce8df5191f",
+  "declarations": [],
+  "status": "BUILD_PASS_NO_NAMED_THEOREMS"
+}

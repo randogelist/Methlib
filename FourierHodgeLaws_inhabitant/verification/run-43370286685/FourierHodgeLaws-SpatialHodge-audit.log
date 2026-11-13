@@ -1,0 +1,87 @@
+NSEMaxwell.HodgeProof.coordinateDerivative_const_add : ∀ (m : NSEMaxwell.Classical.Vec) (a : NSEMaxwell.Classical.Field)
+  (i : Fin 3),
+  Eq.{1} (NSEMaxwell.Classical.coordinateDerivative (fun x => HAdd.hAdd.{0, 0, 0} m (a x)) i)
+    (NSEMaxwell.Classical.coordinateDerivative a i)
+'NSEMaxwell.HodgeProof.coordinateDerivative_const_add' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.divergence_const_add : ∀ (m : NSEMaxwell.Classical.Vec) (a : NSEMaxwell.Classical.Field),
+  Eq.{1} (NSEMaxwell.Classical.divergence fun x => HAdd.hAdd.{0, 0, 0} m (a x)) (NSEMaxwell.Classical.divergence a)
+'NSEMaxwell.HodgeProof.divergence_const_add' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.spatialCurl_const_add : ∀ (m : NSEMaxwell.Classical.Vec) (a : NSEMaxwell.Classical.Field),
+  Eq.{1} (NSEMaxwell.Classical.spatialCurl fun x => HAdd.hAdd.{0, 0, 0} m (a x)) (NSEMaxwell.Classical.spatialCurl a)
+'NSEMaxwell.HodgeProof.spatialCurl_const_add' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (F : NSEMaxwell.Classical.Field),
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} F → ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) (NSEMaxwell.Classical.K F)
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (m : NSEMaxwell.Classical.Vec) (F : NSEMaxwell.Classical.Field),
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} F → ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) (NSEMaxwell.Classical.U m F)
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (F : NSEMaxwell.Classical.Field),
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} F → Eq.{1} (NSEMaxwell.Classical.divergence (NSEMaxwell.Classical.K F)) 0
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (F : NSEMaxwell.Classical.Field),
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+        Eq.{1} (NSEMaxwell.Classical.spatialMean (NSEMaxwell.Classical.K F)) 0
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (F : NSEMaxwell.Classical.Field),
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+        Eq.{1} (NSEMaxwell.Classical.spatialCurl (NSEMaxwell.Classical.K F))
+          (HAdd.hAdd.{0, 0, 0} (HSub.hSub.{0, 0, 0} F fun x => NSEMaxwell.Classical.spatialMean F)
+            (NSEMaxwell.Classical.gradient (NSEMaxwell.Classical.scalarL (NSEMaxwell.Classical.divergence F))))
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (F : NSEMaxwell.Classical.Field),
+    ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) F →
+      NSEMaxwell.Classical.SpatialPeriodic.{0} F →
+        Eq.{1} (NSEMaxwell.Classical.K (NSEMaxwell.Classical.spatialCurl F))
+          (HAdd.hAdd.{0, 0, 0} (HSub.hSub.{0, 0, 0} F fun x => NSEMaxwell.Classical.spatialMean F)
+            (NSEMaxwell.Classical.gradient (NSEMaxwell.Classical.scalarL (NSEMaxwell.Classical.divergence F))))
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (a : NSEMaxwell.Classical.Field),
+    NSEMaxwell.Classical.Data a →
+      Eq.{1} (NSEMaxwell.Classical.U (NSEMaxwell.Classical.spatialMean a) (NSEMaxwell.Classical.spatialCurl a)) a
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Field),
+    NSEMaxwell.Classical.MagneticData B → Eq.{1} (NSEMaxwell.Classical.spatialCurl (NSEMaxwell.Classical.U m B)) B
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Field),
+    NSEMaxwell.Classical.MagneticData B → NSEMaxwell.Classical.Data (NSEMaxwell.Classical.U m B)
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean : NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws →
+  ∀ (m : NSEMaxwell.Classical.Vec) (B : NSEMaxwell.Classical.Field),
+    NSEMaxwell.Classical.MagneticData B → Eq.{1} (NSEMaxwell.Classical.spatialMean (NSEMaxwell.Classical.U m B)) m
+'NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

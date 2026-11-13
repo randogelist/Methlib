@@ -1,0 +1,71 @@
+NSEMaxwell.HodgeProof.native_unitVector : ∀ (i : Fin 3),
+  Eq.{1} (SingularClosure.unitVector i) (NSEMaxwell.Classical.unitVector i)
+'NSEMaxwell.HodgeProof.native_unitVector' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.native_unitCube : Eq.{1} SingularClosure.unitCube NSEMaxwell.Classical.unitCube
+'NSEMaxwell.HodgeProof.native_unitCube' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.native_spatialPeriodic_iff.{u_1} : ∀ {E : Type u_1} (f : NSEMaxwell.Classical.Vec → E),
+  SingularClosure.SpatialPeriodic.{u_1} f ↔ NSEMaxwell.Classical.SpatialPeriodic.{u_1} f
+'NSEMaxwell.HodgeProof.native_spatialPeriodic_iff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.native_spatialMean : ∀ (a : NSEMaxwell.Classical.Field),
+  Eq.{1} (SingularClosure.spatialMean a) (NSEMaxwell.Classical.spatialMean a)
+'NSEMaxwell.HodgeProof.native_spatialMean' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.native_coordinateDerivative : ∀ (a : NSEMaxwell.Classical.Field) (j : Fin 3),
+  Eq.{1} (SingularClosure.coordinateDerivative a j) (NSEMaxwell.Classical.coordinateDerivative a j)
+'NSEMaxwell.HodgeProof.native_coordinateDerivative' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.native_divergence : ∀ (a : NSEMaxwell.Classical.Field),
+  Eq.{1} (SingularClosure.divergence a) (NSEMaxwell.Classical.divergence a)
+'NSEMaxwell.HodgeProof.native_divergence' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.native_gradient : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  Eq.{1} (SingularClosure.gradient f) (NSEMaxwell.Classical.gradient f)
+'NSEMaxwell.HodgeProof.native_gradient' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.native_laplacian : ∀ (a : NSEMaxwell.Classical.Field),
+  Eq.{1} (SingularClosure.laplacian a) (NSEMaxwell.Classical.laplacian a)
+'NSEMaxwell.HodgeProof.native_laplacian' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarLift_component : ∀ (f : NSEMaxwell.Classical.ScalarField) (x : NSEMaxwell.Classical.Vec)
+  (i : Fin 3), Eq.{1} (WithLp.ofLp.{0} (NSEMaxwell.HodgeProof.scalarLift f x) i) (f x)
+'NSEMaxwell.HodgeProof.scalarLift_component' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarLift_contDiff : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f → ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) (NSEMaxwell.HodgeProof.scalarLift f)
+'NSEMaxwell.HodgeProof.scalarLift_contDiff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarLift_periodic : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} (NSEMaxwell.HodgeProof.scalarLift f)
+'NSEMaxwell.HodgeProof.scalarLift_periodic' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_scalarLift : ∀ (f : NSEMaxwell.Classical.ScalarField)
+  (k : NSEMaxwell.Classical.Frequency) (i : Fin 3),
+  Eq.{1} (SingularClosure.datumFourierCoeff (NSEMaxwell.HodgeProof.scalarLift f) k i)
+    (NSEMaxwell.HodgeProof.scalarCoeff f k)
+'NSEMaxwell.HodgeProof.datumFourierCoeff_scalarLift' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseLaplacianSymbol_zero : Eq.{1} (NSEMaxwell.Classical.inverseLaplacianSymbol 0) 0
+'NSEMaxwell.HodgeProof.inverseLaplacianSymbol_zero' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseLaplacianSymbol_neg : ∀ (k : NSEMaxwell.Classical.Frequency),
+  Eq.{1} (NSEMaxwell.Classical.inverseLaplacianSymbol (Neg.neg.{0} k)) (NSEMaxwell.Classical.inverseLaplacianSymbol k)
+'NSEMaxwell.HodgeProof.inverseLaplacianSymbol_neg' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseLaplacianSymbol_nonneg : ∀ (k : NSEMaxwell.Classical.Frequency),
+  LE.le.{0} 0 (NSEMaxwell.Classical.inverseLaplacianSymbol k)
+'NSEMaxwell.HodgeProof.inverseLaplacianSymbol_nonneg' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseLaplacianSymbol_le_one : ∀ (k : NSEMaxwell.Classical.Frequency),
+  LE.le.{0} (NSEMaxwell.Classical.inverseLaplacianSymbol k) 1
+'NSEMaxwell.HodgeProof.inverseLaplacianSymbol_le_one' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseLaplacianSymbol_complex_norm_le_one : ∀ (k : NSEMaxwell.Classical.Frequency),
+  LE.le.{0} (Norm.norm.{0} ↑(NSEMaxwell.Classical.inverseLaplacianSymbol k)) 1
+'NSEMaxwell.HodgeProof.inverseLaplacianSymbol_complex_norm_le_one' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseVectorCoeff_zero : ∀ (a : NSEMaxwell.Classical.Field) (i : Fin 3),
+  Eq.{1} (NSEMaxwell.HodgeProof.inverseVectorCoeff a 0 i) 0
+'NSEMaxwell.HodgeProof.inverseVectorCoeff_zero' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarCoeff_zero : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  Eq.{1} (NSEMaxwell.HodgeProof.inverseScalarCoeff f 0) 0
+'NSEMaxwell.HodgeProof.inverseScalarCoeff_zero' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_neg : ∀ (f : NSEMaxwell.Classical.ScalarField) (k : NSEMaxwell.Classical.Frequency),
+  Eq.{1} (NSEMaxwell.HodgeProof.scalarCoeff f (Neg.neg.{0} k)) (Star.star.{0} (NSEMaxwell.HodgeProof.scalarCoeff f k))
+'NSEMaxwell.HodgeProof.scalarCoeff_neg' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseVectorCoeff_reality : ∀ (a : NSEMaxwell.Classical.Field),
+  SingularClosure.SpectralReality (NSEMaxwell.HodgeProof.inverseVectorCoeff a)
+'NSEMaxwell.HodgeProof.inverseVectorCoeff_reality' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarCoeff_neg : ∀ (f : NSEMaxwell.Classical.ScalarField)
+  (k : NSEMaxwell.Classical.Frequency),
+  Eq.{1} (NSEMaxwell.HodgeProof.inverseScalarCoeff f (Neg.neg.{0} k))
+    (Star.star.{0} (NSEMaxwell.HodgeProof.inverseScalarCoeff f k))
+'NSEMaxwell.HodgeProof.inverseScalarCoeff_neg' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

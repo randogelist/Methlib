@@ -1,0 +1,38 @@
+import FourierHodgeLaws.ParameterSmoothing
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth
+#print axioms NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn
+#check @NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound
+#check @NSEMaxwell.HodgeProof.phaseProjection_eq_sum
+#print axioms NSEMaxwell.HodgeProof.phaseProjection_eq_sum
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable
+#check @NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative
+#print axioms NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative
+#check @NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn
+#check @NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos
+#check @NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt
+#check @NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat
+#check @NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn
+#print axioms NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn
+#check @NSEMaxwell.HodgeProof.scalarL_trajectory_smooth
+#print axioms NSEMaxwell.HodgeProof.scalarL_trajectory_smooth
+#check @NSEMaxwell.HodgeProof.vectorL_trajectory_smooth
+#print axioms NSEMaxwell.HodgeProof.vectorL_trajectory_smooth

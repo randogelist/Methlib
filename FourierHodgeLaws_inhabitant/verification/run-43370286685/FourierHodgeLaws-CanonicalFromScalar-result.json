@@ -1,0 +1,39 @@
+{
+  "module": "FourierHodgeLaws.CanonicalFromScalar",
+  "source_sha256": "c9c0901c3ae1d1484b53d34e0a2c3bc961f92739a5067c6ae19d4388cef5ea38",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.153,
+  "audit_exit": 0,
+  "audit_source_sha256": "60ba5f3a1dc802a45fbceb1ecc197e61c25af72a6be816f9dd4d78b331699d85",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

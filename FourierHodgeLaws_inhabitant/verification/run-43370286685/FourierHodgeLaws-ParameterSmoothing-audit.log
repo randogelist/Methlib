@@ -1,0 +1,146 @@
+NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency),
+      ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (fun z => NSEMaxwell.HodgeProof.inverseScalarCoeff (f z.1) k)
+        NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency),
+      ContinuousOn.{0, 0} (NSEMaxwell.HodgeProof.inverseScalarSeriesTerm f k) NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ContinuousOn.{0, 0} (NSEMaxwell.HodgeProof.inverseScalarSeries f) NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    ∀ (k : NSEMaxwell.Classical.Frequency) {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+      LT.lt.{0} 0 z.1 →
+        HasFDerivAt.{0, 0, 0} (NSEMaxwell.HodgeProof.inverseScalarSeriesTerm f k)
+          (NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative f k z) z
+'NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound : ∀ (f : NSEMaxwell.Classical.Pressure)
+  (k : NSEMaxwell.Classical.Frequency) (z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec),
+  LE.le.{0} (Norm.norm.{0} (NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative f k z))
+    (HAdd.hAdd.{0, 0, 0}
+      (HMul.hMul.{0, 0, 0}
+        (Norm.norm.{0} (NSEMaxwell.HodgeProof.inverseScalarCoeff (NSEMaxwell.Classical.scalarTimeDerivative f z.1) k))
+        (Norm.norm.{0} NSEMaxwell.HodgeProof.timeProjection))
+      (HMul.hMul.{0, 0, 0}
+        (HMul.hMul.{0, 0, 0} (Norm.norm.{0} (NSEMaxwell.HodgeProof.inverseScalarCoeff (f z.1) k))
+          (Norm.norm.{0} (SingularClosure.fourierPhaseCLM k)))
+        (Norm.norm.{0} (ContinuousLinearMap.snd.{0, 0, 0} ℝ ℝ NSEMaxwell.Classical.Vec))))
+'NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.phaseProjection_eq_sum : ∀ (k : NSEMaxwell.Classical.Frequency),
+  Eq.{1} (NSEMaxwell.HodgeProof.phaseProjection k)
+    (∑ j, HSMul.hSMul.{0, 0, 0} (SingularClosure.derivativeSymbol j k) (NSEMaxwell.HodgeProof.spaceProjection j))
+'NSEMaxwell.HodgeProof.phaseProjection_eq_sum' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ (k : NSEMaxwell.Classical.Frequency) {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+        LE.le.{0} 0 z.1 →
+          Eq.{1} (NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative f k z)
+            (HAdd.hAdd.{0, 0, 0}
+              (HSMul.hSMul.{0, 0, 0}
+                (NSEMaxwell.HodgeProof.inverseScalarSeriesTerm (fun t => NSEMaxwell.Classical.scalarTimeDerivative f t)
+                  k z)
+                NSEMaxwell.HodgeProof.timeProjection)
+              (∑ j,
+                HSMul.hSMul.{0, 0, 0}
+                  (NSEMaxwell.HodgeProof.inverseScalarSeriesTerm (NSEMaxwell.HodgeProof.scalarSpaceDerivative f j) k z)
+                  (NSEMaxwell.HodgeProof.spaceProjection j)))
+'NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+        LE.le.{0} 0 z.1 → Summable.{0, 0} fun k => NSEMaxwell.HodgeProof.inverseScalarSeriesTerm f k z
+'NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+        LE.le.{0} 0 z.1 → Summable.{0, 0} fun k => NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative f k z
+'NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+        LE.le.{0} 0 z.1 →
+          Eq.{1}
+            (∑' (k : NSEMaxwell.Classical.Frequency), NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative f k z)
+            (NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative f z)
+'NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ContinuousOn.{0, 0} (NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative f) NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+        LT.lt.{0} 0 z.1 →
+          HasFDerivAt.{0, 0, 0} (NSEMaxwell.HodgeProof.inverseScalarSeries f)
+            (NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative f z) z
+'NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ∀ {z : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec},
+        Membership.mem.{0, 0} NSEMaxwell.Classical.forwardSpacetime z →
+          HasFDerivWithinAt.{0, 0, 0} (NSEMaxwell.HodgeProof.inverseScalarSeries f)
+            (NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative f z) NSEMaxwell.Classical.forwardSpacetime z
+'NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat : ∀ (n : ℕ) (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ContDiffOn.{0, 0, 0} ℝ (↑n) (NSEMaxwell.HodgeProof.inverseScalarSeries f) NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn : ∀ (f : NSEMaxwell.Classical.Pressure),
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) (NSEMaxwell.HodgeProof.inverseScalarSeries f)
+        NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.scalarL_trajectory_smooth : ∀ {f : NSEMaxwell.Classical.Pressure},
+  NSEMaxwell.Classical.SmoothPressure f →
+    NSEMaxwell.Classical.PeriodicPressure f →
+      NSEMaxwell.Classical.SmoothPressure fun t => NSEMaxwell.Classical.scalarL (f t)
+'NSEMaxwell.HodgeProof.scalarL_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.vectorL_trajectory_smooth : ∀ {B : NSEMaxwell.Classical.Velocity},
+  NSEMaxwell.Classical.SmoothVelocity B →
+    NSEMaxwell.Classical.PeriodicVelocity B →
+      NSEMaxwell.Classical.SmoothVelocity fun t => NSEMaxwell.Classical.vectorL (B t)
+'NSEMaxwell.HodgeProof.vectorL_trajectory_smooth' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

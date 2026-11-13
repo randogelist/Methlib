@@ -1,0 +1,30 @@
+{
+  "module": "FourierHodgeLaws.CanonicalInhabitant",
+  "source_sha256": "0eb4841a7bcd633fc3ef2c4509a06023b897b174c3f447cccf853dc36d12796a",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 8.558,
+  "audit_exit": 0,
+  "audit_source_sha256": "85093aa8e6074dee1db25246bf84e6418d5515a5a670239da2e0b05180d21a7c",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.canonical_smoothness",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.h3_canonical_smoothness",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

@@ -1,0 +1,93 @@
+@NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets.{u_1,
+    u_2} : ∀ {E : Type u_1} {F : Type u_2} [inst : NormedAddCommGroup.{u_1} E] [inst_1 : NormedSpace.{0, u_1} ℝ E]
+  [inst_2 : NormedAddCommGroup.{u_2} F] [inst_3 : NormedSpace.{0, u_2} ℝ F] {s : Set.{u_1} E},
+  IsOpen.{u_1} s →
+    Convex.{0, u_1} ℝ s →
+      ∀ {f : E → F} {f' : E → ContinuousLinearMap.{0, 0, u_1, u_2} (RingHom.id.{0} ℝ) E F},
+        ContinuousOn.{u_1, u_2} f (closure.{u_1} s) →
+          ContinuousOn.{u_1, max u_1 u_2} f' (closure.{u_1} s) →
+            (∀ (x : E), Membership.mem.{u_1, u_1} s x → HasFDerivAt.{0, u_1, u_2} f (f' x) x) →
+              ∀ {x : E},
+                Membership.mem.{u_1, u_1} (closure.{u_1} s) x →
+                  HasFDerivWithinAt.{0, u_1, u_2} f (f' x) (closure.{u_1} s) x
+'NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets.{u_1,
+    u_2} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E] [inst_1 : NormedSpace.{0, u_1} ℝ E] {F : ℕ → Type u_2}
+  [inst_2 : (n : ℕ) → NormedAddCommGroup.{u_2} (F n)] [inst_3 : (n : ℕ) → NormedSpace.{0, u_2} ℝ (F n)]
+  {s : Set.{u_1} E},
+  UniqueDiffOn.{0, u_1} ℝ s →
+    ∀ (J : (n : ℕ) → E → F n)
+      (C :
+        (n : ℕ) →
+          ContinuousLinearMap.{0, 0, u_2, max u_2 u_1} (RingHom.id.{0} ℝ) (F (HAdd.hAdd.{0, 0, 0} n 1))
+            (ContinuousLinearMap.{0, 0, u_1, u_2} (RingHom.id.{0} ℝ) E (F n))),
+      (∀ (n : ℕ), ContinuousOn.{u_1, u_2} (J n) s) →
+        (∀ (n : ℕ) (x : E),
+            Membership.mem.{u_1, u_1} s x →
+              HasFDerivWithinAt.{0, u_1, u_2} (J n) ((C n) (J (HAdd.hAdd.{0, 0, 0} n 1) x)) s x) →
+          ∀ (k q : ℕ), ContDiffOn.{0, u_1, u_2} ℝ (↑k) (J q) s
+'NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets.{u_1,
+    u_2} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E] [inst_1 : NormedSpace.{0, u_1} ℝ E] {F : ℕ → Type u_2}
+  [inst_2 : (n : ℕ) → NormedAddCommGroup.{u_2} (F n)] [inst_3 : (n : ℕ) → NormedSpace.{0, u_2} ℝ (F n)]
+  {s : Set.{u_1} E},
+  UniqueDiffOn.{0, u_1} ℝ s →
+    ∀ (J : (n : ℕ) → E → F n)
+      (C :
+        (n : ℕ) →
+          ContinuousLinearMap.{0, 0, u_2, max u_2 u_1} (RingHom.id.{0} ℝ) (F (HAdd.hAdd.{0, 0, 0} n 1))
+            (ContinuousLinearMap.{0, 0, u_1, u_2} (RingHom.id.{0} ℝ) E (F n))),
+      (∀ (n : ℕ), ContinuousOn.{u_1, u_2} (J n) s) →
+        (∀ (n : ℕ) (x : E),
+            Membership.mem.{u_1, u_1} s x →
+              HasFDerivWithinAt.{0, u_1, u_2} (J n) ((C n) (J (HAdd.hAdd.{0, 0, 0} n 1) x)) s x) →
+          ∀ (q : ℕ), ContDiffOn.{0, u_1, u_2} ℝ (↑Top.top.{0}) (J q) s
+'NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets.{u_1,
+    u_2} : ∀ {E : Type u_1} [inst : NormedAddCommGroup.{u_1} E] [inst_1 : NormedSpace.{0, u_1} ℝ E] {F : ℕ → Type u_2}
+  [inst_2 : (n : ℕ) → NormedAddCommGroup.{u_2} (F n)] [inst_3 : (n : ℕ) → NormedSpace.{0, u_2} ℝ (F n)]
+  {s : Set.{u_1} E},
+  IsOpen.{u_1} s →
+    Convex.{0, u_1} ℝ s →
+      UniqueDiffOn.{0, u_1} ℝ (closure.{u_1} s) →
+        ∀ (J : (n : ℕ) → E → F n)
+          (C :
+            (n : ℕ) →
+              ContinuousLinearMap.{0, 0, u_2, max u_2 u_1} (RingHom.id.{0} ℝ) (F (HAdd.hAdd.{0, 0, 0} n 1))
+                (ContinuousLinearMap.{0, 0, u_1, u_2} (RingHom.id.{0} ℝ) E (F n))),
+          (∀ (n : ℕ), ContinuousOn.{u_1, u_2} (J n) (closure.{u_1} s)) →
+            (∀ (n : ℕ) (x : E),
+                Membership.mem.{u_1, u_1} s x →
+                  HasFDerivAt.{0, u_1, u_2} (J n) ((C n) (J (HAdd.hAdd.{0, 0, 0} n 1) x)) x) →
+              ∀ (q : ℕ), ContDiffOn.{0, u_1, u_2} ℝ (↑Top.top.{0}) (J q) (closure.{u_1} s)
+'NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.isOpen_positiveSpacetime : IsOpen.{0} NSEMaxwell.HodgeProof.positiveSpacetime
+'NSEMaxwell.HodgeProof.isOpen_positiveSpacetime' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.convex_positiveSpacetime : Convex.{0, 0} ℝ NSEMaxwell.HodgeProof.positiveSpacetime
+'NSEMaxwell.HodgeProof.convex_positiveSpacetime' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.closure_positiveSpacetime : Eq.{1} (closure.{0} NSEMaxwell.HodgeProof.positiveSpacetime)
+  NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.closure_positiveSpacetime' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets.{u_1} : ∀ {F : ℕ → Type u_1}
+  [inst : (n : ℕ) → NormedAddCommGroup.{u_1} (F n)] [inst_1 : (n : ℕ) → NormedSpace.{0, u_1} ℝ (F n)]
+  (J : (n : ℕ) → Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec → F n)
+  (C :
+    (n : ℕ) →
+      ContinuousLinearMap.{0, 0, u_1, u_1} (RingHom.id.{0} ℝ) (F (HAdd.hAdd.{0, 0, 0} n 1))
+        (ContinuousLinearMap.{0, 0, 0, u_1} (RingHom.id.{0} ℝ) (Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec) (F n))),
+  (∀ (n : ℕ), ContinuousOn.{0, u_1} (J n) NSEMaxwell.Classical.forwardSpacetime) →
+    (∀ (n : ℕ) (x : Prod.{0, 0} ℝ NSEMaxwell.Classical.Vec),
+        Membership.mem.{0, 0} NSEMaxwell.HodgeProof.positiveSpacetime x →
+          HasFDerivAt.{0, 0, u_1} (J n) ((C n) (J (HAdd.hAdd.{0, 0, 0} n 1) x)) x) →
+      ∀ (q : ℕ), ContDiffOn.{0, 0, u_1} ℝ (↑Top.top.{0}) (J q) NSEMaxwell.Classical.forwardSpacetime
+'NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

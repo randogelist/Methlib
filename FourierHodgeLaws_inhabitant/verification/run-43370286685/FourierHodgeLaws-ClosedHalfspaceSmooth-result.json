@@ -1,0 +1,84 @@
+{
+  "module": "FourierHodgeLaws.ClosedHalfspaceSmooth",
+  "source_sha256": "2a6aa1174674cc2b8bd62ec09edde8fd8409891cc97e5e6461fcf1805585ba16",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.2,
+  "audit_exit": 0,
+  "audit_source_sha256": "f9f939615d12e9b228d56f770be2265c4849dc6878228427aa1489d560df8bc4",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.isOpen_positiveSpacetime",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.convex_positiveSpacetime",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.closure_positiveSpacetime",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

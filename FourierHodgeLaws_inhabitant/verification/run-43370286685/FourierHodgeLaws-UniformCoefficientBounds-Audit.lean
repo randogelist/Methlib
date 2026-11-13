@@ -1,0 +1,22 @@
+import FourierHodgeLaws.UniformCoefficientBounds
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.compact_velocity_norm_bound
+#print axioms NSEMaxwell.HodgeProof.compact_velocity_norm_bound
+#check @NSEMaxwell.HodgeProof.compact_componentL1_bound
+#print axioms NSEMaxwell.HodgeProof.compact_componentL1_bound
+#check @NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth
+#print axioms NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth
+#check @NSEMaxwell.HodgeProof.uniform_fourierDecayConstant
+#print axioms NSEMaxwell.HodgeProof.uniform_fourierDecayConstant
+#check @NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound
+#print axioms NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound
+#check @NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth
+#print axioms NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth
+#check @NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic
+#print axioms NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic
+#check @NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound
+#print axioms NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound
+#check @NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound
+#print axioms NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound

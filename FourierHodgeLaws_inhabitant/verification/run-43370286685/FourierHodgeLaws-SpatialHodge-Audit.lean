@@ -1,0 +1,30 @@
+import FourierHodgeLaws.SpatialHodge
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.coordinateDerivative_const_add
+#print axioms NSEMaxwell.HodgeProof.coordinateDerivative_const_add
+#check @NSEMaxwell.HodgeProof.divergence_const_add
+#print axioms NSEMaxwell.HodgeProof.divergence_const_add
+#check @NSEMaxwell.HodgeProof.spatialCurl_const_add
+#print axioms NSEMaxwell.HodgeProof.spatialCurl_const_add
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data
+#check @NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean
+#print axioms NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean

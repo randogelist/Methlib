@@ -1,0 +1,57 @@
+{
+  "module": "FourierHodgeLaws.CanonicalSmoothness",
+  "source_sha256": "6a083df75f1dff1fbddd94414d7a86f32c00cdb41c751f54d62c6ef308160aaf",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.261,
+  "audit_exit": 0,
+  "audit_source_sha256": "b4b27c92d6f4894975fb10d7b7d8a933e17807d3ecf8022ff12471da134d720a",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.canonicalVelocity_smooth_of_vectorL_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.canonicalVelocity_divergence_free_of_vectorL_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.canonicalPressure_smooth_of_scalarL_smooth",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.H3_of_parameter_smoothing",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

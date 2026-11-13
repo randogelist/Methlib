@@ -1,0 +1,44 @@
+import FourierHodgeLaws.ParameterCoefficients
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.cubeSlice_contDiff
+#print axioms NSEMaxwell.HodgeProof.cubeSlice_contDiff
+#check @NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth
+#print axioms NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth
+#check @NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt
+#print axioms NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt
+#check @NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound
+#print axioms NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound
+#check @NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt
+#print axioms NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt
+#check @NSEMaxwell.HodgeProof.cubeIntegral_derivWithin
+#print axioms NSEMaxwell.HodgeProof.cubeIntegral_derivWithin
+#check @NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat
+#print axioms NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat
+#check @NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn
+#print axioms NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn
+#check @NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth
+#print axioms NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth
+#check @NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic
+#print axioms NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic
+#check @NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth
+#print axioms NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth
+#check @NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic
+#print axioms NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic
+#check @NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth
+#check @NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn
+#check @NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt
+#check @NSEMaxwell.HodgeProof.scalarCoeff_derivWithin
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_derivWithin
+#check @NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos
+#check @NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth
+#check @NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn
+#print axioms NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn
+#check @NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt
+#print axioms NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt

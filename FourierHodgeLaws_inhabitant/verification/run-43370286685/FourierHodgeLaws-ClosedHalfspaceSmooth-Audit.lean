@@ -1,0 +1,20 @@
+import FourierHodgeLaws.ClosedHalfspaceSmooth
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets
+#print axioms NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets
+#check @NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets
+#print axioms NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets
+#check @NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets
+#print axioms NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets
+#check @NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets
+#print axioms NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets
+#check @NSEMaxwell.HodgeProof.isOpen_positiveSpacetime
+#print axioms NSEMaxwell.HodgeProof.isOpen_positiveSpacetime
+#check @NSEMaxwell.HodgeProof.convex_positiveSpacetime
+#print axioms NSEMaxwell.HodgeProof.convex_positiveSpacetime
+#check @NSEMaxwell.HodgeProof.closure_positiveSpacetime
+#print axioms NSEMaxwell.HodgeProof.closure_positiveSpacetime
+#check @NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets
+#print axioms NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets

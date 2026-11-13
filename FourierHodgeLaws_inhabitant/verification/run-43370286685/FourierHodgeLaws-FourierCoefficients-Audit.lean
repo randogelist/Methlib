@@ -1,0 +1,24 @@
+import FourierHodgeLaws.FourierCoefficients
+set_option pp.universes true
+set_option pp.fullNames true
+set_option pp.proofs false
+#check @NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative
+#print axioms NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative
+#check @NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative
+#print axioms NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative
+#check @NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative
+#print axioms NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative
+#check @NSEMaxwell.HodgeProof.rapid_datumFourierCoeff
+#print axioms NSEMaxwell.HodgeProof.rapid_datumFourierCoeff
+#check @NSEMaxwell.HodgeProof.rapid_scalarCoeff
+#print axioms NSEMaxwell.HodgeProof.rapid_scalarCoeff
+#check @NSEMaxwell.HodgeProof.rapid_mul_bounded
+#print axioms NSEMaxwell.HodgeProof.rapid_mul_bounded
+#check @NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff
+#print axioms NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff
+#check @NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff
+#print axioms NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff
+#check @NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable
+#print axioms NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable
+#check @NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable
+#print axioms NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable

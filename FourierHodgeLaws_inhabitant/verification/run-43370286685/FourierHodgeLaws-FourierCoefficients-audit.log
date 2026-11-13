@@ -1,0 +1,73 @@
+NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    ∀ (j : Fin 3),
+      Eq.{1} (NSEMaxwell.Classical.coordinateDerivative (NSEMaxwell.HodgeProof.scalarLift f) j)
+        (NSEMaxwell.HodgeProof.scalarLift fun x => (fderiv.{0, 0, 0} ℝ f x) (NSEMaxwell.Classical.unitVector j))
+'NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative : ∀ (a : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) a →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} a →
+      ∀ (j : Fin 3),
+        Eq.{1} (SingularClosure.datumFourierCoeff (NSEMaxwell.Classical.coordinateDerivative a j))
+          (SingularClosure.spectralMultiplier (SingularClosure.derivativeSymbol j)
+            (SingularClosure.datumFourierCoeff a))
+'NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+      ∀ (j : Fin 3) (k : NSEMaxwell.Classical.Frequency),
+        Eq.{1}
+          (NSEMaxwell.HodgeProof.scalarCoeff (fun x => (fderiv.{0, 0, 0} ℝ f x) (NSEMaxwell.Classical.unitVector j)) k)
+          (HMul.hMul.{0, 0, 0} (SingularClosure.derivativeSymbol j k) (NSEMaxwell.HodgeProof.scalarCoeff f k))
+'NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.rapid_datumFourierCoeff : ∀ (a : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) a →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} a →
+      ∀ (i : Fin 3), SingularClosure.RapidScalarFourier fun k => SingularClosure.datumFourierCoeff a k i
+'NSEMaxwell.HodgeProof.rapid_datumFourierCoeff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.rapid_scalarCoeff : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+      SingularClosure.RapidScalarFourier (NSEMaxwell.HodgeProof.scalarCoeff f)
+'NSEMaxwell.HodgeProof.rapid_scalarCoeff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+@NSEMaxwell.HodgeProof.rapid_mul_bounded : ∀ {b w : NSEMaxwell.Classical.Frequency → ℂ},
+  SingularClosure.RapidScalarFourier b →
+    (∀ (k : NSEMaxwell.Classical.Frequency), LE.le.{0} (Norm.norm.{0} (w k)) 1) →
+      SingularClosure.RapidScalarFourier fun k => HMul.hMul.{0, 0, 0} (w k) (b k)
+'NSEMaxwell.HodgeProof.rapid_mul_bounded' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff : ∀ (a : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) a →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} a →
+      ∀ (i : Fin 3), SingularClosure.RapidScalarFourier fun k => NSEMaxwell.HodgeProof.inverseVectorCoeff a k i
+'NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+      SingularClosure.RapidScalarFourier (NSEMaxwell.HodgeProof.inverseScalarCoeff f)
+'NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable : ∀ (a : NSEMaxwell.Classical.Field),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) a →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} a →
+      ∀ (i : Fin 3) (m : ℕ),
+        Summable.{0, 0} fun k =>
+          HMul.hMul.{0, 0, 0} (Norm.norm.{0} (NSEMaxwell.HodgeProof.inverseVectorCoeff a k i))
+            (HPow.hPow.{0, 0, 0} (Norm.norm.{0} (SingularClosure.fourierPhaseCLM k)) m)
+'NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable : ∀ (f : NSEMaxwell.Classical.ScalarField),
+  ContDiff.{0, 0, 0} ℝ (↑Top.top.{0}) f →
+    NSEMaxwell.Classical.SpatialPeriodic.{0} f →
+      ∀ (m : ℕ),
+        Summable.{0, 0} fun k =>
+          HMul.hMul.{0, 0, 0} (Norm.norm.{0} (NSEMaxwell.HodgeProof.inverseScalarCoeff f k))
+            (HPow.hPow.{0, 0, 0} (Norm.norm.{0} (SingularClosure.fourierPhaseCLM k)) m)
+'NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]

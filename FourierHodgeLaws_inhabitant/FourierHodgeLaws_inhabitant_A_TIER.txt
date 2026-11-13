@@ -1,104 +1,186 @@
 FourierHodgeLaws_inhabitant_A_TIER
 ================================
 
-STATUS = A_TIER_CANDIDATE
-EXACT_ROOT = NSEMaxwell.Bridge.FourierHodgeLaws
-COMPILER = Lean 4.34.0-rc1
-MATHLIB_PIN = de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
-UPSTREAM_DEFINITION_PIN = 9f5500cd5dadc351ab3ec98db09dccaa9a22eb25
+STATUS = A_TIER
+FORMAL_CLOSURE = PASS
+UNCONDITIONAL_CLOSURE = PASS
+MARKER = !!!!
+REQUESTED_COMPLETION_SIGN = !=!
+UNRESOLVED_ANALYTIC_ADMISSIONS = 0
+UNRESOLVED_CERTIFICATES_OR_WITNESSES = 0
 LOCAL_LEAN_LAKE_ELAN_EXECUTIONS = 0
 
-H1 = A_TIER_UNRESOLVED_ANALYTIC_ADMISSIONS_0
-H2 = A_TIER_UNRESOLVED_ANALYTIC_ADMISSIONS_0
-H3 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
-H4 = A_TIER_UNRESOLVED_ANALYTIC_ADMISSIONS_0
+ROOT
+----
+NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant :
+  NSEMaxwell.Bridge.FourierHodgeLaws
 
-Prepared target declarations:
-  NSEMaxwell.HodgeProof.h1_reconstruct_velocity
-  NSEMaxwell.HodgeProof.h2_reconstruct_curl
-  NSEMaxwell.HodgeProof.h3_canonical_smoothness
-  NSEMaxwell.HodgeProof.h4_electric_hodge
-  NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant
-  NSEMaxwell.HodgeProof.exact_equivalence_native
+NSEMaxwell.HodgeProof.exact_equivalence_native :
+  NSEMaxwell.Classical.ExactEquivalence
 
-Candidate root assembly:
-  actual smooth-datum Fourier decay + cosine/character identity
-  -> actual inverse-Laplacian spatial calculus -> H1, H2, H4;
-  actual compact-uniform coefficient decay + parameter derivative identities
-  -> actual scalarL joint smoothing on t >= 0
-  -> actual vectorL joint smoothing -> H3;
-  H1 + H2 + H3 + H4 -> NSEMaxwell.Bridge.FourierHodgeLaws
-  -> NSEMaxwell.Classical.ExactEquivalence.
+ROOT_ADDITIONAL_ARGUMENTS = NONE
+ROOT_AXIOMS = {propext, Classical.choice, Quot.sound}
+SORRYAX = ABSENT
+UNAPPROVED_AXIOMS = ABSENT
 
-ROOT_TYPE_HAS_UNRESOLVED_ANALYTIC_PREMISES = NO
-ROOT_BODY_EXTERNAL_KERNEL_ACCEPTANCE = PENDING
-
-EXACT FIELD TYPES
+EXACT FOUR FIELDS
 -----------------
-H1:
-  forall (a : Field), Data a ->
-    U (spatialMean a) (spatialCurl a) = a.
+H1 = A_TIER
+NSEMaxwell.HodgeProof.h1_reconstruct_velocity :
+  ∀ (a : Field), Data a →
+    U (spatialMean a) (spatialCurl a) = a
 
-H2:
-  forall (m : Vec) (B : Field), MagneticData B ->
-    spatialCurl (U m B) = B.
+H2 = A_TIER
+NSEMaxwell.HodgeProof.h2_reconstruct_curl :
+  ∀ (m : Vec) (B : Field), MagneticData B →
+    spatialCurl (U m B) = B
 
-H3:
-  forall (nu c : Real) (m : Vec) (B : Velocity), MagneticPath B ->
-    NSEMaxwell.Bridge.CanonicalSmoothness nu c m B.
+H3 = A_TIER
+NSEMaxwell.HodgeProof.h3_canonical_smoothness :
+  ∀ (ν c : ℝ) (m : Vec) (B : Velocity), MagneticPath B →
+    NSEMaxwell.Bridge.CanonicalSmoothness ν c m B
 
-H4:
-  forall (nu : Real) (m : Vec) (B : Field), MagneticData B ->
-    G nu m B + NSEMaxwell.Classical.gradient (headPotential nu m B)
-      = K (spatialCurl (G nu m B)).
+H4 = A_TIER
+NSEMaxwell.HodgeProof.h4_electric_hodge :
+  ∀ (ν : ℝ) (m : Vec) (B : Field), MagneticData B →
+    G ν m B + NSEMaxwell.Classical.gradient (headPotential ν m B)
+      = K (spatialCurl (G ν m B))
 
-Definitions are the unchanged upstream native definitions at the pinned commit.
-The inverse Laplacian is the actual full integer-frequency cosine integral sum;
-the zero-frequency symbol is zero. Spatial mean uses the actual unit cube.
-H3 uses joint ContDiffOn on the entire closed halfspace t >= 0, including t = 0.
-No positive-time cutoff or negative-time smoothness assumption is inserted.
-The arbitrary harmonic mean m is retained. No PDE solvability assumption is
-introduced into the FourierHodgeLaws inhabitant.
+SCOPE
+-----
+Data a = ContDiff ℝ ∞ a ∧ SpatialPeriodic a ∧ divergence a = 0
+MagneticData B = Data B ∧ spatialMean B = 0
+MagneticPath B = SmoothVelocity B ∧ PeriodicVelocity B
+  ∧ (∀ t ≥ 0, divergence (B t) = 0 ∧ spatialMean (B t) = 0)
 
-CONSEQUENCE SCOPE
+SmoothVelocity B = ContDiffOn ℝ ∞ (fun z => B z.1 z.2)
+  {z : ℝ × Vec | 0 ≤ z.1}
+SmoothPressure p = ContDiffOn ℝ ∞ (fun z => p z.1 z.2)
+  {z : ℝ × Vec | 0 ≤ z.1}
+
+CanonicalSmoothness ν c m B =
+  SmoothVelocity (canonicalVelocity m B)
+  ∧ SmoothPressure (canonicalPressureTrajectory ν m B)
+  ∧ (∀ t ≥ 0, divergence (canonicalVelocity m B t) = 0)
+
+H1_SPATIAL_MEAN = ARBITRARY
+H2_H3_H4_HARMONIC_m = ARBITRARY
+H3_TIME_DOMAIN = [0, ∞)
+H3_INITIAL_BOUNDARY_t_0 = INCLUDED
+NEGATIVE_TIME_SMOOTHNESS_PREMISE = NONE
+POSITIVE_TIME_CUTOFF = NONE
+HODGE_OPERATORS = UNCHANGED_NATIVE_COSINE_INTEGRAL_DEFINITIONS
+FREQUENCY_DOMAIN = ℤ³
+ZERO_FREQUENCY_INVERSE_SYMBOL = 0
+SPATIAL_MEAN_DOMAIN = NATIVE_UNIT_CUBE
+
+COROLLARY_SCOPE
+---------------
+ExactEquivalence =
+  ∀ ν > 0, ∀ c > 0, FeffermanB ν ↔ MaxwellB ν c
+INDEPENDENT_FEFFERMAN_B_EXISTENCE_ASSERTION = NONE
+INDEPENDENT_MAXWELL_B_EXISTENCE_ASSERTION = NONE
+
+PROOF_SPINE
+-----------
+actual smooth periodic data
+  → actual rapid Fourier coefficients
+  → actual cosine/character synthesis identity
+  → actual inverse-Laplacian smoothing and derivative commutation
+  → -Δ(vectorL F) = F - spatialMean F
+  → spatialInverseLaplacianLaws
+  → H1, H2, H4
+
+actual jointly smooth periodic trajectories
+  → compact-uniform summable Fourier coefficient majorants
+  → actual parameter derivative identities
+  → joint inverse Fourier-series derivative on t > 0
+  → continuous-jet within derivative on t ≥ 0
+  → finite-order induction for every n : ℕ
+  → scalarL_trajectory_smooth
+  → canonical_smoothness
+  → H3
+
+H1 ∧ H2 ∧ H3 ∧ H4
+  → FourierHodgeLaws_inhabitant
+  → exact_equivalence_native
+
+CONDITIONAL_HELPER_PARAMETERS = EXPLICIT_IN_HELPER_TYPES
+UNCONDITIONAL_ROOT_USES_UNRESOLVED_HELPER_PARAMETERS = NO
+
+EXTERNAL EVIDENCE
 -----------------
-ExactEquivalence is the existing statement:
-  forall nu > 0, forall c > 0, FeffermanB nu <-> MaxwellB nu c.
-This is an equivalence theorem. It does not separately assert either endpoint.
+RUN = 43370286685
+RUN_URL = https://github.com/randogelist/Methlib/actions/runs/43370286685
+PROOF_SOURCE_COMMIT = f927f1e31196f0be71b2581dc85f6e3fd19e0746
+COMPILER = Lean (version 4.34.0-rc1, x86_64-unknown-linux-gnu, commit 3447a668783dbce1a8fdb97101dd067687b2b418, Release)
+MATHLIB_PIN = de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+UPSTREAM_DEFINITION_PIN = 9f5500cd5dadc351ab3ec98db09dccaa9a22eb25
+PINNED_DEPENDENCY_REVISIONS_VERIFIED = 9
+NATIVE_PREREQUISITE_MODULES_VERIFIED = 59
+PROOF_SOURCE_FILES_VERIFIED = 19
+NAMED_PROOF_MODULES = 18
+NAMED_THEOREMS_COMPILED_AND_FRESHLY_AUDITED = 163
+EXTERNAL_BUILD_STATUS = PASS
+EXTERNAL_THEOREM_AUDIT_STATUS = PASS_STANDARD_ONLY
+EXACT_ROOT_AND_FIELD_TYPE_REVIEW = PASS
+CURRENT_PROOF_SOURCE_HASH_COMPARISON = PASS
+CANONICAL_SOURCE_SNAPSHOT_MISMATCHES = 0
+ARTIFACT_ID = 14012471434
+ARTIFACT_SHA256 = 4aac443289f894f2844db10a663098dce5da03f16197a9b1027a6916d3b011b0
+RETAINED_EVIDENCE = verification/run-43370286685/
+REPORT_ONLY_PUBLICATION = PROOF_SOURCES_UNCHANGED_FROM_CERTIFIED_COMMIT
 
-PROMOTION_GATE = matching source hash + external compiler PASS
-                + exact theorem type + fresh theorem-level axiom audit.
-APPROVED_AXIOMS = {propext, Classical.choice, Quot.sound}
-UNCONDITIONAL_ROOT = NOT_ESTABLISHED
-FORMAL_CLOSURE_OF_NEW_ROOT = NOT_ESTABLISHED
+SOURCE HASHES
+-------------
+FourierHodgeLaws.ParameterIntegral
+  SHA256 = e057005dbf269c7fd797241224651d9f145272f9674f50faa24e2e3dba2e7fe7
+FourierHodgeLaws.CanonicalSmoothness
+  SHA256 = 6a083df75f1dff1fbddd94414d7a86f32c00cdb41c751f54d62c6ef308160aaf
+FourierHodgeLaws.TargetPrimitives
+  SHA256 = 4fffe11365b4b539a063320719565a4e220983ed9113229c9613e87c58f02158
+FourierHodgeLaws.FourierCoefficients
+  SHA256 = 280e00740d779c6c592a6a9a6ce650355297050e7a75f18affbe8348aa8c3212
+FourierHodgeLaws.CosineMultiplier
+  SHA256 = d12c8efdffdbf21e98aed74ed436032e314343f7aa80df61d4ad3e6ee4accc42
+FourierHodgeLaws.CanonicalFromScalar
+  SHA256 = c9c0901c3ae1d1484b53d34e0a2c3bc961f92739a5067c6ae19d4388cef5ea38
+FourierHodgeLaws.ClosedHalfspaceSmooth
+  SHA256 = 2a6aa1174674cc2b8bd62ec09edde8fd8409891cc97e5e6461fcf1805585ba16
+FourierHodgeLaws.ParameterCoefficients
+  SHA256 = 016d9cf0c1deda75770d39f66c2e5c684435448bc7c9785cbc5d28612db54eee
+FourierHodgeLaws.UniformCoefficientBounds
+  SHA256 = ee3d428ae138b05907a15bd3cc68d0a9afcd041b5ea400888bfaa75e1fb1402e
+FourierHodgeLaws.ParameterSmoothing
+  SHA256 = 693e24c88e42270212ba4d6053b9141fcf2d1bbb983ab04bf6bfc43dbb870b0d
+FourierHodgeLaws.CanonicalInhabitant
+  SHA256 = 0eb4841a7bcd633fc3ef2c4509a06023b897b174c3f447cccf853dc36d12796a
+FourierHodgeLaws.SpatialHodge
+  SHA256 = 96492e65f07cc825eb9e5ae2f43de61ee3b6f4ba2c96ac85dbf44290be228df4
+FourierHodgeLaws.ElectricHodge
+  SHA256 = 9a86c179c75a512f15a31e621afc5ace526dfb636e0ad8b704c4081731be10dd
+FourierHodgeLaws.SpatialMultiplier
+  SHA256 = 9385b39dbebac0062302f458c2e4d6e0b3f072330bc81e896f2907b463de3d9f
+FourierHodgeLaws.PoissonFromCoefficients
+  SHA256 = 23cf86397aa7029712671127bbdf7fc28abcd0eafb182d7c4ca48e7afb44fd06
+FourierHodgeLaws.SpatialInhabitant
+  SHA256 = 4a414a1125fffa62e0e4f760186fc1597cb116052c138ec3a486a0cb7c6b693f
+FourierHodgeLaws.Inhabitant
+  SHA256 = 8c08d265db70b08219548c9b3c7857de9404b59dce5f2d94dc6a65f1020cd14a
+FourierHodgeLaws.ParameterJets
+  SHA256 = e448aacc166ec7482242dd7f1d9a494b098a0bb4d6334f4d29bad761d7e87eab
+FourierHodgeLaws_inhabitant
+  SHA256 = 5ef6dfdfbe222edae1d62c232781b46c6c143d0360e1dcce436a0c03fac59de1
 
-VERIFIED INTERMEDIATE ENDPOINTS
-------------------------------
-Run 43369521891, source fa66b4d18fff84777ff102da1d85c47c3ece5604:
-  NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws
-  NSEMaxwell.HodgeProof.h1_reconstruct_velocity
-  NSEMaxwell.HodgeProof.h2_reconstruct_curl
-  NSEMaxwell.HodgeProof.h4_electric_hodge
-Each declaration passed external compilation and a fresh theorem-level audit
-with only {propext, Classical.choice, Quot.sound}; source hashes match.
-H1/H2/H4 retain precisely the field types above. No analytic law, witness or
-inverse-Laplacian admission remains as an extra argument.
-
-Run 43367930477, source a9933aaf969ca19c80a086260250bf369de5324d:
-  NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff
-  NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound
-  NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth
-Status of each listed endpoint: A_TIER, with its exact stated smoothness and
-periodicity hypotheses and no additional analytic admission.
-External module build exit = 0; fresh theorem audit exit = 0.
-Compiled source hashes match these unchanged local theorem modules.
-Axioms are contained in {propext, Classical.choice, Quot.sound}.
-These verified intermediate endpoints do not by themselves certify H1-H4.
-
-External reproduction:
-  Windows: run.cmd
-  Linux: bash run.sh
-  Python 3, Git, and the pinned native Lean toolchain are required.
-  Existing dependency and project caches are retained.
-
-Compiler evidence will be indexed here after source-matching verification.
+EXTERNAL REPRODUCTION
+---------------------
+WINDOWS_ENTRY = run.cmd
+LINUX_ENTRY = bash run.sh
+TOOLCHAIN = leanprover/lean4:v4.34.0-rc1
+DEPENDENCY_MODE = PINNED_NATIVE_SOURCES + OFFICIAL_MATHLIB_CACHE
+PROJECT_MODE = VERIFIED_INCREMENTAL_OBJECTS + FRESH_THEOREM_AXIOM_AUDITS
+CACHE_PRESERVATION = ENABLED
+ROOT_DECLARATIONS = FourierHodgeLaws/Inhabitant.lean
+H1_H2_H4_DECLARATIONS = FourierHodgeLaws/SpatialInhabitant.lean
+H3_DECLARATION = FourierHodgeLaws/CanonicalInhabitant.lean
+PACKAGE_ENTRY = FourierHodgeLaws_inhabitant.lean

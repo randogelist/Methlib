@@ -1,0 +1,48 @@
+{
+  "module": "FourierHodgeLaws.SpatialInhabitant",
+  "source_sha256": "4a414a1125fffa62e0e4f760186fc1597cb116052c138ec3a486a0cb7c6b693f",
+  "new_module": true,
+  "build_exit": 0,
+  "seconds": 4.006,
+  "audit_exit": 0,
+  "audit_source_sha256": "08fb251b14b03d2b10b549470a72d73abdf75fe56f5b9a56efc961978d35c485",
+  "declarations": [
+    {
+      "name": "NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.h1_reconstruct_velocity",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.h2_reconstruct_curl",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    },
+    {
+      "name": "NSEMaxwell.HodgeProof.h4_electric_hodge",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS_STANDARD_ONLY"
+    }
+  ],
+  "status": "PASS_STANDARD_ONLY"
+}

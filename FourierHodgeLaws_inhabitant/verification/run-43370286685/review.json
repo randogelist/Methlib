@@ -1,0 +1,3307 @@
+{
+  "source_commit": "f927f1e31196f0be71b2581dc85f6e3fd19e0746",
+  "compiler": "Lean (version 4.34.0-rc1, x86_64-unknown-linux-gnu, commit 3447a668783dbce1a8fdb97101dd067687b2b418, Release)",
+  "summary_status": "PASS",
+  "manifest_hash_matches": true,
+  "compiler_pin_matches": true,
+  "dependency_revisions_match": true,
+  "lockfile_hash_matches": true,
+  "upstream_pin_matches": true,
+  "source_commit_matches_staging": true,
+  "staged_snapshot_mismatches": [],
+  "modules": [
+    {
+      "module": "FourierHodgeLaws.ParameterIntegral",
+      "source_sha256": "e057005dbf269c7fd797241224651d9f145272f9674f50faa24e2e3dba2e7fe7",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.321,
+      "audit_exit": 0,
+      "audit_source_sha256": "90a20aa47177fea158cf92ca94ea1ca9f23f77cebb83e52bb3eba1e8b939549c",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_scalar_embed",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarMean_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_scalar_embed",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarMean_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.CanonicalSmoothness",
+      "source_sha256": "6a083df75f1dff1fbddd94414d7a86f32c00cdb41c751f54d62c6ef308160aaf",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.261,
+      "audit_exit": 0,
+      "audit_source_sha256": "b4b27c92d6f4894975fb10d7b7d8a933e17807d3ecf8022ff12471da134d720a",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalVelocity_smooth_of_vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalVelocity_divergence_free_of_vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalPressure_smooth_of_scalarL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.H3_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalVelocity_smooth_of_vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalVelocity_divergence_free_of_vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonicalPressure_smooth_of_scalarL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.H3_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.TargetPrimitives",
+      "source_sha256": "4fffe11365b4b539a063320719565a4e220983ed9113229c9613e87c58f02158",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.172,
+      "audit_exit": 0,
+      "audit_source_sha256": "79549dd495cac370ba1a5cb43f1c9ac9d2779c7c89e95957c367f2bc4b5f2d56",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.native_unitVector",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_unitCube",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_spatialPeriodic_iff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_spatialMean",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_divergence",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_gradient",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_laplacian",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_contDiff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_scalarLift",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_nonneg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_le_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_complex_norm_le_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_reality",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.native_unitVector",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_unitCube",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_spatialPeriodic_iff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_spatialMean",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_divergence",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_gradient",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.native_laplacian",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_contDiff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_scalarLift",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_nonneg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_le_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseLaplacianSymbol_complex_norm_le_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_reality",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.FourierCoefficients",
+      "source_sha256": "280e00740d779c6c592a6a9a6ce650355297050e7a75f18affbe8348aa8c3212",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.133,
+      "audit_exit": 0,
+      "audit_source_sha256": "454fbda9939ded7423500939f879df8323c94d2ad5b47cd560019cda59ab62be",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_datumFourierCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_scalarCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_mul_bounded",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_coordinateDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_datumFourierCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_scalarCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_mul_bounded",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_inverseLaplacianCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseVectorCoeff_weighted_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_weighted_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.CosineMultiplier",
+      "source_sha256": "d12c8efdffdbf21e98aed74ed436032e314343f7aa80df61d4ad3e6ee4accc42",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.136,
+      "audit_exit": 0,
+      "audit_source_sha256": "1a268c8570abb849a6c4b37f8cf6f1501c8f60f919d0c6b220466a49a848e29b",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierCharacter_mul_star",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cosineKernel_eq_character_re",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalar_cosine_integral",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalar_cosine_summand",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_eq_realFourierSeries",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vector_cosine_integral_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vector_cosine_summand_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_eq_smoothFourierSynthesis",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_vectorL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierCharacter_mul_star",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cosineKernel_eq_character_re",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalar_cosine_integral",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalar_cosine_summand",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_eq_realFourierSeries",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vector_cosine_integral_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vector_cosine_summand_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_eq_smoothFourierSynthesis",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_vectorL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_component",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.CanonicalFromScalar",
+      "source_sha256": "c9c0901c3ae1d1484b53d34e0a2c3bc961f92739a5067c6ae19d4388cef5ea38",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.153,
+      "audit_exit": 0,
+      "audit_source_sha256": "60ba5f3a1dc802a45fbceb1ecc197e61c25af72a6be816f9dd4d78b331699d85",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.H3_of_scalar_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.ClosedHalfspaceSmooth",
+      "source_sha256": "2a6aa1174674cc2b8bd62ec09edde8fd8409891cc97e5e6461fcf1805585ba16",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.2,
+      "audit_exit": 0,
+      "audit_source_sha256": "f9f939615d12e9b228d56f770be2265c4849dc6878228427aa1489d560df8bc4",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.isOpen_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.convex_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.closure_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.hasFDerivWithinAt_closure_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_nat_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_infty_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_closure_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.isOpen_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.convex_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.closure_positiveSpacetime",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_forwardSpacetime_of_continuous_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterCoefficients",
+      "source_sha256": "016d9cf0c1deda75770d39f66c2e5c684435448bc7c9785cbc5d28612db54eee",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.173,
+      "audit_exit": 0,
+      "audit_source_sha256": "a69ad194980d599130a438323019c2ecb00b91cde348c96f630e74e3ce103a81",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeSlice_contDiff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_derivWithin",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_derivWithin",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeSlice_contDiff",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeTimeDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeTime_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_local_uniform_time_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_derivWithin",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cubeIntegral_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarTimeDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarTimeDerivative_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarSpatialDerivative_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarSpatialDerivative_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_integrand_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_derivWithin",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_hasDerivAt_pos",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarCoeff_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_hasDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.UniformCoefficientBounds",
+      "source_sha256": "ee3d428ae138b05907a15bd3cc68d0a9afcd041b5ea400888bfaa75e1fb1402e",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.167,
+      "audit_exit": 0,
+      "audit_source_sha256": "778c91ae13df1c8db1288843fb9e724e3bb08290a43ff9a9251939fcb7347bc4",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.compact_velocity_norm_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.compact_componentL1_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_fourierDecayConstant",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.compact_velocity_norm_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.compact_componentL1_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.iteratedCoordinateDerivative_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_fourierDecayConstant",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_datumFourierCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarLift_trajectory_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_scalarCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterSmoothing",
+      "source_sha256": "693e24c88e42270212ba4d6053b9141fcf2d1bbb983ab04bf6bfc43dbb870b0d",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 14.643,
+      "audit_exit": 0,
+      "audit_source_sha256": "3785982efb40bf0e67c746cd9c1766ff803d01b0948dc742fb60be714b6a2e91",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.phaseProjection_eq_sum",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarCoeff_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_hasFDerivAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_bound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.phaseProjection_eq_sum",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_eq_partials",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTerm_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesTermDerivative_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.tsum_inverseScalarSeriesTermDerivative",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeriesDerivative_continuousOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivAt_pos",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_hasFDerivWithinAt",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn_nat",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.inverseScalarSeries_contDiffOn",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.vectorL_trajectory_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.CanonicalInhabitant",
+      "source_sha256": "0eb4841a7bcd633fc3ef2c4509a06023b897b174c3f447cccf853dc36d12796a",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 8.558,
+      "audit_exit": 0,
+      "audit_source_sha256": "85093aa8e6074dee1db25246bf84e6418d5515a5a670239da2e0b05180d21a7c",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h3_canonical_smoothness",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.canonical_smoothness",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h3_canonical_smoothness",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.SpatialHodge",
+      "source_sha256": "96492e65f07cc825eb9e5ae2f43de61ee3b6f4ba2c96ac85dbf44290be228df4",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.171,
+      "audit_exit": 0,
+      "audit_source_sha256": "1fbf6c1be3327840b999ad6728e50df1252ff48efeb8a7803a48e067037b9571",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinateDerivative_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.divergence_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialCurl_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinateDerivative_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.divergence_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialCurl_const_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.U_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.divergence_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.curl_K",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.K_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_velocity",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruction_data",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.reconstruct_mean",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.ElectricHodge",
+      "source_sha256": "9a86c179c75a512f15a31e621afc5ace526dfb636e0ad8b704c4081731be10dd",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.281,
+      "audit_exit": 0,
+      "audit_source_sha256": "582e34af839d67a9abec0322a8220bd76862e19841dde78009c4ef843e99a084",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_lamb_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.G_smooth_of_velocity_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_G_of_reconstruction",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.G_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_G",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.electric_hodge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_lamb_zero",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.G_smooth_of_velocity_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialMean_G_of_reconstruction",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.G_smooth",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.spatialMean_G",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.SpatialInverseLaplacianLaws.electric_hodge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.SpatialMultiplier",
+      "source_sha256": "9385b39dbebac0062302f458c2e4d6e0b3f072330bc81e896f2907b463de3d9f",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.151,
+      "audit_exit": 0,
+      "audit_source_sha256": "bbbccb253bb300cf8a05163958f37de1680fe8a39eb1bafebbd4ae499ce79739",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cosine_mul_integrable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_sub",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_finset_sum",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinateDerivative_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinate_component_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_coordinateComponent",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.divergence_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.curl_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_summable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.cosine_mul_integrable",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_sub",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_finset_sum",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinateDerivative_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.coordinate_component_periodic",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.scalarL_coordinateComponent",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.divergence_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.curl_vectorL_commute",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.PoissonFromCoefficients",
+      "source_sha256": "23cf86397aa7029712671127bbdf7fc28abcd0eafb182d7c4ca48e7afb44fd06",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.055,
+      "audit_exit": 0,
+      "audit_source_sha256": "96822489254054728b4c7522bcf1a43f7934a7eacd2bc6d59a0aae52739a56e1",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_sub",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_const",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_laplacian",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.laplacianFrequency_mul_inverseLaplacianSymbol",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.neg_laplacian_vectorL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_add",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_sub",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_neg",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_const",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.datumFourierCoeff_laplacian",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.laplacianFrequency_mul_inverseLaplacianSymbol",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.neg_laplacian_vectorL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.SpatialInhabitant",
+      "source_sha256": "4a414a1125fffa62e0e4f760186fc1597cb116052c138ec3a486a0cb7c6b693f",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.006,
+      "audit_exit": 0,
+      "audit_source_sha256": "08fb251b14b03d2b10b549470a72d73abdf75fe56f5b9a56efc961978d35c485",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h1_reconstruct_velocity",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h2_reconstruct_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h4_electric_hodge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h1_reconstruct_velocity",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h2_reconstruct_curl",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.h4_electric_hodge",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.Inhabitant",
+      "source_sha256": "8c08d265db70b08219548c9b3c7857de9404b59dce5f2d94dc6a65f1020cd14a",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 8.444,
+      "audit_exit": 0,
+      "audit_source_sha256": "e9f7ae84df61bf81466812b647eef8b7c534a729b134590c2755fbe0be5ce1f1",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.exact_equivalence_native",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.exact_equivalence_of_parameter_smoothing",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.fourierHodgeLaws_inhabitant",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        },
+        {
+          "name": "NSEMaxwell.HodgeProof.exact_equivalence_native",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws.ParameterJets",
+      "source_sha256": "e448aacc166ec7482242dd7f1d9a494b098a0bb4d6334f4d29bad761d7e87eab",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 4.196,
+      "audit_exit": 0,
+      "audit_source_sha256": "fc2a9ea3275edd78b0c1d8c7413073848f627f30ed4def57e676530d7027211b",
+      "declarations": [
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "status": "PASS_STANDARD_ONLY",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [
+        {
+          "name": "NSEMaxwell.HodgeProof.contDiffOn_tsum_closure_of_compatible_jets",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "status": "PASS_STANDARD_ONLY"
+        }
+      ],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    },
+    {
+      "module": "FourierHodgeLaws_inhabitant",
+      "source_sha256": "5ef6dfdfbe222edae1d62c232781b46c6c143d0360e1dcce436a0c03fac59de1",
+      "new_module": true,
+      "build_exit": 0,
+      "seconds": 8.234,
+      "audit_exit": 0,
+      "audit_source_sha256": "af359348365b1f1ac35d327229fbad817f77a54c5be1d0cf31201dce8df5191f",
+      "declarations": [],
+      "status": "BUILD_PASS_NO_NAMED_THEOREMS",
+      "current_source_matches": true,
+      "audit_source_hash_matches": true,
+      "raw_axiom_records": [],
+      "raw_axiom_parser_status": "PASS_STANDARD_ONLY",
+      "audit_error_lines": [],
+      "build_error_context": []
+    }
+  ]
+}
