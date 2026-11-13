@@ -1,0 +1,133 @@
+name: Fourier Hodge Laws cached native proof audit
+
+on:
+  push:
+    branches: [FourierHodgeLaws_inhabitant]
+    paths:
+      - 'FourierHodgeLaws_inhabitant/**'
+      - '.github/workflows/fourier-hodge-laws.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fourier-hodge-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  native-lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      ELAN_TOOLCHAIN: leanprover/lean4:v4.34.0-rc1
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      MATHLIB_CACHE_DIR: ${{ github.workspace }}/.mathlib-download-cache
+    steps:
+      - name: Checkout exact Methlib proof revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: source
+          sparse-checkout: |
+            FourierHodgeLaws_inhabitant
+            .github/workflows/fourier-hodge-laws.yml
+          persist-credentials: false
+
+      - name: Checkout pinned native Fefferman source closure
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: randogelist/NSE---MAXWELL---GR---QFT
+          ref: 9f5500cd5dadc351ab3ec98db09dccaa9a22eb25
+          path: upstream
+          sparse-checkout: Fefferman_adapter
+          persist-credentials: false
+
+      - name: Stage exact native package and new proof modules
+        run: |
+          set -euo pipefail
+          python3 source/FourierHodgeLaws_inhabitant/ci/stage.py --upstream-root upstream --package package
+          cp source/.github/workflows/fourier-hodge-laws.yml package/hodge-evidence/workflow.yml
+          uname -a > package/hodge-evidence/host.log
+          df -h . > package/hodge-evidence/disk.log
+
+      - name: Restore pinned native compiler
+        id: compiler-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: fourier-hodge-compiler-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain') }}
+
+      - name: Activate compiler path
+        run: echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Install pinned native compiler on cache miss
+        if: steps.compiler-cache.outputs.cache-hit != 'true'
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore pinned dependency and download caches
+        id: dependency-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            package/.lake/packages
+            package/.lake/config
+            .mathlib-download-cache
+          key: fourier-hodge-deps-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+
+      - name: Hydrate pinned sources and retrieve missing official Mathlib objects
+        id: dependencies
+        run: python3 source/FourierHodgeLaws_inhabitant/ci/runner.py --package package --phase dependencies
+
+      - name: Preserve verified dependency cache
+        if: steps.dependencies.outcome == 'success' && steps.dependency-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            package/.lake/packages
+            package/.lake/config
+            .mathlib-download-cache
+          key: ${{ steps.dependency-cache.outputs.cache-primary-key }}
+
+      - name: Restore incrementally checked project objects
+        id: project-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: fourier-hodge-project-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json', 'package/lakefile.lean') }}-${{ hashFiles('package/FourierHodgeLaws/**/*.lean', 'package/FourierHodgeLaws_inhabitant.lean') }}
+          restore-keys: |
+            fourier-hodge-project-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json', 'package/lakefile.lean') }}-
+
+      - name: Build modules and independently audit every new named theorem
+        id: proofs
+        run: python3 source/FourierHodgeLaws_inhabitant/ci/runner.py --package package --phase build
+
+      - name: Preserve incremental proof objects after success or failure
+        if: always() && steps.project-cache.outcome == 'success' && steps.project-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.project-cache.outputs.cache-primary-key }}
+
+      - name: Preserve compiler cache
+        if: always() && steps.compiler-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: ${{ steps.compiler-cache.outputs.cache-primary-key }}
+
+      - name: Upload exact compiler and theorem evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fourier-hodge-evidence-${{ github.sha }}-${{ github.run_attempt }}
+          path: package/hodge-evidence
+          if-no-files-found: error
+          retention-days: 30
