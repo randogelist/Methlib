@@ -1,0 +1,776 @@
+FourierHodgeLaws_inhabitant_B_TIER
+================================
+
+MODE = B_TIER_DERIVATION
+DATE = 2026-11-13
+THEOREM = FourierHodgeLaws_inhabitant
+EXACT_CONCLUSION = NSEMaxwell.Bridge.FourierHodgeLaws
+MATHEMATICAL_STATUS = ! B_TIER
+NEW_LEAN_INHABITANT = NOT_FORMALIZED
+NEW_A_TIER_PROMOTION = NONE
+LOCAL_LEAN_LAKE_ELAN_EXECUTIONS = 0
+NEW_EXTERNAL_COMPILER_EXECUTIONS = 0
+
+DESTINATION_REPOSITORY = randogelist/Methlib
+DESTINATION_BRANCH = FourierHodgeLaws_inhabitant
+DESTINATION_FOLDER = FourierHodgeLaws_inhabitant/
+DESTINATION_BASE_COMMIT = f8045bd367b3b4b9c0aa23d3f1f77219da49c958
+
+DEFINITION_REPOSITORY = randogelist/NSE---MAXWELL---GR---QFT
+DEFINITION_COMMIT = 9f5500cd5dadc351ab3ec98db09dccaa9a22eb25
+FORMALIZATION_TARGET_COMPILER = Lean 4.34.0-rc1
+MATHLIB_PIN = de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+METHLIB_SOURCE_PIN = e9cf90726b8544a268469ebc8fa6634e9c713e07
+
+0. ROOT THEOREM AND EXACT SCOPE
+-------------------------------
+
+THEOREM FourierHodgeLaws_inhabitant.
+Under the concrete definitions at DEFINITION_COMMIT,
+
+  ! NSEMaxwell.Bridge.FourierHodgeLaws.
+
+EXPLICIT ROOT HYPOTHESES = none.
+DEFINITIONAL CONTEXT = actual Euclidean derivatives, actual Lebesgue cube
+integrals, the full-lattice cosine inverse Laplacian, and the predicates below.
+FOUNDATIONAL SETTING = classical real analysis.
+
+Proof components:
+  H1 := spatial reconstruction of every smooth periodic solenoidal velocity;
+  H2 := curl reconstruction of every smooth periodic mean-zero solenoidal B;
+  H3 := joint within-smoothness of the canonical velocity and pressure on
+        [0,infinity) x R^3, together with velocity divergence zero;
+  H4 := electric Hodge identity with the exact scalar head potential.
+
+COROLLARY.
+  ! forall nu>0, forall c>0,
+      NSEMaxwell.Classical.FeffermanB nu
+        <-> NSEMaxwell.Classical.MaxwellB nu c.
+
+The corollary follows by applying the existing exact implication
+NSEMaxwell.Bridge.exact_equivalence_of_fourierHodgeLaws to the mathematical
+inhabitant derived below. It asserts an equivalence of existence propositions;
+it supplies no independent assertion of either existence proposition.
+
+STRONGER H3 LEMMA.
+  forall nu,c in R, m in R^3, B : R -> (R^3 -> R^3),
+    SmoothVelocity B /\ PeriodicVelocity B
+      -> CanonicalSmoothness nu c m B.
+
+The strengthened lemma contains neither div B=0 nor mean(B)=0.
+
+NOTATION AND DOMAIN.
+  V = EuclideanSpace R (Fin 3), Q=[0,1]^3, vol(Q)=1;
+  S=[0,infinity) x V, O=(0,infinity) x V;
+  Frequency = Fin 3 -> Z;
+  <f> = integral_Q f d(volume).
+  Data(a) := C^infinity(a) /\ SpatialPeriodic(a) /\ div a=0.
+  MagneticData(B) := Data(B) /\ <B>=0.
+  MagneticPath(B) := SmoothVelocity(B) /\ PeriodicVelocity(B)
+                     /\ (forall t>=0, div B(t)=0 /\ <B(t)>=0).
+  SmoothVelocity(u) := ContDiffOn R infinity ((t,x) |-> u(t)(x)) S.
+  SmoothPressure(p) := ContDiffOn R infinity ((t,x) |-> p(t)(x)) S.
+
+There is no restriction on the velocity mean m. All fields are total functions;
+values at t<0 are unrestricted. At t=0, time derivatives are within derivatives
+on [0,infinity). Spatial derivatives on every slice are ordinary derivatives.
+No analyticity, PDE solution existence, or global uniform-in-time bound enters
+the hypotheses of the root theorem.
+
+EXACT STRUCTURE DECLARATIONS (verbatim source signatures).
+structure CanonicalSmoothness (ν c : ℝ) (m : Vec) (B : Velocity) : Prop where
+  velocity_smooth : SmoothVelocity (canonicalVelocity m B)
+  pressure_smooth : SmoothPressure (canonicalPressureTrajectory ν m B)
+  velocity_divergence_free : ∀ t : ℝ, 0 ≤ t → ∀ x : Vec,
+    NSEMaxwell.Classical.divergence (canonicalVelocity m B t) x = 0
+
+/-- Four named analytic endpoints; no inhabitant is claimed. -/
+structure FourierHodgeLaws : Prop where
+  reconstruct_velocity : ∀ (a : Field), Data a →
+    U (spatialMean a) (spatialCurl a) = a
+  reconstruct_curl : ∀ (m : Vec) (B : Field), MagneticData B →
+    spatialCurl (U m B) = B
+  canonical_smoothness : ∀ (ν c : ℝ) (m : Vec) (B : Velocity),
+    MagneticPath B → CanonicalSmoothness ν c m B
+  electric_hodge : ∀ (ν : ℝ) (m : Vec) (B : Field), MagneticData B →
+    G ν m B + NSEMaxwell.Classical.gradient (headPotential ν m B) =
+      K (spatialCurl (G ν m B))
+
+
+1. COORDINATE, MEASURE, AND SCALAR/VECTOR ADAPTERS
+------------------------------------------------
+
+Unit coordinate periodicity extends to every integer translation by induction
+and substitution x -> x-e_j. Hence a continuous periodic scalar component
+descends continuously to (R/Z)^3 with normalized Haar measure.
+
+The standard basis of EuclideanSpace R (Fin 3) is orthonormal; coordinate
+Lebesgue measure is product Lebesgue measure. The coordinate map to the Pi
+space preserves these measures. No equality between the Euclidean norm and
+the default Pi maximum norm is asserted. The comparison is
+
+  |x|_infinity <= |x|_2 <= sqrt(3) |x|_infinity.
+
+The difference of [0,1]^3 and (0,1]^3 is contained in finitely many coordinate
+hyperplanes. Each is null by product measure and the nullity of real singletons.
+Consequently both domains give the same integral for every integrable input.
+This identifies the physical coefficient integral below with
+UnitAddTorus.mFourierCoeff_eq_integral after character identification.
+
+Scalar and vector Fourier calculations are componentwise compatible because
+coordinate projections and real part are continuous linear maps and therefore
+commute with Bochner integrals and summable series. If a vector Methlib endpoint
+is used for scalar f, define iota_j(f)(x)=f(x)e_j, apply the vector endpoint,
+and project onto component j. Smoothness and periodicity of iota_j(f) follow
+by continuous linear composition. No divergence condition is needed for the
+selected derivative and decay endpoints.
+
+2. SPATIAL FOURIER-HODGE DERIVATION
+---------------------------------
+A00. EXACT SPATIAL OBJECTS
+
+Q = [0,1]^3; |Q| = 1; Frequency = Z^3; E = R or R^3.
+All means are unnormalized Lebesgue integrals over Q, equal to averages because |Q|=1.
+f is C^infinity on R^3 and unit-periodic in each coordinate.
+lambda(0)=0; lambda(k)=(4*pi^2*|k|^2)^(-1), k != 0.
+
+L f(x) = sum_{k in Z^3} lambda(k) integral_Q cos(2*pi*k.(x-y)) f(y) dy.
+For E=R this is scalarL. For E=R^3 this is vectorL.
+K B = curl(vectorL B); U_m B = m + K B.
+G_{nu,m}(B) = B cross U_m B + nu curl B.
+Q_{nu,m}(B) = div G_{nu,m}(B).
+headPotential_{nu,m}(B) = scalarL(Q_{nu,m}(B)).
+
+A01. PERIODIC INTEGRATION AND FOURIER DECAY
+
+e_k(x)=exp(2*pi*i*k.x).
+fhat(k)=integral_Q exp(-2*pi*i*k.y) f(y) dy, componentwise in the complexification.
+
+For every multi-index alpha, partial^alpha f is periodic: differentiate the identity
+f(x+e_j)=f(x). For each coordinate j and periodic C^1 scalar g,
+
+  integral_Q partial_j g = 0.
+
+Indeed, Fubini and the one-dimensional fundamental theorem of calculus give the
+integral of g at the two opposite faces, which cancel by periodicity.
+Integration by parts, with the same face cancellation, gives
+
+  (partial_j f)^hat(k) = 2*pi*i*k_j fhat(k),
+  ((1-Delta)^N f)^hat(k) = (1+4*pi^2*|k|^2)^N fhat(k).
+
+Consequently
+
+  ||fhat(k)|| <= A_N(f) (1+4*pi^2*|k|^2)^(-N),
+  A_N(f) = integral_Q ||(1-Delta)^N f|| < infinity.
+
+The bound applies to real scalar functions and to real vector fields componentwise
+(or directly using the finite-dimensional complex norm and the integral triangle inequality).
+
+For q>3, sum_k (1+|k|)^(-q)<infinity. One direct proof uses max-norm shells:
+#{k: |k|_infinity=n}=(2n+1)^3-(2n-1)^3=24n^2+2 for n>=1;
+Euclidean norm dominates max norm, so comparison with sum_n n^(2-q) applies.
+It follows that sum_k (1+|k|)^r ||fhat(k)||<infinity for every integer r>=0.
+
+A02. FOURIER INVERSION WITHOUT AN UNRESOLVED INVERSION ASSUMPTION
+
+Absolute summability makes s(x)=sum_k e_k(x) fhat(k) uniformly convergent.
+Orthogonality integral_Q e_k e_{-l}=delta_{kl} and uniform convergence imply
+s^hat(l)=fhat(l). Thus h=f-s is continuous, periodic, and all its Fourier
+coefficients vanish.
+
+To prove h=0, use the one-dimensional Fejer kernel
+
+  Phi_n(t)=(1/n)|sum_{r=0}^{n-1} exp(2*pi*i*r*t)|^2, n>=1,
+
+and the product kernel Psi_n(y)=product_{j=1}^3 Phi_n(y_j).
+Phi_n>=0, integral_[0,1] Phi_n=1, and for torus-distance(t,0)>=delta>0,
+Phi_n(t)<=1/(n sin^2(pi*delta)) (take 0<delta<=1/2).
+Hence Psi_n has integral one and its integral outside the coordinate delta-box
+tends to zero by a union bound over the three coordinate complements.
+Uniform continuity of h on the torus yields Psi_n*h -> h uniformly.
+Each Psi_n is a finite trigonometric polynomial, and every Fourier coefficient
+of h is zero; therefore Psi_n*h=0 for all n. Thus h=0.
+
+Therefore f(x)=sum_k e_k(x) fhat(k) for every x. This argument also proves
+Fourier uniqueness for every continuous periodic scalar or finite-dimensional
+vector function. No PDE existence statement is used.
+
+A03. IDENTIFICATION OF THE FROZEN REAL COSINE OPERATOR
+
+For real f,
+
+  integral_Q cos(2*pi*k.(x-y)) f(y) dy = Re(e_k(x) fhat(k)).
+
+The coefficient bound in (A01) proves absolute summability of the defining real
+series, uniformly in x. Continuous real-linear maps commute with summable sums,
+so
+
+  Lf(x) = Re sum_k lambda(k)e_k(x)fhat(k).
+
+Because lambda(-k)=lambda(k) and fhat(-k)=conj(fhat(k)), the complex sum on the
+right is real and Lf=sum_k lambda(k)e_k fhat(k). Equivalently, the cosine term
+is one half of the k exponential term plus one half of the -k exponential term;
+reindexing the second full-lattice sum proves the same identity.
+
+NORMALIZATION: the sum already runs over all k and -k. No additional factor 2
+may be inserted. A single cosine input at a nonzero frequency receives exactly
+the multiplier lambda(k).
+
+A04. SMOOTH MULTIPLIER CALCULUS
+
+For |alpha|=r and k!=0,
+
+  ||partial^alpha[lambda(k)e_k(x)fhat(k)]||
+    <= (2*pi)^r |k|^r lambda(k) A_N(f)(1+4*pi^2|k|^2)^(-N)
+    <= C_{r,N} A_N(f) (1+|k|)^(-2N-2+r).
+
+The k=0 term is zero. Choose 2N>r+1. The lattice bound in (A01) is summable,
+uniformly in x. Every differentiated series converges uniformly. Repeated
+termwise differentiation gives Lf in C^infinity, spatially periodic, and
+
+  partial^alpha Lf = L(partial^alpha f),
+  mean(Lf)=0,
+  -Delta Lf=f-mean(f).
+
+The first equality follows also by comparing the absolutely convergent Fourier
+series using the derivative-coefficient identity in (A01). The second follows
+from termwise integration and lambda(0)=0. The third follows from
+4*pi^2|k|^2 lambda(k)=1 for k!=0 and inversion (A02).
+
+Finite-dimensional coordinate projections commute with the integrals and sums,
+so the scalar/vector forms are compatible. In particular
+
+  div(vectorL F)=scalarL(div F),
+  curl(vectorL F)=vectorL(curl F),
+  grad(scalarL f)=vectorL(grad f).
+
+Linearity and L(0)=0 hold on these smooth periodic inputs.
+
+A05. GENERAL SPATIAL HODGE IDENTITY
+
+For every smooth periodic real vector field F, smoothness from (A04) justifies
+the standard coordinate identity curl curl H = grad div H - Delta H.
+Using the derivative commutations in (A04),
+
+  K(curl F)
+    = curl(vectorL(curl F))
+    = curl curl(vectorL F)
+    = grad(scalarL(div F)) - Delta(vectorL F)
+    = F - mean(F) + grad(scalarL(div F)).                     [HODGE]
+
+Likewise
+
+  curl(KF)=F-mean(F)+grad(scalarL(div F)),
+  div(KF)=0,
+  mean(KF)=0.
+
+The divergence identity is div curl=0, using equality of mixed second
+derivatives of vectorL F. The mean identity follows from periodic integration
+of the first derivatives comprising curl. These are proved directly; they do
+not use any field of FourierHodgeLaws.
+
+A06. H1: RECONSTRUCT_VELOCITY
+
+Let Data(a), i.e. a smooth, periodic, div(a)=0. Then HODGE gives
+
+  K(curl a)=a-mean(a),
+  U_{mean(a)}(curl a)=mean(a)+a-mean(a)=a.
+
+This is the exact field equality required by reconstruct_velocity. It is
+pointwise on all R^3, and mean(a) is unrestricted.
+
+A07. H2: RECONSTRUCT_CURL, PLUS DIRECT AUXILIARY CONCLUSIONS
+
+Let MagneticData(B), i.e. B smooth, periodic, div(B)=0, mean(B)=0, and let m in R^3.
+By (A04) U_m B is smooth and periodic. By (A05),
+
+  curl(U_m B)=curl(KB)=B,
+  div(U_m B)=0,
+  mean(U_m B)=m.
+
+The last identity uses |Q|=1 and mean(KB)=0. None of these statements uses H1,
+canonical_smoothness, a solution trajectory, or an inhabitant of FourierHodgeLaws.
+This proves the exact reconstruct_curl field and supplies an independent
+spatial route to reconstructed admissibility and the harmonic-mean identity.
+
+A08. H4: ELECTRIC_HODGE
+
+Let nu in R, m in R^3, MagneticData(B), and u=U_m B.
+By (A07), curl u=B, div u=0, and u is smooth periodic. Hence G=B cross u+nu curl B
+is smooth periodic. The right-handed component conventions in Geometry.lean give
+
+  (curl u) cross u = (u.nabla)u - grad(|u|^2/2).              [LAMB]
+
+For each component i, periodic integration by parts gives
+
+  integral_Q [(u.nabla)u]_i
+    = sum_j integral_Q u_j partial_j u_i
+    = - integral_Q u_i sum_j partial_j u_j
+    = 0.
+
+Also integral_Q grad(|u|^2/2)=0 and integral_Q curl B=0.
+Consequently mean(G)=0, for every real nu and every m; no smallness, positivity,
+mean restriction on u, or evolution equation occurs.
+
+Apply HODGE to F=G:
+
+  K(curl G)=G+grad(scalarL(div G))
+           =G+grad(headPotential_{nu,m}(B)).
+
+Reversing the displayed equality gives exactly electric_hodge.
+
+SIGN CHECK: -Delta L=identity-minus-mean. Therefore the gradient term in HODGE
+has a PLUS sign. At k!=0,
+
+  hhat(k)=[headPotential]^hat(k)
+    =lambda(k) (2*pi*i*k.Ghat(k))
+    =i*(k.Ghat(k))/(2*pi*|k|^2),
+  (grad h)^hat(k)=-k*(k.Ghat(k))/|k|^2.
+
+Thus G+grad h is its transverse projection. The frozen canonical pressure
+p=h-|u|^2/2+mean(|u|^2)/2 has mean zero and the required scalar sign.
+
+
+3. JOINT PARAMETER AND BOUNDARY DERIVATION
+------------------------------------------
+
+STRONGER PARAMETER LEMMA
+Let E = R or R^3, S = [0,infinity) x R^3, O = (0,infinity) x R^3.
+Let F : R x R^3 -> E be ContDiffOn R infinity on S and spatially
+Z^3-periodic at every nonnegative time. No conditions are imposed at t<0.
+Then H(t,x) = L(F(t,.))(x), with the exact frozen cosine-kernel operator,
+is ContDiffOn R infinity on S and spatially periodic there.
+Neither div F=0 nor mean F=0 is a premise.
+
+B01. INPUT JETS
+S is convex with nonempty interior and hence UniqueDiffOn R S.
+The finite-order consequences of ContDiffOn infinity give continuous,
+compatible multilinear jets on S. Their contractions along time and
+space coordinate vectors define partial jets F_(r,alpha) on S. For t>0
+these are ordinary mixed derivatives. For t=0 these are within jets;
+spatial slice derivatives are ordinary spatial derivatives because each
+entire spatial slice lies in S. Unit translations preserve S, so periodicity
+of every partial jet follows by differentiating the input periodicity
+identity within S. This includes time jets at zero by UniqueDiffOn.
+
+B02. COEFFICIENT JETS AND UNIFORM DECAY
+For k in Z^3 and r>=0 define
+ A_r(t,k) = integral_Q exp(-2 pi i k.y) F_(r,0)(t,y) dy,
+with componentwise complexification for E=R^3. Compactness of [0,T] x Q
+and continuity of every input jet give, for all finite T>=0 and integers r,N>=0,
+ M_(T,r,N) = sup_{0<=t<=T} integral_Q
+             |(1-Delta_y)^N F_(r,0)(t,y)| dy < infinity.
+Repeated spatial integration by parts has canceling opposite-face terms:
+ (1+4 pi^2 |k|^2)^N A_r(t,k)
+ = integral_Q exp(-2 pi i k.y) (1-Delta_y)^N F_(r,0)(t,y) dy.
+Thus |A_r(t,k)| <= M_(T,r,N)(1+4 pi^2 |k|^2)^(-N), uniformly on [0,T].
+For t>0, differentiation under the compact spatial integral gives
+ d_t A_r(t,k)=A_(r+1)(t,k). Each A_r is continuous on [0,infinity),
+including zero, by compact domination. This does not assume ambient
+differentiability at zero.
+
+B03. FOURIER JETS
+Let lambda(0)=0 and lambda(k)=(4 pi^2 |k|^2)^(-1) for k!=0.
+For r>=0 and alpha in N^3 define
+ H_(r,alpha)(t,x)=Re sum_k lambda(k)(2 pi i k)^alpha
+                       exp(2 pi i k.x) A_r(t,k).
+For k!=0, each summand is bounded on [0,T] x R^3 by
+ C_(T,r,N,alpha)(1+|k|)^(-2N-2+|alpha|).
+The k=0 summand is exactly zero. Choosing 2N>|alpha|+1 makes this
+majorant summable on Z^3. Hence every H_(r,alpha) is continuous on S by
+locally uniform absolute convergence. The same estimate for the next
+derivative justifies differentiation on O. Therefore
+ d_t H_(r,alpha)=H_(r+1,alpha),
+ d_(x_j) H_(r,alpha)=H_(r,alpha+e_j) on O.
+The original cosine-integral formula equals H_(0,0) on S by
+Re(exp(2 pi i k.(x-y)))=cos(2 pi k.(x-y)), compact integrability,
+and the absolute convergence just proved. There is no factor 2.
+
+B04. BOUNDARY DIFFERENTIABILITY
+Assemble the order-q mixed partial sums into the symmetric multilinear
+jet J_q(t,x). Finite dimensionality turns the component estimates into
+norm estimates C_(T,q,N)(1+|k|)^(-2N-2+q); choose 2N>q+1.
+Each J_q is continuous on S, and on O its ordinary Frechet derivative is
+the currying of J_(q+1). Fix z in S. Continuity of J_(q+1) gives
+ fderiv_R J_q(y) -> curry(J_(q+1)(z)) as y -> z within O.
+Since O is open and convex, closure O=S, and J_q is continuous on S,
+Mathlib's hasFDerivWithinAt_closure_of_tendsto_fderiv applies:
+ HasFDerivWithinAt J_q (curry(J_(q+1)(z))) S z.
+The global O need not have a single uniform-in-time bound: continuity
+and differentiation are established locally using any T>z.time.
+Each J_q can be defined arbitrarily outside S; the conclusion is within S.
+J_0 need only agree with the exact total cosine operator on S, because
+ContDiffOn respects equality on its domain.
+
+B05. ALL FINITE ORDERS, THEN INFINITY
+For every n, prove simultaneously for all q that J_q is ContDiffOn R n S.
+Base n=0 is continuity. At successor n+1 use the preceding derivative
+witness and the induction hypothesis for curry(J_(q+1)); currying is
+continuous linear. The exact Mathlib theorem is
+ contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn.
+Its additional implication (n=omega -> AnalyticOn ...) is vacuous at
+every finite natural n; no analytic or C^omega hypothesis is introduced.
+Then contDiffOn_infty gives ContDiffOn R infinity J_0 S.
+This proves the stronger parameter lemma without a Seeley/Whitney extension.
+
+B06. KINETIC SPATIAL AVERAGE
+For any smooth periodic u on S, set e(t,x)=|u(t,x)|^2 and
+ a_r(t)=integral_Q partial_t^r e(t,x) dx (within jets at zero).
+Compactness gives continuity of a_r on [0,infinity); dominated
+differentiation gives a_r'=a_(r+1) on (0,infinity). The same one-dimensional
+boundary-extension and finite-order induction prove that a_0 is smooth
+within [0,infinity). Its lift (t,x)->a_0(t) is smooth on S.
+This argument requires only compact local domination, not any global
+time bound or smooth extension to negative time.
+
+B07. EXACT H3 ASSEMBLY
+Assume MagneticPath B; only its smooth and periodic fields are used here.
+Apply the vector parameter lemma: W(t,x)=vectorL(B(t,.))(x) is smooth on S.
+Spatial differentiation preserves this smoothness, so
+ u(t,x)=m+curl W(t,x)=canonicalVelocity m B(t,x) is smooth on S.
+For each t>=0, W(t,.) is C^infinity on R^3; commuting spatial derivatives
+gives div(curl W)=0, hence div u=0. No reconstruction identity is needed.
+The smooth functions B,u and curl B give G=B cross u + nu curl B smooth.
+Spatial derivative closure gives Q=div G smooth; G and Q are periodic.
+Apply the scalar parameter lemma to Q: h=scalarL Q is smooth on S.
+The kinetic term |u|^2/2 is smooth, and B06 gives the smoothness of
+its canonical mean correction. Therefore the exact frozen formula
+ p=h-|u|^2/2+(integral_Q |u|^2)/2
+is SmoothPressure. These three conclusions fill CanonicalSmoothness:
+ velocity_smooth;
+ pressure_smooth;
+ velocity_divergence_free.
+The proof works for all nu,c in R and m in R^3. Parameter c is absent
+from these definitions; neither positivity assumption is needed for H3.
+In fact H3 holds for every smooth spatially periodic B, independently
+of magnetic mean-zero and divergence-free conditions.
+
+
+4. EXACT CONSTRUCTOR AND DETERMINISTIC ASSEMBLY
+---------------------------------------------
+
+Define mathematical proof witnesses:
+
+  h_velocity(a,ha) := A06 applied to ha;
+  h_curl(m,B,hB) := A07 applied to m,B,hB;
+  h_smooth(nu,c,m,B,hB) := B07 applied to hB.smooth,hB.periodic;
+  h_electric(nu,m,B,hB) := A08 applied to nu,m,B,hB.
+
+The exact record is
+
+  H = {
+    reconstruct_velocity := h_velocity,
+    reconstruct_curl := h_curl,
+    canonical_smoothness := h_smooth,
+    electric_hodge := h_electric
+  }.
+
+Every field has exactly the quantifiers, operators and conclusion of the
+verbatim structure in section 0. Therefore
+
+  H : NSEMaxwell.Bridge.FourierHodgeLaws.                 QED.
+
+Here the record denotes mathematical assembly; no Lean implementation or
+kernel acceptance is asserted by this notation.
+
+DEPENDENCY RELATION.
+  measure/scalar adapters -> A01 -> A02 -> A03 -> A04 -> A05;
+  A05 -> A06 -> H1;
+  A04+A05 -> A07 -> H2;
+  input within-smoothness+UniqueDiffOn(S) -> B01;
+  B01+A01 -> B02;
+  B02+A03 -> B03 -> B04 -> B05;
+  B05+B06 -> B07 -> H3;
+  A05+A07+periodic integration+Lamb identity -> A08 -> H4;
+  H1+H2+H3+H4 -> H;
+  H+exact_equivalence_of_fourierHodgeLaws -> ExactEquivalence.
+
+NONCIRCULARITY.
+  A01--A05 consume no field of FourierHodgeLaws.
+  A07 proves div(U_m B)=0 and mean(U_m B)=m directly.
+  B01--B07 consume no H1, H2, H4, or FourierHodgeLaws inhabitant.
+  A08 derives mean(G)=0 before applying the general Hodge identity.
+  No FeffermanB or MaxwellB premise occurs in the construction of H.
+
+EXACT COROLLARY SIGNATURE (existing source):
+
+  theorem exact_equivalence_of_fourierHodgeLaws
+      (laws : FourierHodgeLaws) : ExactEquivalence :=
+    exact_equivalence_of_periodicAnalyticLaws laws.toPeriodicAnalyticLaws
+
+Apply this theorem to H. Thus
+
+  ! forall nu : R, 0<nu -> forall c : R, 0<c ->
+      (FeffermanB nu <-> MaxwellB nu c).
+
+Root H itself is independent of any positive viscosity/speed hypothesis;
+those quantifiers belong to the stated corollary.
+
+5. CHECKPOINTS AND NATIVE IMPLEMENTATION BOUNDARY
+------------------------------------------------
+
+CHECKPOINT | MATHEMATICAL RESULT | DERIVATION
+CP01 | physical cube = torus coefficient normalization | section 1
+CP02 | actual derivative coefficient multiplier | A01
+CP03 | arbitrary polynomial decay | A01
+CP04 | all weighted coefficient sums finite | A01
+CP05 | pointwise Fourier inversion and uniqueness | A02
+CP06 | frozen full-Z^3 cosine formula = Fourier multiplier | A03
+CP07 | spatial smoothing, commutation, mean and Poisson laws | A04
+CP08 | general Hodge identity with harmonic mode retained | A05
+CP09 | exact reconstruct_velocity | A06
+CP10 | exact reconstruct_curl and reconstructed mean/divergence | A07
+CP11 | uniform compact-time coefficient/jet estimates | B01--B03
+CP12 | boundary derivatives and all finite smoothness orders | B04--B05
+CP13 | smooth kinetic spatial average | B06
+CP14 | exact canonical_smoothness, under weaker premises | B07
+CP15 | mean(G)=0 and exact electric_hodge | A08
+CP16 | exact four-field mathematical inhabitant | section 4
+
+MATHEMATICAL_CHECKPOINTS = 16 / 16 DERIVED_IN_THIS_DOCUMENT
+NEW_KERNEL_CHECKED_CHECKPOINTS = 0
+
+LATER NATIVE MODULE DECOMPOSITION (proposed names; no declarations asserted):
+  TargetPrimitives        : namespace, coordinate, measure, scalar/vector adapters;
+  FourierCoefficients     : CP02--CP05 on the actual coefficient integrals;
+  CosineMultiplier        : CP06--CP07 for the frozen scalarL/vectorL;
+  SpatialHodge            : CP08--CP10;
+  ParameterJets          : CP11;
+  ClosedHalfspaceSmooth  : CP12--CP13;
+  CanonicalSmoothness    : CP14;
+  ElectricHodge          : CP15;
+  Inhabitant             : CP16, then the exact equivalence corollary.
+
+Available endpoints reduce implementation work; they do not eliminate the
+target-specific adapters. In particular, equal-looking namespace primitives
+must be aligned, the exact cosine sum must be identified, and the time-zero
+boundary theorem must be instantiated on the actual Fourier jets.
+
+FORMALIZATION_RULES.
+  Cached external compiler = Lean 4.34.0-rc1 at the pinned Mathlib revision.
+  Local Lean/Lake/elan execution = forbidden.
+  Proof body, exact theorem type, source hashes, and theorem-level axiom audit
+    must match before any A_TIER promotion.
+  Allowed foundational axioms = {propext, Classical.choice, Quot.sound}.
+  Unresolved analytic/certificate/witness premises must remain explicit.
+  No sorry, admit, new axiom, unproved opaque body, or native_decide axiom.
+
+6. SOURCE ENDPOINT INDEX AND RETAINED CERTIFICATION
+--------------------------------------------------
+
+The following index records reusable declarations, exact signatures, source
+pins, and target adapters. Existing endpoint audits certify their own types;
+they do not certify the new inhabitant. The reference endpoint ledger contains
+older integration statuses; current native-package evidence is separated below.
+
+STEP -> SELECTED EXISTING ENDPOINTS
+section 1 -> M01; T02 namespace primitives; scalar coordinate embedding.
+A01 -> T02, T03; alternatively the explicit (1-Delta)^N proof above.
+A01 lattice bound -> M05; alternatively the explicit shell count above.
+A02 -> M02; alternatively the complete Fejer argument above or T06.
+A03 -> linear integral/summation transport plus the displayed kernel identity.
+A04 -> M06, M07, T04 and coefficient multipliers.
+B03 -> M06 on (0,T) x R^3 and compact-time estimates proved in B02.
+B04 -> M08, with O=(0,infinity) x R^3 and closure(O)=S.
+B05 -> M09 at every finite natural order, followed by M10.
+B06 -> compact parameter integration and the same boundary/finite-order route.
+A05--A08 -> actual curl-curl/Lamb identities and periodic integration.
+section 4 -> NSEMaxwell.Bridge.exact_equivalence_of_fourierHodgeLaws.
+
+STATUS CORRECTION
+The ENDPOINTS.json reference ledger predates native-source integration. Its T01–T10 target_status values NOT_PORTED_OR_AUDITED_ON_4_34_RC1 and matching_project_endpoint_audit NONE are stale as descriptions of the current native package.
+The current package imports original SingularClosure modules from NativeSources/methlib; inspected native T02/T03/T04/T06 source blobs are byte-identical to the source pin. The retained external standalone audit run 43359539373 explicitly lists all ten selected SingularClosure theorem endpoints PASS_STANDARD_ONLY.
+This is retained prior compiler evidence, not a new audit. The exact target inhabitant and all target-specific adapter theorems still require implementation and external verification.
+
+RETAINED AUDIT URL
+https://raw.githubusercontent.com/randogelist/NSE---MAXWELL---GR---QFT/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Auxillary/evidence/linux-43359539373/standalone/audit-summary.json
+RETAINED COMPILER SOURCE COMMIT = 1de664f2ef5ddc11caef25ac2274278b4171ab6b
+RETAINED AUDIT STATUS = PASS_STANDARD_ONLY
+ALLOWED AXIOMS = Classical.choice, Quot.sound, propext
+
+SingularClosure.torusDatumComponent_fourierCoeff = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.datumFourierCoeff_coordinateDerivative = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.FOURIER_POLYNOMIAL_DECAY = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.scalarFourierSeries_contDiff = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.scalarFourierSeries_coefficient = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.datumFourierCoeff_injective_continuous_periodic = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.infiniteTransportPressure_recovery = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.datumFourierCoeff_smoothFourierSynthesis = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.smoothFourierSynthesis_coordinateDerivative = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+SingularClosure.summable_torusSobolevWeight_inv_four = PASS_STANDARD_ONLY; axioms = {Classical.choice, Quot.sound, propext}
+
+ESSENTIAL SOURCE SIGNATURES
+
+M01 UnitAddTorus.mFourierCoeff_eq_integral
+theorem mFourierCoeff_eq_integral (f : UnitAddTorus d → E) (n : d → ℤ) (a : d → ℝ) :
+    mFourierCoeff f n =
+    ∫ (x : d → ℝ) in {x : d → ℝ | ∀ i, x i ∈ Ioc (a i) (a i + 1)},
+    mFourier (-n) (fun i => x i) • f (fun i => x i)
+IMPLICIT CONTEXT: namespace UnitAddTorus; variable {d : Type*} [Fintype d]; local normalized Haar probability measure on UnitAddCircle. mFourierCoeff_eq_integral additionally has {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]; convergence theorem has {f : C(UnitAddTorus d, ℂ)}.
+ROLE: Identify normalized torus Fourier integrals with the physical cube integrals after Euclidean/Pi measure transport and Icc/Ioc null-boundary alignment.
+ADAPTERS: Physical cube measure agrees with Pi-coordinate measure.; Replace Icc with Ioc only via equality almost everywhere.; Identify complex characters with the frozen real cosine inverse-Laplacian definition.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Fourier/AddCircleMulti.lean#L251
+
+M02 UnitAddTorus.hasSum_mFourier_series_apply_of_summable
+theorem hasSum_mFourier_series_apply_of_summable (h : Summable (mFourierCoeff f))
+    (x : UnitAddTorus d) : HasSum (fun i ↦ mFourierCoeff f i • mFourier i x) (f x)
+IMPLICIT CONTEXT: namespace UnitAddTorus; variable {d : Type*} [Fintype d]; local normalized Haar probability measure on UnitAddCircle. mFourierCoeff_eq_integral additionally has {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]; convergence theorem has {f : C(UnitAddTorus d, ℂ)}.
+ROLE: Reconstruct a continuous periodic field pointwise after absolute summability has been proved.
+ADAPTERS: Continuous torus descent of the physical field.; Summable actual Fourier coefficients, supplied by T03 plus M05.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Fourier/AddCircleMulti.lean#L329
+
+M05 ZLattice.summable_norm_pow_inv
+lemma summable_norm_pow_inv (n : ℕ) (hn : Module.finrank ℤ L < n) :
+    Summable fun z : L ↦ ‖z‖⁻¹ ^ n
+IMPLICIT CONTEXT: namespace ZLattice; {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] (L : Submodule ℤ E) [DiscreteTopology L].
+ROLE: Supply summable nonzero-frequency inverse powers with exponent greater than dimension three.
+ADAPTERS: Embed Fin 3 → Z into the discrete integer lattice and establish rank 3.; Separate the zero frequency because the totalized inverse vanishes there.; Compare the chosen frequency norm/weight with the derivative-symbol norm.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Algebra/Module/ZLattice/Summable.lean#L273
+
+M06 hasFDerivAt_tsum_of_isPreconnected
+theorem hasFDerivAt_tsum_of_isPreconnected (hu : Summable u) (hs : IsOpen s)
+    (h's : IsPreconnected s) (hf : ∀ n x, x ∈ s → HasFDerivAt (f n) (f' n x) x)
+    (hf' : ∀ n x, x ∈ s → ‖f' n x‖ ≤ u n) (hx₀ : x₀ ∈ s) (hf0 : Summable fun n => f n x₀)
+    (hx : x ∈ s) : HasFDerivAt (fun y => ∑' n, f n y) (∑' n, f' n x) x
+IMPLICIT CONTEXT: {α β 𝕜 E F : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜] [NormedAddCommGroup E] [NormedSpace 𝕜 E] [NormedAddCommGroup F] [CompleteSpace F] [NormedSpace 𝕜 F]; {u : α → ℝ}, {f : α → E → F}, {f' : α → E → E →L[𝕜] F}, {s : Set E}, {x₀ x : E}.
+ROLE: Differentiate Fourier jet series on each open convex time slab using uniform summable derivative bounds.
+ADAPTERS: Open preconnected (convex) slab (0,T) × R3.; Per-term HasFDerivAt for the actual Fourier jets.; Uniform summable derivative majorant on the slab and one-point summability.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Calculus/SmoothSeries.lean#L72
+
+M07 contDiff_tsum
+theorem contDiff_tsum (hf : ∀ i, ContDiff 𝕜 N (f i)) (hv : ∀ k : ℕ, (k : ℕ∞) ≤ N → Summable (v k))
+    (h'f : ∀ (k : ℕ) (i : α) (x : E), k ≤ N → ‖iteratedFDeriv 𝕜 k (f i) x‖ ≤ v k i) :
+    ContDiff 𝕜 N fun x => ∑' i, f i x
+IMPLICIT CONTEXT: {α 𝕜 E F : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜] [NormedAddCommGroup E] [NormedSpace 𝕜 E] [NormedAddCommGroup F] [CompleteSpace F] [NormedSpace 𝕜 F] {f : α → E → F} {v : ℕ → α → ℝ} {N : ℕ∞}.
+ROLE: Establish spatial C-infinity of Fourier synthesis from bounds for every iterated derivative.
+ADAPTERS: Bounds for every iterated Fréchet derivative.; This ambient theorem alone does not handle the time-zero boundary.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Calculus/SmoothSeries.lean#L225
+
+M08 hasFDerivWithinAt_closure_of_tendsto_fderiv
+theorem hasFDerivWithinAt_closure_of_tendsto_fderiv {f : E → F} {s : Set E} {x : E} {f' : E →L[ℝ] F}
+    (f_diff : DifferentiableOn ℝ f s) (s_conv : Convex ℝ s) (s_open : IsOpen s)
+    (f_cont : ∀ y ∈ closure s, ContinuousWithinAt f s y)
+    (h : Tendsto (fun y => fderiv ℝ f y) (𝓝[s] x) (𝓝 f')) :
+    HasFDerivWithinAt f f' (closure s) x
+IMPLICIT CONTEXT: {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F].
+ROLE: Extend the actual Fréchet derivative of each Fourier jet from the positive-time interior to the closed forward spacetime.
+ADAPTERS: DifferentiableOn on the convex open positive-time domain.; Every jet is continuous on the closure.; Its interior fderiv converges to the proposed next jet within that domain.; Identify closure of the positive-time domain with forward spacetime.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Calculus/FDeriv/Extend.lean#L36
+
+M09 contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn
+theorem contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn (hs : UniqueDiffOn 𝕜 s) :
+    ContDiffOn 𝕜 (n + 1) f s ↔ (n = ω → AnalyticOn 𝕜 f s) ∧
+      ∃ f' : E → E →L[𝕜] F, ContDiffOn 𝕜 n f' s ∧ ∀ x, x ∈ s → HasFDerivWithinAt f (f' x) s x
+IMPLICIT CONTEXT: General normed spaces E and F over a nontrivially normed field 𝕜; n : ℕ∞ω; f : E → F; s : Set E. In this route, specialize 𝕜 = ℝ and n to a natural number.
+ROLE: Prove all finite ContDiffOn orders by induction on continuous compatible derivative jets.
+ADAPTERS: UniqueDiffOn on forward spacetime.; Use finite natural-number n so n = omega is false; no analyticity hypothesis is added.; Compatible HasFDerivWithinAt witnesses for each jet.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Calculus/ContDiff/Defs.lean#L875
+
+M10 contDiffOn_infty
+theorem contDiffOn_infty : ContDiffOn 𝕜 ∞ f s ↔ ∀ n : ℕ, ContDiffOn 𝕜 n f s
+IMPLICIT CONTEXT: General normed spaces E and F over a nontrivially normed field 𝕜; f : E → F; s : Set E.
+ROLE: Pass from all finite ContDiffOn orders to ContDiffOn infinity.
+ADAPTERS: Every finite ContDiffOn order has been established on the same closed domain.
+SOURCE: https://github.com/leanprover-community/mathlib4/blob/de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11/Mathlib/Analysis/Calculus/ContDiff/Defs.lean#L549
+
+T02 SingularClosure.datumFourierCoeff_coordinateDerivative
+theorem datumFourierCoeff_coordinateDerivative (j : Fin 3) (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) :
+    datumFourierCoeff (coordinateDerivative a j) =
+      spectralMultiplier (derivativeSymbol j) (datumFourierCoeff a)
+IMPLICIT CONTEXT: namespace SingularClosure; concrete definitions recorded in definition_context; noncomputable section.
+ROLE: Native reusable endpoint for the spatial derivative coefficient multiplier; compose to obtain divergence, curl, and Laplacian multipliers.
+ADAPTERS: ContDiff real infinity and SpatialPeriodic for the differentiated field.; Align source coordinateDerivative and target directional derivative/curl conventions.
+SOURCE: https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/InitialCutoffBounds.lean#L130
+CURRENT NATIVE COPY: https://github.com/randogelist/NSE---MAXWELL---GR---QFT/blob/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Maxwell_Endpoint/NativeSources/methlib/SingularClosure/InitialCutoffBounds.lean
+
+T03 SingularClosure.FOURIER_POLYNOMIAL_DECAY
+theorem FOURIER_POLYNOMIAL_DECAY (m : ℕ) (a : Field)
+    (ha : ContDiff ℝ ∞ a) (hp : SpatialPeriodic a) (k : Frequency) (i : Fin 3) :
+    ‖datumFourierCoeff a k i‖ ≤ fourierDecayConstant m a /
+      (1 + ∑ j : Fin 3, ((2 * Real.pi) * |(k j : ℝ)|) ^ m)
+IMPLICIT CONTEXT: namespace SingularClosure; concrete definitions recorded in definition_context; noncomputable section.
+ROLE: Native reusable endpoint for arbitrary polynomial coefficient decay from smoothness and periodicity.
+ADAPTERS: Smooth and periodic field.; Uniform time-compact bounds for the L1 norms of all relevant spatial/time derivatives must be proved separately.; Choose decay exponent above weighted derivative order plus dimension three.
+SOURCE: https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierDecay.lean#L162
+CURRENT NATIVE COPY: https://github.com/randogelist/NSE---MAXWELL---GR---QFT/blob/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Maxwell_Endpoint/NativeSources/methlib/SingularClosure/FourierDecay.lean
+
+T04 SingularClosure.scalarFourierSeries_contDiff
+theorem scalarFourierSeries_contDiff {b : Frequency → ℂ}
+    (hb : RapidScalarFourier b) : ContDiff ℝ ∞ (scalarFourierSeries b)
+IMPLICIT CONTEXT: namespace SingularClosure; concrete definitions recorded in definition_context; noncomputable section.
+ROLE: Native reusable endpoint for scalar smooth Fourier synthesis from weighted absolute summability.
+ADAPTERS: RapidScalarFourier is forall m, Summable(norm coefficient times phase-operator norm to power m).; Derive that premise directly from T03 and M05.
+SOURCE: https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/FourierSeriesCalculus.lean#L149
+CURRENT NATIVE COPY: https://github.com/randogelist/NSE---MAXWELL---GR---QFT/blob/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Maxwell_Endpoint/NativeSources/methlib/SingularClosure/FourierSeriesCalculus.lean
+
+T06 SingularClosure.datumFourierCoeff_injective_continuous_periodic
+theorem datumFourierCoeff_injective_continuous_periodic (a b : Field)
+    (ha : Continuous a) (hb : Continuous b)
+    (hpa : SpatialPeriodic a) (hpb : SpatialPeriodic b)
+    (hcoeff : datumFourierCoeff a = datumFourierCoeff b) : a = b
+IMPLICIT CONTEXT: namespace SingularClosure; concrete definitions recorded in definition_context; noncomputable section.
+ROLE: Native reusable endpoint for injectivity on continuous periodic real vector fields without an absolute-summability hypothesis.
+ADAPTERS: Continuity and periodicity of both fields, equality of the actual cube Fourier integrals.; No spectral synthesis or l1 premise is required.
+SOURCE: https://github.com/randogelist/Methlib/blob/e9cf90726b8544a268469ebc8fa6634e9c713e07/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/PeriodicFourierInjective.lean#L77
+CURRENT NATIVE COPY: https://github.com/randogelist/NSE---MAXWELL---GR---QFT/blob/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Maxwell_Endpoint/NativeSources/methlib/SingularClosure/PeriodicFourierInjective.lean
+
+MINIMAL ROUTE AND ADAPTER BOUNDARIES
+Route A (Mathlib inversion): M01 + coefficient decay + M05 -> M02 -> spatial inverse Laplacian. Methlib T02/T03 can supply actual derivative/decay endpoints after transparent namespace adapters.
+Route B (Methlib uniqueness): T02/T03 + M05 + T04 -> coefficient computation of the frozen cosine sum -> T06. T06 needs equality of actual coefficients, continuity and periodicity only, not an additional l1 premise.
+H3 boundary route: M06 on open positive-time slabs + continuous summable jets on closure -> M08 -> M09 at each finite natural order -> M10. M07 by itself is an ambient spatial theorem and is insufficient at t=0.
+Both routes require scalar as well as vector identities. T02/T03/T06 are stated for real vector fields. Scalar reuse can be derived by embedding a scalar into a fixed coordinate, or proved directly; do not silently apply the vector theorem to scalarL.
+Methlib Vec, unitVector, unitCube, SpatialPeriodic, coordinateDerivative, divergence, gradient and spatialMean have the same explicit formulas as NSEMaxwell.Classical; differences are namespace declarations and later PDE predicates. Verify/unfold primitive equalities; do not identify SmoothSigmaZero or GlobalSmoothNSE with arbitrary-mean target Data/NSSolution.
+Coefficient/synthesis definitions remain distinct from target cosineKernel/vectorL/scalarL. Required target adapter: Re(exp(2πik·x) integral exp(-2πik·y) f(y) dy) = integral cos(2πk·(x-y)) f(y) dy; then use justified tsum/continuous-linear-map interchange. Full Z3 indexing has no additional factor 2.
+Hodge projection on an arbitrary smooth periodic F is K(curl F) = F - mean(F) + grad scalarL(div F). The zero mode must be retained. Electric H4 additionally needs mean(G)=0 derived from div(U)=0 and periodic integration.
+All parameter bounds for time derivatives are local on [0,T] and uniform in frequency; T03 as stated is a fixed-spatial-field theorem and does not alone establish these parameter bounds.
+M09 has an analytic-order side condition (n=ω -> AnalyticOn); use only finite natural n, where it is vacuous, before M10.
+M08 requires DifferentiableOn on an open convex set, continuity within it at every closure point, and convergence of actual fderiv. Supplying only formal Fourier coefficients does not satisfy these hypotheses.
+NO new theorem A-tier promotion is justified by source inspection or this report.
+
+7. DEFINITION SOURCE PROVENANCE
+-------------------------------
+
+PATH = Maxwell_Endpoint/MaxwellEndpoint/Geometry.lean
+SHA256 = 67d984b5c32a29ef0f278382c7d279e250dabbc45f84997513f9609c85bfa541
+SOURCE = https://raw.githubusercontent.com/randogelist/NSE---MAXWELL---GR---QFT/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Maxwell_Endpoint/MaxwellEndpoint/Geometry.lean
+
+PATH = Maxwell_Endpoint/MaxwellEndpoint/Constitutive.lean
+SHA256 = e85061de1f8e633d652bd791ef0c9478eca242a6c4d783b09ed4cccfd3087616
+SOURCE = https://raw.githubusercontent.com/randogelist/NSE---MAXWELL---GR---QFT/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Maxwell_Endpoint/MaxwellEndpoint/Constitutive.lean
+
+PATH = Fefferman_adapter/NSEMaxwell/Classical.lean
+SHA256 = d8db7b5d7cce8d443a2143880dc65c48799d7e153eb49d37e4eb3c23230eb109
+SOURCE = https://raw.githubusercontent.com/randogelist/NSE---MAXWELL---GR---QFT/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Fefferman_adapter/NSEMaxwell/Classical.lean
+
+PATH = Fefferman_adapter/NSEMaxwell/AnalyticContracts.lean
+SHA256 = 7664e157e5ebe3c8ffc24a3eba714b180b248bb950e8b8c4ab5c2c3190b49f3e
+SOURCE = https://raw.githubusercontent.com/randogelist/NSE---MAXWELL---GR---QFT/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Fefferman_adapter/NSEMaxwell/AnalyticContracts.lean
+
+PATH = Fefferman_adapter/NSEMaxwell/AnalyticReduction.lean
+SHA256 = 2813f7dd8035681265656a3b6bb2476dbd30e928dc8a737bcb7e3277a8ae77ba
+SOURCE = https://raw.githubusercontent.com/randogelist/NSE---MAXWELL---GR---QFT/9f5500cd5dadc351ab3ec98db09dccaa9a22eb25/Fefferman_adapter/NSEMaxwell/AnalyticReduction.lean
+
+8. FINAL STATUS
+---------------
+
+EXACT_ROOT = NSEMaxwell.Bridge.FourierHodgeLaws
+EXACT_MATHEMATICAL_ROOT = ! B_TIER
+H1 = DERIVED
+H2 = DERIVED
+H3 = DERIVED_UNDER_WEAKER_PREMISES
+H4 = DERIVED
+MATHEMATICAL_ADMISSION_PREMISES = NONE
+JOINT_REGULARITY_AT_t=0 = INCLUDED
+ARBITRARY_HARMONIC_VELOCITY_MEAN = RETAINED
+SCALAR_PRESSURE_SIGN_AND_MEAN = EXACT
+
+EXACT_LEAN_INHABITANT = NOT_FORMALIZED
+MATCHING_NEW_EXTERNAL_COMPILER_EVIDENCE = NONE
+NEW_A_TIER = NOT_ESTABLISHED
+NEW_FORMAL_CLOSURE = NOT_ESTABLISHED
+UNCONDITIONAL_CLOSURE = NOT_ESTABLISHED
+PREEXISTING_AUDITED_IMPLICATION = FourierHodgeLaws -> ExactEquivalence
+PREEXISTING_FORMAL_STATUS = CONDITIONAL_FORMAL_CLOSURE
+
+END.
