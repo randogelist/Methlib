@@ -1,0 +1,1192 @@
+QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
+VERSION = 1.0.0
+MODE = B_TIER_DERIVATION
+MARKER = !=B_TIER
+ROOT_SPECIFICATION = FROZEN
+MATHEMATICAL_STATUS = COMPLETE_COMPOSED_CLASSICAL_DERIVATION
+SOURCE_STATUS = EXACT_DECLARATIONS_INSPECTED
+EXTERNAL_LEAN_VERIFICATION = PENDING
+LOCAL_LEAN_EXECUTIONS = 0
+
+REPOSITORY = randogelist/Methlib
+DEVELOPMENT_BRANCH = QFA
+DIRECTORY = Quasi-Fefferman-A
+QFA_SOURCE_PIN = 8a30134611027f99f4855c062f7903069cdca8d8
+QFB_COMPARISON_PIN = e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c
+MATHLIB_PIN = db584cd6d46c92f209a44c0f1c829460d327499d
+SELECTED_SOURCE_TOOLCHAIN = leanprover/lean4:v4.33.0
+PARENT_DERIVATION = QUASI_FEFFERMAN_A_B_TIER.txt
+
+[00] STATUS AND SCOPE
+
+Purpose:
+  Exact frozen QFA theorem
+    -> complete mathematical composition
+    -> inspected Mathlib/Methlib declarations
+    -> explicit hypothesis adapters
+    -> remaining whole-space analytic formalization obligations.
+
+Existing declaration: a statement and proof body inspected at a pinned source.
+Derived adapter: a mathematical argument recorded below; no corresponding new
+  Lean declaration is asserted.
+Classical input: an established analytic theorem, explicitly specified below;
+  its invocation is mathematical, while its whole-space Lean realization
+  remains a separate construction obligation.
+
+No QFA Lean file, external compiler result, or theorem-level axiom audit is
+established by this TXT. No A_TIER, FORMAL_CLOSURE, or UNCONDITIONAL_CLOSURE
+promotion follows from source inspection.
+
+[01] EXACT ROOT STATEMENT
+
+Omega = R^3, full Lebesgue measure; nu>0 constant; external force f=0.
+H = L^2_sigma(R^3), the distributionally divergence-free real vector fields.
+V = H intersect H^1(R^3;R^3).
+M = ||a||_2.
+T_QFA(a,nu) = M^4/(16*pi^2*nu^5).
+
+LH_nu(a) is the class of velocity trajectories satisfying:
+  u in C_w([0,infinity);H) intersect L^infinity_t L^2_x
+       intersect L^2_t dot H^1_x;
+  u(0)=a and strong right L^2 trace a;
+  distributional unforced incompressible Navier-Stokes;
+  strong energy inequality
+
+    ||u(t)||_2^2 + 2*nu*integral_s^t ||grad u(r)||_2^2 dr <= ||u(s)||_2^2
+
+  for s=0, for almost every s>0, and for every t>=s.
+
+The velocity weak equation is tested against smooth compactly supported
+solenoidal vector fields phi on [0,infinity) x R^3:
+
+  integral integral [u.partial_t phi + (u tensor u):grad phi
+                    - nu*grad u:grad phi] dx dt
+    + integral a.phi(0) dx = 0.
+
+Trajectory equality means equality in spatial L^2 at every time. Smoothness
+means existence of a smooth spacetime representative of these L^2 classes.
+Pressure is reconstructed separately; ungauged pressure pairs are not the
+objects in the trajectory singleton below.
+
+THEOREM QUASI_FEFFERMAN_A:
+
+  For every nu>0 and a in H:
+
+  (Q0) LH_nu(a) is nonempty.
+
+  (Q1) For every u in LH_nu(a),
+         lim_(t -> 0+) ||u(t)-a||_2 = 0.
+
+  (Q2) For every u in LH_nu(a) and every delta>T_QFA(a,nu),
+       there exist smooth representatives u,p on [delta,infinity) x R^3
+       such that
+         partial_t u + (u.grad)u + grad p = nu*Delta u,
+         div u = 0.
+
+  (Q3) For every such u and delta,
+         LH_nu(u(delta)) = {tau |-> u(delta+tau)}.
+
+Quantifier preservation:
+  The admissible trajectory u is arbitrary.
+  The restart witness s may depend on u and delta.
+  Original-data uniqueness is neither assumed nor concluded.
+  Actual nonuniqueness is neither assumed nor concluded.
+  The frozen guarantee uses delta>T_QFA; equality is outside its scope.
+  No smallness or mean-zero hypothesis on a is added.
+  The numerical constant is sufficient; optimality is not asserted.
+
+[02] SELECTED REPRESENTATIONS
+
+Spatial domain:
+  X = EuclideanSpace R (Fin 3), measure = volume.
+Real velocity Hilbert space:
+  L2 = MeasureTheory.Lp X 2 (volume on X).
+Complex Fourier codomain:
+  Y = EuclideanSpace C (Fin 3).
+
+The solenoidal condition is a distributional predicate on the real L2 class.
+An H1 state carries three L2 weak-derivative witnesses G_j.
+
+  E(v) = ||v||_2^2;
+  D(v) = sum_(j=1)^3 ||G_j||_2^2;
+  Z(v) = ||Delta v||_2^2.
+
+D is the Frobenius gradient energy. The operator norm of a Frechet derivative
+is not definitionally the Frobenius norm; substituting one for the other would
+invalidate the exact spectral norm identities and the constant audit.
+
+Complexification is componentwise and isometric. Its adapters identify the
+real vector norm, L2 norm, derivative norms, and Laplacian norm with the
+corresponding complex Hilbert norms. No componentwise supremum estimate is used.
+
+Sobolev source choice:
+  TemperedDistribution.MemSobolev s 2;
+  physical weak derivatives identified with tempered derivatives;
+  exact physical norm formulas proved separately.
+
+Mathlib's Bessel weight is (1+|k|^2)^(s/2) in its native Fourier convention.
+It determines the usual H^s membership, but it is not an identity of all
+physical H^s norm conventions without the required 2*pi conversions.
+
+For an arbitrary LH trajectory:
+  E(t)=||u(t)||_2^2 at every time;
+  D(t)=||grad u(t)||_2^2 at the a.e. H1 times;
+  D(t)=0 on the remaining null set.
+
+The energy-class Bochner representative supplies a.e. strong measurability.
+Its a.e. agreement with the all-time weakly continuous representative supplies
+measurability of E for the scalar integral layer. No continuity or derivative
+of weak E is required.
+
+[03] CLASSICAL ANALYTIC INPUTS
+
+C01. Whole-space Leray-Hopf existence:
+  nu>0 and a in H imply a velocity in the class defined in [01], including
+  the strong initial trace and strong energy inequality.
+
+C02. Local H1 strong solution and continuation:
+  nu>0, b in V, initial time s imply a maximal strong solution v on [s,Tmax).
+  For every s<R<Tmax:
+    v in C([s,R];H1) intersect L2(s,R;H2),
+    partial_t v in L2(s,R;L2), v(s)=b.
+  If Tmax<infinity, the H1 norm cannot remain bounded up to Tmax.
+
+C03. Strong energy/enstrophy identities and positive-time smoothing:
+  E_v'=-2*nu*D_v;
+  (1/2)*D_v'+nu*Z_v = <(v.grad)v,Delta v>;
+  the identities hold with the standard strong-solution regularity;
+  at positive times after s, all spatial Sobolev orders and corresponding
+  time derivatives are available, continuously on compact positive intervals.
+
+C04. Relative-energy testing:
+  Smooth solenoidal approximation in the LH weak equation justifies comparison
+  against a strong solution. The energy-start and representative conditions
+  are retained in a full-measure admissible-time predicate.
+  The resulting inequality is derived explicitly in [09].
+
+References:
+  Ozański-Pooley, Theorem 4.7 and Corollary 4.6: C01 and traces;
+  Theorem 3.17 and Corollary 3.12: C02;
+  Theorem 3.2, Corollary 3.3, Theorem 3.4: C03;
+  Lemma 4.9: C04. Full URL in [15].
+
+The displayed C(H1) intersect L2(H2) form of C02 is the standard H1 energy
+refinement: smooth approximants, the enstrophy estimate and Young's inequality
+give D'+nu*Z <= C*nu^(-3)*D^3; local scalar control bounds D and integral Z.
+The equation controls partial_t v in L2(L2); Hilbert-triple continuity gives
+C(H1). A uniform local existence time on bounded H1 sets yields continuation.
+This refinement is not represented as the verbatim statement of Theorem 3.17.
+
+For a source written with viscosity one:
+  v(t,x)=nu*U(nu*(t-s),x), p_v(t,x)=nu^2*P(nu*(t-s),x), U(0)=b/nu.
+This maps NSE_1(U,P) to NSE_nu(v,p_v).
+
+C01-C04 are classical mathematical inputs. Their actual whole-space Lean
+endpoints are not supplied by a periodic declaration or by a certificate
+field that assumes the same analytic conclusion.
+
+[04] ENERGY-PRODUCT BUDGET: FINITE INTERVAL COMPOSITION
+
+DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
+  For R>0 and u in LH_nu(a),
+
+    integral_0^R E(t)*D(t) dt
+      <= (M^4-F(R)^2)/(4*nu)
+      <= M^4/(4*nu),
+
+  where F(t)=M^2-2*nu*integral_0^t D(r) dr.
+
+Proof:
+  The energy inequality gives 0<=E(t)<=F(t)<=M^2.
+  D is nonnegative and integrable on each finite interval.
+  Therefore the primitive of D is absolutely continuous, and so is F.
+  Almost everywhere, F'(t)=-2*nu*D(t).
+  F is continuous; hence F*D is integrable.
+  A.e. measurability and 0<=E*D<=F*D establish integrability of E*D.
+
+  The absolutely-continuous product identity, with both factors F, gives
+
+    integral_0^R [F'(t)*F(t)+F(t)*F'(t)] dt = F(R)^2-F(0)^2.
+
+  Substitution of the a.e. derivative and F(0)=M^2 gives
+
+    -4*nu*integral_0^R F(t)*D(t) dt = F(R)^2-M^4.
+
+  Since 4*nu>0, integral comparison yields the stated bound. QED.
+
+Selected Mathlib composition:
+  IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
+    -> AbsolutelyContinuousOnInterval.const_mul / .sub / .continuousOn
+    -> IntervalIntegrable.ae_hasDerivAt_integral
+    -> IntervalIntegrable.continuousOn_mul
+    -> MeasureTheory.Integrable.mono_nonneg
+    -> AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
+    -> intervalIntegral.integral_congr_ae
+    -> MeasureTheory.integral_mono_ae.
+
+Integral convention adapter:
+  For R>=0 and Lebesgue measure,
+    integral_0^R = integral_(0,R] = integral_(0,R).
+  Use intervalIntegrable_iff_integrableOn_Ioo_of_le,
+  intervalIntegral.integral_of_le, and integral_Ioc_eq_integral_Ioo.
+
+The exact root uses only this finite-interval estimate at R=delta.
+The parent derivation's infinite-horizon bound remains valid, but monotone
+convergence is not a dependency of the selected minimal root composition.
+
+[05] GOOD RESTART: STRICT AVERAGE AND STRONG RIGHT TRACE
+
+Set kappa=4*pi^2*nu^4>0.
+Let G_u be a full-measure predicate consisting of:
+  u(s) in V;
+  validity of the strong energy inequality starting at s;
+  agreement of the selected weak-derivative and trajectory representatives.
+
+DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
+
+  delta>M^4/(16*pi^2*nu^5)
+    -> exists s in (0,delta):
+         G_u(s) and E(s)*D(s)<kappa
+         and u_s in LH_nu(u(s)),
+  where u_s(tau)=u(s+tau).
+
+Proof of strict selection:
+  nu>0 implies
+    M^4/(4*nu) < kappa*delta.
+  Section [04] supplies integral_0^delta E*D < kappa*delta.
+  If E*D>=kappa almost everywhere on the good set, integral monotonicity
+  and its full measure give integral_0^delta E*D >= kappa*delta.
+  Contradiction. Thus an s in (0,delta) satisfying G_u and E*D<kappa exists.
+
+Equivalent source implementation:
+  QuasiFeffermanB.exists_good_time_of_integral_lt
+  with f=E*D, c=kappa, T=delta, Good=G_u.
+  Its criticalTimeMeasure T is volume.restrict(Ioo 0 T).
+  The generic lemma is selected for a later selective port, with provenance.
+  Its specialized QFB cutoff theorem is not the selected constant argument.
+
+No measurability of the predicate G_u is needed for this extraction: a.e.
+truth suffices. The frequent set {E*D<kappa} intersects the eventual good
+predicate and interval membership. The intersection has positive measure.
+
+Proof of strong right trace at s:
+  Let b=u(s). For t>=s, energy gives ||u(t)||_2^2<=||b||_2^2.
+  Weak continuity gives <u(t),b> -> ||b||_2^2 as t -> s+.
+  The exact Hilbert identity gives
+
+    0 <= ||u(t)-b||_2^2
+       = ||u(t)||_2^2 + ||b||_2^2 - 2*<u(t),b>
+      <= 2*||b||_2^2 - 2*<u(t),b> -> 0.
+
+  Hence u(t)->b strongly in L2.
+  Selected generic helper:
+    QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound.
+  Underlying Mathlib identity:
+    norm_sub_sq_real.
+
+Translation of the weak equation, the energy integrals, and the full-measure
+energy-start set yields u_s in LH_nu(b). Selected temporal source patterns:
+  QuasiFeffermanB.timeTranslate_measurePreserving_Ioc;
+  QuasiFeffermanB.timeTranslate_memLp_Ioc;
+  QuasiFeffermanB.timeTranslate_ae_Ioc;
+  intervalIntegral.integral_comp_add_right;
+  IntervalIntegrable.comp_add_right.
+
+The generic temporal lemmas preserve time measures. The distributional
+whole-space NSE restart proof remains a separate physical adapter. QED.
+
+[06] EXACT FOURIER NORMALIZATION AND AGMON CONSTANT
+
+Selected native Fourier convention:
+  F0(v)(k) = integral_R3 exp(-2*pi*i*x.k)*v(x) dx.
+Frozen angular convention:
+  H(v)(xi) = (2*pi)^(-3/2)*F0(v)(xi/(2*pi)).
+The change of variables xi=2*pi*k identifies the physical norms.
+The selected implementation computes directly in F0 normalization.
+
+For v in H2(R3;R3), complexify v and put h=F0(v).
+The L2 Fourier isometry and distributional derivative identities yield
+
+  E = integral |h(k)|^2 dk;
+  D = integral (2*pi)^2*|k|^2*|h(k)|^2 dk;
+  Z = integral (2*pi)^4*|k|^4*|h(k)|^2 dk.
+
+The sum of directional frequency squares equals |k|^2 by
+OrthonormalBasis.sum_sq_inner_left. All vector norms are Hilbert norms.
+
+For lambda>0, define
+  W_lambda(k)=(2*pi)^2*|k|^2 + lambda^2*(2*pi)^4*|k|^4.
+The reciprocal is assigned zero at k=0; the singleton is Lebesgue null.
+
+Radial integration and positive scaling give
+
+  integral_R3 W_lambda(k)^(-1) dk
+    = 4*pi*integral_0^infinity
+        r^2/[(2*pi)^2*r^2+lambda^2*(2*pi)^4*r^4] dr
+    = (1/pi)*integral_0^infinity [1+(2*pi*lambda*r)^2]^(-1) dr
+    = (1/pi)*(1/(2*pi*lambda))*(pi/2)
+    = 1/(4*pi*lambda).
+
+The same reduction proves integrability, using integrable_inv_one_add_sq.
+Cancellation of r^2 is restricted to r>0.
+
+Weighted Cauchy-Schwarz:
+  sqrt(W_lambda)*|h| and 1/sqrt(W_lambda) belong to L2;
+  their product equals |h| almost everywhere;
+  consequently h belongs to L1 and
+
+    (integral |h|)^2 <= (D+lambda^2*Z)/(4*pi*lambda).
+
+The L1 inverse Fourier map supplies a bounded continuous representative V.
+Its distributional agreement with the L2 inverse identifies V=v a.e.
+The pointwise inverse Fourier bound then gives
+
+    ||v||_infinity^2 <= (D+lambda^2*Z)/(4*pi*lambda).
+
+For D,Z>0 choose lambda=sqrt(D/Z):
+
+  DERIVED ENDPOINT QFA_AGMON_R3:
+    ||v||_infinity^2 <= sqrt(D*Z)/(2*pi).
+
+If D=0 or Z=0, the corresponding weighted spectral integral vanishes.
+Then h=0 off the null singleton {0}, and Plancherel gives v=0. The same
+Agmon estimate holds in these cases.
+
+A second Cauchy-Schwarz estimate gives
+
+  DERIVED ENDPOINT QFA_L2_H1_H2_INTERPOLATION:
+    D <= sqrt(E*Z), equivalently D^2<=E*Z.
+
+Pointwise |(v.grad)v|<=|v|*|grad v|_F and integral Holder now give
+
+  |<(v.grad)v,Delta v>|
+    <= ||v||_infinity*sqrt(D)*sqrt(Z)
+    <= (2*pi)^(-1/2)*D^(3/4)*Z^(3/4)
+    <= (2*pi)^(-1/2)*(E*D)^(1/4)*Z.
+
+Thus the coefficient 1/sqrt(2*pi) is preserved for vector fields, without
+a factor 3 or sqrt(3). The exact source inputs are recorded in Appendix B.
+
+New formal adapters required by this section:
+  real/complex isometry;
+  physical derivative/distribution identification;
+  exact spectral norm identities;
+  L1 inverse/L2 inverse representative compatibility;
+  radial-integral assembly, integrability, weighted estimate, optimization.
+The existing sources supply the constituent theorems, not an already named
+whole-space QFA_AGMON_R3 declaration.
+
+[07] SUBCRITICAL PRODUCT: GLOBAL STRONG RESTART
+
+Fix b=u(s) from [05]. Write
+  E_s=||b||_2^2, D_s=||grad b||_2^2,
+  E_s*D_s<4*pi^2*nu^4,
+  C=(2*pi)^(-1/2), eta=nu-C*(E_s*D_s)^(1/4)>0.
+
+C02 supplies a maximal H1 strong solution v starting from b at time s.
+The energy identity gives E_v(t)<=E_s.
+Section [06] and enstrophy give, at positive smooth times,
+
+  (1/2)*D_v'(t) + [nu-C*(E_v(t)*D_v(t))^(1/4)]*Z_v(t) <= 0.
+
+Selected Methlib scalar theorem:
+  SingularClosure.scalar_invariant_of_deriv_nonpos_below.
+
+Its signature requires a right derivative even at its initial endpoint.
+An H1 trace at s does not itself discharge this hypothesis.
+
+DERIVED POSITIVE-TIME ADAPTER:
+  If E_s=0, the strong energy identity gives v=0 and the result follows.
+  Otherwise choose B>D_s such that E_s*B<4*pi^2*nu^4.
+  For every fixed s<R<Tmax, continuity in H1 gives D_v(q)<B for q>s
+  sufficiently near s. On [q,R], smoothing supplies the derivative data.
+
+  Instantiate the scalar theorem with
+    A(t)=D_v(q+t), d(t)=D_v'(q+t),
+    a=D_v(q), b=B, T=R-q.
+  Whenever A(t)<=B,
+    nu-C*(E_v(q+t)*A(t))^(1/4)
+      >= nu-C*(E_s*B)^(1/4)>0,
+  so the enstrophy inequality implies d(t)<=0.
+  Therefore D_v(t)<=D_v(q) on [q,R].
+  Let q -> s+ and use C(H1): D_v(t)<=D_s.
+
+Consequently E_v(t)*D_v(t)<=E_s*D_s and
+  D_v'(t)+2*eta*Z_v(t)<=0.
+Integration from q>s and passage q -> s+ give
+
+  D_v(t)+2*eta*integral_s^t Z_v(r) dr <= D_s.
+
+The limits use D_v(q)->D_s and local integrability of Z from C02.
+The uniform H1 bound E_v+D_v<=E_s+D_s excludes finite Tmax by C02.
+
+DERIVED ENDPOINT QFA_GLOBAL_STRONG_OF_SUBCRITICAL_PRODUCT:
+  b in V and E_s*D_s<4*pi^2*nu^4
+    -> global strong v from b;
+       v smooth for t>s;
+       E_v<=E_s, D_v<=D_s;
+       D_v(t)+2*eta*integral_s^t Z_v<=D_s.
+
+No application of the scalar theorem at an unjustified H1 derivative time
+is included in this composition. QED.
+
+[08] CONTINUOUS INTEGRABLE COMPARISON MAJORANT
+
+For a finite shifted horizon R>0, set V(t)=v(s+t), 0<=t<=R.
+For t>0 define
+  g(t)=sqrt(D_v(s+t))*sqrt(Z_v(s+t))/(2*pi*nu),
+and set g(0)=0.
+
+Agmon gives nu^(-1)*||V(t)||_infinity^2<=g(t).
+Positive-time H2 continuity gives g continuous on (0,R].
+The enstrophy budget gives
+
+  integral_0^R g(t) dt
+    <= sqrt(D_s)/(2*pi*nu) * sqrt(R*integral_s^(s+R) Z_v)
+    <= D_s/(2*pi*nu)*sqrt(R/(2*eta))
+    =: B_R < infinity.
+
+Thus g is nonnegative and integrable through t=0, although no continuity
+there is required.
+
+For any U in LH_nu(b), put e(t)=||U(t)-V(t)||_2^2.
+The two energy bounds imply
+  0<=e(t)<=2*||U(t)||_2^2+2*||V(t)||_2^2<=4*E_s.
+Therefore g*e is integrable on (0,R).
+The choice of g avoids a separate continuity proof for the L-infinity norm.
+
+[09] WHOLE-SPACE RELATIVE ENERGY AND SELECTED COMPARISON ENDPOINT
+
+Let U in LH_nu(b) be arbitrary. Write w=U-V.
+At admissible positive starting times epsilon, C04 gives
+
+  (1/2)*||w(t)||_2^2 + nu*integral_epsilon^t ||grad w||_2^2
+    <= (1/2)*||w(epsilon)||_2^2
+       + integral_epsilon^t integral_R3 (w.grad)w . V.
+
+Incompressibility and integration by parts give this form of the cross term.
+At a.e. time,
+  |integral (w.grad)w . V|
+    <= ||V||_infinity*||w||_2*||grad w||_2
+    <= (nu/2)*||grad w||_2^2
+       +(1/(2*nu))*||V||_infinity^2*||w||_2^2.
+
+After multiplication by two and absorption,
+
+  e(t)+nu*integral_epsilon^t ||grad w||_2^2
+    <= e(epsilon)+integral_epsilon^t g(r)*e(r) dr.
+
+Dropping the nonnegative dissipation term gives the required scalar inequality.
+If the testing construction initially supplies only a.e. upper endpoints,
+weak L2 continuity of U, strong continuity of V, weak lower semicontinuity
+of the squared norm, and continuity of the integral primitive extend it to
+every upper endpoint. This is part of the physical comparison adapter.
+
+The full-measure admissible-time predicate and
+  SingularClosure.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+give a sequence epsilon_n in (0,R] with epsilon_n->0 and all necessary
+start-time properties. Monotonicity of this sequence is not required.
+
+Both U and V have strong initial trace b. Hence e(epsilon_n)->0.
+Sections [08]-[09] discharge all scalar hypotheses of
+
+  SingularClosure.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+
+with:
+  normed group = real spatial L2;
+  u=U, v=V, a=g, a_0=b, T=R, M=B_R.
+
+The scalar source theorem yields U(t)=V(t) in L2 for every t in (0,R].
+The common datum gives equality at zero. Since R is arbitrary, U=V globally.
+
+Explicit mathematical comparison:
+  for fixed t>0 and all sufficiently large n,
+    e(t)<=e(epsilon_n)*exp(integral_epsilon_n^t g)
+        <=e(epsilon_n)*exp(B_R)->0.
+  With e>=0, e(t)=0. QED.
+
+DERIVED ENDPOINT QFA_WEAK_STRONG_EQ:
+  Every LH trajectory from the subcritical H1 datum b equals the global
+  strong reference velocity at every time.
+
+The selected Methlib theorem proves the scalar comparison. The whole-space
+cross-testing inequality above remains an actual formalization obligation;
+it is not supplied by a generic comparison signature alone.
+
+[10] SMOOTH PRESSURE AND ROOT ASSEMBLY
+
+At every positive time after s, v belongs to H2 and hence to L-infinity by [06].
+Thus v_i*v_j belongs to L2, using L-infinity times L2.
+
+For k!=0 define m_ij(k)=-k_i*k_j/|k|^2, and set m_ij(0)=0.
+Each symbol is Borel measurable and satisfies |m_ij|<=1.
+Consequently multiplication by m_ij maps Fourier L2 to L2 contractively.
+Define
+
+  p(t)=sum_(i,j) F0^(-1)[m_ij*F0(v_i(t)*v_j(t))].
+
+Selected construction:
+  memLp_top_of_bound
+    -> MemLp.smul / MemLp.mul
+    -> Lp.norm_le_norm_of_ae_le
+    -> L2 Fourier isometry and inverse.
+
+The real and even symbol preserves real-valuedness through Fourier conjugate
+symmetry. The multiplier identity gives
+  -Delta p = sum_(i,j) partial_i partial_j(v_i*v_j).
+The projected strong NSE and this pressure reconstruction yield the full NSE.
+The L2 pressure normalization excludes spatial additive constants.
+
+For any nonnegative integer m, positive-time v belongs to H^(m+2).
+Leibniz expresses derivatives through order m of v_i*v_j as finite sums.
+Agmon on the differentiated velocity bounds one factor in L-infinity, and
+the other factor belongs to L2. Thus v_i*v_j belongs to H^m.
+The bounded symbol commutes with polynomial frequency multipliers, so p
+belongs to H^m for every m. The corresponding time regularity from C03 and
+Fourier reconstruction give a smooth spacetime pressure representative.
+
+The pressure route uses positive-time H2. A separate H1-to-L4 embedding
+adapter is unnecessary for this root composition.
+
+The smooth-symbol theorem
+  TemperedDistribution.MemSobolev.fourierMultiplierCLM_of_bounded
+also requires HasTemperateGrowth, including global smoothness.
+The Riesz symbols above fail that condition at zero. Hence the selected
+pressure construction uses bounded measurable multiplication on L2.
+
+ROOT PROOF:
+  C01 establishes Q0 and supplies the stipulated strong initial traces Q1.
+  Fix arbitrary u in LH_nu(a) and arbitrary delta>T_QFA(a,nu).
+  Sections [04]-[05] give s in (0,delta) with a good subcritical H1 trace b.
+  Sections [06]-[07] give a global strong reference v from b at time s.
+  Sections [08]-[09], applied to the shifted u, give u(t)=v(t) for t>=s.
+  Since s<delta, smoothing and the pressure construction hold on a time
+  neighborhood of every point of [delta,infinity). Therefore Q2 holds.
+
+  The shifted smooth tail tau |-> u(delta+tau) is LH_nu(u(delta)) by its
+  energy identity, strong trace, and translated distributional equation.
+  For any other LH velocity from u(delta), repeat [08]-[09] against that
+  strong tail on every finite horizon. The two velocities coincide.
+  Thus the admissible future set is exactly the singleton in Q3. QED.
+
+[11] ENTRY-POINT DECISIONS
+
+SELECTED DIRECT METHLIB MODULES:
+  SingularClosure.CriticalInvariant
+    imports SingularClosure.LinearBudget, which imports Mathlib.
+  SingularClosure.CriticalAdmissibleTimes
+    imports Mathlib.
+  SingularClosure.CriticalUniqueness
+    imports Mathlib.
+
+The selected declarations are spatially generic. Their import chains do not
+require the periodic physical NSE structures. Import inspection is not a
+theorem-level axiom audit.
+
+SELECTED QFB PATTERNS FOR LATER SELECTIVE PORT:
+  exists_good_time_of_integral_lt;
+  strong_tendsto_of_inner_and_norm_bound;
+  timeTranslate_measurePreserving_Ioc;
+  timeTranslate_memLp_Ioc;
+  timeTranslate_ae_Ioc.
+
+At the inspected QFA pin, the QFB directory is absent. The inspected QFB
+source pin uses the same Lean 4.33.0 / Mathlib db584cd6 baseline.
+The containing QFB files import periodic PDE infrastructure. Only the generic
+statements and proofs are selected for transfer, with source provenance.
+No transfer or new Lean implementation is performed in this B-tier artifact.
+
+BOUNDARIES OF OTHER INSPECTED ENDPOINTS:
+  CriticalLerayHopf and CriticalPhysicalL2 use volume.restrict unitCube.
+  CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON has periodic hypotheses.
+  QFB LH_RESTART_FROM_ENERGY_START and LH_UNIQUE_FUTURE_OF_SMOOTH_REFERENCE
+  also have periodic semantics.
+  These are physical architecture references, not whole-space theorem inputs.
+
+  The generic strict-average lemma accepts the improved integral budget.
+  The specialized QFB cutoff arithmetic encodes 8*pi^2; QFA uses 16*pi^2
+  from the sharper energy-envelope product budget.
+
+  A continuous-minimum lemma would impose continuity of weak E*D, which is
+  unavailable. The selected extraction uses integrability and a.e. truth.
+
+  CriticalToRegularityCertificate fields that posit regularity implications
+  remain premises of their composition; they do not discharge those analytic
+  implications for the present whole-space PDE.
+
+[12] PROPOSED QFA ENDPOINT CONTRACTS
+
+The identifiers below name mathematical endpoints, not existing compiled
+Lean declarations.
+
+QFA_LH_PROFILE:
+  actual whole-space LH -> measurable E, nonnegative locally integrable D,
+  all-time zero-start energy envelope, full-measure good restart predicate.
+
+QFA_ENERGY_PRODUCT_BUDGET:
+  scalar profile -> finite-interval product bound [04].
+
+QFA_GOOD_RESTART_BEFORE:
+  product bound + strict frozen cutoff + good predicate -> s in (0,delta),
+  u(s) in H1, E(s)D(s)<4*pi^2*nu^4, and actual shifted LH membership.
+
+QFA_SPECTRAL_ENERGY_IDENTITIES:
+  physical H2 weak derivatives -> exact native Fourier E,D,Z identities.
+
+QFA_AGMON_R3 and QFA_L2_H1_H2_INTERPOLATION:
+  H2 -> exact vector Agmon and interpolation constants [06].
+
+QFA_GLOBAL_STRONG_OF_SUBCRITICAL_PRODUCT:
+  actual local H1 NSE + identities + continuation + exact estimates
+  -> global strong solution and quantitative enstrophy budget [07].
+
+QFA_RELATIVE_ENERGY:
+  actual whole-space LH + strong NSE -> inequality at admissible starts [09].
+
+QFA_WEAK_STRONG_EQ:
+  relative energy + g-integrability + common trace -> all-time L2 equality.
+
+QFA_SMOOTH_PRESSURE:
+  positive-time strong smoothing + bounded L2 multipliers -> actual smooth
+  pressure representative solving the full NSE.
+
+QUASI_FEFFERMAN_A:
+  whole-space existence + the preceding derived endpoints -> exact [01].
+
+[13] CONSTRUCTION ORDER AND REMAINING FORMAL OBLIGATIONS
+
+Selected first implementation slice:
+  1. Scalar energy-envelope budget and interval/set-integral adapters.
+  2. Generic strict-average extraction and Hilbert strong-trace lemma.
+  3. Whole-space trajectory semantics and actual restart adapter.
+  4. Exact spectral identities, radial kernel, vector Agmon, interpolation.
+  5. Positive-time scalar-barrier adapter and enstrophy budget.
+  6. Whole-space relative energy + generic Methlib comparison.
+  7. Pressure reconstruction, tail membership, deterministic root composition.
+
+Parallel analytic construction obligations:
+  P01. Whole-space Leray-Hopf existence with the exact representative and
+       strong energy-start convention.
+  P02. Whole-space local H1 NSE construction and H1 continuation alternative.
+  P03. Energy/enstrophy identities and positive-time high Sobolev smoothing.
+  P04. Legitimate whole-space relative-energy testing and endpoint extension.
+
+Representation and estimate adapters:
+  A01. Whole-space L2, weak-gradient, solenoidal and trajectory semantics.
+  A02. Real/complex isometry and physical/distributional derivative agreement.
+  A03. L1 inverse/L2 inverse representative compatibility.
+  A04. Exact radial integral and weighted Fourier estimate assembly.
+  A05. Time-translation of physical weak NSE and the strong energy convention.
+  A06. Positive-time barrier passage q -> s+.
+  A07. Continuous comparison majorant and product integrability.
+  A08. Bounded pressure multipliers, real-valuedness, Poisson identity and
+       joint spacetime smoothness.
+
+These are implementation obligations, not new assumptions added to the
+mathematical frozen root. Treating an unresolved obligation as a named
+certificate would change the formal status to a conditional implication;
+it would not discharge the physical endpoint.
+
+Verification gate:
+  matching external compiler + exact root theorem-level axiom audit;
+  no sorryAx or unapproved axioms;
+  retain caches for external Lean runs;
+  no local Lean execution.
+
+[14] SOURCE PROVENANCE
+
+Mathlib base URL:
+  https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/
+
+Methlib QFA source base URL:
+  https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/
+
+Methlib QFB source base URL:
+  https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/
+
+Each appendix path is relative to its declared repository base.
+Mathlib source checkout matched the full pin and had no tracked modifications.
+Methlib files were fetched at the explicit pins. The QFA package dependency
+baseline was read from:
+  regularity-B-assembly/Singular-Axiomatic-closure/lean-toolchain
+  regularity-B-assembly/Singular-Axiomatic-closure/lake-manifest.json
+  regularity-B-assembly/Singular-Axiomatic-closure/lakefile.toml
+
+Manifest Mathlib revision:
+  db584cd6d46c92f209a44c0f1c829460d327499d.
+Manifest Git blob:
+  5f6664136213061c7fba9bcbaddff77f8039629f.
+Toolchain Git blob:
+  025e59548e48cf71f2744154e2890beefe30a258.
+
+Source inventory is a reproducible statement lookup, not a claim that the
+composed QFA theorem has elaborated or passed an axiom audit.
+
+[15] MATHEMATICAL REFERENCES
+
+R01. W. S. Ozański and B. C. Pooley, Leray's fundamental work on the
+     Navier-Stokes equations: a modern review of "Sur le mouvement d'un
+     liquide visqueux emplissant l'espace".
+     https://arxiv.org/pdf/1708.09787
+     Theorem 4.7; Corollary 4.6; Theorem 3.17; Corollary 3.12;
+     Theorem 3.2; Corollary 3.3; Theorem 3.4; Lemma 4.9.
+
+R02. W. Xie, A sharp pointwise bound for functions with L2-Laplacians
+     on arbitrary domains and its applications.
+     https://arxiv.org/pdf/math/9204239
+     Theorem 1; independent reference for the exact Agmon constant.
+     The whole-space vector estimate is derived explicitly in [06].
+
+R03. C. L. Fefferman, Existence and smoothness of the Navier-Stokes equation.
+     https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf
+     Problem context only; the frozen eventual-regularity root is [01].
+
+APPENDICES: EXACT SOURCE SIGNATURES AND ADAPTER PARAMETERS
+
+The appended signatures are source excerpts with ambient variables summarized
+where needed. They are reference text, not a new executable Lean file.
+
+APPENDIX A. MATHLIB AC AND MEASURE SIGNATURES
+
+2.1 Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean:412
+
+theorem _root_.IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
+    {f : ℝ → ℝ} {a b c : ℝ}
+    (h : IntervalIntegrable f volume a b) (hc : c ∈ uIcc a b) :
+    AbsolutelyContinuousOnInterval (fun x ↦ ∫ v in c..x, f v) a b
+
+QFA: f=D, a=c=0, b=delta. Membership 0 in uIcc 0 delta is automatic.
+
+2.2 Same file:216,204,245,289
+
+theorem AbsolutelyContinuousOnInterval.const_mul {f : ℝ → ℝ}
+    (α : ℝ) (hf : AbsolutelyContinuousOnInterval f a b) :
+    AbsolutelyContinuousOnInterval (fun x ↦ α * f x) a b
+
+theorem AbsolutelyContinuousOnInterval.sub
+    (hf : AbsolutelyContinuousOnInterval f a b)
+    (hg : AbsolutelyContinuousOnInterval g a b) :
+    AbsolutelyContinuousOnInterval (f - g) a b
+
+theorem AbsolutelyContinuousOnInterval.continuousOn
+    (hf : AbsolutelyContinuousOnInterval f a b) :
+    ContinuousOn f (uIcc a b)
+
+theorem AbsolutelyContinuousOnInterval.mul {f g : ℝ → ℝ}
+    (hf : AbsolutelyContinuousOnInterval f a b)
+    (hg : AbsolutelyContinuousOnInterval g a b) :
+    AbsolutelyContinuousOnInterval (f * g) a b
+
+Constant function AC adapter:
+  LipschitzWith.const (Topology/EMetricSpace/Lipschitz.lean:198)
+  -> LipschitzWith.lipschitzOnWith (same:136)
+  -> LipschitzOnWith.absolutelyContinuousOnInterval
+     (Function/AbsolutelyContinuous.lean:294).
+Alternative: ContDiffOn.absolutelyContinuousOnInterval (same:312).
+
+2.3 Mathlib/MeasureTheory/Integral/IntervalIntegral/LebesgueDifferentiationThm.lean:66
+
+theorem IntervalIntegrable.ae_hasDerivAt_integral {f : ℝ → E} {a b : ℝ}
+    (hf : IntervalIntegrable f volume a b) :
+    ∀ᵐ x, x ∈ uIcc a b → ∀ c ∈ uIcc a b,
+      HasDerivAt (fun x => ∫ (t : ℝ) in c..x, f t) (f x) x
+
+Ambient E: NormedAddCommGroup, NormedSpace ℝ, CompleteSpace. QFA uses ℝ.
+Apply c=0. Combine with HasDerivAt.const_mul and HasDerivAt.const_sub.
+
+Mathlib/Analysis/Calculus/Deriv/Mul.lean:355
+theorem HasDerivAt.const_mul (c : 𝔸) (hd : HasDerivAt d d' x) :
+    HasDerivAt (fun y => c * d y) (c * d') x
+
+Mathlib/Analysis/Calculus/Deriv/Add.lean:434
+nonrec theorem HasDerivAt.const_sub (c : F) (hf : HasDerivAt f f' x) :
+    HasDerivAt (fun x ↦ c - f x) (-f') x
+
+Mathlib/Analysis/Calculus/Deriv/Basic.lean:438
+theorem HasDerivAt.deriv (h : HasDerivAt f f' x) : deriv f x = f'
+
+2.4 Mathlib/MeasureTheory/Integral/IntervalIntegral/AbsolutelyContinuousFun.lean:245
+
+theorem AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
+    {f g : ℝ → ℝ} {a b : ℝ}
+    (hf : AbsolutelyContinuousOnInterval f a b)
+    (hg : AbsolutelyContinuousOnInterval g a b) :
+    ∫ x in a..b, deriv f x * g x + f x * deriv g x =
+      f b * g b - f a * g a
+
+QFA: f=g=F, a=0, b=delta. This is the preferred budget identity.
+
+Equivalent alternate core (same file:225):
+theorem AbsolutelyContinuousOnInterval.integral_deriv_eq_sub
+    {f : ℝ → ℝ} {a b : ℝ}
+    (hf : AbsolutelyContinuousOnInterval f a b) :
+    ∫ (x : ℝ) in a..b, deriv f x = f b - f a
+
+Use alternate with f=F*F and AC multiplication if desired.
+
+2.5 Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean:355
+
+theorem IntervalIntegrable.continuousOn_mul {f g : ℝ → A}
+    (hf : IntervalIntegrable f μ a b)
+    (hg : ContinuousOn g [[a, b]]) :
+    IntervalIntegrable (fun x => g x * f x) μ a b
+
+QFA: f=D, g=F. A=ℝ.
+
+Mathlib/MeasureTheory/Function/L1Space/Integrable.lean:91
+theorem MeasureTheory.Integrable.mono_nonneg
+    [Lattice β] [HasSolidNorm β] [AddLeftMono β] {f g : α → β}
+    (hg : Integrable g μ) (hf : AEStronglyMeasurable f μ)
+    (hnonneg : ∀ᵐ a ∂μ, 0 ≤ f a) (h : ∀ᵐ a ∂μ, f a ≤ g a) :
+    Integrable f μ
+
+QFA: measure=volume.restrict(Ioo 0 delta), f=ED, g=FD, β=ℝ.
+A.e. measurability of ED follows from AEStronglyMeasurable.mul
+(Function/StronglyMeasurable/AEStronglyMeasurable.lean:301).
+
+2.6 Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:627
+
+lemma MeasureTheory.integral_mono_ae {f g : α → E}
+    (hf : Integrable f μ) (hg : Integrable g μ)
+    (h : f ≤ᵐ[μ] g) : ∫ x, f x ∂μ ≤ ∫ x, g x ∂μ
+
+QFA scalar specialization E=ℝ, restricted measure as above.
+
+Interval alternative, IntervalIntegral/Basic.lean:1424:
+theorem intervalIntegral.integral_mono_ae_restrict
+    (hab : a ≤ b) (hf : IntervalIntegrable f μ a b)
+    (hg : IntervalIntegrable g μ a b)
+    (h : f ≤ᵐ[μ.restrict (Icc a b)] g) :
+    (∫ u in a..b, f u ∂μ) ≤ ∫ u in a..b, g u ∂μ
+
+2.7 Same IntervalIntegral/Basic.lean:1242,1257
+
+theorem intervalIntegral.integral_congr_ae
+    (h : ∀ᵐ x ∂μ, x ∈ Ι a b → f x = g x) :
+    ∫ x in a..b, f x ∂μ = ∫ x in a..b, g x ∂μ
+
+theorem intervalIntegral.integral_congr_ae_restrict
+    {a b : ℝ} {f g : ℝ → E} {μ : Measure ℝ}
+    (h : f =ᵐ[μ.restrict (Ι a b)] g) :
+    ∫ x in a..b, f x ∂μ = ∫ x in a..b, g x ∂μ
+
+Use for the a.e. derivative replacement in the FTC identity.
+
+
+INTERVAL / SET BRIDGES
+
+Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean:150
+theorem intervalIntegrable_iff_integrableOn_Ioo_of_le [NullSingletonClass μ]
+    (hab : a ≤ b) (ha : ‖f a‖ₑ ≠ ∞ := by finiteness)
+    (hb : ‖f b‖ₑ ≠ ∞ := by finiteness) :
+    IntervalIntegrable f μ a b ↔ IntegrableOn f (Ioo a b) μ
+
+Same:677
+theorem intervalIntegral.integral_of_le (h : a ≤ b) :
+    ∫ x in a..b, f x ∂μ = ∫ x in Ioc a b, f x ∂μ
+
+Mathlib/MeasureTheory/Integral/Bochner/Set.lean:712
+theorem MeasureTheory.integral_Ioc_eq_integral_Ioo [NullSingletonClass μ] :
+    ∫ t in Ioc x y, f t ∂μ = ∫ t in Ioo x y, f t ∂μ
+
+For real-valued E,D all endpoint enorm-finiteness side conditions are
+automatic. Lebesgue measure supplies NullSingletonClass. delta>=0 gives
+uIcc 0 delta = Icc 0 delta and uIoc 0 delta = Ioc 0 delta.
+
+
+APPENDIX B. MATHLIB FOURIER / SOBOLEV SIGNATURES
+
+[F01] Mathlib/Analysis/Fourier/FourierTransform.lean:438
+namespace Real
+lemma fourier_eq' (f : V -> E) (w : V) :
+  F f w = integral v, Complex.exp ((up(-2*pi*<v,w>) * Complex.I)) smul f v
+Actual Lean statement:
+lemma fourier_eq' (f : V → E) (w : V) :
+    𝓕 f w = ∫ v, Complex.exp ((↑(-2 * π * ⟪v, w⟫) * Complex.I)) • f v := by ...
+V is a finite-dimensional real inner-product space with its Borel measurable structure;
+E is a complex normed space. Real.fourierInv_eq' at line 451 has the positive exponent.
+
+[F02] Mathlib/Analysis/Fourier/LpSpace.lean:50,89,93
+namespace MeasureTheory.Lp
+def fourierTransformₗᵢ : (Lp (α := E) F 2) ≃ₗᵢ[ℂ] (Lp (α := E) F 2)
+theorem norm_fourier_eq (f : Lp (α := E) F 2) : ‖𝓕 f‖ = ‖f‖
+theorem inner_fourier_eq (f g : Lp (α := E) F 2) : ⟪𝓕 f, 𝓕 g⟫ = ⟪f, g⟫
+Variables: E is a finite-dimensional real inner-product space with measurable/Borel structure;
+F is a complete complex inner-product space. Full volume is the measure.
+This is an actual L2 linear isometry equivalence, not merely Schwartz Plancherel.
+FourierPair and FourierInvPair instances in the same file give inverse identities.
+
+[F03] Mathlib/Analysis/Fourier/LpSpace.lean:99,108,120,132
+theorem SchwartzMap.toLp_fourier_eq (f : 𝓢(E, F)) :
+  𝓕 (f.toLp 2) = (𝓕 f).toLp 2
+theorem SchwartzMap.toLp_fourierInv_eq (f : 𝓢(E, F)) :
+  𝓕⁻ (f.toLp 2) = (𝓕⁻ f).toLp 2
+theorem MeasureTheory.Lp.fourier_toTemperedDistribution_eq (f : Lp (α := E) F 2) :
+  𝓕 (f : 𝓢'(E, F)) = (𝓕 f : Lp (α := E) F 2)
+theorem MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq (f : Lp (α := E) F 2) :
+  𝓕⁻ (f : 𝓢'(E, F)) = (𝓕⁻ f : Lp (α := E) F 2)
+The last two right-hand sides are coerced to tempered distributions by elaboration.
+
+[F04] Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean:181,205,314,318
+SchwartzMap.fourier_fderivCLM_eq and SchwartzMap.fourier_lineDerivOp_eq implement the
+2*pi*i directional multiplier on Schwartz functions.
+theorem fourier_lineDerivOp_eq (f : 𝓢(V, E)) (m : V) :
+  𝓕 (∂_{m} f) = (2 * π * Complex.I) • smulLeftCLM E (inner ℝ · m) (𝓕 f)
+theorem integral_norm_sq_fourier (f : 𝓢(V, H)) :
+  ∫ ξ, ‖𝓕 f ξ‖ ^ 2 = ∫ x, ‖f x‖ ^ 2
+H can be any complete complex Hilbert space. Therefore vector estimates need no factor 3.
+
+[F05] Mathlib/Analysis/Distribution/TemperedDistribution.lean:568
+theorem TemperedDistribution.fourier_lineDerivOp_eq (f : 𝓢'(E, F)) (m : E) :
+  𝓕 (∂_{m} f) = (2 * π * Complex.I) • smulLeftCLM F (inner ℝ · m) (𝓕 f)
+Mathlib/Analysis/Distribution/FourierMultiplier.lean:209
+theorem TemperedDistribution.laplacian_eq_fourierMultiplierCLM (f : 𝓢'(E, F)) :
+  Δ f = -(2 * π) ^ 2 • fourierMultiplierCLM F (fun x ↦ Complex.ofReal (‖x‖ ^ 2)) f
+Polynomial multipliers are smooth and of temperate growth, so these APIs apply.
+
+[F06] Mathlib/Analysis/Distribution/Sobolev.lean:149,153,218,241,298,316,344
+def TemperedDistribution.MemSobolev (s : ℝ) (p : ℝ≥0∞) [hp : Fact (1 ≤ p)]
+    (f : 𝓢'(E, F)) : Prop :=
+  ∃ (f' : Lp F p (volume : Measure E)), besselPotential E F s f = f'
+theorem TemperedDistribution.memSobolev_zero_iff {p : ℝ≥0∞} [hp : Fact (1 ≤ p)]
+    {f : 𝓢'(E, F)} : MemSobolev 0 p f ↔ ∃ (f' : Lp F p (volume : Measure E)), f = f'
+theorem TemperedDistribution.memSobolev_iff_exists_smulLeftCLM_fourier
+    {s : ℝ} {f : 𝓢'(E, F)} :
+  MemSobolev s 2 f ↔ ∃ (f' : Lp F 2 (volume : Measure E)),
+    smulLeftCLM F (fun x ↦ ((1 + ‖x‖ ^ 2) ^ (s / 2) : ℝ)) (𝓕 f) = f'
+theorem TemperedDistribution.MemSobolev.fourier_memL1 {s : ℝ}
+    (hs : Module.finrank ℝ E < 2 * s) {f : 𝓢'(E, F)} (hf : MemSobolev s 2 f) :
+  ∃ (v : Lp F 1 (volume : Measure E)), 𝓕 f = (v : 𝓢'(E, F))
+theorem TemperedDistribution.MemSobolev.mono {s s' : ℝ} (h : s' ≤ s)
+    {f : 𝓢'(E, F)} (hf : MemSobolev s 2 f) : MemSobolev s' 2 f
+theorem TemperedDistribution.MemSobolev.lineDerivOp {s : ℝ} {f : 𝓢'(E, F)}
+    (hf : MemSobolev s 2 f) {m : E} : MemSobolev (s - 1) 2 (∂_{m} f)
+theorem TemperedDistribution.MemSobolev.laplacian {s : ℝ} {f : 𝓢'(E, F)}
+    (hf : MemSobolev s 2 f) : MemSobolev (s - 2) 2 (Δ f)
+The Bessel weight is (1+|k|^2)^(s/2), i.e. (1-(2*pi)^(-2) Delta)^(s/2).
+Thus membership agrees with physical Hs, but constants/norms need explicit conversion.
+The file header's memSobolev_two_iff_fourier is stale: use the actual name above.
+
+[F07] Mathlib/Analysis/Fourier/FourierTransform.lean:570,599
+Within namespace Real, declarations Lp.fourierTransformInv and Lp.fourierTransformInvCLM:
+def Real.Lp.fourierTransformInv (f : Lp (α := V) E 1) : V →ᵇ E
+def Real.Lp.fourierTransformInvCLM : Lp (α := V) E 1 →L[ℂ] V →ᵇ E
+Line 580:
+theorem Real.Lp.fourierTransformInv_apply (f : Lp (α := V) E 1) (x : V) :
+  Lp.fourierTransformInv f x = 𝓕⁻ (f : V → E) x
+Use this to select the bounded continuous representative once the transform is L1.
+The compatibility of this L1 inverse representative with the L2 inverse still needs an adapter;
+the inspected LpSpace file provides L2-to-distribution compatibility, not that complete adapter.
+
+[F08] Mathlib/Analysis/Fourier/FourierTransform.lean:100
+theorem VectorFourier.norm_fourierIntegral_le_integral_norm (e : AddChar 𝕜 𝕊)
+    (μ : Measure V) (L : V →ₗ[𝕜] W →ₗ[𝕜] 𝕜) (f : V → E) (w : W) :
+  ‖fourierIntegral e μ L f w‖ ≤ ∫ v : V, ‖f v‖ ∂μ
+Instantiate with e=fourierChar, L=-inner, and full volume for inverse-Fourier bound.
+
+[F09] Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:1191
+theorem MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg {p q : ℝ}
+    (hpq : p.HolderConjugate q) {f g : α → ℝ}
+    (hf_nonneg : 0 ≤ᵐ[μ] f) (hg_nonneg : 0 ≤ᵐ[μ] g)
+    (hf : MemLp f (ENNReal.ofReal p) μ) (hg : MemLp g (ENNReal.ofReal q) μ) :
+  ∫ a, f a * g a ∂μ ≤ (∫ a, f a ^ p ∂μ) ^ (1 / p) * (∫ a, g a ^ q ∂μ) ^ (1 / q)
+Instantiate p=q=2. Both MemLp obligations must be proved before use; a totalized divergent
+Bochner integral is not a substitute for integrability evidence.
+
+[F10] Mathlib/MeasureTheory/Constructions/HaarToSphere.lean:255,296
+For nontrivial finite-dimensional real normed E, Borel structure, additive Haar measure mu:
+lemma MeasureTheory.integrable_fun_norm_addHaar {f : ℝ → F} :
+  Integrable (f ‖·‖) μ ↔ IntegrableOn
+    (fun y : ℝ ↦ y ^ (Module.finrank ℝ E - 1) • f y) (Ioi 0)
+lemma MeasureTheory.integral_fun_norm_addHaar (f : ℝ → F) :
+  ∫ x, f (‖x‖) ∂μ = Module.finrank ℝ E • μ.real (ball 0 1) •
+    ∫ y in Ioi (0 : ℝ), y ^ (Module.finrank ℝ E - 1) • f y
+The source uses local notation dim E := Module.finrank R E.
+
+[F11] Mathlib/MeasureTheory/Measure/Lebesgue/VolumeOfBalls.lean:408
+lemma EuclideanSpace.volume_ball_fin_three (x : EuclideanSpace ℝ (Fin 3)) (r : ℝ) :
+  volume (ball x r) = .ofReal r ^ 3 * .ofReal (π * 4 / 3)
+Hence 3 * volume.real (ball 0 1) = 4*pi.
+
+[F12] Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean:267,280
+Global declarations (the file opens Real; it is not in namespace Real):
+theorem integrable_inv_one_add_sq : Integrable fun (x : ℝ) ↦ (1 + x ^ 2)⁻¹
+theorem integral_Ioi_inv_one_add_sq {i : ℝ} :
+  ∫ (x : ℝ) in Set.Ioi i, (1 + x ^ 2)⁻¹ = (π / 2) - arctan i
+Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean:1187
+Global theorem integral_comp_mul_left_Ioi (g : ℝ → E) (a : ℝ) {b : ℝ} (hb : 0 < b) :
+  ∫ x in Ioi a, g (b * x) = b⁻¹ • ∫ x in Ioi (b * a), g x
+
+[F13] Mathlib/Analysis/InnerProductSpace/PiL2.lean:537
+theorem OrthonormalBasis.sum_sq_inner_left {ι E : Type*} [NormedAddCommGroup E]
+    [InnerProductSpace ℝ E] [Fintype ι] (b : OrthonormalBasis ι ℝ E) (x : E) :
+  ∑ i : ι, ⟪x, b i⟫ ^ 2 = ‖x‖ ^ 2
+This recovers the exact radial frequency weight from the sum of directional energies,
+without a finite-dimensional norm-equivalence loss.
+
+
+BOUNDED MULTIPLIER APIS
+Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean:538
+theorem MeasureTheory.memLp_top_of_bound {f : α → E}
+    (hf : AEStronglyMeasurable f μ) (C : ℝ)
+    (hfC : ∀ᵐ x ∂μ, ‖f x‖ ≤ C) : MemLp f ∞ μ
+Same file:502, alternative direct domination route:
+theorem MeasureTheory.MemLp.of_le {f : α → E} {g : α → F}
+    (hg : MemLp g p μ) (hf : AEStronglyMeasurable f μ)
+    (hfg : ∀ᵐ x ∂μ, ‖f x‖ ≤ ‖g x‖) : MemLp f p μ
+Mathlib/MeasureTheory/Function/LpSeminorm/CompareExp.lean:306
+theorem MeasureTheory.MemLp.smul {p q r : ℝ≥0∞} {f : α → E} {φ : α → 𝕜}
+    (hf : MemLp f q μ) (hφ : MemLp φ p μ) [hpqr : HolderTriple p q r] :
+  MemLp (φ • f) r μ
+Same file:319,325, scalar product variants:
+theorem MeasureTheory.MemLp.mul (hf : MemLp f q μ) (hφ : MemLp φ p μ)
+    [hpqr : HolderTriple p q r] : MemLp (φ * f) r μ
+theorem MeasureTheory.MemLp.mul' (hf : MemLp f q μ) (hφ : MemLp φ p μ)
+    [hpqr : HolderTriple p q r] : MemLp (fun x ↦ φ x * f x) r μ
+Mathlib/Data/ENNReal/Holder.lean:62,65:
+ENNReal.HolderTriple.symm and ENNReal.HolderTriple.instInfty provide triple infinity,2,2.
+Mathlib/MeasureTheory/Function/Holder.lean:183,188:
+lemma MeasureTheory.Lp.coeFn_lpSMul (f : Lp 𝕜 p μ) (g : Lp E q μ) :
+  (f • g : Lp E r μ) =ᵐ[μ] ⇑f • g
+protected lemma MeasureTheory.Lp.norm_smul_le (f : Lp 𝕜 p μ) (g : Lp E q μ) :
+  ‖f • g‖ ≤ ‖f‖ * ‖g‖
+Mathlib/MeasureTheory/Function/LpSpace/Basic.lean:342:
+theorem MeasureTheory.Lp.norm_le_norm_of_ae_le {f : Lp E p μ} {g : Lp F p μ}
+    (h : ∀ᵐ x ∂μ, ‖f x‖ ≤ ‖g x‖) : ‖f‖ ≤ ‖g‖
+
+
+APPENDIX C. METHLIB SCALAR / QFB GENERIC SIGNATURES
+
+regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInvariant.lean
+Git blob: af406054f59aad6d1567f048b9a6e66fe83c34f0
+https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInvariant.lean
+Line 23; namespace SingularClosure
+theorem scalar_invariant_of_deriv_nonpos_below
+    {A d : ℝ → ℝ} {T a b : ℝ}
+    (hT : 0 ≤ T) (hab : a < b)
+    (hA : ContinuousOn A (Icc 0 T)) (hinit : A 0 ≤ a)
+    (hderiv : ∀ t ∈ Ico 0 T, HasDerivWithinAt A (d t) (Ici 0) t)
+    (hbound : ∀ t ∈ Ico 0 T, A t ≤ b → d t ≤ 0) :
+    ∀ t ∈ Icc 0 T, A t ≤ a := by
+
+regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalAdmissibleTimes.lean
+Git blob: 5cfb88877679bec7fb112a07b59546eb6727cc0d
+https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalAdmissibleTimes.lean
+Line 16; namespace SingularClosure
+theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+    {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)
+    (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :
+    ∃ ε : ℕ → ℝ,
+      (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧
+      Tendsto ε atTop (𝓝 0) := by
+
+regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
+Git blob: d71ef8ce484750c41bae8fd5530b5513e28f384d
+https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
+Line 90; namespace SingularClosure
+theorem CRITICAL_RELATIVE_ENERGY_GRONWALL
+    {e a : ℝ → ℝ} {s T δ : ℝ} (hst : s ≤ T)
+    (ha : ContinuousOn a (Icc s T))
+    (ha_nonneg : ∀ t ∈ Icc s T, 0 ≤ a t)
+    (hprod : IntervalIntegrable (fun r => a r * e r) volume s T)
+    (hrelative : ∀ t ∈ Icc s T,
+      e t ≤ δ + ∫ r in s..t, a r * e r) :
+    ∀ t ∈ Icc s T, e t ≤ δ * Real.exp (∫ r in s..t, a r) := by
+
+regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
+Git blob: d71ef8ce484750c41bae8fd5530b5513e28f384d
+https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalUniqueness.lean
+Line 186; namespace SingularClosure
+theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+    {V : Type*} [NormedAddCommGroup V]
+    {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}
+    (hT : 0 < T)
+    (ha : ContinuousOn a (Ioc 0 T))
+    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
+    (ha_integrable : IntervalIntegrable a volume 0 T)
+    (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)
+    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
+    (hε : ∀ n, ε n ∈ Ioc 0 T)
+    (hε_zero : Tendsto ε atTop (𝓝 0))
+    (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))
+    (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))
+    (hrelative : ∀ n t, t ∈ Icc (ε n) T →
+      ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +
+        ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :
+    ∀ t ∈ Ioc 0 T, u t = v t := by
+
+regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLocalUniqueness.lean
+Git blob: 4ebe95dc848cbff223e1016599925448c4441aee
+https://github.com/randogelist/Methlib/blob/8a30134611027f99f4855c062f7903069cdca8d8/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLocalUniqueness.lean
+Line 17; namespace SingularClosure
+theorem CRITICAL_RELATIVE_ENERGY_ZERO_OF_LOCAL_ADMISSIBLE_TRACE
+    {e a : ℝ → ℝ} {T M : ℝ} {ε : ℕ → ℝ}
+    (hT : 0 < T)
+    (he_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ e t)
+    (ha : ContinuousOn a (Ioc 0 T))
+    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
+    (ha_integrable : IntervalIntegrable a volume 0 T)
+    (hprod : ∀ n, IntervalIntegrable (fun r => a r * e r) volume (ε n) T)
+    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
+    (hε : ∀ n, ε n ∈ Ioc 0 T)
+    (hε_zero : Tendsto ε atTop (𝓝 0))
+    (htrace : Tendsto (fun n => e (ε n)) atTop (𝓝 0))
+    (hrelative : ∀ n t, t ∈ Icc (ε n) T →
+      e t ≤ e (ε n) + ∫ r in ε n..t, a r * e r) :
+    ∀ t ∈ Ioc 0 T, e t = 0 := by
+
+Quasi-Fefferman-B/QuasiFeffermanB/GoodTime.lean
+Git blob: 628486116b7120e5e66cfcfcae08693b7516933b
+https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/GoodTime.lean
+Line 12; namespace QuasiFeffermanB
+theorem exists_good_time_of_integral_lt
+    {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}
+    (hT : 0 < T) (hc : 0 ≤ c)
+    (hf : Integrable f (criticalTimeMeasure T))
+    (hgood : ∀ᵐ t ∂criticalTimeMeasure T, Good t)
+    (hbudget : (∫ t, f t ∂criticalTimeMeasure T) < c * T) :
+    ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c := by
+
+Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean
+Git blob: 99c8781a467659b4a44da1a22f284e15f375e523
+https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/LHRestart.lean
+Line 71; namespace QuasiFeffermanB
+theorem strong_tendsto_of_inner_and_norm_bound
+    {ι : Type*} {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+    {l : Filter ι} {f : ι → E} {a : E}
+    (hinner : Tendsto (fun i => inner ℝ (f i) a) l (𝓝 (‖a‖ ^ 2)))
+    (hbound : ∀ᶠ i in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) :
+    Tendsto f l (𝓝 a) := by
+
+Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
+Git blob: 6417b89a2008f3af626819381a31d5c92fb58cd6
+https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
+Line 164; namespace QuasiFeffermanB
+theorem timeTranslate_measurePreserving_Ioc (s T : ℝ) :
+    MeasurePreserving (fun t : ℝ => t + s)
+      (volume.restrict (Ioc (0 : ℝ) T))
+      (volume.restrict (Ioc s (T + s))) := by
+
+Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
+Git blob: 6417b89a2008f3af626819381a31d5c92fb58cd6
+https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
+Line 176; namespace QuasiFeffermanB
+theorem timeTranslate_memLp_Ioc
+    {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {p : ℝ≥0∞}
+    {s T : ℝ} (hs : 0 ≤ s)
+    (hf : MemLp f p (volume.restrict (Ioc (0 : ℝ) (T + s)))) :
+    MemLp (timeTranslate s f) p (volume.restrict (Ioc (0 : ℝ) T)) := by
+
+Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
+Git blob: 6417b89a2008f3af626819381a31d5c92fb58cd6
+https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/TimeTranslate.lean
+Line 187; namespace QuasiFeffermanB
+theorem timeTranslate_ae_Ioc {P : ℝ → Prop} {s T : ℝ} (hs : 0 ≤ s)
+    (hP : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)), P r) :
+    ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T), P (r + s) := by
+
+criticalTimeMeasure definition (QFB CriticalTimeBudget.lean:20): volume.restrict (Ioo 0 T).
+Git blob: 1d02c36c3f5743087687f50546c6e5829b26272e.
+
+
+END OF QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
