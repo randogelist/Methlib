@@ -1,11 +1,14 @@
 QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
-VERSION = 1.1.0
+VERSION = 1.2.0
 MODE = B_TIER_DERIVATION
 MARKER = !=B_TIER
 ROOT_SPECIFICATION = FROZEN
 MATHEMATICAL_STATUS = COMPLETE_COMPOSED_CLASSICAL_DERIVATION
 SOURCE_STATUS = EXACT_DECLARATIONS_INSPECTED
 INDEX_POLICY = DECLARATION_AT_POINT_OF_USE
+LEAN_EXTRACTION = A_TIER_CANDIDATE
+EXTRACTED_THEOREMS = 30
+ANALYTIC_PROP_TARGETS_WITHOUT_PROOFS = 3
 EXTERNAL_LEAN_VERIFICATION = PENDING
 LOCAL_LEAN_EXECUTIONS = 0
 
@@ -17,7 +20,7 @@ QFB_COMPARISON_PIN = e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c
 MATHLIB_PIN = db584cd6d46c92f209a44c0f1c829460d327499d
 SELECTED_SOURCE_TOOLCHAIN = leanprover/lean4:v4.33.0
 PARENT_DERIVATION = QUASI_FEFFERMAN_A_B_TIER.txt
-DOCUMENT_PARENT_COMMIT = 717e853a7ffa1dee986e312392c63baf388f1d85
+DOCUMENT_PARENT_COMMIT = e91397da79d11e08a6499feec8bd5c18465a4107
 
 [00] STATUS AND SCOPE
 
@@ -35,13 +38,17 @@ Classical input: an established analytic theorem, explicitly specified below;
   its invocation is mathematical, while its whole-space Lean realization
   remains a separate construction obligation.
 
-No QFA Lean file, external compiler result, or theorem-level axiom audit is
-established by this TXT. No A_TIER, FORMAL_CLOSURE, or UNCONDITIONAL_CLOSURE
-promotion follows from source inspection.
+Folderwise Lean candidates are prepared under LeanEndpoints/QFA/Endpoints.
+No external compiler result or theorem-level axiom audit is established by
+this TXT. Prepared code and source inspection give no A_TIER, FORMAL_CLOSURE,
+or UNCONDITIONAL_CLOSURE promotion.
 
 INDEX CONVENTION:
   [Dxx.yy] = located mathematical derivation step.
-  [EPnnn] = one exact existing source declaration, assigned at first use.
+  [EPnnn] = one exact existing source declaration; EP001-EP110 are stable
+    v1.1 identifiers, and new scalar sources append EP111-EP116.
+  [LEnnn] = one local theorem candidate, indexed at its derivation step.
+  [LCnnn] = an analytic Prop definition without a supplied proof inhabitant.
   APPLY [EPnnn] = mathematical use with the displayed hypothesis substitution;
     it does not assert execution or elaboration of a new Lean call.
   AD01-AD08 = new composed mathematical adapter bodies recorded at their steps.
@@ -49,8 +56,12 @@ INDEX CONVENTION:
   Appendix A: derivation step -> consumed entry-point indices.
   Appendix B: entry-point index -> exact declaration, pinned source signature,
     source location, and all application locations.
-  Generic QFB patterns are source-inspected transfer candidates; their code
-    has not been imported into QFA by this TXT update.
+  The generic QFB strict-average proof is selectively ported as LE011.
+    Other QFB helpers remain transfer candidates. Entire periodic QFB
+    modules are not dependencies of the extracted Lean package.
+  Appendix C: exact candidate declarations, files, signatures and locations.
+  The extraction-specific mathematical derivation is
+    LeanEndpoints/QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt.
   Elementary finite-dimensional, algebraic and limit calculations are written
     explicitly; they are not represented as fictitious existing QFA lemmas.
 
@@ -242,6 +253,10 @@ DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
       integral_0^R E*D <= (M^4-F(R)^2)/(4*nu) <= M^4/(4*nu).
 
 [D04.01] Physical instantiation and endpoint measure convention.
+
+  LOCAL CANDIDATE [LE001]: QFA.Energy.envelope_zero
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+
   USE [D02.05] with the zero-start energy inequality:
     0<=E(t)<=M^2-2*nu*integral_0^t D=F(t).
   APPLY [EP011] MeasureTheory.restrict_Ioo_eq_restrict_Ioc
@@ -252,6 +267,10 @@ DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
     with 0<=R to pass from the physical L1 statement to IntervalIntegrable.
 
 [D04.02] Absolute-continuity construction.
+
+  LOCAL CANDIDATE [LE002]: QFA.Energy.envelope_absolutelyContinuousOnInterval
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+
   Set A(t)=integral_0^t D.
   APPLY [EP013] IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral
     with f=D, a=0, b=R, c=0; the base point belongs to uIcc 0 R.
@@ -262,6 +281,10 @@ DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
   OUTPUT: F is absolutely continuous on [0,R].
 
 [D04.03] A.e. derivative of the envelope.
+
+  LOCAL CANDIDATE [LE003]: QFA.Energy.envelope_hasDerivAt_ae
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP017] IntervalIntegrable.ae_hasDerivAt_integral
     with f=D, a=0, b=R, c=0.
   APPLY [EP018] HasDerivAt.const_mul with scalar 2*nu,
@@ -271,6 +294,10 @@ DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
   No derivative assertion is made about weak E.
 
 [D04.04] Integrability before comparison.
+
+  LOCAL CANDIDATE [LE004]: QFA.Energy.envelope_product_intervalIntegrable
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP021] AbsolutelyContinuousOnInterval.continuousOn to F.
   APPLY [EP022] IntervalIntegrable.continuousOn_mul
     with integrable f=D and continuous g=F.
@@ -283,6 +310,10 @@ DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
     as a replacement for this integrability premise.
 
 [D04.05] Exact square identity.
+
+  LOCAL CANDIDATE [LE005]: QFA.Energy.envelope_product_integral
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP024] AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
     with f=g=F, a=0, b=R.
   OUTPUT:
@@ -295,6 +326,14 @@ DERIVED ENDPOINT QFA_ENERGY_PRODUCT_BUDGET:
     integral_0^R F*D=(M^4-F(R)^2)/(4*nu).
 
 [D04.06] Product comparison and numerical budget.
+
+  LOCAL CANDIDATE [LE006]: QFA.Energy.product_budget_of_envelope_identity
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE007]: QFA.Energy.product_budget
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE008]: QFA.Energy.product_budget_Ioo
+    FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP026] MeasureTheory.integral_mono_ae
     with f=E*D, g=F*D and the established integrability of both functions.
   APPLY [EP027] intervalIntegral.integral_of_le with 0<=R,
@@ -312,6 +351,12 @@ of the chosen weak-derivative and all-time trajectory representatives.
 The actual LH class makes G_u true almost everywhere on positive time.
 
 [D05.01] Frozen cutoff arithmetic.
+
+  LOCAL CANDIDATE [LE009]: QFA.Endpoints.GoodTime.qfa_cutoff_nonneg
+    FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Cutoff.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE010]: QFA.Endpoints.GoodTime.qfa_budget_lt_threshold
+    FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Cutoff.lean; STATUS = A_TIER_CANDIDATE.
+
   Put kappa=4*pi^2*nu^4>0.
   Since nu>0,
     delta>M^4/(16*pi^2*nu^5)
@@ -320,6 +365,16 @@ The actual LH class makes G_u true almost everywhere on positive time.
     integral_0^delta E*D<kappa*delta.
 
 [D05.02] Extraction retaining the good predicate.
+
+  LOCAL CANDIDATE [LE011]: QFA.Endpoints.GoodTime.exists_good_time_of_integral_lt
+    FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Basic.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE012]: QFA.Endpoints.GoodTime.exists_subcritical_product_good_time
+    FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Cutoff.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE013]: QFA.Endpoints.GoodTime.exists_subcritical_product_good_time_of_interval_budget
+    FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Interval.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE014]: QFA.Endpoints.Composition.exists_subcritical_good_time_of_envelope
+    FILE = LeanEndpoints/QFA/Endpoints/Composition/GoodTimeOfEnvelope.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP028] QuasiFeffermanB.exists_good_time_of_integral_lt
     with f=E*D, Good=G_u, T=delta, c=kappa.
   DISCHARGE:
@@ -332,7 +387,8 @@ The actual LH class makes G_u true almost everywhere on positive time.
   Mathematical proof: absence of such s would imply E*D>=kappa a.e.;
   integration would contradict the strict budget. No continuity of E*D,
   arbitrary point selection, or measurable-set assumption on G_u is needed.
-  The generic QFB proof is selected for later selective port.
+  The generic QFB proof is selectively ported as LE011; external
+  elaboration and theorem-level axiom auditing remain pending.
 
 [D05.03] Strong right L2 trace at the selected time.
   Set b=u(s). The energy inequality gives ||u(t)||_2^2<=||b||_2^2 for t>=s.
@@ -420,6 +476,10 @@ DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
   source applications use native F0 normalization.
 
 [D06.02] Exact spectral energies; derived bridge AD08.
+
+  ANALYTIC TARGET [LC001]: QFA.Endpoints.Agmon.WholeSpaceSpectralEndpoint
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Contracts.lean; NO PROOF INHABITANT SUPPLIED.
+
   USE AD01, [D02.01]-[D02.03], to complexify v and its weak derivatives.
   SELECT [EP047] MeasureTheory.Lp.fourierTransformₗᵢ on Lp Y 2 volume.
 
@@ -555,6 +615,12 @@ DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
   The corresponding composed Lean declaration remains unwritten.
 
 [D06.06] Agmon optimization.
+
+  LOCAL CANDIDATE [LE015]: QFA.Endpoints.Agmon.agmon_fourth_power
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  ANALYTIC TARGET [LC003]: QFA.Endpoints.Agmon.WholeSpaceAgmonEndpoint
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Contracts.lean; NO PROOF INHABITANT SUPPLIED.
+
   APPLY [EP081] VectorFourier.norm_fourierIntegral_le_integral_norm
     to the inverse Fourier integral V with L=-inner.
   OUTPUT: ||V(x)||<=integral |h| for every x.
@@ -565,13 +631,39 @@ DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
   If D=0 or Z=0, the corresponding nonnegative spectral integrand vanishes
   a.e., hence h=0 off {0}; L2 Plancherel gives v=0. The same bound follows.
 
+  Extracted algebraic form (LE015): set A=||v||_infinity.
+  APPLY [EP111] Real.pi_pos to multiply by 2*pi>0; APPLY
+    [EP114] pow_le_pow_left₀ to square the nonnegative sides; APPLY
+    [EP113] Real.sq_sqrt with D*Z>=0.
+  OUTPUT: 4*pi^2*A^4<=D*Z, including both zero cases.
+
 [D06.07] Physical energy interpolation.
+
+  ANALYTIC TARGET [LC002]: QFA.Endpoints.Agmon.WholeSpaceInterpolationEndpoint
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Contracts.lean; NO PROOF INHABITANT SUPPLIED.
+
   APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
     with p=q=2, f=|h| and g=(2*pi)^2*|k|^2*|h|.
   Their squared integrals are E and Z; their product integral is D.
   OUTPUT: D<=sqrt(E*Z), equivalently D^2<=E*Z.
 
 [D06.08] Nonlinear enstrophy coefficient.
+
+  LOCAL CANDIDATE [LE016]: QFA.Endpoints.Agmon.nonlinear_fourth_power_of_agmon_fourth
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE017]: QFA.Endpoints.Agmon.ScalarProfile.nonlinear_fourth_power
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE018]: QFA.Endpoints.Agmon.nonlinear_le_of_product_le
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE019]: QFA.Endpoints.Agmon.nonlinearCoefficient_nonneg
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE020]: QFA.Endpoints.Agmon.nonlinearCoefficient_fourth
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE021]: QFA.Endpoints.Agmon.ScalarProfile.nonlinear_le_coefficient
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE022]: QFA.Endpoints.Agmon.ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+
   Pointwise Euclidean Cauchy-Schwarz gives
     |(v.grad)v|<=|v|*|grad v|_F.
   APPLY [EP071] MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg
@@ -583,13 +675,41 @@ DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
       <=(2*pi)^(-1/2)*(E*D)^(1/4)*Z.
   All vector norms are Hilbert norms. No coordinate-count factor occurs.
 
+  Equivalent scalar proof form for the extracted endpoints:
+    Let A=||v||_infinity and N=abs(<(v.grad)v,Delta v>).
+    APPLY [EP111] Real.pi_pos for every denominator cancellation.
+    APPLY [EP114] pow_le_pow_left₀ to the nonnegative Agmon and convection
+      inequalities; APPLY [EP113] Real.sq_sqrt to evaluate square roots.
+    OUTPUT: 4*pi^2*A^4<=D*Z and 4*pi^2*N^4<=(E*D)*Z^4.
+    Define rho(E,D)=sqrt(sqrt((E*D)/(4*pi^2))).
+    APPLY [EP112] Real.sqrt_nonneg and [EP113] Real.sq_sqrt:
+      rho>=0 and 4*pi^2*rho^4=E*D.
+    APPLY [EP115] le_of_pow_le_pow_left₀ to obtain N<=rho*Z.
+    The nonnegative fourth-root identity identifies
+      rho=(2*pi)^(-1/2)*(E*D)^(1/4).
+    This polynomial formulation preserves the exact constant and covers
+    D=0 and Z=0 without cancellation by either energy. Physical inputs
+    still come from D06.06-D06.08; no analytic inequality is manufactured
+    by the scalar profile definition.
+
 [07] INDEXED GLOBAL STRONG RESTART
 
 [D07.01] Local strong object and subcritical margin.
+
+  LOCAL CANDIDATE [LE023]: QFA.Endpoints.Agmon.nonlinearCoefficient_lt_viscosity
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE024]: QFA.Endpoints.Agmon.ScalarProfile.enstrophy_absorption
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE025]: QFA.Endpoints.Agmon.ScalarProfile.viscosity_margin_pos
+    FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean; STATUS = A_TIER_CANDIDATE.
+
   USE [D05.02]-[D05.05]: b=u(s) in H1, E_s*D_s<4*pi^2*nu^4.
   INVOKE C02 for b at time s, obtaining v on [s,Tmax).
   INVOKE C03 for energy/enstrophy and positive-time smoothing.
   Put C=(2*pi)^(-1/2), eta=nu-C*(E_s*D_s)^(1/4)>0.
+  Extracted scalar margin: use the fourth-power identity for rho from
+  D06.08; APPLY [EP116] lt_of_pow_lt_pow_left₀ to rho^4<nu^4 and nu>=0.
+  OUTPUT: rho<nu and eta=nu-rho>0, with the identical numerical coefficient.
   Energy gives E_v<=E_s; [D06.08] gives
     (1/2)*D_v'+[nu-C*(E_v*D_v)^(1/4)]*Z_v<=0.
 
@@ -718,6 +838,10 @@ DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
   at every upper endpoint, without norm continuity of the weak trajectory.
 
 [D09.03] Admissible starts tending to zero.
+
+  LOCAL CANDIDATE [LE026]: QFA.Endpoints.Comparison.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+    FILE = LeanEndpoints/QFA/Endpoints/Comparison/AdmissibleTimes.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP095] SingularClosure.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
     with T=R, P=the joint valid-energy-start and cross-testing predicate.
   DISCHARGE hT by R>0 and hP by the actual LH/C04 full-measure properties.
@@ -725,6 +849,16 @@ DERIVED ENDPOINT QFA_GOOD_RESTART_BEFORE:
   No monotonicity of epsilon_n is asserted or needed.
 
 [D09.04] Norm-valued comparison: complete premise substitution.
+
+  LOCAL CANDIDATE [LE027]: QFA.Endpoints.Comparison.critical_comparison_differential_gronwall
+    FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE028]: QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_GRONWALL
+    FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE029]: QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE
+    FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean; STATUS = A_TIER_CANDIDATE.
+  LOCAL CANDIDATE [LE030]: QFA.Endpoints.Comparison.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+    FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean; STATUS = A_TIER_CANDIDATE.
+
   APPLY [EP096] SingularClosure.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE:
     source normed group V := real spatial L2;
     source u := U; source v := V; source a := g;
@@ -901,7 +1035,7 @@ The selected declarations are spatially generic. Their import chains do not
 require the periodic physical NSE structures. Import inspection is not a
 theorem-level axiom audit.
 
-SELECTED QFB PATTERNS FOR LATER SELECTIVE PORT:
+SELECTED QFB PATTERNS (LE011 PREPARED; OTHER TRANSFERS PENDING):
   exists_good_time_of_integral_lt;
   strong_tendsto_of_inner_and_norm_bound;
   timeTranslate_tendsto_nhdsWithin_right;
@@ -913,7 +1047,11 @@ At the inspected QFA pin, the QFB directory is absent. The inspected QFB
 source pin uses the same Lean 4.33.0 / Mathlib db584cd6 baseline.
 The containing QFB files import periodic PDE infrastructure. Only the generic
 statements and proofs are selected for transfer, with source provenance.
-No transfer or new Lean implementation is performed in this B-tier artifact.
+LE011 selectively ports the generic strict-average proof. LE026-LE030
+selectively port the two generic Methlib comparison modules. New scalar
+energy, cutoff, algebra and composition proof candidates are also prepared.
+All extracted modules have Mathlib-only external dependencies. The other
+QFB transfers and actual whole-space analytic endpoints remain pending.
 
 BOUNDARIES OF OTHER INSPECTED ENDPOINTS:
   CriticalLerayHopf and CriticalPhysicalL2 use volume.restrict unitCube.
@@ -935,8 +1073,9 @@ BOUNDARIES OF OTHER INSPECTED ENDPOINTS:
 
 [12] PROPOSED QFA ENDPOINT CONTRACTS
 
-The identifiers below name mathematical endpoints, not existing compiled
-Lean declarations.
+The uppercase identifiers below name mathematical endpoints. Their full
+physical implementations are not asserted as compiled Lean declarations.
+Scalar subchains with prepared proof bodies have separate LE identifiers.
 
 QFA_LH_PROFILE:
   actual whole-space LH -> measurable E, nonnegative locally integrable D,
@@ -1008,7 +1147,9 @@ The following mathematical adapter bodies are now explicit and indexed:
 
 Status of AD01-AD08:
   B_TIER mathematical derivations recorded.
-  Corresponding composed QFA Lean implementations: NOT_PREPARED.
+  Complete composed physical-adapter Lean proofs: PENDING.
+  AD08/AD03 target signatures: prepared as LC001-LC003, without proofs.
+  Scalar subchains and generic comparison: LE001-LE030 candidates prepared.
   Matching external compilation and theorem-level axiom evidence: PENDING.
 
 The coefficient-integrability chain D08.01-D08.04 also has explicit API
@@ -1091,8 +1232,7 @@ R03. C. L. Fefferman, Existence and smoothness of the Navier-Stokes equation.
 
 APPENDIX A. LOCATED ENTRY-POINT CONSUMPTION INDEX
 
-Each index below is also printed at the actual derivation step,
-beside its argument substitution and mathematical output.
+EP = pinned source declaration; LE = local theorem candidate; LC = unproved analytic Prop target.
 
 D02.01  Real and complex vector spaces; derived bridge AD01.
   EP001, EP002
@@ -1106,20 +1246,28 @@ D02.05  Trajectory profile supplied by the actual LH class.
   Derived calculation / classical input; no new source invocation.
 D04.01  Physical instantiation and endpoint measure convention.
   EP011, EP012
+  LE001
 D04.02  Absolute-continuity construction.
   EP013, EP014, EP015, EP016
+  LE002
 D04.03  A.e. derivative of the envelope.
   EP017, EP018, EP019, EP020
+  LE003
 D04.04  Integrability before comparison.
   EP021, EP022, EP023
+  LE004
 D04.05  Exact square identity.
   EP024, EP025
+  LE005
 D04.06  Product comparison and numerical budget.
   EP026, EP027
+  LE006, LE007, LE008
 D05.01  Frozen cutoff arithmetic.
   Derived calculation / classical input; no new source invocation.
+  LE009, LE010
 D05.02  Extraction retaining the good predicate.
   EP028
+  LE011, LE012, LE013, LE014
 D05.03  Strong right L2 trace at the selected time.
   EP029, EP030, EP031
 D05.04  Temporal energy and measure transport.
@@ -1130,6 +1278,7 @@ D06.01  Native Fourier convention.
   EP045, EP046
 D06.02  Exact spectral energies; derived bridge AD08.
   EP047, EP044, EP048, EP049, EP050, EP051, EP052, EP053, EP054, EP055, EP056, EP057, EP058, EP059, EP060, EP061, EP062
+  LC001
 D06.03  Exact radial kernel and its integrability.
   EP063, EP064, EP065, EP066, EP067, EP068
 D06.04  Weighted Cauchy-Schwarz with genuine integrability.
@@ -1141,13 +1290,17 @@ D06.05b  Equality on compact smooth tests; continuation of AD03.
 D06.05c  A.e. identification; completion of AD03.
   EP080, EP051, EP057
 D06.06  Agmon optimization.
-  EP081
+  EP081, EP111, EP114, EP113
+  LE015, LC003
 D06.07  Physical energy interpolation.
   EP071
+  LC002
 D06.08  Nonlinear enstrophy coefficient.
-  EP071
+  EP071, EP111, EP114, EP113, EP112, EP115
+  LE016, LE017, LE018, LE019, LE020, LE021, LE022
 D07.01  Local strong object and subcritical margin.
-  Derived calculation / classical input; no new source invocation.
+  EP116
+  LE023, LE024, LE025
 D07.02  Positive-time invariant; derived bridge AD04.
   EP082, EP083
 D07.03  Quantitative enstrophy budget.
@@ -1168,8 +1321,10 @@ D09.02  Upgrade of a.e. upper endpoints; derived bridge AD05.
   EP013, EP021, EP094, EP030
 D09.03  Admissible starts tending to zero.
   EP095
+  LE026
 D09.04  Norm-valued comparison: complete premise substitution.
   EP096
+  LE027, LE028, LE029, LE030
 D10.01  Products on positive regular tails.
   EP097, EP098
 D10.02  Bounded measurable Fourier multiplier.
@@ -1197,7 +1352,8 @@ SOURCE_CLASS:
   MATHLIB_EXISTING: declaration in the pinned Mathlib dependency.
   METHLIB_EXISTING: declaration in QFA's inherited singular-closure source.
   METHLIB_QFB_PATTERN: declaration in the separate pinned QFB source;
-    selected for later selective transfer, not imported by this artifact.
+    local transfer status is recorded by the LE index; the complete QFB
+    PDE modules are not dependencies of the extracted package.
 
 All source classes mean SOURCE_INSPECTED. None asserts QFA compiler evidence.
 
@@ -2343,5 +2499,492 @@ SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f20
 GIT_BLOB = 0c1f4d8fd00c74776c16243e11f2ea2a533cbdaf
 SIGNATURE:
   theorem eq_singleton_iff_unique_mem : s = {a} ↔ a ∈ s ∧ ∀ x ∈ s, x = a
+
+[EP111]
+DECLARATION = Real.pi_pos
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.06, D06.08
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean#L157
+GIT_BLOB = 86ee5817a80feccb86eb9e6fae7b0730007c54c4
+AMBIENT_SOURCE_CONTEXT = No additional section variables.
+SIGNATURE:
+  theorem pi_pos : 0 < π
+
+[EP112]
+DECLARATION = Real.sqrt_nonneg
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.08
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Real/Sqrt.lean#L144
+GIT_BLOB = e111a1394cab20b87caedeef62f5bd0f7f072141
+AMBIENT_SOURCE_CONTEXT = Real namespace; x : real is explicit.
+SIGNATURE:
+  theorem sqrt_nonneg (x : ℝ) : 0 ≤ √x
+
+[EP113]
+DECLARATION = Real.sq_sqrt
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.06, D06.08
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Real/Sqrt.lean#L178
+GIT_BLOB = e111a1394cab20b87caedeef62f5bd0f7f072141
+AMBIENT_SOURCE_CONTEXT = Real namespace; implicit {x : real} from the surrounding section.
+SIGNATURE:
+  theorem sq_sqrt (h : 0 ≤ x) : √x ^ 2 = x
+
+[EP114]
+DECLARATION = pow_le_pow_left₀
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.06, D06.08
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/Order/GroupWithZero/Basic.lean#L470
+GIT_BLOB = 1003ca665170b581f1d63bb09a6245aea0d445d1
+AMBIENT_SOURCE_CONTEXT = Implicit {M₀ : Type*} [MonoidWithZero M₀] [Preorder M₀] {a b : M₀}; the two monotonicity instances are displayed in the signature.
+SIGNATURE:
+  theorem pow_le_pow_left₀ [PosMulMono M₀] [MulPosMono M₀]
+      (ha : 0 ≤ a) (hab : a ≤ b) : ∀ n, a ^ n ≤ b ^ n
+
+[EP115]
+DECLARATION = le_of_pow_le_pow_left₀
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D06.08
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/Order/GroupWithZero/Basic.lean#L702
+GIT_BLOB = 1003ca665170b581f1d63bb09a6245aea0d445d1
+AMBIENT_SOURCE_CONTEXT = Implicit {M₀ : Type*} [MonoidWithZero M₀] [LinearOrder M₀] [PosMulStrictMono M₀] [MulPosMono M₀] {a b : M₀} {n : Nat}; no nonnegativity premise on a, and no ZeroLEOneClass premise.
+SIGNATURE:
+  lemma le_of_pow_le_pow_left₀ (hn : n ≠ 0) (hb : 0 ≤ b) (h : a ^ n ≤ b ^ n) : a ≤ b
+
+[EP116]
+DECLARATION = lt_of_pow_lt_pow_left₀
+SOURCE_CLASS = MATHLIB_EXISTING
+APPLIED_AT = D07.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/Order/GroupWithZero/Basic.lean#L699
+GIT_BLOB = 1003ca665170b581f1d63bb09a6245aea0d445d1
+AMBIENT_SOURCE_CONTEXT = Implicit {M₀ : Type*} [MonoidWithZero M₀] [LinearOrder M₀] [PosMulStrictMono M₀] [MulPosMono M₀] {a b : M₀}; no nonnegativity premise on a, and no ZeroLEOneClass premise.
+SIGNATURE:
+  lemma lt_of_pow_lt_pow_left₀ (n : ℕ) (hb : 0 ≤ b) (h : a ^ n < b ^ n) : a < b
+
+APPENDIX C. LOCAL CANDIDATE DECLARATIONS AND ANALYTIC TARGETS
+
+Every LE body is prepared source only; all external compiler/audit evidence remains pending.
+
+[LE001]
+DECLARATION = QFA.Energy.envelope_zero
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.01
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem envelope_zero (M ν : ℝ) (D : ℝ → ℝ) :
+      envelope M ν D 0 = M ^ 2
+
+[LE002]
+DECLARATION = QFA.Energy.envelope_absolutelyContinuousOnInterval
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.02
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem envelope_absolutelyContinuousOnInterval
+      {M ν R : ℝ} {D : ℝ → ℝ}
+      (hD : IntervalIntegrable D volume (0 : ℝ) R) :
+      AbsolutelyContinuousOnInterval (envelope M ν D) 0 R
+
+[LE003]
+DECLARATION = QFA.Energy.envelope_hasDerivAt_ae
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.03
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem envelope_hasDerivAt_ae
+      {M ν R : ℝ} {D : ℝ → ℝ}
+      (hD : IntervalIntegrable D volume (0 : ℝ) R) :
+      ∀ᵐ t ∂volume, t ∈ uIcc (0 : ℝ) R →
+        HasDerivAt (envelope M ν D) (-(2 * ν * D t)) t
+
+[LE004]
+DECLARATION = QFA.Energy.envelope_product_intervalIntegrable
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.04
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem envelope_product_intervalIntegrable
+      {M ν R : ℝ} {D : ℝ → ℝ}
+      (hD : IntervalIntegrable D volume (0 : ℝ) R) :
+      IntervalIntegrable (fun t => envelope M ν D t * D t) volume 0 R
+
+[LE005]
+DECLARATION = QFA.Energy.envelope_product_integral
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.05
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem envelope_product_integral
+      {M ν R : ℝ} {D : ℝ → ℝ}
+      (hν : ν ≠ 0)
+      (hD : IntervalIntegrable D volume (0 : ℝ) R) :
+      (∫ t in (0 : ℝ)..R, envelope M ν D t * D t) =
+        (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν)
+
+[LE006]
+DECLARATION = QFA.Energy.product_budget_of_envelope_identity
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.06
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem product_budget_of_envelope_identity
+      {E D F : ℝ → ℝ} {M ν R : ℝ}
+      (hR : 0 ≤ R) (hν : 0 < ν)
+      (hFD : IntervalIntegrable (fun t => F t * D t) volume (0 : ℝ) R)
+      (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))
+      (hDm : AEStronglyMeasurable D (volume.restrict (Ioo (0 : ℝ) R)))
+      (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)
+      (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)
+      (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), E t ≤ F t)
+      (hidentity : (∫ t in (0 : ℝ)..R, F t * D t) =
+        (M ^ 4 - (F R) ^ 2) / (4 * ν)) :
+      Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧
+        (∫ t in (0 : ℝ)..R, E t * D t) ≤
+          (M ^ 4 - (F R) ^ 2) / (4 * ν) ∧
+        (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)
+
+[LE007]
+DECLARATION = QFA.Energy.product_budget
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.06
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem product_budget
+      {E D : ℝ → ℝ} {M ν R : ℝ}
+      (hR : 0 ≤ R) (hν : 0 < ν)
+      (hD : IntervalIntegrable D volume (0 : ℝ) R)
+      (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))
+      (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)
+      (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)
+      (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),
+        E t ≤ envelope M ν D t) :
+      Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧
+        (∫ t in (0 : ℝ)..R, E t * D t) ≤
+          (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν) ∧
+        (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)
+
+[LE008]
+DECLARATION = QFA.Energy.product_budget_Ioo
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.06
+FILE = LeanEndpoints/QFA/Endpoints/Energy/ProductBudget.lean
+SIGNATURE:
+  theorem product_budget_Ioo
+      {E D : ℝ → ℝ} {M ν R : ℝ}
+      (hR : 0 ≤ R) (hν : 0 < ν)
+      (hD : IntervalIntegrable D volume (0 : ℝ) R)
+      (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))
+      (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)
+      (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)
+      (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),
+        E t ≤ envelope M ν D t) :
+      Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧
+        (∫ t in Ioo (0 : ℝ) R, E t * D t) ≤ M ^ 4 / (4 * ν)
+
+[LE009]
+DECLARATION = QFA.Endpoints.GoodTime.qfa_cutoff_nonneg
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.01
+FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Cutoff.lean
+SIGNATURE:
+  theorem qfa_cutoff_nonneg (M : ℝ) {ν : ℝ} (hν : 0 < ν) :
+      0 ≤ M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5)
+
+[LE010]
+DECLARATION = QFA.Endpoints.GoodTime.qfa_budget_lt_threshold
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.01
+FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Cutoff.lean
+SIGNATURE:
+  theorem qfa_budget_lt_threshold
+      {M ν δ : ℝ} (hν : 0 < ν)
+      (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ) :
+      M ^ 4 / (4 * ν) < (4 * Real.pi ^ 2 * ν ^ 4) * δ
+
+[LE011]
+DECLARATION = QFA.Endpoints.GoodTime.exists_good_time_of_integral_lt
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.02
+FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Basic.lean
+SIGNATURE:
+  theorem exists_good_time_of_integral_lt
+      {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}
+      (hT : 0 < T) (hc : 0 ≤ c)
+      (hf : Integrable f (volume.restrict (Ioo (0 : ℝ) T)))
+      (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) T), Good t)
+      (hbudget : (∫ t in Ioo (0 : ℝ) T, f t) < c * T) :
+      ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c
+
+[LE012]
+DECLARATION = QFA.Endpoints.GoodTime.exists_subcritical_product_good_time
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.02
+FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Cutoff.lean
+SIGNATURE:
+  theorem exists_subcritical_product_good_time
+      {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}
+      (hν : 0 < ν)
+      (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+      (hprod : Integrable (fun t => E t * D t)
+        (volume.restrict (Ioo (0 : ℝ) δ)))
+      (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)
+      (hbudget : (∫ t in Ioo (0 : ℝ) δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :
+      ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4
+
+[LE013]
+DECLARATION = QFA.Endpoints.GoodTime.exists_subcritical_product_good_time_of_interval_budget
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.02
+FILE = LeanEndpoints/QFA/Endpoints/GoodTime/Interval.lean
+SIGNATURE:
+  theorem exists_subcritical_product_good_time_of_interval_budget
+      {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}
+      (hν : 0 < ν)
+      (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+      (hprod : IntervalIntegrable (fun t => E t * D t) volume 0 δ)
+      (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)
+      (hbudget : (∫ t in (0 : ℝ)..δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :
+      ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4
+
+[LE014]
+DECLARATION = QFA.Endpoints.Composition.exists_subcritical_good_time_of_envelope
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.02
+FILE = LeanEndpoints/QFA/Endpoints/Composition/GoodTimeOfEnvelope.lean
+SIGNATURE:
+  theorem exists_subcritical_good_time_of_envelope
+      {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}
+      (hν : 0 < ν)
+      (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+      (hD : IntervalIntegrable D volume (0 : ℝ) δ)
+      (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) δ)))
+      (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ D t)
+      (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ E t)
+      (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ),
+        E t ≤ QFA.Energy.envelope M ν D t)
+      (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t) :
+      ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4
+
+[LE015]
+DECLARATION = QFA.Endpoints.Agmon.agmon_fourth_power
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.06
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem agmon_fourth_power
+      {D Z A : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z)
+      (hAgmon : A ^ 2 ≤ Real.sqrt (D * Z) / (2 * Real.pi)) :
+      4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z
+
+[LE016]
+DECLARATION = QFA.Endpoints.Agmon.nonlinear_fourth_power_of_agmon_fourth
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem nonlinear_fourth_power_of_agmon_fourth
+      {E D Z A N : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z) (hN : 0 ≤ N)
+      (hInterpolation : D ^ 2 ≤ E * Z)
+      (hAgmon : 4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z)
+      (hConvection : N ≤ A * Real.sqrt D * Real.sqrt Z) :
+      4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4
+
+[LE017]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.nonlinear_fourth_power
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem ScalarProfile.nonlinear_fourth_power
+      {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :
+      4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4
+
+[LE018]
+DECLARATION = QFA.Endpoints.Agmon.nonlinear_le_of_product_le
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem nonlinear_le_of_product_le
+      {E D Z N c : ℝ} (hZ : 0 ≤ Z) (hc : 0 ≤ c)
+      (hFourth : 4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4)
+      (hProduct : E * D ≤ 4 * Real.pi ^ 2 * c ^ 4) :
+      N ≤ c * Z
+
+[LE019]
+DECLARATION = QFA.Endpoints.Agmon.nonlinearCoefficient_nonneg
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem nonlinearCoefficient_nonneg (E D : ℝ) :
+      0 ≤ nonlinearCoefficient E D
+
+[LE020]
+DECLARATION = QFA.Endpoints.Agmon.nonlinearCoefficient_fourth
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem nonlinearCoefficient_fourth
+      {E D : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) :
+      4 * Real.pi ^ 2 * nonlinearCoefficient E D ^ 4 = E * D
+
+[LE021]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.nonlinear_le_coefficient
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem ScalarProfile.nonlinear_le_coefficient
+      {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :
+      N ≤ nonlinearCoefficient E D * Z
+
+[LE022]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D06.08
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero
+      {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) (hZ : Z = 0) : N = 0
+
+[LE023]
+DECLARATION = QFA.Endpoints.Agmon.nonlinearCoefficient_lt_viscosity
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D07.01
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem nonlinearCoefficient_lt_viscosity
+      {E D ν : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) (hν : 0 < ν)
+      (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :
+      nonlinearCoefficient E D < ν
+
+[LE024]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.enstrophy_absorption
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D07.01
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem ScalarProfile.enstrophy_absorption
+      {E D Z A N d ν : ℝ} (h : ScalarProfile E D Z A N)
+      (hEnstrophy : d / 2 + ν * Z ≤ N) :
+      d + 2 * (ν - nonlinearCoefficient E D) * Z ≤ 0
+
+[LE025]
+DECLARATION = QFA.Endpoints.Agmon.ScalarProfile.viscosity_margin_pos
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D07.01
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Scalar.lean
+SIGNATURE:
+  theorem ScalarProfile.viscosity_margin_pos
+      {E D Z A N ν : ℝ} (h : ScalarProfile E D Z A N) (hν : 0 < ν)
+      (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :
+      0 < ν - nonlinearCoefficient E D
+
+[LE026]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D09.03
+FILE = LeanEndpoints/QFA/Endpoints/Comparison/AdmissibleTimes.lean
+SIGNATURE:
+  theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO
+      {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)
+      (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :
+      ∃ ε : ℕ → ℝ,
+        (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧
+        Tendsto ε atTop (𝓝 0)
+
+[LE027]
+DECLARATION = QFA.Endpoints.Comparison.critical_comparison_differential_gronwall
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D09.04
+FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean
+SIGNATURE:
+  theorem critical_comparison_differential_gronwall
+      {y d a : ℝ → ℝ} {s T : ℝ} (hst : s ≤ T)
+      (hy : ContinuousOn y (Icc s T)) (ha : ContinuousOn a (Icc s T))
+      (hderiv : ∀ t ∈ Ioo s T, HasDerivAt y (d t) t)
+      (hbound : ∀ t ∈ Ioo s T, d t ≤ a t * y t) :
+      ∀ t ∈ Icc s T, y t ≤ y s * Real.exp (∫ r in s..t, a r)
+
+[LE028]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_GRONWALL
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D09.04
+FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean
+SIGNATURE:
+  theorem CRITICAL_RELATIVE_ENERGY_GRONWALL
+      {e a : ℝ → ℝ} {s T δ : ℝ} (hst : s ≤ T)
+      (ha : ContinuousOn a (Icc s T))
+      (ha_nonneg : ∀ t ∈ Icc s T, 0 ≤ a t)
+      (hprod : IntervalIntegrable (fun r => a r * e r) volume s T)
+      (hrelative : ∀ t ∈ Icc s T,
+        e t ≤ δ + ∫ r in s..t, a r * e r) :
+      ∀ t ∈ Icc s T, e t ≤ δ * Real.exp (∫ r in s..t, a r)
+
+[LE029]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D09.04
+FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean
+SIGNATURE:
+  theorem CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE
+      {e a : ℝ → ℝ} {T M : ℝ} {ε : ℕ → ℝ}
+      (hT : 0 < T)
+      (he_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ e t)
+      (ha : ContinuousOn a (Ioc 0 T))
+      (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
+      (ha_integrable : IntervalIntegrable a volume 0 T)
+      (hprod : IntervalIntegrable (fun r => a r * e r) volume 0 T)
+      (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
+      (hε : ∀ n, ε n ∈ Ioc 0 T)
+      (hε_zero : Tendsto ε atTop (𝓝 0))
+      (htrace : Tendsto (fun n => e (ε n)) atTop (𝓝 0))
+      (hrelative : ∀ n t, t ∈ Icc (ε n) T →
+        e t ≤ e (ε n) + ∫ r in ε n..t, a r * e r) :
+      ∀ t ∈ Ioc 0 T, e t = 0
+
+[LE030]
+DECLARATION = QFA.Endpoints.Comparison.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D09.04
+FILE = LeanEndpoints/QFA/Endpoints/Comparison/RelativeEnergy.lean
+SIGNATURE:
+  theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE
+      {V : Type*} [NormedAddCommGroup V]
+      {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}
+      (hT : 0 < T)
+      (ha : ContinuousOn a (Ioc 0 T))
+      (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)
+      (ha_integrable : IntervalIntegrable a volume 0 T)
+      (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)
+      (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)
+      (hε : ∀ n, ε n ∈ Ioc 0 T)
+      (hε_zero : Tendsto ε atTop (𝓝 0))
+      (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))
+      (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))
+      (hrelative : ∀ n t, t ∈ Icc (ε n) T →
+        ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +
+          ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :
+      ∀ t ∈ Ioc 0 T, u t = v t
+
+[LC001]
+DECLARATION = QFA.Endpoints.Agmon.WholeSpaceSpectralEndpoint
+STATUS = PROP_TARGET_NO_SUPPLIED_INHABITANT
+APPLIED_AT = D06.02
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Contracts.lean
+
+[LC002]
+DECLARATION = QFA.Endpoints.Agmon.WholeSpaceInterpolationEndpoint
+STATUS = PROP_TARGET_NO_SUPPLIED_INHABITANT
+APPLIED_AT = D06.07
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Contracts.lean
+
+[LC003]
+DECLARATION = QFA.Endpoints.Agmon.WholeSpaceAgmonEndpoint
+STATUS = PROP_TARGET_NO_SUPPLIED_INHABITANT
+APPLIED_AT = D06.06
+FILE = LeanEndpoints/QFA/Endpoints/Agmon/Contracts.lean
 
 END OF QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER

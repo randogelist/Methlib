@@ -1,0 +1,369 @@
+{
+  "version": "0.1.0",
+  "mathematical_status": "B_TIER",
+  "lean_status": "A_TIER_CANDIDATE",
+  "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
+  "lean": "4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "source_parent_commit": "e91397da79d11e08a6499feec8bd5c18465a4107",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "dependency_revisions": {
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "plausible": "b7eb3304aeae834b12dda98993a37f6a41f6f0bb",
+    "LeanSearchClient": "5f4d51b81cbd3f6b32b156bfad9056621a040404",
+    "importGraph": "16f02aa7642864af59f1ff0e384a015994db9118",
+    "proofwidgets": "4be2e3d5087eeb272cf5a8853b8f9dd025ef5957",
+    "aesop": "3448c0bcc5ce01b2d1546e483ec3620e32df3d0e",
+    "Qq": "92c15be17b7caf78c2ad767ec40f89052d908d81",
+    "batteries": "4488d40d070b9700d4d5a6aa342f0d40c31b2a2d",
+    "Cli": "6130a47896ce867c6a4a55373441e59e565bad0f"
+  },
+  "sources": {
+    ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
+    "Audit.lean": "cf71d46e97247cf7778ea4b220a4f9610545fa04af33cc884296d51995ed340a",
+    "QFA/Endpoints/Agmon/Contracts.lean": "a8094d33071c0cc9da07fea80bd9b481eb5e1a87b08d8109835007cbc5c03ec0",
+    "QFA/Endpoints/Agmon/Scalar.lean": "d8b0dd43cfabda0510d4c01c358cdc959d6d7fc266f097c8470df361babfc034",
+    "QFA/Endpoints/Comparison/AdmissibleTimes.lean": "ced4416fb261e3a08a45b321ea13d1c4051641e06f5b7d7ef2b49d4ab556f3a9",
+    "QFA/Endpoints/Comparison/RelativeEnergy.lean": "ff79ddced5e8dc97b430bbea95f5eb54686864632df01003f5f5211e90e80285",
+    "QFA/Endpoints/Composition/GoodTimeOfEnvelope.lean": "4cffe763361a0bd8d70ef79276c7127ddb18736415b9c4b9b5ca9d5aa5e6110d",
+    "QFA/Endpoints/Energy/ProductBudget.lean": "e49714c24f0508ec82ec66f972e1e3aa5071f8ae5046483a267bbd0dbf3a97f2",
+    "QFA/Endpoints/GoodTime/Basic.lean": "2a69494e312c0fd2178d7fb1c1f6ed22e2e3ce2e3382ed40fa4c694c003a9fc5",
+    "QFA/Endpoints/GoodTime/Cutoff.lean": "375484ddc427f6c9abdaa2a738c33a4a96c639a7b3e0476210dec1717473f6f9",
+    "QFA/Endpoints/GoodTime/Interval.lean": "c0a528c3f98a9c611dfb4fbaaf969ac0328a5448bc313c259d173cbd1b6570ec",
+    "QFA.lean": "981f18093783731f05f6a44b58ddd2659cdede2b09344cb74afe086cae3eaef2",
+    "lake-manifest.json": "d6d1cf29b10a13526b356cfb5bdfcccc8aaf33c39b6c68a2990b533a015b41a8",
+    "lakefile.lean": "614dd2cea65be5a53bafdd1eee430697a94c84dc71cc728f2b17c17fd20c1331",
+    "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
+    "run.cmd": "25fdf43a23b45a6d28e89e808fe9174f3c5ac69219de3c1653787ddbce274f07",
+    "scripts/audit.py": "46b68355f5578304a356af0c121d39d144b48189159f4ab7292a49e83a707923"
+  },
+  "declarations": [
+    {
+      "name": "QFA.Energy.envelope_zero",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 38,
+      "signature": "theorem envelope_zero (M ν : ℝ) (D : ℝ → ℝ) :\n    envelope M ν D 0 = M ^ 2",
+      "id": "LE001",
+      "step": "D04.01",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.envelope_absolutelyContinuousOnInterval",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 44,
+      "signature": "theorem envelope_absolutelyContinuousOnInterval\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    AbsolutelyContinuousOnInterval (envelope M ν D) 0 R",
+      "id": "LE002",
+      "step": "D04.02",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.envelope_hasDerivAt_ae",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 61,
+      "signature": "theorem envelope_hasDerivAt_ae\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    ∀ᵐ t ∂volume, t ∈ uIcc (0 : ℝ) R →\n      HasDerivAt (envelope M ν D) (-(2 * ν * D t)) t",
+      "id": "LE003",
+      "step": "D04.03",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.envelope_product_intervalIntegrable",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 76,
+      "signature": "theorem envelope_product_intervalIntegrable\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    IntervalIntegrable (fun t => envelope M ν D t * D t) volume 0 R",
+      "id": "LE004",
+      "step": "D04.04",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.envelope_product_integral",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 86,
+      "signature": "theorem envelope_product_integral\n    {M ν R : ℝ} {D : ℝ → ℝ}\n    (hν : ν ≠ 0)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R) :\n    (∫ t in (0 : ℝ)..R, envelope M ν D t * D t) =\n      (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν)",
+      "id": "LE005",
+      "step": "D04.05",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.product_budget_of_envelope_identity",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 129,
+      "signature": "theorem product_budget_of_envelope_identity\n    {E D F : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hFD : IntervalIntegrable (fun t => F t * D t) volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDm : AEStronglyMeasurable D (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), E t ≤ F t)\n    (hidentity : (∫ t in (0 : ℝ)..R, F t * D t) =\n      (M ^ 4 - (F R) ^ 2) / (4 * ν)) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤\n        (M ^ 4 - (F R) ^ 2) / (4 * ν) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)",
+      "id": "LE006",
+      "step": "D04.06",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.product_budget",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 186,
+      "signature": "theorem product_budget\n    {E D : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      E t ≤ envelope M ν D t) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤\n        (M ^ 4 - (envelope M ν D R) ^ 2) / (4 * ν) ∧\n      (∫ t in (0 : ℝ)..R, E t * D t) ≤ M ^ 4 / (4 * ν)",
+      "id": "LE007",
+      "step": "D04.06",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Energy.product_budget_Ioo",
+      "source": "QFA/Endpoints/Energy/ProductBudget.lean",
+      "module": "QFA.Endpoints.Energy.ProductBudget",
+      "line": 212,
+      "signature": "theorem product_budget_Ioo\n    {E D : ℝ → ℝ} {M ν R : ℝ}\n    (hR : 0 ≤ R) (hν : 0 < ν)\n    (hD : IntervalIntegrable D volume (0 : ℝ) R)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) R)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),\n      E t ≤ envelope M ν D t) :\n    Integrable (fun t => E t * D t) (volume.restrict (Ioo (0 : ℝ) R)) ∧\n      (∫ t in Ioo (0 : ℝ) R, E t * D t) ≤ M ^ 4 / (4 * ν)",
+      "id": "LE008",
+      "step": "D04.06",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.GoodTime.qfa_cutoff_nonneg",
+      "source": "QFA/Endpoints/GoodTime/Cutoff.lean",
+      "module": "QFA.Endpoints.GoodTime.Cutoff",
+      "line": 33,
+      "signature": "theorem qfa_cutoff_nonneg (M : ℝ) {ν : ℝ} (hν : 0 < ν) :\n    0 ≤ M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5)",
+      "id": "LE009",
+      "step": "D05.01",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.GoodTime.qfa_budget_lt_threshold",
+      "source": "QFA/Endpoints/GoodTime/Cutoff.lean",
+      "module": "QFA.Endpoints.GoodTime.Cutoff",
+      "line": 39,
+      "signature": "theorem qfa_budget_lt_threshold\n    {M ν δ : ℝ} (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ) :\n    M ^ 4 / (4 * ν) < (4 * Real.pi ^ 2 * ν ^ 4) * δ",
+      "id": "LE010",
+      "step": "D05.01",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.GoodTime.exists_good_time_of_integral_lt",
+      "source": "QFA/Endpoints/GoodTime/Basic.lean",
+      "module": "QFA.Endpoints.GoodTime.Basic",
+      "line": 38,
+      "signature": "theorem exists_good_time_of_integral_lt\n    {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ}\n    (hT : 0 < T) (hc : 0 ≤ c)\n    (hf : Integrable f (volume.restrict (Ioo (0 : ℝ) T)))\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) T), Good t)\n    (hbudget : (∫ t in Ioo (0 : ℝ) T, f t) < c * T) :\n    ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c",
+      "id": "LE011",
+      "step": "D05.02",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.GoodTime.exists_subcritical_product_good_time",
+      "source": "QFA/Endpoints/GoodTime/Cutoff.lean",
+      "module": "QFA.Endpoints.GoodTime.Cutoff",
+      "line": 57,
+      "signature": "theorem exists_subcritical_product_good_time\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hprod : Integrable (fun t => E t * D t)\n      (volume.restrict (Ioo (0 : ℝ) δ)))\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)\n    (hbudget : (∫ t in Ioo (0 : ℝ) δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
+      "id": "LE012",
+      "step": "D05.02",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.GoodTime.exists_subcritical_product_good_time_of_interval_budget",
+      "source": "QFA/Endpoints/GoodTime/Interval.lean",
+      "module": "QFA.Endpoints.GoodTime.Interval",
+      "line": 35,
+      "signature": "theorem exists_subcritical_product_good_time_of_interval_budget\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hprod : IntervalIntegrable (fun t => E t * D t) volume 0 δ)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t)\n    (hbudget : (∫ t in (0 : ℝ)..δ, E t * D t) ≤ M ^ 4 / (4 * ν)) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
+      "id": "LE013",
+      "step": "D05.02",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Composition.exists_subcritical_good_time_of_envelope",
+      "source": "QFA/Endpoints/Composition/GoodTimeOfEnvelope.lean",
+      "module": "QFA.Endpoints.Composition.GoodTimeOfEnvelope",
+      "line": 30,
+      "signature": "theorem exists_subcritical_good_time_of_envelope\n    {E D : ℝ → ℝ} {Good : ℝ → Prop} {M ν δ : ℝ}\n    (hν : 0 < ν)\n    (hcut : M ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hD : IntervalIntegrable D volume (0 : ℝ) δ)\n    (hEm : AEStronglyMeasurable E (volume.restrict (Ioo (0 : ℝ) δ)))\n    (hDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ D t)\n    (hEnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), 0 ≤ E t)\n    (hEF : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ),\n      E t ≤ QFA.Energy.envelope M ν D t)\n    (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t) :\n    ∃ s, 0 < s ∧ s < δ ∧ Good s ∧ E s * D s < 4 * Real.pi ^ 2 * ν ^ 4",
+      "id": "LE014",
+      "step": "D05.02",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.agmon_fourth_power",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 62,
+      "signature": "theorem agmon_fourth_power\n    {D Z A : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z)\n    (hAgmon : A ^ 2 ≤ Real.sqrt (D * Z) / (2 * Real.pi)) :\n    4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z",
+      "id": "LE015",
+      "step": "D06.06",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.nonlinear_fourth_power_of_agmon_fourth",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 82,
+      "signature": "theorem nonlinear_fourth_power_of_agmon_fourth\n    {E D Z A N : ℝ} (hD : 0 ≤ D) (hZ : 0 ≤ Z) (hN : 0 ≤ N)\n    (hInterpolation : D ^ 2 ≤ E * Z)\n    (hAgmon : 4 * Real.pi ^ 2 * A ^ 4 ≤ D * Z)\n    (hConvection : N ≤ A * Real.sqrt D * Real.sqrt Z) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4",
+      "id": "LE016",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.ScalarProfile.nonlinear_fourth_power",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 108,
+      "signature": "theorem ScalarProfile.nonlinear_fourth_power\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :\n    4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4",
+      "id": "LE017",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.nonlinear_le_of_product_le",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 118,
+      "signature": "theorem nonlinear_le_of_product_le\n    {E D Z N c : ℝ} (hZ : 0 ≤ Z) (hc : 0 ≤ c)\n    (hFourth : 4 * Real.pi ^ 2 * N ^ 4 ≤ (E * D) * Z ^ 4)\n    (hProduct : E * D ≤ 4 * Real.pi ^ 2 * c ^ 4) :\n    N ≤ c * Z",
+      "id": "LE018",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.nonlinearCoefficient_nonneg",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 145,
+      "signature": "theorem nonlinearCoefficient_nonneg (E D : ℝ) :\n    0 ≤ nonlinearCoefficient E D",
+      "id": "LE019",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.nonlinearCoefficient_fourth",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 151,
+      "signature": "theorem nonlinearCoefficient_fourth\n    {E D : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) :\n    4 * Real.pi ^ 2 * nonlinearCoefficient E D ^ 4 = E * D",
+      "id": "LE020",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.ScalarProfile.nonlinear_le_coefficient",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 181,
+      "signature": "theorem ScalarProfile.nonlinear_le_coefficient\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) :\n    N ≤ nonlinearCoefficient E D * Z",
+      "id": "LE021",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 189,
+      "signature": "theorem ScalarProfile.nonlinear_eq_zero_of_laplacian_eq_zero\n    {E D Z A N : ℝ} (h : ScalarProfile E D Z A N) (hZ : Z = 0) : N = 0",
+      "id": "LE022",
+      "step": "D06.08",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.nonlinearCoefficient_lt_viscosity",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 167,
+      "signature": "theorem nonlinearCoefficient_lt_viscosity\n    {E D ν : ℝ} (hE : 0 ≤ E) (hD : 0 ≤ D) (hν : 0 < ν)\n    (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :\n    nonlinearCoefficient E D < ν",
+      "id": "LE023",
+      "step": "D07.01",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.ScalarProfile.enstrophy_absorption",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 200,
+      "signature": "theorem ScalarProfile.enstrophy_absorption\n    {E D Z A N d ν : ℝ} (h : ScalarProfile E D Z A N)\n    (hEnstrophy : d / 2 + ν * Z ≤ N) :\n    d + 2 * (ν - nonlinearCoefficient E D) * Z ≤ 0",
+      "id": "LE024",
+      "step": "D07.01",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Agmon.ScalarProfile.viscosity_margin_pos",
+      "source": "QFA/Endpoints/Agmon/Scalar.lean",
+      "module": "QFA.Endpoints.Agmon.Scalar",
+      "line": 208,
+      "signature": "theorem ScalarProfile.viscosity_margin_pos\n    {E D Z A N ν : ℝ} (h : ScalarProfile E D Z A N) (hν : 0 < ν)\n    (hSmall : E * D < 4 * Real.pi ^ 2 * ν ^ 4) :\n    0 < ν - nonlinearCoefficient E D",
+      "id": "LE025",
+      "step": "D07.01",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Comparison.CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO",
+      "source": "QFA/Endpoints/Comparison/AdmissibleTimes.lean",
+      "module": "QFA.Endpoints.Comparison.AdmissibleTimes",
+      "line": 28,
+      "signature": "theorem CRITICAL_ADMISSIBLE_TIMES_TENDSTO_ZERO\n    {T : ℝ} (hT : 0 < T) (P : ℝ → Prop)\n    (hP : ∀ᵐ s ∂volume.restrict (Ioc (0 : ℝ) T), P s) :\n    ∃ ε : ℕ → ℝ,\n      (∀ n, ε n ∈ Ioc (0 : ℝ) T ∧ P (ε n)) ∧\n      Tendsto ε atTop (𝓝 0)",
+      "id": "LE026",
+      "step": "D09.03",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Comparison.critical_comparison_differential_gronwall",
+      "source": "QFA/Endpoints/Comparison/RelativeEnergy.lean",
+      "module": "QFA.Endpoints.Comparison.RelativeEnergy",
+      "line": 55,
+      "signature": "theorem critical_comparison_differential_gronwall\n    {y d a : ℝ → ℝ} {s T : ℝ} (hst : s ≤ T)\n    (hy : ContinuousOn y (Icc s T)) (ha : ContinuousOn a (Icc s T))\n    (hderiv : ∀ t ∈ Ioo s T, HasDerivAt y (d t) t)\n    (hbound : ∀ t ∈ Ioo s T, d t ≤ a t * y t) :\n    ∀ t ∈ Icc s T, y t ≤ y s * Real.exp (∫ r in s..t, a r)",
+      "id": "LE027",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_GRONWALL",
+      "source": "QFA/Endpoints/Comparison/RelativeEnergy.lean",
+      "module": "QFA.Endpoints.Comparison.RelativeEnergy",
+      "line": 101,
+      "signature": "theorem CRITICAL_RELATIVE_ENERGY_GRONWALL\n    {e a : ℝ → ℝ} {s T δ : ℝ} (hst : s ≤ T)\n    (ha : ContinuousOn a (Icc s T))\n    (ha_nonneg : ∀ t ∈ Icc s T, 0 ≤ a t)\n    (hprod : IntervalIntegrable (fun r => a r * e r) volume s T)\n    (hrelative : ∀ t ∈ Icc s T,\n      e t ≤ δ + ∫ r in s..t, a r * e r) :\n    ∀ t ∈ Icc s T, e t ≤ δ * Real.exp (∫ r in s..t, a r)",
+      "id": "LE028",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Comparison.CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE",
+      "source": "QFA/Endpoints/Comparison/RelativeEnergy.lean",
+      "module": "QFA.Endpoints.Comparison.RelativeEnergy",
+      "line": 153,
+      "signature": "theorem CRITICAL_RELATIVE_ENERGY_ZERO_OF_ADMISSIBLE_TRACE\n    {e a : ℝ → ℝ} {T M : ℝ} {ε : ℕ → ℝ}\n    (hT : 0 < T)\n    (he_nonneg : ∀ t ∈ Icc 0 T, 0 ≤ e t)\n    (ha : ContinuousOn a (Ioc 0 T))\n    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)\n    (ha_integrable : IntervalIntegrable a volume 0 T)\n    (hprod : IntervalIntegrable (fun r => a r * e r) volume 0 T)\n    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)\n    (hε : ∀ n, ε n ∈ Ioc 0 T)\n    (hε_zero : Tendsto ε atTop (𝓝 0))\n    (htrace : Tendsto (fun n => e (ε n)) atTop (𝓝 0))\n    (hrelative : ∀ n t, t ∈ Icc (ε n) T →\n      e t ≤ e (ε n) + ∫ r in ε n..t, a r * e r) :\n    ∀ t ∈ Ioc 0 T, e t = 0",
+      "id": "LE029",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE"
+    },
+    {
+      "name": "QFA.Endpoints.Comparison.CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE",
+      "source": "QFA/Endpoints/Comparison/RelativeEnergy.lean",
+      "module": "QFA.Endpoints.Comparison.RelativeEnergy",
+      "line": 198,
+      "signature": "theorem CRITICAL_COMPARISON_EQ_OF_ADMISSIBLE_TRACE\n    {V : Type*} [NormedAddCommGroup V]\n    {u v : ℝ → V} {a : ℝ → ℝ} {a₀ : V} {T M : ℝ} {ε : ℕ → ℝ}\n    (hT : 0 < T)\n    (ha : ContinuousOn a (Ioc 0 T))\n    (ha_nonneg : ∀ t ∈ Ioc 0 T, 0 ≤ a t)\n    (ha_integrable : IntervalIntegrable a volume 0 T)\n    (hprod : IntervalIntegrable (fun r => a r * ‖u r - v r‖ ^ 2) volume 0 T)\n    (hbudget : (∫ r in (0 : ℝ)..T, a r) ≤ M)\n    (hε : ∀ n, ε n ∈ Ioc 0 T)\n    (hε_zero : Tendsto ε atTop (𝓝 0))\n    (hu_trace : Tendsto (fun n => u (ε n)) atTop (𝓝 a₀))\n    (hv_trace : Tendsto (fun n => v (ε n)) atTop (𝓝 a₀))\n    (hrelative : ∀ n t, t ∈ Icc (ε n) T →\n      ‖u t - v t‖ ^ 2 ≤ ‖u (ε n) - v (ε n)‖ ^ 2 +\n        ∫ r in ε n..t, a r * ‖u r - v r‖ ^ 2) :\n    ∀ t ∈ Ioc 0 T, u t = v t",
+      "id": "LE030",
+      "step": "D09.04",
+      "status": "A_TIER_CANDIDATE"
+    }
+  ],
+  "analytic_targets": [
+    {
+      "id": "LC001",
+      "name": "QFA.Endpoints.Agmon.WholeSpaceSpectralEndpoint",
+      "step": "D06.02",
+      "source": "QFA/Endpoints/Agmon/Contracts.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    },
+    {
+      "id": "LC002",
+      "name": "QFA.Endpoints.Agmon.WholeSpaceInterpolationEndpoint",
+      "step": "D06.07",
+      "source": "QFA/Endpoints/Agmon/Contracts.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    },
+    {
+      "id": "LC003",
+      "name": "QFA.Endpoints.Agmon.WholeSpaceAgmonEndpoint",
+      "step": "D06.06",
+      "source": "QFA/Endpoints/Agmon/Contracts.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    }
+  ]
+}

@@ -110,10 +110,27 @@ $$
 | Artifact | Status |
 |---|---|
 | [QUASI_FEFFERMAN_A_B_TIER.txt](QUASI_FEFFERMAN_A_B_TIER.txt) | Complete composed classical derivation |
-| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.1: 110 source declarations indexed at 45 derivation locations; 142 located applications; eight explicit B-tier adapter derivations |
+| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.2: 116 pinned source declarations at 45 derivation locations; 151 source applications; 30 local theorem candidates and three analytic target signatures indexed at their points of use |
+| [QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt) | Complete mathematical derivations for the extracted scalar endpoints; exact candidate signatures and physical realization boundaries |
 
 Selected source baseline: Lean `4.33.0`, Mathlib
 `db584cd6d46c92f209a44c0f1c829460d327499d`.
 
 `!=B_TIER`; source inspection does not establish external compiler or
 theorem-level axiom-audit evidence.
+
+## Folderwise Lean endpoint extraction
+
+[LeanEndpoints](LeanEndpoints/README.md): `Energy`, `GoodTime`, `Agmon`,
+`Comparison`, `Composition` under `LeanEndpoints/QFA/Endpoints/`.
+
+Status: `A_TIER_CANDIDATE`; 30 proposed theorem bodies in nine endpoint
+modules, plus three analytic Prop targets without supplied proofs.
+The composed scalar endpoint derives a strict good-time witness directly
+from the finite-interval energy-envelope hypotheses. The exact physical
+QFA root remains the frozen B-tier theorem.
+
+[run.cmd](LeanEndpoints/run.cmd): cached external native Windows Lean
+4.33.0 execution and exact theorem-level axiom auditing. Local Lean
+executions: zero.
+

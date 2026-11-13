@@ -1,0 +1,78 @@
+QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER
+VERSION = 0.1.0
+STATUS = A_TIER_CANDIDATE
+MATHEMATICAL_DERIVATION = B_TIER
+EXACT_PHYSICAL_QFA_ROOT = FROZEN; LEAN_IMPLEMENTATION_PENDING
+EXTERNAL_COMPILER_EVIDENCE = ABSENT
+THEOREM_LEVEL_AXIOM_AUDIT_EVIDENCE = ABSENT
+LOCAL_LEAN_EXECUTIONS = 0
+
+PACKAGE
+  Quasi-Fefferman-A/LeanEndpoints
+  Aggregator: QFA.lean
+  Candidate endpoint modules: 9
+  Public theorem declarations: LE001-LE030
+  Analytic Prop definitions: LC001-LC003; no proof inhabitants supplied
+
+PINNED EXTERNAL BASELINE
+  Native Windows Lean 4.33.0
+  Toolchain: leanprover/lean4:v4.33.0
+  Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+  Transitive dependencies: lake-manifest.json
+
+EXACT STATEMENT REGISTER
+  endpoint-manifest.json binds each theorem name to its source path,
+  exact prepared signature, derivation location and source SHA256.
+  Audit.lean emits the compiler type and #print axioms for every registered
+  public theorem. Private helpers remain in the audited dependency closure.
+
+SOURCE STATUS
+  All 30 theorem declarations have proposed proof bodies.
+  No sorry, admit, arbitrary axiom declaration or native_decide proof occurs
+  in the inspected candidate source.
+  This is source inspection, not successful Lean elaboration or axiom evidence.
+  The three analytic Prop definitions supply signatures only.
+
+EXECUTION
+  User's external native Windows environment: run.cmd
+  Mathlib objects: lake exe cache get
+  Candidate objects: incremental lake build QFA
+  Independent elaboration: Elab.async=true in endpoint modules
+  Final chain: explicit deterministic composition
+  Cache deletion: none
+
+EVIDENCE
+  evidence/source-manifest.json
+  evidence/lean-version.txt
+  evidence/mathlib-cache.log
+  evidence/before-revision-*.txt and evidence/after-revision-*.txt
+  evidence/before-status-*.txt and evidence/after-status-*.txt
+  evidence/build.log
+  evidence/axioms.log
+  evidence/status.json
+
+AXIOM POLICY
+  Allowed foundational axioms: propext, Classical.choice, Quot.sound.
+  sorryAx and every other axiom are rejected.
+  Missing, duplicate or unexpected declaration reports are rejected.
+  Type-marker ordering, source hashes, manifest identity, compiler version,
+  dependency revisions and dependency cleanliness are checked.
+
+PROMOTION BOUNDARY
+  Prepared source alone -> A_TIER_CANDIDATE only.
+  Matching external compiler success AND exact theorem-level axiom audit
+    -> evidence for the individual compiled scalar declaration only.
+  Successful typing of an analytic Prop definition does not prove that Prop.
+  No scalar theorem is promoted to the actual whole-space QFA root.
+  No FORMAL_CLOSURE, CONDITIONAL_FORMAL_CLOSURE or UNCONDITIONAL_CLOSURE
+  is established by this package preparation.
+
+PHYSICAL REMAINDERS
+  Whole-space LH construction and profile realization;
+  physical restart and weak-equation translation;
+  AD01, AD08, AD03 and the analytic LC endpoints;
+  local strong existence, actual energy/enstrophy and continuation;
+  comparison coefficient/product integrability and physical cross-testing;
+  pressure realization, full NSE residual elimination and exact root assembly.
+
+END OF QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER
