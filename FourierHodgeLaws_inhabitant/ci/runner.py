@@ -156,6 +156,16 @@ def main():
     for name in new:
         code=strip_comments(found[name].read_text())
         if re.search(r'\b(?:sorry|admit|axiom|unsafe|native_decide)\b',code):raise ValueError('Forbidden proof admission in '+name)
+    upstream=[name for name in order if name not in new]
+    upstream_aggregate={'modules':upstream,'exit_code':None,'seconds':0,
+                        'log':'upstream-aggregate-build.log'}
+    if upstream:
+        print('HODGE_UPSTREAM_AGGREGATE_START '+str(len(upstream)),flush=True)
+        aggregate_code,aggregate_seconds=run(['lake','build',*upstream],package,
+                                             evidence/'upstream-aggregate-build.log')
+        upstream_aggregate.update(exit_code=aggregate_code,seconds=aggregate_seconds)
+        print('HODGE_UPSTREAM_AGGREGATE_END '+str(aggregate_code),flush=True)
+    (evidence/'upstream-aggregate.json').write_text(json.dumps(upstream_aggregate,indent=2)+'\n')
     results=[]; by_name={}; failure=False
     for name in order:
         slug=name.replace('.','-'); is_new=name in new
@@ -166,6 +176,11 @@ def main():
         if blocked:
             code=None; result.update(status='BLOCKED_DEPENDENCY',blocked_by=blocked,
                                      build_exit=None,seconds=0); failure=True
+        elif not is_new and upstream_aggregate['exit_code']==0:
+            code=0
+            result.update(build_exit=0,seconds=0,
+                          aggregate_log=upstream_aggregate['log'],
+                          aggregate_log_sha256=digest(evidence/upstream_aggregate['log']))
         else:
             code,seconds=run(['lake','build',name],package,evidence/(slug+'-build.log'))
             result.update(build_exit=code,seconds=seconds)
@@ -178,7 +193,7 @@ def main():
         else:
             names=declarations(found[name].read_text())
             audit=evidence/(slug+'-Audit.lean')
-            audit.write_text('import '+name+'\nset_option pp.universes true\nset_option pp.fullNames true\nset_option pp.explicit true\nset_option pp.width 180\n'+''.join('#check @'+n+'\n#print axioms '+n+'\n' for n in names))
+            audit.write_text('import '+name+'\nset_option pp.universes true\nset_option pp.fullNames true\nset_option pp.proofs false\n'+''.join('#check @'+n+'\n#print axioms '+n+'\n' for n in names))
             code,_=run(['lake','env','lean',str(audit)],package,evidence/(slug+'-audit.log'))
             result['audit_exit']=code; result['audit_source_sha256']=digest(audit)
             try:
@@ -190,10 +205,10 @@ def main():
         (evidence/(slug+'-result.json')).write_text(json.dumps(result,indent=2)+'\n')
         results.append(result)
         by_name[name]=result
-        (evidence/'summary.json').write_text(json.dumps({'status':'IN_PROGRESS','results':results,'unconditional_promotion':'REQUIRES_EXACT_TYPE_REVIEW'},indent=2)+'\n')
+        (evidence/'summary.json').write_text(json.dumps({'status':'IN_PROGRESS','results':results,'upstream_aggregate':upstream_aggregate,'unconditional_promotion':'REQUIRES_EXACT_TYPE_REVIEW'},indent=2)+'\n')
         print('HODGE_MODULE_END '+name+' '+result['status'],flush=True)
     if source_manifest(package)!=before:raise ValueError('Build changed source files')
-    summary={'status':'FAIL' if failure else 'PASS','results':results,'unconditional_promotion':'REQUIRES_EXACT_TYPE_REVIEW','source_manifest_sha256':digest(evidence/'source-manifest.json')}
+    summary={'status':'FAIL' if failure else 'PASS','results':results,'upstream_aggregate':upstream_aggregate,'unconditional_promotion':'REQUIRES_EXACT_TYPE_REVIEW','source_manifest_sha256':digest(evidence/'source-manifest.json')}
     (evidence/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     print(json.dumps({'status':summary['status'],'new_modules':len(new),'built_modules':len(results)}))
     return 1 if failure else 0

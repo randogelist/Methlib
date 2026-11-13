@@ -34,7 +34,7 @@ theorem canonicalVelocity_divergence_free_of_vectorL_smooth
   change NSEMaxwell.Classical.divergence
     (fun y => m + spatialCurl (vectorL (B t)) y) x = 0
   simpa only [NSEMaxwell.Classical.divergence, coordinateDerivative,
-    fderiv_const_add] using hd
+    fderiv_const_add, Pi.zero_apply] using hd
 
 theorem canonicalPressure_smooth_of_scalarL_smooth
     (ν : ℝ) (m : Vec) (B : Velocity)

@@ -111,7 +111,9 @@ theorem SpatialInverseLaplacianLaws.reconstruct_curl
   rw [hdiv, scalarL_zero, gradient_zero, add_zero, hB.mean_zero] at hK
   change spatialCurl (fun x => m + K B x) = B
   rw [spatialCurl_const_add]
-  simpa using hK
+  have hz : (fun _ : Vec => (0 : Vec)) = (0 : Field) := rfl
+  rw [hz, sub_zero] at hK
+  exact hK
 
 theorem SpatialInverseLaplacianLaws.reconstruction_data
     (laws : SpatialInverseLaplacianLaws) (m : Vec) (B : Field)

@@ -142,13 +142,13 @@ theorem inverseVectorCoeff_reality (a : Field) :
   unfold inverseVectorCoeff
   rw [inverseLaplacianSymbol_neg, SingularClosure.datumFourierCoeff_reality a k i,
     star_mul]
-  simp only [Complex.star_def, Complex.conj_ofReal]
+  simp only [Complex.star_def, Complex.conj_ofReal, mul_comm]
 
 theorem inverseScalarCoeff_neg (f : ScalarField) (k : Frequency) :
     inverseScalarCoeff f (-k) = star (inverseScalarCoeff f k) := by
   unfold inverseScalarCoeff
   rw [inverseLaplacianSymbol_neg, scalarCoeff_neg, star_mul]
-  simp only [Complex.star_def, Complex.conj_ofReal]
+  simp only [Complex.star_def, Complex.conj_ofReal, mul_comm]
 
 end
 
