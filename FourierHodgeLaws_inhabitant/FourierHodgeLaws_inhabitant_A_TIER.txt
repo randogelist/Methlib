@@ -33,11 +33,57 @@ Candidate root assembly:
 ROOT_TYPE_HAS_UNRESOLVED_ANALYTIC_PREMISES = NO
 ROOT_BODY_EXTERNAL_KERNEL_ACCEPTANCE = PENDING
 
+EXACT FIELD TYPES
+-----------------
+H1:
+  forall (a : Field), Data a ->
+    U (spatialMean a) (spatialCurl a) = a.
+
+H2:
+  forall (m : Vec) (B : Field), MagneticData B ->
+    spatialCurl (U m B) = B.
+
+H3:
+  forall (nu c : Real) (m : Vec) (B : Velocity), MagneticPath B ->
+    NSEMaxwell.Bridge.CanonicalSmoothness nu c m B.
+
+H4:
+  forall (nu : Real) (m : Vec) (B : Field), MagneticData B ->
+    G nu m B + NSEMaxwell.Classical.gradient (headPotential nu m B)
+      = K (spatialCurl (G nu m B)).
+
+Definitions are the unchanged upstream native definitions at the pinned commit.
+The inverse Laplacian is the actual full integer-frequency cosine integral sum;
+the zero-frequency symbol is zero. Spatial mean uses the actual unit cube.
+H3 uses joint ContDiffOn on the entire closed halfspace t >= 0, including t = 0.
+No positive-time cutoff or negative-time smoothness assumption is inserted.
+The arbitrary harmonic mean m is retained. No PDE solvability assumption is
+introduced into the FourierHodgeLaws inhabitant.
+
+CONSEQUENCE SCOPE
+-----------------
+ExactEquivalence is the existing statement:
+  forall nu > 0, forall c > 0, FeffermanB nu <-> MaxwellB nu c.
+This is an equivalence theorem. It does not separately assert either endpoint.
+
 PROMOTION_GATE = matching source hash + external compiler PASS
                 + exact theorem type + fresh theorem-level axiom audit.
 APPROVED_AXIOMS = {propext, Classical.choice, Quot.sound}
 UNCONDITIONAL_ROOT = NOT_ESTABLISHED
 FORMAL_CLOSURE_OF_NEW_ROOT = NOT_ESTABLISHED
+
+VERIFIED INTERMEDIATE ENDPOINTS
+------------------------------
+Run 43367930477, source a9933aaf969ca19c80a086260250bf369de5324d:
+  NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff
+  NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound
+  NSEMaxwell.HodgeProof.kineticMean_trajectory_smooth
+Status of each listed endpoint: A_TIER, with its exact stated smoothness and
+periodicity hypotheses and no additional analytic admission.
+External module build exit = 0; fresh theorem audit exit = 0.
+Compiled source hashes match these unchanged local theorem modules.
+Axioms are contained in {propext, Classical.choice, Quot.sound}.
+These verified intermediate endpoints do not by themselves certify H1-H4.
 
 External reproduction:
   Windows: run.cmd

@@ -168,7 +168,8 @@ theorem scalarCoeff_integrand_smooth (f : Pressure) (hf : SmoothPressure f)
   have hc : ContDiffOn ℝ ∞ (fun z : ℝ × Vec =>
       star (SingularClosure.fourierCharacter k z.2)) forwardSpacetime := by
     simpa only [SingularClosure.fourierCharacter_neg] using
-      (SingularClosure.fourierCharacter_contDiff (-k)).comp_contDiffOn contDiffOn_snd
+      (SingularClosure.fourierCharacter_contDiff (-k)).comp_contDiffOn
+        (contDiffOn_snd : ContDiffOn ℝ ∞ (fun z : ℝ × Vec => z.2) forwardSpacetime)
   exact hc.mul (Complex.ofRealCLM.contDiff.comp_contDiffOn hf)
 
 theorem scalarCoeff_contDiffOn (f : Pressure) (hf : SmoothPressure f) (k : Frequency) :
@@ -179,7 +180,9 @@ theorem scalarCoeff_hasDerivWithinAt (f : Pressure) (hf : SmoothPressure f)
     (k : Frequency) {t : ℝ} (ht : 0 ≤ t) :
     HasDerivWithinAt (fun s : ℝ => scalarCoeff (f s) k)
       (scalarCoeff (scalarTimeDerivative f t) k) (Ici (0 : ℝ)) t := by
-  have h := cubeIntegral_hasDerivWithinAt _ (scalarCoeff_integrand_smooth f hf k) ht
+  have h := cubeIntegral_hasDerivWithinAt
+    (fun (s : ℝ) (x : Vec) => star (SingularClosure.fourierCharacter k x) * (f s x : ℂ))
+    (scalarCoeff_integrand_smooth f hf k) ht
   have he : cubeTimeDerivative
       (fun s x => star (SingularClosure.fourierCharacter k x) * (f s x : ℂ)) t =
       fun x => star (SingularClosure.fourierCharacter k x) *

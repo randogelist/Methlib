@@ -21,9 +21,8 @@ theorem scalarL_summable (f : ScalarField) (hf : ContDiff ℝ ∞ f)
       (∫ y in unitCube, cosineKernel k x y * f y)) := by
   have hs := (SingularClosure.scalarFourierSeries_summable
     (rapid_inverseScalarCoeff f hf hp).summable_norm x).mapL Complex.reCLM
-  convert hs using 1
-  funext k
-  exact scalar_cosine_summand f hf.continuous k x
+  simp only [Complex.reCLM_apply] at hs
+  exact hs.congr (fun k => (scalar_cosine_summand f hf.continuous k x).symm)
 
 theorem cosine_mul_integrable (f : ScalarField) (hf : Continuous f)
     (k : Frequency) (x : Vec) :

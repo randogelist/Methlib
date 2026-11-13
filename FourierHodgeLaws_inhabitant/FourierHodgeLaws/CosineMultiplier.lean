@@ -51,6 +51,7 @@ theorem scalar_cosine_integral (f : ScalarField) (hf : Continuous f)
           (star (SingularClosure.fourierCharacter k y) * (f y : ℂ))).re := by
       apply integral_congr_ae
       exact Filter.Eventually.of_forall (fun y => by
+        dsimp only
         rw [cosineKernel_eq_character_re]
         simp only [← mul_assoc, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
           mul_zero, sub_zero])
@@ -74,8 +75,10 @@ theorem scalarL_eq_realFourierSeries (f : ScalarField)
   funext x
   have hs := SingularClosure.scalarFourierSeries_summable
     (rapid_inverseScalarCoeff f hf hp).summable_norm x
+  have hre := Complex.reCLM.map_tsum hs
+  simp only [Complex.reCLM_apply] at hre
   unfold scalarL SingularClosure.realFourierSeries SingularClosure.scalarFourierSeries
-  rw [Complex.reCLM.map_tsum hs]
+  rw [hre]
   apply tsum_congr
   intro k
   exact scalar_cosine_summand f hf.continuous k x
@@ -113,9 +116,8 @@ theorem vectorL_summable (F : Field) (hF : ContDiff ℝ ∞ F)
   intro i
   have hs := (SingularClosure.scalarFourierSeries_summable
     (rapid_inverseLaplacianCoeff F hF hp i).summable_norm x).mapL Complex.reCLM
-  convert hs using 1
-  funext k
-  exact vector_cosine_summand_component F hF.continuous k x i
+  simp only [Complex.reCLM_apply] at hs
+  exact hs.congr (fun k => (vector_cosine_summand_component F hF.continuous k x i).symm)
 
 theorem vectorL_eq_smoothFourierSynthesis (F : Field)
     (hF : ContDiff ℝ ∞ F) (hp : SpatialPeriodic F) :
@@ -124,14 +126,17 @@ theorem vectorL_eq_smoothFourierSynthesis (F : Field)
   ext i
   have hpj := (EuclideanSpace.proj i : Vec →L[ℝ] ℝ).map_tsum
     (vectorL_summable F hF hp x)
+  simp only [EuclideanSpace.coe_proj] at hpj
   change (∑' k : Frequency, inverseLaplacianSymbol k •
     (∫ y in unitCube, cosineKernel k x y • F y)) i = _
   rw [hpj]
   change (∑' k : Frequency, (inverseLaplacianSymbol k •
     (∫ y in unitCube, cosineKernel k x y • F y)) i) =
       (∑' k : Frequency, SingularClosure.fourierCharacter k x * inverseVectorCoeff F k i).re
-  rw [Complex.reCLM.map_tsum (SingularClosure.scalarFourierSeries_summable
-    (rapid_inverseLaplacianCoeff F hF hp i).summable_norm x)]
+  have hre := Complex.reCLM.map_tsum (SingularClosure.scalarFourierSeries_summable
+    (rapid_inverseLaplacianCoeff F hF hp i).summable_norm x)
+  simp only [Complex.reCLM_apply] at hre
+  rw [hre]
   apply tsum_congr
   intro k
   exact vector_cosine_summand_component F hF.continuous k x i

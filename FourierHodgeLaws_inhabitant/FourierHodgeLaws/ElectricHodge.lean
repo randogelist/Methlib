@@ -23,6 +23,7 @@ theorem spatialMean_lamb_zero (u : Field) (hu : Data u) :
     (hu.smooth.norm_sq ℝ).div_const 2
   have hep : SpatialPeriodic (fun x : Vec => ‖u x‖ ^ 2 / 2) := by
     intro x i
+    change ‖u (x + unitVector i)‖ ^ 2 / 2 = ‖u x‖ ^ 2 / 2
     rw [hu.periodic x i]
   have hc : (fun x => cross (spatialCurl u x) (u x)) =
       convection u - NSEMaxwell.Classical.gradient (fun x => ‖u x‖ ^ 2 / 2) := by
