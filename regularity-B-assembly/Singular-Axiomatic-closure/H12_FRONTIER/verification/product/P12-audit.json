@@ -1,0 +1,50 @@
+{
+  "declaration_count": 5,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}

@@ -1,0 +1,34 @@
+{
+  "declaration_count": 3,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}

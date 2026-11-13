@@ -1,0 +1,2 @@
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_CERTIFICATE
+'SingularClosure.H12Frontier.PRODUCT_CERTIFICATE' depends on axioms: [propext, Classical.choice, Quot.sound]
