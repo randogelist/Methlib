@@ -90,8 +90,9 @@ theorem EnergyProfile.velocityEnergy_aestronglyMeasurable
     AEStronglyMeasurable (fun t => velocityEnergy (u t))
       (volume.restrict (Ioo (0 : ℝ) R)) := by
   -- D02.05: the inspected AEStronglyMeasurable.norm and .pow APIs.
-  simpa only [velocityEnergy, Pi.pow_apply] using
-    ((h.velocity_aestronglyMeasurable R hR).norm.pow 2)
+  change AEStronglyMeasurable ((fun t : ℝ => ‖u t‖) ^ 2)
+    (volume.restrict (Ioo (0 : ℝ) R))
+  exact (h.velocity_aestronglyMeasurable R hR).norm.pow 2
 
 /-- Coordinatewise time L2 membership of the supplied spatial L2 fields gives
 genuine L1 integrability of the Frobenius energy readout. -/

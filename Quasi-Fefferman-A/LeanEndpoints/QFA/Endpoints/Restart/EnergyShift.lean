@@ -92,7 +92,7 @@ theorem timeTranslate_energy_intervals
   change E (t + s) + 2 * ν * (∫ q in r..t, D (q + s)) ≤ E (r + s)
   -- EP035 transports the integral; both endpoint inequalities are retained.
   rw [intervalIntegral.integral_comp_add_right D s]
-  exact hr (t + s) ⟨add_le_add_right ht.1 s, add_le_add_right ht.2 s⟩
+  exact hr (t + s) ⟨by linarith [ht.1], by linarith [ht.2]⟩
 
 end
 
