@@ -74,7 +74,9 @@ theorem scalarL_finset_sum {ι : Type*} (s : Finset ι) (f : ι → ScalarField)
     scalarL (fun x => ∑ i ∈ s, f i x) = fun x => ∑ i ∈ s, scalarL (f i) x := by
   classical
   induction s using Finset.induction_on with
-  | empty => simpa using scalarL_zero
+  | empty =>
+      change scalarL (0 : ScalarField) = (0 : ScalarField)
+      exact scalarL_zero
   | @insert i s hi ih =>
       simp only [Finset.sum_insert hi]
       have hs : ContDiff ℝ ∞ (fun x => ∑ j ∈ s, f j x) :=

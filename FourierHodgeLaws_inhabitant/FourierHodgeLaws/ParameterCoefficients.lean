@@ -167,7 +167,7 @@ theorem scalarCoeff_integrand_smooth (f : Pressure) (hf : SmoothPressure f)
       forwardSpacetime := by
   have hc : ContDiffOn ℝ ∞ (fun z : ℝ × Vec =>
       star (SingularClosure.fourierCharacter k z.2)) forwardSpacetime := by
-    simpa only [SingularClosure.fourierCharacter_neg] using
+    simpa only [Function.comp_def, SingularClosure.fourierCharacter_neg] using
       (SingularClosure.fourierCharacter_contDiff (-k)).comp_contDiffOn
         (contDiffOn_snd : ContDiffOn ℝ ∞ (fun z : ℝ × Vec => z.2) forwardSpacetime)
   exact hc.mul (Complex.ofRealCLM.contDiff.comp_contDiffOn hf)

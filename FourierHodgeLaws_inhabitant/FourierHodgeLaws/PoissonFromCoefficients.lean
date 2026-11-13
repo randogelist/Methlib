@@ -49,7 +49,11 @@ theorem datumFourierCoeff_const (m : Vec) :
   change (∫ x in unitCube,
     star (SingularClosure.fourierCharacter k x) * (m i : ℂ)) = _
   simp_rw [← SingularClosure.fourierCharacter_neg]
-  rw [integral_mul_const, SingularClosure.integral_fourierCharacter]
+  rw [integral_mul_const]
+  change (∫ x in SingularClosure.unitCube,
+    SingularClosure.fourierCharacter (-k) x) * (m i : ℂ) =
+      if k = 0 then (m i : ℂ) else 0
+  rw [SingularClosure.integral_fourierCharacter]
   by_cases hk : k = 0 <;> simp [hk]
 
 theorem datumFourierCoeff_laplacian (a : Field)
