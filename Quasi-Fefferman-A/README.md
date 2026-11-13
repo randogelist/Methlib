@@ -110,7 +110,7 @@ $$
 | Artifact | Status |
 |---|---|
 | [QUASI_FEFFERMAN_A_B_TIER.txt](QUASI_FEFFERMAN_A_B_TIER.txt) | Complete composed classical derivation |
-| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | Exact source entry points, derived hypothesis adapters, remaining whole-space formalization obligations |
+| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.1: 110 source declarations indexed at 45 derivation locations; 142 located applications; eight explicit B-tier adapter derivations |
 
 Selected source baseline: Lean `4.33.0`, Mathlib
 `db584cd6d46c92f209a44c0f1c829460d327499d`.
