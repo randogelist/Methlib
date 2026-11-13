@@ -112,7 +112,8 @@ theorem shifted_strong_trace_of_energy_start
   -- EP031 composes the proved right trace with the translated source filter.
   have h := (strong_right_trace_of_energy_start hν hs hD hweak hE).comp
     (timeTranslate_tendsto_nhdsWithin_right s)
-  simpa only [Function.comp_def, timeTranslate] using h
+  change Tendsto (fun t : ℝ => u (t + s)) (𝓝[>] (0 : ℝ)) (𝓝 (u s))
+  exact h
 
 end
 

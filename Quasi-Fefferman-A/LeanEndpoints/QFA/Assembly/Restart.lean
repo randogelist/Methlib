@@ -78,8 +78,9 @@ theorem timeTranslate_aestronglyMeasurable_Ioc
   have hrestricted :=
     hf.mono_measure (Measure.restrict_mono_set volume hsub)
   -- LE061 and AEStronglyMeasurable.comp_measurePreserving: actual pullback.
-  simpa only [Function.comp_def, timeTranslate] using
-    hrestricted.comp_measurePreserving (timeTranslate_measurePreserving_Ioc s T)
+  change AEStronglyMeasurable (f ∘ (fun t : ℝ => t + s))
+    (volume.restrict (Ioc (0 : ℝ) T))
+  exact hrestricted.comp_measurePreserving (timeTranslate_measurePreserving_Ioc s T)
 
 /-- EP011 converts both intervals to the null-endpoint-equivalent Ioc form. -/
 theorem timeTranslate_aestronglyMeasurable_Ioo
@@ -133,8 +134,9 @@ theorem energyProfile_timeTranslate
       (h.velocity_aestronglyMeasurable (R + s) hRs)
   · intro R hR j
     have hRs : 0 < R + s := lt_of_lt_of_le hR (le_add_of_nonneg_right hs)
-    simpa only [gradientTranslate, timeTranslate] using
-      (timeTranslate_memLp_Ioo hs (h.gradient_memLp (R + s) hRs j))
+    change MemLp (timeTranslate s (fun t : ℝ => G t j)) 2
+      (volume.restrict (Ioo (0 : ℝ) R))
+    exact timeTranslate_memLp_Ioo hs (h.gradient_memLp (R + s) hRs j)
   · -- LE068: no positivity of viscosity is required for the translation itself.
     have hshift := timeTranslate_energy_from_start
       (E := fun t => velocityEnergy (u t))
