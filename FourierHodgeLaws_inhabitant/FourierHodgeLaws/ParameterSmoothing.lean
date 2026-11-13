@@ -120,8 +120,8 @@ theorem inverseScalarSeriesTermDerivative_bound (f : Pressure) (k : Frequency)
 
 theorem phaseProjection_eq_sum (k : Frequency) :
     phaseProjection k = ∑ j : Fin 3, SingularClosure.derivativeSymbol j k • spaceProjection j := by
-  ext v
-  simp [phaseProjection, SingularClosure.fourierPhaseCLM, spaceProjection,
+  ext v <;>
+    simp [phaseProjection, SingularClosure.fourierPhaseCLM, spaceProjection,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.sum_apply,
     ContinuousLinearMap.smul_apply]
 

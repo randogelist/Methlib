@@ -8,10 +8,10 @@ MATHLIB_PIN = de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
 UPSTREAM_DEFINITION_PIN = 9f5500cd5dadc351ab3ec98db09dccaa9a22eb25
 LOCAL_LEAN_LAKE_ELAN_EXECUTIONS = 0
 
-H1 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
-H2 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
+H1 = A_TIER_UNRESOLVED_ANALYTIC_ADMISSIONS_0
+H2 = A_TIER_UNRESOLVED_ANALYTIC_ADMISSIONS_0
 H3 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
-H4 = CANDIDATE_UNCONDITIONAL_PROOF_CHAIN
+H4 = A_TIER_UNRESOLVED_ANALYTIC_ADMISSIONS_0
 
 Prepared target declarations:
   NSEMaxwell.HodgeProof.h1_reconstruct_velocity
@@ -74,6 +74,16 @@ FORMAL_CLOSURE_OF_NEW_ROOT = NOT_ESTABLISHED
 
 VERIFIED INTERMEDIATE ENDPOINTS
 ------------------------------
+Run 43369521891, source fa66b4d18fff84777ff102da1d85c47c3ece5604:
+  NSEMaxwell.HodgeProof.spatialInverseLaplacianLaws
+  NSEMaxwell.HodgeProof.h1_reconstruct_velocity
+  NSEMaxwell.HodgeProof.h2_reconstruct_curl
+  NSEMaxwell.HodgeProof.h4_electric_hodge
+Each declaration passed external compilation and a fresh theorem-level audit
+with only {propext, Classical.choice, Quot.sound}; source hashes match.
+H1/H2/H4 retain precisely the field types above. No analytic law, witness or
+inverse-Laplacian admission remains as an extra argument.
+
 Run 43367930477, source a9933aaf969ca19c80a086260250bf369de5324d:
   NSEMaxwell.HodgeProof.rapid_inverseScalarCoeff
   NSEMaxwell.HodgeProof.uniform_inverseScalarCoeff_moment_bound
