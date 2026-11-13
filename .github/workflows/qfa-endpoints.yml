@@ -78,6 +78,14 @@ jobs:
           use-mathlib-cache: 'false'
           use-github-cache: 'false'
 
+      - name: Bind the native Windows Elan path
+        run: |
+          $qfaElanBin = Join-Path $env:USERPROFILE '.elan\bin'
+          if (!(Test-Path (Join-Path $qfaElanBin 'lake.exe'))) {
+            throw 'Missing native Lake proxy'
+          }
+          $qfaElanBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
       - name: Build all endpoints and audit every exact declaration
         id: audit
         shell: cmd
