@@ -54,8 +54,10 @@ theorem envelope_absolutelyContinuousOnInterval
     apply ContDiffOn.absolutelyContinuousOnInterval
     exact contDiffOn_const
   -- EP015 and EP016: scaling and subtraction preserve AC.
-  simpa only [envelope, Pi.sub_apply] using
-    hC.sub (AbsolutelyContinuousOnInterval.const_mul (2 * ν) hA)
+  change AbsolutelyContinuousOnInterval
+    ((fun _ : ℝ => M ^ 2) -
+      (fun t : ℝ => 2 * ν * (∫ r in (0 : ℝ)..t, D r))) 0 R
+  exact hC.sub (AbsolutelyContinuousOnInterval.const_mul (2 * ν) hA)
 
 /-- D04.03: only the envelope is differentiated, and only a.e. on the interval. -/
 theorem envelope_hasDerivAt_ae
@@ -68,8 +70,10 @@ theorem envelope_hasDerivAt_ae
   intro htmem
   have hA := ht htmem (0 : ℝ) (by simp)
   -- EP018 and EP019: scale the primitive and subtract from the constant.
-  simpa only [envelope] using
-    HasDerivAt.const_sub (M ^ 2) (HasDerivAt.const_mul (2 * ν) hA)
+  change HasDerivAt
+    (fun x : ℝ => M ^ 2 - 2 * ν * (∫ r in (0 : ℝ)..x, D r))
+    (-(2 * ν * D t)) t
+  exact HasDerivAt.const_sub (M ^ 2) (HasDerivAt.const_mul (2 * ν) hA)
 
 /-- D04.04: the continuous envelope times the integrable dissipation is
 integrable, before any comparison with the weak energy profile is made. -/
@@ -152,7 +156,8 @@ theorem product_budget_of_envelope_identity
     exact (intervalIntegrable_iff_integrableOn_Ioc_of_le hR).mp hFD
   have hEDm : AEStronglyMeasurable (fun t => E t * D t)
       (volume.restrict (Ioo (0 : ℝ) R)) := by
-    simpa only [Pi.mul_apply] using hEm.mul hDm
+    change AEStronglyMeasurable (E * D) (volume.restrict (Ioo (0 : ℝ) R))
+    exact hEm.mul hDm
   have hEDnn : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R), 0 ≤ E t * D t := by
     filter_upwards [hEnn, hDnn] with t hEt hDt
     exact mul_nonneg hEt hDt

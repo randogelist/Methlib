@@ -128,7 +128,8 @@ theorem timeTranslate_intervalIntegrable
     IntervalIntegrable (timeTranslate s f) volume a b := by
   -- Mathlib IntervalIntegrable.comp_add_right; the source signature retains
   -- its endpoint finiteness argument, discharged for the real codomain.
-  simpa only [timeTranslate, add_sub_cancel_right] using hf.comp_add_right s
+  change IntervalIntegrable (fun t : ℝ => f (t + s)) volume a b
+  simpa only [add_sub_cancel_right] using hf.comp_add_right s
 
 /-- D05.04: restriction and translation of the supplied dissipation
 integrability on the original positive-time horizon. -/
@@ -143,7 +144,8 @@ theorem timeTranslate_dissipation_intervalIntegrable
       rw [uIcc_of_le (by linarith : s ≤ T + s),
         uIcc_of_le (add_nonneg hT hs)]
       exact Icc_subset_Icc hs le_rfl)
-  simpa only [sub_self, add_sub_cancel_right, timeTranslate]
+  change IntervalIntegrable (fun t : ℝ => D (t + s)) volume (0 : ℝ) T
+  simpa only [sub_self, add_sub_cancel_right]
     using hI.comp_add_right s
 
 end

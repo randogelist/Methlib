@@ -128,7 +128,7 @@ theorem nonlinear_le_of_product_le
         mul_le_mul_of_nonneg_right hProduct (pow_nonneg hZ 4)
       _ = (4 * Real.pi ^ 2) * (c * Z) ^ 4 := by ring
   have hpow : N ^ 4 ≤ (c * Z) ^ 4 :=
-    (mul_le_mul_left four_pi_sq_pos).mp hscaled
+    le_of_mul_le_mul_left hscaled four_pi_sq_pos
   -- EP115: only the target c*Z must be nonnegative for order reflection.
   exact le_of_pow_le_pow_left₀ (by norm_num : (4 : ℕ) ≠ 0)
     (mul_nonneg hc hZ) hpow
@@ -173,7 +173,7 @@ theorem nonlinearCoefficient_lt_viscosity
     rw [nonlinearCoefficient_fourth hE hD]
     exact hSmall
   have hpow : nonlinearCoefficient E D ^ 4 < ν ^ 4 :=
-    (mul_lt_mul_left four_pi_sq_pos).mp hscaled
+    lt_of_mul_lt_mul_left hscaled four_pi_sq_pos.le
   -- EP116: strict fourth-power comparison reflects through nonnegative viscosity.
   exact lt_of_pow_lt_pow_left₀ 4 hν.le hpow
 
