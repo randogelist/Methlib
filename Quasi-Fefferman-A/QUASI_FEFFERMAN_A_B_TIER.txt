@@ -1,0 +1,749 @@
+QUASI_FEFFERMAN_A_B_TIER
+VERSION = 1.0.0
+MODE = B_TIER_DERIVATION
+MARKER = !=B_TIER
+SPECIFICATION_STATUS = FROZEN
+MATHEMATICAL_STATUS = COMPLETE_COMPOSED_CLASSICAL_DERIVATION
+EXTERNAL_LEAN_VERIFICATION = PENDING
+LOCAL_LEAN_EXECUTIONS = 0
+
+REPOSITORY = randogelist/Methlib
+DEVELOPMENT_BRANCH = QFA
+DIRECTORY = Quasi-Fefferman-A
+INSPECTED_BASE = 4813604a46179c745b82f51bee51a186e9f4cc2d
+ROOT_SPECIFICATION = Quasi-Fefferman-A/README.md
+
+[00] STATUS CONVENTION
+
+This document records a mathematical derivation of the exact frozen QFA
+statement. Established classical theorems are listed explicitly in [03].
+Their use is mathematical theorem invocation, not an unresolved mathematical
+admission. Their realization in Lean remains a separate formalization task.
+
+Source declarations inspected in Methlib are distinguished from whole-space
+analytic endpoints. No compiler pass, theorem-level axiom audit, FORMAL_CLOSURE,
+or UNCONDITIONAL_CLOSURE is asserted by this document.
+
+[01] OBJECTS, NORMS, AND SEMANTICS
+
+Domain:
+  Omega = R^3, with Lebesgue measure dx.
+
+Parameters:
+  nu > 0, constant in time; f = 0.
+
+Spaces:
+  H := L^2_sigma(R^3)
+     = {a in L^2(R^3;R^3) : div a = 0 in distributions}.
+  V := H^1(R^3;R^3) intersect H.
+
+Norms:
+  ||v||_2^2       := sum_i int_R^3 |v_i(x)|^2 dx.
+  ||grad v||_2^2  := sum_{i,j} int_R^3 |partial_j v_i(x)|^2 dx.
+  ||Delta v||_2^2 := sum_i int_R^3 |Delta v_i(x)|^2 dx.
+  ||v||_infty     := ess sup_x |v(x)|, with Euclidean vector norm.
+
+Fourier convention:
+  vhat(xi) := (2*pi)^(-3/2) int_R^3 exp(-i*x.xi) v(x) dx.
+  ||v||_{dot H^s}^2 := int_R^3 |xi|^(2*s) |vhat(xi)|^2 dxi.
+
+Equation NSE_nu(u,p):
+  partial_t u + (u.grad)u + grad p = nu*Delta u,
+  div u = 0.
+
+LH_nu(a) denotes VELOCITY trajectories, with equality in L^2 at each time.
+It does not denote arbitrary velocity-pressure pairs.
+
+Definition LH_nu(a):
+  u in C_w([0,infty);H)
+       intersect L^infty(0,infty;L^2)
+       intersect L^2(0,infty;dot H^1),
+  u(0)=a,
+  lim_{t downarrow 0} ||u(t)-a||_2 = 0,
+  distributional incompressible NSE with f=0,
+  and the standard strong energy inequality:
+
+  ||u(t)||_2^2 + 2*nu*int_s^t ||grad u(r)||_2^2 dr <= ||u(s)||_2^2
+
+  for s=0, for almost every s>0, and for every t>=s.
+
+The distributional velocity equation is equivalently:
+  int_0^infty int_R^3
+    [u.partial_t phi + (u tensor u):grad phi - nu*grad u:grad phi] dx dt
+  + int_R^3 a.phi(0) dx = 0
+  for every smooth compactly supported solenoidal test phi on [0,infty)xR^3.
+
+If an imported convention initially supplies only almost every upper endpoint
+t, weak L^2 continuity and weak lower semicontinuity extend the energy
+inequality to every upper endpoint. The representative above is fixed.
+
+For every t>=0, set E(t):=||u(t)||_2^2.
+At the almost-everywhere times with u(t) in V, set
+  D(t) := ||grad u(t)||_2^2.
+Assign D=0 on the remaining null set; this does not change any integral.
+
+For initial datum a, set
+  M := ||a||_2,
+  E_0 := M^2,
+  K_0 := M^2/2.
+Thus E is the squared L^2 norm and K=E/2 is kinetic energy.
+
+Smoothness of an L^2-valued trajectory means existence of a smooth spacetime
+representative agreeing with that trajectory in L^2 at every relevant time.
+It does not quantify over arbitrary pointwise modifications on null sets.
+
+[02] EXACT FROZEN ROOT THEOREM
+
+  T_QFA(a,nu) := M^4/(16*pi^2*nu^5)
+               = K_0^2/(4*pi^2*nu^5).
+
+THEOREM QUASI_FEFFERMAN_A.
+
+  For every constant nu>0 and every a in H:
+
+  (Q0) LH_nu(a) is nonempty.
+
+  (Q1) For every u in LH_nu(a):
+         lim_{t downarrow 0} ||u(t)-a||_2 = 0.
+
+  (Q2) For every u in LH_nu(a) and every delta>T_QFA(a,nu),
+       there exist smooth representatives u,p on [delta,infty)xR^3
+       satisfying NSE_nu(u,p).
+
+  (Q3) For every such u and delta:
+         LH_nu(u(delta)) = {tau |-> u(delta+tau)}.
+
+Equivalent combined quantifiers:
+
+  forall nu>0, forall a in H,
+    LH_nu(a) != empty
+    and forall u in LH_nu(a),
+      [lim_{t downarrow 0} ||u(t)-a||_2=0
+       and forall delta>T_QFA(a,nu),
+         (exists p, (u,p) have smooth representatives on [delta,infty)xR^3
+          and NSE_nu(u,p) on that tail
+          and LH_nu(u(delta))={tau |-> u(delta+tau)})].
+
+Pressure gauge on every regular tail:
+  p(t) := sum_{i,j=1}^3 R_i R_j(u_i(t)*u_j(t)),
+  where R_i has multiplier -i*xi_i/|xi|.
+
+No mean-zero hypothesis is imposed on H.
+No smallness hypothesis is imposed on M.
+Uniqueness from the original datum a is neither a premise nor a conclusion.
+Existence of two distinct trajectories from a is not asserted.
+
+[03] ESTABLISHED CLASSICAL INPUTS
+
+C01. LERAY-HOPF EXISTENCE ON R^3.
+  nu>0 and a in H imply existence of u in LH_nu(a), with the strong initial
+  L^2 trace and the energy inequality specified in [01].
+  References: [R1], [R2, Theorem 4.7 and Corollary 4.6].
+
+C02. LOCAL H^1 SOLVABILITY AND CONTINUATION.
+  nu>0, b in V, and initial time s imply a maximal strong solution v with
+  lifetime T_max>s, such that for every s<R<T_max,
+    v in C([s,R];V) intersect L^2(s,R;H^2),
+    partial_t v in L^2(s,R;L^2),
+    v(s)=b,
+  and finite T_max forces unbounded H^1 norm as t approaches T_max.
+  References: [R1], [R2, Theorem 3.17 and Corollary 3.12].
+  The displayed H^1 energy-space formulation is the standard refinement of
+  the semi-strong existence formulation in R2. On smooth approximants,
+  testing against -Delta v and applying Agmon and Young yields
+    D_v' + nu*||Delta v||_2^2 <= C*nu^(-3)*D_v^3
+  for a universal finite C. The local scalar bound controls D_v and the
+  integral of ||Delta v||_2^2; the equation gives partial_t v in L^2(L^2).
+  The Hilbert-triple continuity theorem supplies C(H^1). Uniform local
+  existence time on bounded H^1 sets supplies the continuation alternative.
+
+C03. STRONG-SOLUTION IDENTITIES AND SMOOTHING.
+  The solutions of C02 satisfy the energy and enstrophy identities, and are
+  smooth for t>s. On compact subintervals of (s,T_max), spatial Sobolev
+  regularity of every order and the corresponding time derivatives hold.
+  References: [R2, Theorem 3.2, Corollary 3.3, Theorem 3.4].
+
+C04. RELATIVE-ENERGY TESTING.
+  A Leray-Hopf velocity can be compared with a strong solution sharing its
+  initial trace. Smooth solenoidal approximation in the weak formulation
+  justifies the relative-energy inequality used explicitly in [10].
+  Reference: [R2, Lemma 4.9]; the estimate and Gronwall step are given in [10].
+
+Viscosity normalization for sources stated with nu=1:
+  v(t,x)=nu*U(nu*(t-s),x),
+  p_v(t,x)=nu^2*P(nu*(t-s),x),
+  U(0,x)=b(x)/nu.
+  NSE_1(U,P) implies NSE_nu(v,p_v).
+
+Additional standard analysis used below:
+  Plancherel; weighted Cauchy-Schwarz; the fundamental theorem for absolutely
+  continuous functions; the chain rule for their squares; monotone convergence;
+  Sobolev embedding H^1(R^3) into L^6; Hilbert-space weak convergence plus norm
+  convergence; density of smooth solenoidal test fields; integral Gronwall.
+
+Dependency boundary:
+  C01-C04 are established classical mathematical inputs.
+  They are not identified with already-verified whole-space Lean declarations.
+
+[04] LEMMA QFA_GOOD_RESTART_TIMES
+
+CLAIM.
+  For every u in LH_nu(a), there exists a measurable full-measure set
+  G_u subset (0,infty) such that for every s in G_u:
+    u(s) in V;
+    the energy inequality begins at s;
+    u(s+h) -> u(s) strongly in L^2 as h downarrow 0;
+    u_s(tau):=u(s+tau) belongs to LH_nu(u(s)).
+
+PROOF.
+  The H^1-time set has full measure by the energy class.
+  The admissible energy-start set has full measure by the strong energy
+  inequality. Intersect these sets, using a countable exhaustion by finite
+  intervals if necessary.
+
+  Fix s in that intersection. For every h>0,
+    E(s+h) + 2*nu*int_s^(s+h) D(r) dr <= E(s),
+  whence
+    limsup_{h downarrow 0} ||u(s+h)||_2^2 <= ||u(s)||_2^2.
+  Weak continuity gives u(s+h) weakly -> u(s). Therefore the norms converge
+  and Hilbert-space uniform convexity gives strong L^2 convergence.
+
+  Time translation preserves distributional NSE and the energy classes.
+  The energy inequality at time zero for u_s is the inequality beginning at s;
+  the remaining admissible starts are translations of a full-measure set.
+  Thus u_s in LH_nu(u(s)). QED.
+
+[05] LEMMA QFA_ENERGY_PRODUCT_BUDGET
+
+CLAIM.
+  For every u in LH_nu(a) and every R>0,
+
+    int_0^R E(t)*D(t) dt
+      <= [M^4-F(R)^2]/(4*nu)
+      <= M^4/(4*nu),
+
+  where F(t):=M^2-2*nu*int_0^t D(r) dr.
+  Consequently int_0^infty E*D <= M^4/(4*nu).
+
+PROOF.
+  The energy inequality beginning at zero yields
+    0 <= E(t) <= F(t) <= M^2.
+  Since D is nonnegative and locally integrable,
+    F in AC([0,R]),
+    F(0)=M^2,
+    F'(t)=-2*nu*D(t) almost everywhere.
+  In particular E*D is integrable on (0,R).
+
+  Multiplication by D>=0 and the AC square chain rule yield
+    int_0^R E*D
+      <= int_0^R F*D
+       = -(1/(2*nu))*int_0^R F*F'
+       = [F(0)^2-F(R)^2]/(4*nu)
+       = [M^4-F(R)^2]/(4*nu)
+      <= M^4/(4*nu).
+
+  Apply monotone convergence as R increases to infinity. QED.
+
+Hypothesis audit:
+  E is not differentiated.
+  Energy equality before regularity is not used.
+  The limit E(t)->0 is not used.
+  A Poincare inequality or spectral gap is not used.
+
+COROLLARY QFA_HHALF_QUARTIC_BUDGET.
+  For almost every t, Fourier Cauchy-Schwarz gives
+    ||u(t)||_{dot H^(1/2)}^2
+      = int |xi|*|uhat(t,xi)|^2 dxi
+      <= ||u(t)||_2*||grad u(t)||_2.
+  Therefore
+    int_0^infty ||u(t)||_{dot H^(1/2)}^4 dt
+      <= int_0^infty E(t)*D(t) dt
+      <= M^4/(4*nu). QED.
+
+[06] LEMMA QFA_AGMON_R3
+
+CLAIM.
+  For every vector field v in H^2(R^3;R^3),
+    ||v||_infty^2 <= ||grad v||_2*||Delta v||_2/(2*pi).
+
+PROOF.
+  For lambda>0, define
+    w_lambda(xi):=|xi|^2+lambda^2*|xi|^4.
+  A spherical-coordinate calculation gives
+    (2*pi)^(-3)*int_R^3 w_lambda(xi)^(-1) dxi
+      = (2*pi)^(-3)*4*pi*int_0^infty dr/(1+lambda^2*r^2)
+      = 1/(4*pi*lambda).
+
+  Fourier inversion, the Euclidean vector triangle inequality, and weighted
+  Cauchy-Schwarz give
+    ||v||_infty^2
+      <= [||grad v||_2^2+lambda^2*||Delta v||_2^2]/(4*pi*lambda).
+
+  Put G:=||grad v||_2 and H2:=||Delta v||_2.
+  If G>0 and H2>0, choose lambda=G/H2 to obtain G*H2/(2*pi).
+  If G=0 or H2=0, Plancherel implies vhat=0 almost everywhere off {0};
+  since vhat is an L^2 function, v=0, and the estimate is immediate. QED.
+
+The vector norm introduces no factor 3.
+Independent literature anchor: [R3, Theorem 1 and its vector-valued extension].
+
+[07] LEMMA QFA_NONLINEAR_ENSTROPHY_BOUND
+
+CLAIM.
+  For every solenoidal v in H^2(R^3;R^3), with E_v=||v||_2^2 and
+  D_v=||grad v||_2^2,
+
+    | <(v.grad)v, Delta v> |
+      <= (2*pi)^(-1/2)*(E_v*D_v)^(1/4)*||Delta v||_2^2.
+
+PROOF.
+  Write G:=||grad v||_2 and H2:=||Delta v||_2.
+  Fourier Cauchy-Schwarz gives G^2 <= ||v||_2*H2.
+  By [06] and Holder,
+    | <(v.grad)v, Delta v> |
+      <= ||v||_infty*G*H2
+      <= (2*pi)^(-1/2)*G^(3/2)*H2^(3/2)
+      <= (2*pi)^(-1/2)*(||v||_2*G)^(1/2)*H2^2
+       = (2*pi)^(-1/2)*(E_v*D_v)^(1/4)*H2^2.
+  Zero-norm cases follow directly. QED.
+
+For a local strong solution v supplied by C02, C03 gives almost everywhere:
+  E_v' = -2*nu*D_v,
+  (1/2)*D_v' + nu*||Delta v||_2^2
+    = <(v.grad)v, Delta v>.
+Hence
+
+  (1/2)*D_v'
+    + [nu-(2*pi)^(-1/2)*(E_v*D_v)^(1/4)]*||Delta v||_2^2 <= 0.    (7.1)
+
+The identities are justified first on regular subintervals and extend to the
+initial H^1 time by the strong-solution energy identities and H^1 continuity.
+
+[08] THEOREM QFA_SMALL_PRODUCT_GLOBAL_STRONG
+
+CLAIM.
+  If b in V and ||b||_2*||grad b||_2 < 2*pi*nu^2, then there is a global
+  strong solution v starting from b at time s. Moreover,
+    v in C([s,infty);V),
+    v is smooth on (s,infty)xR^3.
+
+PROOF.
+  Let v be the maximal strong solution from C02.
+  Set
+    E_s:=||b||_2^2,
+    D_s:=||grad b||_2^2,
+    q_s:=E_s*D_s,
+    alpha:=4*pi^2*nu^4,
+    c:=(2*pi)^(-1/2).
+  The hypothesis is exactly q_s<alpha.
+
+  Choose beta=(q_s+alpha)/2, so q_s<beta<alpha.
+  By continuity, E_v(t)*D_v(t)<beta on a right neighborhood of s.
+  On every interval where this remains true, (7.1) implies
+    D_v'<=0,
+  while E_v'=-2*nu*D_v<=0.
+  Therefore E_v(t)*D_v(t)<=q_s<beta on that interval.
+  A first crossing of beta is impossible by continuity.
+
+  Consequently, throughout the maximal interval,
+    E_v(t)<=E_s,
+    D_v(t)<=D_s,
+    E_v(t)*D_v(t)<=q_s<alpha.
+
+  Define the fixed positive dissipation margin
+    eta_s:=nu-c*q_s^(1/4)>0.
+  Integrating (7.1) gives
+    D_v(t)+2*eta_s*int_s^t ||Delta v(r)||_2^2 dr <= D_s.          (8.1)
+
+  In particular ||v(t)||_{H^1}^2<=E_s+D_s uniformly before T_max.
+  The continuation alternative C02 excludes finite T_max.
+  Thus T_max=infty. Smoothing follows from C03. QED.
+
+Endpoint signature:
+  b in H^1_sigma(R^3)
+  and ||b||_2*||grad b||_2<2*pi*nu^2
+    ==> GlobalStrong_nu(b).
+
+[09] LEMMA QFA_RESTART_BEFORE_CUTOFF
+
+CLAIM.
+  For every u in LH_nu(a) and delta>T_QFA(a,nu), there exists
+  s in (0,delta) intersect G_u such that
+    E(s)*D(s)<4*pi^2*nu^4.
+
+PROOF.
+  Put alpha:=4*pi^2*nu^4. Since nu>0,
+    delta>M^4/(16*pi^2*nu^5)
+      <==> alpha*delta>M^4/(4*nu).
+  By [05],
+    int_0^delta E*D <= M^4/(4*nu) < alpha*delta.
+
+  Define S_delta:={s in (0,delta):E(s)*D(s)<alpha}.
+  If S_delta had measure zero, E*D>=alpha almost everywhere on (0,delta),
+  implying int_0^delta E*D>=alpha*delta, a contradiction.
+  Thus S_delta has positive measure.
+
+  G_u has full measure by [04]. Choose s in S_delta intersect G_u.
+  Then b:=u(s) belongs to V, u_s belongs to LH_nu(b), and
+    ||b||_2*||grad b||_2<2*pi*nu^2.
+  Apply [08]. QED.
+
+The strict inequality delta>T_QFA is retained throughout.
+
+[10] THEOREM QFA_WEAK_STRONG_COMPARISON
+
+CLAIM.
+  Let v be the global strong solution constructed in [08], starting from b
+  at time s. Every Leray-Hopf velocity U with the same strong trace b at s
+  agrees with v for every t>=s in L^2.
+
+PROOF OF THE INTEGRABILITY ENDPOINT.
+  Fix any finite R>s. By [06], [08], and Cauchy-Schwarz in time,
+
+    int_s^R ||v(t)||_infty^2 dt
+      <= (1/(2*pi))*int_s^R sqrt(D_v(t))*||Delta v(t)||_2 dt
+      <= (sqrt(D_s)/(2*pi))*sqrt(R-s)
+           *(int_s^R ||Delta v(t)||_2^2 dt)^(1/2)
+      <= (D_s/(2*pi))*sqrt((R-s)/(2*eta_s))
+       < infty.                                                (10.1)
+
+PROOF OF COMPARISON.
+  Set w:=U-v and Y(t):=||w(t)||_2^2.
+  C04 combines the weak energy inequality for U, the strong energy equality
+  for v, and the cross-tested momentum equations. Divergence-free integration
+  by parts changes the nonlinear difference term to a term bounded by
+    ||v||_infty*||w||_2*||grad w||_2.
+
+  Young's inequality gives
+    2*||v||_infty*||w||_2*||grad w||_2
+      <= nu*||grad w||_2^2 + nu^(-1)*||v||_infty^2*Y.
+  Therefore
+
+    Y(t)+nu*int_s^t ||grad w(r)||_2^2 dr
+      <= Y(s)+nu^(-1)*int_s^t ||v(r)||_infty^2*Y(r) dr.           (10.2)
+
+  The shared strong trace implies Y(s)=0. By (10.1), the Gronwall coefficient
+  is integrable on every finite [s,R]. Integral Gronwall yields Y=0 almost
+  everywhere on [s,R]. Weak L^2 continuity upgrades equality to every time.
+  Since R>s is arbitrary, U(t)=v(t) for all t>=s. QED.
+
+No integrability of ||v||_infty^2 over the entire infinite interval is required.
+No uniqueness of LH_nu(a) before s is used.
+
+[11] LEMMA QFA_SMOOTH_TAIL_AND_PRESSURE
+
+CLAIM.
+  For every u in LH_nu(a) and delta>T_QFA(a,nu), the velocity trajectory
+  admits smooth velocity and pressure representatives on [delta,infty)xR^3.
+
+PROOF.
+  Select s<delta by [09]. Construct v by [08].
+  The translated u belongs to LH_nu(u(s)) by [04].
+  Apply [10] to identify u(t)=v(t) in L^2 for every t>=s.
+
+  C03 yields positive-time smoothness on the open interval (s,infty).
+  Since s<delta, this includes a temporal neighborhood of every point with
+  time coordinate in [delta,infty).
+
+  Define
+    p(t):=sum_{i,j} R_i R_j(v_i(t)*v_j(t)).
+  H^1 embeds in L^4 by interpolation between L^2 and L^6, so v_i*v_j in L^2.
+  The multiplier -xi_i*xi_j/|xi|^2 is bounded; hence p(t) is in L^2.
+
+  In distributions,
+    -Delta p = sum_{i,j} partial_i partial_j(v_i*v_j).
+  The projected NSE and this pressure formula give the full NSE.
+  On compact time intervals within (s,infty), C03 supplies Sobolev regularity
+  of all orders; products in H^m for m>3/2 and bounded order-zero Fourier
+  multipliers transfer this regularity to p. The same argument applies to
+  all time derivatives. Sobolev embedding yields joint spacetime smoothness.
+
+  A nonzero spatial constant does not lie in L^2(R^3), so this normalization
+  fixes the spatially constant pressure freedom. QED.
+
+CONSEQUENCE: TAIL ENERGY EQUALITY.
+  For every t>=r>=delta,
+    ||u(t)||_2^2+2*nu*int_r^t ||grad u(q)||_2^2 dq=||u(r)||_2^2.
+
+[12] THEOREM QFA_UNIQUE_POSTCUTOFF_CONTINUATION
+
+CLAIM.
+  Under the hypotheses of [11],
+    LH_nu(u(delta))={tau |-> u(delta+tau)}.
+
+PROOF.
+  Let z(tau):=u(delta+tau), tau>=0.
+  Strong continuity, NSE, and tail energy equality imply
+    z in LH_nu(u(delta)).
+
+  Let W be any other element of LH_nu(u(delta)).
+  The known z is strong and smooth, and satisfies the finite-interval
+  L^2_time L^infty_space bound obtained by restricting (10.1).
+  Apply (10.2) and Gronwall to W and z, now with initial time zero.
+  Thus W(tau)=z(tau) in L^2 for every tau>=0. QED.
+
+Pressure convention:
+  The singleton is a singleton of velocity trajectories.
+  For pairs (velocity,pressure), impose the canonical pressure in [11].
+  Without a pressure normalization, p+c(t) would prevent a singleton statement
+  about pairs even for an identically zero velocity.
+
+[13] DETERMINISTIC ROOT ASSEMBLY
+
+Fix nu>0 and a in H.
+
+  C01 supplies LH_nu(a)!=empty.                         => Q0.
+  The LH definition supplies the strong initial trace. => Q1.
+
+Fix an arbitrary u in LH_nu(a), and an arbitrary delta>T_QFA(a,nu).
+
+  [04] supplies the full-measure admissible restart set G_u.
+  [05] supplies int E*D<=M^4/(4*nu).
+  [06]-[08] supply the exact strict global restart criterion.
+  [09] selects s in (0,delta) intersect G_u satisfying that criterion.
+  [10] identifies the given u with the global strong restarted solution.
+  [11] supplies smooth velocity and pressure on [delta,infty). => Q2.
+  [12] supplies the post-cutoff singleton continuation.        => Q3.
+
+The variables u and delta were arbitrary. Quantifying them, and then a and nu,
+proves exactly QUASI_FEFFERMAN_A as stated in [02]. QED.
+
+RESULT = !=B_TIER
+
+[14] CONSEQUENCES AND BOUNDARY CHECKS
+
+14.1 ZERO DATUM.
+  M=0 ==> a=0 ==> E(t)=0 for all t>=0 ==> u=0.
+  The canonical pressure is p=0, and T_QFA=0.
+  Every delta>0 satisfies the frozen tail statement.
+
+14.2 UNIVERSAL TRAJECTORY QUANTIFIER.
+  A_nu(a):=LH_nu(a).
+  T_delta(a):={u(delta):u in A_nu(a)}.
+  For delta>T_QFA,
+    forall b in T_delta(a), #LH_nu(b)=1.
+  The map from admitted tails to their delta traces is a bijection:
+    {tau |-> u(delta+tau):u in A_nu(a)} <-> T_delta(a).
+  No assertion #A_nu(a)=1 or #A_nu(a)>1 is obtained.
+
+14.3 SINGULAR-TIME CONTAINMENT.
+  Define Sing_t(u) as the positive times admitting no smooth representative
+  on a time neighborhood times R^3. Then
+    Sing_t(u) subset (0,T_QFA(a,nu)].
+  The root theorem supplies no regularity guarantee on that remaining interval.
+
+14.4 SCALING.
+  a_lambda(x):=lambda*a(lambda*x), lambda>0,
+  u_lambda(t,x):=lambda*u(lambda^2*t,lambda*x).
+  Then
+    ||a_lambda||_2^2=lambda^(-1)*||a||_2^2,
+    E_lambda(t)*D_lambda(t)=E(lambda^2*t)*D(lambda^2*t),
+    T_QFA(a_lambda,nu)=lambda^(-2)*T_QFA(a,nu).
+
+14.5 CUTOFF STATUS.
+  Coefficient 1/(16*pi^2): explicit sufficient coefficient.
+  Optimality: not asserted.
+  Endpoint delta=T_QFA: not part of the frozen root.
+  Recursive halving: not supplied by the proof.
+  Full Fefferman-A regularity from t=0: not the root conclusion.
+
+[15] METHLIB SOURCE MAP AT THE INSPECTED BASE
+
+All URLs in this section are pinned to:
+  4813604a46179c745b82f51bee51a186e9f4cc2d.
+The observations concern source text, not a new compiler/axiom-audit result.
+
+M01. GENERIC SCALAR INVARIANT.
+  Path:
+    regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/
+    CriticalInvariant.lean
+  Declaration:
+    SingularClosure.scalar_invariant_of_deriv_nonpos_below
+  Actual premise pattern:
+    ContinuousOn A (Icc 0 T),
+    A 0 <= a < b,
+    HasDerivWithinAt A (d t) (Ici 0) t,
+    A t <= b ==> d t <= 0.
+  Conclusion:
+    forall t in Icc 0 T, A t <= a.
+  Mapping:
+    scalar barrier architecture for [08], after the actual regularity and
+    derivative premises have been established for a strong solution.
+    The H^1 initial-time or merely AC version still requires its exact adapter.
+
+M02. CLASSICAL-DERIVATIVE SQUARE BUDGET.
+  Same path; declaration:
+    SingularClosure.CRITICAL_SQUARE_BUDGET_DIV
+  Actual premises include classical derivative data, continuity of A and X,
+  nonnegative A,B, C*a0<nu,
+    d(t)+2*(nu-C*sqrt(A(t)))*B(t)<=0,
+    X(t)^2<=A(t)*B(t).
+  This theorem is not a direct realization of [05]: weak kinetic energy E
+  has not been supplied with those derivative premises. The QFA argument
+  uses the absolutely continuous envelope F, not a differentiability claim
+  about weak E.
+
+M03. PHYSICAL PERIODIC LERAY-HOPF CLASS.
+  Path:
+    regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/
+    CriticalLerayHopf.lean
+  Declarations:
+    SingularClosure.CriticalPhysicalL2
+    SingularClosure.CriticalLerayHopf
+    SingularClosure.CriticalLerayHopf.velocity_energy_le_initial
+  Actual spatial measure:
+    volume.restrict unitCube.
+  The structure records weak momentum, energy classes, strong trace,
+  weak continuity, almost-everywhere H^1, and initial/intermediate energy
+  inequalities. Its energy upper-bound theorem is proved from those fields.
+  Mapping:
+    a useful physical specification pattern; not LH on R^3 with full volume.
+
+M04. PHYSICAL PERIODIC WEAK-STRONG COMPARISON.
+  Path:
+    regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/
+    CriticalSerrinUniqueness.lean
+  Declaration:
+    SingularClosure.CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON
+  Actual premises include CriticalLerayHopf, a positive-time regular comparison
+  field, periodic pressure, actual NSE, shared strong trace, and the Serrin
+  L^4_time L^6_space condition.
+  Actual conclusion:
+    v t = u t almost everywhere for volume.restrict unitCube.
+  Mapping:
+    periodic proof architecture for [10]; not an already-instantiated R^3
+    comparison theorem. Whole-space test approximation and estimates remain
+    distinct formalization obligations.
+
+M05. CONDITIONAL REGULARITY CERTIFICATE.
+  Path:
+    regularity-B-assembly/pkg2/CEA10_CriticalToRegularity.lean
+  Declarations:
+    CEATheta.CriticalToRegularityCertificate
+    CEATheta.CEA_theta_criticalPair_to_regular
+  The certificate explicitly contains:
+    serrin46_of_finite_bound : bound -> Serrin46,
+    regular_of_serrin46 : Serrin46 -> Regular.
+  Mapping:
+    implication assembly, not a discharge of the actual whole-space analytic
+    regularity theorem. The present B-tier derivation does not import this
+    certificate as if its regularity field had been independently constructed.
+
+Source-only Mathlib observations:
+  CriticalInvariant.lean invokes image_le_of_deriv_right_lt_deriv_boundary.
+  CriticalLerayHopf.lean invokes
+    intervalIntegral.integral_nonneg_of_forall.
+  These are elementary components, not whole-space QFA analytic endpoints.
+
+INSPECTED QFA DIRECTORY AT BASE:
+  Quasi-Fefferman-A/README.md only.
+  No whole-space QFA Lean theorem was present in that directory at this base.
+
+[16] FUTURE FORMAL ENDPOINT SIGNATURES
+
+The identifiers below name mathematical targets. They are not assertions that
+matching Lean declarations have already been prepared or kernel-checked.
+
+  QFA_LERAY_HOPF_EXISTS:
+    nu>0 -> a in H -> Nonempty(LH_nu(a)).
+
+  QFA_GOOD_RESTART_TIMES:
+    u in LH_nu(a) -> FullMeasure(G_u) and RestartLaw(G_u).
+
+  QFA_ENERGY_PRODUCT_BUDGET:
+    u in LH_nu(a) -> int_0^infty E*D <= ||a||_2^4/(4*nu).
+
+  QFA_AGMON_R3:
+    v in H^2(R^3;R^3) -> ||v||_infty^2 <= ||grad v||_2*||Delta v||_2/(2*pi).
+
+  QFA_NONLINEAR_ENSTROPHY_BOUND:
+    v in H^2_sigma -> |<(v.grad)v,Delta v>|
+      <= (2*pi)^(-1/2)*(E_v*D_v)^(1/4)*||Delta v||_2^2.
+
+  QFA_SMALL_PRODUCT_GLOBAL_STRONG:
+    b in V -> ||b||_2*||grad b||_2<2*pi*nu^2 -> GlobalStrong_nu(b).
+
+  QFA_RESTART_BEFORE_CUTOFF:
+    u in LH_nu(a) -> delta>T_QFA(a,nu)
+      -> exists s in (0,delta) intersect G_u, E(s)*D(s)<4*pi^2*nu^4.
+
+  QFA_WEAK_STRONG_COMPARISON:
+    U in LH_nu(b) -> Strong_nu(v,b)
+      -> [forall R>0, int_0^R ||v||_infty^2<infty]
+      -> U=v as L^2-valued trajectories.
+
+  QFA_SMOOTH_TAIL_AND_PRESSURE:
+    u in LH_nu(a) -> delta>T_QFA(a,nu) -> SmoothTail_nu(u,delta).
+
+  QFA_UNIQUE_POSTCUTOFF_CONTINUATION:
+    u in LH_nu(a) -> delta>T_QFA(a,nu)
+      -> LH_nu(u(delta))={tau |-> u(delta+tau)}.
+
+  QUASI_FEFFERMAN_A:
+    exactly the combined quantifiers in [02].
+
+Formal promotion condition:
+  matching external compilation
+  and exact theorem-level axiom audit
+  and no sorryAx
+  and no unapproved axioms.
+
+Future execution policy:
+  cached external Lean runs; no local Lean execution.
+  No run.cmd or Lean candidate is included in this B-tier artifact.
+
+[17] REFERENCES AND EXACT SOURCE LINKS
+
+R0. Frozen QFA specification, inspected base:
+https://raw.githubusercontent.com/randogelist/Methlib/4813604a46179c745b82f51bee51a186e9f4cc2d/Quasi-Fefferman-A/README.md
+
+R1. Jean Leray, Sur le mouvement d'un liquide visqueux emplissant l'espace,
+    Acta Mathematica 63 (1934), 193-248; existence and regular/weak comparison.
+https://www.i2m.univ-amu.fr/perso/thierry.gallouet/artbase.d/leray-ns.pdf
+
+R2. W. S. Ozanski and B. C. Pooley, Leray's fundamental work on the
+    Navier-Stokes equations: a modern review, arXiv:1708.09787v1.
+    Detailed proofs of the local H^1, smoothing, weak-existence, and comparison
+    theorems cited in [03]. The published chapter is in Partial Differential
+    Equations in Fluid Mechanics, LMS Lecture Note Series 452, 113-203 (2018).
+https://arxiv.org/pdf/1708.09787
+https://doi.org/10.1017/9781108610575.007
+
+R3. Wenzheng Xie, A sharp pointwise bound for functions with L^2-Laplacians
+    on arbitrary domains and its applications, Bulletin of the American
+    Mathematical Society 26(2) (1992), 294-298, Theorem 1.
+https://arxiv.org/pdf/math/9204239
+
+R4. P. Braz e Silva, J. P. Zingano, P. R. Zingano,
+    Some remarks on the regularity time of Leray solutions to the
+    Navier-Stokes equations, arXiv:1706.10173.
+    Independent context for classical eventual regularity and the
+    nu^(-5)*||a||_2^4 scaling; its sharper numerical bounds are not used here.
+https://arxiv.org/pdf/1706.10173
+
+R5. Charles L. Fefferman, Existence and Smoothness of the Navier-Stokes
+    Equation, official Clay statement; formulation (A) is the whole-space
+    smooth-data problem and is not the QFA tail theorem.
+https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf
+
+M01-M02:
+https://raw.githubusercontent.com/randogelist/Methlib/4813604a46179c745b82f51bee51a186e9f4cc2d/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalInvariant.lean
+
+M03:
+https://raw.githubusercontent.com/randogelist/Methlib/4813604a46179c745b82f51bee51a186e9f4cc2d/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalLerayHopf.lean
+
+M04:
+https://raw.githubusercontent.com/randogelist/Methlib/4813604a46179c745b82f51bee51a186e9f4cc2d/regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/CriticalSerrinUniqueness.lean
+
+M05:
+https://raw.githubusercontent.com/randogelist/Methlib/4813604a46179c745b82f51bee51a186e9f4cc2d/regularity-B-assembly/pkg2/CEA10_CriticalToRegularity.lean
+
+[18] FINAL STATUS
+
+  QUASI_FEFFERMAN_A = !=B_TIER.
+  Exact frozen scope = preserved.
+  Unresolved mathematical admission in the composed classical proof = none.
+  Whole-space Lean realization and exact external audit = pending.
+  A_TIER promotion = none.
+  FORMAL_CLOSURE promotion = none.
+  UNCONDITIONAL_CLOSURE promotion = none.
