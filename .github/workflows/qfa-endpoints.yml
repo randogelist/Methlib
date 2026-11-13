@@ -66,6 +66,13 @@ jobs:
           restore-keys: |
             qfa-endpoints-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LeanEndpoints/lean-toolchain', 'Quasi-Fefferman-A/LeanEndpoints/lake-manifest.json') }}-
 
+      - name: Restore compiled Lake configurations
+        id: config-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LeanEndpoints/.lake/config
+          key: qfa-config-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LeanEndpoints/lean-toolchain', 'Quasi-Fefferman-A/LeanEndpoints/lake-manifest.json', 'Quasi-Fefferman-A/LeanEndpoints/lakefile.lean') }}
+
       - name: Install the pinned native toolchain
         id: toolchain
         uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
@@ -104,6 +111,13 @@ jobs:
         with:
           path: Quasi-Fefferman-A/LeanEndpoints/.lake/packages
           key: ${{ steps.dependency-cache.outputs.cache-primary-key }}
+
+      - name: Preserve compiled Lake configurations
+        if: ${{ !cancelled() && hashFiles('Quasi-Fefferman-A/LeanEndpoints/evidence/cache-ready.json') != '' && steps.config-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LeanEndpoints/.lake/config
+          key: ${{ steps.config-cache.outputs.cache-primary-key }}
 
       - name: Preserve incremental endpoint objects
         if: ${{ !cancelled() && hashFiles('Quasi-Fefferman-A/LeanEndpoints/evidence/cache-ready.json') != '' && steps.endpoint-cache.outputs.cache-hit != 'true' }}
