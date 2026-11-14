@@ -12,7 +12,7 @@ set_option autoImplicit false
 set_option Elab.async true
 
 open MeasureTheory FourierTransform
-open scoped BigOperators FourierTransform SchwartzMap LineDeriv Laplacian ENNReal
+open scoped Nat NNReal ContDiff BigOperators FourierTransform SchwartzMap LineDeriv Laplacian
 
 namespace QFA.LC001SpectralReduction
 
@@ -44,7 +44,7 @@ theorem ae_eq_of_const_smul_real_multiplier_distribution
     simpa [φ, Function.comp_apply, hm_temp, smul_smul, mul_assoc, mul_left_comm,
       mul_comm] using hEval
 
-/-- Real-scalar specialization of the representative-uniqueness adapter. -/
+/-- Real-scalar version of the representative-uniqueness adapter. -/
 theorem ae_eq_of_real_smul_real_multiplier_distribution
     (q h : ComplexL2) (c : ℝ) (m : Space → ℝ)
     (hm_cont : Continuous m) (hm_temp : m.HasTemperateGrowth)
@@ -53,9 +53,18 @@ theorem ae_eq_of_real_smul_real_multiplier_distribution
         (fun x : Space => (m x : ℂ))
         (h : 𝓢'(Space, ComplexVector))) :
     (fun x : Space => q x) =ᵐ[volume]
-      (fun x : Space => ((c : ℂ) * (m x : ℂ)) • h x) := by
-  apply ae_eq_of_const_smul_real_multiplier_distribution q h (c : ℂ) m hm_cont hm_temp
-  simpa only [Complex.real_smul] using hEq
+      (fun x : Space => (c * m x) • h x) := by
+  apply ae_eq_of_integral_contDiff_smul_eq
+  · exact (Lp.memLp q).locallyIntegrable (by norm_num)
+  · exact MeasureTheory.LocallyIntegrable.continuous_smul (by fun_prop)
+      ((Lp.memLp h).locallyIntegrable (by norm_num))
+  · intro g hg g_cpt
+    have hg₁ : HasCompactSupport (Complex.ofRealCLM ∘ g) := g_cpt.comp_left rfl
+    have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
+    let φ := hg₁.toSchwartzMap hg₂
+    have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T φ) hEq
+    simpa [φ, Function.comp_apply, hm_temp, Complex.real_smul, smul_smul,
+      mul_assoc, mul_left_comm, mul_comm] using hEval
 
 /-- Fourier transform of each supplied first derivative, as an exact equality
 of tempered distributions. -/
@@ -110,10 +119,10 @@ theorem laplacian_fourier_distribution_eq
     {v : ComplexL2} {G : Fin 3 → ComplexL2} {L : ComplexL2}
     (h : SchwartzDerivativeWitnesses v G L) :
     ((𝓕 L : ComplexL2) : 𝓢'(Space, ComplexVector)) =
-      -((2 * Real.pi) ^ 2 •
+      (-((2 * Real.pi) ^ 2)) •
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ))
-          ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector))) := by
+          ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector)) := by
   let f : 𝓢'(Space, ComplexVector) := (v : 𝓢'(Space, ComplexVector))
   calc
     ((𝓕 L : ComplexL2) : 𝓢'(Space, ComplexVector)) =
@@ -129,7 +138,7 @@ theorem laplacian_fourier_distribution_eq
     _ = -((2 * Real.pi) ^ 2 •
         𝓕 (TemperedDistribution.fourierMultiplierCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ)) f)) := by
-      simp
+      rw [map_neg, ContinuousLinearMap.map_smul_of_tower]
     _ = -((2 * Real.pi) ^ 2 •
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ)) (𝓕 f)) := by
@@ -139,6 +148,11 @@ theorem laplacian_fourier_distribution_eq
           (fun k : Space => (‖k‖ ^ 2 : ℂ))
           ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector))) := by
       simp [f, MeasureTheory.Lp.fourier_toTemperedDistribution_eq]
+    _ = (-((2 * Real.pi) ^ 2)) •
+        TemperedDistribution.smulLeftCLM ComplexVector
+          (fun k : Space => (‖k‖ ^ 2 : ℂ))
+          ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector)) := by
+      rw [neg_smul]
 
 /-- Almost-everywhere Laplacian multiplier identity. -/
 theorem laplacian_fourier_ae
@@ -146,13 +160,11 @@ theorem laplacian_fourier_ae
     (h : SchwartzDerivativeWitnesses v G L) :
     (fun k : Space => (𝓕 L : ComplexL2) k) =ᵐ[volume]
       (fun k : Space =>
-        ((-(2 * Real.pi) ^ 2 : ℂ) * (‖k‖ ^ 2 : ℂ)) •
-          (𝓕 v : ComplexL2) k) := by
-  apply ae_eq_of_real_smul_real_multiplier_distribution
+        (-((2 * Real.pi) ^ 2) * ‖k‖ ^ 2) • (𝓕 v : ComplexL2) k) := by
+  exact ae_eq_of_real_smul_real_multiplier_distribution
     (𝓕 L : ComplexL2) (𝓕 v : ComplexL2)
     (-((2 * Real.pi) ^ 2)) (fun k : Space => ‖k‖ ^ 2)
-    (by fun_prop) (by fun_prop)
-  simpa only [neg_smul] using laplacian_fourier_distribution_eq h
+    (by fun_prop) (by fun_prop) (laplacian_fourier_distribution_eq h)
 
 end
 
