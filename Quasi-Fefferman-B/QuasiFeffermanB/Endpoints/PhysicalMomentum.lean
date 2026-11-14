@@ -361,13 +361,13 @@ private theorem energyPM_slab
     have hrpos := hs.trans hr.1
     exact (energyPM_pairing_bound _ _ (energyPM_velocity_memLp (g (σ n)) r)
       (htime_cont r hrpos) Ct hCt (hCt_bound r ⟨hr.1.le, hr.2⟩)).trans
-        (add_le_add_right (henergy n r hrpos.le) _)
+        (add_le_add (henergy n r hrpos.le) le_rfl)
   have hbound₂ (n : ℕ) : ∀ᵐ r ∂μ, ‖F₂ n r‖ ≤ B + Cl ^ 2 * (μQ).real Set.univ := by
     filter_upwards [ae_restrict_mem measurableSet_Ioc] with r hr
     have hrpos := hs.trans hr.1
     exact (energyPM_pairing_bound _ _ (energyPM_velocity_memLp (g (σ n)) r)
       (hlap_cont r hrpos) Cl hCl (hCl_bound r ⟨hr.1.le, hr.2⟩)).trans
-        (add_le_add_right (henergy n r hrpos.le) _)
+        (add_le_add (henergy n r hrpos.le) le_rfl)
   have hbound₃ (n : ℕ) : ∀ᵐ r ∂μ, ‖F₃ n r‖ ≤ Cp * B := by
     filter_upwards [ae_restrict_mem measurableSet_Ioc] with r hr
     exact (energyPM_transport_bound _ _ (energyPM_velocity_memLp (g (σ n)) r)

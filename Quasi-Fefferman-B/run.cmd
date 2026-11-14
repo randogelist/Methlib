@@ -1,12 +1,18 @@
 @echo off
 setlocal EnableExtensions
 rem External native Windows Lean 4.33.0 only. This file is never executed locally by Codex.
-set "QFB_AUDIT_SELECTION="
+set "QFB_AUDIT_SELECTION=--target QuasiFeffermanB.Endpoints.Root"
 if "%~1"=="" goto :options_ready
+if "%~1"=="--all" goto :all_candidates
 if not "%~1"=="--target" exit /b 2
 if not "%~2"=="QuasiFeffermanB.Endpoints.Root" exit /b 2
 if not "%~3"=="" exit /b 2
 set "QFB_AUDIT_SELECTION=--target QuasiFeffermanB.Endpoints.Root"
+goto :options_ready
+:all_candidates
+if not "%~2"=="" exit /b 2
+if not "%~3"=="" exit /b 2
+set "QFB_AUDIT_SELECTION="
 :options_ready
 set "QFB_PROJECT=%~dp0"
 for %%I in ("%QFB_PROJECT%..") do set "QFB_REPOSITORY=%%~fI"
@@ -29,11 +35,11 @@ findstr /x /c:"db584cd6d46c92f209a44c0f1c829460d327499d" evidence\mathlib-revisi
 if errorlevel 1 goto :fail
 py -3 qfb\scripts\audit.py --self-test
 if errorlevel 1 goto :fail
-call lake env py -3 qfb\scripts\audit.py --package . %QFB_AUDIT_SELECTION% > evidence\external-driver.log 2>&1
+call lake env py -3 qfb\scripts\audit.py --package . --jobs 2 %QFB_AUDIT_SELECTION% > evidence\external-driver.log 2>&1
 if errorlevel 1 goto :fail
 echo EXTERNAL_EXACT_DECLARATION_AUDIT_PASS
 echo Evidence: %QFB_NATIVE_PACKAGE%\evidence
-echo Root and uncompleted Q/A contracts remain pending.
+echo Every selected declaration has a fresh exact type and standard-only axiom report.
 popd
 exit /b 0
 :fail

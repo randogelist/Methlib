@@ -68,7 +68,7 @@
     "QuasiFeffermanB/Endpoints/InitialCoefficients.lean": "82847d0a07f908e034e9e1ffe498dd6b4068e9b9e28071744e97030b56f63d36",
     "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
     "QuasiFeffermanB/Endpoints/LimitEnergy.lean": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
-    "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean": "344b8b8f6502ff45ee3a1d5eae30b4c8dee4f3639e4ed98f5988fa08df490070",
+    "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean": "9debf97162400c41ab50c734f591bfcbf24a722e60a40331c2ffdbe4ca9292ca",
     "QuasiFeffermanB/Endpoints/Root.lean": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
     "QuasiFeffermanB/Endpoints/TestProjection.lean": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
     "QuasiFeffermanB/Endpoints/WeakH0Limit.lean": "f0f771e3986728ffc09a8b8a6008b2bd324456d65b43f997abe839467e04124a",
@@ -504,7 +504,7 @@
     {
       "module": "QuasiFeffermanB.Endpoints.PhysicalMomentum",
       "source": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
-      "sha256": "344b8b8f6502ff45ee3a1d5eae30b4c8dee4f3639e4ed98f5988fa08df490070",
+      "sha256": "9debf97162400c41ab50c734f591bfcbf24a722e60a40331c2ffdbe4ca9292ca",
       "declarations": [
         "QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_MOMENTUM"
       ],
