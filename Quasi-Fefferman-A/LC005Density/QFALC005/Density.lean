@@ -13,6 +13,7 @@ import QFALC004.CompactSchwartz
 import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 import Mathlib.Analysis.Calculus.ContDiff.Bounds
 import Mathlib.Analysis.Calculus.ContDiff.Operations
+import Mathlib.Analysis.Normed.Group.Bounded
 
 set_option autoImplicit false
 set_option Elab.async true
@@ -21,6 +22,27 @@ open scoped Topology ContDiff
 open Filter Metric Real Finset Function
 
 noncomputable section
+
+namespace QFA.LC005.Backport
+
+variable {𝕜 E F : Type*} [NontriviallyNormedField 𝕜]
+  [NormedAddCommGroup E] [NormedSpace 𝕜 E]
+  [NormedAddCommGroup F] [NormedSpace 𝕜 F]
+
+/-- Uniform derivative bound needed by the October cutoff-density argument.
+This is the exact short lemma later added to Mathlib's `ContDiff.Basic`. -/
+lemma exists_bound_iteratedFDeriv {f : E → F}
+    (hf : HasCompactSupport f) (hf' : ContDiff 𝕜 ∞ f) (m : ℕ) :
+    ∃ C, 0 ≤ C ∧ ∀ i ≤ m, ∀ y, ‖iteratedFDeriv 𝕜 i f y‖ ≤ C := by
+  have key i : ∃ C, ∀ y, ‖iteratedFDeriv 𝕜 i f y‖ ≤ C :=
+    (hf'.continuous_iteratedFDeriv (mod_cast le_top)).bounded_above_of_compact_support
+      (hf.iteratedFDeriv i)
+  choose A hA using key
+  refine ⟨max 0 ((Finset.range (m + 1)).sup' ⟨0, by simp⟩ A), le_max_left _ _, fun i hi y => ?_⟩
+  grw [hA i y, ← le_max_right]
+  exact Finset.le_sup' A (by grind)
+
+end QFA.LC005.Backport
 
 namespace SchwartzMap
 
@@ -37,7 +59,7 @@ lemma qfa_tendsto_seminorm_cutoff_sub (k n : ℕ) :
       (fun ε : ℝ => (smulLeftCLM F (fun x => φ (ε • x)) f - f).seminorm ℝ k n)
       (𝓝 0) (𝓝 0) := by
   obtain ⟨r, hr, hφr⟩ := eventually_nhds_iff_ball.mp hφ1
-  obtain ⟨A, hA0, hA⟩ := hφc.exists_bound_iteratedFDeriv hφ n
+  obtain ⟨A, hA0, hA⟩ := QFA.LC005.Backport.exists_bound_iteratedFDeriv hφc hφ n
   have hψ : ∀ i ≤ n, ∀ y, ‖iteratedFDeriv ℝ i (fun z => φ z - 1) y‖ ≤ A + 1 := by
     rintro (- | i) hi y
     · grind [norm_iteratedFDeriv_zero, norm_sub_le, norm_one, hA 0 hi y]
