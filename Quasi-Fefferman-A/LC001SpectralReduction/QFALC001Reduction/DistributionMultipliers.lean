@@ -41,9 +41,17 @@ theorem ae_eq_of_const_smul_real_multiplier_distribution
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
     let test := hg₁.toSchwartzMap hg₂
     have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
-    rw [← integral_smul] at hEval
-    simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc, mul_left_comm,
-      mul_comm] using hEval
+    calc
+      (∫ x : Space, g x • q x) =
+          c • ∫ x : Space, ((m x : ℂ) * (g x : ℂ)) • h x := by
+        simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc,
+          mul_left_comm, mul_comm] using hEval
+      _ = ∫ x : Space, c • (((m x : ℂ) * (g x : ℂ)) • h x) := by
+        rw [integral_smul]
+      _ = ∫ x : Space, g x • (c * (m x : ℂ)) • h x := by
+        apply integral_congr_ae
+        filter_upwards with x
+        simp [Complex.real_smul, smul_smul, mul_assoc, mul_left_comm, mul_comm]
 
 /-- Real-scalar version of the representative-uniqueness adapter. -/
 theorem ae_eq_of_real_smul_real_multiplier_distribution
@@ -64,9 +72,17 @@ theorem ae_eq_of_real_smul_real_multiplier_distribution
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
     let test := hg₁.toSchwartzMap hg₂
     have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
-    rw [← integral_smul] at hEval
-    simpa [test, Function.comp_apply, hm_temp, Complex.real_smul, smul_smul,
-      mul_assoc, mul_left_comm, mul_comm] using hEval
+    calc
+      (∫ x : Space, g x • q x) =
+          c • ∫ x : Space, ((m x : ℂ) * (g x : ℂ)) • h x := by
+        simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc,
+          mul_left_comm, mul_comm] using hEval
+      _ = ∫ x : Space, c • (((m x : ℂ) * (g x : ℂ)) • h x) := by
+        rw [integral_smul]
+      _ = ∫ x : Space, g x • (c * m x) • h x := by
+        apply integral_congr_ae
+        filter_upwards with x
+        simp [Complex.real_smul, smul_smul, mul_assoc, mul_left_comm, mul_comm]
 
 /-- Fourier transform of each supplied first derivative, as an exact equality
 of tempered distributions. -/
@@ -141,10 +157,10 @@ theorem laplacian_fourier_distribution_eq
     _ = -(𝓕 ((2 * Real.pi) ^ 2 • M)) := by
       simpa using (fourier_neg (((2 * Real.pi) ^ 2) • M))
     _ = -((2 * Real.pi) ^ 2 • 𝓕 M) := by
-      congr 1
-      exact ContinuousLinearMap.map_smul_of_tower
-        (FourierTransform.fourierCLM ℂ (𝓢'(Space, ComplexVector)))
-        ((2 * Real.pi) ^ 2) M
+      exact congrArg (fun z : 𝓢'(Space, ComplexVector) => -z)
+        (ContinuousLinearMap.map_smul_of_tower
+          (FourierTransform.fourierCLM ℂ (𝓢'(Space, ComplexVector)))
+          ((2 * Real.pi) ^ 2) M)
     _ = -((2 * Real.pi) ^ 2 •
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ)) (𝓕 f)) := by
@@ -164,17 +180,20 @@ theorem laplacian_fourier_distribution_eq
           (fun k : Space => (‖k‖ ^ 2 : ℂ))
           ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector)))
 
-/-- Almost-everywhere Laplacian multiplier identity. -/
+/-- Almost-everywhere Laplacian multiplier identity in the complex scalar
+normalization used by the norm-density calculation. -/
 theorem laplacian_fourier_ae
     {v : ComplexL2} {G : Fin 3 → ComplexL2} {L : ComplexL2}
     (h : SchwartzDerivativeWitnesses v G L) :
     (fun k : Space => (𝓕 L : ComplexL2) k) =ᵐ[volume]
       (fun k : Space =>
-        (-((2 * Real.pi) ^ 2) * ‖k‖ ^ 2) • (𝓕 v : ComplexL2) k) := by
-  exact ae_eq_of_real_smul_real_multiplier_distribution
+        ((-((2 * Real.pi) ^ 2) : ℂ) * (‖k‖ ^ 2 : ℂ)) •
+          (𝓕 v : ComplexL2) k) := by
+  apply ae_eq_of_const_smul_real_multiplier_distribution
     (𝓕 L : ComplexL2) (𝓕 v : ComplexL2)
-    (-((2 * Real.pi) ^ 2)) (fun k : Space => ‖k‖ ^ 2)
-    (by fun_prop) (by fun_prop) (laplacian_fourier_distribution_eq h)
+    (-((2 * Real.pi) ^ 2) : ℂ) (fun k : Space => ‖k‖ ^ 2)
+    (by fun_prop) (by fun_prop)
+  simpa only [Complex.real_smul] using laplacian_fourier_distribution_eq h
 
 end
 
