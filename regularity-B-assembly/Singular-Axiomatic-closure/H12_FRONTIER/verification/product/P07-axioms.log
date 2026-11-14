@@ -1,0 +1,88 @@
+ci/product_audits/P07.lean:12:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:13:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:13:40: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT
+'SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/product_audits/P07.lean:23:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:24:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:24:40: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET
+'SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/product_audits/P07.lean:36:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:37:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:39:13: warning: Variable name `ht` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ht
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND
+'SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ci/product_audits/P07.lean:48:5: warning: Variable name `hreal` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hreal
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:49:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P07.lean:49:40: warning: Variable name `hT` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hT
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL
+'SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

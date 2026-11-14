@@ -1,0 +1,126 @@
+name: H12 FRONTIER exact milestones
+on:
+  push:
+    branches: [H12_extension]
+    paths:
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/SingularClosure/H12Frontier/**'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/frontier*'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/frontier_audits/**'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/build_frontier.py'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/assemble_frontier_replay.py'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/ci/publish_frontier_sources.py'
+      - '.github/workflows/h12-frontier.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: h12-frontier-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  frontier:
+    name: Lean 4.33.0 / frontier exact endpoints
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: package
+        shell: bash
+    env:
+      PROJECT: regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          persist-credentials: false
+          sparse-checkout: |
+            regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER
+            .github/workflows/h12-frontier.yml
+      - name: Extract and record source
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir package
+          git -C repository archive "$GITHUB_SHA:$PROJECT" | tar -xf - -C package
+          mkdir -p package/evidence
+          echo "$GITHUB_SHA" > package/evidence/commit.txt
+          git -C repository archive --format=zip "$GITHUB_SHA:$PROJECT" > package/evidence/source_snapshot.zip
+          cp repository/.github/workflows/h12-frontier.yml package/evidence/workflow.yml
+          cd package
+          sha256sum lake-manifest.json > evidence/lockfile-before.sha256
+      - name: Assemble hash-locked coefficient replay
+        id: assemble
+        run: python3 ci/assemble_frontier_replay.py
+      - name: Install pinned toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Restore dependency cache
+        id: deps
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+      - name: Verify pins and fetch cached objects
+        run: |
+          set -euo pipefail
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          sha256sum --check evidence/lockfile-before.sha256
+      - name: Save dependency cache
+        if: steps.deps.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: ${{ steps.deps.outputs.cache-primary-key }}
+      - name: Restore compiled project cache
+        id: project
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: h12-frontier-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/SingularClosure/**/*.lean', 'package/ci/frontier_audits/*.lean') }}
+          restore-keys: |
+            h12-frontier-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+      - name: Compile and audit frontier endpoints
+        id: frontier
+        run: python3 ci/build_frontier.py
+      - name: Base regression exact type and axioms
+        if: always() && steps.project.outcome == 'success'
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.SmallDataClosure 2>&1 | tee evidence/base-build.log
+          lake env lean ci/critical_audits/SmallDataClosure.lean 2>&1 | tee evidence/base-axioms.log
+          python3 ci/check_axioms.py evidence/base-axioms.log ci/critical_audits/SmallDataClosure.json | tee evidence/base-audit.json
+      - name: Store generated source blobs without changing refs
+        if: always() && steps.assemble.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 ci/publish_frontier_sources.py
+      - name: Preserve compiler cache
+        if: always() && steps.project.outcome == 'success' && steps.project.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.project.outputs.cache-primary-key }}
+      - name: Upload exact source and compiler evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: h12-frontier-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
+          if-no-files-found: error

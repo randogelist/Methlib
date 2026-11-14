@@ -1,0 +1,212 @@
+FRONTIER_H12_PRODUCT_ADAPTER_CHAIN_A_TIER
+=======================================
+
+MODE=A_TIER_DERIVATION
+STATUS=!!!! UNCONDITIONAL_CLOSURE_IN_STATED_SMALL_DATA_SCOPE
+CHECKPOINTS=16/16
+THEOREM_LEVEL_AUDITS=38/38
+CHECKPOINT_MARKER=<=>
+LOCAL_LEAN_EXECUTIONS=0
+EXTERNAL_CACHED_REPLAY=PASS
+DATE=2026-11-13
+
+1. BASE
+-------
+
+REPOSITORY=randogelist/Methlib
+BASE_BRANCH=H12_extension
+BASE_SOURCE=59a220c10f4f1600498c1b423b809695fb58a92f
+BASE_COMPILED_SOURCE=d8b5e510411c224fd7b284b0a65eb2f9b08b3d83
+ADAPTER_BRANCH=codex/h12-product-adapter
+COMPILED_ADAPTER_SOURCE=ae723622792692401ac1bf7cd7bd3c00b410d563
+PACKAGE=regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER
+INHERITED_LEAN_SOURCE_CHANGES=0
+LEAN=4.33.0
+MATHLIB=db584cd6d46c92f209a44c0f1c829460d327499d
+
+  H_F(nu) := {a:CriticalSobolev 1 |
+    CriticalSigmaZero a AND paperNorm 1 a < sqrt(2)*nu/literatureK2}.
+
+  ExistingRoot := FRONTIER_H12.
+  ExistingSufficientRadius := sqrt(2)*nu/literatureK2.
+
+2. ADAPTED EXACT ROOT
+---------------------
+
+  P := nativeProduct>0;
+  K2 := literatureK2>0;
+  CF := frontierConstant=(2*pi)^3*P;
+  h(a) := ||a||;
+  p(a) := paperNorm 1 a;
+  CriticalSigmaZero a -> h(a)=sqrt(2*pi)*p(a).
+
+  H_P(nu) := {a:CriticalSobolev 1 |
+    CriticalSigmaZero a AND P*h(a)<nu}.
+
+  P*h(a)<nu
+    <-> p(a)<[sqrt(2)*(2*pi)^3/K2]*nu.
+
+  !!!! FRONTIER_H12_PRODUCT_ADAPTER_CHAIN:
+    forall nu>0, forall a:CriticalSobolev 1,
+      CriticalSigmaZero a
+      -> p(a)<[sqrt(2)*(2*pi)^3/K2]*nu
+      -> CriticalDatumAX6 nu a
+         AND exists U:CriticalRegularSolution nu a,
+           CriticalLerayHopf nu (criticalInitialPhysicalL2 a)
+             U.lerayVelocity U.lerayGradient
+           AND U.lerayHopfUnique
+           AND PositiveSmoothNSE nu U.flow.velocity U.flow.pressure
+           AND GlobalProductQuantitativeBounds(nu,a,U).
+
+  CriticalRegularSolution entails:
+    U.critical in C([0,infinity);CriticalSobolev 1);
+    U.critical 0=a;
+    forall t>=0, ||U.critical t||<=||a||;
+    positive-time physical/Fourier coefficient agreement.
+
+  U.lerayHopfUnique:
+    forall v G, CriticalLerayHopf nu (criticalInitialPhysicalL2 a) v G
+    -> forall t>0, v(t)=U.flow.velocity(t) a.e.[volume.restrict unitCube].
+
+  delta := nu-P*||a||>0;
+  DP := ||a||^2/(2*delta);
+  VP := (nu+criticalTransportConstant*||a||)^2*||a||^2/(2*delta).
+
+  GlobalProductQuantitativeBounds:
+    W:=U.flow.threeHalfState in L^2((0,infinity);CriticalSobolev 3),
+      integral_0^infinity ||W(t)||^2dt<=DP;
+    Z:=U.flow.negativeHalfDerivative in L^2((0,infinity);CriticalSobolev (-1)),
+      integral_0^infinity ||Z(t)||^2dt<=VP;
+    (t -> criticalSpatialNorm 6 (U.flow.velocity t)) in L^4(0,infinity);
+    forall T>0,
+      IntegrableOn (fun t -> physicalDissipation(U.flow.velocity t)^2) [0,T],
+      integral_0^T physicalDissipation(U.flow.velocity t)^2dt
+        <= [||a||^4-||U.critical T||^4]/(4*delta).
+
+  Quantifier(U)=one common solution.
+  ExtraAnalyticPremises=emptyset.
+  ExtraCertificatePremises=emptyset.
+  ExtraAdmissionPremises=emptyset.
+  OptimalLiteratureRadiusClaim=NONE.
+  ComparisonAgainstCriticalNonlinearConstant=NONE.
+
+3. CHECKPOINT REGISTER
+----------------------
+
+<=> P01  PRODUCT_CERTIFICATE  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_CERTIFICATE
+<=> P02  PRODUCT_CONSTANT_IDENTITY  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.product_literatureK2_eq
+    SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY
+<=> P03  PRODUCT_COEFFICIENT_NORM_IDENTITY  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.product_coefficient_normalization
+    SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY
+<=> P04  PRODUCT_SMALLNESS_IFF  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF
+    SingularClosure.H12Frontier.product_scale_cube_gt_one
+    SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO
+<=> P05  PRODUCT_MARGIN_AND_BUDGETS  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.productDissipationConstant_eq
+    SingularClosure.H12Frontier.productDerivativeConstant_eq
+    SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS
+<=> P06  GALERKIN_DIFFERENTIAL_INEQUALITY  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY
+<=> P07  GALERKIN_ENERGY_AND_DISSIPATION  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL
+<=> P08  GALERKIN_SHARP_QUARTIC  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC
+    SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET
+<=> P09  SIX_CHANNEL_BUDGET_AND_DATUM_AX6  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET
+    SingularClosure.H12Frontier.PRODUCT_DATUM_AX6
+<=> P10  TIME_DERIVATIVE_BUDGET  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE
+    SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE
+    SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET
+<=> P11  COMPACTNESS_AND_POSITIVE_FLOW  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS
+    SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY
+    SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2
+    SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS
+    SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW
+<=> P12  LIMIT_BUDGETS_AND_STRONG_TRACE  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF
+    SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC
+    SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF
+    SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC
+    SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY
+<=> P13  GLOBAL_ENERGY_CLASS  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS
+<=> P14  SERRIN_LERAYHOPF_AND_UNIQUENESS  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.PRODUCT_SERRIN_LERAYHOPF
+<=> P15  NATIVE_ROOT  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE
+<=> P16  PUBLIC_ROOT  [!! A_TIER; exact-type PASS; standard-only axioms PASS]
+    SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT
+    SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN
+
+4. EXTERNAL PROOF EVIDENCE
+--------------------------
+
+RUN=https://github.com/randogelist/Methlib/actions/runs/43357771407
+JOB=131663782133
+RUN_CONCLUSION=SUCCESS
+SOURCE_COMMIT=ae723622792692401ac1bf7cd7bd3c00b410d563
+ARTIFACT_ID=14006547832
+ARTIFACT_SHA256=5fdfb18a3a3bc1404a31fed07f91b70d46c2d1317d1cea77115912000ad68f00
+DEPENDENCY_CACHE=RESTORED
+PROJECT_CACHE=RESTORED
+SOURCE_HASHES_VERIFIED=326
+RAW_THEOREM_AUDITS_REPARSED=38/38 PASS
+EXACT_TYPE_CHECKS=38/38 PASS
+DELIVERY_ENTRYPOINT=PASS
+AXIOMS_SUBSET={propext, Classical.choice, Quot.sound}
+SORRYAX=ABSENT
+ADDITIONAL_ALLOWED_AXIOMS=emptyset
+
+PERSISTENT_EVIDENCE=verification/product/
+  EXECUTION.json
+  results.json
+  P01-axioms.log ... P16-axioms.log
+  P01-audit.json ... P16-audit.json
+  source-sha256.json
+  delivery-entrypoint.json
+  cache.json
+  lean-version.txt
+  mathlib-revision.txt
+  commit.txt
+
+5. NATIVE WINDOWS REPLAY
+------------------------
+
+RUN_CONTEXT=adapter-branch Git checkout; package H12_FRONTIER;
+            existing native Windows Lean 4.33.0 caches.
+ENTRYPOINT=product_adapter/run.cmd
+RUNNER=ci/run_product_windows.py
+AUDIT_RUNNER=ci/build_product_adapter.py
+SOURCE_ENTRYPOINT=FRONTIER_H12_PRODUCT_ADAPTER_CHAIN.lean
+DEPENDENCY_REFRESH=DISABLED
+CACHE_DELETION=DISABLED
+UNCACHED_FALLBACK=DISABLED
+TOOLCHAIN_UPGRADE=DISABLED
+
+  run.cmd -> pin/cache validation -> incremental adapter build
+          -> P01-P16 exact-type/axiom audits -> delivery entrypoint.
+
+6. ROOT SOURCE LOCATION
+------------------------
+
+https://github.com/randogelist/Methlib/blob/ae723622792692401ac1bf7cd7bd3c00b410d563/regularity-B-assembly/Singular-Axiomatic-closure/H12_FRONTIER/SingularClosure/H12Frontier/ProductRoot.lean
+
+https://github.com/randogelist/Methlib/pull/10
+
+FINAL:
+  <=> P01 ... <=> P16.
+  !!!! FRONTIER_H12_PRODUCT_ADAPTER_CHAIN.
+  Fixed-instance radius ratio = (2*pi)^3.
+  Frozen original FRONTIER_H12 retained.
+
+END.

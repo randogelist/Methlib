@@ -1,0 +1,26 @@
+{
+  "declaration_count": 2,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.criticalInitialPhysicalL2_fourierCoeff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.criticalInitialPhysicalL2_norm"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "declarations": [
+    {
+      "name": "SingularClosure.SMALL_DATA_CRITICAL_SERRIN_REGULARITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SMALL_DATA_CRITICAL_SERRIN_REGULARITY"
+    }
+  ],
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

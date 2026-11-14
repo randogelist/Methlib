@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+@GLOBAL_STRONG_SMOOTH_BOOTSTRAP : ∀ {ν : ℝ} {a : SingularClosure.Field} {ha : SmoothSigmaZero a}
+  (L : GlobalGalerkinStrongLimit ν a ha), ContDiffOn ℝ ∞ (fun z => L.velocity z.1 z.2) forwardSpacetime
+'SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP' depends on axioms: [propext, Classical.choice, Quot.sound]

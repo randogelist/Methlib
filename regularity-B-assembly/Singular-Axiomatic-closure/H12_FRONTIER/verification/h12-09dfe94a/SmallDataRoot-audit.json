@@ -1,0 +1,34 @@
+{
+  "declaration_count": 3,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SMALL_DATA_CRITICAL_REGULARITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_REGULARITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNIVERSAL_CONSTANT"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}

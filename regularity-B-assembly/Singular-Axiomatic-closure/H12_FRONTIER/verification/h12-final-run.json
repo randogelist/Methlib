@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "root_theorem": "SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL",
+  "source_commit": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "run_id": 43059293572,
+  "job_id": 130657144029,
+  "workflow_url": "https://github.com/randogelist/Methlib/actions/runs/43059293572",
+  "compiler": "Lean 4.33.0; external cached GitHub Actions",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "exact_type": "PASS",
+  "axiom_audit": "PASS_STANDARD_ONLY",
+  "actual_root_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "full_package_build": "PASS",
+  "original_endpoint_audit": "PASS",
+  "extension_modules": 104,
+  "extension_audit_modules": 27,
+  "extension_declarations": 33,
+  "original_declarations": 171,
+  "local_lean_executions": 0,
+  "source_manifest": "verification/h12-09dfe94a/sources.json",
+  "compiled_inputs_match_external_compilation": true,
+  "post_verification_changes": "Verification records, theorem reports and documentation only",
+  "additional_analytic_premises": [],
+  "additional_admission_premises": [],
+  "additional_certificate_premises": []
+}

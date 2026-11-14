@@ -1,0 +1,20 @@
+ci/product_audits/P13.lean:11:15: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P13.lean:11:52: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P13.lean:12:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS
+'SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS' depends on axioms: [propext, Classical.choice, Quot.sound]

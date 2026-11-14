@@ -1,0 +1,31 @@
+GALERKIN_ENSTROPHY_INEQUALITY — A_TIER
+Completion marker: !!
+
+EXACT SCOPE
+Exists C > 0, for every nu > 0, physical datum a, cutoff N,
+actual GalerkinSolution g and t >= 0, exists d such that
+HasDerivWithinAt (r |-> integral_unitCube gradientSquareDensity(g.velocity r))
+  d (Ici 0) t,
+and
+d + nu * integral_unitCube norm(laplacian(g.velocity t))^2
+  <= C / nu^3 * (integral_unitCube gradientSquareDensity(g.velocity t))^3.
+
+The constant is independent of nu, N and a. Every derivative and spatial
+integral is literal. No nonlinear estimate or absorption certificate is an
+additional hypothesis. The derivative at zero is within the forward half-line.
+
+EXTERNAL EVIDENCE
+Commit: 956fb516a77e3832f7069fb916d7f68f6ca04f3d
+Run: https://github.com/randogelist/Methlib/actions/runs/42950795091
+Job: 130294354395
+Checkpoint artifact: 13824224939
+Compiler: Lean 4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Module compilation: PASS
+Exact-type check: PASS
+Theorem-level axiom audit: PASS
+Matching theorem and exact-audit source hashes: PASS
+Axioms: propext, Classical.choice, Quot.sound
+
+The independent checkpoint was inspected while other modules were still
+compiling. This report promotes only endpoint 5. Local Lean executions: zero.

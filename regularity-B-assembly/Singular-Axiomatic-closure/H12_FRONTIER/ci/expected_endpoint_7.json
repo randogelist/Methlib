@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+    }
+  ]
+}

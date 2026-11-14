@@ -1,0 +1,11 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_GALERKIN_GLOBAL_EXISTS_UNIQUE
+CRITICAL_GALERKIN_GLOBAL_EXISTS_UNIQUE : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (c : FourierCoeff),
+      SpectralReality c →
+        SpectralSolenoidal c →
+          ∀ (N : ℕ),
+            ∃ g,
+              g.coeff 0 = cutoffCoeff N c ∧
+                ∀ (h : GalerkinSolution ν (finiteSynthesis N c) N), EqOn g.coeff h.coeff (Ici 0)
+'SingularClosure.CRITICAL_GALERKIN_GLOBAL_EXISTS_UNIQUE' depends on axioms: [propext, Classical.choice, Quot.sound]

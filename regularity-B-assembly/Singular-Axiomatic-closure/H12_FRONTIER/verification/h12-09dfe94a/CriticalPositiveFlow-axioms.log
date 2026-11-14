@@ -1,0 +1,4 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_POSITIVE_PHYSICAL_NSE
+@CRITICAL_POSITIVE_PHYSICAL_NSE : ∀ {ν : ℝ} (L : CriticalPositiveSobolevFlow ν),
+  PositiveSmoothNSE ν L.velocity L.pressure
+'SingularClosure.CRITICAL_POSITIVE_PHYSICAL_NSE' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,1036 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.smoothSigmaZero_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_zero"
+    },
+    {
+      "name": "SingularClosure.globalSmoothNSE_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.globalSmoothNSE_zero"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS"
+    },
+    {
+      "name": "SingularClosure.spectralChannel_preserves_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.spectralChannel_preserves_solenoidal"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET"
+    },
+    {
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL"
+    },
+    {
+      "name": "SingularClosure.zeroGalerkinSolution",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution"
+    },
+    {
+      "name": "SingularClosure.zeroGalerkinSolution_velocity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution_velocity"
+    },
+    {
+      "name": "SingularClosure.gradientSquareDensity_nonneg",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.gradientSquareDensity_nonneg"
+    },
+    {
+      "name": "SingularClosure.budget6_ne_top_of_bound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.budget6_ne_top_of_bound"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION"
+    },
+    {
+      "name": "SingularClosure.contDiff_finiteGalerkinRhs",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.contDiff_finiteGalerkinRhs"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt"
+    },
+    {
+      "name": "SingularClosure.finiteSynthesis_coordinateDerivative",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteSynthesis_coordinateDerivative"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_coordinateDerivative",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_coordinateDerivative"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_periodic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_periodic"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_divergence_free",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_divergence_free"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.physicalChannel_divergence_free",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.physicalChannel_divergence_free"
+    },
+    {
+      "name": "SingularClosure.physicalEnstrophy_lt_top",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalEnstrophy_lt_top"
+    },
+    {
+      "name": "SingularClosure.physicalChannel_v_w_gradient_product_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.physicalChannel_v_w_gradient_product_zero"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.finiteGalerkinRhs_local_exists",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_local_exists"
+    },
+    {
+      "name": "SingularClosure.finiteGalerkinRhs_uniform_local_time",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteGalerkinRhs_uniform_local_time"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coeff_unique_forward",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coeff_unique_forward"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.velocity_unique_forward",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_unique_forward"
+    },
+    {
+      "name": "SingularClosure.coefficientTransport_complex_energy_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_complex_energy_zero"
+    },
+    {
+      "name": "SingularClosure.coefficientNonlinearPower_eq_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientNonlinearPower_eq_zero"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_identity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_identity"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_le_initial",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_le_initial"
+    },
+    {
+      "name": "SingularClosure.uniform_cubic_energy_of_square_budget",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.uniform_cubic_energy_of_square_budget"
+    },
+    {
+      "name": "SingularClosure.coefficientLeray_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientLeray_solenoidal"
+    },
+    {
+      "name": "SingularClosure.galerkinRhs_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinRhs_solenoidal"
+    },
+    {
+      "name": "SingularClosure.pressureFromTransport_recovery",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.pressureFromTransport_recovery"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET"
+    },
+    {
+      "name": "SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnstrophy_identity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnstrophy_identity"
+    },
+    {
+      "name": "SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport"
+    },
+    {
+      "name": "SingularClosure.forwardGlobalSolution_exists",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.forwardGlobalSolution_exists"
+    },
+    {
+      "name": "SingularClosure.galerkinRhs_reality",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinRhs_reality"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientDissipation_integral_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_integral_le"
+    },
+    {
+      "name": "SingularClosure.invariantGalerkinRhs_global_exists",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.invariantGalerkinRhs_global_exists"
+    },
+    {
+      "name": "SingularClosure.galerkinSolution_exists_of_fourier_invariants",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinSolution_exists_of_fourier_invariants"
+    },
+    {
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION"
+    },
+    {
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL"
+    },
+    {
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS"
+    },
+    {
+      "name": "SingularClosure.torusL2Channel_fourierCoeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusL2Channel_fourierCoeff"
+    },
+    {
+      "name": "SingularClosure.torusL2Channel_preserves_mean",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusL2Channel_preserves_mean"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ"
+    },
+    {
+      "name": "SingularClosure.ax6_physical_square_budget",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ax6_physical_square_budget"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_idempotent",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_idempotent"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_periodic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_periodic"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_own_coordinateDerivative_zero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_own_coordinateDerivative_zero"
+    },
+    {
+      "name": "SingularClosure.smoothSigmaZero_fourier_integrable",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_integrable"
+    },
+    {
+      "name": "SingularClosure.datumFourierCoeff_reality",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_reality"
+    },
+    {
+      "name": "SingularClosure.smoothSigmaZero_fourier_solenoidal",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_fourier_solenoidal"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_ENERGY_IDENTITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENERGY_IDENTITY"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_smooth",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_smooth"
+    },
+    {
+      "name": "SingularClosure.coordinateAverage_all_coordinateDerivative_commute",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coordinateAverage_all_coordinateDerivative_commute"
+    },
+    {
+      "name": "SingularClosure.COEFFICIENT_POINCARE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.COEFFICIENT_POINCARE"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_NORM_POINCARE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NORM_POINCARE"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ"
+    },
+    {
+      "name": "SingularClosure.SIX_CHANNEL_PROJECTIONS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_PROJECTIONS"
+    },
+    {
+      "name": "SingularClosure.smoothSixChannel_fourierCutoff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothSixChannel_fourierCutoff"
+    },
+    {
+      "name": "SingularClosure.periodic_closedBall_three_integral_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.periodic_closedBall_three_integral_le"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY"
+    },
+    {
+      "name": "SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ"
+    },
+    {
+      "name": "SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET"
+    },
+    {
+      "name": "SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL"
+    },
+    {
+      "name": "SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY"
+    },
+    {
+      "name": "SingularClosure.galerkinPressure_recovery",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.galerkinPressure_recovery"
+    },
+    {
+      "name": "SingularClosure.finiteTransportPressure_meanZero",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteTransportPressure_meanZero"
+    },
+    {
+      "name": "SingularClosure.coefficientDissipation_initial_cutoff_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientDissipation_initial_cutoff_le"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficientDissipation_initial_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientDissipation_initial_le"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION"
+    },
+    {
+      "name": "SingularClosure.coefficientLeray_energy_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientLeray_energy_le"
+    },
+    {
+      "name": "SingularClosure.coefficientEnergy_leray_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientEnergy_leray_le"
+    },
+    {
+      "name": "SingularClosure.integral_norm_sq_leray_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.integral_norm_sq_leray_le"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.timeDerivative_L2_bound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_L2_bound"
+    },
+    {
+      "name": "SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND"
+    },
+    {
+      "name": "SingularClosure.torusSobolevInclusion_tail",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tail"
+    },
+    {
+      "name": "SingularClosure.torusSobolevInclusion_compact",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_compact"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_H2_H1_compact_closedBall",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H2_H1_compact_closedBall"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS"
+    },
+    {
+      "name": "SingularClosure.finiteSobolev_H1_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H1_norm_sq"
+    },
+    {
+      "name": "SingularClosure.finiteSobolev_H2_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.finiteSobolev_H2_norm_sq"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq"
+    },
+    {
+      "name": "SingularClosure.FOURIER_COORDINATE_DECAY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FOURIER_COORDINATE_DECAY"
+    },
+    {
+      "name": "SingularClosure.FOURIER_POLYNOMIAL_DECAY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FOURIER_POLYNOMIAL_DECAY"
+    },
+    {
+      "name": "SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.coefficient_time_modulus",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficient_time_modulus"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS"
+    },
+    {
+      "name": "SingularClosure.summable_torusSobolevWeight_inv_four",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.summable_torusSobolevWeight_inv_four"
+    },
+    {
+      "name": "SingularClosure.FINITE_FOURIER_H2_L1_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_H2_L1_BOUND"
+    },
+    {
+      "name": "SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND"
+    },
+    {
+      "name": "SingularClosure.scalarFourierSeries_hasFDerivAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_hasFDerivAt"
+    },
+    {
+      "name": "SingularClosure.scalarFourierSeries_contDiff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_contDiff"
+    },
+    {
+      "name": "SingularClosure.scalarFourierSeries_integral",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.scalarFourierSeries_integral"
+    },
+    {
+      "name": "SingularClosure.realFourierSeries_gradient_apply",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.realFourierSeries_gradient_apply"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.sobolevState_memLp",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.sobolevState_memLp"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS"
+    },
+    {
+      "name": "SingularClosure.torusDatumComponent_mk",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusDatumComponent_mk"
+    },
+    {
+      "name": "SingularClosure.torusDatumL2_fourierBasis_repr",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusDatumL2_fourierBasis_repr"
+    },
+    {
+      "name": "SingularClosure.torusSobolevL2_fourierCoeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_fourierCoeff"
+    },
+    {
+      "name": "SingularClosure.torusSobolevL2_isometry",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevL2_isometry"
+    },
+    {
+      "name": "SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV"
+    },
+    {
+      "name": "SingularClosure.GalerkinSolution.highOrderEnergy_balance",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.highOrderEnergy_balance"
+    },
+    {
+      "name": "SingularClosure.coefficientTransport_eq_product_divergence",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_product_divergence"
+    },
+    {
+      "name": "SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_H1_interpolation",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_interpolation"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_H1_time_difference_bound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_H1_time_difference_bound"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS"
+    },
+    {
+      "name": "SingularClosure.canonicalSobolevLimit_initial_physical",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.canonicalSobolevLimit_initial_physical"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND"
+    },
+    {
+      "name": "SingularClosure.countable_precompact_family_subsequence",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.countable_precompact_family_subsequence"
+    },
+    {
+      "name": "SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE"
+    },
+    {
+      "name": "SingularClosure.fourierTensorCoefficient_summable_norm",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fourierTensorCoefficient_summable_norm"
+    },
+    {
+      "name": "SingularClosure.fourierTensorCoefficient_norm_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fourierTensorCoefficient_norm_le"
+    },
+    {
+      "name": "SingularClosure.coefficientTransport_eq_divergenceTransport",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.coefficientTransport_eq_divergenceTransport"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES"
+    },
+    {
+      "name": "SingularClosure.torusSobolev_limit_mem_and_norm_le",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolev_limit_mem_and_norm_le"
+    },
+    {
+      "name": "SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE"
+    },
+    {
+      "name": "SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION"
+    },
+    {
+      "name": "SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS"
+    },
+    {
+      "name": "SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND"
+    },
+    {
+      "name": "SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND"
+    },
+    {
+      "name": "SingularClosure.datumFourierCoeff_injective_continuous_periodic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.datumFourierCoeff_injective_continuous_periodic"
+    },
+    {
+      "name": "SingularClosure.smoothFourierSynthesis_convection_coeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothFourierSynthesis_convection_coeff"
+    },
+    {
+      "name": "SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY"
+    },
+    {
+      "name": "SingularClosure.smoothFourierSynthesis_laplacian_coeff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.smoothFourierSynthesis_laplacian_coeff"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.canonicalLimit_physical_timeDerivative",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.canonicalLimit_physical_timeDerivative"
+    },
+    {
+      "name": "SingularClosure.ax6_implies_fefferman_B_0_adjust",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.ax6_implies_fefferman_B_0_adjust"
+    },
+    {
+      "name": "SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT"
+    },
+    {
+      "name": "SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP"
+    },
+    {
+      "name": "SingularClosure.PERIODIC_PRESSURE_RECOVERY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PERIODIC_PRESSURE_RECOVERY"
+    },
+    {
+      "name": "SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS"
+    },
+    {
+      "name": "SingularClosure.fourierSobolevRhs_contDiff",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fourierSobolevRhs_contDiff"
+    },
+    {
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH"
+    },
+    {
+      "name": "SingularClosure.fullTransportPressure_fourierCoeff_quadratic",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.fullTransportPressure_fourierCoeff_quadratic"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "verified_commit": "bb7c4f569a7b305935006dfc333b17f1528ae34c",
+  "run_id": 42935149091,
+  "job_id": 130243260923,
+  "ci_url": "https://github.com/randogelist/Methlib/actions/runs/42935149091",
+  "compiler": "Lean 4.33.0 (d8b18978322de05a8f3dba51ef03cf5461676c17), x86_64-unknown-linux-gnu",
+  "mathlib_rev": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "compiler_status": "PASS",
+  "exact_type_status": "PASS",
+  "axiom_audit_status": "PASS_STANDARD_ONLY",
+  "audited_declaration_count": 16,
+  "completed_frozen_endpoints": [
+    6
+  ],
+  "root_completed": false,
+  "local_lean_executions": 0,
+  "source_artifact": {
+    "id": 13818620127,
+    "sha256": "e9cbd86db43a3eec31922e7f68df5aa25fd8ab64ddcae3dd09820927dea69e77"
+  },
+  "evidence_artifact": {
+    "id": 13817219828,
+    "sha256": "e098cac2f612dfa9d00cd5fef01413f2732939ba71f4dd93c2a2f98c4f46fd86"
+  },
+  "lean_source_sha256": {
+    "SingularClosure/Admission.lean": "cd8e62a4f88a33b14d3a699b2431e801d590bcadf02d03b2e67ef3ebb5dc63ca",
+    "SingularClosure/Contracts.lean": "4c59cbf26fd4196529a4865ac09404d18015228c737055c2674cbcc4a5fd18f7",
+    "SingularClosure/CubicBudget.lean": "de827ddaa2ce8767891da6ed8e5686504a26d002d55bf2cf097fad0a6adad003",
+    "SingularClosure/Galerkin.lean": "e1ac5c944bab2667b02ae6c75b46f63605354b8c928c56298aee0e28b043a6fa",
+    "SingularClosure/GalerkinAlgebra.lean": "f361277b03794598be46b2c5faaee641d3d0772a4c75eab543fd86aa0ea088a8",
+    "SingularClosure/PhysicalChannels.lean": "0d522433e0a511a1c0f41b25947a05ece9780cacbe6809d105fdbb8991dca89f",
+    "SingularClosure/SixChannels.lean": "1c7f53956d9a766a3c8e4e781aa850a26351761ef0086c7ffd10047762854eab",
+    "SingularClosure/SixEnergy.lean": "b22f47947e216c6dac7f252c92d86973e4332644aafbd10ffedab7f2c707d6e8",
+    "SingularClosure.lean": "838a1c9b4bd2d68c657d85284e456e14a0e68251636f92e58a3fb3a25419f0df",
+    "ci/Audit.lean": "d7f477473999c177e9f0647736e6c68f9351dbc144b3ccf5ea03bc0916cb426b"
+  }
+}

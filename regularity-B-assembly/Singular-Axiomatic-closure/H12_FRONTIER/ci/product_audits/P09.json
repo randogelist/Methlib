@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_DATUM_AX6",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_DATUM_AX6"
+    }
+  ]
+}

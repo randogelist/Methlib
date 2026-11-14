@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW"
+    }
+  ]
+}

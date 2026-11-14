@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "purpose": "User-requested fresh external execution of the materialized FRONTIER_H12 assembly",
+  "branch": "H12_extension",
+  "source_baseline": "bc23626115fa2aad96b1aac76898be376dfa9200",
+  "previous_verified_run": 43313480602,
+  "previous_verified_job": 131515309480,
+  "lean": "4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "cache_policy": "reuse pinned dependency and compiled-project caches; no cache deletion",
+  "required_core_milestones": ["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10", "E11", "E12", "E13", "E14"],
+  "required_checks": ["external source compilation", "exact theorem types", "theorem-level standard-only axiom audits", "base root regression", "source hash agreement"],
+  "allowed_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "core_scope": "Fixed proved conservative Sobolev constant instance with actual periodic NSE conclusion; no auxiliary nonlinear certificate remains assumed in the concrete root",
+  "comparison_scope": "E15: no strict comparison with criticalNonlinearConstant is claimed",
+  "completion_marker": "!=!",
+  "local_lean_executions": 0,
+  "lean_source_changes_in_this_request": 0,
+  "new_run_status": "REQUESTED_NOT_YET_CERTIFIED"
+}

@@ -1,0 +1,23 @@
+EXACT_TYPE_PASS:SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : CriticalSobolev 1),
+      CriticalSigmaZero a →
+        criticalNonlinearConstant * ‖a‖ < ν →
+          CriticalDatumAX6 ν a ∧
+            ∃ U,
+              CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient ∧
+                U.lerayHopfUnique ∧
+                  PositiveSmoothNSE ν U.flow.velocity U.flow.pressure ∧
+                    (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi 0)) ∧
+                        ∫ (t : ℝ) in Ioi 0, ‖U.flow.threeHalfState t‖ ^ 2 ≤ criticalDissipationBudget ν a) ∧
+                      (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi 0)) ∧
+                          ∫ (t : ℝ) in Ioi 0, ‖U.flow.negativeHalfDerivative t‖ ^ 2 ≤
+                            criticalTimeDerivativeBudget ν a) ∧
+                        MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4 (volume.restrict (Ioi 0)) ∧
+                          ∀ (T : ℝ),
+                            0 < T →
+                              IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2) (Icc 0 T) volume ∧
+                                ∫ (t : ℝ) in 0..T, physicalDissipation (U.flow.velocity t) ^ 2 ≤
+                                  (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) / (4 * (ν - criticalNonlinearConstant * ‖a‖))
+'SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL' depends on axioms: [propext, Classical.choice, Quot.sound]

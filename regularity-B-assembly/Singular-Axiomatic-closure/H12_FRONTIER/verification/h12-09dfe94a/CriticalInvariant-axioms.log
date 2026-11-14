@@ -1,0 +1,28 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_ENERGY_INVARIANT
+@CRITICAL_ENERGY_INVARIANT : ∀ {A B d : ℝ → ℝ} {ν C a₀ T : ℝ},
+  0 ≤ T →
+    0 ≤ C →
+      0 ≤ a₀ →
+        C * a₀ < ν →
+          ContinuousOn A (Icc 0 T) →
+            (∀ t ∈ Ico 0 T, 0 ≤ B t) →
+              A 0 ≤ a₀ ^ 2 →
+                (∀ t ∈ Ico 0 T, HasDerivWithinAt A (d t) (Ici 0) t) →
+                  (∀ t ∈ Ico 0 T, d t + 2 * (ν - C * √(A t)) * B t ≤ 0) → ∀ t ∈ Icc 0 T, A t ≤ a₀ ^ 2
+'SingularClosure.CRITICAL_ENERGY_INVARIANT' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_SQUARE_BUDGET_DIV
+@CRITICAL_SQUARE_BUDGET_DIV : ∀ {A B X d : ℝ → ℝ} {ν C a₀ T : ℝ},
+  0 ≤ T →
+    0 ≤ C →
+      0 ≤ a₀ →
+        C * a₀ < ν →
+          ContinuousOn A (Icc 0 T) →
+            ContinuousOn X (Icc 0 T) →
+              (∀ t ∈ Icc 0 T, 0 ≤ A t) →
+                (∀ t ∈ Ico 0 T, 0 ≤ B t) →
+                  A 0 ≤ a₀ ^ 2 →
+                    (∀ t ∈ Ico 0 T, HasDerivWithinAt A (d t) (Ici 0) t) →
+                      (∀ t ∈ Ico 0 T, d t + 2 * (ν - C * √(A t)) * B t ≤ 0) →
+                        (∀ t ∈ Ioo 0 T, X t ^ 2 ≤ A t * B t) →
+                          ∫ (s : ℝ) in 0..T, X s ^ 2 ≤ (a₀ ^ 4 - A T ^ 2) / (4 * (ν - C * a₀))
+'SingularClosure.CRITICAL_SQUARE_BUDGET_DIV' depends on axioms: [propext, Classical.choice, Quot.sound]

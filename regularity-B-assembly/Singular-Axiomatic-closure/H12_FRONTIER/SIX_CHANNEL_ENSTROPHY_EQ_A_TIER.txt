@@ -1,0 +1,35 @@
+SIX_CHANNEL_ENSTROPHY_EQ — A_TIER
+Completion marker: !!
+
+EXACT TYPE
+forall a : Field,
+  ContDiff R infinity a -> SpatialPeriodic a ->
+  sum A : Fin 6, physicalEnstrophy (smoothSixChannel A a)
+    = physicalEnstrophy a.
+
+SEMANTICS
+Field = EuclideanSpace R (Fin 3) -> EuclideanSpace R (Fin 3).
+smoothSixChannel is the literal coordinate-average decomposition with fixed
+axes j=2 and i=0 in zero-based coordinates. physicalEnstrophy is the actual
+nonnegative extended integral of the squared actual gradient over unitCube.
+
+SCOPE
+No finite-frequency support premise. No solenoidal or mean-zero premise.
+No smallness premise. No assumed orthogonality or derivative-commutation
+certificate. Every required physical identity is proved in the dependency chain.
+
+EXTERNAL EVIDENCE
+Commit: 4d39e66229e0412a15f8fa9af8f38de4e2f566a6
+Run: https://github.com/randogelist/Methlib/actions/runs/42945570303
+Job: 130277415163
+Compiler: Lean 4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Independent module compilation: PASS
+Exact-type check: PASS
+Theorem-level axiom audit: PASS
+Axioms: propext, Classical.choice, Quot.sound
+
+AGGREGATE STATUS
+Other candidate modules failed in this run. This report promotes only the
+exact independently audited endpoint 2. No global PDE closure is asserted.
+Local Lean execution: zero.

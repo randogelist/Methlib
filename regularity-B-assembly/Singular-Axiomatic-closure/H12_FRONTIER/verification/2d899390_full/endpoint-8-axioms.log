@@ -1,0 +1,16 @@
+ci/EndpointAudit8.lean:7:13: warning: Variable name `hAX6` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hAX6
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/EndpointAudit8.lean:8:13: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT
+GALERKIN_GLOBAL_STRONG_LIMIT : AX6Statement →
+  ∀ (ν : ℝ), 0 < ν → ∀ (a : SingularClosure.Field) (ha : SmoothSigmaZero a), Nonempty (GlobalGalerkinStrongLimit ν a ha)
+'SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]

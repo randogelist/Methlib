@@ -1,0 +1,47 @@
+import SingularClosure.H12Frontier.ProductRoot
+
+set_option autoImplicit false
+set_option Elab.async false
+
+#check SingularClosure.H12Frontier.PRODUCT_CERTIFICATE
+#check SingularClosure.H12Frontier.product_literatureK2_eq
+#check SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY
+#check SingularClosure.H12Frontier.product_coefficient_normalization
+#check SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY
+#check SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF
+#check SingularClosure.H12Frontier.product_scale_cube_gt_one
+#check SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO
+#check SingularClosure.H12Frontier.productDissipationConstant_eq
+#check SingularClosure.H12Frontier.productDerivativeConstant_eq
+#check SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC
+#check SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET
+#check SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET
+#check SingularClosure.H12Frontier.PRODUCT_DATUM_AX6
+#check SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE
+#check SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE
+#check SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET
+#check SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS
+#check SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY
+#check SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2
+#check SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS
+#check SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW
+#check SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF
+#check SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC
+#check SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF
+#check SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC
+#check SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY
+#check SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS
+#check SingularClosure.H12Frontier.PRODUCT_SERRIN_LERAYHOPF
+#check SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE
+#check SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT
+#check SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN
+
+#print axioms SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE
+#print axioms SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT
+#print axioms SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN

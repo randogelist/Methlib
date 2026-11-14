@@ -1,0 +1,15 @@
+test_duplicate_report (__main__.AuditBoundaryTests.test_duplicate_report) ... ok
+test_empty_audit_rejected (__main__.AuditBoundaryTests.test_empty_audit_rejected) ... ok
+test_exact_custom_axiom_policy (__main__.AuditBoundaryTests.test_exact_custom_axiom_policy) ... ok
+test_missing_exact_type_check (__main__.AuditBoundaryTests.test_missing_exact_type_check) ... ok
+test_missing_report (__main__.AuditBoundaryTests.test_missing_report) ... ok
+test_nested_comment_and_string_stripping (__main__.AuditBoundaryTests.test_nested_comment_and_string_stripping) ... ok
+test_no_axiom_report_supported (__main__.AuditBoundaryTests.test_no_axiom_report_supported) ... ok
+test_sorry_rejected (__main__.AuditBoundaryTests.test_sorry_rejected) ... ok
+test_unknown_axiom_rejected (__main__.AuditBoundaryTests.test_unknown_axiom_rejected) ... ok
+test_valid_audit (__main__.AuditBoundaryTests.test_valid_audit) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK

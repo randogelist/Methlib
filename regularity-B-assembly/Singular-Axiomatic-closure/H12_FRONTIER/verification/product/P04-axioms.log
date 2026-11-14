@@ -1,0 +1,18 @@
+ci/product_audits/P04.lean:12:5: warning: Variable name `hz` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hz
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF
+'SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.product_scale_cube_gt_one
+'SingularClosure.H12Frontier.product_scale_cube_gt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/product_audits/P04.lean:28:15: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO
+'SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO' depends on axioms: [propext, Classical.choice, Quot.sound]

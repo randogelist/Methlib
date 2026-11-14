@@ -1,0 +1,1378 @@
+{
+  "declaration_count": 171,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothSigmaZero_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.globalSmoothNSE_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.spectralChannel_preserves_solenoidal"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.zeroGalerkinSolution"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.zeroGalerkinSolution_velocity"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.gradientSquareDensity_nonneg"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.budget6_ne_top_of_bound"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.contDiff_finiteGalerkinRhs"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.finiteSynthesis_coordinateDerivative"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.physicalChannel_coordinateDerivative"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.physicalChannel_periodic"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.physicalChannel_divergence_free"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.physicalChannel_divergence_free"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.physicalEnstrophy_lt_top"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.physicalChannel_v_w_gradient_product_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.PHYSICAL_V_W_ENSTROPHY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.finiteGalerkinRhs_local_exists"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.finiteGalerkinRhs_uniform_local_time"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coeff_unique_forward"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.velocity_unique_forward"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientTransport_complex_energy_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientNonlinearPower_eq_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_identity"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_le_initial"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.uniform_cubic_energy_of_square_budget"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientLeray_solenoidal"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.galerkinRhs_solenoidal"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.pressureFromTransport_recovery"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.PHYSICAL_ENSTROPHY_LE_SIX_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.PHYSICAL_SQUARE_BUDGET_LE_AX6_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.INTEGRAL_FOURIER_CHARACTER_ORTHOGONALITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientEnstrophy_identity"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientEnstrophyNonlinearPower_eq_transport"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.forwardGlobalSolution_exists"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.galerkinRhs_reality"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_integral_identity"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientDissipation_integral_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.invariantGalerkinRhs_global_exists"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.galerkinSolution_exists_of_fourier_invariants"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_RECONSTRUCTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_ORTHOGONAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.TORUS_L2_SIX_CHANNEL_PYTHAGORAS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusL2Channel_fourierCoeff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusL2Channel_preserves_mean"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.PHYSICAL_CHANNEL_GRADIENT_ORTHOGONALITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_ENSTROPHY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_SQUARE_BUDGET_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.ax6_physical_square_budget"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coordinateAverage_idempotent"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coordinateAverage_periodic"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coordinateAverage_own_coordinateDerivative_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothSigmaZero_fourier_integrable"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.datumFourierCoeff_reality"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothSigmaZero_fourier_solenoidal"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_ENERGY_PARSEVAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_ENSTROPHY_PARSEVAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GALERKIN_ENERGY_IDENTITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coordinateAverage_smooth"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coordinateAverage_all_coordinateDerivative_commute"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.COEFFICIENT_POINCARE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_NORM_POINCARE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_ENSTROPHY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_PROJECTIONS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothSixChannel_fourierCutoff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.periodic_closedBall_three_integral_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_L6_FROM_ENSTROPHY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_HESSIAN_LAPLACIAN_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_EXACT_REAL_SQUARE_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_EXACT_PHYSICAL_SQUARE_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_DERIVATIVE_L6_FROM_LAPLACIAN"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_NONLINEAR_THREE_QUARTER_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_BILINEAR_PARSEVAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientEnstrophyNonlinearPower_eq_physical"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GALERKIN_ENSTROPHY_INEQUALITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.galerkinPressure_recovery"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.finiteTransportPressure_meanZero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientDissipation_initial_cutoff_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientDissipation_initial_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_ENSTROPHY_ACCUMULATION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_PHYSICAL_ENSTROPHY_ACCUMULATION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientLeray_energy_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientEnergy_leray_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.integral_norm_sq_leray_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.velocity_hasDerivWithinAt"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.timeDerivative_L2_bound"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_PHYSICAL_CONVECTION_SQUARE_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolevInclusion_tail"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolevInclusion_compact"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolev_H2_H1_compact_closedBall"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.timeDerivative_energy_intervalIntegrable"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_TIME_DERIVATIVE_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_PHYSICAL_STRONG_BOUNDS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.finiteSobolev_H1_norm_sq"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.finiteSobolev_H2_norm_sq"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.sobolevState_H2_physical_norm_sq"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FOURIER_COORDINATE_DECAY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FOURIER_POLYNOMIAL_DECAY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_IFF_CANONICAL_GALERKIN_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficient_time_modulus"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_COEFFICIENT_TIME_MODULUS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.summable_torusSobolevWeight_inv_four"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_FOURIER_H2_L1_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.FINITE_FOURIER_TAME_PRODUCT_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.scalarFourierSeries_hasFDerivAt"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.scalarFourierSeries_contDiff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.scalarFourierSeries_integral"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.realFourierSeries_gradient_apply"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.sobolevState_hasDerivWithinAt"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.sobolevState_memLp"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.rhsSobolev_H0_physical_norm_sq"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_H0_TIME_MODULUS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusDatumComponent_mk"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusDatumL2_fourierBasis_repr"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolevL2_fourierCoeff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolevL2_isometry"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SMOOTH_DATUM_MEM_TORUS_SOBOLEV"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.highOrderEnergy_balance"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientTransport_eq_product_divergence"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.LINEAR_ENERGY_OF_COEFFICIENT_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_STRONG_BOUNDS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_UNIFORM_SUBSEQUENCE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolev_H1_interpolation"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolev_H1_time_difference_bound"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_HIGH_ORDER_ACCUMULATION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GALERKIN_HIGH_ORDER_DIFFERENTIAL_INEQUALITY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_CONSTRAINED_SUBSEQUENCE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_H0_L2H1_SUBSEQUENCE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_COMPATIBLE_LIMITS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.canonicalSobolevLimit_initial_physical"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GALERKIN_RHS_SOBOLEV_NORM_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.countable_precompact_family_subsequence"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_UNIFORM_HIGH_ORDER_TIME_MODULUS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_Hm_COMPACT_CLOSURE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_Hm_SUBSEQUENCE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.fourierTensorCoefficient_summable_norm"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.fourierTensorCoefficient_norm_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.coefficientTransport_eq_divergenceTransport"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_CURVES"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolev_limit_mem_and_norm_le"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.torusSobolevInclusion_tendsto_of_coeff_tendsto"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_TRACE"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.ALL_SOBOLEV_SMOOTH_PHYSICAL_REALIZATION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.NONEMPTY_GLOBAL_STRONG_COEFFICIENT_NSE_OF_CONTINUOUS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_GLOBAL_STRONG_COEFFICIENT_EXISTS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SOBOLEV_SCALE_TIME_SMOOTH"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SOBOLEV_DIVERGENCE_PRODUCT_NORM_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.INFINITE_SCALAR_FOURIER_PRODUCT_BOUND"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.datumFourierCoeff_injective_continuous_periodic"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothFourierSynthesis_convection_coeff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.INFINITE_TRANSPORT_PRESSURE_RECOVERY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothFourierSynthesis_laplacian_coeff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SOBOLEV_CURVES_JOINT_SPACETIME_SMOOTH"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.canonicalLimit_physical_timeDerivative"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.ax6_implies_fefferman_B_0_adjust"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GALERKIN_GLOBAL_STRONG_LIMIT"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GLOBAL_STRONG_SMOOTH_BOOTSTRAP"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.PERIODIC_PRESSURE_RECOVERY"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.PHYSICAL_NSE_OF_FULL_FOURIER_RHS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.fourierSobolevRhs_contDiff"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.AX6_CANONICAL_GALERKIN_GLOBAL_SOBOLEV_SMOOTH"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SOBOLEV_TRANSPORT_PRESSURE_JOINT_SMOOTH"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.fullTransportPressure_fourierCoeff_quadratic"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}

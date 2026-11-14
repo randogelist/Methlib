@@ -1,0 +1,226 @@
+EXACT_TYPE_PASS:SingularClosure.smoothSigmaZero_zero
+smoothSigmaZero_zero : SmoothSigmaZero 0
+'SingularClosure.smoothSigmaZero_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.globalSmoothNSE_zero
+globalSmoothNSE_zero : ∀ (ν : ℝ), GlobalSmoothNSE ν 0 0 0
+'SingularClosure.globalSmoothNSE_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS
+SIX_CHANNEL_SPECTRAL_PROJECTIONS : (∀ (a : FourierCoeff), ∑ A, spectralChannel A a = a) ∧
+  (∀ (A : Fin 6) (a : FourierCoeff), spectralChannel A (spectralChannel A a) = spectralChannel A a) ∧
+    ∀ (A B : Fin 6), A ≠ B → ∀ (a : FourierCoeff), spectralChannel A (spectralChannel B a) = 0
+'SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.spectralChannel_preserves_solenoidal
+spectralChannel_preserves_solenoidal : ∀ (A : Fin 6) {a : FourierCoeff},
+  SpectralSolenoidal a → SpectralSolenoidal (spectralChannel A a)
+'SingularClosure.spectralChannel_preserves_solenoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ
+SIX_CHANNEL_SPECTRAL_ENERGY_EQ : ∀ (w : Frequency → ℝ≥0∞) (a : FourierCoeff),
+  ∑ A, spectralEnergy w (spectralChannel A a) = spectralEnergy w a
+'SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ
+SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ : ∀ (a : FourierCoeff),
+  ∑ A, spectralEnstrophy (spectralChannel A a) = spectralEnstrophy a
+'SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET
+@CUBIC_ENERGY_OF_SQUARE_BUDGET : ∀ {y z d : ℝ → ℝ} {ν κ T M y₀ : ℝ},
+  0 < ν →
+    0 ≤ κ →
+      0 ≤ T →
+        0 ≤ M →
+          ContinuousOn y (Icc 0 T) →
+            ContinuousOn z (Icc 0 T) →
+              ContinuousOn d (Icc 0 T) →
+                (∀ t ∈ Icc 0 T, 0 ≤ y t) →
+                  y 0 ≤ y₀ →
+                    (∀ t ∈ Ioo 0 T, HasDerivAt y (d t) t) →
+                      (∀ t ∈ Ioo 0 T, d t + ν * z t ^ 2 ≤ κ * y t ^ 3) →
+                        ∫ (s : ℝ) in 0..T, y s ^ 2 ≤ M →
+                          ∀ t ∈ Icc 0 T, y t + ν * ∫ (s : ℝ) in 0..t, z s ^ 2 ≤ y₀ * Real.exp (κ * M)
+'SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL
+@CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL : ∀ {y z d : ℝ → ℝ} {ν κ T M : ℝ},
+  0 < ν →
+    0 ≤ κ →
+      0 ≤ T →
+        0 ≤ M →
+          ContinuousOn y (Icc 0 T) →
+            ContinuousOn z (Icc 0 T) →
+              ContinuousOn d (Icc 0 T) →
+                (∀ t ∈ Icc 0 T, 0 ≤ y t) →
+                  (∀ t ∈ Ioo 0 T, HasDerivAt y (d t) t) →
+                    (∀ t ∈ Ioo 0 T, d t + ν * z t ^ 2 ≤ κ * y t ^ 3) →
+                      ∫ (s : ℝ) in 0..T, y s ^ 2 ≤ M →
+                        ∀ t ∈ Icc 0 T, y t + ν * ∫ (s : ℝ) in 0..t, z s ^ 2 ≤ y 0 * Real.exp (κ * M)
+'SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution
+zeroGalerkinSolution : (ν : ℝ) → (N : ℕ) → GalerkinSolution ν 0 N
+'SingularClosure.zeroGalerkinSolution' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.zeroGalerkinSolution_velocity
+zeroGalerkinSolution_velocity : ∀ (ν : ℝ) (N : ℕ), (zeroGalerkinSolution ν N).velocity = 0
+'SingularClosure.zeroGalerkinSolution_velocity' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.gradientSquareDensity_nonneg
+gradientSquareDensity_nonneg : ∀ (v : SingularClosure.Field) (x : Vec), 0 ≤ gradientSquareDensity v x
+'SingularClosure.gradientSquareDensity_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.budget6_ne_top_of_bound
+@budget6_ne_top_of_bound : ∀ {N : ℕ} {c : ℝ → FourierCoeff} {T : ℝ} {M : ℝ≥0}, budget6 N c T ≤ ↑M → budget6 N c T ≠ ∞
+'SingularClosure.budget6_ne_top_of_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION
+SIX_CHANNEL_FINITE_RECONSTRUCTION : ∀ (N : ℕ) (a : FourierCoeff), ∑ A, physicalChannel N A a = finiteSynthesis N a
+'SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION
+SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION : ∀ (N : ℕ) (a : FourierCoeff) (j : Fin 3) (x : Vec),
+  coordinateDerivative (finiteSynthesis N a) j x = ∑ A, coordinateDerivative (physicalChannel N A a) j x
+'SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.contDiff_finiteGalerkinRhs
+contDiff_finiteGalerkinRhs : ∀ (ν : ℝ) (N : ℕ), ContDiff ℝ ∞ (finiteGalerkinRhs ν N)
+'SingularClosure.contDiff_finiteGalerkinRhs' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt
+@GalerkinSolution.coefficientEnergy_hasDerivWithinAt : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : GalerkinSolution ν a N) {t : ℝ},
+  0 ≤ t →
+    HasDerivWithinAt (fun r => coefficientEnergy N (g.coeff r))
+      (∑ k ∈ cutoffModes N, ∑ i, 2 * (star (g.coeff t k i) * galerkinRhs ν N (g.coeff t) k i).re) (Ici 0) t
+'SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+{
+  "declaration_count": 16,
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.smoothSigmaZero_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.globalSmoothNSE_zero"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_PROJECTIONS"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.spectralChannel_preserves_solenoidal"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENERGY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_SPECTRAL_ENSTROPHY_EQ"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.CUBIC_ENERGY_OF_SQUARE_BUDGET_EXACT_INITIAL"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.zeroGalerkinSolution"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.zeroGalerkinSolution_velocity"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.gradientSquareDensity_nonneg"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.budget6_ne_top_of_bound"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_RECONSTRUCTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.SIX_CHANNEL_FINITE_DERIVATIVE_RECONSTRUCTION"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.contDiff_finiteGalerkinRhs"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "SingularClosure.GalerkinSolution.coefficientEnergy_hasDerivWithinAt"
+    }
+  ],
+  "endpoint_completion_inferred": false,
+  "errors": [],
+  "schema_version": 1,
+  "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+  "status": "PASS"
+}
+

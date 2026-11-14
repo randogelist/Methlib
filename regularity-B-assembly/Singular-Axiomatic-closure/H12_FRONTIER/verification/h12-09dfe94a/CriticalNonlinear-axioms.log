@@ -1,0 +1,8 @@
+EXACT_TYPE_PASS:SingularClosure.FINITE_CRITICAL_NONLINEAR_BOUND
+FINITE_CRITICAL_NONLINEAR_BOUND : ∃ C,
+  0 < C ∧
+    ∀ (N : ℕ) (c : FourierCoeff),
+      (∀ k ∉ cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+        SpectralReality c →
+          SpectralSolenoidal c → |criticalNonlinearPower 1 N c| ≤ C * √(criticalEnergy 1 N c) * criticalEnergy 3 N c
+'SingularClosure.FINITE_CRITICAL_NONLINEAR_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,45 @@
+GALERKIN_GLOBAL_EXISTS_UNIQUE — A_TIER
+FROZEN ENDPOINT: 3
+COMPLETION MARKER: !!
+
+EXACT THEOREM
+SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE :
+  forall (nu : Real), 0 < nu ->
+  forall (a : Field), SmoothSigmaZero a ->
+  forall N : Nat, exists g : GalerkinSolution nu a N,
+    forall h : GalerkinSolution nu a N,
+      Set.EqOn g.coeff h.coeff (Set.Ici 0).
+
+SEMANTICS
+GalerkinSolution is the actual nonzero Euclidean Fourier cutoff NSE ODE.
+The initial coefficients are actual Lebesgue Fourier integrals of a.
+Support, conjugate reality, solenoidality, continuity and the differential
+equation are constructed; no assumed Galerkin-existence argument occurs.
+All nonnegative times are covered. Negative-time values are outside the
+contract and are not claimed unique. No AX6 hypothesis is needed.
+
+VERIFICATION
+Commit: c1af57143f708d3587a03425dbd9493db0e6f5f0
+Run: https://github.com/randogelist/Methlib/actions/runs/42940507715
+Job: 130260911652
+Compiler: Lean 4.33.0
+Mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+Pinned dependency object cache: used
+Compiler: PASS
+Exact type: PASS
+Theorem axiom audit: PASS_STANDARD_ONLY
+Axioms: propext; Classical.choice; Quot.sound
+Custom axioms: none
+Local Lean executions: zero
+
+FILES
+SingularClosure/GalerkinGlobal.lean
+ci/EndpointAudit3.lean
+ci/expected_endpoint_3.json
+verification/c1af5714_endpoint3.log
+run.cmd
+
+BOUNDARY
+The independent endpoint-3 audit passed. The aggregate build at that commit
+failed on other pending modules. This report does not promote those modules,
+AX6, the infinite NSE limit, or Fefferman_B_0_adjust.

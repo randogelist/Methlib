@@ -1,0 +1,28 @@
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF
+'SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC
+'SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF
+'SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF' depends on axioms: [propext, Classical.choice, Quot.sound]
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC
+'SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC' depends on axioms: [propext, Classical.choice, Quot.sound]
+ci/product_audits/P12.lean:95:15: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P12.lean:95:52: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/product_audits/P12.lean:96:5: warning: Variable name `hsmall` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsmall
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY
+'SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY' depends on axioms: [propext, Classical.choice, Quot.sound]

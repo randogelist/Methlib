@@ -1,0 +1,187 @@
+FRONTIER_H12_A_TIER
+==================
+
+MODE = A_TIER_DERIVATION
+STATUS = UNCONDITIONAL_CLOSURE_CONCRETE_ADMISSIBLE_INSTANCE
+ROOT_MARKER = !!!!
+CORE_MILESTONES = 14/14 !=!
+BRANCH = H12_extension
+COMPILED_SOURCE = d8b5e510411c224fd7b284b0a65eb2f9b08b3d83
+WORKFLOW_RUN = 43317474994
+WORKFLOW_JOB = 131529143429
+ARTIFACT_ID = 13989646453
+COMPILER = Lean 4.33.0; external x86_64 Linux
+MATHLIB = db584cd6d46c92f209a44c0f1c829460d327499d
+LOCAL_LEAN_EXECUTIONS = 0
+
+1. EXACT CONSTANT SCOPE
+----------------------
+The constants CSHalf, CSOne and CSZero are fixed conservative admissible
+constants, not optimal or independently prescribed numerical constants.
+Their actual finite-Fourier Sobolev inequalities and ordinary Lebesgue
+normalization on the dilated 2*pi cube are proved in LiteratureConstants.lean.
+
+K2 = sqrt(2)*CSHalf*CSOne*CSZero/(2*pi).
+CF = K2/(2*sqrt(pi)) = (2*pi)^3*nativeProduct > 0.
+The finite nonlinear estimate is proved with CF. frontierCertificate is
+constructed, not a hypothesis of either concrete root.
+
+For mean-zero data:
+  nativeNorm(a) = sqrt(2*pi)*paperNorm(1,a).
+Thus the public smallness condition is exactly equivalent to the native one.
+The strict radius identity nu/K2 < sqrt(2)*nu/K2 is separately audited for the
+same fixed K2. There is no claim of optimality or historical priority.
+
+E15 IS OPEN:
+  CF < SingularClosure.criticalNonlinearConstant.
+The completed root therefore does not establish strict enlargement of the
+original compiled Methlib ball. The separate BMO/Beltrami program is excluded.
+
+2. EXACT COMPILED ROOT SOURCE
+----------------------------
+Source module: SingularClosure.H12Frontier.Root
+Source path: SingularClosure/H12Frontier/Root.lean
+Git blob: f2dfc526b7b187fd38017268f5f826baafb1b71f
+
+import SingularClosure.H12Frontier.NonlinearBound
+import SingularClosure.H12Frontier.ReplayClosure
+import SingularClosure.H12Frontier.LimitMilestones
+
+set_option autoImplicit false
+set_option Elab.async true
+open Set MeasureTheory Filter
+open scoped BigOperators Topology Interval NNReal ENNReal
+namespace SingularClosure.H12Frontier
+noncomputable section
+
+theorem FRONTIER_H12_NATIVE :
+    ∀ (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+    (hsmall : frontierConstant * ‖a‖ < ν),
+    CriticalDatumAX6 ν a ∧ ∃ U : CriticalRegularSolution ν a,
+      CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient ∧
+      U.lerayHopfUnique ∧
+      PositiveSmoothNSE ν U.flow.velocity U.flow.pressure ∧
+      (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.threeHalfState t‖ ^ 2) ≤ frontierDissipationConstant ν a) ∧
+      (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.negativeHalfDerivative t‖ ^ 2) ≤
+          frontierDerivativeConstant ν a) ∧
+      MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+        (volume.restrict (Ioi (0 : ℝ))) ∧
+      (∀ T : ℝ, 0 < T →
+        IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume ∧
+        (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤
+          (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) /
+            (4 * (ν - frontierConstant * ‖a‖))) :=
+  @Replay.fullClosure frontierCertificate
+
+theorem FRONTIER_H12 :
+    ∀ (ν : ℝ) (hν : 0 < ν) (a : CriticalSobolev 1) (ha : CriticalSigmaZero a)
+    (hsmall : paperNorm 1 a < (Real.sqrt 2 / literatureK2) * ν),
+    CriticalDatumAX6 ν a ∧ ∃ U : CriticalRegularSolution ν a,
+      CriticalLerayHopf ν (criticalInitialPhysicalL2 a) U.lerayVelocity U.lerayGradient ∧
+      U.lerayHopfUnique ∧
+      PositiveSmoothNSE ν U.flow.velocity U.flow.pressure ∧
+      (MemLp U.flow.threeHalfState 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.threeHalfState t‖ ^ 2) ≤ frontierDissipationConstant ν a) ∧
+      (MemLp U.flow.negativeHalfDerivative 2 (volume.restrict (Ioi (0 : ℝ))) ∧
+        (∫ t in Ioi (0 : ℝ), ‖U.flow.negativeHalfDerivative t‖ ^ 2) ≤
+          frontierDerivativeConstant ν a) ∧
+      MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4
+        (volume.restrict (Ioi (0 : ℝ))) ∧
+      (∀ T : ℝ, 0 < T →
+        IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2)
+          (Icc (0 : ℝ) T) volume ∧
+        (∫ t in (0 : ℝ)..T, physicalDissipation (U.flow.velocity t) ^ 2) ≤
+          (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) /
+            (4 * (ν - frontierConstant * ‖a‖))) := by
+  intro ν hν a ha hsmall
+  exact FRONTIER_H12_NATIVE ν hν a ha
+    ((FRONTIER_H12_SMALLNESS_IFF ν a ha.mean_zero).mp hsmall)
+
+end
+end SingularClosure.H12Frontier
+
+3. REGISTERED CONCLUSION
+-----------------------
+CriticalRegularSolution includes continuity in the critical Hilbert norm,
+the exact initial datum, agreement with a compatible positive-time Sobolev
+flow, and the uniform bound norm(u(t)) <= norm(a). PositiveSmoothNSE asserts
+the actual periodic physical equation, incompressibility, zero means, and
+positive-time smooth velocity and pressure. The root also constructs
+Leray-Hopf membership and registered weak-strong uniqueness for that same
+solution, global HthreeHalf and HminusHalf Bochner budgets, global L4_t L6_x,
+and the retained-terminal quartic-gradient estimate.
+
+Auxiliary analytic premises = [].
+Auxiliary certificate premises = [].
+Auxiliary admission premises = [].
+The registered mathematical hypotheses nu>0, CriticalSigmaZero, and the
+fixed-coefficient smallness condition are retained.
+
+4. MILESTONE AUDIT REGISTER
+--------------------------
+All declarations have namespace SingularClosure.H12Frontier.
+
+!=! E01 FRONTIER_H12_NORM_BRIDGE
+!=! E02 FRONTIER_H12_CONSTANT_NORMALIZATION
+!=! E03 FRONTIER_FINITE_CRITICAL_NONLINEAR_BOUND
+!=! E04 frontierGalerkinEnergyInvariant
+!=! E05 frontierDissipationBudget
+!=! E06 frontierSharpQuarticBudget
+!=! E07 frontierTimeDerivativeBudget
+!=! E08 frontierPositiveTimeEnstrophyAccumulation
+!=! E09 frontierPositiveTimeH2Bound
+!=! E10 frontierPositiveTimeAllOrders
+!=! E11 frontierLimitNegativeHalf
+!=! E12 frontierLimitSharpQuartic
+!=! E13 FRONTIER_H12_NATIVE
+!=! E14 FRONTIER_H12
+
+For each E##:
+  ci/frontier_audits/E##.lean fixes the exact theorem type;
+  ci/frontier_audits/E##.json fixes the allowed axiom policy;
+  external frontier/E##-axioms.log contains exactly one matching
+    EXACT_TYPE_PASS marker and the theorem-level #print axioms output;
+  external frontier/E##-audit.json reports PASS.
+
+Every root and core milestone reports only:
+  [propext, Classical.choice, Quot.sound].
+No sorryAx or unapproved axiom occurs.
+
+26 audit groups / 51 frontier and support declarations passed. Generic
+certificate-parametric support is not confused with unconditional concrete
+specialization. The concrete certificate is discharged by E03 and its
+proved product and dilation/Sobolev support.
+
+5. EXECUTION AND INTEGRITY
+-------------------------
+Fresh external cached workflow:
+  https://github.com/randogelist/Methlib/actions/runs/43317474994
+Exact compiled commit:
+  d8b5e510411c224fd7b284b0a65eb2f9b08b3d83
+Artifact SHA256:
+  ee4669d58c0741900ff3042e53628c728904f6862de346ba70699ea40cfb7224
+
+305 Lean source hashes matched the external manifest.
+60 generated-file hashes matched.
+11 frozen proof-template hashes matched.
+259 original base Lean files matched the original source manifest.
+The original unconditional base root was recompiled and exact-type/axiom
+audited successfully. No base Lean source was changed.
+
+The proof sources were already materialized at bc23626115fa2aad96b1aac76898be376dfa9200.
+The fresh execution adds a replay-request record but changes no Lean source.
+Subsequent documentation commits do not change the compiled theorem inputs.
+Local processing only extracts evidence, reads source and rechecks hashes
+and external audit transcripts; no local Lean execution occurred.
+
+6. EXTERNAL NATIVE WINDOWS REPLAY
+--------------------------------
+From the complete H12_FRONTIER package directory:
+  call run-frontier.cmd
+
+Required: Lean 4.33.0 through elan/Lake, Python 3, Git, and the pinned Mathlib
+cache. The runner fetches/reuses matching cache objects and never deletes
+cache directories. The root source requires the complete package imports.

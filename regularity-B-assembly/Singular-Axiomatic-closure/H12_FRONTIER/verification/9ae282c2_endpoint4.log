@@ -1,0 +1,24 @@
+2026-11-11T02:00:57.6641716Z EXACT_TYPE_PASS:SingularClosure.GALERKIN_ENERGY_IDENTITY
+2026-11-11T02:00:57.6642455Z @GALERKIN_ENERGY_IDENTITY : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ} (g : GalerkinSolution ν a N) {T : ℝ},
+2026-11-11T02:00:57.6642871Z   0 ≤ T →
+2026-11-11T02:00:57.6643179Z     IntervalIntegrable (fun t => physicalDissipation (g.velocity t)) volume 0 T ∧
+2026-11-11T02:00:57.6643691Z       physicalEnergy (g.velocity T) + 2 * ν * ∫ (t : ℝ) in 0..T, physicalDissipation (g.velocity t) =
+2026-11-11T02:00:57.6644080Z         physicalEnergy (finiteSynthesis N (datumFourierCoeff a))
+2026-11-11T02:00:57.6644523Z 'SingularClosure.GALERKIN_ENERGY_IDENTITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-11T02:00:58.0325290Z {
+2026-11-11T02:00:58.0325610Z   "declaration_count": 1,
+2026-11-11T02:00:58.0326082Z   "declarations": [
+2026-11-11T02:00:58.0326265Z     {
+2026-11-11T02:00:58.0326426Z       "axioms": [
+2026-11-11T02:00:58.0326631Z         "Classical.choice",
+2026-11-11T02:00:58.0326899Z         "Quot.sound",
+2026-11-11T02:00:58.0327123Z         "propext"
+2026-11-11T02:00:58.0327340Z       ],
+2026-11-11T02:00:58.0327543Z       "name": "SingularClosure.GALERKIN_ENERGY_IDENTITY"
+2026-11-11T02:00:58.0327788Z     }
+2026-11-11T02:00:58.0327933Z   ],
+2026-11-11T02:00:58.0328128Z   "endpoint_completion_inferred": false,
+2026-11-11T02:00:58.0328501Z   "errors": [],
+2026-11-11T02:00:58.0328839Z   "schema_version": 1,
+2026-11-11T02:00:58.0329298Z   "scope": "Only the explicit compiled declarations and exact-type checks in this audit.",
+2026-11-11T02:00:58.0329828Z   "status": "PASS"

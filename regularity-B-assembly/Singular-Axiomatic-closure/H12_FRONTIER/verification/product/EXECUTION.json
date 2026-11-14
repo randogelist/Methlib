@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "project": "FRONTIER_H12_PRODUCT_ADAPTER_CHAIN",
+  "status": "UNCONDITIONAL_CLOSURE_IN_STATED_SMALL_DATA_SCOPE",
+  "marker": "!!!!",
+  "checkpoint_marker": "<=>",
+  "checkpoints_total": 16,
+  "checkpoints_passed": 16,
+  "audited_theorems": 38,
+  "compiled_source_commit": "ae723622792692401ac1bf7cd7bd3c00b410d563",
+  "base_source_commit": "59a220c10f4f1600498c1b423b809695fb58a92f",
+  "branch": "codex/h12-product-adapter",
+  "pull_request": 10,
+  "workflow_run": 43357771407,
+  "workflow_job": 131663782133,
+  "workflow_url": "https://github.com/randogelist/Methlib/actions/runs/43357771407",
+  "artifact_id": 14006547832,
+  "artifact_sha256": "5fdfb18a3a3bc1404a31fed07f91b70d46c2d1317d1cea77115912000ad68f00",
+  "compiler": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "cache": {
+    "dependency_cache": "RESTORED",
+    "project_cache": "RESTORED",
+    "dependency_cache_key": "singular-ax6-deps-Linux-X64-59a3c1af0ee974c9bbbdab31d6359ed6889696b358e70134b236b46c6666b3c6",
+    "project_cache_key": "h12-frontier-build-Linux-X64-59a3c1af0ee974c9bbbdab31d6359ed6889696b358e70134b236b46c6666b3c6-697ea56a1c4d76f4469d1d9e569c4957990ff6dd7300feba9c84830e805a57dd",
+    "uncached_fallback": false
+  },
+  "inherited_lean_sources_changed": false,
+  "raw_theorem_audits_reparsed": true,
+  "verified_lean_source_hashes": 326,
+  "exact_type_audit": "PASS_38_OF_38",
+  "theorem_axiom_audit": "PASS_STANDARD_ONLY_38_OF_38",
+  "delivery_entrypoint": "PASS",
+  "local_lean_executions": 0,
+  "root_names": [
+    "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE",
+    "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT",
+    "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN"
+  ],
+  "root_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "additional_allowed_axioms": [],
+  "unresolved_analytic_premises": [],
+  "unresolved_certificate_premises": [],
+  "unresolved_admission_premises": [],
+  "scope": "nu>0; a:CriticalSobolev 1; CriticalSigmaZero a; nativeProduct*norm(a)<nu, equivalently paperNorm(1,a)<sqrt(2)*(2*pi)^3*nu/literatureK2; one-common-solution AX6, strong trace, positive smooth NSE, Leray-Hopf uniqueness and quantitative bounds",
+  "checkpoints": [
+    {
+      "id": "P01",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_CERTIFICATE",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P02",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.product_literatureK2_eq",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_CONSTANT_IDENTITY",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P03",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.product_coefficient_normalization",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_COEFFICIENT_NORM_IDENTITY",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P04",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_SMALLNESS_IFF",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.product_scale_cube_gt_one",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_RADIUS_RATIO",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P05",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.productDissipationConstant_eq",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.productDerivativeConstant_eq",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_MARGIN_AND_BUDGETS",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P06",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DIFFERENTIAL_INEQUALITY",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P07",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_ENERGY_INVARIANT",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_DISSIPATION_BUDGET",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_NORM_BOUND",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_STATE_THREE_INTEGRAL",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P08",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P09",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_SIX_CHANNEL_BUDGET",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_DATUM_AX6",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P10",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_POINTWISE",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_SQUARE",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_TIME_DERIVATIVE_BUDGET",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P11",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GLOBAL_COMPACTNESS",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ENSTROPHY",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_H2",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_ALL_ORDERS",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_POSITIVE_FLOW",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P12",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_NEGATIVE_HALF",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_LIMIT_QUARTIC",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_NEGATIVE_HALF",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_PHYSICAL_QUARTIC",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_QUANTITATIVE_REGULARITY",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P13",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_GLOBAL_ENERGY_CLASS",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P14",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.PRODUCT_SERRIN_LERAYHOPF",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P15",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_NATIVE",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    },
+    {
+      "id": "P16",
+      "declarations": [
+        {
+          "name": "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "name": "SingularClosure.H12Frontier.FRONTIER_H12_PRODUCT_ADAPTER_CHAIN",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "marker": "<=>"
+    }
+  ]
+}

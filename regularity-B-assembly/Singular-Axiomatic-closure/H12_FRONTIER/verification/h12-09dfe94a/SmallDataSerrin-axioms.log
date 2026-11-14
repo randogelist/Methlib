@@ -1,0 +1,28 @@
+EXACT_TYPE_PASS:SingularClosure.SMALL_DATA_CRITICAL_SERRIN_REGULARITY
+SMALL_DATA_CRITICAL_SERRIN_REGULARITY : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : CriticalSobolev 1),
+      CriticalSigmaZero a →
+        criticalNonlinearConstant * ‖a‖ < ν →
+          ∃ U,
+            (∀ (T : ℝ),
+                0 < T →
+                  ∃ W,
+                    MemLp W 2 (volume.restrict (Icc 0 T)) ∧
+                      (∀ᵐ (t : ℝ) ∂volume.restrict (Icc 0 T), criticalCoeff 3 (W t) = criticalCoeff 1 (U.critical t)) ∧
+                        ∫ (t : ℝ) in Icc 0 T, ‖W t‖ ^ 2 ≤ criticalDissipationBudget ν a) ∧
+              (∀ (T : ℝ),
+                  0 < T →
+                    ∃ V,
+                      MemLp V 2 (volume.restrict (Icc 0 T)) ∧
+                        (∀ᵐ (t : ℝ) ∂volume.restrict (Icc 0 T),
+                            criticalCoeff (-1) (V t) = datumFourierCoeff (timeDerivative U.flow.velocity t)) ∧
+                          ∫ (t : ℝ) in Icc 0 T, ‖V t‖ ^ 2 ≤ criticalTimeDerivativeBudget ν a) ∧
+                (∀ (T : ℝ),
+                    0 < T →
+                      IntegrableOn (fun t => physicalDissipation (U.flow.velocity t) ^ 2) (Icc 0 T) volume ∧
+                        ∫ (t : ℝ) in 0..T, physicalDissipation (U.flow.velocity t) ^ 2 ≤
+                          (‖a‖ ^ 4 - ‖U.critical T‖ ^ 4) / (4 * (ν - criticalNonlinearConstant * ‖a‖))) ∧
+                  ∀ (T : ℝ),
+                    0 < T → MemLp (fun t => criticalSpatialNorm 6 (U.flow.velocity t)) 4 (volume.restrict (Ioc 0 T))
+'SingularClosure.SMALL_DATA_CRITICAL_SERRIN_REGULARITY' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,9 @@
+EXACT_TYPE_PASS:SingularClosure.CRITICAL_PHYSICAL_H1_L6
+CRITICAL_PHYSICAL_H1_L6 : ∃ K,
+  0 ≤ K ∧
+    ∀ (v : Field) (G : Vec → Vec →L[ℝ] Vec),
+      CriticalPhysicalH1 v G →
+        eLpNorm v 6 (volume.restrict unitCube) ≤
+          ↑(SNormLESNormFDerivOfEqConst Vec volume 2) * 343 ^ (1 / 2) *
+            (eLpNorm G 2 (volume.restrict unitCube) + ENNReal.ofReal K * eLpNorm v 2 (volume.restrict unitCube))
+'SingularClosure.CRITICAL_PHYSICAL_H1_L6' depends on axioms: [propext, Classical.choice, Quot.sound]

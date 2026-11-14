@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.Replay.stateNormBound",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.stateNormBound"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.dissipationConstant_nonneg",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.dissipationConstant_nonneg"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.derivativeConstant_nonneg",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.derivativeConstant_nonneg"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.stateThreeIntegral",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.stateThreeIntegral"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.Replay.globalCompactness",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.Replay.globalCompactness"
+    }
+  ]
+}

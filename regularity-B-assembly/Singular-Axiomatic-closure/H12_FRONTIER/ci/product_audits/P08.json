@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GALERKIN_SHARP_QUARTIC"
+    },
+    {
+      "name": "SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.H12Frontier.PRODUCT_GALERKIN_SQUARE_BUDGET"
+    }
+  ]
+}

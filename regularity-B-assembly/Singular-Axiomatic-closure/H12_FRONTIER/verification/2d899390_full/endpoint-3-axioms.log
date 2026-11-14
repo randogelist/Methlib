@@ -1,0 +1,18 @@
+ci/EndpointAudit3.lean:10:21: warning: Variable name `hν` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hν
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+ci/EndpointAudit3.lean:11:17: warning: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EXACT_TYPE_PASS:SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE
+GALERKIN_GLOBAL_EXISTS_UNIQUE : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : SingularClosure.Field),
+      SmoothSigmaZero a → ∀ (N : ℕ), ∃ g, ∀ (h : GalerkinSolution ν a N), EqOn g.coeff h.coeff (Ici 0)
+'SingularClosure.GALERKIN_GLOBAL_EXISTS_UNIQUE' depends on axioms: [propext, Classical.choice, Quot.sound]
