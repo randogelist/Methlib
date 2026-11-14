@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "formal_closure": true,
+  "conditional_formal_closure": true,
+  "unconditional_closure": false,
+  "physical_QFA_root_inferred": true,
+  "compiled_commit": "41188cef6ac21628648e0e2b598d926604d9813f",
+  "run_id": 43554315545,
+  "compiler": "Lean 4.33.0 x86_64-w64-windows-gnu commit d8b18978322de05a8f3dba51ef03cf5461676c17 Release",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "root_theorem": "QFA.CorrectedPhysicalRoot.QUASI_FEFFERMAN_A_CORRECTED",
+  "allowed_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "audited_declarations": 7,
+  "sorryAx": false,
+  "unapproved_axioms": false,
+  "old_compact_to_schwartz_premise_present": false,
+  "lc005_discharged": true
+}

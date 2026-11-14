@@ -1,0 +1,65 @@
+QFA CORRECTED PHYSICAL ROOT — CONDITIONAL FORMAL CLOSURE
+
+STATUS=PASS
+MARKER=!!!
+FORMAL_CLOSURE=TRUE
+CONDITIONAL_FORMAL_CLOSURE=TRUE
+UNCONDITIONAL_CLOSURE=FALSE
+
+COMPILED_SOURCE_COMMIT=41188cef6ac21628648e0e2b598d926604d9813f
+GITHUB_RUN_ID=43554315545
+GITHUB_RUN_URL=https://github.com/randogelist/Methlib/actions/runs/43554315545
+COMPILER=Lean 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release
+MATHLIB=db584cd6d46c92f209a44c0f1c829460d327499d
+LOCAL_LEAN_EXECUTIONS=0
+
+ROOT_THEOREM=QFA.CorrectedPhysicalRoot.QUASI_FEFFERMAN_A_CORRECTED
+ROOT_CONCLUSION=QFA.CorrectedPhysicalRoot.QFARoot
+
+EXACT_ROOT:
+  for every datum a in Domain and every u in Admissible(a),
+  u tends strongly to a as t -> 0+; and for every strict cutoff
+
+    norm(a)^4 / (16*pi^2*nu^5) < delta,
+
+  SmoothNSETail(nu,u,delta) holds and the physical nonnegative-time
+  admissible class from u(delta) is the singleton tail of u.
+
+AUDITED_DECLARATIONS=7
+CR001=QFA.CorrectedPhysicalRoot.exists_absorption_of_compactSchwartzData
+CR002=QFA.CorrectedPhysicalRoot.correctedPointwiseAbsorption_of_analytic_inputs
+CR003=QFA.CorrectedPhysicalRoot.quantified_tail_assembly_of_corrected_analytic_inputs
+CR004=QFA.CorrectedPhysicalRoot.selectedTail_restricted_singleton
+CR005=QFA.CorrectedPhysicalRoot.selectedTail_smooth
+CR006=QFA.CorrectedPhysicalRoot.selectedTail_root_conclusion
+CR007=QFA.CorrectedPhysicalRoot.QUASI_FEFFERMAN_A_CORRECTED
+
+TRANSITIVE_AXIOMS={propext, Classical.choice, Quot.sound}
+SORRY_AX=ABSENT
+UNAPPROVED_AXIOMS=ABSENT
+
+DISCHARGED_REPRESENTATION_OBLIGATIONS:
+  LC005=DenseCompactSchwartzTests
+  corrected compact-Schwartz tests -> tempered-distribution derivative witnesses
+
+REMOVED_PREMISE:
+  QFA.Assembly.Representation.CompactToSchwartzEndpoint
+  The old radial ContDiffBump-only universal extension is absent from CR007.
+
+NAMED_UNRESOLVED_PREMISES:
+  ClassRealization
+  ReferencePorts
+  WholeSpaceSpectralEndpoint (LC001)
+  WholeSpaceAgmonEndpoint (LC003)
+  CorrectedReferenceConstructionFromAbsorption
+  SmoothReferencePorts
+
+SCOPE:
+  The exact implication from all named premises to the frozen QFA root is A_TIER.
+  This is CONDITIONAL_FORMAL_CLOSURE, not unconditional Navier-Stokes regularity.
+  Original-data uniqueness is neither assumed nor concluded.
+
+AUDIT_ARTIFACT_ID=14097712646
+AUDIT_ARTIFACT_DIGEST=sha256:edfcea0e09e6708a942604b863e106977d48cd61bcb1ac7a0b67a918155158f2
+SOURCE_ARTIFACT_ID=14097194245
+SOURCE_ARTIFACT_DIGEST=sha256:95f61f234550a69628968d3cac2fc88bee7e7256b4539055a6b8c705ae0bb301

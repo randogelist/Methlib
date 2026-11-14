@@ -1,0 +1,27 @@
+CR001=QFA.CorrectedPhysicalRoot.exists_absorption_of_compactSchwartzData
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+CR002=QFA.CorrectedPhysicalRoot.correctedPointwiseAbsorption_of_analytic_inputs
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+CR003=QFA.CorrectedPhysicalRoot.quantified_tail_assembly_of_corrected_analytic_inputs
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+CR004=QFA.CorrectedPhysicalRoot.selectedTail_restricted_singleton
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+CR005=QFA.CorrectedPhysicalRoot.selectedTail_smooth
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+CR006=QFA.CorrectedPhysicalRoot.selectedTail_root_conclusion
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+CR007=QFA.CorrectedPhysicalRoot.QUASI_FEFFERMAN_A_CORRECTED
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT

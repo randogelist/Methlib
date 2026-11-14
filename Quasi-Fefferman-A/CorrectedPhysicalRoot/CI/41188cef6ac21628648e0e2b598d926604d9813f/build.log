@@ -1,0 +1,7 @@
+⚠ [8724/8737] Replayed QFA.Endpoints.Comparison.RelativeEnergy
+warning: QFA/Endpoints/Comparison/RelativeEnergy.lean:75:25: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [8735/8737] Built QFACorrectedRoot.PhysicalRoot (13s)
+✔ [8736/8737] Built QFACorrectedRoot (7.7s)
+Build completed successfully (8737 jobs).
