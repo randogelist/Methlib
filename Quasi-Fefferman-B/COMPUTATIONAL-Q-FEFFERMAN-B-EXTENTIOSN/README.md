@@ -63,6 +63,55 @@ The preferred dimensionless cell test is
 > 1.
 ```
 
+### `COMPUTATIONAL_REDUCTION_CELL_CERTIFICATES_B_TIER.txt`
+
+Defines a sound finite-cell reduction for one shell escalation step. For every computational cell `C_k`, certify
+
+```text
+MASS2(b) ≤ m_k                  for every b ∈ C_k,
+STRONG_WINDOW_ν(b,τ_k)          for every b ∈ C_k,
+8π² I² ν⁵ τ_k > m_k².
+```
+
+Together with verified shell coverage, these certificates imply
+
+```text
+ADMISSION(I) ⟹ ADMISSION(J).
+```
+
+The robust strong-window certificate is reduced to the exact a posteriori inequalities
+
+```text
+α_k < 1,
+4 β_k η_k < (1 - α_k)²,
+```
+
+for the error equation
+
+```text
+w = F_{k,b} + L_k(w) + Q_k(w,w).
+```
+
+Critical noncompactness is not suppressed: it is isolated in one of the named interfaces
+
+```text
+TAIL_QUOTIENT_REDUCTION(I,J),
+PROFILE_PACKET_REDUCTION(I,J),
+CERTIFICATE_GENERATOR(I,J).
+```
+
+The resulting root chain is
+
+```text
+APOSTERIORI_WINDOW_CERTS
++ MASS2_INTERVAL_BOUNDS
++ TAIL_OR_PROFILE_REDUCTION
++ SHELL_COVERAGE
+⟹ COMPUTATIONAL_REDUCTION(I,J)
+⟹ OVERLAP_SHELL(I,J)
+⟹ ADMISSION(I) → ADMISSION(J).
+```
+
 ## Status
 
 `! B_TIER` derivations only. No prepared endpoint in this directory is promoted to `A_TIER` without matching external Lean compiler and theorem-level axiom-audit evidence.
