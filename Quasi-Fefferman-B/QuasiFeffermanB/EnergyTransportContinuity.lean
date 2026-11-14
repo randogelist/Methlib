@@ -54,7 +54,8 @@ theorem energyWeakTransport_L2_tendsto
     Tendsto (fun n => criticalWeakTransport (v n : Field) φ) l
       (𝓝 (criticalWeakTransport (w : Field) φ)) := by
   have h := (energyMatrixQuadratic_continuous (energyTestMatrix φ hφ)).continuousAt.tendsto.comp hvw
-  simpa only [energyWeakTransport_eq_L2_inner _ φ (Lp.memLp _) hφ, Lp.toLp_coeFn]
+  simpa only [Function.comp_def,
+    energyWeakTransport_eq_L2_inner _ φ (Lp.memLp _) hφ, Lp.toLp_coeFn]
     using h
 
 theorem energyMatrixQuadratic_bound (D : EnergyMatrixLinf) (v : PhysicalCubeL2) :

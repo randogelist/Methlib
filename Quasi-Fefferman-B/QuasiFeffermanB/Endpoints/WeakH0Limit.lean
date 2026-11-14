@@ -63,7 +63,11 @@ theorem ENERGY_LP_WEAK_TENDSTO
           (dist (inner ℂ (F n) (criticalLpProjection S w))
             (inner ℂ v (criticalLpProjection S w)) +
            dist (inner ℂ v (criticalLpProjection S w)) (inner ℂ v w)) :=
-      (dist_triangle _ _ _).trans (add_le_add_left (dist_triangle _ _ _) _)
+      (dist_triangle (inner ℂ (F n) w)
+        (inner ℂ (F n) (criticalLpProjection S w)) (inner ℂ v w)).trans
+          (add_le_add le_rfl
+            (dist_triangle (inner ℂ (F n) (criticalLpProjection S w))
+              (inner ℂ v (criticalLpProjection S w)) (inner ℂ v w)))
     _ < ε := by linarith
 
 theorem ENERGY_H0_WEAK_TENDSTO

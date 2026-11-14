@@ -44,8 +44,8 @@ theorem physicalH1_weighted_finite_bound
       ‖criticalWeightedCoeff 2 (datumFourierCoeff v) ki‖ ^ 2 =
         criticalFrequencyWeight ki.1 ^ (2 : ℕ) *
           Complex.normSq (datumFourierCoeff v ki.1 ki.2) := by
-    simp only [criticalWeightedCoeff_norm, mul_pow, criticalHalfWeight_zpow_sq,
-      zpow_ofNat, Complex.normSq_eq_norm_sq]
+    simp only [criticalWeightedCoeff_norm, mul_pow, zpow_ofNat,
+      criticalHalfWeight_sq, Complex.normSq_eq_norm_sq]
   calc
     (∑ ki ∈ S, ‖criticalWeightedCoeff 2 (datumFourierCoeff v) ki‖ ^ 2) ≤
         ∑ ki ∈ sobolevCutoffIndices N,

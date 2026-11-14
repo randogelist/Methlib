@@ -59,6 +59,8 @@ theorem ENERGY_PHYSICAL_STRONG_INITIAL_TRACE
   apply hz.congr'
   apply Filter.Eventually.of_forall
   intro t
+  change ‖energyPhysicalVelocityL2 U t - a.val‖ₑ =
+    eLpNorm (energyPeriodicVelocity U t - (a.val : Field)) 2 (volume.restrict unitCube)
   rw [Lp.enorm_def]
   apply eLpNorm_congr_ae
   exact (Lp.coeFn_sub _ _).trans

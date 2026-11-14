@@ -1,5 +1,6 @@
 import QuasiFeffermanB.EnergyGlobalPhysical
 import SingularClosure.CriticalLimitFatou
+import SingularClosure.CriticalUniformBounds
 
 /-! Passage of the Galerkin interval energy inequality to the actual modal
 limit. The initial time is any time at which the approximating energies
@@ -142,7 +143,11 @@ theorem ENERGY_GALERKIN_INTERVAL_LIMIT
     ((g n).criticalState_continuousOn 2).mono (fun r hr => hs.trans hr.1)
   have hsq (n : ℕ) (r : ℝ) : ‖(g n).criticalState 2 r‖ ^ 2 =
       coefficientDissipation (N n) ((g n).coeff r) := by
-    rw [(g n).criticalState_norm_sq_nat 2 r, criticalEnergy_two_eq_coefficientDissipation]
+    have hnat : ‖(g n).criticalState (2 : ℤ) r‖ ^ 2 =
+        criticalEnergy (2 : ℕ) (N n) ((g n).coeff r) := by
+      simpa only [Nat.cast_ofNat] using (g n).criticalState_norm_sq_nat 2 r
+    exact hnat.trans
+      (criticalEnergy_two_eq_coefficientDissipation (N n) ((g n).coeff r))
   have hpass := ENERGY_MODAL_INTERVAL_BUDGET_LIMIT
     (volume.restrict (Icc s t)) (2 * ν) (by positivity)
     (fun n => (g n).criticalState 0 t) v (fun n => (g n).criticalState 2) W
@@ -164,7 +169,12 @@ theorem ENERGY_GALERKIN_INTERVAL_LIMIT
       simpa only [heq, hr] using hc r hmem k i)
     (by
       intro n
-      rw [galerkin_critical_zero_norm_sq]
+      have hzero : ‖(g n).criticalState 0 t‖ ^ 2 =
+          coefficientEnergy (N n) ((g n).coeff t) := by
+        unfold GalerkinSolution.criticalState
+        rw [criticalFiniteSobolev_norm_sq]
+        simp only [zpow_zero, one_mul, coefficientEnergy]
+      rw [hzero]
       simp_rw [hsq]
       have h := GALERKIN_INTERVAL_ENERGY_IDENTITY (g n) hs hst
       rw [intervalIntegral.integral_of_le hst, ← integral_Icc_eq_integral_Ioc] at h
