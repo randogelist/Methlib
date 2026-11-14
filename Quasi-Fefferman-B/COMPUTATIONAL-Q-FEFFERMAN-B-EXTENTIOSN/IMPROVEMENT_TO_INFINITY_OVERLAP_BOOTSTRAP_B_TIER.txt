@@ -1,0 +1,988 @@
+IMPROVEMENT_TO_INFINITY_OVERLAP_BOOTSTRAP_B_TIER
+=================================================
+
+STATUS
+------
+! B_TIER
+
+No A_TIER claim is made by this file.
+No external Lean compiler transcript or theorem-level axiom audit is attached.
+
+
+0. PURPOSE
+----------
+
+This file derives an exact computational bootstrap for extending the critical
+H^(1/2) admission factor
+
+  I
+
+toward
+
+  I -> infinity.
+
+The principal mechanism is:
+
+  current admission at factor I
+
+  +
+
+  certified local strong existence beyond the current QFB cutoff
+
+  ->
+
+  global regularity of the tested datum.
+
+Applied to every datum in the next critical annulus, this yields the next
+admission factor J > I.
+
+
+1. IMPORTED OBJECTS
+-------------------
+
+Let
+
+  H12SQ(b) := ||b||_{Ḣ^(1/2)}^2.
+
+For I > 0 define the non-strict admission object
+
+  ADMISSION(I)
+
+by
+
+  forall nu > 0,
+  forall b in H^(1/2)_{sigma,0}(T^3),
+
+    H12SQ(b) < 2*pi*I*nu^2
+
+    ->
+
+    Reg_nu(b).
+
+The previously frozen strict improvement object is
+
+  IMPROVEMENT(I) := I > 1 and ADMISSION(I).
+
+The baseline is
+
+  ADMISSION(1).
+
+For a in L^2_{sigma,0}(T^3), define
+
+  T_I(a,nu)
+  := ||a||_2^4 / (8*pi^2*I^2*nu^5).
+
+The imported H12_SIGMA_0_RESTR adapter is
+
+  ADMISSION(I)
+
+  ->
+
+  forall a in L^2_{sigma,0},
+  forall u in LH_nu(a),
+  forall delta > T_I(a,nu),
+
+    u is smooth on [delta,infinity) x T^3.
+
+
+2. DOWNWARD MONOTONICITY
+------------------------
+
+If
+
+  0 < J <= I
+
+and
+
+  ADMISSION(I),
+
+then
+
+  ADMISSION(J).
+
+Proof:
+
+  H12SQ(b) < 2*pi*J*nu^2
+
+  <= 2*pi*I*nu^2.
+
+Therefore the set
+
+  A := { I > 0 : ADMISSION(I) }
+
+is downward closed.
+
+Define the extended admission extent
+
+  I_STAR := sup A
+
+in the extended nonnegative reals.
+
+Then, up to the strict-boundary convention,
+
+  ADMISSION(I)  for every finite I < I_STAR.
+
+
+3. UNBOUNDED-ADMISSION CLOSURE
+------------------------------
+
+Define
+
+  UNBOUNDED_ADMISSION
+
+by the existence of a sequence I_n such that
+
+  forall n, I_n > 0,
+  forall n, ADMISSION(I_n),
+  forall M > 0, exists n, M < I_n.
+
+Define
+
+  H12_GLOBAL_REGULARITY
+
+by
+
+  forall nu > 0,
+  forall b in H^(1/2)_{sigma,0}(T^3),
+
+    Reg_nu(b).
+
+The exact equivalence is
+
+  UNBOUNDED_ADMISSION
+
+  <->
+
+  H12_GLOBAL_REGULARITY.
+
+Forward proof:
+
+  Fix nu > 0 and b in H^(1/2)_{sigma,0}.
+
+  Put
+
+    M := H12SQ(b) / (2*pi*nu^2).
+
+  Choose n with
+
+    I_n > M.
+
+  Then
+
+    H12SQ(b) < 2*pi*I_n*nu^2.
+
+  Apply ADMISSION(I_n).
+
+Reverse proof:
+
+  H12_GLOBAL_REGULARITY implies ADMISSION(I) for every finite I > 0.
+
+Consequently
+
+  I_STAR = infinity
+
+  <->
+
+  H12_GLOBAL_REGULARITY.
+
+Under the standard Fujita-Kato local/restart adapter and the mean/Galilean
+adapter already used for the periodic formulation,
+
+  H12_GLOBAL_REGULARITY
+
+  <->
+
+  NSE_B.
+
+Thus
+
+  I_STAR = infinity
+
+  <->
+
+  NSE_B.
+
+Marker:
+
+  ! UNBOUNDED_ADMISSION_IFF_H12_GLOBAL
+
+
+4. CRITICAL ANNULUS OBJECT
+--------------------------
+
+For 0 < I < J define
+
+  SHELL(I,J,nu)
+
+by
+
+  { b in H^(1/2)_{sigma,0} :
+
+      2*pi*I*nu^2 <= H12SQ(b)
+
+      and
+
+      H12SQ(b) < 2*pi*J*nu^2 }.
+
+Define
+
+  SHELL_REGULAR(I,J)
+
+by
+
+  forall nu > 0,
+  forall b in SHELL(I,J,nu),
+
+    Reg_nu(b).
+
+Then
+
+  ADMISSION(I)
+  and
+  SHELL_REGULAR(I,J)
+
+  ->
+
+  ADMISSION(J).
+
+Proof:
+
+  Every b below the J-threshold lies either below the I-threshold or inside
+  SHELL(I,J,nu).
+
+Marker:
+
+  ! SHELL_EXTENSION
+
+
+5. LOCAL STRONG WINDOW
+----------------------
+
+Define
+
+  STRONG_WINDOW_nu(b,tau)
+
+by
+
+  tau > 0
+
+  and
+
+  the NSE datum b generates a unique strong critical solution on [0,tau],
+  with the weak-strong uniqueness and restart compatibility required to glue
+  it to a Leray-Hopf trajectory.
+
+Define the overlap margin
+
+  OVERLAP_MARGIN(I,b,nu,tau)
+  := tau - T_I(b,nu).
+
+Define
+
+  QFB_OVERLAP(I,b,nu)
+
+by
+
+  exists tau > T_I(b,nu),
+
+    STRONG_WINDOW_nu(b,tau).
+
+
+6. DATUMWISE OVERLAP LEMMA
+--------------------------
+
+Assume
+
+  ADMISSION(I)
+
+and
+
+  QFB_OVERLAP(I,b,nu).
+
+Then
+
+  Reg_nu(b).
+
+Proof:
+
+  Choose tau such that
+
+    tau > T_I(b,nu)
+
+  and
+
+    STRONG_WINDOW_nu(b,tau).
+
+  Choose delta with
+
+    T_I(b,nu) < delta < tau.
+
+  Let u be a Leray-Hopf solution with datum b.
+
+  By the QFB adapter induced by ADMISSION(I),
+
+    u is smooth on [delta,infinity).
+
+  By STRONG_WINDOW_nu(b,tau) and weak-strong uniqueness,
+
+    u agrees on [0,delta]
+
+  with the unique local strong solution.
+
+  The two strong pieces agree at delta and form a global strong trajectory.
+
+  Therefore
+
+    Reg_nu(b).
+
+Frozen endpoint:
+
+  QFB_OVERLAP_REGULARITY:
+
+    ADMISSION(I)
+    and
+    STRONG_WINDOW_nu(b,tau)
+    and
+    T_I(b,nu) < tau
+
+    ->
+
+    Reg_nu(b).
+
+Marker:
+
+  ! QFB_OVERLAP_REGULARITY
+
+
+7. SHELL OVERLAP CERTIFICATE
+----------------------------
+
+Define
+
+  OVERLAP_SHELL(I,J)
+
+by
+
+  forall nu > 0,
+  forall b in SHELL(I,J,nu),
+
+    QFB_OVERLAP(I,b,nu).
+
+Then
+
+  ADMISSION(I)
+  and
+  OVERLAP_SHELL(I,J)
+
+  ->
+
+  ADMISSION(J).
+
+Proof:
+
+  QFB_OVERLAP_REGULARITY gives SHELL_REGULAR(I,J).
+
+  SHELL_EXTENSION gives ADMISSION(J).
+
+Frozen endpoint:
+
+  IMPROVEMENT_EXTENSION_STEP:
+
+    0 < I < J
+    and
+    ADMISSION(I)
+    and
+    OVERLAP_SHELL(I,J)
+
+    ->
+
+    ADMISSION(J).
+
+If J > 1, this yields IMPROVEMENT(J).
+
+Marker:
+
+  ! IMPROVEMENT_EXTENSION_STEP
+
+
+8. ITERATED EXTENSION ENGINE
+----------------------------
+
+Let I_n be a sequence satisfying
+
+  I_0 > 0,
+  I_n < I_(n+1),
+  I_n -> infinity.
+
+Assume
+
+  ADMISSION(I_0)
+
+and
+
+  forall n,
+
+    OVERLAP_SHELL(I_n,I_(n+1)).
+
+Induction through IMPROVEMENT_EXTENSION_STEP gives
+
+  forall n,
+
+    ADMISSION(I_n).
+
+Since I_n is unbounded,
+
+  UNBOUNDED_ADMISSION.
+
+Therefore
+
+  H12_GLOBAL_REGULARITY
+
+and, under the standard periodic adapters,
+
+  NSE_B.
+
+Frozen root theorem:
+
+  OVERLAP_BOOTSTRAP_TO_NSE_B:
+
+    ADMISSION(I_0)
+
+    and
+
+    I_n -> infinity
+
+    and
+
+    forall n, OVERLAP_SHELL(I_n,I_(n+1))
+
+    ->
+
+    NSE_B.
+
+This is conditional formal closure with the named unresolved family
+
+  OVERLAP_SHELL(I_n,I_(n+1)).
+
+Marker:
+
+  ! OVERLAP_BOOTSTRAP_TO_NSE_B
+
+
+9. FUNCTIONAL IMPROVEMENT STEP
+------------------------------
+
+Let F:(0,infinity)->(0,infinity).
+
+Define
+
+  IMPROVEMENT_STEP(F)
+
+by
+
+  forall I > 0,
+
+    ADMISSION(I)
+
+    ->
+
+    ADMISSION(F(I)).
+
+A sufficient implementation is
+
+  forall I > 0,
+
+    I < F(I)
+
+    and
+
+    OVERLAP_SHELL(I,F(I)).
+
+Let
+
+  I_(n+1) := F(I_n).
+
+If
+
+  ADMISSION(I_0)
+
+and
+
+  IMPROVEMENT_STEP(F)
+
+and
+
+  I_n -> infinity,
+
+then
+
+  NSE_B.
+
+Elementary sufficient divergence laws include:
+
+  ADDITIVE DRIFT:
+
+    exists c > 0,
+    forall I >= I_0,
+
+      F(I) >= I + c.
+
+    Then
+
+      I_n >= I_0 + n*c
+
+    and
+
+      I_n -> infinity.
+
+  MULTIPLICATIVE DRIFT:
+
+    exists q > 1,
+    forall I >= I_0,
+
+      F(I) >= q*I.
+
+    Then
+
+      I_n >= q^n*I_0
+
+    and
+
+      I_n -> infinity.
+
+The analytic content is not the recurrence calculation.  The analytic content
+is the shell-overlap certificate implementing each step.
+
+
+10. DIMENSIONLESS MASS-RATIO FORM
+---------------------------------
+
+Define
+
+  THETA_I(b,nu)
+  := ||b||_2^2 / (2*pi*I*nu^2).
+
+Then the QFB cutoff has the exact form
+
+  T_I(b,nu)
+  = THETA_I(b,nu)^2 / (2*nu).
+
+Proof:
+
+  THETA_I(b,nu)^2 / (2*nu)
+
+  = ||b||_2^4
+    /
+    (8*pi^2*I^2*nu^5).
+
+Therefore the overlap test is exactly
+
+  2*nu*tau
+
+  >
+
+  THETA_I(b,nu)^2.
+
+Define the overlap index
+
+  OMEGA_I(b,nu,tau)
+  := 2*nu*tau / THETA_I(b,nu)^2
+
+when THETA_I(b,nu) > 0.
+
+Then
+
+  OMEGA_I(b,nu,tau) > 1
+
+is equivalent to
+
+  tau > T_I(b,nu).
+
+This is the preferred computational scalar certificate.
+
+For b = 0, regularity is immediate and the overlap quotient is unnecessary.
+
+Marker:
+
+  ! DIMENSIONLESS_QFB_OVERLAP
+
+
+11. POINCARE SHELL BOUND
+------------------------
+
+Let C_P be the squared-norm Poincare constant satisfying
+
+  ||b||_2^2
+
+  <=
+
+  C_P * H12SQ(b)
+
+for mean-zero data.
+
+For
+
+  b in SHELL(I,J,nu),
+
+one has
+
+  ||b||_2^2
+
+  <
+
+  2*pi*C_P*J*nu^2.
+
+Hence
+
+  THETA_I(b,nu)
+
+  <
+
+  C_P * J/I
+
+and
+
+  T_I(b,nu)
+
+  <
+
+  C_P^2 * J^2 / (2*I^2*nu).
+
+Thus a sufficient uniform shell certificate is
+
+  forall b in SHELL(I,J,nu),
+
+    STRONG_WINDOW_nu
+    (
+      b,
+      tau_shell
+    )
+
+with
+
+  tau_shell
+
+  >=
+
+  C_P^2 * J^2 / (2*I^2*nu)
+
+and strict inequality at the final overlap comparison.
+
+Important boundary:
+
+  If J/I remains bounded away from zero, this worst-case shell cutoff is only
+  O(1/nu).  It does not automatically tend to zero as I grows.
+
+  The I^(-2) gain applies datumwise at fixed L^2 mass.  Expanding the shell can
+  increase the admissible L^2 mass and offset that gain.
+
+Therefore a successful extension requires more information than the shell
+H^(1/2) radius alone.
+
+
+12. COMPUTATIONAL CELL CERTIFICATE
+----------------------------------
+
+Let C be a certified subset of SHELL(I,J,nu).
+
+Assume computable bounds
+
+  MASS_UPPER(C) >= sup_{b in C} ||b||_2^2
+
+and
+
+  WINDOW_LOWER(C) <= inf_{b in C} tau_cert(b,nu),
+
+where
+
+  STRONG_WINDOW_nu(b,tau_cert(b,nu))
+
+holds for every b in C.
+
+Define
+
+  CELL_OVERLAP(I,C,nu)
+
+by
+
+  WINDOW_LOWER(C)
+
+  >
+
+  MASS_UPPER(C)^2
+  /
+  (8*pi^2*I^2*nu^5).
+
+Then
+
+  CELL_OVERLAP(I,C,nu)
+
+implies
+
+  forall b in C,
+
+    QFB_OVERLAP(I,b,nu).
+
+If certified cells C_1,...,C_N cover SHELL(I,J,nu) and every cell satisfies
+CELL_OVERLAP, then
+
+  OVERLAP_SHELL(I,J).
+
+Therefore
+
+  ADMISSION(I)
+
+  +
+
+  FINITE_CERTIFIED_CELL_COVER(I,J)
+
+  ->
+
+  ADMISSION(J).
+
+This is the finite computational endpoint sought by the directory
+
+  COMPUTATIONAL-Q-FEFFERMAN-B-EXTENTIOSN.
+
+Marker:
+
+  ! FINITE_CELL_QFB_EXTENSION
+
+
+13. NONCOMPACTNESS BOUNDARY
+---------------------------
+
+A bounded shell in H^(1/2) is not compact in the H^(1/2) topology.
+
+Therefore a direct finite H^(1/2)-ball cover of SHELL(I,J,nu) is unavailable.
+
+A valid finite computational cover requires an additional reduction, such as:
+
+  (A) finite low-mode cells plus a uniform analytic tail theorem;
+
+  (B) profile decomposition plus finitely many normalized profile cells;
+
+  (C) symmetry or structural classes with certified orbit access;
+
+  (D) a nonlinear-defect reduction placing the residual in a stable class;
+
+  (E) a critical-element compactness theorem followed by rigidity.
+
+Define the required reduction abstractly as
+
+  COMPUTATIONAL_REDUCTION(I,J)
+
+meaning:
+
+  every b in SHELL(I,J,nu) is assigned to one of finitely many certified
+  normalized cells, together with analytic residual data sufficient to
+  transfer the cell's local strong window to b.
+
+Then
+
+  COMPUTATIONAL_REDUCTION(I,J)
+
+  +
+
+  CELL_OVERLAP for every normalized cell
+
+  ->
+
+  OVERLAP_SHELL(I,J).
+
+The reduction is an explicit unresolved endpoint.  It may not be silently
+replaced by finite-dimensional truncation alone.
+
+
+14. STRUCTURAL EFFECTIVE-GAIN VARIANT
+-------------------------------------
+
+Let R_n be structural predicates, let I_n > 0, and let rho_n in (0,1].
+
+Assume
+
+  ADMISSION restricted to R_n at factor I_n
+
+and
+
+  uniform orbit-access density rho_n.
+
+The structural QFB cutoff is
+
+  T_n(a,nu)
+
+  :=
+
+  ||a||_2^4
+  /
+  (8*pi^2*rho_n*I_n^2*nu^5).
+
+Define
+
+  EFFECTIVE_GAIN_n
+
+  := rho_n*I_n^2.
+
+If
+
+  EFFECTIVE_GAIN_n -> infinity,
+
+then, for fixed a and nu,
+
+  T_n(a,nu) -> 0.
+
+Hence every Leray-Hopf trajectory is smooth on [delta,infinity) for every
+fixed delta > 0.
+
+For smooth or H^(1/2) initial data, the ordinary local strong interval fills
+the initial endpoint and weak-strong uniqueness glues the positive-time tail.
+Thus, under uniform structural hypotheses,
+
+  EFFECTIVE_GAIN_n -> infinity
+
+  ->
+
+  NSE_B.
+
+Since rho_n <= 1,
+
+  EFFECTIVE_GAIN_n -> infinity
+
+still implies
+
+  I_n -> infinity.
+
+Its advantage is not avoidance of unbounded threshold factors.  Its advantage
+is that each unbounded factor may be proved only on a structured sector rather
+than on the entire critical ball.
+
+Marker:
+
+  ! STRUCTURAL_EFFECTIVE_GAIN_CLOSURE
+
+
+15. PRIORITIZED ENDPOINTS
+-------------------------
+
+Endpoint E1:
+
+  QFB_OVERLAP_REGULARITY.
+
+  This is the exact analytic gluing lemma.
+
+Endpoint E2:
+
+  OVERLAP_SHELL(I,J).
+
+  This converts a current admission factor into a larger one.
+
+Endpoint E3:
+
+  COMPUTATIONAL_REDUCTION(I,J).
+
+  This resolves the noncompact critical shell into finitely certifiable
+  normalized cells plus analytic residual control.
+
+Endpoint E4:
+
+  CELL_OVERLAP(I,C,nu).
+
+  This is the numerical inequality checked cellwise.
+
+Endpoint E5:
+
+  UNBOUNDED_SHELL_CHAIN.
+
+  This iterates E2 along I_n -> infinity.
+
+Endpoint E6:
+
+  UNBOUNDED_ADMISSION_IFF_H12_GLOBAL.
+
+  This converts the unbounded chain into full H^(1/2) regularity and NSE_B.
+
+Recommended proof spine:
+
+  E1
+
+  -> E4
+
+  -> E3
+
+  -> E2
+
+  -> E5
+
+  -> E6.
+
+
+16. LOGICAL BOUNDARY
+--------------------
+
+The derivation proves the implication from the listed overlap and reduction
+premises to NSE_B.
+
+It does not prove:
+
+  OVERLAP_SHELL(I,J),
+
+  COMPUTATIONAL_REDUCTION(I,J),
+
+  a finite cover of an infinite-dimensional critical shell,
+
+  or an unbounded chain I_n.
+
+The central unresolved computational-analytic obligation is
+
+  forall n,
+
+    OVERLAP_SHELL(I_n,I_(n+1))
+
+for an explicit unbounded sequence I_n.
+
+No A_TIER promotion is permitted without a matching external native Lean
+compiler pass and theorem-level axiom audit.
+
+
+17. FROZEN ROOT FORMULA
+-----------------------
+
+  ADMISSION(I_0)
+
+  +
+
+  [ forall n,
+
+      COMPUTATIONAL_REDUCTION(I_n,I_(n+1))
+
+      and
+
+      CELL_OVERLAP on every resulting certified cell ]
+
+  +
+
+  I_n -> infinity
+
+  ->
+
+  H12_GLOBAL_REGULARITY
+
+  ->
+
+  NSE_B.
+
+Equivalent compressed form:
+
+  UNBOUNDED_CERTIFIED_QFB_OVERLAP_CHAIN
+
+  ->
+
+  I_STAR = infinity
+
+  ->
+
+  NSE_B.
+
+Marker:
+
+  ! IMPROVEMENT_TO_INFINITY_OVERLAP_BOOTSTRAP_B_TIER
