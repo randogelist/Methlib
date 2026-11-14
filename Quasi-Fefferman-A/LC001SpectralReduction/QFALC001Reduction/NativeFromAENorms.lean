@@ -58,7 +58,7 @@ theorem integrable_norm_sq (f : ComplexL2) :
 /-- The square of the `L2` norm is the integral of the squared pointwise norm. -/
 theorem integral_norm_sq_eq_norm_sq (f : ComplexL2) :
     (∫ x : Space, ‖f x‖ ^ 2 ∂volume) = ‖f‖ ^ 2 := by
-  have h := congrArg Complex.re (L2.inner_def (𝕜 := ℂ) f f)
+  have h := congrArg RCLike.re (L2.inner_def (𝕜 := ℂ) f f)
   rw [← integral_re] at h
   · simpa only [← norm_sq_eq_re_inner] using h.symm
   · exact L2.integrable_inner f f
@@ -67,7 +67,8 @@ theorem integral_norm_sq_eq_norm_sq (f : ComplexL2) :
 integrable. -/
 theorem integrable_gradient_fourier_sum (G : Fin 3 → ComplexL2) :
     Integrable (fun k : Space => ∑ j : Fin 3, ‖(𝓕 (G j) : ComplexL2) k‖ ^ 2) volume := by
-  exact Integrable.sum Finset.univ (fun j _ => integrable_norm_sq (𝓕 (G j) : ComplexL2))
+  exact integrable_finsetSum Finset.univ
+    (fun j _ => integrable_norm_sq (𝓕 (G j) : ComplexL2))
 
 /-- The integral of the finite derivative sum equals the sum of the three
 Fourier `L2` norm squares. -/
@@ -90,18 +91,22 @@ theorem nativeSpectralRealization_of_fourierNormAE
     (h : FourierNormAEWitnesses v G L) :
     NativeSpectralRealization v G L := by
   have hEnergyInt : Integrable (energyDensity v) volume := by
-    simpa only [energyDensity] using integrable_norm_sq (𝓕 v : ComplexL2)
+    change Integrable (fun k : Space => ‖(𝓕 v : ComplexL2) k‖ ^ 2) volume
+    exact integrable_norm_sq (𝓕 v : ComplexL2)
   have hGradientInt : Integrable (gradientDensity v) volume :=
     (integrable_gradient_fourier_sum G).congr h.gradient_ae
   have hLaplacianInt : Integrable (laplacianDensity v) volume :=
     (integrable_norm_sq (𝓕 L : ComplexL2)).congr h.laplacian_ae
   refine
     { energy_integrable := by
-        simpa only [energyDensity] using hEnergyInt
+        change Integrable (energyDensity v) volume
+        exact hEnergyInt
       gradient_integrable := by
-        simpa only [gradientDensity, energyDensity] using hGradientInt
+        change Integrable (gradientDensity v) volume
+        exact hGradientInt
       laplacian_integrable := by
-        simpa only [laplacianDensity, energyDensity] using hLaplacianInt
+        change Integrable (laplacianDensity v) volume
+        exact hLaplacianInt
       energy_identity := ?_
       gradient_identity := ?_
       laplacian_identity := ?_ }
