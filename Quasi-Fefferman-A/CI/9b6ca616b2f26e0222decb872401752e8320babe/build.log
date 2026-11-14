@@ -1,0 +1,13 @@
+⚠ [8712/8731] Replayed QFA.Endpoints.GoodTime.Interval
+warning: QFA/Endpoints/GoodTime/Interval.lean:63:4: Unused tactic linter: `change (∫ t, E t * D t ∂volume.restrict (Ioo (0 : ℝ) δ)) ≤ M ^ 4 / (4 * ν)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [8718/8731] Replayed QFA.Endpoints.Comparison.RelativeEnergy
+warning: QFA/Endpoints/Comparison/RelativeEnergy.lean:75:25: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [8727/8731] Built QFA.Assembly.AnalyticChain (17s)
+✔ [8728/8731] Built QFA.Assembly.Integrated (9.9s)
+✔ [8729/8731] Built QFA.Assembly (9.0s)
+✔ [8730/8731] Built QFA (9.1s)
+Build completed successfully (8731 jobs).

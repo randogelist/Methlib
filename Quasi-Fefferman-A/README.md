@@ -5,7 +5,7 @@
 | Goal identifier | `QUASI_FEFFERMAN_A` |
 | Development branch | `QFA` |
 | Specification status | `FROZEN` |
-| External endpoint verification | `PASS`; LE001–LE093 |
+| External endpoint verification | `PASS`; LE001–LE108 |
 | Physical root formalization | `B_TIER_ROOT_FORMALIZATION_PENDING` |
 
 ## Definitions
@@ -106,20 +106,23 @@ $$
 \mathrm{EndpointAxiomAudit}=\mathrm{PASS}.
 $$
 
-Exact scope: LE001–LE093, compiled commit `97d745678734a2bb9d7c1d9d4ae05d1a36c0a162`.
-[CI run 43528295686](https://github.com/randogelist/Methlib/actions/runs/43528295686), attempt 1; [verified evidence](CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt).
-The complete physical root remains `B_TIER`. The endpoint ledger records
-current status; preserved source comments record their preparation snapshot.
+Exact scope: LE001–LE108, compiled commit `9b6ca616b2f26e0222decb872401752e8320babe`.
+[CI run 43532773061](https://github.com/randogelist/Methlib/actions/runs/43532773061), attempt 1; [verified evidence](CI/9b6ca616b2f26e0222decb872401752e8320babe/VERIFICATION.txt).
+The [chain ledger](QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt) records the current verified status of
+106 theorems and two proof-carrying constructions. Compiled package metadata
+and source preparation labels remain unchanged. The complete physical root
+remains `B_TIER_ROOT_FORMALIZATION_PENDING`.
 
 ## B-tier derivations
 
 | Artifact | Status |
 |---|---|
 | [QUASI_FEFFERMAN_A_B_TIER.txt](QUASI_FEFFERMAN_A_B_TIER.txt) | Complete composed classical derivation |
-| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.4: 139 pinned source declarations at 45 derivation locations; 180 source applications; LE001–LE093 and four analytic targets indexed at their points of use |
+| [QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt](QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt) | v1.5: original 139-source / 180-application index preserved; EP140 and LE094–LE108 appended; current verified scope LE001–LE108 |
 | [QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt) | Complete scalar derivations, LE001–LE030 |
 | [QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER.txt) | Complete representation, field-profile, time-translation and strong-trace derivations, LE031–LE073 |
 | [QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_ASSEMBLY_B_TIER.txt) | Complete reusable representation/restart/analytic/comparison assemblies, LE074–LE093 |
+| [QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt](LeanEndpoints/QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt) | Complete analytic/comparison/selection/integrated derivations, LE094–LE108 |
 
 Selected source baseline: Lean `4.33.0`, Mathlib
 `db584cd6d46c92f209a44c0f1c829460d327499d`.
@@ -129,14 +132,15 @@ theorem-level axiom-audit evidence.
 
 ## Folderwise Lean endpoint extraction
 
-[LeanEndpoints](LeanEndpoints/README.md), version `0.3.0`:
+[LeanEndpoints](LeanEndpoints/README.md), version `0.4.0`:
 `Energy`, `GoodTime`, `Agmon`, `Comparison`, `Representation`, `Restart`,
 `Composition` under `LeanEndpoints/QFA/Endpoints/`.
 
-Status: `!!=A_TIER`; 91 theorem bodies and two proof-carrying
-linear-isometry constructions in 19 proof modules. Four analytic
-Prop targets retain no supplied proof inhabitants. All 93 proof-bearing
+Status: `!!=A_TIER`; 106 theorem bodies and two proof-carrying
+linear-isometry constructions in 23 endpoint/assembly modules. All 108
 declarations have matching external compiler and exact axiom-audit PASS evidence.
+LC001, LC003 and LC004 remain explicit unresolved analytic inputs. LE095
+proves LC001 → LC002; no unconditional inhabitant of LC002 is supplied.
 
 LE073 composes the concrete full-volume L2 energy profile, weak pairing
 continuity and a.e. energy starts into a strict subcritical time, the
@@ -155,9 +159,32 @@ executions: zero.
 import QFA.Assembly
 ```
 
-[Assembly](LeanEndpoints/QFA/Assembly/README.md): four interfaces under
-`LeanEndpoints/QFA/Assembly/`, with 20 verified assembly theorems.
+[Assembly](LeanEndpoints/QFA/Assembly/README.md): eight modules under
+`LeanEndpoints/QFA/Assembly/`, with 35 verified assembly theorems.
 The assembly constructs shifted energy data, composes supplied analytic
 estimates, constructs comparison sequences, and restricts singleton equality
 to nonnegative time. [assembly-manifest.json](LeanEndpoints/assembly-manifest.json)
 records the subsequent physical stages and named unresolved analytic inputs.
+
+## Canonical integrated chain
+
+`QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs` — LE108.
+
+| New module | Indices | Verified implication |
+|---|---|---|
+| [AnalyticChain](LeanEndpoints/QFA/Assembly/AnalyticChain.lean) | LE094–LE097 | Spectral interpolation and compact derivative data to explicit absorption |
+| [TailComparison](LeanEndpoints/QFA/Assembly/TailComparison.lean) | LE098–LE104 | Finite comparison premises to restricted class and further-restart singleton |
+| [Chain](LeanEndpoints/QFA/Assembly/Chain.lean) | LE105–LE106 | Strict-cutoff selection, reference comparison and quantified restricted-tail conclusion |
+| [Integrated](LeanEndpoints/QFA/Assembly/Integrated.lean) | LE107–LE108 | Analytic absorption and the explicit reference-construction input joined to the quantified chain |
+
+The canonical theorem retains `ClassRealization`, `ReferencePorts`, LC004,
+LC001, LC003 and `ReferenceConstructionFromAbsorption` as explicit inputs.
+`Domain`, `Admissible`, `Reference` and `Good` retain their supplied
+interpretations. The reference-construction input requires actual strong
+evolution, a temporal invariant and continuation; its inhabitant is not
+constructed here. Selected restart data supply no H2/Laplacian witness.
+
+AO01–AO08 remain unresolved physical realization obligations. Smoothness,
+pressure and the physical NSE root are not conclusions of the parameterized
+chain. Singleton equality concerns nonnegative-time restrictions and retains
+actual reference membership and fresh comparison data after the later shift.

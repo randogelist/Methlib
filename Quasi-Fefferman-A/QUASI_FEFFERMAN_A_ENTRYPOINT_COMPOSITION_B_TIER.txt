@@ -6,18 +6,21 @@ ROOT_SPECIFICATION = FROZEN
 MATHEMATICAL_STATUS = COMPLETE_COMPOSED_CLASSICAL_DERIVATION
 SOURCE_STATUS = EXACT_DECLARATIONS_INSPECTED
 INDEX_POLICY = DECLARATION_AT_POINT_OF_USE
-LEAN_EXTRACTION = A_TIER_FOR_LE001_LE093; A_TIER_CANDIDATE_FOR_LE094_LE108
+LEAN_EXTRACTION = A_TIER_FOR_LE001_LE108
 ENDPOINT_MARKER = !!=A_TIER
 EXTRACTED_THEOREMS = 106
 PROOF_CARRYING_CONSTRUCTIONS = 2
 EXACT_AUDIT_ROOTS = 108
 ANALYTIC_PROP_TARGETS_WITHOUT_PROOFS = 4
-EXTERNAL_LEAN_VERIFICATION = PASS_FOR_LE001_LE093
-EXTERNAL_THEOREM_AXIOM_AUDIT = PASS_FOR_LE001_LE093
-COMPILED_COMMIT = 97d745678734a2bb9d7c1d9d4ae05d1a36c0a162
-CI_RUN = 43528295686; ATTEMPT = 1
-CI_RUN_URL = https://github.com/randogelist/Methlib/actions/runs/43528295686
-ENDPOINT_EVIDENCE = CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162
+EXTERNAL_LEAN_VERIFICATION = PASS_FOR_LE001_LE108
+EXTERNAL_THEOREM_AXIOM_AUDIT = PASS_FOR_LE001_LE108
+COMPILED_COMMIT = 9b6ca616b2f26e0222decb872401752e8320babe
+CI_RUN = 43532773061; ATTEMPT = 1
+CI_RUN_URL = https://github.com/randogelist/Methlib/actions/runs/43532773061
+ENDPOINT_EVIDENCE = CI/9b6ca616b2f26e0222decb872401752e8320babe
+COMPILED_SOURCE_MANIFEST_SHA256 = e05a8d02127334c2b9332a9cd768205181b51bf43eb572288ed9f5069e50a39c
+CURRENT_STATUS_LEDGER = QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt
+CANONICAL_VERIFIED_DECLARATION = QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs
 PHYSICAL_ROOT_STATUS = B_TIER_ROOT_FORMALIZATION_PENDING
 LOCAL_LEAN_EXECUTIONS = 0
 
@@ -48,10 +51,10 @@ Classical input: an established analytic theorem, explicitly specified below;
   remains a separate construction obligation.
 
 Folderwise endpoints under LeanEndpoints/QFA/Endpoints and
-LeanEndpoints/QFA/Assembly are A_TIER for the exact LE001-LE093 declarations.
+LeanEndpoints/QFA/Assembly are A_TIER for the exact LE001-LE108 declarations.
 Matching native Windows Lean 4.33.0 compilation and declaration-level axiom
 audit are recorded in the CI evidence identified above. Current declaration
-status is recorded in LeanEndpoints/QUASI_FEFFERMAN_A_ENDPOINTS_A_TIER.txt;
+status is recorded in QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt;
 source-header comments and immutable B-tier supplements retain their
 preparation-snapshot labels. The physical root remains B_TIER; no physical
 FORMAL_CLOSURE or UNCONDITIONAL_CLOSURE is established.
@@ -64,7 +67,7 @@ INDEX CONVENTION:
   [LEnnn] = one externally verified local theorem or proof-carrying construction,
     indexed at its derivation step; LE001-LE073 are stable.
     LE031 and LE041 are linear-isometry constructions; every other LE
-    is a theorem declaration. All 93 are exact external axiom-audit roots.
+    is a theorem declaration. All 108 are exact external axiom-audit roots.
   [LCnnn] = an analytic Prop definition without a supplied proof inhabitant.
   APPLY [EPnnn] = mathematical use with the displayed hypothesis substitution;
     it does not assert execution or elaboration of a new Lean call.
@@ -4587,6 +4590,12 @@ NEW_INDEX = EP140; LE094-LE108; exact current signatures in endpoint-manifest.js
 NEW_COMPLETE_DERIVATION = LeanEndpoints/QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt.
 NEW_LEAN_SCOPE = explicit analytic/class/reference implication.
 NEW_STATUS_AT_PREPARATION = A_TIER_CANDIDATE; external CI evidence required.
+CURRENT_STATUS = A_TIER_FOR_LE001_LE108; exact matching compiler and axiom audit PASS.
+PREPARATION_LABEL_POLICY = all STATUS_AT_PREPARATION labels remain historical.
+COMPILED_PACKAGE_METADATA = immutable preparation snapshot; current ledger is authoritative.
+CURRENT_CHAIN_EVIDENCE = CI/9b6ca616b2f26e0222decb872401752e8320babe/VERIFICATION.txt.
+RETAINED_ANALYTIC_INPUTS = LC001, LC003, LC004; LC001 -> LC002 only conditionally.
+RETAINED_PHYSICAL_INPUTS = AO01-AO08; class/reference realization; ReferenceConstructionFromAbsorption.
 POST_VERIFICATION_LEDGER = QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt.
 PHYSICAL_ROOT_STATUS = B_TIER_ROOT_FORMALIZATION_PENDING.
 
