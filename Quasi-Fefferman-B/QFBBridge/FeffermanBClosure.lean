@@ -22,7 +22,7 @@ noncomputable section
 
 /-- A physical `L²` datum with a smooth periodic representative and the
 standard divergence-free, mean-zero physical constraints. -/
-structure SmoothInitialDatum (a : CriticalPhysicalL2) : Prop where
+structure SmoothInitialDatum (a : CriticalPhysicalL2) where
   sigma_zero : EnergySigmaZero a
   representative : Field
   representative_L2 : MemLp representative 2 (volume.restrict unitCube)
@@ -32,7 +32,7 @@ structure SmoothInitialDatum (a : CriticalPhysicalL2) : Prop where
 
 /-- A normalized global classical solution, including its actual initial
 physical `L²` trace. -/
-structure GlobalClassicalSolution (ν : ℝ) (a : CriticalPhysicalL2) : Prop where
+structure GlobalClassicalSolution (ν : ℝ) (a : CriticalPhysicalL2) where
   velocity : Velocity
   pressure : Pressure
   classical : ClassicalTail ν 0 velocity pressure
@@ -40,7 +40,8 @@ structure GlobalClassicalSolution (ν : ℝ) (a : CriticalPhysicalL2) : Prop whe
 
 /-- Fefferman--B at one fixed viscosity. -/
 def FeffermanBAt (ν : ℝ) : Prop :=
-  ∀ a : CriticalPhysicalL2, SmoothInitialDatum a → GlobalClassicalSolution ν a
+  ∀ a : CriticalPhysicalL2,
+    SmoothInitialDatum a → Nonempty (GlobalClassicalSolution ν a)
 
 /-- The universal Fefferman--B statement over positive viscosities. -/
 def FeffermanBStatement : Prop :=
@@ -51,7 +52,7 @@ classical interval ends.  `local_overlap_closes` is the formal endpoint of
 local weak--strong identification and smooth overlap patching. -/
 structure OneRestartOverlapCertificate
     (ν : ℝ) (a : CriticalPhysicalL2)
-    (u : Velocity) (G : WeakGradientTrajectory) : Prop where
+    (u : Velocity) (G : WeakGradientTrajectory) where
   restartTime : ℝ
   tailLag : ℝ
   localEnd : ℝ
@@ -74,7 +75,7 @@ def QFBOneRestartOverlap (ν : ℝ) : Prop :=
   ∀ (a : CriticalPhysicalL2), SmoothInitialDatum a →
     ∀ (u : Velocity) (G : WeakGradientTrajectory),
       CriticalLerayHopf ν a u G →
-        OneRestartOverlapCertificate ν a u G
+        Nonempty (OneRestartOverlapCertificate ν a u G)
 
 def QFBOneRestartOverlapStatement : Prop :=
   ∀ ν : ℝ, 0 < ν → QFBOneRestartOverlap ν
@@ -88,7 +89,7 @@ theorem feffermanBAt_of_qfb_one_restart_overlap
     FeffermanBAt ν := by
   intro a ha
   obtain ⟨u, G, hLH⟩ := (hQFB ν hν a ha.sigma_zero).1
-  let cert := hOverlap a ha u G hLH
+  obtain ⟨cert⟩ := hOverlap a ha u G hLH
   have hShiftQFB :=
     (hQFB ν hν (criticalL2Representative (u cert.restartTime))
       cert.trace_sigma_zero).2
@@ -100,7 +101,7 @@ theorem feffermanBAt_of_qfb_one_restart_overlap
   have hGlobal : HasSmoothTail ν u 0 :=
     cert.local_overlap_closes hShiftTail
   obtain ⟨v, p, hClassical, hAgreement⟩ := hGlobal
-  refine ⟨v, p, hClassical, ?_⟩
+  refine ⟨⟨v, p, hClassical, ?_⟩⟩
   exact (hAgreement 0 le_rfl).symm.trans hLH.initial
 
 /-- Exact conditional closure over all positive viscosities.  The established
