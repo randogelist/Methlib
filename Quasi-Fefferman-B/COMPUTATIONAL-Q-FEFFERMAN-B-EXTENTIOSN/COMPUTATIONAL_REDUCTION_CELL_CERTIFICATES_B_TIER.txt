@@ -1,0 +1,639 @@
+COMPUTATIONAL_REDUCTION_CELL_CERTIFICATES_B_TIER
+================================================
+
+STATUS
+------
+! B_TIER
+
+No A_TIER claim is made by this file.
+No external Lean compiler transcript or theorem-level axiom audit is attached.
+
+
+0. PURPOSE
+----------
+
+This file isolates the exact finite computational certificate sufficient for
+one escalation step
+
+  ADMISSION(I) -> ADMISSION(J),
+
+where
+
+  0 < I < J.
+
+The result does not assume that a bounded H^(1/2) shell is compact.  Instead,
+it separates:
+
+  (a) finite-dimensional cells,
+  (b) an analytic tail/profile relation,
+  (c) robust local-window certificates,
+  (d) the explicit QFB overlap inequality.
+
+The unresolved universal content is placed only in the reduction/coverage
+premise.
+
+
+1. IMPORTED OBJECTS
+-------------------
+
+Let
+
+  X := H^(1/2)_{sigma,0}(T^3),
+
+  H12SQ(b) := ||b||_{Ḣ^(1/2)}^2,
+
+  MASS2(b) := ||b||_2^2.
+
+For I > 0 define
+
+  ADMISSION(I)
+
+by
+
+  forall nu > 0,
+  forall b in X,
+
+    H12SQ(b) < 2*pi*I*nu^2
+
+    ->
+
+    Reg_nu(b).
+
+For 0 < I < J define
+
+  SHELL(I,J,nu)
+
+by
+
+  { b in X :
+      2*pi*I*nu^2 <= H12SQ(b)
+      and
+      H12SQ(b) < 2*pi*J*nu^2 }.
+
+For b in X define the QFB overlap time
+
+  T_I(b,nu)
+  := MASS2(b)^2 / (8*pi^2*I^2*nu^5)
+   = ||b||_2^4 / (8*pi^2*I^2*nu^5).
+
+The imported datumwise overlap theorem is
+
+  ADMISSION(I)
+  + STRONG_WINDOW_nu(b,tau)
+  + tau > T_I(b,nu)
+
+  ->
+
+  Reg_nu(b).
+
+
+2. ABSTRACT COMPUTATIONAL CELLS
+-------------------------------
+
+Fix
+
+  nu > 0,
+  0 < I < J.
+
+A computational cell C_k is an arbitrary subset
+
+  C_k subset X.
+
+For each cell attach certified rational or interval bounds
+
+  m_k >= 0,
+  tau_k > 0,
+
+with the intended meanings
+
+  CELL_MASS2(k,m_k):
+
+    forall b in C_k,
+      MASS2(b) <= m_k,
+
+and
+
+  CELL_STRONG_WINDOW(k,tau_k):
+
+    forall b in C_k,
+      STRONG_WINDOW_nu(b,tau_k).
+
+The cell overlap margin is
+
+  MARGIN_I(k)
+  := 8*pi^2*I^2*nu^5*tau_k - m_k^2.
+
+The exact computable test is
+
+  MARGIN_I(k) > 0.
+
+Equivalently, when m_k > 0, define
+
+  CELL_GAIN_I(k)
+  := 8*pi^2*I^2*nu^5*tau_k / m_k^2.
+
+Then
+
+  CELL_GAIN_I(k) > 1
+
+is equivalent to
+
+  tau_k > m_k^2 / (8*pi^2*I^2*nu^5).
+
+For every b in C_k,
+
+  MASS2(b) <= m_k
+
+implies
+
+  T_I(b,nu)
+  <= m_k^2 / (8*pi^2*I^2*nu^5)
+  < tau_k.
+
+Therefore
+
+  ADMISSION(I)
+  + CELL_MASS2(k,m_k)
+  + CELL_STRONG_WINDOW(k,tau_k)
+  + MARGIN_I(k) > 0
+
+  ->
+
+  forall b in C_k,
+    Reg_nu(b).
+
+
+3. FINITE CELL OVERLAP THEOREM
+------------------------------
+
+Let
+
+  K = {1,...,N}
+
+be a finite cell index set.
+
+Define
+
+  FINITE_SHELL_COVER(I,J,nu,{C_k})
+
+by
+
+  SHELL(I,J,nu)
+  subset
+  union_{k in K} C_k.
+
+Assume for every k in K:
+
+  CELL_MASS2(k,m_k),
+
+  CELL_STRONG_WINDOW(k,tau_k),
+
+  8*pi^2*I^2*nu^5*tau_k > m_k^2.
+
+Then every datum b in SHELL(I,J,nu) lies in some C_k and satisfies
+
+  T_I(b,nu) < tau_k.
+
+The imported datumwise overlap theorem gives
+
+  Reg_nu(b).
+
+Together with ADMISSION(I), this covers the full J-ball:
+
+  H12SQ(b) < 2*pi*J*nu^2
+
+because every such b lies either
+
+  below the I-threshold
+
+or
+
+  in SHELL(I,J,nu).
+
+Hence:
+
+  FINITE_CELL_OVERLAP:
+
+  ADMISSION(I)
+  + FINITE_SHELL_COVER(I,J,nu,{C_k})
+  + forall k, CELL_MASS2(k,m_k)
+  + forall k, CELL_STRONG_WINDOW(k,tau_k)
+  + forall k,
+      8*pi^2*I^2*nu^5*tau_k > m_k^2
+
+  ->
+
+  ADMISSION_AT_VISCOSITY(J,nu).
+
+If the certificate is uniform for every nu > 0, then
+
+  ADMISSION(I) -> ADMISSION(J).
+
+Marker:
+
+  ! FINITE_CELL_OVERLAP
+
+
+4. INTERVAL-ARITHMETIC FORM
+---------------------------
+
+For machine certification, let
+
+  m_k^+
+
+be a verified upper bound for MASS2 on C_k, and let
+
+  tau_k^-
+
+be a verified lower bound for the common strong window.
+
+The checker only needs to establish
+
+  8*pi^2*I^2*nu^5*tau_k^- > (m_k^+)^2.
+
+No floating-point equality is accepted.
+The inequality must be discharged by exact rational arithmetic, directed
+interval arithmetic, or an equivalent verified enclosure.
+
+Define the exact checker predicate
+
+  CHECK_CELL_I(k)
+
+by
+
+  COVER_CERT(k)
+  and MASS2_UPPER_CERT(k,m_k^+)
+  and STRONG_WINDOW_LOWER_CERT(k,tau_k^-)
+  and
+  8*pi^2*I^2*nu^5*tau_k^- > (m_k^+)^2.
+
+Then
+
+  forall k, CHECK_CELL_I(k)
+  + verified shell coverage
+
+  ->
+
+  OVERLAP_SHELL(I,J).
+
+
+5. ROBUST STRONG-WINDOW CERTIFICATE
+-----------------------------------
+
+The remaining cellwise analytic task is to prove
+
+  forall b in C_k,
+    STRONG_WINDOW_nu(b,tau_k).
+
+This can be reduced to an a posteriori contraction certificate.
+
+Let X_tau be a Banach strong-solution space on [0,tau].
+Let v_k be a computed approximate trajectory on [0,tau_k].
+For b in C_k, write the exact error equation as
+
+  w = F_{k,b} + L_k(w) + Q_k(w,w).
+
+Assume verified uniform bounds
+
+  sup_{b in C_k} ||F_{k,b}||_{X_tau} <= eta_k,
+
+  ||L_k(w)||_{X_tau} <= alpha_k ||w||_{X_tau},
+
+  ||Q_k(w,z)||_{X_tau}
+  <= beta_k ||w||_{X_tau} ||z||_{X_tau},
+
+with
+
+  eta_k >= 0,
+  alpha_k >= 0,
+  beta_k >= 0.
+
+A sufficient exact certificate is
+
+  alpha_k < 1
+
+and
+
+  4*beta_k*eta_k < (1-alpha_k)^2.
+
+For beta_k > 0 define
+
+  r_k
+  :=
+  ((1-alpha_k)
+   - sqrt((1-alpha_k)^2 - 4*beta_k*eta_k))
+  /
+  (2*beta_k).
+
+Then
+
+  eta_k + alpha_k*r_k + beta_k*r_k^2 = r_k,
+
+and
+
+  alpha_k + 2*beta_k*r_k
+  = 1 - sqrt((1-alpha_k)^2 - 4*beta_k*eta_k)
+  < 1.
+
+Therefore the error map is a contraction on the closed X_tau-ball of radius
+r_k.  It has a unique fixed point and yields an exact strong solution for every
+b in C_k through time tau_k.
+
+For beta_k = 0, it suffices that
+
+  alpha_k < 1
+
+and one may take
+
+  r_k >= eta_k/(1-alpha_k).
+
+Define
+
+  APOSTERIORI_WINDOW_CERT(k)
+
+by these inequalities and the verified error-equation representation.
+
+Then
+
+  APOSTERIORI_WINDOW_CERT(k)
+
+  ->
+
+  CELL_STRONG_WINDOW(k,tau_k).
+
+Marker:
+
+  ! APOSTERIORI_WINDOW_CERT
+
+
+6. DECOMPOSITION OF eta_k
+-------------------------
+
+A computational implementation may bound eta_k by
+
+  eta_k
+  <=
+  INIT_k
+  + RESIDUAL_k
+  + LOW_CELL_k
+  + TAIL_k.
+
+Here:
+
+  INIT_k
+
+controls the mismatch between the nominal center and v_k(0).
+
+  RESIDUAL_k
+
+controls
+
+  partial_t v_k + nu*A*v_k + B(v_k,v_k).
+
+  LOW_CELL_k
+
+controls finite-dimensional variation inside the low-mode cell.
+
+  TAIL_k
+
+controls the infinite-dimensional residual or profile tail.
+
+The first three terms are finite computational objects after fixing a spectral
+cutoff.  The fourth term is the noncompact analytic endpoint.
+
+A valid reduction must provide an exact theorem of the form
+
+  TAIL_RELATION_k(r)
+
+  ->
+
+  TAIL_COST_k(r) <= epsilon_k,
+
+and must prove that every datum assigned to C_k has a residual r satisfying
+TAIL_RELATION_k(r).
+
+
+7. WHY LOW-MODE COVERAGE ALONE IS INSUFFICIENT
+----------------------------------------------
+
+A bounded shell in critical H^(1/2) is not norm compact.
+Consequently, no argument of the form
+
+  choose one fixed N,
+  cover P_{<=N} SHELL by finitely many cells,
+  ignore P_{>N}
+
+establishes universal shell coverage.
+
+In particular, boundedness of
+
+  ||b||_{Ḣ^(1/2)}
+
+does not imply a uniform estimate
+
+  sup_{b in SHELL}
+  ||P_{>N}b||_{Ḣ^(1/2)} -> 0.
+
+Therefore the finite cell theorem requires one of the following exact
+interfaces.
+
+
+8. VALID REDUCTION INTERFACES
+-----------------------------
+
+8.1 TAIL-QUOTIENT FINITE REDUCTION
+
+  TAIL_QUOTIENT_REDUCTION(I,J)
+
+means that there exist finitely many low-mode cells C_k and tail relations
+TAIL_RELATION_k such that every b in SHELL(I,J,nu) admits
+
+  b = c + r,
+
+with c in the k-th finite low-mode cell and TAIL_RELATION_k(r), and such that
+the tail relation enters the robust-window certificate through the verified
+bound TAIL_k.
+
+This is the preferred finite-cell interface.
+
+
+8.2 PROFILE-PACKET REDUCTION
+
+  PROFILE_PACKET_REDUCTION(I,J)
+
+means that every shell datum admits a finite profile packet
+
+  b = sum_{j=1}^M g_j + r,
+
+where each normalized profile belongs to one of finitely many certified profile
+cells, the remainder r satisfies a verified smallness relation, and all
+cross-interaction defects are bounded strongly enough to invoke a robust
+superposition theorem.
+
+This interface handles frequency/translation escape explicitly rather than
+forcing norm compactness.
+
+
+8.3 ADAPTIVE CERTIFICATE GENERATOR
+
+  CERTIFICATE_GENERATOR(I,J)
+
+means that for every b in SHELL(I,J,nu), an algorithm terminates with a finite
+certificate containing
+
+  a cell identifier,
+  a mass upper bound,
+  a strong-window lower bound,
+  a posteriori constants eta, alpha, beta,
+  and a proof that the overlap inequality holds.
+
+Pointwise finite verification is not by itself enough.  The universal theorem
+must also prove termination and soundness for every shell datum.
+
+
+9. COMPUTATIONAL REDUCTION ENDPOINT
+-----------------------------------
+
+Define
+
+  COMPUTATIONAL_REDUCTION(I,J)
+
+as any verified reduction interface from Section 8 that produces a finite or
+terminating family of cells satisfying:
+
+  shell coverage,
+  cell mass bounds,
+  robust strong-window certificates,
+  strict QFB overlap margins.
+
+Then:
+
+  COMPUTATIONAL_REDUCTION_TO_OVERLAP:
+
+  COMPUTATIONAL_REDUCTION(I,J)
+
+  ->
+
+  OVERLAP_SHELL(I,J).
+
+Combined with the previous bootstrap:
+
+  ADMISSION(I)
+  + COMPUTATIONAL_REDUCTION(I,J)
+
+  ->
+
+  ADMISSION(J).
+
+Marker:
+
+  ! COMPUTATIONAL_REDUCTION_TO_OVERLAP
+
+
+10. UNBOUNDED LADDER
+--------------------
+
+Let
+
+  0 < I_0 < I_1 < I_2 < ...,
+
+  I_n -> infinity.
+
+Assume
+
+  ADMISSION(I_0)
+
+and
+
+  forall n,
+    COMPUTATIONAL_REDUCTION(I_n,I_{n+1}).
+
+Then by induction
+
+  forall n,
+    ADMISSION(I_n).
+
+For arbitrary b in H^(1/2)_{sigma,0} and nu > 0, choose n such that
+
+  H12SQ(b) < 2*pi*I_n*nu^2.
+
+Then Reg_nu(b).
+
+Therefore
+
+  UNBOUNDED_COMPUTATIONAL_LADDER:
+
+  ADMISSION(I_0)
+  + I_n -> infinity
+  + forall n,
+      COMPUTATIONAL_REDUCTION(I_n,I_{n+1})
+
+  ->
+
+  global H^(1/2)_{sigma,0} regularity.
+
+Under the frozen positive-time smoothing/restart adapter, this implies the
+periodic NSE-B statement.
+
+Marker:
+
+  ! UNBOUNDED_COMPUTATIONAL_LADDER
+
+
+11. EXACT OPEN ENDPOINTS
+------------------------
+
+The algebraic and logical chain is complete conditional on the following
+analytic/computational objects:
+
+  OPEN-1:
+    a concrete strong-solution Banach space X_tau and verified constants for
+    the error equation.
+
+  OPEN-2:
+    a sound a posteriori residual evaluator for approximate NSE trajectories.
+
+  OPEN-3:
+    an analytic tail/profile relation that survives critical noncompactness.
+
+  OPEN-4:
+    universal shell coverage or universal termination of the adaptive
+    certificate generator.
+
+  OPEN-5:
+    an unbounded ladder I_n -> infinity for which every shell reduction passes.
+
+No claim in this file discharges OPEN-1 through OPEN-5.
+
+
+12. FROZEN ROOT CHAIN
+---------------------
+
+  APOSTERIORI_WINDOW_CERTS
+  + MASS2_INTERVAL_BOUNDS
+  + TAIL_OR_PROFILE_REDUCTION
+  + FINITE_OR_TERMINATING_SHELL_COVERAGE
+
+  ->
+
+  COMPUTATIONAL_REDUCTION(I,J)
+
+  ->
+
+  OVERLAP_SHELL(I,J)
+
+  ->
+
+  ADMISSION(I) -> ADMISSION(J).
+
+Iterated along I_n -> infinity:
+
+  global H^(1/2)_{sigma,0} regularity
+
+  ->
+
+  NSE-B.
+
+Marker:
+
+  ! COMPUTATIONAL_REDUCTION_CELL_CERTIFICATES_B_TIER
