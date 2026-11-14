@@ -112,6 +112,56 @@ APOSTERIORI_WINDOW_CERTS
 ⟹ ADMISSION(I) → ADMISSION(J).
 ```
 
+### `H12_RADIAL_FIRST_CONTACT_MINIMUM_B_TIER.txt`
+
+Replaces the informal “angle” by the exact boundary minimization object. With normalized data
+
+```text
+b = ν r ω,
+‖ω‖_{Ḣ¹ᐟ²} = 1,
+```
+
+define the certified permeability
+
+```text
+Q_lower(r,ω) := 2 S_lower(r,ω) / ‖ω‖₂⁴
+```
+
+and its sphere minimum
+
+```text
+M(r) := inf_ω Q_lower(r,ω).
+```
+
+The most restrictive boundary datum is an active minimizer of `Q_lower`. The required inherited radius and radial reserve are
+
+```text
+B(r) := r M(r)^(-1/4),
+D(r) := r - B(r).
+```
+
+Thus
+
+```text
+M(r) > 1  ⇔  B(r) < r  ⇔  D(r) > 0.
+```
+
+A finite obstruction must be a first contact `M(r*) = 1`. The differential propagation certificate is
+
+```text
+M(r₀) > 1,
+M'(r) ≥ -a(r)(M(r)-1),
+a ∈ L¹_loc
+```
+
+which implies `M(r) > 1` for every finite radius. Combined with lower-semicontinuity, profile compactness, and the QFB overlap adapter, this yields
+
+```text
+r → ∞ ⇔ I = r²/(2π) → ∞ ⇒ NSE_B.
+```
+
+The exact active-profile target is the `RADIAL_FIRST_CONTACT_RESISTOR` system: constrained stationarity in `ω`, equality `Q_lower = 1`, and nonpositive radial envelope derivative.
+
 ## Status
 
 `! B_TIER` derivations only. No prepared endpoint in this directory is promoted to `A_TIER` without matching external Lean compiler and theorem-level axiom-audit evidence.
