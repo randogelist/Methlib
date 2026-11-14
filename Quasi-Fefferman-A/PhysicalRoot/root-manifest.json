@@ -1,0 +1,60 @@
+{
+  "version": "0.5.0",
+  "theorem": "QFA.PhysicalRoot.QUASI_FEFFERMAN_A",
+  "prepared_status": "A_TIER_CANDIDATE",
+  "target_status": "CONDITIONAL_FORMAL_CLOSURE",
+  "target_marker": "!!!",
+  "lean": "4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "local_lean_executions": 0,
+  "root_declarations": [
+    {
+      "id": "LE109",
+      "name": "QFA.PhysicalRoot.selectedTail_restricted_singleton"
+    },
+    {
+      "id": "LE110",
+      "name": "QFA.PhysicalRoot.selectedTail_smooth"
+    },
+    {
+      "id": "LE111",
+      "name": "QFA.PhysicalRoot.selectedTail_root_conclusion"
+    },
+    {
+      "id": "LE112",
+      "name": "QFA.PhysicalRoot.QUASI_FEFFERMAN_A"
+    }
+  ],
+  "baseline": {
+    "status": "A_TIER",
+    "audit_roots": 108,
+    "compiled_commit": "9b6ca616b2f26e0222decb872401752e8320babe",
+    "github_run": 43532773061,
+    "endpoint_manifest_sha256": "e05a8d02127334c2b9332a9cd768205181b51bf43eb572288ed9f5069e50a39c",
+    "verification_sha256": "e73f7926400d24fd34b9c01a08e1a0e2d63d77dbb4d66f2b463a04b89a5e90b6",
+    "source_copy": "Quasi-Fefferman-A/LeanEndpoints tree copied without modification"
+  },
+  "root_sources": {
+    "QUASI_FEFFERMAN_A.lean": "1bbbf31aa48240eead9f3ae1d69c896dd50096aae4cd3d1de3ef9073266221f3",
+    "RootAudit.lean": "e4383048a955c369672bb8e2c4b847265e8c9ea3dfbaf1e818510263e90961e2",
+    "scripts/root_audit.py": "734f5cf6d71093a151fa3d4b67380fb7dc8d2dcbb2df315da00a9acd281f9225",
+    "root-run.cmd": "4dd2baaa8d6d25c8ec17c56d12dd1e1ad9bccf04b5536753fc2d4e832b38e668",
+    "README.md": "cc9d82e7b2418174f8b48d1ce81d1aee912a232f14ffbb12c49b49620f9e001a",
+    "QUASI_FEFFERMAN_A_CONDITIONAL_FORMAL_CLOSURE_B_TIER.txt": "882873b07dcaaa369729b7a9dd83e543f1fd6858dda9c03e8da0209402ee0a32"
+  },
+  "unresolved_premises": [
+    "ClassRealization: actual Leray-Hopf existence, representatives, energy profile, good restart times, translated admission",
+    "ReferencePorts: relative-energy comparison and positive-shift admission",
+    "LC004 CompactToSchwartzEndpoint",
+    "LC001 WholeSpaceSpectralEndpoint",
+    "LC003 WholeSpaceAgmonEndpoint",
+    "ReferenceConstructionFromAbsorption: local strong evolution, actual identities, temporal invariant, global continuation",
+    "SmoothReferencePorts: pressure/smooth-NSE semantics and transport"
+  ],
+  "unconditional_closure": false
+}

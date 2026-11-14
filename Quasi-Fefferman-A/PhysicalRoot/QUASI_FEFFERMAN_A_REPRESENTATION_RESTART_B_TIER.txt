@@ -1,0 +1,1304 @@
+QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER
+VERSION = 1.0.0
+MODE = B_TIER_DERIVATION
+MARKER = !=B_TIER
+MATHEMATICAL_SCOPE = REPRESENTATION_AND_ENERGY_PROFILE_TO_SELECTED_STRONG_TRACE
+MATHEMATICAL_STATUS = COMPLETE_DERIVATION_OF_THE_EXPLICIT_IMPLICATIONS_BELOW
+LOCAL_ENDPOINT_RANGE = LE031-LE073
+LEAN_SOURCE_STATUS = A_TIER_CANDIDATE
+EXTERNAL_COMPILER_EVIDENCE = PENDING
+EXACT_THEOREM_LEVEL_AXIOM_AUDIT = PENDING
+LOCAL_LEAN_EXECUTIONS = 0
+LOCAL_LAKE_EXECUTIONS = 0
+PHYSICAL_QFA_ROOT_PROMOTION = NONE
+
+REPOSITORY = randogelist/Methlib
+BRANCH = QFA
+INTEGRATION_BASELINE = bf028db80b675a09c6144135e289c5c48572075a / indexed derivation version 1.2
+PREPARED_ENTRYPOINT_INDEX = 1.3
+PREPARED_CANDIDATE_PACKAGE = 0.2.0
+QFA_SOURCE_PIN = 8a30134611027f99f4855c062f7903069cdca8d8
+QFB_SELECTIVE_SOURCE_PIN = e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c
+MATHLIB_PIN = db584cd6d46c92f209a44c0f1c829460d327499d
+EXTERNAL_TOOLCHAIN = leanprover/lean4:v4.33.0
+PARENT_DERIVATION = ../QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER.txt
+PRECEDING_EXTRACTION = QUASI_FEFFERMAN_A_ENDPOINT_EXTRACTION_B_TIER.txt
+INDEX_POLICY = ORIGINAL_EP001-EP116_RETAINED; EP117-EP133_APPENDED
+
+[00] CARRIERS, INTEGRALS, AND TIME DOMAIN
+
+X = EuclideanSpace R (Fin 3), with full spatial Lebesgue measure dx.
+Y = EuclideanSpace C (Fin 3), regarded also as a real normed vector space.
+H_R = Lp X 2 (volume : Measure X) = L2(R3;R3).
+H_C = Lp Y 2 (volume : Measure X) = L2(R3;C3).
+No periodic quotient, unit-cube restriction, normalized volume, or finite
+total spatial volume is imposed.
+
+The actual candidate names are
+  QFA.Representation.RealSpatialL2 = H_R;
+  QFA.Endpoints.Representation.RealL2 = H_R;
+  QFA.Endpoints.Agmon.ComplexL2 = H_C.
+The two real abbreviations describe the same carrier. Spatial L2 elements
+are equivalence classes; identities of selected pointwise representatives
+are asserted almost everywhere unless stated otherwise.
+
+For v in H_R and G : Fin 3 -> H_R, define
+  E_R(v) = ||v||_2^2;
+  D_R(G) = sum_(j:Fin 3) ||G_j||_2^2.
+The corresponding complex energies are defined by the same formulas.
+For a supplied L in H_C, Z_C(L)=||L||_2^2. The sum in D_R is the Frobenius
+gradient energy if the supplied G_j are actual directional derivatives.
+The definitions themselves do not assert any derivative relation.
+
+Time measure dt is one-dimensional Lebesgue measure. Ioo(a,b)=(a,b),
+Ioc(a,b)=(a,b], Icc(a,b)=[a,b], and Ici(0)=[0,infinity).
+In physical applications, trajectory, energy-start, and trace conclusions
+concern nonnegative time. Generic translation identities retain arbitrary
+real parameters where explicitly stated. Total-real physical trajectories
+supply only an auxiliary extension outside the nonnegative domain. No
+negative-time identification is concluded.
+
+The notation integral_a^b denotes the oriented interval Bochner integral.
+For signatures with no integrability premise, it has Lean's total convention:
+an integral of a nonintegrable function is zero. Statements explicitly
+identified below as total-integral identities retain that exact scope.
+Every field-level energy integral and product integral used in the main
+theorem is genuinely integrable; Sections 04 and 07 discharge this fact.
+
+[01] EXACT FIELD-LEVEL PREMISES AND COMPOSED THEOREM
+
+Let nu,delta be real, a in H_R, u:R->H_R, G:R->(Fin 3->H_R), and
+Good:R->Prop. Write
+  E(t)=E_R(u(t)), D(t)=D_R(G(t)), M=||a||_2,
+  T_QFA=M^4/(16*pi^2*nu^5), kappa=4*pi^2*nu^4.
+
+EnergyProfile(nu,a,u,G) is precisely the conjunction:
+
+  (P1) For every finite R>0, u is a.e. strongly measurable on (0,R)
+       as an H_R-valued function.
+
+  (P2) For every finite R>0 and every j:Fin 3,
+       t |-> G(t,j) belongs to time L2((0,R);H_R).
+
+  (P3) For every t>=0,
+       E(t)+2*nu*integral_0^t D(r)dr <= M^2.
+
+This predicate is exactly QFA.Representation.EnergyProfile. In particular,
+P3 has every nonnegative upper endpoint. No global time-L2 norm is required.
+The parameter a supplies the energy bound. The predicate alone does not
+identify a with u(0), impose an initial trace, or define PDE admissibility.
+
+THEOREM [LE073]:
+  QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace.
+
+Assume P1-P3 and
+
+  (P4) nu>0 and delta>T_QFA;
+
+  (P5) For every b in H_R, the real pairing
+       t |-> <u(t),b>_R is continuous on [0,infinity);
+
+  (P6) For almost every s in (0,delta),
+       Good(s) AND
+       [for every r in R with s<=r,
+          E(r)+2*nu*integral_s^r D(q)dq <= E(s)].
+
+Then there exists s satisfying all of
+
+  0<s<delta;
+  Good(s);
+  E(s)*D(s)<4*pi^2*nu^4;
+  for every r>=s,
+    E(r)+2*nu*integral_s^r D(q)dq <= E(s);
+  lim_(t->s, t>s) ||u(t)-u(s)||_2 = 0;
+  lim_(tau->0, tau>0) ||u(tau+s)-u(s)||_2 = 0.
+
+Good is an arbitrary predicate with the displayed a.e. premise; no
+measurability of its truth set is added. The witness s may depend on every
+supplied trajectory datum and on delta. Neither uniqueness nor actual
+nonuniqueness of trajectories is a premise or a conclusion. The conclusion
+is a subcritical norm-product time with its energy start and strong traces.
+No H1 membership follows unless the supplied G_j are independently identified
+as weak derivatives of u at that time.
+
+[02] COMPONENTWISE COMPLEXIFICATION AND ITS SPATIAL L2 LIFT
+
+Location: D02.01-D02.02 / AD01.
+Endpoints: LE031-LE046.
+
+Define J:X->Y by J(v)_j=(v_j:C). The scalar real linear isometry
+[EP001] Complex.ofRealLI supplies additivity and real homogeneity in each
+coordinate. Coordinate extensionality, PiLp.ext, gives these properties for J.
+Using [EP002] EuclideanSpace.norm_sq_eq on both Euclidean spaces,
+
+  ||J(v)||^2 = sum_j |(v_j:C)|^2 = sum_j |v_j|^2 = ||v||^2.
+
+Both norms are nonnegative; hence ||J(v)||=||v||. Also J(0)=0, and linearity
+applied to v-w proves ||J(v)-J(w)||=||v-w||. Therefore J is an actual real
+linear isometry, LE031 complexifyVectorLI. LE032-LE036 record its coordinate
+formula, zero preservation, norm, squared norm, and isometry respectively.
+There is no dimension-dependent multiplier.
+
+The isometry is 1-Lipschitz. Apply [EP003] LipschitzWith.compLp with J, p=2,
+J(0)=0, and the full spatial volume. This defines J2:H_R->H_C.
+[EP004] LipschitzWith.coeFn_compLp gives
+  J2(v)(x)=J(v(x)) for almost every x.                         [LE037]
+Thus the representative norms agree a.e. Applying [EP005]
+MeasureTheory.Lp.norm_le_norm_of_ae_le in both directions yields
+  ||J2(v)||_2=||v||_2.                                       [LE038]
+No finite-volume hypothesis is needed for this lift.
+
+The a.e. representative identities [EP117] MeasureTheory.Lp.coeFn_add and
+[EP118] MeasureTheory.Lp.coeFn_smul, together with J's linearity, give
+  J2(v+w)=J2(v)+J2(w), J2(c*v)=c*J2(v) for c in R.           [LE039-LE040]
+Equality in Lp follows from MeasureTheory.Lp.ext. Bundling these results
+gives LE041 complexifyL2LI, a real linear isometry. It yields the isometry
+and zero conclusions LE042-LE043.
+
+Squaring LE038 and summing a finite family yields exactly
+  E_C(J2(v))=||v||_2^2;                                     [LE044]
+  D_C(j |-> J2(G_j))=sum_j ||G_j||_2^2;                      [LE045]
+  Z_C(J2(L))=||L||_2^2 for each supplied L in H_R.            [LE046]
+The last formula is norm preservation for a supplied field; identification
+of L with an actual Laplacian remains a separate premise.
+
+[03] COMPACT REAL TESTS AND ACTUAL WEAK-DERIVATIVE TRANSPORT
+
+Location: D02.03 / AD01.
+Endpoints: LE047-LE050.
+
+Let F be a normed real vector space, v in L2(X;F), and psi:X->R continuous
+with compact support. Let K be the compact closure of its support. Spatial
+Lebesgue measure is finite on K. The selected Lp representative is a.e.
+strongly measurable, and Holder's inequality gives
+
+  integral_K ||v|| <= volume(K)^(1/2)*(integral_K ||v||^2)^(1/2) < infinity.
+
+The continuous function psi is bounded on K and vanishes off K. Consequently
+psi*v is a.e. strongly measurable and
+  integral ||psi*v|| <= sup_K |psi| * integral_K ||v|| < infinity.
+This proves actual integrability, including for the incomplete target spaces
+allowed by LE047 integrable_compact_test_smul. The source composition is
+[EP051] MeasureTheory.MemLp.locallyIntegrable at p=2, followed by
+[EP119] MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport.
+
+Let v in H_R and suppose psi*v is integrable, with no compactness assumption
+needed for this intermediate implication. By LE037 and real linearity,
+  psi(x)*J2(v)(x)=J(psi(x)*v(x)) a.e.
+J is a continuous real linear map. Its image of an integrable function is
+integrable. Both X and Y are complete real normed spaces, so [EP006]
+ContinuousLinearMap.integral_comp_comm and integral_congr_ae give
+
+  integral psi*J2(v) = J(integral psi*v).                     [LE048]
+
+If v,G in H_R and both dpsi*v and psi*G are integrable, the real identity
+  integral dpsi*v = -integral psi*G
+therefore implies
+  integral dpsi*J2(v) = -integral psi*J2(G).                  [LE049]
+The minus sign is preserved by the real linear map J.
+
+For a complete normed real vector target F, the semantic predicate
+RealTestWeakDirectionalDerivative(v,G,e), e in X, means
+
+  for every real psi in C_c^infinity(X),
+    integral (Dpsi(x)[e])*v(x) dx = -integral psi(x)*G(x) dx.
+
+For such psi, x |-> Dpsi(x)[e] is continuous. Off the compact closure of
+psi's support, psi vanishes in a neighborhood, so its derivative vanishes;
+the derivative test therefore has compact support. The exact supporting
+declarations are [EP120] ContDiff.continuous_fderiv, [EP122]
+Continuous.clm_apply, and [EP121] HasCompactSupport.fderiv_apply. LE047 supplies
+integrability of both test products, and LE049 then proves
+
+  RealTestWeakDirectionalDerivative(v,G,e)
+    -> RealTestWeakDirectionalDerivative(J2(v),J2(G),e).     [LE050]
+
+Thus the actual compact-real-test derivative identity is transported without
+an extra integrability assumption in LE050. Each further supplied derivative
+witness can be transported by repetition. Derivative existence, Laplacian
+assembly, extension to complex tests, and compact-to-Schwartz extension are
+not supplied by this implication. In particular, AD08 remains separate.
+
+[04] CONCRETE FIELD DATA TO THE SCALAR ENVELOPE AND PRODUCT BUDGET
+
+Location: D02.05 -> D04.01-D04.06.
+Endpoints: LE051-LE058; existing scalar Energy endpoints are reused.
+
+Assume P1-P3. For every real t,
+  E(t)>=0, D(t)>=0,
+by nonnegativity of a square and finite summation. These are LE051-LE052.
+
+Fix R>0. The norm is continuous; squaring is continuous. Applying [EP123]
+MeasureTheory.AEStronglyMeasurable.norm and [EP124] .pow to P1 proves scalar a.e.
+strong measurability of E on (0,R).                           [LE053]
+For each j, P2 and [EP125] MeasureTheory.MemLp.integrable_norm_pow at the natural
+exponent p=2 give integrability of t |-> ||G(t,j)||_2^2. The finite-sum lemma
+[EP126] MeasureTheory.integrable_finsetSum gives D in L1((0,R)). [LE054]
+
+Lebesgue singletons have measure zero. [EP011]
+MeasureTheory.restrict_Ioo_eq_restrict_Ioc identifies the restricted measures
+on (0,R) and (0,R]. [EP012]
+intervalIntegrable_iff_integrableOn_Ioc_of_le then gives
+  IntervalIntegrable D volume 0 R.                           [LE055]
+The same restriction argument gives genuine integrability on every finite
+[s,r] with 0<=s<=r: choose a larger positive horizon and restrict to [s,r].
+The interval [0,0] has zero measure. Hence every P3 and P6 energy integral
+has genuine integrability for the field application.
+
+Set M=||a||_2, with M allowed to be zero, and
+  F(t)=M^2-2*nu*integral_0^t D.
+Rearranging P3 gives E(t)<=F(t) at every t>=0.                [LE056]
+[EP127] MeasureTheory.ae_restrict_mem supplies t in (0,R) a.e.; thus the same bound
+holds a.e. on (0,R), with no new continuity premise on E.     [LE057]
+
+Now assume nu>0. The remaining argument is the exact scalar product-budget
+derivation of QFA.Energy.product_budget_Ioo, with E,D as above and M=||a||_2.
+
+  (a) By [EP013] IntervalIntegrable.absolutelyContinuousOnInterval_intervalIntegral,
+      the primitive integral_0^t D is absolutely continuous on [0,R].
+      Constant functions, [EP014] ContDiffOn.absolutelyContinuousOnInterval,
+      [EP015] AbsolutelyContinuousOnInterval.const_mul, and [EP016]
+      AbsolutelyContinuousOnInterval.sub make F absolutely continuous.
+
+  (b) [EP017] IntervalIntegrable.ae_hasDerivAt_integral, with basepoint 0,
+      and [EP018-EP020] HasDerivAt.const_mul, .const_sub, .deriv yield
+        F'(t)=-2*nu*D(t) a.e. on [0,R], F(0)=M^2.
+      Differentiability of the weak energy E is never used.
+
+  (c) [EP021] AbsolutelyContinuousOnInterval.continuousOn makes F bounded
+      on the compact interval. [EP022] IntervalIntegrable.continuousOn_mul
+      gives integrability of F*D. The product E*D is a.e. strongly measurable,
+      and 0<=E*D<=F*D a.e. [EP023] MeasureTheory.Integrable.mono_nonneg
+      therefore gives genuine integrability of E*D before integral comparison.
+
+  (d) Apply [EP024] AbsolutelyContinuousOnInterval.integral_deriv_mul_eq_sub
+      with both factors equal to F. [EP025]
+      intervalIntegral.integral_congr_ae substitutes F'=-2*nu*D:
+        F(R)^2-M^4 = integral_0^R (F'*F+F*F')
+                   = -4*nu*integral_0^R F*D.
+      Since nu>0,
+        integral_0^R F*D = (M^4-F(R)^2)/(4*nu).
+
+  (e) [EP026] MeasureTheory.integral_mono_ae, [EP027]
+      intervalIntegral.integral_of_le, and the null endpoint conversion give
+        integral_(0,R) E*D
+          <= (M^4-F(R)^2)/(4*nu)
+          <= M^4/(4*nu).
+
+This proves LE058 EnergyProfile.energy_product_budget_Ioo, including its
+Integrable conjunct. Neither continuity of D nor differentiability or
+absolute continuity of E is a premise. The square identity concerns F alone.
+
+[05] THE EXACT STRICT CUTOFF AND FULL-MEASURE SELECTION
+
+Location: D05.01-D05.02.
+Endpoint: LE059; prior composition LE014.
+
+Assume nu>0 and delta>M^4/(16*pi^2*nu^5). Since the cutoff is nonnegative,
+delta>0. Since pi>0 and nu>0, kappa=4*pi^2*nu^4 is positive. Multiplication
+of the strict cutoff inequality by kappa gives exactly
+
+  M^4/(4*nu) < kappa*delta.
+
+Apply LE058 with R=delta. Suppose no s in (0,delta) satisfies both Good(s)
+and E(s)D(s)<kappa. Then E(s)D(s)>=kappa at every good point of that interval.
+If Good holds a.e. there, this lower bound holds a.e. The product is integrable
+by LE058, and the constant is integrable on the finite interval. Hence
+
+  kappa*delta <= integral_(0,delta) E*D
+                 <= M^4/(4*nu) < kappa*delta,
+
+a contradiction. This proves LE059 EnergyProfile.exists_subcritical_good_time.
+The source pattern is [EP028] QuasiFeffermanB.exists_good_time_of_integral_lt,
+ported into the prior scalar chain; the actual reused composition is
+LE014 QFA.Endpoints.Composition.exists_subcritical_good_time_of_envelope.
+
+The argument works with M=0 and never divides by M, E(s), or D(s). The strict
+boundary delta>T_QFA is preserved. No claim at delta=T_QFA follows from this
+strict-average selection argument.
+
+[06] TEMPORAL TRANSLATION: EXACT DOMAINS AND INTEGRABILITY
+
+Location: D05.03-D05.04.
+Define timeTranslate(s,f)(t)=f(t+s), denoted f_s(t).
+
+The map t |-> t+s is continuous, sends t>0 to t+s>s, and tends to s as
+t->0+. Thus it sends the right-neighborhood filter of 0 to that of s.
+This proves LE060, following [EP031]
+QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right, for every real s.
+
+Lebesgue translation invariance and
+  {t:t+s in (s,T+s]}=(0,T]
+give restricted measure preservation
+  (t |-> t+s)_*(dt restricted to (0,T]) = dt restricted to (s,T+s].
+This is LE061, following [EP032]
+QuasiFeffermanB.timeTranslate_measurePreserving_Ioc, for every real s,T.
+For T<=0 both interval measures are zero.
+
+If s>=0, then (s,T+s] is a subset of (0,T+s]. Restricting an assumed MemLp
+class on the latter interval and pulling back by LE061 proves LE062:
+
+  MemLp(f,p,(0,T+s]) -> MemLp(f_s,p,(0,T]), for every p in [0,infinity].
+
+The target may be any normed additive group. The same restriction and pullback
+for an arbitrary a.e. predicate P proves LE063:
+
+  P holds a.e. on (0,T+s] -> P(t+s) holds a.e. on (0,T].
+
+These are the precise patterns of [EP033]
+QuasiFeffermanB.timeTranslate_memLp_Ioc and [EP034]
+QuasiFeffermanB.timeTranslate_ae_Ioc. No measurability of {P} is required.
+
+For every scalar f:R->R and real s,a,b, [EP035]
+intervalIntegral.integral_comp_add_right gives the total-integral identity
+
+  integral_a^b f(t+s)dt = integral_(a+s)^(b+s) f(t)dt.        [LE064]
+
+Translation preserves actual integrability as well. In particular,
+  IntervalIntegrable f volume (a+s) (b+s)
+    -> IntervalIntegrable f_s volume a b.                    [LE065]
+The exact source is [EP129] IntervalIntegrable.comp_add_right. The integral identity
+also remains valid when integrability fails, under the total convention
+specified in Section 00; it is not itself evidence of integrability.
+
+If s>=0,T>=0 and D is integrable on [0,T+s], then [s,T+s] is a subinterval.
+[EP128] IntervalIntegrable.mono_set restricts D, and LE065 translates it. Therefore
+  D_s is interval integrable on [0,T].                       [LE066]
+The hypotheses s>=0 and T>=0 are retained in this restriction statement.
+For a field EnergyProfile, Section 04 supplies the required integrability
+for every positive horizon T+s; when T+s=0 the interval is degenerate.
+
+[07] ENERGY TRANSPORT WITH THE UPPER-ENDPOINT QUANTIFIERS RETAINED
+
+Location: D05.03-D05.04.
+Endpoints: LE067-LE069.
+
+First let E,D:R->R, nu>=0, s>=0, D(r)>=0 for r>=0, and assume
+  for every r>=s, E(r)+2*nu*integral_s^r D <= E(s).
+For t>=s, D is nonnegative throughout [s,t]. The integral is nonnegative:
+in the integrable case this follows by integral positivity, and in the
+nonintegrable case its total value is zero. The exact source is [EP130]
+intervalIntegral.integral_nonneg. Thus
+  E(t)<=E(s).                                                [LE067]
+This generic implication does not require integrability as a separate
+premise. The field application has actual integrability from Section 04.
+
+Next, for arbitrary real nu,s and E,D with that energy-start inequality,
+let t>=0. Then t+s>=s, and LE064 with lower endpoint 0 gives
+  E_s(t)+2*nu*integral_0^t D_s <= E(s).                       [LE068]
+This is an algebraic total-integral implication; no positivity is needed
+for the change of variables. In a physical application s>=0, so t+s>=0.
+For the field data, all translated dissipation integrals are genuine by
+LE066. The initial value of the translated velocity is exactly u_s(0)=u(s).
+
+Finally assume s>=0 and, for a real finite T,
+  for almost every r in (0,T+s], for every t in [r,T+s],
+    E(t)+2*nu*integral_r^t D <= E(r).
+LE063 transports this entire valid-start predicate to almost every
+r in (0,T]. If t in [r,T], then t+s in [r+s,T+s]. Apply the supplied
+inequality there and LE064 to obtain
+
+  for almost every r in (0,T], for every t in [r,T],
+    E_s(t)+2*nu*integral_r^t D_s <= E_s(r).                   [LE069]
+
+The a.e. quantifier applies to the starting time; the upper-endpoint
+quantifier remains every t in the stated interval. No a.e.-to-all upgrade
+is claimed. The generic theorem permits T<=0, where the a.e. conclusion
+is vacuous; physical positive-horizon applications use T>0. Integrability
+does not follow from the energy inequality alone. It is retained separately
+and, for the field data, follows by interval restriction and LE066.
+
+[08] STRONG RIGHT TRACES AND DETERMINISTIC COMPOSITION
+
+Location: D05.03.
+Endpoints: LE070-LE073.
+
+Let H be any real inner-product space, l any filter on an index type,
+f an H-valued function, and b in H. Assume
+  <f(i),b>_R -> ||b||^2 along l,
+  ||f(i)||^2 <= ||b||^2 eventually along l.
+By [EP030] norm_sub_sq_real,
+
+  0 <= ||f(i)-b||^2
+     = ||f(i)||^2 - 2*<f(i),b>_R + ||b||^2
+     <= 2*||b||^2 - 2*<f(i),b>_R -> 0.
+
+The squeeze theorem, [EP131] squeeze_zero', yields convergence of the squared
+distance to zero. [EP132] Real.continuous_sqrt and sqrt(||x||^2)=||x|| yield norm
+convergence, hence f->b. This proves LE070, the selective port of [EP029]
+QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound. Completeness of H
+is unnecessary; H_R is the complete Hilbert carrier in the application.
+
+Let u:R->H, s>=0, nu>=0, D(r)>=0 for every r>=0, and assume
+  t |-> <u(t),u(s)>_R is continuous on [0,infinity),
+  ||u(r)||^2+2*nu*integral_s^r D <= ||u(s)||^2 for every r>=s.
+The first premise gives
+  <u(t),u(s)>_R -> <u(s),u(s)>_R=||u(s)||^2 as t->s+,
+because (s,infinity) lies in [0,infinity). LE067 gives the eventual norm
+upper bound. LE070 therefore gives
+  u(t)->u(s) strongly as t->s+.                              [LE071]
+No strong continuity of u or continuity of E is assumed. Composing this
+limit with LE060 yields
+  u_s(tau)->u(s) strongly as tau->0+.                        [LE072]
+The supporting norm-pairing identity is [EP133] real_inner_self_eq_norm_sq.
+
+For the field-level theorem in Section 01, define
+  GoodStar(s) := Good(s) AND
+    [for every r>=s, E(r)+2*nu*integral_s^r D <= E(s)].
+P6 states precisely that GoodStar holds a.e. on (0,delta). Apply LE059
+to this predicate, retaining it unchanged in the witness. Obtain
+  0<s<delta, Good(s), E(s)D(s)<kappa, and the energy-start inequality.
+LE052 gives D>=0 on all physical times. P5 at b=u(s) supplies the single
+pairing continuity required by LE071. Use nu>0 -> nu>=0 and s>0 -> s>=0.
+LE071 and LE072 give the two claimed strong traces. All remaining conjuncts
+are the selected witness data. This completes the derivation of LE073.
+
+[09] LOCAL ENDPOINT REGISTER
+
+Prefix A = QFA.Endpoints.Representation.
+  LE031 A.complexifyVectorLI                         proof-carrying definition
+  LE032 A.complexifyVectorLI_apply
+  LE033 A.complexifyVectorLI_zero
+  LE034 A.complexifyVectorLI_norm
+  LE035 A.complexifyVectorLI_norm_sq
+  LE036 A.complexifyVectorLI_isometry
+  LE037 A.complexifyL2_ae
+  LE038 A.complexifyL2_norm
+  LE039 A.complexifyL2_add
+  LE040 A.complexifyL2_smul
+  LE041 A.complexifyL2LI                             proof-carrying definition
+  LE042 A.complexifyL2_isometry
+  LE043 A.complexifyL2_zero
+  LE044 A.complexifyL2_velocityEnergy
+  LE045 A.complexifyL2_gradientEnergy
+  LE046 A.complexifyL2_laplacianEnergy
+  LE047 A.integrable_compact_test_smul
+  LE048 A.integral_test_smul_complexifyL2
+  LE049 A.weakTestIdentity_complexify
+  LE050 A.complexifyL2_weakDirectionalDerivative
+
+Prefix B = QFA.Representation.
+  LE051 B.velocityEnergy_nonneg
+  LE052 B.gradientEnergy_nonneg
+  LE053 B.EnergyProfile.velocityEnergy_aestronglyMeasurable
+  LE054 B.EnergyProfile.gradientEnergy_integrable
+  LE055 B.EnergyProfile.gradientEnergy_intervalIntegrable
+  LE056 B.EnergyProfile.velocityEnergy_le_envelope
+  LE057 B.EnergyProfile.velocityEnergy_le_envelope_ae
+  LE058 B.EnergyProfile.energy_product_budget_Ioo
+  LE059 B.EnergyProfile.exists_subcritical_good_time
+
+Prefix C = QFA.Endpoints.Restart.
+  LE060 C.timeTranslate_tendsto_nhdsWithin_right
+  LE061 C.timeTranslate_measurePreserving_Ioc
+  LE062 C.timeTranslate_memLp_Ioc
+  LE063 C.timeTranslate_ae_Ioc
+  LE064 C.timeTranslate_intervalIntegral
+  LE065 C.timeTranslate_intervalIntegrable
+  LE066 C.timeTranslate_dissipation_intervalIntegrable
+  LE067 C.energy_le_of_energy_start
+  LE068 C.timeTranslate_energy_from_start
+  LE069 C.timeTranslate_energy_intervals
+  LE070 C.strong_tendsto_of_inner_and_norm_bound
+  LE071 C.strong_right_trace_of_energy_start
+  LE072 C.shifted_strong_trace_of_energy_start
+
+Prefix D = QFA.Endpoints.Composition.
+  LE073 D.exists_subcritical_good_time_with_strong_trace
+
+The 43 indexed endpoints comprise 41 theorem candidates and two definitions
+containing proof fields. Both proof-carrying definitions require transitive
+axiom audit. Plain carrier definitions and the EnergyProfile predicate do not
+assert an inhabitant of any missing physical or analytic endpoint.
+
+Candidate modules, relative to LeanEndpoints/:
+  QFA/Endpoints/Representation/Complexification.lean
+  QFA/Endpoints/Representation/EnergyProfile.lean
+  QFA/Endpoints/Restart/TimeTranslate.lean
+  QFA/Endpoints/Restart/EnergyShift.lean
+  QFA/Endpoints/Restart/HilbertTrace.lean
+  QFA/Endpoints/Composition/GoodTimeAndTrace.lean
+
+[10] PINNED SOURCE LOCATIONS AND UNCHANGED CLASSICAL BOUNDARY
+
+Original EP identifiers retain their exact meanings in the parent catalog.
+The original source applications used here are EP001-EP006, EP011-EP035,
+and EP051. The fixed additional identifiers EP117-EP133 appear at their
+actual application paragraphs. Source inspection is not an external Lean
+verification result. Exact source signatures belong to the parent catalog.
+
+Pinned Mathlib source base:
+  https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/
+
+Additional exact source locations, relative to that base:
+  Mathlib/Analysis/Normed/Lp/PiLp.lean:97
+    PiLp.ext.
+  Mathlib/MeasureTheory/Function/LpSpace/Basic.lean:146,185,198,436
+    MeasureTheory.Lp.ext, .memLp, [EP117] .coeFn_add, [EP118] .coeFn_smul.
+  Mathlib/MeasureTheory/Function/LocallyIntegrable.lean:448
+    [EP119] MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport.
+  Mathlib/Analysis/Calculus/ContDiff/Defs.lean:1151,1272
+    ContDiff.continuous, [EP120] ContDiff.continuous_fderiv.
+  Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean:470
+    [EP122] Continuous.clm_apply.
+  Mathlib/Analysis/Calculus/FDeriv/Const.lean:392
+    [EP121] HasCompactSupport.fderiv_apply.
+  Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:299
+    MeasureTheory.integral_congr_ae.
+  Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean:355,503
+    [EP124] MeasureTheory.AEStronglyMeasurable.pow, [EP123] .norm.
+  Mathlib/MeasureTheory/Function/L1Space/Integrable.lean:209,448
+    [EP125] MeasureTheory.MemLp.integrable_norm_pow,
+    [EP126] MeasureTheory.integrable_finsetSum.
+  Mathlib/MeasureTheory/Measure/Restrict.lean:641
+    [EP127] MeasureTheory.ae_restrict_mem.
+  Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean
+    [EP128] IntervalIntegrable.mono_set, [EP129] IntervalIntegrable.comp_add_right,
+    [EP130] intervalIntegral.integral_nonneg.
+  Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean
+    [EP131] squeeze_zero'.
+  Mathlib/Analysis/Real/Sqrt.lean
+    [EP132] Real.continuous_sqrt.
+  Mathlib/Analysis/InnerProductSpace/Basic.lean
+    [EP133] real_inner_self_eq_norm_sq.
+
+Selective QFB source base:
+  https://github.com/randogelist/Methlib/blob/e6d7a34aba1549d098b0f8bd0caefd9dbdc85b0c/Quasi-Fefferman-B/QuasiFeffermanB/
+  TimeTranslate.lean; Git blob 6417b89a2008f3af626819381a31d5c92fb58cd6.
+  LHRestart.lean; Git blob 99c8781a467659b4a44da1a22f284e15f375e523.
+Only generic time, scalar energy, and inner-product arguments are reused.
+The periodic QFB package is not a dependency or a spatial realization of QFA.
+
+The frozen physical root remains the whole-space, unforced theorem with
+  T_QFA(a,nu)=||a||_2^4/(16*pi^2*nu^5), nu>0,
+arbitrary a in L2_sigma(R3), and arbitrary Leray-Hopf admissible u. Its
+eventual regularity assertion concerns every delta>T_QFA. Its future
+singleton assertion concerns trajectories tau |-> u(delta+tau) for tau>=0.
+The present supplement proves only the explicitly stated representation,
+profile, selection, and trace implications; it establishes none of the
+remaining physical root conclusions by itself.
+
+The original classical inputs remain:
+  C01: whole-space Leray-Hopf existence with strong initial trace and the
+       exact all-upper-endpoint strong energy inequality convention;
+  C02: local whole-space H1 strong solutions and the H1 continuation
+       alternative, including the stated C(H1) and L2(H2) regularity;
+  C03: strong energy/enstrophy identities and positive-time smoothing;
+  C04: legitimate whole-space weak/strong cross-testing and relative energy.
+Their exact statements and classical references remain in parent Section 03.
+No endpoint above discharges their whole-space Lean realizations.
+
+Physical construction of u,G from a Leray-Hopf solution, actual weak-gradient
+identification, incompressibility, the weak momentum equation, the initial
+trace a, and a suitable physical full-measure Good predicate remain distinct
+obligations. LE050 transports a supplied compact-test derivative relation;
+it does not construct it. AD08 spectral/Schwartz realization, the physical
+Agmon endpoint, translated weak-equation construction, strong PDE restart,
+smoothing, pressure, comparison, and the final singleton assembly remain
+outside this extraction. No proof inhabitants of the existing analytic
+Prop targets are supplied.
+
+All displayed mathematical implications are B_TIER. Their prepared Lean
+bodies, including LE031 and LE041 proof fields, remain A_TIER_CANDIDATE.
+Promotion requires the matching external compiler and exact theorem-level
+axiom audit without sorryAx or unapproved axioms. Prepared source, static
+inspection, and this derivation establish no A_TIER, FORMAL_CLOSURE, or
+UNCONDITIONAL_CLOSURE claim. The external cached run workflow remains the
+verification route. No local Lean or Lake execution was performed.
+
+APPENDIX A. EXACT ROUND-2 LOCAL DECLARATIONS
+
+Every body is prepared source; matching external compiler and exact axiom audit remain pending.
+
+[LE031]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI
+KIND = proof_carrying_definition
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  def complexifyVectorLI : Space →ₗᵢ[ℝ] ComplexVector
+
+[LE032]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_apply
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyVectorLI_apply (v : Space) (j : Fin 3) :
+      complexifyVectorLI v j = (v j : ℂ)
+
+[LE033]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_zero
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyVectorLI_zero : complexifyVectorLI 0 = 0
+
+[LE034]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_norm
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyVectorLI_norm (v : Space) : ‖complexifyVectorLI v‖ = ‖v‖
+
+[LE035]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_norm_sq
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyVectorLI_norm_sq (v : Space) :
+      ‖complexifyVectorLI v‖ ^ 2 = ‖v‖ ^ 2
+
+[LE036]
+DECLARATION = QFA.Endpoints.Representation.complexifyVectorLI_isometry
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyVectorLI_isometry : Isometry complexifyVectorLI
+
+[LE037]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_ae
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_ae (v : RealL2) :
+      (fun x : Space => complexifyL2 v x) =ᵐ[volume]
+        (fun x : Space => complexifyVectorLI (v x))
+
+[LE038]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_norm
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_norm (v : RealL2) : ‖complexifyL2 v‖ = ‖v‖
+
+[LE039]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_add
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_add (v w : RealL2) :
+      complexifyL2 (v + w) = complexifyL2 v + complexifyL2 w
+
+[LE040]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_smul
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_smul (c : ℝ) (v : RealL2) :
+      complexifyL2 (c • v) = c • complexifyL2 v
+
+[LE041]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2LI
+KIND = proof_carrying_definition
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  def complexifyL2LI : RealL2 →ₗᵢ[ℝ] ComplexL2
+
+[LE042]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_isometry
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_isometry : Isometry complexifyL2
+
+[LE043]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_zero
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_zero : complexifyL2 0 = 0
+
+[LE044]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_velocityEnergy
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_velocityEnergy (v : RealL2) :
+      velocityEnergy (complexifyL2 v) = ‖v‖ ^ 2
+
+[LE045]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_gradientEnergy
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_gradientEnergy (G : Fin 3 → RealL2) :
+      gradientEnergy (fun j => complexifyL2 (G j)) = ∑ j : Fin 3, ‖G j‖ ^ 2
+
+[LE046]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_laplacianEnergy
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_laplacianEnergy (L : RealL2) :
+      laplacianEnergy (complexifyL2 L) = ‖L‖ ^ 2
+
+[LE047]
+DECLARATION = QFA.Endpoints.Representation.integrable_compact_test_smul
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.03
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem integrable_compact_test_smul
+      {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+      (v : Lp F 2 (volume : Measure Space)) {ψ : Space → ℝ}
+      (hψ : Continuous ψ) (hcompact : HasCompactSupport ψ) :
+      Integrable (fun x : Space => ψ x • v x) volume
+
+[LE048]
+DECLARATION = QFA.Endpoints.Representation.integral_test_smul_complexifyL2
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.03
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem integral_test_smul_complexifyL2
+      (v : RealL2) (ψ : Space → ℝ)
+      (hInt : Integrable (fun x : Space => ψ x • v x) volume) :
+      (∫ x : Space, ψ x • complexifyL2 v x) =
+        complexifyVectorCLM (∫ x : Space, ψ x • v x)
+
+[LE049]
+DECLARATION = QFA.Endpoints.Representation.weakTestIdentity_complexify
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.03
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem weakTestIdentity_complexify
+      (v G : RealL2) (dψ ψ : Space → ℝ)
+      (hv : Integrable (fun x : Space => dψ x • v x) volume)
+      (hG : Integrable (fun x : Space => ψ x • G x) volume)
+      (hId : (∫ x : Space, dψ x • v x) = -(∫ x : Space, ψ x • G x)) :
+      (∫ x : Space, dψ x • complexifyL2 v x) =
+        -(∫ x : Space, ψ x • complexifyL2 G x)
+
+[LE050]
+DECLARATION = QFA.Endpoints.Representation.complexifyL2_weakDirectionalDerivative
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.03
+FILE = LeanEndpoints/QFA/Endpoints/Representation/Complexification.lean
+SIGNATURE:
+  theorem complexifyL2_weakDirectionalDerivative
+      {v G : RealL2} {e : Space} (h : RealTestWeakDirectionalDerivative v G e) :
+      RealTestWeakDirectionalDerivative (complexifyL2 v) (complexifyL2 G) e
+
+[LE051]
+DECLARATION = QFA.Representation.velocityEnergy_nonneg
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.05, D04.06
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem velocityEnergy_nonneg (v : RealSpatialL2) :
+      0 ≤ velocityEnergy v
+
+[LE052]
+DECLARATION = QFA.Representation.gradientEnergy_nonneg
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.05
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem gradientEnergy_nonneg (G : Fin 3 → RealSpatialL2) :
+      0 ≤ gradientEnergy G
+
+[LE053]
+DECLARATION = QFA.Representation.EnergyProfile.velocityEnergy_aestronglyMeasurable
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.05
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.velocityEnergy_aestronglyMeasurable
+      {ν R : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      (h : EnergyProfile ν a u G) (hR : 0 < R) :
+      AEStronglyMeasurable (fun t => velocityEnergy (u t))
+        (volume.restrict (Ioo (0 : ℝ) R))
+
+[LE054]
+DECLARATION = QFA.Representation.EnergyProfile.gradientEnergy_integrable
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.05
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.gradientEnergy_integrable
+      {ν R : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      (h : EnergyProfile ν a u G) (hR : 0 < R) :
+      Integrable (fun t => gradientEnergy (G t))
+        (volume.restrict (Ioo (0 : ℝ) R))
+
+[LE055]
+DECLARATION = QFA.Representation.EnergyProfile.gradientEnergy_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.05
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.gradientEnergy_intervalIntegrable
+      {ν R : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      (h : EnergyProfile ν a u G) (hR : 0 < R) :
+      IntervalIntegrable (fun t => gradientEnergy (G t)) volume (0 : ℝ) R
+
+[LE056]
+DECLARATION = QFA.Representation.EnergyProfile.velocityEnergy_le_envelope
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.01
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.velocityEnergy_le_envelope
+      {ν : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      (h : EnergyProfile ν a u G) {t : ℝ} (ht : 0 ≤ t) :
+      velocityEnergy (u t) ≤
+        QFA.Energy.envelope ‖a‖ ν (fun r => gradientEnergy (G r)) t
+
+[LE057]
+DECLARATION = QFA.Representation.EnergyProfile.velocityEnergy_le_envelope_ae
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.01, D04.06
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.velocityEnergy_le_envelope_ae
+      {ν R : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      (h : EnergyProfile ν a u G) :
+      ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) R),
+        velocityEnergy (u t) ≤
+          QFA.Energy.envelope ‖a‖ ν (fun r => gradientEnergy (G r)) t
+
+[LE058]
+DECLARATION = QFA.Representation.EnergyProfile.energy_product_budget_Ioo
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D04.06
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.energy_product_budget_Ioo
+      {ν R : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      (h : EnergyProfile ν a u G) (hν : 0 < ν) (hR : 0 < R) :
+      Integrable (fun t => velocityEnergy (u t) * gradientEnergy (G t))
+          (volume.restrict (Ioo (0 : ℝ) R)) ∧
+        (∫ t in Ioo (0 : ℝ) R, velocityEnergy (u t) * gradientEnergy (G t)) ≤
+          ‖a‖ ^ 4 / (4 * ν)
+
+[LE059]
+DECLARATION = QFA.Representation.EnergyProfile.exists_subcritical_good_time
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D02.05, D05.02
+FILE = LeanEndpoints/QFA/Endpoints/Representation/EnergyProfile.lean
+SIGNATURE:
+  theorem EnergyProfile.exists_subcritical_good_time
+      {ν δ : ℝ} {a : RealSpatialL2}
+      {u : ℝ → RealSpatialL2} {G : ℝ → Fin 3 → RealSpatialL2}
+      {Good : ℝ → Prop}
+      (h : EnergyProfile ν a u G) (hν : 0 < ν)
+      (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+      (hgood : ∀ᵐ t ∂volume.restrict (Ioo (0 : ℝ) δ), Good t) :
+      ∃ s, 0 < s ∧ s < δ ∧ Good s ∧
+        velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4
+
+[LE060]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_tendsto_nhdsWithin_right
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.03
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_tendsto_nhdsWithin_right (s : ℝ) :
+      Tendsto (fun t : ℝ => t + s) (𝓝[>] (0 : ℝ)) (𝓝[>] s)
+
+[LE061]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_measurePreserving_Ioc
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_measurePreserving_Ioc (s T : ℝ) :
+      MeasurePreserving (fun t : ℝ => t + s)
+        (volume.restrict (Ioc (0 : ℝ) T))
+        (volume.restrict (Ioc s (T + s)))
+
+[LE062]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_memLp_Ioc
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_memLp_Ioc
+      {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {p : ℝ≥0∞}
+      {s T : ℝ} (hs : 0 ≤ s)
+      (hf : MemLp f p (volume.restrict (Ioc (0 : ℝ) (T + s)))) :
+      MemLp (timeTranslate s f) p (volume.restrict (Ioc (0 : ℝ) T))
+
+[LE063]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_ae_Ioc
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_ae_Ioc {P : ℝ → Prop} {s T : ℝ} (hs : 0 ≤ s)
+      (hP : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)), P r) :
+      ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T), P (r + s)
+
+[LE064]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_intervalIntegral
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_intervalIntegral (f : ℝ → ℝ) (s a b : ℝ) :
+      (∫ t in a..b, timeTranslate s f t) = ∫ t in a + s..b + s, f t
+
+[LE065]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_intervalIntegrable
+      {f : ℝ → ℝ} {s a b : ℝ}
+      (hf : IntervalIntegrable f volume (a + s) (b + s)) :
+      IntervalIntegrable (timeTranslate s f) volume a b
+
+[LE066]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_dissipation_intervalIntegrable
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/TimeTranslate.lean
+SIGNATURE:
+  theorem timeTranslate_dissipation_intervalIntegrable
+      {D : ℝ → ℝ} {s T : ℝ} (hs : 0 ≤ s) (hT : 0 ≤ T)
+      (hD : IntervalIntegrable D volume (0 : ℝ) (T + s)) :
+      IntervalIntegrable (timeTranslate s D) volume (0 : ℝ) T
+
+[LE067]
+DECLARATION = QFA.Endpoints.Restart.energy_le_of_energy_start
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.03
+FILE = LeanEndpoints/QFA/Endpoints/Restart/EnergyShift.lean
+SIGNATURE:
+  theorem energy_le_of_energy_start
+      {E D : ℝ → ℝ} {ν s t : ℝ}
+      (hν : 0 ≤ ν) (hs : 0 ≤ s)
+      (hD : ∀ r : ℝ, 0 ≤ r → 0 ≤ D r)
+      (hE : ∀ r : ℝ, s ≤ r →
+        E r + 2 * ν * (∫ q in s..r, D q) ≤ E s)
+      (hst : s ≤ t) :
+      E t ≤ E s
+
+[LE068]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_energy_from_start
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/EnergyShift.lean
+SIGNATURE:
+  theorem timeTranslate_energy_from_start
+      {E D : ℝ → ℝ} {ν s : ℝ}
+      (hE : ∀ r : ℝ, s ≤ r →
+        E r + 2 * ν * (∫ q in s..r, D q) ≤ E s) :
+      ∀ t : ℝ, 0 ≤ t →
+        timeTranslate s E t +
+          2 * ν * (∫ q in (0 : ℝ)..t, timeTranslate s D q) ≤ E s
+
+[LE069]
+DECLARATION = QFA.Endpoints.Restart.timeTranslate_energy_intervals
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.04
+FILE = LeanEndpoints/QFA/Endpoints/Restart/EnergyShift.lean
+SIGNATURE:
+  theorem timeTranslate_energy_intervals
+      {E D : ℝ → ℝ} {ν s T : ℝ} (hs : 0 ≤ s)
+      (hE : ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) (T + s)),
+        ∀ t ∈ Icc r (T + s),
+          E t + 2 * ν * (∫ q in r..t, D q) ≤ E r) :
+      ∀ᵐ r ∂volume.restrict (Ioc (0 : ℝ) T),
+        ∀ t ∈ Icc r T,
+          timeTranslate s E t +
+            2 * ν * (∫ q in r..t, timeTranslate s D q) ≤ timeTranslate s E r
+
+[LE070]
+DECLARATION = QFA.Endpoints.Restart.strong_tendsto_of_inner_and_norm_bound
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.03
+FILE = LeanEndpoints/QFA/Endpoints/Restart/HilbertTrace.lean
+SIGNATURE:
+  theorem strong_tendsto_of_inner_and_norm_bound
+      {ι : Type*} {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+      {l : Filter ι} {f : ι → E} {a : E}
+      (hinner : Tendsto (fun i => inner ℝ (f i) a) l (𝓝 (‖a‖ ^ 2)))
+      (hbound : ∀ᶠ i in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) :
+      Tendsto f l (𝓝 a)
+
+[LE071]
+DECLARATION = QFA.Endpoints.Restart.strong_right_trace_of_energy_start
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.03
+FILE = LeanEndpoints/QFA/Endpoints/Restart/HilbertTrace.lean
+SIGNATURE:
+  theorem strong_right_trace_of_energy_start
+      {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+      {u : ℝ → H} {D : ℝ → ℝ} {ν s : ℝ}
+      (hν : 0 ≤ ν) (hs : 0 ≤ s)
+      (hD : ∀ r : ℝ, 0 ≤ r → 0 ≤ D r)
+      (hweak : ContinuousOn (fun t => inner ℝ (u t) (u s)) (Ici (0 : ℝ)))
+      (hE : ∀ r : ℝ, s ≤ r →
+        ‖u r‖ ^ 2 + 2 * ν * (∫ q in s..r, D q) ≤ ‖u s‖ ^ 2) :
+      Tendsto u (𝓝[>] s) (𝓝 (u s))
+
+[LE072]
+DECLARATION = QFA.Endpoints.Restart.shifted_strong_trace_of_energy_start
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.03
+FILE = LeanEndpoints/QFA/Endpoints/Restart/HilbertTrace.lean
+SIGNATURE:
+  theorem shifted_strong_trace_of_energy_start
+      {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+      {u : ℝ → H} {D : ℝ → ℝ} {ν s : ℝ}
+      (hν : 0 ≤ ν) (hs : 0 ≤ s)
+      (hD : ∀ r : ℝ, 0 ≤ r → 0 ≤ D r)
+      (hweak : ContinuousOn (fun t => inner ℝ (u t) (u s)) (Ici (0 : ℝ)))
+      (hE : ∀ r : ℝ, s ≤ r →
+        ‖u r‖ ^ 2 + 2 * ν * (∫ q in s..r, D q) ≤ ‖u s‖ ^ 2) :
+      Tendsto (timeTranslate s u) (𝓝[>] (0 : ℝ)) (𝓝 (u s))
+
+[LE073]
+DECLARATION = QFA.Endpoints.Composition.exists_subcritical_good_time_with_strong_trace
+KIND = theorem
+STATUS = A_TIER_CANDIDATE
+APPLIED_AT = D05.02, D05.03
+FILE = LeanEndpoints/QFA/Endpoints/Composition/GoodTimeAndTrace.lean
+SIGNATURE:
+  theorem exists_subcritical_good_time_with_strong_trace
+      {ν δ : ℝ} {a : QFA.Representation.RealSpatialL2}
+      {u : ℝ → QFA.Representation.RealSpatialL2}
+      {G : ℝ → Fin 3 → QFA.Representation.RealSpatialL2}
+      {Good : ℝ → Prop}
+      (h : QFA.Representation.EnergyProfile ν a u G)
+      (hν : 0 < ν)
+      (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+      (hweak : ∀ b : QFA.Representation.RealSpatialL2,
+        ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))
+      (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),
+        Good s ∧ ∀ r : ℝ, s ≤ r →
+          QFA.Representation.velocityEnergy (u r) +
+            2 * ν * (∫ q in s..r, QFA.Representation.gradientEnergy (G q)) ≤
+              QFA.Representation.velocityEnergy (u s)) :
+      ∃ s, 0 < s ∧ s < δ ∧ Good s ∧
+        QFA.Representation.velocityEnergy (u s) *
+          QFA.Representation.gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 ∧
+        (∀ r : ℝ, s ≤ r →
+          QFA.Representation.velocityEnergy (u r) +
+            2 * ν * (∫ q in s..r, QFA.Representation.gradientEnergy (G q)) ≤
+              QFA.Representation.velocityEnergy (u s)) ∧
+        Tendsto u (𝓝[>] s) (𝓝 (u s)) ∧
+        Tendsto (QFA.Endpoints.Restart.timeTranslate s u)
+          (𝓝[>] (0 : ℝ)) (𝓝 (u s))
+
+
+APPENDIX B. ADDITIONAL PINNED SOURCE DECLARATIONS
+
+[EP117] MeasureTheory.Lp.coeFn_add
+APPLIED_AT = D02.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean#L198
+GIT_BLOB = f771df1cab54c03c2feb5ea2a42a4578104d5feb
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory.Lp. Ambient {α E : Type*}, {m : MeasurableSpace α}, {p : ℝ≥0∞}, {μ : Measure α}, [NormedAddCommGroup E]. Both f and g have the same exponent and measure; the equality is of chosen representatives almost everywhere.
+SIGNATURE:
+  theorem coeFn_add (f g : Lp E p μ) : ⇑(f + g) =ᵐ[μ] f + g
+
+[EP118] MeasureTheory.Lp.coeFn_smul
+APPLIED_AT = D02.02
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LpSpace/Basic.lean#L436
+GIT_BLOB = f771df1cab54c03c2feb5ea2a42a4578104d5feb
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory.Lp, section IsBoundedSMul. Ambient {α 𝕜 E : Type*}, {m : MeasurableSpace α}, {p : ℝ≥0∞}, {μ : Measure α}, [NormedAddCommGroup E], [NormedRing 𝕜], [Module 𝕜 E], [IsBoundedSMul 𝕜 E]. No Fact (1 ≤ p) premise is needed for this representative identity.
+SIGNATURE:
+  theorem coeFn_smul (c : 𝕜) (f : Lp E p μ) : ⇑(c • f) =ᵐ[μ] c • ⇑f
+
+[EP119] MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport
+APPLIED_AT = D02.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean#L448
+GIT_BLOB = dc00e515b31d960ce61d0ce79d08ba0d8ab3af83
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory. Ambient {X E : Type*}, [MeasurableSpace X], [TopologicalSpace X], [NormedAddCommGroup E], {μ : Measure X}. Declaration adds the NormedRing scalar, Module/IsBoundedSMul, OpensMeasurableSpace/T2Space, local integrability, continuity, and compact support assumptions explicitly. No finite total measure premise.
+SIGNATURE:
+  theorem LocallyIntegrable.integrable_smul_left_of_hasCompactSupport
+      {𝕜 : Type*} [NormedRing 𝕜] [Module 𝕜 E] [IsBoundedSMul 𝕜 E]
+      [OpensMeasurableSpace X] [T2Space X] {f : X → E} (hf : LocallyIntegrable f μ)
+      {g : X → 𝕜} (hg : Continuous g) (h'g : HasCompactSupport g) :
+      Integrable (fun x ↦ g x • f x) μ
+
+[EP120] ContDiff.continuous_fderiv
+APPLIED_AT = D02.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/ContDiff/Defs.lean#L1272
+GIT_BLOB = aac7759c6a9585e2f80d63f3349039a29261d0e3
+AMBIENT_SOURCE_CONTEXT = Global qualified declaration. Ambient {𝕜 : Type*} [NontriviallyNormedField 𝕜], normed additive groups E,F with NormedSpace 𝕜 instances, {f : E → F}, {n : ℕ∞ω}. The explicit hn is n ≠ 0. Source opens scoped ContDiff.
+SIGNATURE:
+  theorem ContDiff.continuous_fderiv (h : ContDiff 𝕜 n f) (hn : n ≠ 0) :
+      Continuous (fderiv 𝕜 f)
+
+[EP121] HasCompactSupport.fderiv_apply
+APPLIED_AT = D02.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Calculus/FDeriv/Const.lean#L392
+GIT_BLOB = a35d81e96fb6e07aaba3d95e3bf5243ce323942b
+AMBIENT_SOURCE_CONTEXT = Global qualified protected declaration, section Support. Source changes 𝕜 to an explicit parameter using variable (𝕜). Ambient [NontriviallyNormedField 𝕜], E and F with AddCommGroup, Module 𝕜, and TopologicalSpace instances, {f : E → F}. Invocation order supports hcompact.fderiv_apply ℝ e. No differentiability premise is required for compact support of the total fderiv.
+SIGNATURE:
+  protected theorem HasCompactSupport.fderiv_apply (hf : HasCompactSupport f) (v : E) :
+      HasCompactSupport (fderiv 𝕜 f · v)
+
+[EP122] Continuous.clm_apply
+APPLIED_AT = D02.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean#L470
+GIT_BLOB = b14f659d85e0a8199b3b0dad378ead71d1ee76bf
+AMBIENT_SOURCE_CONTEXT = Global qualified declaration. Ambient {𝕜 : Type*} [NontriviallyNormedField 𝕜], E,F seminormed additive groups with NormedSpace 𝕜 instances, and {X : Type*} [TopologicalSpace X]. Continuity of a varying continuous linear map and its argument gives continuity of evaluation.
+SIGNATURE:
+  theorem Continuous.clm_apply {f : X → E →L[𝕜] F} {g : X → E}
+      (hf : Continuous f) (hg : Continuous g) : Continuous (fun x ↦ f x (g x))
+
+[EP123] MeasureTheory.AEStronglyMeasurable.norm
+APPLIED_AT = D02.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean#L503
+GIT_BLOB = 6ea6fa20830981f5e7b178981f05b49a9416c1b6
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory.AEStronglyMeasurable. Ambient source measure is {μ : Measure[m₀] α}, with {m₀ : MeasurableSpace α}. The declaration locally rebinds {β : Type*}, [SeminormedAddCommGroup β], {f : α → β}. It uses the ordinary AEStronglyMeasurable predicate for the measure sigma-algebra; no second-countability or Borel premise.
+SIGNATURE:
+  protected theorem norm {β : Type*} [SeminormedAddCommGroup β] {f : α → β}
+      (hf : AEStronglyMeasurable f μ) : AEStronglyMeasurable (fun x => ‖f x‖) μ
+
+[EP124] MeasureTheory.AEStronglyMeasurable.pow
+APPLIED_AT = D02.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean#L355
+GIT_BLOB = 6ea6fa20830981f5e7b178981f05b49a9416c1b6
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory.AEStronglyMeasurable. Ambient {α β : Type*}, [TopologicalSpace β], {m m₀ : MeasurableSpace α}, {μ : Measure[m₀] α}, {f : α → β}. Declaration adds [Monoid β] [ContinuousMul β]. Predicate AEStronglyMeasurable[m] permits m to differ from the underlying measure sigma-algebra m₀; n is a natural number.
+SIGNATURE:
+  protected theorem pow [Monoid β] [ContinuousMul β] (hf : AEStronglyMeasurable[m] f μ) (n : ℕ) :
+      AEStronglyMeasurable[m] (f ^ n) μ
+
+[EP125] MeasureTheory.MemLp.integrable_norm_pow
+APPLIED_AT = D02.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L209
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory. Ambient {α β : Type*}, {m : MeasurableSpace α}, {μ : Measure α}, [NormedAddCommGroup β]. The declaration binds {p : ℕ}; its Lp exponent is the coercion of p to ℝ≥0∞. Explicit premise p ≠ 0. Unlike the primed neighbor, this theorem has no IsFiniteMeasure μ assumption.
+SIGNATURE:
+  lemma MemLp.integrable_norm_pow {f : α → β} {p : ℕ} (hf : MemLp f p μ) (hp : p ≠ 0) :
+      Integrable (fun x : α => ‖f x‖ ^ p) μ
+
+[EP126] MeasureTheory.integrable_finsetSum
+APPLIED_AT = D02.05
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L448
+GIT_BLOB = 5895b55e6d15c6b006c03eba868bb5c418858fe2
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory, section ESeminormedAddCommMonoid. Ambient domain {α : Type*}, {m : MeasurableSpace α}, {μ : Measure α}; codomain {ε′ : Type*} [TopologicalSpace ε′] [ESeminormedAddCommMonoid ε′] [ContinuousAdd ε′]. Index type ι is arbitrary; s is a Finset. This unprimed declaration returns integrability of the explicit pointwise sum.
+SIGNATURE:
+  theorem integrable_finsetSum {ι} (s : Finset ι) {f : ι → α → ε'}
+      (hf : ∀ i ∈ s, Integrable (f i) μ) : Integrable (fun a => ∑ i ∈ s, f i a) μ
+
+[EP127] MeasureTheory.ae_restrict_mem
+APPLIED_AT = D04.01
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Measure/Restrict.lean#L641
+GIT_BLOB = 1c0d3412b2148bc91c4f4c0b2de56abcc502f975
+AMBIENT_SOURCE_CONTEXT = Namespace MeasureTheory, after end Measure at line547. Ambient {α : Type*}, {m0 : MeasurableSpace α}, {μ : Measure α}, {s : Set α}. The explicit premise is MeasurableSet s; the conclusion holds almost everywhere under μ.restrict s.
+SIGNATURE:
+  theorem ae_restrict_mem (hs : MeasurableSet s) : ∀ᵐ x ∂μ.restrict s, x ∈ s
+
+[EP128] IntervalIntegrable.mono_set
+APPLIED_AT = D05.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L262
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+AMBIENT_SOURCE_CONTEXT = Namespace IntervalIntegrable. Ambient {ε : Type*}, [TopologicalSpace ε], [ENormedAddMonoid ε], [PseudoMetrizableSpace ε], {f : ℝ → ε}, {a b c d : ℝ}, {μ : Measure ℝ}. Source opens scoped Interval: [[c,d]] means uIcc c d, not Icc with an implicit ordering premise.
+SIGNATURE:
+  theorem mono_set (hf : IntervalIntegrable f μ a b) (h : [[c, d]] ⊆ [[a, b]]) :
+      IntervalIntegrable f μ c d
+
+[EP129] IntervalIntegrable.comp_add_right
+APPLIED_AT = D05.04
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L426
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+AMBIENT_SOURCE_CONTEXT = Namespace IntervalIntegrable. Ambient {ε : Type*}, [TopologicalSpace ε], [ENormedAddMonoid ε], [PseudoMetrizableSpace ε], {f : ℝ → ε}, {a b : ℝ}. Measure is explicitly volume. Preserve the full default argument (h : ‖f (min a b)‖ₑ ≠ ∞ := by finiteness). The translated integrability interval is (a-c)..(b-c).
+SIGNATURE:
+  theorem comp_add_right (hf : IntervalIntegrable f volume a b) (c : ℝ)
+      (h : ‖f (min a b)‖ₑ ≠ ∞ := by finiteness) :
+      IntervalIntegrable (fun x ↦ f (x + c)) volume (a - c) (b - c)
+
+[EP130] intervalIntegral.integral_nonneg
+APPLIED_AT = D05.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean#L1390
+GIT_BLOB = 4092210205f534fd53ca3139589e2aa26f88a00d
+AMBIENT_SOURCE_CONTEXT = Namespace intervalIntegral. Ambient {f : ℝ → ℝ}, {a b : ℝ}, {μ : Measure ℝ}; source opens Set and interval notation. Explicit a ≤ b and pointwise nonnegativity on Icc a b. This declaration itself has no IntervalIntegrable premise; integrability must be established separately wherever mathematically required.
+SIGNATURE:
+  theorem integral_nonneg (hab : a ≤ b) (hf : ∀ u, u ∈ Icc a b → 0 ≤ f u) : 0 ≤ ∫ u in a..b, f u ∂μ
+
+[EP131] squeeze_zero'
+APPLIED_AT = D05.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean#L32
+GIT_BLOB = bd5e7cc7d3820491f99e382c0f3240ee6b99ff03
+AMBIENT_SOURCE_CONTEXT = Global declaration. It locally rebinds {α}, so the earlier ambient [PseudoMetricSpace α] does not apply. Inputs: real-valued f,g on an arbitrary source type, an arbitrary Filter α, eventual 0 ≤ f, eventual f ≤ g, and Tendsto g to 0. Source opens Filter and scoped Topology.
+SIGNATURE:
+  lemma squeeze_zero' {α} {f g : α → ℝ} {t₀ : Filter α} (hf : ∀ᶠ t in t₀, 0 ≤ f t)
+      (hft : ∀ᶠ t in t₀, f t ≤ g t) (g0 : Tendsto g t₀ (𝓝 0)) : Tendsto f t₀ (𝓝 0)
+
+[EP132] Real.continuous_sqrt
+APPLIED_AT = D05.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/Real/Sqrt.lean#L126
+GIT_BLOB = e111a1394cab20b87caedeef62f5bd0f7f072141
+AMBIENT_SOURCE_CONTEXT = Namespace Real. Canonical real topology; no extra hypotheses. Local prefix √ denotes Real.sqrt, including its defined value zero on negative inputs.
+SIGNATURE:
+  theorem continuous_sqrt : Continuous (√· : ℝ → ℝ)
+
+[EP133] real_inner_self_eq_norm_sq
+APPLIED_AT = D05.03
+SOURCE = https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Analysis/InnerProductSpace/Basic.lean#L396
+GIT_BLOB = df294ad3a9269545374b410a9f806932b4417025
+AMBIENT_SOURCE_CONTEXT = Global declaration, section BasicProperties_Seminormed. Relevant ambient {F : Type*}, [SeminormedAddCommGroup F], [InnerProductSpace ℝ F]. Source opens scoped InnerProductSpace, so ⟪x,x⟫_ℝ is the real inner product. No CompleteSpace or NormedAddCommGroup strengthening is assumed.
+SIGNATURE:
+  theorem real_inner_self_eq_norm_sq (x : F) : ⟪x, x⟫_ℝ = ‖x‖ ^ 2
+
+END OF QUASI_FEFFERMAN_A_REPRESENTATION_RESTART_B_TIER

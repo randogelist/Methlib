@@ -1,0 +1,324 @@
+{
+  "version": "0.4.0",
+  "import": "QFA.Assembly",
+  "source_parent_commit": "e781dbbcf332445c0c9af32b6b4b40fd1626b121",
+  "status": "A_TIER_CANDIDATE",
+  "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
+  "new_declaration_ids": [
+    "LE094",
+    "LE095",
+    "LE096",
+    "LE097",
+    "LE098",
+    "LE099",
+    "LE100",
+    "LE101",
+    "LE102",
+    "LE103",
+    "LE104",
+    "LE105",
+    "LE106",
+    "LE107",
+    "LE108"
+  ],
+  "modules": [
+    {
+      "module": "QFA.Assembly.Representation",
+      "indices": [
+        "LE074",
+        "LE075",
+        "LE076",
+        "LE077"
+      ],
+      "input": "Actual compact-test first/diagonal-second L2 witnesses and L=sum H",
+      "output": "Complexified witness data; conditional Schwartz/spectral realization",
+      "unresolved_analytic_inputs": [
+        "LC004",
+        "LC001"
+      ]
+    },
+    {
+      "module": "QFA.Assembly.Restart",
+      "indices": [
+        "LE078",
+        "LE079",
+        "LE080",
+        "LE081",
+        "LE082",
+        "LE083",
+        "LE084"
+      ],
+      "input": "EnergyProfile, nu>0, strict QFA cutoff, weak pairing continuity, AE(Good AND EnergyStart)",
+      "output": "Strict good time, retained energy start, shifted EnergyProfile, weak continuity, strong trace",
+      "unresolved_analytic_inputs": [],
+      "not_concluded": "Physical weak equation or LH membership"
+    },
+    {
+      "module": "QFA.Assembly.AnalyticInputs",
+      "indices": [
+        "LE085",
+        "LE086",
+        "LE087",
+        "LE088",
+        "LE089"
+      ],
+      "input": "Actual L2 norms, SchwartzDerivativeWitnesses, LC002/LC003, convection and enstrophy inequalities",
+      "output": "ScalarProfile, exact nonlinear coefficient, explicit positive absorption margin",
+      "unresolved_analytic_inputs": [
+        "LC002",
+        "LC003"
+      ],
+      "physical_identifications": [
+        "N = absolute nonlinear pairing",
+        "d = actual enstrophy derivative"
+      ]
+    },
+    {
+      "module": "QFA.Assembly.Comparison",
+      "indices": [
+        "LE090",
+        "LE091",
+        "LE092",
+        "LE093"
+      ],
+      "input": "AE Good, common right traces, continuous nonnegative g, integrable g and g*norm(u-v)^2, all-upper-endpoint relative energy",
+      "output": "Equality on positive/closed horizons and all nonnegative time; restricted singleton with reference membership",
+      "unresolved_analytic_inputs": [],
+      "physical_inputs": [
+        "Cross-testing inequality",
+        "Coefficient and product integrability",
+        "Initial values for equality at zero",
+        "Reference LH membership for singleton"
+      ]
+    },
+    {
+      "module": "QFA.Assembly.AnalyticChain",
+      "indices": [
+        "LE094",
+        "LE095",
+        "LE096",
+        "LE097"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "derivation_locations": [
+        "D06.07"
+      ],
+      "derivation": "QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt"
+    },
+    {
+      "module": "QFA.Assembly.TailComparison",
+      "indices": [
+        "LE098",
+        "LE099",
+        "LE100",
+        "LE101",
+        "LE102",
+        "LE103",
+        "LE104"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "derivation_locations": [
+        "D09.04",
+        "D10.07"
+      ],
+      "derivation": "QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt"
+    },
+    {
+      "module": "QFA.Assembly.Chain",
+      "indices": [
+        "LE105",
+        "LE106"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "derivation_locations": [
+        "D05.02",
+        "D09.04",
+        "D10.07"
+      ],
+      "derivation": "QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt"
+    },
+    {
+      "module": "QFA.Assembly.Integrated",
+      "indices": [
+        "LE107",
+        "LE108"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "derivation_locations": [
+        "D06.07",
+        "D07.01",
+        "D10.07"
+      ],
+      "derivation": "QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt"
+    }
+  ],
+  "analytic_targets": [
+    {
+      "id": "LC001",
+      "name": "QFA.Endpoints.Agmon.WholeSpaceSpectralEndpoint",
+      "step": "D06.02",
+      "source": "QFA/Endpoints/Agmon/Contracts.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    },
+    {
+      "id": "LC002",
+      "name": "QFA.Endpoints.Agmon.WholeSpaceInterpolationEndpoint",
+      "step": "D06.07",
+      "source": "QFA/Endpoints/Agmon/Contracts.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    },
+    {
+      "id": "LC003",
+      "name": "QFA.Endpoints.Agmon.WholeSpaceAgmonEndpoint",
+      "step": "D06.06",
+      "source": "QFA/Endpoints/Agmon/Contracts.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    },
+    {
+      "id": "LC004",
+      "name": "QFA.Assembly.Representation.CompactToSchwartzEndpoint",
+      "step": "D06.02",
+      "source": "QFA/Assembly/Representation.lean",
+      "status": "PROP_TARGET_NO_SUPPLIED_INHABITANT"
+    }
+  ],
+  "remaining_physical_stages": [
+    {
+      "id": "AO01",
+      "locations": [
+        "D02.05",
+        "C01"
+      ],
+      "target": "Actual whole-space LH existence, representatives, weak gradients, EnergyProfile and full-measure Good predicate"
+    },
+    {
+      "id": "AO02",
+      "locations": [
+        "D05.05",
+        "AD02"
+      ],
+      "target": "Translated weak momentum equation with the selected initial boundary term; actual shifted LH membership"
+    },
+    {
+      "id": "AO03",
+      "locations": [
+        "D06.02",
+        "AD08"
+      ],
+      "target": "LC004 compact-to-Schwartz extension and LC001 weighted Fourier identities"
+    },
+    {
+      "id": "AO04",
+      "locations": [
+        "D06.03",
+        "D06.04",
+        "D06.05a",
+        "D06.05b",
+        "D06.05c",
+        "D06.06",
+        "D06.07",
+        "AD03"
+      ],
+      "target": "LC002 interpolation and LC003 actual Agmon representative with the exact constant"
+    },
+    {
+      "id": "AO05",
+      "locations": [
+        "C02",
+        "C03",
+        "D07.01"
+      ],
+      "target": "Local H1 strong NSE, actual nonlinear/enstrophy identities and continuation alternative; physical derivative-value identification"
+    },
+    {
+      "id": "AO06",
+      "locations": [
+        "D07.02",
+        "D07.03",
+        "D07.04",
+        "AD04"
+      ],
+      "target": "Temporal subcritical invariant, uniform positive margin, enstrophy budget and global continuation"
+    },
+    {
+      "id": "AO07",
+      "locations": [
+        "D08.01",
+        "D08.02",
+        "D08.03",
+        "D08.04",
+        "D09.01",
+        "D09.02",
+        "C04",
+        "AD05"
+      ],
+      "target": "Actual comparison coefficient/product integrability, legitimate cross-testing and all-time upper endpoints"
+    },
+    {
+      "id": "AO08",
+      "locations": [
+        "D10.01",
+        "D10.02",
+        "D10.03",
+        "D10.04",
+        "D10.05",
+        "D10.06",
+        "D10.07",
+        "AD06",
+        "AD07"
+      ],
+      "target": "Positive-time smoothing, pressure, full NSE residual elimination and exact root assembly; actual reference LH membership"
+    }
+  ],
+  "verified_base_external_execution": {
+    "lean": "4.33.0",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "runner": "run.cmd",
+    "cache_policy": "MATHLIB_CACHE_AND_INCREMENTAL_LAKE",
+    "compiler_status": "PASS",
+    "axiom_audit_status": "PASS",
+    "local_lean_executions": 0,
+    "execution": "GITHUB_ACTIONS",
+    "status": "PASS",
+    "compiled_commit": "97d745678734a2bb9d7c1d9d4ae05d1a36c0a162",
+    "run_id": 43528295686,
+    "run_attempt": 1,
+    "run_url": "https://github.com/randogelist/Methlib/actions/runs/43528295686",
+    "compiler_record": "Lean (version 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+    "compiled_source_manifest_sha256": "6c25121124c5f6bf461d932921b54bc3ffdcceb5648d91fb7184f4fa98cd75bf",
+    "evidence_directory": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162",
+    "evidence_files": {
+      "VERIFICATION.txt": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/VERIFICATION.txt",
+      "github-run.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/github-run.json",
+      "source-manifest.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/source-manifest.json",
+      "lean-version.txt": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/lean-version.txt",
+      "build.log": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/build.log",
+      "axioms.log": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/axioms.log",
+      "status.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/status.json",
+      "record-sha256.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/record-sha256.json"
+    },
+    "record_sha256": "f321ac6d969104979adc541f6d142bc780d6ca3930a10879ffc0e76734022b74",
+    "physical_QFA_root_inferred": false
+  },
+  "external_verification": {
+    "lean": "4.33.0",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "runner": "run.cmd",
+    "cache_policy": "MATHLIB_CACHE_AND_INCREMENTAL_LAKE",
+    "compiler_status": "PENDING_FOR_LE094_LE108",
+    "axiom_audit_status": "PENDING_FOR_LE094_LE108",
+    "local_lean_executions": 0,
+    "physical_QFA_root_inferred": false
+  },
+  "chain_manifest": "chain-manifest.json",
+  "conditional_analytic_relations": [
+    {
+      "premise": "LC001",
+      "conclusion": "LC002",
+      "declaration": "QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint",
+      "id": "LE095",
+      "status": "A_TIER_CANDIDATE",
+      "unconditional_inhabitant_supplied": false
+    }
+  ]
+}

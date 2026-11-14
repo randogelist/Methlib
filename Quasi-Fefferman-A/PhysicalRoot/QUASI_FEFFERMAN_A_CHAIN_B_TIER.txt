@@ -1,0 +1,1350 @@
+QUASI_FEFFERMAN_A_CHAIN_B_TIER
+VERSION = 1.0.0
+PACKAGE_VERSION = 0.4.0
+MODE = B_TIER_DERIVATION
+MARKER = !=B_TIER
+EXACT_SCOPE = LE094-LE108; CONDITIONAL_CLASS_REFERENCE_AND_ANALYTIC_COMPOSITION
+BASELINE = LE001-LE093; EXTERNALLY_VERIFIED
+LEAN_STATUS_AT_SOURCE_PREPARATION = A_TIER_CANDIDATE
+PHYSICAL_QFA_ROOT = B_TIER_ROOT_FORMALIZATION_PENDING
+MATHLIB_PIN = db584cd6d46c92f209a44c0f1c829460d327499d
+EXTERNAL_COMPILER = NATIVE_WINDOWS_LEAN_4.33.0
+EXECUTION = CACHED_GITHUB_CI_ONLY
+LOCAL_LEAN_LAKE_EXECUTIONS = 0
+
+CANONICAL_DECLARATION:
+  QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs
+
+CHAIN:
+  compact derivative data + LC004 + LC001 + LC003
+    -> actual spectral interpolation (LC002 derived from LC001)
+    -> real-energy pointwise nonlinear absorption;
+  explicit reference-construction-from-absorption interface
+    -> subcritical reference construction;
+  actual EnergyProfile -> strict selected restart + RestartData;
+  explicit class realization + primitive comparison inputs
+    -> equality on the selected closed tail;
+  actual positive-shift reference admission + fresh comparison
+    -> restricted singleton at every strict post-cutoff time.
+
+All remaining physical/analytic ports occur explicitly in the exact types.
+Reference and Admissible are parameters; no interpretation as physical NSE
+classes, smoothness, pressure, or frozen root conclusion follows automatically.
+
+
+QUASI_FEFFERMAN_A_ANALYTIC_CHAIN_B_TIER
+MODE = B_TIER_DERIVATION
+MATHEMATICAL_STATUS = COMPLETE_SCOPED_DERIVATION
+LEAN_STATUS = A_TIER_CANDIDATE
+LOCAL_LEAN_EXECUTIONS = 0
+PHYSICAL_ROOT_STATUS = B_TIER_ROOT_FORMALIZATION_PENDING
+
+SOURCE = Quasi-Fefferman-A/LeanEndpoints/QFA/Assembly/AnalyticChain.lean
+INTEGRATED_SOURCE = Quasi-Fefferman-A/LeanEndpoints/QFA/Assembly/Integrated.lean
+NAMESPACE = QFA.Assembly.AnalyticChain
+BASELINE = Lean 4.33.0
+MATHLIB = db584cd6d46c92f209a44c0f1c829460d327499d
+PREVIOUS_VERIFIED_SCOPE = LE001-LE093
+NEW_LOCAL_IDS = LE094-LE097
+INTEGRATED_LOCAL_IDS = LE107-LE108
+
+Exact public declarations:
+  LE094 interpolation_of_nativeSpectralRealization
+  LE095 interpolationEndpoint_of_spectralEndpoint
+  LE096 exists_profile_of_compactData
+  LE097 exists_absorption_of_compactData
+
+The mathematical implications below are completely derived from their stated
+premises. Prepared Lean source is not external compiler or axiom-audit evidence.
+LC001, LC003 and LC004 retain explicit input status. LC002 is constructed
+conditionally from LC001; no unconditional inhabitant of LC002 is supplied.
+No temporal invariant, continuation theorem, physical solution construction,
+or physical QFA root theorem is asserted.
+
+[A00] FIXED CARRIERS, QUANTITIES AND CONTRACTS
+
+Space = EuclideanSpace R (Fin 3), with full Lebesgue volume.
+RealVector = EuclideanSpace R (Fin 3).
+ComplexVector = EuclideanSpace C (Fin 3).
+RealL2 = Lp RealVector 2 volume.
+ComplexL2 = Lp ComplexVector 2 volume.
+
+For complex fields v,L : ComplexL2 and G : Fin 3 -> ComplexL2:
+
+  E = velocityEnergy v = ||v||_2^2,
+  D = gradientEnergy G = sum_j ||G_j||_2^2,
+  Z = laplacianEnergy L = ||L||_2^2.
+
+Native Fourier normalization is exp(-2*pi*i*<x,k>). Define
+
+  q(k) = ||Fourier(v)(k)||^2,
+  w(k) = (2*pi)^2 ||k||^2.
+
+Thus q(k)>=0 and
+
+  w(k)^2 q(k) = (2*pi)^4 ||k||^4 ||Fourier(v)(k)||^2.
+
+NativeSpectralRealization v G L supplies exactly:
+
+  q, w*q, w^2*q are integrable with respect to full volume;
+  E = integral q;
+  D = integral w*q;
+  Z = integral w^2*q.
+
+The last integrability and identity are rewritten using the displayed
+polynomial equality; no new moment-integrability hypothesis is introduced.
+
+SchwartzDerivativeWitnesses v G L supplies the actual first directional
+tempered-distribution identities and Laplacian identity.
+
+LC001 / WholeSpaceSpectralEndpoint:
+  for all complex v,G,L,
+  SchwartzDerivativeWitnesses v G L -> NativeSpectralRealization v G L.
+
+LC002 / WholeSpaceInterpolationEndpoint:
+  for all complex v,G,L,
+  SchwartzDerivativeWitnesses v G L -> D^2 <= E*Z.
+
+LC003 / WholeSpaceAgmonEndpoint:
+  for all complex v,G,L with SchwartzDerivativeWitnesses v G L,
+  there exists bounded continuous V : Space -> ComplexVector such that
+
+    V = v almost everywhere,
+    ||V||_infinity^2 <= sqrt(D*Z)/(2*pi).
+
+LC004 / CompactToSchwartzEndpoint:
+  actual compact-real-test first and diagonal-second derivative data,
+  together with the actual L2 Laplacian sum, imply the existing Schwartz
+  derivative witnesses on complex fields.
+
+All quantifiers above are those of the existing contracts. No new predicate
+is substituted for an existing analytic endpoint.
+
+[A01] SPECTRAL REALIZATION IMPLIES INTERPOLATION
+
+Exact theorem:
+
+  LE094 / interpolation_of_nativeSpectralRealization
+    {v L : ComplexL2} {G : Fin 3 -> ComplexL2}
+    (hSpectral : NativeSpectralRealization v G L) :
+    gradientEnergy G ^ 2 <= velocityEnergy v * laplacianEnergy L.
+
+Fix any x in R. The quantities x*x and 2*x are constants in k. Since q and
+w*q are integrable, so are
+
+  k |-> (x*x) q(k),
+  k |-> (2*x) w(k) q(k).
+
+ENTRYPOINT AT APPLICATION:
+  MeasureTheory.Integrable.const_mul
+  Mathlib/MeasureTheory/Function/L1Space/Integrable.lean:1039.
+
+Their difference is integrable. Adding the supplied integrable w^2*q
+preserves integrability. Pointwise polynomial expansion gives
+
+  (x-w(k))^2 q(k)
+    = (x*x) q(k) - (2*x) w(k) q(k) + w(k)^2 q(k).
+
+ENTRYPOINTS AT APPLICATION:
+  MeasureTheory.Integrable.sub
+  Mathlib/MeasureTheory/Function/L1Space/Integrable.lean:541.
+  MeasureTheory.integral_congr_ae
+  Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:299.
+
+The equality is pointwise and hence almost everywhere. Integral linearity
+is applied only to the explicitly integrable summands. Constant extraction
+and the three supplied spectral identities therefore give
+
+  integral (x-w)^2 q
+    = (x*x) integral q - (2*x) integral w*q + integral w^2*q
+    = E*(x*x) + (-2*D)*x + Z.
+
+ENTRYPOINTS AT APPLICATION:
+  MeasureTheory.integral_add
+  Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:237.
+  MeasureTheory.integral_sub
+  Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:261.
+  MeasureTheory.integral_const_mul
+  Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:288.
+
+Both (x-w(k))^2 and q(k) are nonnegative. Consequently
+
+  0 <= integral (x-w)^2 q = E*(x*x) + (-2*D)*x + Z
+
+for every x in R.
+
+ENTRYPOINT AT APPLICATION:
+  MeasureTheory.integral_nonneg
+  Mathlib/MeasureTheory/Integral/Bochner/Basic.lean:612.
+
+A real quadratic nonnegative at every real x has nonpositive discriminant:
+
+  discrim E (-2*D) Z <= 0.
+
+ENTRYPOINT AT APPLICATION:
+  EP140 / discrim_le_zero
+  Mathlib/Algebra/QuadraticDiscriminant.lean:124.
+  Exact signature:
+    variable {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
+      {a b c : K}
+    theorem discrim_le_zero (h : ∀ x : K, 0 ≤ a * (x * x) + b * x + c) :
+      discrim a b c ≤ 0
+  Here K=R, a=E, b=-2*D, c=Z.
+  Pinned source URL:
+    https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/QuadraticDiscriminant.lean#L124
+
+By definition discrim a b c = b^2 - 4*a*c. Hence
+
+  4*D^2 - 4*E*Z <= 0,
+  D^2 <= E*Z.
+
+No division by E, D or Z occurs. The derivation includes E=0, D=0 and Z=0.
+The discriminant implication includes degenerate constant/linear cases.
+No positivity of E beyond the spectral contract is added to the theorem.
+
+[A02] CONDITIONAL ANALYTIC ENDPOINT COMPOSITION
+
+Exact theorem:
+
+  LE095 / interpolationEndpoint_of_spectralEndpoint
+    (hSpectral : WholeSpaceSpectralEndpoint) :
+    WholeSpaceInterpolationEndpoint.
+
+Fix arbitrary complex v,G,L and SchwartzDerivativeWitnesses v G L.
+Apply hSpectral to these exact fields and witnesses. It yields the exact
+NativeSpectralRealization v G L required by [A01]. Applying [A01] yields
+D^2<=E*Z. Universal introduction over v,G,L and their derivative witnesses
+is precisely WholeSpaceInterpolationEndpoint.
+
+The logical implication is
+
+  LC001 -> LC002.
+
+Its proof contains no hypothesis asserting LC002 and no new axiom. The input
+LC001 remains unresolved. Therefore the implication does not establish
+an unconditional inhabitant of LC001 or LC002.
+
+[A03] REAL DERIVATIVE DATA TO REPRESENTATIVE AND SCALAR PROFILE
+
+Let v,L : RealL2 and G,H : Fin 3 -> RealL2. Supply
+
+  hDerivatives : CompactDerivativeData v G H L.
+
+This means, for every coordinate j, that G_j is the supplied real-compact-test
+weak directional derivative of v, that H_j is the corresponding supplied
+directional derivative of G_j, and that L=sum_j H_j in the actual L2 space.
+It is stronger than a collection of unrelated scalar norm values. Its
+existence is not inferred for an arbitrary trajectory.
+
+Define real energy readouts
+
+  E_R = ||v||_2^2,
+  D_R = sum_j ||G_j||_2^2,
+  Z_R = ||L||_2^2.
+
+Additional premises:
+
+  hExtension : LC004;
+  hSpectral : LC001;
+  hAgmon : LC003;
+  N in R, N>=0;
+  for every bounded continuous V : Space -> ComplexVector,
+    V = complexifyL2(v) almost everywhere ->
+    N <= ||V||_infinity * sqrt(D_R) * sqrt(Z_R).
+
+Exact output of LE096 / exists_profile_of_compactData:
+
+  SchwartzDerivativeWitnesses
+    complexifyL2(v) (j |-> complexifyL2(G_j)) complexifyL2(L),
+  and NativeSpectralRealization for those same three complex fields,
+  and there exists bounded continuous V such that
+    V = complexifyL2(v) almost everywhere,
+    ScalarProfile E_R D_R Z_R ||V||_infinity N.
+
+Derivation:
+
+1. Existing LE075 transports each supplied derivative identity and L=sum H
+   through the real linear L2 isometry. Existing LE076 applies the explicit
+   LC004 input to the transported data. This gives hSchwartz for the exact
+   complexified fields, without asserting existence of new real witnesses.
+
+2. The explicit LC001 input applied to hSchwartz gives the retained native
+   spectral realization. By [A02], the same LC001 input supplies the LC002
+   argument required by the already verified field-profile assembler LE087.
+
+3. LC003 applied to hSchwartz gives a bounded continuous V, its exact
+   almost-everywhere equality to complexifyL2(v), and the Agmon inequality.
+   The universally quantified convection input is now applied to this V
+   with that exact equality.
+
+4. Existing LE044-LE046 preserve all three squared energy readouts:
+
+     velocityEnergy(complexifyL2(v)) = E_R,
+     gradientEnergy(j |-> complexifyL2(G_j)) = D_R,
+     laplacianEnergy(complexifyL2(L)) = Z_R.
+
+   In particular the real convection input is exactly the complex convection
+   input required by LE087 after rewriting these established identities.
+
+5. LE087 yields the actual representative and ScalarProfile on the complex
+   readouts; LE044-LE046 rewrite that profile to E_R,D_R,Z_R. Every positivity
+   field of the profile is proved from squared norms, a finite sum of squared
+   norms, the bounded continuous function norm, or the explicit N>=0 premise.
+
+Thus the profile contains exactly
+
+  E_R,D_R,Z_R,A,N >= 0, where A=||V||_infinity;
+  D_R^2 <= E_R*Z_R;
+  A^2 <= sqrt(D_R*Z_R)/(2*pi);
+  N <= A*sqrt(D_R)*sqrt(Z_R).
+
+The final representative agrees almost everywhere with the complexification
+of the actual input field. It is not an unrelated amplitude witness.
+No norm of an operator-valued derivative replaces the Frobenius sum D_R.
+
+[A04] REAL DERIVATIVE DATA TO EXPLICIT NONLINEAR ABSORPTION
+
+Exact theorem: LE097 / exists_absorption_of_compactData.
+
+Retain every premise of [A03]. Supply additional real numbers d,nu and
+
+  nu>0,
+  E_R*D_R < 4*pi^2*nu^4,
+  d/2 + nu*Z_R <= N.
+
+Define the exact nested-square-root coefficient
+
+  rho = nonlinearCoefficient E_R D_R
+      = sqrt(sqrt((E_R*D_R)/(4*pi^2))).
+
+The theorem returns the Schwartz and native spectral witnesses from [A03],
+and returns V and eta satisfying all of
+
+  V = complexifyL2(v) almost everywhere;
+  ScalarProfile E_R D_R Z_R ||V||_infinity N;
+  eta = nu-rho;
+  eta>0;
+  4*pi^2*N^4 <= (E_R*D_R)*Z_R^4;
+  N <= (nu-eta)*Z_R;
+  d + 2*eta*Z_R <= 0.
+
+Complete scalar derivation, using the retained ScalarProfile:
+
+  A^2 <= sqrt(D_R*Z_R)/(2*pi)
+    -> 4*pi^2*A^4 <= D_R*Z_R,
+
+because 2*pi>0 and D_R*Z_R>=0. The convection bound and N>=0 give
+
+  N^4 <= A^4*D_R^2*Z_R^2.
+
+Multiplication by 4*pi^2, then the fourth-power Agmon bound, give
+
+  4*pi^2*N^4 <= D_R^3*Z_R^3.
+
+Multiplying D_R^2<=E_R*Z_R by the nonnegative D_R*Z_R^3 yields
+
+  D_R^3*Z_R^3 <= (E_R*D_R)*Z_R^4.
+
+This is the exact nonlinear fourth-power conclusion. Existing verified
+LE017 / ScalarProfile.nonlinear_fourth_power supplies this deterministic implication.
+
+The coefficient is nonnegative and satisfies
+
+  4*pi^2*rho^4 = E_R*D_R.
+
+The fourth-power estimate therefore gives N^4 <= (rho*Z_R)^4. Since
+rho*Z_R>=0, fourth-power order reflection yields N<=rho*Z_R. This is the
+existing LE021 / ScalarProfile.nonlinear_le_coefficient conclusion. No cancellation
+by Z_R is needed.
+
+By strict subcriticality and nu>0,
+
+  rho^4 < nu^4,
+  rho < nu,
+  eta=nu-rho>0.
+
+Existing LE025 / ScalarProfile.viscosity_margin_pos gives the strict positivity.
+The identity nu-(nu-rho)=rho rewrites N<=rho*Z_R as
+
+  N <= (nu-eta)*Z_R.
+
+Finally,
+
+  d/2 + nu*Z_R <= N <= rho*Z_R
+    -> d + 2*(nu-rho)*Z_R <= 0
+    -> d + 2*eta*Z_R <= 0.
+
+This is existing LE024 / ScalarProfile.enstrophy_absorption with the exact retained
+enstrophy premise. Every zero-energy case remains included. In particular
+Z_R=0 yields N=0 and d<=0; no division by Z_R or its norm is performed.
+
+[A05] EXACT CLOSURE BOUNDARY
+
+PROVED MATHEMATICAL IMPLICATIONS:
+  NativeSpectralRealization -> interpolation.
+  LC001 -> LC002.
+  Actual real compact derivative data + LC004 + LC001 + LC003 + convection
+    -> exact complex derivative/spectral witnesses + actual representative
+       + real-energy ScalarProfile.
+  The same inputs + strict subcriticality + supplied enstrophy inequality
+    -> exact nonlinear bound + explicit positive pointwise absorption margin.
+
+RETAINED UNRESOLVED INPUTS:
+  LC001: actual spectral realization from Schwartz derivative witnesses.
+  LC003: exact Agmon representative and constant.
+  LC004: compact-real-test to Schwartz derivative extension.
+  Actual supplied real first/diagonal-second derivatives and Laplacian sum.
+  N>=0 and convection estimate for the actual representative.
+  d/2+nu*Z_R<=N and the strict product bound.
+
+NO ADDITIONAL ASSERTIONS:
+  d is not identified with a temporal derivative.
+  N is not identified with a Navier-Stokes nonlinear integral.
+  H2/Laplacian witnesses are not asserted at an arbitrary H1 restart time.
+  The pointwise margin is not asserted uniform on a time interval.
+  An invariant region, local strong solver and global continuation are absent.
+  Physical comparison, pressure, smoothing and exact QFA root assembly remain
+  separate obligations. Original-data trajectory uniqueness is not asserted.
+
+EXTERNAL VERIFICATION:
+  No local Lean or Lake was executed.
+  Matching cached native Windows compiler and exact declaration-level axiom
+  evidence are required before promotion of any new Lean declaration.
+  The new proof import is Mathlib.Algebra.QuadraticDiscriminant.
+  Existing proof modules and all prior LE001-LE093 statements remain unchanged.
+
+
+
+QFA_TAIL_COMPARISON_B_TIER
+MODE = B_TIER_DERIVATION
+MATHEMATICAL_STATUS = COMPLETE_FOR_THE_EXPLICIT_STATEMENTS_BELOW
+MARKER = !=B_TIER
+NEW_LEAN_STATUS = A_TIER_CANDIDATE
+EXTERNAL_COMPILER_AND_EXACT_AXIOM_AUDIT = PENDING_FOR_NEW_DECLARATIONS
+LOCAL_LEAN_EXECUTIONS = 0
+
+MODULE = QFA.Assembly.TailComparison
+FILE = Quasi-Fefferman-A/LeanEndpoints/QFA/Assembly/TailComparison.lean
+NEW_THEOREM_INDICES = LE098-LE104
+IMPORTS = QFA.Assembly.Comparison; QFA.Assembly.Restart
+MATHLIB = db584cd6d46c92f209a44c0f1c829460d327499d
+EXTERNAL_TOOLCHAIN = leanprover/lean4:v4.33.0
+EXISTING_LE001_LE093_SOURCE_MODIFICATIONS = NONE
+FROZEN_PHYSICAL_QFA_ROOT = UNCHANGED; NOT_CONCLUDED_BY_THIS_MODULE
+
+[00] EXACT SCOPE
+
+V is an arbitrary normed additive commutative group. Completeness,
+inner-product structure and a spatial PDE interpretation are not required
+for the generic comparison and set-image theorems.
+
+Time trajectories u,v are functions R -> V. Their negative-time values are
+auxiliary. Define
+
+  TimeNonnegative := {t : R // 0 <= t},
+  restrictNonnegative(u)(t) := u(t.val),
+  tau_s(u)(t) := u(t+s).
+
+The Lean statements expand restrictNonnegative explicitly. They do not
+introduce equality of total-real trajectory extensions.
+
+For one constructor, V is the existing concrete carrier
+
+  QFA.Representation.RealSpatialL2
+    = Lp(R^3; R^3, exponent 2, full spatial Lebesgue volume).
+
+That constructor uses the strong trace already supplied by RestartData.
+Its energy profile and directional fields are not promoted to a physical
+weak equation or physical weak-gradient identification.
+
+The new endpoint connects the comparison stage of root derivation [10]
+to the restricted trajectory-class singleton stage [12], including a
+further time shift delta>s. The physical construction and admissibility
+of the reference trajectory remain explicit inputs.
+
+[01] FINITE COMPARISON DATA
+
+For u,v : R -> V, a0 : V, T : R, g : R -> R and Good : R -> Prop,
+
+  ComparisonData(u,v,a0,T,g,Good)
+
+is the conjunction of the following ten actual premises:
+
+  CD01. g is continuous on (0,T].
+  CD02. g(t)>=0 for all t in (0,T].
+  CD03. g is genuinely interval-integrable on 0..T.
+  CD04. r |-> g(r)*||u(r)-v(r)||^2 is genuinely interval-integrable on 0..T.
+  CD05. Good holds almost everywhere for volume restricted to (0,T).
+  CD06. u(t) -> a0 strongly as t -> 0+.
+  CD07. v(t) -> a0 strongly as t -> 0+.
+  CD08. u(0)=a0.
+  CD09. v(0)=a0.
+  CD10. For every r in (0,T) satisfying Good(r), and every t in [r,T],
+
+      ||u(t)-v(t)||^2
+        <= ||u(r)-v(r)||^2
+           + integral_r^t g(q)*||u(q)-v(q)||^2 dq.
+
+T>0 is required by the finite comparison theorem; it is not silently
+included in the data definition. A strong right trace does not determine
+a separately assigned total-real value at zero, hence CD08 and CD09 are
+retained independently of CD06 and CD07.
+
+No data field asserts equality of trajectories. No numerical bound on the
+coefficient integral or sequence of admissible initial times is assumed.
+
+Lean field names:
+  coefficient_continuous;
+  coefficient_nonnegative;
+  coefficient_integrable;
+  relative_energy_integrable;
+  good_ae;
+  left_trace;
+  right_trace;
+  left_initial;
+  right_initial;
+  relative_energy.
+
+[02] FINITE CLOSED-HORIZON COMPARISON
+
+THEOREM LE098: ComparisonData.eq_on_Icc.
+
+  ComparisonData(u,v,a0,T,g,Good) AND T>0
+    ==> forall t in [0,T], u(t)=v(t).
+
+PROOF.
+  Apply the previously verified exact endpoint
+
+    LE091:
+    QFA.Assembly.Comparison.eq_on_Icc_of_ae_relative_energy.
+
+  Its arguments, in order, are T>0 and CD01, CD02, CD03, CD04, CD05,
+  CD06, CD07, CD08, CD09, CD10. No premise is weakened or omitted.
+
+  The mathematical content of the finite comparison is as follows.
+  Write e(t)=||u(t)-v(t)||^2. Then e(t)>=0 for every t.
+  By CD05, choose r_n in Good intersect (0,min(T,1/(n+1))). These intervals
+  have positive volume; their intersection with the full-measure Good set
+  is nonempty. Thus r_n>0, r_n<T, and r_n->0.
+
+  CD06 and CD07 imply e(r_n)->0. Fix t in (0,T]. Eventually r_n<t.
+  On [r_n,T], g is continuous and nonnegative. CD04 restricts to actual
+  integrability of g*e on this subinterval. CD10 is available at the
+  admissible start r_n and at every upper endpoint, including t and T.
+
+  Integral Gronwall gives
+
+    e(t) <= e(r_n)*exp(integral_(r_n)^t g).
+
+  This Gronwall statement does not require continuity of e. Indeed, with
+  d=e(r_n), define
+
+    F(x)=d+integral_(r_n)^x g(q)e(q)dq,
+    G(x)=d+integral_(r_n)^x g(q)F(q)dq.
+
+  The product integrability makes F continuous. Nonnegativity of g and
+  e<=F imply F<=G. The function G is continuously differentiable in the
+  open interval and satisfies G'=gF<=gG. The integrating factor
+  exp(-integral_(r_n)^x g) gives G(x)<=d*exp(integral_(r_n)^x g).
+  Consequently e<=F<=G yields the displayed estimate.
+
+  By CD02 and CD03,
+
+    integral_(r_n)^t g <= integral_0^T g =: M_T,
+
+  where M_T is a finite real number. Hence
+
+    0 <= e(t) <= e(r_n)*exp(M_T).
+
+  Passing to the limit gives e(t)=0, and the norm separates points, so
+  u(t)=v(t). At zero, CD08 and CD09 give the same equality directly.
+  QED.
+
+PROVENANCE.
+  LE091 consumes LE090, which constructs admissible times using LE026 and
+  applies LE030 with coefficient budget M_T equal to the actual integral.
+  LE030 supplies the norm-valued form of scalar relative-energy comparison.
+
+[03] EVERY FINITE HORIZON TO ALL NONNEGATIVE TIMES
+
+DEFINITION ComparableOnNonnegative.
+
+  ComparableOnNonnegative(u,v,a0)
+    iff forall T>0, exists g, exists Good,
+          ComparisonData(u,v,a0,T,g,Good).
+
+The witnesses g and Good may depend on T. They may also depend on u and v.
+There is no requirement of a single globally chosen coefficient or good
+predicate, no infinite-interval integrability assumption, and no coherence
+condition on different finite-horizon witnesses.
+
+THEOREM LE099: ComparableOnNonnegative.eq_on_nonnegative.
+
+  ComparableOnNonnegative(u,v,a0)
+    ==> forall t>=0, u(t)=v(t).
+
+PROOF.
+  Fix t>=0 and set T=t+1. Then T>0 and t belongs to [0,T].
+  Obtain the finite witnesses g,Good and ComparisonData at this T.
+  Apply [02] at t. The conclusion is independent of the selected witnesses.
+  QED.
+
+[04] ARBITRARY CLASS TO RESTRICTED SINGLETON
+
+THEOREM LE100: restricted_class_eq_singleton_of_comparable.
+
+  Let C be any set of total-real trajectories R -> V.
+  Suppose
+
+    v in C;
+    forall w in C, ComparableOnNonnegative(w,v,a0).
+
+  Then
+
+    restrictNonnegative '' C = {restrictNonnegative(v)}.
+
+PROOF.
+  For every w in C, [03] gives w(t)=v(t) at every t>=0. Thus the
+  restriction of every class member belongs to the displayed singleton.
+  Conversely v belongs to C by the explicit membership premise, so its
+  restriction belongs to the image. The two inclusions prove equality.
+  QED.
+
+LEAN COMPOSITION.
+  The proof applies LE093,
+    QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative,
+  with its equality premise supplied by [03]. No equality premise is
+  required directly from the caller of the new theorem.
+
+NONVACUITY.
+  The reverse inclusion uses actual reference membership. Empty or
+  uninhabited classes cannot satisfy the stated membership premise.
+
+[05] CONCRETE RESTART TRACE TO FINITE COMPARISON DATA
+
+THEOREM LE101: comparisonData_of_restartData.
+
+  Let u,v be trajectories in the concrete RealSpatialL2 carrier and let
+  G be the three supplied spatial L2 directional-field trajectories.
+  Suppose RestartData(nu,u,G,s), together with
+
+    CD01-CD05 for the pair (tau_s(u),v);
+    v(t)->u(s) strongly as t->0+;
+    v(0)=u(s);
+    CD10 for the pair (tau_s(u),v).
+
+  Then ComparisonData(tau_s(u),v,u(s),T,g,Good).
+
+PROOF.
+  Copy CD01-CD05 and CD10 from the explicit supplied hypotheses.
+  Copy the right trace and right initial value from the supplied reference
+  hypotheses. The field RestartData.strong_trace is precisely
+
+    tau_s(u)(t)->u(s) strongly as t->0+,
+
+  and therefore supplies CD06. Finally
+
+    tau_s(u)(0)=u(0+s)=u(s),
+
+  which supplies CD08. These are all ten fields of ComparisonData. QED.
+
+BOUNDARY.
+  The constructor does not derive CD03, CD04 or CD10 from energy data.
+  It does not construct v or assert its physical strong-solution status.
+  RestartData remains the previously fixed three-field structure: shifted
+  EnergyProfile, weak pairing continuity and strong shifted initial trace.
+
+[06] ORIGINAL CLOCK AND FURTHER RESTART
+
+THEOREM LE102: ComparableOnNonnegative.eq_on_tail.
+
+  ComparableOnNonnegative(tau_s(u),v,a0)
+    ==> forall t>=s, u(t)=v(t-s).
+
+PROOF.
+  If t>=s, then r=t-s>=0. By [03],
+
+    tau_s(u)(r)=v(r).
+
+  Expanding tau_s and using (t-s)+s=t gives the desired equality.
+  The starting point t=s is included because [03] includes zero. QED.
+
+THEOREM LE103: ComparableOnNonnegative.further_timeTranslate_eq.
+
+  ComparableOnNonnegative(tau_s(u),v,a0) AND s<=delta
+    ==> restrictNonnegative(tau_delta(u))
+          = restrictNonnegative(tau_(delta-s)(v)).
+
+PROOF.
+  Fix r>=0. Since delta>=s, r+delta>=s. Apply the preceding theorem:
+
+    u(r+delta)=v((r+delta)-s)=v(r+(delta-s)).
+
+  The two sides are precisely the values of the two shifted trajectories.
+  Function extensionality on TimeNonnegative proves the restriction
+  equality. No equality is asserted for r<0. QED.
+
+INITIAL-VALUE CONSEQUENCE.
+  Evaluating at r=0 gives u(delta)=v(delta-s). This consequence can be used
+  when constructing the right initial-value fields for a subsequent
+  comparison. It does not itself establish reference-class membership.
+
+[07] COMPOSED FURTHER-RESTART SINGLETON
+
+THEOREM LE104: restricted_restart_class_eq_singleton.
+
+  Let Admissible : V -> Set(R -> V) be any datum-indexed class.
+  Assume
+
+    H01. s<delta.
+    H02. ComparableOnNonnegative(tau_s(u),v,u(s)).
+    H03. tau_(delta-s)(v) in Admissible(u(delta)).
+    H04. For every w in Admissible(u(delta)),
+           ComparableOnNonnegative(w,tau_(delta-s)(v),u(delta)).
+
+  Then
+
+    restrictNonnegative '' Admissible(u(delta))
+      = {restrictNonnegative(tau_delta(u))}.
+
+PROOF.
+  Put d=delta-s>0 and z=tau_d(v).
+  H03 supplies z in Admissible(u(delta)). H04 and [04] give
+
+    restrictNonnegative '' Admissible(u(delta))
+      = {restrictNonnegative(z)}.
+
+  H01 implies s<=delta. H02 and [06] give
+
+    restrictNonnegative(tau_delta(u))=restrictNonnegative(z).
+
+  Substitute this equality only into the singleton representative. The
+  resulting identity is the exact conclusion. QED.
+
+ESSENTIAL TWO-COMPARISON DISTINCTION.
+  H02 compares the original restarted trajectory with the reference v.
+  H04 separately compares every datum-class member with the later reference
+  shift tau_(delta-s)(v). Coefficient and product integrability, good starts,
+  common traces, initial values and relative energy for this later pair are
+  retained in H04. They are not inferred merely from H02.
+
+ESSENTIAL MEMBERSHIP DISTINCTION.
+  H03 is actual membership of the shifted reference z. The proof never
+  infers that a different total-real extension tau_delta(u) belongs to the
+  same total-real class merely because its nonnegative restriction agrees
+  with z. No class extensionality premise for negative-time changes is used.
+  The displayed image is nonempty because H03 supplies a witness.
+
+[08] EXACT PUBLIC DECLARATION REGISTER
+
+Namespace: QFA.Assembly.TailComparison.
+
+DATA DEFINITION
+  ComparisonData
+    (u v : R -> V) (a0 : V) (T : R)
+    (g : R -> R) (Good : R -> Prop) : Prop.
+
+QUANTIFIED COMPARISON DEFINITION
+  ComparableOnNonnegative (u v : R -> V) (a0 : V) : Prop.
+
+THEOREM BODIES
+  LE098 ComparisonData.eq_on_Icc
+  LE099 ComparableOnNonnegative.eq_on_nonnegative
+  LE100 restricted_class_eq_singleton_of_comparable
+  LE101 comparisonData_of_restartData
+  LE102 ComparableOnNonnegative.eq_on_tail
+  LE103 ComparableOnNonnegative.further_timeTranslate_eq
+  LE104 restricted_restart_class_eq_singleton
+
+All exact Lean signatures are in the new module. The existing LE091 and
+LE093 types are consumed unchanged. The concrete trace constructor consumes
+RestartData.strong_trace unchanged. The root integration register reserves
+LE098-LE104 in the exact file declaration order shown above. The two data
+definitions are premise packages, not additional theorem audit roots.
+
+[09] PHYSICAL AND VERIFICATION BOUNDARY
+
+Explicit physical obligations remain:
+  actual whole-space LH existence and the supplied class's intended meaning;
+  construction of the global strong reference trajectory;
+  legitimate weak/strong cross-testing at both comparison stages;
+  genuine coefficient/product integrability for every used finite horizon;
+  common traces and actual point values at each new initial time;
+  actual shifted reference membership in the datum-indexed class;
+  physical weak-gradient identification, incompressibility and momentum;
+  positive-time smoothing, pressure construction and full NSE recovery.
+
+No arbitrary predicate named Regular is introduced. No physical QFA theorem
+or regularity conclusion is declared. The data package is an exact list of
+comparison premises, not a renaming of trajectory equality or the singleton
+target. The source and target time domains remain explicit throughout.
+
+New Lean proof bodies contain no sorry, admit, axiom or native_decide.
+Their mathematical derivations are complete above. Matching cached external
+Lean compilation and exact declaration-level axiom auditing remain required
+before A_TIER promotion of the seven new theorem declarations.
+
+END OF QFA_TAIL_COMPARISON_B_TIER
+
+
+QUASI_FEFFERMAN_A_SELECTED_REFERENCE_CHAIN_B_TIER
+LOCAL_RANGE = LE105-LE106
+MATHEMATICAL_STATUS = COMPLETE_DERIVATION_OF_EXPLICIT_IMPLICATIONS
+PHYSICAL_QFA_ROOT_STATUS = B_TIER_ROOT_FORMALIZATION_PENDING
+
+[C00] CARRIERS AND EXPLICIT INTERFACES
+
+H := L2(R3;R3), full Lebesgue volume.
+Trajectory := R -> H.
+GradientTrajectory := R -> Fin3 -> H.
+tau_s(u)(t) := u(t+s).
+rho(u) := u restricted to [0,infinity).
+E(v) := ||v||_H^2.
+D(G) := sum_j ||G_j||_H^2.
+
+Admissible : H -> Set Trajectory.
+Reference : H -> Trajectory -> Prop.
+Domain : Set H.
+Good : Trajectory -> GradientTrajectory -> R -> Prop.
+
+SEMANTIC_STATUS:
+  Admissible, Reference, Domain and Good are explicit parameters.
+  No LH, strong-NSE, divergence, smoothness, or pressure interpretation
+  follows from their names. Actual realization is a separate obligation.
+
+ReferencePorts(Admissible,Reference):
+  RP1. For b in H and w,v trajectories,
+       w in Admissible(b) and Reference(b,v)
+       imply ComparableOnNonnegative(w,v,b).
+       ComparableOnNonnegative is the primitive finite-horizon comparison
+       data of LE098-LE099; it contains no equality-of-trajectories field.
+  RP2. For Reference(b,v) and r>0,
+       Reference(v(r),tau_r(v)) and tau_r(v) in Admissible(v(r)).
+       Both assertions are independent explicit obligations.
+
+SelectedTail(nu,delta,Admissible,Reference,u,G,Good) is the conjunction
+under existential witnesses s and v of:
+  S01. 0<s;
+  S02. s<delta;
+  S03. Good(s);
+  S04. E(u(s))*D(G(s)) < 4*pi^2*nu^4;
+  S05. EnergyStart(nu,u,G,s);
+  S06. RestartData(nu,u,G,s);
+  S07. Reference(u(s),v);
+  S08. For every t>=s, u(t)=v(t-s);
+  S09. Reference(u(delta),tau_(delta-s)(v));
+  S10. tau_(delta-s)(v) in Admissible(u(delta));
+  S11. rho(tau_delta(u))=rho(tau_(delta-s)(v));
+  S12. rho '' Admissible(u(delta))={rho(tau_delta(u))}.
+
+[C01 / D05.02 -> D05.05 -> D09.04 -> D10.07]
+[LE105] exists_selected_reference_and_tail_singleton
+
+PREMISES:
+  EnergyProfile(nu,a,u,G);
+  nu>0;
+  ||a||_H^4/(16*pi^2*nu^5)<delta;
+  weak pairing continuity on [0,infinity);
+  Good(s) and EnergyStart(nu,u,G,s) for a.e. s in (0,delta);
+  restart admission:
+    s>0, Good(s), EnergyStart(nu,u,G,s)
+      -> tau_s(u) in Admissible(u(s));
+  subcritical reference construction:
+    s>0, Good(s), E(u(s))*D(G(s))<4*pi^2*nu^4,
+    EnergyStart(nu,u,G,s), RestartData(nu,u,G,s)
+      -> exists v, Reference(u(s),v);
+  ReferencePorts(Admissible,Reference).
+
+CONCLUSION:
+  SelectedTail(nu,delta,Admissible,Reference,u,G,Good).
+
+DERIVATION:
+  APPLY [LE084] QFA.Assembly.Restart.exists_restartData_before to the
+  supplied profile, viscosity, cutoff, pairing continuity and a.e. predicate.
+  Obtain s and S01-S06. No physical admission follows from LE084.
+
+  APPLY the explicit restart-admission premise at s to obtain
+    tau_s(u) in Admissible(u(s)).
+  APPLY the explicit subcritical-construction premise at s to obtain
+    v with Reference(u(s),v).
+  This construction supplies no target equality or singleton conclusion.
+
+  APPLY RP1 with b=u(s), w=tau_s(u) and the obtained v. This gives
+    ComparableOnNonnegative(tau_s(u),v,u(s)).
+  APPLY [LE102] to obtain S08 at every t>=s, including t=s.
+
+  Define r=delta-s. Since s<delta, r>0.
+  Evaluate S08 at t=delta:
+    v(r)=u(delta).
+  APPLY RP2 at r to obtain Reference(v(r),tau_r(v)) and actual membership
+    tau_r(v) in Admissible(v(r)).
+  Substitute v(r)=u(delta) to obtain S09 and S10.
+  No extensionality or membership transfer between total-real trajectories
+  is used in this datum substitution.
+
+  APPLY [LE103] to the first comparison and s<=delta to obtain S11.
+  For each w in Admissible(u(delta)), APPLY RP1 to w and S09.
+  This gives fresh primitive comparison data at datum u(delta).
+  APPLY [LE104] with s<delta, the first comparison, S10 and these fresh
+  comparisons. The conclusion is S12.
+  The displayed witnesses and S01-S12 prove SelectedTail exactly.
+
+[C02 / D02.05 -> D10.07]
+[LE106] quantified_tail_assembly
+
+ClassRealization(nu,Domain,Admissible,Good) consists exactly of:
+  CR1. For every a in Domain, Admissible(a) is nonempty.
+  CR2. For a in Domain and u in Admissible(a), u(0)=a.
+  CR3. For those a,u, u(t)->a strongly in H as t decreases to zero.
+  CR4. For those a,u, there exists G with EnergyProfile(nu,a,u,G),
+       all weak pairing continuities on [0,infinity), and
+       for every R>0, Good(u,G,s) and EnergyStart(nu,u,G,s)
+       for a.e. s in (0,R).
+  CR5. For a in Domain, u in Admissible(a), G and s>0,
+       Good(u,G,s) and EnergyStart(nu,u,G,s)
+       imply tau_s(u) in Admissible(u(s)).
+
+SubcriticalReferenceConstruction(nu,Domain,Admissible,Reference,Good):
+  For a in Domain, u in Admissible(a), G and s>0,
+  Good(u,G,s), E(u(s))*D(G(s))<4*pi^2*nu^4,
+  EnergyStart(nu,u,G,s), RestartData(nu,u,G,s)
+  imply exists v, Reference(u(s),v).
+
+PREMISES:
+  nu>0;
+  ClassRealization(nu,Domain,Admissible,Good);
+  SubcriticalReferenceConstruction(nu,Domain,Admissible,Reference,Good);
+  ReferencePorts(Admissible,Reference).
+
+CONCLUSION:
+  For every a in Domain:
+    Admissible(a) is nonempty;
+    for every u in Admissible(a):
+      u(0)=a;
+      u(t)->a strongly in H as t decreases to zero;
+      for every delta>||a||_H^4/(16*pi^2*nu^5):
+        exists G,
+          EnergyProfile(nu,a,u,G)
+          and SelectedTail(nu,delta,Admissible,Reference,u,G,Good(u,G)).
+
+DERIVATION:
+  Fix arbitrary a in Domain and u in Admissible(a).
+  CR1-CR3 supply nonemptiness, the initial value and strong initial trace.
+  Fix arbitrary delta greater than the exact cutoff.
+  CR4 supplies G, the energy profile, weak pairing continuity and all
+  finite-horizon a.e. good-start statements.
+  Since nu>0, the cutoff is nonnegative; hence delta>0.
+  Specialize CR4 to R=delta. Specialize CR5 and the subcritical-construction
+  premise to a,u,G. APPLY [LE105] with these exact specializations.
+  Retain G and its EnergyProfile in the conclusion.
+  Generalization over delta,u,a proves the exact quantified implication.
+
+[C03] PRESERVED BOUNDARIES
+
+  delta>T_QFA is strict. No assertion at delta=T_QFA is derived.
+  Original-data uniqueness and actual nonuniqueness are absent.
+  Class singleton concerns rho '' Admissible, not all negative extensions.
+  Selected G(s) is not assigned H2 regularity or a Laplacian witness.
+  Pointwise H2 absorption is a later strong-evolution input.
+  Local strong existence, H1 continuity, invariant subcritical product,
+  fixed positive absorption margin, continuation, physical weak momentum,
+  class realizations, smoothing and pressure remain explicit future tasks.
+  A verified parameterized implication does not identify Reference with
+  actual smooth NSE solutions or prove the frozen physical QFA root.
+
+
+QUASI_FEFFERMAN_A_INTEGRATED_CHAIN_B_TIER
+LOCAL_RANGE = LE107-LE108
+
+[I00] UNIVERSAL POINTWISE ABSORPTION INTERFACE
+
+NAMESPACE = QFA.Assembly.Integrated
+
+Definition PointwiseAbsorption nu : Prop:
+
+  For every v,L : RealL2, G,H : Fin 3 -> RealL2, and N,d : R,
+  if
+    CompactDerivativeData v G H L,
+    N>=0,
+    for every bounded continuous V a.e. equal to complexifyL2(v),
+      N <= ||V||_infinity * sqrt(sum_j ||G_j||_2^2) * sqrt(||L||_2^2),
+    ||v||_2^2 * sum_j ||G_j||_2^2 < 4*pi^2*nu^4,
+    d/2 + nu*||L||_2^2 <= N,
+  then there exists eta in R such that
+    eta = nu - nonlinearCoefficient ||v||_2^2 (sum_j ||G_j||_2^2),
+    eta>0,
+    4*pi^2*N^4 <= (||v||_2^2 * sum_j ||G_j||_2^2) * (||L||_2^2)^4,
+    N <= (nu-eta)*||L||_2^2,
+    d + 2*eta*||L||_2^2 <= 0.
+
+Every quantifier and premise in this definition is explicit. No trajectory,
+time interval, temporal derivative, or reference existence is encoded in
+its conclusion. The derivative data are supplied at each field instance;
+their existence at a selected H1 restart time is not inferred.
+
+[I01] LE107: ANALYTIC INPUTS IMPLY UNIVERSAL POINTWISE ABSORPTION
+
+Exact theorem:
+
+  pointwiseAbsorption_of_analytic_inputs
+    {nu : R} (hnu : 0<nu)
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint) :
+    PointwiseAbsorption nu.
+
+Fix arbitrary v,L,G,H,N,d and every premise in [I00]. Apply LE097 from
+[A04] to these exact field data, with hnu, hExtension, hSpectral and hAgmon.
+Its output contains the Schwartz and spectral witnesses, V, eta, the a.e.
+representative identity, the scalar profile, and all five required scalar
+conclusions. Existential/conjunctive elimination retains eta and those five
+conclusions. Universal introduction over v,L,G,H,N,d and the displayed
+premises is exactly PointwiseAbsorption nu.
+
+This uses no independent LC002 input: LE095 derives LC002 from the retained
+LC001 input in LE097. There is no new integral estimate or regularity
+assumption in the passage from LE097 to LE107.
+
+[I02] EXPLICIT UNRESOLVED REFERENCE-CONSTRUCTION INPUT
+
+Let
+
+  Trajectory = R -> RealSpatialL2,
+  GradientTrajectory = R -> Fin 3 -> RealSpatialL2,
+  Domain : Set RealSpatialL2,
+  Admissible : RealSpatialL2 -> Set Trajectory,
+  Reference : RealSpatialL2 -> Trajectory -> Prop,
+  Good : Trajectory -> GradientTrajectory -> R -> Prop.
+
+RealSpatialL2 and RealL2 are the existing actual full-volume real spatial
+L2 carriers. Domain, Admissible, Reference and Good remain explicit
+parameters; none is identified by this definition with a physical class.
+
+Definition ReferenceConstructionFromAbsorption
+  nu Domain Admissible Reference Good : Prop:
+
+  PointwiseAbsorption nu ->
+    Chain.SubcriticalReferenceConstruction
+      nu Domain Admissible Reference Good.
+
+The consequent is the existing exact reference-witness construction:
+
+  for every a in Domain, u in Admissible(a), G : GradientTrajectory, s in R,
+    s>0,
+    Good u G s,
+    velocityEnergy(u(s))*gradientEnergy(G(s)) < 4*pi^2*nu^4,
+    EnergyStart nu u G s,
+    RestartData nu u G s
+  imply the existence of v : Trajectory with Reference(u(s),v).
+
+No inhabitant of ReferenceConstructionFromAbsorption is supplied. Its
+physical proof requires local strong evolution from the selected data,
+actual N/d identifications, the temporal subcritical invariant, a uniform
+margin where needed, and continuation. The pointwise theorem [I01] alone
+does not establish that proof. The interface's consequent contains no
+tail-equality, singleton, smoothing, pressure or frozen-root conclusion.
+
+[I03] LE108: INTEGRATED QUANTIFIED TAIL ASSEMBLY
+
+Exact theorem: quantified_tail_assembly_of_analytic_inputs.
+
+Parameters: nu,Domain,Admissible,Reference,Good as in [I02].
+
+Premises:
+
+  hnu : 0<nu;
+  hClass : Chain.ClassRealization nu Domain Admissible Good;
+  hPorts : Chain.ReferencePorts Admissible Reference;
+  hExtension : LC004;
+  hSpectral : LC001;
+  hAgmon : LC003;
+  hReferenceBackend : ReferenceConstructionFromAbsorption
+    nu Domain Admissible Reference Good.
+
+Exact conclusion, identical to Chain.quantified_tail_assembly:
+
+  for every a in Domain,
+    Admissible(a) is nonempty,
+    and for every u in Admissible(a),
+      u(0)=a,
+      u(t) tends strongly in RealSpatialL2 to a as t decreases to 0,
+      and for every delta > ||a||_2^4/(16*pi^2*nu^5),
+        there exists G : GradientTrajectory such that
+          EnergyProfile nu a u G,
+          Chain.SelectedTail nu delta Admissible Reference u G (Good u G).
+
+SelectedTail retains precisely:
+
+  existence of s in (0,delta) and a reference trajectory v;
+  Good u G s;
+  velocityEnergy(u(s))*gradientEnergy(G(s)) < 4*pi^2*nu^4;
+  EnergyStart nu u G s and RestartData nu u G s;
+  Reference(u(s),v);
+  u(t)=v(t-s) for every t>=s;
+  Reference(u(delta), timeTranslate(delta-s,v));
+  timeTranslate(delta-s,v) belongs to Admissible(u(delta));
+  equality of the restrictions of timeTranslate(delta,u) and
+    timeTranslate(delta-s,v) to nonnegative time;
+  the image of Admissible(u(delta)) under restriction to nonnegative time
+    equals the singleton containing that restricted original delta-tail.
+
+Complete integrated derivation:
+
+1. Apply LE107 to hnu,hExtension,hSpectral,hAgmon. Its conclusion is the
+   exact PointwiseAbsorption nu argument required by hReferenceBackend.
+
+2. Apply hReferenceBackend to that derived argument. By the definition in
+   [I02], this yields the exact existing
+   Chain.SubcriticalReferenceConstruction nu Domain Admissible Reference Good.
+   No additional LC002 or H2-at-selected-time premise is introduced.
+
+3. Apply Chain.quantified_tail_assembly (LE106) to hnu,hClass, the result
+   of step 2, and hPorts. This yields exactly the displayed quantified
+   conclusion. Its field profile gives the strict subcritical selected time;
+   the supplied reference construction gives v; primitive comparison data
+   identify the original trajectory with v on the selected tail; positive
+   reference shift by delta-s supplies actual membership at u(delta); a
+   second primitive comparison gives the entire restricted singleton.
+
+Nonemptiness, initial values and strong initial traces remain supplied by
+hClass. The physical realization of hClass and hPorts is not discharged.
+The reference backend is a named unresolved implication, not a supplied
+proof of a physical strong solution. The conclusion has the exact strict
+cutoff and the universal trajectory quantifier of the class-level assembly;
+it does not assert smoothness or pressure for the uninterpreted Reference.
+
+Current proof status:
+  LE107-LE108 have complete mathematical derivations and prepared Lean bodies.
+  No matching external compiler or theorem-level axiom audit is asserted here.
+  No local Lean/Lake execution occurred.
+  LC001, LC003, LC004 and the reference backend remain unresolved inputs.
+  The physical QFA root remains B_TIER_ROOT_FORMALIZATION_PENDING.
+
+END OF QUASI_FEFFERMAN_A_ANALYTIC_CHAIN_B_TIER
+
+
+[EXACT_NEW_DECLARATION_REGISTER]
+
+[LE094] QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization
+SOURCE = QFA/Assembly/AnalyticChain.lean
+LOCATIONS = D06.07
+theorem interpolation_of_nativeSpectralRealization
+    {v L : ComplexL2} {G : Fin 3 → ComplexL2}
+    (hSpectral : NativeSpectralRealization v G L) :
+    gradientEnergy G ^ 2 ≤ velocityEnergy v * laplacianEnergy L
+
+[LE095] QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint
+SOURCE = QFA/Assembly/AnalyticChain.lean
+LOCATIONS = D06.07
+theorem interpolationEndpoint_of_spectralEndpoint
+    (hSpectral : WholeSpaceSpectralEndpoint) : WholeSpaceInterpolationEndpoint
+
+[LE096] QFA.Assembly.AnalyticChain.exists_profile_of_compactData
+SOURCE = QFA/Assembly/AnalyticChain.lean
+LOCATIONS = D06.07
+theorem exists_profile_of_compactData
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint)
+    {v L : RealL2} {G H : Fin 3 → RealL2} {N : ℝ}
+    (hDerivatives : CompactDerivativeData v G H L)
+    (hN : 0 ≤ N)
+    (hConvection : ∀ V : Space →ᵇ ComplexVector,
+      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →
+        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2)) :
+    SchwartzDerivativeWitnesses (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      NativeSpectralRealization (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      ∃ V : Space →ᵇ ComplexVector,
+        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧
+          ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N
+
+[LE097] QFA.Assembly.AnalyticChain.exists_absorption_of_compactData
+SOURCE = QFA/Assembly/AnalyticChain.lean
+LOCATIONS = D06.07
+theorem exists_absorption_of_compactData
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint)
+    {v L : RealL2} {G H : Fin 3 → RealL2} {N d ν : ℝ}
+    (hDerivatives : CompactDerivativeData v G H L)
+    (hN : 0 ≤ N)
+    (hConvection : ∀ V : Space →ᵇ ComplexVector,
+      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →
+        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2))
+    (hν : 0 < ν)
+    (hSmall : (‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2) < 4 * Real.pi ^ 2 * ν ^ 4)
+    (hEnstrophy : d / 2 + ν * ‖L‖ ^ 2 ≤ N) :
+    SchwartzDerivativeWitnesses (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      NativeSpectralRealization (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      ∃ (V : Space →ᵇ ComplexVector) (η : ℝ),
+        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧
+        ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N ∧
+        η = ν - nonlinearCoefficient (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) ∧
+        0 < η ∧
+        4 * Real.pi ^ 2 * N ^ 4 ≤
+          ((‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2)) * (‖L‖ ^ 2) ^ 4 ∧
+        N ≤ (ν - η) * ‖L‖ ^ 2 ∧
+        d + 2 * η * ‖L‖ ^ 2 ≤ 0
+
+[LE098] QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem ComparisonData.eq_on_Icc
+    {u v : ℝ → V} {a₀ : V} {T : ℝ} {g : ℝ → ℝ} {Good : ℝ → Prop}
+    (h : ComparisonData u v a₀ T g Good) (hT : 0 < T) :
+    ∀ t ∈ Icc (0 : ℝ) T, u t = v t
+
+[LE099] QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem ComparableOnNonnegative.eq_on_nonnegative
+    {u v : ℝ → V} {a₀ : V}
+    (h : ComparableOnNonnegative u v a₀) :
+    ∀ t : ℝ, 0 ≤ t → u t = v t
+
+[LE100] QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem restricted_class_eq_singleton_of_comparable
+    {C : Set (ℝ → V)} {v : ℝ → V} {a₀ : V}
+    (hv : v ∈ C)
+    (hcomparisons : ∀ w ∈ C, ComparableOnNonnegative w v a₀) :
+    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' C =
+      {fun t : {t : ℝ // 0 ≤ t} => v t.1}
+
+[LE101] QFA.Assembly.TailComparison.comparisonData_of_restartData
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem comparisonData_of_restartData
+    {ν s T : ℝ}
+    {u v : ℝ → QFA.Representation.RealSpatialL2}
+    {G : ℝ → Fin 3 → QFA.Representation.RealSpatialL2}
+    {g : ℝ → ℝ} {Good : ℝ → Prop}
+    (hrestart : QFA.Assembly.Restart.RestartData ν u G s)
+    (hg : ContinuousOn g (Ioc (0 : ℝ) T))
+    (hg_nonnegative : ∀ t ∈ Ioc (0 : ℝ) T, 0 ≤ g t)
+    (hg_integrable : IntervalIntegrable g volume (0 : ℝ) T)
+    (hprod : IntervalIntegrable
+      (fun r => g r * ‖timeTranslate s u r - v r‖ ^ 2) volume (0 : ℝ) T)
+    (hgood : ∀ᵐ r ∂volume.restrict (Ioo (0 : ℝ) T), Good r)
+    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 (u s)))
+    (hv_initial : v 0 = u s)
+    (hrelative : ∀ r ∈ Ioo (0 : ℝ) T, Good r →
+      ∀ t ∈ Icc r T,
+        ‖timeTranslate s u t - v t‖ ^ 2 ≤ ‖timeTranslate s u r - v r‖ ^ 2 +
+          ∫ q in r..t, g q * ‖timeTranslate s u q - v q‖ ^ 2) :
+    ComparisonData (timeTranslate s u) v (u s) T g Good
+
+[LE102] QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem ComparableOnNonnegative.eq_on_tail
+    {u v : ℝ → V} {a₀ : V} {s : ℝ}
+    (h : ComparableOnNonnegative (timeTranslate s u) v a₀) :
+    ∀ t : ℝ, s ≤ t → u t = v (t - s)
+
+[LE103] QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem ComparableOnNonnegative.further_timeTranslate_eq
+    {u v : ℝ → V} {a₀ : V} {s δ : ℝ}
+    (h : ComparableOnNonnegative (timeTranslate s u) v a₀)
+    (hsδ : s ≤ δ) :
+    (fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1) =
+      (fun t : {t : ℝ // 0 ≤ t} => timeTranslate (δ - s) v t.1)
+
+[LE104] QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton
+SOURCE = QFA/Assembly/TailComparison.lean
+LOCATIONS = D09.04, D10.07
+theorem restricted_restart_class_eq_singleton
+    {Admissible : V → Set (ℝ → V)} {u v : ℝ → V} {s δ : ℝ}
+    (hsδ : s < δ)
+    (hsource : ComparableOnNonnegative (timeTranslate s u) v (u s))
+    (hreference : timeTranslate (δ - s) v ∈ Admissible (u δ))
+    (hcomparisons : ∀ w ∈ Admissible (u δ),
+      ComparableOnNonnegative w (timeTranslate (δ - s) v) (u δ)) :
+    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' Admissible (u δ) =
+      {fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1}
+
+[LE105] QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton
+SOURCE = QFA/Assembly/Chain.lean
+LOCATIONS = D05.02, D09.04, D10.07
+theorem exists_selected_reference_and_tail_singleton
+    {ν δ : ℝ} {a : RealSpatialL2}
+    {u : Trajectory} {G : GradientTrajectory} {Good : ℝ → Prop}
+    {Admissible : RealSpatialL2 → Set Trajectory}
+    {Reference : RealSpatialL2 → Trajectory → Prop}
+    (hProfile : EnergyProfile ν a u G) (hν : 0 < ν)
+    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+    (hweak : ∀ b : RealSpatialL2,
+      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))
+    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),
+      Good s ∧ EnergyStart ν u G s)
+    (hRestart : ∀ s : ℝ, 0 < s → Good s → EnergyStart ν u G s →
+      timeTranslate s u ∈ Admissible (u s))
+    (hReference : ∀ s : ℝ, 0 < s → Good s →
+      velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 →
+      EnergyStart ν u G s → RestartData ν u G s →
+        ∃ v : Trajectory, Reference (u s) v)
+    (hPorts : ReferencePorts Admissible Reference) :
+    SelectedTail ν δ Admissible Reference u G Good
+
+[LE106] QFA.Assembly.Chain.quantified_tail_assembly
+SOURCE = QFA/Assembly/Chain.lean
+LOCATIONS = D05.02, D09.04, D10.07
+theorem quantified_tail_assembly
+    {ν : ℝ} {Domain : Set RealSpatialL2}
+    {Admissible : RealSpatialL2 → Set Trajectory}
+    {Reference : RealSpatialL2 → Trajectory → Prop}
+    {Good : Trajectory → GradientTrajectory → ℝ → Prop}
+    (hν : 0 < ν)
+    (hClass : ClassRealization ν Domain Admissible Good)
+    (hReference : SubcriticalReferenceConstruction ν Domain Admissible Reference Good)
+    (hPorts : ReferencePorts Admissible Reference) :
+    ∀ a ∈ Domain,
+      (Admissible a).Nonempty ∧
+      ∀ u ∈ Admissible a,
+        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧
+        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →
+          ∃ G : GradientTrajectory,
+            EnergyProfile ν a u G ∧
+              SelectedTail ν δ Admissible Reference u G (Good u G)
+
+[LE107] QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs
+SOURCE = QFA/Assembly/Integrated.lean
+LOCATIONS = D06.07, D07.01, D10.07
+theorem pointwiseAbsorption_of_analytic_inputs
+    {ν : ℝ} (hν : 0 < ν)
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint) :
+    PointwiseAbsorption ν
+
+[LE108] QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs
+SOURCE = QFA/Assembly/Integrated.lean
+LOCATIONS = D06.07, D07.01, D10.07
+theorem quantified_tail_assembly_of_analytic_inputs
+    {ν : ℝ} {Domain : Set RealSpatialL2}
+    {Admissible : RealSpatialL2 → Set Trajectory}
+    {Reference : RealSpatialL2 → Trajectory → Prop}
+    {Good : Trajectory → GradientTrajectory → ℝ → Prop}
+    (hν : 0 < ν)
+    (hClass : Chain.ClassRealization ν Domain Admissible Good)
+    (hPorts : Chain.ReferencePorts Admissible Reference)
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint)
+    (hReferenceBackend :
+      ReferenceConstructionFromAbsorption ν Domain Admissible Reference Good) :
+    ∀ a ∈ Domain,
+      (Admissible a).Nonempty ∧
+      ∀ u ∈ Admissible a,
+        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧
+        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →
+          ∃ G : GradientTrajectory,
+            EnergyProfile ν a u G ∧
+              Chain.SelectedTail ν δ Admissible Reference u G (Good u G)

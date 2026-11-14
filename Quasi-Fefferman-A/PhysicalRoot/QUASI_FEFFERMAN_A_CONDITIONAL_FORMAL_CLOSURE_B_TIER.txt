@@ -1,0 +1,104 @@
+QUASI_FEFFERMAN_A_CONDITIONAL_FORMAL_CLOSURE_B_TIER
+VERSION = 0.5.0
+MODE = B_TIER_DERIVATION
+MARKER = !=B_TIER
+ROOT_SPECIFICATION = ../README.md
+LOCAL_LEAN_EXECUTIONS = 0
+
+[01] FROZEN ROOT INTERFACE
+
+For fixed ν>0, domain H, trajectory class LH, and exact physical predicate
+
+  SmoothNSETail(ν,u,δ)
+  := ∃p, (u,p) have smooth representatives on [δ,∞)×R^3
+         and solve unforced incompressible NSE_ν there,
+
+define
+
+  RestrictedLH(b)
+  := { w|_[0,∞) : w ∈ LH(b) },
+
+  Tail_δ(u)(τ) := u(δ+τ),  τ≥0,
+
+and
+
+  QFARoot(ν,H,LH,SmoothNSETail)
+  :=
+  ∀a∈H,
+    LH(a)≠∅
+    ∧ ∀u∈LH(a),
+        u(t)→a in L^2 as t↓0
+        ∧ ∀δ>||a||_2^4/(16π^2ν^5),
+            SmoothNSETail(ν,u,δ)
+            ∧ RestrictedLH(u(δ))={Tail_δ(u)}.
+
+The restriction is exact: internal Lean trajectories are real-time extensions;
+physical Leray-Hopf trajectories are their nonnegative-time restrictions.
+
+[02] EXPLICIT PREMISES
+
+P1 = ClassRealization(ν,H,LH,Good).
+     Supplies LH nonemptiness, initial value/trace, EnergyProfile,
+     full-measure good energy starts, and translated admission.
+
+P2 = ReferencePorts(LH,Reference).
+     Supplies finite-horizon comparison and positive-shift admission.
+
+P3 = CompactToSchwartzEndpoint.                       [LC004]
+P4 = WholeSpaceSpectralEndpoint.                      [LC001]
+P5 = WholeSpaceAgmonEndpoint.                         [LC003]
+
+P6 = ReferenceConstructionFromAbsorption.
+     Supplies local strong reference construction, actual nonlinear and
+     derivative identities, temporal subcritical invariance, and continuation.
+
+P7 = SmoothReferencePorts.
+     Supplies:
+       Reference(b,v) ∧ r>0 ⇒ SmoothNSETail(ν,v,r),
+     and transport under the proved identity
+       u(t)=v(t-s), t≥s.
+
+[03] DERIVATION
+
+D1. P3+P4+P5 and ν>0 imply PointwiseAbsorption(ν).            [LE107]
+
+D2. D1+P6 imply SubcriticalReferenceConstruction.             [definition]
+
+D3. P1+P2+D2 imply, for every a∈H, u∈LH(a), and
+    δ>T_QFA(a,ν), a SelectedTail witness (s,v) with:
+      0<s<δ,
+      Reference(u(s),v),
+      u(t)=v(t-s) for all t≥s,
+      RestrictedLH(u(δ))={Tail_δ(u)}.                         [LE108]
+
+D4. Since δ-s>0, P7 yields SmoothNSETail(ν,v,δ-s).
+
+D5. P7 transports D4 across u(t)=v(t-s):
+      SmoothNSETail(ν,u,s+(δ-s))
+      = SmoothNSETail(ν,u,δ).                                 [LE110]
+
+D6. The SelectedTail singleton field yields:
+      RestrictedLH(u(δ))={Tail_δ(u)}.                         [LE109]
+
+D7. D5+D6 give the exact post-cutoff root conclusion.          [LE111]
+
+D8. Quantifying D7 through LE108 gives QFARoot.                [LE112]
+
+[04] STATUS
+
+The implication P1∧...∧P7 ⇒ QFARoot is mathematically complete.
+
+UNRESOLVED =
+  LC001, LC003, LC004;
+  physical Leray-Hopf realization;
+  local strong evolution and actual PDE identities;
+  temporal invariant and global continuation;
+  relative-energy comparison and positive-shift admission;
+  pressure/smooth-NSE semantic realization.
+
+TARGET_PROMOTION =
+  matching native Windows Lean 4.33.0 compiler pass
+  + exact theorem-level axiom audit
+  ⇒ !!! CONDITIONAL_FORMAL_CLOSURE.
+
+UNCONDITIONAL_CLOSURE = not asserted.
