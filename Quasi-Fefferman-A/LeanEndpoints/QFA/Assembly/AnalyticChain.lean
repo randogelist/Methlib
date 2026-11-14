@@ -71,6 +71,12 @@ theorem interpolation_of_nativeSpectralRealization
       hq.const_mul (x * x)
     have h1x : Integrable (fun k : Space => (2 * x) * (w k * q k)) volume :=
       hwq.const_mul (2 * x)
+    have hsub : Integrable
+        (fun k : Space => (x * x) * q k - (2 * x) * (w k * q k)) volume := by
+      change Integrable
+        ((fun k : Space => (x * x) * q k) -
+          (fun k : Space => (2 * x) * (w k * q k))) volume
+      exact h0x.sub h1x
     have hIdentity : (∫ k : Space, (x - w k) ^ 2 * q k) =
         velocityEnergy v * (x * x) + (-2 * gradientEnergy G) * x +
           laplacianEnergy L := by
@@ -83,7 +89,7 @@ theorem interpolation_of_nativeSpectralRealization
         _ = ((x * x) * (∫ k : Space, q k) -
               (2 * x) * (∫ k : Space, w k * q k)) +
               (∫ k : Space, w k ^ 2 * q k) := by
-          rw [integral_add (h0x.sub h1x) hw2q, integral_sub h0x h1x,
+          rw [integral_add hsub hw2q, integral_sub h0x h1x,
             integral_const_mul, integral_const_mul]
         _ = velocityEnergy v * (x * x) + (-2 * gradientEnergy G) * x +
               laplacianEnergy L := by
