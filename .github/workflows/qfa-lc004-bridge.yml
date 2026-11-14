@@ -1,0 +1,136 @@
+name: QFA corrected compact-Schwartz bridge
+
+on:
+  push:
+    branches: [QFA]
+    paths:
+      - 'Quasi-Fefferman-A/LC004Bridge/**'
+      - '.github/workflows/qfa-lc004-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qfa-lc004-bridge-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  bridge-audit:
+    name: Lean 4.33.0 / corrected LC004 bridge
+    runs-on: windows-2022
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: Quasi-Fefferman-A/LC004Bridge
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      LEAN_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            Quasi-Fefferman-A/LeanEndpoints
+            Quasi-Fefferman-A/LC004Bridge
+            .github/workflows/qfa-lc004-bridge.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Verify static source policy
+        run: python scripts/audit.py --static
+
+      - name: Restore native toolchain cache
+        id: toolchain-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: qfa-elan-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LC004Bridge/lean-toolchain') }}
+
+      - name: Restore dependency cache
+        id: dependency-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LC004Bridge/.lake/packages
+          key: qfa-lc004-dependencies-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LC004Bridge/lean-toolchain', 'Quasi-Fefferman-A/LeanEndpoints/lake-manifest.json') }}
+
+      - name: Restore incremental bridge objects
+        id: object-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            Quasi-Fefferman-A/LC004Bridge/.lake/build
+            Quasi-Fefferman-A/LeanEndpoints/.lake/build
+          key: qfa-lc004-objects-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LC004Bridge/lean-toolchain', 'Quasi-Fefferman-A/LC004Bridge/QFALC004/**/*.lean', 'Quasi-Fefferman-A/LeanEndpoints/QFA/**/*.lean') }}
+          restore-keys: |
+            qfa-lc004-objects-v1-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install native Lean toolchain
+        id: toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: Quasi-Fefferman-A/LC004Bridge
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Bind native Windows Elan path
+        run: |
+          $bin = Join-Path $env:USERPROFILE '.elan\bin'
+          if (!(Test-Path (Join-Path $bin 'lake.exe'))) { throw 'Missing native Lake proxy' }
+          $bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Build and audit exact bridge declarations
+        shell: cmd
+        run: run.cmd
+
+      - name: Preserve native toolchain cache
+        if: ${{ !cancelled() && steps.toolchain.outcome == 'success' && steps.toolchain-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: ${{ steps.toolchain-cache.outputs.cache-primary-key }}
+
+      - name: Preserve dependency cache
+        if: ${{ !cancelled() && steps.dependency-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LC004Bridge/.lake/packages
+          key: ${{ steps.dependency-cache.outputs.cache-primary-key }}
+
+      - name: Preserve incremental bridge objects
+        if: ${{ !cancelled() && steps.object-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            Quasi-Fefferman-A/LC004Bridge/.lake/build
+            Quasi-Fefferman-A/LeanEndpoints/.lake/build
+          key: ${{ steps.object-cache.outputs.cache-primary-key }}
+
+      - name: Upload compiler and theorem-level axiom evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qfa-lc004-bridge-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: Quasi-Fefferman-A/LC004Bridge/evidence
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload tested source package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qfa-lc004-bridge-source-${{ github.sha }}
+          path: |
+            Quasi-Fefferman-A/LC004Bridge
+            !Quasi-Fefferman-A/LC004Bridge/.lake
+            !Quasi-Fefferman-A/LC004Bridge/evidence
+            !Quasi-Fefferman-A/LC004Bridge/**/__pycache__
+            .github/workflows/qfa-lc004-bridge.yml
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
