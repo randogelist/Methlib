@@ -1,0 +1,143 @@
+name: QFA LC005 compact-Schwartz density
+
+on:
+  push:
+    branches: [QFA]
+    paths:
+      - 'Quasi-Fefferman-A/LC005Density/**'
+      - '.github/workflows/qfa-lc005-density.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qfa-lc005-density-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  density-audit:
+    name: Lean 4.33.0 / LC005 density
+    runs-on: windows-2022
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: Quasi-Fefferman-A/LC005Density
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+      LEAN_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            Quasi-Fefferman-A/LeanEndpoints
+            Quasi-Fefferman-A/LC004Bridge
+            Quasi-Fefferman-A/LC005Density
+            .github/workflows/qfa-lc005-density.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Verify static source policy
+        run: python scripts/audit.py --static
+
+      - name: Restore native toolchain cache
+        id: toolchain-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: qfa-elan-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LC005Density/lean-toolchain') }}
+
+      - name: Restore pinned dependency objects
+        id: dependency-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LC005Density/.lake/packages
+          key: qfa-lc005-dependencies-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LC005Density/lean-toolchain', 'Quasi-Fefferman-A/LC005Density/lake-manifest.json') }}
+          restore-keys: |
+            qfa-lc005-dependencies-v1-${{ runner.os }}-${{ runner.arch }}-
+            qfa-lc004-dependencies-v1-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Restore incremental density objects
+        id: object-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            Quasi-Fefferman-A/LC005Density/.lake/build
+            Quasi-Fefferman-A/LC004Bridge/.lake/build
+            Quasi-Fefferman-A/LeanEndpoints/.lake/build
+          key: qfa-lc005-objects-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Quasi-Fefferman-A/LC005Density/**/*.lean', 'Quasi-Fefferman-A/LC004Bridge/QFALC004/**/*.lean', 'Quasi-Fefferman-A/LeanEndpoints/QFA/**/*.lean') }}
+          restore-keys: |
+            qfa-lc005-objects-v1-${{ runner.os }}-${{ runner.arch }}-
+            qfa-lc004-objects-v1-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install native Lean toolchain
+        id: toolchain
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: Quasi-Fefferman-A/LC005Density
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Bind native Windows Elan path
+        run: |
+          $bin = Join-Path $env:USERPROFILE '.elan\bin'
+          if (!(Test-Path (Join-Path $bin 'lake.exe'))) { throw 'Missing native Lake proxy' }
+          $bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Build LC005 and audit exact declarations
+        shell: cmd
+        run: run.cmd
+
+      - name: Preserve native toolchain cache
+        if: ${{ !cancelled() && steps.toolchain.outcome == 'success' && steps.toolchain-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.elan
+          key: ${{ steps.toolchain-cache.outputs.cache-primary-key }}
+
+      - name: Preserve pinned dependency objects
+        if: ${{ !cancelled() && steps.dependency-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: Quasi-Fefferman-A/LC005Density/.lake/packages
+          key: ${{ steps.dependency-cache.outputs.cache-primary-key }}
+
+      - name: Preserve incremental density objects
+        if: ${{ !cancelled() && steps.object-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            Quasi-Fefferman-A/LC005Density/.lake/build
+            Quasi-Fefferman-A/LC004Bridge/.lake/build
+            Quasi-Fefferman-A/LeanEndpoints/.lake/build
+          key: ${{ steps.object-cache.outputs.cache-primary-key }}
+
+      - name: Upload compiler and theorem-level axiom evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qfa-lc005-density-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: Quasi-Fefferman-A/LC005Density/evidence
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload tested source package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qfa-lc005-density-source-${{ github.sha }}
+          path: |
+            Quasi-Fefferman-A/LC005Density
+            !Quasi-Fefferman-A/LC005Density/.lake
+            !Quasi-Fefferman-A/LC005Density/evidence
+            !Quasi-Fefferman-A/LC005Density/**/__pycache__
+            .github/workflows/qfa-lc005-density.yml
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
