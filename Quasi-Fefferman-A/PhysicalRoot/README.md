@@ -14,7 +14,7 @@ source tree plus the exact physical-root implication LE109–LE112.
 ## Canonical theorem
 
 ```lean
-import QUASI_FEFFERMAN_A
+import QFA.PhysicalRoot
 
 #check QFA.PhysicalRoot.QUASI_FEFFERMAN_A
 ```

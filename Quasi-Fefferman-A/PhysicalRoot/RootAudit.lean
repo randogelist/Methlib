@@ -1,4 +1,4 @@
-import QUASI_FEFFERMAN_A
+import QFA.PhysicalRoot
 
 set_option pp.universes false
 set_option pp.explicit true

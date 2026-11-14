@@ -40,11 +40,12 @@
     "source_copy": "Quasi-Fefferman-A/LeanEndpoints tree copied without modification"
   },
   "root_sources": {
-    "QUASI_FEFFERMAN_A.lean": "1bbbf31aa48240eead9f3ae1d69c896dd50096aae4cd3d1de3ef9073266221f3",
-    "RootAudit.lean": "e4383048a955c369672bb8e2c4b847265e8c9ea3dfbaf1e818510263e90961e2",
-    "scripts/root_audit.py": "734f5cf6d71093a151fa3d4b67380fb7dc8d2dcbb2df315da00a9acd281f9225",
+    "QFA/PhysicalRoot.lean": "1bbbf31aa48240eead9f3ae1d69c896dd50096aae4cd3d1de3ef9073266221f3",
+    "QUASI_FEFFERMAN_A.lean": "845863e865e3128334c764fe418492a653808e6714d38671f9a18a7441739ee7",
+    "RootAudit.lean": "b3cdde6785f8b237baa64fa833b22a2ad35173390367b6880e5e627f94f6b64e",
+    "scripts/root_audit.py": "dc48327dce8a84b01b3deb2c92cd3b9acd407785ab7c5d5af57d14104bff909f",
     "root-run.cmd": "4dd2baaa8d6d25c8ec17c56d12dd1e1ad9bccf04b5536753fc2d4e832b38e668",
-    "README.md": "cc9d82e7b2418174f8b48d1ce81d1aee912a232f14ffbb12c49b49620f9e001a",
+    "README.md": "6a526167ef422e154080b57dd591a8b66f2eb590ca4ed2759749eaead30d20b3",
     "QUASI_FEFFERMAN_A_CONDITIONAL_FORMAL_CLOSURE_B_TIER.txt": "882873b07dcaaa369729b7a9dd83e543f1fd6858dda9c03e8da0209402ee0a32"
   },
   "unresolved_premises": [

@@ -159,7 +159,7 @@ def inspect_sources(base: Path) -> tuple[dict, dict, list[str], list[str]]:
     if set(baseline_names) & set(root_names):
         raise ValueError("BASELINE_ROOT_AUDIT_OVERLAP")
 
-    for relative in ["QUASI_FEFFERMAN_A.lean", "RootAudit.lean"]:
+    for relative in ["QFA/PhysicalRoot.lean", "QUASI_FEFFERMAN_A.lean", "RootAudit.lean"]:
         code = lean_code((base / relative).read_text(encoding="utf-8"))
         if re.search(r"\b(?:sorry|admit|axiom|native_decide)\b", code):
             raise ValueError(f"UNAPPROVED_ROOT_PROOF_CONSTRUCTION:{relative}")
