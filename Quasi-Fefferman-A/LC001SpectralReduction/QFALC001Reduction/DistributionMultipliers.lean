@@ -39,9 +39,9 @@ theorem ae_eq_of_const_smul_real_multiplier_distribution
   · intro g hg g_cpt
     have hg₁ : HasCompactSupport (Complex.ofRealCLM ∘ g) := g_cpt.comp_left rfl
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
-    let φ := hg₁.toSchwartzMap hg₂
-    have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T φ) hEq
-    simpa [φ, Function.comp_apply, hm_temp, smul_smul, mul_assoc, mul_left_comm,
+    let test := hg₁.toSchwartzMap hg₂
+    have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
+    simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc, mul_left_comm,
       mul_comm] using hEval
 
 /-- Real-scalar version of the representative-uniqueness adapter. -/
@@ -61,9 +61,9 @@ theorem ae_eq_of_real_smul_real_multiplier_distribution
   · intro g hg g_cpt
     have hg₁ : HasCompactSupport (Complex.ofRealCLM ∘ g) := g_cpt.comp_left rfl
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
-    let φ := hg₁.toSchwartzMap hg₂
-    have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T φ) hEq
-    simpa [φ, Function.comp_apply, hm_temp, Complex.real_smul, smul_smul,
+    let test := hg₁.toSchwartzMap hg₂
+    have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
+    simpa [test, Function.comp_apply, hm_temp, Complex.real_smul, smul_smul,
       mul_assoc, mul_left_comm, mul_comm] using hEval
 
 /-- Fourier transform of each supplied first derivative, as an exact equality
@@ -138,7 +138,7 @@ theorem laplacian_fourier_distribution_eq
     _ = -((2 * Real.pi) ^ 2 •
         𝓕 (TemperedDistribution.fourierMultiplierCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ)) f)) := by
-      rw [map_neg, ContinuousLinearMap.map_smul_of_tower]
+      rw [fourier_neg, ContinuousLinearMap.map_smul_of_tower]
     _ = -((2 * Real.pi) ^ 2 •
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ)) (𝓕 f)) := by
@@ -152,7 +152,11 @@ theorem laplacian_fourier_distribution_eq
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ))
           ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector)) := by
-      rw [neg_smul]
+      symm
+      exact neg_smul ((2 * Real.pi) ^ 2)
+        (TemperedDistribution.smulLeftCLM ComplexVector
+          (fun k : Space => (‖k‖ ^ 2 : ℂ))
+          ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector)))
 
 /-- Almost-everywhere Laplacian multiplier identity. -/
 theorem laplacian_fourier_ae
