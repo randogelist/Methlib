@@ -41,48 +41,29 @@ theorem ae_eq_of_const_smul_real_multiplier_distribution
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
     let test := hg₁.toSchwartzMap hg₂
     have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
+    rw [SchwartzMap.smulLeftCLM_apply hm_temp test] at hEval
     calc
       (∫ x : Space, g x • q x) =
           c • ∫ x : Space, ((m x : ℂ) * (g x : ℂ)) • h x := by
-        simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc,
-          mul_left_comm, mul_comm] using hEval
+        simpa [test, Function.comp_apply, smul_smul, mul_assoc, mul_left_comm,
+          mul_comm] using hEval
       _ = ∫ x : Space, c • (((m x : ℂ) * (g x : ℂ)) • h x) := by
         rw [integral_smul]
-      _ = ∫ x : Space, g x • (c * (m x : ℂ)) • h x := by
+      _ = ∫ x : Space, g x • ((c * (m x : ℂ)) • h x) := by
         apply integral_congr_ae
         filter_upwards with x
-        simp [Complex.real_smul, smul_smul, mul_assoc, mul_left_comm, mul_comm]
-
-/-- Real-scalar version of the representative-uniqueness adapter. -/
-theorem ae_eq_of_real_smul_real_multiplier_distribution
-    (q h : ComplexL2) (c : ℝ) (m : Space → ℝ)
-    (hm_cont : Continuous m) (hm_temp : m.HasTemperateGrowth)
-    (hEq : (q : 𝓢'(Space, ComplexVector)) =
-      c • TemperedDistribution.smulLeftCLM ComplexVector
-        (fun x : Space => (m x : ℂ))
-        (h : 𝓢'(Space, ComplexVector))) :
-    (fun x : Space => q x) =ᵐ[volume]
-      (fun x : Space => (c * m x) • h x) := by
-  apply ae_eq_of_integral_contDiff_smul_eq
-  · exact (Lp.memLp q).locallyIntegrable (by norm_num)
-  · exact MeasureTheory.LocallyIntegrable.continuous_smul (by fun_prop)
-      ((Lp.memLp h).locallyIntegrable (by norm_num))
-  · intro g hg g_cpt
-    have hg₁ : HasCompactSupport (Complex.ofRealCLM ∘ g) := g_cpt.comp_left rfl
-    have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
-    let test := hg₁.toSchwartzMap hg₂
-    have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
-    calc
-      (∫ x : Space, g x • q x) =
-          c • ∫ x : Space, ((m x : ℂ) * (g x : ℂ)) • h x := by
-        simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc,
-          mul_left_comm, mul_comm] using hEval
-      _ = ∫ x : Space, c • (((m x : ℂ) * (g x : ℂ)) • h x) := by
-        rw [integral_smul]
-      _ = ∫ x : Space, g x • (c * m x) • h x := by
-        apply integral_congr_ae
-        filter_upwards with x
-        simp [Complex.real_smul, smul_smul, mul_assoc, mul_left_comm, mul_comm]
+        calc
+          c • (((m x : ℂ) * (g x : ℂ)) • h x) =
+              (c * ((m x : ℂ) * (g x : ℂ))) • h x :=
+            (mul_smul c ((m x : ℂ) * (g x : ℂ)) (h x)).symm
+          _ = ((g x : ℂ) * (c * (m x : ℂ))) • h x := by
+            congr 1
+            ring
+          _ = (g x : ℂ) • ((c * (m x : ℂ)) • h x) :=
+            mul_smul (g x : ℂ) (c * (m x : ℂ)) (h x)
+          _ = g x • ((c * (m x : ℂ)) • h x) :=
+            (RCLike.real_smul_eq_coe_smul (K := ℂ) (g x)
+              ((c * (m x : ℂ)) • h x)).symm
 
 /-- Fourier transform of each supplied first derivative, as an exact equality
 of tempered distributions. -/
@@ -182,6 +163,7 @@ theorem laplacian_fourier_distribution_eq
 
 /-- Almost-everywhere Laplacian multiplier identity in the complex scalar
 normalization used by the norm-density calculation. -/
+set_option maxHeartbeats 800000 in
 theorem laplacian_fourier_ae
     {v : ComplexL2} {G : Fin 3 → ComplexL2} {L : ComplexL2}
     (h : SchwartzDerivativeWitnesses v G L) :
