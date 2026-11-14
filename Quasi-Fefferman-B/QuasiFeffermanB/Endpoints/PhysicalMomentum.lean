@@ -75,9 +75,12 @@ private theorem energyPM_pairing_tendsto
   have heq (n : ℕ) : physicalFieldInner (v n) φ =
       inner ℝ (criticalL2Representative (v n)) (criticalL2Representative φ) :=
     energyPM_pairing_rep (v n) φ (hv n) hφ
-  have h := hconv.inner
-    (tendsto_const_nhds : Tendsto (fun _ : ℕ => criticalL2Representative φ)
-      atTop (𝓝 (criticalL2Representative φ)))
+  have h : Tendsto
+      (fun n => inner ℝ (criticalL2Representative (v n)) (criticalL2Representative φ))
+      atTop (𝓝 (inner ℝ (criticalL2Representative w) (criticalL2Representative φ))) :=
+    hconv.inner
+      (tendsto_const_nhds : Tendsto (fun _ : ℕ => criticalL2Representative φ)
+        atTop (𝓝 (criticalL2Representative φ)))
   simpa only [heq, energyPM_pairing_rep w φ hw hφ] using h
 
 private theorem energyPM_transport_tendsto
@@ -110,7 +113,7 @@ private theorem energyPM_pairing_bound (v φ : Field)
     (hv : MemLp v 2 μQ) (hφ : Continuous φ)
     (C : ℝ) (hC : 0 ≤ C) (hbound : ∀ x ∈ unitCube, ‖φ x‖ ≤ C) :
     ‖physicalFieldInner v φ‖ ≤
-      physicalEnergy v + C ^ 2 * μQ.real Set.univ := by
+      physicalEnergy v + C ^ 2 * (μQ).real Set.univ := by
   have hφ₂ : MemLp φ 2 μQ := critical_continuous_memLp_cube _ hφ 2
   have hsquare : Integrable (fun x => ‖v x‖ ^ 2) μQ :=
     (memLp_two_iff_integrable_sq_norm hv.aestronglyMeasurable).mp hv
@@ -122,10 +125,11 @@ private theorem energyPM_pairing_bound (v φ : Field)
     _ ≤ ∫ x in unitCube, (‖v x‖ ^ 2 + C ^ 2) := by
       apply integral_mono_ae hinner.norm (hsquare.add (integrable_const _))
       filter_upwards [ae_restrict_mem isCompact_unitCube.measurableSet] with x hx
+      change ‖inner ℝ (v x) (φ x)‖ ≤ ‖v x‖ ^ 2 + C ^ 2
       have h := norm_inner_le_norm (𝕜 := ℝ) (v x) (φ x)
       have hmul := mul_le_mul_of_nonneg_left (hbound x hx) (norm_nonneg (v x))
       nlinarith [sq_nonneg (‖v x‖ - C)]
-    _ = physicalEnergy v + C ^ 2 * μQ.real Set.univ := by
+    _ = physicalEnergy v + C ^ 2 * (μQ).real Set.univ := by
       rw [integral_add hsquare (integrable_const _), integral_const,
         physicalEnergy_eq_integral_norm_sq]
       simp only [smul_eq_mul]
@@ -179,6 +183,8 @@ private theorem energyPM_transport_difference_bound (v φ ψ : Field)
     _ ≤ ∫ x in unitCube, C * ‖v x‖ ^ 2 := by
       apply integral_mono_ae (hiφ.sub hiψ).norm (hsquare.const_mul C)
       filter_upwards [ae_restrict_mem isCompact_unitCube.measurableSet] with x hx
+      change ‖inner ℝ (v x) ((fderiv ℝ φ x) (v x)) -
+        inner ℝ (v x) ((fderiv ℝ ψ x) (v x))‖ ≤ C * ‖v x‖ ^ 2
       rw [← inner_sub_right, ← ContinuousLinearMap.sub_apply]
       calc
         _ ≤ ‖v x‖ * ‖(fderiv ℝ φ x - fderiv ℝ ψ x) (v x)‖ :=
@@ -268,7 +274,7 @@ private theorem energyPM_physical_subsequence
     funext n
     exact energy_galerkin_physical_L2 (g (σ n)) r hrmem.1
   rw [heq, energyPeriodicVelocity_L2 U r]
-  simpa only [energyH0PhysicalMap_apply] using hp
+  simpa only [Function.comp_def, energyH0PhysicalMap_apply] using hp
 
 /-- Passage on one positive slab. The subsequence is selected only after the
 slab is fixed; the endpoint pairings use the all-time modal limit. -/
@@ -350,13 +356,13 @@ private theorem energyPM_slab
     exact ⟨(intervalIntegrable_iff_integrableOn_Ioc_of_le hst).mp h₁,
       (intervalIntegrable_iff_integrableOn_Ioc_of_le hst).mp h₂,
       (intervalIntegrable_iff_integrableOn_Ioc_of_le hst).mp h₃⟩
-  have hbound₁ (n : ℕ) : ∀ᵐ r ∂μ, ‖F₁ n r‖ ≤ B + Ct ^ 2 * μQ.real Set.univ := by
+  have hbound₁ (n : ℕ) : ∀ᵐ r ∂μ, ‖F₁ n r‖ ≤ B + Ct ^ 2 * (μQ).real Set.univ := by
     filter_upwards [ae_restrict_mem measurableSet_Ioc] with r hr
     have hrpos := hs.trans hr.1
     exact (energyPM_pairing_bound _ _ (energyPM_velocity_memLp (g (σ n)) r)
       (htime_cont r hrpos) Ct hCt (hCt_bound r ⟨hr.1.le, hr.2⟩)).trans
         (add_le_add_right (henergy n r hrpos.le) _)
-  have hbound₂ (n : ℕ) : ∀ᵐ r ∂μ, ‖F₂ n r‖ ≤ B + Cl ^ 2 * μQ.real Set.univ := by
+  have hbound₂ (n : ℕ) : ∀ᵐ r ∂μ, ‖F₂ n r‖ ≤ B + Cl ^ 2 * (μQ).real Set.univ := by
     filter_upwards [ae_restrict_mem measurableSet_Ioc] with r hr
     have hrpos := hs.trans hr.1
     exact (energyPM_pairing_bound _ _ (energyPM_velocity_memLp (g (σ n)) r)
@@ -394,10 +400,10 @@ private theorem energyPM_slab
       (fun n => henergy n r (hs.trans hmem.1).le) r ⟨hmem.1.le, hmem.2⟩
     simpa only [sub_add_cancel, zero_add] using herror.add hfixed
   obtain ⟨hi₁, hj₁⟩ := energyPM_dominated_limit F₁ f₁
-    (B + Ct ^ 2 * μQ.real Set.univ) (fun n => (hfinite n).1.aestronglyMeasurable)
+    (B + Ct ^ 2 * (μQ).real Set.univ) (fun n => (hfinite n).1.aestronglyMeasurable)
     hbound₁ hlim₁
   obtain ⟨hi₂, hj₂⟩ := energyPM_dominated_limit F₂ f₂
-    (B + Cl ^ 2 * μQ.real Set.univ) (fun n => (hfinite n).2.1.aestronglyMeasurable)
+    (B + Cl ^ 2 * (μQ).real Set.univ) (fun n => (hfinite n).2.1.aestronglyMeasurable)
     hbound₂ hlim₂
   obtain ⟨hi₃, hj₃⟩ := energyPM_dominated_limit F₃ f₃
     (Cp * B) (fun n => (hfinite n).2.2.aestronglyMeasurable) hbound₃ hlim₃
