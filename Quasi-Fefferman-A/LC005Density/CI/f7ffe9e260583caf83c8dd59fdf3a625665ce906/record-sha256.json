@@ -1,0 +1,10 @@
+{
+  "raw_artifact_files_sha256": {
+    "axioms.log": "cebe58f296ff5ec86b326cfb492ac734e23cd2b6b5a15ac20b5ccb01cbd5d48b",
+    "build.log": "e2dda0d65e2c4361cc2c7ef93d25921e42133369321ca732f8c072a57e3fc4a0",
+    "lake-update.log": "df758404aee0e6334ae36f4ec46bdc14caf7a71affa9895bda190418958157b6",
+    "lean-version.txt": "7a500134ba72c45d1ce50e1c6d9681376189b1190c0c48f54fde95efa7b5e553",
+    "mathlib-cache.log": "79ba20e3aaab0fb986d9cd084173e19ca4a1cae2d7ad3ecb721b31da0284e7ea",
+    "status.json": "fd1c25f1d05a63f2f0e0f0c9b83bede133c2ccc71961d2fc8f77be6ebb8b50a5"
+  }
+}

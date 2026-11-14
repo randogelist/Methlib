@@ -1,0 +1,45 @@
+TYPE_BEGIN:SchwartzMap.qfa_dense_hasCompactSupport
+@SchwartzMap.qfa_dense_hasCompactSupport : ∀ {E : Type u_1} [inst : NormedAddCommGroup E]
+  [inst_1 : @NormedSpace Real E Real.normedField (@NormedAddCommGroup.toSeminormedAddCommGroup E inst)] {F : Type u_2}
+  [inst_2 : NormedAddCommGroup F]
+  [inst_3 : @NormedSpace Real F Real.normedField (@NormedAddCommGroup.toSeminormedAddCommGroup F inst_2)]
+  [@FiniteDimensional Real E Real.instDivisionRing (@NormedAddCommGroup.toAddCommGroup E inst)
+      (@NormedSpace.toModule Real E Real.normedField (@NormedAddCommGroup.toSeminormedAddCommGroup E inst) inst_1)],
+  @Dense (@SchwartzMap E F inst inst_1 inst_2 inst_3) (@SchwartzMap.instTopologicalSpace E F inst inst_1 inst_2 inst_3)
+    (@Set.ofPred (@SchwartzMap E F inst inst_1 inst_2 inst_3) fun f =>
+      @HasCompactSupport E F
+        (@UniformSpace.toTopologicalSpace E
+          (@PseudoMetricSpace.toUniformSpace E
+            (@SeminormedAddCommGroup.toPseudoMetricSpace E (@NormedAddCommGroup.toSeminormedAddCommGroup E inst))))
+        (@NegZeroClass.toZero F
+          (@SubNegZeroMonoid.toNegZeroClass F
+            (@SubtractionMonoid.toSubNegZeroMonoid F
+              (@SubtractionCommMonoid.toSubtractionMonoid F
+                (@AddCommGroup.toDivisionAddCommMonoid F (@NormedAddCommGroup.toAddCommGroup F inst_2))))))
+        (@DFunLike.coe (@SchwartzMap E F inst inst_1 inst_2 inst_3) E (fun x => F)
+          (@SchwartzMap.instFunLike E F inst inst_1 inst_2 inst_3) f))
+TYPE_END:SchwartzMap.qfa_dense_hasCompactSupport
+'SchwartzMap.qfa_dense_hasCompactSupport' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QFA.Endpoints.Representation.CompactSchwartz.denseCompactSchwartzTests
+QFA.Endpoints.Representation.CompactSchwartz.denseCompactSchwartzTests : QFA.Endpoints.Representation.CompactSchwartz.DenseCompactSchwartzTests
+TYPE_END:QFA.Endpoints.Representation.CompactSchwartz.denseCompactSchwartzTests
+'QFA.Endpoints.Representation.CompactSchwartz.denseCompactSchwartzTests' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz_unconditional
+@QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz_unconditional : ∀
+  {v : ↥QFA.Endpoints.Agmon.ComplexL2}
+  {G : Fin (@OfNat.ofNat Nat (nat_lit 3) (instOfNatNat (nat_lit 3))) → ↥QFA.Endpoints.Agmon.ComplexL2}
+  {L : ↥QFA.Endpoints.Agmon.ComplexL2},
+  QFA.Endpoints.Representation.CompactSchwartz.CompactSchwartzDerivativeWitnesses v G L →
+    QFA.Endpoints.Agmon.SchwartzDerivativeWitnesses v G L
+TYPE_END:QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz_unconditional
+'QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz_unconditional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QFA.Endpoints.Representation.CompactSchwartz.compactSchwartzToSchwartzEndpoint
+QFA.Endpoints.Representation.CompactSchwartz.compactSchwartzToSchwartzEndpoint : QFA.Endpoints.Representation.CompactSchwartz.CompactSchwartzToSchwartzEndpoint
+TYPE_END:QFA.Endpoints.Representation.CompactSchwartz.compactSchwartzToSchwartzEndpoint
+'QFA.Endpoints.Representation.CompactSchwartz.compactSchwartzToSchwartzEndpoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

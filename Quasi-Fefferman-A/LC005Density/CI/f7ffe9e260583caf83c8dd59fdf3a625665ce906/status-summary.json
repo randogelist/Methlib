@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "physical_QFA_root_inferred": false,
+  "lc005_discharged": true,
+  "compiled_commit": "f7ffe9e260583caf83c8dd59fdf3a625665ce906",
+  "run_id": 43552566360,
+  "compiler": "Lean 4.33.0 x86_64-w64-windows-gnu commit d8b18978322de05a8f3dba51ef03cf5461676c17 Release",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "allowed_axioms": ["propext", "Classical.choice", "Quot.sound"],
+  "declarations": {
+    "LCD001": "SchwartzMap.qfa_dense_hasCompactSupport",
+    "LCD002": "QFA.Endpoints.Representation.CompactSchwartz.denseCompactSchwartzTests",
+    "LCD003": "QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz_unconditional",
+    "LCD004": "QFA.Endpoints.Representation.CompactSchwartz.compactSchwartzToSchwartzEndpoint"
+  },
+  "sorryAx": false,
+  "unapproved_axioms": false
+}

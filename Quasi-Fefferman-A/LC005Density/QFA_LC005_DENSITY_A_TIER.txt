@@ -1,0 +1,46 @@
+QFA LC005 COMPACT-SCHWARTZ DENSITY — A_TIER VERIFICATION
+
+STATUS=PASS
+MARKER=!!
+SCOPE=LC005_DENSITY_AND_CORRECTED_COMPACT_SCHWARTZ_ENDPOINT
+PHYSICAL_QFA_ROOT_INFERRED=FALSE
+
+COMPILED_SOURCE_COMMIT=f7ffe9e260583caf83c8dd59fdf3a625665ce906
+GITHUB_RUN_ID=43552566360
+GITHUB_RUN_URL=https://github.com/randogelist/Methlib/actions/runs/43552566360
+COMPILER=Lean 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release
+MATHLIB=db584cd6d46c92f209a44c0f1c829460d327499d
+LOCAL_LEAN_EXECUTIONS=0
+
+AUDITED_DECLARATIONS=4
+LCD001=SchwartzMap.qfa_dense_hasCompactSupport
+LCD002=QFA.Endpoints.Representation.CompactSchwartz.denseCompactSchwartzTests
+LCD003=QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz_unconditional
+LCD004=QFA.Endpoints.Representation.CompactSchwartz.compactSchwartzToSchwartzEndpoint
+
+TRANSITIVE_AXIOMS={propext, Classical.choice, Quot.sound}
+SORRY_AX=ABSENT
+UNAPPROVED_AXIOMS=ABSENT
+LC005_DISCHARGED=TRUE
+
+EXACT_FORMAL_CHAIN:
+  compact cutoff approximants
+  -> DenseCompactSchwartzTests
+  -> CompactSchwartzDerivativeWitnesses(v,G,L)
+  -> SchwartzDerivativeWitnesses(v,G,L).
+
+BACKPORT_SCOPE:
+  The density proof is a namespace-isolated backport of Mathlib PR #43046,
+  commit b2115b96757894e56b53fd0f94bd63acd64d8025, plus the later uniform
+  derivative-bound lemma required by the pinned Mathlib API.
+
+NON_CONCLUSIONS:
+  The old ContDiffBump-only CompactToSchwartzEndpoint is not validated.
+  Physical weak derivative data are not yet converted to CompactSchwartzDerivativeWitnesses.
+  WholeSpaceSpectralEndpoint, WholeSpaceAgmonEndpoint, physical NSE realization,
+  smoothness, pressure, and the frozen physical QFA root are not inferred.
+
+AUDIT_ARTIFACT_ID=14096733099
+AUDIT_ARTIFACT_DIGEST=sha256:c119ea298daf9a939e2a89cd9681958b8d189819f67f37e11491e6d3f67e90d5
+SOURCE_ARTIFACT_ID=14096468511
+SOURCE_ARTIFACT_DIGEST=sha256:4a8734ae8383492c21d71b5c5e096e51d84f0462cf8f529645eac04ac91cba03
