@@ -41,6 +41,7 @@ theorem ae_eq_of_const_smul_real_multiplier_distribution
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
     let test := hg₁.toSchwartzMap hg₂
     have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
+    rw [← integral_smul] at hEval
     simpa [test, Function.comp_apply, hm_temp, smul_smul, mul_assoc, mul_left_comm,
       mul_comm] using hEval
 
@@ -63,6 +64,7 @@ theorem ae_eq_of_real_smul_real_multiplier_distribution
     have hg₂ : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ g) := by fun_prop
     let test := hg₁.toSchwartzMap hg₂
     have hEval := congrArg (fun T : 𝓢'(Space, ComplexVector) => T test) hEq
+    rw [← integral_smul] at hEval
     simpa [test, Function.comp_apply, hm_temp, Complex.real_smul, smul_smul,
       mul_assoc, mul_left_comm, mul_comm] using hEval
 
@@ -124,25 +126,29 @@ theorem laplacian_fourier_distribution_eq
           (fun k : Space => (‖k‖ ^ 2 : ℂ))
           ((𝓕 v : ComplexL2) : 𝓢'(Space, ComplexVector)) := by
   let f : 𝓢'(Space, ComplexVector) := (v : 𝓢'(Space, ComplexVector))
+  let M : 𝓢'(Space, ComplexVector) :=
+    TemperedDistribution.fourierMultiplierCLM ComplexVector
+      (fun k : Space => (‖k‖ ^ 2 : ℂ)) f
   calc
     ((𝓕 L : ComplexL2) : 𝓢'(Space, ComplexVector)) =
         𝓕 (L : 𝓢'(Space, ComplexVector)) :=
       (MeasureTheory.Lp.fourier_toTemperedDistribution_eq L).symm
     _ = 𝓕 (Δ f) := by simpa [f] using congrArg 𝓕 h.laplacian_eq
-    _ = 𝓕 (-((2 * Real.pi) ^ 2 •
-        TemperedDistribution.fourierMultiplierCLM ComplexVector
-          (fun k : Space => (‖k‖ ^ 2 : ℂ)) f)) := by
+    _ = 𝓕 (-((2 * Real.pi) ^ 2 • M)) := by
       congr 1
-      simpa using
+      simpa [M] using
         (TemperedDistribution.laplacian_eq_fourierMultiplierCLM f)
-    _ = -((2 * Real.pi) ^ 2 •
-        𝓕 (TemperedDistribution.fourierMultiplierCLM ComplexVector
-          (fun k : Space => (‖k‖ ^ 2 : ℂ)) f)) := by
-      rw [fourier_neg, ContinuousLinearMap.map_smul_of_tower]
+    _ = -(𝓕 ((2 * Real.pi) ^ 2 • M)) := by
+      simpa using (fourier_neg (((2 * Real.pi) ^ 2) • M))
+    _ = -((2 * Real.pi) ^ 2 • 𝓕 M) := by
+      congr 1
+      exact ContinuousLinearMap.map_smul_of_tower
+        (FourierTransform.fourierCLM ℂ (𝓢'(Space, ComplexVector)))
+        ((2 * Real.pi) ^ 2) M
     _ = -((2 * Real.pi) ^ 2 •
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ)) (𝓕 f)) := by
-      simp [TemperedDistribution.fourierMultiplierCLM_apply]
+      simp [M, TemperedDistribution.fourierMultiplierCLM_apply]
     _ = -((2 * Real.pi) ^ 2 •
         TemperedDistribution.smulLeftCLM ComplexVector
           (fun k : Space => (‖k‖ ^ 2 : ℂ))
