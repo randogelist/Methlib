@@ -33,7 +33,7 @@ theorem FINITE_CALORIC_QUADRATIC_ESTIMATE
     (caloricVolterra_nonneg_le_primitive ν (κ i) T (f i) hν.le (hκ i hi).le hT
       (hfc i hi) (hf0 i hi) t ht).1
   have hsumc : ContinuousOn (fun t => ∑ i ∈ s, y i t) (Icc 0 T) :=
-    continuousOn_finset_sum hyc
+    continuousOn_finsetSum s hyc
   have hsum0 (t : ℝ) (ht : t ∈ Icc 0 T) : 0 ≤ ∑ i ∈ s, y i t :=
     Finset.sum_nonneg (fun i hi => hy0 i hi t ht)
   have hiF : (∑ i ∈ s, ∫ t in (0 : ℝ)..T, f i t) ≤
@@ -41,7 +41,7 @@ theorem FINITE_CALORIC_QUADRATIC_ESTIMATE
     rw [finiteTimeL2_sq T hT, ← intervalIntegral.integral_finsetSum
       (fun i hi => (hfc i hi).intervalIntegrable_of_Icc hT)]
     exact intervalIntegral.integral_mono_on hT
-      ((continuousOn_finset_sum hfc).intervalIntegrable_of_Icc hT)
+      ((continuousOn_finsetSum s hfc).intervalIntegrable_of_Icc hT)
       ((hAc.pow 2).intervalIntegrable_of_Icc hT) hsource
   have hY : finiteTimeL2 T (fun t => ∑ i ∈ s, y i t) ≤
       finiteTimeL2 T A ^ 2 / Real.sqrt (2 * ν) := by

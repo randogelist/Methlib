@@ -40,7 +40,7 @@
   "sources": {
     "QuasiFeffermanB/CaloricAdmission.lean": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
     "QuasiFeffermanB/CaloricBarrier.lean": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
-    "QuasiFeffermanB/CaloricBootstrap.lean": "0dd9a312d4402cf6aba80fd9e299a110483f513d226f4f8d4a5df1ff1cb7e98a",
+    "QuasiFeffermanB/CaloricBootstrap.lean": "64ea44a78ade4a6ef701c7a023bc2eebefecd1dfe6cb30f9773a1e80a209a770",
     "QuasiFeffermanB/CaloricCompactness.lean": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
     "QuasiFeffermanB/CaloricConstants.lean": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
     "QuasiFeffermanB/CaloricConvolution.lean": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
@@ -145,7 +145,7 @@
     {
       "module": "QuasiFeffermanB.CaloricBootstrap",
       "source": "QuasiFeffermanB/CaloricBootstrap.lean",
-      "sha256": "0dd9a312d4402cf6aba80fd9e299a110483f513d226f4f8d4a5df1ff1cb7e98a",
+      "sha256": "64ea44a78ade4a6ef701c7a023bc2eebefecd1dfe6cb30f9773a1e80a209a770",
       "declarations": [
         "QuasiFeffermanB.FINITE_CALORIC_QUADRATIC_ESTIMATE",
         "QuasiFeffermanB.finiteTimeL2_continuousOn_horizon",

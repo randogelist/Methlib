@@ -1,4 +1,4 @@
-name: Quasi Fefferman B cached endpoint preload
+name: Quasi Fefferman B accelerated cached assembly
 
 on:
   push:
@@ -112,7 +112,7 @@ jobs:
         id: endpoints
         run: |
           set -euo pipefail
-          lake env python3 qfb/scripts/audit.py --package . --target QuasiFeffermanB.Endpoints.Root 2>&1 | tee evidence/external-driver.log
+          lake env python3 qfb/scripts/audit.py --package . --target QuasiFeffermanB.Endpoints.Root --jobs 2 2>&1 | tee evidence/external-driver.log
           sha256sum --check evidence/lockfiles-before.sha256
 
       - name: Preserve reused and newly checked foundation objects

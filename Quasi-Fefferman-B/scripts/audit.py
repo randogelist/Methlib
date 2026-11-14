@@ -1,5 +1,7 @@
 """External-only build/audit driver. Exact source signatures; no root inference."""
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
+from threading import Lock
 import argparse
 import hashlib
 import json
@@ -195,10 +197,13 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--self-test", action="store_true")
     p.add_argument("--package", default=".")
+    p.add_argument("--jobs", type=int, default=1, help="Independent module processes per import frontier; exact audits remain mandatory")
     p.add_argument("--target", action="append", help="Audit this module and its complete candidate import closure; repeatable")
     p.add_argument("--plan-only", action="store_true", help="Print the source-verified preload plan; execute no compiler")
     p.add_argument("--project", help="Source overlay path, permitted only with --plan-only")
     args = p.parse_args()
+    if args.jobs < 1 or args.jobs > 4:
+        raise ValueError("--jobs must be between 1 and 4")
     if args.self_test:
         self_test(); cache_self_test(); selection_self_test(); return 0
     if args.project and not args.plan_only:
@@ -277,14 +282,27 @@ def main():
     env["LEAN_PATH"] = os.pathsep.join([str(build_dir), str(base / ".lake/build/lib/lean"), *inherited])
     status = {"root_status": "PENDING", "endpoint_completion_inferred": False,
               "contract_status": manifest["contract_status"], "scope": scope,
-              "modules": {}, "declarations": {}}
+              "modules": {}, "declarations": {},
+              "scheduler": {"kind": "DEPENDENCY_FRONTIER", "jobs": args.jobs},
+              "resolution_marker": "!=!"}
+    output_lock = Lock()
+    def emit(line):
+        with output_lock:
+            print(line, flush=True)
+    def checkpoint():
+        target = evidence / "status.json"
+        temporary = evidence / "status.json.tmp"
+        temporary.write_text(json.dumps(status, indent=2) + "\n", encoding="utf-8")
+        temporary.replace(target)
     def command(argv, cwd, logfile, command_env=None):
         with logfile.open("w", encoding="utf-8") as log:
             proc = subprocess.Popen(argv, cwd=cwd, env=command_env, stdout=subprocess.PIPE,
                                     stderr=subprocess.STDOUT, text=True, encoding="utf-8")
             assert proc.stdout is not None
             for line in proc.stdout:
-                print(line, end="", flush=True); log.write(line)
+                with output_lock:
+                    print(line, end="", flush=True)
+                log.write(line)
             return proc.wait()
     native_result = command(["lake", "build", *native_imports], base, evidence / "foundation-imports.log")
     if native_result:
@@ -292,71 +310,95 @@ def main():
         (evidence / "status.json").write_text(json.dumps(status, indent=2) + "\n")
         return 1
     status["foundation_status"] = "PASS"
-    pending = set(modules)
-    while pending:
-        ready = sorted(m for m in pending if not any(i in pending for i in modules[m]["imports"]))
-        if not ready: raise ValueError("Cyclic QFB imports")
-        for module in ready:
-            pending.remove(module)
-            stem = module.replace(".", "_")
-            if any(status["modules"].get(i, {}).get("build") != "PASS"
-                   for i in modules[module]["imports"] if i in modules):
-                status["modules"][module] = {"build": "BLOCKED_BY_DEPENDENCY"}; continue
-            out = build_dir / (module.replace(".", "/") + ".olean")
-            out.parent.mkdir(parents=True, exist_ok=True)
-            record = object_cache.get(module, {})
-            if not isinstance(record, dict):
-                record = {}
-            cache_hit = (record.get("compiler_version") == version.strip()
-                         and cached_object_matches(record, fingerprints[module], out))
-            if cache_hit:
-                code = 0
-                (evidence / f"{stem}-build.log").write_text(
-                    "CACHED_VERIFIED_OBJECT: exact source/import-closure/compiler fingerprint and object digest matched.\n",
-                    encoding="utf-8")
-                print(f"CACHED_VERIFIED_OBJECT {module}", flush=True)
-            else:
-                object_cache.pop(module, None)
-                code = command(["lean", "-o", str(out), modules[module]["source"]], root,
-                               evidence / f"{stem}-build.log", env)
+    def compile_and_audit(module):
+        # Every worker owns exactly one output and its independent log files.
+        # Shared status/cache manifests are written only by the parent thread.
+        stem = module.replace(".", "_")
+        out = build_dir / (module.replace(".", "/") + ".olean")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        record = object_cache.get(module, {})
+        if not isinstance(record, dict):
+            record = {}
+        cache_hit = (record.get("compiler_version") == version.strip()
+                     and cached_object_matches(record, fingerprints[module], out))
+        if cache_hit:
+            code = 0
+            (evidence / f"{stem}-build.log").write_text(
+                "CACHED_VERIFIED_OBJECT: exact source/import-closure/compiler fingerprint and object digest matched.\n",
+                encoding="utf-8")
+            emit(f"CACHED_VERIFIED_OBJECT {module}")
+        else:
+            code = command(["lean", "-o", str(out), modules[module]["source"]], root,
+                           evidence / f"{stem}-build.log", env)
+        if code:
+            return module, {"build": "FAIL"}, {}, None
+        if not cache_hit:
+            record = {"fingerprint": fingerprints[module],
+                "olean_sha256": hashlib.sha256(out.read_bytes()).hexdigest(),
+                "producer_run_id": os.environ.get("GITHUB_RUN_ID"),
+                "producer_commit": os.environ.get("GITHUB_SHA"),
+                "compiler_version": version.strip()}
+        module_status = {"build": "PASS",
+            "build_origin": "CACHED_VERIFIED_OBJECT" if cache_hit else "EXTERNAL_COMPILER",
+            "dependency_fingerprint": fingerprints[module],
+            "object_provenance": record}
+        if module not in audit_specs:
+            return module, module_status, {}, record
+        names = audit_specs[module]["declarations"]
+        audit_source = [f"import {module}", "set_option pp.universes false", "set_option pp.explicit false", ""]
+        for name in names:
+            audit_source += [f'#eval IO.println "TYPE_BEGIN:{name}"', f"#check @{name}",
+                             f'#eval IO.println "TYPE_END:{name}"', f"#print axioms {name}", ""]
+        audit_path = evidence / f"{stem}-audit.lean"
+        audit_path.write_text("\n".join(audit_source), encoding="utf-8")
+        log = evidence / f"{stem}-axioms.log"
+        code = command(["lean", str(audit_path)], root, log, env)
+        declarations = {}
+        try:
             if code:
-                status["modules"][module] = {"build": "FAIL"}; continue
-            if not cache_hit:
-                object_cache[module] = {"fingerprint": fingerprints[module],
-                    "olean_sha256": hashlib.sha256(out.read_bytes()).hexdigest(),
-                    "producer_run_id": os.environ.get("GITHUB_RUN_ID"),
-                    "producer_commit": os.environ.get("GITHUB_SHA"),
-                    "compiler_version": version.strip()}
-            cache_manifest_path.write_text(json.dumps(object_cache, indent=2) + "\n", encoding="utf-8")
-            status["modules"][module] = {"build": "PASS",
-                "build_origin": "CACHED_VERIFIED_OBJECT" if cache_hit else "EXTERNAL_COMPILER",
-                "dependency_fingerprint": fingerprints[module],
-                "object_provenance": object_cache[module]}
-            if module not in audit_specs: continue
-            names = audit_specs[module]["declarations"]
-            audit_source = [f"import {module}", "set_option pp.universes false", "set_option pp.explicit false", ""]
-            for name in names:
-                audit_source += [f'#eval IO.println "TYPE_BEGIN:{name}"', f"#check @{name}",
-                                 f'#eval IO.println "TYPE_END:{name}"', f"#print axioms {name}", ""]
-            audit_path = evidence / f"{stem}-audit.lean"
-            audit_path.write_text("\n".join(audit_source), encoding="utf-8")
-            log = evidence / f"{stem}-axioms.log"
-            code = command(["lean", str(audit_path)], root, log, env)
-            try:
-                if code: raise ValueError(f"Audit compiler exit {code}")
-                declarations = check_log(log.read_text(), names)
-                for name, details in declarations.items():
-                    details.update({"source": audit_specs[module]["source"],
-                                    "source_sha256": audit_specs[module]["sha256"],
-                                    "type_rendering": "readable compiler presentation; pinned source is normative",
-                                    "type_prettyprinter_elisions": "⋯" in details["type"] or "..." in details["type"],
-                                    "status": "A_TIER_EXACT_DECLARATION", "contract_completion": False})
-                    status["declarations"][name] = details
-                    print(f"!! DECLARATION {name}", flush=True)
-                status["modules"][module]["audit"] = "PASS"
-            except ValueError as error:
-                status["modules"][module]["audit"] = "FAIL"
-                status["modules"][module]["error"] = str(error)
+                raise ValueError(f"Audit compiler exit {code}")
+            declarations = check_log(log.read_text(), names)
+            for name, details in declarations.items():
+                details.update({"source": audit_specs[module]["source"],
+                                "source_sha256": audit_specs[module]["sha256"],
+                                "type_rendering": "readable compiler presentation; pinned source is normative",
+                                "type_prettyprinter_elisions": "⋯" in details["type"] or "..." in details["type"],
+                                "status": "A_TIER_EXACT_DECLARATION", "contract_completion": False})
+            module_status["audit"] = "PASS"
+        except ValueError as error:
+            declarations = {}
+            module_status["audit"] = "FAIL"
+            module_status["error"] = str(error)
+        return module, module_status, declarations, record
+
+    pending = set(modules)
+    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+        while pending:
+            ready = sorted(m for m in pending if not any(i in pending for i in modules[m]["imports"]))
+            if not ready:
+                raise ValueError("Cyclic QFB imports")
+            runnable = []
+            for module in ready:
+                pending.remove(module)
+                if any(status["modules"].get(i, {}).get("build") != "PASS"
+                       for i in modules[module]["imports"] if i in modules):
+                    status["modules"][module] = {"build": "BLOCKED_BY_DEPENDENCY"}
+                else:
+                    runnable.append(module)
+            # Results are committed in sorted order. The whole frontier joins
+            # before dependent declarations can be submitted to the compiler.
+            for module, module_status, declarations, record in pool.map(compile_and_audit, runnable):
+                status["modules"][module] = module_status
+                if record is None:
+                    object_cache.pop(module, None)
+                else:
+                    object_cache[module] = record
+                cache_manifest_path.write_text(json.dumps(object_cache, indent=2) + "\n", encoding="utf-8")
+                status["declarations"].update(declarations)
+                for name in declarations:
+                    emit(f"!=! DECLARATION {name}")
+                checkpoint()
+            checkpoint()
     passed = all(m.get("build") == "PASS" and (k not in audit_specs or m.get("audit") == "PASS")
                  for k, m in status["modules"].items())
     status["status"] = "PASS" if passed else "FAIL"

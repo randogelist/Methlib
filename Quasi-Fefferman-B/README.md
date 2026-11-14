@@ -1,3 +1,26 @@
+# Quasi-Fefferman-B: R10 cached assembly
+
+```text
+TARGET = QuasiFeffermanB.Endpoints.Root
+EXACT_ROOT = QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED
+NATIVE_CI = Ubuntu 24.04 / Lean 4.33.0
+SCHEDULER = independent dependency frontiers / 2 processes
+NATIVE_ASYNC = Elab.async true
+CACHE = exact source + transitive imports + compiler + dependency pins + object digest
+AUDIT = fresh exact type and axiom report for every selected declaration
+RESOLUTION_MARKER = !=! only after matching external compilation and axiom audit
+ALLOWED_AXIOMS = {propext, Classical.choice, Quot.sound}
+LOCAL_LEAN_EXECUTIONS = 0
+ROOT_STATUS = A_TIER_CANDIDATE pending matching external evidence
+FROZEN_CUTOFF = norm(a)^4 / (8*pi^2*nu^5)
+```
+
+The root and its 74-module import closure are assembled by the existing
+external CI workflow. All 409 registered declarations receive fresh audits.
+Parallel scheduling changes only independent process order; each dependency
+frontier completes before dependent modules are submitted. Verified cached
+objects retain their original producer identity and are audited again.
+
 # Quasi-Fefferman-B: R8 source preload
 
 | Current field | Value |
