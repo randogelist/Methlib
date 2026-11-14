@@ -1,0 +1,41 @@
+QFA CORRECTED COMPACT-SCHWARTZ BRIDGE — A_TIER VERIFICATION
+
+STATUS=PASS
+MARKER=!!
+SCOPE=CORRECTED_COMPACT_SCHWARTZ_BRIDGE_ONLY
+PHYSICAL_QFA_ROOT_INFERRED=FALSE
+
+COMPILED_SOURCE_COMMIT=d792554efff24debed5bf1570b72ba03c42370dc
+GITHUB_RUN_ID=43550563998
+GITHUB_RUN_URL=https://github.com/randogelist/Methlib/actions/runs/43550563998
+COMPILER=Lean 4.33.0, x86_64-w64-windows-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release
+MATHLIB=db584cd6d46c92f209a44c0f1c829460d327499d
+LOCAL_LEAN_EXECUTIONS=0
+
+AUDITED_DECLARATIONS=4
+LCB001=QFA.Endpoints.Representation.CompactSchwartz.dense_span_compactSchwartzTests
+LCB002=QFA.Endpoints.Representation.CompactSchwartz.tempered_eq_of_eq_on_compactSchwartz
+LCB003=QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz
+LCB004=QFA.Endpoints.Representation.CompactSchwartz.correctedCompactToSchwartzEndpoint
+
+TRANSITIVE_AXIOMS={propext, Classical.choice, Quot.sound}
+SORRY_AX=ABSENT
+UNAPPROVED_AXIOMS=ABSENT
+
+EXACT_FORMAL_IMPLICATION:
+  DenseCompactSchwartzTests
+  + CompactSchwartzDerivativeWitnesses(v,G,L)
+  -> SchwartzDerivativeWitnesses(v,G,L).
+
+UNRESOLVED_PREMISE:
+  LC005=DenseCompactSchwartzTests.
+
+NON_CONCLUSIONS:
+  DenseCompactSchwartzTests is not proved by this package.
+  The old ContDiffBump-based CompactToSchwartzEndpoint is not validated.
+  WholeSpaceSpectralEndpoint, WholeSpaceAgmonEndpoint, physical NSE realization, smoothness, pressure, and the frozen physical QFA root are not inferred.
+
+AUDIT_ARTIFACT_ID=14095893155
+AUDIT_ARTIFACT_DIGEST=sha256:878b28130fccd45ea897798c9e238ad277ce53d2e0012e95c2b0c97720731a82
+SOURCE_ARTIFACT_ID=14095843708
+SOURCE_ARTIFACT_DIGEST=sha256:8a78ea1e2ab64739f34e5531883985d00846e46d03b2855fc8176e57a9c4d0ea

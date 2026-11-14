@@ -1,0 +1,26 @@
+{
+  "workflow_name": "QFA corrected compact-Schwartz bridge",
+  "workflow_file": ".github/workflows/qfa-lc004-bridge.yml",
+  "run_id": 43550563998,
+  "run_attempt": 1,
+  "run_number": 2,
+  "status": "completed",
+  "conclusion": "success",
+  "head_branch": "QFA",
+  "head_sha": "d792554efff24debed5bf1570b72ba03c42370dc",
+  "run_url": "https://github.com/randogelist/Methlib/actions/runs/43550563998",
+  "created_at": "2026-11-14T03:14:15Z",
+  "updated_at": "2026-11-14T03:23:31Z",
+  "audit_artifact": {
+    "id": 14095893155,
+    "name": "qfa-lc004-bridge-audit-43550563998-1",
+    "digest": "sha256:878b28130fccd45ea897798c9e238ad277ce53d2e0012e95c2b0c97720731a82",
+    "expires_at": "2026-12-14T03:22:59Z"
+  },
+  "source_artifact": {
+    "id": 14095843708,
+    "name": "qfa-lc004-bridge-source-d792554efff24debed5bf1570b72ba03c42370dc",
+    "digest": "sha256:8a78ea1e2ab64739f34e5531883985d00846e46d03b2855fc8176e57a9c4d0ea",
+    "expires_at": "2026-12-14T03:23:26Z"
+  }
+}

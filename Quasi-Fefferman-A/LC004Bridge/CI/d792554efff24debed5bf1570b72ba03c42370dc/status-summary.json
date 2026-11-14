@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "physical_QFA_root_inferred": false,
+  "compiled_commit": "d792554efff24debed5bf1570b72ba03c42370dc",
+  "run_id": 43550563998,
+  "compiler": "Lean 4.33.0 x86_64-w64-windows-gnu commit d8b18978322de05a8f3dba51ef03cf5461676c17 Release",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": {
+    "LCB001": {
+      "name": "QFA.Endpoints.Representation.CompactSchwartz.dense_span_compactSchwartzTests",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "type_head": "QFA.Endpoints.Representation.CompactSchwartz.dense_span_compactSchwartzTests : QFA.Endpoints.Representation.CompactSchwartz.DenseCompactSchwartzTests →"
+    },
+    "LCB002": {
+      "name": "QFA.Endpoints.Representation.CompactSchwartz.tempered_eq_of_eq_on_compactSchwartz",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "type_head": "QFA.Endpoints.Representation.CompactSchwartz.tempered_eq_of_eq_on_compactSchwartz : QFA.Endpoints.Representation.CompactSchwartz.DenseCompactSchwartzTests →"
+    },
+    "LCB003": {
+      "name": "QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "type_head": "QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz : QFA.Endpoints.Representation.CompactSchwartz.DenseCompactSchwartzTests →"
+    },
+    "LCB004": {
+      "name": "QFA.Endpoints.Representation.CompactSchwartz.correctedCompactToSchwartzEndpoint",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "type_head": "QFA.Endpoints.Representation.CompactSchwartz.correctedCompactToSchwartzEndpoint : QFA.Endpoints.Representation.CompactSchwartz.CorrectedCompactToSchwartzEndpoint"
+    }
+  }
+}

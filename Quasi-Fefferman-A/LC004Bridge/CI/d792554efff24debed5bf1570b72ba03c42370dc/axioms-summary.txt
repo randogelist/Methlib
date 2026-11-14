@@ -1,0 +1,15 @@
+LCB001=QFA.Endpoints.Representation.CompactSchwartz.dense_span_compactSchwartzTests
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+LCB002=QFA.Endpoints.Representation.CompactSchwartz.tempered_eq_of_eq_on_compactSchwartz
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+LCB003=QFA.Endpoints.Representation.CompactSchwartz.schwartzDerivativeWitnesses_of_compactSchwartz
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT
+
+LCB004=QFA.Endpoints.Representation.CompactSchwartz.correctedCompactToSchwartzEndpoint
+AXIOMS={Classical.choice, Quot.sound, propext}
+SORRY_AX=ABSENT

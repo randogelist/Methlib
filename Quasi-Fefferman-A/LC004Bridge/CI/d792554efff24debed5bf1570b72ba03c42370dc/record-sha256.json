@@ -1,0 +1,19 @@
+{
+  "raw_artifact_files_sha256": {
+    "axioms.log": "96575080e5583c894963ddf8ab54964cd560df3683568dd7aeffcbea994ee53f",
+    "build.log": "3efa83cca40a346e5e2fa898aba9e937b2fe410447977cc1f8c39723ad909fe1",
+    "lake-update.log": "df758404aee0e6334ae36f4ec46bdc14caf7a71affa9895bda190418958157b6",
+    "lean-version.txt": "e6b111cafa2d4ae12b81443b6c8dee764959008488bf60ae830ca952abbb6ed0",
+    "mathlib-cache.log": "3ac93ac0baae7aff61ac429e99e7e8cfd04cef4544110a9675f5627ba8b94cd1",
+    "status.json": "dec0fd4580c36087167c84b4124e10219ca6f87c18a94fd347ab351554099834"
+  },
+  "committed_record_files_sha256": {
+    "VERIFICATION.txt": "e03b109bc036b32856f2422570f5ffc6df53f52bfa9c478daab2de037eaa523f",
+    "axioms-summary.txt": "c397d5f96c691feb9100fd559a7a97e9b66f25b1cd32ba4dead617ee4104e8e0",
+    "build.log": "3efa83cca40a346e5e2fa898aba9e937b2fe410447977cc1f8c39723ad909fe1",
+    "github-run.json": "30a3acef41af90363cd455ca1335d286e9eeab86989b43d5d3f7c8b6b7247f66",
+    "lake-update.log": "df758404aee0e6334ae36f4ec46bdc14caf7a71affa9895bda190418958157b6",
+    "lean-version.txt": "e6b111cafa2d4ae12b81443b6c8dee764959008488bf60ae830ca952abbb6ed0",
+    "status-summary.json": "ef36bc6d4994391e239d93b243f029503c333acb537cdea08aa59e68020bff37"
+  }
+}
