@@ -83,8 +83,10 @@ theorem selectedTail_restricted_singleton
       {tailRestriction δ u} := by
   obtain ⟨s, v, hs0, hsδ, hgood, hsmall, hstart, hrestart,
     href, htail, hrefδ, hadmitδ, hrestricted, hsingleton⟩ := h
-  simpa only [restrictedAdmissible, restrictNonnegative, tailRestriction]
-    using hsingleton
+  change (fun w : Trajectory => fun t : {t : ℝ // 0 ≤ t} => w t.1) ''
+      Admissible (u δ) =
+    {fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1}
+  exact hsingleton
 
 /-- Positive-time smoothness of the global reference transfers to the selected
 trajectory at every later cutoff. -/
