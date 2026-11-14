@@ -1,0 +1,41 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_positive_iteratedDerivative_smooth
+QuasiFeffermanB.energy_positive_iteratedDerivative_smooth : ∀ (φ : SingularClosure.Velocity),
+  ContDiffOn ℝ (↑⊤) (fun z => φ z.1 z.2) {z | 0 < z.1} →
+    ∀ (j : Fin 3) (m : ℕ),
+      ContDiffOn ℝ (↑⊤) (fun z => SingularClosure.iteratedCoordinateDerivative j m (φ z.1) z.2) {z | 0 < z.1}
+TYPE_END:QuasiFeffermanB.energy_positive_iteratedDerivative_smooth
+'QuasiFeffermanB.energy_positive_iteratedDerivative_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn
+QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (m : ℕ) (s t : ℝ), 0 < s → ContinuousOn (fun r => SingularClosure.fourierDecayConstant m (φ r)) (Set.Icc s t)
+TYPE_END:QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn
+'QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY
+QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (m : ℕ) (s t : ℝ),
+      0 < s →
+        ∃ C,
+          0 ≤ C ∧
+            ∀ r ∈ Set.Icc s t,
+              ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                SingularClosure.torusSobolevWeight k ^ (m + 2) * ‖SingularClosure.datumFourierCoeff (φ r) k i‖ ≤ C
+TYPE_END:QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY
+'QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT
+QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (s t : ℝ),
+      0 < s →
+        ∃ C,
+          0 ≤ C ∧
+            (Summable fun k => C * (SingularClosure.torusSobolevWeight k)⁻¹ ^ 4) ∧
+              ∀ r ∈ Set.Icc s t,
+                ∀ (j : Fin 3) (k : SingularClosure.Frequency) (i : Fin 3),
+                  ‖SingularClosure.derivativeSymbol j k * SingularClosure.datumFourierCoeff (φ r) k i‖ ≤
+                    C * (SingularClosure.torusSobolevWeight k)⁻¹ ^ 4
+TYPE_END:QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT
+'QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT' depends on axioms: [propext, Classical.choice, Quot.sound]

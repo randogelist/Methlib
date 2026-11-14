@@ -1,0 +1,70 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_cubeTorusMap_periodic
+QuasiFeffermanB.energy_cubeTorusMap_periodic : SingularClosure.SpatialPeriodic SingularClosure.criticalCubeTorusMap
+TYPE_END:QuasiFeffermanB.energy_cubeTorusMap_periodic
+'QuasiFeffermanB.energy_cubeTorusMap_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicField_periodic
+QuasiFeffermanB.energyPeriodicField_periodic : ∀ (c : SingularClosure.TorusSobolev 0),
+  SingularClosure.SpatialPeriodic (QuasiFeffermanB.energyPeriodicField c)
+TYPE_END:QuasiFeffermanB.energyPeriodicField_periodic
+'QuasiFeffermanB.energyPeriodicField_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicField_coe
+QuasiFeffermanB.energyPeriodicField_coe : ∀ (c : SingularClosure.TorusSobolev 0),
+  ↑↑(SingularClosure.torusToPhysicalCubeL2
+          (SingularClosure.torusSobolevL2 c)) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube]
+    QuasiFeffermanB.energyPeriodicField c
+TYPE_END:QuasiFeffermanB.energyPeriodicField_coe
+'QuasiFeffermanB.energyPeriodicField_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicVelocity_ae
+QuasiFeffermanB.energyPeriodicVelocity_ae : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (t : ℝ),
+  QuasiFeffermanB.energyPhysicalVelocity U t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube]
+    QuasiFeffermanB.energyPeriodicVelocity U t
+TYPE_END:QuasiFeffermanB.energyPeriodicVelocity_ae
+'QuasiFeffermanB.energyPeriodicVelocity_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicVelocity_memLp
+QuasiFeffermanB.energyPeriodicVelocity_memLp : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (t : ℝ),
+  MeasureTheory.MemLp (QuasiFeffermanB.energyPeriodicVelocity U t) 2
+    (MeasureTheory.volume.restrict SingularClosure.unitCube)
+TYPE_END:QuasiFeffermanB.energyPeriodicVelocity_memLp
+'QuasiFeffermanB.energyPeriodicVelocity_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicVelocity_L2
+QuasiFeffermanB.energyPeriodicVelocity_L2 : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (t : ℝ),
+  SingularClosure.criticalL2Representative (QuasiFeffermanB.energyPeriodicVelocity U t) =
+    QuasiFeffermanB.energyPhysicalVelocityL2 U t
+TYPE_END:QuasiFeffermanB.energyPeriodicVelocity_L2
+'QuasiFeffermanB.energyPeriodicVelocity_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicField_fourierCoeff
+QuasiFeffermanB.energyPeriodicField_fourierCoeff : ∀ (c : SingularClosure.TorusSobolev 0),
+  SingularClosure.SpectralReality ↑c →
+    SingularClosure.SpectralMeanZero ↑c → SingularClosure.datumFourierCoeff (QuasiFeffermanB.energyPeriodicField c) = ↑c
+TYPE_END:QuasiFeffermanB.energyPeriodicField_fourierCoeff
+'QuasiFeffermanB.energyPeriodicField_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicField_gradient_annihilation
+QuasiFeffermanB.energyPeriodicField_gradient_annihilation : ∀ (c : SingularClosure.TorusSobolev 0),
+  SingularClosure.SpectralReality ↑c →
+    SingularClosure.SpectralSolenoidal ↑c →
+      SingularClosure.SpectralMeanZero ↑c →
+        ∀ (p : SingularClosure.Vec → ℝ),
+          ContDiff ℝ (↑⊤) p →
+            SingularClosure.SpatialPeriodic p →
+              SingularClosure.physicalFieldInner (QuasiFeffermanB.energyPeriodicField c) (SingularClosure.gradient p) =
+                0
+TYPE_END:QuasiFeffermanB.energyPeriodicField_gradient_annihilation
+'QuasiFeffermanB.energyPeriodicField_gradient_annihilation' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_physicalH1_congr_velocity
+@QuasiFeffermanB.energy_physicalH1_congr_velocity : ∀ {v w : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    v =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] w → SingularClosure.CriticalPhysicalH1 w G
+TYPE_END:QuasiFeffermanB.energy_physicalH1_congr_velocity
+'QuasiFeffermanB.energy_physicalH1_congr_velocity' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicVelocity_spatial_H1
+QuasiFeffermanB.energyPeriodicVelocity_spatial_H1 : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralReality ↑(U t)) →
+    (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralMeanZero ↑(U t)) →
+      (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) →
+        ∀ᵐ (t : ℝ) ∂μ,
+          SingularClosure.CriticalPhysicalH1 (QuasiFeffermanB.energyPeriodicVelocity U t)
+            (QuasiFeffermanB.energyGlobalGradient U t)
+TYPE_END:QuasiFeffermanB.energyPeriodicVelocity_spatial_H1
+'QuasiFeffermanB.energyPeriodicVelocity_spatial_H1' depends on axioms: [propext, Classical.choice, Quot.sound]

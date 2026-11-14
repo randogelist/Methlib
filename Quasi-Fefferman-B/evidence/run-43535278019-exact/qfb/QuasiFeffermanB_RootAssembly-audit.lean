@@ -1,0 +1,18 @@
+import QuasiFeffermanB.RootAssembly
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION"
+#check @QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION
+#eval IO.println "TYPE_END:QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION"
+#print axioms QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION"
+#check @QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION
+#eval IO.println "TYPE_END:QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION"
+#print axioms QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints"
+#check @QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints
+#eval IO.println "TYPE_END:QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints"
+#print axioms QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints

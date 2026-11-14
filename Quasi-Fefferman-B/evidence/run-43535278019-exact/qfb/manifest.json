@@ -1,0 +1,1154 @@
+{
+  "schema": 1,
+  "foundation_sha": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+  "lean": "4.33.0",
+  "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "root_status": "A_TIER_CANDIDATE; no root promotion",
+  "contract_status": {
+    "Q00": "PENDING",
+    "Q01": "PENDING",
+    "Q02": "PENDING",
+    "Q03": "PENDING",
+    "Q04": "PENDING",
+    "Q05": "PENDING",
+    "Q06": "PENDING",
+    "Q07": "PENDING",
+    "Q08": "PENDING",
+    "Q09": "PENDING",
+    "Q10": "PENDING",
+    "Q11": "PENDING",
+    "Q12": "PENDING",
+    "Q13": "PENDING",
+    "Q14": "PENDING",
+    "A01": "PENDING",
+    "A02": "PENDING",
+    "A03": "PENDING",
+    "A04": "PENDING",
+    "A05": "PENDING",
+    "A06": "PENDING",
+    "A07": "PENDING",
+    "A08": "PENDING",
+    "A09": "PENDING",
+    "A10": "PENDING",
+    "A11": "PENDING"
+  },
+  "sources": {
+    "QuasiFeffermanB/CaloricAdmission.lean": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+    "QuasiFeffermanB/CaloricBarrier.lean": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+    "QuasiFeffermanB/CaloricBootstrap.lean": "64ea44a78ade4a6ef701c7a023bc2eebefecd1dfe6cb30f9773a1e80a209a770",
+    "QuasiFeffermanB/CaloricCompactness.lean": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+    "QuasiFeffermanB/CaloricConstants.lean": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+    "QuasiFeffermanB/CaloricConvolution.lean": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+    "QuasiFeffermanB/CaloricEnstrophy.lean": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+    "QuasiFeffermanB/CaloricFiniteNorm.lean": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+    "QuasiFeffermanB/CaloricFlowControl.lean": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+    "QuasiFeffermanB/CaloricFourierBridge.lean": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+    "QuasiFeffermanB/CaloricFourierEstimate.lean": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+    "QuasiFeffermanB/CaloricFrequencyGeometry.lean": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+    "QuasiFeffermanB/CaloricGalerkinBudget.lean": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+    "QuasiFeffermanB/CaloricGalerkinMajorant.lean": "57e0265b2cb4b867977803ec1742242b8f2a1f256b4ef99c9f9e6d386da1e881",
+    "QuasiFeffermanB/CaloricH1Regularity.lean": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+    "QuasiFeffermanB/CaloricH2.lean": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+    "QuasiFeffermanB/CaloricKernel.lean": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+    "QuasiFeffermanB/CaloricMultiplier.lean": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+    "QuasiFeffermanB/CaloricNumericalAdmission.lean": "6cd3f193ad856a75931bf0f47e7718fbebc9922fecc4dbbf8405d9b6f78a017f",
+    "QuasiFeffermanB/CaloricPhysicalControl.lean": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+    "QuasiFeffermanB/CaloricSmoothing.lean": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+    "QuasiFeffermanB/CriticalTimeBudget.lean": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+    "QuasiFeffermanB/Cutoff.lean": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+    "QuasiFeffermanB/EndpointEnergy.lean": "7169438351c4e92a206bff99ee92eb1a882e39d6bc78cd8e974992443d47cbd2",
+    "QuasiFeffermanB/EndpointRestart.lean": "2c2e8ebb8ce4c14b220ee9786929b09f9dbbbfe2b02eb4667be3f3da30c9c0d7",
+    "QuasiFeffermanB/Endpoints/CaloricBudget.lean": "cc5b78965699e80c612756aed478b5b36359a471b6f2cfc30686fcaeabd44461",
+    "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean": "b664b92ef0a1e36ccce1dfaf371957569801d0ae5f1f7427a591e5dcdee12846",
+    "QuasiFeffermanB/Endpoints/InitialCoefficients.lean": "82847d0a07f908e034e9e1ffe498dd6b4068e9b9e28071744e97030b56f63d36",
+    "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
+    "QuasiFeffermanB/Endpoints/LimitEnergy.lean": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
+    "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean": "9debf97162400c41ab50c734f591bfcbf24a722e60a40331c2ffdbe4ca9292ca",
+    "QuasiFeffermanB/Endpoints/Root.lean": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+    "QuasiFeffermanB/Endpoints/TestProjection.lean": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+    "QuasiFeffermanB/Endpoints/WeakH0Limit.lean": "f0f771e3986728ffc09a8b8a6008b2bd324456d65b43f997abe839467e04124a",
+    "QuasiFeffermanB/EnergyDatumApproximation.lean": "4c46173671ae878a59fd59d969764520206ab3e20513474b31f3ca01a2fc4279",
+    "QuasiFeffermanB/EnergyDatumGlobal.lean": "cc34d31ca5814e1cff727c28aa54ad6d1e7a1155319848604bdb05702ff7355d",
+    "QuasiFeffermanB/EnergyFiniteWeakPairing.lean": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+    "QuasiFeffermanB/EnergyGalerkinCompactness.lean": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+    "QuasiFeffermanB/EnergyGlobalCoefficient.lean": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+    "QuasiFeffermanB/EnergyGlobalLimit.lean": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+    "QuasiFeffermanB/EnergyGlobalPhysical.lean": "49e137be886e3b078989bd7b19788f62f5aa9f1a5613601d5745ea8dbdf48fe6",
+    "QuasiFeffermanB/EnergyH1Realization.lean": "d2d1ed37d4cfb0c560c46e2f92ba447ab65e60b32f3a8267160d28189c39e124",
+    "QuasiFeffermanB/EnergyLimitCompatibility.lean": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+    "QuasiFeffermanB/EnergyLimitEnergy.lean": "83c660e847e55951c53216d5f7b2a13fb85276b6493ef619820e031f0b983197",
+    "QuasiFeffermanB/EnergyModalEquation.lean": "3ff6b9a5921e4040813265fcbc0d6eda407d99253269e88cead4faca0cd43202",
+    "QuasiFeffermanB/EnergyPeriodicRepresentative.lean": "abfb3d2d2aa523a21513f29d1a07c14224e17739890df161b7257604cff95fb9",
+    "QuasiFeffermanB/EnergyPhysicalContinuity.lean": "34e854c8f313dcb7812a84491b2d1ea8f67d3c02617133444341f085c192c340",
+    "QuasiFeffermanB/EnergyPhysicalTrace.lean": "54db750c908792e3380a0fd7cb2b374526a43bf0c11014b1c91995af433aecac",
+    "QuasiFeffermanB/EnergyTestDecay.lean": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+    "QuasiFeffermanB/EnergyTimeCompactness.lean": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+    "QuasiFeffermanB/EnergyTransportContinuity.lean": "5e52894cfdc35253f9dab0d771b4dda869f7a453e0b459c044a4d60b1e6c0b49",
+    "QuasiFeffermanB/EnergyWeakContinuity.lean": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+    "QuasiFeffermanB/ExactAdmission.lean": "03588fe871c87d52c663af96a3f88c2f37b136a6472086a97f82aa5eb605c704",
+    "QuasiFeffermanB/FiniteCaloricSchur.lean": "6437914490b9b7f99656e8ce8c95cf90cb3af1395dcda84bdf810c429d2c82ee",
+    "QuasiFeffermanB/FourierEnergy.lean": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+    "QuasiFeffermanB/GoodTime.lean": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+    "QuasiFeffermanB/LHEnergy.lean": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+    "QuasiFeffermanB/LHExistence.lean": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+    "QuasiFeffermanB/LHRestart.lean": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+    "QuasiFeffermanB/MeanPreservation.lean": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+    "QuasiFeffermanB/PhysicalFourierL2.lean": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
+    "QuasiFeffermanB/PhysicalH1Admission.lean": "f297c5c997dd91b0c3838735cbe0af7c0d5900ec2ba8c44f31495acc71c20050",
+    "QuasiFeffermanB/PressureUniqueness.lean": "1986794e95b477cafa3f6918681d1a1eea6ea8b1469a211f272e757b4924f5c5",
+    "QuasiFeffermanB/RegularReference.lean": "da49c63001e8a3a2320cc0e2dc6db801113087bb3f9047d6064b8ed379a9cdb7",
+    "QuasiFeffermanB/RootAssembly.lean": "ab58317402d12d1f7bae744b750b97fe87209e69be76f6b8c6bef19d3e1d3f4d",
+    "QuasiFeffermanB/RootContract.lean": "433b6ddf7dc747c7efa5252fec2dcf2acf1153912b1fdd7853bb741fa00a8470",
+    "QuasiFeffermanB/SafeCutoff.lean": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+    "QuasiFeffermanB/Semantics.lean": "84f66ea0eb20f2c8e5fe3a8fdc946e7427c78e87bc8d879c19b3f398b971953e",
+    "QuasiFeffermanB/SpatialAdmission.lean": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+    "QuasiFeffermanB/TailChain.lean": "edb75daa799194c41c9bd7a6b4ff6ef0282f03791a647380d32e6c2f4c5fd1ea",
+    "QuasiFeffermanB/TailEnergy.lean": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+    "QuasiFeffermanB/TailRegularity.lean": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+    "QuasiFeffermanB/TailUniqueness.lean": "104d4b9fa21b4ab57c80f321f32de3cbcf6c40711a49d2dd88c688a7189d69e9",
+    "QuasiFeffermanB/ThetaGaussian.lean": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+    "QuasiFeffermanB/ThetaLattice.lean": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+    "QuasiFeffermanB/ThetaResolvent.lean": "e15543d05055d67dfc388da4aa66ba2fba1e44d32ab35a971cce877f69c1cd78",
+    "QuasiFeffermanB/ThetaSchur.lean": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+    "QuasiFeffermanB/TimeTranslate.lean": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+    "QuasiFeffermanB/ZeroData.lean": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4"
+  },
+  "modules": [
+    {
+      "module": "QuasiFeffermanB.CaloricAdmission",
+      "source": "QuasiFeffermanB/CaloricAdmission.lean",
+      "sha256": "4ecc58699a1471b2348c32e48275e6e493f454767ef113b6505609d51bb5a5fa",
+      "declarations": [
+        "QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN",
+        "QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricBarrier",
+      "source": "QuasiFeffermanB/CaloricBarrier.lean",
+      "sha256": "0b1f8a8d663ed43dbe0efcd742c6bc0ca4a10f42be5bbd66c00a521f44538df4",
+      "declarations": [
+        "QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER",
+        "QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET",
+        "QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET",
+        "QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET",
+        "QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricBootstrap",
+      "source": "QuasiFeffermanB/CaloricBootstrap.lean",
+      "sha256": "64ea44a78ade4a6ef701c7a023bc2eebefecd1dfe6cb30f9773a1e80a209a770",
+      "declarations": [
+        "QuasiFeffermanB.FINITE_CALORIC_QUADRATIC_ESTIMATE",
+        "QuasiFeffermanB.finiteTimeL2_continuousOn_horizon",
+        "QuasiFeffermanB.FINITE_CALORIC_UNIFORM_BUDGET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricCompactness",
+      "source": "QuasiFeffermanB/CaloricCompactness.lean",
+      "sha256": "52c48d1dd7543b0b18f8f8cc5b68369a5e1c44815e17dc470cfc7cbc5649e0f7",
+      "declarations": [
+        "QuasiFeffermanB.caloric_criticalEnergy_le_succ",
+        "QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian",
+        "QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy",
+        "QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian",
+        "QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND",
+        "QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricConstants",
+      "source": "QuasiFeffermanB/CaloricConstants.lean",
+      "sha256": "76191927b83a1ffc4a1a1197489893036a4684842f667e95dc8aa79c37fa6333",
+      "declarations": [
+        "QuasiFeffermanB.caloricBilinearConstant_pos",
+        "QuasiFeffermanB.caloricBilinearConstant_sq",
+        "QuasiFeffermanB.caloricHeatBudget_nonneg",
+        "QuasiFeffermanB.caloricHeatBudget_sq",
+        "QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT",
+        "QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricConvolution",
+      "source": "QuasiFeffermanB/CaloricConvolution.lean",
+      "sha256": "9baf3f42d9c3b79de8b67b33e6f39ad7277e5392d56cc598ece16e7f5db55383",
+      "declarations": [
+        "QuasiFeffermanB.caloric_primitive_continuousOn",
+        "QuasiFeffermanB.caloric_primitive_hasDerivAt",
+        "QuasiFeffermanB.caloricVolterra_kernel",
+        "QuasiFeffermanB.caloricVolterra_continuousOn",
+        "QuasiFeffermanB.caloricVolterra_hasDerivAt",
+        "QuasiFeffermanB.caloricVolterra_nonneg_le_primitive",
+        "QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricEnstrophy",
+      "source": "QuasiFeffermanB/CaloricEnstrophy.lean",
+      "sha256": "a360ea5aeef3a28fe5e6563d62ff6917e16e1515def78067245251ec10eb121f",
+      "declarations": [
+        "QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE",
+        "QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFiniteNorm",
+      "source": "QuasiFeffermanB/CaloricFiniteNorm.lean",
+      "sha256": "587108b114b220903839c059df9ecd65054b855affa3fe3f685897ccb4f77fdc",
+      "declarations": [
+        "QuasiFeffermanB.finiteTimeL2_nonneg",
+        "QuasiFeffermanB.finiteTimeL2_sq",
+        "QuasiFeffermanB.caloric_continuous_memLp_two",
+        "QuasiFeffermanB.finiteTimeL2_cauchy",
+        "QuasiFeffermanB.finiteTimeL2_mono",
+        "QuasiFeffermanB.finiteTimeL2_add_le",
+        "QuasiFeffermanB.finiteTimeL2_const_mul",
+        "QuasiFeffermanB.finiteTimeL2_sum_le",
+        "QuasiFeffermanB.CALORIC_VOLTERRA_L2_BOUND",
+        "QuasiFeffermanB.FINITE_NONNEGATIVE_CONVOLUTION_L1"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFlowControl",
+      "source": "QuasiFeffermanB/CaloricFlowControl.lean",
+      "sha256": "3720b34814d712492610fc6d7d7992be5f3d09c0d9f7211d3af8c1fc12cb6d71",
+      "declarations": [
+        "QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS",
+        "QuasiFeffermanB.POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE",
+        "QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND",
+        "QuasiFeffermanB.POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND",
+        "QuasiFeffermanB.POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFourierBridge",
+      "source": "QuasiFeffermanB/CaloricFourierBridge.lean",
+      "sha256": "ddff2efe9df6058eb77d5d365806ddebb8f0024af1bc0a8b143f704bb97a27f8",
+      "declarations": [
+        "QuasiFeffermanB.complexVecNorm_finset_sum_le",
+        "QuasiFeffermanB.coefficientTransport_frequencyDot",
+        "QuasiFeffermanB.finite_convolution_swap",
+        "QuasiFeffermanB.coefficientTransport_symmetric",
+        "QuasiFeffermanB.coefficientLeray_transport_symmetric"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFourierEstimate",
+      "source": "QuasiFeffermanB/CaloricFourierEstimate.lean",
+      "sha256": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
+      "declarations": [
+        "QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricFrequencyGeometry",
+      "source": "QuasiFeffermanB/CaloricFrequencyGeometry.lean",
+      "sha256": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
+      "declarations": [
+        "QuasiFeffermanB.frequencyRadius_pos",
+        "QuasiFeffermanB.frequencyRadius_sq",
+        "QuasiFeffermanB.complexFrequency_norm_sq",
+        "QuasiFeffermanB.complexFrequency_norm",
+        "QuasiFeffermanB.normalizedComplexFrequency_norm",
+        "QuasiFeffermanB.complexFrequency_inner",
+        "QuasiFeffermanB.normalizedComplexFrequency_inner",
+        "QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq",
+        "QuasiFeffermanB.coefficientLeray_eq_complexTransverse",
+        "QuasiFeffermanB.complexTransverse_smul",
+        "QuasiFeffermanB.symmetricFrequencyTensor_normalized",
+        "QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound",
+        "QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricGalerkinBudget",
+      "source": "QuasiFeffermanB/CaloricGalerkinBudget.lean",
+      "sha256": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
+      "declarations": [
+        "QuasiFeffermanB.REAL_SCALAR_DUHAMEL",
+        "QuasiFeffermanB.complexVec_sum_units",
+        "QuasiFeffermanB.GALERKIN_COMPLEX_MODE_CONTINUOUS",
+        "QuasiFeffermanB.GALERKIN_COMPLEX_MODE_HAS_DERIV",
+        "QuasiFeffermanB.GALERKIN_COMPLEX_FORCING_CONTINUOUS",
+        "QuasiFeffermanB.GALERKIN_MODE_DUHAMEL"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricGalerkinMajorant",
+      "source": "QuasiFeffermanB/CaloricGalerkinMajorant.lean",
+      "sha256": "57e0265b2cb4b867977803ec1742242b8f2a1f256b4ef99c9f9e6d386da1e881",
+      "declarations": [
+        "QuasiFeffermanB.finiteModeConvolution_nonneg",
+        "QuasiFeffermanB.FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE",
+        "QuasiFeffermanB.GALERKIN_MODE_CONVOLUTION_CONTINUOUS",
+        "QuasiFeffermanB.GALERKIN_MODE_DUHAMEL_NORM",
+        "QuasiFeffermanB.GALERKIN_MODE_CALORIC_MAJORANT",
+        "QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_SHARP_MULTIPLIER_AND_HEAT",
+        "QuasiFeffermanB.FINITE_HEAT_L2_ON_INTERVAL_LE",
+        "QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricH1Regularity",
+      "source": "QuasiFeffermanB/CaloricH1Regularity.lean",
+      "sha256": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
+      "declarations": [
+        "QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricH2",
+      "source": "QuasiFeffermanB/CaloricH2.lean",
+      "sha256": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
+      "declarations": [
+        "QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET",
+        "QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricKernel",
+      "source": "QuasiFeffermanB/CaloricKernel.lean",
+      "sha256": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
+      "declarations": [
+        "QuasiFeffermanB.HEAT_MULTIPLIER_SQUARE_INTEGRAL",
+        "QuasiFeffermanB.HEAT_PAIR_INTEGRAL",
+        "QuasiFeffermanB.HEAT_PAIR_INTEGRABLE",
+        "QuasiFeffermanB.finiteCaloricQuadratic_nonneg",
+        "QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRABLE",
+        "QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRAL"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricMultiplier",
+      "source": "QuasiFeffermanB/CaloricMultiplier.lean",
+      "sha256": "cea4517f8950039a43ade28470c842999c9d653105fe92f64d3534294b440071",
+      "declarations": [
+        "QuasiFeffermanB.complexVecNorm_nonneg",
+        "QuasiFeffermanB.complexVecNorm_sq",
+        "QuasiFeffermanB.norm_component_le_complexVecNorm",
+        "QuasiFeffermanB.finiteChi0_nonneg",
+        "QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE",
+        "QuasiFeffermanB.complexVecNorm_eq_norm",
+        "QuasiFeffermanB.complexVecNorm_add_le",
+        "QuasiFeffermanB.complexVecNorm_smul",
+        "QuasiFeffermanB.complexTransverse_symmetric",
+        "QuasiFeffermanB.complexTransverse_pythagoras",
+        "QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER",
+        "QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricNumericalAdmission",
+      "source": "QuasiFeffermanB/CaloricNumericalAdmission.lean",
+      "sha256": "6cd3f193ad856a75931bf0f47e7718fbebc9922fecc4dbbf8405d9b6f78a017f",
+      "declarations": [
+        "QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET",
+        "QuasiFeffermanB.EXACT_H1_ADMISSION_UNCONDITIONAL"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricPhysicalControl",
+      "source": "QuasiFeffermanB/CaloricPhysicalControl.lean",
+      "sha256": "2eb8764bb84adffac4a4864fb49518069e680d17c4c9b09f499464728bd9caaa",
+      "declarations": [
+        "QuasiFeffermanB.caloric_fourierCharacter_norm",
+        "QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0",
+        "QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY",
+        "QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT",
+        "QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0",
+        "QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0",
+        "QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS",
+        "QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND",
+        "QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CaloricSmoothing",
+      "source": "QuasiFeffermanB/CaloricSmoothing.lean",
+      "sha256": "026ad5371251f96795a566cf68bf5c1f7f71b44a04e92b067c9e8a621e32d87a",
+      "declarations": [
+        "QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION",
+        "QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.CriticalTimeBudget",
+      "source": "QuasiFeffermanB/CriticalTimeBudget.lean",
+      "sha256": "31234ca005e1f7f73adc3565672a635fd2b52e034417eb70a9bc63e815fb06c9",
+      "declarations": [
+        "QuasiFeffermanB.criticalFourthPower_integrable",
+        "QuasiFeffermanB.criticalFourthPower_budget",
+        "QuasiFeffermanB.energyCutoff_nonneg",
+        "QuasiFeffermanB.LH_HALF_ENERGY_AE_FINITE",
+        "QuasiFeffermanB.LH_HALF_ENERGY_AEMEASURABLE",
+        "QuasiFeffermanB.LH_FOURTH_POWER_BUDGET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Cutoff",
+      "source": "QuasiFeffermanB/Cutoff.lean",
+      "sha256": "3545e9f8edf52e43f1e885b280101dde8f0fd910d34e79af158b79c8704335be",
+      "declarations": [
+        "QuasiFeffermanB.CUTOFF_NONNEG",
+        "QuasiFeffermanB.CUTOFF_ZERO",
+        "QuasiFeffermanB.CUTOFF_POS",
+        "QuasiFeffermanB.SAFE_CUTOFF_GT",
+        "QuasiFeffermanB.ENERGY_SLICE_CUTOFF"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EndpointEnergy",
+      "source": "QuasiFeffermanB/EndpointEnergy.lean",
+      "sha256": "7169438351c4e92a206bff99ee92eb1a882e39d6bc78cd8e974992443d47cbd2",
+      "declarations": [
+        "QuasiFeffermanB.Q02_LERAY_HOPF_ENERGY"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EndpointRestart",
+      "source": "QuasiFeffermanB/EndpointRestart.lean",
+      "sha256": "2c2e8ebb8ce4c14b220ee9786929b09f9dbbbfe2b02eb4667be3f3da30c9c0d7",
+      "declarations": [
+        "QuasiFeffermanB.Q05_GOOD_RESTART_SET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.CaloricBudget",
+      "source": "QuasiFeffermanB/Endpoints/CaloricBudget.lean",
+      "sha256": "cc5b78965699e80c612756aed478b5b36359a471b6f2cfc30686fcaeabd44461",
+      "declarations": [
+        "QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
+      "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "sha256": "b664b92ef0a1e36ccce1dfaf371957569801d0ae5f1f7427a591e5dcdee12846",
+      "declarations": [
+        "QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn",
+        "QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn",
+        "QuasiFeffermanB.energyGalerkin_velocity_continuousOn",
+        "QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn",
+        "QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt",
+        "QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV",
+        "QuasiFeffermanB.energy_finite_projection_pairing",
+        "QuasiFeffermanB.energy_test_projection_laplacian",
+        "QuasiFeffermanB.energyTest_fourier_solenoidal",
+        "QuasiFeffermanB.energyGalerkin_projected_test_pairing",
+        "QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE",
+        "QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.InitialCoefficients",
+      "source": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
+      "sha256": "82847d0a07f908e034e9e1ffe498dd6b4068e9b9e28071744e97030b56f63d36",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.LerayHopfExistence",
+      "source": "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean",
+      "sha256": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
+      "declarations": [
+        "QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.LimitEnergy",
+      "source": "QuasiFeffermanB/Endpoints/LimitEnergy.lean",
+      "sha256": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.PhysicalMomentum",
+      "source": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
+      "sha256": "9debf97162400c41ab50c734f591bfcbf24a722e60a40331c2ffdbe4ca9292ca",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_MOMENTUM"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.Root",
+      "source": "QuasiFeffermanB/Endpoints/Root.lean",
+      "sha256": "9229c7f8ece4d6adcbe27792b8d34b649f58fb9a296402f916c71f689e523512",
+      "declarations": [
+        "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.TestProjection",
+      "source": "QuasiFeffermanB/Endpoints/TestProjection.lean",
+      "sha256": "e4ba0c1ec169a025e56c39f34a79b6a1c5964a41c78d9498f44ccfbab262cc1b",
+      "declarations": [
+        "QuasiFeffermanB.energy_sobolevCutoffModes_tendsto",
+        "QuasiFeffermanB.energy_smooth_datumFourier_reconstruction",
+        "QuasiFeffermanB.energy_smooth_derivative_fourierSeries",
+        "QuasiFeffermanB.energy_finite_derivative_fourierSum",
+        "QuasiFeffermanB.energy_vector_norm_le_three",
+        "QuasiFeffermanB.energy_operator_norm_le_nine",
+        "QuasiFeffermanB.energyTest_derivative_entries_uniform",
+        "QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM",
+        "QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.Endpoints.WeakH0Limit",
+      "source": "QuasiFeffermanB/Endpoints/WeakH0Limit.lean",
+      "sha256": "f0f771e3986728ffc09a8b8a6008b2bd324456d65b43f997abe839467e04124a",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_LP_WEAK_TENDSTO",
+        "QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO",
+        "QuasiFeffermanB.ENERGY_H0_LIMIT_NORM_LE",
+        "QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_TENDSTO",
+        "QuasiFeffermanB.energy_galerkin_physical_L2",
+        "QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyDatumApproximation",
+      "source": "QuasiFeffermanB/EnergyDatumApproximation.lean",
+      "sha256": "4c46173671ae878a59fd59d969764520206ab3e20513474b31f3ca01a2fc4279",
+      "declarations": [
+        "QuasiFeffermanB.energyDatumGalerkinFamily_initial",
+        "QuasiFeffermanB.energyDatumGalerkinFamily_energy_initial",
+        "QuasiFeffermanB.ENERGY_DATUM_GALERKIN_COMPACTNESS"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyDatumGlobal",
+      "source": "QuasiFeffermanB/EnergyDatumGlobal.lean",
+      "sha256": "cc34d31ca5814e1cff727c28aa54ad6d1e7a1155319848604bdb05702ff7355d",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_DATUM_GLOBAL_MODAL_LIMIT"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyFiniteWeakPairing",
+      "source": "QuasiFeffermanB/EnergyFiniteWeakPairing.lean",
+      "sha256": "4bd186ac162da2bd62b36a632754b75f6859d9057d9b24f8079c852b22f4a028",
+      "declarations": [
+        "QuasiFeffermanB.energy_galerkin_mode_pairing",
+        "QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING",
+        "QuasiFeffermanB.energyGalerkin_finite_test_pairing"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGalerkinCompactness",
+      "source": "QuasiFeffermanB/EnergyGalerkinCompactness.lean",
+      "sha256": "ee364ab906f1beecddbc13d82ecb24920e7bc0247292fbacc727b76376a558de",
+      "declarations": [
+        "QuasiFeffermanB.energyModeTransportBound_nonneg",
+        "QuasiFeffermanB.energyModeTransport_norm_le",
+        "QuasiFeffermanB.energyModeRhsBound_nonneg",
+        "QuasiFeffermanB.fullFourierRhs_energy_bound",
+        "QuasiFeffermanB.galerkin_H0_norm_sq",
+        "QuasiFeffermanB.galerkin_H0_energy_bound",
+        "QuasiFeffermanB.galerkin_energy_coefficient_modulus",
+        "QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGlobalCoefficient",
+      "source": "QuasiFeffermanB/EnergyGlobalCoefficient.lean",
+      "sha256": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
+      "declarations": [
+        "QuasiFeffermanB.energy_coefficient_curve_precompact",
+        "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE",
+        "QuasiFeffermanB.globalEnergyCoefficient_eq_horizon",
+        "QuasiFeffermanB.globalEnergyCoefficient_continuousOn",
+        "QuasiFeffermanB.globalEnergyCoefficient_uniform_limit"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGlobalLimit",
+      "source": "QuasiFeffermanB/EnergyGlobalLimit.lean",
+      "sha256": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT",
+        "QuasiFeffermanB.energy_modal_limit_constraints",
+        "QuasiFeffermanB.energy_modal_limit_H1_representative"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyGlobalPhysical",
+      "source": "QuasiFeffermanB/EnergyGlobalPhysical.lean",
+      "sha256": "49e137be886e3b078989bd7b19788f62f5aa9f1a5613601d5745ea8dbdf48fe6",
+      "declarations": [
+        "QuasiFeffermanB.energyGlobalH1State_eq",
+        "QuasiFeffermanB.energyGlobalH1State_ae_eq",
+        "QuasiFeffermanB.energyGlobalH1State_memLp",
+        "QuasiFeffermanB.energyGlobalGradient_memLp",
+        "QuasiFeffermanB.energyPhysicalVelocity_eq_H1",
+        "QuasiFeffermanB.energyGlobalPhysical_spatial_H1",
+        "QuasiFeffermanB.energyGlobalGradient_energy_ae",
+        "QuasiFeffermanB.energyGlobalGradient_energy_integrable"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyH1Realization",
+      "source": "QuasiFeffermanB/EnergyH1Realization.lean",
+      "sha256": "d2d1ed37d4cfb0c560c46e2f92ba447ab65e60b32f3a8267160d28189c39e124",
+      "declarations": [
+        "QuasiFeffermanB.energy_derivativeSymbol_norm_le_critical",
+        "QuasiFeffermanB.energy_derivative_weighted_bound",
+        "QuasiFeffermanB.energyDerivativeLinear_norm_le",
+        "QuasiFeffermanB.energyDerivative_cutoff",
+        "QuasiFeffermanB.energyPhysicalColumn_fourierCoeff",
+        "QuasiFeffermanB.energyPhysicalColumn_finite",
+        "QuasiFeffermanB.energy_Lp_sum_coe",
+        "QuasiFeffermanB.energyPhysicalGradient_coe",
+        "QuasiFeffermanB.energyPhysicalGradient_finite",
+        "QuasiFeffermanB.ENERGY_FOURIER_H1_PHYSICAL_REALIZATION",
+        "QuasiFeffermanB.energyPhysicalGradient_column",
+        "QuasiFeffermanB.energyDerivative_sum_norm_sq",
+        "QuasiFeffermanB.energyPhysicalGradient_energy"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyLimitCompatibility",
+      "source": "QuasiFeffermanB/EnergyLimitCompatibility.lean",
+      "sha256": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
+      "declarations": [
+        "QuasiFeffermanB.energyGalerkinTimeLimits_compatible",
+        "QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyLimitEnergy",
+      "source": "QuasiFeffermanB/EnergyLimitEnergy.lean",
+      "sha256": "83c660e847e55951c53216d5f7b2a13fb85276b6493ef619820e031f0b983197",
+      "declarations": [
+        "QuasiFeffermanB.energy_modal_eventually_lower",
+        "QuasiFeffermanB.energy_modal_lintegral_le_of_eventual_budget",
+        "QuasiFeffermanB.ENERGY_MODAL_INTERVAL_BUDGET_LIMIT",
+        "QuasiFeffermanB.GALERKIN_INTERVAL_ENERGY_IDENTITY",
+        "QuasiFeffermanB.ENERGY_GALERKIN_INTERVAL_LIMIT"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyModalEquation",
+      "source": "QuasiFeffermanB/EnergyModalEquation.lean",
+      "sha256": "3ff6b9a5921e4040813265fcbc0d6eda407d99253269e88cead4faca0cd43202",
+      "declarations": [
+        "QuasiFeffermanB.ENERGY_GALERKIN_MODAL_INTEGRAL"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyPeriodicRepresentative",
+      "source": "QuasiFeffermanB/EnergyPeriodicRepresentative.lean",
+      "sha256": "abfb3d2d2aa523a21513f29d1a07c14224e17739890df161b7257604cff95fb9",
+      "declarations": [
+        "QuasiFeffermanB.energy_cubeTorusMap_periodic",
+        "QuasiFeffermanB.energyPeriodicField_periodic",
+        "QuasiFeffermanB.energyPeriodicField_coe",
+        "QuasiFeffermanB.energyPeriodicVelocity_ae",
+        "QuasiFeffermanB.energyPeriodicVelocity_memLp",
+        "QuasiFeffermanB.energyPeriodicVelocity_L2",
+        "QuasiFeffermanB.energyPeriodicField_fourierCoeff",
+        "QuasiFeffermanB.energyPeriodicField_gradient_annihilation",
+        "QuasiFeffermanB.energy_physicalH1_congr_velocity",
+        "QuasiFeffermanB.energyPeriodicVelocity_spatial_H1"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyPhysicalContinuity",
+      "source": "QuasiFeffermanB/EnergyPhysicalContinuity.lean",
+      "sha256": "34e854c8f313dcb7812a84491b2d1ea8f67d3c02617133444341f085c192c340",
+      "declarations": [
+        "QuasiFeffermanB.energyH0PhysicalMap_apply",
+        "QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_CONTINUITY",
+        "QuasiFeffermanB.ENERGY_PERIODIC_WEAK_CONTINUITY"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyPhysicalTrace",
+      "source": "QuasiFeffermanB/EnergyPhysicalTrace.lean",
+      "sha256": "54db750c908792e3380a0fd7cb2b374526a43bf0c11014b1c91995af433aecac",
+      "declarations": [
+        "QuasiFeffermanB.energyPhysicalVelocityL2_initial",
+        "QuasiFeffermanB.energyPeriodicVelocity_initial",
+        "QuasiFeffermanB.energyPhysical_initial_norm",
+        "QuasiFeffermanB.ENERGY_PHYSICAL_STRONG_INITIAL_TRACE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyTestDecay",
+      "source": "QuasiFeffermanB/EnergyTestDecay.lean",
+      "sha256": "2810442e088d28b5305972af9748ec0140f7a052eac251c6a26a1b1cb9bf7eb9",
+      "declarations": [
+        "QuasiFeffermanB.energy_positive_iteratedDerivative_smooth",
+        "QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn",
+        "QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY",
+        "QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyTimeCompactness",
+      "source": "QuasiFeffermanB/EnergyTimeCompactness.lean",
+      "sha256": "f788ad21d6d1da7a2ea4f8ceb15fd55c4a2217ae61a380139953e20ce25aa9a4",
+      "declarations": [
+        "QuasiFeffermanB.energyTimeH0L2_norm_sq",
+        "QuasiFeffermanB.energy_H0_tail_sq",
+        "SingularClosure.GalerkinSolution.energy_H0_time_tail",
+        "QuasiFeffermanB.energyGalerkin_H0_time_difference_bound",
+        "QuasiFeffermanB.energyTimeH0L2_sub_norm_sq",
+        "QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyTransportContinuity",
+      "source": "QuasiFeffermanB/EnergyTransportContinuity.lean",
+      "sha256": "5e52894cfdc35253f9dab0d771b4dda869f7a453e0b459c044a4d60b1e6c0b49",
+      "declarations": [
+        "QuasiFeffermanB.energyMatrixAction_coe",
+        "QuasiFeffermanB.energyTestMatrix_coe",
+        "QuasiFeffermanB.energyWeakTransport_eq_L2_inner",
+        "QuasiFeffermanB.energyMatrixQuadratic_continuous",
+        "QuasiFeffermanB.energyWeakTransport_L2_tendsto",
+        "QuasiFeffermanB.energyMatrixQuadratic_bound",
+        "QuasiFeffermanB.energyWeakTransport_L2_bound",
+        "QuasiFeffermanB.energyWeakTransport_congr_ae"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.EnergyWeakContinuity",
+      "source": "QuasiFeffermanB/EnergyWeakContinuity.lean",
+      "sha256": "6dfc8707efb6c219844c5d283f9e37f1417060067f7349db8c9b0faba338c49e",
+      "declarations": [
+        "QuasiFeffermanB.energy_lp_inner_projection",
+        "QuasiFeffermanB.energy_lp_projection_tendsto",
+        "QuasiFeffermanB.ENERGY_LP_WEAK_CONTINUITY",
+        "QuasiFeffermanB.ENERGY_H0_WEAK_CONTINUITY",
+        "QuasiFeffermanB.energy_complex_strong_tendsto_of_inner_and_norm_bound",
+        "QuasiFeffermanB.ENERGY_H0_STRONG_INITIAL_TRACE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.ExactAdmission",
+      "source": "QuasiFeffermanB/ExactAdmission.lean",
+      "sha256": "03588fe871c87d52c663af96a3f88c2f37b136a6472086a97f82aa5eb605c704",
+      "declarations": [
+        "QuasiFeffermanB.EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.FiniteCaloricSchur",
+      "source": "QuasiFeffermanB/FiniteCaloricSchur.lean",
+      "sha256": "6437914490b9b7f99656e8ce8c95cf90cb3af1395dcda84bdf810c429d2c82ee",
+      "declarations": [
+        "QuasiFeffermanB.FINITE_CALORIC_SCHUR_SCALAR",
+        "QuasiFeffermanB.FINITE_CALORIC_SCHUR",
+        "QuasiFeffermanB.CRITICAL_DATUM_FINITE_CALORIC_SCHUR"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.FourierEnergy",
+      "source": "QuasiFeffermanB/FourierEnergy.lean",
+      "sha256": "4d7f58fc4aa788351607c663ee274e1d95fed8186d9b31ccfb56cbd428eaba65",
+      "declarations": [
+        "QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq",
+        "QuasiFeffermanB.physicalEnergy_tendsto_of_L2",
+        "QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2",
+        "QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2",
+        "QuasiFeffermanB.physicalH1_cutoff_bounds",
+        "QuasiFeffermanB.criticalEnergy_midpoint",
+        "QuasiFeffermanB.physicalH1_cutoff_midpoint",
+        "QuasiFeffermanB.physicalHalfEnergyTerm_nonneg",
+        "QuasiFeffermanB.physicalHalfEnergy_cutoff",
+        "QuasiFeffermanB.physicalH1_halfEnergy_le",
+        "QuasiFeffermanB.physicalH1_halfEnergy_ne_top",
+        "QuasiFeffermanB.physicalH1_halfEnergy_midpoint",
+        "QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum",
+        "QuasiFeffermanB.physicalH1_halfEnergy_summable",
+        "QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero",
+        "QuasiFeffermanB.physicalH1_mem_halfSobolev",
+        "QuasiFeffermanB.physicalH1HalfDatum_norm_sq",
+        "QuasiFeffermanB.physicalHalfEnergy_aemeasurable"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.GoodTime",
+      "source": "QuasiFeffermanB/GoodTime.lean",
+      "sha256": "dc0a65f247226790ee0af8ecbca87dedd1afff6d66035656de4b4d5c966287a1",
+      "declarations": [
+        "QuasiFeffermanB.exists_good_time_of_integral_lt",
+        "QuasiFeffermanB.fourthPower_budget_lt_threshold",
+        "QuasiFeffermanB.exists_subcritical_good_time",
+        "QuasiFeffermanB.LH_GOOD_SUBCRITICAL_TIME"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.LHEnergy",
+      "source": "QuasiFeffermanB/LHEnergy.lean",
+      "sha256": "192c583d31a680ff5c6f5e94acaca88f3caa8b69c390b8ac47be99a4277e3db4",
+      "declarations": [
+        "QuasiFeffermanB.LH_ENERGY_BOUNDS"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.LHExistence",
+      "source": "QuasiFeffermanB/LHExistence.lean",
+      "sha256": "4a0d22fe658b173a69e222fe0f9e11d5460f3670e71f6a2c61667bfbfc22dcc9",
+      "declarations": [
+        "QuasiFeffermanB.galerkin_H1_time_energy_bound",
+        "QuasiFeffermanB.galerkin_critical_zero_norm_sq",
+        "QuasiFeffermanB.ENERGY_GALERKIN_H0_COEFFICIENT_LIMIT",
+        "QuasiFeffermanB.ENERGY_GALERKIN_L2H0_SUBSEQUENCE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.LHRestart",
+      "source": "QuasiFeffermanB/LHRestart.lean",
+      "sha256": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
+      "declarations": [
+        "QuasiFeffermanB.lh_ae_good_energy_time",
+        "QuasiFeffermanB.restart_representative_norm_sq",
+        "QuasiFeffermanB.restart_representative_inner",
+        "QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound",
+        "QuasiFeffermanB.lh_energy_le_from_start",
+        "QuasiFeffermanB.lh_energy_le_at_good_time",
+        "QuasiFeffermanB.lh_strong_right_trace_of_energy_start",
+        "QuasiFeffermanB.lh_strong_right_trace_at_good_time",
+        "QuasiFeffermanB.restart_representative_edist",
+        "QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right",
+        "QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start",
+        "QuasiFeffermanB.lh_shifted_strong_trace_at_good_time",
+        "QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START",
+        "QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME",
+        "QuasiFeffermanB.LH_RESTART_AE",
+        "QuasiFeffermanB.LH_RESTART_AE_Ioc",
+        "QuasiFeffermanB.LH_RESTART_AE_Ioo"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.MeanPreservation",
+      "source": "QuasiFeffermanB/MeanPreservation.lean",
+      "sha256": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
+      "declarations": [
+        "QuasiFeffermanB.physical_inner_congr_left_ae",
+        "QuasiFeffermanB.constant_positive_solenoidal_test",
+        "QuasiFeffermanB.constant_weak_momentum_integrand",
+        "QuasiFeffermanB.LH_CONSTANT_PAIRING_PRESERVED",
+        "QuasiFeffermanB.LH_POSITIVE_TRACE_ENERGY_SIGMA_ZERO"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.PhysicalFourierL2",
+      "source": "QuasiFeffermanB/PhysicalFourierL2.lean",
+      "sha256": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
+      "declarations": [
+        "QuasiFeffermanB.torusDatumRepresentative_measurePreserving",
+        "QuasiFeffermanB.rough_torusDatumComponent_memLp",
+        "QuasiFeffermanB.physicalTorusComponentL2_coeff",
+        "QuasiFeffermanB.physicalTorusComponentL2_norm_sq",
+        "QuasiFeffermanB.physicalTorusComponentL2_sum_norm_sq",
+        "QuasiFeffermanB.physicalL2_coefficientEnergy_le",
+        "QuasiFeffermanB.physicalL2_fourier_mem",
+        "QuasiFeffermanB.physicalFourierSequence_component",
+        "QuasiFeffermanB.physicalFourierSequence_norm_sq",
+        "QuasiFeffermanB.physical_datumFourierCoeff_sub",
+        "QuasiFeffermanB.physicalL2_fourier_injective",
+        "QuasiFeffermanB.physicalH1HalfDatum_physicalL2",
+        "QuasiFeffermanB.physicalL2SobolevDatum_norm",
+        "QuasiFeffermanB.physicalL2SobolevDatum_sub",
+        "QuasiFeffermanB.physicalL2SobolevDatum_finite",
+        "QuasiFeffermanB.physicalL2_cutoff_tendsto",
+        "QuasiFeffermanB.physicalL2_cutoff_eLpNorm_tendsto",
+        "QuasiFeffermanB.zeroSobolevPhysicalL2_continuous",
+        "QuasiFeffermanB.zeroSobolevPhysicalL2_finite",
+        "QuasiFeffermanB.zeroSobolevPhysicalL2_fourierCoeff",
+        "QuasiFeffermanB.zeroSobolevPhysicalL2_norm",
+        "QuasiFeffermanB.torusSobolevH0_physical_fourierCoeff",
+        "QuasiFeffermanB.torusSobolevH0_physical_norm"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.PhysicalH1Admission",
+      "source": "QuasiFeffermanB/PhysicalH1Admission.lean",
+      "sha256": "f297c5c997dd91b0c3838735cbe0af7c0d5900ec2ba8c44f31495acc71c20050",
+      "declarations": [
+        "QuasiFeffermanB.meanZero_sobolevCutoff_sum",
+        "QuasiFeffermanB.physicalH1_weighted_finite_bound",
+        "QuasiFeffermanB.physicalH1_mem_sobolevTwo",
+        "QuasiFeffermanB.physicalH1SobolevDatum_lower_half",
+        "QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq",
+        "QuasiFeffermanB.physicalH1SobolevDatum_physicalL2"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.PressureUniqueness",
+      "source": "QuasiFeffermanB/PressureUniqueness.lean",
+      "sha256": "1986794e95b477cafa3f6918681d1a1eea6ea8b1469a211f272e757b4924f5c5",
+      "declarations": [
+        "QuasiFeffermanB.pressure_integral_cube_constant",
+        "QuasiFeffermanB.pressure_fderiv_eq_of_gradient_eq",
+        "QuasiFeffermanB.NORMALIZED_PRESSURE_UNIQUE_OF_GRADIENT",
+        "QuasiFeffermanB.pressure_unique_spatial_smooth",
+        "QuasiFeffermanB.pressure_unique_velocity_spatial_smooth",
+        "QuasiFeffermanB.pressure_timeDerivative_eq_of_positive_velocity_eq",
+        "QuasiFeffermanB.POSITIVE_SMOOTH_NSE_NORMALIZED_PRESSURE_UNIQUE",
+        "QuasiFeffermanB.POSITIVE_SMOOTH_NSE_PRESSURE_UNIQUE",
+        "QuasiFeffermanB.continuous_periodic_velocity_eq_of_cube_ae",
+        "QuasiFeffermanB.POSITIVE_SMOOTH_NSE_NORMALIZED_PRESSURE_UNIQUE_OF_AE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.RootAssembly",
+      "source": "QuasiFeffermanB/RootAssembly.lean",
+      "sha256": "ab58317402d12d1f7bae744b750b97fe87209e69be76f6b8c6bef19d3e1d3f4d",
+      "declarations": [
+        "QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION",
+        "QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION",
+        "QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.SafeCutoff",
+      "source": "QuasiFeffermanB/SafeCutoff.lean",
+      "sha256": "b164165cca921278784bb96090a6c94be737cd916043bde64663e98ee87d1ac9",
+      "declarations": [
+        "QuasiFeffermanB.CLASSICAL_TAIL_OF_GLOBAL_SMOOTH_NSE",
+        "QuasiFeffermanB.ZERO_LH_HAS_SMOOTH_TAIL",
+        "QuasiFeffermanB.SAFE_CUTOFF_TAIL"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.SpatialAdmission",
+      "source": "QuasiFeffermanB/SpatialAdmission.lean",
+      "sha256": "6689c777035a8b3fb74abc73fffb08e18cf136fa26b4317015478a3d2e883140",
+      "declarations": [
+        "QuasiFeffermanB.physical_constant_pairing_coordinate",
+        "QuasiFeffermanB.physical_mean_pairings_fourier_zero",
+        "QuasiFeffermanB.physical_complex_coordinate_memLp",
+        "QuasiFeffermanB.physical_datumFourierIntegrand_integrable",
+        "QuasiFeffermanB.complex_derivative_real_component",
+        "QuasiFeffermanB.complex_derivative_imaginary_component",
+        "QuasiFeffermanB.physical_complex_gradient_annihilation",
+        "QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal",
+        "QuasiFeffermanB.EnergySigmaZero.fourier_constraints",
+        "QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero",
+        "QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.TailChain",
+      "source": "QuasiFeffermanB/TailChain.lean",
+      "sha256": "edb75daa799194c41c9bd7a6b4ff6ef0282f03791a647380d32e6c2f4c5fd1ea",
+      "declarations": [
+        "QuasiFeffermanB.Q09_POST_CUTOFF_SMOOTHNESS",
+        "QuasiFeffermanB.Q11_POST_CUTOFF_ENERGY_EQUALITY",
+        "QuasiFeffermanB.Q12_POST_CUTOFF_TRACE_UNIQUENESS",
+        "QuasiFeffermanB.Q13_ZERO_AND_SAFE_CLOSED_CUTOFF",
+        "QuasiFeffermanB.Quasi_Fefferman_B_of_LH_existence"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.TailEnergy",
+      "source": "QuasiFeffermanB/TailEnergy.lean",
+      "sha256": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
+      "declarations": [
+        "QuasiFeffermanB.tail_physicalEnergy_congr_ae",
+        "QuasiFeffermanB.tail_physicalFieldInner_zero_of_ae_zero",
+        "QuasiFeffermanB.physicalH1_gradient_column_zero_of_ae_zero",
+        "QuasiFeffermanB.physicalH1_gradient_zero_of_ae_zero",
+        "QuasiFeffermanB.physicalH1_gradient_eq_smooth",
+        "QuasiFeffermanB.tail_criticalGradientEnergy_congr_ae",
+        "QuasiFeffermanB.physicalH1_gradientEnergy_eq_smooth",
+        "QuasiFeffermanB.positiveSmoothNSE_test",
+        "QuasiFeffermanB.positiveSmoothNSE_pressure_spatial_smooth",
+        "QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE",
+        "QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW",
+        "QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.TailRegularity",
+      "source": "QuasiFeffermanB/TailRegularity.lean",
+      "sha256": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
+      "declarations": [
+        "QuasiFeffermanB.positive_timeDerivative_translate",
+        "QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE",
+        "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE",
+        "QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.TailUniqueness",
+      "source": "QuasiFeffermanB/TailUniqueness.lean",
+      "sha256": "104d4b9fa21b4ab57c80f321f32de3cbcf6c40711a49d2dd88c688a7189d69e9",
+      "declarations": [
+        "QuasiFeffermanB.positiveSmoothNSE_timeTranslate",
+        "QuasiFeffermanB.positive_reference_shifted_serrin",
+        "QuasiFeffermanB.positive_reference_strict_shift_serrin",
+        "QuasiFeffermanB.LH_UNIQUE_FUTURE_OF_REFERENCE_SHIFT_SERRIN",
+        "QuasiFeffermanB.LH_UNIQUE_FUTURE_OF_POSITIVE_REFERENCE",
+        "QuasiFeffermanB.LH_UNIQUE_FUTURE_OF_SMOOTH_REFERENCE",
+        "QuasiFeffermanB.LH_UNIQUE_FUTURE_OF_SMOOTH_FLOW",
+        "QuasiFeffermanB.LH_UNIQUE_FUTURE_OF_POSITIVE_FLOW"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.ThetaGaussian",
+      "source": "QuasiFeffermanB/ThetaGaussian.lean",
+      "sha256": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
+      "declarations": [
+        "QuasiFeffermanB.gaussianThetaOne_nonneg",
+        "QuasiFeffermanB.gaussianThetaOne_summable",
+        "QuasiFeffermanB.gaussianThetaOne_jacobi",
+        "QuasiFeffermanB.GAUSSIAN_THETA_ONE_TRANSFORM",
+        "QuasiFeffermanB.GAUSSIAN_THETA_ONE_GEOMETRIC_TAIL",
+        "QuasiFeffermanB.SIXTEEN_LT_EXP_PI",
+        "QuasiFeffermanB.EXP_NEG_PI_LT_ONE_SIXTEENTH",
+        "QuasiFeffermanB.GAUSSIAN_THETA_ONE_CUBE_AT_ONE_LT_TWO",
+        "QuasiFeffermanB.GAUSSIAN_EXP_TAIL_LE_POWER",
+        "QuasiFeffermanB.GAUSSIAN_THETA_CUBE_LARGE",
+        "QuasiFeffermanB.GAUSSIAN_THETA_CUBE_ENVELOPE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.ThetaLattice",
+      "source": "QuasiFeffermanB/ThetaLattice.lean",
+      "sha256": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
+      "declarations": [
+        "QuasiFeffermanB.FINITE_LATTICE_GAUSSIAN_ENVELOPE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.ThetaResolvent",
+      "source": "QuasiFeffermanB/ThetaResolvent.lean",
+      "sha256": "e15543d05055d67dfc388da4aa66ba2fba1e44d32ab35a971cce877f69c1cd78",
+      "declarations": [
+        "QuasiFeffermanB.cutoff_frequency_square_pos",
+        "QuasiFeffermanB.FINITE_LATTICE_HEAT_RESOLVENT",
+        "QuasiFeffermanB.NORMALIZED_GAUSSIAN_HALF_INTEGRAL",
+        "QuasiFeffermanB.FINITE_LATTICE_RESOLVENT_BOUND"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.ThetaSchur",
+      "source": "QuasiFeffermanB/ThetaSchur.lean",
+      "sha256": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
+      "declarations": [
+        "QuasiFeffermanB.WEIGHTED_SCHUR_PAIR",
+        "QuasiFeffermanB.FINITE_WEIGHTED_SCHUR",
+        "QuasiFeffermanB.FINITE_WEIGHTED_SCHUR_DIAGONAL",
+        "QuasiFeffermanB.STRICT_H12_TO_CALORIC_SQUARE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.TimeTranslate",
+      "source": "QuasiFeffermanB/TimeTranslate.lean",
+      "sha256": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
+      "declarations": [
+        "QuasiFeffermanB.restartTimeClamp_pos",
+        "QuasiFeffermanB.restartTimeClamp_contDiff",
+        "QuasiFeffermanB.restartTimeClamp_eq",
+        "QuasiFeffermanB.restartTimeClamp_hasDerivAt",
+        "QuasiFeffermanB.restartTest_is_test",
+        "QuasiFeffermanB.restartTest_eq",
+        "QuasiFeffermanB.restartTest_timeDerivative",
+        "QuasiFeffermanB.timeTranslate_integrated_momentum",
+        "QuasiFeffermanB.timeTranslate_measurePreserving_Ioc",
+        "QuasiFeffermanB.timeTranslate_memLp_Ioc",
+        "QuasiFeffermanB.timeTranslate_ae_Ioc"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    },
+    {
+      "module": "QuasiFeffermanB.ZeroData",
+      "source": "QuasiFeffermanB/ZeroData.lean",
+      "sha256": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4",
+      "declarations": [
+        "QuasiFeffermanB.ZERO_LH_VELOCITY",
+        "QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE"
+      ],
+      "scope": "exact source declaration; broader Q/A contracts remain pending"
+    }
+  ]
+}

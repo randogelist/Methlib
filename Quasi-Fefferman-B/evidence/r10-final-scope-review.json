@@ -1,0 +1,27 @@
+{
+  "verdict": "PASS",
+  "exact_declaration": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED",
+  "exact_type": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED : QuasiFeffermanB.QuasiFeffermanBStatement",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "root_dependency_fingerprint": "3f5fb37abab7fe07e3ff138a3a3bc1b2e15a051e423c30aca4e3186317ac0659",
+  "root_build": "PASS",
+  "root_audit": "PASS",
+  "extra_certificate_checker_admission_or_existence_arguments": [],
+  "frozen_scope": {
+    "cutoff": "norm(a)^4 / (8*pi^2*nu^5)",
+    "safe_cutoff": "2*cutoff",
+    "original_gradient_preserved": true,
+    "all_original_LH_trajectories": true,
+    "all_competing_futures": true,
+    "strict_delta_gt_cutoff": true,
+    "zero_datum_closed_safe_cutoff": true
+  },
+  "raw_aggregate_sentinel_preserved": "PENDING",
+  "scope_reviewed_root_classification": "A_TIER",
+  "closure": "UNCONDITIONAL_CLOSURE_OF_THE_FROZEN_ROOT",
+  "local_lean_executions": 0
+}

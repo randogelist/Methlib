@@ -1,0 +1,53 @@
+{
+  "run": 43535278019,
+  "commit": "f70d495e952c952ccc87a390194dd1621643a233",
+  "status": "PASS",
+  "source_snapshot_match": true,
+  "frozen_sources_preserved": [
+    "Semantics.lean",
+    "RootContract.lean",
+    "RootAssembly.lean",
+    "Cutoff.lean",
+    "SafeCutoff.lean",
+    "TailChain.lean",
+    "Endpoints/Root.lean"
+  ],
+  "native_source_mutations": 0,
+  "compiler": "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+  "pins": {
+    "foundation_sha": "09dfe94a1ef150e21d09df3013fbe09002ef139c",
+    "lean": "4.33.0",
+    "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d"
+  },
+  "source_modules": 79,
+  "selected_modules": 74,
+  "build_counts": {
+    "PASS": 74,
+    "FAIL": 0,
+    "BLOCKED_BY_DEPENDENCY": 0
+  },
+  "exact_audited_declarations": 409,
+  "retained_declarations": 406,
+  "new_exact_audited_declarations": 3,
+  "new_declarations_by_source": {
+    "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean": [
+      "QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_MOMENTUM"
+    ],
+    "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean": [
+      "QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE"
+    ],
+    "QuasiFeffermanB/Endpoints/Root.lean": [
+      "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED"
+    ]
+  },
+  "new_passing_modules": [
+    "QuasiFeffermanB.Endpoints.LerayHopfExistence",
+    "QuasiFeffermanB.Endpoints.PhysicalMomentum",
+    "QuasiFeffermanB.Endpoints.Root"
+  ],
+  "verified_object_cache_hits": 71,
+  "failures": {},
+  "root_status": "A_TIER",
+  "local_lean_executions": 0,
+  "promotion_marker": "!=!"
+}

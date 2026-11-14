@@ -1,0 +1,57 @@
+TYPE_BEGIN:QuasiFeffermanB.REAL_SCALAR_DUHAMEL
+@QuasiFeffermanB.REAL_SCALAR_DUHAMEL : ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]
+  [CompleteSpace E] (α T : ℝ) (u f : ℝ → E),
+  0 ≤ T →
+    ContinuousOn u (Set.Icc 0 T) →
+      ContinuousOn f (Set.Icc 0 T) →
+        (∀ t ∈ Set.Ioo 0 T, HasDerivAt u (f t - α • u t) t) →
+          u T = Real.exp (-α * T) • u 0 + ∫ (s : ℝ) in 0..T, Real.exp (-α * (T - s)) • f s
+TYPE_END:QuasiFeffermanB.REAL_SCALAR_DUHAMEL
+'QuasiFeffermanB.REAL_SCALAR_DUHAMEL' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexVec_sum_units
+QuasiFeffermanB.complexVec_sum_units : ∀ (c : Fin 3 → ℂ),
+  QuasiFeffermanB.complexVec c = ∑ i, c i • QuasiFeffermanB.complexUnit i
+TYPE_END:QuasiFeffermanB.complexVec_sum_units
+'QuasiFeffermanB.complexVec_sum_units' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_COMPLEX_MODE_CONTINUOUS
+@QuasiFeffermanB.GALERKIN_COMPLEX_MODE_CONTINUOUS : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (k : SingularClosure.Frequency),
+  ContinuousOn (fun t => QuasiFeffermanB.complexVec (g.coeff t k)) (Set.Ici 0)
+TYPE_END:QuasiFeffermanB.GALERKIN_COMPLEX_MODE_CONTINUOUS
+'QuasiFeffermanB.GALERKIN_COMPLEX_MODE_CONTINUOUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_COMPLEX_MODE_HAS_DERIV
+@QuasiFeffermanB.GALERKIN_COMPLEX_MODE_HAS_DERIV : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ∀ k ∈ SingularClosure.cutoffModes N,
+    ∀ (t : ℝ),
+      0 < t →
+        HasDerivAt (fun r => QuasiFeffermanB.complexVec (g.coeff r k))
+          (QuasiFeffermanB.complexVec (SingularClosure.galerkinRhs ν N (g.coeff t) k)) t
+TYPE_END:QuasiFeffermanB.GALERKIN_COMPLEX_MODE_HAS_DERIV
+'QuasiFeffermanB.GALERKIN_COMPLEX_MODE_HAS_DERIV' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_COMPLEX_FORCING_CONTINUOUS
+@QuasiFeffermanB.GALERKIN_COMPLEX_FORCING_CONTINUOUS : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ∀ k ∈ SingularClosure.cutoffModes N,
+    ContinuousOn
+      (fun t =>
+        -QuasiFeffermanB.complexVec
+            (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N (g.coeff t) k)))
+      (Set.Ici 0)
+TYPE_END:QuasiFeffermanB.GALERKIN_COMPLEX_FORCING_CONTINUOUS
+'QuasiFeffermanB.GALERKIN_COMPLEX_FORCING_CONTINUOUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_MODE_DUHAMEL
+@QuasiFeffermanB.GALERKIN_MODE_DUHAMEL : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ∀ k ∈ SingularClosure.cutoffModes N,
+    ∀ (T : ℝ),
+      0 ≤ T →
+        QuasiFeffermanB.complexVec (g.coeff T k) =
+          Real.exp (-(ν * (2 * Real.pi) ^ 2 * ↑(SingularClosure.galerkinFreqSq k)) * T) •
+              QuasiFeffermanB.complexVec (g.coeff 0 k) +
+            ∫ (s : ℝ) in 0..T,
+              Real.exp (-(ν * (2 * Real.pi) ^ 2 * ↑(SingularClosure.galerkinFreqSq k)) * (T - s)) •
+                -QuasiFeffermanB.complexVec
+                    (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N (g.coeff s) k))
+TYPE_END:QuasiFeffermanB.GALERKIN_MODE_DUHAMEL
+'QuasiFeffermanB.GALERKIN_MODE_DUHAMEL' depends on axioms: [propext, Classical.choice, Quot.sound]

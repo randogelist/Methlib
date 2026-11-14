@@ -1,0 +1,20 @@
+TYPE_BEGIN:QuasiFeffermanB.FINITE_CALORIC_SCHUR_SCALAR
+QuasiFeffermanB.FINITE_CALORIC_SCHUR_SCALAR : ∀ (N : ℕ) (a : SingularClosure.Frequency → ℝ),
+  QuasiFeffermanB.finiteCaloricQuadratic (SingularClosure.cutoffModes N) SingularClosure.criticalFrequencyWeight a ≤
+    (∑ k ∈ SingularClosure.cutoffModes N, SingularClosure.criticalFrequencyWeight k * a k ^ 2) / (4 * Real.pi)
+TYPE_END:QuasiFeffermanB.FINITE_CALORIC_SCHUR_SCALAR
+'QuasiFeffermanB.FINITE_CALORIC_SCHUR_SCALAR' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_CALORIC_SCHUR
+QuasiFeffermanB.FINITE_CALORIC_SCHUR : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (QuasiFeffermanB.finiteCaloricQuadratic (SingularClosure.cutoffModes N) SingularClosure.criticalFrequencyWeight
+      fun k => QuasiFeffermanB.complexVecNorm (c k)) ≤
+    SingularClosure.criticalEnergy 1 N c / (4 * Real.pi)
+TYPE_END:QuasiFeffermanB.FINITE_CALORIC_SCHUR
+'QuasiFeffermanB.FINITE_CALORIC_SCHUR' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CRITICAL_DATUM_FINITE_CALORIC_SCHUR
+QuasiFeffermanB.CRITICAL_DATUM_FINITE_CALORIC_SCHUR : ∀ (N : ℕ) (a : SingularClosure.CriticalSobolev 1),
+  (QuasiFeffermanB.finiteCaloricQuadratic (SingularClosure.cutoffModes N) SingularClosure.criticalFrequencyWeight
+      fun k => QuasiFeffermanB.complexVecNorm (SingularClosure.criticalCoeff 1 a k)) ≤
+    ‖a‖ ^ 2 / (4 * Real.pi)
+TYPE_END:QuasiFeffermanB.CRITICAL_DATUM_FINITE_CALORIC_SCHUR
+'QuasiFeffermanB.CRITICAL_DATUM_FINITE_CALORIC_SCHUR' depends on axioms: [propext, Classical.choice, Quot.sound]

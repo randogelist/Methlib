@@ -1,0 +1,27 @@
+TYPE_BEGIN:QuasiFeffermanB.energyDatumGalerkinFamily_initial
+QuasiFeffermanB.energyDatumGalerkinFamily_initial : ∀ (ν : ℝ) (hν : 0 ≤ ν) (a : QuasiFeffermanB.EnergyDatum) (n : ℕ),
+  (QuasiFeffermanB.energyDatumGalerkinFamily ν hν a n).coeff 0 =
+    SingularClosure.cutoffCoeff (n + 1) (SingularClosure.datumFourierCoeff ↑↑↑a)
+TYPE_END:QuasiFeffermanB.energyDatumGalerkinFamily_initial
+'QuasiFeffermanB.energyDatumGalerkinFamily_initial' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyDatumGalerkinFamily_energy_initial
+QuasiFeffermanB.energyDatumGalerkinFamily_energy_initial : ∀ (ν : ℝ) (hν : 0 ≤ ν) (a : QuasiFeffermanB.EnergyDatum)
+  (n : ℕ),
+  SingularClosure.coefficientEnergy (n + 1) ((QuasiFeffermanB.energyDatumGalerkinFamily ν hν a n).coeff 0) ≤ ‖↑a‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyDatumGalerkinFamily_energy_initial
+'QuasiFeffermanB.energyDatumGalerkinFamily_energy_initial' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_DATUM_GALERKIN_COMPACTNESS
+QuasiFeffermanB.ENERGY_DATUM_GALERKIN_COMPACTNESS : ∀ (ν : ℝ) (hν : 0 < ν) (a : QuasiFeffermanB.EnergyDatum) (T : ℝ),
+  0 ≤ T →
+    ∃ u v φ,
+      StrictMono φ ∧
+        (∀ (t : ↑(Set.Icc 0 T)), ‖u t‖ ≤ ‖↑a‖) ∧
+          (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+              TendstoUniformly
+                (fun n t => ↑((QuasiFeffermanB.energyDatumGalerkinFamily ν ⋯ a (φ n)).sobolevState 0 ↑t) k i)
+                (fun t => ↑(u t) k i) Filter.atTop) ∧
+            Filter.Tendsto (fun n => (QuasiFeffermanB.energyDatumGalerkinFamily ν ⋯ a (φ n)).energyTimeH0L2 T)
+                Filter.atTop (nhds v) ∧
+              ∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T), ∀ (ht : t ∈ Set.Icc 0 T), ↑↑v t = u ⟨t, ht⟩
+TYPE_END:QuasiFeffermanB.ENERGY_DATUM_GALERKIN_COMPACTNESS
+'QuasiFeffermanB.ENERGY_DATUM_GALERKIN_COMPACTNESS' depends on axioms: [propext, Classical.choice, Quot.sound]

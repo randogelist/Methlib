@@ -1,0 +1,62 @@
+TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_le_succ
+QuasiFeffermanB.caloric_criticalEnergy_le_succ : ∀ (q N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.criticalEnergy q N c ≤ SingularClosure.criticalEnergy (q + 1) N c
+TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_le_succ
+'QuasiFeffermanB.caloric_criticalEnergy_le_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian
+QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.criticalEnergy 4 N c = SingularClosure.coefficientLaplacianSquare N c
+TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian
+'QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy
+QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.criticalEnergy 1 N c ≤ SingularClosure.coefficientDissipation N c
+TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy
+'QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian
+QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.criticalEnergy 3 N c ≤ SingularClosure.coefficientLaplacianSquare N c
+TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian
+'QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND
+@QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND : ∀ {ν : ℝ},
+  0 ≤ ν →
+    ∀ {a : SingularClosure.Field} {N : ℕ} (g : SingularClosure.GalerkinSolution ν a N) (L : ℝ),
+      0 ≤ L →
+        ∀ (t : ℝ),
+          0 ≤ t →
+            SingularClosure.coefficientDissipation N (g.coeff t) ≤ L →
+              ‖g.criticalRhs (-1) t‖ ^ 2 ≤
+                (ν + SingularClosure.criticalTransportConstant * (L + 1)) ^ 2 *
+                  SingularClosure.criticalEnergy 3 N (g.coeff t)
+TYPE_END:QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND
+'QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY
+QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : SingularClosure.CriticalSobolev 1),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 1 a) →
+        SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 1 a) →
+          ∀
+            (g :
+              (n : ℕ) →
+                SingularClosure.GalerkinSolution ν
+                  (SingularClosure.finiteSynthesis (n + 1) (SingularClosure.criticalCoeff 1 a)) (n + 1))
+            (L : ℝ),
+            0 ≤ L →
+              (∀ (n : ℕ) (t : ℝ), 0 ≤ t → SingularClosure.coefficientDissipation (n + 1) ((g n).coeff t) ≤ L) →
+                (∀ (n : ℕ) (T : ℝ),
+                    0 ≤ T →
+                      ∫ (t : ℝ) in 0..T, SingularClosure.coefficientLaplacianSquare (n + 1) ((g n).coeff t) ≤ L / ν) →
+                  ∃ u φ,
+                    StrictMono φ ∧
+                      ContinuousOn u (Set.Ici 0) ∧
+                        u 0 = a ∧
+                          (∀ (t : ℝ), 0 ≤ t → ‖u t‖ ≤ L + 1) ∧
+                            ∀ (T : ℝ),
+                              TendstoUniformlyOn (fun n t => (g (φ n)).sobolevState 0 t)
+                                (fun t => (SingularClosure.criticalToTorusH0 1 ⋯) (u t)) Filter.atTop (Set.Icc 0 T)
+TYPE_END:QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY
+'QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY' depends on axioms: [propext, Classical.choice, Quot.sound]

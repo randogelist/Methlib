@@ -1,0 +1,74 @@
+{
+  "compared_base": "08b7d49a962ad417c0f35fa1ddc58d0ef722fdf1",
+  "current_compiled_candidate": "f70d495e952c952ccc87a390194dd1621643a233",
+  "changed_canonical_modules": [
+    {
+      "path": "QuasiFeffermanB/CaloricBootstrap.lean",
+      "sha256": "64ea44a78ade4a6ef701c7a023bc2eebefecd1dfe6cb30f9773a1e80a209a770",
+      "public_signatures_preserved": 3
+    },
+    {
+      "path": "QuasiFeffermanB/CaloricGalerkinMajorant.lean",
+      "sha256": "57e0265b2cb4b867977803ec1742242b8f2a1f256b4ef99c9f9e6d386da1e881",
+      "public_signatures_preserved": 9
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
+      "sha256": "b664b92ef0a1e36ccce1dfaf371957569801d0ae5f1f7427a591e5dcdee12846",
+      "public_signatures_preserved": 12
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
+      "sha256": "82847d0a07f908e034e9e1ffe498dd6b4068e9b9e28071744e97030b56f63d36",
+      "public_signatures_preserved": 1
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean",
+      "sha256": "9debf97162400c41ab50c734f591bfcbf24a722e60a40331c2ffdbe4ca9292ca",
+      "public_signatures_preserved": 1
+    },
+    {
+      "path": "QuasiFeffermanB/Endpoints/WeakH0Limit.lean",
+      "sha256": "f0f771e3986728ffc09a8b8a6008b2bd324456d65b43f997abe839467e04124a",
+      "public_signatures_preserved": 6
+    },
+    {
+      "path": "QuasiFeffermanB/EnergyH1Realization.lean",
+      "sha256": "d2d1ed37d4cfb0c560c46e2f92ba447ab65e60b32f3a8267160d28189c39e124",
+      "public_signatures_preserved": 24
+    },
+    {
+      "path": "QuasiFeffermanB/EnergyLimitEnergy.lean",
+      "sha256": "83c660e847e55951c53216d5f7b2a13fb85276b6493ef619820e031f0b983197",
+      "public_signatures_preserved": 5
+    },
+    {
+      "path": "QuasiFeffermanB/EnergyPhysicalTrace.lean",
+      "sha256": "54db750c908792e3380a0fd7cb2b374526a43bf0c11014b1c91995af433aecac",
+      "public_signatures_preserved": 4
+    },
+    {
+      "path": "QuasiFeffermanB/EnergyTransportContinuity.lean",
+      "sha256": "5e52894cfdc35253f9dab0d771b4dda869f7a453e0b459c044a4d60b1e6c0b49",
+      "public_signatures_preserved": 11
+    },
+    {
+      "path": "QuasiFeffermanB/PhysicalH1Admission.lean",
+      "sha256": "f297c5c997dd91b0c3838735cbe0af7c0d5900ec2ba8c44f31495acc71c20050",
+      "public_signatures_preserved": 8
+    },
+    {
+      "path": "QuasiFeffermanB/TailUniqueness.lean",
+      "sha256": "104d4b9fa21b4ab57c80f321f32de3cbcf6c40711a49d2dd88c688a7189d69e9",
+      "public_signatures_preserved": 8
+    },
+    {
+      "path": "QuasiFeffermanB/ThetaResolvent.lean",
+      "sha256": "e15543d05055d67dfc388da4aa66ba2fba1e44d32ab35a971cce877f69c1cd78",
+      "public_signatures_preserved": 4
+    }
+  ],
+  "public_signature_changes": 0,
+  "checked_public_signatures": 96,
+  "local_lean_executions": 0
+}

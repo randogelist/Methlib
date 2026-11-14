@@ -1,0 +1,40 @@
+TYPE_BEGIN:QuasiFeffermanB.HEAT_MULTIPLIER_SQUARE_INTEGRAL
+QuasiFeffermanB.HEAT_MULTIPLIER_SQUARE_INTEGRAL : ∀ (ν κ : ℝ),
+  0 < ν → 0 < κ → ∫ (t : ℝ) in Set.Ioi 0, (κ * Real.exp (-ν * κ ^ 2 * t)) ^ 2 = 1 / (2 * ν)
+TYPE_END:QuasiFeffermanB.HEAT_MULTIPLIER_SQUARE_INTEGRAL
+'QuasiFeffermanB.HEAT_MULTIPLIER_SQUARE_INTEGRAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.HEAT_PAIR_INTEGRAL
+QuasiFeffermanB.HEAT_PAIR_INTEGRAL : ∀ (ν κ η : ℝ),
+  0 < ν →
+    0 < κ ^ 2 + η ^ 2 →
+      ∫ (t : ℝ) in Set.Ioi 0, Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * η ^ 2 * t) = 1 / (ν * (κ ^ 2 + η ^ 2))
+TYPE_END:QuasiFeffermanB.HEAT_PAIR_INTEGRAL
+'QuasiFeffermanB.HEAT_PAIR_INTEGRAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.HEAT_PAIR_INTEGRABLE
+QuasiFeffermanB.HEAT_PAIR_INTEGRABLE : ∀ (ν κ η : ℝ),
+  0 < ν →
+    0 < κ ^ 2 + η ^ 2 →
+      MeasureTheory.IntegrableOn (fun t => Real.exp (-ν * κ ^ 2 * t) * Real.exp (-ν * η ^ 2 * t)) (Set.Ioi 0)
+        MeasureTheory.volume
+TYPE_END:QuasiFeffermanB.HEAT_PAIR_INTEGRABLE
+'QuasiFeffermanB.HEAT_PAIR_INTEGRABLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteCaloricQuadratic_nonneg
+@QuasiFeffermanB.finiteCaloricQuadratic_nonneg : ∀ {ι : Type u_1} (s : Finset ι) (κ a : ι → ℝ),
+  (∀ i ∈ s, 0 ≤ a i) → 0 ≤ QuasiFeffermanB.finiteCaloricQuadratic s κ a
+TYPE_END:QuasiFeffermanB.finiteCaloricQuadratic_nonneg
+'QuasiFeffermanB.finiteCaloricQuadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRABLE
+@QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRABLE : ∀ {ι : Type u_1} (s : Finset ι) (κ a : ι → ℝ) (ν : ℝ),
+  0 < ν →
+    (∀ i ∈ s, 0 < κ i) →
+      MeasureTheory.IntegrableOn (fun t => QuasiFeffermanB.finiteHeatSum s κ a ν t ^ 2) (Set.Ioi 0) MeasureTheory.volume
+TYPE_END:QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRABLE
+'QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRABLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRAL
+@QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRAL : ∀ {ι : Type u_1} (s : Finset ι) (κ a : ι → ℝ) (ν : ℝ),
+  0 < ν →
+    (∀ i ∈ s, 0 < κ i) →
+      ∫ (t : ℝ) in Set.Ioi 0, QuasiFeffermanB.finiteHeatSum s κ a ν t ^ 2 =
+        QuasiFeffermanB.finiteCaloricQuadratic s κ a / ν
+TYPE_END:QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRAL
+'QuasiFeffermanB.FINITE_HEAT_SQUARE_INTEGRAL' depends on axioms: [propext, Classical.choice, Quot.sound]

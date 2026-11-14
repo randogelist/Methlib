@@ -1,0 +1,54 @@
+TYPE_BEGIN:QuasiFeffermanB.meanZero_sobolevCutoff_sum
+QuasiFeffermanB.meanZero_sobolevCutoff_sum : ∀ (q N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.SpectralMeanZero c →
+    ∑ ki ∈ SingularClosure.sobolevCutoffIndices N,
+        SingularClosure.criticalFrequencyWeight ki.1 ^ q * Complex.normSq (c ki.1 ki.2) =
+      SingularClosure.criticalEnergy q N c
+TYPE_END:QuasiFeffermanB.meanZero_sobolevCutoff_sum
+'QuasiFeffermanB.meanZero_sobolevCutoff_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_weighted_finite_bound
+@QuasiFeffermanB.physicalH1_weighted_finite_bound : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v) →
+      ∀ (S : Finset SingularClosure.FourierIndex),
+        ∑ ki ∈ S, ‖SingularClosure.criticalWeightedCoeff 2 (SingularClosure.datumFourierCoeff v) ki‖ ^ 2 ≤
+          SingularClosure.criticalGradientEnergy G
+TYPE_END:QuasiFeffermanB.physicalH1_weighted_finite_bound
+'QuasiFeffermanB.physicalH1_weighted_finite_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_mem_sobolevTwo
+@QuasiFeffermanB.physicalH1_mem_sobolevTwo : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v) →
+      Memℓp (SingularClosure.criticalWeightedCoeff 2 (SingularClosure.datumFourierCoeff v)) 2
+TYPE_END:QuasiFeffermanB.physicalH1_mem_sobolevTwo
+'QuasiFeffermanB.physicalH1_mem_sobolevTwo' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1SobolevDatum_lower_half
+@QuasiFeffermanB.physicalH1SobolevDatum_lower_half : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec}
+  (hv : SingularClosure.CriticalPhysicalH1 v G)
+  (hz : SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v)),
+  (SingularClosure.criticalSobolevLower 1 2 ⋯) (QuasiFeffermanB.physicalH1SobolevDatum hv hz) =
+    QuasiFeffermanB.physicalH1HalfDatum hv hz
+TYPE_END:QuasiFeffermanB.physicalH1SobolevDatum_lower_half
+'QuasiFeffermanB.physicalH1SobolevDatum_lower_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq
+@QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec}
+  (hv : SingularClosure.CriticalPhysicalH1 v G)
+  (hz : SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v)),
+  ‖(SingularClosure.criticalSobolevLower 1 2 ⋯) (QuasiFeffermanB.physicalH1SobolevDatum hv hz)‖ ^ 2 =
+    (QuasiFeffermanB.physicalHalfEnergy v).toReal
+TYPE_END:QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq
+'QuasiFeffermanB.physicalH1SobolevDatum_half_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1SobolevDatum_physicalL2
+@QuasiFeffermanB.physicalH1SobolevDatum_physicalL2 : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec}
+  (hv : SingularClosure.CriticalPhysicalH1 v G)
+  (hz : SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v)),
+  SingularClosure.criticalInitialPhysicalL2
+      ((SingularClosure.criticalSobolevLower 1 2 ⋯) (QuasiFeffermanB.physicalH1SobolevDatum hv hz)) =
+    SingularClosure.criticalL2Representative v
+TYPE_END:QuasiFeffermanB.physicalH1SobolevDatum_physicalL2
+'QuasiFeffermanB.physicalH1SobolevDatum_physicalL2' depends on axioms: [propext, Classical.choice, Quot.sound]

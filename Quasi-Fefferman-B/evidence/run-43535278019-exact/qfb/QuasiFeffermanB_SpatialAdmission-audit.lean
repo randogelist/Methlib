@@ -1,0 +1,58 @@
+import QuasiFeffermanB.SpatialAdmission
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physical_constant_pairing_coordinate"
+#check @QuasiFeffermanB.physical_constant_pairing_coordinate
+#eval IO.println "TYPE_END:QuasiFeffermanB.physical_constant_pairing_coordinate"
+#print axioms QuasiFeffermanB.physical_constant_pairing_coordinate
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physical_mean_pairings_fourier_zero"
+#check @QuasiFeffermanB.physical_mean_pairings_fourier_zero
+#eval IO.println "TYPE_END:QuasiFeffermanB.physical_mean_pairings_fourier_zero"
+#print axioms QuasiFeffermanB.physical_mean_pairings_fourier_zero
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physical_complex_coordinate_memLp"
+#check @QuasiFeffermanB.physical_complex_coordinate_memLp
+#eval IO.println "TYPE_END:QuasiFeffermanB.physical_complex_coordinate_memLp"
+#print axioms QuasiFeffermanB.physical_complex_coordinate_memLp
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physical_datumFourierIntegrand_integrable"
+#check @QuasiFeffermanB.physical_datumFourierIntegrand_integrable
+#eval IO.println "TYPE_END:QuasiFeffermanB.physical_datumFourierIntegrand_integrable"
+#print axioms QuasiFeffermanB.physical_datumFourierIntegrand_integrable
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.complex_derivative_real_component"
+#check @QuasiFeffermanB.complex_derivative_real_component
+#eval IO.println "TYPE_END:QuasiFeffermanB.complex_derivative_real_component"
+#print axioms QuasiFeffermanB.complex_derivative_real_component
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.complex_derivative_imaginary_component"
+#check @QuasiFeffermanB.complex_derivative_imaginary_component
+#eval IO.println "TYPE_END:QuasiFeffermanB.complex_derivative_imaginary_component"
+#print axioms QuasiFeffermanB.complex_derivative_imaginary_component
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physical_complex_gradient_annihilation"
+#check @QuasiFeffermanB.physical_complex_gradient_annihilation
+#eval IO.println "TYPE_END:QuasiFeffermanB.physical_complex_gradient_annihilation"
+#print axioms QuasiFeffermanB.physical_complex_gradient_annihilation
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal"
+#check @QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal
+#eval IO.println "TYPE_END:QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal"
+#print axioms QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.EnergySigmaZero.fourier_constraints"
+#check @QuasiFeffermanB.EnergySigmaZero.fourier_constraints
+#eval IO.println "TYPE_END:QuasiFeffermanB.EnergySigmaZero.fourier_constraints"
+#print axioms QuasiFeffermanB.EnergySigmaZero.fourier_constraints
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero"
+#check @QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero
+#eval IO.println "TYPE_END:QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero"
+#print axioms QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS"
+#check @QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS
+#eval IO.println "TYPE_END:QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS"
+#print axioms QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS

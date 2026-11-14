@@ -1,0 +1,25 @@
+TYPE_BEGIN:QuasiFeffermanB.WEIGHTED_SCHUR_PAIR
+QuasiFeffermanB.WEIGHTED_SCHUR_PAIR : ∀ (x y u v : ℝ), 0 < u → 0 < v → 2 * x * y ≤ x ^ 2 * (v / u) + y ^ 2 * (u / v)
+TYPE_END:QuasiFeffermanB.WEIGHTED_SCHUR_PAIR
+'QuasiFeffermanB.WEIGHTED_SCHUR_PAIR' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_WEIGHTED_SCHUR
+@QuasiFeffermanB.FINITE_WEIGHTED_SCHUR : ∀ {ι : Type u_1} (s : Finset ι) (M : ι → ι → ℝ) (w x : ι → ℝ) (C : ℝ),
+  (∀ i ∈ s, ∀ j ∈ s, 0 ≤ M i j) →
+    (∀ i ∈ s, ∀ j ∈ s, M i j = M j i) →
+      (∀ i ∈ s, 0 < w i) →
+        (∀ i ∈ s, ∑ j ∈ s, M i j * w j ≤ C * w i) → ∑ i ∈ s, ∑ j ∈ s, M i j * x i * x j ≤ C * ∑ i ∈ s, x i ^ 2
+TYPE_END:QuasiFeffermanB.FINITE_WEIGHTED_SCHUR
+'QuasiFeffermanB.FINITE_WEIGHTED_SCHUR' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_WEIGHTED_SCHUR_DIAGONAL
+@QuasiFeffermanB.FINITE_WEIGHTED_SCHUR_DIAGONAL : ∀ {ι : Type u_1} (s : Finset ι) (M : ι → ι → ℝ) (w x d : ι → ℝ),
+  (∀ i ∈ s, ∀ j ∈ s, 0 ≤ M i j) →
+    (∀ i ∈ s, ∀ j ∈ s, M i j = M j i) →
+      (∀ i ∈ s, 0 < w i) →
+        (∀ i ∈ s, ∑ j ∈ s, M i j * w j ≤ d i * w i) → ∑ i ∈ s, ∑ j ∈ s, M i j * x i * x j ≤ ∑ i ∈ s, d i * x i ^ 2
+TYPE_END:QuasiFeffermanB.FINITE_WEIGHTED_SCHUR_DIAGONAL
+'QuasiFeffermanB.FINITE_WEIGHTED_SCHUR_DIAGONAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.STRICT_H12_TO_CALORIC_SQUARE
+QuasiFeffermanB.STRICT_H12_TO_CALORIC_SQUARE : ∀ (H Q ν : ℝ),
+  Q ^ 2 ≤ H / (4 * Real.pi) → H < 2 * Real.pi * ν ^ 2 → Q ^ 2 < ν ^ 2 / 2
+TYPE_END:QuasiFeffermanB.STRICT_H12_TO_CALORIC_SQUARE
+'QuasiFeffermanB.STRICT_H12_TO_CALORIC_SQUARE' depends on axioms: [propext, Classical.choice, Quot.sound]

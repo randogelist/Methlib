@@ -1,0 +1,18 @@
+TYPE_BEGIN:QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT
+QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (b : SingularClosure.CriticalSobolev 2),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 b) →
+        SingularClosure.SpectralSolenoidal (SingularClosure.criticalCoeff 2 b) →
+          SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 b) →
+            ‖(SingularClosure.criticalSobolevLower 1 2 ⋯) b‖ ^ 2 < 2 * Real.pi * ν ^ 2 →
+              ∀ (N : ℕ)
+                (g :
+                  SingularClosure.GalerkinSolution ν
+                    (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 b)) N)
+                (T : ℝ),
+                0 ≤ T →
+                  ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤
+                    ‖(SingularClosure.criticalSobolevLower 1 2 ⋯) b‖ ^ 2 / (Real.pi * ν)
+TYPE_END:QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT
+'QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET_EXPLICIT' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,15 @@
+TYPE_BEGIN:QuasiFeffermanB.ZERO_LH_VELOCITY
+@QuasiFeffermanB.ZERO_LH_VELOCITY : ∀ {ν : ℝ},
+  0 ≤ ν →
+    ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+      SingularClosure.CriticalLerayHopf ν 0 u G → QuasiFeffermanB.SameVelocity u 0
+TYPE_END:QuasiFeffermanB.ZERO_LH_VELOCITY
+'QuasiFeffermanB.ZERO_LH_VELOCITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE
+@QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE : ∀ {ν : ℝ},
+  0 ≤ ν →
+    ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+      SingularClosure.CriticalLerayHopf ν 0 u G →
+        ∃ v p, SingularClosure.GlobalSmoothNSE ν 0 v p ∧ QuasiFeffermanB.SameVelocity u v
+TYPE_END:QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE
+'QuasiFeffermanB.ZERO_LH_SMOOTH_REPRESENTATIVE' depends on axioms: [propext, Classical.choice, Quot.sound]

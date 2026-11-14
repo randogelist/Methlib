@@ -1,0 +1,37 @@
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE
+QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (N : ℕ) (c : SingularClosure.FourierCoeff) (R : ℝ),
+      0 ≤ R →
+        SingularClosure.coefficientEnstrophyNonlinearPower N c ^ 2 ≤
+            R * SingularClosure.coefficientDissipation N c * SingularClosure.coefficientLaplacianSquare N c →
+          -2 * ν * SingularClosure.coefficientLaplacianSquare N c -
+                2 * SingularClosure.coefficientEnstrophyNonlinearPower N c +
+              ν * SingularClosure.coefficientLaplacianSquare N c ≤
+            R / ν * SingularClosure.coefficientDissipation N c
+TYPE_END:QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE
+'QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL
+QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (R : (N : ℕ) → SingularClosure.GalerkinSolution ν (a N) N → ℝ → ℝ) (E₀ S : ℝ),
+      (∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N), ContinuousOn (R N g) (Set.Ici 0)) →
+        (∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N) (t : ℝ), 0 ≤ t → 0 ≤ R N g t) →
+          (∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N) (t : ℝ),
+              0 ≤ t →
+                SingularClosure.coefficientEnstrophyNonlinearPower N (g.coeff t) ^ 2 ≤
+                  R N g t * SingularClosure.coefficientDissipation N (g.coeff t) *
+                    SingularClosure.coefficientLaplacianSquare N (g.coeff t)) →
+            (∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N),
+                SingularClosure.coefficientDissipation N (g.coeff 0) ≤ E₀) →
+              (∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N) (T : ℝ),
+                  0 ≤ T → ∫ (t : ℝ) in 0..T, R N g t ≤ S) →
+                ∀ (T : ℝ),
+                  0 ≤ T →
+                    ∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N),
+                      ∀ t ∈ Set.Icc 0 T,
+                        SingularClosure.coefficientDissipation N (g.coeff t) +
+                            ν * ∫ (s : ℝ) in 0..t, SingularClosure.coefficientLaplacianSquare N (g.coeff s) ≤
+                          E₀ * Real.exp (S / ν)
+TYPE_END:QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL
+'QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL' depends on axioms: [propext, Classical.choice, Quot.sound]

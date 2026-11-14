@@ -1,0 +1,54 @@
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT
+QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R : ℝ),
+      0 ≤ R →
+        (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+          ∃ U φ,
+            StrictMono φ ∧
+              (∀ (t : ℝ), 0 ≤ t → ‖U t‖ ≤ R) ∧
+                (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) (Set.Ici 0)) ∧
+                  (∀ (T : ℝ) (k : SingularClosure.Frequency) (i : Fin 3),
+                      TendstoUniformlyOn (fun n t => (g (φ n)).coeff t k i) (fun t => ↑(U t) k i) Filter.atTop
+                        (Set.Icc 0 T)) ∧
+                    ∀ (T : ℝ),
+                      0 ≤ T →
+                        ∃ v,
+                          Filter.Tendsto (fun n => (g (φ n)).energyTimeH0L2 T) Filter.atTop (nhds v) ∧
+                            ∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T), ↑↑v t = U t
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT
+'QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_modal_limit_constraints
+QuasiFeffermanB.energy_modal_limit_constraints : ∀ (ν : ℝ) (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ)
+  (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n)) (U : ℝ → SingularClosure.TorusSobolev 0),
+  (∀ (t : ℝ),
+      0 ≤ t →
+        ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+          Filter.Tendsto (fun n => (g n).coeff t k i) Filter.atTop (nhds (↑(U t) k i))) →
+    ∀ (t : ℝ),
+      0 ≤ t →
+        SingularClosure.SpectralReality ↑(U t) ∧
+          SingularClosure.SpectralSolenoidal ↑(U t) ∧ SingularClosure.SpectralMeanZero ↑(U t)
+TYPE_END:QuasiFeffermanB.energy_modal_limit_constraints
+'QuasiFeffermanB.energy_modal_limit_constraints' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_modal_limit_H1_representative
+QuasiFeffermanB.energy_modal_limit_H1_representative : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R T : ℝ),
+      0 ≤ T →
+        (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+          ∀ (U : ℝ → SingularClosure.TorusSobolev 0),
+            (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) (Set.Ici 0)) →
+              (∀ (t : ℝ),
+                  0 ≤ t →
+                    ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                      Filter.Tendsto (fun n => (g n).coeff t k i) Filter.atTop (nhds (↑(U t) k i))) →
+                ∃ W,
+                  MeasureTheory.MemLp W 2 (MeasureTheory.volume.restrict (Set.Icc 0 T)) ∧
+                    (∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T),
+                        SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) ∧
+                      ∫ (t : ℝ) in Set.Icc 0 T, ‖W t‖ ^ 2 ≤ R ^ 2 / (2 * ν)
+TYPE_END:QuasiFeffermanB.energy_modal_limit_H1_representative
+'QuasiFeffermanB.energy_modal_limit_H1_representative' depends on axioms: [propext, Classical.choice, Quot.sound]

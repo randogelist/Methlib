@@ -1,0 +1,8 @@
+import QuasiFeffermanB.CaloricH1Regularity
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET"
+#check @QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET
+#eval IO.println "TYPE_END:QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET"
+#print axioms QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET

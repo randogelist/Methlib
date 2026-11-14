@@ -1,0 +1,22 @@
+TYPE_BEGIN:QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET
+QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (b : SingularClosure.CriticalSobolev 2),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 b) →
+        SingularClosure.SpectralSolenoidal (SingularClosure.criticalCoeff 2 b) →
+          SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 b) →
+            ‖(SingularClosure.criticalSobolevLower 1 2 ⋯) b‖ ^ 2 < 2 * Real.pi * ν ^ 2 →
+              ∃ S,
+                ∀ (N : ℕ)
+                  (g :
+                    SingularClosure.GalerkinSolution ν
+                      (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 b)) N)
+                  (T : ℝ),
+                  0 ≤ T →
+                    ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤ S
+TYPE_END:QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET
+'QuasiFeffermanB.SPECTRAL_H1_CALORIC_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.EXACT_H1_ADMISSION_UNCONDITIONAL
+QuasiFeffermanB.EXACT_H1_ADMISSION_UNCONDITIONAL : ∀ (ν : ℝ), 0 < ν → QuasiFeffermanB.ExactH1Admission ν
+TYPE_END:QuasiFeffermanB.EXACT_H1_ADMISSION_UNCONDITIONAL
+'QuasiFeffermanB.EXACT_H1_ADMISSION_UNCONDITIONAL' depends on axioms: [propext, Classical.choice, Quot.sound]

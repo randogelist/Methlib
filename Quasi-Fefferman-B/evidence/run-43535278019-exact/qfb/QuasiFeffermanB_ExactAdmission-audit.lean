@@ -1,0 +1,8 @@
+import QuasiFeffermanB.ExactAdmission
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET"
+#check @QuasiFeffermanB.EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET
+#eval IO.println "TYPE_END:QuasiFeffermanB.EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET"
+#print axioms QuasiFeffermanB.EXACT_H1_ADMISSION_OF_SPECTRAL_CALORIC_BUDGET

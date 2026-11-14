@@ -1,0 +1,26 @@
+TYPE_BEGIN:QuasiFeffermanB.cutoff_frequency_square_pos
+@QuasiFeffermanB.cutoff_frequency_square_pos : ∀ {N : ℕ} {k : SingularClosure.Frequency},
+  k ∈ SingularClosure.cutoffModes N → 0 < ↑(SingularClosure.galerkinFreqSq k)
+TYPE_END:QuasiFeffermanB.cutoff_frequency_square_pos
+'QuasiFeffermanB.cutoff_frequency_square_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_LATTICE_HEAT_RESOLVENT
+QuasiFeffermanB.FINITE_LATTICE_HEAT_RESOLVENT : ∀ (N : ℕ) (t : ℝ),
+  0 < t →
+    ∑ k ∈ SingularClosure.cutoffModes N,
+        Real.exp (-(Real.pi * ↑(SingularClosure.galerkinFreqSq k)) * t) / ↑(SingularClosure.galerkinFreqSq k) ≤
+      2 * Real.pi * t ^ (-1 / 2)
+TYPE_END:QuasiFeffermanB.FINITE_LATTICE_HEAT_RESOLVENT
+'QuasiFeffermanB.FINITE_LATTICE_HEAT_RESOLVENT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.NORMALIZED_GAUSSIAN_HALF_INTEGRAL
+QuasiFeffermanB.NORMALIZED_GAUSSIAN_HALF_INTEGRAL : ∀ (r : ℝ),
+  0 < r → ∫ (t : ℝ) in Set.Ioi 0, t ^ (-1 / 2) * Real.exp (-(Real.pi * r ^ 2 * t)) = 1 / r
+TYPE_END:QuasiFeffermanB.NORMALIZED_GAUSSIAN_HALF_INTEGRAL
+'QuasiFeffermanB.NORMALIZED_GAUSSIAN_HALF_INTEGRAL' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_LATTICE_RESOLVENT_BOUND
+QuasiFeffermanB.FINITE_LATTICE_RESOLVENT_BOUND : ∀ (N : ℕ) (r : ℝ),
+  0 < r →
+    ∑ k ∈ SingularClosure.cutoffModes N,
+        1 / (↑(SingularClosure.galerkinFreqSq k) * (r ^ 2 + ↑(SingularClosure.galerkinFreqSq k))) ≤
+      2 * Real.pi ^ 2 / r
+TYPE_END:QuasiFeffermanB.FINITE_LATTICE_RESOLVENT_BOUND
+'QuasiFeffermanB.FINITE_LATTICE_RESOLVENT_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]

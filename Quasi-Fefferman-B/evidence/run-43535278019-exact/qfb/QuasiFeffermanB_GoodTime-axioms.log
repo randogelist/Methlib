@@ -1,0 +1,39 @@
+TYPE_BEGIN:QuasiFeffermanB.exists_good_time_of_integral_lt
+@QuasiFeffermanB.exists_good_time_of_integral_lt : ∀ {f : ℝ → ℝ} {Good : ℝ → Prop} {T c : ℝ},
+  0 < T →
+    0 ≤ c →
+      MeasureTheory.Integrable f (QuasiFeffermanB.criticalTimeMeasure T) →
+        (∀ᵐ (t : ℝ) ∂QuasiFeffermanB.criticalTimeMeasure T, Good t) →
+          ∫ (t : ℝ), f t ∂QuasiFeffermanB.criticalTimeMeasure T < c * T → ∃ t, 0 < t ∧ t < T ∧ Good t ∧ f t < c
+TYPE_END:QuasiFeffermanB.exists_good_time_of_integral_lt
+'QuasiFeffermanB.exists_good_time_of_integral_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.fourthPower_budget_lt_threshold
+@QuasiFeffermanB.fourthPower_budget_lt_threshold : ∀ {M μ T : ℝ},
+  0 < μ → QuasiFeffermanB.energyCutoff M μ < T → M ^ 2 / (2 * μ) < (2 * Real.pi * μ ^ 2) ^ 2 * T
+TYPE_END:QuasiFeffermanB.fourthPower_budget_lt_threshold
+'QuasiFeffermanB.fourthPower_budget_lt_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.exists_subcritical_good_time
+@QuasiFeffermanB.exists_subcritical_good_time : ∀ {critical : ℝ → ℝ} {Good : ℝ → Prop} {M μ T : ℝ},
+  0 < μ →
+    QuasiFeffermanB.energyCutoff M μ < T →
+      MeasureTheory.Integrable (fun t => critical t ^ 2) (QuasiFeffermanB.criticalTimeMeasure T) →
+        (∀ᵐ (t : ℝ) ∂QuasiFeffermanB.criticalTimeMeasure T, Good t) →
+          ∫ (t : ℝ), critical t ^ 2 ∂QuasiFeffermanB.criticalTimeMeasure T ≤ M ^ 2 / (2 * μ) →
+            ∃ t, 0 < t ∧ t < T ∧ Good t ∧ critical t < 2 * Real.pi * μ ^ 2
+TYPE_END:QuasiFeffermanB.exists_subcritical_good_time
+'QuasiFeffermanB.exists_subcritical_good_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_GOOD_SUBCRITICAL_TIME
+@QuasiFeffermanB.LH_GOOD_SUBCRITICAL_TIME : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}
+  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory} {Good : ℝ → Prop} {T : ℝ},
+  0 < ν →
+    SingularClosure.CriticalLerayHopf ν a u G →
+      QuasiFeffermanB.cutoff a ν < T →
+        (∀ᵐ (t : ℝ) ∂QuasiFeffermanB.criticalTimeMeasure T, Good t) →
+          ∃ t,
+            0 < t ∧
+              t < T ∧
+                Good t ∧
+                  SingularClosure.CriticalPhysicalH1 (u t) (G t) ∧
+                    QuasiFeffermanB.physicalHalfEnergy (u t) < ENNReal.ofReal (2 * Real.pi * ν ^ 2)
+TYPE_END:QuasiFeffermanB.LH_GOOD_SUBCRITICAL_TIME
+'QuasiFeffermanB.LH_GOOD_SUBCRITICAL_TIME' depends on axioms: [propext, Classical.choice, Quot.sound]

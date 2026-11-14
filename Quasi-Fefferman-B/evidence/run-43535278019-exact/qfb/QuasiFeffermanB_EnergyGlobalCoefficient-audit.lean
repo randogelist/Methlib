@@ -1,0 +1,28 @@
+import QuasiFeffermanB.EnergyGlobalCoefficient
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energy_coefficient_curve_precompact"
+#check @QuasiFeffermanB.energy_coefficient_curve_precompact
+#eval IO.println "TYPE_END:QuasiFeffermanB.energy_coefficient_curve_precompact"
+#print axioms QuasiFeffermanB.energy_coefficient_curve_precompact
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE"
+#check @QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE"
+#print axioms QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.globalEnergyCoefficient_eq_horizon"
+#check @QuasiFeffermanB.globalEnergyCoefficient_eq_horizon
+#eval IO.println "TYPE_END:QuasiFeffermanB.globalEnergyCoefficient_eq_horizon"
+#print axioms QuasiFeffermanB.globalEnergyCoefficient_eq_horizon
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.globalEnergyCoefficient_continuousOn"
+#check @QuasiFeffermanB.globalEnergyCoefficient_continuousOn
+#eval IO.println "TYPE_END:QuasiFeffermanB.globalEnergyCoefficient_continuousOn"
+#print axioms QuasiFeffermanB.globalEnergyCoefficient_continuousOn
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.globalEnergyCoefficient_uniform_limit"
+#check @QuasiFeffermanB.globalEnergyCoefficient_uniform_limit
+#eval IO.println "TYPE_END:QuasiFeffermanB.globalEnergyCoefficient_uniform_limit"
+#print axioms QuasiFeffermanB.globalEnergyCoefficient_uniform_limit

@@ -1,0 +1,144 @@
+TYPE_BEGIN:QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq
+QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)),
+  SingularClosure.physicalEnergy v = ‖MeasureTheory.MemLp.toLp v hv‖ ^ 2
+TYPE_END:QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq
+'QuasiFeffermanB.physicalEnergy_eq_toLp_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalEnergy_tendsto_of_L2
+QuasiFeffermanB.physicalEnergy_tendsto_of_L2 : ∀ (f : ℕ → SingularClosure.Field) (v : SingularClosure.Field),
+  (∀ (n : ℕ), MeasureTheory.MemLp (f n) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) →
+    MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+      Filter.Tendsto
+          (fun n => MeasureTheory.eLpNorm (f n - v) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          Filter.atTop (nhds 0) →
+        Filter.Tendsto (fun n => SingularClosure.physicalEnergy (f n)) Filter.atTop
+          (nhds (SingularClosure.physicalEnergy v))
+TYPE_END:QuasiFeffermanB.physicalEnergy_tendsto_of_L2
+'QuasiFeffermanB.physicalEnergy_tendsto_of_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2
+@QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2 : ∀ {E : Type u_1} [inst : NormedAddCommGroup E]
+  [inst_1 : NormedSpace ℝ E] (L : E →L[ℝ] SingularClosure.Vec) (f : ℕ → SingularClosure.Vec → E)
+  (g : SingularClosure.Vec → E),
+  (∀ (n : ℕ), MeasureTheory.MemLp (f n) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) →
+    MeasureTheory.MemLp g 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+      Filter.Tendsto
+          (fun n => MeasureTheory.eLpNorm (f n - g) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          Filter.atTop (nhds 0) →
+        Filter.Tendsto (fun n => SingularClosure.physicalEnergy (⇑L ∘ f n)) Filter.atTop
+          (nhds (SingularClosure.physicalEnergy (⇑L ∘ g)))
+TYPE_END:QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2
+'QuasiFeffermanB.physicalEnergy_compCLM_tendsto_of_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2
+QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2 : ∀ (f : ℕ → SingularClosure.Field) (v : SingularClosure.Field),
+  (∀ (n : ℕ), MeasureTheory.MemLp (f n) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) →
+    MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+      Filter.Tendsto
+          (fun n => MeasureTheory.eLpNorm (f n - v) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          Filter.atTop (nhds 0) →
+        ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+          Filter.Tendsto (fun n => SingularClosure.datumFourierCoeff (f n) k i) Filter.atTop
+            (nhds (SingularClosure.datumFourierCoeff v k i))
+TYPE_END:QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2
+'QuasiFeffermanB.datumFourierCoeff_tendsto_of_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_cutoff_bounds
+@QuasiFeffermanB.physicalH1_cutoff_bounds : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    ∀ (N : ℕ),
+      SingularClosure.coefficientEnergy N (SingularClosure.datumFourierCoeff v) ≤ SingularClosure.physicalEnergy v ∧
+        SingularClosure.coefficientDissipation N (SingularClosure.datumFourierCoeff v) ≤
+          SingularClosure.criticalGradientEnergy G
+TYPE_END:QuasiFeffermanB.physicalH1_cutoff_bounds
+'QuasiFeffermanB.physicalH1_cutoff_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.criticalEnergy_midpoint
+QuasiFeffermanB.criticalEnergy_midpoint : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.criticalEnergy 1 N c ^ 2 ≤
+    SingularClosure.coefficientEnergy N c * SingularClosure.coefficientDissipation N c
+TYPE_END:QuasiFeffermanB.criticalEnergy_midpoint
+'QuasiFeffermanB.criticalEnergy_midpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_cutoff_midpoint
+@QuasiFeffermanB.physicalH1_cutoff_midpoint : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    ∀ (N : ℕ),
+      SingularClosure.criticalEnergy 1 N (SingularClosure.datumFourierCoeff v) ^ 2 ≤
+        SingularClosure.physicalEnergy v * SingularClosure.criticalGradientEnergy G
+TYPE_END:QuasiFeffermanB.physicalH1_cutoff_midpoint
+'QuasiFeffermanB.physicalH1_cutoff_midpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalHalfEnergyTerm_nonneg
+QuasiFeffermanB.physicalHalfEnergyTerm_nonneg : ∀ (v : SingularClosure.Field) (ki : SingularClosure.FourierIndex),
+  0 ≤ QuasiFeffermanB.physicalHalfEnergyTerm v ki
+TYPE_END:QuasiFeffermanB.physicalHalfEnergyTerm_nonneg
+'QuasiFeffermanB.physicalHalfEnergyTerm_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalHalfEnergy_cutoff
+QuasiFeffermanB.physicalHalfEnergy_cutoff : ∀ (v : SingularClosure.Field) (N : ℕ),
+  ∑ ki ∈ SingularClosure.sobolevCutoffIndices N, ENNReal.ofReal (QuasiFeffermanB.physicalHalfEnergyTerm v ki) =
+    ENNReal.ofReal (SingularClosure.criticalEnergy 1 N (SingularClosure.datumFourierCoeff v))
+TYPE_END:QuasiFeffermanB.physicalHalfEnergy_cutoff
+'QuasiFeffermanB.physicalHalfEnergy_cutoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_halfEnergy_le
+@QuasiFeffermanB.physicalH1_halfEnergy_le : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    QuasiFeffermanB.physicalHalfEnergy v ≤
+      ENNReal.ofReal √(SingularClosure.physicalEnergy v * SingularClosure.criticalGradientEnergy G)
+TYPE_END:QuasiFeffermanB.physicalH1_halfEnergy_le
+'QuasiFeffermanB.physicalH1_halfEnergy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_halfEnergy_ne_top
+@QuasiFeffermanB.physicalH1_halfEnergy_ne_top : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G → QuasiFeffermanB.physicalHalfEnergy v ≠ ⊤
+TYPE_END:QuasiFeffermanB.physicalH1_halfEnergy_ne_top
+'QuasiFeffermanB.physicalH1_halfEnergy_ne_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_halfEnergy_midpoint
+@QuasiFeffermanB.physicalH1_halfEnergy_midpoint : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    (QuasiFeffermanB.physicalHalfEnergy v).toReal ^ 2 ≤
+      SingularClosure.physicalEnergy v * SingularClosure.criticalGradientEnergy G
+TYPE_END:QuasiFeffermanB.physicalH1_halfEnergy_midpoint
+'QuasiFeffermanB.physicalH1_halfEnergy_midpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum
+QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum : ∀ (v : SingularClosure.Field),
+  (QuasiFeffermanB.physicalHalfEnergy v).toReal =
+    ∑' (ki : SingularClosure.FourierIndex), QuasiFeffermanB.physicalHalfEnergyTerm v ki
+TYPE_END:QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum
+'QuasiFeffermanB.physicalHalfEnergy_toReal_eq_tsum' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_halfEnergy_summable
+@QuasiFeffermanB.physicalH1_halfEnergy_summable : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G → Summable (QuasiFeffermanB.physicalHalfEnergyTerm v)
+TYPE_END:QuasiFeffermanB.physicalH1_halfEnergy_summable
+'QuasiFeffermanB.physicalH1_halfEnergy_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero
+QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero : ∀ (v : SingularClosure.Field),
+  SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v) →
+    ∀ (ki : SingularClosure.FourierIndex),
+      QuasiFeffermanB.physicalHalfEnergyTerm v ki =
+        SingularClosure.criticalFrequencyWeight ki.1 * Complex.normSq (SingularClosure.datumFourierCoeff v ki.1 ki.2)
+TYPE_END:QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero
+'QuasiFeffermanB.physicalHalfEnergyTerm_of_meanZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_mem_halfSobolev
+@QuasiFeffermanB.physicalH1_mem_halfSobolev : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v) →
+      Memℓp (SingularClosure.criticalWeightedCoeff 1 (SingularClosure.datumFourierCoeff v)) 2
+TYPE_END:QuasiFeffermanB.physicalH1_mem_halfSobolev
+'QuasiFeffermanB.physicalH1_mem_halfSobolev' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1HalfDatum_norm_sq
+@QuasiFeffermanB.physicalH1HalfDatum_norm_sq : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec}
+  (hv : SingularClosure.CriticalPhysicalH1 v G)
+  (hz : SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v)),
+  ‖QuasiFeffermanB.physicalH1HalfDatum hv hz‖ ^ 2 = (QuasiFeffermanB.physicalHalfEnergy v).toReal
+TYPE_END:QuasiFeffermanB.physicalH1HalfDatum_norm_sq
+'QuasiFeffermanB.physicalH1HalfDatum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalHalfEnergy_aemeasurable
+@QuasiFeffermanB.physicalHalfEnergy_aemeasurable : ∀ {α : Type u_1} [inst : MeasurableSpace α]
+  {m : MeasureTheory.Measure α} (v : α → SingularClosure.Field),
+  (∀ᵐ (t : α) ∂m, MeasureTheory.MemLp (v t) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) →
+    MeasureTheory.AEStronglyMeasurable (fun t => SingularClosure.criticalL2Representative (v t)) m →
+      AEMeasurable (fun t => QuasiFeffermanB.physicalHalfEnergy (v t)) m
+TYPE_END:QuasiFeffermanB.physicalHalfEnergy_aemeasurable
+'QuasiFeffermanB.physicalHalfEnergy_aemeasurable' depends on axioms: [propext, Classical.choice, Quot.sound]

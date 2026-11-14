@@ -1,0 +1,41 @@
+TYPE_BEGIN:QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET
+QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (b : SingularClosure.CriticalSobolev 2),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 b) →
+        SingularClosure.SpectralSolenoidal (SingularClosure.criticalCoeff 2 b) →
+          SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 b) →
+            ∀ (S : ℝ),
+              (∀ (N : ℕ)
+                  (g :
+                    SingularClosure.GalerkinSolution ν
+                      (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 b)) N)
+                  (T : ℝ),
+                  0 ≤ T →
+                    ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤ S) →
+                ∃ L,
+                  SingularClosure.PositiveSmoothNSE ν L.velocity L.pressure ∧
+                    Filter.Tendsto
+                        (fun t =>
+                          MeasureTheory.eLpNorm
+                            (L.velocity t -
+                              ↑↑(SingularClosure.criticalInitialPhysicalL2
+                                    ((SingularClosure.criticalSobolevLower 1 2 ⋯) b)))
+                            2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+                        (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) ∧
+                      (∀ (T : ℝ),
+                          0 < T →
+                            MeasureTheory.MemLp (fun t => SingularClosure.criticalSpatialNorm 6 (L.velocity t)) 4
+                              (MeasureTheory.volume.restrict (Set.Ioc 0 T))) ∧
+                        (∀ (t : ℝ),
+                            0 < t → SingularClosure.physicalDissipation (L.velocity t) ≤ ‖b‖ ^ 2 * Real.exp (S / ν)) ∧
+                          ∀ (v : SingularClosure.Velocity)
+                            (G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec),
+                            SingularClosure.CriticalLerayHopf ν
+                                (SingularClosure.criticalInitialPhysicalL2
+                                  ((SingularClosure.criticalSobolevLower 1 2 ⋯) b))
+                                v G →
+                              ∀ (t : ℝ),
+                                0 < t → v t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity t
+TYPE_END:QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET
+'QuasiFeffermanB.CALORIC_H1_REGULARITY_OF_FINITE_CHI0_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]

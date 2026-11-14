@@ -1,0 +1,139 @@
+name: Quasi Fefferman B accelerated cached assembly
+
+on:
+  push:
+    branches: [QUASI-FEFFERMAN-B]
+    paths:
+      - 'Quasi-Fefferman-B/**'
+      - '.github/workflows/quasi-fefferman-b.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quasi-fefferman-b-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-endpoints:
+    name: Lean 4.33.0 / root import closure
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: package
+        shell: bash
+    env:
+      FOUNDATION_SHA: 09dfe94a1ef150e21d09df3013fbe09002ef139c
+      MATHLIB_REV: db584cd6d46c92f209a44c0f1c829460d327499d
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - name: Checkout exact candidate revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: repository
+          sparse-checkout: |
+            regularity-B-assembly/Singular-Axiomatic-closure
+            Quasi-Fefferman-B
+            .github/workflows/quasi-fefferman-b.yml
+          persist-credentials: false
+
+      - name: Verify immutable foundation and prepare isolated overlay
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(git -C repository rev-parse HEAD)" = "$GITHUB_SHA"
+          git -C repository fetch --no-tags --depth=1 origin "$FOUNDATION_SHA"
+          python3 repository/Quasi-Fefferman-B/scripts/prepare.py --repository repository --output package
+          cp repository/.github/workflows/quasi-fefferman-b.yml package/evidence/workflow.yml
+          cd package
+          sha256sum lake-manifest.json lean-toolchain lakefile.toml > evidence/lockfiles-before.sha256
+
+      - name: Install pinned compiler without running a build
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: package
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Restore inherited dependency cache
+        id: deps
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}
+
+      - name: Verify compiler and fetch pinned Mathlib objects
+        run: |
+          set -euo pipefail
+          lean --version | tee evidence/lean-version.txt
+          grep -F 'version 4.33.0,' evidence/lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/mathlib-cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/mathlib-revision.txt
+          test "$(cat evidence/mathlib-revision.txt)" = "$MATHLIB_REV"
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          sha256sum --check evidence/lockfiles-before.sha256
+
+      - name: Preserve verified dependency objects
+        if: steps.deps.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/packages
+          key: ${{ steps.deps.outputs.cache-primary-key }}
+
+      - name: Restore unchanged foundation objects from accessible main cache
+        id: foundation
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/SingularClosure/**/*.lean', 'package/ci/CriticalAudit.lean') }}
+          restore-keys: |
+            h12-small-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+
+      - name: Restore candidate module objects
+        id: candidate
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/qfb/.lake/build
+          key: qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/qfb/QuasiFeffermanB/**/*.lean', 'package/qfb/endpoint-manifest.json') }}
+          restore-keys: |
+            qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
+
+      - name: Test fail-closed audit policy
+        run: python3 qfb/scripts/audit.py --self-test
+
+      - name: Preload the exact root import closure and audit every selected declaration
+        id: endpoints
+        run: |
+          set -euo pipefail
+          lake env python3 qfb/scripts/audit.py --package . --target QuasiFeffermanB.Endpoints.Root --jobs 2 2>&1 | tee evidence/external-driver.log
+          sha256sum --check evidence/lockfiles-before.sha256
+
+      - name: Preserve reused and newly checked foundation objects
+        if: always() && steps.foundation.outcome == 'success' && steps.foundation.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/.lake/build
+          key: ${{ steps.foundation.outputs.cache-primary-key }}
+
+      - name: Preserve successfully compiled candidate objects
+        if: always() && steps.candidate.outcome == 'success' && steps.candidate.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: package/qfb/.lake/build
+          key: ${{ steps.candidate.outputs.cache-primary-key }}
+
+      - name: Upload exact source compiler and theorem audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quasi-fefferman-b-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: package/evidence
+          if-no-files-found: error
+

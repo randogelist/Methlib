@@ -1,0 +1,63 @@
+TYPE_BEGIN:QuasiFeffermanB.energyTimeH0L2_norm_sq
+QuasiFeffermanB.energyTimeH0L2_norm_sq : ∀ (T : ℝ) (f : ↥(QuasiFeffermanB.EnergyTimeH0L2 T)),
+  ‖f‖ ^ 2 = ∫ (t : ℝ) in Set.Icc 0 T, ‖↑↑f t‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyTimeH0L2_norm_sq
+'QuasiFeffermanB.energyTimeH0L2_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_H0_tail_sq
+QuasiFeffermanB.energy_H0_tail_sq : ∀ (K : ℕ),
+  0 < K →
+    ∀ (v : SingularClosure.TorusSobolev 1),
+      ‖(SingularClosure.torusSobolevInclusion 0) v -
+              (SingularClosure.torusSobolevCutoff 0 K) ((SingularClosure.torusSobolevInclusion 0) v)‖ ^
+          2 ≤
+        4 * (↑K)⁻¹ * ‖v‖ ^ 2
+TYPE_END:QuasiFeffermanB.energy_H0_tail_sq
+'QuasiFeffermanB.energy_H0_tail_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:SingularClosure.GalerkinSolution.energy_H0_time_tail
+@SingularClosure.GalerkinSolution.energy_H0_time_tail : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (T B : ℝ),
+  0 ≤ T →
+    ∫ (t : ℝ) in 0..T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B →
+      ∀ (K : ℕ),
+        0 < K →
+          ∫ (t : ℝ) in 0..T, ‖g.sobolevState 0 t - (SingularClosure.torusSobolevCutoff 0 K) (g.sobolevState 0 t)‖ ^ 2 ≤
+            4 * (↑K)⁻¹ * B
+TYPE_END:SingularClosure.GalerkinSolution.energy_H0_time_tail
+'SingularClosure.GalerkinSolution.energy_H0_time_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_H0_time_difference_bound
+@QuasiFeffermanB.energyGalerkin_H0_time_difference_bound : ∀ {ν : ℝ} {a b : SingularClosure.Field} {N M : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (h : SingularClosure.GalerkinSolution ν b M) (T B η : ℝ),
+  0 ≤ T →
+    0 ≤ η →
+      ∫ (t : ℝ) in 0..T, ‖g.sobolevState 1 t‖ ^ 2 ≤ B →
+        ∫ (t : ℝ) in 0..T, ‖h.sobolevState 1 t‖ ^ 2 ≤ B →
+          ∀ (K : ℕ),
+            0 < K →
+              (∀ t ∈ Set.Icc 0 T,
+                  ‖(SingularClosure.torusSobolevCutoff 0 K) (g.sobolevState 0 t) -
+                        (SingularClosure.torusSobolevCutoff 0 K) (h.sobolevState 0 t)‖ ≤
+                    η) →
+                ∫ (t : ℝ) in 0..T, ‖g.sobolevState 0 t - h.sobolevState 0 t‖ ^ 2 ≤ 24 * (↑K)⁻¹ * B + 3 * T * η ^ 2
+TYPE_END:QuasiFeffermanB.energyGalerkin_H0_time_difference_bound
+'QuasiFeffermanB.energyGalerkin_H0_time_difference_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyTimeH0L2_sub_norm_sq
+@QuasiFeffermanB.energyTimeH0L2_sub_norm_sq : ∀ {ν : ℝ} {a b : SingularClosure.Field} {N M : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (h : SingularClosure.GalerkinSolution ν b M) (T : ℝ),
+  0 ≤ T →
+    ‖g.energyTimeH0L2 T - h.energyTimeH0L2 T‖ ^ 2 = ∫ (t : ℝ) in 0..T, ‖g.sobolevState 0 t - h.sobolevState 0 t‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyTimeH0L2_sub_norm_sq
+'QuasiFeffermanB.energyTimeH0L2_sub_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM
+QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM : ∀ (ν : ℝ) (a : ℕ → SingularClosure.Field)
+  (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n)) (T B : ℝ),
+  0 ≤ T →
+    0 ≤ B →
+      ∀ (u0 : ↑(Set.Icc 0 T) → SingularClosure.TorusSobolev 0),
+        (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+            TendstoUniformly (fun n t => ↑((g n).sobolevState 0 ↑t) k i) (fun t => ↑(u0 t) k i) Filter.atTop) →
+          (∀ (n : ℕ), ∫ (t : ℝ) in 0..T, ‖(g n).sobolevState 1 t‖ ^ 2 ≤ B) →
+            ∃ u1, Filter.Tendsto (fun n => (g n).energyTimeH0L2 T) Filter.atTop (nhds u1)
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM
+'QuasiFeffermanB.ENERGY_GALERKIN_L2H0_LIMIT_OF_COEFFICIENT_UNIFORM' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,79 @@
+TYPE_BEGIN:QuasiFeffermanB.frequencyRadius_pos
+QuasiFeffermanB.frequencyRadius_pos : ∀ (k : SingularClosure.Frequency), k ≠ 0 → 0 < QuasiFeffermanB.frequencyRadius k
+TYPE_END:QuasiFeffermanB.frequencyRadius_pos
+'QuasiFeffermanB.frequencyRadius_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.frequencyRadius_sq
+QuasiFeffermanB.frequencyRadius_sq : ∀ (k : SingularClosure.Frequency),
+  QuasiFeffermanB.frequencyRadius k ^ 2 = ↑(SingularClosure.galerkinFreqSq k)
+TYPE_END:QuasiFeffermanB.frequencyRadius_sq
+'QuasiFeffermanB.frequencyRadius_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexFrequency_norm_sq
+QuasiFeffermanB.complexFrequency_norm_sq : ∀ (k : SingularClosure.Frequency),
+  ‖QuasiFeffermanB.complexFrequency k‖ ^ 2 = ↑(SingularClosure.galerkinFreqSq k)
+TYPE_END:QuasiFeffermanB.complexFrequency_norm_sq
+'QuasiFeffermanB.complexFrequency_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexFrequency_norm
+QuasiFeffermanB.complexFrequency_norm : ∀ (k : SingularClosure.Frequency),
+  ‖QuasiFeffermanB.complexFrequency k‖ = QuasiFeffermanB.frequencyRadius k
+TYPE_END:QuasiFeffermanB.complexFrequency_norm
+'QuasiFeffermanB.complexFrequency_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.normalizedComplexFrequency_norm
+QuasiFeffermanB.normalizedComplexFrequency_norm : ∀ (k : SingularClosure.Frequency),
+  k ≠ 0 → ‖QuasiFeffermanB.normalizedComplexFrequency k‖ = 1
+TYPE_END:QuasiFeffermanB.normalizedComplexFrequency_norm
+'QuasiFeffermanB.normalizedComplexFrequency_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexFrequency_inner
+QuasiFeffermanB.complexFrequency_inner : ∀ (k : SingularClosure.Frequency) (z : Fin 3 → ℂ),
+  inner ℂ (QuasiFeffermanB.complexFrequency k) (QuasiFeffermanB.complexVec z) = QuasiFeffermanB.frequencyDot k z
+TYPE_END:QuasiFeffermanB.complexFrequency_inner
+'QuasiFeffermanB.complexFrequency_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.normalizedComplexFrequency_inner
+QuasiFeffermanB.normalizedComplexFrequency_inner : ∀ (k : SingularClosure.Frequency) (z : Fin 3 → ℂ),
+  inner ℂ (QuasiFeffermanB.normalizedComplexFrequency k) (QuasiFeffermanB.complexVec z) =
+    (↑(QuasiFeffermanB.frequencyRadius k))⁻¹ * QuasiFeffermanB.frequencyDot k z
+TYPE_END:QuasiFeffermanB.normalizedComplexFrequency_inner
+'QuasiFeffermanB.normalizedComplexFrequency_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq
+QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq : ∀ (k : SingularClosure.Frequency),
+  ∑ i, ↑(k i) ^ 2 = ↑(QuasiFeffermanB.frequencyRadius k) ^ 2
+TYPE_END:QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq
+'QuasiFeffermanB.frequency_complex_square_sum_eq_radius_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.coefficientLeray_eq_complexTransverse
+QuasiFeffermanB.coefficientLeray_eq_complexTransverse : ∀ (k : SingularClosure.Frequency),
+  k ≠ 0 →
+    ∀ (z : Fin 3 → ℂ),
+      QuasiFeffermanB.complexVec (SingularClosure.coefficientLeray k z) =
+        QuasiFeffermanB.complexTransverse (QuasiFeffermanB.normalizedComplexFrequency k) (QuasiFeffermanB.complexVec z)
+TYPE_END:QuasiFeffermanB.coefficientLeray_eq_complexTransverse
+'QuasiFeffermanB.coefficientLeray_eq_complexTransverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexTransverse_smul
+QuasiFeffermanB.complexTransverse_smul : ∀ (e z : EuclideanSpace ℂ (Fin 3)) (α : ℂ),
+  QuasiFeffermanB.complexTransverse e (α • z) = α • QuasiFeffermanB.complexTransverse e z
+TYPE_END:QuasiFeffermanB.complexTransverse_smul
+'QuasiFeffermanB.complexTransverse_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.symmetricFrequencyTensor_normalized
+QuasiFeffermanB.symmetricFrequencyTensor_normalized : ∀ (k : SingularClosure.Frequency),
+  k ≠ 0 →
+    ∀ (z w : Fin 3 → ℂ),
+      QuasiFeffermanB.complexVec (QuasiFeffermanB.symmetricFrequencyTensor k z w) =
+        ↑(QuasiFeffermanB.frequencyRadius k) •
+          (inner ℂ (QuasiFeffermanB.normalizedComplexFrequency k) (QuasiFeffermanB.complexVec z) •
+              QuasiFeffermanB.complexVec w +
+            inner ℂ (QuasiFeffermanB.normalizedComplexFrequency k) (QuasiFeffermanB.complexVec w) •
+              QuasiFeffermanB.complexVec z)
+TYPE_END:QuasiFeffermanB.symmetricFrequencyTensor_normalized
+'QuasiFeffermanB.symmetricFrequencyTensor_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound
+QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound : ∀ (k : SingularClosure.Frequency),
+  k ≠ 0 →
+    ∀ (z w : Fin 3 → ℂ),
+      QuasiFeffermanB.complexVecNorm
+          (SingularClosure.coefficientLeray k (QuasiFeffermanB.symmetricFrequencyTensor k z w)) ≤
+        √↑(SingularClosure.galerkinFreqSq k) * (QuasiFeffermanB.complexVecNorm z * QuasiFeffermanB.complexVecNorm w)
+TYPE_END:QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound
+'QuasiFeffermanB.coefficientLeray_symmetric_frequency_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius
+QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius : ∀ (k : SingularClosure.Frequency),
+  k ≠ 0 → SingularClosure.criticalFrequencyWeight k = 2 * Real.pi * √↑(SingularClosure.galerkinFreqSq k)
+TYPE_END:QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius
+'QuasiFeffermanB.criticalFrequencyWeight_eq_two_pi_radius' depends on axioms: [propext, Classical.choice, Quot.sound]

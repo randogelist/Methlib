@@ -1,0 +1,54 @@
+TYPE_BEGIN:QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET
+QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : SingularClosure.CriticalSobolev 2),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 a) →
+        ∀ (S : ℝ),
+          (∀ (N : ℕ)
+              (g :
+                SingularClosure.GalerkinSolution ν
+                  (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 a)) N)
+              (T : ℝ),
+              0 ≤ T →
+                ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤ S) →
+            ∀ (τ T : ℝ),
+              0 < τ →
+                τ ≤ T →
+                  ∃ B,
+                    0 ≤ B ∧
+                      ∀ (N : ℕ)
+                        (g :
+                          SingularClosure.GalerkinSolution ν
+                            (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 a)) N),
+                        ∫ (t : ℝ) in τ..T, SingularClosure.highOrderEnergy 2 N (g.coeff t) ≤ B
+TYPE_END:QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET
+'QuasiFeffermanB.CALORIC_H1_GALERKIN_H2_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT
+QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : SingularClosure.CriticalSobolev 2),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 a) →
+        ∀ (S : ℝ),
+          (∀ (N : ℕ)
+              (g :
+                SingularClosure.GalerkinSolution ν
+                  (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 a)) N)
+              (T : ℝ),
+              0 ≤ T →
+                ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤ S) →
+            ∀ (φ : ℕ → ℕ),
+              StrictMono φ →
+                ∀
+                  (g :
+                    (n : ℕ) →
+                      SingularClosure.GalerkinSolution ν
+                        (SingularClosure.finiteSynthesis (φ n + 1) (SingularClosure.criticalCoeff 2 a)) (φ n + 1))
+                  (u : ℝ → SingularClosure.TorusSobolev 0),
+                  ContinuousOn u (Set.Ici 0) →
+                    (∀ (T : ℝ),
+                        0 < T → TendstoUniformlyOn (fun n t => (g n).sobolevState 0 t) u Filter.atTop (Set.Icc 0 T)) →
+                      ∃ L,
+                        (∀ (t : ℝ), 0 < t → L.state 0 t = u t) ∧
+                          SingularClosure.PositiveSmoothNSE ν L.velocity L.pressure
+TYPE_END:QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT
+'QuasiFeffermanB.CALORIC_H1_POSITIVE_FLOW_OF_GALERKIN_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,13 @@
+import QuasiFeffermanB.CaloricSmoothing
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION"
+#check @QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION
+#eval IO.println "TYPE_END:QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION"
+#print axioms QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED"
+#check @QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED
+#eval IO.println "TYPE_END:QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED"
+#print axioms QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED

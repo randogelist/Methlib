@@ -1,0 +1,59 @@
+TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS
+@QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS : ∀ {ν : ℝ}
+  (L : SingularClosure.CriticalPositiveSobolevFlow ν) (u : ℝ → SingularClosure.CriticalSobolev 1),
+  (∀ (t : ℝ), 0 < t → ↑(L.state 0 t) = SingularClosure.criticalCoeff 1 (u t)) →
+    ∀ (t : ℝ) (ht : 0 < t),
+      SingularClosure.criticalInitialPhysicalL2 (u t) = SingularClosure.physicalFieldL2 (L.velocity t) ⋯
+TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS
+'QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_L2_OF_CRITICAL_COEFFICIENTS' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE
+@QuasiFeffermanB.POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE : ∀ {ν : ℝ}
+  (a : SingularClosure.CriticalSobolev 1) (L : SingularClosure.CriticalPositiveSobolevFlow ν)
+  (u : ℝ → SingularClosure.CriticalSobolev 1),
+  ContinuousOn u (Set.Ici 0) →
+    u 0 = a →
+      (∀ (t : ℝ), 0 < t → ↑(L.state 0 t) = SingularClosure.criticalCoeff 1 (u t)) →
+        Filter.Tendsto
+          (fun t =>
+            MeasureTheory.eLpNorm (L.velocity t - ↑↑(SingularClosure.criticalInitialPhysicalL2 a)) 2
+              (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          (nhdsWithin 0 (Set.Ioi 0)) (nhds 0)
+TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE
+'QuasiFeffermanB.POSITIVE_FLOW_STRONG_PHYSICAL_TRACE_OF_CRITICAL_CURVE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND
+@QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND : ∀ {ν : ℝ}
+  (L : SingularClosure.CriticalPositiveSobolevFlow ν) (u : ℝ → SingularClosure.CriticalSobolev 1),
+  (∀ (t : ℝ), 0 < t → ↑(L.state 0 t) = SingularClosure.criticalCoeff 1 (u t)) →
+    ∀ (A : ℝ), (∀ (t : ℝ), 0 ≤ t → ‖u t‖ ≤ A) → ∀ (t : ℝ), 0 < t → SingularClosure.physicalEnergy (L.velocity t) ≤ A ^ 2
+TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND
+'QuasiFeffermanB.POSITIVE_FLOW_PHYSICAL_ENERGY_OF_CRITICAL_BOUND' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND
+QuasiFeffermanB.POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND : ∀ (ν : ℝ) (a : ℕ → SingularClosure.Field) (φ : ℕ → ℕ)
+  (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (φ n + 1)) (L : SingularClosure.CriticalPositiveSobolevFlow ν)
+  (D : ℝ),
+  0 ≤ D →
+    ∀ (u : ℝ → SingularClosure.TorusSobolev 0),
+      (∀ (t : ℝ), 0 < t → L.state 0 t = u t) →
+        (∀ (n : ℕ) (t : ℝ), 0 ≤ t → SingularClosure.coefficientDissipation (φ n + 1) ((g n).coeff t) ≤ D) →
+          (∀ (T : ℝ), 0 < T → TendstoUniformlyOn (fun n t => (g n).sobolevState 0 t) u Filter.atTop (Set.Icc 0 T)) →
+            ∀ (t : ℝ), 0 < t → SingularClosure.physicalDissipation (L.velocity t) ≤ D
+TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND
+'QuasiFeffermanB.POSITIVE_FLOW_DISSIPATION_OF_GALERKIN_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS
+@QuasiFeffermanB.POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS : ∀ {ν : ℝ}
+  (L : SingularClosure.CriticalPositiveSobolevFlow ν) (E D : ℝ),
+  (∀ (t : ℝ), 0 < t → SingularClosure.physicalEnergy (L.velocity t) ≤ E) →
+    (∀ (t : ℝ), 0 < t → SingularClosure.physicalDissipation (L.velocity t) ≤ D) →
+      ∀ (T : ℝ),
+        MeasureTheory.MemLp (fun t => SingularClosure.criticalSpatialNorm 6 (L.velocity t)) 4
+          (MeasureTheory.volume.restrict (Set.Ioc 0 T))
+TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS
+'QuasiFeffermanB.POSITIVE_FLOW_SERRIN_OF_UNIFORM_PHYSICAL_BOUNDS' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

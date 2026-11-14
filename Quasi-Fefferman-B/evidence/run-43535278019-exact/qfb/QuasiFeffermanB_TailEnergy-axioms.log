@@ -1,0 +1,104 @@
+TYPE_BEGIN:QuasiFeffermanB.tail_physicalEnergy_congr_ae
+@QuasiFeffermanB.tail_physicalEnergy_congr_ae : ∀ {v w : SingularClosure.Field},
+  v =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] w →
+    SingularClosure.physicalEnergy v = SingularClosure.physicalEnergy w
+TYPE_END:QuasiFeffermanB.tail_physicalEnergy_congr_ae
+'QuasiFeffermanB.tail_physicalEnergy_congr_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.tail_physicalFieldInner_zero_of_ae_zero
+@QuasiFeffermanB.tail_physicalFieldInner_zero_of_ae_zero : ∀ {v : SingularClosure.Field},
+  v =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] 0 →
+    ∀ (φ : SingularClosure.Field), SingularClosure.physicalFieldInner v φ = 0
+TYPE_END:QuasiFeffermanB.tail_physicalFieldInner_zero_of_ae_zero
+'QuasiFeffermanB.tail_physicalFieldInner_zero_of_ae_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_gradient_column_zero_of_ae_zero
+@QuasiFeffermanB.physicalH1_gradient_column_zero_of_ae_zero : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    v =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] 0 →
+      ∀ (j : Fin 3),
+        (fun x => (G x) (SingularClosure.unitVector j)) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] 0
+TYPE_END:QuasiFeffermanB.physicalH1_gradient_column_zero_of_ae_zero
+'QuasiFeffermanB.physicalH1_gradient_column_zero_of_ae_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_gradient_zero_of_ae_zero
+@QuasiFeffermanB.physicalH1_gradient_zero_of_ae_zero : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 v G →
+    v =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] 0 →
+      G =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] 0
+TYPE_END:QuasiFeffermanB.physicalH1_gradient_zero_of_ae_zero
+'QuasiFeffermanB.physicalH1_gradient_zero_of_ae_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_gradient_eq_smooth
+@QuasiFeffermanB.physicalH1_gradient_eq_smooth : ∀ {u v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 u G →
+    ContDiff ℝ (↑⊤) v →
+      SingularClosure.SpatialPeriodic v →
+        u =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] v →
+          G =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] fderiv ℝ v
+TYPE_END:QuasiFeffermanB.physicalH1_gradient_eq_smooth
+'QuasiFeffermanB.physicalH1_gradient_eq_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.tail_criticalGradientEnergy_congr_ae
+@QuasiFeffermanB.tail_criticalGradientEnergy_congr_ae : ∀
+  {G H : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  G =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] H →
+    SingularClosure.criticalGradientEnergy G = SingularClosure.criticalGradientEnergy H
+TYPE_END:QuasiFeffermanB.tail_criticalGradientEnergy_congr_ae
+'QuasiFeffermanB.tail_criticalGradientEnergy_congr_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1_gradientEnergy_eq_smooth
+@QuasiFeffermanB.physicalH1_gradientEnergy_eq_smooth : ∀ {u v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalPhysicalH1 u G →
+    ContDiff ℝ (↑⊤) v →
+      SingularClosure.SpatialPeriodic v →
+        u =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] v →
+          SingularClosure.criticalGradientEnergy G = SingularClosure.physicalDissipation v
+TYPE_END:QuasiFeffermanB.physicalH1_gradientEnergy_eq_smooth
+'QuasiFeffermanB.physicalH1_gradientEnergy_eq_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.positiveSmoothNSE_test
+@QuasiFeffermanB.positiveSmoothNSE_test : ∀ {ν : ℝ} {v : SingularClosure.Velocity} {p : SingularClosure.Pressure},
+  SingularClosure.PositiveSmoothNSE ν v p → SingularClosure.CriticalPositiveSolenoidalTest v
+TYPE_END:QuasiFeffermanB.positiveSmoothNSE_test
+'QuasiFeffermanB.positiveSmoothNSE_test' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.positiveSmoothNSE_pressure_spatial_smooth
+@QuasiFeffermanB.positiveSmoothNSE_pressure_spatial_smooth : ∀ {ν : ℝ} {v : SingularClosure.Velocity}
+  {p : SingularClosure.Pressure}, SingularClosure.PositiveSmoothNSE ν v p → ∀ {t : ℝ}, 0 < t → ContDiff ℝ (↑⊤) (p t)
+TYPE_END:QuasiFeffermanB.positiveSmoothNSE_pressure_spatial_smooth
+'QuasiFeffermanB.positiveSmoothNSE_pressure_spatial_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE
+@QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}
+  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+  0 < ν →
+    SingularClosure.CriticalLerayHopf ν a u G →
+      ∀ {v : SingularClosure.Velocity} {p : SingularClosure.Pressure},
+        SingularClosure.PositiveSmoothNSE ν v p →
+          ∀ {s δ : ℝ},
+            0 ≤ s →
+              s < δ →
+                (∀ (r : ℝ), s < r → u r =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] v (r - s)) →
+                  QuasiFeffermanB.TailEnergyEquality ν u G δ
+TYPE_END:QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE
+'QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_REFERENCE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW
+@QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}
+  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+  0 < ν →
+    SingularClosure.CriticalLerayHopf ν a u G →
+      ∀ (L : SingularClosure.CriticalPositiveSobolevFlow ν) {s δ : ℝ},
+        0 ≤ s →
+          s < δ →
+            (∀ (r : ℝ), s < r → u r =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity (r - s)) →
+              QuasiFeffermanB.TailEnergyEquality ν u G δ
+TYPE_END:QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW
+'QuasiFeffermanB.LH_TAIL_ENERGY_OF_POSITIVE_FLOW' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY
+@QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}
+  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+  0 ≤ ν →
+    SingularClosure.CriticalLerayHopf ν a u G →
+      ∀ {δ : ℝ},
+        0 ≤ δ →
+          QuasiFeffermanB.TailEnergyEquality ν u G δ →
+            SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (u δ))
+              (QuasiFeffermanB.Shift δ u) fun t => G (δ + t)
+TYPE_END:QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY
+'QuasiFeffermanB.LH_RESTART_OF_TAIL_ENERGY' depends on axioms: [propext, Classical.choice, Quot.sound]

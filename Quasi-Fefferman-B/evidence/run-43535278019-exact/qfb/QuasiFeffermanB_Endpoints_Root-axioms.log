@@ -1,0 +1,4 @@
+TYPE_BEGIN:QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED
+QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED : QuasiFeffermanB.QuasiFeffermanBStatement
+TYPE_END:QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED
+'QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,162 @@
+TYPE_BEGIN:QuasiFeffermanB.torusDatumRepresentative_measurePreserving
+QuasiFeffermanB.torusDatumRepresentative_measurePreserving : MeasureTheory.MeasurePreserving
+  SingularClosure.torusDatumRepresentative MeasureTheory.volume (MeasureTheory.volume.restrict SingularClosure.unitCube)
+TYPE_END:QuasiFeffermanB.torusDatumRepresentative_measurePreserving
+'QuasiFeffermanB.torusDatumRepresentative_measurePreserving' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.rough_torusDatumComponent_memLp
+QuasiFeffermanB.rough_torusDatumComponent_memLp : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    ∀ (i : Fin 3), MeasureTheory.MemLp (SingularClosure.torusDatumComponent v i) 2 MeasureTheory.volume
+TYPE_END:QuasiFeffermanB.rough_torusDatumComponent_memLp
+'QuasiFeffermanB.rough_torusDatumComponent_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalTorusComponentL2_coeff
+QuasiFeffermanB.physicalTorusComponentL2_coeff : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) (i : Fin 3)
+  (k : SingularClosure.Frequency),
+  ↑(UnitAddTorus.mFourierBasis.repr (QuasiFeffermanB.physicalTorusComponentL2 v hv i)) k =
+    SingularClosure.datumFourierCoeff v k i
+TYPE_END:QuasiFeffermanB.physicalTorusComponentL2_coeff
+'QuasiFeffermanB.physicalTorusComponentL2_coeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalTorusComponentL2_norm_sq
+QuasiFeffermanB.physicalTorusComponentL2_norm_sq : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) (i : Fin 3),
+  ‖QuasiFeffermanB.physicalTorusComponentL2 v hv i‖ ^ 2 =
+    ∫ (x : SingularClosure.Vec) in SingularClosure.unitCube, ‖↑((v x).ofLp i)‖ ^ 2
+TYPE_END:QuasiFeffermanB.physicalTorusComponentL2_norm_sq
+'QuasiFeffermanB.physicalTorusComponentL2_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalTorusComponentL2_sum_norm_sq
+QuasiFeffermanB.physicalTorusComponentL2_sum_norm_sq : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)),
+  ∑ i, ‖QuasiFeffermanB.physicalTorusComponentL2 v hv i‖ ^ 2 = SingularClosure.physicalEnergy v
+TYPE_END:QuasiFeffermanB.physicalTorusComponentL2_sum_norm_sq
+'QuasiFeffermanB.physicalTorusComponentL2_sum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2_coefficientEnergy_le
+QuasiFeffermanB.physicalL2_coefficientEnergy_le : ∀ (N : ℕ) (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    SingularClosure.coefficientEnergy N (SingularClosure.datumFourierCoeff v) ≤ SingularClosure.physicalEnergy v
+TYPE_END:QuasiFeffermanB.physicalL2_coefficientEnergy_le
+'QuasiFeffermanB.physicalL2_coefficientEnergy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2_fourier_mem
+QuasiFeffermanB.physicalL2_fourier_mem : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    Memℓp (fun ki => SingularClosure.datumFourierCoeff v ki.1 ki.2) 2
+TYPE_END:QuasiFeffermanB.physicalL2_fourier_mem
+'QuasiFeffermanB.physicalL2_fourier_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalFourierSequence_component
+QuasiFeffermanB.physicalFourierSequence_component : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) (i : Fin 3),
+  SingularClosure.fourierVectorComponent (QuasiFeffermanB.physicalFourierSequence v hv) i =
+    UnitAddTorus.mFourierBasis.repr (QuasiFeffermanB.physicalTorusComponentL2 v hv i)
+TYPE_END:QuasiFeffermanB.physicalFourierSequence_component
+'QuasiFeffermanB.physicalFourierSequence_component' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalFourierSequence_norm_sq
+QuasiFeffermanB.physicalFourierSequence_norm_sq : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)),
+  ‖QuasiFeffermanB.physicalFourierSequence v hv‖ ^ 2 = SingularClosure.physicalEnergy v
+TYPE_END:QuasiFeffermanB.physicalFourierSequence_norm_sq
+'QuasiFeffermanB.physicalFourierSequence_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physical_datumFourierCoeff_sub
+QuasiFeffermanB.physical_datumFourierCoeff_sub : ∀ (v w : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    MeasureTheory.MemLp w 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+      SingularClosure.datumFourierCoeff (v - w) =
+        SingularClosure.datumFourierCoeff v - SingularClosure.datumFourierCoeff w
+TYPE_END:QuasiFeffermanB.physical_datumFourierCoeff_sub
+'QuasiFeffermanB.physical_datumFourierCoeff_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2_fourier_injective
+QuasiFeffermanB.physicalL2_fourier_injective : ∀ (a b : ↥SingularClosure.PhysicalCubeL2),
+  SingularClosure.datumFourierCoeff ↑↑a = SingularClosure.datumFourierCoeff ↑↑b → a = b
+TYPE_END:QuasiFeffermanB.physicalL2_fourier_injective
+'QuasiFeffermanB.physicalL2_fourier_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1HalfDatum_physicalL2
+@QuasiFeffermanB.physicalH1HalfDatum_physicalL2 : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec}
+  (hv : SingularClosure.CriticalPhysicalH1 v G)
+  (hz : SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v)),
+  SingularClosure.criticalInitialPhysicalL2 (QuasiFeffermanB.physicalH1HalfDatum hv hz) = MeasureTheory.MemLp.toLp v ⋯
+TYPE_END:QuasiFeffermanB.physicalH1HalfDatum_physicalL2
+'QuasiFeffermanB.physicalH1HalfDatum_physicalL2' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2SobolevDatum_norm
+QuasiFeffermanB.physicalL2SobolevDatum_norm : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)),
+  ‖QuasiFeffermanB.physicalL2SobolevDatum v hv‖ = ‖MeasureTheory.MemLp.toLp v hv‖
+TYPE_END:QuasiFeffermanB.physicalL2SobolevDatum_norm
+'QuasiFeffermanB.physicalL2SobolevDatum_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2SobolevDatum_sub
+QuasiFeffermanB.physicalL2SobolevDatum_sub : ∀ (v w : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+  (hw : MeasureTheory.MemLp w 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)),
+  QuasiFeffermanB.physicalL2SobolevDatum (v - w) ⋯ =
+    QuasiFeffermanB.physicalL2SobolevDatum v hv - QuasiFeffermanB.physicalL2SobolevDatum w hw
+TYPE_END:QuasiFeffermanB.physicalL2SobolevDatum_sub
+'QuasiFeffermanB.physicalL2SobolevDatum_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2SobolevDatum_finite
+QuasiFeffermanB.physicalL2SobolevDatum_finite : ∀ (N : ℕ) (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    QuasiFeffermanB.physicalL2SobolevDatum (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff v)) ⋯ =
+      SingularClosure.criticalFiniteSobolev 0 N (SingularClosure.datumFourierCoeff v)
+TYPE_END:QuasiFeffermanB.physicalL2SobolevDatum_finite
+'QuasiFeffermanB.physicalL2SobolevDatum_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2_cutoff_tendsto
+QuasiFeffermanB.physicalL2_cutoff_tendsto : ∀ (v : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)),
+  SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v) →
+    Filter.Tendsto
+      (fun N =>
+        SingularClosure.physicalFieldL2 (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff v)) ⋯)
+      Filter.atTop (nhds (MeasureTheory.MemLp.toLp v hv))
+TYPE_END:QuasiFeffermanB.physicalL2_cutoff_tendsto
+'QuasiFeffermanB.physicalL2_cutoff_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalL2_cutoff_eLpNorm_tendsto
+QuasiFeffermanB.physicalL2_cutoff_eLpNorm_tendsto : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v) →
+      Filter.Tendsto
+        (fun N =>
+          MeasureTheory.eLpNorm (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff v) - v) 2
+            (MeasureTheory.volume.restrict SingularClosure.unitCube))
+        Filter.atTop (nhds 0)
+TYPE_END:QuasiFeffermanB.physicalL2_cutoff_eLpNorm_tendsto
+'QuasiFeffermanB.physicalL2_cutoff_eLpNorm_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.zeroSobolevPhysicalL2_continuous
+QuasiFeffermanB.zeroSobolevPhysicalL2_continuous : Continuous QuasiFeffermanB.zeroSobolevPhysicalL2
+TYPE_END:QuasiFeffermanB.zeroSobolevPhysicalL2_continuous
+'QuasiFeffermanB.zeroSobolevPhysicalL2_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.zeroSobolevPhysicalL2_finite
+QuasiFeffermanB.zeroSobolevPhysicalL2_finite : ∀ (a : SingularClosure.CriticalSobolev 0),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 0 a) →
+    ∀ (N : ℕ),
+      QuasiFeffermanB.zeroSobolevPhysicalL2
+          (SingularClosure.criticalFiniteSobolev 0 N (SingularClosure.criticalCoeff 0 a)) =
+        SingularClosure.physicalFieldL2 (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 0 a)) ⋯
+TYPE_END:QuasiFeffermanB.zeroSobolevPhysicalL2_finite
+'QuasiFeffermanB.zeroSobolevPhysicalL2_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.zeroSobolevPhysicalL2_fourierCoeff
+QuasiFeffermanB.zeroSobolevPhysicalL2_fourierCoeff : ∀ (a : SingularClosure.CriticalSobolev 0),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 0 a) →
+    SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 0 a) →
+      SingularClosure.datumFourierCoeff ↑↑(QuasiFeffermanB.zeroSobolevPhysicalL2 a) = SingularClosure.criticalCoeff 0 a
+TYPE_END:QuasiFeffermanB.zeroSobolevPhysicalL2_fourierCoeff
+'QuasiFeffermanB.zeroSobolevPhysicalL2_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.zeroSobolevPhysicalL2_norm
+QuasiFeffermanB.zeroSobolevPhysicalL2_norm : ∀ (a : SingularClosure.CriticalSobolev 0),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 0 a) →
+    SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 0 a) →
+      ‖QuasiFeffermanB.zeroSobolevPhysicalL2 a‖ = ‖a‖
+TYPE_END:QuasiFeffermanB.zeroSobolevPhysicalL2_norm
+'QuasiFeffermanB.zeroSobolevPhysicalL2_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.torusSobolevH0_physical_fourierCoeff
+QuasiFeffermanB.torusSobolevH0_physical_fourierCoeff : ∀ (c : SingularClosure.TorusSobolev 0),
+  SingularClosure.SpectralReality ↑c →
+    SingularClosure.SpectralMeanZero ↑c →
+      SingularClosure.datumFourierCoeff ↑↑(SingularClosure.torusToPhysicalCubeL2 (SingularClosure.torusSobolevL2 c)) =
+        ↑c
+TYPE_END:QuasiFeffermanB.torusSobolevH0_physical_fourierCoeff
+'QuasiFeffermanB.torusSobolevH0_physical_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.torusSobolevH0_physical_norm
+QuasiFeffermanB.torusSobolevH0_physical_norm : ∀ (c : SingularClosure.TorusSobolev 0),
+  SingularClosure.SpectralReality ↑c →
+    SingularClosure.SpectralMeanZero ↑c →
+      ‖SingularClosure.torusToPhysicalCubeL2 (SingularClosure.torusSobolevL2 c)‖ = ‖c‖
+TYPE_END:QuasiFeffermanB.torusSobolevH0_physical_norm
+'QuasiFeffermanB.torusSobolevH0_physical_norm' depends on axioms: [propext, Classical.choice, Quot.sound]

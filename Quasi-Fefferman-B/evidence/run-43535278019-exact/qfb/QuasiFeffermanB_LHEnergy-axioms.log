@@ -1,0 +1,12 @@
+TYPE_BEGIN:QuasiFeffermanB.LH_ENERGY_BOUNDS
+@QuasiFeffermanB.LH_ENERGY_BOUNDS : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2} {u : SingularClosure.Velocity}
+  {G : QuasiFeffermanB.WeakGradientTrajectory},
+  0 < ν →
+    SingularClosure.CriticalLerayHopf ν a u G →
+      (∀ (t : ℝ), 0 ≤ t → SingularClosure.physicalEnergy (u t) ≤ ‖a‖ ^ 2) ∧
+        ∀ (T : ℝ),
+          0 < T →
+            IntervalIntegrable (fun t => SingularClosure.criticalGradientEnergy (G t)) MeasureTheory.volume 0 T ∧
+              ∫ (t : ℝ) in 0..T, SingularClosure.criticalGradientEnergy (G t) ≤ ‖a‖ ^ 2 / (2 * ν)
+TYPE_END:QuasiFeffermanB.LH_ENERGY_BOUNDS
+'QuasiFeffermanB.LH_ENERGY_BOUNDS' depends on axioms: [propext, Classical.choice, Quot.sound]

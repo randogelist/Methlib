@@ -1,0 +1,24 @@
+TYPE_BEGIN:QuasiFeffermanB.energyH0PhysicalMap_apply
+QuasiFeffermanB.energyH0PhysicalMap_apply : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (t : ℝ),
+  QuasiFeffermanB.energyH0PhysicalMap (U t) = QuasiFeffermanB.energyPhysicalVelocityL2 U t
+TYPE_END:QuasiFeffermanB.energyH0PhysicalMap_apply
+'QuasiFeffermanB.energyH0PhysicalMap_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_CONTINUITY
+QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_CONTINUITY : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (I : Set ℝ) (R : ℝ),
+  0 ≤ R →
+    (∀ t ∈ I, ‖U t‖ ≤ R) →
+      (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) I) →
+        ∀ (φ : ↥SingularClosure.PhysicalCubeL2),
+          ContinuousOn (fun t => inner ℝ (QuasiFeffermanB.energyPhysicalVelocityL2 U t) φ) I
+TYPE_END:QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_CONTINUITY
+'QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_CONTINUITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_PERIODIC_WEAK_CONTINUITY
+QuasiFeffermanB.ENERGY_PERIODIC_WEAK_CONTINUITY : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (I : Set ℝ) (R : ℝ),
+  0 ≤ R →
+    (∀ t ∈ I, ‖U t‖ ≤ R) →
+      (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) I) →
+        ∀ (φ : SingularClosure.Field),
+          MeasureTheory.MemLp φ 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+            ContinuousOn (fun t => SingularClosure.physicalFieldInner (QuasiFeffermanB.energyPeriodicVelocity U t) φ) I
+TYPE_END:QuasiFeffermanB.ENERGY_PERIODIC_WEAK_CONTINUITY
+'QuasiFeffermanB.ENERGY_PERIODIC_WEAK_CONTINUITY' depends on axioms: [propext, Classical.choice, Quot.sound]

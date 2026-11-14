@@ -1,0 +1,115 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn
+QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn : ∀ (N : ℕ) (c : ℝ → SingularClosure.FourierCoeff)
+  (I : Set ℝ),
+  (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun r => c r k i) I) →
+    ContinuousOn (fun z => SingularClosure.finiteSynthesis N (c z.1) z.2) {z | z.1 ∈ I}
+TYPE_END:QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn
+'QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn
+QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn : ∀ (ν : ℝ) (N : ℕ) (c : ℝ → SingularClosure.FourierCoeff)
+  (I : Set ℝ),
+  (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun r => c r k i) I) →
+    ∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun r => SingularClosure.galerkinRhs ν N (c r) k i) I
+TYPE_END:QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn
+'QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_velocity_continuousOn
+@QuasiFeffermanB.energyGalerkin_velocity_continuousOn : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N), ContinuousOn (fun z => g.velocity z.1 z.2) {z | 0 < z.1}
+TYPE_END:QuasiFeffermanB.energyGalerkin_velocity_continuousOn
+'QuasiFeffermanB.energyGalerkin_velocity_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn
+@QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ContinuousOn (fun z => SingularClosure.timeDerivative g.velocity z.1 z.2) {z | 0 < z.1}
+TYPE_END:QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn
+'QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt
+@QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (t : ℝ),
+  0 < t →
+    ∀ (x : SingularClosure.Vec), HasDerivAt (fun r => g.velocity r x) (SingularClosure.timeDerivative g.velocity t x) t
+TYPE_END:QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt
+'QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV
+@QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (t : ℝ),
+      0 < t →
+        HasDerivAt (fun r => SingularClosure.physicalFieldInner (g.velocity r) (φ r))
+          (SingularClosure.physicalFieldInner (g.velocity t) (SingularClosure.timeDerivative φ t) +
+            SingularClosure.physicalFieldInner (SingularClosure.timeDerivative g.velocity t) (φ t))
+          t
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV
+'QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_finite_projection_pairing
+QuasiFeffermanB.energy_finite_projection_pairing : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff)
+  (f : SingularClosure.Field),
+  Continuous f →
+    SingularClosure.physicalFieldInner (SingularClosure.finiteSynthesis N c)
+        (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff f)) =
+      SingularClosure.physicalFieldInner (SingularClosure.finiteSynthesis N c) f
+TYPE_END:QuasiFeffermanB.energy_finite_projection_pairing
+'QuasiFeffermanB.energy_finite_projection_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_test_projection_laplacian
+QuasiFeffermanB.energy_test_projection_laplacian : ∀ (N : ℕ) (f : SingularClosure.Field),
+  ContDiff ℝ (↑⊤) f →
+    SingularClosure.SpatialPeriodic f →
+      SingularClosure.laplacian (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff f)) =
+        SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff (SingularClosure.laplacian f))
+TYPE_END:QuasiFeffermanB.energy_test_projection_laplacian
+'QuasiFeffermanB.energy_test_projection_laplacian' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyTest_fourier_solenoidal
+QuasiFeffermanB.energyTest_fourier_solenoidal : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (t : ℝ), 0 < t → SingularClosure.SpectralSolenoidal (SingularClosure.datumFourierCoeff (φ t))
+TYPE_END:QuasiFeffermanB.energyTest_fourier_solenoidal
+'QuasiFeffermanB.energyTest_fourier_solenoidal' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_projected_test_pairing
+@QuasiFeffermanB.energyGalerkin_projected_test_pairing : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (t : ℝ),
+      0 < t →
+        SingularClosure.physicalFieldInner (SingularClosure.timeDerivative g.velocity t) (φ t) =
+          ν * SingularClosure.physicalFieldInner (g.velocity t) (SingularClosure.laplacian (φ t)) +
+            SingularClosure.criticalWeakTransport (g.velocity t)
+              (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff (φ t)))
+TYPE_END:QuasiFeffermanB.energyGalerkin_projected_test_pairing
+'QuasiFeffermanB.energyGalerkin_projected_test_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE
+@QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (s t : ℝ),
+      0 < s →
+        s ≤ t →
+          IntervalIntegrable
+              (fun r => SingularClosure.physicalFieldInner (g.velocity r) (SingularClosure.timeDerivative φ r))
+              MeasureTheory.volume s t ∧
+            IntervalIntegrable
+                (fun r => SingularClosure.physicalFieldInner (g.velocity r) (SingularClosure.laplacian (φ r)))
+                MeasureTheory.volume s t ∧
+              IntervalIntegrable
+                (fun r =>
+                  SingularClosure.criticalWeakTransport (g.velocity r)
+                    (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff (φ r))))
+                MeasureTheory.volume s t
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE
+'QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY
+@QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (s t : ℝ),
+      0 < s →
+        s ≤ t →
+          SingularClosure.physicalFieldInner (g.velocity t) (φ t) -
+              SingularClosure.physicalFieldInner (g.velocity s) (φ s) =
+            ∫ (r : ℝ) in s..t,
+              SingularClosure.physicalFieldInner (g.velocity r) (SingularClosure.timeDerivative φ r) +
+                  ν * SingularClosure.physicalFieldInner (g.velocity r) (SingularClosure.laplacian (φ r)) +
+                SingularClosure.criticalWeakTransport (g.velocity r)
+                  (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff (φ r)))
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY
+'QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,82 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_sobolevCutoffModes_tendsto
+QuasiFeffermanB.energy_sobolevCutoffModes_tendsto : Filter.Tendsto SingularClosure.sobolevCutoffModes Filter.atTop
+  Filter.atTop
+TYPE_END:QuasiFeffermanB.energy_sobolevCutoffModes_tendsto
+'QuasiFeffermanB.energy_sobolevCutoffModes_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_smooth_datumFourier_reconstruction
+QuasiFeffermanB.energy_smooth_datumFourier_reconstruction : ∀ (f : SingularClosure.Field),
+  ContDiff ℝ (↑⊤) f →
+    SingularClosure.SpatialPeriodic f → f = SingularClosure.smoothFourierSynthesis (SingularClosure.datumFourierCoeff f)
+TYPE_END:QuasiFeffermanB.energy_smooth_datumFourier_reconstruction
+'QuasiFeffermanB.energy_smooth_datumFourier_reconstruction' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_smooth_derivative_fourierSeries
+QuasiFeffermanB.energy_smooth_derivative_fourierSeries : ∀ (f : SingularClosure.Field),
+  ContDiff ℝ (↑⊤) f →
+    SingularClosure.SpatialPeriodic f →
+      ∀ (j i : Fin 3) (x : SingularClosure.Vec),
+        ((fderiv ℝ f x) (SingularClosure.unitVector j)).ofLp i =
+          (∑' (k : SingularClosure.Frequency),
+              SingularClosure.fourierCharacter k x *
+                (SingularClosure.derivativeSymbol j k * SingularClosure.datumFourierCoeff f k i)).re
+TYPE_END:QuasiFeffermanB.energy_smooth_derivative_fourierSeries
+'QuasiFeffermanB.energy_smooth_derivative_fourierSeries' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_finite_derivative_fourierSum
+QuasiFeffermanB.energy_finite_derivative_fourierSum : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff) (j i : Fin 3)
+  (x : SingularClosure.Vec),
+  ((fderiv ℝ (SingularClosure.finiteSynthesis N c) x) (SingularClosure.unitVector j)).ofLp i =
+    (∑ k ∈ SingularClosure.cutoffModes N,
+        SingularClosure.fourierCharacter k x * (SingularClosure.derivativeSymbol j k * c k i)).re
+TYPE_END:QuasiFeffermanB.energy_finite_derivative_fourierSum
+'QuasiFeffermanB.energy_finite_derivative_fourierSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_vector_norm_le_three
+QuasiFeffermanB.energy_vector_norm_le_three : ∀ (v : SingularClosure.Vec) (b : ℝ),
+  (∀ (i : Fin 3), |v.ofLp i| ≤ b) → ‖v‖ ≤ 3 * b
+TYPE_END:QuasiFeffermanB.energy_vector_norm_le_three
+'QuasiFeffermanB.energy_vector_norm_le_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_operator_norm_le_nine
+QuasiFeffermanB.energy_operator_norm_le_nine : ∀ (A : SingularClosure.Vec →L[ℝ] SingularClosure.Vec) (b : ℝ),
+  0 ≤ b → (∀ (j i : Fin 3), |(A (SingularClosure.unitVector j)).ofLp i| ≤ b) → ‖A‖ ≤ 9 * b
+TYPE_END:QuasiFeffermanB.energy_operator_norm_le_nine
+'QuasiFeffermanB.energy_operator_norm_le_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyTest_derivative_entries_uniform
+QuasiFeffermanB.energyTest_derivative_entries_uniform : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (s t : ℝ),
+      0 < s →
+        TendstoUniformlyOn
+          (fun N z =>
+            ∑ k ∈ SingularClosure.cutoffModes N,
+              SingularClosure.fourierCharacter k z.2.2 *
+                (SingularClosure.derivativeSymbol z.1.1 k * SingularClosure.datumFourierCoeff (φ z.2.1) k z.1.2))
+          (fun z =>
+            ∑' (k : SingularClosure.Frequency),
+              SingularClosure.fourierCharacter k z.2.2 *
+                (SingularClosure.derivativeSymbol z.1.1 k * SingularClosure.datumFourierCoeff (φ z.2.1) k z.1.2))
+          Filter.atTop (Set.univ ×ˢ Set.Icc s t ×ˢ SingularClosure.unitCube)
+TYPE_END:QuasiFeffermanB.energyTest_derivative_entries_uniform
+'QuasiFeffermanB.energyTest_derivative_entries_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM
+QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (s t : ℝ),
+      0 < s →
+        s ≤ t →
+          TendstoUniformlyOn
+            (fun N z => fderiv ℝ (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff (φ z.1))) z.2)
+            (fun z => fderiv ℝ (φ z.1) z.2) Filter.atTop (Set.Icc s t ×ˢ SingularClosure.unitCube)
+TYPE_END:QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM
+'QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_UNIFORM' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND
+QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND : ∀ (φ : SingularClosure.Velocity),
+  SingularClosure.CriticalPositiveSolenoidalTest φ →
+    ∀ (s t : ℝ),
+      0 < s →
+        s ≤ t →
+          ∃ C,
+            0 ≤ C ∧
+              ∀ (N : ℕ),
+                ∀ r ∈ Set.Icc s t,
+                  ∀ x ∈ SingularClosure.unitCube,
+                    ‖fderiv ℝ (SingularClosure.finiteSynthesis N (SingularClosure.datumFourierCoeff (φ r))) x‖ ≤ C
+TYPE_END:QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND
+'QuasiFeffermanB.ENERGY_TEST_DERIVATIVE_CUTOFF_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]

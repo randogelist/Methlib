@@ -1,0 +1,72 @@
+[
+  {
+    "run": 43531852237,
+    "commit": "026221576baf1c44d08762568ddbcc5625a096bc",
+    "status": "FAIL",
+    "build_counts": {
+      "PASS": 50,
+      "FAIL": 7,
+      "BLOCKED_BY_DEPENDENCY": 17
+    },
+    "exact_audited_declarations": 294,
+    "new_exact_audited_declarations": 67,
+    "verified_object_cache_hits": 42,
+    "root_status": "A_TIER_CANDIDATE"
+  },
+  {
+    "run": 43532871859,
+    "commit": "419f177617cfca92335a4473f1841ccf8b5f2d75",
+    "status": "FAIL",
+    "build_counts": {
+      "PASS": 61,
+      "FAIL": 5,
+      "BLOCKED_BY_DEPENDENCY": 8
+    },
+    "exact_audited_declarations": 367,
+    "new_exact_audited_declarations": 73,
+    "verified_object_cache_hits": 50,
+    "root_status": "A_TIER_CANDIDATE"
+  },
+  {
+    "run": 43533862788,
+    "commit": "e26b8b465e5e087b29963508dad73cc4ab26abdd",
+    "status": "FAIL",
+    "build_counts": {
+      "PASS": 71,
+      "FAIL": 1,
+      "BLOCKED_BY_DEPENDENCY": 2
+    },
+    "exact_audited_declarations": 406,
+    "new_exact_audited_declarations": 39,
+    "verified_object_cache_hits": 61,
+    "root_status": "A_TIER_CANDIDATE"
+  },
+  {
+    "run": 43534628432,
+    "commit": "ec8e8812bfc972546450a73933910394cc17ca4a",
+    "status": "FAIL",
+    "build_counts": {
+      "PASS": 71,
+      "FAIL": 1,
+      "BLOCKED_BY_DEPENDENCY": 2
+    },
+    "exact_audited_declarations": 406,
+    "new_exact_audited_declarations": 0,
+    "verified_object_cache_hits": 71,
+    "root_status": "A_TIER_CANDIDATE"
+  },
+  {
+    "run": 43535278019,
+    "commit": "f70d495e952c952ccc87a390194dd1621643a233",
+    "status": "PASS",
+    "build_counts": {
+      "PASS": 74,
+      "FAIL": 0,
+      "BLOCKED_BY_DEPENDENCY": 0
+    },
+    "exact_audited_declarations": 409,
+    "new_exact_audited_declarations": 3,
+    "verified_object_cache_hits": 71,
+    "root_status": "A_TIER"
+  }
+]

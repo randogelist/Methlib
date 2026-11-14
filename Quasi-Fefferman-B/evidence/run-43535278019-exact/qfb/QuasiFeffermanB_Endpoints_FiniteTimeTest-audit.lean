@@ -1,0 +1,63 @@
+import QuasiFeffermanB.Endpoints.FiniteTimeTest
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn"
+#check @QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn
+#eval IO.println "TYPE_END:QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn"
+#print axioms QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn"
+#check @QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn
+#eval IO.println "TYPE_END:QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn"
+#print axioms QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_velocity_continuousOn"
+#check @QuasiFeffermanB.energyGalerkin_velocity_continuousOn
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyGalerkin_velocity_continuousOn"
+#print axioms QuasiFeffermanB.energyGalerkin_velocity_continuousOn
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn"
+#check @QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn"
+#print axioms QuasiFeffermanB.energyGalerkin_timeDerivative_continuousOn
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt"
+#check @QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt"
+#print axioms QuasiFeffermanB.energyGalerkin_velocity_hasDerivAt
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV"
+#check @QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV"
+#print axioms QuasiFeffermanB.ENERGY_GALERKIN_PAIRING_HASDERIV
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energy_finite_projection_pairing"
+#check @QuasiFeffermanB.energy_finite_projection_pairing
+#eval IO.println "TYPE_END:QuasiFeffermanB.energy_finite_projection_pairing"
+#print axioms QuasiFeffermanB.energy_finite_projection_pairing
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energy_test_projection_laplacian"
+#check @QuasiFeffermanB.energy_test_projection_laplacian
+#eval IO.println "TYPE_END:QuasiFeffermanB.energy_test_projection_laplacian"
+#print axioms QuasiFeffermanB.energy_test_projection_laplacian
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyTest_fourier_solenoidal"
+#check @QuasiFeffermanB.energyTest_fourier_solenoidal
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyTest_fourier_solenoidal"
+#print axioms QuasiFeffermanB.energyTest_fourier_solenoidal
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_projected_test_pairing"
+#check @QuasiFeffermanB.energyGalerkin_projected_test_pairing
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyGalerkin_projected_test_pairing"
+#print axioms QuasiFeffermanB.energyGalerkin_projected_test_pairing
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE"
+#check @QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE"
+#print axioms QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_INTEGRABLE
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY"
+#check @QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY"
+#print axioms QuasiFeffermanB.ENERGY_GALERKIN_TIME_TEST_IDENTITY

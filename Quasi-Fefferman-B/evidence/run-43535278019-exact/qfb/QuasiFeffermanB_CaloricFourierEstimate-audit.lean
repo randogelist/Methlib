@@ -1,0 +1,8 @@
+import QuasiFeffermanB.CaloricFourierEstimate
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN"
+#check @QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN
+#eval IO.println "TYPE_END:QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN"
+#print axioms QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN

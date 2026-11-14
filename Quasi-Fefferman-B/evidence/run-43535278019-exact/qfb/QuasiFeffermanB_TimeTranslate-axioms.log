@@ -1,0 +1,69 @@
+TYPE_BEGIN:QuasiFeffermanB.restartTimeClamp_pos
+QuasiFeffermanB.restartTimeClamp_pos : ∀ (s : ℝ) {c : ℝ}, 0 < c → ∀ (r : ℝ), 0 < QuasiFeffermanB.restartTimeClamp s c r
+TYPE_END:QuasiFeffermanB.restartTimeClamp_pos
+'QuasiFeffermanB.restartTimeClamp_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restartTimeClamp_contDiff
+QuasiFeffermanB.restartTimeClamp_contDiff : ∀ (s c : ℝ), ContDiff ℝ (↑⊤) (QuasiFeffermanB.restartTimeClamp s c)
+TYPE_END:QuasiFeffermanB.restartTimeClamp_contDiff
+'QuasiFeffermanB.restartTimeClamp_contDiff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restartTimeClamp_eq
+QuasiFeffermanB.restartTimeClamp_eq : ∀ (s : ℝ) {c r : ℝ},
+  0 < c → 2 * c ≤ r - s → QuasiFeffermanB.restartTimeClamp s c r = r - s
+TYPE_END:QuasiFeffermanB.restartTimeClamp_eq
+'QuasiFeffermanB.restartTimeClamp_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restartTimeClamp_hasDerivAt
+QuasiFeffermanB.restartTimeClamp_hasDerivAt : ∀ (s : ℝ) {c r : ℝ},
+  0 < c → 2 * c < r - s → HasDerivAt (QuasiFeffermanB.restartTimeClamp s c) 1 r
+TYPE_END:QuasiFeffermanB.restartTimeClamp_hasDerivAt
+'QuasiFeffermanB.restartTimeClamp_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restartTest_is_test
+QuasiFeffermanB.restartTest_is_test : ∀ (s : ℝ) {c : ℝ},
+  0 < c →
+    ∀ {φ : SingularClosure.Velocity},
+      SingularClosure.CriticalPositiveSolenoidalTest φ →
+        SingularClosure.CriticalPositiveSolenoidalTest (QuasiFeffermanB.restartTest s c φ)
+TYPE_END:QuasiFeffermanB.restartTest_is_test
+'QuasiFeffermanB.restartTest_is_test' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restartTest_eq
+QuasiFeffermanB.restartTest_eq : ∀ (s : ℝ) {c r : ℝ},
+  0 < c → 2 * c ≤ r - s → ∀ (φ : SingularClosure.Velocity), QuasiFeffermanB.restartTest s c φ r = φ (r - s)
+TYPE_END:QuasiFeffermanB.restartTest_eq
+'QuasiFeffermanB.restartTest_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restartTest_timeDerivative
+QuasiFeffermanB.restartTest_timeDerivative : ∀ (s : ℝ) {c r : ℝ},
+  0 < c →
+    2 * c < r - s →
+      0 < r →
+        ∀ {φ : SingularClosure.Velocity},
+          SingularClosure.CriticalPositiveSolenoidalTest φ →
+            SingularClosure.timeDerivative (QuasiFeffermanB.restartTest s c φ) r =
+              SingularClosure.timeDerivative φ (r - s)
+TYPE_END:QuasiFeffermanB.restartTest_timeDerivative
+'QuasiFeffermanB.restartTest_timeDerivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.timeTranslate_integrated_momentum
+@QuasiFeffermanB.timeTranslate_integrated_momentum : ∀ {ν : ℝ} {v : SingularClosure.Velocity},
+  SingularClosure.CriticalIntegratedWeakMomentum ν v →
+    ∀ {s : ℝ}, 0 ≤ s → SingularClosure.CriticalIntegratedWeakMomentum ν (QuasiFeffermanB.timeTranslate s v)
+TYPE_END:QuasiFeffermanB.timeTranslate_integrated_momentum
+'QuasiFeffermanB.timeTranslate_integrated_momentum' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.timeTranslate_measurePreserving_Ioc
+QuasiFeffermanB.timeTranslate_measurePreserving_Ioc : ∀ (s T : ℝ),
+  MeasureTheory.MeasurePreserving (fun t => t + s) (MeasureTheory.volume.restrict (Set.Ioc 0 T))
+    (MeasureTheory.volume.restrict (Set.Ioc s (T + s)))
+TYPE_END:QuasiFeffermanB.timeTranslate_measurePreserving_Ioc
+'QuasiFeffermanB.timeTranslate_measurePreserving_Ioc' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.timeTranslate_memLp_Ioc
+@QuasiFeffermanB.timeTranslate_memLp_Ioc : ∀ {E : Type u_1} [inst : NormedAddCommGroup E] {f : ℝ → E} {p : ENNReal}
+  {s T : ℝ},
+  0 ≤ s →
+    MeasureTheory.MemLp f p (MeasureTheory.volume.restrict (Set.Ioc 0 (T + s))) →
+      MeasureTheory.MemLp (QuasiFeffermanB.timeTranslate s f) p (MeasureTheory.volume.restrict (Set.Ioc 0 T))
+TYPE_END:QuasiFeffermanB.timeTranslate_memLp_Ioc
+'QuasiFeffermanB.timeTranslate_memLp_Ioc' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.timeTranslate_ae_Ioc
+@QuasiFeffermanB.timeTranslate_ae_Ioc : ∀ {P : ℝ → Prop} {s T : ℝ},
+  0 ≤ s →
+    (∀ᵐ (r : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioc 0 (T + s)), P r) →
+      ∀ᵐ (r : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioc 0 T), P (r + s)
+TYPE_END:QuasiFeffermanB.timeTranslate_ae_Ioc
+'QuasiFeffermanB.timeTranslate_ae_Ioc' depends on axioms: [propext, Classical.choice, Quot.sound]

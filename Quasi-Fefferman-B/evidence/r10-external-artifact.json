@@ -1,0 +1,15 @@
+{
+  "compiled_commit": "f70d495e952c952ccc87a390194dd1621643a233",
+  "run_id": 43535278019,
+  "job_id": 132262647369,
+  "artifact_id": 14089920319,
+  "artifact_sha256": "9bdbc5e7da6ca9c0dbf8d97b8eeafc4348c2eb00d26dbd12e553aaf0e9de6329",
+  "artifact_filename": "QFB_external_evidence_43535278019.zip",
+  "root_type": "QuasiFeffermanB.QuasiFeffermanBStatement",
+  "root_declaration": "QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED",
+  "root_status": "A_TIER",
+  "closure": "UNCONDITIONAL_CLOSURE_OF_THE_FROZEN_ROOT",
+  "root_scope_modules": 74,
+  "exact_audited_declarations": 409,
+  "local_lean_executions": 0
+}

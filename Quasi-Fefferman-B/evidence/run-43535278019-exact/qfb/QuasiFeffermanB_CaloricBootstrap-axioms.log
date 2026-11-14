@@ -1,0 +1,38 @@
+TYPE_BEGIN:QuasiFeffermanB.FINITE_CALORIC_QUADRATIC_ESTIMATE
+@QuasiFeffermanB.FINITE_CALORIC_QUADRATIC_ESTIMATE : ∀ {ι : Type u_1} (s : Finset ι) (κ : ι → ℝ) (ν T H : ℝ),
+  0 < ν →
+    0 ≤ T →
+      (∀ i ∈ s, 0 < κ i) →
+        ∀ (A h : ℝ → ℝ) (f : ι → ℝ → ℝ),
+          ContinuousOn A (Set.Icc 0 T) →
+            ContinuousOn h (Set.Icc 0 T) →
+              (∀ i ∈ s, ContinuousOn (f i) (Set.Icc 0 T)) →
+                (∀ t ∈ Set.Icc 0 T, 0 ≤ A t) →
+                  (∀ t ∈ Set.Icc 0 T, 0 ≤ h t) →
+                    (∀ i ∈ s, ∀ t ∈ Set.Icc 0 T, 0 ≤ f i t) →
+                      (∀ t ∈ Set.Icc 0 T,
+                          A t ≤ h t + 1 / 2 * ∑ i ∈ s, QuasiFeffermanB.caloricVolterra ν (κ i) (f i) t) →
+                        (∀ t ∈ Set.Icc 0 T, ∑ i ∈ s, f i t ≤ A t ^ 2) →
+                          QuasiFeffermanB.finiteTimeL2 T h ≤ H →
+                            QuasiFeffermanB.finiteTimeL2 T A ≤
+                              H + 1 / (2 * √(2 * ν)) * QuasiFeffermanB.finiteTimeL2 T A ^ 2
+TYPE_END:QuasiFeffermanB.FINITE_CALORIC_QUADRATIC_ESTIMATE
+'QuasiFeffermanB.FINITE_CALORIC_QUADRATIC_ESTIMATE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_continuousOn_horizon
+QuasiFeffermanB.finiteTimeL2_continuousOn_horizon : ∀ (A : ℝ → ℝ) (T : ℝ),
+  0 ≤ T → ContinuousOn A (Set.Icc 0 T) → ContinuousOn (fun t => QuasiFeffermanB.finiteTimeL2 t A) (Set.Icc 0 T)
+TYPE_END:QuasiFeffermanB.finiteTimeL2_continuousOn_horizon
+'QuasiFeffermanB.finiteTimeL2_continuousOn_horizon' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_CALORIC_UNIFORM_BUDGET
+QuasiFeffermanB.FINITE_CALORIC_UNIFORM_BUDGET : ∀ (ν H : ℝ),
+  0 < ν →
+    0 ≤ H →
+      4 * (1 / (2 * √(2 * ν))) * H < 1 →
+        ∀ (A : ℝ → ℝ),
+          ContinuousOn A (Set.Ici 0) →
+            (∀ (T : ℝ),
+                0 ≤ T →
+                  QuasiFeffermanB.finiteTimeL2 T A ≤ H + 1 / (2 * √(2 * ν)) * QuasiFeffermanB.finiteTimeL2 T A ^ 2) →
+              ∀ (T : ℝ), 0 ≤ T → ∫ (t : ℝ) in 0..T, A t ^ 2 ≤ 4 * H ^ 2
+TYPE_END:QuasiFeffermanB.FINITE_CALORIC_UNIFORM_BUDGET
+'QuasiFeffermanB.FINITE_CALORIC_UNIFORM_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]

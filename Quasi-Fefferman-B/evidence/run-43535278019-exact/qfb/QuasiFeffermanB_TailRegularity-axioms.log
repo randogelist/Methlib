@@ -1,0 +1,38 @@
+TYPE_BEGIN:QuasiFeffermanB.positive_timeDerivative_translate
+@QuasiFeffermanB.positive_timeDerivative_translate : ∀ {ν : ℝ} {v : SingularClosure.Velocity}
+  {p : SingularClosure.Pressure},
+  SingularClosure.PositiveSmoothNSE ν v p →
+    ∀ (s t : ℝ),
+      0 < t →
+        0 < t - s →
+          ∀ (x : SingularClosure.Vec),
+            SingularClosure.timeDerivative (fun r => v (r - s)) t x = SingularClosure.timeDerivative v (t - s) x
+TYPE_END:QuasiFeffermanB.positive_timeDerivative_translate
+'QuasiFeffermanB.positive_timeDerivative_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE
+@QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE : ∀ {ν : ℝ} {v : SingularClosure.Velocity}
+  {p : SingularClosure.Pressure},
+  SingularClosure.PositiveSmoothNSE ν v p →
+    ∀ (s δ : ℝ), 0 ≤ s → s < δ → QuasiFeffermanB.ClassicalTail ν δ (fun t => v (t - s)) fun t => p (t - s)
+TYPE_END:QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE
+'QuasiFeffermanB.CLASSICAL_TAIL_OF_POSITIVE_SMOOTH_NSE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE
+@QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE : ∀ {ν : ℝ} {u v : SingularClosure.Velocity}
+  {p : SingularClosure.Pressure},
+  SingularClosure.PositiveSmoothNSE ν v p →
+    ∀ (s δ : ℝ),
+      0 ≤ s →
+        s < δ →
+          (∀ (t : ℝ), s < t → u t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] v (t - s)) →
+            QuasiFeffermanB.HasSmoothTail ν u δ
+TYPE_END:QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE
+'QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_REFERENCE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW
+@QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW : ∀ {ν : ℝ} {u : SingularClosure.Velocity}
+  (L : SingularClosure.CriticalPositiveSobolevFlow ν) (s δ : ℝ),
+  0 ≤ s →
+    s < δ →
+      (∀ (t : ℝ), s < t → u t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity (t - s)) →
+        QuasiFeffermanB.HasSmoothTail ν u δ
+TYPE_END:QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW
+'QuasiFeffermanB.HAS_SMOOTH_TAIL_OF_POSITIVE_FLOW' depends on axioms: [propext, Classical.choice, Quot.sound]

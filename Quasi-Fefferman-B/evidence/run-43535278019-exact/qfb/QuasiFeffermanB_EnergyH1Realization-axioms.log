@@ -1,0 +1,95 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_derivativeSymbol_norm_le_critical
+QuasiFeffermanB.energy_derivativeSymbol_norm_le_critical : ∀ (j : Fin 3) (k : SingularClosure.Frequency),
+  ‖SingularClosure.derivativeSymbol j k‖ ≤ SingularClosure.criticalFrequencyWeight k
+TYPE_END:QuasiFeffermanB.energy_derivativeSymbol_norm_le_critical
+'QuasiFeffermanB.energy_derivativeSymbol_norm_le_critical' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_derivative_weighted_bound
+QuasiFeffermanB.energy_derivative_weighted_bound : ∀ (j : Fin 3) (c : SingularClosure.FourierCoeff)
+  (ki : SingularClosure.FourierIndex),
+  ‖SingularClosure.criticalWeightedCoeff 0 (SingularClosure.spectralMultiplier (SingularClosure.derivativeSymbol j) c)
+        ki‖ ≤
+    ‖SingularClosure.criticalWeightedCoeff 2 c ki‖
+TYPE_END:QuasiFeffermanB.energy_derivative_weighted_bound
+'QuasiFeffermanB.energy_derivative_weighted_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyDerivativeLinear_norm_le
+QuasiFeffermanB.energyDerivativeLinear_norm_le : ∀ (j : Fin 3) (c : SingularClosure.CriticalSobolev 2),
+  ‖(QuasiFeffermanB.energyDerivativeLinear j) c‖ ≤ ‖c‖
+TYPE_END:QuasiFeffermanB.energyDerivativeLinear_norm_le
+'QuasiFeffermanB.energyDerivativeLinear_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyDerivative_cutoff
+QuasiFeffermanB.energyDerivative_cutoff : ∀ (j : Fin 3) (c : SingularClosure.CriticalSobolev 2) (N : ℕ),
+  (QuasiFeffermanB.energyDerivative j) (SingularClosure.criticalFiniteSobolev 2 N (SingularClosure.criticalCoeff 2 c)) =
+    SingularClosure.criticalFiniteSobolev 0 N (SingularClosure.criticalCoeff 0 ((QuasiFeffermanB.energyDerivative j) c))
+TYPE_END:QuasiFeffermanB.energyDerivative_cutoff
+'QuasiFeffermanB.energyDerivative_cutoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalColumn_fourierCoeff
+QuasiFeffermanB.energyPhysicalColumn_fourierCoeff : ∀ (j : Fin 3) (c : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 c) →
+    SingularClosure.datumFourierCoeff ↑↑((QuasiFeffermanB.energyPhysicalColumn j) c) =
+      SingularClosure.spectralMultiplier (SingularClosure.derivativeSymbol j) (SingularClosure.criticalCoeff 2 c)
+TYPE_END:QuasiFeffermanB.energyPhysicalColumn_fourierCoeff
+'QuasiFeffermanB.energyPhysicalColumn_fourierCoeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalColumn_finite
+QuasiFeffermanB.energyPhysicalColumn_finite : ∀ (j : Fin 3) (c : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 c) →
+    ∀ (N : ℕ),
+      (QuasiFeffermanB.energyPhysicalColumn j)
+          (SingularClosure.criticalFiniteSobolev 2 N (SingularClosure.criticalCoeff 2 c)) =
+        SingularClosure.physicalFieldL2
+          (SingularClosure.coordinateDerivative (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 c))
+            j)
+          ⋯
+TYPE_END:QuasiFeffermanB.energyPhysicalColumn_finite
+'QuasiFeffermanB.energyPhysicalColumn_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_Lp_sum_coe
+@QuasiFeffermanB.energy_Lp_sum_coe : ∀ {E : Type u_1} {ι : Type u_2} [inst : NormedAddCommGroup E] (s : Finset ι)
+  (f : ι → ↥(MeasureTheory.Lp E 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))),
+  ↑↑(∑ i ∈ s, f i) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] fun x => ∑ i ∈ s, ↑↑(f i) x
+TYPE_END:QuasiFeffermanB.energy_Lp_sum_coe
+'QuasiFeffermanB.energy_Lp_sum_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalGradient_coe
+QuasiFeffermanB.energyPhysicalGradient_coe : ∀ (c : SingularClosure.CriticalSobolev 2),
+  ↑↑(QuasiFeffermanB.energyPhysicalGradient c) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] fun x =>
+    ∑ j, ContinuousLinearMap.smulRight (EuclideanSpace.proj j) (↑↑((QuasiFeffermanB.energyPhysicalColumn j) c) x)
+TYPE_END:QuasiFeffermanB.energyPhysicalGradient_coe
+'QuasiFeffermanB.energyPhysicalGradient_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalGradient_finite
+QuasiFeffermanB.energyPhysicalGradient_finite : ∀ (c : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 c) →
+    ∀ (N : ℕ),
+      ↑↑(QuasiFeffermanB.energyPhysicalGradient
+              (SingularClosure.criticalFiniteSobolev 2 N
+                (SingularClosure.criticalCoeff 2 c))) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube]
+        fderiv ℝ (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 c))
+TYPE_END:QuasiFeffermanB.energyPhysicalGradient_finite
+'QuasiFeffermanB.energyPhysicalGradient_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_FOURIER_H1_PHYSICAL_REALIZATION
+QuasiFeffermanB.ENERGY_FOURIER_H1_PHYSICAL_REALIZATION : ∀ (c : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 c) →
+    SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 c) →
+      SingularClosure.CriticalPhysicalH1
+        ↑↑(QuasiFeffermanB.zeroSobolevPhysicalL2 ((SingularClosure.criticalSobolevLower 0 2 ⋯) c))
+        ↑↑(QuasiFeffermanB.energyPhysicalGradient c)
+TYPE_END:QuasiFeffermanB.ENERGY_FOURIER_H1_PHYSICAL_REALIZATION
+'QuasiFeffermanB.ENERGY_FOURIER_H1_PHYSICAL_REALIZATION' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalGradient_column
+QuasiFeffermanB.energyPhysicalGradient_column : ∀ (c : SingularClosure.CriticalSobolev 2) (j : Fin 3),
+  (fun x =>
+      (↑↑(QuasiFeffermanB.energyPhysicalGradient c) x)
+        (SingularClosure.unitVector j)) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube]
+    ↑↑((QuasiFeffermanB.energyPhysicalColumn j) c)
+TYPE_END:QuasiFeffermanB.energyPhysicalGradient_column
+'QuasiFeffermanB.energyPhysicalGradient_column' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyDerivative_sum_norm_sq
+QuasiFeffermanB.energyDerivative_sum_norm_sq : ∀ (c : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 c) →
+    ∑ j, ‖(QuasiFeffermanB.energyDerivative j) c‖ ^ 2 = ‖c‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyDerivative_sum_norm_sq
+'QuasiFeffermanB.energyDerivative_sum_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalGradient_energy
+QuasiFeffermanB.energyPhysicalGradient_energy : ∀ (c : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 c) →
+    SingularClosure.SpectralMeanZero (SingularClosure.criticalCoeff 2 c) →
+      SingularClosure.criticalGradientEnergy ↑↑(QuasiFeffermanB.energyPhysicalGradient c) = ‖c‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyPhysicalGradient_energy
+'QuasiFeffermanB.energyPhysicalGradient_energy' depends on axioms: [propext, Classical.choice, Quot.sound]

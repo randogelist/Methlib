@@ -1,0 +1,113 @@
+TYPE_BEGIN:QuasiFeffermanB.finiteModeConvolution_nonneg
+QuasiFeffermanB.finiteModeConvolution_nonneg : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff)
+  (k : SingularClosure.Frequency), 0 ≤ QuasiFeffermanB.finiteModeConvolution N c k
+TYPE_END:QuasiFeffermanB.finiteModeConvolution_nonneg
+'QuasiFeffermanB.finiteModeConvolution_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE
+QuasiFeffermanB.FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (∀ k ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+    ∑ k ∈ SingularClosure.cutoffModes N, QuasiFeffermanB.finiteModeConvolution N c k ≤
+      QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) c ^ 2
+TYPE_END:QuasiFeffermanB.FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE
+'QuasiFeffermanB.FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_MODE_CONVOLUTION_CONTINUOUS
+@QuasiFeffermanB.GALERKIN_MODE_CONVOLUTION_CONTINUOUS : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (k : SingularClosure.Frequency),
+  ContinuousOn (fun t => QuasiFeffermanB.finiteModeConvolution N (g.coeff t) k) (Set.Ici 0)
+TYPE_END:QuasiFeffermanB.GALERKIN_MODE_CONVOLUTION_CONTINUOUS
+'QuasiFeffermanB.GALERKIN_MODE_CONVOLUTION_CONTINUOUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_MODE_DUHAMEL_NORM
+@QuasiFeffermanB.GALERKIN_MODE_DUHAMEL_NORM : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ∀ k ∈ SingularClosure.cutoffModes N,
+    ∀ (T : ℝ),
+      0 ≤ T →
+        QuasiFeffermanB.complexVecNorm (g.coeff T k) ≤
+          Real.exp (-(ν * (2 * Real.pi) ^ 2 * ↑(SingularClosure.galerkinFreqSq k)) * T) *
+              QuasiFeffermanB.complexVecNorm (g.coeff 0 k) +
+            ∫ (s : ℝ) in 0..T,
+              Real.exp (-(ν * (2 * Real.pi) ^ 2 * ↑(SingularClosure.galerkinFreqSq k)) * (T - s)) *
+                QuasiFeffermanB.complexVecNorm
+                  (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N (g.coeff s) k))
+TYPE_END:QuasiFeffermanB.GALERKIN_MODE_DUHAMEL_NORM
+'QuasiFeffermanB.GALERKIN_MODE_DUHAMEL_NORM' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_MODE_CALORIC_MAJORANT
+@QuasiFeffermanB.GALERKIN_MODE_CALORIC_MAJORANT : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ∀ k ∈ SingularClosure.cutoffModes N,
+    ∀ (T : ℝ),
+      0 ≤ T →
+        (∀ (t : ℝ),
+            0 ≤ t →
+              QuasiFeffermanB.complexVecNorm
+                  (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N (g.coeff t) k)) ≤
+                SingularClosure.criticalFrequencyWeight k / 2 * QuasiFeffermanB.finiteModeConvolution N (g.coeff t) k) →
+          QuasiFeffermanB.complexVecNorm (g.coeff T k) ≤
+            Real.exp (-ν * SingularClosure.criticalFrequencyWeight k ^ 2 * T) *
+                QuasiFeffermanB.complexVecNorm (g.coeff 0 k) +
+              1 / 2 *
+                QuasiFeffermanB.caloricVolterra ν (SingularClosure.criticalFrequencyWeight k)
+                  (fun t => QuasiFeffermanB.finiteModeConvolution N (g.coeff t) k) T
+TYPE_END:QuasiFeffermanB.GALERKIN_MODE_CALORIC_MAJORANT
+'QuasiFeffermanB.GALERKIN_MODE_CALORIC_MAJORANT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_SHARP_MULTIPLIER_AND_HEAT
+@QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_SHARP_MULTIPLIER_AND_HEAT : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  0 < ν →
+    ∀ (H : ℝ),
+      0 ≤ H →
+        4 * (1 / (2 * √(2 * ν))) * H < 1 →
+          (∀ k ∈ SingularClosure.cutoffModes N,
+              ∀ (t : ℝ),
+                0 ≤ t →
+                  QuasiFeffermanB.complexVecNorm
+                      (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N (g.coeff t) k)) ≤
+                    SingularClosure.criticalFrequencyWeight k / 2 *
+                      QuasiFeffermanB.finiteModeConvolution N (g.coeff t) k) →
+            (∀ (T : ℝ),
+                0 ≤ T →
+                  QuasiFeffermanB.finiteTimeL2 T
+                      (QuasiFeffermanB.finiteHeatSum (SingularClosure.cutoffModes N)
+                        SingularClosure.criticalFrequencyWeight (fun k => QuasiFeffermanB.complexVecNorm (g.coeff 0 k))
+                        ν) ≤
+                    H) →
+              ∀ (T : ℝ),
+                0 ≤ T →
+                  ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤
+                    4 * H ^ 2
+TYPE_END:QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_SHARP_MULTIPLIER_AND_HEAT
+'QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_SHARP_MULTIPLIER_AND_HEAT' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_HEAT_L2_ON_INTERVAL_LE
+@QuasiFeffermanB.FINITE_HEAT_L2_ON_INTERVAL_LE : ∀ {ι : Type u_1} (s : Finset ι) (κ a : ι → ℝ) (ν T : ℝ),
+  0 < ν →
+    0 ≤ T →
+      (∀ i ∈ s, 0 < κ i) →
+        QuasiFeffermanB.finiteTimeL2 T (QuasiFeffermanB.finiteHeatSum s κ a ν) ≤
+          √(QuasiFeffermanB.finiteCaloricQuadratic s κ a / ν)
+TYPE_END:QuasiFeffermanB.FINITE_HEAT_L2_ON_INTERVAL_LE
+'QuasiFeffermanB.FINITE_HEAT_L2_ON_INTERVAL_LE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC
+@QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  0 < ν →
+    ∀ (B : ℝ),
+      0 ≤ B →
+        B < ν ^ 2 / 2 →
+          (∀ k ∈ SingularClosure.cutoffModes N,
+              ∀ (t : ℝ),
+                0 ≤ t →
+                  QuasiFeffermanB.complexVecNorm
+                      (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N (g.coeff t) k)) ≤
+                    SingularClosure.criticalFrequencyWeight k / 2 *
+                      QuasiFeffermanB.finiteModeConvolution N (g.coeff t) k) →
+            (QuasiFeffermanB.finiteCaloricQuadratic (SingularClosure.cutoffModes N)
+                  SingularClosure.criticalFrequencyWeight fun k => QuasiFeffermanB.complexVecNorm (g.coeff 0 k)) ≤
+                B →
+              ∀ (T : ℝ),
+                0 ≤ T →
+                  ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤
+                    4 * B / ν
+TYPE_END:QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC
+'QuasiFeffermanB.GALERKIN_CHI0_BUDGET_OF_CALORIC_QUADRATIC' depends on axioms: [propext, Classical.choice, Quot.sound]

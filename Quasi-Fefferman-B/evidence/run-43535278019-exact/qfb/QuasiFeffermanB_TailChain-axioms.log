@@ -1,0 +1,47 @@
+TYPE_BEGIN:QuasiFeffermanB.Q09_POST_CUTOFF_SMOOTHNESS
+@QuasiFeffermanB.Q09_POST_CUTOFF_SMOOTHNESS : ∀ {ν : ℝ},
+  0 < ν →
+    ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+      QuasiFeffermanB.EnergySigmaZero a →
+        ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+          SingularClosure.CriticalLerayHopf ν a u G →
+            ∀ {δ : ℝ}, QuasiFeffermanB.cutoff a ν < δ → QuasiFeffermanB.HasSmoothTail ν u δ
+TYPE_END:QuasiFeffermanB.Q09_POST_CUTOFF_SMOOTHNESS
+'QuasiFeffermanB.Q09_POST_CUTOFF_SMOOTHNESS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.Q11_POST_CUTOFF_ENERGY_EQUALITY
+@QuasiFeffermanB.Q11_POST_CUTOFF_ENERGY_EQUALITY : ∀ {ν : ℝ},
+  0 < ν →
+    ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+      QuasiFeffermanB.EnergySigmaZero a →
+        ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+          SingularClosure.CriticalLerayHopf ν a u G →
+            ∀ {δ : ℝ}, QuasiFeffermanB.cutoff a ν < δ → QuasiFeffermanB.TailEnergyEquality ν u G δ
+TYPE_END:QuasiFeffermanB.Q11_POST_CUTOFF_ENERGY_EQUALITY
+'QuasiFeffermanB.Q11_POST_CUTOFF_ENERGY_EQUALITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.Q12_POST_CUTOFF_TRACE_UNIQUENESS
+@QuasiFeffermanB.Q12_POST_CUTOFF_TRACE_UNIQUENESS : ∀ {ν : ℝ},
+  0 < ν →
+    ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+      QuasiFeffermanB.EnergySigmaZero a →
+        ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+          SingularClosure.CriticalLerayHopf ν a u G →
+            ∀ {δ : ℝ}, QuasiFeffermanB.cutoff a ν < δ → QuasiFeffermanB.UniqueFuture ν u G δ
+TYPE_END:QuasiFeffermanB.Q12_POST_CUTOFF_TRACE_UNIQUENESS
+'QuasiFeffermanB.Q12_POST_CUTOFF_TRACE_UNIQUENESS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.Q13_ZERO_AND_SAFE_CLOSED_CUTOFF
+@QuasiFeffermanB.Q13_ZERO_AND_SAFE_CLOSED_CUTOFF : ∀ {ν : ℝ},
+  0 < ν →
+    ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+      QuasiFeffermanB.EnergySigmaZero a →
+        ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+          SingularClosure.CriticalLerayHopf ν a u G → QuasiFeffermanB.HasSmoothTail ν u (QuasiFeffermanB.safeCutoff a ν)
+TYPE_END:QuasiFeffermanB.Q13_ZERO_AND_SAFE_CLOSED_CUTOFF
+'QuasiFeffermanB.Q13_ZERO_AND_SAFE_CLOSED_CUTOFF' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.Quasi_Fefferman_B_of_LH_existence
+QuasiFeffermanB.Quasi_Fefferman_B_of_LH_existence : (∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : ↥SingularClosure.CriticalPhysicalL2),
+        QuasiFeffermanB.EnergySigmaZero a → ∃ u G, SingularClosure.CriticalLerayHopf ν a u G) →
+  QuasiFeffermanB.QuasiFeffermanBStatement
+TYPE_END:QuasiFeffermanB.Quasi_Fefferman_B_of_LH_existence
+'QuasiFeffermanB.Quasi_Fefferman_B_of_LH_existence' depends on axioms: [propext, Classical.choice, Quot.sound]

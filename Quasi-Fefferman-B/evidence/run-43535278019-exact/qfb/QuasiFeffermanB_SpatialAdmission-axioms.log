@@ -1,0 +1,99 @@
+TYPE_BEGIN:QuasiFeffermanB.physical_constant_pairing_coordinate
+QuasiFeffermanB.physical_constant_pairing_coordinate : ∀ (v : SingularClosure.Field) (i : Fin 3),
+  (SingularClosure.physicalFieldInner v fun x => SingularClosure.unitVector i) =
+    ∫ (x : SingularClosure.Vec) in SingularClosure.unitCube, (v x).ofLp i
+TYPE_END:QuasiFeffermanB.physical_constant_pairing_coordinate
+'QuasiFeffermanB.physical_constant_pairing_coordinate' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physical_mean_pairings_fourier_zero
+QuasiFeffermanB.physical_mean_pairings_fourier_zero : ∀ (v : SingularClosure.Field),
+  (∀ (i : Fin 3), (SingularClosure.physicalFieldInner v fun x => SingularClosure.unitVector i) = 0) →
+    SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff v)
+TYPE_END:QuasiFeffermanB.physical_mean_pairings_fourier_zero
+'QuasiFeffermanB.physical_mean_pairings_fourier_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physical_complex_coordinate_memLp
+QuasiFeffermanB.physical_complex_coordinate_memLp : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    ∀ (i : Fin 3),
+      MeasureTheory.MemLp (fun x => ↑((v x).ofLp i)) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)
+TYPE_END:QuasiFeffermanB.physical_complex_coordinate_memLp
+'QuasiFeffermanB.physical_complex_coordinate_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physical_datumFourierIntegrand_integrable
+QuasiFeffermanB.physical_datumFourierIntegrand_integrable : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+      MeasureTheory.IntegrableOn (SingularClosure.datumFourierIntegrand v k i) SingularClosure.unitCube
+        MeasureTheory.volume
+TYPE_END:QuasiFeffermanB.physical_datumFourierIntegrand_integrable
+'QuasiFeffermanB.physical_datumFourierIntegrand_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complex_derivative_real_component
+QuasiFeffermanB.complex_derivative_real_component : ∀ (f : SingularClosure.Vec → ℂ),
+  Differentiable ℝ f →
+    ∀ (x : SingularClosure.Vec) (i : Fin 3),
+      (fderiv ℝ (fun y => (f y).re) x) (SingularClosure.unitVector i) =
+        ((fderiv ℝ f x) (SingularClosure.unitVector i)).re
+TYPE_END:QuasiFeffermanB.complex_derivative_real_component
+'QuasiFeffermanB.complex_derivative_real_component' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complex_derivative_imaginary_component
+QuasiFeffermanB.complex_derivative_imaginary_component : ∀ (f : SingularClosure.Vec → ℂ),
+  Differentiable ℝ f →
+    ∀ (x : SingularClosure.Vec) (i : Fin 3),
+      (fderiv ℝ (fun y => (f y).im) x) (SingularClosure.unitVector i) =
+        ((fderiv ℝ f x) (SingularClosure.unitVector i)).im
+TYPE_END:QuasiFeffermanB.complex_derivative_imaginary_component
+'QuasiFeffermanB.complex_derivative_imaginary_component' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physical_complex_gradient_annihilation
+QuasiFeffermanB.physical_complex_gradient_annihilation : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    (∀ (p : SingularClosure.Vec → ℝ),
+        ContDiff ℝ (↑⊤) p →
+          SingularClosure.SpatialPeriodic p → SingularClosure.physicalFieldInner v (SingularClosure.gradient p) = 0) →
+      ∀ (f : SingularClosure.Vec → ℂ),
+        ContDiff ℝ (↑⊤) f →
+          SingularClosure.SpatialPeriodic f →
+            ∫ (x : SingularClosure.Vec) in SingularClosure.unitCube,
+                ∑ i, ↑((v x).ofLp i) * (fderiv ℝ f x) (SingularClosure.unitVector i) =
+              0
+TYPE_END:QuasiFeffermanB.physical_complex_gradient_annihilation
+'QuasiFeffermanB.physical_complex_gradient_annihilation' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal
+QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal : ∀ (v : SingularClosure.Field),
+  MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    (∀ (p : SingularClosure.Vec → ℝ),
+        ContDiff ℝ (↑⊤) p →
+          SingularClosure.SpatialPeriodic p → SingularClosure.physicalFieldInner v (SingularClosure.gradient p) = 0) →
+      SingularClosure.SpectralSolenoidal (SingularClosure.datumFourierCoeff v)
+TYPE_END:QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal
+'QuasiFeffermanB.physical_gradient_annihilation_fourier_solenoidal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.EnergySigmaZero.fourier_constraints
+@QuasiFeffermanB.EnergySigmaZero.fourier_constraints : ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+  QuasiFeffermanB.EnergySigmaZero a →
+    SingularClosure.SpectralReality (SingularClosure.datumFourierCoeff ↑↑a) ∧
+      SingularClosure.SpectralSolenoidal (SingularClosure.datumFourierCoeff ↑↑a) ∧
+        SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff ↑↑a)
+TYPE_END:QuasiFeffermanB.EnergySigmaZero.fourier_constraints
+'QuasiFeffermanB.EnergySigmaZero.fourier_constraints' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero
+@QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero : ∀ {v : SingularClosure.Field}
+  {G : SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec}
+  (hv : SingularClosure.CriticalPhysicalH1 v G),
+  (∀ (p : SingularClosure.Vec → ℝ),
+      ContDiff ℝ (↑⊤) p →
+        SingularClosure.SpatialPeriodic p → SingularClosure.physicalFieldInner v (SingularClosure.gradient p) = 0) →
+    ∀ (hmean : ∀ (i : Fin 3), (SingularClosure.physicalFieldInner v fun x => SingularClosure.unitVector i) = 0),
+      SingularClosure.CriticalSigmaZero (QuasiFeffermanB.physicalH1HalfDatum hv ⋯)
+TYPE_END:QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero
+'QuasiFeffermanB.physicalH1HalfDatum_criticalSigmaZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS
+@QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS : ∀ {ν : ℝ} {a : ↥SingularClosure.CriticalPhysicalL2}
+  {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+  SingularClosure.CriticalLerayHopf ν a u G →
+    QuasiFeffermanB.EnergySigmaZero a →
+      ∀ (t : ℝ),
+        0 < t →
+          SingularClosure.SpectralReality (SingularClosure.datumFourierCoeff (u t)) ∧
+            SingularClosure.SpectralSolenoidal (SingularClosure.datumFourierCoeff (u t)) ∧
+              SingularClosure.SpectralMeanZero (SingularClosure.datumFourierCoeff (u t))
+TYPE_END:QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS
+'QuasiFeffermanB.LH_POSITIVE_TRACE_FOURIER_CONSTRAINTS' depends on axioms: [propext, Classical.choice, Quot.sound]

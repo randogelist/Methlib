@@ -1,0 +1,31 @@
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalVelocityL2_initial
+QuasiFeffermanB.energyPhysicalVelocityL2_initial : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (a : QuasiFeffermanB.EnergyDatum),
+  ↑(U 0) = SingularClosure.datumFourierCoeff ↑↑↑a → QuasiFeffermanB.energyPhysicalVelocityL2 U 0 = ↑a
+TYPE_END:QuasiFeffermanB.energyPhysicalVelocityL2_initial
+'QuasiFeffermanB.energyPhysicalVelocityL2_initial' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPeriodicVelocity_initial
+QuasiFeffermanB.energyPeriodicVelocity_initial : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (a : QuasiFeffermanB.EnergyDatum),
+  ↑(U 0) = SingularClosure.datumFourierCoeff ↑↑↑a →
+    QuasiFeffermanB.energyPeriodicVelocity U 0 =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] ↑↑↑a
+TYPE_END:QuasiFeffermanB.energyPeriodicVelocity_initial
+'QuasiFeffermanB.energyPeriodicVelocity_initial' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysical_initial_norm
+QuasiFeffermanB.energyPhysical_initial_norm : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (a : QuasiFeffermanB.EnergyDatum), ↑(U 0) = SingularClosure.datumFourierCoeff ↑↑↑a → ‖U 0‖ = ‖↑a‖
+TYPE_END:QuasiFeffermanB.energyPhysical_initial_norm
+'QuasiFeffermanB.energyPhysical_initial_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_PHYSICAL_STRONG_INITIAL_TRACE
+QuasiFeffermanB.ENERGY_PHYSICAL_STRONG_INITIAL_TRACE : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (a : QuasiFeffermanB.EnergyDatum),
+  ↑(U 0) = SingularClosure.datumFourierCoeff ↑↑↑a →
+    (∀ (t : ℝ), 0 ≤ t → ‖U t‖ ≤ ‖↑a‖) →
+      (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) (Set.Ici 0)) →
+        Filter.Tendsto
+          (fun t =>
+            MeasureTheory.eLpNorm (QuasiFeffermanB.energyPeriodicVelocity U t - ↑↑↑a) 2
+              (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          (nhdsWithin 0 (Set.Ioi 0)) (nhds 0)
+TYPE_END:QuasiFeffermanB.ENERGY_PHYSICAL_STRONG_INITIAL_TRACE
+'QuasiFeffermanB.ENERGY_PHYSICAL_STRONG_INITIAL_TRACE' depends on axioms: [propext, Classical.choice, Quot.sound]

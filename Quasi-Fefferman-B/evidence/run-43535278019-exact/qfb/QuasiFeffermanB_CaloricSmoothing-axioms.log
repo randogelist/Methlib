@@ -1,0 +1,39 @@
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION
+QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (τ T : ℝ),
+      0 < τ →
+        τ ≤ T →
+          ∀ (L : ℝ),
+            0 ≤ L →
+              (∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N),
+                  ∀ t ∈ Set.Icc τ T,
+                    SingularClosure.coefficientDissipation N (g.coeff t) +
+                        ν * ∫ (s : ℝ) in τ..t, SingularClosure.coefficientLaplacianSquare N (g.coeff s) ≤
+                      L) →
+                ∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N),
+                  ∫ (t : ℝ) in τ..T, SingularClosure.highOrderEnergy 2 N (g.coeff t) ≤ 3 * L * (T - τ) + L / ν
+TYPE_END:QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION
+'QuasiFeffermanB.GALERKIN_H2_SEED_OF_ENSTROPHY_ACCUMULATION' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED
+QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field),
+      (∀ (σ T : ℝ),
+          0 < σ →
+            σ < T →
+              ∃ S,
+                0 ≤ S ∧
+                  ∀ (N : ℕ) (g : SingularClosure.GalerkinSolution ν (a N) N),
+                    ∫ (s : ℝ) in σ..T, SingularClosure.highOrderEnergy 2 N (g.coeff s) ≤ S) →
+        ∀ (φ : ℕ → ℕ),
+          StrictMono φ →
+            ∀ (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a (φ n + 1)) (φ n + 1))
+              (u : ℝ → SingularClosure.TorusSobolev 0),
+              ContinuousOn u (Set.Ici 0) →
+                (∀ (T : ℝ),
+                    0 < T → TendstoUniformlyOn (fun n t => (g n).sobolevState 0 t) u Filter.atTop (Set.Icc 0 T)) →
+                  ∃ L,
+                    (∀ (t : ℝ), 0 < t → L.state 0 t = u t) ∧ SingularClosure.PositiveSmoothNSE ν L.velocity L.pressure
+TYPE_END:QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED
+'QuasiFeffermanB.GALERKIN_POSITIVE_FLOW_OF_H2_SEED' depends on axioms: [propext, Classical.choice, Quot.sound]

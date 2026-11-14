@@ -1,0 +1,54 @@
+TYPE_BEGIN:QuasiFeffermanB.energyMatrixAction_coe
+QuasiFeffermanB.energyMatrixAction_coe : ∀ (D : ↥QuasiFeffermanB.EnergyMatrixLinf)
+  (v : ↥SingularClosure.PhysicalCubeL2),
+  ↑↑((QuasiFeffermanB.energyMatrixAction D) v) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] fun x =>
+    (↑↑D x) (↑↑v x)
+TYPE_END:QuasiFeffermanB.energyMatrixAction_coe
+'QuasiFeffermanB.energyMatrixAction_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyTestMatrix_coe
+QuasiFeffermanB.energyTestMatrix_coe : ∀ (φ : SingularClosure.Field) (hφ : ContDiff ℝ (↑⊤) φ),
+  ↑↑(QuasiFeffermanB.energyTestMatrix φ hφ) =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] fderiv ℝ φ
+TYPE_END:QuasiFeffermanB.energyTestMatrix_coe
+'QuasiFeffermanB.energyTestMatrix_coe' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyWeakTransport_eq_L2_inner
+QuasiFeffermanB.energyWeakTransport_eq_L2_inner : ∀ (v φ : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) (hφ : ContDiff ℝ (↑⊤) φ),
+  SingularClosure.criticalWeakTransport v φ =
+    inner ℝ (MeasureTheory.MemLp.toLp v hv)
+      ((QuasiFeffermanB.energyMatrixAction (QuasiFeffermanB.energyTestMatrix φ hφ)) (MeasureTheory.MemLp.toLp v hv))
+TYPE_END:QuasiFeffermanB.energyWeakTransport_eq_L2_inner
+'QuasiFeffermanB.energyWeakTransport_eq_L2_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyMatrixQuadratic_continuous
+QuasiFeffermanB.energyMatrixQuadratic_continuous : ∀ (D : ↥QuasiFeffermanB.EnergyMatrixLinf),
+  Continuous fun v => inner ℝ v ((QuasiFeffermanB.energyMatrixAction D) v)
+TYPE_END:QuasiFeffermanB.energyMatrixQuadratic_continuous
+'QuasiFeffermanB.energyMatrixQuadratic_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyWeakTransport_L2_tendsto
+@QuasiFeffermanB.energyWeakTransport_L2_tendsto : ∀ {ι : Type u_1} {l : Filter ι}
+  (v : ι → ↥SingularClosure.PhysicalCubeL2) (w : ↥SingularClosure.PhysicalCubeL2),
+  Filter.Tendsto v l (nhds w) →
+    ∀ (φ : SingularClosure.Field),
+      ContDiff ℝ (↑⊤) φ →
+        Filter.Tendsto (fun n => SingularClosure.criticalWeakTransport (↑↑(v n)) φ) l
+          (nhds (SingularClosure.criticalWeakTransport (↑↑w) φ))
+TYPE_END:QuasiFeffermanB.energyWeakTransport_L2_tendsto
+'QuasiFeffermanB.energyWeakTransport_L2_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyMatrixQuadratic_bound
+QuasiFeffermanB.energyMatrixQuadratic_bound : ∀ (D : ↥QuasiFeffermanB.EnergyMatrixLinf)
+  (v : ↥SingularClosure.PhysicalCubeL2),
+  |inner ℝ v ((QuasiFeffermanB.energyMatrixAction D) v)| ≤ ‖QuasiFeffermanB.energyMatrixAction D‖ * ‖v‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyMatrixQuadratic_bound
+'QuasiFeffermanB.energyMatrixQuadratic_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyWeakTransport_L2_bound
+QuasiFeffermanB.energyWeakTransport_L2_bound : ∀ (v φ : SingularClosure.Field)
+  (hv : MeasureTheory.MemLp v 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)) (hφ : ContDiff ℝ (↑⊤) φ),
+  |SingularClosure.criticalWeakTransport v φ| ≤
+    ‖QuasiFeffermanB.energyMatrixAction (QuasiFeffermanB.energyTestMatrix φ hφ)‖ * ‖MeasureTheory.MemLp.toLp v hv‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyWeakTransport_L2_bound
+'QuasiFeffermanB.energyWeakTransport_L2_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyWeakTransport_congr_ae
+@QuasiFeffermanB.energyWeakTransport_congr_ae : ∀ {v w φ : SingularClosure.Field},
+  v =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] w →
+    SingularClosure.criticalWeakTransport v φ = SingularClosure.criticalWeakTransport w φ
+TYPE_END:QuasiFeffermanB.energyWeakTransport_congr_ae
+'QuasiFeffermanB.energyWeakTransport_congr_ae' depends on axioms: [propext, Classical.choice, Quot.sound]

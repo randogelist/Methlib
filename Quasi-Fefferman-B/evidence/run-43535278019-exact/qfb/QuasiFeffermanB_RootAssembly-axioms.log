@@ -1,0 +1,39 @@
+TYPE_BEGIN:QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION
+@QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION : ∀ {ν : ℝ},
+  0 < ν →
+    QuasiFeffermanB.ExactH1Admission ν →
+      ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+        QuasiFeffermanB.EnergySigmaZero a →
+          ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+            SingularClosure.CriticalLerayHopf ν a u G →
+              ∀ {δ : ℝ},
+                QuasiFeffermanB.cutoff a ν < δ →
+                  ∃ s L,
+                    0 < s ∧
+                      s < δ ∧
+                        ∀ (r : ℝ),
+                          s < r → u r =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity (r - s)
+TYPE_END:QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION
+'QuasiFeffermanB.TAIL_REFERENCE_FROM_EXACT_ADMISSION' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION
+@QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION : ∀ {ν : ℝ},
+  0 < ν →
+    QuasiFeffermanB.ExactH1Admission ν →
+      ∀ {a : ↥SingularClosure.CriticalPhysicalL2},
+        QuasiFeffermanB.EnergySigmaZero a →
+          ∀ {u : SingularClosure.Velocity} {G : QuasiFeffermanB.WeakGradientTrajectory},
+            SingularClosure.CriticalLerayHopf ν a u G →
+              ∀ {δ : ℝ},
+                QuasiFeffermanB.cutoff a ν < δ →
+                  QuasiFeffermanB.HasSmoothTail ν u δ ∧
+                    QuasiFeffermanB.TailEnergyEquality ν u G δ ∧ QuasiFeffermanB.UniqueFuture ν u G δ
+TYPE_END:QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION
+'QuasiFeffermanB.TAIL_CONCLUSIONS_FROM_EXACT_ADMISSION' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints
+QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints : (∀ (ν : ℝ),
+    0 < ν →
+      ∀ (a : ↥SingularClosure.CriticalPhysicalL2),
+        QuasiFeffermanB.EnergySigmaZero a → ∃ u G, SingularClosure.CriticalLerayHopf ν a u G) →
+  (∀ (ν : ℝ), 0 < ν → QuasiFeffermanB.ExactH1Admission ν) → QuasiFeffermanB.QuasiFeffermanBStatement
+TYPE_END:QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints
+'QuasiFeffermanB.Quasi_Fefferman_B_of_analytic_endpoints' depends on axioms: [propext, Classical.choice, Quot.sound]

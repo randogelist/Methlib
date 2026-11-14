@@ -1,0 +1,48 @@
+TYPE_BEGIN:QuasiFeffermanB.gaussianThetaOne_nonneg
+QuasiFeffermanB.gaussianThetaOne_nonneg : ∀ (t : ℝ), 0 ≤ QuasiFeffermanB.gaussianThetaOne t
+TYPE_END:QuasiFeffermanB.gaussianThetaOne_nonneg
+'QuasiFeffermanB.gaussianThetaOne_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.gaussianThetaOne_summable
+QuasiFeffermanB.gaussianThetaOne_summable : ∀ (t : ℝ), 0 < t → Summable fun n => Real.exp (-Real.pi * t * ↑n ^ 2)
+TYPE_END:QuasiFeffermanB.gaussianThetaOne_summable
+'QuasiFeffermanB.gaussianThetaOne_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.gaussianThetaOne_jacobi
+QuasiFeffermanB.gaussianThetaOne_jacobi : ∀ (t : ℝ),
+  jacobiTheta (Complex.I * ↑t) = ↑(QuasiFeffermanB.gaussianThetaOne t)
+TYPE_END:QuasiFeffermanB.gaussianThetaOne_jacobi
+'QuasiFeffermanB.gaussianThetaOne_jacobi' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GAUSSIAN_THETA_ONE_TRANSFORM
+QuasiFeffermanB.GAUSSIAN_THETA_ONE_TRANSFORM : ∀ (t : ℝ),
+  0 < t → QuasiFeffermanB.gaussianThetaOne t = 1 / t ^ (1 / 2) * QuasiFeffermanB.gaussianThetaOne (1 / t)
+TYPE_END:QuasiFeffermanB.GAUSSIAN_THETA_ONE_TRANSFORM
+'QuasiFeffermanB.GAUSSIAN_THETA_ONE_TRANSFORM' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GAUSSIAN_THETA_ONE_GEOMETRIC_TAIL
+QuasiFeffermanB.GAUSSIAN_THETA_ONE_GEOMETRIC_TAIL : ∀ (t : ℝ),
+  0 < t → QuasiFeffermanB.gaussianThetaOne t - 1 ≤ 2 / (1 - Real.exp (-Real.pi * t)) * Real.exp (-Real.pi * t)
+TYPE_END:QuasiFeffermanB.GAUSSIAN_THETA_ONE_GEOMETRIC_TAIL
+'QuasiFeffermanB.GAUSSIAN_THETA_ONE_GEOMETRIC_TAIL' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.SIXTEEN_LT_EXP_PI
+QuasiFeffermanB.SIXTEEN_LT_EXP_PI : 16 < Real.exp Real.pi
+TYPE_END:QuasiFeffermanB.SIXTEEN_LT_EXP_PI
+'QuasiFeffermanB.SIXTEEN_LT_EXP_PI' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.EXP_NEG_PI_LT_ONE_SIXTEENTH
+QuasiFeffermanB.EXP_NEG_PI_LT_ONE_SIXTEENTH : Real.exp (-Real.pi) < 1 / 16
+TYPE_END:QuasiFeffermanB.EXP_NEG_PI_LT_ONE_SIXTEENTH
+'QuasiFeffermanB.EXP_NEG_PI_LT_ONE_SIXTEENTH' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GAUSSIAN_THETA_ONE_CUBE_AT_ONE_LT_TWO
+QuasiFeffermanB.GAUSSIAN_THETA_ONE_CUBE_AT_ONE_LT_TWO : QuasiFeffermanB.gaussianThetaOne 1 ^ 3 < 2
+TYPE_END:QuasiFeffermanB.GAUSSIAN_THETA_ONE_CUBE_AT_ONE_LT_TWO
+'QuasiFeffermanB.GAUSSIAN_THETA_ONE_CUBE_AT_ONE_LT_TWO' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GAUSSIAN_EXP_TAIL_LE_POWER
+QuasiFeffermanB.GAUSSIAN_EXP_TAIL_LE_POWER : ∀ (t : ℝ), 1 ≤ t → Real.exp (Real.pi * (1 - t)) ≤ t ^ (-3 / 2)
+TYPE_END:QuasiFeffermanB.GAUSSIAN_EXP_TAIL_LE_POWER
+'QuasiFeffermanB.GAUSSIAN_EXP_TAIL_LE_POWER' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GAUSSIAN_THETA_CUBE_LARGE
+QuasiFeffermanB.GAUSSIAN_THETA_CUBE_LARGE : ∀ (t : ℝ), 1 ≤ t → QuasiFeffermanB.gaussianThetaOne t ^ 3 - 1 ≤ t ^ (-3 / 2)
+TYPE_END:QuasiFeffermanB.GAUSSIAN_THETA_CUBE_LARGE
+'QuasiFeffermanB.GAUSSIAN_THETA_CUBE_LARGE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GAUSSIAN_THETA_CUBE_ENVELOPE
+QuasiFeffermanB.GAUSSIAN_THETA_CUBE_ENVELOPE : ∀ (t : ℝ),
+  0 < t → QuasiFeffermanB.gaussianThetaOne t ^ 3 - 1 ≤ t ^ (-3 / 2)
+TYPE_END:QuasiFeffermanB.GAUSSIAN_THETA_CUBE_ENVELOPE
+'QuasiFeffermanB.GAUSSIAN_THETA_CUBE_ENVELOPE' depends on axioms: [propext, Classical.choice, Quot.sound]

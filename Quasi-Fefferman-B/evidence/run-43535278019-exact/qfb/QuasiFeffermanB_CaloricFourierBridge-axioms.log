@@ -1,0 +1,43 @@
+TYPE_BEGIN:QuasiFeffermanB.complexVecNorm_finset_sum_le
+@QuasiFeffermanB.complexVecNorm_finset_sum_le : ∀ {ι : Type u_1} (S : Finset ι) (v : ι → Fin 3 → ℂ),
+  (QuasiFeffermanB.complexVecNorm fun i => ∑ p ∈ S, v p i) ≤ ∑ p ∈ S, QuasiFeffermanB.complexVecNorm (v p)
+TYPE_END:QuasiFeffermanB.complexVecNorm_finset_sum_le
+'QuasiFeffermanB.complexVecNorm_finset_sum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.coefficientTransport_frequencyDot
+QuasiFeffermanB.coefficientTransport_frequencyDot : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.SpectralSolenoidal c →
+    ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+      SingularClosure.coefficientTransport N c k i =
+        ↑(2 * Real.pi) * Complex.I *
+          ∑ p ∈ SingularClosure.cutoffModes N, QuasiFeffermanB.frequencyDot k (c p) * c (k - p) i
+TYPE_END:QuasiFeffermanB.coefficientTransport_frequencyDot
+'QuasiFeffermanB.coefficientTransport_frequencyDot' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finite_convolution_swap
+QuasiFeffermanB.finite_convolution_swap : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (∀ p ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c p i = 0) →
+    ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+      ∑ p ∈ SingularClosure.cutoffModes N, QuasiFeffermanB.frequencyDot k (c p) * c (k - p) i =
+        ∑ p ∈ SingularClosure.cutoffModes N, QuasiFeffermanB.frequencyDot k (c (k - p)) * c p i
+TYPE_END:QuasiFeffermanB.finite_convolution_swap
+'QuasiFeffermanB.finite_convolution_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.coefficientTransport_symmetric
+QuasiFeffermanB.coefficientTransport_symmetric : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (∀ p ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c p i = 0) →
+    SingularClosure.SpectralSolenoidal c →
+      ∀ (k : SingularClosure.Frequency),
+        SingularClosure.coefficientTransport N c k =
+          (↑Real.pi * Complex.I) •
+            ∑ p ∈ SingularClosure.cutoffModes N, QuasiFeffermanB.symmetricFrequencyTensor k (c p) (c (k - p))
+TYPE_END:QuasiFeffermanB.coefficientTransport_symmetric
+'QuasiFeffermanB.coefficientTransport_symmetric' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.coefficientLeray_transport_symmetric
+QuasiFeffermanB.coefficientLeray_transport_symmetric : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (∀ p ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c p i = 0) →
+    SingularClosure.SpectralSolenoidal c →
+      ∀ (k : SingularClosure.Frequency),
+        SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N c k) =
+          (↑Real.pi * Complex.I) •
+            ∑ p ∈ SingularClosure.cutoffModes N,
+              SingularClosure.coefficientLeray k (QuasiFeffermanB.symmetricFrequencyTensor k (c p) (c (k - p)))
+TYPE_END:QuasiFeffermanB.coefficientLeray_transport_symmetric
+'QuasiFeffermanB.coefficientLeray_transport_symmetric' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,43 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_lp_inner_projection
+QuasiFeffermanB.energy_lp_inner_projection : ∀ (z w : ↥SingularClosure.FourierVectorSequence)
+  (S : Finset SingularClosure.FourierIndex),
+  inner ℂ z ((SingularClosure.criticalLpProjection S) w) = ∑ ki ∈ S, inner ℂ (↑z ki) (↑w ki)
+TYPE_END:QuasiFeffermanB.energy_lp_inner_projection
+'QuasiFeffermanB.energy_lp_inner_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_lp_projection_tendsto
+QuasiFeffermanB.energy_lp_projection_tendsto : ∀ (w : ↥SingularClosure.FourierVectorSequence),
+  Filter.Tendsto (fun S => (SingularClosure.criticalLpProjection S) w) Filter.atTop (nhds w)
+TYPE_END:QuasiFeffermanB.energy_lp_projection_tendsto
+'QuasiFeffermanB.energy_lp_projection_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_LP_WEAK_CONTINUITY
+QuasiFeffermanB.ENERGY_LP_WEAK_CONTINUITY : ∀ (U : ℝ → ↥SingularClosure.FourierVectorSequence) (I : Set ℝ) (R : ℝ),
+  0 ≤ R →
+    (∀ t ∈ I, ‖U t‖ ≤ R) →
+      (∀ (ki : SingularClosure.FourierIndex), ContinuousOn (fun t => ↑(U t) ki) I) →
+        ∀ (w : ↥SingularClosure.FourierVectorSequence), ContinuousOn (fun t => inner ℂ (U t) w) I
+TYPE_END:QuasiFeffermanB.ENERGY_LP_WEAK_CONTINUITY
+'QuasiFeffermanB.ENERGY_LP_WEAK_CONTINUITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_H0_WEAK_CONTINUITY
+QuasiFeffermanB.ENERGY_H0_WEAK_CONTINUITY : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (I : Set ℝ) (R : ℝ),
+  0 ≤ R →
+    (∀ t ∈ I, ‖U t‖ ≤ R) →
+      (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) I) →
+        ∀ (w : SingularClosure.TorusSobolev 0), ContinuousOn (fun t => inner ℂ (U t) w) I
+TYPE_END:QuasiFeffermanB.ENERGY_H0_WEAK_CONTINUITY
+'QuasiFeffermanB.ENERGY_H0_WEAK_CONTINUITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_complex_strong_tendsto_of_inner_and_norm_bound
+@QuasiFeffermanB.energy_complex_strong_tendsto_of_inner_and_norm_bound : ∀ {ι : Type u_1} {E : Type u_2}
+  [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℂ E] {l : Filter ι} {f : ι → E} {a : E},
+  Filter.Tendsto (fun i => (inner ℂ (f i) a).re) l (nhds (‖a‖ ^ 2)) →
+    (∀ᶠ (i : ι) in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) → Filter.Tendsto f l (nhds a)
+TYPE_END:QuasiFeffermanB.energy_complex_strong_tendsto_of_inner_and_norm_bound
+'QuasiFeffermanB.energy_complex_strong_tendsto_of_inner_and_norm_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_H0_STRONG_INITIAL_TRACE
+QuasiFeffermanB.ENERGY_H0_STRONG_INITIAL_TRACE : ∀ (U : ℝ → SingularClosure.TorusSobolev 0),
+  (∀ t ∈ Set.Ici 0, ‖U t‖ ≤ ‖U 0‖) →
+    (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) (Set.Ici 0)) →
+      Filter.Tendsto U (nhdsWithin 0 (Set.Ici 0)) (nhds (U 0))
+TYPE_END:QuasiFeffermanB.ENERGY_H0_STRONG_INITIAL_TRACE
+'QuasiFeffermanB.ENERGY_H0_STRONG_INITIAL_TRACE' depends on axioms: [propext, Classical.choice, Quot.sound]

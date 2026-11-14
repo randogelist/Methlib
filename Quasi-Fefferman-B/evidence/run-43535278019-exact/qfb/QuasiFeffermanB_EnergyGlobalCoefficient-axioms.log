@@ -1,0 +1,62 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_coefficient_curve_precompact
+QuasiFeffermanB.energy_coefficient_curve_precompact : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R : ℝ),
+      0 ≤ R →
+        (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+          ∀ (m : ℕ) (ki : SingularClosure.FourierIndex),
+            IsCompact
+              (closure
+                (Set.range fun n =>
+                  BoundedContinuousFunction.mkOfCompact (QuasiFeffermanB.energyCoefficientCurve (g n) m ki)))
+TYPE_END:QuasiFeffermanB.energy_coefficient_curve_precompact
+'QuasiFeffermanB.energy_coefficient_curve_precompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE
+QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R : ℝ),
+      0 ≤ R →
+        (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+          ∃ u φ,
+            StrictMono φ ∧
+              (∀ (m : ℕ) (ki : SingularClosure.FourierIndex),
+                  TendstoUniformly (fun n t => (g (φ n)).coeff (↑t) ki.1 ki.2) (⇑(u m ki)) Filter.atTop) ∧
+                ∀ (m l : ℕ) (ki : SingularClosure.FourierIndex) (t : ℝ) (hm : t ∈ QuasiFeffermanB.EnergyTimeHorizon m)
+                  (hl : t ∈ QuasiFeffermanB.EnergyTimeHorizon l), (u m ki) ⟨t, hm⟩ = (u l ki) ⟨t, hl⟩
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE
+'QuasiFeffermanB.ENERGY_GALERKIN_GLOBAL_COEFFICIENT_SUBSEQUENCE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.globalEnergyCoefficient_eq_horizon
+QuasiFeffermanB.globalEnergyCoefficient_eq_horizon : ∀
+  (u : (m : ℕ) → SingularClosure.FourierIndex → C(↑(QuasiFeffermanB.EnergyTimeHorizon m), ℂ)),
+  (∀ (m l : ℕ) (ki : SingularClosure.FourierIndex) (t : ℝ) (hm : t ∈ QuasiFeffermanB.EnergyTimeHorizon m)
+      (hl : t ∈ QuasiFeffermanB.EnergyTimeHorizon l), (u m ki) ⟨t, hm⟩ = (u l ki) ⟨t, hl⟩) →
+    ∀ (m : ℕ) (t : ℝ) (ht : t ∈ QuasiFeffermanB.EnergyTimeHorizon m) (k : SingularClosure.Frequency) (i : Fin 3),
+      QuasiFeffermanB.globalEnergyCoefficient u t k i = (u m (k, i)) ⟨t, ht⟩
+TYPE_END:QuasiFeffermanB.globalEnergyCoefficient_eq_horizon
+'QuasiFeffermanB.globalEnergyCoefficient_eq_horizon' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.globalEnergyCoefficient_continuousOn
+QuasiFeffermanB.globalEnergyCoefficient_continuousOn : ∀
+  (u : (m : ℕ) → SingularClosure.FourierIndex → C(↑(QuasiFeffermanB.EnergyTimeHorizon m), ℂ)),
+  (∀ (m l : ℕ) (ki : SingularClosure.FourierIndex) (t : ℝ) (hm : t ∈ QuasiFeffermanB.EnergyTimeHorizon m)
+      (hl : t ∈ QuasiFeffermanB.EnergyTimeHorizon l), (u m ki) ⟨t, hm⟩ = (u l ki) ⟨t, hl⟩) →
+    ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+      ContinuousOn (fun t => QuasiFeffermanB.globalEnergyCoefficient u t k i) (Set.Ici 0)
+TYPE_END:QuasiFeffermanB.globalEnergyCoefficient_continuousOn
+'QuasiFeffermanB.globalEnergyCoefficient_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.globalEnergyCoefficient_uniform_limit
+QuasiFeffermanB.globalEnergyCoefficient_uniform_limit : ∀ (ν : ℝ) (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ)
+  (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+  (u : (m : ℕ) → SingularClosure.FourierIndex → C(↑(QuasiFeffermanB.EnergyTimeHorizon m), ℂ)) (φ : ℕ → ℕ),
+  (∀ (m : ℕ) (ki : SingularClosure.FourierIndex),
+      TendstoUniformly (fun n t => (g (φ n)).coeff (↑t) ki.1 ki.2) (⇑(u m ki)) Filter.atTop) →
+    (∀ (m l : ℕ) (ki : SingularClosure.FourierIndex) (t : ℝ) (hm : t ∈ QuasiFeffermanB.EnergyTimeHorizon m)
+        (hl : t ∈ QuasiFeffermanB.EnergyTimeHorizon l), (u m ki) ⟨t, hm⟩ = (u l ki) ⟨t, hl⟩) →
+      ∀ (T : ℝ) (k : SingularClosure.Frequency) (i : Fin 3),
+        TendstoUniformlyOn (fun n t => (g (φ n)).coeff t k i) (fun t => QuasiFeffermanB.globalEnergyCoefficient u t k i)
+          Filter.atTop (Set.Icc 0 T)
+TYPE_END:QuasiFeffermanB.globalEnergyCoefficient_uniform_limit
+'QuasiFeffermanB.globalEnergyCoefficient_uniform_limit' depends on axioms: [propext, Classical.choice, Quot.sound]

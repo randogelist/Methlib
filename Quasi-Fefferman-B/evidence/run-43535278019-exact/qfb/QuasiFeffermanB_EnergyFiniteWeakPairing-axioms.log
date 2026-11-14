@@ -1,0 +1,40 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_galerkin_mode_pairing
+QuasiFeffermanB.energy_galerkin_mode_pairing : ∀ (ν : ℝ) (N : ℕ) (c b : SingularClosure.FourierCoeff),
+  SingularClosure.SpectralSolenoidal b →
+    ∀ (k : SingularClosure.Frequency),
+      ∑ i, (star (b k i) * SingularClosure.galerkinRhs ν N c k i).re =
+        ν * ∑ i, (star (SingularClosure.laplacianCoefficient b k i) * c k i).re -
+          ∑ i, (star (b k i) * SingularClosure.coefficientTransport N c k i).re
+TYPE_END:QuasiFeffermanB.energy_galerkin_mode_pairing
+'QuasiFeffermanB.energy_galerkin_mode_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING
+QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING : ∀ (ν : ℝ) (N : ℕ) (c b : SingularClosure.FourierCoeff),
+  (∀ k ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+    SingularClosure.SpectralReality c →
+      SingularClosure.SpectralSolenoidal c →
+        SingularClosure.SpectralReality b →
+          SingularClosure.SpectralSolenoidal b →
+            SingularClosure.physicalFieldInner (SingularClosure.finiteSynthesis N (SingularClosure.galerkinRhs ν N c))
+                (SingularClosure.finiteSynthesis N b) =
+              ν *
+                  SingularClosure.physicalFieldInner (SingularClosure.finiteSynthesis N c)
+                    (SingularClosure.laplacian (SingularClosure.finiteSynthesis N b)) +
+                SingularClosure.criticalWeakTransport (SingularClosure.finiteSynthesis N c)
+                  (SingularClosure.finiteSynthesis N b)
+TYPE_END:QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING
+'QuasiFeffermanB.ENERGY_FINITE_GALERKIN_WEAK_PAIRING' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkin_finite_test_pairing
+@QuasiFeffermanB.energyGalerkin_finite_test_pairing : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (b : SingularClosure.FourierCoeff),
+  SingularClosure.SpectralReality b →
+    SingularClosure.SpectralSolenoidal b →
+      ∀ (t : ℝ),
+        0 ≤ t →
+          SingularClosure.physicalFieldInner (SingularClosure.timeDerivative g.velocity t)
+              (SingularClosure.finiteSynthesis N b) =
+            ν *
+                SingularClosure.physicalFieldInner (g.velocity t)
+                  (SingularClosure.laplacian (SingularClosure.finiteSynthesis N b)) +
+              SingularClosure.criticalWeakTransport (g.velocity t) (SingularClosure.finiteSynthesis N b)
+TYPE_END:QuasiFeffermanB.energyGalerkin_finite_test_pairing
+'QuasiFeffermanB.energyGalerkin_finite_test_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]

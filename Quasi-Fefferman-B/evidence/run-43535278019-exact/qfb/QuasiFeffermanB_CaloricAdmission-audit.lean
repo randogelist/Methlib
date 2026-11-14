@@ -1,0 +1,13 @@
+import QuasiFeffermanB.CaloricAdmission
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN"
+#check @QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN
+#eval IO.println "TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN"
+#print axioms QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN"
+#check @QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN
+#eval IO.println "TYPE_END:QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN"
+#print axioms QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN

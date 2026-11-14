@@ -1,0 +1,42 @@
+TYPE_BEGIN:QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER
+QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER : ∀ (X : ℝ → ℝ) (h b R T : ℝ),
+  ContinuousOn X (Set.Icc 0 T) →
+    X 0 < R → h + b * R ^ 2 < R → (∀ t ∈ Set.Icc 0 T, X t ≤ h + b * X t ^ 2) → ∀ t ∈ Set.Icc 0 T, X t < R
+TYPE_END:QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER
+'QuasiFeffermanB.CONTINUOUS_QUADRATIC_BARRIER' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET
+QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET : ∀ (X : ℝ → ℝ) (h b T : ℝ),
+  0 < h →
+    4 * b * h < 1 →
+      ContinuousOn X (Set.Icc 0 T) →
+        X 0 = 0 → (∀ t ∈ Set.Icc 0 T, X t ≤ h + b * X t ^ 2) → ∀ t ∈ Set.Icc 0 T, X t < 2 * h
+TYPE_END:QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET
+'QuasiFeffermanB.QUADRATIC_BARRIER_LT_TWO_HEAT_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET
+QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET : ∀ (X : ℝ → ℝ) (b T : ℝ),
+  0 < b →
+    ContinuousOn X (Set.Icc 0 T) →
+      X 0 = 0 → (∀ t ∈ Set.Icc 0 T, 0 ≤ X t) → (∀ t ∈ Set.Icc 0 T, X t ≤ b * X t ^ 2) → ∀ t ∈ Set.Icc 0 T, X t = 0
+TYPE_END:QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET
+'QuasiFeffermanB.QUADRATIC_BARRIER_ZERO_HEAT_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET
+QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET : ∀ (X : ℝ → ℝ) (h b T : ℝ),
+  0 ≤ h →
+    0 < b →
+      4 * b * h < 1 →
+        ContinuousOn X (Set.Icc 0 T) →
+          X 0 = 0 →
+            (∀ t ∈ Set.Icc 0 T, 0 ≤ X t) → (∀ t ∈ Set.Icc 0 T, X t ≤ h + b * X t ^ 2) → ∀ t ∈ Set.Icc 0 T, X t ≤ 2 * h
+TYPE_END:QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET
+'QuasiFeffermanB.QUADRATIC_BARRIER_LE_TWO_HEAT_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET
+QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET : ∀ (X : ℝ → ℝ) (h b T : ℝ),
+  0 ≤ h →
+    0 < b →
+      4 * b * h < 1 →
+        ContinuousOn X (Set.Icc 0 T) →
+          X 0 = 0 →
+            (∀ t ∈ Set.Icc 0 T, 0 ≤ X t) →
+              (∀ t ∈ Set.Icc 0 T, X t ≤ h + b * X t ^ 2) → ∀ t ∈ Set.Icc 0 T, X t ^ 2 ≤ 4 * h ^ 2
+TYPE_END:QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET
+'QuasiFeffermanB.QUADRATIC_BARRIER_SQUARE_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]

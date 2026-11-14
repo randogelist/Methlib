@@ -1,0 +1,11 @@
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS
+QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS : ∀ (ν : ℝ) (hν : 0 ≤ ν) (a : QuasiFeffermanB.EnergyDatum)
+  (σ : ℕ → ℕ),
+  StrictMono σ →
+    ∀ (c : SingularClosure.FourierCoeff),
+      (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+          Filter.Tendsto (fun n => (QuasiFeffermanB.energyDatumGalerkinFamily ν hν a (σ n)).coeff 0 k i) Filter.atTop
+            (nhds (c k i))) →
+        c = SingularClosure.datumFourierCoeff ↑↑↑a
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS
+'QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS' depends on axioms: [propext, Classical.choice, Quot.sound]

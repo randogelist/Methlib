@@ -1,0 +1,29 @@
+TYPE_BEGIN:QuasiFeffermanB.energyGalerkinTimeLimits_compatible
+QuasiFeffermanB.energyGalerkinTimeLimits_compatible : ∀ (ν : ℝ) (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ)
+  (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n)) (T : ℝ)
+  (u : ↑(Set.Icc 0 T) → SingularClosure.TorusSobolev 0) (v : ↥(QuasiFeffermanB.EnergyTimeH0L2 T)),
+  (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+      TendstoUniformly (fun n t => ↑((g n).sobolevState 0 ↑t) k i) (fun t => ↑(u t) k i) Filter.atTop) →
+    Filter.Tendsto (fun n => (g n).energyTimeH0L2 T) Filter.atTop (nhds v) →
+      ∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T), ∀ (ht : t ∈ Set.Icc 0 T), ↑↑v t = u ⟨t, ht⟩
+TYPE_END:QuasiFeffermanB.energyGalerkinTimeLimits_compatible
+'QuasiFeffermanB.energyGalerkinTimeLimits_compatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE
+QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R T : ℝ),
+      0 ≤ R →
+        0 ≤ T →
+          (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+            ∃ u v φ,
+              StrictMono φ ∧
+                (∀ (t : ↑(Set.Icc 0 T)), ‖u t‖ ≤ R) ∧
+                  (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                      TendstoUniformly (fun n t => ↑((g (φ n)).sobolevState 0 ↑t) k i) (fun t => ↑(u t) k i)
+                        Filter.atTop) ∧
+                    Filter.Tendsto (fun n => (g (φ n)).energyTimeH0L2 T) Filter.atTop (nhds v) ∧
+                      ∀ᵐ (t : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T),
+                        ∀ (ht : t ∈ Set.Icc 0 T), ↑↑v t = u ⟨t, ht⟩
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE
+'QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,47 @@
+TYPE_BEGIN:QuasiFeffermanB.galerkin_H1_time_energy_bound
+@QuasiFeffermanB.galerkin_H1_time_energy_bound : ∀ {ν : ℝ},
+  0 < ν →
+    ∀ {a : SingularClosure.Field} {N : ℕ} (g : SingularClosure.GalerkinSolution ν a N) (R T : ℝ),
+      0 ≤ T →
+        SingularClosure.coefficientEnergy N (g.coeff 0) ≤ R ^ 2 →
+          ∫ (t : ℝ) in 0..T, ‖g.sobolevState 1 t‖ ^ 2 ≤ T * R ^ 2 + R ^ 2 / (2 * ν)
+TYPE_END:QuasiFeffermanB.galerkin_H1_time_energy_bound
+'QuasiFeffermanB.galerkin_H1_time_energy_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.galerkin_critical_zero_norm_sq
+@QuasiFeffermanB.galerkin_critical_zero_norm_sq : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (t : ℝ),
+  ‖g.criticalState 0 t‖ ^ 2 = SingularClosure.coefficientEnergy N (g.coeff t)
+TYPE_END:QuasiFeffermanB.galerkin_critical_zero_norm_sq
+'QuasiFeffermanB.galerkin_critical_zero_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_H0_COEFFICIENT_LIMIT
+QuasiFeffermanB.ENERGY_GALERKIN_H0_COEFFICIENT_LIMIT : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R T : ℝ),
+      0 ≤ R →
+        0 ≤ T →
+          (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+            ∃ u φ,
+              StrictMono φ ∧
+                (∀ (t : ↑(Set.Icc 0 T)), ‖u t‖ ≤ R) ∧
+                  ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                    TendstoUniformly (fun n t => ↑((g (φ n)).sobolevState 0 ↑t) k i) (fun t => ↑(u t) k i) Filter.atTop
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_H0_COEFFICIENT_LIMIT
+'QuasiFeffermanB.ENERGY_GALERKIN_H0_COEFFICIENT_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_L2H0_SUBSEQUENCE
+QuasiFeffermanB.ENERGY_GALERKIN_L2H0_SUBSEQUENCE : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R T : ℝ),
+      0 ≤ R →
+        0 ≤ T →
+          (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+            ∃ u v φ,
+              StrictMono φ ∧
+                (∀ (t : ↑(Set.Icc 0 T)), ‖u t‖ ≤ R) ∧
+                  (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                      TendstoUniformly (fun n t => ↑((g (φ n)).sobolevState 0 ↑t) k i) (fun t => ↑(u t) k i)
+                        Filter.atTop) ∧
+                    Filter.Tendsto (fun n => (g (φ n)).energyTimeH0L2 T) Filter.atTop (nhds v)
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_L2H0_SUBSEQUENCE
+'QuasiFeffermanB.ENERGY_GALERKIN_L2H0_SUBSEQUENCE' depends on axioms: [propext, Classical.choice, Quot.sound]

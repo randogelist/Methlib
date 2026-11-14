@@ -1,0 +1,81 @@
+TYPE_BEGIN:QuasiFeffermanB.caloric_fourierCharacter_norm
+QuasiFeffermanB.caloric_fourierCharacter_norm : ∀ (k : SingularClosure.Frequency) (x : SingularClosure.Vec),
+  ‖SingularClosure.fourierCharacter k x‖ = 1
+TYPE_END:QuasiFeffermanB.caloric_fourierCharacter_norm
+'QuasiFeffermanB.caloric_fourierCharacter_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0
+QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0 : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff) (x : SingularClosure.Vec),
+  ‖SingularClosure.finiteSynthesis N c x‖ ≤ QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) c
+TYPE_END:QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0
+'QuasiFeffermanB.FINITE_SYNTHESIS_NORM_LE_CHI0' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY
+QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY : ∀ (v : SingularClosure.Field) (x : SingularClosure.Vec),
+  ‖SingularClosure.convection v x‖ ^ 2 ≤ ‖v x‖ ^ 2 * SingularClosure.gradientSquareDensity v x
+TYPE_END:QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY
+'QuasiFeffermanB.CONVECTION_NORM_SQ_LE_GRADIENT_DENSITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT
+QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT : ∀ (v w : SingularClosure.Field),
+  Continuous v →
+    Continuous w →
+      (∫ (x : SingularClosure.Vec) in SingularClosure.unitCube, inner ℝ (v x) (w x)) ^ 2 ≤
+        SingularClosure.physicalEnergy v * SingularClosure.physicalEnergy w
+TYPE_END:QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT
+'QuasiFeffermanB.PHYSICAL_PAIRING_SQUARE_LE_ENERGY_PRODUCT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0
+QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0 : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  SingularClosure.SpectralReality c →
+    SingularClosure.physicalEnergy (SingularClosure.convection (SingularClosure.finiteSynthesis N c)) ≤
+      QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) c ^ 2 * SingularClosure.coefficientDissipation N c
+TYPE_END:QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0
+'QuasiFeffermanB.FINITE_CONVECTION_ENERGY_LE_CHI0' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0
+QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0 : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (∀ k ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c k i = 0) →
+    SingularClosure.SpectralReality c →
+      SingularClosure.SpectralSolenoidal c →
+        SingularClosure.coefficientEnstrophyNonlinearPower N c ^ 2 ≤
+          QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) c ^ 2 *
+              SingularClosure.coefficientDissipation N c *
+            SingularClosure.coefficientLaplacianSquare N c
+TYPE_END:QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0
+'QuasiFeffermanB.FINITE_ENSTROPHY_TRANSPORT_SQUARE_LE_CHI0' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS
+@QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N),
+  ContinuousOn (fun t => QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t)) (Set.Ici 0)
+TYPE_END:QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS
+'QuasiFeffermanB.GALERKIN_CHI0_CONTINUOUS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND
+@QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND : ∀ {ν : ℝ} {N : ℕ} (a : SingularClosure.CriticalSobolev 2),
+  SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 a) →
+    ∀
+      (g :
+        SingularClosure.GalerkinSolution ν (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 a)) N),
+      SingularClosure.coefficientDissipation N (g.coeff 0) ≤ ‖a‖ ^ 2
+TYPE_END:QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND
+'QuasiFeffermanB.GALERKIN_H1_INITIAL_ENSTROPHY_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION
+QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : SingularClosure.CriticalSobolev 2),
+      SingularClosure.SpectralReality (SingularClosure.criticalCoeff 2 a) →
+        ∀ (S : ℝ),
+          (∀ (N : ℕ)
+              (g :
+                SingularClosure.GalerkinSolution ν
+                  (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 a)) N)
+              (T : ℝ),
+              0 ≤ T →
+                ∫ (t : ℝ) in 0..T, QuasiFeffermanB.finiteChi0 (SingularClosure.cutoffModes N) (g.coeff t) ^ 2 ≤ S) →
+            ∀ (T : ℝ),
+              0 ≤ T →
+                ∀ (N : ℕ)
+                  (g :
+                    SingularClosure.GalerkinSolution ν
+                      (SingularClosure.finiteSynthesis N (SingularClosure.criticalCoeff 2 a)) N),
+                  ∀ t ∈ Set.Icc 0 T,
+                    SingularClosure.coefficientDissipation N (g.coeff t) +
+                        ν * ∫ (s : ℝ) in 0..t, SingularClosure.coefficientLaplacianSquare N (g.coeff s) ≤
+                      ‖a‖ ^ 2 * Real.exp (S / ν)
+TYPE_END:QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION
+'QuasiFeffermanB.CALORIC_H1_GALERKIN_ENSTROPHY_ACCUMULATION' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,62 @@
+TYPE_BEGIN:QuasiFeffermanB.complexVecNorm_nonneg
+QuasiFeffermanB.complexVecNorm_nonneg : ∀ (c : Fin 3 → ℂ), 0 ≤ QuasiFeffermanB.complexVecNorm c
+TYPE_END:QuasiFeffermanB.complexVecNorm_nonneg
+'QuasiFeffermanB.complexVecNorm_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexVecNorm_sq
+QuasiFeffermanB.complexVecNorm_sq : ∀ (c : Fin 3 → ℂ), QuasiFeffermanB.complexVecNorm c ^ 2 = ∑ i, ‖c i‖ ^ 2
+TYPE_END:QuasiFeffermanB.complexVecNorm_sq
+'QuasiFeffermanB.complexVecNorm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.norm_component_le_complexVecNorm
+QuasiFeffermanB.norm_component_le_complexVecNorm : ∀ (c : Fin 3 → ℂ) (i : Fin 3),
+  ‖c i‖ ≤ QuasiFeffermanB.complexVecNorm c
+TYPE_END:QuasiFeffermanB.norm_component_le_complexVecNorm
+'QuasiFeffermanB.norm_component_le_complexVecNorm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteChi0_nonneg
+@QuasiFeffermanB.finiteChi0_nonneg : ∀ {ι : Type u_1} (s : Finset ι) (c : ι → Fin 3 → ℂ),
+  0 ≤ QuasiFeffermanB.finiteChi0 s c
+TYPE_END:QuasiFeffermanB.finiteChi0_nonneg
+'QuasiFeffermanB.finiteChi0_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE
+QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE : ∀ (a b x y : ℝ), (a * y + b * x) ^ 2 ≤ (a ^ 2 + x ^ 2) * (b ^ 2 + y ^ 2)
+TYPE_END:QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE
+'QuasiFeffermanB.SYMMETRIC_SPLIT_SCALAR_SQUARE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexVecNorm_eq_norm
+QuasiFeffermanB.complexVecNorm_eq_norm : ∀ (c : Fin 3 → ℂ),
+  QuasiFeffermanB.complexVecNorm c = ‖QuasiFeffermanB.complexVec c‖
+TYPE_END:QuasiFeffermanB.complexVecNorm_eq_norm
+'QuasiFeffermanB.complexVecNorm_eq_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexVecNorm_add_le
+QuasiFeffermanB.complexVecNorm_add_le : ∀ (c d : Fin 3 → ℂ),
+  (QuasiFeffermanB.complexVecNorm fun i => c i + d i) ≤
+    QuasiFeffermanB.complexVecNorm c + QuasiFeffermanB.complexVecNorm d
+TYPE_END:QuasiFeffermanB.complexVecNorm_add_le
+'QuasiFeffermanB.complexVecNorm_add_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexVecNorm_smul
+QuasiFeffermanB.complexVecNorm_smul : ∀ (α : ℂ) (c : Fin 3 → ℂ),
+  (QuasiFeffermanB.complexVecNorm fun i => α * c i) = ‖α‖ * QuasiFeffermanB.complexVecNorm c
+TYPE_END:QuasiFeffermanB.complexVecNorm_smul
+'QuasiFeffermanB.complexVecNorm_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexTransverse_symmetric
+QuasiFeffermanB.complexTransverse_symmetric : ∀ (e z w : EuclideanSpace ℂ (Fin 3)),
+  QuasiFeffermanB.complexTransverse e (inner ℂ e z • w + inner ℂ e w • z) =
+    inner ℂ e z • QuasiFeffermanB.complexTransverse e w + inner ℂ e w • QuasiFeffermanB.complexTransverse e z
+TYPE_END:QuasiFeffermanB.complexTransverse_symmetric
+'QuasiFeffermanB.complexTransverse_symmetric' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.complexTransverse_pythagoras
+QuasiFeffermanB.complexTransverse_pythagoras : ∀ (e z : EuclideanSpace ℂ (Fin 3)),
+  ‖e‖ = 1 → ‖z‖ ^ 2 = ‖inner ℂ e z‖ ^ 2 + ‖QuasiFeffermanB.complexTransverse e z‖ ^ 2
+TYPE_END:QuasiFeffermanB.complexTransverse_pythagoras
+'QuasiFeffermanB.complexTransverse_pythagoras' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER
+QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER : ∀ (e z w : EuclideanSpace ℂ (Fin 3)),
+  ‖e‖ = 1 → ‖QuasiFeffermanB.complexTransverse e (inner ℂ e z • w + inner ℂ e w • z)‖ ≤ ‖z‖ * ‖w‖
+TYPE_END:QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER
+'QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED
+QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED : ∀ (κ : ℝ),
+  0 ≤ κ →
+    ∀ (e z w : EuclideanSpace ℂ (Fin 3)),
+      ‖e‖ = 1 →
+        ‖↑(κ / 2) • QuasiFeffermanB.complexTransverse e (inner ℂ e z • w + inner ℂ e w • z)‖ ≤ κ / 2 * (‖z‖ * ‖w‖)
+TYPE_END:QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED
+'QuasiFeffermanB.SYMMETRIC_COMPLEX_LERAY_MULTIPLIER_SCALED' depends on axioms: [propext, Classical.choice, Quot.sound]

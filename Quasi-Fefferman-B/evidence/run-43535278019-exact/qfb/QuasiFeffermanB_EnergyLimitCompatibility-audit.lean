@@ -1,0 +1,13 @@
+import QuasiFeffermanB.EnergyLimitCompatibility
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyGalerkinTimeLimits_compatible"
+#check @QuasiFeffermanB.energyGalerkinTimeLimits_compatible
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyGalerkinTimeLimits_compatible"
+#print axioms QuasiFeffermanB.energyGalerkinTimeLimits_compatible
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE"
+#check @QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE"
+#print axioms QuasiFeffermanB.ENERGY_GALERKIN_COMPATIBLE_L2H0_SUBSEQUENCE

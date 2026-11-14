@@ -1,0 +1,13 @@
+import QuasiFeffermanB.CaloricEnstrophy
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE"
+#check @QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE
+#eval IO.println "TYPE_END:QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE"
+#print axioms QuasiFeffermanB.GALERKIN_ENSTROPHY_RATE_OF_TRANSPORT_SQUARE
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL"
+#check @QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL
+#eval IO.println "TYPE_END:QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL"
+#print axioms QuasiFeffermanB.GALERKIN_ENSTROPHY_ACCUMULATION_OF_CONTROL

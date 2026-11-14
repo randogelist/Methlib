@@ -1,0 +1,66 @@
+TYPE_BEGIN:QuasiFeffermanB.energyModeTransportBound_nonneg
+QuasiFeffermanB.energyModeTransportBound_nonneg : ∀ (k : SingularClosure.Frequency),
+  0 ≤ QuasiFeffermanB.energyModeTransportBound k
+TYPE_END:QuasiFeffermanB.energyModeTransportBound_nonneg
+'QuasiFeffermanB.energyModeTransportBound_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyModeTransport_norm_le
+QuasiFeffermanB.energyModeTransport_norm_le : ∀ (k : SingularClosure.Frequency) (c : SingularClosure.TorusSobolev 0),
+  ‖fun j => ((SingularClosure.divergenceTransportCoefficient k j) c) c‖ ≤
+    QuasiFeffermanB.energyModeTransportBound k * ‖c‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyModeTransport_norm_le
+'QuasiFeffermanB.energyModeTransport_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyModeRhsBound_nonneg
+QuasiFeffermanB.energyModeRhsBound_nonneg : ∀ (ν R : ℝ),
+  0 ≤ R → ∀ (k : SingularClosure.Frequency) (i : Fin 3), 0 ≤ QuasiFeffermanB.energyModeRhsBound ν R k i
+TYPE_END:QuasiFeffermanB.energyModeRhsBound_nonneg
+'QuasiFeffermanB.energyModeRhsBound_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.fullFourierRhs_energy_bound
+QuasiFeffermanB.fullFourierRhs_energy_bound : ∀ (ν R : ℝ),
+  0 ≤ R →
+    ∀ (c : SingularClosure.TorusSobolev 0),
+      ‖c‖ ≤ R →
+        ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+          ‖SingularClosure.fullFourierRhs ν c k i‖ ≤ QuasiFeffermanB.energyModeRhsBound ν R k i
+TYPE_END:QuasiFeffermanB.fullFourierRhs_energy_bound
+'QuasiFeffermanB.fullFourierRhs_energy_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.galerkin_H0_norm_sq
+@QuasiFeffermanB.galerkin_H0_norm_sq : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (t : ℝ),
+  ‖g.sobolevState 0 t‖ ^ 2 = SingularClosure.coefficientEnergy N (g.coeff t)
+TYPE_END:QuasiFeffermanB.galerkin_H0_norm_sq
+'QuasiFeffermanB.galerkin_H0_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.galerkin_H0_energy_bound
+@QuasiFeffermanB.galerkin_H0_energy_bound : ∀ {ν : ℝ},
+  0 ≤ ν →
+    ∀ {a : SingularClosure.Field} {N : ℕ} (g : SingularClosure.GalerkinSolution ν a N) (R : ℝ),
+      0 ≤ R → SingularClosure.coefficientEnergy N (g.coeff 0) ≤ R ^ 2 → ∀ (t : ℝ), 0 ≤ t → ‖g.sobolevState 0 t‖ ≤ R
+TYPE_END:QuasiFeffermanB.galerkin_H0_energy_bound
+'QuasiFeffermanB.galerkin_H0_energy_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.galerkin_energy_coefficient_modulus
+@QuasiFeffermanB.galerkin_energy_coefficient_modulus : ∀ {ν : ℝ},
+  0 ≤ ν →
+    ∀ {a : SingularClosure.Field} {N : ℕ} (g : SingularClosure.GalerkinSolution ν a N) (R T : ℝ),
+      0 ≤ R →
+        0 ≤ T →
+          SingularClosure.coefficientEnergy N (g.coeff 0) ≤ R ^ 2 →
+            ∀ (k : SingularClosure.Frequency) (i : Fin 3) {s t : ℝ},
+              0 ≤ s →
+                s ≤ t →
+                  t ≤ T →
+                    ‖g.coeff t k i - g.coeff s k i‖ ^ 2 ≤ T * QuasiFeffermanB.energyModeRhsBound ν R k i ^ 2 * (t - s)
+TYPE_END:QuasiFeffermanB.galerkin_energy_coefficient_modulus
+'QuasiFeffermanB.galerkin_energy_coefficient_modulus' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE
+QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R T : ℝ),
+      0 ≤ R →
+        0 ≤ T →
+          (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+            ∃ u φ,
+              StrictMono φ ∧
+                ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                  TendstoUniformly (fun n t => (g (φ n)).coeff (↑t) k i) (⇑(u (k, i))) Filter.atTop
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE
+'QuasiFeffermanB.ENERGY_GALERKIN_COEFFICIENT_SUBSEQUENCE' depends on axioms: [propext, Classical.choice, Quot.sound]

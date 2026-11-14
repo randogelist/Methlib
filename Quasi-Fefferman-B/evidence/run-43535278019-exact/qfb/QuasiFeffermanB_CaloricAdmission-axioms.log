@@ -1,0 +1,41 @@
+TYPE_BEGIN:QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN
+QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a₀ : ↥SingularClosure.CriticalPhysicalL2) (L : SingularClosure.CriticalPositiveSobolevFlow ν),
+      Filter.Tendsto
+          (fun t =>
+            MeasureTheory.eLpNorm (L.velocity t - ↑↑a₀) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) →
+        (∀ (T : ℝ),
+            0 < T →
+              MeasureTheory.MemLp (fun t => SingularClosure.criticalSpatialNorm 6 (L.velocity t)) 4
+                (MeasureTheory.volume.restrict (Set.Ioc 0 T))) →
+          ∀ (v : SingularClosure.Velocity)
+            (G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec),
+            SingularClosure.CriticalLerayHopf ν a₀ v G →
+              ∀ (t : ℝ), 0 < t → v t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] L.velocity t
+TYPE_END:QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN
+'QuasiFeffermanB.POSITIVE_FLOW_LH_COMPARISON_OF_TRACE_AND_SERRIN' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN
+QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a₀ : ↥SingularClosure.CriticalPhysicalL2) (L : SingularClosure.CriticalPositiveSobolevFlow ν),
+      Filter.Tendsto
+          (fun t =>
+            MeasureTheory.eLpNorm (L.velocity t - ↑↑a₀) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube))
+          (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) →
+        (∀ (T : ℝ),
+            0 < T →
+              MeasureTheory.MemLp (fun t => SingularClosure.criticalSpatialNorm 6 (L.velocity t)) 4
+                (MeasureTheory.volume.restrict (Set.Ioc 0 T))) →
+          ∀ (v w : SingularClosure.Velocity)
+            (G H : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec),
+            SingularClosure.CriticalLerayHopf ν a₀ v G →
+              SingularClosure.CriticalLerayHopf ν a₀ w H →
+                ∀ (t : ℝ), 0 ≤ t → v t =ᵐ[MeasureTheory.volume.restrict SingularClosure.unitCube] w t
+TYPE_END:QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN
+'QuasiFeffermanB.TWO_LH_EQUAL_OF_POSITIVE_FLOW_TRACE_AND_SERRIN' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

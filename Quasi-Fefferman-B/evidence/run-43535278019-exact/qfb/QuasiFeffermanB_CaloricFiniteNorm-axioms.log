@@ -1,0 +1,80 @@
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_nonneg
+QuasiFeffermanB.finiteTimeL2_nonneg : ∀ (T : ℝ) (f : ℝ → ℝ), 0 ≤ QuasiFeffermanB.finiteTimeL2 T f
+TYPE_END:QuasiFeffermanB.finiteTimeL2_nonneg
+'QuasiFeffermanB.finiteTimeL2_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_sq
+QuasiFeffermanB.finiteTimeL2_sq : ∀ (T : ℝ),
+  0 ≤ T → ∀ (f : ℝ → ℝ), QuasiFeffermanB.finiteTimeL2 T f ^ 2 = ∫ (t : ℝ) in 0..T, f t ^ 2
+TYPE_END:QuasiFeffermanB.finiteTimeL2_sq
+'QuasiFeffermanB.finiteTimeL2_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloric_continuous_memLp_two
+@QuasiFeffermanB.caloric_continuous_memLp_two : ∀ {f : ℝ → ℝ} {T : ℝ},
+  ContinuousOn f (Set.Icc 0 T) → MeasureTheory.MemLp f 2 (MeasureTheory.volume.restrict (Set.Icc 0 T))
+TYPE_END:QuasiFeffermanB.caloric_continuous_memLp_two
+'QuasiFeffermanB.caloric_continuous_memLp_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_cauchy
+QuasiFeffermanB.finiteTimeL2_cauchy : ∀ (T : ℝ),
+  0 ≤ T →
+    ∀ (f g : ℝ → ℝ),
+      ContinuousOn f (Set.Icc 0 T) →
+        ContinuousOn g (Set.Icc 0 T) →
+          (∀ t ∈ Set.Icc 0 T, 0 ≤ f t) →
+            (∀ t ∈ Set.Icc 0 T, 0 ≤ g t) →
+              ∫ (t : ℝ) in 0..T, f t * g t ≤ QuasiFeffermanB.finiteTimeL2 T f * QuasiFeffermanB.finiteTimeL2 T g
+TYPE_END:QuasiFeffermanB.finiteTimeL2_cauchy
+'QuasiFeffermanB.finiteTimeL2_cauchy' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_mono
+QuasiFeffermanB.finiteTimeL2_mono : ∀ (T : ℝ),
+  0 ≤ T →
+    ∀ (f g : ℝ → ℝ),
+      ContinuousOn f (Set.Icc 0 T) →
+        ContinuousOn g (Set.Icc 0 T) →
+          (∀ t ∈ Set.Icc 0 T, 0 ≤ f t) →
+            (∀ t ∈ Set.Icc 0 T, f t ≤ g t) → QuasiFeffermanB.finiteTimeL2 T f ≤ QuasiFeffermanB.finiteTimeL2 T g
+TYPE_END:QuasiFeffermanB.finiteTimeL2_mono
+'QuasiFeffermanB.finiteTimeL2_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_add_le
+QuasiFeffermanB.finiteTimeL2_add_le : ∀ (T : ℝ),
+  0 ≤ T →
+    ∀ (f g : ℝ → ℝ),
+      ContinuousOn f (Set.Icc 0 T) →
+        ContinuousOn g (Set.Icc 0 T) →
+          (∀ t ∈ Set.Icc 0 T, 0 ≤ f t) →
+            (∀ t ∈ Set.Icc 0 T, 0 ≤ g t) →
+              (QuasiFeffermanB.finiteTimeL2 T fun t => f t + g t) ≤
+                QuasiFeffermanB.finiteTimeL2 T f + QuasiFeffermanB.finiteTimeL2 T g
+TYPE_END:QuasiFeffermanB.finiteTimeL2_add_le
+'QuasiFeffermanB.finiteTimeL2_add_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_const_mul
+QuasiFeffermanB.finiteTimeL2_const_mul : ∀ (T c : ℝ),
+  0 ≤ T →
+    0 ≤ c → ∀ (f : ℝ → ℝ), (QuasiFeffermanB.finiteTimeL2 T fun t => c * f t) = c * QuasiFeffermanB.finiteTimeL2 T f
+TYPE_END:QuasiFeffermanB.finiteTimeL2_const_mul
+'QuasiFeffermanB.finiteTimeL2_const_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.finiteTimeL2_sum_le
+@QuasiFeffermanB.finiteTimeL2_sum_le : ∀ {ι : Type u_1} (s : Finset ι) (T : ℝ),
+  0 ≤ T →
+    ∀ (f : ι → ℝ → ℝ),
+      (∀ i ∈ s, ContinuousOn (f i) (Set.Icc 0 T)) →
+        (∀ i ∈ s, ∀ t ∈ Set.Icc 0 T, 0 ≤ f i t) →
+          (QuasiFeffermanB.finiteTimeL2 T fun t => ∑ i ∈ s, f i t) ≤ ∑ i ∈ s, QuasiFeffermanB.finiteTimeL2 T (f i)
+TYPE_END:QuasiFeffermanB.finiteTimeL2_sum_le
+'QuasiFeffermanB.finiteTimeL2_sum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CALORIC_VOLTERRA_L2_BOUND
+QuasiFeffermanB.CALORIC_VOLTERRA_L2_BOUND : ∀ (ν κ T : ℝ) (f : ℝ → ℝ),
+  0 < ν →
+    0 < κ →
+      0 ≤ T →
+        ContinuousOn f (Set.Icc 0 T) →
+          (∀ t ∈ Set.Icc 0 T, 0 ≤ f t) →
+            QuasiFeffermanB.finiteTimeL2 T (QuasiFeffermanB.caloricVolterra ν κ f) ≤ (∫ (t : ℝ) in 0..T, f t) / √(2 * ν)
+TYPE_END:QuasiFeffermanB.CALORIC_VOLTERRA_L2_BOUND
+'QuasiFeffermanB.CALORIC_VOLTERRA_L2_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.FINITE_NONNEGATIVE_CONVOLUTION_L1
+QuasiFeffermanB.FINITE_NONNEGATIVE_CONVOLUTION_L1 : ∀ (r s t : Finset SingularClosure.Frequency)
+  (a b : SingularClosure.Frequency → ℝ),
+  (∀ (k : SingularClosure.Frequency), 0 ≤ a k) →
+    (∀ (k : SingularClosure.Frequency), 0 ≤ b k) →
+      (∀ k ∉ t, b k = 0) → ∑ k ∈ r, ∑ p ∈ s, a p * b (k - p) ≤ (∑ p ∈ s, a p) * ∑ q ∈ t, b q
+TYPE_END:QuasiFeffermanB.FINITE_NONNEGATIVE_CONVOLUTION_L1
+'QuasiFeffermanB.FINITE_NONNEGATIVE_CONVOLUTION_L1' depends on axioms: [propext, Classical.choice, Quot.sound]

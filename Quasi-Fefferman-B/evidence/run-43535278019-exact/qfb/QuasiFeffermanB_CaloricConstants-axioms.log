@@ -1,0 +1,37 @@
+TYPE_BEGIN:QuasiFeffermanB.caloricBilinearConstant_pos
+QuasiFeffermanB.caloricBilinearConstant_pos : ∀ (ν : ℝ), 0 < ν → 0 < QuasiFeffermanB.caloricBilinearConstant ν
+TYPE_END:QuasiFeffermanB.caloricBilinearConstant_pos
+'QuasiFeffermanB.caloricBilinearConstant_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricBilinearConstant_sq
+QuasiFeffermanB.caloricBilinearConstant_sq : ∀ (ν : ℝ),
+  0 < ν → QuasiFeffermanB.caloricBilinearConstant ν ^ 2 = 1 / (8 * ν)
+TYPE_END:QuasiFeffermanB.caloricBilinearConstant_sq
+'QuasiFeffermanB.caloricBilinearConstant_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricHeatBudget_nonneg
+QuasiFeffermanB.caloricHeatBudget_nonneg : ∀ (ν Q : ℝ), 0 ≤ Q → 0 ≤ QuasiFeffermanB.caloricHeatBudget ν Q
+TYPE_END:QuasiFeffermanB.caloricHeatBudget_nonneg
+'QuasiFeffermanB.caloricHeatBudget_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricHeatBudget_sq
+QuasiFeffermanB.caloricHeatBudget_sq : ∀ (ν Q : ℝ), 0 < ν → QuasiFeffermanB.caloricHeatBudget ν Q ^ 2 = Q ^ 2 / ν
+TYPE_END:QuasiFeffermanB.caloricHeatBudget_sq
+'QuasiFeffermanB.caloricHeatBudget_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT
+QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT : ∀ (ν Q : ℝ),
+  0 < ν →
+    0 ≤ Q →
+      Q ^ 2 < ν ^ 2 / 2 → 4 * QuasiFeffermanB.caloricBilinearConstant ν * QuasiFeffermanB.caloricHeatBudget ν Q < 1
+TYPE_END:QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT
+'QuasiFeffermanB.STRICT_CALORIC_DISCRIMINANT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET
+QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET : ∀ (X : ℝ → ℝ) (ν Q T : ℝ),
+  0 < ν →
+    0 ≤ Q →
+      Q ^ 2 < ν ^ 2 / 2 →
+        ContinuousOn X (Set.Icc 0 T) →
+          X 0 = 0 →
+            (∀ t ∈ Set.Icc 0 T, 0 ≤ X t) →
+              (∀ t ∈ Set.Icc 0 T,
+                  X t ≤ QuasiFeffermanB.caloricHeatBudget ν Q + QuasiFeffermanB.caloricBilinearConstant ν * X t ^ 2) →
+                ∀ t ∈ Set.Icc 0 T, X t ^ 2 ≤ 4 * Q ^ 2 / ν
+TYPE_END:QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET
+'QuasiFeffermanB.STRICT_CALORIC_QUADRATIC_BUDGET' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,3 +1,45 @@
+# Quasi-Fefferman-B: verified R10 assembly
+
+```text
+!=! QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_MOMENTUM
+!=! QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE
+!=! QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED
+!!!! UNCONDITIONAL_CLOSURE_OF_THE_FROZEN_ROOT
+
+EXACT_TYPE = QuasiFeffermanB.QuasiFeffermanBStatement
+COMPILED_COMMIT = f70d495e952c952ccc87a390194dd1621643a233
+EXTERNAL_RUN = 43535278019
+EXTERNAL_PLATFORM = Ubuntu 24.04 / Lean 4.33.0
+MODULES = 74 PASS / 0 FAIL / 0 BLOCKED
+EXACT_DECLARATION_AUDITS = 409 / 409
+ALLOWED_AXIOMS = {propext, Classical.choice, Quot.sound}
+SORRYAX = 0
+UNAPPROVED_AXIOMS = 0
+ROOT_STATEMENT_AND_CUTOFF = SOURCE_IDENTICAL_TO_R8
+LOCAL_LEAN_EXECUTIONS = 0
+```
+
+[Exact external CI evidence](https://github.com/randogelist/Methlib/actions/runs/43535278019)
+
+- [Root source](QUASI_FEFFERMAN_B.lean): byte-identical to the audited `Endpoints/Root.lean`.
+- [Exact theorem and complete declaration ledger](QUASI_FEFFERMAN_B_A_TIER.txt).
+- [External native Windows runner](run.cmd): Lean 4.33.0, root import closure by default, two independent processes; `--all` selects all 79 project modules.
+- [Evidence verification](evidence/run-43535278019-verification.json).
+- [Complete unmodified external evidence](evidence/run-43535278019-exact).
+- [Cached assembly history](evidence/r10-cached-assembly-history.json).
+
+```lean
+import QuasiFeffermanB.Endpoints.Root
+#check @QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED
+#print axioms QuasiFeffermanB.QUASI_FEFFERMAN_B_COMPOSED
+```
+
+`SOURCE_GRAPH = 79 canonical project modules; ROOT_SCOPE = 74.`
+`OPTIONAL_FIVE_MODULES = outside this root compilation result.`
+`WINDOWS_RUNNER = prepared external reproduction entry; native Windows execution not performed in this session.`
+
+## Historical assembly records
+
 # Quasi-Fefferman-B: R10 cached assembly
 
 ```text

@@ -1,0 +1,6 @@
+TYPE_BEGIN:QuasiFeffermanB.FINITE_LATTICE_GAUSSIAN_ENVELOPE
+QuasiFeffermanB.FINITE_LATTICE_GAUSSIAN_ENVELOPE : ∀ (N : ℕ) (t : ℝ),
+  0 < t →
+    ∑ k ∈ SingularClosure.cutoffModes N, Real.exp (-Real.pi * t * ↑(SingularClosure.galerkinFreqSq k)) ≤ t ^ (-3 / 2)
+TYPE_END:QuasiFeffermanB.FINITE_LATTICE_GAUSSIAN_ENVELOPE
+'QuasiFeffermanB.FINITE_LATTICE_GAUSSIAN_ENVELOPE' depends on axioms: [propext, Classical.choice, Quot.sound]

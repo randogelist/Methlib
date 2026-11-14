@@ -1,0 +1,13 @@
+TYPE_BEGIN:QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN
+QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN : ∀ (N : ℕ) (c : SingularClosure.FourierCoeff),
+  (∀ p ∉ SingularClosure.cutoffModes N, ∀ (i : Fin 3), c p i = 0) →
+    SingularClosure.SpectralSolenoidal c →
+      ∀ (k : SingularClosure.Frequency),
+        k ≠ 0 →
+          QuasiFeffermanB.complexVecNorm
+              (SingularClosure.coefficientLeray k (SingularClosure.coefficientTransport N c k)) ≤
+            SingularClosure.criticalFrequencyWeight k / 2 *
+              ∑ p ∈ SingularClosure.cutoffModes N,
+                QuasiFeffermanB.complexVecNorm (c p) * QuasiFeffermanB.complexVecNorm (c (k - p))
+TYPE_END:QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN
+'QuasiFeffermanB.COEFFICIENT_TRANSPORT_SHARP_EUCLIDEAN' depends on axioms: [propext, Classical.choice, Quot.sound]

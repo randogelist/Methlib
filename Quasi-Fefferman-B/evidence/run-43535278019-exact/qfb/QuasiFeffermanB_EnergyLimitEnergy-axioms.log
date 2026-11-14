@@ -1,0 +1,70 @@
+TYPE_BEGIN:QuasiFeffermanB.energy_modal_eventually_lower
+QuasiFeffermanB.energy_modal_eventually_lower : ∀ (q : ℤ) (F : ℕ → SingularClosure.CriticalSobolev q)
+  (v : SingularClosure.CriticalSobolev q),
+  (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+      Filter.Tendsto (fun n => SingularClosure.criticalCoeff q (F n) k i) Filter.atTop
+        (nhds (SingularClosure.criticalCoeff q v k i))) →
+    ∀ (ε : ℝ), 0 < ε → ∀ᶠ (n : ℕ) in Filter.atTop, ‖v‖ ^ 2 - ε ≤ ‖F n‖ ^ 2
+TYPE_END:QuasiFeffermanB.energy_modal_eventually_lower
+'QuasiFeffermanB.energy_modal_eventually_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_modal_lintegral_le_of_eventual_budget
+QuasiFeffermanB.energy_modal_lintegral_le_of_eventual_budget : ∀ (q : ℤ) (μ : MeasureTheory.Measure ℝ)
+  (F : ℕ → ℝ → SingularClosure.CriticalSobolev q) (W : ℝ → SingularClosure.CriticalSobolev q) (B : ℝ),
+  (∀ (n : ℕ), MeasureTheory.AEStronglyMeasurable (F n) μ) →
+    (∀ᵐ (t : ℝ) ∂μ,
+        ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+          Filter.Tendsto (fun n => SingularClosure.criticalCoeff q (F n t) k i) Filter.atTop
+            (nhds (SingularClosure.criticalCoeff q (W t) k i))) →
+      (∀ᶠ (n : ℕ) in Filter.atTop, ∫⁻ (t : ℝ), ENNReal.ofReal (‖F n t‖ ^ 2) ∂μ ≤ ENNReal.ofReal B) →
+        ∫⁻ (t : ℝ), ENNReal.ofReal (‖W t‖ ^ 2) ∂μ ≤ ENNReal.ofReal B
+TYPE_END:QuasiFeffermanB.energy_modal_lintegral_le_of_eventual_budget
+'QuasiFeffermanB.energy_modal_lintegral_le_of_eventual_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_MODAL_INTERVAL_BUDGET_LIMIT
+QuasiFeffermanB.ENERGY_MODAL_INTERVAL_BUDGET_LIMIT : ∀ (μ : MeasureTheory.Measure ℝ) (c : ℝ),
+  0 < c →
+    ∀ (F₀ : ℕ → SingularClosure.CriticalSobolev 0) (v : SingularClosure.CriticalSobolev 0)
+      (F₂ : ℕ → ℝ → SingularClosure.CriticalSobolev 2) (W : ℝ → SingularClosure.CriticalSobolev 2) (B : ℕ → ℝ) (b : ℝ),
+      (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+          Filter.Tendsto (fun n => SingularClosure.criticalCoeff 0 (F₀ n) k i) Filter.atTop
+            (nhds (SingularClosure.criticalCoeff 0 v k i))) →
+        (∀ (n : ℕ), MeasureTheory.AEStronglyMeasurable (F₂ n) μ) →
+          (∀ (n : ℕ), MeasureTheory.Integrable (fun t => ‖F₂ n t‖ ^ 2) μ) →
+            MeasureTheory.Integrable (fun t => ‖W t‖ ^ 2) μ →
+              (∀ᵐ (t : ℝ) ∂μ,
+                  ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                    Filter.Tendsto (fun n => SingularClosure.criticalCoeff 2 (F₂ n t) k i) Filter.atTop
+                      (nhds (SingularClosure.criticalCoeff 2 (W t) k i))) →
+                (∀ (n : ℕ), ‖F₀ n‖ ^ 2 + c * ∫ (t : ℝ), ‖F₂ n t‖ ^ 2 ∂μ ≤ B n) →
+                  Filter.Tendsto B Filter.atTop (nhds b) → ‖v‖ ^ 2 + c * ∫ (t : ℝ), ‖W t‖ ^ 2 ∂μ ≤ b
+TYPE_END:QuasiFeffermanB.ENERGY_MODAL_INTERVAL_BUDGET_LIMIT
+'QuasiFeffermanB.ENERGY_MODAL_INTERVAL_BUDGET_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.GALERKIN_INTERVAL_ENERGY_IDENTITY
+@QuasiFeffermanB.GALERKIN_INTERVAL_ENERGY_IDENTITY : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) {s t : ℝ},
+  0 ≤ s →
+    s ≤ t →
+      SingularClosure.coefficientEnergy N (g.coeff t) +
+          2 * ν * ∫ (r : ℝ) in s..t, SingularClosure.coefficientDissipation N (g.coeff r) =
+        SingularClosure.coefficientEnergy N (g.coeff s)
+TYPE_END:QuasiFeffermanB.GALERKIN_INTERVAL_ENERGY_IDENTITY
+'QuasiFeffermanB.GALERKIN_INTERVAL_ENERGY_IDENTITY' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_INTERVAL_LIMIT
+QuasiFeffermanB.ENERGY_GALERKIN_INTERVAL_LIMIT : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (U : ℝ → SingularClosure.TorusSobolev 0) (W : ℝ → SingularClosure.CriticalSobolev 2) (s t : ℝ),
+      0 ≤ s →
+        s ≤ t →
+          (∀ r ∈ Set.Icc s t,
+              ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                Filter.Tendsto (fun n => (g n).coeff r k i) Filter.atTop (nhds (↑(U r) k i))) →
+            MeasureTheory.MemLp W 2 (MeasureTheory.volume.restrict (Set.Icc s t)) →
+              (∀ᵐ (r : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc s t),
+                  SingularClosure.criticalCoeff 2 (W r) = ↑(U r)) →
+                Filter.Tendsto (fun n => SingularClosure.coefficientEnergy (N n) ((g n).coeff s)) Filter.atTop
+                    (nhds (‖U s‖ ^ 2)) →
+                  ‖U t‖ ^ 2 + 2 * ν * ∫ (r : ℝ) in Set.Icc s t, ‖W r‖ ^ 2 ≤ ‖U s‖ ^ 2
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_INTERVAL_LIMIT
+'QuasiFeffermanB.ENERGY_GALERKIN_INTERVAL_LIMIT' depends on axioms: [propext, Classical.choice, Quot.sound]

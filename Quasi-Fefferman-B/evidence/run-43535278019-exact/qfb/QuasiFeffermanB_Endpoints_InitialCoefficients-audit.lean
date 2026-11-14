@@ -1,0 +1,8 @@
+import QuasiFeffermanB.Endpoints.InitialCoefficients
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS"
+#check @QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS"
+#print axioms QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS

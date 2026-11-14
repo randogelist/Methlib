@@ -1,0 +1,23 @@
+import QuasiFeffermanB.EnergyTestDecay
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energy_positive_iteratedDerivative_smooth"
+#check @QuasiFeffermanB.energy_positive_iteratedDerivative_smooth
+#eval IO.println "TYPE_END:QuasiFeffermanB.energy_positive_iteratedDerivative_smooth"
+#print axioms QuasiFeffermanB.energy_positive_iteratedDerivative_smooth
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn"
+#check @QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn
+#eval IO.println "TYPE_END:QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn"
+#print axioms QuasiFeffermanB.energyTest_fourierDecayConstant_continuousOn
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY"
+#check @QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY"
+#print axioms QuasiFeffermanB.ENERGY_TEST_UNIFORM_SOBOLEV_DECAY
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT"
+#check @QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT
+#eval IO.println "TYPE_END:QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT"
+#print axioms QuasiFeffermanB.ENERGY_TEST_UNIFORM_DERIVATIVE_MAJORANT

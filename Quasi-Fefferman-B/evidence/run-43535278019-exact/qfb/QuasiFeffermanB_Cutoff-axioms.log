@@ -1,0 +1,24 @@
+TYPE_BEGIN:QuasiFeffermanB.CUTOFF_NONNEG
+QuasiFeffermanB.CUTOFF_NONNEG : ∀ (a : ↥SingularClosure.CriticalPhysicalL2) {ν : ℝ},
+  0 < ν → 0 ≤ QuasiFeffermanB.cutoff a ν
+TYPE_END:QuasiFeffermanB.CUTOFF_NONNEG
+'QuasiFeffermanB.CUTOFF_NONNEG' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CUTOFF_ZERO
+QuasiFeffermanB.CUTOFF_ZERO : ∀ (ν : ℝ), QuasiFeffermanB.cutoff 0 ν = 0
+TYPE_END:QuasiFeffermanB.CUTOFF_ZERO
+'QuasiFeffermanB.CUTOFF_ZERO' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CUTOFF_POS
+QuasiFeffermanB.CUTOFF_POS : ∀ (a : ↥SingularClosure.CriticalPhysicalL2),
+  a ≠ 0 → ∀ {ν : ℝ}, 0 < ν → 0 < QuasiFeffermanB.cutoff a ν
+TYPE_END:QuasiFeffermanB.CUTOFF_POS
+'QuasiFeffermanB.CUTOFF_POS' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.SAFE_CUTOFF_GT
+QuasiFeffermanB.SAFE_CUTOFF_GT : ∀ (a : ↥SingularClosure.CriticalPhysicalL2),
+  a ≠ 0 → ∀ {ν : ℝ}, 0 < ν → QuasiFeffermanB.cutoff a ν < QuasiFeffermanB.safeCutoff a ν
+TYPE_END:QuasiFeffermanB.SAFE_CUTOFF_GT
+'QuasiFeffermanB.SAFE_CUTOFF_GT' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_SLICE_CUTOFF
+QuasiFeffermanB.ENERGY_SLICE_CUTOFF : ∀ (a : ↥SingularClosure.CriticalPhysicalL2) (ν E : ℝ),
+  ‖a‖ ^ 2 / 2 = E → QuasiFeffermanB.cutoff a ν = E ^ 2 / (2 * Real.pi ^ 2 * ν ^ 5)
+TYPE_END:QuasiFeffermanB.ENERGY_SLICE_CUTOFF
+'QuasiFeffermanB.ENERGY_SLICE_CUTOFF' depends on axioms: [propext, Classical.choice, Quot.sound]

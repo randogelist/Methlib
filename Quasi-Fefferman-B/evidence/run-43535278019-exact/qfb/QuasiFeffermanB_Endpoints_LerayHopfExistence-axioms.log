@@ -1,0 +1,7 @@
+TYPE_BEGIN:QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE
+QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ↥SingularClosure.CriticalPhysicalL2),
+      QuasiFeffermanB.EnergySigmaZero a → ∃ u G, SingularClosure.CriticalLerayHopf ν a u G
+TYPE_END:QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE
+'QuasiFeffermanB.Q01_LERAY_HOPF_EXISTENCE' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,68 @@
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalH1State_eq
+QuasiFeffermanB.energyGlobalH1State_eq : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (t : ℝ)
+  (w : SingularClosure.CriticalSobolev 2),
+  SingularClosure.criticalCoeff 2 w = ↑(U t) → QuasiFeffermanB.energyGlobalH1State U t = w
+TYPE_END:QuasiFeffermanB.energyGlobalH1State_eq
+'QuasiFeffermanB.energyGlobalH1State_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalH1State_ae_eq
+QuasiFeffermanB.energyGlobalH1State_ae_eq : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) → QuasiFeffermanB.energyGlobalH1State U =ᵐ[μ] W
+TYPE_END:QuasiFeffermanB.energyGlobalH1State_ae_eq
+'QuasiFeffermanB.energyGlobalH1State_ae_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalH1State_memLp
+QuasiFeffermanB.energyGlobalH1State_memLp : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  MeasureTheory.MemLp W 2 μ →
+    (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) →
+      MeasureTheory.MemLp (QuasiFeffermanB.energyGlobalH1State U) 2 μ
+TYPE_END:QuasiFeffermanB.energyGlobalH1State_memLp
+'QuasiFeffermanB.energyGlobalH1State_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalGradient_memLp
+QuasiFeffermanB.energyGlobalGradient_memLp : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  MeasureTheory.MemLp W 2 μ →
+    (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) →
+      MeasureTheory.MemLp (QuasiFeffermanB.energyGlobalGradientL2 U) 2 μ
+TYPE_END:QuasiFeffermanB.energyGlobalGradient_memLp
+'QuasiFeffermanB.energyGlobalGradient_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyPhysicalVelocity_eq_H1
+QuasiFeffermanB.energyPhysicalVelocity_eq_H1 : ∀ (U : ℝ → SingularClosure.TorusSobolev 0) (t : ℝ)
+  (w : SingularClosure.CriticalSobolev 2),
+  SingularClosure.criticalCoeff 2 w = ↑(U t) →
+    QuasiFeffermanB.energyPhysicalVelocityL2 U t =
+      QuasiFeffermanB.zeroSobolevPhysicalL2 ((SingularClosure.criticalSobolevLower 0 2 ⋯) w)
+TYPE_END:QuasiFeffermanB.energyPhysicalVelocity_eq_H1
+'QuasiFeffermanB.energyPhysicalVelocity_eq_H1' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalPhysical_spatial_H1
+QuasiFeffermanB.energyGlobalPhysical_spatial_H1 : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralReality ↑(U t)) →
+    (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralMeanZero ↑(U t)) →
+      (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) →
+        ∀ᵐ (t : ℝ) ∂μ,
+          SingularClosure.CriticalPhysicalH1 (QuasiFeffermanB.energyPhysicalVelocity U t)
+            (QuasiFeffermanB.energyGlobalGradient U t)
+TYPE_END:QuasiFeffermanB.energyGlobalPhysical_spatial_H1
+'QuasiFeffermanB.energyGlobalPhysical_spatial_H1' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalGradient_energy_ae
+QuasiFeffermanB.energyGlobalGradient_energy_ae : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralReality ↑(U t)) →
+    (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralMeanZero ↑(U t)) →
+      (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) →
+        (fun t => SingularClosure.criticalGradientEnergy (QuasiFeffermanB.energyGlobalGradient U t)) =ᵐ[μ] fun t =>
+          ‖W t‖ ^ 2
+TYPE_END:QuasiFeffermanB.energyGlobalGradient_energy_ae
+'QuasiFeffermanB.energyGlobalGradient_energy_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energyGlobalGradient_energy_integrable
+QuasiFeffermanB.energyGlobalGradient_energy_integrable : ∀ (U : ℝ → SingularClosure.TorusSobolev 0)
+  (W : ℝ → SingularClosure.CriticalSobolev 2) (μ : MeasureTheory.Measure ℝ),
+  MeasureTheory.MemLp W 2 μ →
+    (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralReality ↑(U t)) →
+      (∀ᵐ (t : ℝ) ∂μ, SingularClosure.SpectralMeanZero ↑(U t)) →
+        (∀ᵐ (t : ℝ) ∂μ, SingularClosure.criticalCoeff 2 (W t) = ↑(U t)) →
+          MeasureTheory.Integrable
+            (fun t => SingularClosure.criticalGradientEnergy (QuasiFeffermanB.energyGlobalGradient U t)) μ
+TYPE_END:QuasiFeffermanB.energyGlobalGradient_energy_integrable
+'QuasiFeffermanB.energyGlobalGradient_energy_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]

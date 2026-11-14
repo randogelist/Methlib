@@ -1,0 +1,50 @@
+TYPE_BEGIN:QuasiFeffermanB.caloric_primitive_continuousOn
+@QuasiFeffermanB.caloric_primitive_continuousOn : ∀ {f : ℝ → ℝ} {T : ℝ},
+  0 ≤ T → ContinuousOn f (Set.Icc 0 T) → ContinuousOn (fun t => ∫ (s : ℝ) in 0..t, f s) (Set.Icc 0 T)
+TYPE_END:QuasiFeffermanB.caloric_primitive_continuousOn
+'QuasiFeffermanB.caloric_primitive_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloric_primitive_hasDerivAt
+@QuasiFeffermanB.caloric_primitive_hasDerivAt : ∀ {f : ℝ → ℝ} {T t : ℝ},
+  ContinuousOn f (Set.Icc 0 T) → t ∈ Set.Ioo 0 T → HasDerivAt (fun x => ∫ (s : ℝ) in 0..x, f s) (f t) t
+TYPE_END:QuasiFeffermanB.caloric_primitive_hasDerivAt
+'QuasiFeffermanB.caloric_primitive_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricVolterra_kernel
+QuasiFeffermanB.caloricVolterra_kernel : ∀ (ν κ : ℝ) (f : ℝ → ℝ) (t : ℝ),
+  QuasiFeffermanB.caloricVolterra ν κ f t = ∫ (s : ℝ) in 0..t, κ * Real.exp (-ν * κ ^ 2 * (t - s)) * f s
+TYPE_END:QuasiFeffermanB.caloricVolterra_kernel
+'QuasiFeffermanB.caloricVolterra_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricVolterra_continuousOn
+QuasiFeffermanB.caloricVolterra_continuousOn : ∀ (ν κ T : ℝ) (f : ℝ → ℝ),
+  0 ≤ T → ContinuousOn f (Set.Icc 0 T) → ContinuousOn (QuasiFeffermanB.caloricVolterra ν κ f) (Set.Icc 0 T)
+TYPE_END:QuasiFeffermanB.caloricVolterra_continuousOn
+'QuasiFeffermanB.caloricVolterra_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricVolterra_hasDerivAt
+QuasiFeffermanB.caloricVolterra_hasDerivAt : ∀ (ν κ T : ℝ) (f : ℝ → ℝ),
+  ContinuousOn f (Set.Icc 0 T) →
+    ∀ t ∈ Set.Ioo 0 T,
+      HasDerivAt (QuasiFeffermanB.caloricVolterra ν κ f) (κ * f t - ν * κ ^ 2 * QuasiFeffermanB.caloricVolterra ν κ f t)
+        t
+TYPE_END:QuasiFeffermanB.caloricVolterra_hasDerivAt
+'QuasiFeffermanB.caloricVolterra_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.caloricVolterra_nonneg_le_primitive
+QuasiFeffermanB.caloricVolterra_nonneg_le_primitive : ∀ (ν κ T : ℝ) (f : ℝ → ℝ),
+  0 ≤ ν →
+    0 ≤ κ →
+      0 ≤ T →
+        ContinuousOn f (Set.Icc 0 T) →
+          (∀ t ∈ Set.Icc 0 T, 0 ≤ f t) →
+            ∀ t ∈ Set.Icc 0 T,
+              0 ≤ QuasiFeffermanB.caloricVolterra ν κ f t ∧
+                QuasiFeffermanB.caloricVolterra ν κ f t ≤ κ * ∫ (s : ℝ) in 0..t, f s
+TYPE_END:QuasiFeffermanB.caloricVolterra_nonneg_le_primitive
+'QuasiFeffermanB.caloricVolterra_nonneg_le_primitive' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND
+QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND : ∀ (ν κ T : ℝ) (f : ℝ → ℝ),
+  0 < ν →
+    0 < κ →
+      0 ≤ T →
+        ContinuousOn f (Set.Icc 0 T) →
+          (∀ t ∈ Set.Icc 0 T, 0 ≤ f t) →
+            ∫ (t : ℝ) in 0..T, QuasiFeffermanB.caloricVolterra ν κ f t ^ 2 ≤ (∫ (t : ℝ) in 0..T, f t) ^ 2 / (2 * ν)
+TYPE_END:QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND
+'QuasiFeffermanB.CALORIC_VOLTERRA_L2_SQUARE_BOUND' depends on axioms: [propext, Classical.choice, Quot.sound]

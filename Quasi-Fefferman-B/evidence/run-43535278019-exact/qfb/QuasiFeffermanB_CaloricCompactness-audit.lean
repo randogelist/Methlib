@@ -1,0 +1,33 @@
+import QuasiFeffermanB.CaloricCompactness
+set_option pp.universes false
+set_option pp.explicit false
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_le_succ"
+#check @QuasiFeffermanB.caloric_criticalEnergy_le_succ
+#eval IO.println "TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_le_succ"
+#print axioms QuasiFeffermanB.caloric_criticalEnergy_le_succ
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian"
+#check @QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian
+#eval IO.println "TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian"
+#print axioms QuasiFeffermanB.caloric_criticalEnergy_four_eq_laplacian
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy"
+#check @QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy
+#eval IO.println "TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy"
+#print axioms QuasiFeffermanB.caloric_criticalEnergy_one_le_enstrophy
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian"
+#check @QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian
+#eval IO.println "TYPE_END:QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian"
+#print axioms QuasiFeffermanB.caloric_criticalEnergy_three_le_laplacian
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND"
+#check @QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND
+#eval IO.println "TYPE_END:QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND"
+#print axioms QuasiFeffermanB.GALERKIN_CRITICAL_RHS_SQUARE_OF_ENSTROPHY_BOUND
+
+#eval IO.println "TYPE_BEGIN:QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY"
+#check @QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY
+#eval IO.println "TYPE_END:QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY"
+#print axioms QuasiFeffermanB.GALERKIN_CRITICAL_COMPACTNESS_OF_ENSTROPHY

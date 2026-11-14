@@ -1,0 +1,35 @@
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY
+QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY : ∀ (ν : ℝ),
+  0 < ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R : ℝ),
+      (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+        ∀ (U : ℝ → SingularClosure.TorusSobolev 0),
+          (∀ (k : SingularClosure.Frequency) (i : Fin 3), ContinuousOn (fun t => ↑(U t) k i) (Set.Ici 0)) →
+            (∀ (r : ℝ),
+                0 ≤ r →
+                  ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                    Filter.Tendsto (fun n => (g n).coeff r k i) Filter.atTop (nhds (↑(U r) k i))) →
+              (∀ (T : ℝ),
+                  0 ≤ T →
+                    ∃ z,
+                      Filter.Tendsto (fun n => (g n).energyTimeH0L2 T) Filter.atTop (nhds z) ∧
+                        ∀ᵐ (r : ℝ) ∂MeasureTheory.volume.restrict (Set.Icc 0 T), ↑↑z r = U r) →
+                (∀ (t : ℝ),
+                    0 ≤ t →
+                      SingularClosure.physicalEnergy (QuasiFeffermanB.energyPeriodicVelocity U t) +
+                          2 * ν *
+                            ∫ (r : ℝ) in 0..t,
+                              SingularClosure.criticalGradientEnergy (QuasiFeffermanB.energyGlobalGradient U r) ≤
+                        R ^ 2) ∧
+                  ∀ (T : ℝ),
+                    0 < T →
+                      ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioc 0 T),
+                        ∀ t ∈ Set.Icc s T,
+                          SingularClosure.physicalEnergy (QuasiFeffermanB.energyPeriodicVelocity U t) +
+                              2 * ν *
+                                ∫ (r : ℝ) in s..t,
+                                  SingularClosure.criticalGradientEnergy (QuasiFeffermanB.energyGlobalGradient U r) ≤
+                            SingularClosure.physicalEnergy (QuasiFeffermanB.energyPeriodicVelocity U s)
+TYPE_END:QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY
+'QuasiFeffermanB.ENERGY_PERIODIC_LIMIT_ENERGY' depends on axioms: [propext, Classical.choice, Quot.sound]

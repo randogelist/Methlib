@@ -1,0 +1,187 @@
+TYPE_BEGIN:QuasiFeffermanB.lh_ae_good_energy_time
+@QuasiFeffermanB.lh_ae_good_energy_time : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioi 0), QuasiFeffermanB.LHGoodEnergyTime ν v G s
+TYPE_END:QuasiFeffermanB.lh_ae_good_energy_time
+'QuasiFeffermanB.lh_ae_good_energy_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restart_representative_norm_sq
+QuasiFeffermanB.restart_representative_norm_sq : ∀ (f : SingularClosure.Field),
+  MeasureTheory.MemLp f 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    ‖SingularClosure.criticalL2Representative f‖ ^ 2 = SingularClosure.physicalEnergy f
+TYPE_END:QuasiFeffermanB.restart_representative_norm_sq
+'QuasiFeffermanB.restart_representative_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restart_representative_inner
+QuasiFeffermanB.restart_representative_inner : ∀ (f g : SingularClosure.Field),
+  MeasureTheory.MemLp f 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    MeasureTheory.MemLp g 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+      inner ℝ (SingularClosure.criticalL2Representative f) (SingularClosure.criticalL2Representative g) =
+        SingularClosure.physicalFieldInner f g
+TYPE_END:QuasiFeffermanB.restart_representative_inner
+'QuasiFeffermanB.restart_representative_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound
+@QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound : ∀ {ι : Type u_1} {E : Type u_2} [inst : NormedAddCommGroup E]
+  [inst_1 : InnerProductSpace ℝ E] {l : Filter ι} {f : ι → E} {a : E},
+  Filter.Tendsto (fun i => inner ℝ (f i) a) l (nhds (‖a‖ ^ 2)) →
+    (∀ᶠ (i : ι) in l, ‖f i‖ ^ 2 ≤ ‖a‖ ^ 2) → Filter.Tendsto f l (nhds a)
+TYPE_END:QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound
+'QuasiFeffermanB.strong_tendsto_of_inner_and_norm_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.lh_energy_le_from_start
+@QuasiFeffermanB.lh_energy_le_from_start : ∀ {ν : ℝ} {v : SingularClosure.Velocity}
+  {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  0 ≤ ν →
+    ∀ {s t : ℝ},
+      (∀ (r : ℝ),
+          s ≤ r →
+            SingularClosure.physicalEnergy (v r) +
+                2 * ν * ∫ (q : ℝ) in s..r, SingularClosure.criticalGradientEnergy (G q) ≤
+              SingularClosure.physicalEnergy (v s)) →
+        s ≤ t → SingularClosure.physicalEnergy (v t) ≤ SingularClosure.physicalEnergy (v s)
+TYPE_END:QuasiFeffermanB.lh_energy_le_from_start
+'QuasiFeffermanB.lh_energy_le_from_start' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.lh_energy_le_at_good_time
+@QuasiFeffermanB.lh_energy_le_at_good_time : ∀ {ν : ℝ} {v : SingularClosure.Velocity}
+  {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  0 ≤ ν →
+    ∀ {s t : ℝ},
+      QuasiFeffermanB.LHGoodEnergyTime ν v G s →
+        s ≤ t → SingularClosure.physicalEnergy (v t) ≤ SingularClosure.physicalEnergy (v s)
+TYPE_END:QuasiFeffermanB.lh_energy_le_at_good_time
+'QuasiFeffermanB.lh_energy_le_at_good_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.lh_strong_right_trace_of_energy_start
+@QuasiFeffermanB.lh_strong_right_trace_of_energy_start : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ {s : ℝ},
+        0 ≤ s →
+          (∀ (r : ℝ),
+              s ≤ r →
+                SingularClosure.physicalEnergy (v r) +
+                    2 * ν * ∫ (q : ℝ) in s..r, SingularClosure.criticalGradientEnergy (G q) ≤
+                  SingularClosure.physicalEnergy (v s)) →
+            Filter.Tendsto (fun t => SingularClosure.criticalL2Representative (v t)) (nhdsWithin s (Set.Ioi s))
+              (nhds (SingularClosure.criticalL2Representative (v s)))
+TYPE_END:QuasiFeffermanB.lh_strong_right_trace_of_energy_start
+'QuasiFeffermanB.lh_strong_right_trace_of_energy_start' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.lh_strong_right_trace_at_good_time
+@QuasiFeffermanB.lh_strong_right_trace_at_good_time : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ {s : ℝ},
+        QuasiFeffermanB.LHGoodEnergyTime ν v G s →
+          Filter.Tendsto (fun t => SingularClosure.criticalL2Representative (v t)) (nhdsWithin s (Set.Ioi s))
+            (nhds (SingularClosure.criticalL2Representative (v s)))
+TYPE_END:QuasiFeffermanB.lh_strong_right_trace_at_good_time
+'QuasiFeffermanB.lh_strong_right_trace_at_good_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.restart_representative_edist
+QuasiFeffermanB.restart_representative_edist : ∀ (f : SingularClosure.Field),
+  MeasureTheory.MemLp f 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+    ∀ (a : ↥SingularClosure.CriticalPhysicalL2),
+      edist (SingularClosure.criticalL2Representative f) a =
+        MeasureTheory.eLpNorm (f - ↑↑a) 2 (MeasureTheory.volume.restrict SingularClosure.unitCube)
+TYPE_END:QuasiFeffermanB.restart_representative_edist
+'QuasiFeffermanB.restart_representative_edist' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right
+QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right : ∀ (s : ℝ),
+  Filter.Tendsto (fun t => t + s) (nhdsWithin 0 (Set.Ioi 0)) (nhdsWithin s (Set.Ioi s))
+TYPE_END:QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right
+'QuasiFeffermanB.timeTranslate_tendsto_nhdsWithin_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start
+@QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ {s : ℝ},
+        0 ≤ s →
+          (∀ (r : ℝ),
+              s ≤ r →
+                SingularClosure.physicalEnergy (v r) +
+                    2 * ν * ∫ (q : ℝ) in s..r, SingularClosure.criticalGradientEnergy (G q) ≤
+                  SingularClosure.physicalEnergy (v s)) →
+            Filter.Tendsto
+              (fun t =>
+                MeasureTheory.eLpNorm
+                  (QuasiFeffermanB.timeTranslate s v t - ↑↑(SingularClosure.criticalL2Representative (v s))) 2
+                  (MeasureTheory.volume.restrict SingularClosure.unitCube))
+              (nhdsWithin 0 (Set.Ioi 0)) (nhds 0)
+TYPE_END:QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start
+'QuasiFeffermanB.lh_shifted_strong_trace_of_energy_start' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.lh_shifted_strong_trace_at_good_time
+@QuasiFeffermanB.lh_shifted_strong_trace_at_good_time : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ {s : ℝ},
+        QuasiFeffermanB.LHGoodEnergyTime ν v G s →
+          Filter.Tendsto
+            (fun t =>
+              MeasureTheory.eLpNorm
+                (QuasiFeffermanB.timeTranslate s v t - ↑↑(SingularClosure.criticalL2Representative (v s))) 2
+                (MeasureTheory.volume.restrict SingularClosure.unitCube))
+            (nhdsWithin 0 (Set.Ioi 0)) (nhds 0)
+TYPE_END:QuasiFeffermanB.lh_shifted_strong_trace_at_good_time
+'QuasiFeffermanB.lh_shifted_strong_trace_at_good_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START
+@QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ {s : ℝ},
+        0 ≤ s →
+          (∀ (r : ℝ),
+              s ≤ r →
+                SingularClosure.physicalEnergy (v r) +
+                    2 * ν * ∫ (q : ℝ) in s..r, SingularClosure.criticalGradientEnergy (G q) ≤
+                  SingularClosure.physicalEnergy (v s)) →
+            SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))
+              (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)
+TYPE_END:QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START
+'QuasiFeffermanB.LH_RESTART_FROM_ENERGY_START' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME
+@QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2}
+  {v : SingularClosure.Velocity} {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ {s : ℝ},
+        QuasiFeffermanB.LHGoodEnergyTime ν v G s →
+          SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))
+            (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)
+TYPE_END:QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME
+'QuasiFeffermanB.LH_RESTART_AT_GOOD_TIME' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_RESTART_AE
+@QuasiFeffermanB.LH_RESTART_AE : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2} {v : SingularClosure.Velocity}
+  {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioi 0),
+        SingularClosure.CriticalPhysicalH1 (v s) (G s) ∧
+          SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))
+            (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)
+TYPE_END:QuasiFeffermanB.LH_RESTART_AE
+'QuasiFeffermanB.LH_RESTART_AE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_RESTART_AE_Ioc
+@QuasiFeffermanB.LH_RESTART_AE_Ioc : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2} {v : SingularClosure.Velocity}
+  {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ (T : ℝ),
+        ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioc 0 T),
+          SingularClosure.CriticalPhysicalH1 (v s) (G s) ∧
+            SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))
+              (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)
+TYPE_END:QuasiFeffermanB.LH_RESTART_AE_Ioc
+'QuasiFeffermanB.LH_RESTART_AE_Ioc' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.LH_RESTART_AE_Ioo
+@QuasiFeffermanB.LH_RESTART_AE_Ioo : ∀ {ν : ℝ} {a₀ : ↥SingularClosure.CriticalPhysicalL2} {v : SingularClosure.Velocity}
+  {G : ℝ → SingularClosure.Vec → SingularClosure.Vec →L[ℝ] SingularClosure.Vec},
+  SingularClosure.CriticalLerayHopf ν a₀ v G →
+    0 ≤ ν →
+      ∀ (T : ℝ),
+        ∀ᵐ (s : ℝ) ∂MeasureTheory.volume.restrict (Set.Ioo 0 T),
+          SingularClosure.CriticalPhysicalH1 (v s) (G s) ∧
+            SingularClosure.CriticalLerayHopf ν (SingularClosure.criticalL2Representative (v s))
+              (QuasiFeffermanB.timeTranslate s v) (QuasiFeffermanB.timeTranslate s G)
+TYPE_END:QuasiFeffermanB.LH_RESTART_AE_Ioo
+'QuasiFeffermanB.LH_RESTART_AE_Ioo' depends on axioms: [propext, Classical.choice, Quot.sound]

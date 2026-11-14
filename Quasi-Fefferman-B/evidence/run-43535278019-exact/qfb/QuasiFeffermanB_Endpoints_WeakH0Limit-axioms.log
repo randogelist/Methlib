@@ -1,0 +1,71 @@
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_LP_WEAK_TENDSTO
+QuasiFeffermanB.ENERGY_LP_WEAK_TENDSTO : ∀ (F : ℕ → ↥SingularClosure.FourierVectorSequence)
+  (v : ↥SingularClosure.FourierVectorSequence) (R : ℝ),
+  0 ≤ R →
+    (∀ (n : ℕ), ‖F n‖ ≤ R) →
+      ‖v‖ ≤ R →
+        (∀ (ki : SingularClosure.FourierIndex), Filter.Tendsto (fun n => ↑(F n) ki) Filter.atTop (nhds (↑v ki))) →
+          ∀ (w : ↥SingularClosure.FourierVectorSequence),
+            Filter.Tendsto (fun n => inner ℂ (F n) w) Filter.atTop (nhds (inner ℂ v w))
+TYPE_END:QuasiFeffermanB.ENERGY_LP_WEAK_TENDSTO
+'QuasiFeffermanB.ENERGY_LP_WEAK_TENDSTO' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO
+QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO : ∀ (F : ℕ → SingularClosure.TorusSobolev 0) (v : SingularClosure.TorusSobolev 0)
+  (R : ℝ),
+  0 ≤ R →
+    (∀ (n : ℕ), ‖F n‖ ≤ R) →
+      ‖v‖ ≤ R →
+        (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+            Filter.Tendsto (fun n => ↑(F n) k i) Filter.atTop (nhds (↑v k i))) →
+          ∀ (w : SingularClosure.TorusSobolev 0),
+            Filter.Tendsto (fun n => inner ℂ (F n) w) Filter.atTop (nhds (inner ℂ v w))
+TYPE_END:QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO
+'QuasiFeffermanB.ENERGY_H0_WEAK_TENDSTO' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_H0_LIMIT_NORM_LE
+QuasiFeffermanB.ENERGY_H0_LIMIT_NORM_LE : ∀ (F : ℕ → SingularClosure.TorusSobolev 0)
+  (v : SingularClosure.TorusSobolev 0) (R : ℝ),
+  (∀ (n : ℕ), ‖F n‖ ≤ R) →
+    (∀ (k : SingularClosure.Frequency) (i : Fin 3), Filter.Tendsto (fun n => ↑(F n) k i) Filter.atTop (nhds (↑v k i))) →
+      ‖v‖ ≤ R
+TYPE_END:QuasiFeffermanB.ENERGY_H0_LIMIT_NORM_LE
+'QuasiFeffermanB.ENERGY_H0_LIMIT_NORM_LE' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_TENDSTO
+QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_TENDSTO : ∀ (F : ℕ → SingularClosure.TorusSobolev 0)
+  (v : SingularClosure.TorusSobolev 0) (R : ℝ),
+  0 ≤ R →
+    (∀ (n : ℕ), ‖F n‖ ≤ R) →
+      ‖v‖ ≤ R →
+        (∀ (k : SingularClosure.Frequency) (i : Fin 3),
+            Filter.Tendsto (fun n => ↑(F n) k i) Filter.atTop (nhds (↑v k i))) →
+          ∀ (φ : ↥SingularClosure.PhysicalCubeL2),
+            Filter.Tendsto (fun n => inner ℝ (QuasiFeffermanB.energyH0PhysicalMap (F n)) φ) Filter.atTop
+              (nhds (inner ℝ (QuasiFeffermanB.energyH0PhysicalMap v) φ))
+TYPE_END:QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_TENDSTO
+'QuasiFeffermanB.ENERGY_PHYSICAL_L2_WEAK_TENDSTO' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.energy_galerkin_physical_L2
+@QuasiFeffermanB.energy_galerkin_physical_L2 : ∀ {ν : ℝ} {a : SingularClosure.Field} {N : ℕ}
+  (g : SingularClosure.GalerkinSolution ν a N) (r : ℝ),
+  0 ≤ r →
+    SingularClosure.criticalL2Representative (g.velocity r) = QuasiFeffermanB.energyH0PhysicalMap (g.sobolevState 0 r)
+TYPE_END:QuasiFeffermanB.energy_galerkin_physical_L2
+'QuasiFeffermanB.energy_galerkin_physical_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+TYPE_BEGIN:QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO
+QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO : ∀ (ν : ℝ),
+  0 ≤ ν →
+    ∀ (a : ℕ → SingularClosure.Field) (N : ℕ → ℕ) (g : (n : ℕ) → SingularClosure.GalerkinSolution ν (a n) (N n))
+      (R : ℝ),
+      0 ≤ R →
+        (∀ (n : ℕ), SingularClosure.coefficientEnergy (N n) ((g n).coeff 0) ≤ R ^ 2) →
+          ∀ (U : ℝ → SingularClosure.TorusSobolev 0),
+            (∀ (t : ℝ),
+                0 ≤ t →
+                  ∀ (k : SingularClosure.Frequency) (i : Fin 3),
+                    Filter.Tendsto (fun n => (g n).coeff t k i) Filter.atTop (nhds (↑(U t) k i))) →
+              ∀ (r : ℝ),
+                0 ≤ r →
+                  ∀ (φ : SingularClosure.Field),
+                    MeasureTheory.MemLp φ 2 (MeasureTheory.volume.restrict SingularClosure.unitCube) →
+                      Filter.Tendsto (fun n => SingularClosure.physicalFieldInner ((g n).velocity r) φ) Filter.atTop
+                        (nhds (SingularClosure.physicalFieldInner (QuasiFeffermanB.energyPeriodicVelocity U r) φ))
+TYPE_END:QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO
+'QuasiFeffermanB.ENERGY_GALERKIN_PHYSICAL_PAIRING_TENDSTO' depends on axioms: [propext, Classical.choice, Quot.sound]
