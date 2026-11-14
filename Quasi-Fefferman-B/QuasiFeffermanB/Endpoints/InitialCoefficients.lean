@@ -30,6 +30,8 @@ theorem ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS
     · subst k
       apply Filter.Eventually.of_forall
       intro n
+      change (energyDatumGalerkinFamily ν hν a (σ n)).coeff 0 0 i =
+        datumFourierCoeff (a.val : Field) 0 i
       rw [energyDatumGalerkinFamily_initial]
       simp only [cutoffCoeff, if_neg (cutoffModes_zero_not_mem _),
         Pi.zero_apply, a.property.fourier_constraints.2.2 i]

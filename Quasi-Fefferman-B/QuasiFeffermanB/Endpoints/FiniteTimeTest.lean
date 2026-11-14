@@ -53,7 +53,8 @@ theorem energy_finiteSynthesis_joint_continuousOn
       ((hc k i).comp continuous_fst.continuousOn (fun z hz => hz))
   have hunit : ContinuousOn (fun _ : ℝ × Vec => (unitVector i : Vec))
       {z | z.1 ∈ I} := continuousOn_const
-  simpa only [Pi.smul_apply] using hscalar.smul hunit
+  intro z hz
+  exact Filter.Tendsto.smul (hscalar z hz) (hunit z hz)
 
 /-- The actual finite NSE vector field preserves coordinate continuity.
 Every denominator in the Leray multiplier is a constant in time. -/

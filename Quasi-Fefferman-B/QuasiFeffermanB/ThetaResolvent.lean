@@ -70,7 +70,7 @@ theorem FINITE_LATTICE_HEAT_RESOLVENT
         Real.exp (-(Real.pi * (galerkinFreqSq k : ℝ)) * t) / (galerkinFreqSq k : ℝ)) =
       ∑ k ∈ cutoffModes N,
         Real.exp (-(Real.pi * (galerkinFreqSq k : ℝ)) * t) / (galerkinFreqSq k : ℝ) := by
-    field_simp [Real.pi_ne_zero]
+    rw [← mul_assoc, mul_one_div_cancel Real.pi_ne_zero, one_mul]
   rw [hcancel] at hmul
   nlinarith
 
@@ -87,7 +87,7 @@ theorem NORMALIZED_GAUSSIAN_HALF_INTEGRAL (r : ℝ) (hr : 0 < r) :
       Real.sqrt_mul Real.pi_pos.le, Real.sqrt_sq hr.le]
     field_simp [ne_of_gt hr, ne_of_gt (Real.sqrt_pos.mpr Real.pi_pos)]
   norm_num only [show (1 / 2 : ℝ) - 1 = -1 / 2 by norm_num] at h
-  exact h.trans hval
+  simpa only [neg_div] using h.trans hval
 
 /-- The exact finite lattice row bound needed by the weighted Schur test.
 Only finite-sum integration is used; no infinite Fourier quadratic form is
@@ -149,9 +149,11 @@ theorem FINITE_LATTICE_RESOLVENT_BOUND (N : ℕ) (r : ℝ) (hr : 0 < r) :
         1 / ((galerkinFreqSq k : ℝ) * (r ^ 2 + (galerkinFreqSq k : ℝ)))) =
       ∑ k ∈ cutoffModes N,
         1 / ((galerkinFreqSq k : ℝ) * (r ^ 2 + (galerkinFreqSq k : ℝ))) := by
-    field_simp [Real.pi_ne_zero]
+    rw [← mul_assoc, mul_one_div_cancel Real.pi_ne_zero, one_mul]
   rw [hcancel] at hmul
-  convert hmul using 1 <;> ring
+  calc
+    _ ≤ Real.pi * ((2 * Real.pi) * (1 / r)) := hmul
+    _ = 2 * Real.pi ^ 2 / r := by ring
 
 end
 end QuasiFeffermanB

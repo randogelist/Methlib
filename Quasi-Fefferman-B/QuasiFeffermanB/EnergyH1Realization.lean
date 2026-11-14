@@ -32,10 +32,12 @@ theorem energy_derivative_weighted_bound (j : Fin 3) (c : FourierCoeff)
     (ki : FourierIndex) :
     ‖criticalWeightedCoeff 0 (spectralMultiplier (derivativeSymbol j) c) ki‖ ≤
       ‖criticalWeightedCoeff 2 c ki‖ := by
-  simp only [criticalWeightedCoeff_norm, zpow_zero, one_mul, zpow_ofNat,
-    criticalHalfWeight_sq, spectralMultiplier, norm_mul]
-  exact mul_le_mul_of_nonneg_right (energy_derivativeSymbol_norm_le_critical j ki.1)
-    (norm_nonneg _)
+  have hmul : ‖derivativeSymbol j ki.1‖ * ‖c ki.1 ki.2‖ ≤
+      criticalFrequencyWeight ki.1 * ‖c ki.1 ki.2‖ :=
+    mul_le_mul_of_nonneg_right (energy_derivativeSymbol_norm_le_critical j ki.1)
+      (norm_nonneg (c ki.1 ki.2))
+  simpa only [criticalWeightedCoeff_norm, zpow_zero, zpow_ofNat, pow_zero,
+    one_mul, criticalHalfWeight_sq, spectralMultiplier, norm_mul] using hmul
 
 def energyDerivativeValue (j : Fin 3) (c : CriticalSobolev 2) : CriticalSobolev 0 :=
   criticalSobolevOfCoeff 0 (spectralMultiplier (derivativeSymbol j) (criticalCoeff 2 c))
@@ -90,9 +92,9 @@ theorem energyDerivative_cutoff (j : Fin 3) (c : CriticalSobolev 2) (N : ℕ) :
 
 def energyPhysicalColumn (j : Fin 3) : CriticalSobolev 2 →L[ℝ] PhysicalCubeL2 :=
   torusToPhysicalCubeL2.comp
-    ((torusSobolevL2.toContinuousLinearMap.comp
+    (((torusSobolevL2.toContinuousLinearMap.comp
       criticalH0Equiv.toContinuousLinearEquiv.toContinuousLinearMap).restrictScalars ℝ).comp
-      ((energyDerivative j).restrictScalars ℝ)
+      ((energyDerivative j).restrictScalars ℝ))
 
 @[simp] theorem energyPhysicalColumn_eq (j : Fin 3) (c : CriticalSobolev 2) :
     energyPhysicalColumn j c = zeroSobolevPhysicalL2 (energyDerivative j c) := rfl
@@ -186,7 +188,8 @@ theorem energyPhysicalGradient_finite (c : CriticalSobolev 2)
     hall] with x hx hy
   rw [hx]
   simp_rw [hy]
-  ext y
+  apply ContinuousLinearMap.ext
+  intro y
   simp only [ContinuousLinearMap.sum_apply, ContinuousLinearMap.smulRight_apply]
   change (∑ j : Fin 3, y j •
     fderiv ℝ (finiteSynthesis N (criticalCoeff 2 c)) x (unitVector j)) = _
@@ -203,7 +206,8 @@ theorem ENERGY_FOURIER_H1_PHYSICAL_REALIZATION (c : CriticalSobolev 2)
   let v : PhysicalCubeL2 :=
     zeroSobolevPhysicalL2 (criticalSobolevLower 0 2 (by norm_num) c)
   have hvcoeff : datumFourierCoeff (v : Field) = criticalCoeff 2 c := by
-    rw [v, zeroSobolevPhysicalL2_fourierCoeff _
+    dsimp only [v]
+    rw [zeroSobolevPhysicalL2_fourierCoeff _
       (by simpa only [criticalSobolevLower_coeff] using hr)
       (by simpa only [criticalSobolevLower_coeff] using hz), criticalSobolevLower_coeff]
   have hvel := physicalL2_cutoff_eLpNorm_tendsto (v : Field) (Lp.memLp v)
@@ -226,7 +230,7 @@ theorem ENERGY_FOURIER_H1_PHYSICAL_REALIZATION (c : CriticalSobolev 2)
       (fun N => finiteSynthesis_contDiff N _),
       (fun N => finiteSynthesis_periodic N _), ?_, ?_⟩⟩
   · simpa only [hvcoeff] using hvel
-  · simpa only [heq, sub_self, enorm_zero] using hgradnorm
+  · simpa only [Function.comp_def, heq, sub_self, enorm_zero] using hgradnorm
 
 theorem energyPhysicalGradient_column (c : CriticalSobolev 2) (j : Fin 3) :
     (fun x => energyPhysicalGradient c x (unitVector j))
@@ -246,7 +250,8 @@ theorem energyDerivative_sum_norm_sq (c : CriticalSobolev 2)
     apply Summable.of_nonneg_of_le (fun _ => Complex.normSq_nonneg _) _ hs
     intro ki
     rw [← critical_sum_derivative_normSq (criticalCoeff 2 c) ki.1 ki.2]
-    exact Finset.single_le_sum (fun l _ => Complex.normSq_nonneg _)
+    exact Finset.single_le_sum (fun l _ => Complex.normSq_nonneg
+      (spectralMultiplier (derivativeSymbol l) (criticalCoeff 2 c) ki.1 ki.2))
       (Finset.mem_univ j)
   simp_rw [criticalSobolev_norm_sq 0, zpow_zero, one_mul, energyDerivative_coeff]
   rw [← Summable.tsum_finsetSum (fun j _ => hd j), criticalSobolev_norm_sq 2]

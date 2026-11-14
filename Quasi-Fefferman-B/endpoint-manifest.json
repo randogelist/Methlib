@@ -51,7 +51,7 @@
     "QuasiFeffermanB/CaloricFourierEstimate.lean": "af746d11aa8e8b142052a814489db995a196b0520314dd02c9ea2668c6ea2ff5",
     "QuasiFeffermanB/CaloricFrequencyGeometry.lean": "b6bb0a5cb0c734e62ba0aadc786d9c654c22cb8482438a7eaafe3489a6ff86a1",
     "QuasiFeffermanB/CaloricGalerkinBudget.lean": "7dc18a2500ff53777e774b4775ca9582f21cbf37836c0cb0e805ce0499702cbd",
-    "QuasiFeffermanB/CaloricGalerkinMajorant.lean": "aff803feeea382deb1810c5fc443afd1bcc34017f0a69d47241123079db384ab",
+    "QuasiFeffermanB/CaloricGalerkinMajorant.lean": "57e0265b2cb4b867977803ec1742242b8f2a1f256b4ef99c9f9e6d386da1e881",
     "QuasiFeffermanB/CaloricH1Regularity.lean": "b343b66c6a05c7522baf06668fd1ad899f03106e0ea2c4fd73d9c2f86b08b17a",
     "QuasiFeffermanB/CaloricH2.lean": "88c0f35613c592ffc915a638a3ec8a370bd16b7102aa887c53e21834eb46f570",
     "QuasiFeffermanB/CaloricKernel.lean": "fe77d9830bc2d38411588ec4802edd593aa0d5872211d266cc0b561051d22a08",
@@ -64,8 +64,8 @@
     "QuasiFeffermanB/EndpointEnergy.lean": "7169438351c4e92a206bff99ee92eb1a882e39d6bc78cd8e974992443d47cbd2",
     "QuasiFeffermanB/EndpointRestart.lean": "2c2e8ebb8ce4c14b220ee9786929b09f9dbbbfe2b02eb4667be3f3da30c9c0d7",
     "QuasiFeffermanB/Endpoints/CaloricBudget.lean": "cc5b78965699e80c612756aed478b5b36359a471b6f2cfc30686fcaeabd44461",
-    "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
-    "QuasiFeffermanB/Endpoints/InitialCoefficients.lean": "243327d3daa81a5b16e559cecb4df96bdc6cae14d42440ad4e8a372b36c27d1e",
+    "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean": "b664b92ef0a1e36ccce1dfaf371957569801d0ae5f1f7427a591e5dcdee12846",
+    "QuasiFeffermanB/Endpoints/InitialCoefficients.lean": "82847d0a07f908e034e9e1ffe498dd6b4068e9b9e28071744e97030b56f63d36",
     "QuasiFeffermanB/Endpoints/LerayHopfExistence.lean": "9f1073863d87c24cb9baceb8f04055b31d2a43afe6563225a85ff741765281b4",
     "QuasiFeffermanB/Endpoints/LimitEnergy.lean": "27babc0e6f15d59354e2cbcb93be7c7a746a7131325c5057208cd6a183de894b",
     "QuasiFeffermanB/Endpoints/PhysicalMomentum.lean": "d2e122aab16d773a42629464eb99cb86b2a5ddb7bac571a4d0585534929faf19",
@@ -79,7 +79,7 @@
     "QuasiFeffermanB/EnergyGlobalCoefficient.lean": "b85625a315432baae29cf6504a2e53c8efc9f3706d9bc0cbbc8e91c7d7e3c359",
     "QuasiFeffermanB/EnergyGlobalLimit.lean": "490e16ef97f36c8f78fa23faafd3274a976899f8e61acba7571c5d8eec5a2c87",
     "QuasiFeffermanB/EnergyGlobalPhysical.lean": "49e137be886e3b078989bd7b19788f62f5aa9f1a5613601d5745ea8dbdf48fe6",
-    "QuasiFeffermanB/EnergyH1Realization.lean": "559ef4c95ab497bb6c2a22d5f91adc914125da6093c133126e018c0d54543700",
+    "QuasiFeffermanB/EnergyH1Realization.lean": "d2d1ed37d4cfb0c560c46e2f92ba447ab65e60b32f3a8267160d28189c39e124",
     "QuasiFeffermanB/EnergyLimitCompatibility.lean": "e0c5a9aa7a1280b61a93d8dbfd176a2206687a1a29c5a7bf44af82055df0fd7b",
     "QuasiFeffermanB/EnergyLimitEnergy.lean": "3c20f7fcb2c578c92a7f3fb5d9d3ee845993a5792e43232534ab23b353e2f4dc",
     "QuasiFeffermanB/EnergyModalEquation.lean": "3ff6b9a5921e4040813265fcbc0d6eda407d99253269e88cead4faca0cd43202",
@@ -99,7 +99,7 @@
     "QuasiFeffermanB/LHRestart.lean": "2e631205d82a320acfddcc2c684cd5ed1154fd88acd9cbab7f9202ea4a530ecc",
     "QuasiFeffermanB/MeanPreservation.lean": "ef14fc3d203f3e8dfc7011552043316da68f172d2b98730fca641b4e89ef59c6",
     "QuasiFeffermanB/PhysicalFourierL2.lean": "f78a325b69e367bd239b62add16398870502d946f5f6989c09537f505ea76c7e",
-    "QuasiFeffermanB/PhysicalH1Admission.lean": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+    "QuasiFeffermanB/PhysicalH1Admission.lean": "551ef88a9d1144b14f400aeb37975ca13b5b7c8a6a41047de69d51b957ce04b2",
     "QuasiFeffermanB/PressureUniqueness.lean": "1986794e95b477cafa3f6918681d1a1eea6ea8b1469a211f272e757b4924f5c5",
     "QuasiFeffermanB/RegularReference.lean": "da49c63001e8a3a2320cc0e2dc6db801113087bb3f9047d6064b8ed379a9cdb7",
     "QuasiFeffermanB/RootAssembly.lean": "ab58317402d12d1f7bae744b750b97fe87209e69be76f6b8c6bef19d3e1d3f4d",
@@ -110,10 +110,10 @@
     "QuasiFeffermanB/TailChain.lean": "edb75daa799194c41c9bd7a6b4ff6ef0282f03791a647380d32e6c2f4c5fd1ea",
     "QuasiFeffermanB/TailEnergy.lean": "e0e6bf72e6f8985228d0f63960272a23f75cf49da33500aa626dd7256e68191f",
     "QuasiFeffermanB/TailRegularity.lean": "a0c62e4b548013a823edc8941e35b827f23b6c66da6702d2ae002d185a28b63a",
-    "QuasiFeffermanB/TailUniqueness.lean": "60ea0a60cf64feb09f3f6331dcd2cf2eb2df046912783908c9cc9bd6e3953843",
+    "QuasiFeffermanB/TailUniqueness.lean": "104d4b9fa21b4ab57c80f321f32de3cbcf6c40711a49d2dd88c688a7189d69e9",
     "QuasiFeffermanB/ThetaGaussian.lean": "29410a3a0faebda8bf94df94d3a531b771590720f243333345cca55862e699cd",
     "QuasiFeffermanB/ThetaLattice.lean": "817870419769838484c7b3357fb1a455e6435fecd9cd1e670812dbf6b2b0cd40",
-    "QuasiFeffermanB/ThetaResolvent.lean": "7fc98cecdc2468b44c0a09dd0b583aa5c8f70529bf7b8a121d7444a632a71c2a",
+    "QuasiFeffermanB/ThetaResolvent.lean": "e15543d05055d67dfc388da4aa66ba2fba1e44d32ab35a971cce877f69c1cd78",
     "QuasiFeffermanB/ThetaSchur.lean": "716fa291db780e68381db5a8040d3dbd942358b214d585ebb1f205a5e2bc6459",
     "QuasiFeffermanB/TimeTranslate.lean": "aec93551f72b38d8773a215004c3ebb44ea1aab72a905758b5fd13697866cde3",
     "QuasiFeffermanB/ZeroData.lean": "ee74e3e6851f357515323a1619911f319c0fed78d2fd114adb9b0cdc7e8cd7b4"
@@ -297,7 +297,7 @@
     {
       "module": "QuasiFeffermanB.CaloricGalerkinMajorant",
       "source": "QuasiFeffermanB/CaloricGalerkinMajorant.lean",
-      "sha256": "aff803feeea382deb1810c5fc443afd1bcc34017f0a69d47241123079db384ab",
+      "sha256": "57e0265b2cb4b867977803ec1742242b8f2a1f256b4ef99c9f9e6d386da1e881",
       "declarations": [
         "QuasiFeffermanB.finiteModeConvolution_nonneg",
         "QuasiFeffermanB.FINITE_MODE_CONVOLUTION_SUM_LE_CHI0_SQUARE",
@@ -457,7 +457,7 @@
     {
       "module": "QuasiFeffermanB.Endpoints.FiniteTimeTest",
       "source": "QuasiFeffermanB/Endpoints/FiniteTimeTest.lean",
-      "sha256": "cd3641cbfad9cd4e43c1f0bca8bea5371e152e6910d1c2843db938a499470d9e",
+      "sha256": "b664b92ef0a1e36ccce1dfaf371957569801d0ae5f1f7427a591e5dcdee12846",
       "declarations": [
         "QuasiFeffermanB.energy_finiteSynthesis_joint_continuousOn",
         "QuasiFeffermanB.energy_galerkinRhs_coordinate_continuousOn",
@@ -477,7 +477,7 @@
     {
       "module": "QuasiFeffermanB.Endpoints.InitialCoefficients",
       "source": "QuasiFeffermanB/Endpoints/InitialCoefficients.lean",
-      "sha256": "243327d3daa81a5b16e559cecb4df96bdc6cae14d42440ad4e8a372b36c27d1e",
+      "sha256": "82847d0a07f908e034e9e1ffe498dd6b4068e9b9e28071744e97030b56f63d36",
       "declarations": [
         "QuasiFeffermanB.ENERGY_GALERKIN_LIMIT_INITIAL_COEFFICIENTS"
       ],
@@ -640,7 +640,7 @@
     {
       "module": "QuasiFeffermanB.EnergyH1Realization",
       "source": "QuasiFeffermanB/EnergyH1Realization.lean",
-      "sha256": "559ef4c95ab497bb6c2a22d5f91adc914125da6093c133126e018c0d54543700",
+      "sha256": "d2d1ed37d4cfb0c560c46e2f92ba447ab65e60b32f3a8267160d28189c39e124",
       "declarations": [
         "QuasiFeffermanB.energy_derivativeSymbol_norm_le_critical",
         "QuasiFeffermanB.energy_derivative_weighted_bound",
@@ -938,7 +938,7 @@
     {
       "module": "QuasiFeffermanB.PhysicalH1Admission",
       "source": "QuasiFeffermanB/PhysicalH1Admission.lean",
-      "sha256": "3db336a74be6d8c96a4fe8b04b6f8b686421b125d0b48ff7de1f395b9c61ceb0",
+      "sha256": "551ef88a9d1144b14f400aeb37975ca13b5b7c8a6a41047de69d51b957ce04b2",
       "declarations": [
         "QuasiFeffermanB.meanZero_sobolevCutoff_sum",
         "QuasiFeffermanB.physicalH1_weighted_finite_bound",
@@ -1056,7 +1056,7 @@
     {
       "module": "QuasiFeffermanB.TailUniqueness",
       "source": "QuasiFeffermanB/TailUniqueness.lean",
-      "sha256": "60ea0a60cf64feb09f3f6331dcd2cf2eb2df046912783908c9cc9bd6e3953843",
+      "sha256": "104d4b9fa21b4ab57c80f321f32de3cbcf6c40711a49d2dd88c688a7189d69e9",
       "declarations": [
         "QuasiFeffermanB.positiveSmoothNSE_timeTranslate",
         "QuasiFeffermanB.positive_reference_shifted_serrin",
@@ -1100,7 +1100,7 @@
     {
       "module": "QuasiFeffermanB.ThetaResolvent",
       "source": "QuasiFeffermanB/ThetaResolvent.lean",
-      "sha256": "7fc98cecdc2468b44c0a09dd0b583aa5c8f70529bf7b8a121d7444a632a71c2a",
+      "sha256": "e15543d05055d67dfc388da4aa66ba2fba1e44d32ab35a971cce877f69c1cd78",
       "declarations": [
         "QuasiFeffermanB.cutoff_frequency_square_pos",
         "QuasiFeffermanB.FINITE_LATTICE_HEAT_RESOLVENT",

@@ -27,7 +27,8 @@ theorem meanZero_sobolevCutoff_sum (q N : ℕ) (c : FourierCoeff)
   rw [hprod, sobolevCutoffModes, Finset.sum_insert (by
     intro h
     exact ((mem_cutoffModes_iff N 0).mp h).2.1 rfl)]
-  simp only [hz, Complex.normSq_zero, mul_zero, Finset.sum_const_zero, zero_add,
+  have hz0 (i : Fin 3) : c 0 i = 0 := hz i
+  simp only [hz0, Complex.normSq_zero, mul_zero, Finset.sum_const_zero, zero_add,
     criticalEnergy]
 
 theorem physicalH1_weighted_finite_bound
@@ -43,8 +44,8 @@ theorem physicalH1_weighted_finite_bound
       ‖criticalWeightedCoeff 2 (datumFourierCoeff v) ki‖ ^ 2 =
         criticalFrequencyWeight ki.1 ^ (2 : ℕ) *
           Complex.normSq (datumFourierCoeff v ki.1 ki.2) := by
-    rw [criticalWeightedCoeff_norm, mul_pow, criticalHalfWeight_zpow_sq,
-      zpow_natCast, Complex.normSq_eq_norm_sq]
+    simp only [criticalWeightedCoeff_norm, mul_pow, criticalHalfWeight_zpow_sq,
+      zpow_ofNat, Complex.normSq_eq_norm_sq]
   calc
     (∑ ki ∈ S, ‖criticalWeightedCoeff 2 (datumFourierCoeff v) ki‖ ^ 2) ≤
         ∑ ki ∈ sobolevCutoffIndices N,

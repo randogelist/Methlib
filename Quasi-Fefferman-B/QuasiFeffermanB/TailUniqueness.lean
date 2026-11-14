@@ -40,7 +40,8 @@ theorem positiveSmoothNSE_timeTranslate
   }
   intro t ht x
   have hd : timeDerivative (timeTranslate ε v) t x = timeDerivative v (t + ε) x := by
-    simpa only [timeTranslate, sub_neg_eq_add] using
+    change timeDerivative (fun r => v (r + ε)) t x = timeDerivative v (t + ε) x
+    simpa only [sub_neg_eq_add] using
       positive_timeDerivative_translate hv (-ε) t ht
         (by simpa only [sub_neg_eq_add] using hpositive t ht) x
   rw [hd]
@@ -68,7 +69,10 @@ theorem positive_reference_strict_shift_serrin
     apply (htest.eLpNorm_six_toReal_continuousOn (T + ε)).comp
       (continuous_id.add continuous_const).continuousOn
     intro t ht
-    exact ⟨by linarith [ht.1], add_le_add_right ht.2 ε⟩
+    change 0 < t + ε ∧ t + ε ≤ T + ε
+    constructor
+    · linarith only [hε, ht.1]
+    · linarith only [ht.2]
   haveI : IsFiniteMeasure (volume.restrict (Icc (0 : ℝ) T)) :=
     ⟨by simp only [Measure.restrict_apply_univ, Real.volume_Icc]; finiteness⟩
   obtain ⟨C, hC⟩ := isCompact_Icc.exists_bound_of_continuousOn hc

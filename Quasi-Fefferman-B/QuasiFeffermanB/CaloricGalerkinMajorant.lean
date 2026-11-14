@@ -60,7 +60,8 @@ theorem GALERKIN_MODE_DUHAMEL_NORM
   apply (norm_add_le _ _).trans
   apply add_le_add
   · simp only [norm_smul, Real.norm_of_nonneg (Real.exp_pos _).le, complexVecNorm_eq_norm, le_refl]
-  · have h := intervalIntegral.norm_integral_le_integral_norm (f := fun s =>
+  · have h := intervalIntegral.norm_integral_le_integral_norm
+      (μ := (volume : Measure ℝ)) (f := fun s =>
         Real.exp (-(ν * (2 * Real.pi) ^ 2 * (galerkinFreqSq k : ℝ)) * (T - s)) •
           (-complexVec (coefficientLeray k (coefficientTransport N (g.coeff s) k)))) hT
     simpa only [norm_smul, norm_neg, Real.norm_of_nonneg (Real.exp_pos _).le,
@@ -83,10 +84,11 @@ theorem GALERKIN_MODE_CALORIC_MAJORANT
     ring
   have hm := GALERKIN_MODE_DUHAMEL_NORM g k hk T hT
   rw [← hw] at hm
-  simp only [neg_mul] at hm
+  simp only [← neg_mul] at hm
   have hpc : ContinuousOn
       (fun s => complexVecNorm (coefficientLeray k (coefficientTransport N (g.coeff s) k))) (Icc 0 T) := by
-    have h := (GALERKIN_COMPLEX_FORCING_CONTINUOUS g k hk).norm.mono (fun t ht => ht.1)
+    have h := (GALERKIN_COMPLEX_FORCING_CONTINUOUS g k hk).norm.mono
+      (show Icc (0 : ℝ) T ⊆ Ici 0 from fun _ ht => ht.1)
     simpa only [norm_neg, complexVecNorm_eq_norm] using h
   have hfc := (GALERKIN_MODE_CONVOLUTION_CONTINUOUS g k).mono (show Icc (0 : ℝ) T ⊆ Ici 0 from fun _ ht => ht.1)
   have he : Continuous (fun s : ℝ => Real.exp (-ν * criticalFrequencyWeight k ^ 2 * (T - s))) := by fun_prop
