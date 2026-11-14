@@ -468,3 +468,78 @@ set_option pp.fullNames true
 #check @QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative
 #eval IO.println "TYPE_END:QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative"
 #print axioms QFA.Assembly.Comparison.restricted_class_eq_singleton_of_eq_on_nonnegative
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization"
+#check @QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization"
+#print axioms QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint"
+#check @QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint"
+#print axioms QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticChain.exists_profile_of_compactData"
+#check @QFA.Assembly.AnalyticChain.exists_profile_of_compactData
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticChain.exists_profile_of_compactData"
+#print axioms QFA.Assembly.AnalyticChain.exists_profile_of_compactData
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.AnalyticChain.exists_absorption_of_compactData"
+#check @QFA.Assembly.AnalyticChain.exists_absorption_of_compactData
+#eval IO.println "TYPE_END:QFA.Assembly.AnalyticChain.exists_absorption_of_compactData"
+#print axioms QFA.Assembly.AnalyticChain.exists_absorption_of_compactData
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc"
+#check @QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc"
+#print axioms QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative"
+#check @QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative"
+#print axioms QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable"
+#check @QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable"
+#print axioms QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.comparisonData_of_restartData"
+#check @QFA.Assembly.TailComparison.comparisonData_of_restartData
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.comparisonData_of_restartData"
+#print axioms QFA.Assembly.TailComparison.comparisonData_of_restartData
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail"
+#check @QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail"
+#print axioms QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq"
+#check @QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq"
+#print axioms QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton"
+#check @QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton
+#eval IO.println "TYPE_END:QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton"
+#print axioms QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton"
+#check @QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton
+#eval IO.println "TYPE_END:QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton"
+#print axioms QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Chain.quantified_tail_assembly"
+#check @QFA.Assembly.Chain.quantified_tail_assembly
+#eval IO.println "TYPE_END:QFA.Assembly.Chain.quantified_tail_assembly"
+#print axioms QFA.Assembly.Chain.quantified_tail_assembly
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs"
+#check @QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs
+#eval IO.println "TYPE_END:QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs"
+#print axioms QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs
+
+#eval IO.println "TYPE_BEGIN:QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs"
+#check @QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs
+#eval IO.println "TYPE_END:QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs"
+#print axioms QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs

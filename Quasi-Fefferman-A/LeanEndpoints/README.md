@@ -1,3 +1,38 @@
+# QFA composed chain v0.4.0
+
+| Field | Source-preparation snapshot |
+|---|---|
+| Exact audited registry | LE001–LE108; 106 theorems + 2 proof-carrying constructions |
+| Existing verified base | LE001–LE093 |
+| New composed declarations | LE094–LE108; A_TIER_CANDIDATE until matching CI evidence |
+| Canonical import | `QFA.Assembly` |
+| Canonical theorem | `QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs` |
+| Physical root | `B_TIER_ROOT_FORMALIZATION_PENDING` |
+
+Complete indexed derivation: [QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt](QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt).
+Exact interface registry: [chain-manifest.json](chain-manifest.json).
+Post-verification status ledger: [QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt](../QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt).
+
+`AnalyticChain`: LC001 implies LC002; real compact derivative data plus
+LC004/LC001/LC003 yield pointwise nonlinear absorption.
+`TailComparison`: primitive relative-energy data yield tail equality and a
+restricted singleton with actual shifted-reference admission.
+`Chain`: strict energy selection, explicit reference construction and two
+comparison stages compose into a quantified class/reference implication.
+`Integrated`: the analytic output is passed to an explicitly unresolved
+strong-reference construction interface before the quantified chain.
+
+The explicit realization interfaces retain local strong existence, physical
+derivative identification, temporal invariance, fixed positive margin,
+continuation, actual class membership, cross-testing, smoothing and pressure.
+No H2 data are imposed at the selected H1 restart time. The conclusion uses
+parameterized classes and contains no physical smoothness assertion.
+
+Source snapshots retain preparation labels. Successful matching CI evidence
+and the post-verification ledger determine actual declaration status.
+
+## Verified baseline v0.3.0
+
 # QFA Lean endpoints
 
 | Field | Value |

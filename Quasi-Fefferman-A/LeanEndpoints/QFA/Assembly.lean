@@ -2,25 +2,27 @@ import QFA.Assembly.Representation
 import QFA.Assembly.Restart
 import QFA.Assembly.AnalyticInputs
 import QFA.Assembly.Comparison
+import QFA.Assembly.AnalyticChain
+import QFA.Assembly.TailComparison
+import QFA.Assembly.Chain
+import QFA.Assembly.Integrated
 
 /-!
-# QFA reusable endpoint assembly
+# QFA composed endpoint chain, v0.4.0
 
-`import QFA.Assembly` exposes four independent, explicitly scoped interfaces:
+Canonical parameterized implication:
+`QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs`.
 
-* Representation: supplied compact-test derivatives and their L2 Laplacian sum;
-  conditional compact-to-Schwartz and spectral composition.
-* Restart: selected subcritical time, shifted energy profile, weak pairing
-  continuity and strong initial trace.
-* AnalyticInputs: supplied physical norm estimates to scalar absorption.
-* Comparison: a.e. comparison starts and common traces to nonnegative-time
-  equality; singleton only after restriction to the physical time domain.
+LC004 + LC001 + LC003 -> actual real-field pointwise absorption;
+explicit strong-reference construction and class/comparison realization ->
+selected subcritical restart -> comparison -> restricted tail singleton.
+LC002 follows conditionally from LC001 through the spectral moments.
 
-All new proof bodies remain A_TIER_CANDIDATE. The analytic endpoint arguments,
-physical witness identification, weak momentum equation, local/global strong
-solution theory, cross-testing, smoothing and pressure require their stated
-realization proofs. No declaration here asserts the frozen physical QFA root.
+LE001-LE093 retain their verified proof bodies. LE094-LE108 are prepared
+candidates until the matching external compiler and axiom audit pass.
+The post-verification ledger and immutable CI records identify actual status.
+No smoothness, pressure, actual LH realization, or physical QFA root closure
+is inferred from the explicitly parameterized class/reference implication.
 
-External execution: cached native Windows Lean 4.33.0; exact axiom audits.
-Local Lean/Lake executions: zero.
+Execution: cached native Windows Lean 4.33.0 in GitHub Actions only.
 -/

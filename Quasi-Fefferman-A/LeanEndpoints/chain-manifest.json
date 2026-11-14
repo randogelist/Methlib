@@ -1,0 +1,434 @@
+{
+  "version": "0.4.0",
+  "status": "A_TIER_CANDIDATE",
+  "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
+  "source_parent_commit": "e781dbbcf332445c0c9af32b6b4b40fd1626b121",
+  "new_declaration_ids": [
+    "LE094",
+    "LE095",
+    "LE096",
+    "LE097",
+    "LE098",
+    "LE099",
+    "LE100",
+    "LE101",
+    "LE102",
+    "LE103",
+    "LE104",
+    "LE105",
+    "LE106",
+    "LE107",
+    "LE108"
+  ],
+  "canonical_theorem": "QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs",
+  "canonical_scope": "Parameterized class/reference implication; no physical smoothness or PDE assertion",
+  "source_modules": [
+    "QFA.Assembly.AnalyticChain",
+    "QFA.Assembly.TailComparison",
+    "QFA.Assembly.Chain",
+    "QFA.Assembly.Integrated"
+  ],
+  "conditional_analytic_relations": [
+    {
+      "premise": "LC001",
+      "conclusion": "LC002",
+      "declaration": "QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint",
+      "id": "LE095",
+      "status": "A_TIER_CANDIDATE",
+      "unconditional_inhabitant_supplied": false
+    }
+  ],
+  "independent_analytic_premises": [
+    "LC004",
+    "LC001",
+    "LC003"
+  ],
+  "unresolved_realization_inputs": [
+    {
+      "name": "ClassRealization",
+      "covers": [
+        "AO01",
+        "AO02"
+      ],
+      "content": "Existence, initial values/traces, actual energy profile, weak continuity, good starts and restart admission"
+    },
+    {
+      "name": "ReferenceConstructionFromAbsorption",
+      "covers": [
+        "AO05",
+        "AO06"
+      ],
+      "content": "Local strong evolution, correct physical identification, temporal invariant, uniform margin and continuation from pointwise absorption"
+    },
+    {
+      "name": "ReferencePorts.comparison",
+      "covers": [
+        "AO07"
+      ],
+      "content": "Actual primitive finite-horizon relative-energy data with common traces and coefficient/product integrability"
+    },
+    {
+      "name": "ReferencePorts.positive_shift",
+      "covers": [
+        "AO08"
+      ],
+      "content": "Reference status and actual class membership for every positive reference shift"
+    },
+    {
+      "name": "Physical interpretation",
+      "covers": [
+        "AO01",
+        "AO05",
+        "AO08"
+      ],
+      "content": "Actual LH/strong-NSE meanings; smooth representatives, pressure and full equation"
+    }
+  ],
+  "invariants": {
+    "cutoff": "norm(a)^4/(16*pi^2*nu^5)",
+    "cutoff_comparison": "strict",
+    "singleton_domain": "nonnegative-time restrictions",
+    "original_data_uniqueness_assumed": false,
+    "selected_H1_time_replaced_by_H2_time": false,
+    "physical_QFA_root_inferred": false,
+    "local_lean_lake_executions": 0
+  },
+  "declarations": [
+    {
+      "name": "QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 45,
+      "signature": "theorem interpolation_of_nativeSpectralRealization\n    {v L : ComplexL2} {G : Fin 3 → ComplexL2}\n    (hSpectral : NativeSpectralRealization v G L) :\n    gradientEnergy G ^ 2 ≤ velocityEnergy v * laplacianEnergy L",
+      "id": "LE094",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 106,
+      "signature": "theorem interpolationEndpoint_of_spectralEndpoint\n    (hSpectral : WholeSpaceSpectralEndpoint) : WholeSpaceInterpolationEndpoint",
+      "id": "LE095",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.exists_profile_of_compactData",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 115,
+      "signature": "theorem exists_profile_of_compactData\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : RealL2} {G H : Fin 3 → RealL2} {N : ℝ}\n    (hDerivatives : CompactDerivativeData v G H L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →\n        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2)) :\n    SchwartzDerivativeWitnesses (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      NativeSpectralRealization (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      ∃ V : Space →ᵇ ComplexVector,\n        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧\n          ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N",
+      "id": "LE096",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.exists_absorption_of_compactData",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 149,
+      "signature": "theorem exists_absorption_of_compactData\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : RealL2} {G H : Fin 3 → RealL2} {N d ν : ℝ}\n    (hDerivatives : CompactDerivativeData v G H L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →\n        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2))\n    (hν : 0 < ν)\n    (hSmall : (‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2) < 4 * Real.pi ^ 2 * ν ^ 4)\n    (hEnstrophy : d / 2 + ν * ‖L‖ ^ 2 ≤ N) :\n    SchwartzDerivativeWitnesses (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      NativeSpectralRealization (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      ∃ (V : Space →ᵇ ComplexVector) (η : ℝ),\n        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧\n        ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N ∧\n        η = ν - nonlinearCoefficient (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) ∧\n        0 < η ∧\n        4 * Real.pi ^ 2 * N ^ 4 ≤\n          ((‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2)) * (‖L‖ ^ 2) ^ 4 ∧\n        N ≤ (ν - η) * ‖L‖ ^ 2 ∧\n        d + 2 * η * ‖L‖ ^ 2 ≤ 0",
+      "id": "LE097",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 70,
+      "signature": "theorem ComparisonData.eq_on_Icc\n    {u v : ℝ → V} {a₀ : V} {T : ℝ} {g : ℝ → ℝ} {Good : ℝ → Prop}\n    (h : ComparisonData u v a₀ T g Good) (hT : 0 < T) :\n    ∀ t ∈ Icc (0 : ℝ) T, u t = v t",
+      "id": "LE098",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 81,
+      "signature": "theorem ComparableOnNonnegative.eq_on_nonnegative\n    {u v : ℝ → V} {a₀ : V}\n    (h : ComparableOnNonnegative u v a₀) :\n    ∀ t : ℝ, 0 ≤ t → u t = v t",
+      "id": "LE099",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 93,
+      "signature": "theorem restricted_class_eq_singleton_of_comparable\n    {C : Set (ℝ → V)} {v : ℝ → V} {a₀ : V}\n    (hv : v ∈ C)\n    (hcomparisons : ∀ w ∈ C, ComparableOnNonnegative w v a₀) :\n    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' C =\n      {fun t : {t : ℝ // 0 ≤ t} => v t.1}",
+      "id": "LE100",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.comparisonData_of_restartData",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 106,
+      "signature": "theorem comparisonData_of_restartData\n    {ν s T : ℝ}\n    {u v : ℝ → QFA.Representation.RealSpatialL2}\n    {G : ℝ → Fin 3 → QFA.Representation.RealSpatialL2}\n    {g : ℝ → ℝ} {Good : ℝ → Prop}\n    (hrestart : QFA.Assembly.Restart.RestartData ν u G s)\n    (hg : ContinuousOn g (Ioc (0 : ℝ) T))\n    (hg_nonnegative : ∀ t ∈ Ioc (0 : ℝ) T, 0 ≤ g t)\n    (hg_integrable : IntervalIntegrable g volume (0 : ℝ) T)\n    (hprod : IntervalIntegrable\n      (fun r => g r * ‖timeTranslate s u r - v r‖ ^ 2) volume (0 : ℝ) T)\n    (hgood : ∀ᵐ r ∂volume.restrict (Ioo (0 : ℝ) T), Good r)\n    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 (u s)))\n    (hv_initial : v 0 = u s)\n    (hrelative : ∀ r ∈ Ioo (0 : ℝ) T, Good r →\n      ∀ t ∈ Icc r T,\n        ‖timeTranslate s u t - v t‖ ^ 2 ≤ ‖timeTranslate s u r - v r‖ ^ 2 +\n          ∫ q in r..t, g q * ‖timeTranslate s u q - v q‖ ^ 2) :\n    ComparisonData (timeTranslate s u) v (u s) T g Good",
+      "id": "LE101",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 142,
+      "signature": "theorem ComparableOnNonnegative.eq_on_tail\n    {u v : ℝ → V} {a₀ : V} {s : ℝ}\n    (h : ComparableOnNonnegative (timeTranslate s u) v a₀) :\n    ∀ t : ℝ, s ≤ t → u t = v (t - s)",
+      "id": "LE102",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 154,
+      "signature": "theorem ComparableOnNonnegative.further_timeTranslate_eq\n    {u v : ℝ → V} {a₀ : V} {s δ : ℝ}\n    (h : ComparableOnNonnegative (timeTranslate s u) v a₀)\n    (hsδ : s ≤ δ) :\n    (fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1) =\n      (fun t : {t : ℝ // 0 ≤ t} => timeTranslate (δ - s) v t.1)",
+      "id": "LE103",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 172,
+      "signature": "theorem restricted_restart_class_eq_singleton\n    {Admissible : V → Set (ℝ → V)} {u v : ℝ → V} {s δ : ℝ}\n    (hsδ : s < δ)\n    (hsource : ComparableOnNonnegative (timeTranslate s u) v (u s))\n    (hreference : timeTranslate (δ - s) v ∈ Admissible (u δ))\n    (hcomparisons : ∀ w ∈ Admissible (u δ),\n      ComparableOnNonnegative w (timeTranslate (δ - s) v) (u δ)) :\n    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' Admissible (u δ) =\n      {fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1}",
+      "id": "LE104",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton",
+      "source": "QFA/Assembly/Chain.lean",
+      "module": "QFA.Assembly.Chain",
+      "line": 81,
+      "signature": "theorem exists_selected_reference_and_tail_singleton\n    {ν δ : ℝ} {a : RealSpatialL2}\n    {u : Trajectory} {G : GradientTrajectory} {Good : ℝ → Prop}\n    {Admissible : RealSpatialL2 → Set Trajectory}\n    {Reference : RealSpatialL2 → Trajectory → Prop}\n    (hProfile : EnergyProfile ν a u G) (hν : 0 < ν)\n    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hweak : ∀ b : RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))\n    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),\n      Good s ∧ EnergyStart ν u G s)\n    (hRestart : ∀ s : ℝ, 0 < s → Good s → EnergyStart ν u G s →\n      timeTranslate s u ∈ Admissible (u s))\n    (hReference : ∀ s : ℝ, 0 < s → Good s →\n      velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 →\n      EnergyStart ν u G s → RestartData ν u G s →\n        ∃ v : Trajectory, Reference (u s) v)\n    (hPorts : ReferencePorts Admissible Reference) :\n    SelectedTail ν δ Admissible Reference u G Good",
+      "id": "LE105",
+      "step": "D05.02",
+      "application_steps": [
+        "D05.02",
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Chain.quantified_tail_assembly",
+      "source": "QFA/Assembly/Chain.lean",
+      "module": "QFA.Assembly.Chain",
+      "line": 165,
+      "signature": "theorem quantified_tail_assembly\n    {ν : ℝ} {Domain : Set RealSpatialL2}\n    {Admissible : RealSpatialL2 → Set Trajectory}\n    {Reference : RealSpatialL2 → Trajectory → Prop}\n    {Good : Trajectory → GradientTrajectory → ℝ → Prop}\n    (hν : 0 < ν)\n    (hClass : ClassRealization ν Domain Admissible Good)\n    (hReference : SubcriticalReferenceConstruction ν Domain Admissible Reference Good)\n    (hPorts : ReferencePorts Admissible Reference) :\n    ∀ a ∈ Domain,\n      (Admissible a).Nonempty ∧\n      ∀ u ∈ Admissible a,\n        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧\n        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →\n          ∃ G : GradientTrajectory,\n            EnergyProfile ν a u G ∧\n              SelectedTail ν δ Admissible Reference u G (Good u G)",
+      "id": "LE106",
+      "step": "D05.02",
+      "application_steps": [
+        "D05.02",
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs",
+      "source": "QFA/Assembly/Integrated.lean",
+      "module": "QFA.Assembly.Integrated",
+      "line": 69,
+      "signature": "theorem pointwiseAbsorption_of_analytic_inputs\n    {ν : ℝ} (hν : 0 < ν)\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint) :\n    PointwiseAbsorption ν",
+      "id": "LE107",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07",
+        "D07.01",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs",
+      "source": "QFA/Assembly/Integrated.lean",
+      "module": "QFA.Assembly.Integrated",
+      "line": 99,
+      "signature": "theorem quantified_tail_assembly_of_analytic_inputs\n    {ν : ℝ} {Domain : Set RealSpatialL2}\n    {Admissible : RealSpatialL2 → Set Trajectory}\n    {Reference : RealSpatialL2 → Trajectory → Prop}\n    {Good : Trajectory → GradientTrajectory → ℝ → Prop}\n    (hν : 0 < ν)\n    (hClass : Chain.ClassRealization ν Domain Admissible Good)\n    (hPorts : Chain.ReferencePorts Admissible Reference)\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    (hReferenceBackend :\n      ReferenceConstructionFromAbsorption ν Domain Admissible Reference Good) :\n    ∀ a ∈ Domain,\n      (Admissible a).Nonempty ∧\n      ∀ u ∈ Admissible a,\n        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧\n        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →\n          ∃ G : GradientTrajectory,\n            EnergyProfile ν a u G ∧\n              Chain.SelectedTail ν δ Admissible Reference u G (Good u G)",
+      "id": "LE108",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07",
+        "D07.01",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    }
+  ],
+  "mathlib_entrypoints": [
+    {
+      "name": "discrim",
+      "source": "Mathlib/Algebra/QuadraticDiscriminant.lean",
+      "line": 48,
+      "signature": "def discrim [Ring R] (a b c : R) : R",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "7a62a7b18ade09ec1e81d986b870dd17a35fc854c628450de689bee90312ae5e",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/QuadraticDiscriminant.lean#L48"
+    },
+    {
+      "name": "discrim_le_zero",
+      "source": "Mathlib/Algebra/QuadraticDiscriminant.lean",
+      "line": 124,
+      "signature": "theorem discrim_le_zero (h : ∀ x : K, 0 ≤ a * (x * x) + b * x + c) : discrim a b c ≤ 0",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "7a62a7b18ade09ec1e81d986b870dd17a35fc854c628450de689bee90312ae5e",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/Algebra/QuadraticDiscriminant.lean#L124",
+      "id": "EP140"
+    },
+    {
+      "name": "MeasureTheory.Integrable.const_mul",
+      "source": "Mathlib/MeasureTheory/Function/L1Space/Integrable.lean",
+      "line": 1039,
+      "signature": "theorem Integrable.const_mul {f : α → 𝕜} (h : Integrable f μ) (c : 𝕜) :\n    Integrable (fun x => c * f x) μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "86008d68eeb9281c5a382f49c21ed58246c5f9a5f0d5268f8eeadb050b50e70f",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L1039"
+    },
+    {
+      "name": "MeasureTheory.Integrable.sub",
+      "source": "Mathlib/MeasureTheory/Function/L1Space/Integrable.lean",
+      "line": 541,
+      "signature": "theorem Integrable.sub {f g : α → β} (hf : Integrable f μ) (hg : Integrable g μ) :\n    Integrable (f - g) μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "86008d68eeb9281c5a382f49c21ed58246c5f9a5f0d5268f8eeadb050b50e70f",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Function/L1Space/Integrable.lean#L541"
+    },
+    {
+      "name": "MeasureTheory.integral_congr_ae",
+      "source": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "line": 299,
+      "signature": "theorem integral_congr_ae {f g : α → G} (h : f =ᵐ[μ] g) : ∫ a, f a ∂μ = ∫ a, g a ∂μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L299"
+    },
+    {
+      "name": "MeasureTheory.integral_add",
+      "source": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "line": 237,
+      "signature": "theorem integral_add {f g : α → G} (hf : Integrable f μ) (hg : Integrable g μ) :\n    ∫ a, f a + g a ∂μ = ∫ a, f a ∂μ + ∫ a, g a ∂μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L237"
+    },
+    {
+      "name": "MeasureTheory.integral_sub",
+      "source": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "line": 261,
+      "signature": "theorem integral_sub {f g : α → G} (hf : Integrable f μ) (hg : Integrable g μ) :\n    ∫ a, f a - g a ∂μ = ∫ a, f a ∂μ - ∫ a, g a ∂μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L261"
+    },
+    {
+      "name": "MeasureTheory.integral_const_mul",
+      "source": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "line": 288,
+      "signature": "theorem integral_const_mul {L : Type*} [RCLike L] (r : L) (f : α → L) :\n    ∫ a, r * f a ∂μ = r * ∫ a, f a ∂μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L288"
+    },
+    {
+      "name": "MeasureTheory.integral_nonneg",
+      "source": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "line": 612,
+      "signature": "lemma integral_nonneg {f : α → E} (hf : 0 ≤ f) :\n    0 ≤ ∫ x, f x ∂μ",
+      "application_steps": [
+        "A01",
+        "D06.07"
+      ],
+      "source_sha256": "f81a06eab17faccbc4b671a93e7af73332f5fd3946f7690e7c2a3cfee77d28c8",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/db584cd6d46c92f209a44c0f1c829460d327499d/Mathlib/MeasureTheory/Integral/Bochner/Basic.lean#L612"
+    }
+  ]
+}

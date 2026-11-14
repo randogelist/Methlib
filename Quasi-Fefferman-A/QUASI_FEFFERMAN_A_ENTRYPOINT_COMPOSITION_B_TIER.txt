@@ -1,16 +1,16 @@
 QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
-VERSION = 1.4.0
+VERSION = 1.5.0
 MODE = B_TIER_DERIVATION
 MARKER = !=B_TIER
 ROOT_SPECIFICATION = FROZEN
 MATHEMATICAL_STATUS = COMPLETE_COMPOSED_CLASSICAL_DERIVATION
 SOURCE_STATUS = EXACT_DECLARATIONS_INSPECTED
 INDEX_POLICY = DECLARATION_AT_POINT_OF_USE
-LEAN_EXTRACTION = A_TIER
+LEAN_EXTRACTION = A_TIER_FOR_LE001_LE093; A_TIER_CANDIDATE_FOR_LE094_LE108
 ENDPOINT_MARKER = !!=A_TIER
-EXTRACTED_THEOREMS = 91
+EXTRACTED_THEOREMS = 106
 PROOF_CARRYING_CONSTRUCTIONS = 2
-EXACT_AUDIT_ROOTS = 93
+EXACT_AUDIT_ROOTS = 108
 ANALYTIC_PROP_TARGETS_WITHOUT_PROOFS = 4
 EXTERNAL_LEAN_VERIFICATION = PASS_FOR_LE001_LE093
 EXTERNAL_THEOREM_AXIOM_AUDIT = PASS_FOR_LE001_LE093
@@ -4578,3 +4578,300 @@ APPLIED_AT = D06.02
 FILE = LeanEndpoints/QFA/Assembly/Representation.lean
 
 END OF QUASI_FEFFERMAN_A_ENTRYPOINT_COMPOSITION_B_TIER
+
+
+[16] COMPOSED CHAIN EXTENSION v0.4.0
+
+BASELINE_INDEX = sections 00-15 and their appendices; EP001-EP139; LE001-LE093.
+NEW_INDEX = EP140; LE094-LE108; exact current signatures in endpoint-manifest.json.
+NEW_COMPLETE_DERIVATION = LeanEndpoints/QUASI_FEFFERMAN_A_CHAIN_B_TIER.txt.
+NEW_LEAN_SCOPE = explicit analytic/class/reference implication.
+NEW_STATUS_AT_PREPARATION = A_TIER_CANDIDATE; external CI evidence required.
+POST_VERIFICATION_LEDGER = QUASI_FEFFERMAN_A_CHAIN_A_TIER.txt.
+PHYSICAL_ROOT_STATUS = B_TIER_ROOT_FORMALIZATION_PENDING.
+
+[D06.07-C] APPLY LE094 to NativeSpectralRealization's three integrable moments.
+  Integral linearity and positivity give E*x^2-2*D*x+Z>=0 for every real x.
+  APPLY EP140 discrim_le_zero; conclude D^2<=E*Z. LE095 yields LC001->LC002.
+  No additional moment integrability or positivity hypothesis is introduced.
+
+[D06.02-C -> D07.01-C] APPLY LE096 then LE097 to actual real compact derivative
+  data, LC004, LC001, LC003, and supplied convection/enstrophy inequalities.
+  LC002 is derived. The output retains spectral/representative witnesses and
+  gives the exact positive absorption margin. No temporal invariant follows.
+
+[D09.04-C] APPLY LE098-LE104 to primitive finite-horizon comparison data.
+  The coefficient and good predicate may vary with the horizon and pair.
+  At delta>s, actual shifted-reference membership and fresh comparisons
+  yield a singleton of nonnegative restrictions, not total-real extensions.
+
+[D10.07-C] APPLY LE105 to LE084's selected restart and explicit physical ports.
+  APPLY LE106 to quantified class realization. APPLY LE107 to obtain the
+  actual pointwise absorption interface. APPLY the explicitly unresolved
+  reference-construction interface, then LE108 to join both branches.
+  The canonical output is parameterized; no smoothness/pressure/NSE root
+  conclusion is inserted into an abstract Reference predicate.
+
+[EP140]
+  DECLARATION = discrim_le_zero.
+  PIN = db584cd6d46c92f209a44c0f1c829460d327499d.
+  SOURCE = Mathlib/Algebra/QuadraticDiscriminant.lean.
+  APPLICATION = D06.07-C / LE094.
+  TYPE = (forall x : K, 0 <= a*(x*x)+b*x+c) -> discrim a b c <= 0.
+  Here K=R, a=E, b=-2D, c=Z; the ordered-field hypotheses hold.
+
+[APPENDIX E] EXACT COMPOSED DECLARATIONS
+
+[LE094]
+NAME = QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization
+SOURCE = LeanEndpoints/QFA/Assembly/AnalyticChain.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D06.07
+theorem interpolation_of_nativeSpectralRealization
+    {v L : ComplexL2} {G : Fin 3 → ComplexL2}
+    (hSpectral : NativeSpectralRealization v G L) :
+    gradientEnergy G ^ 2 ≤ velocityEnergy v * laplacianEnergy L
+
+[LE095]
+NAME = QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint
+SOURCE = LeanEndpoints/QFA/Assembly/AnalyticChain.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D06.07
+theorem interpolationEndpoint_of_spectralEndpoint
+    (hSpectral : WholeSpaceSpectralEndpoint) : WholeSpaceInterpolationEndpoint
+
+[LE096]
+NAME = QFA.Assembly.AnalyticChain.exists_profile_of_compactData
+SOURCE = LeanEndpoints/QFA/Assembly/AnalyticChain.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D06.07
+theorem exists_profile_of_compactData
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint)
+    {v L : RealL2} {G H : Fin 3 → RealL2} {N : ℝ}
+    (hDerivatives : CompactDerivativeData v G H L)
+    (hN : 0 ≤ N)
+    (hConvection : ∀ V : Space →ᵇ ComplexVector,
+      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →
+        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2)) :
+    SchwartzDerivativeWitnesses (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      NativeSpectralRealization (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      ∃ V : Space →ᵇ ComplexVector,
+        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧
+          ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N
+
+[LE097]
+NAME = QFA.Assembly.AnalyticChain.exists_absorption_of_compactData
+SOURCE = LeanEndpoints/QFA/Assembly/AnalyticChain.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D06.07
+theorem exists_absorption_of_compactData
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint)
+    {v L : RealL2} {G H : Fin 3 → RealL2} {N d ν : ℝ}
+    (hDerivatives : CompactDerivativeData v G H L)
+    (hN : 0 ≤ N)
+    (hConvection : ∀ V : Space →ᵇ ComplexVector,
+      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →
+        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2))
+    (hν : 0 < ν)
+    (hSmall : (‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2) < 4 * Real.pi ^ 2 * ν ^ 4)
+    (hEnstrophy : d / 2 + ν * ‖L‖ ^ 2 ≤ N) :
+    SchwartzDerivativeWitnesses (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      NativeSpectralRealization (complexifyL2 v)
+        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧
+      ∃ (V : Space →ᵇ ComplexVector) (η : ℝ),
+        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧
+        ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N ∧
+        η = ν - nonlinearCoefficient (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) ∧
+        0 < η ∧
+        4 * Real.pi ^ 2 * N ^ 4 ≤
+          ((‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2)) * (‖L‖ ^ 2) ^ 4 ∧
+        N ≤ (ν - η) * ‖L‖ ^ 2 ∧
+        d + 2 * η * ‖L‖ ^ 2 ≤ 0
+
+[LE098]
+NAME = QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem ComparisonData.eq_on_Icc
+    {u v : ℝ → V} {a₀ : V} {T : ℝ} {g : ℝ → ℝ} {Good : ℝ → Prop}
+    (h : ComparisonData u v a₀ T g Good) (hT : 0 < T) :
+    ∀ t ∈ Icc (0 : ℝ) T, u t = v t
+
+[LE099]
+NAME = QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem ComparableOnNonnegative.eq_on_nonnegative
+    {u v : ℝ → V} {a₀ : V}
+    (h : ComparableOnNonnegative u v a₀) :
+    ∀ t : ℝ, 0 ≤ t → u t = v t
+
+[LE100]
+NAME = QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem restricted_class_eq_singleton_of_comparable
+    {C : Set (ℝ → V)} {v : ℝ → V} {a₀ : V}
+    (hv : v ∈ C)
+    (hcomparisons : ∀ w ∈ C, ComparableOnNonnegative w v a₀) :
+    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' C =
+      {fun t : {t : ℝ // 0 ≤ t} => v t.1}
+
+[LE101]
+NAME = QFA.Assembly.TailComparison.comparisonData_of_restartData
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem comparisonData_of_restartData
+    {ν s T : ℝ}
+    {u v : ℝ → QFA.Representation.RealSpatialL2}
+    {G : ℝ → Fin 3 → QFA.Representation.RealSpatialL2}
+    {g : ℝ → ℝ} {Good : ℝ → Prop}
+    (hrestart : QFA.Assembly.Restart.RestartData ν u G s)
+    (hg : ContinuousOn g (Ioc (0 : ℝ) T))
+    (hg_nonnegative : ∀ t ∈ Ioc (0 : ℝ) T, 0 ≤ g t)
+    (hg_integrable : IntervalIntegrable g volume (0 : ℝ) T)
+    (hprod : IntervalIntegrable
+      (fun r => g r * ‖timeTranslate s u r - v r‖ ^ 2) volume (0 : ℝ) T)
+    (hgood : ∀ᵐ r ∂volume.restrict (Ioo (0 : ℝ) T), Good r)
+    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 (u s)))
+    (hv_initial : v 0 = u s)
+    (hrelative : ∀ r ∈ Ioo (0 : ℝ) T, Good r →
+      ∀ t ∈ Icc r T,
+        ‖timeTranslate s u t - v t‖ ^ 2 ≤ ‖timeTranslate s u r - v r‖ ^ 2 +
+          ∫ q in r..t, g q * ‖timeTranslate s u q - v q‖ ^ 2) :
+    ComparisonData (timeTranslate s u) v (u s) T g Good
+
+[LE102]
+NAME = QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem ComparableOnNonnegative.eq_on_tail
+    {u v : ℝ → V} {a₀ : V} {s : ℝ}
+    (h : ComparableOnNonnegative (timeTranslate s u) v a₀) :
+    ∀ t : ℝ, s ≤ t → u t = v (t - s)
+
+[LE103]
+NAME = QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem ComparableOnNonnegative.further_timeTranslate_eq
+    {u v : ℝ → V} {a₀ : V} {s δ : ℝ}
+    (h : ComparableOnNonnegative (timeTranslate s u) v a₀)
+    (hsδ : s ≤ δ) :
+    (fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1) =
+      (fun t : {t : ℝ // 0 ≤ t} => timeTranslate (δ - s) v t.1)
+
+[LE104]
+NAME = QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton
+SOURCE = LeanEndpoints/QFA/Assembly/TailComparison.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D09.04, D10.07
+theorem restricted_restart_class_eq_singleton
+    {Admissible : V → Set (ℝ → V)} {u v : ℝ → V} {s δ : ℝ}
+    (hsδ : s < δ)
+    (hsource : ComparableOnNonnegative (timeTranslate s u) v (u s))
+    (hreference : timeTranslate (δ - s) v ∈ Admissible (u δ))
+    (hcomparisons : ∀ w ∈ Admissible (u δ),
+      ComparableOnNonnegative w (timeTranslate (δ - s) v) (u δ)) :
+    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' Admissible (u δ) =
+      {fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1}
+
+[LE105]
+NAME = QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton
+SOURCE = LeanEndpoints/QFA/Assembly/Chain.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D05.02, D09.04, D10.07
+theorem exists_selected_reference_and_tail_singleton
+    {ν δ : ℝ} {a : RealSpatialL2}
+    {u : Trajectory} {G : GradientTrajectory} {Good : ℝ → Prop}
+    {Admissible : RealSpatialL2 → Set Trajectory}
+    {Reference : RealSpatialL2 → Trajectory → Prop}
+    (hProfile : EnergyProfile ν a u G) (hν : 0 < ν)
+    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)
+    (hweak : ∀ b : RealSpatialL2,
+      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))
+    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),
+      Good s ∧ EnergyStart ν u G s)
+    (hRestart : ∀ s : ℝ, 0 < s → Good s → EnergyStart ν u G s →
+      timeTranslate s u ∈ Admissible (u s))
+    (hReference : ∀ s : ℝ, 0 < s → Good s →
+      velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 →
+      EnergyStart ν u G s → RestartData ν u G s →
+        ∃ v : Trajectory, Reference (u s) v)
+    (hPorts : ReferencePorts Admissible Reference) :
+    SelectedTail ν δ Admissible Reference u G Good
+
+[LE106]
+NAME = QFA.Assembly.Chain.quantified_tail_assembly
+SOURCE = LeanEndpoints/QFA/Assembly/Chain.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D05.02, D09.04, D10.07
+theorem quantified_tail_assembly
+    {ν : ℝ} {Domain : Set RealSpatialL2}
+    {Admissible : RealSpatialL2 → Set Trajectory}
+    {Reference : RealSpatialL2 → Trajectory → Prop}
+    {Good : Trajectory → GradientTrajectory → ℝ → Prop}
+    (hν : 0 < ν)
+    (hClass : ClassRealization ν Domain Admissible Good)
+    (hReference : SubcriticalReferenceConstruction ν Domain Admissible Reference Good)
+    (hPorts : ReferencePorts Admissible Reference) :
+    ∀ a ∈ Domain,
+      (Admissible a).Nonempty ∧
+      ∀ u ∈ Admissible a,
+        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧
+        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →
+          ∃ G : GradientTrajectory,
+            EnergyProfile ν a u G ∧
+              SelectedTail ν δ Admissible Reference u G (Good u G)
+
+[LE107]
+NAME = QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs
+SOURCE = LeanEndpoints/QFA/Assembly/Integrated.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D06.07, D07.01, D10.07
+theorem pointwiseAbsorption_of_analytic_inputs
+    {ν : ℝ} (hν : 0 < ν)
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint) :
+    PointwiseAbsorption ν
+
+[LE108]
+NAME = QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs
+SOURCE = LeanEndpoints/QFA/Assembly/Integrated.lean
+STATUS_AT_PREPARATION = A_TIER_CANDIDATE
+APPLICATIONS = D06.07, D07.01, D10.07
+theorem quantified_tail_assembly_of_analytic_inputs
+    {ν : ℝ} {Domain : Set RealSpatialL2}
+    {Admissible : RealSpatialL2 → Set Trajectory}
+    {Reference : RealSpatialL2 → Trajectory → Prop}
+    {Good : Trajectory → GradientTrajectory → ℝ → Prop}
+    (hν : 0 < ν)
+    (hClass : Chain.ClassRealization ν Domain Admissible Good)
+    (hPorts : Chain.ReferencePorts Admissible Reference)
+    (hExtension : CompactToSchwartzEndpoint)
+    (hSpectral : WholeSpaceSpectralEndpoint)
+    (hAgmon : WholeSpaceAgmonEndpoint)
+    (hReferenceBackend :
+      ReferenceConstructionFromAbsorption ν Domain Admissible Reference Good) :
+    ∀ a ∈ Domain,
+      (Admissible a).Nonempty ∧
+      ∀ u ∈ Admissible a,
+        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧
+        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →
+          ∃ G : GradientTrajectory,
+            EnergyProfile ν a u G ∧
+              Chain.SelectedTail ν δ Admissible Reference u G (Good u G)

@@ -1,3 +1,19 @@
+# QFA integrated composition v0.4.0
+
+| Module | New indices |
+|---|---|
+| AnalyticChain | LE094–LE097 |
+| TailComparison | LE098–LE104 |
+| Chain | LE105–LE106 |
+| Integrated | LE107–LE108 |
+
+Canonical declaration: `QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs`.
+Prepared status: A_TIER_CANDIDATE; matching external evidence required.
+The compiled implication retains explicit analytic and physical realization
+premises. No physical QFA root closure follows without their realization.
+
+## Verified baseline interfaces
+
 # QFA assembly
 
 ```lean

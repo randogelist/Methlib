@@ -1,11 +1,11 @@
 {
-  "version": "0.3.0",
+  "version": "0.4.0",
   "mathematical_status": "B_TIER",
-  "lean_status": "A_TIER",
+  "lean_status": "A_TIER_CANDIDATE",
   "root_status": "B_TIER_ROOT_FORMALIZATION_PENDING",
   "lean": "4.33.0",
   "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
-  "source_parent_commit": "0ebdf99322b661016d5537e7902b274fd13e72c9",
+  "source_parent_commit": "e781dbbcf332445c0c9af32b6b4b40fd1626b121",
   "allowed_axioms": [
     "propext",
     "Classical.choice",
@@ -24,12 +24,17 @@
   },
   "sources": {
     ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
-    "Audit.lean": "3419c635a029b288b53ee29d22b45341c7c045d445194a9ca8f99b08acd77870",
+    "Audit.lean": "7b6c82e4a239620ead592671cbd495f99f6dfbc2212924007b077d36e32efad1",
+    "QFA.lean": "2132d6f04c87d34d021c5cdd2307a1e62a696e420d6402275c724c1ee3d88b68",
+    "QFA/Assembly.lean": "6d6faee1174df2b8394d575f452817e4b9b661e6461b81cb6fac7e34b8448ef9",
+    "QFA/Assembly/AnalyticChain.lean": "d6d4df19d3d2f49fcbe068fa486c232bb92ffe1ba0cca9e68accd68ef8d8a038",
     "QFA/Assembly/AnalyticInputs.lean": "a5c53dafbc179bd35f810a6b3051e561ce5ebd507d9b6923b04e54265dec7451",
+    "QFA/Assembly/Chain.lean": "51efca53b57728326cd81c1b8b2581ec4f2dd4ad64b560f14181726c23e1bdcf",
     "QFA/Assembly/Comparison.lean": "fd138e6f4bd91f9e55e6624f9cf99b5d6c0a6ba344770fda5ba421d9b6c1ef92",
+    "QFA/Assembly/Integrated.lean": "1b560d0c9cfc2248175720e9fe1dcfd4a668eaf66d998e0a77113aceb307d0cd",
     "QFA/Assembly/Representation.lean": "83ad5c89c278f5ed43686a6aa2e0294fb6494875a08f55acecffb03f0eaae3e3",
     "QFA/Assembly/Restart.lean": "e07d862aa284d0f1c488f7344ac0c0a5ccc8bcc99ad6ecae2f796644cedfa347",
-    "QFA/Assembly.lean": "b6c49effd5f14aa951ee78e39cfd81f4c596892d4e9b2481de148402658404c9",
+    "QFA/Assembly/TailComparison.lean": "526677a5971b5ed4c75f0d9f965d67e8810f7ced0c4397817cbd61919f9493d3",
     "QFA/Endpoints/Agmon/Contracts.lean": "a8094d33071c0cc9da07fea80bd9b481eb5e1a87b08d8109835007cbc5c03ec0",
     "QFA/Endpoints/Agmon/Scalar.lean": "bc4f1169867d0cc94fbd8865b0f29a6417ed9f11c94be2900ae3e0fa25d1b3e6",
     "QFA/Endpoints/Comparison/AdmissibleTimes.lean": "ced4416fb261e3a08a45b321ea13d1c4051641e06f5b7d7ef2b49d4ab556f3a9",
@@ -45,8 +50,8 @@
     "QFA/Endpoints/Restart/EnergyShift.lean": "0111c14a6ab440f9623e0f419e199cbf981622a35a00a774d55f67fd26c9f68e",
     "QFA/Endpoints/Restart/HilbertTrace.lean": "2715d102af4ac35b4e52a4f145792c75a67d39c16f41ee03f2ad6a58f1156727",
     "QFA/Endpoints/Restart/TimeTranslate.lean": "ec4370573c9dbdcb482c9ce732f5c6ebed2a1eed2711c5361a4c307906080e7d",
-    "QFA.lean": "2dae30bc12a7c0c1fa94bf1461689eb3ce1d3eaff4c4d66cded5d973a21ec721",
-    "assembly-manifest.json": "76cdfd258deb5e372082ce3745b8aff03ce5d6af2276d7f83578ef13bb555259",
+    "assembly-manifest.json": "d054f1c15791b8f90bc017aaefed07c920d5ba33eb32862d58dab9c23436ab5a",
+    "chain-manifest.json": "11e548797b657db495e827a05a2409c158823b7da4acf7d0269d2a9669f2800d",
     "lake-manifest.json": "d6d1cf29b10a13526b356cfb5bdfcccc8aaf33c39b6c68a2990b533a015b41a8",
     "lakefile.lean": "082fa0336d2b38e238f6444e163513b4590e0f003f9a951293827d31c04a5012",
     "lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b",
@@ -1367,6 +1372,231 @@
       "application_steps": [
         "D10.07"
       ]
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.interpolation_of_nativeSpectralRealization",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 45,
+      "signature": "theorem interpolation_of_nativeSpectralRealization\n    {v L : ComplexL2} {G : Fin 3 → ComplexL2}\n    (hSpectral : NativeSpectralRealization v G L) :\n    gradientEnergy G ^ 2 ≤ velocityEnergy v * laplacianEnergy L",
+      "id": "LE094",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 106,
+      "signature": "theorem interpolationEndpoint_of_spectralEndpoint\n    (hSpectral : WholeSpaceSpectralEndpoint) : WholeSpaceInterpolationEndpoint",
+      "id": "LE095",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.exists_profile_of_compactData",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 115,
+      "signature": "theorem exists_profile_of_compactData\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : RealL2} {G H : Fin 3 → RealL2} {N : ℝ}\n    (hDerivatives : CompactDerivativeData v G H L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →\n        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2)) :\n    SchwartzDerivativeWitnesses (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      NativeSpectralRealization (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      ∃ V : Space →ᵇ ComplexVector,\n        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧\n          ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N",
+      "id": "LE096",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.AnalyticChain.exists_absorption_of_compactData",
+      "source": "QFA/Assembly/AnalyticChain.lean",
+      "module": "QFA.Assembly.AnalyticChain",
+      "line": 149,
+      "signature": "theorem exists_absorption_of_compactData\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    {v L : RealL2} {G H : Fin 3 → RealL2} {N d ν : ℝ}\n    (hDerivatives : CompactDerivativeData v G H L)\n    (hN : 0 ≤ N)\n    (hConvection : ∀ V : Space →ᵇ ComplexVector,\n      (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) →\n        N ≤ ‖V‖ * Real.sqrt (∑ j : Fin 3, ‖G j‖ ^ 2) * Real.sqrt (‖L‖ ^ 2))\n    (hν : 0 < ν)\n    (hSmall : (‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2) < 4 * Real.pi ^ 2 * ν ^ 4)\n    (hEnstrophy : d / 2 + ν * ‖L‖ ^ 2 ≤ N) :\n    SchwartzDerivativeWitnesses (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      NativeSpectralRealization (complexifyL2 v)\n        (fun j => complexifyL2 (G j)) (complexifyL2 L) ∧\n      ∃ (V : Space →ᵇ ComplexVector) (η : ℝ),\n        (fun x : Space => V x) =ᵐ[volume] (fun x : Space => complexifyL2 v x) ∧\n        ScalarProfile (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) (‖L‖ ^ 2) ‖V‖ N ∧\n        η = ν - nonlinearCoefficient (‖v‖ ^ 2) (∑ j : Fin 3, ‖G j‖ ^ 2) ∧\n        0 < η ∧\n        4 * Real.pi ^ 2 * N ^ 4 ≤\n          ((‖v‖ ^ 2) * (∑ j : Fin 3, ‖G j‖ ^ 2)) * (‖L‖ ^ 2) ^ 4 ∧\n        N ≤ (ν - η) * ‖L‖ ^ 2 ∧\n        d + 2 * η * ‖L‖ ^ 2 ≤ 0",
+      "id": "LE097",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparisonData.eq_on_Icc",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 70,
+      "signature": "theorem ComparisonData.eq_on_Icc\n    {u v : ℝ → V} {a₀ : V} {T : ℝ} {g : ℝ → ℝ} {Good : ℝ → Prop}\n    (h : ComparisonData u v a₀ T g Good) (hT : 0 < T) :\n    ∀ t ∈ Icc (0 : ℝ) T, u t = v t",
+      "id": "LE098",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_nonnegative",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 81,
+      "signature": "theorem ComparableOnNonnegative.eq_on_nonnegative\n    {u v : ℝ → V} {a₀ : V}\n    (h : ComparableOnNonnegative u v a₀) :\n    ∀ t : ℝ, 0 ≤ t → u t = v t",
+      "id": "LE099",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.restricted_class_eq_singleton_of_comparable",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 93,
+      "signature": "theorem restricted_class_eq_singleton_of_comparable\n    {C : Set (ℝ → V)} {v : ℝ → V} {a₀ : V}\n    (hv : v ∈ C)\n    (hcomparisons : ∀ w ∈ C, ComparableOnNonnegative w v a₀) :\n    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' C =\n      {fun t : {t : ℝ // 0 ≤ t} => v t.1}",
+      "id": "LE100",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.comparisonData_of_restartData",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 106,
+      "signature": "theorem comparisonData_of_restartData\n    {ν s T : ℝ}\n    {u v : ℝ → QFA.Representation.RealSpatialL2}\n    {G : ℝ → Fin 3 → QFA.Representation.RealSpatialL2}\n    {g : ℝ → ℝ} {Good : ℝ → Prop}\n    (hrestart : QFA.Assembly.Restart.RestartData ν u G s)\n    (hg : ContinuousOn g (Ioc (0 : ℝ) T))\n    (hg_nonnegative : ∀ t ∈ Ioc (0 : ℝ) T, 0 ≤ g t)\n    (hg_integrable : IntervalIntegrable g volume (0 : ℝ) T)\n    (hprod : IntervalIntegrable\n      (fun r => g r * ‖timeTranslate s u r - v r‖ ^ 2) volume (0 : ℝ) T)\n    (hgood : ∀ᵐ r ∂volume.restrict (Ioo (0 : ℝ) T), Good r)\n    (hv_trace : Tendsto v (𝓝[>] (0 : ℝ)) (𝓝 (u s)))\n    (hv_initial : v 0 = u s)\n    (hrelative : ∀ r ∈ Ioo (0 : ℝ) T, Good r →\n      ∀ t ∈ Icc r T,\n        ‖timeTranslate s u t - v t‖ ^ 2 ≤ ‖timeTranslate s u r - v r‖ ^ 2 +\n          ∫ q in r..t, g q * ‖timeTranslate s u q - v q‖ ^ 2) :\n    ComparisonData (timeTranslate s u) v (u s) T g Good",
+      "id": "LE101",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparableOnNonnegative.eq_on_tail",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 142,
+      "signature": "theorem ComparableOnNonnegative.eq_on_tail\n    {u v : ℝ → V} {a₀ : V} {s : ℝ}\n    (h : ComparableOnNonnegative (timeTranslate s u) v a₀) :\n    ∀ t : ℝ, s ≤ t → u t = v (t - s)",
+      "id": "LE102",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.ComparableOnNonnegative.further_timeTranslate_eq",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 154,
+      "signature": "theorem ComparableOnNonnegative.further_timeTranslate_eq\n    {u v : ℝ → V} {a₀ : V} {s δ : ℝ}\n    (h : ComparableOnNonnegative (timeTranslate s u) v a₀)\n    (hsδ : s ≤ δ) :\n    (fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1) =\n      (fun t : {t : ℝ // 0 ≤ t} => timeTranslate (δ - s) v t.1)",
+      "id": "LE103",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.TailComparison.restricted_restart_class_eq_singleton",
+      "source": "QFA/Assembly/TailComparison.lean",
+      "module": "QFA.Assembly.TailComparison",
+      "line": 172,
+      "signature": "theorem restricted_restart_class_eq_singleton\n    {Admissible : V → Set (ℝ → V)} {u v : ℝ → V} {s δ : ℝ}\n    (hsδ : s < δ)\n    (hsource : ComparableOnNonnegative (timeTranslate s u) v (u s))\n    (hreference : timeTranslate (δ - s) v ∈ Admissible (u δ))\n    (hcomparisons : ∀ w ∈ Admissible (u δ),\n      ComparableOnNonnegative w (timeTranslate (δ - s) v) (u δ)) :\n    (fun w : ℝ → V => fun t : {t : ℝ // 0 ≤ t} => w t.1) '' Admissible (u δ) =\n      {fun t : {t : ℝ // 0 ≤ t} => timeTranslate δ u t.1}",
+      "id": "LE104",
+      "step": "D09.04",
+      "application_steps": [
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Chain.exists_selected_reference_and_tail_singleton",
+      "source": "QFA/Assembly/Chain.lean",
+      "module": "QFA.Assembly.Chain",
+      "line": 81,
+      "signature": "theorem exists_selected_reference_and_tail_singleton\n    {ν δ : ℝ} {a : RealSpatialL2}\n    {u : Trajectory} {G : GradientTrajectory} {Good : ℝ → Prop}\n    {Admissible : RealSpatialL2 → Set Trajectory}\n    {Reference : RealSpatialL2 → Trajectory → Prop}\n    (hProfile : EnergyProfile ν a u G) (hν : 0 < ν)\n    (hcut : ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ)\n    (hweak : ∀ b : RealSpatialL2,\n      ContinuousOn (fun t => inner ℝ (u t) b) (Ici (0 : ℝ)))\n    (hgood : ∀ᵐ s ∂volume.restrict (Ioo (0 : ℝ) δ),\n      Good s ∧ EnergyStart ν u G s)\n    (hRestart : ∀ s : ℝ, 0 < s → Good s → EnergyStart ν u G s →\n      timeTranslate s u ∈ Admissible (u s))\n    (hReference : ∀ s : ℝ, 0 < s → Good s →\n      velocityEnergy (u s) * gradientEnergy (G s) < 4 * Real.pi ^ 2 * ν ^ 4 →\n      EnergyStart ν u G s → RestartData ν u G s →\n        ∃ v : Trajectory, Reference (u s) v)\n    (hPorts : ReferencePorts Admissible Reference) :\n    SelectedTail ν δ Admissible Reference u G Good",
+      "id": "LE105",
+      "step": "D05.02",
+      "application_steps": [
+        "D05.02",
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Chain.quantified_tail_assembly",
+      "source": "QFA/Assembly/Chain.lean",
+      "module": "QFA.Assembly.Chain",
+      "line": 165,
+      "signature": "theorem quantified_tail_assembly\n    {ν : ℝ} {Domain : Set RealSpatialL2}\n    {Admissible : RealSpatialL2 → Set Trajectory}\n    {Reference : RealSpatialL2 → Trajectory → Prop}\n    {Good : Trajectory → GradientTrajectory → ℝ → Prop}\n    (hν : 0 < ν)\n    (hClass : ClassRealization ν Domain Admissible Good)\n    (hReference : SubcriticalReferenceConstruction ν Domain Admissible Reference Good)\n    (hPorts : ReferencePorts Admissible Reference) :\n    ∀ a ∈ Domain,\n      (Admissible a).Nonempty ∧\n      ∀ u ∈ Admissible a,\n        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧\n        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →\n          ∃ G : GradientTrajectory,\n            EnergyProfile ν a u G ∧\n              SelectedTail ν δ Admissible Reference u G (Good u G)",
+      "id": "LE106",
+      "step": "D05.02",
+      "application_steps": [
+        "D05.02",
+        "D09.04",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Integrated.pointwiseAbsorption_of_analytic_inputs",
+      "source": "QFA/Assembly/Integrated.lean",
+      "module": "QFA.Assembly.Integrated",
+      "line": 69,
+      "signature": "theorem pointwiseAbsorption_of_analytic_inputs\n    {ν : ℝ} (hν : 0 < ν)\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint) :\n    PointwiseAbsorption ν",
+      "id": "LE107",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07",
+        "D07.01",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
+    },
+    {
+      "name": "QFA.Assembly.Integrated.quantified_tail_assembly_of_analytic_inputs",
+      "source": "QFA/Assembly/Integrated.lean",
+      "module": "QFA.Assembly.Integrated",
+      "line": 99,
+      "signature": "theorem quantified_tail_assembly_of_analytic_inputs\n    {ν : ℝ} {Domain : Set RealSpatialL2}\n    {Admissible : RealSpatialL2 → Set Trajectory}\n    {Reference : RealSpatialL2 → Trajectory → Prop}\n    {Good : Trajectory → GradientTrajectory → ℝ → Prop}\n    (hν : 0 < ν)\n    (hClass : Chain.ClassRealization ν Domain Admissible Good)\n    (hPorts : Chain.ReferencePorts Admissible Reference)\n    (hExtension : CompactToSchwartzEndpoint)\n    (hSpectral : WholeSpaceSpectralEndpoint)\n    (hAgmon : WholeSpaceAgmonEndpoint)\n    (hReferenceBackend :\n      ReferenceConstructionFromAbsorption ν Domain Admissible Reference Good) :\n    ∀ a ∈ Domain,\n      (Admissible a).Nonempty ∧\n      ∀ u ∈ Admissible a,\n        u 0 = a ∧ Tendsto u (𝓝[>] (0 : ℝ)) (𝓝 a) ∧\n        ∀ δ : ℝ, ‖a‖ ^ 4 / (16 * Real.pi ^ 2 * ν ^ 5) < δ →\n          ∃ G : GradientTrajectory,\n            EnergyProfile ν a u G ∧\n              Chain.SelectedTail ν δ Admissible Reference u G (Good u G)",
+      "id": "LE108",
+      "step": "D06.07",
+      "application_steps": [
+        "D06.07",
+        "D07.01",
+        "D10.07"
+      ],
+      "status": "A_TIER_CANDIDATE",
+      "kind": "theorem"
     }
   ],
   "analytic_targets": [
@@ -1400,12 +1630,23 @@
     }
   ],
   "declaration_counts": {
-    "theorems": 91,
+    "theorems": 106,
     "proof_carrying_definitions": 2,
-    "audit_roots": 93
+    "audit_roots": 108
   },
   "assembly_manifest": "assembly-manifest.json",
-  "ci": {
+  "chain_manifest": "chain-manifest.json",
+  "conditional_analytic_relations": [
+    {
+      "premise": "LC001",
+      "conclusion": "LC002",
+      "declaration": "QFA.Assembly.AnalyticChain.interpolationEndpoint_of_spectralEndpoint",
+      "id": "LE095",
+      "status": "A_TIER_CANDIDATE",
+      "unconditional_inhabitant_supplied": false
+    }
+  ],
+  "verified_base_ci": {
     "workflow": ".github/workflows/qfa-endpoints.yml",
     "runner": "windows-2022",
     "branch": "QFA",
@@ -1430,6 +1671,15 @@
       "record-sha256.json": "../CI/97d745678734a2bb9d7c1d9d4ae05d1a36c0a162/record-sha256.json"
     },
     "record_sha256": "f321ac6d969104979adc541f6d142bc780d6ca3930a10879ffc0e76734022b74",
+    "physical_QFA_root_inferred": false
+  },
+  "ci": {
+    "workflow": ".github/workflows/qfa-endpoints.yml",
+    "runner": "windows-2022",
+    "branch": "QFA",
+    "compiler": "native Windows Lean 4.33.0",
+    "audit_roots": 108,
+    "status": "PENDING_FOR_NEW_CHAIN",
     "physical_QFA_root_inferred": false
   }
 }

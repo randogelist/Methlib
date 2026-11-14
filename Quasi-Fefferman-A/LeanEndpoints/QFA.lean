@@ -16,9 +16,10 @@ import QFA.Endpoints.Restart.TimeTranslate
 import QFA.Assembly
 
 /-!
-QFA endpoint package v0.3.0: 91 theorem candidates and two proof-carrying
-linear-isometry constructions. Four analytic proposition targets retain no
-supplied proof inhabitants. Import QFA.Assembly for the four reusable assembly
-interfaces. The frozen physical QFA root remains a separate B-tier target.
-External cached Windows Lean 4.33.0 compilation and exact axiom audits pending.
+QFA v0.4.0: 108 exact audit roots, 106 theorem declarations and two
+proof-carrying isometry constructions. Import QFA.Assembly for the full chain.
+LE001-LE093 have prior matching external evidence. New LE094-LE108 remain
+candidates until the matching current-source CI audit passes. Source headers
+record preparation status; the recorded CI evidence is authoritative.
+The physical QFA root remains B_TIER_ROOT_FORMALIZATION_PENDING.
 -/

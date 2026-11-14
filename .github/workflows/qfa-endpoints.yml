@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   endpoint-audit:
-    name: Lean 4.33.0 / LE001-LE093
+    name: Lean 4.33.0 / LE001-LE108
     runs-on: windows-2022
     timeout-minutes: 90
     defaults:
