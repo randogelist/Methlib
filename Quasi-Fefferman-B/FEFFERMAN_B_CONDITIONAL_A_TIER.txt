@@ -1,0 +1,54 @@
+FEFFERMAN_B_CONDITIONAL_CLOSURE
+===============================
+
+THEOREMS
+--------
+
+Strict implication endpoint:
+
+  QuasiFeffermanB.FEFFERMAN_B_OF_QFB_ONE_RESTART_OVERLAP
+    (hOverlap : QFBOneRestartOverlapStatement) :
+    FeffermanBStatement
+
+Named unresolved analytic axiom:
+
+  QuasiFeffermanB.QFB_ONE_RESTART_OVERLAP :
+    QFBOneRestartOverlapStatement
+
+Final conditional theorem:
+
+  QuasiFeffermanB.FEFFERMAN_B_CONDITIONAL_CLOSURE :
+    FeffermanBStatement
+
+MATHEMATICAL CONTENT
+--------------------
+
+For every positive viscosity and every smooth periodic divergence-free,
+mean-zero L2 datum, the overlap axiom supplies one Leray-Hopf restart time
+s, one positive lag eta and one local classical endpoint T such that
+
+  s + eta < T
+
+and
+
+  cutoff(u(s),nu) < eta.
+
+The restarted trajectory is an actual Leray-Hopf solution from its trace.
+The established QFB theorem therefore supplies a classical tail for the
+restart at eta. The overlap certificate's final field is the formal endpoint
+of local weak-strong identification and smooth patching, producing a
+classical tail from time zero.
+
+STATUS
+------
+
+The strict implication is intended for standard-only theorem-level audit:
+
+  !=! A_TIER candidate before external compilation.
+
+The final closed theorem deliberately depends on the named analytic axiom:
+
+  !!! CONDITIONAL_FORMAL_CLOSURE candidate before external compilation.
+
+No unconditional Fefferman-B claim is made.
+No local Lean execution is performed by the assembly process.

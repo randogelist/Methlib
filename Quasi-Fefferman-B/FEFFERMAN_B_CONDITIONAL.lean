@@ -1,0 +1,6 @@
+import QFBAdmissions.OneRestartOverlapAxiom
+
+#check @QuasiFeffermanB.QFB_ONE_RESTART_OVERLAP
+#check @QuasiFeffermanB.FEFFERMAN_B_OF_QFB_ONE_RESTART_OVERLAP
+#check @QuasiFeffermanB.FEFFERMAN_B_CONDITIONAL_CLOSURE
+#print axioms QuasiFeffermanB.FEFFERMAN_B_CONDITIONAL_CLOSURE

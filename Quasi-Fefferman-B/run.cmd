@@ -37,9 +37,12 @@ py -3 qfb\scripts\audit.py --self-test
 if errorlevel 1 goto :fail
 call lake env py -3 qfb\scripts\audit.py --package . --jobs 2 %QFB_AUDIT_SELECTION% > evidence\external-driver.log 2>&1
 if errorlevel 1 goto :fail
+call lake env py -3 qfb\scripts\audit_fefferman_b.py --package . > evidence\fefferman-b-driver.log 2>&1
+if errorlevel 1 goto :fail
 echo EXTERNAL_EXACT_DECLARATION_AUDIT_PASS
+echo CONDITIONAL_FEFFERMAN_B_CLOSURE_AUDIT_PASS
 echo Evidence: %QFB_NATIVE_PACKAGE%\evidence
-echo Every selected declaration has a fresh exact type and standard-only axiom report.
+echo The QFB root and conditional implication are standard-only; the final closure exposes exactly the named overlap axiom.
 popd
 exit /b 0
 :fail
@@ -47,4 +50,3 @@ echo EXTERNAL_EXACT_DECLARATION_AUDIT_FAIL
 echo Evidence: %QFB_NATIVE_PACKAGE%\evidence
 popd
 exit /b 1
-

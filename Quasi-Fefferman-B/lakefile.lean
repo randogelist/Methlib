@@ -9,3 +9,9 @@ require singular_axiomatic_closure from "../regularity-B-assembly/Singular-Axiom
 @[default_target]
 lean_lib QuasiFeffermanB where
   globs := #[.submodules `QuasiFeffermanB]
+
+lean_lib QFBBridge where
+  globs := #[.submodules `QFBBridge]
+
+lean_lib QFBAdmissions where
+  globs := #[.submodules `QFBAdmissions]

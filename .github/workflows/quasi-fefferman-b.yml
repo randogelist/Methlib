@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   exact-endpoints:
-    name: Lean 4.33.0 / root import closure
+    name: Lean 4.33.0 / root and conditional closure
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     defaults:
@@ -101,18 +101,25 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: package/qfb/.lake/build
-          key: qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/qfb/QuasiFeffermanB/**/*.lean', 'package/qfb/endpoint-manifest.json') }}
+          key: qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/qfb/QuasiFeffermanB/**/*.lean', 'package/qfb/QFBBridge/**/*.lean', 'package/qfb/QFBAdmissions/**/*.lean', 'package/qfb/ci/**/*.lean', 'package/qfb/scripts/audit_fefferman_b.py', 'package/qfb/endpoint-manifest.json') }}
           restore-keys: |
             qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
 
       - name: Test fail-closed audit policy
         run: python3 qfb/scripts/audit.py --self-test
 
-      - name: Preload the exact root import closure and audit every selected declaration
+      - name: Preload the exact QFB root import closure and audit every selected declaration
         id: endpoints
         run: |
           set -euo pipefail
           lake env python3 qfb/scripts/audit.py --package . --target QuasiFeffermanB.Endpoints.Root --jobs 2 2>&1 | tee evidence/external-driver.log
+          sha256sum --check evidence/lockfiles-before.sha256
+
+      - name: Compile the Fefferman-B bridge and audit the named axiom boundary
+        id: fefferman
+        run: |
+          set -euo pipefail
+          lake env python3 qfb/scripts/audit_fefferman_b.py --package . 2>&1 | tee evidence/fefferman-b-driver.log
           sha256sum --check evidence/lockfiles-before.sha256
 
       - name: Preserve reused and newly checked foundation objects
@@ -136,4 +143,3 @@ jobs:
           name: quasi-fefferman-b-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: package/evidence
           if-no-files-found: error
-
