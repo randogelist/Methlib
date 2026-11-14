@@ -1,0 +1,34 @@
+{
+  "verdict": "PASS",
+  "compiled_commit": "0f20ea84a385359c2b005ef10c6a17f4ee648539",
+  "run_id": 43541304720,
+  "job_id": 132282246760,
+  "artifact_id": 14091279444,
+  "artifact_sha256": "bb09a92425d336a2c2c8b72eedfab8bdce17bcbb506675c20efbae3cf8208b8f",
+  "compiler": "Lean 4.33.0",
+  "strict_implication": {
+    "declaration": "QuasiFeffermanB.FEFFERMAN_B_OF_QFB_ONE_RESTART_OVERLAP",
+    "type": "QuasiFeffermanB.QFBOneRestartOverlapStatement -> QuasiFeffermanB.FeffermanBStatement",
+    "status": "A_TIER",
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "conditional_closure": {
+    "declaration": "QuasiFeffermanB.FEFFERMAN_B_CONDITIONAL_CLOSURE",
+    "type": "QuasiFeffermanB.FeffermanBStatement",
+    "status": "CONDITIONAL_FORMAL_CLOSURE",
+    "named_unresolved_axiom": "QuasiFeffermanB.QFB_ONE_RESTART_OVERLAP",
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "QuasiFeffermanB.QFB_ONE_RESTART_OVERLAP",
+      "Quot.sound"
+    ]
+  },
+  "sorryAx": 0,
+  "unexpected_axioms": 0,
+  "local_lean_executions": 0
+}
