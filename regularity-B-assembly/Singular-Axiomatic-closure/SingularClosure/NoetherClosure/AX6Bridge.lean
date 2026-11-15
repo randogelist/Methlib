@@ -36,7 +36,7 @@ theorem NOETHER_TO_AX6
       lintegral_mono_ae hAE
     _ = ((timeLength * M ^ 2 : ℝ≥0) : ℝ≥0∞) := by
       simp [timeLength, setLIntegral_const, Real.volume_Icc,
-        ENNReal.coe_mul, ENNReal.coe_pow, hT.le]
+        ENNReal.coe_mul, ENNReal.coe_pow, hT.le, mul_comm]
 
 end
 end SingularClosure
