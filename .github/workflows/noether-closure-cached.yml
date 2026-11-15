@@ -1,0 +1,70 @@
+name: NOETHER_CLOSURE cached candidate audit
+
+on:
+  push:
+    branches: [codex/noether-closure-methlib-v0-3]
+    paths:
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NoetherClosure/**'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/ci/NoetherClosureAudit.lean'
+      - 'regularity-B-assembly/Singular-Axiomatic-closure/ci/noether_expected_axioms.json'
+      - '.github/workflows/noether-closure-cached.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  noether-cached:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    defaults:
+      run:
+        shell: bash
+        working-directory: regularity-B-assembly/Singular-Axiomatic-closure
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          lake-package-directory: regularity-B-assembly/Singular-Axiomatic-closure
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Restore pinned dependency objects
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: regularity-B-assembly/Singular-Axiomatic-closure/.lake/packages
+          key: noether-ax6-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('regularity-B-assembly/Singular-Axiomatic-closure/lean-toolchain', 'regularity-B-assembly/Singular-Axiomatic-closure/lake-manifest.json') }}
+          restore-keys: |
+            singular-ax6-deps-${{ runner.os }}-${{ runner.arch }}-
+      - name: Retrieve cached pinned Mathlib build objects
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          lake env lean --version | tee evidence/noether-lean-version.txt
+          grep -F 'version 4.33.0,' evidence/noether-lean-version.txt
+          lake exe cache get 2>&1 | tee evidence/noether-cache.log
+          git -C .lake/packages/mathlib rev-parse HEAD | tee evidence/noether-mathlib-rev.txt
+          test "$(cat evidence/noether-mathlib-rev.txt)" = "db584cd6d46c92f209a44c0f1c829460d327499d"
+      - name: Restore existing Methlib build objects
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: regularity-B-assembly/Singular-Axiomatic-closure/.lake/build
+          key: noether-ax6-build-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('regularity-B-assembly/Singular-Axiomatic-closure/lean-toolchain','regularity-B-assembly/Singular-Axiomatic-closure/lake-manifest.json','regularity-B-assembly/Singular-Axiomatic-closure/SingularClosure/NoetherClosure/**/*.lean') }}
+          restore-keys: |
+            singular-ax6-build-v2-${{ runner.os }}-${{ runner.arch }}-
+      - name: Compile new root and audit its exact theorem types
+        run: |
+          set -euo pipefail
+          lake build SingularClosure.NoetherClosure.Root 2>&1 | tee evidence/noether-build.log
+          lake env lean ci/NoetherClosureAudit.lean 2>&1 | tee evidence/noether-axioms.log
+          python3 ci/check_axioms.py evidence/noether-axioms.log ci/noether_expected_axioms.json | tee evidence/noether-audit.json
+      - name: Upload candidate evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: noether-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: regularity-B-assembly/Singular-Axiomatic-closure/evidence/noether-*
+          if-no-files-found: warn
