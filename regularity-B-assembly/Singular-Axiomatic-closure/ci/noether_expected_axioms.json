@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "declarations": [
+    {
+      "name": "SingularClosure.NOETHER_TO_AX6",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NOETHER_TO_AX6"
+    },
+    {
+      "name": "SingularClosure.NOETHER_CLOSURE",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NOETHER_CLOSURE"
+    },
+    {
+      "name": "SingularClosure.NOETHER_UNIFORM_PHYSICAL_ENSTROPHY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NOETHER_UNIFORM_PHYSICAL_ENSTROPHY"
+    },
+    {
+      "name": "SingularClosure.NOETHER_SIX_CHANNEL_MATCH",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NOETHER_SIX_CHANNEL_MATCH"
+    },
+    {
+      "name": "SingularClosure.NOETHER_UNIFORM_SIX_ENSTROPHY",
+      "additional_allowed_axioms": [],
+      "required_axioms": [],
+      "exact_type_marker": "EXACT_TYPE_PASS:SingularClosure.NOETHER_UNIFORM_SIX_ENSTROPHY"
+    }
+  ]
+}

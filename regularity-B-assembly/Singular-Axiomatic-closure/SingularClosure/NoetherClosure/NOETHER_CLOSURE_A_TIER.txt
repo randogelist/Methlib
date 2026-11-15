@@ -1,0 +1,44 @@
+NOETHER_CLOSURE — A_TIER_CANDIDATE
+==================================================
+FROZEN ROOT:
+  SingularClosure.NOETHER_CLOSURE :
+    NOETHER_CHARGE_ADMISSION -> Fefferman_B_0_adjust
+
+PRESERVED METHLIB PHYSICAL ROOT:
+  SingularClosure.Fefferman_B_0_adjust
+  source: SingularClosure/Contracts.lean
+
+NEW SOURCE MODULES:
+  SingularClosure/NoetherClosure/Admission.lean
+  SingularClosure/NoetherClosure/EnstrophyBound.lean
+  SingularClosure/NoetherClosure/SixChannelBridge.lean
+  SingularClosure/NoetherClosure/AX6Bridge.lean
+  SingularClosure/NoetherClosure/Root.lean
+
+EXTERNAL NATIVE COMPILER: NOT RUN
+MATCHING AXIOM AUDIT: NOT RUN
+PROOF CHECK: UNVERIFIED CANDIDATE
+NO_LOCAL_LEAN: RESPECTED
+
+The frozen premise is an actual normalized coercive finite-time charge
+certificate for every Galerkin solution, universal in viscosity/datum/horizon.
+This is NOT established by time translation invariance or ordinary NSE energy.
+
+EXISTING A_TIER INTERFACES IN METHLIB MANIFEST:
+  GALERKIN_GLOBAL_EXISTS_UNIQUE
+  GALERKIN_ENERGY_IDENTITY
+  SIX_CHANNEL_PROJECTIONS
+  SIX_CHANNEL_ENSTROPHY_EQ
+  GALERKIN_GLOBAL_STRONG_LIMIT (under AX6)
+  GLOBAL_STRONG_SMOOTH_BOOTSTRAP (under constructed strong limit)
+  PERIODIC_PRESSURE_RECOVERY (under constructed strong limit)
+  ax6_implies_fefferman_B_0_adjust (under AX6)
+
+NEW DECLARATIONS TO VERIFY:
+  NOETHER_UNIFORM_PHYSICAL_ENSTROPHY
+  NOETHER_SIX_CHANNEL_MATCH
+  NOETHER_UNIFORM_SIX_ENSTROPHY
+  NOETHER_TO_AX6
+  NOETHER_CLOSURE
+
+No external compiler result or axiom audit is implied by preparation.
