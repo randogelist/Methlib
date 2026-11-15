@@ -35,9 +35,7 @@ theorem NOETHER_TO_AX6
     _ ≤ ∫⁻ _t in Icc (0 : ℝ) T, (M : ℝ≥0∞) ^ 2 :=
       lintegral_mono_ae hAE
     _ = ((timeLength * M ^ 2 : ℝ≥0) : ℝ≥0∞) := by
-      have hTcoe : ENNReal.ofReal T =
-          ((⟨T, hT.le⟩ : ℝ≥0) : ℝ≥0∞) :=
-        ENNReal.ofReal_eq_coe_nnreal hT.le
+      have hTcoe := ENNReal.ofReal_eq_coe_nnreal hT.le
       simp [timeLength, setLIntegral_const, Real.volume_Icc,
         ENNReal.coe_mul, ENNReal.coe_pow, hTcoe, mul_comm]
 
