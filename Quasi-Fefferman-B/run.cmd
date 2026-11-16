@@ -39,10 +39,13 @@ call lake env py -3 qfb\scripts\audit.py --package . --jobs 2 %QFB_AUDIT_SELECTI
 if errorlevel 1 goto :fail
 call lake env py -3 qfb\scripts\audit_fefferman_b.py --package . > evidence\fefferman-b-driver.log 2>&1
 if errorlevel 1 goto :fail
+call lake env py -3 qfb\scripts\audit_fb_analytic_equivalence.py --package . > evidence\fb-analytic-equivalence-driver.log 2>&1
+if errorlevel 1 goto :fail
 echo EXTERNAL_EXACT_DECLARATION_AUDIT_PASS
 echo CONDITIONAL_FEFFERMAN_B_CLOSURE_AUDIT_PASS
+echo CONDITIONAL_FB_ANALYTIC_EQUIVALENCE_AUDIT_PASS
 echo Evidence: %QFB_NATIVE_PACKAGE%\evidence
-echo The QFB root and conditional implication are standard-only; the final closure exposes exactly the named overlap axiom.
+echo The exact equivalence implications are standard-only; the analytic upgrade remains an explicit theorem premise.
 popd
 exit /b 0
 :fail
