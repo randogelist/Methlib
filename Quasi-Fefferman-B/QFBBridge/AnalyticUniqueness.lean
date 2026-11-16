@@ -21,13 +21,13 @@ namespace QuasiFeffermanB
 open SingularClosure
 noncomputable section
 
-/-- Exact analytic-admissibility interface.  Analyticity is asserted on the
+/-- Exact analytic-admissibility certificate.  Analyticity is asserted on the
 open positive-time spacetime region; no analyticity at the initial endpoint is
 assumed.  The trace and Serrin clauses are explicit rather than inferred from
 an unspecified analytic-function-space closure principle. -/
 structure QFBAnalyticAdmissible
     (ν : ℝ) (a : CriticalPhysicalL2)
-    (u : Velocity) (G : WeakGradientTrajectory) : Prop where
+    (u : Velocity) (G : WeakGradientTrajectory) where
   lerayHopf : CriticalLerayHopf ν a u G
   pressure : Pressure
   positiveNSE : PositiveSmoothNSE ν u pressure
