@@ -1,0 +1,744 @@
+VAR_STABLE_COSNTRUCT
+B_TIER MATHEMATICAL DERIVATION AND FORMALIZATION ENDPOINT MAP
+
+Repository: randogelist/Methlib
+Branch: VAR_STABLE_COSNTRUCT
+Base branch: Fefferman_b_uniqueness_reattempt
+Base commit: 96033dd69c994bec337a87369a6c27256e724980
+Mode: B_TIER_DERIVATION
+Status: ! B_TIER
+Lean execution: NONE
+External compiler / theorem-level axiom audit for this new package: NONE
+
+The branch spelling COSNTRUCT is preserved exactly.
+
+======================================================================
+0. PURPOSE AND NON-GOALS
+======================================================================
+
+PURPOSE.
+Construct a finite-horizon Navier-Stokes regularity class from quantitative
+stability around an explicit reference path. The class is not defined by
+assuming regularity. Membership is witnessed by:
+
+  (1) a reference trajectory A,
+  (2) its full NSE residual R_A,
+  (3) an initial discrepancy bound,
+  (4) a finite weighted spacetime cover,
+  (5) a scalar Riccati threshold below one.
+
+The intended root is
+
+  FCVSCertificate nu T a -> SmoothNSEThrough nu T a.
+
+The associated class is
+
+  X_VAR_STABLE(nu,T)
+    := {a | there exists an independently checkable FCVS certificate}.
+
+NON-GOALS.
+
+  * No assertion X_VAR_STABLE(nu,T)=C^infinity_sigma,0 is made.
+  * No universal successful Galerkin cutoff is asserted.
+  * No QFB tail theorem is imported into the finite-horizon root.
+  * No local-cover identity is treated as a regularity estimate by itself.
+  * No Aubin-Lions compactness theorem is silently assumed.
+  * No prepared Lean source is classified A_TIER without matching external
+    compiler and theorem-level axiom-audit evidence.
+
+======================================================================
+1. MATHEMATICAL DEFINITIONS
+======================================================================
+
+Fix nu>0, T>0, and the periodic unit torus T^3.
+
+Let P denote the Leray projector and write
+
+  B(u,v) := P((u . grad)v).
+
+For a divergence-free reference path A:[0,T]->H^4_sigma,0 define
+
+  R_A(t) := partial_t A(t) - nu Delta A(t) + B(A(t),A(t)).
+
+Thus R_A=0 iff A is an exact NSE trajectory.
+
+Let u be the exact solution with datum a and set
+
+  v := u-A,
+  Y(t) := ||v(t)||_(H^3)^2.
+
+The exact error equation is
+
+  partial_t v - nu Delta v
+    + B(A,v) + B(v,A) + B(v,v)
+    = -R_A.
+
+The central analytic endpoint is the differential inequality
+
+  Y'(t)
+    <= alpha_A(t) Y(t)
+       + beta_nu Y(t)^2
+       + gamma_nu ||R_A(t)||_(H^2)^2.                       (1.1)
+
+One admissible structural choice is
+
+  alpha_A(t) = C/nu * ||A(t)||_(H^3)^2,
+  beta_nu     = C/nu,
+  gamma_nu    = C/nu,
+
+for a normalization-dependent universal Sobolev constant C>0.
+The exact constants are a formal proof obligation.
+
+Define
+
+  Lambda_A(t) := integral_0^t alpha_A(s) ds,
+
+  F_A(t) := d_A^2
+    + gamma_nu integral_0^t exp(-Lambda_A(s))
+        ||R_A(s)||_(H^2)^2 ds,
+
+where d_A >= ||a-A(0)||_(H^3).
+
+Define the Riccati control functional
+
+  Theta_A(T)
+    := beta_nu integral_0^T exp(Lambda_A(t)) F_A(t) dt.      (1.2)
+
+An FCVS certificate is the data above together with
+
+  Theta_A(T)<1.                                              (1.3)
+
+The scalar comparison target is
+
+  Y(t) <= exp(Lambda_A(t)) F_A(t)/(1-Theta_A(t)),
+  0<=t<=T.                                                   (1.4)
+
+Consequently, a successful certificate prevents H^3 breakdown before T.
+
+======================================================================
+2. FINITE COVER FORM
+======================================================================
+
+The minimal A-tierable cover object should first be algebraic rather than
+geometric.
+
+Let I be a finite index type. A finite cover-weight system consists of
+measurable functions psi_i:[0,T]xT^3->R satisfying
+
+  0 <= psi_i,
+  sum_{i in I} psi_i(t,x)=1 almost everywhere.
+
+Define the local residual charges
+
+  Q_i(A)
+    := integral_[0,T] integral_(T^3)
+         psi_i(t,x) |(1-Delta)R_A(t,x)|^2 dx dt.             (2.1)
+
+Then the exact cover identity is
+
+  sum_i Q_i(A)
+    = integral_[0,T] ||R_A(t)||_(H^2)^2 dt.                 (2.2)
+
+This is an exact distribution identity, not an estimate.
+
+The first formal package should use finite weights satisfying sum=1.
+Only a later geometric package should import an actual partition of unity
+subordinate to open spacetime sets.
+
+A multiple-reference atlas A_i would require additional terms:
+
+  * reference switching mismatch,
+  * derivatives of the partition weights,
+  * overlap/interface defects,
+  * pressure/boundary flux terms.
+
+These terms are excluded from the first single-reference theorem.
+
+======================================================================
+3. RICCATI COMPARISON
+======================================================================
+
+Set
+
+  Z(t) := exp(-Lambda_A(t)) Y(t).
+
+From (1.1),
+
+  Z'(t)
+    <= beta_nu exp(Lambda_A(t)) Z(t)^2
+       + exp(-Lambda_A(t)) gamma_nu ||R_A(t)||_(H^2)^2.
+
+Let
+
+  F_A(t)=d_A^2
+    + gamma_nu integral_0^t exp(-Lambda_A(s))
+      ||R_A(s)||_(H^2)^2 ds,
+
+  Theta_A(t)=beta_nu integral_0^t exp(Lambda_A(s))F_A(s) ds.
+
+The comparator
+
+  U_A(t):=F_A(t)/(1-Theta_A(t))
+
+satisfies the required scalar supersolution inequality whenever Theta_A<1.
+Therefore Z<=U_A and (1.4) follows.
+
+This quadratic comparison is not merely linear Gronwall. Mathlib's Gronwall
+infrastructure is reusable for the linear integrating factor, but a custom
+Methlib theorem should expose the exact quadratic endpoint.
+
+Proposed theorem name:
+
+  FCVS_RICCATI_COMPARISON
+
+Proposed signature, schematically:
+
+  HasDeriv inequalities for Y, alpha, residual
+  -> 0<=Y
+  -> 0<=alpha
+  -> Theta T < 1
+  -> forall t in [0,T],
+       Y t <= exp(Lambda t)*F t/(1-Theta t).
+
+======================================================================
+4. DEFINITION OF THE CLASS
+======================================================================
+
+Define
+
+  FCVSCertificate(nu,T,a) : Prop
+
+as existence of:
+
+  * a divergence-free reference path A,
+  * a residual R_A satisfying the exact residual equation,
+  * a certified initial error d_A,
+  * a finite nonnegative cover-weight system,
+  * the exact cover-charge identity,
+  * the H^3/H^2 perturbation inequality,
+  * Theta_A(T)<1.
+
+Then define
+
+  X_VAR_STABLE(nu,T)
+    := {a in H^3_sigma,0 | FCVSCertificate(nu,T,a)}.          (4.1)
+
+The root theorem is
+
+  VAR_STABLE_THROUGH:
+    nu>0 -> T>0 -> a in X_VAR_STABLE(nu,T)
+    -> SmoothNSEThrough(nu,T,a).                              (4.2)
+
+This theorem is noncircular only if SmoothNSEThrough is a conclusion and no
+field of FCVSCertificate assumes existence of the target exact solution.
+The certificate must use a computable reference and independently verified
+error bounds.
+
+======================================================================
+5. GALERKIN REFERENCE SPECIALIZATION
+======================================================================
+
+For a Fourier-Galerkin solution w_M, define
+
+  R_M := (I-P_M) P((w_M . grad)w_M).
+
+Equivalently,
+
+  R_M := -(I-P_M) P(w_M x curl w_M).
+
+For a sharp spherical cutoff, R_M has finite Fourier support in the first
+unresolved interaction band M<|k|<=2M.
+
+The Fourier coefficient is
+
+  r_k(t)
+    = 2*pi*i Pi_k
+      sum_{p+q=k, |p|,|q|<=M} (q . a_p(t)) a_q(t).
+
+The H^2 residual norm is the finite sum
+
+  ||R_M(t)||_(H^2)^2
+    = sum_{M<|k|<=2M}
+        (1+4*pi^2|k|^2)^2 |r_k(t)|^2.                        (5.1)
+
+This is the preferred finite witness constructor.
+
+Proposed endpoints:
+
+  GALERKIN_FULL_NSE_RESIDUAL
+  GALERKIN_RESIDUAL_SUPPORT
+  GALERKIN_RESIDUAL_H2_NORM_SQ
+  GALERKIN_FCVS_CERTIFICATE
+
+No assertion is made that every datum admits M satisfying the threshold.
+
+======================================================================
+6. EXISTING METHLIB ENDPOINTS TO REUSE
+======================================================================
+
+The following endpoints already exist in the branch base.
+
+A. CRITICAL SOBOLEV INFRASTRUCTURE
+
+Path:
+  regularity-B-assembly/Singular-Axiomatic-closure/
+  SingularClosure/CriticalSpaces.lean
+
+Reusable objects/endpoints:
+
+  criticalFrequencyWeight
+  criticalWeightedCoeff
+  CriticalSobolev q
+  criticalSobolevRepr
+  criticalSobolevCompleteSpace
+  criticalSobolev_norm_sq
+  criticalSobolevCoeff
+
+Use:
+  actual half-integer Fourier Sobolev spaces, Hilbert structure, completeness,
+  coefficient evaluation, and exact weighted norm identities.
+
+B. INTEGER TORUS SOBOLEV / GALERKIN INFRASTRUCTURE
+
+Paths:
+  SingularClosure/TorusSobolev.lean
+  SingularClosure/TorusGalerkinSobolev.lean
+
+Reusable objects/endpoints:
+
+  TorusSobolev s
+  torusSobolevRepr
+  finiteSobolev s N c
+  finiteSobolev_norm_sq
+  finiteSobolev_H1_norm_sq
+  finiteSobolev_H2_norm_sq
+  GalerkinSolution.sobolevState
+  GalerkinSolution.sobolevState_inclusion
+  GalerkinSolution.sobolevState_H1_physical_norm_sq
+  GalerkinSolution.sobolevState_H2_physical_norm_sq
+
+Use:
+  H^3/H^4 reference states, finite Fourier norms, and exact Galerkin state
+  embeddings. The existing physical Parseval equalities are explicit at H^1
+  and H^2; H^3/H^4 use the general weighted Fourier norm.
+
+C. PHYSICAL NONLINEARITY / ENSTROPHY
+
+Paths:
+  SingularClosure/PhysicalBilinear.lean
+  SingularClosure/PeriodicNonlinear.lean
+  SingularClosure/EnstrophyAbsorption.lean
+
+Reusable endpoints:
+
+  datumFourierCoeff_convection_finiteSynthesis
+  coefficientEnstrophyNonlinearPower_eq_physical
+  FINITE_PHYSICAL_NONLINEAR_REAL_BOUND
+  quartic_absorption
+  nonlinear_three_quarter_absorption
+  GALERKIN_COEFFICIENT_ENSTROPHY_INEQUALITY
+  GALERKIN_ENSTROPHY_INEQUALITY
+
+Use:
+  exact Fourier convolution for convection, physical trilinear pairing,
+  cutoff-independent nonlinear bounds, and viscous absorption.
+
+D. EXISTING SMALL-DATA ROOT AND UNIQUENESS
+
+Paths:
+  SingularClosure/SmallDataUniqueness.lean
+  SingularClosure/NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL.lean
+
+Reusable endpoints:
+
+  CriticalRegularSolution.lerayHopfUnique_of_serrin
+  SMALL_DATA_CRITICAL_LERAY_HOPF_COMPARISON
+  NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  CRITICAL_LERAY_HOPF_SERRIN_COMPARISON_ON
+
+Use:
+  include the existing critical small-data class as a proved subset of the
+  eventual regularity carrier and reuse weak-strong uniqueness machinery.
+
+The existing small-data root returns:
+
+  * CriticalDatumAX6,
+  * a CriticalRegularSolution,
+  * a CriticalLerayHopf trajectory,
+  * Leray-Hopf uniqueness,
+  * PositiveSmoothNSE,
+  * H^(3/2) and time-derivative budgets,
+  * global Serrin L^4_t L^6_x membership,
+  * physical dissipation bounds.
+
+E. CLASSICAL/QFB ADAPTERS
+
+Paths:
+  Quasi-Fefferman-B/QFBBridge/FeffermanBClosure.lean
+  Quasi-Fefferman-B/QFBBridge/AnalyticUniqueness.lean
+
+Reusable objects/endpoints:
+
+  SmoothInitialDatum
+  GlobalClassicalSolution
+  FeffermanBAt
+  FeffermanBStatement
+  QFBPositiveSpaceTimeAnalytic
+  QFBAnalyticAdmissibilityPrincipleAt
+  QFB_ANALYTIC_UNIQUENESS_AT_OF_AAP
+
+Use:
+  optional adapters from a certified finite-time strong trajectory to the
+  already formalized classical/QFB vocabulary and uniqueness layer.
+
+The QFB restart-overlap premise must not be imported into the basic FCVS
+finite-horizon theorem.
+
+======================================================================
+7. SUITABLE MATHLIB ENDPOINTS
+======================================================================
+
+The following Mathlib modules are directly suitable.
+
+A. HILBERT / LP INFRASTRUCTURE
+
+  Mathlib.Analysis.InnerProductSpace.l2Space
+
+Provides:
+  lp, MemLp/Mem-lp structures, Hilbert-space machinery, coefficient
+  evaluation, weighted sequence realizations.
+
+Already used by Methlib's TorusSobolev/CriticalSpaces implementation.
+
+B. FINITE-DIMENSIONAL COMPACTNESS
+
+  Mathlib.Analysis.Normed.Operator.Compact.FiniteDimension
+
+Use:
+  compactness/continuity for finite Galerkin state spaces and validated ODE
+  witnesses. This is not a replacement for infinite-dimensional spacetime
+  compactness.
+
+C. GRONWALL / ODE
+
+  Mathlib.Analysis.ODE.Gronwall
+  Mathlib.Analysis.ODE.ExistUnique
+
+Available relevant endpoint family:
+
+  norm_le_gronwallBound_of_norm_deriv_right_le
+
+Use:
+  linear integrating factors, finite-dimensional Galerkin ODE existence and
+  uniqueness. The quadratic Riccati comparison remains a new Methlib lemma.
+
+D. PARTITIONS OF UNITY
+
+  Mathlib.Topology.PartitionOfUnity
+  Mathlib.Topology.MetricSpace.PartitionOfUnity
+  Mathlib.Analysis.Convex.PartitionOfUnity
+
+Use:
+  geometric realization of finite cover weights after the algebraic weight
+  theorem is complete.
+
+Recommended first phase:
+  define a finite family of measurable nonnegative weights with Finset sum 1;
+  postpone support/subordination/open-cover geometry.
+
+E. FINITE FOURIER ALGEBRA
+
+  Finset, Finsupp, Matrix, LinearMap, ContinuousLinearMap
+  Mathlib.LinearAlgebra.Vandermonde
+
+Available relevant endpoint:
+
+  Matrix.det_vandermonde
+
+Use:
+  finite support, convolution sums, finite caloric-null checker, and
+  independence of distinct exponential decay factors.
+
+F. ANALYTICITY
+
+  Mathlib.Analysis.Analytic.Basic
+
+Use:
+  optional analytic input/output wrappers. Analyticity is not required for
+  the first finite-horizon FCVS theorem.
+
+G. INTEGRATION AND Lp
+
+  Mathlib.MeasureTheory.Integral.Bochner
+  Mathlib.MeasureTheory.Function.LpSpace.Basic
+  interval-integral and finite-sum integration lemmas
+
+Use:
+  residual charges, finite cover reconstruction, time-weighted estimates,
+  and the existing Serrin comparison infrastructure.
+
+======================================================================
+8. NEW METHLIB ENDPOINTS REQUIRED
+======================================================================
+
+PHASE A: ALGEBRAIC / SCALAR SKELETON
+
+  FCVSFiniteWeights
+  FCVSFiniteWeights.sum_eq_one
+  FCVS_LOCAL_CHARGE
+  FCVS_TOTAL_CHARGE
+  FCVS_LOCAL_CHARGE_SUM_EQ_TOTAL
+  FCVS_RICCATI_COMPARISON
+
+These endpoints are the earliest A-tierable package. They do not require a
+new PDE construction.
+
+PHASE B: FOURIER RESIDUAL
+
+  GalerkinFullResidual
+  GALERKIN_FULL_RESIDUAL_CONVECTION
+  GALERKIN_FULL_RESIDUAL_LAMB
+  GALERKIN_RESIDUAL_SUPPORT
+  GALERKIN_RESIDUAL_H2_NORM_SQ
+  GALERKIN_RESIDUAL_COVER_CHARGE_IDENTITY
+
+These are finite Fourier statements and should reuse PhysicalBilinear and
+TorusGalerkinSobolev.
+
+PHASE C: ANALYTIC PDE EDGE
+
+  FCVS_H3_H2_PERTURBATION_INEQUALITY
+  FCVS_APOSTERIORI_THROUGH
+  FCVS_REFERENCE_UNIQUENESS
+
+This is the main new analytic obligation. Required sublemmas:
+
+  * H^3 product estimate into H^2 for B(u,v),
+  * H^4/H^2 dual pairing,
+  * viscous absorption,
+  * continuity of the H^3 error,
+  * strong continuation criterion at finite H^3 norm.
+
+PHASE D: CLASS ASSEMBLY
+
+  X_VAR_STABLE
+  mem_X_VAR_STABLE_iff_certificate
+  VAR_STABLE_THROUGH
+  H12_SMALL_SUBSET_VAR_STABLE
+  CALORIC_NULL_SUBSET_VAR_STABLE
+  TRIANGULAR_SUBSET_VAR_STABLE       [later independent branch]
+
+Only the first three are needed for the minimal root.
+
+PHASE E: OPTIONAL CERTIFIED CLOSURE
+
+  FCVSUniformCertificateSequence
+  FCVS_CERTIFIED_COMPACTNESS
+  FCVS_CERTIFIED_LIMIT
+  FCVS_QFB_HORIZON_ADAPTER
+
+Aubin-Lions-type spacetime compactness is not currently identified as a
+ready Mathlib endpoint. It must be proved, explicitly assumed, or avoided by
+using one successful finite certificate instead of a limit of certificates.
+
+======================================================================
+9. PROPOSED LEAN MODULE LAYOUT
+======================================================================
+
+regularity-B-assembly/VAR_STABLE_COSNTRUCT/
+
+  VAR_STABLE_COSNTRUCT_B_TIER.txt
+
+  VarStable/Basic.lean
+    ReferencePath
+    FullResidual
+    FCVSFiniteWeights
+    LocalCharge
+    TotalCharge
+
+  VarStable/CoverCharge.lean
+    FCVS_LOCAL_CHARGE_SUM_EQ_TOTAL
+    optional PartitionOfUnity adapter
+
+  VarStable/Riccati.lean
+    FCVS_RICCATI_COMPARISON
+
+  VarStable/GalerkinResidual.lean
+    GalerkinFullResidual
+    support theorem
+    H2 Fourier norm identity
+
+  VarStable/Perturbation.lean
+    FCVS_H3_H2_PERTURBATION_INEQUALITY
+    FCVS_APOSTERIORI_THROUGH
+
+  VarStable/Class.lean
+    X_VAR_STABLE
+    VAR_STABLE_THROUGH
+
+  VarStable/Adapters.lean
+    small-data inclusion
+    caloric-null inclusion
+    QFB/Fefferman adapters
+
+  VarStable/Root.lean
+    final minimal root
+
+The first Lean package should not include CertifiedCompactness or universal
+coverage.
+
+======================================================================
+10. MINIMAL FORMAL ROOT
+======================================================================
+
+The minimal exact root should be:
+
+  theorem VAR_STABLE_THROUGH
+      (nu T : R) (hnu : 0 < nu) (hT : 0 < T)
+      (a : TorusSobolev 3)
+      (hcert : X_VAR_STABLE nu T a) :
+      SmoothNSEThrough nu T a
+
+or the equivalent project-native solution predicate.
+
+The proof spine is
+
+  hcert
+  -> extract A, R_A, d_A, weights, differential inequality, Theta<1
+  -> FCVS_RICCATI_COMPARISON
+  -> uniform H^3 bound through T
+  -> strong continuation
+  -> SmoothNSEThrough nu T a.
+
+The exact solution type should reuse existing Methlib physical velocity,
+pressure, smoothness, periodicity, and Leray-Hopf predicates rather than
+introducing a duplicate NSE ontology.
+
+======================================================================
+11. FIRST ATTAINABLE A-TIER SUBROOT
+======================================================================
+
+Before the full perturbation theorem, target the finite algebraic package:
+
+  FCVS_COVER_RICCATI_SKELETON
+
+with conclusion:
+
+  exact cover-charge identity
+  AND exact scalar Riccati bound.
+
+This package can be A-tier independently of unresolved PDE constants.
+
+Recommended theorem spine:
+
+  FCVS_LOCAL_CHARGE_SUM_EQ_TOTAL
+  -> FCVS_RICCATI_COMPARISON
+  -> FCVS_SCALAR_CERTIFICATE_BOUND.
+
+The next package then supplies the PDE inequality as an opaque edge proven
+from Methlib Sobolev estimates.
+
+======================================================================
+12. FORMAL RISK REGISTER
+======================================================================
+
+R1. H^3/H^2 PRODUCT ESTIMATE
+Status: new analytic endpoint.
+Risk: norm normalization and derivative loss.
+Resolution: state in TorusSobolev coordinates and prove by weighted Fourier
+convolution or physical Sobolev multiplication.
+
+R2. CONTINUATION FROM BOUNDED H^3
+Status: new assembly endpoint unless already encoded in a suitable Methlib
+strong-solution object.
+Risk: defining a second solution ontology.
+Resolution: adapt to existing PositiveSmoothNSE / ClassicalTail predicates.
+
+R3. PARTITION OF UNITY
+Status: Mathlib infrastructure exists.
+Risk: unnecessary topological complexity in phase one.
+Resolution: use finite nonnegative weights with sum one first.
+
+R4. CERTIFIED LIMIT
+Status: not required for minimal root.
+Risk: Aubin-Lions is not a ready imported endpoint.
+Resolution: postpone; one successful reference certificate is sufficient.
+
+R5. UNIVERSAL COVERAGE
+Status: unresolved and excluded from the root.
+Risk: circular equivalence with finite-time regularity.
+Resolution: preserve as a separate explicit relation/axiom only.
+
+R6. QFB HORIZON
+Status: optional adapter.
+Risk: conflating finite-horizon FCVS with QFB tail closure.
+Resolution: prove VAR_STABLE_THROUGH for arbitrary finite T first.
+
+======================================================================
+13. FINAL MAIN CHAIN
+======================================================================
+
+EXISTING INFRASTRUCTURE:
+
+  CriticalSobolev / TorusSobolev
+  + GalerkinSolution.sobolevState
+  + physical Fourier bilinear identities
+  + enstrophy absorption
+  + existing H1/2-small global root
+
+NEW FINITE SKELETON:
+
+  FullResidual
+  -> finite cover charges
+  -> total charge identity
+  -> Riccati comparison
+
+NEW ANALYTIC EDGE:
+
+  H3/H2 perturbation inequality
+  -> bounded error through T
+  -> strong continuation
+
+CLASS ASSEMBLY:
+
+  certificate existence
+  -> membership in X_VAR_STABLE(nu,T)
+  -> SmoothNSEThrough(nu,T,a).
+
+OPTIONAL ADAPTERS:
+
+  X_VAR_STABLE(nu,T_Q(a,nu)) + QFB_TAIL
+  -> global regularity,
+
+or
+
+  universal certified-cover relation
+  -> reduced analytic Fefferman-B closure.
+
+Neither optional adapter is part of the minimal root.
+
+======================================================================
+14. CLASSIFICATION
+======================================================================
+
+Existing reused endpoint:
+
+  NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+  = existing A_TIER endpoint under its recorded external evidence.
+
+This document and proposed new endpoints:
+
+  ! B_TIER.
+
+Prepared-code status:
+
+  no Lean files prepared in this turn;
+  no local Lean run;
+  no external native compiler run;
+  no theorem-level axiom audit;
+  no A_TIER promotion;
+  no FORMAL_CLOSURE claim;
+  no UNCONDITIONAL_CLOSURE claim.
+
+The branch now contains only this theorem-design artifact. Existing Lean
+sources inherited from the base branch are unchanged.
