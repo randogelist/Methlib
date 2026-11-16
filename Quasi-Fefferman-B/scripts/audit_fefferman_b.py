@@ -1,4 +1,4 @@
-"""Compile and audit the conditional bridge and analytic uniqueness extension."""
+"""Compile and audit the conditional bridges and analytic uniqueness extension."""
 
 from pathlib import Path
 import argparse
@@ -12,10 +12,12 @@ STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 NAMED = "QuasiFeffermanB.QFB_ONE_RESTART_OVERLAP"
 STRICT = "QuasiFeffermanB.FEFFERMAN_B_OF_QFB_ONE_RESTART_OVERLAP"
 CONDITIONAL = "QuasiFeffermanB.FEFFERMAN_B_CONDITIONAL_CLOSURE"
-ANALYTIC_PAIR = "QuasiFeffermanB.QFB_ANALYTIC_PAIR_UNIQUENESS"
+ANALYTIC_AT = "QuasiFeffermanB.QFB_ANALYTIC_UNIQUENESS_AT_OF_AAP"
 ANALYTIC = "QuasiFeffermanB.QFB_ANALYTIC_UNIQUENESS"
-MERGED = "QuasiFeffermanB.QUASI_FEFFERMAN_B_WITH_ANALYTIC_UNIQUENESS"
-STANDARD_DECLARATIONS = (STRICT, ANALYTIC_PAIR, ANALYTIC, MERGED)
+MERGED = "QuasiFeffermanB.QFB_ANALYTIC_UNIQUE"
+MERGED_ALIAS = "QuasiFeffermanB.QUASI_FEFFERMAN_B_WITH_ANALYTIC_UNIQUENESS"
+AAP = "QuasiFeffermanB.QFBAnalyticAdmissibilityPrincipleAt"
+STANDARD_DECLARATIONS = (STRICT, ANALYTIC_AT, ANALYTIC, MERGED, MERGED_ALIAS)
 AUDITED_DECLARATIONS = (*STANDARD_DECLARATIONS, CONDITIONAL)
 
 
@@ -143,20 +145,25 @@ def main():
             "named_unresolved_axiom": NAMED,
             "axioms": sorted(conditional_axioms),
         },
-        "analytic_pair_uniqueness": {
-            "declaration": ANALYTIC_PAIR,
-            "status": "A_TIER",
-            "axioms": standard_axioms[ANALYTIC_PAIR],
+        "analytic_uniqueness_at": {
+            "declaration": ANALYTIC_AT,
+            "status": "CONDITIONAL_FORMAL_CLOSURE",
+            "named_unresolved_premise": AAP,
+            "axioms": standard_axioms[ANALYTIC_AT],
         },
         "analytic_uniqueness": {
             "declaration": ANALYTIC,
-            "status": "A_TIER",
+            "status": "CONDITIONAL_FORMAL_CLOSURE",
+            "named_unresolved_premise": AAP,
             "axioms": standard_axioms[ANALYTIC],
         },
         "merged_qfb_extension": {
             "declaration": MERGED,
-            "status": "UNCONDITIONAL_CLOSURE",
+            "alias": MERGED_ALIAS,
+            "status": "CONDITIONAL_FORMAL_CLOSURE",
+            "named_unresolved_premise": AAP,
             "axioms": standard_axioms[MERGED],
+            "alias_axioms": standard_axioms[MERGED_ALIAS],
         },
         "local_lean_executions": 0,
     }
@@ -164,9 +171,9 @@ def main():
         json.dumps(status, indent=2) + "\n", encoding="utf-8")
     print(f"!=! DECLARATION {STRICT}")
     print(f"!!! CONDITIONAL_FORMAL_CLOSURE {CONDITIONAL}")
-    print(f"!=! DECLARATION {ANALYTIC_PAIR}")
-    print(f"!=! DECLARATION {ANALYTIC}")
-    print(f"!!!! UNCONDITIONAL_CLOSURE {MERGED}")
+    print(f"!!! CONDITIONAL_FORMAL_CLOSURE {ANALYTIC_AT}")
+    print(f"!!! CONDITIONAL_FORMAL_CLOSURE {ANALYTIC}")
+    print(f"!!! CONDITIONAL_FORMAL_CLOSURE {MERGED}")
     print(json.dumps(status, indent=2))
     return 0
 
