@@ -2,7 +2,7 @@ name: Quasi Fefferman B accelerated cached assembly
 
 on:
   push:
-    branches: [QUASI-FEFFERMAN-B]
+    branches: [QUASI-FEFFERMAN-B, Fefferman_b_uniqueness_reattempt]
     paths:
       - 'Quasi-Fefferman-B/**'
       - '.github/workflows/quasi-fefferman-b.yml'
@@ -101,7 +101,7 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: package/qfb/.lake/build
-          key: qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/qfb/QuasiFeffermanB/**/*.lean', 'package/qfb/QFBBridge/**/*.lean', 'package/qfb/QFBAdmissions/**/*.lean', 'package/qfb/ci/**/*.lean', 'package/qfb/scripts/audit_fefferman_b.py', 'package/qfb/endpoint-manifest.json') }}
+          key: qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-${{ hashFiles('package/qfb/QuasiFeffermanB/**/*.lean', 'package/qfb/QFBBridge/**/*.lean', 'package/qfb/QFBAdmissions/**/*.lean', 'package/qfb/ci/**/*.lean', 'package/qfb/scripts/audit_fefferman_b.py', 'package/qfb/scripts/audit_fb_analytic_equivalence.py', 'package/qfb/endpoint-manifest.json') }}
           restore-keys: |
             qfb-candidate-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package/lean-toolchain', 'package/lake-manifest.json') }}-
 
@@ -120,6 +120,13 @@ jobs:
         run: |
           set -euo pipefail
           lake env python3 qfb/scripts/audit_fefferman_b.py --package . 2>&1 | tee evidence/fefferman-b-driver.log
+          sha256sum --check evidence/lockfiles-before.sha256
+
+      - name: Compile and audit the FB analytic equivalence chain
+        id: fb-analytic-equivalence
+        run: |
+          set -euo pipefail
+          lake env python3 qfb/scripts/audit_fb_analytic_equivalence.py --package . 2>&1 | tee evidence/fb-analytic-equivalence-driver.log
           sha256sum --check evidence/lockfiles-before.sha256
 
       - name: Preserve reused and newly checked foundation objects
