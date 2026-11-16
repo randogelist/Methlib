@@ -1,4 +1,4 @@
-"""Compile and audit the QFB -> Fefferman-B conditional bridge."""
+"""Compile and audit the conditional bridge and analytic uniqueness extension."""
 
 from pathlib import Path
 import argparse
@@ -12,6 +12,11 @@ STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 NAMED = "QuasiFeffermanB.QFB_ONE_RESTART_OVERLAP"
 STRICT = "QuasiFeffermanB.FEFFERMAN_B_OF_QFB_ONE_RESTART_OVERLAP"
 CONDITIONAL = "QuasiFeffermanB.FEFFERMAN_B_CONDITIONAL_CLOSURE"
+ANALYTIC_PAIR = "QuasiFeffermanB.QFB_ANALYTIC_PAIR_UNIQUENESS"
+ANALYTIC = "QuasiFeffermanB.QFB_ANALYTIC_UNIQUENESS"
+MERGED = "QuasiFeffermanB.QUASI_FEFFERMAN_B_WITH_ANALYTIC_UNIQUENESS"
+STANDARD_DECLARATIONS = (STRICT, ANALYTIC_PAIR, ANALYTIC, MERGED)
+AUDITED_DECLARATIONS = (*STANDARD_DECLARATIONS, CONDITIONAL)
 
 
 def run(argv, cwd, env, log):
@@ -68,6 +73,8 @@ def main():
          root / "QFBBridge" / "FeffermanBClosure.lean"),
         ("QFBAdmissions.OneRestartOverlapAxiom",
          root / "QFBAdmissions" / "OneRestartOverlapAxiom.lean"),
+        ("QFBBridge.AnalyticUniqueness",
+         root / "QFBBridge" / "AnalyticUniqueness.lean"),
     ]
     module_status = {}
     for module, source in modules:
@@ -87,21 +94,27 @@ def main():
         audit_log,
     )
     if code:
-        raise ValueError("Conditional closure audit file failed to compile")
+        raise ValueError("Bridge and analytic uniqueness audit file failed to compile")
 
     text = audit_log.read_text(encoding="utf-8")
     if re.search(r"\bsorryAx\b|\buses ['`]sorry['`]|\berror(?:\([^\n)]*\))?:", text):
         raise ValueError("Lean error or sorry dependency")
 
     observed = reports(text)
-    if STRICT not in observed or CONDITIONAL not in observed:
-        raise ValueError(f"Missing theorem-level axiom reports: {sorted(observed)}")
+    missing = [name for name in AUDITED_DECLARATIONS if name not in observed]
+    if missing:
+        raise ValueError(f"Missing theorem-level axiom reports: {missing}")
 
-    strict_axioms = observed[STRICT]
+    standard_axioms = {}
+    for name in STANDARD_DECLARATIONS:
+        axioms = observed[name]
+        if not axioms <= STANDARD:
+            raise ValueError(
+                f"Unapproved standard theorem axioms for {name}: "
+                f"{sorted(axioms - STANDARD)}")
+        standard_axioms[name] = sorted(axioms)
+
     conditional_axioms = observed[CONDITIONAL]
-    if not strict_axioms <= STANDARD:
-        raise ValueError(
-            f"Unapproved strict theorem axioms: {sorted(strict_axioms - STANDARD)}")
     if NAMED not in conditional_axioms:
         raise ValueError("Conditional theorem does not expose the named overlap axiom")
     if not conditional_axioms <= STANDARD | {NAMED}:
@@ -109,7 +122,7 @@ def main():
             "Unexpected conditional theorem axioms: "
             f"{sorted(conditional_axioms - (STANDARD | {NAMED}))}")
 
-    for name in (STRICT, CONDITIONAL):
+    for name in AUDITED_DECLARATIONS:
         if text.count(f"TYPE_BEGIN:{name}\n") != 1:
             raise ValueError(f"Missing type start marker for {name}")
         if text.count(f"TYPE_END:{name}\n") != 1:
@@ -122,7 +135,7 @@ def main():
         "strict_implication": {
             "declaration": STRICT,
             "status": "A_TIER",
-            "axioms": sorted(strict_axioms),
+            "axioms": standard_axioms[STRICT],
         },
         "conditional_closure": {
             "declaration": CONDITIONAL,
@@ -130,12 +143,30 @@ def main():
             "named_unresolved_axiom": NAMED,
             "axioms": sorted(conditional_axioms),
         },
+        "analytic_pair_uniqueness": {
+            "declaration": ANALYTIC_PAIR,
+            "status": "A_TIER",
+            "axioms": standard_axioms[ANALYTIC_PAIR],
+        },
+        "analytic_uniqueness": {
+            "declaration": ANALYTIC,
+            "status": "A_TIER",
+            "axioms": standard_axioms[ANALYTIC],
+        },
+        "merged_qfb_extension": {
+            "declaration": MERGED,
+            "status": "UNCONDITIONAL_CLOSURE",
+            "axioms": standard_axioms[MERGED],
+        },
         "local_lean_executions": 0,
     }
     (evidence / "status.json").write_text(
         json.dumps(status, indent=2) + "\n", encoding="utf-8")
     print(f"!=! DECLARATION {STRICT}")
     print(f"!!! CONDITIONAL_FORMAL_CLOSURE {CONDITIONAL}")
+    print(f"!=! DECLARATION {ANALYTIC_PAIR}")
+    print(f"!=! DECLARATION {ANALYTIC}")
+    print(f"!!!! UNCONDITIONAL_CLOSURE {MERGED}")
     print(json.dumps(status, indent=2))
     return 0
 
