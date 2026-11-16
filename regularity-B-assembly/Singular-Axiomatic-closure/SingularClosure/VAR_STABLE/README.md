@@ -13,6 +13,18 @@
 This directory is the isolated staging location for the finite-horizon
 `VAR_STABLE` construction.
 
+Existing dependencies are collected in:
+
+```text
+SingularClosure/VAR_STABLE/Endpoints/
+```
+
+The aggregate import is:
+
+```lean
+import SingularClosure.VAR_STABLE.Endpoints.All
+```
+
 No declaration in this directory is classified as proved merely by being
 prepared. Promotion requires a matching external native Lean build and a
 theorem-level axiom audit.
@@ -43,6 +55,19 @@ AX6At
   -> FINITE_ENTRY_AX6_IMP_GLOBAL_REGULARITY
 ```
 
+## Endpoint groups
+
+```text
+Endpoints/Mathlib.lean
+Endpoints/AX6.lean
+Endpoints/Critical.lean
+Endpoints/Channels.lean
+Endpoints/Galerkin.lean
+Endpoints/Limit.lean
+Endpoints/Entry.lean
+Endpoints/All.lean
+```
+
 ## Planned module order
 
 ```text
@@ -68,63 +93,10 @@ AX6At
 20_Root.lean
 ```
 
-## Initial endpoint register
-
-### Local AX6 interface
-
-```text
-AX6At
-AX6At_iff_selected_AX6Statement_instance
-AX6At_iff_canonical
-AX6_AT_EXACT_REAL_SQUARE_BUDGET
-AX6_AT_UNIFORM_ENSTROPHY_ACCUMULATION
-AX6_AT_UNIFORM_TIME_DERIVATIVE_BOUND
-AX6_AT_UNIFORM_PHYSICAL_STRONG_BOUNDS
-```
-
-### Finite-horizon solution
-
-```text
-StrongSolutionThrough
-LOCAL_AX6_H0_L2H1_SUBSEQUENCE
-LOCAL_AX6_STRONG_INITIAL_TRACE
-LOCAL_AX6_TO_STRONG_SOLUTION_THROUGH
-LOCAL_AX6_POSITIVE_TIME_ALL_ORDERS
-LOCAL_AX6_POSITIVE_SMOOTH_NSE
-```
-
-### Entry-horizon reduction
-
-```text
-CRITICAL_ENERGY_ZERO_ONE_TWO_INTERPOLATION
-CRITICAL_HHALF_NORM_LE_L2_H1_GEOMETRIC_MEAN
-STRONG_SOLUTION_L2_EXPONENTIAL_DECAY
-STRONG_SOLUTION_GOOD_H1_TIME
-EXPLICIT_CRITICAL_ENTRY_HORIZON
-POINCARE_GAP_ENTRY_HORIZON
-```
-
-### Critical restart
-
-```text
-STRONG_TRACE_TO_CRITICAL_DATUM
-SMALL_CRITICAL_SOLUTION_TIME_SHIFT
-LOCAL_STRONG_SMALL_CRITICAL_OVERLAP_UNIQUE
-SMALL_CRITICAL_RESTART_SPLICE
-```
-
-### Root
-
-```text
-FINITE_ENTRY_AX6_IMP_GLOBAL_REGULARITY
-AX6_ENTRY_UNIVERSAL_IMP_FEFFERMAN_B
-FEFFERMAN_B_REDUCES_TO_ENTRY_HORIZON
-```
-
 ## Status
 
 ```text
-B_TIER staging only.
+Endpoint gathering only.
 No local Lean execution.
 No external compiler transcript.
 No theorem-level axiom audit.

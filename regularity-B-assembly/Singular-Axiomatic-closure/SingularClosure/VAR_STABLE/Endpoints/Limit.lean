@@ -1,0 +1,37 @@
+import SingularClosure.CriticalLimitTimeL2
+import SingularClosure.CriticalLimitFatou
+import SingularClosure.CriticalTerminalDissipation
+import SingularClosure.CriticalPositiveTimeSeed
+import SingularClosure.CriticalPositiveTimeHighOrder
+import SingularClosure.CriticalPositiveFlow
+import SingularClosure.CriticalPositiveTimeSmooth
+import SingularClosure.GlobalStrongLimit
+import SingularClosure.GlobalSmoothBootstrap
+import SingularClosure.PeriodicPressureRecovery
+
+/-!
+# VAR_STABLE compactness and limit endpoint collection
+
+Existing fixed-horizon compactness ingredients, positive-time smoothing,
+strong-limit construction, physical realization, smooth bootstrap, and
+pressure recovery.
+-/
+
+set_option autoImplicit false
+
+namespace SingularClosure
+namespace VAR_STABLE
+
+#check CRITICAL_GALERKIN_L2H1_LIMIT_OF_H0_UNIFORM
+#check criticalExtendedSquare_le_liminf
+#check critical_modal_square_budget
+#check GALERKIN_POSITIVE_TIME_ALL_ORDERS
+#check CRITICAL_POSITIVE_FLOW_OF_GALERKIN_LIMIT
+#check GlobalGalerkinStrongLimit.state_integral_rhs
+#check GlobalGalerkinStrongLimit.velocity_initial
+#check GALERKIN_GLOBAL_STRONG_LIMIT
+#check GLOBAL_STRONG_SMOOTH_BOOTSTRAP
+#check PERIODIC_PRESSURE_RECOVERY
+
+end VAR_STABLE
+end SingularClosure

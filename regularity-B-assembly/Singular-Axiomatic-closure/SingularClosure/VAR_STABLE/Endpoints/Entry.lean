@@ -1,0 +1,38 @@
+import SingularClosure.PeriodicPoincare
+import SingularClosure.GalerkinEnergyIntegral
+import SingularClosure.CriticalFourierInterpolation
+import SingularClosure.CriticalInitialPhysicalFourier
+import SingularClosure.CriticalSmoothEnergyNorm
+import SingularClosure.CriticalPhysicalH1
+import SingularClosure.CriticalLerayHopf
+import SingularClosure.SmallDataAX6Closure
+import SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+/-!
+# VAR_STABLE entry-horizon and restart endpoint collection
+
+Existing spectral gap, energy identity, critical Fourier realization,
+physical H1 closure, Leray-Hopf energy class, datumwise small AX6, and the
+unconditional small-critical global theorem.
+-/
+
+set_option autoImplicit false
+
+namespace SingularClosure
+namespace VAR_STABLE
+
+#check COEFFICIENT_POINCARE
+#check COEFFICIENT_GRADIENT_POINCARE
+#check GalerkinSolution.coefficientEnergy_integral_identity
+#check criticalEnergy_interpolation
+#check coefficientDissipation_sq_le_criticalEnergy
+#check criticalInitialPhysicalL2_fourierCoeff
+#check criticalInitialPhysicalL2_norm
+#check critical_smoothFourierSynthesis_energy_eq_norm_sq
+#check CRITICAL_PHYSICAL_H1_L6
+#check CriticalLerayHopf.velocity_energy_le_initial
+#check SMALL_DATA_AX6
+#check NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+end VAR_STABLE
+end SingularClosure

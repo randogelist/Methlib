@@ -1,11 +1,15 @@
-import SingularClosure.Admission
+import SingularClosure.VAR_STABLE.Endpoints.All
 
 /-!
 # VAR_STABLE endpoint register
 
 Staging module only.
 
-No theorem is asserted by this file. The principal future root is:
+The existing Mathlib and Methlib dependencies are gathered under:
+
+`SingularClosure/VAR_STABLE/Endpoints/`
+
+No new theorem is asserted by this file. The principal future root is:
 
 `FINITE_ENTRY_AX6_IMP_GLOBAL_REGULARITY`
 
@@ -30,7 +34,7 @@ set_option Elab.async true
 namespace SingularClosure
 namespace VAR_STABLE
 
--- Formal declarations will be introduced in dependency order.
+-- New formal declarations will be introduced in dependency order.
 
 end VAR_STABLE
 end SingularClosure

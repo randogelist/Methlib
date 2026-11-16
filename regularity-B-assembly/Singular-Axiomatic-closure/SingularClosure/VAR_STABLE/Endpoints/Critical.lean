@@ -1,0 +1,43 @@
+import SingularClosure.CriticalFourierInterpolation
+import SingularClosure.CriticalSobolevInterpolation
+import SingularClosure.CriticalNonlinear
+import SingularClosure.CriticalDissipation
+import SingularClosure.CriticalNegativeEnergy
+import SingularClosure.CriticalNegativeTransport
+import SingularClosure.CriticalH1Algebra
+import SingularClosure.CriticalPhysicalH1
+import SingularClosure.CriticalLerayHopf
+import SingularClosure.CriticalRelativeNonlinear
+import SingularClosure.CriticalGradientEnergyBound
+import SingularClosure.SmallDataAX6Closure
+import SingularClosure.NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+/-!
+# VAR_STABLE critical endpoint collection
+
+Existing critical-scale interpolation, nonlinear, negative-order, physical H1,
+relative-energy, and unconditional small-data endpoints.
+-/
+
+set_option autoImplicit false
+
+namespace SingularClosure
+namespace VAR_STABLE
+
+#check criticalEnergy_interpolation
+#check coefficientDissipation_sq_le_criticalEnergy
+#check FINITE_CRITICAL_NONLINEAR_BOUND
+#check CRITICAL_DISSIPATION_BUDGET
+#check criticalNegativeEnergy
+#check criticalFiniteSobolev_neg_one_norm_sq
+#check FINITE_CRITICAL_NEGATIVE_TRANSPORT_BOUND
+#check CRITICAL_RELATIVE_NONLINEAR_IDENTITY
+#check CRITICAL_ROUGH_TRANSPORT_ENERGY_BOUND
+#check criticalSerrinEnergyCoefficient_integrable
+#check CRITICAL_PHYSICAL_H1_L6
+#check CriticalLerayHopf.velocity_energy_le_initial
+#check SMALL_DATA_AX6
+#check NSE_H12_SIGMA_ZERO_SMALL_UNCONDITIONAL
+
+end VAR_STABLE
+end SingularClosure
